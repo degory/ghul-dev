@@ -22,7 +22,5 @@ export default ({
       document.head.appendChild(styleElement)
     })
 
-    // import 'prismjs/themes/prism.css';    
-
   }
 }
