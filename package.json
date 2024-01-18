@@ -1,0 +1,24 @@
+{
+  "name": "ghul-dev",
+  "version": "0.0.1",
+  "description": "ghūl programming language docs",
+  "main": "index.js",
+  "authors": {
+    "name": "degory",
+    "email": ""
+  },
+  "repository": "github.com/degory/ghul-dev/ghul-dev",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@vuepress/plugin-prismjs": "^2.0.0-rc.0",
+    "vuepress": "^1.5.3"
+  },
+  "dependencies": {
+    "markdown-it-prism": "^2.3.0",
+    "prismjs": "^1.29.0"
+  }
+}
