@@ -29,6 +29,9 @@ jobs:
           name: dist
           path: ./src/.vuepress/dist/
 
+      - name: Disable Jekyll
+        run: touch ./src/.vuepress/dist/.nojekyll
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
