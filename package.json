@@ -1,7 +1,7 @@
 {
   "name": "ghul-dev",
   "version": "0.0.1",
-  "description": "ghūl programming language docs",
+  "description": "ghūl programming language",
   "main": "index.js",
   "authors": {
     "name": "degory",
