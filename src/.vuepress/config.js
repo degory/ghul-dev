@@ -39,6 +39,7 @@ module.exports = {
     lastUpdated: false,
     sidebar: [
       '/',
+      '/definitions',
     ],
   },
 
