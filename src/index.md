@@ -22,15 +22,17 @@
   "footer": null
 } -->
 
+# ghūl programming language docs
 
-# Hello World!
+
+## Hello World!
 
 ```ghul
 entry() =>
     IO.Std.write_line("hello world"); 
 ```
 
-# Literals
+# literals
 
 ```ghul
 use IO.Std.write_line;
@@ -56,7 +58,7 @@ entry() is
 si
 ```
 
-# Control Flow
+# control flow
 ```ghul
 use IO.Std.write_line;
 
@@ -145,7 +147,7 @@ entry() is
 si
 ```
 
-# Closures
+# closures
 ```ghul
 use IO.Std.write_line;
 use Collections.LIST;
@@ -194,7 +196,7 @@ entry() is
 si
 ```
 
-# Pipes
+# pipes
 ```ghul
 // make a type available in this scope without qualification
 use Collections.Iterable;
