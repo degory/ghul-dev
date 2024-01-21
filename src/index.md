@@ -24,14 +24,99 @@
 
 # ghūl programming language
 
-## program entry point
+## about ghūl
+
+ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment with programming language design. Apart from a slightly quirky syntax, ghūl is a fairly conventional programming language. Although it is a hobby project maintained by a single person, it aims to be sufficiently expressive to be useful for general purpose development: for example, the [ghūl compiler](https://github.com/degory/ghul) itself is written in ghūl
+
+## features
+
+- **type safety**: ghūl enforces type safety at compile-time.
+
+- **functional programming elements**: ghūl supports function literals, including anonymous functions, lambdas, and closures.
+
+- **OOP**: ghūl supports classes, objects, inheritance, polymorphism, and other Object-Oriented Programming concepts.
+
+- **error handling**: the language includes try/catch/finally for error handling.
+
+- **generics**: ghūl types, methods, and functions can have generic type parameters.
+
+- **.NET integration**: ghūl targets .NET, producing and consuming NuGet packages and supporting inter-operation with other .NET languages.
+
+## examples
+
+### hello world!
 
 ```ghul
 entry() =>
     IO.Std.write_line("hello world"); 
 ```
 
-## literals
+### functional
+
+```ghul
+use IO.Std.write_line;
+
+entry() is
+    let add = (x: single, y: single) => x + y;
+    let subtract = (x: single, y: single) => x - y;
+    let multiply = (x: single, y: single) => x * y;
+    let divide = (x: single, y: single) => x / y;
+
+    let calc = (x: single, y: single, operation: (single, single) -> single) => operation(x, y);
+
+    let a = 10.0;
+    let b = 5.0;
+
+    write_line("Addition: " + calc(a, b, add));
+    write_line("Subtraction: " + calc(a, b, subtract));
+    write_line("Multiplication: " + calc(a, b, multiply));
+    write_line("Division: " + calc(a, b, divide));
+si
+```
+
+### OOP
+```ghul
+use IO.Std.write_line;
+
+class Calculator is
+    init() is
+    si
+
+    add(x: single, y: single) -> single is
+        return x + y;
+    si
+
+    subtract(x: single, y: single) -> single is
+        return x - y;
+    si
+
+    multiply(x: single, y: single) -> single is
+        return x * y;
+    si
+
+    divide(x: single, y: single) -> single is
+        if y != 0.0 then
+            return x / y;
+        else
+            throw new System.DivideByZeroException("Error: Division by zero");
+        fi
+    si
+si
+
+entry() is
+    let calc = new Calculator();
+
+    let a = 10.0;
+    let b = 5.0;
+
+    write_line("Addition: " + calc.add(a, b));
+    write_line("Subtraction: " + calc.subtract(a, b));
+    write_line("Multiplication: " + calc.multiply(a, b));
+    write_line("Division: " + calc.divide(a, b));
+si
+```
+
+### literals
 
 ```ghul
 use IO.Std.write_line;
@@ -57,7 +142,7 @@ entry() is
 si
 ```
 
-## control flow
+### control flow
 ```ghul
 use IO.Std.write_line;
 
@@ -146,7 +231,64 @@ entry() is
 si
 ```
 
-## closures
+### generics
+```ghul
+use IO.Std.write_line;
+use Collections;
+
+count_things[E](things: Iterable[E]) -> int is
+    let count = 0;
+
+    for thing in things do
+        count = count + 1;
+    od
+
+    return count;
+si
+
+trait Sack[T] is
+    add(thing: T);
+    count() -> int;
+si
+
+class SACK[T]: Sack[T] is
+    _things: MutableList[T];
+
+    init() is
+        _things = new LIST[T]();
+    si
+
+    add(thing: T) is
+        _things.add(thing);
+    si
+
+    count() -> int is
+        return _things.count;
+    si
+si
+
+demonstrate_sack[T](sack: Sack[T], things: Iterable[T]) is
+    for thing in things do
+        sack.add(thing);
+    od
+
+    write_line("sack has " + sack.count() + " things");
+si
+
+entry() is
+    let int_things = [1, 2, 3, 4, 5];
+    let string_things = ["one", "two", "three", "four", "five"];
+
+    write_line("int_things has " + count_things(int_things) + " things");
+    write_line("string_things has " + count_things(string_things) + " things");
+
+    demonstrate_sack(new SACK[int](), int_things);
+    demonstrate_sack(new SACK[string](), string_things);
+si
+```
+
+
+### closures
 ```ghul
 use IO.Std.write_line;
 use Collections.LIST;
@@ -195,7 +337,7 @@ entry() is
 si
 ```
 
-## pipes
+### pipes
 ```ghul
 // make a type available in this scope without qualification
 use Collections.Iterable;

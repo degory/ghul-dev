@@ -37,8 +37,10 @@ module.exports = {
     docsDir: '',
     editLinkText: '',
     lastUpdated: false,
+    sidebarDepth: 3,
     sidebar: [
-      '/',
+      ['/', 'overview'],
+      ['/getting-started', 'getting started'],
       '/definitions',
     ],
   },
