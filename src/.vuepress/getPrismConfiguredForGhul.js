@@ -17,7 +17,7 @@ function getPrismConfiguredForGhul() {
       'control': /\b(assert|if|then|elif|else|fi|for|in|while|do|od|continue|break|case|when|default|esac|throw|try|catch|finally|yrt|return)\b/,
       'keyword': /\b(new|cast|isa|namespace|class|trait|enum|use|is|si|let|ptr|ref|static|public|protected|private|typeof|->|=>)\b/,
       'boolean': /\b(?:true|false|null)\b/,
-      'class-name': /\b([A-Z][A-Za-z0-9_`]*|void|bool|byte|ubyte|short|ushort|int|uint|long|ulong|word|uword|char|object|string)\b/,
+      'class-name': /\b([A-Z][A-Za-z0-9_`]*|void|bool|byte|ubyte|short|ushort|int|uint|long|ulong|word|uword|char|object|string|single|double)\b/,
       'function': /\b([a-zA-Z_][a-zA-Z0-9_]*)(?=\s*\()/,
       'number': /\b-?\d*\.?[\d]+\b/,
       'operator': /(!|\$|%|\^|&|\*|-|\+|=|\||@|~|#|\\|<|>|\.|\?|\/|\*)+/,
