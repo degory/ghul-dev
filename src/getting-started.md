@@ -1,12 +1,14 @@
+# getting started
+
 ## prerequisites
 
-The compiler requires the [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+The ghūl programming language compiler requires the [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
 ## target
 
 The compiler produces standard .NET assemblies and packages targeting .NET 8.0
 
-## getting the compiler
+## getting the ghūl compiler
 
 There are a few different ways to get the compiler
 
