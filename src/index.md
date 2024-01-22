@@ -1,32 +1,11 @@
-<!-- ---
-{
-  "home": true,
-  "heroImage": "https://v1.vuepress.vuejs.org/hero.png",
-  "tagline": "ghūl programming language docs",
-  "actionText": "Quick Start →",
-  "actionLink": "/guide/",
-  "features": [
-    {
-      "title": "Feature 1 Title",
-      "details": "Feature 1 Description"
-    },
-    {
-      "title": "Feature 2 Title",
-      "details": "Feature 2 Description"
-    },
-    {
-      "title": "Feature 3 Title",
-      "details": "Feature 3 Description"
-    }
-  ],
-  "footer": null
-} -->
 
-#  overview
+#  ghūl programming language
+
+![Hero Image](ghul-logo-draft.png)
 
 (Note: this site is very much a **work-in-progress**. The [ghūl compiler](https://github.com/degory/ghul) is currently the definitive ghūl language reference)
 
-## about the ghūl programming language
+## about ghūl
 
 ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment with programming language design. Apart from a slightly quirky syntax, ghūl is a fairly conventional programming language. Although it is a hobby project maintained by a single person, its goal is to be sufficiently expressive for general-purpose development. The [ghūl compiler](https://github.com/degory/ghul) itself is written in ghūl.
 
