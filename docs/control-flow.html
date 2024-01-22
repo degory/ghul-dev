@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>control flow in ghūl | ghūl programming language</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="stylesheet" href="/prism-vsc-dark-plus.css">
+    <meta name="description" content="ghūl programming language">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/assets/css/0.styles.1fba5f60.css" as="style"><link rel="preload" href="/assets/js/app.87eac244.js" as="script"><link rel="preload" href="/assets/js/2.d0d5977e.js" as="script"><link rel="preload" href="/assets/js/1.a053b9db.js" as="script"><link rel="preload" href="/assets/js/28.e39191bf.js" as="script"><link rel="prefetch" href="/assets/js/10.7cbc8b3d.js"><link rel="prefetch" href="/assets/js/11.f206c2fa.js"><link rel="prefetch" href="/assets/js/12.8e113096.js"><link rel="prefetch" href="/assets/js/13.4fc459fc.js"><link rel="prefetch" href="/assets/js/14.79be315a.js"><link rel="prefetch" href="/assets/js/15.75678467.js"><link rel="prefetch" href="/assets/js/16.8c2a8dca.js"><link rel="prefetch" href="/assets/js/17.4659f144.js"><link rel="prefetch" href="/assets/js/18.78f87d15.js"><link rel="prefetch" href="/assets/js/19.687fa966.js"><link rel="prefetch" href="/assets/js/20.f8afd611.js"><link rel="prefetch" href="/assets/js/21.359314cd.js"><link rel="prefetch" href="/assets/js/22.1f905eaa.js"><link rel="prefetch" href="/assets/js/23.d132bf08.js"><link rel="prefetch" href="/assets/js/24.73c8580c.js"><link rel="prefetch" href="/assets/js/25.0e1675ec.js"><link rel="prefetch" href="/assets/js/26.96870961.js"><link rel="prefetch" href="/assets/js/27.08c56407.js"><link rel="prefetch" href="/assets/js/29.9f2f71c1.js"><link rel="prefetch" href="/assets/js/3.789d2799.js"><link rel="prefetch" href="/assets/js/30.0bc263c5.js"><link rel="prefetch" href="/assets/js/31.8db247ce.js"><link rel="prefetch" href="/assets/js/32.0bfcd058.js"><link rel="prefetch" href="/assets/js/33.993472ee.js"><link rel="prefetch" href="/assets/js/34.2cc9ba24.js"><link rel="prefetch" href="/assets/js/35.45b1b6b7.js"><link rel="prefetch" href="/assets/js/36.3939f2de.js"><link rel="prefetch" href="/assets/js/37.45462b31.js"><link rel="prefetch" href="/assets/js/38.e37c2f5d.js"><link rel="prefetch" href="/assets/js/39.89c4ac27.js"><link rel="prefetch" href="/assets/js/4.2750cc6e.js"><link rel="prefetch" href="/assets/js/40.1ae8af17.js"><link rel="prefetch" href="/assets/js/41.2886b0df.js"><link rel="prefetch" href="/assets/js/5.a0237d0a.js"><link rel="prefetch" href="/assets/js/6.b7ad37cd.js"><link rel="prefetch" href="/assets/js/7.a507e3fa.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.271bc088.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.1fba5f60.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">ghūl programming language</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="/" aria-current="page" class="sidebar-link">overview</a></li><li><a href="/getting-started.html" class="sidebar-link">getting started</a></li><li><a href="/language-basics.html" class="sidebar-link">language basics</a></li><li><a href="/definitions.html" class="sidebar-link">definitions</a></li><li><a href="/control-flow.html" aria-current="page" class="active sidebar-link">control flow</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/control-flow.html#assert-statement" class="sidebar-link">assert statement</a></li><li class="sidebar-sub-header"><a href="/control-flow.html#if-statement" class="sidebar-link">if statement</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/control-flow.html#if-then-fi" class="sidebar-link">if-then-fi</a></li><li class="sidebar-sub-header"><a href="/control-flow.html#if-then-else-fi" class="sidebar-link">if-then-else-fi</a></li><li class="sidebar-sub-header"><a href="/control-flow.html#if-then-elif-fi" class="sidebar-link">if-then-elif-fi</a></li></ul></li><li class="sidebar-sub-header"><a href="/control-flow.html#while-statement" class="sidebar-link">while statement</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/control-flow.html#while-do-od" class="sidebar-link">while-do-od</a></li><li class="sidebar-sub-header"><a href="/control-flow.html#break-and-continue-in-while-loops" class="sidebar-link">break and continue in while loops</a></li></ul></li><li class="sidebar-sub-header"><a href="/control-flow.html#do-statement" class="sidebar-link">do statement</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/control-flow.html#do-od" class="sidebar-link">do-od</a></li><li class="sidebar-sub-header"><a href="/control-flow.html#break-and-continue-in-do-od-loops" class="sidebar-link">break and continue in do-od loops</a></li></ul></li><li class="sidebar-sub-header"><a href="/control-flow.html#try-statement" class="sidebar-link">try statement</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/control-flow.html#try-catch-finally-yrt" class="sidebar-link">try-catch-finally-yrt</a></li><li class="sidebar-sub-header"><a href="/control-flow.html#try-catch-yrt" class="sidebar-link">try-catch-yrt</a></li><li class="sidebar-sub-header"><a href="/control-flow.html#try-finally-yrt" class="sidebar-link">try-finally-yrt</a></li></ul></li></ul></li><li><a href="/functional-programming.html" class="sidebar-link">functional programming</a></li><li><a href="/object-oriented-programming.html" class="sidebar-link">object oriented programming</a></li><li><a href="/generics.html" class="sidebar-link">generics</a></li><li><a href="/dotnet-integration.html" class="sidebar-link">.NET integration</a></li><li><a href="/resources.html" class="sidebar-link">resources</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="control-flow-in-ghul"><a href="#control-flow-in-ghul" class="header-anchor">#</a> control flow in ghūl</h1> <h2 id="assert-statement"><a href="#assert-statement" class="header-anchor">#</a> assert statement</h2> <p>In ghūl the <code>assert</code> statement is used to ensure an expected condition holds and to throw an exception if it does not. An assert statement starts with <code>assert</code>, followed by an expression that must evaluate to a bool, followed by <code>else</code>, and then a value to throw. If the value to throw is a string, it will be wrapped in an <code>AssertionFailedException</code>. Otherwise it must be of a throwable type.</p> <div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token control">assert</span> <span class="token boolean">true</span> <span class="token control">else</span> <span class="token string">&quot;all bets are off&quot;</span><span class="token punctuation">;</span> <span class="token comment">// should not throw</span>
+<span class="token control">assert</span> <span class="token boolean">false</span> <span class="token control">else</span> <span class="token string">&quot;expect AssertionFailedException&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> <span class="token variable">list</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token control">assert</span> <span class="token number">3</span> <span class="token operator">&lt;</span> <span class="token variable">list</span><span class="token operator">.</span><span class="token variable">count</span> <span class="token control">else</span> <span class="token keyword">new</span> <span class="token class-name">ArgumentOutOfRangeException</span><span class="token punctuation">(</span><span class="token string">&quot;list&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="if-statement"><a href="#if-statement" class="header-anchor">#</a> if statement</h2> <p>If statements allow the execution of different code blocks based on specific conditions.</p> <h3 id="if-then-fi"><a href="#if-then-fi" class="header-anchor">#</a> if-then-fi</h3> <p>This is the simplest form of a conditional statement. It checks a condition and executes the subsequent block of code if the condition is true.</p> <div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token control">if</span> <span class="token variable">condition</span> <span class="token control">then</span>
+    <span class="token comment">// code to execute if condition is true</span>
+<span class="token control">fi</span>
+</code></pre></div><div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token keyword">let</span> <span class="token variable">list</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token control">if</span> <span class="token variable">list</span><span class="token operator">.</span><span class="token variable">count</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token control">then</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;list is empty&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">fi</span>
+</code></pre></div><h3 id="if-then-else-fi"><a href="#if-then-else-fi" class="header-anchor">#</a> if-then-else-fi</h3> <p>This form allows for an alternative block of code to be executed if the condition is false.</p> <div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token control">if</span> <span class="token variable">condition</span> <span class="token control">then</span>
+    <span class="token comment">// code to execute if condition is true</span>
+<span class="token control">else</span>
+    <span class="token comment">// code to execute if condition is false</span>
+<span class="token control">fi</span>
+</code></pre></div><div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token control">if</span> <span class="token variable">list</span><span class="token operator">.</span><span class="token variable">count</span> <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token control">then</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;list is not empty&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">else</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;list is empty&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">fi</span>
+</code></pre></div><h3 id="if-then-elif-fi"><a href="#if-then-elif-fi" class="header-anchor">#</a> if-then-elif-fi</h3> <p>This form is used for multiple conditions. If the initial condition is false, the <code>elif</code> conditions are checked in order. The corresponding block for the first true condition is executed.</p> <div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token control">if</span> <span class="token variable">first</span><span class="token operator">-</span><span class="token variable">condition</span> <span class="token control">then</span>
+    <span class="token comment">// code for first condition]</span>
+<span class="token control">elif</span> <span class="token variable">second</span><span class="token operator">-</span><span class="token variable">condition</span> <span class="token control">then</span>
+    <span class="token comment">// code for second condition]</span>
+<span class="token operator">...</span> <span class="token punctuation">(</span><span class="token variable">more</span> <span class="token control">elif</span> <span class="token variable">conditions</span> <span class="token control">if</span> <span class="token variable">needed</span><span class="token punctuation">)</span> <span class="token operator">...</span>
+<span class="token control">else</span>
+    <span class="token comment">// code if all conditions are false</span>
+<span class="token control">fi</span>
+</code></pre></div><div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token keyword">let</span> <span class="token variable">list</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token control">if</span> <span class="token variable">list</span><span class="token operator">.</span><span class="token variable">count</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token control">then</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;list is empty&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">fi</span>
+
+<span class="token control">if</span> <span class="token variable">list</span><span class="token operator">.</span><span class="token variable">count</span> <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token control">then</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;list is not empty&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">else</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;list is empty&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">fi</span>
+
+<span class="token control">if</span> <span class="token variable">list</span><span class="token operator">.</span><span class="token variable">count</span> <span class="token operator">&gt;</span> <span class="token number">10</span> <span class="token control">then</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;list has lots of elements&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">elif</span> <span class="token variable">list</span><span class="token operator">.</span><span class="token variable">count</span> <span class="token operator">&gt;</span> <span class="token number">5</span> <span class="token control">then</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;list has some elements&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">elif</span> <span class="token variable">list</span><span class="token operator">.</span><span class="token variable">count</span> <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token control">then</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;list has a few elements&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">else</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;list is empty&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">fi</span>
+</code></pre></div><h2 id="while-statement"><a href="#while-statement" class="header-anchor">#</a> while statement</h2> <h3 id="while-do-od"><a href="#while-do-od" class="header-anchor">#</a> while-do-od</h3> <p>The while loop in ghūl executes a block of code repeatedly as long as a specified condition remains true. The condition is evaluated before each iteration of the loop's body.</p> <div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token control">while</span> <span class="token variable">condition</span> <span class="token control">do</span>
+    <span class="token comment">// code to execute while the condition is true</span>
+<span class="token control">od</span>
+</code></pre></div><div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token keyword">let</span> <span class="token variable">counter</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token control">while</span> <span class="token variable">counter</span> <span class="token operator">&lt;</span> <span class="token number">5</span> <span class="token control">do</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token variable">counter</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">counter</span> <span class="token operator">=</span> <span class="token variable">counter</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token control">od</span>
+</code></pre></div><p>This loop prints numbers from 0 to 4. It terminates when counter becomes 5, as the condition counter &lt; 5 then evaluates to false.</p> <h3 id="break-and-continue-in-while-loops"><a href="#break-and-continue-in-while-loops" class="header-anchor">#</a> break and continue in while loops</h3> <p>The <code>break</code> statement immediately exits the loop, while <code>continue</code> skips the remaining code in the current iteration and proceeds to the next iteration immediately before the condition is reevaluated.</p> <div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token keyword">let</span> <span class="token variable">counter</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token control">while</span> <span class="token variable">counter</span> <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token control">do</span>
+    <span class="token control">if</span> <span class="token variable">counter</span> <span class="token operator">==</span> <span class="token number">5</span> <span class="token control">then</span>
+        <span class="token control">break</span><span class="token punctuation">;</span>
+    <span class="token control">fi</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token variable">counter</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">counter</span> <span class="token operator">=</span> <span class="token variable">counter</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token control">od</span>
+</code></pre></div><p>This loop exits when counter reaches 5.</p> <div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token keyword">let</span> <span class="token variable">counter</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token control">while</span> <span class="token variable">counter</span> <span class="token operator">&lt;</span> <span class="token number">5</span> <span class="token control">do</span>
+    <span class="token variable">counter</span> <span class="token operator">=</span> <span class="token variable">counter</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token control">if</span> <span class="token variable">counter</span> <span class="token operator">==</span> <span class="token number">3</span> <span class="token control">then</span>
+        <span class="token control">continue</span><span class="token punctuation">;</span>
+    <span class="token control">fi</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token variable">counter</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">od</span>
+</code></pre></div><p>This loop skips the write_line statement when counter is 3.</p> <h2 id="do-statement"><a href="#do-statement" class="header-anchor">#</a> do statement</h2> <h3 id="do-od"><a href="#do-od" class="header-anchor">#</a> do-od</h3> <p>The do / od loop in ghūl is used to create an indefinite loop which will continue to execute until explicitly broken with a break statement.</p> <div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token control">do</span>
+    <span class="token comment">// code to execute indefinitely</span>
+    <span class="token comment">// break statement to exit loop</span>
+<span class="token control">od</span>
+</code></pre></div><div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token keyword">let</span> <span class="token variable">counter</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token control">do</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token variable">counter</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">counter</span> <span class="token operator">=</span> <span class="token variable">counter</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token control">if</span> <span class="token variable">counter</span> <span class="token operator">==</span> <span class="token number">5</span> <span class="token control">then</span>
+        <span class="token control">break</span><span class="token punctuation">;</span>
+    <span class="token control">fi</span>
+<span class="token control">od</span>
+</code></pre></div><p>This loop will run indefinitely until counter reaches 5, at which point the break statement terminates the loop.</p> <h3 id="break-and-continue-in-do-od-loops"><a href="#break-and-continue-in-do-od-loops" class="header-anchor">#</a> break and continue in do-od loops</h3> <p>The break and continue statements work similarly in do / od loops as they do in while loops.</p> <div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token keyword">let</span> <span class="token variable">counter</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token control">do</span>
+    <span class="token variable">counter</span> <span class="token operator">=</span> <span class="token variable">counter</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token control">if</span> <span class="token variable">counter</span> <span class="token operator">==</span> <span class="token number">3</span> <span class="token control">then</span>
+        <span class="token control">continue</span><span class="token punctuation">;</span>
+    <span class="token control">fi</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token variable">counter</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token control">if</span> <span class="token variable">counter</span> <span class="token operator">==</span> <span class="token number">5</span> <span class="token control">then</span>
+        <span class="token control">break</span><span class="token punctuation">;</span>
+    <span class="token control">fi</span>
+<span class="token control">od</span>
+</code></pre></div><p>This loop skips the write_line statement when counter is 3 and breaks out of the loop when counter reaches 5.</p> <h2 id="try-statement"><a href="#try-statement" class="header-anchor">#</a> try statement</h2> <h3 id="try-catch-finally-yrt"><a href="#try-catch-finally-yrt" class="header-anchor">#</a> try-catch-finally-yrt</h3> <p>The try-catch-finally-yrt block in ghūl consists of four parts:</p> <ul><li>try: The block where code that might throw an exception is placed.</li> <li>catch: This block catches and handles exceptions. It takes an exception variable and a type.</li> <li>finally: This block is executed after the try and catch blocks, regardless of whether an exception was thrown or not. It is typically used for clean-up code.</li> <li>yrt: Marks the end of the try-catch-finally block.</li></ul> <div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token control">try</span>
+    <span class="token comment">// Code that might throw an exception</span>
+<span class="token control">catch</span> <span class="token variable">e</span>: <span class="token class-name">SomeExceptionType</span>
+    <span class="token comment">// Exception handling code</span>
+<span class="token control">finally</span>
+    <span class="token comment">// Clean-up code, always executed</span>
+<span class="token control">yrt</span>
+</code></pre></div><div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token keyword">let</span> <span class="token variable">reader</span>: <span class="token class-name">StreamReader</span><span class="token punctuation">;</span>
+
+<span class="token control">try</span>
+    <span class="token variable">reader</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StreamReader</span><span class="token punctuation">(</span><span class="token string">&quot;file.txt&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token variable">content</span> <span class="token operator">=</span> <span class="token variable">reader</span><span class="token operator">.</span><span class="token function">read_to_end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token variable">content</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token control">catch</span> <span class="token variable">e</span>: <span class="token class-name">FileNotFoundException</span>
+    <span class="token comment">// Handle the case where the file is not found</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;Error: file not found: &quot;</span> <span class="token operator">+</span> <span class="token variable">e</span><span class="token operator">.</span><span class="token variable">message</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">catch</span> <span class="token variable">e</span>: <span class="token class-name">IOException</span>
+    <span class="token comment">// Handle errors during file reading</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;Error: reading file: &quot;</span> <span class="token operator">+</span> <span class="token variable">e</span><span class="token operator">.</span><span class="token variable">message</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">finally</span>
+    <span class="token comment">// Close the file and clean up resources</span>
+    <span class="token control">if</span> <span class="token variable">reader</span><span class="token operator">?</span> <span class="token control">then</span>
+        <span class="token variable">reader</span><span class="token operator">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token control">fi</span>
+
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;File processing completed, file closed.&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">yrt</span>
+</code></pre></div><h3 id="try-catch-yrt"><a href="#try-catch-yrt" class="header-anchor">#</a> try-catch-yrt</h3> <p>The finally clause can be omitted if no clean-up is required</p> <div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token control">try</span>
+    <span class="token comment">// Code that might throw an exception</span>
+<span class="token control">catch</span> <span class="token variable">e</span>: <span class="token class-name">SomeExceptionType</span>
+    <span class="token comment">// Exception handling code</span>
+<span class="token control">yrt</span>
+</code></pre></div><div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token control">try</span>
+    <span class="token keyword">let</span> <span class="token variable">content</span> <span class="token operator">=</span> <span class="token class-name">File</span><span class="token operator">.</span><span class="token function">read_all_text</span><span class="token punctuation">(</span><span class="token string">&quot;file.txt&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token variable">content</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;File processing completed.&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">catch</span> <span class="token variable">e</span>: <span class="token class-name">FileNotFoundException</span>
+    <span class="token comment">// Handle the case where the file is not found</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;Error: file not found: &quot;</span> <span class="token operator">+</span> <span class="token variable">e</span><span class="token operator">.</span><span class="token variable">message</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">catch</span> <span class="token variable">e</span>: <span class="token class-name">IOException</span>
+    <span class="token comment">// Handle errors during file reading</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;Error: reading file: &quot;</span> <span class="token operator">+</span> <span class="token variable">e</span><span class="token operator">.</span><span class="token variable">message</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token control">yrt</span>
+
+</code></pre></div><h3 id="try-finally-yrt"><a href="#try-finally-yrt" class="header-anchor">#</a> try-finally-yrt</h3> <p>The catch clause can be omitted if no exceptions need to be caught but clean-up is still required</p> <div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token control">try</span>
+    <span class="token comment">// Code that might throw an exception</span>
+<span class="token control">finally</span>
+    <span class="token comment">// Clean-up code, always executed</span>
+<span class="token control">yrt</span>
+</code></pre></div><div class="language-ghul extra-class"><pre class="language-ghul"><code class="language-ghul"><span class="token keyword">let</span> <span class="token variable">reader</span>: <span class="token class-name">StreamReader</span><span class="token punctuation">;</span>
+
+<span class="token control">try</span>
+    <span class="token variable">reader</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StreamReader</span><span class="token punctuation">(</span><span class="token string">&quot;file.txt&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> <span class="token variable">content</span> <span class="token operator">=</span> <span class="token variable">reader</span><span class="token operator">.</span><span class="token function">read_to_end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token variable">content</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">write_line</span><span class="token punctuation">(</span><span class="token string">&quot;File processing completed.&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token control">finally</span>
+    <span class="token control">if</span> <span class="token variable">reader</span><span class="token operator">?</span> <span class="token control">then</span>
+        <span class="token variable">reader</span><span class="token operator">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token control">fi</span>
+
+    <span class="token comment">// Any exceptions will be thrown to the calling code</span>
+<span class="token control">yrt</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/definitions.html" class="prev">
+        definitions
+      </a></span> <span class="next"><a href="/functional-programming.html">
+        functional programming
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.87eac244.js" defer></script><script src="/assets/js/2.d0d5977e.js" defer></script><script src="/assets/js/1.a053b9db.js" defer></script><script src="/assets/js/28.e39191bf.js" defer></script>
+  </body>
+</html>
