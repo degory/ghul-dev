@@ -41,7 +41,14 @@ module.exports = {
     sidebar: [
       ['/', 'overview'],
       ['/getting-started', 'getting started'],
-      '/definitions',
+      ['/language-basics', 'language basics'],
+      ['/definitions', 'definitions'],
+      ['/control-flow', 'control flow'],
+      ['/functional-programming', 'functional programming'],
+      ['/object-oriented-programming', 'object oriented programming'],
+      ['/generics', 'generics'],
+      ['/dotnet-integration', '.NET integration'],
+      ['/resources', 'resources']
     ],
   },
 
@@ -52,6 +59,7 @@ module.exports = {
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
   ],
+
 
   markdown: {
     extendMarkdown: md => {

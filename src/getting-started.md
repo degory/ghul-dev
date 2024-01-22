@@ -69,4 +69,4 @@ Applications written in ghūl require the [.NET 8.0](https://dotnet.microsoft.co
 
 ### Other editors
 
-The [ghūl language extension implementation](https://github.com/degory/ghul-vsce) is currently tightly coupled to the Visual Studio Code extension API. However under the hood it is using the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) as so could be extended to support other clients. Feel free to submit a PR. 
+The [ghūl language extension implementation](https://github.com/degory/ghul-vsce) is currently tightly coupled to the Visual Studio Code extension API. However under the hood it is using the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) so could be extended to support other clients. Feel free to submit a PR. 

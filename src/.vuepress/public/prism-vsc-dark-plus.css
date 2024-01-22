@@ -5,6 +5,13 @@ Adapted from https://github.com/PrismJS/prism-themes/blob/master/themes/prism-vs
 */
 
 
+h4 {
+    font-size: 1.2em;
+    color: #333; /* Choose a color that contrasts well */
+    margin-bottom: 10px;
+}
+
+
 @font-face {
     font-family: 'Fira Code';
     src:

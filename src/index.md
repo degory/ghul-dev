@@ -22,7 +22,9 @@
   "footer": null
 } -->
 
-# overview
+#  overview
+
+(Note: this site is very much a **work-in-progress**. The [ghūl compiler](https://github.com/degory/ghul) is currently the definitive ghūl language reference)
 
 ## about the ghūl programming language
 

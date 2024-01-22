@@ -1,4 +1,4 @@
-# ghūl definitions
+# definitions
 
 ## variables
 
