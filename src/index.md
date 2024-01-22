@@ -28,7 +28,7 @@
 
 ## about the ghūl programming language
 
-ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment with programming language design. Apart from a slightly quirky syntax, ghūl is a fairly conventional programming language. Although it is a hobby project maintained by a single person, it aims to be sufficiently expressive to be useful for general purpose development: for example, the [ghūl compiler](https://github.com/degory/ghul) itself is written in ghūl
+ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment with programming language design. Apart from a slightly quirky syntax, ghūl is a fairly conventional programming language. Although it is a hobby project maintained by a single person, its goal is to be sufficiently expressive for general-purpose development. The [ghūl compiler](https://github.com/degory/ghul) itself is written in ghūl.
 
 ## features
 

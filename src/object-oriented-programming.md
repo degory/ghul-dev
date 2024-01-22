@@ -3,7 +3,14 @@
 ```ghul
 use IO.Std.write_line;
 
-class Calculator is
+trait Calculator is
+    add(x: single, y: single) -> single;
+    subtract(x: single, y: single) -> single;
+    multiply(x: single, y: single) -> single;
+    divide(x: single, y: single) -> single;
+si
+
+class CALCULATOR: Calculator is
     init() is
     si
 
@@ -28,9 +35,7 @@ class Calculator is
     si
 si
 
-entry() is
-    let calc = new Calculator();
-
+demonstrate_calculator(calc: Calculator) is
     let a = 10.0;
     let b = 5.0;
 
@@ -38,5 +43,11 @@ entry() is
     write_line("Subtraction: " + calc.subtract(a, b));
     write_line("Multiplication: " + calc.multiply(a, b));
     write_line("Division: " + calc.divide(a, b));
+si
+
+entry() is
+    let calc = new CALCULATOR();
+
+    demonstrate_calculator(calc);
 si
 ```

@@ -46,3 +46,22 @@ Recommended naming conventions for variables, functions, classes, etc.
 Code formatting guidelines
 Tips for writing clean and readable code
 
+
+
+### interaction of return with try-catch-finally
+
+If a return statement is executed from within a `try` block, then control is first passed to the enclosing `finally` blocks for every `try` block that encloses the `return` statement before control exits the function.
+
+In general during the course of exception handling or function return, you can imagine there is a single return value or exception object that is being passed from the point of the return, the throw, or the function invocation that has thrown. 
+
+That object passes through enclosing catch and finally blocks, where it can be replaced by a different exception or return value, until control flow finally leaves the function.
+
+```ghul
+swallow(i: int) -> int is
+    try
+        return do_something_risky(i);
+    catch e: Exception
+        return 1234; // I'm sure it was fine
+    yrt
+si
+```

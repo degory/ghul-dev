@@ -188,6 +188,44 @@ od
 ```
 This loop skips the write_line statement when counter is 3 and breaks out of the loop when counter reaches 5.
 
+## case statement
+
+```ghul
+case value
+when -1:
+    return "minus one";
+
+when 0:
+    let result = "zero";
+    return result;
+
+when 1:
+    return "one";
+
+when 2:
+    return "two";
+
+when 3:
+    return "three";
+
+when 4:
+    return "four";
+
+when 5:
+    let result = "five";
+    return result;
+
+when 6, 7, 8, 9:
+    return "more than five and less than ten";
+
+when 13:
+    return "unlucky";
+
+default
+    return "less than -1 or more than nine";
+esac
+```
+
 ## try statement
 
 ### try-catch-finally-yrt
@@ -293,3 +331,41 @@ finally
     // Any exceptions will be thrown to the calling code
 yrt
 ```
+
+## return statement
+
+### return without value
+
+In functions of void return type, a bare `return` statement with no value returns control flow directly to the caller  
+
+```
+let tries = 0;
+
+try_something(limit: int) is
+    if tries > limit then
+        return; // give up
+    fi
+
+    tries = tries + 1;
+
+    // do stuff
+si
+
+```
+
+### return value
+
+In functions of non-void return type, `return` statements must return a value of a type that's assignment compatible with the function's return type
+
+```ghul
+fib(n: int) -> int is
+    if n < 0 then
+        return 0;
+    elif n == 1 then
+        return 1;
+    else
+        return fib(n - 1) + fib(n - 2);
+    fi
+si
+```
+
