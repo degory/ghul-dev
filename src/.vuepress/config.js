@@ -50,7 +50,8 @@ module.exports = {
       ['/generics', 'generics'],
       ['/dotnet-integration', '.NET integration'],
       ['/grammar', 'grammar'],
-      ['/resources', 'resources']
+      ['/resources', 'resources'],
+      ['/bootstrap', 'bootstrap']
     ],
   },
 
