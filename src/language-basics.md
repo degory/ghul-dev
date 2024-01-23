@@ -16,8 +16,8 @@ ghūl primitive types include various signed and unsigned integers, single and d
 * `ulong`: unsigned 64-bit integer
 * `word`: signed pointer length integer
 * `uword`: unsigned pointer length integer
+* `void`: the absence of any value
 
----
 As usual for languages targeting .NET, these ghūl primitive types are all actually aliases for standard .NET types defined in the `System` namespace, such as `System.Int32`. It is conventional to use the ghūl types rather the raw .NET type names, although technically they are interchangeable.
 
 ### composite types
@@ -95,6 +95,8 @@ let i = 1234;
 let j: int;
 let k: int = 5678;
 ```
+
+Local variables with no explicit initializer are initialized to the default value for their type (zero, false, or null)
 
 ### arguments
 
@@ -182,18 +184,18 @@ let weight = things.`1;
 
 ### function
 
-Function literals are constructed from an parenthesized argument list, a return type, and a return value or a function body. If there is only one argument, no parentheses are needed.
+Function literals are constructed from an parenthesized argument list, a return type, and a return expression or a function body. If there is only one argument, no parentheses are needed.
 
 #### expression body function literal
 
 ```ghul
-let simpleAdd = (x: int, y: int) -> int => x + y;
+let simple_add = (x: int, y: int) -> int => x + y;
 ```
 
 #### block body function literal
 
 ```ghul
-let complexAdd = (x: int, y: int) -> int is
+let complex_add = (x: int, y: int) -> int is
     let result = x + y;
     return result;
 si;
@@ -204,9 +206,9 @@ si;
 Return type can usually be omitted provided it can be inferred from the type of the expression body or any values returned from the block body
 
 ```ghul
-let simpleAdd = (x: int, y: int) => x + y;
+let simple_add = (x: int, y: int) => x + y;
 
-let complexAdd = (x: int, y: int) is
+let complex_add = (x: int, y: int) is
     let result = x + y;
     return result;
 si;
@@ -258,8 +260,6 @@ let closure = () => object_reference.some_property;
 ```
 
 Then while `closure` cannot change what `object_reference` points to, it can interact with `object_references`'s properties or methods, which can lead to changes in the state of the `SOME_OBJECT` object referenced by `object_reference`.
-
-
 
 ## operators and expressions
 ### arithmetic operators

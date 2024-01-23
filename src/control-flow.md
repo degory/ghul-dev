@@ -341,6 +341,8 @@ In functions of void return type, a bare `return` statement with no value return
 ```
 let tries = 0;
 
+...
+
 try_something(limit: int) is
     if tries > limit then
         return; // give up
@@ -369,3 +371,17 @@ fib(n: int) -> int is
 si
 ```
 
+### default return
+
+If execution reaches the end of a non-void function without encountering a return statement, then the default value of the function's return type is returned to the caller.
+
+```ghul
+default_return() -> int is
+    // do nothing
+si
+
+...
+
+let i = default_return();
+assert i == 0;
+```

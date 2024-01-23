@@ -67,6 +67,6 @@ Applications written in ghūl require the [.NET 8.0](https://dotnet.microsoft.co
 
 [Visual Studio Code](https://code.visualstudio.com) will give you rich language support via the [ghūl VSCode language extension](https://marketplace.visualstudio.com/items?itemName=degory.ghul).
 
-### Other editors
+### other editors
 
 The [ghūl language extension implementation](https://github.com/degory/ghul-vsce) is currently tightly coupled to the Visual Studio Code extension API. However under the hood it is using the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) so could be extended to support other clients. Feel free to submit a PR. 

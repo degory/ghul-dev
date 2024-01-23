@@ -49,6 +49,7 @@ module.exports = {
       ['/object-oriented-programming', 'object oriented programming'],
       ['/generics', 'generics'],
       ['/dotnet-integration', '.NET integration'],
+      ['/grammar', 'grammar'],
       ['/resources', 'resources']
     ],
   },
