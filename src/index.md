@@ -5,7 +5,9 @@
 
 (Note: this site is very much a **work-in-progress**. The [ghūl compiler](https://github.com/degory/ghul) is currently the definitive ghūl language reference)
 
-## about ghūl
+## why ghūl?
+
+Why not 🤔
 
 ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment with programming language design. Apart from a slightly quirky syntax, ghūl is a fairly conventional programming language. Although ghūl is a hobby project maintained by a single person, its goal is to be sufficiently expressive for general-purpose development: the [ghūl compiler](https://github.com/degory/ghul) itself is written in ghūl.
 

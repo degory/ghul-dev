@@ -11,7 +11,7 @@ ghūl primitive types include various signed and unsigned integers, single and d
 * `short`: signed 16-bit integer
 * `ushort`: unsigned 16-bit integer
 * `int`: signed 32-bit integer
-* `uint`: usigned 32-bit integer
+* `uint`: unsigned 32-bit integer
 * `long`: signed 64-bit integer
 * `ulong`: unsigned 64-bit integer
 * `word`: signed pointer length integer
@@ -284,8 +284,11 @@ let neq = 1 != 2; // true
 ```ghul
 let list = [1, 2, 3]
 
-let and_then = 4 < list.count /\ list[4] == 4; // false
-let or_else = 4 < list.count \/ list[4] == 3; // true
+let index = 4;
+let search_value = 3;
+
+let and_then = index < list.count /\ list[index] == search_value; // false
+let or_else = index >= list.count \/ list[index] != search_value; // true
 ```
 
 ## assignment

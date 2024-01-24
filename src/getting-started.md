@@ -36,6 +36,37 @@ The compiler expects to be driven by MSBuild using a `.ghulproj` project file.
 See the [ghūl test](https://github.com/degory/ghul-test) project for
 a real-world example, or use one of the project templates to get started.
 
+`Directory.build.props`
+```xml
+<Project>
+  <PropertyGroup>
+    <Version>0.1.0-alpha.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ghul.targets" Version="1.2.1" />
+    <PackageReference Include="ghul.pipes" Version="1.0.0" />
+    <PackageReference Include="ghul.runtime" Version="1.0.0" />
+  </ItemGroup>
+</Project>
+```
+
+`example.ghulproj``
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+
+    <GhulCompiler>dotnet ghul-compiler</GhulCompiler>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <GhulSources Include="src/**/*.ghul" />
+  </ItemGroup>
+</Project>
+```
+
 ### source files
 
 You'll need some ghūl source files. By convention ghūl source files have the extension `.ghul`, and the standard MSBuild targets will include `**/*.ghul` when building.
