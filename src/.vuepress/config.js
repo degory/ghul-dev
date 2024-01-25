@@ -40,7 +40,7 @@ module.exports = {
     lastUpdated: false,
     sidebarDepth: 3,
     sidebar: [
-      ['/', 'overview'],
+      ['/', 'overview'], 
       ['/getting-started', 'getting started'],
       ['/language-basics', 'language basics'],
       ['/definitions', 'definitions'],
@@ -51,7 +51,7 @@ module.exports = {
       ['/dotnet-integration', '.NET integration'],
       ['/grammar', 'grammar'],
       ['/resources', 'resources'],
-      ['/bootstrap', 'bootstrap']
+      ['/history', 'history']
     ],
   },
 

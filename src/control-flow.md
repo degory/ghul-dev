@@ -232,10 +232,10 @@ esac
 
 The try-catch-finally-yrt block in ghūl consists of four parts:
 
-* try: The block where code that might throw an exception is placed.
-* catch: This block catches and handles exceptions. It takes an exception variable and a type.
-* finally: This block is executed after the try and catch blocks, regardless of whether an exception was thrown or not. It is typically used for clean-up code.
-* yrt: Marks the end of the try-catch-finally block.
+* try block: the block where code that might throw an exception is placed.
+* exception to catch: exceptions that are assignment compatible with this class will be caught and control will enter the catch block
+* catch block: this code block catches and handles exceptions. It takes an exception variable and a type.
+* finally block: this code block is executed after the try and catch blocks, regardless of whether an exception was thrown or not. It is typically used for clean-up code.
 
 ```ghul
 try
@@ -246,6 +246,8 @@ finally
     // Clean-up code, always executed
 yrt
 ```
+
+If different types of exception should be caught, then there can be multiple exception clauses and catch blocks
 
 ```ghul
 let reader: StreamReader;
