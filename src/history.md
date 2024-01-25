@@ -15,7 +15,7 @@ For example, a compiler C that reads source in language S, translates it to lang
 ![Example tombstone showing compiler for language S, targeting language T, written in language I](bootstrap-tombstone-example.drawio.svg)
 
 ## the L compiler
-ghūl grew out of another language I had designed, years before, named L, and I used L in the early stages of the ghūl compiler development. The initial ghūl compiler could in principle have been written in any pre-existing language with a compiler; I chose L because I knew I could easily make changes to the L language and compiler if needed to support the ghūl bootstrap.
+ghūl grew out of another language I designed, years before, named L, and I used L in the early stages of the ghūl compiler development. The initial ghūl compiler could in principle have been written in any pre-existing language with a compiler; I chose L because I knew I could easily make changes to the L language and compiler if needed to support the ghūl bootstrap.
 
 Like the ghūl compiler, the L compiler is self-hosting. It was originally written in C++ and I bootstrapped it manually by hand translating the C++ source into equivalent L. This tedious process was made easier by carefully sticking to an L-compatible subset of C++ when writing the initial C++ version of the L compiler.
 
