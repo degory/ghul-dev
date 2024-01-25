@@ -17,6 +17,8 @@ For example, a compiler C that reads source in language S, translates it to lang
 ## the L compiler
 ghūl grew out of another language I designed, years before, named L, and I used L in the early stages of the ghūl compiler development. The initial ghūl compiler could in principle have been written in any pre-existing language with a compiler; I chose L because I knew I could easily make changes to the L language and compiler if needed to support the ghūl bootstrap.
 
+(Plus, why spend ages designing a programming language and building a compiler for it, if you're not going to use it to build _another_ compiler for a _another_ programming language you've invented? 😂)
+
 Like the ghūl compiler, the L compiler is self-hosting. It was originally written in C++ and I bootstrapped it manually by hand translating the C++ source into equivalent L. This tedious process was made easier by carefully sticking to an L-compatible subset of C++ when writing the initial C++ version of the L compiler.
 
 ![bootstrapping the L compiler](bootstrap-L-compiler-bootstrap-from-C++.drawio.svg)
@@ -45,14 +47,14 @@ Then I passed the L source code of the ghūl to L transpiler through the L to gh
 
 ![Bootstrapping the ghūl to L transpiler](bootstrap-ghūl-self-hosting-transpiler.drawio.svg)
 
-This step is the first bootstrap, and why I started with a transpiler: the source code of the ghūl to L transpiler, which was originally L, has now been transformed into ghūl. This new transpiler is written in ghūl, and it can transpile  itself into L: it has become self-hosting, albeit still dependent on the L compiler to generate machine code from L.
+**This step is the first bootstrap**, and it's why I started with a transpiler: the source code of the ghūl to L transpiler, which was originally L, has now been mechanically transformed into ghūl. This new transpiler is written in ghūl, and it can transpile itself into L: it has become self-hosting, albeit still dependent on the L compiler to generate machine code from L.
 
 ## .NET backend
 Gradually, I integrated more semantic analysis into the ghūl compiler: representations of classes, traits, methods, functions, variables, etc., along with corresponding error checking and reporting.
 
 With the compiler now capable of constructing a detailed representation of input programs, I began implementing a .NET IL generation backend. I did this in stages, adding support for expressions and local variable definitions first, then working through the other more advanced language constructs.
 
-I initially used scaffolding to test generated IL snippets, because the compiler wasn't capable of generating completely self-contained IL programs. As I implemented .NET IL for the various ghūl language features, and the compiler became increasingly more capable, I guarded against regressions by building integration tests as I went using a regression test runner implemented first in bash but later written in ghūl itself. The initial regression suite included tests asserting correct IL generation for all the different ghūl language constructs as I implemented them. As soon as the compiler could generate code for complete programs, I added further integration tests exercising generated code execution.
+I initially used scaffolding to test generated IL snippets, because the compiler wasn't capable of generating completely self-contained IL programs. As I implemented .NET IL for the various ghūl language features, and the compiler became increasingly more capable, I guarded against regressions by building [integration tests](https://github.com/degory/ghul/tree/main/integration-tests) as I went. The regression test runner started out as a collection of bash scripts, but as the compiler stabilized, I [rewrote it in ghūl](https://github.com/degory/ghul-test). The initial regression suite included tests asserting correct IL generation for all the different ghūl language constructs as I implemented them. As soon as the compiler could generate code for complete programs, I added further integration tests exercising generated code execution.
 
 I continued to maintain the transpilation to L source code backend alongside the .NET IL backend throughout this process, until the .NET IL backend was sufficiently complete and stable to self-host the compiler on .NET.
 
