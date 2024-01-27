@@ -51,7 +51,7 @@ a real-world example, or use one of the project templates to get started.
 </Project>
 ```
 
-`example.ghulproj``
+`example.ghulproj`
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
