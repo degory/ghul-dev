@@ -50,6 +50,7 @@ module.exports = {
       ['/generics', 'generics'],
       ['/dotnet-integration', '.NET integration'],
       ['/grammar', 'grammar'],
+      ['/known-issues', 'known issues'],
       ['/resources', 'resources'],
       ['/history', 'history']
     ],
