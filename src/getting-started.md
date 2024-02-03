@@ -1,5 +1,7 @@
 # getting started
 
+> **Examples**: if you just want to see some ghūl code examples and maybe experiment with writing some ghūl, then start with the **[ghūl examples repository](https://github.com/degory/ghul-examples)**. The examples project is ready to open in a devcontainer, or a GitHub Codespace.
+
 ## prerequisites
 
 The ghūl programming language compiler requires the [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
