@@ -129,7 +129,7 @@ while counter < 10 do
     counter = counter + 1;
 od
 ```
-This loop exits when counter reaches 5.
+This loop exits when counter reaches 5 without proceeding to execute `write_line(counter)``
 
 
 ```ghul
@@ -142,7 +142,88 @@ while counter < 5 do
     write_line(counter);
 od
 ```
-This loop skips the write_line statement when counter is 3.
+
+This loop skips the call to `write_line` when counter is 3.
+
+## for statement
+
+### for-in-do-od
+The for loop in ghūl steps through an iterable object executing the loop body once for every value the iterator produces. An iterable object is something that implements either `Collections.Iterable[T]` or `Collections.Iterator[T]`, and the loop variable's type is inferred to be `T`.
+
+```ghul
+for variable in iterable do
+    // variable is set to each element of iterator in turn
+od
+```
+
+The variable is defined by the for loop and its scope is the for loop body from the `do` up to the `od`
+
+
+```ghul
+// i not in scope here
+for i in [1, 2, 3, 4, 5] do // i defined here, with type `int`
+    // i in scope here:
+    write_line(i);
+od
+```
+### range operators
+
+The `..` and `::` operators construct integer ranges that can be iterated over by for statements. `..` constructs ranges that are inclusive of its left operand and exclusive of its right operand:
+
+```ghul
+for i in 0..5 do
+    // i will take values 0, 1, 2, 3, 4 in sequence
+    write_line(i);
+od
+```
+`::` constructs a range that is inclusive of its left and right operands:
+
+```ghul
+for i in 1::5 do
+    // i will take values 1, 2, 3, 4, 5 in sequence
+    write_line(i);
+od
+```
+
+These operators are not for loop specific and can be used in any expression context
+
+```ghul
+let zero_to_four = 0..5;
+let five_to_nine = 5..10;
+
+let zero_to_nine = zero_to_four | .cat(five_to_nine);
+
+while zero_to_nine.has_next() do
+    write_line(range.next())
+od
+```
+
+### break and continue in for loops
+
+The `break` statement immediately exits the loop, while `continue` skips the remaining code in the current iteration and proceeds to the next iteration immediately before attempting to read the next element from the iterator
+
+```ghul
+for counter in 0..10 do
+    if counter == 5 then
+        break;
+    fi
+    write_line(counter);
+od
+```
+This loop exits when counter reaches 5, without proceeding to execute `write_line(5)`
+
+
+```ghul
+for counter in 0..5 do
+    counter = counter + 1;
+    if counter == 3 then
+        continue;
+    fi
+    write_line(counter);
+od
+```
+This loop skips the call to `write_line` when counter is 3.
+
 
 ## do statement
 
