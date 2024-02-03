@@ -6,7 +6,7 @@ Official source repositories are [hosted on GitHub.com](https://github.com/degor
 
 Official release packages are [hosted on NuGet.org](https://www.nuget.org/packages?q=degory+ghul). Copies of the release versions and beta versions are available on GitHub under Packages for each repository, and as workflow assets on successful PR builds.
 
-The Visual Studio Code language extension is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/VSCode).
+The Visual Studio Code language extension is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=degory.ghul).
 
 
 ### compiler
