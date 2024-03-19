@@ -40,20 +40,37 @@ entry() =>
 use IO.Std.write_line;
 
 entry() is
-    let add = (x: single, y: single) => x + y;
-    let subtract = (x: single, y: single) => x - y;
-    let multiply = (x: single, y: single) => x * y;
-    let divide = (x: single, y: single) => x / y;
+    // lazily generates an infinite sequence of fibonacci numbers:
+    let fibonacci_sequence = generate(
+        (0, 1),
+        state: (int, int) =>
+            let 
+                (prev, current) = state,
+                next = prev + current
+            in
+                ((current, next), next)
+    );
 
-    let calc = (x: single, y: single, operation: (single, single) -> single) => operation(x, y);
+    // lazily generates an infinite sequence of factorials:
+    let factorial_sequence = generate(
+        (1, 1),
+        state: (int, int) =>
+            let
+                (p, prev) = state,
+                n = p + 1,
+                next = prev * n
+            in
+                ((n, next), next)            
+    );
 
-    let a = 10.0;
-    let b = 5.0;
+    write_line("first 10 fibonacci numbers: {fibonacci_sequence | .take(10)}");
+    write_line("first 10 factorial numbers: {factorial_sequence | .take(10)}");
+    write_line("first 10 even fibonacci numbers: {fibonacci_sequence | .filter(x => x % 2 == 0) .take(10)}");
 
-    write_line("Addition: " + calc(a, b, add));
-    write_line("Subtraction: " + calc(a, b, subtract));
-    write_line("Multiplication: " + calc(a, b, multiply));
-    write_line("Division: " + calc(a, b, divide));
+    for (i, (fib, fact)) in fibonacci_sequence | .zip(factorial_sequence) .take(10) .index() do
+        write_line("fibonacci {i} is {fib}");
+        write_line("factorial {i} is {fact}");
+    od;
 si
 ```
 

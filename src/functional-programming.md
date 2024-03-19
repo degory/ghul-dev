@@ -325,25 +325,27 @@ generate[T, S](initial: S, generator: S -> (S, T)) -> GENERATOR[T, S] =>
 
 ```ghul
 // generates an infinite sequence of fibonacci numbers:
-let fibonacci_sequence = generate(
+let fibonacci = generate(
     (0, 1),
-    (state: (prev: int, current: int) =>
-        ((state.current, state.prev + state.current), state.prev + state.current))
+    (state: (int, int)) =>
+        let
+            (prev, current) = state,
+            next = prev + current
+        in
+            ((current, next), next)
 );
 
-// generates an infinite sequence of factorials:
+// generates an infinite sequence of factorials
+// (although overflow will occur fairly rapidly)
 let factorial_sequence = generate(
-    (1, 1),
-    (state: (n: int, prev: int) =>
-        ((state.n + 1, state.prev * (state.n + 1)), state.prev * (state.n + 1)))
-);
-
-let fibonacci_sequence_block_body = generate(
-    (0, 1),
-    (state: (prev: int, current: int) is
-        let next = state.prev + state.current;
-        return ((state.current, next), next)
-    si)
+    (1U, 1UL),
+    (state: (uint, ulong)) =>
+        let
+            (n, current) = state,
+            next_n = n + 1U,
+            next = current * cast ulong(next_n)
+        in 
+            ((next_n, next), next)
 );
 
 write_line("first 20 fibonacci numbers: {fibonacci_sequence | .take(10)}");
