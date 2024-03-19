@@ -80,11 +80,71 @@ is_odd(n: int) -> bool is
     if n == 0 then false else is_even(n - 1) fi;
 si
 ```
-
 ## immutable data structures and pure functions
-While ghūl doesn't do anything special to enforce immutability,
-pipes make it easy to iterate over data and produce
-transformed output without mutation
+While ghūl supports imperitive code it also aims to support
+writing pure functions with appropriate constructs and defaults
+
+### lists are immutable by default
+The standard trait for lists `Collections.List[T]` is immutable (it maps to .NET's ``System.Collections.Generic.IReadOnlyList`1[T]``)
+
+### arrays are immutable
+The ghūl array type `T[]` does not expose an assign indexer
+
+### maps are immutable by default
+The standard trait for maps `Collections.Map[T]` is immutable (it maps to .NET's ``System.Collections.Generic.IReadOnlyDictionary`2[K,V]``)
+
+### list literals are immutable
+The values constructed by list literals are immutable
+
+```ghul
+let list = [1, 2, 3, 4, 5];
+
+let element = list[3]; // elements can be read
+
+// the list is an instance of an immutable type:
+assert list.get_type() == typeof Collections.List[int];
+
+element[3] = 6; // elements cannot be assigned to - compile time error
+```
+
+### tuples are immutable
+Values of ghūl tuple types `(T1, T2, T3, ...)` are immutable (the elements `` `0 ``, `` `1 ``, `` `2 ``, ... do not have assign accessors)
+
+### tuple literals are immutable
+The values constructed by tuple literals are immutable
+
+```ghul
+let tuple = (1, 2, 3, 4, 5);
+
+let element = tuple.`3; // elements can be read
+
+// the tuple is an instance of an immutable type:
+assert tuple.get_type == typeof (int, int, int, int, int)
+
+tuple.`3 = 6; // elements cannot be assigned to - compile time error
+```
+
+### properties are not publicly assignable by default
+When defining properties in classes and structs, they are not
+publicly assignable by default
+
+```ghul
+struct THING is
+    name: string;
+
+    init(name: string) is
+        self.name = name;
+    si
+si
+
+let thing = new THING("a thing");
+thing.name = "change it"; // compile time error
+```
+
+### pipes support non mutating operations over lists
+
+pipes make it easy to iterate over lists and generators producing
+transformed output without mutating the source data
 
 ```ghul
 let list = [1, 2, 3, 4, 5];
@@ -94,7 +154,7 @@ let doubled = list | .map(x => x * 2);
 // original list is still the same:
 write_line("list: {list| }");
 ```
-
+### expression oriented programming
 Expression bodied functions and some support for
 expression oriented programming help in writing
 pure functions
@@ -115,7 +175,6 @@ let classify = (n: int) =>
     else
         if n % 5 == 0 then "Positive odd and multiple of 5" else "Positive odd" fi
     fi;
-
 
 write_line("classifyNumber(-10): {classify(-10)}");
 write_line("classifyNumber(-3): {classify(-3)}");
