@@ -227,37 +227,11 @@ let apply_twice_times_2 = create_apply_twice(times_2);
 write_line("apply_twice_times_2(5): {apply_twice_times_2(5)}");
 ```
 
+## tagged unions
+Tagged unions are not yet supported [(see GitHub issue #1132)](https://github.com/degory/ghul/issues/1132)
+
 ## pattern matching
-pattern matching is not yet supported, but if expressions
-go some way to providing similar functionality:
-```ghul
-let is_even =
-    (n: int) => 
-        if n % 2 == 0 then 
-            true 
-        else 
-            false
-        fi;
-
-let is_odd = 
-    (n: int) => 
-        if n % 2 != 0 then
-            true 
-        else 
-            false
-        fi;
-
-let parity = 
-    (n: int) => 
-        if is_even(n) then
-            "even" 
-        else
-            "odd"
-        fi;
-
-write_line("parity(10): {parity(10)}");
-write_line("parity(11): {parity(11)}");
-```
+Pattern matching is not yet supported [(see GitHub issue #1134)](https://github.com/degory/ghul/issues/1134)
 
 ## currying
 ```ghul

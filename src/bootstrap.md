@@ -17,11 +17,7 @@ To use compiler C, we need a compiler for source language I, and a machine to ex
 
 I wrote the first version of the ghūl compiler in the L programming language - a language I designed and implemented a self-hosting compiler for previously. 
 
-
-
- Getting to this point required [bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_(compilers)) the compiler:  bootstrapping is the process of getting
-
-
+Getting to this point required [bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_(compilers)) the compiler:  bootstrapping is the process of getting
 
 Bootstrapping it now is routine: it's done by the CI/CD pipeline on every PR merge and release. However, the initial bootstrap was much more complex.
 
