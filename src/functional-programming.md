@@ -227,8 +227,132 @@ let apply_twice_times_2 = create_apply_twice(times_2);
 write_line("apply_twice_times_2(5): {apply_twice_times_2(5)}");
 ```
 
-## tagged unions
-Tagged unions are not yet supported [(see GitHub issue #1132)](https://github.com/degory/ghul/issues/1132)
+## union types
+
+Unions are under development [(see GitHub issue #1132)](https://github.com/degory/ghul/issues/1132)
+
+Unions hold a value of one of several different types (variants). Each variant can have its own set of fields. This is useful for creating types that can represent multiple kinds of data in a single structure.
+
+```ghul
+union Shape is
+    CIRCLE(radius: float);
+    SQUARE(side: float);
+si
+
+union Option[T] is
+    SOME(value: T);
+    NONE;
+si
+
+union Result[T, E] is
+    OK(value: T);
+    ERROR(error: E);
+si
+```
+
+Accessing the data held by a union's variant requires first checking which variant the union currently holds. Unions provide properties for this for each of their variants:
+
+```ghul
+if an_option.is_some then
+    let value = an_option.some;
+    ...
+fi
+```
+
+Unions shaped like `Option` types (exactly one non-unit variant) support the `?` and `!` operators for testing if they hold a value and for unwrapping that value, respectively:
+
+```ghul
+if an_option? then
+    let value = an_option!;
+    ...
+fi
+```
+
+```ghul
+use IO.Std.write_line;
+
+union Option[T] is
+    SOME(value: T);
+    NONE;
+si
+
+union List[T] is
+    NIL;
+    CONS(head: T, tail: List[T]);
+si
+
+union Tree[T] is
+    LEAF(value: T);
+    NODE(left: Tree[T], right: Tree[T]);
+si
+
+entry() is
+    test_option();
+    test_list();
+    test_tree();
+si
+
+test_option() is
+    let some_int = some(42);
+    let none_int = none`[int]();
+
+    let stringify_option = (o: Option[int]) rec =>
+        if o.is_some then
+            "{o.some}"
+        else
+            "none"
+        fi;
+
+    write_line(stringify_option(some_int));
+    write_line(stringify_option(none_int));
+si
+
+test_list() is
+    let list = cons(1, cons(2, cons(3, nil`[int]())));
+
+    let stringify_list = (l: List[int]) rec =>
+        if l.is_cons then
+            let (head, tail) = l.cons in
+            "{head}, {rec(tail)}"
+        else
+            "nil"
+        fi;
+
+    write_line(stringify_list(list));
+si
+
+test_tree() is
+    let tree = node(
+        node(
+            leaf(1),
+            leaf(2)
+        ),
+        node(
+            leaf(3),
+            leaf(4)
+        )
+    );
+
+    let stringify_tree = (t: Tree[int]) rec =>
+        if t.is_node then
+            let (left, right) = t.node in
+            "({rec(left)}, {rec(right)})"
+        else
+            "{t.leaf}"
+        fi;
+
+    write_line(stringify_tree(tree));
+si
+
+some[T](value: T) -> Option[T] => new Option.SOME[T](value);
+none[T]() -> Option[T] => new Option[T].NONE();
+
+node[T](left: Tree[T], right: Tree[T]) -> Tree[T] => new Tree.NODE[T](left, right);
+leaf[T](value: T) -> Tree[T] => new Tree.LEAF[T](value);
+
+cons[T](head: T, tail: List[T]) -> List[T] => new List.CONS[T](head, tail);
+nil[T]() -> List[T] => new List.NIL[T]();
+```
 
 ## pattern matching
 Pattern matching is not yet supported [(see GitHub issue #1134)](https://github.com/degory/ghul/issues/1134)
