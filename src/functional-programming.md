@@ -137,7 +137,7 @@ struct THING is
     si
 si
 
-let thing = new THING("a thing");
+let thing = THING("a thing");
 thing.name = "change it"; // compile time error
 ```
 
@@ -344,14 +344,14 @@ test_tree() is
     write_line(stringify_tree(tree));
 si
 
-some[T](value: T) -> Option[T] => new Option.SOME[T](value);
-none[T]() -> Option[T] => new Option[T].NONE();
+some[T](value: T) -> Option[T] => Option.SOME[T](value);
+none[T]() -> Option[T] => Option.NONE[T]();
 
-node[T](left: Tree[T], right: Tree[T]) -> Tree[T] => new Tree.NODE[T](left, right);
-leaf[T](value: T) -> Tree[T] => new Tree.LEAF[T](value);
+node[T](left: Tree[T], right: Tree[T]) -> Tree[T] => Tree.NODE[T](left, right);
+leaf[T](value: T) -> Tree[T] => Tree.LEAF[T](value);
 
-cons[T](head: T, tail: List[T]) -> List[T] => new List.CONS[T](head, tail);
-nil[T]() -> List[T] => new List.NIL[T]();
+cons[T](head: T, tail: List[T]) -> List[T] => List.CONS[T](head, tail);
+nil[T]() -> List[T] => List.NIL[T]();
 ```
 
 ## pattern matching (TODO)
@@ -421,7 +421,7 @@ si
 
 // generator constructor helper so we don't have to specify types
 generate[T, S](initial: S, generator: S -> (S, T)) -> GENERATOR[T, S] =>
-    new GENERATOR[T, S](initial, generator);
+    GENERATOR[T, S](initial, generator);
 ```
 
 ```ghul

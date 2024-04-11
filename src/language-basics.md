@@ -48,7 +48,7 @@ si
 
 Functions can also have an expression body using `=>` instead of `is` / `si`:
 ```ghul
-square(x: int) => x * x;
+square(x: int) -> int => x * x;
 ```
 
 ### control flow
@@ -318,7 +318,7 @@ In this case, `g` captures the value of `i` at the moment of `g`'s creation. The
 
 ```ghul
 // Define a list to hold the closures:
-let closure_list = new LIST[() -> int]();
+let closure_list = LIST[() -> int]();
 
 // Iterate over an integer range:
 for i in 1::10 do
@@ -331,13 +331,13 @@ od
 
 // Each closure captured the value of i at the time of its creation:
 for closure in closure_list do
-    write_line("Closure captured value: " + closure());
+    write_line("Closure captured value: {closure()}");
 od
 ```
 
 If the captured value is a reference to an object, like in the following example:
 ```ghul
-let object_reference = new SOME_OBJECT();
+let object_reference = SOME_OBJECT();
 let closure = () => object_reference.some_property;
 ```
 

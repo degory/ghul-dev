@@ -78,41 +78,37 @@ si
 ```ghul
 use IO.Std.write_line;
 
-class Calculator is
+class CALCULATOR is
     init() is
     si
 
-    add(x: single, y: single) -> single is
-        return x + y;
-    si
+    add(x: single, y: single) -> single =>
+        x + y;
 
-    subtract(x: single, y: single) -> single is
-        return x - y;
-    si
+    subtract(x: single, y: single) -> single =>
+        x - y;
 
-    multiply(x: single, y: single) -> single is
+    multiply(x: single, y: single) -> single =>
         return x * y;
-    si
 
-    divide(x: single, y: single) -> single is
+    divide(x: single, y: single) -> single =>
         if y != 0.0 then
-            return x / y;
+            x / y;
         else
-            throw new System.DivideByZeroException("Error: Division by zero");
-        fi
-    si
+            throw System.DivideByZeroException("oops: division by zero");
+        fi;
 si
 
 entry() is
-    let calc = new Calculator();
+    let calc = CALCULATOR();
 
     let a = 10.0;
     let b = 5.0;
 
-    write_line("Addition: " + calc.add(a, b));
-    write_line("Subtraction: " + calc.subtract(a, b));
-    write_line("Multiplication: " + calc.multiply(a, b));
-    write_line("Division: " + calc.divide(a, b));
+    write_line("Addition: {calc.add(a, b)}");
+    write_line("Subtraction: {calc.subtract(a, b)}");
+    write_line("Multiplication: {calc.multiply(a, b)}");
+    write_line("Division: {calc.divide(a, b)}");
 si
 ```
 

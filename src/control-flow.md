@@ -11,7 +11,7 @@ assert false else "expect AssertionFailedException";
 
 let list = [1, 2, 3, 4, 5];
 
-assert 3 < list.count else new ArgumentOutOfRangeException("list");
+assert 3 < list.count else ArgumentOutOfRangeException("list");
 ```
 
 ## if statement
@@ -334,7 +334,7 @@ If different types of exception should be caught, then there can be multiple exc
 let reader: StreamReader;
 
 try
-    reader = new StreamReader("file.txt");
+    reader = StreamReader("file.txt");
     let content = reader.read_to_end();
 
     write_line(content);
@@ -399,7 +399,7 @@ yrt
 let reader: StreamReader;
 
 try
-    reader = new StreamReader("file.txt");
+    reader = StreamReader("file.txt");
 
     let content = reader.read_to_end();
     write_line(content);
@@ -460,7 +460,7 @@ If execution reaches the end of a non-void function without encountering a retur
 
 ```ghul
 default_return() -> int is
-    // do nothing
+    // do nothing, return 0
 si
 
 ...
