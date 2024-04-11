@@ -276,7 +276,7 @@ Outer.Inner.do_something();
 
 A namespace definition is an instance of that namespace. Namespace instances are aggregated across all source files to form a single namespace scope. This means that all definitions within a namespace instance are visible unqualified within all other instances of that namespace in all source files:
 
-Source file 1:
+`source-file-1.ghul`:
 ```ghul
 namespace Example is
     // this definition of Test is visible unqualified
@@ -287,7 +287,7 @@ namespace Example is
 si
 ```
 
-Source file 2:
+`source-file-2.ghul`:
 ```ghul
 namespace Example is
     // class TEST can implement the Test trait without having
@@ -298,9 +298,7 @@ namespace Example is
 si
 ```
 
-### source code outside any namespace
-
-If a source file contains no explicit namespace declarations, all definitions in that file are placed in a compiler-generated namespace that is private to that source file. This private namespace has no specific name and is inaccessible from other files. This feature is useful for examples and tests:
+### definitions outside any namespace
 
 If a source file contains no namespaces, then all definitions in the file are placed in a compiler generated namespace that is private to that source file. This is useful for examples and tests:
 
@@ -310,7 +308,7 @@ entry() is
     IO.Std.write_line("Hello, world!");
 si
 ```
-However, for definitions to be visible from other files, they must be placed in an explicitly declared namespace.
+For definitions to be visible from other files, they must be placed in an explicitly declared namespace.
 
 ### namespace usage consistency
 
@@ -330,13 +328,23 @@ si
 ```
 
 ## importing symbols with `use`
-Symbols can be imported into the current namespace instance's scope using the use keyword. Imported symbols can then be used without qualification:
+Symbols can be brought into the current namespace instance's scope using the use keyword. Imported symbols can then be used without qualification:
 
 ```ghul
 use Example.TEST;
 
 ...
+
 let t = TEST();
+```
+
+`use` applied to a namespace imports all symbols from that namespace:
+```ghul
+use Example; // imports Example.TEST and Example.Test
+
+...
+
+let t: Test;
 ```
 
 Note that `use` only applies within the current `namespace` definition. It does not import a symbol into all instances of the current namespace:

@@ -1,74 +1,156 @@
 # language basics
 
+## syntax
+
+ghūl syntax is inspired by a number of non-brace languages, including ALGOL 68 and Pascal
+
+### identifiers and keywords
+
+Identifiers in ghūl follow the convention of `snake_case` for variables, functions, and properties, `PascalCase` for namespaces and traits, and `MACRO_CASE` for concrete types like classes, structs, and enums. ghūl keywords are lowercase.
+
+ghūl relies on keywords for block structure where other languages use braces or indentation. Keywords are context specific and generally come in pairs where the closing keyword is the reverse or mirror image of the opening keyword. In the examples below `is` introduces a method or class body and its block is closed by the reverse keyword `si`
+
+```ghul
+let my_variable = 42;
+
+print_something(thing: string) is
+    write_line("The thing is: {thing}");
+si
+
+class PERSON is
+    name: string;
+    age: int;
+si
+```
+
+### expressions and statements
+Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, but only if statements can be used as expressions.
+
+```ghul
+let x = 10; // variable declaration statement
+let y = x * 2; // expression used as part of a declaration statement
+
+if x > 5 then // 'if' is a statement, 'x > 5' is an expression
+    write_line("x is greater than 5");
+fi
+
+let z = if x > 5 then x else y fi; // if can also be used as an expression
+```
+
+### function declarations
+Functions in ghūl are declared with an optional return type, a name, a list of parameters in parentheses, and a body enclosed in `is` and `si` keywords
+
+```ghul
+greet(name: string) -> void is
+    write_line("Hello, {name}!");
+si
+```
+
+Functions can also have an expression body using `=>` instead of `is` / `si`:
+```ghul
+square(x: int) => x * x;
+```
+
+### control flow
+ghūl supports standard control flow constructs like `if`, `else`, `while`, `for`, and `case` expressions.
+
+```ghul
+if x > 0 then
+    write_line("Positive");
+elif x < 0 then
+    write_line("Negative");
+else
+    write_line("Zero");
+fi
+
+for item in my_list do
+    process(item);
+od
+```
+
+### types
+
+ghūl is statically typed, with some support for type inference. Types can be explicitly specified using a colon `:` plus a type expression
+
+```ghul
+let x: int = 42;
+let y = "Hello"; // type inferred as string
+```
+User types are defined using `class`, `struct`, `trait`, `enum`, and `union` keywords.
+
 ## data types
+
+ghūl supports a variety of data types, including primitives, arrays, and tuples.
 
 ### primitive types
 
-ghūl primitive types include various signed and unsigned integers, single and double precision floating point, and boolean.
+ghūl provides the following primitive data types:
 
-* `byte`: signed 8-bit integer
-* `ubyte`: unsigned 8-bit integer
-* `short`: signed 16-bit integer
-* `ushort`: unsigned 16-bit integer
-* `int`: signed 32-bit integer
-* `uint`: unsigned 32-bit integer
-* `long`: signed 64-bit integer
-* `ulong`: unsigned 64-bit integer
-* `word`: signed pointer length integer
-* `uword`: unsigned pointer length integer
-* `void`: the absence of any value
-
-As usual for languages targeting .NET, these ghūl primitive types are all actually aliases for standard .NET types defined in the `System` namespace, such as `System.Int32`. It is conventional to use the ghūl types rather the raw .NET type names, although technically they are interchangeable.
-
-### composite types
-
-ghūl supports various composite types.
-
-#### arrays
-
-Array types are composed with the `[]` postfix type operator
+* integer types: `byte`, `ubyte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `word`, `uword`
+* floating-point types: `single`, `double`
+* boolean type: `bool`
+* character type: `char`
+* void type: `void`
 
 ```ghul
-int[] // a one dimensional array of integers
-string[] // a one dimensional array of strings
+let my_int: int = 42;
+let my_float: double = 3.14;
+let my_bool: bool = true;
+let my_char: char = 'A';
 ```
+These types are used to represent basic values in ghūl programs.
 
-ghūl does not have multi-dimensional arrays, but jagged array types can be composed using multiple `[]`
+### arrays
+
+ghūl supports arrays, which are fixed-size, **immutable** collections of elements of the same type. Array types are denoted using square brackets [] after the element type.
 
 ```ghul
-int[][] // an array where each element can hold an array of integers
-string[][] // an array where each element can hold an array of strings
+let numbers: int[];
 ```
 
-Values of array type are references to the underlying array object, and can be null
+Arrays can be constructed with an array literal
+```ghul
+let primes = [2, 3, 5, 7, 11];
+```
 
-Objects of array type can be constructed with `new type[](size)`
+Array elements can be read with indexer syntax
+```ghul
+let p = primes[i];
+```
+
+### tuples
+Tuples in ghūl are lightweight, immutable data structures that can hold a fixed number of elements of different types. Tuple types use parentheses `(` `)`, with elements separated by commas. Tuple literals are similarly constructed with `(` `)` and comma delimited elements
 
 ```ghul
-let array = new int[](10);
+let point: (int, int) = (10, 20);
+let person: (string, int) = ("Alice", 30);
 ```
-Note there is no special array constructor syntax: the constructor parameter is in parentheses after the type as normal.
 
-Elements of arrays can be accessed using the indexing operator `array[index]`
+Tuple elements can be accessed using the dot `.` notation followed by the element name:
 
 ```ghul
-let a = new int[](10);
-
-a[0] = 0;
-a[1] = 1;
+let x = point.`0;
+let y = point.`1;
+let name = person.`0;
+let age = person.`1;
 ```
 
-In practice, use of arrays is fairly rare in ghūl. Use of collection traits like `List[T]` or `MutableList[T]` is preferred.
+Tuple elements can be given more descriptive names, either in the type or in the tuple literal:
+```ghul
+let point: (x: int, y: int) = (10, 20);
+let person = (name = "Alice", age = 30);
+let x = point.x;
+let y = point.y;
+let name = person.name;
+let age = person.age;
+```
 
-#### tuples
-
-Tuples in ghūl are defined using parentheses ( and ). They can encapsulate multiple types.
-
-The general syntax for a tuple type is `(type1, type2, ...)`. For example, `(int, string)` represents a tuple with an integer and a string.
-
-Elements in a tuple can be named. The syntax for a tuple type with named elements is `(s: string, i: int)`, where s and i are the names of the tuple elements. If tuple elements are not explicitly named, they are assigned names consisting of a back-tick followed by an index.
-
-Tuples in ghūl are structurally typed. A tuple value is assignment compatible with a tuple type only if the types of all of its elements are identical to the element types of the target tuple type (i.e. co-variance is not supported)
+ghūl also supports tuple destructuring:
+```ghul
+let (a, b) = point;
+let (name, age) = person;
+```
+These are the basic data types available in ghūl. The language also supports more advanced types such as classes, structs, traits, enums, and unions, which will be covered in later sections of the documentation.
 
 ### type conversions
 
