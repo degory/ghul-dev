@@ -44,6 +44,7 @@ module.exports = {
       ['/getting-started', 'getting started'],
       ['/language-basics', 'language basics'],
       ['/definitions', 'definitions'],
+      ['/expressions', 'expressions'],
       ['/control-flow', 'control flow'],
       ['/functional-programming', 'functional programming'],
       ['/object-oriented-programming', 'object oriented programming'],

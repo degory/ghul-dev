@@ -46,9 +46,11 @@ a real-world example, or use one of the project templates to get started.
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ghul.targets" Version="1.2.1" />
-    <PackageReference Include="ghul.pipes" Version="1.0.0" />
-    <PackageReference Include="ghul.runtime" Version="1.0.0" />
+    <!--
+      ghul.runtime provides MSBuild targets required to drive the 
+      ghul compiler
+     -->
+    <PackageReference Include="ghul.runtime" Version="1.3.3" />
   </ItemGroup>
 </Project>
 ```
@@ -71,7 +73,7 @@ a real-world example, or use one of the project templates to get started.
 
 ### source files
 
-You'll need some ghūl source files. By convention ghūl source files have the extension `.ghul`, and the standard MSBuild targets will include `**/*.ghul` when building.
+You'll need some ghūl source files. By convention ghūl source files have the extension `.ghul`, and the `ghul.runtime` provided MSBuild targets will include `**/*.ghul` when building.
 
 ### building and running
 

@@ -19,16 +19,6 @@ The ghūl runtime library.
 - **Repository:** [ghul-runtime](https://github.com/degory/ghul-runtime)
 - **Package:** [ghul.runtime](https://www.nuget.org/packages/ghul.runtime)
 
-### pipes
-The ghūl pipes library, providing the `|` (pipe) operator and operations like `filter`, `map`, `reduce`.
-- **Repository:** [ghul-pipes](https://github.com/degory/ghul-pipes)
-- **Package:** [ghul.pipes](https://www.nuget.org/packages/ghul.pipes)
-
-### targets
-MSBuild project targets for compiling ghūl projects.
-- **Repository:** [ghul-targets](https://github.com/degory/ghul-targets)
-- **Package:** [ghul.targets](https://www.nuget.org/packages/ghul.targets)
-
 ### test
 Integration test runner for the ghūl compiler. (A build time dependency of the compiler itself. Not required for other ghūl projects)
 - **Repository:** [ghul-test](https://github.com/degory/ghul-test) 

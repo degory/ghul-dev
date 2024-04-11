@@ -1,9 +1,9 @@
 
 #  ghūl programming language
 
-![Hero Image](ghul-logo-draft.png)
+![ghūl programming language logo](ghul-logo-draft.png)
 
-(Note: this site is very much a **work-in-progress**. The [ghūl compiler](https://github.com/degory/ghul) is currently the definitive ghūl language reference)
+(Note: this site is very much a **work-in-progress**. The [ghūl compiler](https://github.com/degory/ghul) source code is currently the definitive ghūl language reference)
 
 ## why ghūl?
 
@@ -15,7 +15,7 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 
 - **type safety**: ghūl enforces type safety at compile-time.
 
-- **functional programming elements**: ghūl supports function literals, including anonymous functions, lambdas, and closures.
+- **functional programming elements**: ghūl supports anonymous functions with closures.
 
 - **OOP**: ghūl supports classes, objects, inheritance, polymorphism, and other Object-Oriented Programming concepts.
 

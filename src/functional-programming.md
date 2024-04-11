@@ -354,8 +354,8 @@ cons[T](head: T, tail: List[T]) -> List[T] => new List.CONS[T](head, tail);
 nil[T]() -> List[T] => new List.NIL[T]();
 ```
 
-## pattern matching
-Pattern matching is not yet supported [(see GitHub issue #1134)](https://github.com/degory/ghul/issues/1134)
+## pattern matching (TODO)
+Pattern matching is under development [(see GitHub issue #1134)](https://github.com/degory/ghul/issues/1134)
 
 ## currying
 ```ghul
@@ -381,10 +381,13 @@ write_line("add_10(3): {add_10(3)}");
     write_line("add_10(3): {add_10(3)}");
 ```
 
-## lazy evaluation
+## lazy evaluation (TODO)
+Lazy evaluation is not yet supported [(see GitHub issue #1165)](https://github.com/degory/ghul/issues/1165)
+
+The workaround is to implement the `Iterator[T]` trait and manually manage state. For example:
 
 ```ghul
-// a generic infinite sequence generator with arbitrary state
+// generate an infinite sequence of T generator from state S
 class GENERATOR[T, S]: Collections.Iterator[T], Collections.Iterable[T] is
     current: T;
     iterator: Collections.Iterator[T] => self;
@@ -446,8 +449,10 @@ let factorial_sequence = generate(
             ((next_n, next), next)
 );
 
-write_line("first 20 fibonacci numbers: {fibonacci_sequence | .take(10)}");
-write_line("first 20 factorial numbers: {factorial_sequence | .take(10)}");
+// the resulting sequences can be comsumed by a pipe, generating values on demand:
+
+write_line("first 10 fibonacci numbers: {fibonacci_sequence | .take(10)}");
+write_line("first 10 factorial numbers: {factorial_sequence | .take(10)}");
 
 for (i, (fib, fact)) in fibonacci_sequence | .zip(factorial_sequence) .take(10) .index() do
     write_line("fibonacci {i} is {fib}");

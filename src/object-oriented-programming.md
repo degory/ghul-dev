@@ -3,51 +3,122 @@
 ```ghul
 use IO.Std.write_line;
 
-trait Calculator is
-    add(x: single, y: single) -> single;
-    subtract(x: single, y: single) -> single;
-    multiply(x: single, y: single) -> single;
-    divide(x: single, y: single) -> single;
-si
-
-class CALCULATOR: Calculator is
-    init() is
-    si
-
-    add(x: single, y: single) -> single is
-        return x + y;
-    si
-
-    subtract(x: single, y: single) -> single is
-        return x - y;
-    si
-
-    multiply(x: single, y: single) -> single is
-        return x * y;
-    si
-
-    divide(x: single, y: single) -> single is
-        if y != 0.0 then
-            return x / y;
-        else
-            throw new System.DivideByZeroException("Error: Division by zero");
-        fi
-    si
-si
-
-demonstrate_calculator(calc: Calculator) is
-    let a = 10.0;
-    let b = 5.0;
-
-    write_line("Addition: " + calc.add(a, b));
-    write_line("Subtraction: " + calc.subtract(a, b));
-    write_line("Multiplication: " + calc.multiply(a, b));
-    write_line("Division: " + calc.divide(a, b));
-si
-
 entry() is
-    let calc = new CALCULATOR();
+    let int_calculator = CALCULATOR[int](
+        [
+            // we don't have covariance in tuples, so we need to cast
+            ("+", cast Operation[int](INTEGER_ADDITION())),
+            ("-", cast Operation[int](INTEGER_SUBTRACTION())),
+            ("*", cast Operation[int](INTEGER_MULTIPLICATION())),
+            ("/", cast Operation[int](INTEGER_DIVISION()))
+        ]
+    );
 
-    demonstrate_calculator(calc);
+    write_line("1 + 2 = {int_calculator.calculate("+", 1, 2)}");
+    write_line("1 - 2 = {int_calculator.calculate("-", 1, 2)}");
+    write_line("1 * 2 = {int_calculator.calculate("*", 1, 2)}");
+    write_line("1 / 2 = {int_calculator.calculate("/", 1, 2)}");
+
+    write_line("1 + 2 - 3 = {int_calculator.calculate_from_memory("-", 3)}");
+
+    let string_calculator = CALCULATOR[string](
+        [
+            ("+", cast Operation[string](STRING_CONCATENATION())),
+            ("-", cast Operation[string](STRING_SUBTRACTION()))
+        ]
+    );
+
+    write_line("hello + world = {string_calculator.calculate("+", "hello", "world")}");
+    write_line("helloworld - world = {string_calculator.calculate("-", "helloworld", "world")}");
+
+    string_calculator.clear_memory();
+
+    write_line("memory is cleared");
+si
+
+trait Operation[T] is
+    execute(left: T, right: T) -> T;
+si
+
+class INTEGER_ADDITION: Operation[int] is
+    init() is si
+
+    execute(left: int, right: int) -> int => left + right;
+si
+
+class INTEGER_SUBTRACTION: Operation[int] is
+    init() is si
+
+    execute(left: int, right: int) -> int => left - right;
+si
+
+class INTEGER_MULTIPLICATION: Operation[int] is
+    init() is si
+
+    execute(left: int, right: int) -> int is
+        return left * right;
+    si
+si
+
+class INTEGER_DIVISION: Operation[int] is
+    init() is si
+
+    execute(left: int, right: int) -> int =>
+        if right == 0 then
+            throw System.InvalidOperationException("division by zero");
+        else
+            left / right
+        fi;
+si
+
+class STRING_CONCATENATION: Operation[string] is
+    init() is si
+
+    execute(left: string, right: string) -> string => left + right;
+si
+
+class STRING_SUBTRACTION: Operation[string] is
+    init() is si
+
+    execute(left: string, right: string) -> string => left.replace(right, "");
+si
+
+class CALCULATOR[T] is
+    _operations: Collections.MAP[string, Operation[T]];
+
+    memory: T;
+
+    init(operations: Collections.Iterable[(name: string, operation: Operation[T])]) is
+        _operations = 
+            Collections.MAP[string, Operation[T]](
+                operations | 
+                    .map(on => let (name, operation) = on in Collections.KeyValuePair`2[string, Operation[T]](name, operation)));
+    si
+
+    calculate(operation_name: string, left: T, right: T) -> T =>
+        if _operations.contains_key(operation_name) then
+            let operation = _operations[operation_name];
+            memory = operation.execute(left, right);
+
+            memory
+        else
+            throw System.InvalidOperationException("invalid operation {operation_name}")
+        fi;
+
+
+    calculate_from_memory(operation_name: string, right: T) -> T =>
+        if _operations.contains_key(operation_name) then
+            let operation = _operations[operation_name];
+            memory = operation.execute(memory, right);
+
+            memory
+        else
+            throw System.InvalidOperationException("invalid operation {operation_name}")
+        fi;
+
+    clear_memory() is
+        let def: T; // uninitialized variable has default value
+        memory = def;
+    si
 si
 ```
