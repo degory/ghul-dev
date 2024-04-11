@@ -89,7 +89,7 @@ class CALCULATOR is
         x - y;
 
     multiply(x: single, y: single) -> single =>
-        return x * y;
+        x * y;
 
     divide(x: single, y: single) -> single =>
         if y != 0.0 then

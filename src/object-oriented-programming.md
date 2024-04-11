@@ -6,11 +6,12 @@ use IO.Std.write_line;
 entry() is
     let int_calculator = CALCULATOR[int](
         [
-            // we don't have covariance in tuples, so we need to cast
-            ("+", cast Operation[int](INTEGER_ADDITION())),
-            ("-", cast Operation[int](INTEGER_SUBTRACTION())),
-            ("*", cast Operation[int](INTEGER_MULTIPLICATION())),
-            ("/", cast Operation[int](INTEGER_DIVISION()))
+            // we don't have covariance in tuples, so we need
+            // to coerce the type of the operations explicitly
+            ("+", op: Operation[int] = INTEGER_ADDITION()),
+            ("-", op: Operation[int] = INTEGER_SUBTRACTION()),
+            ("*", op: Operation[int] = INTEGER_MULTIPLICATION()),
+            ("/", op: Operation[int] = INTEGER_DIVISION())
         ]
     );
 
@@ -23,8 +24,8 @@ entry() is
 
     let string_calculator = CALCULATOR[string](
         [
-            ("+", cast Operation[string](STRING_CONCATENATION())),
-            ("-", cast Operation[string](STRING_SUBTRACTION()))
+            ("+", op: Operation[string] = STRING_CONCATENATION()),
+            ("-", op: Operation[string] = STRING_SUBTRACTION())
         ]
     );
 
@@ -92,7 +93,9 @@ class CALCULATOR[T] is
         _operations = 
             Collections.MAP[string, Operation[T]](
                 operations | 
-                    .map(on => let (name, operation) = on in Collections.KeyValuePair`2[string, Operation[T]](name, operation)));
+                    .map(on => 
+                        let (name, operation) = on in
+                        Collections.KeyValuePair`2[string, Operation[T]](name, operation)));
     si
 
     calculate(operation_name: string, left: T, right: T) -> T =>
