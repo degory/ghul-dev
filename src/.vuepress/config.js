@@ -49,6 +49,7 @@ module.exports = {
       ['/functional-programming', 'functional programming'],
       ['/object-oriented-programming', 'object oriented programming'],
       ['/generics', 'generics'],
+      ['/type-inference', 'type inference'],
       ['/dotnet-integration', '.NET integration'],
       ['/grammar', 'grammar'],
       ['/known-issues', 'known issues'],
