@@ -4,14 +4,12 @@
 use IO.Std.write_line;
 
 entry() is
-    let int_calculator = CALCULATOR[int](
+    let int_calculator = CALCULATOR(
         [
-            // we don't have covariance in tuples, so we need
-            // to coerce the type of the operations explicitly
-            ("+", op: Operation[int] = INTEGER_ADDITION()),
-            ("-", op: Operation[int] = INTEGER_SUBTRACTION()),
-            ("*", op: Operation[int] = INTEGER_MULTIPLICATION()),
-            ("/", op: Operation[int] = INTEGER_DIVISION())
+            ("+", INTEGER_ADDITION()),
+            ("-", INTEGER_SUBTRACTION()),
+            ("*", INTEGER_MULTIPLICATION()),
+            ("/", INTEGER_DIVISION())
         ]
     );
 
@@ -22,10 +20,10 @@ entry() is
 
     write_line("1 + 2 - 3 = {int_calculator.calculate_from_memory("-", 3)}");
 
-    let string_calculator = CALCULATOR[string](
+    let string_calculator = CALCULATOR(
         [
-            ("+", op: Operation[string] = STRING_CONCATENATION()),
-            ("-", op: Operation[string] = STRING_SUBTRACTION())
+            ("+", STRING_CONCATENATION()),
+            ("-", STRING_SUBTRACTION())
         ]
     );
 
@@ -39,6 +37,45 @@ si
 
 trait Operation[T] is
     execute(left: T, right: T) -> T;
+si
+
+class CALCULATOR[T] is
+    _operations: Collections.MAP[string, Operation[T]];
+
+    memory: T;
+
+    init(operations: Collections.Iterable[(name: string, operation: Operation[T])]) is
+        _operations = 
+            Collections.MAP(
+                operations | 
+                    .map(on => let (name, operation) = on in Collections.KeyValuePair`2(name, operation)));
+    si
+
+    calculate(operation_name: string, left: T, right: T) -> T =>
+        if _operations.contains_key(operation_name) then
+            let operation = _operations[operation_name];
+            memory = operation.execute(left, right);
+
+            memory
+        else
+            throw System.InvalidOperationException("invalid operation {operation_name}")
+        fi;
+
+
+    calculate_from_memory(operation_name: string, right: T) -> T =>
+        if _operations.contains_key(operation_name) then
+            let operation = _operations[operation_name];
+            memory = operation.execute(memory, right);
+
+            memory
+        else
+            throw System.InvalidOperationException("invalid operation {operation_name}")
+        fi;
+
+    clear_memory() is
+        let def: T; // uninitialized variable has default value
+        memory = def;
+    si
 si
 
 class INTEGER_ADDITION: Operation[int] is
@@ -82,46 +119,5 @@ class STRING_SUBTRACTION: Operation[string] is
     init() is si
 
     execute(left: string, right: string) -> string => left.replace(right, "");
-si
-
-class CALCULATOR[T] is
-    _operations: Collections.MAP[string, Operation[T]];
-
-    memory: T;
-
-    init(operations: Collections.Iterable[(name: string, operation: Operation[T])]) is
-        _operations = 
-            Collections.MAP[string, Operation[T]](
-                operations | 
-                    .map(on => 
-                        let (name, operation) = on in
-                        Collections.KeyValuePair`2[string, Operation[T]](name, operation)));
-    si
-
-    calculate(operation_name: string, left: T, right: T) -> T =>
-        if _operations.contains_key(operation_name) then
-            let operation = _operations[operation_name];
-            memory = operation.execute(left, right);
-
-            memory
-        else
-            throw System.InvalidOperationException("invalid operation {operation_name}")
-        fi;
-
-
-    calculate_from_memory(operation_name: string, right: T) -> T =>
-        if _operations.contains_key(operation_name) then
-            let operation = _operations[operation_name];
-            memory = operation.execute(memory, right);
-
-            memory
-        else
-            throw System.InvalidOperationException("invalid operation {operation_name}")
-        fi;
-
-    clear_memory() is
-        let def: T; // uninitialized variable has default value
-        memory = def;
-    si
 si
 ```

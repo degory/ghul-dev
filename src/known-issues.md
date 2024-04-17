@@ -28,9 +28,9 @@ Very occasionally, if you have an error in your code and you make an edit that c
 The ghūl language, compiler and language extension all support generics, but the language support is limited compared to generics in for example C#, plus there are issues in the implementation.
 
 ### type constraints are not enforced
-The parser supports a very limited syntax for type constraints in generic type definitions. However generic type constraints **are currently not enforced at all**, neither for ghūl types that include them or for types imported from non-ghūl assemblies, including the .NET library. This is obviously quite dangerous. It can result in IL that doesn't assemble, causing confusing unhelpful build errors that don't reference the root cause or the location of the issue in the source code. Worse still it can result in IL that assembles but either crashes at runtime or silently executes incorrectly.
+The parser supports a limited syntax for type constraints in generic type definitions. However generic type constraints **are currently not enforced at all**, neither for ghūl types that include them or for types imported from non-ghūl assemblies, including the .NET library. This is obviously quite dangerous. It can result in IL that doesn't assemble, causing confusing unhelpful build errors that don't reference the root cause or the location of the issue in the source code. Worse still it can result in IL that assembles but either crashes at runtime or silently executes incorrectly.
 
-The workaround here is to either completely avoid consuming types that have constraints on any type parameters, or manually ensure your ghūl code meets those constraints.
+The workaround here is to either completely avoid consuming types that have constraints on any type parameters, or manually ensure your ghūl code meets those constraints: the compiler will issue a warning when types with constraints are referenced.
 
 ### generic type checks are not always correct
 In rare cases the compiler may allow assignments or method/function calls involving generics that should have been blocked due to incompatible types. Similarly to with type constraints, this could result in unhelpful errors from the IL assembler or incorrect runtime behavior. If you encounter this kind of error, please raise an issue with example code that reproduces it.
