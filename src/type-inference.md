@@ -98,9 +98,10 @@ let obj = do_something(object(), DERIVED());
 
 When constructing an anonymous function literal, the compiler will attempt to infer the return type from either the type of the expression body or from the type of return expressions in the block body
 
+```ghul
 let returns_int = (i: int) => i * 2;
 let returns_string = (s: string) = "{s}{s}";
-
+```
 
 ## anonymous function argument types
 

@@ -87,14 +87,14 @@ writing pure functions with appropriate constructs and defaults
 ### lists are immutable by default
 The standard trait for lists `Collections.List[T]` is immutable (it maps to .NET's ``System.Collections.Generic.IReadOnlyList`1[T]``)
 
-### arrays are immutable
-The ghūl array type `T[]` does not expose an assign indexer
-
 ### maps are immutable by default
 The standard trait for maps `Collections.Map[T]` is immutable (it maps to .NET's ``System.Collections.Generic.IReadOnlyDictionary`2[K,V]``)
 
-### list literals are immutable
-The values constructed by list literals are immutable
+### arrays are immutable
+The ghūl array type `T[]` does not expose an assign indexer
+
+### array literals are immutable
+The values constructed by array literals are immutable
 
 ```ghul
 let list = [1, 2, 3, 4, 5];
@@ -286,6 +286,13 @@ union Tree[T] is
     NODE(left: Tree[T], right: Tree[T]);
 si
 
+use Option.SOME;
+use Option.NONE;
+use List.NIL;
+use List.CONS;
+use Tree.LEAF;
+use Tree.NODE;
+
 entry() is
     test_option();
     test_list();
@@ -293,8 +300,8 @@ entry() is
 si
 
 test_option() is
-    let some_int = some(42);
-    let none_int = none`[int]();
+    let some_int = SOME(42);
+    let none_int = NONE`[int]();
 
     let stringify_option = (o: Option[int]) rec =>
         if o.is_some then
@@ -308,7 +315,7 @@ test_option() is
 si
 
 test_list() is
-    let list = cons(1, cons(2, cons(3, nil`[int]())));
+    let list = CONS(1, CONS(2, CONS(3, NIL`[int]())));
 
     let stringify_list = (l: List[int]) rec =>
         if l.is_cons then
@@ -322,14 +329,14 @@ test_list() is
 si
 
 test_tree() is
-    let tree = node(
-        node(
-            leaf(1),
-            leaf(2)
+    let tree = NODE(
+        NODE(
+            LEAF(1),
+            LEAF(2)
         ),
-        node(
-            leaf(3),
-            leaf(4)
+        NODE(
+            LEAF(3),
+            LEAF(4)
         )
     );
 
@@ -343,15 +350,6 @@ test_tree() is
 
     write_line(stringify_tree(tree));
 si
-
-some[T](value: T) -> Option[T] => Option.SOME[T](value);
-none[T]() -> Option[T] => Option.NONE[T]();
-
-node[T](left: Tree[T], right: Tree[T]) -> Tree[T] => Tree.NODE[T](left, right);
-leaf[T](value: T) -> Tree[T] => Tree.LEAF[T](value);
-
-cons[T](head: T, tail: List[T]) -> List[T] => List.CONS[T](head, tail);
-nil[T]() -> List[T] => List.NIL[T]();
 ```
 
 ## pattern matching (TODO)
@@ -372,13 +370,13 @@ write_line("add_10(3): {add_10(3)}");
 
 ## partial application
 ```ghul
-    let add = (x: int, y: int) => x + y;
+let add = (x: int, y: int) => x + y;
 
-    let add_5 = (y: int) => add(5, y);
-    write_line("add_5(3): {add_5(3)}");
+let add_5 = (y: int) => add(5, y);
+write_line("add_5(3): {add_5(3)}");
 
-    let add_10 = (y: int) => add(10, y);
-    write_line("add_10(3): {add_10(3)}");
+let add_10 = (y: int) => add(10, y);
+write_line("add_10(3): {add_10(3)}");
 ```
 
 ## lazy evaluation (TODO)

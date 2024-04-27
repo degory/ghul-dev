@@ -1,5 +1,11 @@
 # control flow in ghūl
 
+## block scope
+
+In ghūl, most control flow statements incorporate one or more blocks. A block is a list of one or more statements that forms a scope for local variable definitions. The scope of a variable is the region of code where that variable is visible and can be accessed.
+Blocks are delimited by keywords that are specific to their control flow statement. For example, if-then statements use `then` and `else`, `elif` or `fi` to delimit their blocks, while loops use `do` and `od`, and so on.
+Variables defined within a block are only accessible within that block and any nested blocks. Once execution exits the block, those variables go out of scope and cannot be accessed anymore.
+
 ## assert statement
 
 In ghūl the `assert` statement is used to ensure an expected condition holds and to throw an exception if it does not. An assert statement starts with `assert`, followed by an expression that must evaluate to a bool, followed by `else`, and then a value to throw. If the value to throw is a string, it will be wrapped in an `AssertionFailedException`. Otherwise it must be of a throwable type.
@@ -95,6 +101,24 @@ else
 fi
 ```
 
+### scope
+Each branch of an if statement constitutes a separate scope
+
+```ghul
+let a = 5;
+
+if a > 0 then
+    // new scope - neither y nor z are in scope here
+    let x = 10
+elif a < 0 then
+    // new scope - neither x nor z are in scope here
+    let y = 20
+else
+    // new scope - neither x nor y are in scope here
+    let z = 30;
+fi
+```
+
 ## while statement
 
 ### while-do-od
@@ -144,6 +168,10 @@ od
 ```
 
 This loop skips the call to `write_line` when counter is 3.
+
+### scope
+
+The block statement body of the while statement, delimited by `do` and `od` forms a scope for local variable definitions.
 
 ## for statement
 
@@ -224,6 +252,10 @@ od
 ```
 This loop skips the call to `write_line` when counter is 3.
 
+### scope
+
+The block statement body of the for statement, delimited by `do` and `od` forms a scope for local variable definitions. The loop variable is in scope within this block scope but not within the expression that provides the iterable object.
+
 
 ## do statement
 
@@ -269,6 +301,11 @@ od
 ```
 This loop skips the write_line statement when counter is 3 and breaks out of the loop when counter reaches 5.
 
+### scope
+
+The block statement body of the do statement, delimited by `do` and `od` forms a scope for local variable definitions.
+
+
 ## case statement
 
 ```ghul
@@ -306,6 +343,11 @@ default
     return "less than -1 or more than nine";
 esac
 ```
+
+### scope
+
+Each arm of the case statement, delimited by either a `when` clause or `default` forms a separate scope for local variable definitions.
+
 
 ## try statement
 

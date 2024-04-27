@@ -52,7 +52,7 @@ square(x: int) -> int => x * x;
 ```
 
 ### control flow
-ghūl supports standard control flow constructs like `if`, `else`, `while`, `for`, and `case` expressions.
+ghūl supports various [control flow constructs](/control-flow.html) like `if`, `else`, `while`, `for`, and `case` expressions.
 
 ```ghul
 if x > 0 then
@@ -70,13 +70,13 @@ od
 
 ### types
 
-ghūl is statically typed, with some support for type inference. Types can be explicitly specified using a colon `:` plus a type expression
+ghūl is statically typed, with some support for [type inference](/type-inference.html). Types can be explicitly specified using a colon `:` plus a type expression
 
 ```ghul
 let x: int = 42;
 let y = "Hello"; // type inferred as string
 ```
-User types are defined using `class`, `struct`, `trait`, `enum`, and `union` keywords.
+[User types](/definitions.html#types) are defined using `class`, `struct`, `trait`, `enum`, and `union` keywords.
 
 ## data types
 
@@ -108,7 +108,7 @@ ghūl supports arrays, which are fixed-size, **immutable** collections of elemen
 let numbers: int[];
 ```
 
-Arrays can be constructed with an array literal
+Arrays can be constructed with an [array literal]()
 ```ghul
 let primes = [2, 3, 5, 7, 11];
 ```
@@ -189,7 +189,7 @@ some_function(argument: type)
 ```
 
 ### captured values
-Captured values will be covered with function literals. They are not explicitly defined but inferred from context.
+Captured values will be covered with [function literals](/language-basics.html#function). They are not explicitly defined but inferred from context.
 
 ### scope
 
@@ -199,149 +199,15 @@ The scope of all variable definitions is from the point of declaration to the en
 ghūl can infer the type of local variables from their initializer if present. It's a compile time error if a variable doesn't have either an explicit type or an initializer, or if an initializer is not assignment compatible with any explicit type.
 
 ## literals
-
-### integers
-
-Integer literals consist of an optional radix (base), followed by a sequence of digits with optional underscores for readability, followed by a dot and a decimal fraction and/or exponent (for floating point numbers) and finally a type suffix.
+Literal expressions represent fixed values of a specific type.
 
 ```ghul
-let i = 12_345_678; // int
-let hex = 0x1234_ABCD; // int
-let long = 1_000_000_000_000_000L; // long
-
-let hex_unsigned_long = 0x1234_5678__9ABC_DEF0_UL; // ulong
-
-let b = 99b; // byte
+let integer_literal = 42;
+let floating_point_literal = 3.14;
+let string_literal = "Hello, world!";
+let boolean_literal_true = true;
+let boolean_literal_false = false;
 ```
-
-### char
-```ghul
-let c = 'c';
-let u_macron = 'ū'
-```
-
-### floating point
-```ghul
-let s = 123.456; // single
-let t = 123.456E5; // single
-
-let d = 123.456D; // double
-let e = 123_456_789_000.0D // double
-```
-
-### string
-```ghul
-let hello_world = "Hello World!";
-let unicode = "ghūl programming language"
-```
-
-### list
-List literals are constructed from a comma separated list of element values enclosed in `[` and `]`. The list element type is inferred as the most specific type compatible with all elements (which may be `object`). The resulting list type is `Collections.List[E]` where `E` is the inferred element type. The constructed list object is an array, but this type is not exposed and should not be relied on. 
-
-```ghul
-let animals = ["frog", "bat", "elephant"]; // List[string]
-let things = ["frog", 1234, 12.5] // List[object]
-let lists = [[1, 2], [3, 4], [5, 6], [7, 7]] // List[List[int]]
-```
-
-### tuple
-
-Tuple literals are constructed from a comma separated list of elements enclosed in `(` and `)`. Each element can be a bare value or a named value, and each element can optionally specify a type. Where explicit types are omitted, element types will be inferred.
-
-```ghul
-let path_with_id = (path = "/tmp/my-file.txt", id = 1234); // (path: string, id: int)
-
-let path = path_with_id.path;
-let id = path_with_id.id;
-```
-
-If tuple elements are not explicitly named, they are assigned names consisting of a back-tick followed by an index
-
-```ghul
-let things = ("thing", 12.34); // (string, int) with element names `0 and `1
-
-let name = things.`0;
-let weight = things.`1;
-```
-
-### function
-
-Function literals are constructed from an parenthesized argument list, a return type, and a return expression or a function body. If there is only one argument, no parentheses are needed.
-
-#### expression body function literal
-
-```ghul
-let simple_add = (x: int, y: int) -> int => x + y;
-```
-
-#### block body function literal
-
-```ghul
-let complex_add = (x: int, y: int) -> int is
-    let result = x + y;
-    return result;
-si;
-```
-
-#### type inference
-
-Return type can usually be omitted provided it can be inferred from the type of the expression body or any values returned from the block body
-
-```ghul
-let simple_add = (x: int, y: int) => x + y;
-
-let complex_add = (x: int, y: int) is
-    let result = x + y;
-    return result;
-si;
-```
-
-Argument types usually can be inferred if the function literal is being passed into a function.
-
-```ghul
-let list = [1, 2, 3, 4, 5];
-
-list | .filter(element => element < 3); // type of element is inferred to be int
-```
-
-#### capturing and closure
-In ghūl, function literals can capture and utilize values from their surrounding lexical scope, thereby forming closures. It's important to note that what are captured are the values of variables at the point of the function literal's creation, rather than the variables themselves. This distinction is crucial for understanding how closures work in ghūl.
-
-When a function literal is constructed, it creates read-only snapshots of the values from the outer scopes that are referenced within it. These snapshots are immutable in the sense that the literal cannot alter the captured values. However, the immutability applies to the value's binding, not necessarily to the value itself. In ghūl, like in many .NET languages, a value could be a reference to an object. While the reference is immutable and remains constant throughout the lifetime of the function literal, the object it points to can still be mutable. This means that if the captured value is an object reference, the object's state can be modified either by the closure itself or by other code, but the reference held by the closure will always point to the same object.
-
-Consider a simple closure that captures a loop variable:
-```ghul
-let g = () => i;
-```
-
-In this case, `g` captures the value of `i` at the moment of `g`'s creation. The variable `i` itself is not captured; only its value at a specific point in time is. Here is a more complete example:
-
-```ghul
-// Define a list to hold the closures:
-let closure_list = LIST[() -> int]();
-
-// Iterate over an integer range:
-for i in 1::10 do
-    // Create a closure that captures the current value of i:
-    let closure = () => i;
-
-    // Add the closure to the list:
-    closure_list.add(closure);
-od
-
-// Each closure captured the value of i at the time of its creation:
-for closure in closure_list do
-    write_line("Closure captured value: {closure()}");
-od
-```
-
-If the captured value is a reference to an object, like in the following example:
-```ghul
-let object_reference = SOME_OBJECT();
-let closure = () => object_reference.some_property;
-```
-
-Then while `closure` cannot change what `object_reference` points to, it can interact with `object_references`'s properties or methods, which can lead to changes in the state of the `SOME_OBJECT` object referenced by `object_reference`.
 
 ## operators and expressions
 ### arithmetic operators

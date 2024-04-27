@@ -93,9 +93,7 @@ si
 class INTEGER_MULTIPLICATION: Operation[int] is
     init() is si
 
-    execute(left: int, right: int) -> int is
-        return left * right;
-    si
+    execute(left: int, right: int) -> int => left * right;
 si
 
 class INTEGER_DIVISION: Operation[int] is

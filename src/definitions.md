@@ -52,7 +52,9 @@ Arguments consist of a name followed by a type. The type is mandatory as the com
 do_something(what: string, why: string, to: int);
 ```
 
-## classes
+## types
+
+### classes
 
 Classes consist of a name optionally followed by a superclass name and the types of any traits implemented, and then the class body. The class body is delimited by keywords `is` and `si`:
 ```ghul
@@ -74,7 +76,7 @@ let a_thing = THING();
 
 Classes can only be defined at global scope. Classes can be generic, which will be covered later. Concrete class names should be in `MACRO_CASE`. Abstract class names should be in `PascalCase`.
 
-## structs
+### structs
 
 Structs consist of a name, then the types of any traits implemented, and then the struct body again enclosed in `is` / `si`:
 ```ghul
@@ -105,7 +107,7 @@ assert origin != right;
 
 Structs can only be defined at global scope. Structs can be generic, which will be covered later. Struct names should be in `MACRO_CASE`.
 
-## traits
+### traits
 
 A trait consists of a name, the types of any parent traits that must also be implemented, and then the trait body:
 
@@ -134,7 +136,7 @@ si
 
 Traits can only be defined at global scope. Trait methods and properties must be made abstract by giving them empty bodies (see issue [#285](https://github.com/degory/ghul/issues/285)). Trait names should be in `PascalCase`;
 
-## unions
+### unions
 
 A union consists of a name and then a union body, which contains one or more variants. Each variant has a name, and then an optional list of fields:
 ```ghul
@@ -166,7 +168,22 @@ elif tree.is_leaf then
 fi
 ```
 
-Union names should be in `PascalCase` and variant names should be in `MACRO_CASE`
+Unions can only be defined at global scope. Union names should be in `PascalCase` and variant names should be in `MACRO_CASE`
+
+### enums
+
+An enum consists of a name and then an enum body, which contains one or more elements. Each element has a name and an optional constant integer value
+
+```ghul
+enum SUITS is
+    SPADES,
+    HEARTS,
+    DIAMONDS,
+    CLUBS
+si
+```
+
+Enums can only be defined at global scope. Enums and their members should be named in `MACRO_CASE`
 
 ## properties
 
