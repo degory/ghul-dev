@@ -3,7 +3,9 @@
 
 ![ghūl programming language logo](ghul-logo-draft.png)
 
-(Note: this site is very much a **work-in-progress**. The [ghūl compiler](https://github.com/degory/ghul) source code is currently the definitive ghūl language reference)
+> - The ghūl language, compiler, tools, and this website are all very much a **work-in-progress**.
+> - Whatever the [ghūl compiler](https://github.com/degory/ghul) accepts is currently the definitive ghūl language reference.
+> - ghūl is pronounced 'ghoul'.
 
 ## why ghūl?
 
