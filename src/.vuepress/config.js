@@ -25,7 +25,15 @@ module.exports = {
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
     ['meta', { name: 'keywords', content: 'ghul, ghul programming language, ghoul, ghoul programming language, ghūl, ghūl programming language'}],
     ['link', { rel: 'stylesheet', href: '/prism-vsc-dark-plus.css' }],
-    ['link', { rel: 'icon', href: '/favicon.ico' }],    
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    [
+      'script',
+      {
+        'data-goatcounter': 'https://ghul.goatcounter.com/count',
+        async: true,
+        src: '//gc.zgo.at/count.js'
+      }
+    ]
   ],
 
   /**
