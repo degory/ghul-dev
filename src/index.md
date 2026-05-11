@@ -43,9 +43,9 @@ use IO.Std.write_line;
 
 entry() is
     // lazily generates an infinite sequence of fibonacci numbers:
-    let fibonacci_sequence = GENERATE(
+    let fibonacci_sequence = GENERATOR(
         (0, 1),
-        state: (int, int) =>
+        state =>
             let 
                 (prev, current) = state,
                 next = prev + current
@@ -54,9 +54,9 @@ entry() is
     );
 
     // lazily generates an infinite sequence of factorials:
-    let factorial_sequence = GENERATE(
+    let factorial_sequence = GENERATOR(
         (1, 1),
-        state: (int, int) =>
+        state =>
             let
                 (p, prev) = state,
                 n = p + 1,
