@@ -101,6 +101,48 @@ else
 fi
 ```
 
+### type narrowing
+
+When an `if` predicate proves a stronger fact about a variable's type, the then-branch sees that variable at the narrower type. The most common cases are union variant tags and `isa` class tests:
+
+```ghul
+union Maybe[T] is
+    YES(value: T);
+    NO;
+si
+
+let m: Maybe[int] = Maybe.YES(42);
+
+if m.is_yes then
+    // m is narrowed to Maybe.YES inside the branch, so m.value is in scope
+    write_line("got value {m.value}");
+fi
+
+let a: Animal = Cat("whiskers");
+if isa Cat(a) then
+    // a is narrowed to Cat inside the branch
+    write_line(a.purr());
+fi
+```
+
+For a two-variant union, the `else` branch is also narrowed to the complementary variant:
+
+```ghul
+union Result[T, E] is
+    OK(value: T);
+    ERR(error: E);
+si
+
+let r: Result[int, string] = some_call();
+
+if r.is_ok then
+    write_line("ok: {r.value}");
+else
+    // r is narrowed to Result.ERR here
+    write_line("err: {r.error}");
+fi
+```
+
 ### scope
 Each branch of an if statement constitutes a separate scope
 
