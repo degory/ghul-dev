@@ -11,11 +11,11 @@ pretty much anything else you can do with any other ghūl value
 
 ```ghul
 let f = (i: int) => i * 2;
-f();
+f(123);
 let g = f;
-g();
+g(456);
 
-let ff(f: int -> int, i: int) => f(f(i));
+let ff = (f: int -> int, i: int) => f(f(i));
 ```
 
 ## filter, map, reduce
@@ -102,9 +102,9 @@ let list = [1, 2, 3, 4, 5];
 let element = list[3]; // elements can be read
 
 // the list is an instance of an immutable type:
-assert list.get_type() == typeof Collections.List[int];
+assert list.get_type() == typeof int[];
 
-element[3] = 6; // elements cannot be assigned to - compile time error
+list[3] = 6; // elements cannot be assigned to - compile time error
 ```
 
 ### tuples are immutable
@@ -119,7 +119,7 @@ let tuple = (1, 2, 3, 4, 5);
 let element = tuple.`3; // elements can be read
 
 // the tuple is an instance of an immutable type:
-assert tuple.get_type == typeof (int, int, int, int, int)
+assert tuple.get_type() == typeof (int, int, int, int, int);
 
 tuple.`3 = 6; // elements cannot be assigned to - compile time error
 ```

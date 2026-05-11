@@ -197,7 +197,7 @@ si
 class Sized is
     _size: int;
 
-    size: int => size,
+    size: int => _size,
         = new_size is
             assert new_size > 0;
 

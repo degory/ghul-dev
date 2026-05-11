@@ -43,9 +43,9 @@ let unicode = "ghūl programming language"
 Array literals are constructed from a comma separated list of element values enclosed in `[` and `]`. The array element type is inferred as the most specific type compatible with all elements (which may be `object` if no more specific ancestor type exists). The resulting array type is `E[]` where `E` is the inferred element type. 
 
 ```ghul
-let animals = ["frog", "bat", "elephant"]; // List[string]
-let things = ["frog", 1234, 12.5] // List[object]
-let lists = [[1, 2], [3, 4], [5, 6], [7, 7]] // List[List[int]]
+let animals = ["frog", "bat", "elephant"]; // string[]
+let things = ["frog", 1234, 12.5]; // object[]
+let lists = [[1, 2], [3, 4], [5, 6], [7, 7]]; // int[][]
 ```
 
 ### tuple
