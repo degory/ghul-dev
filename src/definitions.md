@@ -26,6 +26,17 @@ Multiple variables can be defined in the same `let` statement, including a mix o
 let initialize_now = 123, initialize_later: int, why_are_we_doing_this = "I don't know";
 ```
 
+The name `_` is a discard placeholder. It binds wherever a name would normally bind, but the bound value is discarded. `_` is repeatable in a single scope, and is accepted in `let` bindings, tuple destructuring, lambda parameters, and `for` loop variables:
+
+```ghul
+let _ = side_effect();
+let (_, _, third) = (1, 2, 3);
+let only_first = (x: int, _: int) => x;
+for _ in 1..10 do
+    counter = counter + 1;
+od
+```
+
 Variables may only be defined within functions, methods or property bodies. Variables names should be in `snake_case`
 
 ## functions
@@ -134,6 +145,31 @@ class BOOK: Printable is
 si
 ```
 
+A trait method or property can provide a default body. Implementing classes inherit the default and only need to override it to change the behaviour:
+
+```ghul
+trait Logged is
+    log() is
+        write_line("(no log message provided)");
+    si
+si
+
+class SILENT: Logged is
+    init() is si
+si
+
+class NOISY: Logged is
+    init() is si
+
+    log() is
+        super.log();
+        write_line("plus my own message");
+    si
+si
+```
+
+A class override can call the trait's default with `super.method()`.
+
 Traits can only be defined at global scope. Trait methods and properties can be abstract or have a default implementation. Trait names should be in `PascalCase`.
 
 ### unions
@@ -166,6 +202,17 @@ if tree.is_node then
 elif tree.is_leaf then
     write_line("have a leaf with value {tree.leaf}"); // note we don't need tree.leaf.value here
 fi
+```
+
+Unions support structural equality through the `=~` operator. Two union references compare equal when they hold the same variant with member-wise equal fields:
+
+```ghul
+let leaf1 = Tree.LEAF(123);
+let leaf2 = Tree.LEAF(123);
+let leaf3 = Tree.LEAF(456);
+
+assert leaf1 =~ leaf2;
+assert !(leaf1 =~ leaf3);
 ```
 
 Unions can only be defined at global scope. Union names should be in `PascalCase` and variant names should be in `MACRO_CASE`
