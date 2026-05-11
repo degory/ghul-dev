@@ -100,7 +100,7 @@ When constructing an anonymous function literal, the compiler will attempt to in
 
 ```ghul
 let returns_int = (i: int) => i * 2;
-let returns_string = (s: string) = "{s}{s}";
+let returns_string = (s: string) => "{s}{s}";
 ```
 
 ## anonymous function argument types
