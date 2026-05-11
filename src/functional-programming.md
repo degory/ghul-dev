@@ -10,12 +10,12 @@ variables, passed to other functions, stored in data structures, or
 pretty much anything else you can do with any other ghūl value
 
 ```ghul
-let f = (i: int) => i * 2;
+let f = i => i * 2;
 f(123);
 let g = f;
 g(456);
 
-let ff = (f: int -> int, i: int) => f(f(i));
+let ff = (f: int -> int, i) => f(f(i));
 ```
 
 ## filter, map, reduce
@@ -46,11 +46,11 @@ can all call themselves or each other recursively
 
 ```ghul
 // factorial
-let factorial = (n: int) rec => if n == 0 then 1 else n * rec(n - 1) fi;
+let factorial = n rec => if n == 0 then 1 else n * rec(n - 1) fi;
 write_line("factorial(5): {factorial(5)}");
 
 // fibonacci
-let fibonacci = (n: int) rec => if n <= 1 then n else rec(n - 1) + rec(n - 2) fi;
+let fibonacci = n rec => if n <= 1 then n else rec(n - 1) + rec(n - 2) fi;
 write_line("fibonacci(10): {fibonacci(10)}");
 ```
 
@@ -61,8 +61,8 @@ by passing one function into the other as an argument:
 
 ```ghul
 
-let is_even = (n: int, is_odd: int -> bool) => if n == 0 then true else is_odd(n - 1) fi;
-let is_odd = (n: int) rec => if n == 0 then false else is_even(n - 1, rec) fi;
+let is_even = (n, is_odd: int -> bool) => if n == 0 then true else is_odd(n - 1) fi;
+let is_odd = n rec => if n == 0 then false else is_even(n - 1, rec) fi;
 
 write_line("even(10): {is_even(10, is_odd)}");
 write_line("odd(10): {is_odd(10)}");
@@ -160,10 +160,10 @@ expression oriented programming help in writing
 pure functions
 
 ```ghul
-let add = (x: int, y: int) => x + y;
+let add = (x, y) => x + y;
 write_line("add(5, 3): {add(5, 3)}");
 
-let classify = (n: int) =>
+let classify = n =>
     if n == 0 then
         "Zero"
     elif n % 2 == 0 /\ n < 0 then
@@ -210,18 +210,18 @@ si
 ### higher order anonymous functions:
 
 ```ghul
-let times_2 = (x: int) => x * 2;
+let times_2 = x => x * 2;
 write_line("apply(times_2, 5): {apply(times_2, 5)}");
 
-let square = (x: int) => x * x;
+let square = x => x * x;
 write_line("apply(square, 5): {apply(square, 5)}");
 
 // higher order function consumes another function:
-let apply_twice = (f: int -> int, x: int) => f(f(x));
+let apply_twice = (f: int -> int, x) => f(f(x));
 write_line("apply_twice(times_2, 5): {apply_twice(times_2, 5)}");
 
 // higher order function returns another function:
-let create_apply_twice = (f: int -> int) => (x: int) => f(f(x));
+let create_apply_twice = (f: int -> int) => x => f(f(x));
 let apply_twice_times_2 = create_apply_twice(times_2);
 
 write_line("apply_twice_times_2(5): {apply_twice_times_2(5)}");
@@ -301,11 +301,11 @@ si
 
 test_option() is
     let some_int = SOME(42);
-    let none_int = NONE`[int]();
+    let none_int = NONE[int]();
 
     let stringify_option = (o: Option[int]) rec =>
         if o.is_some then
-            "{o.some}"
+            "{o.value}"
         else
             "none"
         fi;
@@ -315,11 +315,11 @@ test_option() is
 si
 
 test_list() is
-    let list = CONS(1, CONS(2, CONS(3, NIL`[int]())));
+    let list = CONS(1, CONS(2, CONS(3, NIL())));
 
     let stringify_list = (l: List[int]) rec =>
         if l.is_cons then
-            let (head, tail) = l.cons in
+            let (head, tail) = l in
             "{head}, {rec(tail)}"
         else
             "nil"
@@ -342,10 +342,10 @@ test_tree() is
 
     let stringify_tree = (t: Tree[int]) rec =>
         if t.is_node then
-            let (left, right) = t.node in
+            let (left, right) = t in
             "({rec(left)}, {rec(right)})"
         else
-            "{t.leaf}"
+            "{t.value}"
         fi;
 
     write_line(stringify_tree(tree));
@@ -357,25 +357,25 @@ Pattern matching is under development [(see GitHub issue #1134)](https://github.
 
 ## currying
 ```ghul
-let curryed_add = (x: int) => (y: int) => x + y;
+let curried_add = x => y => x + y;
 
-write_line("curryed_add(5)(3): {curryed_add(5)(3)}");
+write_line("curried_add(5)(3): {curried_add(5)(3)}");
 
-let add_5 = curryed_add(5);
+let add_5 = curried_add(5);
 write_line("add_5(3): {add_5(3)}");
 
-let add_10 = curryed_add(10);
+let add_10 = curried_add(10);
 write_line("add_10(3): {add_10(3)}");
 ```
 
 ## partial application
 ```ghul
-let add = (x: int, y: int) => x + y;
+let add = (x, y) => x + y;
 
-let add_5 = (y: int) => add(5, y);
+let add_5 = y => add(5, y);
 write_line("add_5(3): {add_5(3)}");
 
-let add_10 = (y: int) => add(10, y);
+let add_10 = y => add(10, y);
 write_line("add_10(3): {add_10(3)}");
 ```
 

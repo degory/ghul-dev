@@ -122,7 +122,7 @@ In this case, `g` captures the value of `i` at the moment of `g`'s creation. The
 
 ```ghul
 // Define a list to hold the closures:
-let closure_list = LIST[() -> int]();
+let closure_list = LIST();
 
 // Iterate over an integer range:
 for i in 1::10 do
