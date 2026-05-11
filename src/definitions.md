@@ -117,7 +117,7 @@ trait Printable is
 si
 ```
 
-Traits are similar to interfaces in other languages. The methods and properties of the trait must be implemented by any class that inherits from the trait:
+Traits are similar to interfaces in other languages. Trait methods and properties without a default implementation must be implemented by any class that inherits from the trait:
 ```ghul
 class BOOK: Printable is
     title: string;
@@ -134,7 +134,7 @@ class BOOK: Printable is
 si
 ```
 
-Traits can only be defined at global scope. Trait methods and properties must be made abstract by giving them empty bodies (see issue [#285](https://github.com/degory/ghul/issues/285)). Trait names should be in `PascalCase`;
+Traits can only be defined at global scope. Trait methods and properties can be abstract or have a default implementation. Trait names should be in `PascalCase`.
 
 ### unions
 

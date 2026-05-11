@@ -33,8 +33,8 @@ si
 ```
 
 ```ghul
-let holds_int = HOLD_SOMETHING[int](1234);
-let holds_string = HOLD_SOMETHING[string]("hello");
+let holds_int = HOLD_SOMETHING(1234);
+let holds_string = HOLD_SOMETHING("hello");
 ```
 
 ```ghul
@@ -43,7 +43,7 @@ union Option[T] is
     NONE;
 si
 
-let some_int = Option.SOME[int](1234);
+let some_int = Option.SOME(1234);
 ```
 
 Generic argument types are largely opaque: the operations permitted on values of generic argument types are limited to:
@@ -53,7 +53,7 @@ Generic argument types are largely opaque: the operations permitted on values of
 - method calls supported by `object`
 
 
-Generic argument types must be explicitly specified when constructing objects but can be inferred from context for generic function and method calls
+Generic argument types can be inferred from context for generic constructor invocations as well as generic function and method calls
 
 ```ghul
 print_something(1234); // T inferred as int
