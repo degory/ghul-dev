@@ -379,82 +379,69 @@ let add_10 = y => add(10, y);
 write_line("add_10(3): {add_10(3)}");
 ```
 
-## lazy evaluation (TODO)
-Lazy evaluation is not yet supported [(see GitHub issue #1165)](https://github.com/degory/ghul/issues/1165)
+## lazy sequences
 
-The workaround is to implement the `Iterator[T]` trait and manually manage state. For example:
+Lazy infinite and finite sequences are expressed with the
+`Ghul.Pipes.STREAM[T, S]` union and the `stream(initial, advance)`
+factory. State type `S` and output type `T` are independent, so the
+state of a stream is hidden from its consumers — `stream()` returns a
+plain `Pipe[T]`.
 
 ```ghul
-// generate an infinite sequence of T generator from state S
-class GENERATOR[T, S]: Collections.Iterator[T], Collections.Iterable[T] is
-    current: T;
-    iterator: Collections.Iterator[T] => self;
-
-    _initial: S;
-    _state: S;
-    _generator: S -> (S, T); // given the current state, return the next state and the current value
-
-    init(initial: S, generator: S -> (S, T)) is
-        _initial = initial;
-        _generator = generator;
-        reset();
-    si
-
-    init() is
-        reset();
-    si
-        
-    move_next() -> bool is
-        (_state, current) = _generator(_state);
-        return true;
-    si
-
-    reset() is
-        _state = _initial;
-    si
-
-    dispose() is
-    si
+union STREAM[T, S] is
+    DONE;
+    YIELD(value: T, state: S);
 si
 
-// generator constructor helper so we don't have to specify types
-generate[T, S](initial: S, generator: S -> (S, T)) -> GENERATOR[T, S] =>
-    GENERATOR[T, S](initial, generator);
+stream[T, S](initial: S, advance: S -> STREAM[T, S]) -> Pipe[T]
 ```
 
+`advance` is a pure step function: it receives the current state and
+returns either `DONE` (sequence is over) or `YIELD(value, next_state)`
+— the yielded element and the state to feed back in on the next step.
+The `||` infix is parser sugar for `YIELD(value, next_state)`, so a
+step body usually reads `value || next_state`.
+
 ```ghul
-// generates an infinite sequence of fibonacci numbers:
-let fibonacci = generate(
-    (0, 1),
-    (state: (int, int)) =>
-        let
-            (prev, current) = state,
-            next = prev + current
-        in
-            ((current, next), next)
+use Ghul.Pipes.STREAM;
+use Ghul.Pipes.stream;
+use STREAM.DONE;
+use STREAM.YIELD;
+
+// fibonacci. State is (prev, current); output is the int value.
+let fibonacci = stream`[int, (int, int)](
+    (1, 1),
+    s => let (prev, current) = s in current || (current, prev + current)
 );
 
-// generates an infinite sequence of factorials
-// (although overflow will occur fairly rapidly)
-let factorial_sequence = generate(
-    (1U, 1UL),
-    (state: (uint, ulong)) =>
-        let
-            (n, current) = state,
-            next_n = n + 1U,
-            next = current * cast ulong(next_n)
-        in 
-            ((next_n, next), next)
+// factorials. State is (n, current); output is the int value.
+let factorial = stream`[int, (int, int)](
+    (1, 1),
+    s => let (n, prev) = s in
+        let next_n = n + 1, next = prev * next_n in
+            next || (next_n, next)
 );
 
-// the resulting sequences can be comsumed by a pipe, generating values on demand:
+// chars of a string: state is an int cursor, output is char.
+// Input string is captured by the lambda; integer state is hidden
+// inside the resulting Pipe[char].
+let chars_of = (s: string) =>
+    let xs = s.to_char_array() in
+    stream`[char, int](
+        0,
+        i => if i == xs.count then DONE[char, int]() else xs[i] || (i + 1) fi
+    );
 
-write_line("first 10 fibonacci numbers: {fibonacci_sequence | .take(10)}");
-write_line("first 10 factorial numbers: {factorial_sequence | .take(10)}");
+write_line("first 10 fibonacci numbers: {fibonacci | .take(10)}");
+write_line("first 10 factorial numbers: {factorial | .take(10)}");
+write_line("chars of hello: {chars_of("hello")}");
 
-for (i, (fib, fact)) in fibonacci_sequence | .zip(factorial_sequence) .take(10) .index() do
+for (i, (fib, fact)) in fibonacci | .zip(factorial) .take(10) .index() do
     write_line("fibonacci {i} is {fib}");
     write_line("factorial {i} is {fact}");
 od;
-
 ```
+
+The factory returns `Pipe[T]` directly so combinators like `.take`,
+`.filter`, `.map`, `.zip`, and `.index` chain straight onto a stream
+value. State shape never appears in the type a consumer sees.
