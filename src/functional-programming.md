@@ -408,18 +408,23 @@ use Ghul.Pipes.stream;
 use STREAM.DONE;
 use STREAM.YIELD;
 
-// fibonacci. State is (prev, current); output is the int value.
-let fibonacci = stream`[int, (int, int)](
-    (1, 1),
-    s => let (prev, current) = s in current || (current, prev + current)
+// counting down: state and output are both int; sequence terminates
+// when state reaches zero.
+let counting = (n: int) =>
+    stream(n, i => if i == 0 then DONE[int, int]() else i || (i - 1) fi);
+
+// fibonacci. State is the named tuple (prev, current); output is int.
+// State and output are different types.
+let fibonacci = stream(
+    (prev = 1, current = 1),
+    s => s.current || (prev = s.current, current = s.prev + s.current)
 );
 
-// factorials. State is (n, current); output is the int value.
-let factorial = stream`[int, (int, int)](
-    (1, 1),
-    s => let (n, prev) = s in
-        let next_n = n + 1, next = prev * next_n in
-            next || (next_n, next)
+// factorial. State is (n, prev); output is int.
+let factorial = stream(
+    (n = 1, prev = 1),
+    s => let next_n = s.n + 1, next = s.prev * next_n in
+        next || (n = next_n, prev = next)
 );
 
 // chars of a string: state is an int cursor, output is char.
@@ -427,11 +432,9 @@ let factorial = stream`[int, (int, int)](
 // inside the resulting Pipe[char].
 let chars_of = (s: string) =>
     let xs = s.to_char_array() in
-    stream`[char, int](
-        0,
-        i => if i == xs.count then DONE[char, int]() else xs[i] || (i + 1) fi
-    );
+    stream(0, i => if i == xs.count then DONE[char, int]() else xs[i] || (i + 1) fi);
 
+write_line("counting down from 5: {counting(5)}");
 write_line("first 10 fibonacci numbers: {fibonacci | .take(10)}");
 write_line("first 10 factorial numbers: {factorial | .take(10)}");
 write_line("chars of hello: {chars_of("hello")}");
@@ -442,6 +445,15 @@ for (i, (fib, fact)) in fibonacci | .zip(factorial) .take(10) .index() do
 od;
 ```
 
+Type arguments to `stream` are inferred from the initial-state value
+and the lambda's yield expression. Multi-component state reads more
+clearly as a named tuple (`(n = 1, prev = 1)` with `s.n` and `s.prev`
+field access) than as a positional tuple needing destructuring. The
+no-argument `DONE[T, S]()` constructor in terminating sequences keeps
+its explicit type arguments — the surrounding `if/else` widens to
+`object` before the outer lambda return type can constrain it.
+
 The factory returns `Pipe[T]` directly so combinators like `.take`,
 `.filter`, `.map`, `.zip`, and `.index` chain straight onto a stream
-value. State shape never appears in the type a consumer sees.
+value. State shape never appears in the type a consumer sees of a
+`stream(...)`-produced pipe.
