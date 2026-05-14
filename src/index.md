@@ -40,29 +40,20 @@ entry() =>
 
 ```ghul
 use IO.Std.write_line;
+use Ghul.Pipes.stream;
 
 entry() is
     // lazily generates an infinite sequence of fibonacci numbers:
-    let fibonacci_sequence = GENERATOR(
-        (0, 1),
-        state =>
-            let 
-                (prev, current) = state,
-                next = prev + current
-            in
-                ((current, next), next)
+    let fibonacci_sequence = stream(
+        (prev = 1, current = 1),
+        s => s.current || (prev = s.current, current = s.prev + s.current)
     );
 
     // lazily generates an infinite sequence of factorials:
-    let factorial_sequence = GENERATOR(
-        (1, 1),
-        state =>
-            let
-                (p, prev) = state,
-                n = p + 1,
-                next = prev * n
-            in
-                ((n, next), next)            
+    let factorial_sequence = stream(
+        (n = 1, prev = 1),
+        s => let next_n = s.n + 1, next = s.prev * next_n in
+            next || (n = next_n, prev = next)
     );
 
     write_line("first 10 fibonacci numbers: {fibonacci_sequence | .take(10)}");
