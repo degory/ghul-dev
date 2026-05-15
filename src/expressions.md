@@ -232,6 +232,21 @@ Type cast expressions allow you to explicitly convert a value from one type to a
 let integer_value = cast int(3.14);
 ```
 
+## default value
+
+A `default` expression evaluates to the default value of a type: `null` for reference types, the zero value for numeric and other value types.
+
+`default[T]` pins the type explicitly. A bare `default` takes its type from the surrounding context — a typed `let`, an assignment, or a return:
+
+```ghul
+let a = default[int];   // 0
+let b: string = default;   // null
+
+zero[T]() -> T => default;
+```
+
+`let a = default` initialises a local to its type's default value, where the type is inferred from how the local is later used.
+
 These are the main types of expressions in ghūl. They can be combined and nested to form more complex expressions and statements:
 
 
