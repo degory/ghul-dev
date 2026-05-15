@@ -73,8 +73,7 @@ class CALCULATOR[T] is
         fi;
 
     clear_memory() is
-        let def: T; // uninitialized variable has default value
-        memory = def;
+        memory = default;
     si
 si
 
