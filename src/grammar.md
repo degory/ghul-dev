@@ -548,5 +548,8 @@ A user-defined operator — any operator not in the table above — is assigned 
 precedence from its **first character**, modelled on OCaml and F#: operators
 starting with `*` `/` `%` bind as multiplication, `+` `-` as addition, and so on;
 an operator with no recognised first character defaults to user&#8209;5. The
-`@precedence("op", "level")` pragma overrides the precedence of a named operator,
-where `level` is one of `user-1` … `user-8`.
+`@precedence("op", "level")` pragma overrides the precedence of a named operator.
+Both arguments must be string literals — a numeric `level` is not accepted —
+and `level` names a precedence level: `user-1` … `user-8`, or one of the built-in
+level names `boolean`, `relational`, `range`, `shift`, `bitwise`, `addition` and
+`multiplication`.
