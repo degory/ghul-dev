@@ -321,8 +321,8 @@ VariableLeft ::= Identifier
 VariableList ::= Variable ( "," Variable )*
 ```
 
-The parenthesised form of `VariableLeft` destructures a tuple. A bare `let` binding
-is immutable unless followed by `mut`.
+The parenthesised form of `VariableLeft` destructures a tuple. A bare `let` local
+variable is immutable unless followed by `mut`.
 
 ## statements
 
@@ -350,7 +350,7 @@ Statement ::= Let
             | ExpressionStatement
 ```
 
-### bindings, return, throw, assert
+### local variable definitions, return, throw, assert
 
 ```ebnf
 Let    ::= "let" "use"? VariableList ( "in" Expression )?
@@ -359,9 +359,9 @@ Throw  ::= "throw" Expression?
 Assert ::= "assert" Expression ( "else" Expression )?
 ```
 
-`let use` binds a disposable whose `dispose` is called when the binding goes out of
-scope. The `let … in …` form is a [let-in expression](#primary-expressions) used as
-a statement.
+`let use` defines a local variable holding a disposable, whose `dispose` is called
+when the variable goes out of scope. The `let … in …` form is a
+[let-in expression](#primary-expressions) used as a statement.
 
 ### if
 
@@ -371,11 +371,11 @@ If          ::= "if"   IfCondition "then" StatementList
                 ( "else"             StatementList )?
                 "fi"
 IfCondition ::= Expression
-              | "let" Variable        /* if-let binding */
+              | "let" Variable        /* if-let local variable */
 ```
 
-The `if let` form binds a variable whose initializer must be present; a type
-ascription on the binding (`if let c: T = e`) tests that the value is a `T`.
+The `if let` form defines a local variable whose initializer must be present; a
+type ascription on it (`if let c: T = e`) tests that the value is a `T`.
 
 ### case
 
@@ -510,9 +510,9 @@ A list literal `[ a, b, ... ]` builds a `List`; it requires at least one element
 calling the type, `TypeName(args)`.
 
 Within an `ExpressionList` that forms call arguments or a tuple, an element of the
-form `Identifier ":" TypeExpression? ( "=" Expression )?` is an inline variable
-binding rather than a plain identifier — this is the only place that form is
-accepted.
+form `Identifier ":" TypeExpression? ( "=" Expression )?` is an inline local
+variable definition rather than a plain identifier — this is the only place that
+form is accepted.
 
 ## operator precedence
 
