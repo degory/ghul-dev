@@ -450,7 +450,7 @@ UnaryExpression ::= Operator UnaryExpression      /* prefix operator */
 PostfixExpression ::= PrimaryExpression PostfixSuffix*
 
 PostfixSuffix ::= "(" ExpressionList? ")"     /* call */
-                | "[" ExpressionList "]"      /* index, or generic application */
+                | "[" ExpressionList "]"      /* index expression, or generic application */
                 | "`[" TypeList "]"           /* explicit generic application */
                 | "." Identifier              /* member access */
                 | "?"                         /* has-value test */
@@ -459,8 +459,9 @@ PostfixSuffix ::= "(" ExpressionList? ")"     /* call */
                 | "|"                         /* pipe */
 ```
 
-A `[ ... ]` suffix is a value index or a generic type application depending on
-whether its contents resolve as expressions or as types; `` `[ ... ] `` forces the
+A `[ ... ]` suffix is either an index expression — an access through an
+[indexer](#indexer) — or a generic type application, depending on whether its
+contents resolve as expressions or as types; `` `[ ... ] `` forces the
 generic-application reading.
 
 ### function literals
