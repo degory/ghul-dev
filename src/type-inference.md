@@ -284,7 +284,7 @@ write_line("{factorial(5)}");
 
 ### operations on a not-yet-inferred value
 
-When an anonymous function's parameter has no annotation, every operation the body performs on it - a member access, a method call, an index, an iteration, a destructuring - is recorded as a requirement on the parameter's type. A later call must supply a type that satisfies all of them.
+When an anonymous function's parameter has no annotation, every operation the body performs on it - a member access, a method call, an index, an iteration, a destructuring - is recorded as a constraint on the parameter's type. Whatever type is eventually inferred for the parameter must satisfy all of them.
 
 ```ghul
 let length_of = x => x.length;
