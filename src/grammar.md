@@ -243,9 +243,8 @@ Body ::= "is" StatementList "si"
 ```
 
 A function may be named by an `Operator`, which defines that operator. A function
-with no body (just `;`) is an abstract declaration — valid in a trait or as an
-external declaration. A `=>` or `innate` body is terminated by `;`; a block body
-(`is` … `si`) is not.
+with no body (just `;`) is abstract. A `=>` or `innate` body is terminated by `;`;
+a block body (`is` … `si`) is not.
 
 #### property
 
