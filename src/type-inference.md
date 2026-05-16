@@ -1,17 +1,23 @@
 # type inference
 
-ghūl infers types pervasively. Inside a function body most local variables, loop variables, destructured bindings and lambda parameters can be left unannotated — the compiler works their types out from how they are initialized and from how they are later used.
+ghūl infers types pervasively. Inside a method or function body, most local variables, loop variables, destructured variables and anonymous function parameters can be left unannotated — the compiler works their types out from how they are initialized and from how they are later used.
 
-Two boundaries are worth understanding up front, because together they explain both what inference will do for you and what it will not:
+Type inference is **function-local**. Type information inferred within one function is not visible outside that function, and outside function bodies all types are explicit — this includes the signatures of methods and global functions, whose parameter types and return types are always written out.
 
-- Inference is **function-local**. The compiler works within one function body at a time. A function's signature — its parameter types and, where it returns a value, its return type — is always written out explicitly.
-- Inference applies to **local symbols** only. Local variables, loop variables, destructured bindings and lambda parameters have inferred types. Fields and properties carry declared types.
+Within a function, types are inferred only for certain kinds of symbol:
 
-The same two boundaries govern type narrowing: a local can be narrowed by a test that proves a stronger fact about it, but a field or property cannot.
+- local variables
+- loop variables
+- destructured variables
+- anonymous function parameters
+- anonymous function return types
+- generic type arguments on calls to constructors, methods, static methods and global functions
+
+ghūl also performs **type narrowing** — within parts of a function a symbol may be observed at a more specific type than the one it was declared with. Narrowing applies only to local variables: function parameters, `let` variables, loop variables, destructured variables and anonymous function parameters. It does not apply to fields or properties.
 
 ## inference is function-local
 
-A function's signature is written out explicitly. Inference then has free rein inside the body
+A function's signature is written out explicitly. Inference then works within the body
 
 ```ghul
 // the signature is explicit: the parameter type and the return type are written out
@@ -24,17 +30,15 @@ totals(values: Collections.Iterable[int]) -> (sum: int, count: int) is
         count = count + 1;
     od
 
-    (sum, count);
+    return (sum, count);
 si
 ```
 
-Inference does not flow the other way. It never reads a type back out of a function body into that function's signature, and it never crosses from one function into another. Each body is checked on its own, against the fixed signatures of everything it calls.
-
-This is what makes signatures the stable contract between functions — and it is also why a named function's return type is written out, while an anonymous function's return type is inferred: a lambda has no separate signature to honour, so there is nothing for an explicit return type to agree with.
+Inference stays inside the body. It does not read types out of a body into that function's signature, and it does not carry from one function into another: each body is checked on its own, against the explicit signatures of everything it calls.
 
 ## inference applies to local symbols
 
-A field or property is part of a type's surface — other code relies on its type — so its type is declared. A local variable exists only for the duration of one call, so the compiler is free to infer it
+Inference is function-local, so it only ever works out the types of symbols that are local to a function body. A field or property belongs to a type rather than to any one function body, so its type is always written out explicitly — for a private member no less than a public one
 
 ```ghul
 class COUNTER is
@@ -51,23 +55,23 @@ class COUNTER is
 si
 ```
 
-## narrowing respects the same boundary
+## type narrowing
 
-When a test proves a stronger fact about a value's type, ghūl narrows that value to the narrower type for the code the fact covers. Narrowing applies to local symbols — including a function's own parameters, which are locals of that function
+When a check proves a stronger fact about a value's type, ghūl narrows that value to the narrower type for the code the fact covers. Narrowing applies to local variables — including a function's own parameters
 
 ```ghul
 greet(a: Animal) is
     if isa Cat(a) then
-        // a is a local of greet, narrowed to Cat in this branch
+        // a is a parameter of greet, narrowed to Cat in this branch
         write_line(a.purr());
     fi
 si
 ```
 
-A field or property is **not** narrowed, even by a test written directly against it
+A field or property is **not** narrowed — an `isa` check or variant test written directly against one narrows nothing
 
 ```ghul
-class CAGE is
+class CARRIER is
     occupant: Animal;
 
     init(occupant: Animal) is
@@ -77,41 +81,39 @@ si
 
 ...
 
-describe(cage: CAGE) is
-    if isa Cat(cage.occupant) then
-        // cage.occupant is a property access, not a local — it is not narrowed,
-        // so cage.occupant.purr() would not compile here
-        write_line("the cage holds a cat");
+describe(carrier: CARRIER) is
+    if isa Cat(carrier.occupant) then
+        // carrier.occupant is a property access, not a local variable — it is
+        // not narrowed, so carrier.occupant.purr() would not compile here
+        write_line("the carrier holds a cat");
     fi
 si
 ```
 
-The compiler cannot carry the proven fact from the test to a later use, because a property access is re-evaluated every time it is written — there is no single, stable location to track. A field could be reassigned between the two points. A local that is not reassigned in between gives the compiler something it can rely on.
-
-To narrow a property, copy it into a local and test the local
+ghūl narrows local variables only. Narrowing a field or property is possible in principle, but ghūl deliberately keeps narrowing simple and does not. To narrow a property, copy it into a local variable and narrow that
 
 ```ghul
-describe(cage: CAGE) is
-    let occupant = cage.occupant;  // copy the property into a local
+describe(carrier: CARRIER) is
+    let occupant = carrier.occupant;  // copy the property into a local variable
 
     if isa Cat(occupant) then
-        // occupant is a local, narrowed to Cat in this branch
+        // occupant is a local variable, narrowed to Cat in this branch
         write_line(occupant.purr());
     fi
 si
 ```
 
-`if let` does the same in one step: it binds a fresh local from the property expression, and that local narrows
+`if let` does the same in one step: it introduces a fresh local variable from the property expression, and that local narrows
 
 ```ghul
-describe(cage: CAGE) is
-    if let cat: Cat = cage.occupant then
+describe(carrier: CARRIER) is
+    if let cat: Cat = carrier.occupant then
         write_line(cat.purr());
     fi
 si
 ```
 
-Narrowing covers union variant tags, `isa` class tests, null tests (`x?`) and `if let` bindings, and it is flow-sensitive — an early-return guard narrows the code that follows it. See [type narrowing and `if let`](/control-flow.html#type-narrowing) in the control flow chapter for the full picture.
+Narrowing covers union variant tags, `isa` class checks, null checks (`x?`) and `if let`, and it is flow-sensitive — an early-return guard narrows the code that follows it. See [type narrowing and `if let`](/control-flow.html#type-narrowing) in the control flow chapter for the full picture.
 
 ## what gets inferred
 
@@ -125,9 +127,9 @@ let an_int = 12345;
 let an_int_array = [1, 2, 3, 4, 5];
 ```
 
-### destructuring bindings
+### destructuring variables
 
-A destructuring `let` binds several names at once from a tuple. Each name takes its type from the corresponding element of the right hand side, and the pattern can nest
+A destructuring `let` declares several variables at once from a tuple. Each variable takes its type from the corresponding element of the right-hand side, and the pattern can nest
 
 ```ghul
 let person = ("alice", 30);
@@ -219,7 +221,7 @@ let int_thing = THING(1234);
 let string_thing = THING("hello");
 ```
 
-This type of inference is only possible if all type arguments are referenced in the constructor actual arguments and if the constructor overload to call is unambiguous
+Inference from the constructor arguments works when every type argument appears among those arguments and the constructor overload is unambiguous. A type argument left unpinned — by a no-argument constructor, say — can still be resolved from later use of the value (see [inference from later use sites](#inference-from-later-use-sites)).
 
 ### generic function and method calls
 
@@ -282,12 +284,14 @@ write_line("{factorial(5)}");
 
 ### operations on a not yet inferred value
 
-When the argument of an anonymous function has no annotation and the body uses it — accessing a member, calling a method, indexing, iterating, or destructuring — the compiler records what the argument must support. When a call later supplies a concrete type, candidate types are filtered against those operations
+When an anonymous function's parameter has no annotation, every operation the body performs on it — a member access, a method call, an index, an iteration, a destructuring — is recorded as something the parameter's type must support. When a call later supplies a concrete type, that type has to satisfy the recorded operations
 
 ```ghul
 let length_of = x => x.length;
 write_line("{length_of("hello")}"); // x resolves to string
 ```
+
+The call passes a `string`, and `string` has a `length` member, so `x` resolves to `string`. The recorded operations earn their keep when the call site leaves room for more than one type: a candidate that does not support every operation the body relies on is discarded.
 
 ### generic argument inference from sibling actuals
 
