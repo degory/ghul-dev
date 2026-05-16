@@ -249,7 +249,7 @@ let j = 10;
 let s = "Hello";
 
 i = i + j;
-s = s + " World!";
+s = "{s} World!";
 
 thing.property = i + j;
 ```
