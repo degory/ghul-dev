@@ -519,27 +519,27 @@ ghūl has no fixed list of binary operators: any [operator token](#operators) ma
 used infix. Precedence is assigned by a table of built-in operators plus a
 first-character heuristic for everything else, so the grammar's flat
 `Expression ::= UnaryExpression ( Operator UnaryExpression )*` is disambiguated by
-the following levels, **loosest first**:
+the following levels, **tightest first**:
 
 | Precedence       | Operators                                   |
 |------------------|---------------------------------------------|
-| yield infix      | `\|\|`                                      |
-| user&#8209;1     | *(user-defined)*                            |
-| boolean          | `/\`  `\/`  `∧`  `∨`                         |
-| user&#8209;2     | *(user-defined)*                            |
-| relational       | `==` `!=` `=~` `!~` `<` `>` `>=` `<=` `≈` `≡` |
-| user&#8209;3     | *(user-defined)*                            |
-| range            | `..`  `::`                                  |
-| user&#8209;4     | *(user-defined)*                            |
-| shift            | `<<`  `>>`                                  |
-| user&#8209;5     | *(user-defined — default)*                  |
-| bitwise          | `&` `\|` `¦` `^` `∩` `∪`                     |
-| user&#8209;6     | *(user-defined)*                            |
-| addition         | `+`  `-`                                    |
-| user&#8209;7     | *(user-defined)*                            |
-| multiplication   | `*` `×` `✕` `/` `%` `÷`                      |
-| user&#8209;8     | *(user-defined)*                            |
 | *(prefix unary, member access, call, index — tightest)* | |
+| user&#8209;8     | *(user-defined)*                            |
+| multiplication   | `*` `×` `✕` `/` `%` `÷`                      |
+| user&#8209;7     | *(user-defined)*                            |
+| addition         | `+`  `-`                                    |
+| user&#8209;6     | *(user-defined)*                            |
+| bitwise          | `&` `\|` `¦` `^` `∩` `∪`                     |
+| user&#8209;5     | *(user-defined — default)*                  |
+| shift            | `<<`  `>>`                                  |
+| user&#8209;4     | *(user-defined)*                            |
+| range            | `..`  `::`                                  |
+| user&#8209;3     | *(user-defined)*                            |
+| relational       | `==` `!=` `=~` `!~` `<` `>` `>=` `<=` `≈` `≡` |
+| user&#8209;2     | *(user-defined)*                            |
+| boolean          | `/\`  `\/`  `∧`  `∨`                         |
+| user&#8209;1     | *(user-defined)*                            |
+| yield infix      | `\|\|`                                      |
 
 All binary operators are left-associative. Prefix unary operators, member access,
 calls and indexing bind more tightly than any binary operator.
