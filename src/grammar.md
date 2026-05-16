@@ -294,7 +294,7 @@ PrimaryType ::= QualifiedIdentifier
               | QualifiedIdentifier "[" TypeList "]"   /* generic type */
               | QualifiedIdentifier "[" "]"            /* array type */
               | Identifier ":" TypeExpression          /* named tuple element */
-              | "(" TypeList? ")"                      /* tuple, or grouping */
+              | "(" TypeList ")"                       /* tuple, or grouping */
               | "(" TypeList? ")" "->" TypeExpression  /* function type */
 
 TypeSuffix ::= "[]"                  /* array */
@@ -308,9 +308,9 @@ TypeList ::= TypeExpression ( "," TypeExpression )*
 ```
 
 `( T )` is just `T` in parentheses — parentheses group, e.g. to disambiguate
-`(a -> b) -> c` from `a -> b -> c`. `( )` is the undefined type, and a parenthesised
-list of two or more types is a tuple type. A `name: Type` element gives a tuple
-element a name.
+`(a -> b) -> c` from `a -> b -> c`. A parenthesised list of two or more types is a
+tuple type. Empty parentheses are meaningful only as `( ) -> T`, a function type
+taking no arguments. A `name: Type` element gives a tuple element a name.
 
 ## variables
 
