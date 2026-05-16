@@ -109,7 +109,7 @@ si
 class STRING_CONCATENATION: Operation[string] is
     init() is si
 
-    execute(left: string, right: string) -> string => left + right;
+    execute(left: string, right: string) -> string => "{left}{right}";
 si
 
 class STRING_SUBTRACTION: Operation[string] is

@@ -352,8 +352,28 @@ test_tree() is
 si
 ```
 
-## pattern matching (TODO)
-Pattern matching is under development [(see GitHub issue #1134)](https://github.com/degory/ghul/issues/1134)
+## pattern matching
+
+ghūl has no dedicated `match` construct. Discovering which variant a union holds, binding its payload, and branching on the result is done with `if let` — a `let` binding in an `if` / `elif` condition, where the branch runs only on a match, with the binding narrowed and in scope:
+
+```ghul
+union Shape is
+    CIRCLE(radius: double);
+    SQUARE(side: double);
+si
+
+area(s: Shape) -> double is
+    if let c: CIRCLE = s then
+        return 3.14159 * c.radius * c.radius;
+    elif let q: SQUARE = s then
+        return q.side * q.side;
+    fi
+
+    return 0.0;
+si
+```
+
+Union variant tags (`s.is_circle`) and `else`-branch narrowing cover the same ground; see [type narrowing and `if let`](/control-flow.html#type-narrowing) in the control flow chapter for the full picture.
 
 ## currying
 ```ghul

@@ -125,7 +125,7 @@ if isa Cat(a) then
 fi
 ```
 
-For a two-variant union, the `else` branch is also narrowed to the complementary variant:
+For a two-variant union, the `else` branch is narrowed to the complementary variant:
 
 ```ghul
 union Result[T, E] is
@@ -140,6 +140,73 @@ if r.is_ok then
 else
     // r is narrowed to Result.ERR here
     write_line("err: {r.error}");
+fi
+```
+
+Narrowing is flow-sensitive — it follows the control flow rather than being confined to a branch body. If a guard rejects the narrower type and then leaves the enclosing block — by `return`, `throw`, `break` or `continue` — the code after the guard is narrowed:
+
+```ghul
+classify(a: Animal) is
+    if !isa Cat(a) then
+        write_line("not a cat");
+        return;
+    fi
+
+    // every non-Cat has returned, so a is narrowed to Cat from here on
+    write_line(a.purr());
+si
+```
+
+### if let
+
+`cast T(x)` views `x` as type `T`, and yields null — rather than throwing — when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test:
+
+```ghul
+let c = cast Cat(a);
+
+if c? then
+    write_line(c.purr());
+fi
+```
+
+`if let` folds that into the `if` itself: it puts a `let` binding in the condition of an `if` or `elif`. The then-branch runs only when the bound value is present, with the binding in scope — and narrowed — just within that branch:
+
+```ghul
+if let c: Cat = a then
+    // c has type Cat here; it is not in scope in the else branch, or after the fi
+    write_line(c.purr());
+else
+    write_line("not a cat");
+fi
+```
+
+A type on the binding (`c: Cat`) makes it a type test. `elif let` chains these, so a sequence of type tests reads as one construct:
+
+```ghul
+if let c: Cat = a then
+    write_line(c.purr());
+elif let d: Dog = a then
+    write_line(d.bark());
+else
+    write_line("some other animal");
+fi
+```
+
+With no type on the binding, `if let` simply tests that the value is present — useful for any expression that can yield null:
+
+```ghul
+if let line = reader.read_line() then
+    write_line("read: {line}");
+else
+    write_line("end of input");
+fi
+```
+
+The binding can also destructure, exactly like a plain `let`, including `_` to discard a field that is not needed:
+
+```ghul
+if let (name, _) = lookup(id) then
+    write_line("found {name}");
 fi
 ```
 
@@ -425,10 +492,10 @@ try
 
 catch e: FileNotFoundException
     // Handle the case where the file is not found
-    write_line("Error: file not found: " + e.message);
+    write_line("Error: file not found: {e.message}");
 catch e: IOException
     // Handle errors during file reading
-    write_line("Error: reading file: " + e.message);
+    write_line("Error: reading file: {e.message}");
 finally
     // Close the file and clean up resources
     if reader? then
@@ -459,10 +526,10 @@ try
     write_line("File processing completed.");
 catch e: FileNotFoundException
     // Handle the case where the file is not found
-    write_line("Error: file not found: " + e.message);
+    write_line("Error: file not found: {e.message}");
 catch e: IOException
     // Handle errors during file reading
-    write_line("Error: reading file: " + e.message);
+    write_line("Error: reading file: {e.message}");
 yrt
 
 ```
