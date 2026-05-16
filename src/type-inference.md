@@ -10,6 +10,33 @@ let an_int = 12345;
 let an_int_array = [1, 2, 3, 4, 5];
 ```
 
+## destructuring bindings
+
+A destructuring `let` binds several names at once from a tuple. Each name takes its type from the corresponding element of the right hand side, and the pattern can nest
+
+```ghul
+let person = ("alice", 30);
+let (name, age) = person; // name is string, age is int
+
+let ((first, second), third) = (("a", "b"), "c");
+```
+
+## for loop variables
+
+A `for` loop variable takes its type from the element type of the iterable being looped over. Destructuring composes with this: when the element type is a tuple, its element types flow into the destructured names
+
+```ghul
+for i in 1::10 do // i is int
+    write_line("{i}");
+od
+
+let pairs = [("a", 1), ("b", 2)];
+
+for (name, count) in pairs do // name is string, count is int
+    write_line("{name}: {count}");
+od
+```
+
 ## list literal element type
 
 The element type of list literals is inferred from the types of the elements. The compiler will try to find a type that is compatible with all the elements.
