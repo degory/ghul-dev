@@ -26,7 +26,7 @@ Multiple variables can be defined in the same `let` statement, including a mix o
 let initialize_now = 123, initialize_later: int, why_are_we_doing_this = "I don't know";
 ```
 
-The name `_` is a discard placeholder. It binds wherever a name would normally bind, but the bound value is discarded. `_` is repeatable in a single scope, and is accepted in `let` bindings, tuple destructuring, lambda parameters, and `for` loop variables:
+The name `_` is a discard placeholder. It can stand in for any variable name, but the value that would be assigned to it is discarded. `_` is accepted in `let` definitions, tuple destructuring, lambda parameters, and `for` loop variables:
 
 ```ghul
 let _ = side_effect();

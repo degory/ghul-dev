@@ -354,7 +354,7 @@ si
 
 ## pattern matching
 
-ghūl has no dedicated `match` construct. Discovering which variant a union holds, binding its payload, and branching on the result is done with `if let` — a `let` binding in an `if` / `elif` condition, where the branch runs only on a match, with the binding narrowed and in scope:
+ghūl has no dedicated `match` construct. Discovering which variant a union holds, and branching on the result is done with `if let` — a `let` definition in an `if` / `elif` condition, where the branch runs only on a match, with the variable narrowed and in scope:
 
 ```ghul
 union Shape is

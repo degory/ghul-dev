@@ -125,6 +125,17 @@ if isa Cat(a) then
 fi
 ```
 
+An [optional type](/language-basics.html#optional-types) narrows the same way. A `?` test in the predicate narrows the optional to its non-optional form in the then-branch, so the value can be used directly:
+
+```ghul
+let name: string? = lookup();
+
+if name? then
+    // name is narrowed to non-optional string here — no ! needed
+    write_line("hello, {name}");
+fi
+```
+
 For a two-variant union, the `else` branch is narrowed to the complementary variant:
 
 ```ghul
@@ -169,7 +180,7 @@ if c? then
 fi
 ```
 
-`if let` folds that into the `if` itself: it puts a `let` binding in the condition of an `if` or `elif`. The then-branch runs only when the bound value is present, with the binding in scope — and narrowed — just within that branch:
+`if let` folds that into the `if` itself: it puts a `let` definition in the condition of an `if` or `elif`. The then-branch runs only when the value is present, with the variable in scope — and narrowed — just within that branch:
 
 ```ghul
 if let c: Cat = a then
@@ -180,7 +191,7 @@ else
 fi
 ```
 
-A type on the binding (`c: Cat`) makes it a type test. `elif let` chains these, so a sequence of type tests reads as one construct:
+A type on the variable (`c: Cat`) makes it a type test. `elif let` chains these, so a sequence of type tests reads as one construct:
 
 ```ghul
 if let c: Cat = a then
@@ -192,17 +203,18 @@ else
 fi
 ```
 
-With no type on the binding, `if let` simply tests that the value is present — useful for any expression that can yield null:
+With no type given for the local variable, `if let` simply tests that the value is present. This is the natural way to consume an [optional type](/language-basics.html#optional-types): the local variable has the non-optional type within the then-branch, so there is no need for an explicit `!`.
 
 ```ghul
 if let line = reader.read_line() then
+    // reader.read_line() yields string?; line is string here
     write_line("read: {line}");
 else
     write_line("end of input");
 fi
 ```
 
-The binding can also destructure, exactly like a plain `let`, including `_` to discard a field that is not needed:
+An `if let` can also destructure, exactly like a plain `let`, including `_` to discard a field that is not needed:
 
 ```ghul
 if let (name, _) = lookup(id) then
@@ -458,6 +470,43 @@ esac
 Each arm of the case statement, delimited by either a `when` clause or `default` forms a separate scope for local variable definitions.
 
 
+## throw statement
+
+The `throw` statement raises an exception. Control leaves the current block immediately and passes to the nearest enclosing `catch` that handles the exception's type. If there is no such `catch`, the exception propagates out through the calling functions, and out of the program if it is never caught.
+
+```ghul
+withdraw(balance: int, amount: int) -> int is
+    if amount > balance then
+        throw System.InvalidOperationException("insufficient funds");
+    fi
+
+    return balance - amount;
+si
+```
+
+The thrown value must be an exception — `System.Exception`, or a type derived from it.
+
+### exception types
+
+An exception is any class that derives from `System.Exception`, or from a more specific exception type:
+
+```ghul
+class InsufficientFundsException: System.Exception is
+    init(message: string) is
+        super.init(message);
+    si
+si
+```
+
+```ghul
+try
+    withdraw(account, 100);
+catch e: InsufficientFundsException
+    write_line("declined: {e.message}");
+yrt
+```
+
+
 ## try statement
 
 ### try-catch-finally-yrt
@@ -564,6 +613,22 @@ finally
 
     // Any exceptions will be thrown to the calling code
 yrt
+```
+
+### finally and return
+
+A `finally` block runs whenever control leaves the `try` block — including when the `try` block, or a `catch` block, executes a `return`. The `finally` block runs first, then control returns to the caller:
+
+```ghul
+read_file(path: string) -> string is
+    let reader = StreamReader(path);
+
+    try
+        return reader.read_to_end();
+    finally
+        reader.close(); // runs before the function returns
+    yrt
+si
 ```
 
 ## return statement
