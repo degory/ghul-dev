@@ -78,9 +78,9 @@ let y = "Hello"; // type inferred as string
 ```
 [User types](/definitions.html#types) are defined using `class`, `struct`, `trait`, `enum`, and `union` keywords.
 
-## data types
+## built-in data types
 
-ghūl supports a variety of data types, including primitives, arrays, and tuples.
+ghūl's built-in data types are primitive types, arrays, tuples, and optionals.
 
 ### primitive types
 
@@ -150,6 +150,54 @@ ghūl also supports tuple destructuring:
 let (a, b) = point;
 let (name, age) = person;
 ```
+
+### optional types
+
+A type followed by `?` is an **optional** type: a value of that type may be present, or it may be absent. The same type written without the `?` is non-optional — a value is always expected to be there.
+
+```ghul
+let name: string? = "Alice"; // present
+let nickname: string? = null; // absent
+```
+
+The postfix `?` operator tests whether an optional has a value. The postfix `!` operator reads the value out:
+
+```ghul
+if name? then
+    write_line("name is {name!}");
+fi
+```
+
+Most of the time you don't need `!` directly — `if let` tests an optional and reads its value into a local variable in one step (see [control flow](/control-flow.html#if-let)).
+
+Optional types work for both reference types and value types. An optional value type is backed by `OPTION[T]` — the .NET `Nullable[T]` — so a present value is constructed explicitly:
+
+```ghul
+let here: int? = OPTION[int](42); // present
+let gone: int? = null; // absent
+```
+
+A non-optional type does not expect to be absent. Putting `null`, or an optional the compiler cannot see has a value, where a non-optional type is expected produces a warning:
+
+```ghul
+let label: string = null; // warning: null where a non-optional string is expected
+
+let maybe = lookup(); // maybe is string?
+let title: string = maybe; // warning: maybe might be absent
+```
+
+The warning clears once the value is known to be present — inside an `if name?` check, inside an `if let`, or with an explicit `!`:
+
+```ghul
+let maybe = lookup();
+
+if maybe? then
+    let title: string = maybe; // fine: maybe is known to be present here
+fi
+
+let forced: string = maybe!; // fine: ! asserts the value is present
+```
+
 These are the basic data types available in ghūl. The language also supports more advanced types such as classes, structs, traits, enums, and unions, which will be covered in later sections of the documentation.
 
 ### type conversions

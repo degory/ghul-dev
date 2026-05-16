@@ -31,7 +31,7 @@ Blocks are delimited by keywords. The keywords that begin and end a block are sp
 if x > y then
    write_line("x > y")
 else
-   write_line("x <= y)
+   write_line("x <= y")
 fi
 ```
 
@@ -49,4 +49,23 @@ Blocks in ghūl can contain definitions, statements, or a mix of both. Which is 
 
 ## file structure
 
+At its top level a ghūl source file contains [definitions](/definitions.html) and `use` directives. There is no required ordering and no file header — a source file is simply a collection of definitions.
+
+```ghul
+use IO.Std.write_line;
+
+greet(name: string) is
+    write_line("hello, {name}");
+si
+
+entry() is
+    greet("world");
+si
+```
+
+The definitions in a file can be global functions, properties, classes, structs, traits, unions and enums, or `namespace` blocks that group definitions under a name. A definition is visible to the rest of the project regardless of which file it appears in, so how source is split across files is purely a matter of organisation.
+
+A file that declares any `namespace` must place all of its definitions inside namespaces. A file with no namespace at all has its definitions placed in a private namespace of their own, which is convenient for small programs and tests. Namespaces, `use` and symbol visibility are covered in full under [definitions](/definitions.html#namespaces).
+
+Execution of a program begins at a function named `entry`.
 

@@ -258,7 +258,7 @@ Here `self` is already known to be `Pipe[int]`, so `Pipe[int].filter(predicate: 
 
 ## inference from later use sites
 
-The sections above describe types inferred from the right-hand side of a declaration or from the value passed at a call site. Because inference works across the whole function body, the compiler can also infer a variable that has no immediate clue from how it is later used in the same body, feeding that information back.
+The sections above infer a type from a declaration's initializer or from a call argument. Because inference spans the whole function body, the compiler can also work the other way: when a declaration gives no type on its own, a later use of the variable in the same body can supply one.
 
 ```ghul
 let m = Box();   // m is Box[?] here - the type argument is not yet known
@@ -266,7 +266,7 @@ m.set(42);       // the set call carries an int, so m is Box[int]
 let x = m.get(); // x reads as int
 ```
 
-The same applies to let-bound anonymous functions whose argument types are not annotated: a later call supplies a concrete type, which flows back to the function literal.
+The same applies to anonymous functions whose argument types are not explicit: if a later call supplies a concrete type, that flows back to the function literal.
 
 ```ghul
 let f = x => x + 1;
@@ -282,7 +282,7 @@ let factorial = n rec => if n == 0 then 1 else n * rec(n - 1) fi;
 write_line("{factorial(5)}");
 ```
 
-### operations on a not yet inferred value
+### operations on a not-yet-inferred value
 
 When an anonymous function's parameter has no annotation, every operation the body performs on it - a member access, a method call, an index, an iteration, a destructuring - is recorded as a requirement on the parameter's type. A later call must supply a type that satisfies all of them.
 
