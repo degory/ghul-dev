@@ -484,7 +484,6 @@ PrimaryExpression ::= Identifier
                     | Literal
                     | "(" ExpressionList? ")"                /* tuple or grouping */
                     | "[" ExpressionList "]" ( ":" TypeExpression )?  /* list literal */
-                    | "new" TypeExpression? "(" ExpressionList? ")"
                     | "cast" TypeExpression "(" Expression ")"
                     | "isa" TypeExpression "(" Expression ")"
                     | "typeof" TypeExpression
@@ -507,8 +506,7 @@ ExpressionList ::= Expression ( "," Expression )*
 ```
 
 A list literal `[ a, b, ... ]` builds a `List`; it requires at least one element
-(use `LIST[T]()` for an empty list). `new` is deprecated — construct a value by
-calling the type, `TypeName(args)`.
+(use `LIST[T]()` for an empty list).
 
 Within an `ExpressionList` that forms call arguments or a tuple, an element of the
 form `Identifier ":" TypeExpression? ( "=" Expression )?` is an inline local
