@@ -29,8 +29,8 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 
 ## examples
 
-::: tip the examples are live
-Every example on this site is compiled and run with a pinned ghūl compiler. Hover any identifier to see its type; open the panel beneath an example for its captured output or compiler diagnostics.
+::: tip interactive examples
+Hover any identifier in a code example to see its type. An example's output and any compiler diagnostics appear in a panel beneath it.
 :::
 
 ### hello world!
@@ -44,6 +44,3 @@ Every example on this site is compiled and run with a pinned ghūl compiler. Hov
 ### OOP
 
 <GhulExample name="object-oriented" />
-
-### examples project
-See the [ghūl examples repository](https://github.com/degory/ghul-examples) for projects with these examples and others that can be viewed, edited and run from Visual Studio Code or a GitHub Codespace.
