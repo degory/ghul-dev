@@ -1,0 +1,1 @@
+import{_ as a,I as s,g as n,j as t}from"./chunks/framework.CbuNJfvM.js";const h=JSON.parse('{"title":"grammar","description":"","frontmatter":{},"headers":[],"relativePath":"grammar.md","filePath":"grammar.md"}'),o={name:"grammar.md"};function i(p,e,r,l,d,c){return s(),n("div",null,[...e[0]||(e[0]=[t("",114)])])}const q=a(o,[["render",i]]);export{h as __pageData,q as default};
