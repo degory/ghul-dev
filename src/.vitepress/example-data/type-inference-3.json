@@ -1,0 +1,16 @@
+{
+  "name": "type-inference-3",
+  "code": "greet(a: Animal) is\n    if isa Cat(a) then\n        // a is a parameter of greet, narrowed to Cat\n        // in this branch\n        write_line(a.purr());\n    fi\nsi",
+  "output": "purr\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 5, "text": "greet(a: Animal) -> Ghul.void // global function" },
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 7, "text": "a: Animal // local argument" },
+    { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 15, "text": "class Animal" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "class Cat" },
+    { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 16, "text": "a: Animal // local argument" },
+    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 18, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 5, "startColumn": 20, "endLine": 5, "endColumn": 20, "text": "a: Cat // local argument" },
+    { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 25, "text": "Cat.purr() -> Ghul.string // method" }
+  ]
+}

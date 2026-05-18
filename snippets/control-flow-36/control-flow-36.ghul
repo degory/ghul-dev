@@ -1,0 +1,7 @@
+try
+    // Code that might throw an exception
+catch e: SomeExceptionType
+    // Exception handling code
+finally
+    // Clean-up code, always executed
+yrt

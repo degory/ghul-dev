@@ -1,0 +1,22 @@
+use IO.Std.write_line;
+
+class BOX is
+    property: int public;
+
+    init() is si
+si
+
+entry() is
+    let thing = BOX();
+// >>>
+    let i mut = 0;
+    let j = 10;
+    let s mut = "Hello";
+
+    i = i + j;
+    s = "{s} World!";
+
+    thing.property = i + j;
+// <<<
+    write_line("i = {i}, s = {s}, thing.property = {thing.property}");
+si

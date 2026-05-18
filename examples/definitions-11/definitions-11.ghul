@@ -1,0 +1,19 @@
+struct POINT is
+    x: double;
+    y: double;
+
+    init(x: double, y: double) is
+        self.x = x;
+        self.y = y;
+    si
+si
+
+entry() is
+// >>>
+    let origin = POINT(0.0D, 0.0D);
+
+    // or up, or down, or even left, depending on
+    // your co-ordinate system!
+    let right = POINT(1.0D, 0.0D);
+// <<<
+si

@@ -1,0 +1,5 @@
+entry() is
+// >>>
+    let first_element = [1, 2, 3][0];
+// <<<
+si

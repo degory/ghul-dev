@@ -1,0 +1,19 @@
+{
+  "name": "type-inference-9",
+  "code": "for i in 1::10 do\n    write_line(\"{i}\");\nod\n\nlet pairs = [(\"a\", 1), (\"b\", 2)];\n\nfor (name, count) in pairs do\n    write_line(\"{name}: {count}\");\nod",
+  "output": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\na: 1\nb: 2\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 12, "text": "Ghul.::(from: Ghul.int, to: Ghul.int) -> Ghul.INT_RANGE_INCLUSIVE // innate function range.inclusive" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 9, "text": "pairs: (string, int)[] // local value" },
+    { "startLine": 7, "startColumn": 6, "endLine": 7, "endColumn": 9, "text": "name: Ghul.string // local value" },
+    { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 16, "text": "count: Ghul.int // local value" },
+    { "startLine": 7, "startColumn": 22, "endLine": 7, "endColumn": 26, "text": "pairs: (string, int)[] // local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 18, "text": "i: Ghul.int // local value" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 8, "startColumn": 18, "endLine": 8, "endColumn": 21, "text": "name: Ghul.string // local value" },
+    { "startLine": 8, "startColumn": 26, "endLine": 8, "endColumn": 30, "text": "count: Ghul.int // local value" }
+  ]
+}

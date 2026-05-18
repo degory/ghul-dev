@@ -1,0 +1,15 @@
+{
+  "name": "functional-programming-15",
+  "code": "if an_option.is_some then\n    let value = an_option.value;\n    write_line(\"the option holds {value}\");\nfi",
+  "output": "the option holds 42\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 13, "text": "value: Ghul.int // local value" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 25, "text": "an_option: Option.SOME[Ghul.int] // local value" },
+    { "startLine": 2, "startColumn": 27, "endLine": 2, "endColumn": 31, "text": "Option.SOME[Ghul.int].value: Ghul.int // variant field" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 12, "text": "an_option: Option[Ghul.int] // local value" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 20, "text": "Option.is_some: Ghul.bool // instance property" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 39, "text": "value: Ghul.int // local value" }
+  ]
+}

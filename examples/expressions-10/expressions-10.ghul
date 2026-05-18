@@ -1,0 +1,10 @@
+entry() is
+// >>>
+    let simple_add = (x: int, y: int) => x + y;
+
+    let complex_add = (x: int, y: int) is
+        let result = x + y;
+        return result;
+    si;
+// <<<
+si

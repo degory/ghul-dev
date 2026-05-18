@@ -1,0 +1,6 @@
+entry() is
+// >>>
+    let name: string? = "Alice"; // present
+    let nickname: string? = null; // absent
+// <<<
+si

@@ -1,0 +1,28 @@
+// expect: error
+use IO.Std.write_line;
+
+// >>>
+struct VALUE is
+    public_property: int;
+
+    _protected_property: string;
+
+    init(value: int) is
+        public_property = value;
+        _protected_property = "value is {value}";
+    si
+si
+// <<<
+
+entry() is
+// >>>
+    let v = VALUE(1234);
+
+    // OK: public_property is publicly readable
+    write_line(v.public_property);
+
+    write_line(v._protected_property);
+
+    v.public_property = 5678;
+// <<<
+si

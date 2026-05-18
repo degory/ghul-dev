@@ -1,0 +1,10 @@
+// >>>
+class SCALER is
+    _scale: double;
+
+    scale(value: double) -> double => value * _scale;
+si
+// <<<
+
+entry() is
+si

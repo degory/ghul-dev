@@ -1,0 +1,16 @@
+{
+  "name": "syntax-2",
+  "code": "use IO.Std.write_line;\n\ngreet(name: string) is\n    write_line(\"hello, {name}\");\nsi\n\nentry() is\n    greet(\"world\");\nsi",
+  "output": "hello, world\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 5, "text": "greet(name: Ghul.string) -> Ghul.void // global function" },
+    { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 10, "text": "name: Ghul.string // local argument" },
+    { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 18, "text": "class Ghul.string" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 5, "text": "entry() -> Ghul.void // global function" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...) // function group" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 4, "startColumn": 25, "endLine": 4, "endColumn": 28, "text": "name: Ghul.string // local argument" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 9, "text": "greet(name: Ghul.string) -> Ghul.void // global function" }
+  ]
+}

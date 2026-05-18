@@ -1,0 +1,7 @@
+{
+  "name": "control-flow-38",
+  "code": "try\n    // Code that might throw an exception\ncatch e: SomeExceptionType\n    // Exception handling code\nyrt",
+  "output": "",
+  "diagnostics": [],
+  "hovers": []
+}

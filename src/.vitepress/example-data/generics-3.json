@@ -1,0 +1,17 @@
+{
+  "name": "generics-3",
+  "code": "struct HOLD_SOMETHING[T] is\n    value: T;\n\n    init(value: T) is\n        self.value = value;\n    si\nsi",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 21, "text": "struct HOLD_SOMETHING" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "text": "T // type variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "HOLD_SOMETHING.value: T // instance property" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 12, "text": "T // type variable" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 8, "text": "HOLD_SOMETHING.init(value: T) // constructor" },
+    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 14, "text": "value: T // local argument" },
+    { "startLine": 4, "startColumn": 17, "endLine": 4, "endColumn": 17, "text": "T // type variable" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 18, "text": "HOLD_SOMETHING.value: T // instance property" },
+    { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 26, "text": "value: T // local argument" }
+  ]
+}

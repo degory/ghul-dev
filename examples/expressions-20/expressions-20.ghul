@@ -1,0 +1,5 @@
+entry() is
+// >>>
+    let length = "Hello".length;
+// <<<
+si

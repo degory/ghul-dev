@@ -1,0 +1,7 @@
+entry() is
+    let primes = [2, 3, 5, 7, 11];
+    let i = 2;
+// >>>
+    let p = primes[i];
+// <<<
+si

@@ -1,0 +1,23 @@
+// >>>
+class COUNTER is
+    count: int;
+
+    init() is
+        count = 0;
+    si
+
+    init(initial_count: int) is
+        count = initial_count;
+    si
+si
+// <<<
+
+entry() is
+// >>>
+    // calls the parameterless overload of init()
+    let c = COUNTER();
+
+    // calls init(initial_count: int)
+    let d = COUNTER(50);
+// <<<
+si

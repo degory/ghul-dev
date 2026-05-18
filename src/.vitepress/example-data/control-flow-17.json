@@ -1,0 +1,22 @@
+{
+  "name": "control-flow-17",
+  "code": "let a = 5;\n\nif a > 0 then\n    // new scope - neither y nor z are in scope here\n    let x = 10;\n    write_line(\"x is {x}\");\nelif a < 0 then\n    // new scope - neither x nor z are in scope here\n    let y = 20;\n    write_line(\"y is {y}\");\nelse\n    // new scope - neither x nor y are in scope here\n    let z = 30;\n    write_line(\"z is {z}\");\nfi",
+  "output": "x is 10\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "a: Ghul.int // local value" },
+    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 9, "text": "x: Ghul.int // local value" },
+    { "startLine": 9, "startColumn": 9, "endLine": 9, "endColumn": 9, "text": "y: Ghul.int // local value" },
+    { "startLine": 13, "startColumn": 9, "endLine": 13, "endColumn": 9, "text": "z: Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 4, "text": "a: Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 6, "startColumn": 23, "endLine": 6, "endColumn": 23, "text": "x: Ghul.int // local value" },
+    { "startLine": 7, "startColumn": 6, "endLine": 7, "endColumn": 6, "text": "a: Ghul.int // local value" },
+    { "startLine": 7, "startColumn": 8, "endLine": 7, "endColumn": 8, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" },
+    { "startLine": 10, "startColumn": 5, "endLine": 10, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 10, "startColumn": 23, "endLine": 10, "endColumn": 23, "text": "y: Ghul.int // local value" },
+    { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 14, "startColumn": 23, "endLine": 14, "endColumn": 23, "text": "z: Ghul.int // local value" }
+  ]
+}

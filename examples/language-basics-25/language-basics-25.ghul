@@ -1,0 +1,10 @@
+entry() is
+// >>>
+    let gt = 3 > 1; // true
+    let gte = 4 >= 4; // true
+    let lt = 3 < 1; // false
+    let lte = 4 <= 4; // true
+    let eq = 1 == 2; // false
+    let neq = 1 != 2; // true
+// <<<
+si

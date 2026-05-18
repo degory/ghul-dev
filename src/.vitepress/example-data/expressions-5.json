@@ -1,0 +1,11 @@
+{
+  "name": "expressions-5",
+  "code": "let animals = [\"frog\", \"bat\", \"elephant\"]; // string[]\nlet things = [\"frog\", 1234, 12.5]; // object[]\nlet lists = [[1, 2], [3, 4], [5, 6], [7, 7]]; // int[][]",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "animals: Ghul.string[] // local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "things: Ghul.object[] // local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "text": "lists: Ghul.int[][] // local value" }
+  ]
+}

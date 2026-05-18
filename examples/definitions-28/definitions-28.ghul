@@ -1,0 +1,17 @@
+namespace Example is
+    trait Test is
+        run();
+    si
+
+// >>>
+    // class TEST can implement the Test trait without having
+    // to qualify the name Test:
+    class TEST: Test is
+        run() is si
+    si
+// <<<
+si
+
+namespace Demo is
+    entry() is si
+si

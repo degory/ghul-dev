@@ -1,0 +1,14 @@
+{
+  "name": "type-inference-20",
+  "code": "let length_of = x => x.length;\nwrite_line(\"{length_of(\"hello\")}\");",
+  "output": "5\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "text": "x: Ghul.string // local argument" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 13, "text": "length_of: Ghul.string -> Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 22, "text": "x: Ghul.string // local argument" },
+    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 29, "text": "Ghul.string.length: Ghul.int // instance property" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 22, "text": "length_of: Ghul.string -> Ghul.int // local value" }
+  ]
+}

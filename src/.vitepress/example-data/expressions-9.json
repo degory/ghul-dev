@@ -1,0 +1,19 @@
+{
+  "name": "expressions-9",
+  "code": "let complex_add = (x: int, y: int) -> int is\n    let result = x + y;\n    return result;\nsi;",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "text": "x: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 28, "text": "y: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "text": "complex_add: (Ghul.int, Ghul.int) -> Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 41, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 25, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 33, "text": "struct Ghul.int" },
+    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 14, "text": "result: Ghul.int // local value" },
+    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 18, "text": "x: Ghul.int // local argument" },
+    { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 22, "text": "y: Ghul.int // local argument" },
+    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 20, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 17, "text": "result: Ghul.int // local value" }
+  ]
+}

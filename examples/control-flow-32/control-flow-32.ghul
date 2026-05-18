@@ -1,0 +1,47 @@
+use IO.Std.write_line;
+
+classify(value: int) -> string is
+// >>>
+case value
+when -1:
+    return "minus one";
+
+when 0:
+    let result = "zero";
+    return result;
+
+when 1:
+    return "one";
+
+when 2:
+    return "two";
+
+when 3:
+    return "three";
+
+when 4:
+    return "four";
+
+when 5:
+    let result = "five";
+    return result;
+
+when 6, 7, 8, 9:
+    return "more than five and less than ten";
+
+when 13:
+    return "unlucky";
+
+default
+    return "less than -1 or more than nine";
+esac
+// <<<
+si
+
+entry() is
+    write_line(classify(0));
+    write_line(classify(3));
+    write_line(classify(7));
+    write_line(classify(13));
+    write_line(classify(-5));
+si

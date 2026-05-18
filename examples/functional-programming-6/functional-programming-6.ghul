@@ -1,0 +1,10 @@
+// expect: error
+entry() is
+// >>>
+    let list = [1, 2, 3, 4, 5];
+
+    let element = list[3]; // elements can be read
+
+    list[3] = 6;
+// <<<
+si

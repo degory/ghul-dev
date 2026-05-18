@@ -1,0 +1,12 @@
+// >>>
+struct HOLD_SOMETHING[T] is
+    value: T;
+
+    init(value: T) is
+        self.value = value;
+    si
+si
+// <<<
+
+entry() is
+si

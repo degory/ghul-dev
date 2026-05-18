@@ -1,0 +1,14 @@
+{
+  "name": "language-basics-14",
+  "code": "let (a, b) = point;\nlet (name, age) = person;",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "text": "a: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "text": "b: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 18, "text": "point: (int, int) // local value" },
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 9, "text": "name: Ghul.string // local value" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "age: Ghul.int // local value" },
+    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "text": "person: (string, int) // local value" }
+  ]
+}

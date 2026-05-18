@@ -1,0 +1,19 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    let my_variable = 42;
+// <<<
+    print_something("a hello");
+si
+
+// >>>
+print_something(thing: string) is
+    write_line("The thing is: {thing}");
+si
+
+class PERSON is
+    name: string;
+    age: int;
+si
+// <<<

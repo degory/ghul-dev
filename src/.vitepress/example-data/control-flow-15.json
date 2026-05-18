@@ -1,0 +1,14 @@
+{
+  "name": "control-flow-15",
+  "code": "if let line = reader.read_line() then\n    // reader.read_line() yields string?;\n    // line is string here\n    write_line(\"read: {line}\");\nelse\n    write_line(\"end of input\");\nfi",
+  "output": "read: the only line\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 11, "text": "line: Ghul.string? // local value" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 20, "text": "reader: STRING_READER // local value" },
+    { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 30, "text": "STRING_READER.read_line() -> Ghul.string? // method" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 4, "startColumn": 24, "endLine": 4, "endColumn": 27, "text": "line: Ghul.string // local value" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" }
+  ]
+}

@@ -1,0 +1,9 @@
+union STREAM[T, S] is
+    DONE;
+    YIELD(value: T, state: S);
+si
+
+stream[T, S](
+    initial: S,
+    advance: S -> STREAM[T, S]
+) -> Pipe[T]

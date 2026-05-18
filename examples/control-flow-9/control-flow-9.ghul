@@ -1,0 +1,15 @@
+use IO.Std.write_line;
+
+lookup() -> string? => "world";
+
+entry() is
+// >>>
+    let name: string? = lookup();
+
+    if name? then
+        // name is narrowed to non-optional string
+        // here — no ! needed
+        write_line("hello, {name}");
+    fi
+// <<<
+si

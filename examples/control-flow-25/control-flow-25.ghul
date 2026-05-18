@@ -1,0 +1,10 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    for i in 1::5 do
+        // i will take values 1, 2, 3, 4, 5 in sequence
+        write_line(i);
+    od
+// <<<
+si

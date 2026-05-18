@@ -1,0 +1,10 @@
+{
+  "name": "type-inference-11",
+  "code": "let int_string = [(123, \"hello\"), (456, \"goodbye\")];\n\nlet int_object = [(123, 456), (798, \"wibble\")];",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "text": "int_string: (int, string)[] // local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "int_object: (int, object)[] // local value" }
+  ]
+}

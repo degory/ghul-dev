@@ -1,0 +1,26 @@
+namespace Example is
+    trait Test is
+        run();
+    si
+si
+
+// >>>
+namespace UseExample is
+    use Example;
+
+    class ANOTHER_TEST: Test is
+        run() is si
+    si
+si
+
+namespace UseExample is
+    // Test still needs qualification here
+    class YET_ANOTHER_TEST: Example.Test is
+        run() is si
+    si
+si
+// <<<
+
+namespace Demo is
+    entry() is si
+si

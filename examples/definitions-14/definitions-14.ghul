@@ -1,0 +1,24 @@
+use IO.Std.write_line;
+
+trait Printable is
+    print();
+si
+
+// >>>
+class BOOK: Printable is
+    title: string;
+    author: string;
+
+    init(title: string, author: string) is
+        self.title = title;
+        self.author = author;
+    si
+
+    print() is
+        write_line("Title: {title}, Author: {author}");
+    si
+si
+// <<<
+
+entry() is
+si

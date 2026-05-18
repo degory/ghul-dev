@@ -1,0 +1,17 @@
+{
+  "name": "expressions-8",
+  "code": "let simple_add = (x: int, y: int) -> int => x + y;",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 19, "text": "x: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "text": "y: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "text": "simple_add: (Ghul.int, Ghul.int) -> Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 38, "endLine": 1, "endColumn": 40, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 24, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 30, "endLine": 1, "endColumn": 32, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 45, "endLine": 1, "endColumn": 45, "text": "x: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 49, "endLine": 1, "endColumn": 49, "text": "y: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 47, "endLine": 1, "endColumn": 47, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "expressions-12",
+  "code": "let g = () => i;",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "g: () -> Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 15, "text": "i: Ghul.int // captured value" }
+  ]
+}

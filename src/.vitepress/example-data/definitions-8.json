@@ -1,0 +1,9 @@
+{
+  "name": "definitions-8",
+  "code": "class THING is\n    // class body\nsi",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "text": "class THING" }
+  ]
+}

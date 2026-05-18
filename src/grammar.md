@@ -109,7 +109,7 @@ A string literal may not span a newline. Two string literals separated only by
 whitespace are concatenated into a single literal.
 
 Inside a string literal, `{` begins an [interpolation](#interpolated-strings) and
-`}` ends it; a literal brace is written `{{` or `}}`.
+`}` ends it; a literal brace is written <code v-pre>{{</code> or <code v-pre>}}</code>.
 
 ### interpolated strings
 

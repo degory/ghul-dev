@@ -1,0 +1,7 @@
+{
+  "name": "language-basics-22",
+  "code": "some_function(argument: type)",
+  "output": "",
+  "diagnostics": [],
+  "hovers": []
+}

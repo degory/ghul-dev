@@ -1,0 +1,10 @@
+use IO.Std.write_line;
+
+entry() is
+    let name: string? = "Alice";
+// >>>
+    if name? then
+        write_line("name is {name!}");
+    fi
+// <<<
+si

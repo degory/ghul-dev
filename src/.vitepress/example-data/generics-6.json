@@ -1,0 +1,10 @@
+{
+  "name": "generics-6",
+  "code": "print_something(1234);\nprint_something(\"hello\");",
+  "output": "something is 1234\nsomething is hello\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "text": "print_something[Ghul.int](t: Ghul.int) -> Ghul.void // global function" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "text": "print_something[Ghul.string](t: Ghul.string) -> Ghul.void // global function" }
+  ]
+}

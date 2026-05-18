@@ -1,0 +1,28 @@
+{
+  "name": "type-inference-14",
+  "code": "do_something[T](a: T, b: T) -> T => a;\nlet base = do_something(Base(), DERIVED());\nlet derived = do_something(DERIVED(), DERIVED());\nlet obj = do_something(object(), DERIVED());",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 12, "text": "do_something[T](a: T, b: T) -> T // global function" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "T // type variable" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "text": "a: T // local argument" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "text": "b: T // local argument" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "text": "T // type variable" },
+    { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 26, "text": "T // type variable" },
+    { "startLine": 1, "startColumn": 32, "endLine": 1, "endColumn": 32, "text": "T // type variable" },
+    { "startLine": 1, "startColumn": 37, "endLine": 1, "endColumn": 37, "text": "a: T // local argument" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "base: Base // local value" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 23, "text": "do_something[Base](a: Base, b: Base) -> Base // global function" },
+    { "startLine": 2, "startColumn": 25, "endLine": 2, "endColumn": 28, "text": "Base.init() // constructor" },
+    { "startLine": 2, "startColumn": 33, "endLine": 2, "endColumn": 39, "text": "DERIVED.init() // constructor" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "text": "derived: DERIVED // local value" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 26, "text": "do_something[DERIVED](a: DERIVED, b: DERIVED) -> DERIVED // global function" },
+    { "startLine": 3, "startColumn": 28, "endLine": 3, "endColumn": 34, "text": "DERIVED.init() // constructor" },
+    { "startLine": 3, "startColumn": 39, "endLine": 3, "endColumn": 45, "text": "DERIVED.init() // constructor" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 7, "text": "obj: Ghul.object // local value" },
+    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 22, "text": "do_something[Ghul.object](a: Ghul.object, b: Ghul.object) -> Ghul.object // global function" },
+    { "startLine": 4, "startColumn": 24, "endLine": 4, "endColumn": 29, "text": "Ghul.object.init() -> Ghul.void // method" },
+    { "startLine": 4, "startColumn": 34, "endLine": 4, "endColumn": 40, "text": "DERIVED.init() // constructor" }
+  ]
+}

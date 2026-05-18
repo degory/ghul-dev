@@ -1,0 +1,7 @@
+entry() is
+// >>>
+    let list = [1, 2, 3, 4, 5];
+
+    list | .filter(element => element < 3);
+// <<<
+si

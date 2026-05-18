@@ -1,0 +1,21 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    let a = 5;
+
+    if a > 0 then
+        // new scope - neither y nor z are in scope here
+        let x = 10;
+        write_line("x is {x}");
+    elif a < 0 then
+        // new scope - neither x nor z are in scope here
+        let y = 20;
+        write_line("y is {y}");
+    else
+        // new scope - neither x nor y are in scope here
+        let z = 30;
+        write_line("z is {z}");
+    fi
+// <<<
+si

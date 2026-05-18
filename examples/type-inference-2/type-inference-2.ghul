@@ -1,0 +1,20 @@
+// >>>
+class COUNTER is
+    count: int; // a property - its type is declared
+
+    init() is
+        count = 0;
+    si
+
+    tick() is
+        // a local - its type is inferred from the
+        // initializer
+        let step = 1;
+        count = count + step;
+    si
+si
+// <<<
+
+entry() is
+    COUNTER().tick();
+si

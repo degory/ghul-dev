@@ -1,5 +1,9 @@
 # generics
 
+::: tip runnable examples
+The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/generics) has fuller, runnable generics examples — open it in a GitHub Codespace or a dev container to build and run them.
+:::
+
 ghūl supports generic type arguments on
 - classes
 - structs
@@ -13,38 +17,15 @@ Type arguments declare a named type, which can be used anywhere within its scope
 For example in the following global function, `T` is a type argument, and it can be used within the function's definition and body.
 When a particular specialization of `print_something[T](T)` is called, `T` will have whatever actual type argument was supplied
 
-```ghul
-print_something[T](t: T) => write_line("something is {t}")
-```
+<GhulExample name="generics-1" />
 
-```ghul
-print_something[int](1234);
-print_something[string]("hello");
-```
+<GhulExample name="generics-2" />
 
-```ghul
-struct HOLD_SOMETHING[T] is
-    value: T;
+<GhulExample name="generics-3" />
 
-    init(value: T) is
-        self.value = value;
-    si
-si
-```
+<GhulExample name="generics-4" />
 
-```ghul
-let holds_int = HOLD_SOMETHING(1234);
-let holds_string = HOLD_SOMETHING("hello");
-```
-
-```ghul
-union Option[T] is
-    SOME(value: T);
-    NONE;
-si
-
-let some_int = Option.SOME(1234);
-```
+<GhulExample name="generics-5" />
 
 Generic argument types are largely opaque: the operations permitted on values of generic argument types are limited to:
 - storing in a variable
@@ -55,8 +36,5 @@ Generic argument types are largely opaque: the operations permitted on values of
 
 Generic argument types can be inferred from context for generic constructor invocations as well as generic function and method calls
 
-```ghul
-print_something(1234); // T inferred as int
-print_something("hello"); // T inferred as string
-```
+<GhulExample name="generics-6" />
 

@@ -1,0 +1,30 @@
+{
+  "name": "type-inference-21",
+  "code": "class Animal is\n    init() is si\n    speak() -> string => \"animal\";\nsi\n\nclass Cat: Animal is\n    init() is si\nsi\n\nclass Dog: Animal is\n    init() is si\nsi\n\nmerge[T](a: T, b: T) -> T => a;\nlet a = merge(Cat(), Dog());",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "text": "class Animal" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "Animal.init() // constructor" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "text": "Animal.speak() -> Ghul.string // method" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 21, "text": "class Ghul.string" },
+    { "startLine": 6, "startColumn": 7, "endLine": 6, "endColumn": 9, "text": "class Cat" },
+    { "startLine": 6, "startColumn": 12, "endLine": 6, "endColumn": 17, "text": "class Animal" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 8, "text": "Cat.init() // constructor" },
+    { "startLine": 10, "startColumn": 7, "endLine": 10, "endColumn": 9, "text": "class Dog" },
+    { "startLine": 10, "startColumn": 12, "endLine": 10, "endColumn": 17, "text": "class Animal" },
+    { "startLine": 11, "startColumn": 5, "endLine": 11, "endColumn": 8, "text": "Dog.init() // constructor" },
+    { "startLine": 14, "startColumn": 1, "endLine": 14, "endColumn": 5, "text": "merge[T](a: T, b: T) -> T // global function" },
+    { "startLine": 14, "startColumn": 7, "endLine": 14, "endColumn": 7, "text": "T // type variable" },
+    { "startLine": 14, "startColumn": 10, "endLine": 14, "endColumn": 10, "text": "a: T // local argument" },
+    { "startLine": 14, "startColumn": 16, "endLine": 14, "endColumn": 16, "text": "b: T // local argument" },
+    { "startLine": 14, "startColumn": 13, "endLine": 14, "endColumn": 13, "text": "T // type variable" },
+    { "startLine": 14, "startColumn": 19, "endLine": 14, "endColumn": 19, "text": "T // type variable" },
+    { "startLine": 14, "startColumn": 25, "endLine": 14, "endColumn": 25, "text": "T // type variable" },
+    { "startLine": 14, "startColumn": 30, "endLine": 14, "endColumn": 30, "text": "a: T // local argument" },
+    { "startLine": 15, "startColumn": 5, "endLine": 15, "endColumn": 5, "text": "a: Animal // local value" },
+    { "startLine": 15, "startColumn": 9, "endLine": 15, "endColumn": 13, "text": "merge[Animal](a: Animal, b: Animal) -> Animal // global function" },
+    { "startLine": 15, "startColumn": 15, "endLine": 15, "endColumn": 17, "text": "Cat.init() // constructor" },
+    { "startLine": 15, "startColumn": 22, "endLine": 15, "endColumn": 24, "text": "Dog.init() // constructor" }
+  ]
+}

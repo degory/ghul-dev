@@ -1,0 +1,14 @@
+// >>>
+struct POINT is
+    x: double;
+    y: double;
+
+    init(x: double, y: double) is
+        self.x = x;
+        self.y = y;
+    si
+si
+// <<<
+
+entry() is
+si

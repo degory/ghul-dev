@@ -1,0 +1,14 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    let counter mut = 0;
+    do
+        write_line(counter);
+        counter = counter + 1;
+        if counter == 5 then
+            break;
+        fi
+    od
+// <<<
+si

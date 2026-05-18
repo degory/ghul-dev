@@ -1,0 +1,15 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    for i in 1::10 do
+        write_line("{i}");
+    od
+
+    let pairs = [("a", 1), ("b", 2)];
+
+    for (name, count) in pairs do
+        write_line("{name}: {count}");
+    od
+// <<<
+si

@@ -1,0 +1,5 @@
+entry() is
+// >>>
+    let o: object = "a string";
+// <<<
+si

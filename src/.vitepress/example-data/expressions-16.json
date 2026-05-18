@@ -1,0 +1,20 @@
+{
+  "name": "expressions-16",
+  "code": "let equal = 5 == 5; // Equality\nlet not_equal = 5 != 10; // Inequality\nlet less_than = 5 < 10; // Less than\nlet greater_than = 10 > 5; // Greater than\nlet less_than_or_equal = 5 <= 5; // Less or equal\nlet greater_than_or_equal = 10 >= 10; // Greater or equal",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "equal: Ghul.bool // local value" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 16, "text": "Ghul.==(a: Ghul.int, b: Ghul.int) -> Ghul.bool // innate function compare.value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "text": "not_equal: Ghul.bool // local value" },
+    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 20, "text": "Ghul.==(a: Ghul.int, b: Ghul.int) -> Ghul.bool // innate function compare.value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 13, "text": "less_than: Ghul.bool // local value" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 19, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 16, "text": "greater_than: Ghul.bool // local value" },
+    { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 23, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 22, "text": "less_than_or_equal: Ghul.bool // local value" },
+    { "startLine": 5, "startColumn": 28, "endLine": 5, "endColumn": 29, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 25, "text": "greater_than_or_equal: Ghul.bool // local value" },
+    { "startLine": 6, "startColumn": 32, "endLine": 6, "endColumn": 33, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" }
+  ]
+}

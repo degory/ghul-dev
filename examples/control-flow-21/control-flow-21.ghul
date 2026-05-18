@@ -1,0 +1,14 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    let counter mut = 0;
+    while counter < 5 do
+        counter = counter + 1;
+        if counter == 3 then
+            continue;
+        fi
+        write_line(counter);
+    od
+// <<<
+si

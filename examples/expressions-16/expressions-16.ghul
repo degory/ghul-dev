@@ -1,0 +1,10 @@
+entry() is
+// >>>
+    let equal = 5 == 5; // Equality
+    let not_equal = 5 != 10; // Inequality
+    let less_than = 5 < 10; // Less than
+    let greater_than = 10 > 5; // Greater than
+    let less_than_or_equal = 5 <= 5; // Less or equal
+    let greater_than_or_equal = 10 >= 10; // Greater or equal
+// <<<
+si

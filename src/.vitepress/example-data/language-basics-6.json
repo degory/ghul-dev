@@ -1,0 +1,11 @@
+{
+  "name": "language-basics-6",
+  "code": "let x: int = 42;\nlet y = \"Hello\";",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "x: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 10, "text": "struct Ghul.int" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "y: Ghul.string // local value" }
+  ]
+}

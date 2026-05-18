@@ -1,0 +1,18 @@
+// expect: error
+// >>>
+struct THING is
+    name: string;
+
+    init(name: string) is
+        self.name = name;
+    si
+si
+// <<<
+
+entry() is
+// >>>
+    let thing = THING("a thing");
+
+    thing.name = "change it";
+// <<<
+si

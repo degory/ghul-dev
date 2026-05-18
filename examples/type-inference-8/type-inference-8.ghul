@@ -1,0 +1,8 @@
+entry() is
+// >>>
+    let person = ("alice", 30);
+    let (name, age) = person;
+
+    let ((first, second), third) = (("a", "b"), "c");
+// <<<
+si

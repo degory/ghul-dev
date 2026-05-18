@@ -1,0 +1,12 @@
+// expect: warning
+lookup() -> string? => null;
+
+entry() is
+// >>>
+    let label: string = null;
+
+    let maybe = lookup();
+
+    let title: string = maybe;
+// <<<
+si

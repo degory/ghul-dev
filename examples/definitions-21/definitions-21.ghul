@@ -1,0 +1,19 @@
+// >>>
+class COUNTER is
+    count: int;
+si
+
+class Sized is
+    _size: int;
+
+    size: int => _size,
+        = new_size is
+            assert new_size > 0;
+
+            _size = new_size;
+        si
+si
+// <<<
+
+entry() is
+si

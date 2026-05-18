@@ -1,0 +1,19 @@
+{
+  "name": "definitions-30",
+  "code": "namespace Example is\n    entry() is\n        IO.Std.write_line(\"hello from a namespace\");\n    si\nsi\ngreet() is\n    IO.Std.write_line(\"not in a namespace\");\nsi",
+  "output": "",
+  "diagnostics": [
+    { "startLine": 6, "startColumn": 1, "endLine": 8, "endColumn": 3, "severity": "error", "message": "cannot mix global definitions and namespaces in the same file" }
+  ],
+  "hovers": [
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 17, "text": "namespace Example" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "Example.entry() -> Ghul.void // global function" },
+    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 5, "text": "greet() -> Ghul.void // global function" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 10, "text": "namespace IO" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 14, "text": "class IO.Std" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 25, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 6, "text": "namespace IO" },
+    { "startLine": 7, "startColumn": 8, "endLine": 7, "endColumn": 10, "text": "class IO.Std" },
+    { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 21, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" }
+  ]
+}

@@ -1,0 +1,6 @@
+entry() is
+// >>>
+    let x: int = 42;
+    let y = "Hello";
+// <<<
+si

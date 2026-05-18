@@ -1,0 +1,12 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    for counter in 0..5 do
+        if counter == 3 then
+            continue;
+        fi
+        write_line(counter);
+    od
+// <<<
+si

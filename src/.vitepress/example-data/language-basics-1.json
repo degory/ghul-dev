@@ -1,0 +1,19 @@
+{
+  "name": "language-basics-1",
+  "code": "let my_variable = 42;\nprint_something(thing: string) is\n    write_line(\"The thing is: {thing}\");\nsi\n\nclass PERSON is\n    name: string;\n    age: int;\nsi",
+  "output": "The thing is: a hello\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "text": "my_variable: Ghul.int // local value" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "text": "print_something(thing: Ghul.string) -> Ghul.void // global function" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 21, "text": "thing: Ghul.string // local argument" },
+    { "startLine": 2, "startColumn": 24, "endLine": 2, "endColumn": 29, "text": "class Ghul.string" },
+    { "startLine": 6, "startColumn": 7, "endLine": 6, "endColumn": 12, "text": "class PERSON" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 8, "text": "PERSON.name: Ghul.string // instance property" },
+    { "startLine": 7, "startColumn": 11, "endLine": 7, "endColumn": 16, "text": "class Ghul.string" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 7, "text": "PERSON.age: Ghul.int // instance property" },
+    { "startLine": 8, "startColumn": 10, "endLine": 8, "endColumn": 12, "text": "struct Ghul.int" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 3, "startColumn": 32, "endLine": 3, "endColumn": 36, "text": "thing: Ghul.string // local argument" }
+  ]
+}

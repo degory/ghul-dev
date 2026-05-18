@@ -1,0 +1,12 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    // i not in scope here
+    // i defined here
+    for i in [1, 2, 3, 4, 5] do
+        // i in scope here:
+        write_line(i);
+    od
+// <<<
+si

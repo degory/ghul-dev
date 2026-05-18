@@ -1,0 +1,11 @@
+{
+  "name": "type-inference-7",
+  "code": "let a_string = \"12345\";\nlet an_int = 12345;\nlet an_int_array = [1, 2, 3, 4, 5];",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 12, "text": "a_string: Ghul.string // local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "an_int: Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "text": "an_int_array: Ghul.int[] // local value" }
+  ]
+}

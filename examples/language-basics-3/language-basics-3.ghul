@@ -1,0 +1,10 @@
+use IO.Std.write_line;
+
+// >>>
+greet(name: string) -> void is
+    write_line("Hello, {name}!");
+si
+// <<<
+
+entry() is
+si

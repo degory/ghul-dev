@@ -1,5 +1,9 @@
 # control flow in ghūl
 
+::: tip runnable examples
+The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples — open it in a GitHub Codespace or a dev container to build and run them.
+:::
+
 ## block scope
 
 In ghūl, most control flow statements incorporate one or more blocks. A block is a list of one or more statements that forms a scope for local variable definitions. The scope of a variable is the region of code where that variable is visible and can be accessed.
@@ -10,15 +14,7 @@ Variables defined within a block are only accessible within that block and any n
 
 In ghūl the `assert` statement is used to ensure an expected condition holds and to throw an exception if it does not. An assert statement starts with `assert`, followed by an expression that must evaluate to a bool, followed by `else`, and then a value to throw. If the value to throw is a string, it will be wrapped in an `AssertionFailedException`. Otherwise it must be of a throwable type.
 
-
-```ghul
-assert true else "all bets are off"; // should not throw
-assert false else "expect AssertionFailedException";
-
-let list = [1, 2, 3, 4, 5];
-
-assert 3 < list.count else ArgumentOutOfRangeException("list");
-```
+<GhulExample name="control-flow-1" />
 
 ## if statement
 
@@ -28,265 +24,91 @@ If statements allow the execution of different code blocks based on specific con
 
 This is the simplest form of a conditional statement. It checks a condition and executes the subsequent block of code if the condition is true.
 
-```ghul
-if condition then
-    // code to execute if condition is true
-fi
-```
+<GhulExample name="control-flow-2" />
 
-```ghul
-let list = [1, 2, 3, 4];
-
-if list.count == 0 then
-    write_line("list is empty");
-fi
-```
+<GhulExample name="control-flow-3" />
 
 ### if-then-else-fi
 
 This form allows for an alternative block of code to be executed if the condition is false.
 
-```ghul
-if condition then
-    // code to execute if condition is true
-else
-    // code to execute if condition is false
-fi
-```
+<GhulExample name="control-flow-4" />
 
-```ghul
-if list.count > 0 then
-    write_line("list is not empty");
-else
-    write_line("list is empty");
-fi
-```
+<GhulExample name="control-flow-5" />
 
 ### if-then-elif-fi
 
 This form is used for multiple conditions. If the initial condition is false, the `elif` conditions are checked in order. The corresponding block for the first true condition is executed.
 
-```ghul
-if first-condition then
-    // code for first condition]
-elif second-condition then
-    // code for second condition]
-... (more elif conditions if needed) ...
-else
-    // code if all conditions are false
-fi
-```
+<GhulExample name="control-flow-6" />
 
-```ghul
-let list = [1, 2, 3, 4];
-
-if list.count == 0 then
-    write_line("list is empty");
-fi
-
-if list.count > 0 then
-    write_line("list is not empty");
-else
-    write_line("list is empty");
-fi
-
-if list.count > 10 then
-    write_line("list has lots of elements");
-elif list.count > 5 then
-    write_line("list has some elements");
-elif list.count > 0 then
-    write_line("list has a few elements");
-else
-    write_line("list is empty");
-fi
-```
+<GhulExample name="control-flow-7" />
 
 ### type narrowing
 
 When an `if` predicate proves a stronger fact about a variable's type, the then-branch sees that variable at the narrower type. The most common cases are union variant tags and `isa` class tests:
 
-```ghul
-union Maybe[T] is
-    YES(value: T);
-    NO;
-si
-
-let m: Maybe[int] = Maybe.YES(42);
-
-if m.is_yes then
-    // m is narrowed to Maybe.YES inside the branch, so m.value is in scope
-    write_line("got value {m.value}");
-fi
-
-let a: Animal = Cat("whiskers");
-if isa Cat(a) then
-    // a is narrowed to Cat inside the branch
-    write_line(a.purr());
-fi
-```
+<GhulExample name="control-flow-8" />
 
 An [optional type](/language-basics.html#optional-types) narrows the same way. A `?` test in the predicate narrows the optional to its non-optional form in the then-branch, so the value can be used directly:
 
-```ghul
-let name: string? = lookup();
-
-if name? then
-    // name is narrowed to non-optional string here — no ! needed
-    write_line("hello, {name}");
-fi
-```
+<GhulExample name="control-flow-9" />
 
 For a two-variant union, the `else` branch is narrowed to the complementary variant:
 
-```ghul
-union Result[T, E] is
-    OK(value: T);
-    ERR(error: E);
-si
-
-let r: Result[int, string] = some_call();
-
-if r.is_ok then
-    write_line("ok: {r.value}");
-else
-    // r is narrowed to Result.ERR here
-    write_line("err: {r.error}");
-fi
-```
+<GhulExample name="control-flow-10" />
 
 Narrowing is flow-sensitive — it follows the control flow rather than being confined to a branch body. If a guard rejects the narrower type and then leaves the enclosing block — by `return`, `throw`, `break` or `continue` — the code after the guard is narrowed:
 
-```ghul
-classify(a: Animal) is
-    if !isa Cat(a) then
-        write_line("not a cat");
-        return;
-    fi
-
-    // every non-Cat has returned, so a is narrowed to Cat from here on
-    write_line(a.purr());
-si
-```
+<GhulExample name="control-flow-11" />
 
 ### if let
 
 `cast T(x)` views `x` as type `T`, and yields null — rather than throwing — when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test:
 
-```ghul
-let c = cast Cat(a);
-
-if c? then
-    write_line(c.purr());
-fi
-```
+<GhulExample name="control-flow-12" />
 
 `if let` folds that into the `if` itself: it puts a `let` definition in the condition of an `if` or `elif`. The then-branch runs only when the value is present, with the variable in scope — and narrowed — just within that branch:
 
-```ghul
-if let c: Cat = a then
-    // c has type Cat here; it is not in scope in the else branch, or after the fi
-    write_line(c.purr());
-else
-    write_line("not a cat");
-fi
-```
+<GhulExample name="control-flow-13" />
 
 A type on the variable (`c: Cat`) makes it a type test. `elif let` chains these, so a sequence of type tests reads as one construct:
 
-```ghul
-if let c: Cat = a then
-    write_line(c.purr());
-elif let d: Dog = a then
-    write_line(d.bark());
-else
-    write_line("some other animal");
-fi
-```
+<GhulExample name="control-flow-14" />
 
 With no type given for the local variable, `if let` simply tests that the value is present. This is the natural way to consume an [optional type](/language-basics.html#optional-types): the local variable has the non-optional type within the then-branch, so there is no need for an explicit `!`.
 
-```ghul
-if let line = reader.read_line() then
-    // reader.read_line() yields string?; line is string here
-    write_line("read: {line}");
-else
-    write_line("end of input");
-fi
-```
+<GhulExample name="control-flow-15" />
 
 An `if let` can also destructure, exactly like a plain `let`, including `_` to discard a field that is not needed:
 
-```ghul
-if let (name, _) = lookup(id) then
-    write_line("found {name}");
-fi
-```
+<GhulExample name="control-flow-16" />
 
 ### scope
 Each branch of an if statement constitutes a separate scope
 
-```ghul
-let a = 5;
-
-if a > 0 then
-    // new scope - neither y nor z are in scope here
-    let x = 10
-elif a < 0 then
-    // new scope - neither x nor z are in scope here
-    let y = 20
-else
-    // new scope - neither x nor y are in scope here
-    let z = 30;
-fi
-```
+<GhulExample name="control-flow-17" />
 
 ## while statement
 
 ### while-do-od
 The while loop in ghūl executes a block of code repeatedly as long as a specified condition remains true. The condition is evaluated before each iteration of the loop's body.
 
-```ghul
-while condition do
-    // code to execute while the condition is true
-od
-```
+<GhulExample name="control-flow-18" />
 
-```ghul
-let counter = 0;
-while counter < 5 do
-    write_line(counter);
-    counter = counter + 1;
-od
-```
+<GhulExample name="control-flow-19" />
 
 This loop prints numbers from 0 to 4. It terminates when counter becomes 5, as the condition counter < 5 then evaluates to false.
 
 ### break and continue in while loops
 The `break` statement immediately exits the loop, while `continue` skips the remaining code in the current iteration and proceeds to the next iteration immediately before the condition is reevaluated.
 
-```ghul
-let counter = 0;
-while counter < 10 do
-    if counter == 5 then
-        break;
-    fi
-    write_line(counter);
-    counter = counter + 1;
-od
-```
-This loop exits when counter reaches 5 without proceeding to execute `write_line(counter)``
+<GhulExample name="control-flow-20" />
+
+This loop exits when counter reaches 5 without proceeding to execute `write_line(counter)`
 
 
-```ghul
-let counter = 0;
-while counter < 5 do
-    counter = counter + 1;
-    if counter == 3 then
-        continue;
-    fi
-    write_line(counter);
-od
-```
+<GhulExample name="control-flow-21" />
 
 This loop skips the call to `write_line` when counter is 3.
 
@@ -299,78 +121,38 @@ The block statement body of the while statement, delimited by `do` and `od` form
 ### for-in-do-od
 The for loop in ghūl steps through an iterable object executing the loop body once for every value the iterator produces. An iterable object is something that implements either `Collections.Iterable[T]` or `Collections.Iterator[T]`, and the loop variable's type is inferred to be `T`.
 
-```ghul
-for variable in iterable do
-    // variable is set to each element of iterator in turn
-od
-```
+<GhulExample name="control-flow-22" />
 
 The variable is defined by the for loop and its scope is the for loop body from the `do` up to the `od`
 
 
-```ghul
-// i not in scope here
-for i in [1, 2, 3, 4, 5] do // i defined here, with type `int`
-    // i in scope here:
-    write_line(i);
-od
-```
+<GhulExample name="control-flow-23" />
+
 ### range operators
 
 The `..` and `::` operators construct integer ranges that can be iterated over by for statements. `..` constructs ranges that are inclusive of its left operand and exclusive of its right operand:
 
-```ghul
-for i in 0..5 do
-    // i will take values 0, 1, 2, 3, 4 in sequence
-    write_line(i);
-od
-```
+<GhulExample name="control-flow-24" />
+
 `::` constructs a range that is inclusive of its left and right operands:
 
-```ghul
-for i in 1::5 do
-    // i will take values 1, 2, 3, 4, 5 in sequence
-    write_line(i);
-od
-```
+<GhulExample name="control-flow-25" />
 
 These operators are not for loop specific and can be used in any expression context
 
-```ghul
-let zero_to_four = 0..5;
-let five_to_nine = 5..10;
-
-let zero_to_nine = zero_to_four | .cat(five_to_nine);
-
-while zero_to_nine.has_next() do
-    write_line(range.next())
-od
-```
+<GhulExample name="control-flow-26" />
 
 ### break and continue in for loops
 
 The `break` statement immediately exits the loop, while `continue` skips the remaining code in the current iteration and proceeds to the next iteration immediately before attempting to read the next element from the iterator
 
-```ghul
-for counter in 0..10 do
-    if counter == 5 then
-        break;
-    fi
-    write_line(counter);
-od
-```
+<GhulExample name="control-flow-27" />
+
 This loop exits when counter reaches 5, without proceeding to execute `write_line(5)`
 
 
-```ghul
-for counter in 0..5 do
-    counter = counter + 1;
-    if counter == 3 then
-        continue;
-    fi
-    write_line(counter);
-od
-```
+<GhulExample name="control-flow-28" />
+
 This loop skips the call to `write_line` when counter is 3.
 
 ### scope
@@ -384,42 +166,18 @@ The block statement body of the for statement, delimited by `do` and `od` forms 
 
 The do / od loop in ghūl is used to create an indefinite loop which will continue to execute until explicitly broken with a break statement.
 
-```ghul
-do
-    // code to execute indefinitely
-    // break statement to exit loop
-od
-```
+<GhulExample name="control-flow-29" />
 
-```ghul
-let counter = 0;
-do
-    write_line(counter);
-    counter = counter + 1;
-    if counter == 5 then
-        break;
-    fi
-od
-```
+<GhulExample name="control-flow-30" />
+
 This loop will run indefinitely until counter reaches 5, at which point the break statement terminates the loop.
 
 ### break and continue in do-od loops
 
 The break and continue statements work similarly in do / od loops as they do in while loops.
 
-```ghul
-let counter = 0;
-do
-    counter = counter + 1;
-    if counter == 3 then
-        continue;
-    fi
-    write_line(counter);
-    if counter == 5 then
-        break;
-    fi
-od
-```
+<GhulExample name="control-flow-31" />
+
 This loop skips the write_line statement when counter is 3 and breaks out of the loop when counter reaches 5.
 
 ### scope
@@ -429,41 +187,7 @@ The block statement body of the do statement, delimited by `do` and `od` forms a
 
 ## case statement
 
-```ghul
-case value
-when -1:
-    return "minus one";
-
-when 0:
-    let result = "zero";
-    return result;
-
-when 1:
-    return "one";
-
-when 2:
-    return "two";
-
-when 3:
-    return "three";
-
-when 4:
-    return "four";
-
-when 5:
-    let result = "five";
-    return result;
-
-when 6, 7, 8, 9:
-    return "more than five and less than ten";
-
-when 13:
-    return "unlucky";
-
-default
-    return "less than -1 or more than nine";
-esac
-```
+<GhulExample name="control-flow-32" />
 
 ### scope
 
@@ -474,15 +198,7 @@ Each arm of the case statement, delimited by either a `when` clause or `default`
 
 The `throw` statement raises an exception. Control leaves the current block immediately and passes to the nearest enclosing `catch` that handles the exception's type. If there is no such `catch`, the exception propagates out through the calling functions, and out of the program if it is never caught.
 
-```ghul
-withdraw(balance: int, amount: int) -> int is
-    if amount > balance then
-        throw System.InvalidOperationException("insufficient funds");
-    fi
-
-    return balance - amount;
-si
-```
+<GhulExample name="control-flow-33" />
 
 The thrown value must be an exception — `System.Exception`, or a type derived from it.
 
@@ -490,21 +206,9 @@ The thrown value must be an exception — `System.Exception`, or a type derived 
 
 An exception is any class that derives from `System.Exception`, or from a more specific exception type:
 
-```ghul
-class InsufficientFundsException: System.Exception is
-    init(message: string) is
-        super.init(message);
-    si
-si
-```
+<GhulExample name="control-flow-34" />
 
-```ghul
-try
-    withdraw(account, 100);
-catch e: InsufficientFundsException
-    write_line("declined: {e.message}");
-yrt
-```
+<GhulExample name="control-flow-35" />
 
 
 ## try statement
@@ -518,118 +222,33 @@ The try-catch-finally-yrt block in ghūl consists of four parts:
 * catch block: this code block catches and handles exceptions. It takes an exception variable and a type.
 * finally block: this code block is executed after the try and catch blocks, regardless of whether an exception was thrown or not. It is typically used for clean-up code.
 
-```ghul
-try
-    // Code that might throw an exception
-catch e: SomeExceptionType
-    // Exception handling code
-finally
-    // Clean-up code, always executed
-yrt
-```
+<GhulExample name="control-flow-36" />
 
 If different types of exception should be caught, then there can be multiple exception clauses and catch blocks
 
-```ghul
-let reader: StreamReader;
-
-try
-    reader = StreamReader("file.txt");
-    let content = reader.read_to_end();
-
-    write_line(content);
-
-catch e: FileNotFoundException
-    // Handle the case where the file is not found
-    write_line("Error: file not found: {e.message}");
-catch e: IOException
-    // Handle errors during file reading
-    write_line("Error: reading file: {e.message}");
-finally
-    // Close the file and clean up resources
-    if reader? then
-        reader.close();
-    fi
-
-    write_line("File processing completed, file closed.");
-yrt
-```
+<GhulExample name="control-flow-37" />
 
 ### try-catch-yrt
 
 The finally clause can be omitted if no clean-up is required
 
-```ghul
-try
-    // Code that might throw an exception
-catch e: SomeExceptionType
-    // Exception handling code
-yrt
-```
+<GhulExample name="control-flow-38" />
 
-```ghul
-try
-    let content = File.read_all_text("file.txt");
-    write_line(content);
-
-    write_line("File processing completed.");
-catch e: FileNotFoundException
-    // Handle the case where the file is not found
-    write_line("Error: file not found: {e.message}");
-catch e: IOException
-    // Handle errors during file reading
-    write_line("Error: reading file: {e.message}");
-yrt
-
-```
+<GhulExample name="control-flow-39" />
 
 ### try-finally-yrt
 
 The catch clause can be omitted if no exceptions need to be caught but clean-up is still required
 
-```ghul
-try
-    // Code that might throw an exception
-finally
-    // Clean-up code, always executed
-yrt
-```
+<GhulExample name="control-flow-40" />
 
-```ghul
-let reader: StreamReader;
-
-try
-    reader = StreamReader("file.txt");
-
-    let content = reader.read_to_end();
-    write_line(content);
-
-    write_line("File processing completed.");
-
-finally
-    if reader? then
-        reader.close();
-    fi
-
-    // Any exceptions will be thrown to the calling code
-yrt
-```
+<GhulExample name="control-flow-41" />
 
 ### finally and return
 
 A `finally` block runs whenever control leaves the `try` block — including when the `try` block, or a `catch` block, executes a `return`. The `finally` block runs first, then control returns to the caller:
 
-```ghul
-read_file(path: string) -> string is
-    let reader = StreamReader(path);
-
-    try
-        return reader.read_to_end();
-    finally
-        reader.close(); // runs before the function returns
-    yrt
-si
-```
+<GhulExample name="control-flow-42" />
 
 ## return statement
 
@@ -637,50 +256,16 @@ si
 
 In functions of void return type, a bare `return` statement with no value returns control flow directly to the caller  
 
-```
-let tries = 0;
-
-...
-
-try_something(limit: int) is
-    if tries > limit then
-        return; // give up
-    fi
-
-    tries = tries + 1;
-
-    // do stuff
-si
-
-```
+<GhulExample name="control-flow-43" />
 
 ### return value
 
 In functions of non-void return type, `return` statements must return a value of a type that's assignment compatible with the function's return type
 
-```ghul
-fib(n: int) -> int is
-    if n < 0 then
-        return 0;
-    elif n == 1 then
-        return 1;
-    else
-        return fib(n - 1) + fib(n - 2);
-    fi
-si
-```
+<GhulExample name="control-flow-44" />
 
 ### default return
 
 If execution reaches the end of a non-void function without encountering a return statement, then the default value of the function's return type is returned to the caller.
 
-```ghul
-default_return() -> int is
-    // do nothing, return 0
-si
-
-...
-
-let i = default_return();
-assert i == 0;
-```
+<GhulExample name="control-flow-45" />

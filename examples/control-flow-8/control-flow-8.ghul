@@ -1,0 +1,34 @@
+use IO.Std.write_line;
+
+// >>>
+union Maybe[T] is
+    YES(value: T);
+    NO;
+si
+// <<<
+
+class Animal is si
+
+class Cat: Animal is
+    name: string;
+    init(name: string) is self.name = name; si
+    purr() -> string => "{name} purrs";
+si
+
+entry() is
+// >>>
+    let m: Maybe[int] = Maybe.YES(42);
+
+    if m.is_yes then
+        // m is narrowed to Maybe.YES inside the branch,
+        // so m.value is in scope
+        write_line("got value {m.value}");
+    fi
+
+    let a: Animal = Cat("whiskers");
+    if isa Cat(a) then
+        // a is narrowed to Cat inside the branch
+        write_line(a.purr());
+    fi
+// <<<
+si

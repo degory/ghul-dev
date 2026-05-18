@@ -1,0 +1,15 @@
+lookup() -> string? => null;
+
+entry() is
+// >>>
+    let maybe = lookup();
+
+    if maybe? then
+        // fine: maybe is known to be present here
+        let title: string = maybe;
+    fi
+
+    // fine: ! asserts the value is present
+    let forced: string = maybe!;
+// <<<
+si

@@ -1,0 +1,14 @@
+use IO.Std.write_line;
+
+entry() is
+    let x = 3;
+    let y = 7;
+
+// >>>
+    if x > y then
+        write_line("x > y")
+    else
+        write_line("x <= y")
+    fi
+// <<<
+si

@@ -1,0 +1,20 @@
+{
+  "name": "definitions-15",
+  "code": "trait Logged is\n    log() is\n        write_line(\"(no log message provided)\");\n    si\nsi\n\nclass SILENT: Logged is\n    init() is si\nsi\n\nclass NOISY: Logged is\n    init() is si\n\n    log() is\n        super.log();\n        write_line(\"plus my own message\");\n    si\nsi",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "text": "trait Logged" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "text": "Logged.log() -> Ghul.void // default trait method" },
+    { "startLine": 7, "startColumn": 7, "endLine": 7, "endColumn": 12, "text": "class SILENT" },
+    { "startLine": 7, "startColumn": 15, "endLine": 7, "endColumn": 20, "text": "trait Logged" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "text": "SILENT.init() // constructor" },
+    { "startLine": 11, "startColumn": 7, "endLine": 11, "endColumn": 11, "text": "class NOISY" },
+    { "startLine": 11, "startColumn": 14, "endLine": 11, "endColumn": 19, "text": "trait Logged" },
+    { "startLine": 12, "startColumn": 5, "endLine": 12, "endColumn": 8, "text": "NOISY.init() // constructor" },
+    { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 7, "text": "NOISY.log() -> Ghul.void // method" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 18, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 15, "startColumn": 15, "endLine": 15, "endColumn": 17, "text": "Logged.log() -> Ghul.void // default trait method" },
+    { "startLine": 16, "startColumn": 9, "endLine": 16, "endColumn": 18, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" }
+  ]
+}

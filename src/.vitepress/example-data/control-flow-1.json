@@ -1,0 +1,7 @@
+{
+  "name": "control-flow-1",
+  "code": "assert true else \"all bets are off\"; // should not throw\nassert false else \"expect AssertionFailedException\";\n\nlet list = [1, 2, 3, 4, 5];\n\nassert 3 < list.count\n    else ArgumentOutOfRangeException(\"list\");",
+  "output": "",
+  "diagnostics": [],
+  "hovers": []
+}

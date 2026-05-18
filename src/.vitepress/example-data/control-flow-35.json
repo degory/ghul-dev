@@ -1,0 +1,15 @@
+{
+  "name": "control-flow-35",
+  "code": "try\n    withdraw(account, 100);\ncatch e: InsufficientFundsException\n    write_line(\"declined: {e.message}\");\nyrt",
+  "output": "declined: only 50 available\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 7, "text": "e: InsufficientFundsException // local value" },
+    { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 35, "text": "class InsufficientFundsException" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "withdraw(account: Ghul.int, amount: Ghul.int) -> Ghul.int // global function" },
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 20, "text": "account: Ghul.int // local value" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 4, "startColumn": 28, "endLine": 4, "endColumn": 28, "text": "e: InsufficientFundsException // local value" },
+    { "startLine": 4, "startColumn": 30, "endLine": 4, "endColumn": 36, "text": "System.Exception.message: Ghul.string // instance property" }
+  ]
+}

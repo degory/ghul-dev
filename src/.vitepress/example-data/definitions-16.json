@@ -1,0 +1,20 @@
+{
+  "name": "definitions-16",
+  "code": "union Tree is\n    NODE(left: Tree, right: Tree);\n    LEAF(value: int);\nsi",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 10, "text": "union Tree" },
+    { "startLine": 1, "startColumn": 1, "endLine": 4, "endColumn": 2, "text": "System.Exception.init(message: Ghul.string) -> Ghul.void // method" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "variant Tree.NODE(left: Tree, right: Tree)" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 13, "text": "Tree.NODE.left: Tree // variant field" },
+    { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 26, "text": "Tree.NODE.right: Tree // variant field" },
+    { "startLine": 2, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },
+    { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 19, "text": "union Tree" },
+    { "startLine": 2, "startColumn": 29, "endLine": 2, "endColumn": 32, "text": "union Tree" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "variant Tree.LEAF(value: Ghul.int)" },
+    { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 14, "text": "Tree.LEAF.value: Ghul.int // variant field" },
+    { "startLine": 3, "startColumn": 5, "endLine": 4, "endColumn": 2, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },
+    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 19, "text": "struct Ghul.int" }
+  ]
+}

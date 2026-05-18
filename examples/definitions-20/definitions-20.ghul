@@ -1,0 +1,11 @@
+// >>>
+enum SUITS is
+    SPADES,
+    HEARTS,
+    DIAMONDS,
+    CLUBS
+si
+// <<<
+
+entry() is
+si

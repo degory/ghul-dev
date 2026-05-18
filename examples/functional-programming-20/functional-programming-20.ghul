@@ -1,0 +1,13 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    let add = (x, y) => x + y;
+
+    let add_5 = y => add(5, y);
+    write_line("add_5(3): {add_5(3)}");
+
+    let add_10 = y => add(10, y);
+    write_line("add_10(3): {add_10(3)}");
+// <<<
+si

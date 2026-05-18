@@ -1,0 +1,30 @@
+{
+  "name": "functional-programming-4",
+  "code": "let is_even = (n, is_odd: int -> bool) =>\n    if n == 0 then true else is_odd(n - 1) fi;\n\nlet is_odd = n rec =>\n    if n == 0 then false else is_even(n - 1, rec) fi;\n\nwrite_line(\"even(10): {is_even(10, is_odd)}\");\nwrite_line(\"odd(10): {is_odd(10)}\");",
+  "output": "even(10): True\nodd(10): False\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "text": "n: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 24, "text": "is_odd: Ghul.int -> Ghul.bool // local argument" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "is_even: (Ghul.int, Ghul.int -> Ghul.bool) -> Ghul.bool // captured value" },
+    { "startLine": 1, "startColumn": 34, "endLine": 1, "endColumn": 37, "text": "struct Ghul.bool" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 29, "text": "struct Ghul.int" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "text": "n: Ghul.int // local argument" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 10, "text": "is_odd: Ghul.int -> Ghul.bool // local value" },
+    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 8, "text": "n: Ghul.int // local argument" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 11, "text": "Ghul.==(a: Ghul.int, b: Ghul.int) -> Ghul.bool // innate function compare.value" },
+    { "startLine": 2, "startColumn": 30, "endLine": 2, "endColumn": 35, "text": "is_odd: Ghul.int -> Ghul.bool // local argument" },
+    { "startLine": 2, "startColumn": 37, "endLine": 2, "endColumn": 37, "text": "n: Ghul.int // local argument" },
+    { "startLine": 2, "startColumn": 39, "endLine": 2, "endColumn": 39, "text": "Ghul.-(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.sub" },
+    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 8, "text": "n: Ghul.int // local argument" },
+    { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 11, "text": "Ghul.==(a: Ghul.int, b: Ghul.int) -> Ghul.bool // innate function compare.value" },
+    { "startLine": 5, "startColumn": 31, "endLine": 5, "endColumn": 37, "text": "is_even: (Ghul.int, Ghul.int -> Ghul.bool) -> Ghul.bool // captured value" },
+    { "startLine": 5, "startColumn": 39, "endLine": 5, "endColumn": 39, "text": "n: Ghul.int // local argument" },
+    { "startLine": 5, "startColumn": 41, "endLine": 5, "endColumn": 41, "text": "Ghul.-(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.sub" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 7, "startColumn": 24, "endLine": 7, "endColumn": 30, "text": "is_even: (Ghul.int, Ghul.int -> Ghul.bool) -> Ghul.bool // captured value" },
+    { "startLine": 7, "startColumn": 36, "endLine": 7, "endColumn": 41, "text": "is_odd: Ghul.int -> Ghul.bool // local value" },
+    { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 8, "startColumn": 23, "endLine": 8, "endColumn": 28, "text": "is_odd: Ghul.int -> Ghul.bool // local value" }
+  ]
+}

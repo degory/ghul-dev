@@ -1,0 +1,98 @@
+namespace ExampleTool is
+    use System.Text.StringBuilder;
+    use Collections.Iterable;
+
+    _json_string(s: string) -> string is
+        let b = StringBuilder();
+
+        b.append('"');
+
+        for c in s do
+            if c == '"' then
+                b.append("\\\"");
+            elif c == '\\' then
+                b.append("\\\\");
+            elif c == '\n' then
+                b.append("\\n");
+            elif c == '\r' then
+                b.append("\\r");
+            elif c == '\t' then
+                b.append("\\t");
+            else
+                b.append(c);
+            fi
+        od
+
+        b.append('"');
+
+        return b.to_string();
+    si
+
+    // Render one example's artifact as JSON: the displayed code, the run
+    // output, the translated diagnostics, and the translated hovers — all in
+    // displayed-slice coordinates. Literal JSON braces are doubled — a bare
+    // `{`/`}` in a ghūl string is interpolation syntax.
+    build_artifact_json(
+        name: string,
+        code: string,
+        hovers: Iterable[HOVER],
+        output: string,
+        diagnostics: Iterable[DIAGNOSTIC]
+    ) -> string is
+        let b = StringBuilder();
+
+        b.append("{{\n");
+        b.append("  \"name\": "); b.append(_json_string(name)); b.append(",\n");
+        b.append("  \"code\": "); b.append(_json_string(code)); b.append(",\n");
+        b.append("  \"output\": "); b.append(_json_string(output)); b.append(",\n");
+        b.append("  \"diagnostics\": [");
+
+        let first_diagnostic mut = true;
+        for d in diagnostics do
+            if !first_diagnostic then
+                b.append(",");
+            fi
+            first_diagnostic = false;
+
+            b.append("\n    {{ ");
+            b.append("\"startLine\": {d.start_line}, ");
+            b.append("\"startColumn\": {d.start_column}, ");
+            b.append("\"endLine\": {d.end_line}, ");
+            b.append("\"endColumn\": {d.end_column}, ");
+            b.append("\"severity\": "); b.append(_json_string(d.severity)); b.append(", ");
+            b.append("\"message\": "); b.append(_json_string(d.message));
+            b.append(" }}");
+        od
+
+        if !first_diagnostic then
+            b.append("\n  ");
+        fi
+
+        b.append("],\n");
+        b.append("  \"hovers\": [");
+
+        let first mut = true;
+        for h in hovers do
+            if !first then
+                b.append(",");
+            fi
+            first = false;
+
+            b.append("\n    {{ ");
+            b.append("\"startLine\": {h.start_line}, ");
+            b.append("\"startColumn\": {h.start_column}, ");
+            b.append("\"endLine\": {h.end_line}, ");
+            b.append("\"endColumn\": {h.end_column}, ");
+            b.append("\"text\": "); b.append(_json_string(h.text));
+            b.append(" }}");
+        od
+
+        if !first then
+            b.append("\n  ");
+        fi
+
+        b.append("]\n}}\n");
+
+        return b.to_string();
+    si
+si

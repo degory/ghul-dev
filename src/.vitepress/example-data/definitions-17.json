@@ -1,0 +1,25 @@
+{
+  "name": "definitions-17",
+  "code": "let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));\nlet leaf = Tree.LEAF(123);\n\nif tree.is_node then\n    write_line(\"have tree node\");\nelif tree.is_leaf then\n    write_line(\"have tree leaf\");\nfi",
+  "output": "have tree node\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "tree: Tree // local value" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 14, "text": "union Tree" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 21, "text": "union Tree" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 26, "text": "Tree.NODE.init(left: Tree, right: Tree) // constructor" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 31, "text": "union Tree" },
+    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 36, "text": "Tree.LEAF.init(value: Ghul.int) // constructor" },
+    { "startLine": 1, "startColumn": 44, "endLine": 1, "endColumn": 47, "text": "union Tree" },
+    { "startLine": 1, "startColumn": 49, "endLine": 1, "endColumn": 52, "text": "Tree.LEAF.init(value: Ghul.int) // constructor" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "leaf: Tree.LEAF // local value" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 15, "text": "union Tree" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 20, "text": "Tree.LEAF.init(value: Ghul.int) // constructor" },
+    { "startLine": 4, "startColumn": 4, "endLine": 4, "endColumn": 7, "text": "tree: Tree // local value" },
+    { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 15, "text": "Tree.is_node: Ghul.bool // instance property" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 6, "startColumn": 6, "endLine": 6, "endColumn": 9, "text": "tree: Tree.LEAF // local value" },
+    { "startLine": 6, "startColumn": 11, "endLine": 6, "endColumn": 17, "text": "Tree.LEAF.is_leaf: Ghul.bool // instance property" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "definitions-34",
+  "code": "class PUBLIC is\nsi\n\npublic_function() -> int => 0;\n\npublic_property: int;\n\nclass _PRIVATE is\nsi\n\n_private_function() -> int => 0;\n\n_private_property: int;",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "text": "class PUBLIC" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 15, "text": "public_function() -> Ghul.int // global function" },
+    { "startLine": 4, "startColumn": 22, "endLine": 4, "endColumn": 24, "text": "struct Ghul.int" },
+    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 15, "text": "public_property: Ghul.int // global property" },
+    { "startLine": 6, "startColumn": 18, "endLine": 6, "endColumn": 20, "text": "struct Ghul.int" },
+    { "startLine": 8, "startColumn": 7, "endLine": 8, "endColumn": 14, "text": "class _PRIVATE" },
+    { "startLine": 11, "startColumn": 1, "endLine": 11, "endColumn": 17, "text": "_private_function() -> Ghul.int // global function" },
+    { "startLine": 11, "startColumn": 24, "endLine": 11, "endColumn": 26, "text": "struct Ghul.int" },
+    { "startLine": 13, "startColumn": 1, "endLine": 13, "endColumn": 17, "text": "_private_property" },
+    { "startLine": 13, "startColumn": 20, "endLine": 13, "endColumn": 22, "text": "struct Ghul.int" }
+  ]
+}

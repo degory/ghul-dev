@@ -1,0 +1,14 @@
+{
+  "name": "control-flow-27",
+  "code": "for counter in 0..10 do\n    if counter == 5 then\n        break;\n    fi\n    write_line(counter);\nod",
+  "output": "0\n1\n2\n3\n4\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "counter: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 18, "text": "Ghul...(from: Ghul.int, to: Ghul.int) -> Ghul.INT_RANGE // innate function range.exclusive" },
+    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 14, "text": "counter: Ghul.int // local value" },
+    { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 17, "text": "Ghul.==(a: Ghul.int, b: Ghul.int) -> Ghul.bool // innate function compare.value" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.int) -> Ghul.void // class method" },
+    { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 22, "text": "counter: Ghul.int // local value" }
+  ]
+}

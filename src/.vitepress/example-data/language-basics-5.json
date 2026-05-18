@@ -1,0 +1,19 @@
+{
+  "name": "language-basics-5",
+  "code": "if x > 0 then\n    write_line(\"Positive\");\nelif x < 0 then\n    write_line(\"Negative\");\nelse\n    write_line(\"Zero\");\nfi\n\nfor item in my_list do\n    process(item);\nod",
+  "output": "Positive\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 8, "text": "item: Ghul.int // local value" },
+    { "startLine": 9, "startColumn": 13, "endLine": 9, "endColumn": 19, "text": "my_list: Ghul.int[] // local value" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 4, "text": "x: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "text": "x: Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 8, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 10, "startColumn": 5, "endLine": 10, "endColumn": 11, "text": "process(item: Ghul.int) -> Ghul.void // global function" },
+    { "startLine": 10, "startColumn": 13, "endLine": 10, "endColumn": 16, "text": "item: Ghul.int // local value" }
+  ]
+}

@@ -1,0 +1,22 @@
+let reader: StreamReader;
+
+try
+    reader = StreamReader("file.txt");
+    let content = reader.read_to_end();
+
+    write_line(content);
+
+catch e: FileNotFoundException
+    // Handle the case where the file is not found
+    write_line("Error: file not found: {e.message}");
+catch e: IOException
+    // Handle errors during file reading
+    write_line("Error: reading file: {e.message}");
+finally
+    // Close the file and clean up resources
+    if reader? then
+        reader.close();
+    fi
+
+    write_line("File processing completed, file closed.");
+yrt

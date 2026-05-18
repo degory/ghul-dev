@@ -1,0 +1,14 @@
+{
+  "name": "expressions-18",
+  "code": "let max = if a > b then a else b fi;",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 7, "text": "max: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "a: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 18, "text": "b: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" },
+    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "text": "a: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 32, "endLine": 1, "endColumn": 32, "text": "b: Ghul.int // local value" }
+  ]
+}

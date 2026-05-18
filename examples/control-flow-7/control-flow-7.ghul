@@ -1,0 +1,27 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    let list = [1, 2, 3, 4];
+
+    if list.count == 0 then
+        write_line("list is empty");
+    fi
+
+    if list.count > 0 then
+        write_line("list is not empty");
+    else
+        write_line("list is empty");
+    fi
+
+    if list.count > 10 then
+        write_line("list has lots of elements");
+    elif list.count > 5 then
+        write_line("list has some elements");
+    elif list.count > 0 then
+        write_line("list has a few elements");
+    else
+        write_line("list is empty");
+    fi
+// <<<
+si

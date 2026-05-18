@@ -1,0 +1,11 @@
+entry() is
+// >>>
+    let i = 12_345_678; // int
+    let hex = 0x1234_ABCD; // int
+    let long = 1_000_000_000_000_000L; // long
+
+    let hex_unsigned_long = 0x1234_5678__9ABC_DEF0_UL; // ulong
+
+    let b = 99b; // byte
+// <<<
+si

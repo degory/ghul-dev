@@ -1,0 +1,13 @@
+// >>>
+namespace Example is
+    // this definition of Test is visible unqualified
+    // throughout the Example namespace:
+    trait Test is
+        run();
+    si
+si
+// <<<
+
+namespace Demo is
+    entry() is si
+si

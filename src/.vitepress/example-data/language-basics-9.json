@@ -1,0 +1,9 @@
+{
+  "name": "language-basics-9",
+  "code": "let primes = [2, 3, 5, 7, 11];",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "primes: Ghul.int[] // local value" }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "control-flow-25",
+  "code": "for i in 1::5 do\n    // i will take values 1, 2, 3, 4, 5 in sequence\n    write_line(i);\nod",
+  "output": "1\n2\n3\n4\n5\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 12, "text": "Ghul.::(from: Ghul.int, to: Ghul.int) -> Ghul.INT_RANGE_INCLUSIVE // innate function range.inclusive" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.int) -> Ghul.void // class method" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 16, "text": "i: Ghul.int // local value" }
+  ]
+}

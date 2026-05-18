@@ -10,72 +10,31 @@ Identifiers in ghūl follow the convention of `snake_case` for variables, functi
 
 ghūl relies on keywords for block structure where other languages use braces or indentation. Keywords are context specific and generally come in pairs where the closing keyword is the reverse or mirror image of the opening keyword. In the examples below `is` introduces a method or class body and its block is closed by the reverse keyword `si`
 
-```ghul
-let my_variable = 42;
-
-print_something(thing: string) is
-    write_line("The thing is: {thing}");
-si
-
-class PERSON is
-    name: string;
-    age: int;
-si
-```
+<GhulExample name="language-basics-1" />
 
 ### expressions and statements
 Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, but only if statements can be used as expressions.
 
-```ghul
-let x = 10; // variable declaration statement
-let y = x * 2; // expression used as part of a declaration statement
-
-if x > 5 then // 'if' is a statement, 'x > 5' is an expression
-    write_line("x is greater than 5");
-fi
-
-let z = if x > 5 then x else y fi; // if can also be used as an expression
-```
+<GhulExample name="language-basics-2" />
 
 ### function declarations
 Functions in ghūl are declared with an optional return type, a name, a list of parameters in parentheses, and a body enclosed in `is` and `si` keywords
 
-```ghul
-greet(name: string) -> void is
-    write_line("Hello, {name}!");
-si
-```
+<GhulExample name="language-basics-3" />
 
 Functions can also have an expression body using `=>` instead of `is` / `si`:
-```ghul
-square(x: int) -> int => x * x;
-```
+<GhulExample name="language-basics-4" />
 
 ### control flow
 ghūl supports various [control flow constructs](/control-flow.html) like `if`, `else`, `while`, `for`, and `case` expressions.
 
-```ghul
-if x > 0 then
-    write_line("Positive");
-elif x < 0 then
-    write_line("Negative");
-else
-    write_line("Zero");
-fi
-
-for item in my_list do
-    process(item);
-od
-```
+<GhulExample name="language-basics-5" />
 
 ### types
 
 ghūl is statically typed, with some support for [type inference](/type-inference.html). Types can be explicitly specified using a colon `:` plus a type expression
 
-```ghul
-let x: int = 42;
-let y = "Hello"; // type inferred as string
-```
+<GhulExample name="language-basics-6" />
 [User types](/definitions.html#types) are defined using `class`, `struct`, `trait`, `enum`, and `union` keywords.
 
 ## built-in data types
@@ -92,111 +51,59 @@ ghūl provides the following primitive data types:
 * character type: `char`
 * void type: `void`
 
-```ghul
-let my_int: int = 42;
-let my_float: double = 3.14;
-let my_bool: bool = true;
-let my_char: char = 'A';
-```
+<GhulExample name="language-basics-7" />
 These types are used to represent basic values in ghūl programs.
 
 ### arrays
 
 ghūl supports arrays, which are fixed-size, **immutable** collections of elements of the same type. Array types are denoted using square brackets [] after the element type.
 
-```ghul
-let numbers: int[];
-```
+<GhulExample name="language-basics-8" />
 
 Arrays can be constructed with an [array literal]()
-```ghul
-let primes = [2, 3, 5, 7, 11];
-```
+<GhulExample name="language-basics-9" />
 
 Array elements can be read with indexer syntax
-```ghul
-let p = primes[i];
-```
+<GhulExample name="language-basics-10" />
 
 ### tuples
 Tuples in ghūl are lightweight, immutable data structures that can hold a fixed number of elements of different types. Tuple types use parentheses `(` `)`, with elements separated by commas. Tuple literals are similarly constructed with `(` `)` and comma delimited elements
 
-```ghul
-let point: (int, int) = (10, 20);
-let person: (string, int) = ("Alice", 30);
-```
+<GhulExample name="language-basics-11" />
 
 Tuple elements can be accessed using the dot `.` notation followed by the element name:
 
-```ghul
-let x = point.`0;
-let y = point.`1;
-let name = person.`0;
-let age = person.`1;
-```
+<GhulExample name="language-basics-12" />
 
 Tuple elements can be given more descriptive names, either in the type or in the tuple literal:
-```ghul
-let point: (x: int, y: int) = (10, 20);
-let person = (name = "Alice", age = 30);
-let x = point.x;
-let y = point.y;
-let name = person.name;
-let age = person.age;
-```
+<GhulExample name="language-basics-13" />
 
 ghūl also supports tuple destructuring:
-```ghul
-let (a, b) = point;
-let (name, age) = person;
-```
+<GhulExample name="language-basics-14" />
 
 ### optional types
 
 A type followed by `?` is an **optional** type: a value of that type may be present, or it may be absent. The same type written without the `?` is non-optional — a value is always expected to be there.
 
-```ghul
-let name: string? = "Alice"; // present
-let nickname: string? = null; // absent
-```
+<GhulExample name="language-basics-15" />
 
 The postfix `?` operator tests whether an optional has a value. The postfix `!` operator reads the value out:
 
-```ghul
-if name? then
-    write_line("name is {name!}");
-fi
-```
+<GhulExample name="language-basics-16" />
 
 Most of the time you don't need `!` directly — `if let` tests an optional and reads its value into a local variable in one step (see [control flow](/control-flow.html#if-let)).
 
 Optional types work for both reference types and value types. An optional value type is backed by `OPTION[T]` — the .NET `Nullable[T]` — so a present value is constructed explicitly:
 
-```ghul
-let here: int? = OPTION[int](42); // present
-let gone: int? = null; // absent
-```
+<GhulExample name="language-basics-17" />
 
 A non-optional type does not expect to be absent. Putting `null`, or an optional the compiler cannot see has a value, where a non-optional type is expected produces a warning:
 
-```ghul
-let label: string = null; // warning: null where a non-optional string is expected
-
-let maybe = lookup(); // maybe is string?
-let title: string = maybe; // warning: maybe might be absent
-```
+<GhulExample name="language-basics-18" />
 
 The warning clears once the value is known to be present — inside an `if name?` check, inside an `if let`, or with an explicit `!`:
 
-```ghul
-let maybe = lookup();
-
-if maybe? then
-    let title: string = maybe; // fine: maybe is known to be present here
-fi
-
-let forced: string = maybe!; // fine: ! asserts the value is present
-```
+<GhulExample name="language-basics-19" />
 
 These are the basic data types available in ghūl. The language also supports more advanced types such as classes, structs, traits, enums, and unions, which will be covered in later sections of the documentation.
 
@@ -204,13 +111,7 @@ These are the basic data types available in ghūl. The language also supports mo
 
 ghūl does not perform implicit type conversion (coercion) between scalar types; all scalar type conversions must be explicitly cast. However, ghūl supports polymorphic behavior by allowing upcasting, where instances of derived classes or interfaces can be automatically coerced to compatible ancestor types in the class/interface hierarchy.
 
-```ghul
-let d = 1.0d + 1.0d; // OK both addends are type double
-let e = 1.0d + 1; // Compile time error because addends are mixed types (double vs int)
-let e = 1.0d + cast double(1); // OK with explicit cast
-
-let o: object = "hello"; // OK "hello" is a string, and string is derived from object
-```
+<GhulExample name="language-basics-20" />
 
 ## variables
 
@@ -220,11 +121,7 @@ ghūl has three kinds of variables: locals declared within the body of a functio
 
 Local variables are declared with `let` followed by the variable name, plus a type and/or an initializer.
 
-```ghul
-let i = 1234;
-let j: int;
-let k: int = 5678;
-```
+<GhulExample name="language-basics-21" />
 
 Local variables with no explicit initializer are initialized to the default value for their type (zero, false, or null)
 
@@ -232,9 +129,7 @@ Local variables with no explicit initializer are initialized to the default valu
 
 Arguments will be covered in detail with functions and methods, but the basic form is the argument name followed by its type.
 
-```ghul
-some_function(argument: type)
-```
+<GhulExample name="language-basics-22" />
 
 ### captured values
 Captured values will be covered with [function literals](/language-basics.html#function). They are not explicitly defined but inferred from context.
@@ -249,56 +144,19 @@ ghūl can infer the type of local variables from their initializer if present. I
 ## literals
 Literal expressions represent fixed values of a specific type.
 
-```ghul
-let integer_literal = 42;
-let floating_point_literal = 3.14;
-let string_literal = "Hello, world!";
-let boolean_literal_true = true;
-let boolean_literal_false = false;
-```
+<GhulExample name="language-basics-23" />
 
 ## operators and expressions
 ### arithmetic operators
-```ghul
-let add = 1 + 2;
-let sub = 3 - 1;
-let mul = 3 * 3;
-let div = 12 / 3;
-let mod = 13 % 4;
-```
+<GhulExample name="language-basics-24" />
 
 ### comparison and logical operators
-```ghul
-let gt = 3 > 1; // true
-let gte = 4 >= 4; // true
-let lt = 3 < 1; // false
-let lte = 4 <= 4; // true
-let eq = 1 == 2; // false
-let neq = 1 != 2; // true
-```
+<GhulExample name="language-basics-25" />
 
-```ghul
-let list = [1, 2, 3]
-
-let index = 4;
-let search_value = 3;
-
-let and_then = index < list.count /\ list[index] == search_value; // false
-let or_else = index >= list.count \/ list[index] != search_value; // true
-```
+<GhulExample name="language-basics-26" />
 
 ## assignment
 
 variables and properties can be updated via assignment statements
 
-```ghul
-let i = 0;
-let j = 10;
-let s = "Hello";
-
-i = i + j;
-s = "{s} World!";
-
-thing.property = i + j;
-```
-
+<GhulExample name="language-basics-27" />

@@ -1,0 +1,15 @@
+union Tree is
+    NODE(left: Tree, right: Tree);
+    LEAF(value: int);
+si
+
+entry() is
+// >>>
+    let leaf1 = Tree.LEAF(123);
+    let leaf2 = Tree.LEAF(123);
+    let leaf3 = Tree.LEAF(456);
+
+    assert leaf1 =~ leaf2;
+    assert !(leaf1 =~ leaf3);
+// <<<
+si

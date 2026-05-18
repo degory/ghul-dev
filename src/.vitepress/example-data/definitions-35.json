@@ -1,0 +1,11 @@
+{
+  "name": "definitions-35",
+  "code": "class THING is\n    do_something_public() is\n    si\n\n    _do_something_protected() is\n    si\nsi",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "text": "class THING" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 23, "text": "THING.do_something_public() -> Ghul.void // method" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 27, "text": "THING._do_something_protected() -> Ghul.void // method" }
+  ]
+}

@@ -1,0 +1,24 @@
+// >>>
+union Shape is
+    CIRCLE(radius: double);
+    SQUARE(side: double);
+si
+// <<<
+
+use Shape.CIRCLE;
+use Shape.SQUARE;
+
+// >>>
+area(s: Shape) -> double is
+    if let c: CIRCLE = s then
+        return 3.14159d * c.radius * c.radius;
+    elif let q: SQUARE = s then
+        return q.side * q.side;
+    fi
+
+    return 0.0d;
+si
+// <<<
+
+entry() is
+si

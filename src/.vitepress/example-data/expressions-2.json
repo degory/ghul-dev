@@ -1,0 +1,10 @@
+{
+  "name": "expressions-2",
+  "code": "let c = 'c';\nlet u_macron = 'ū'",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "c: Ghul.char // local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "u_macron: Ghul.char // local value" }
+  ]
+}

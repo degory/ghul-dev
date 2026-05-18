@@ -1,0 +1,5 @@
+entry() is
+// >>>
+    let integer_value = cast int(3.14);
+// <<<
+si

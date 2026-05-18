@@ -1,0 +1,26 @@
+class Box[T] is
+    _value: T;
+
+    init() is
+        _value = default;
+    si
+
+    set(value: T) is
+        _value = value;
+    si
+
+    get() -> T => _value;
+si
+
+entry() is
+// >>>
+    // m is Box[?] here — the type argument is not
+    // yet known
+    let m = Box();
+
+    // the set call carries an int, so m is Box[int]
+    m.set(42);
+
+    let x = m.get();
+// <<<
+si

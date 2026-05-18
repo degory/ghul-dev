@@ -1,0 +1,17 @@
+let reader: StreamReader;
+
+try
+    reader = StreamReader("file.txt");
+
+    let content = reader.read_to_end();
+    write_line(content);
+
+    write_line("File processing completed.");
+
+finally
+    if reader? then
+        reader.close();
+    fi
+
+    // Any exceptions will be thrown to the calling code
+yrt

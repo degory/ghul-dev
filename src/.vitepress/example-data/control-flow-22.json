@@ -1,0 +1,7 @@
+{
+  "name": "control-flow-22",
+  "code": "for variable in iterable do\n    // variable is set to each element of iterator in turn\nod",
+  "output": "",
+  "diagnostics": [],
+  "hovers": []
+}

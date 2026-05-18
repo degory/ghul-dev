@@ -1,0 +1,6 @@
+entry() is
+// >>>
+    let hello_world = "Hello World!";
+    let unicode = "ghūl programming language"
+// <<<
+si

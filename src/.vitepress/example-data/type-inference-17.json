@@ -1,0 +1,15 @@
+{
+  "name": "type-inference-17",
+  "code": "// m is Box[?] here — the type argument is not\n// yet known\nlet m = Box();\n\n// the set call carries an int, so m is Box[int]\nm.set(42);\n\nlet x = m.get();",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "m: Box[Ghul.int] // local value" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 11, "text": "Box[Ghul.int].init() // constructor" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 5, "text": "x: Ghul.int // local value" },
+    { "startLine": 8, "startColumn": 9, "endLine": 8, "endColumn": 9, "text": "m: Box[Ghul.int] // local value" },
+    { "startLine": 8, "startColumn": 11, "endLine": 8, "endColumn": 13, "text": "Box[Ghul.int].get() -> Ghul.int // method" },
+    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 1, "text": "m: Box[Ghul.int] // local value" },
+    { "startLine": 6, "startColumn": 3, "endLine": 6, "endColumn": 5, "text": "Box[Ghul.int].set(value: Ghul.int) -> Ghul.void // method" }
+  ]
+}

@@ -1,0 +1,178 @@
+namespace Analysis.Protocol is
+    use System.Exception;
+    use System.Diagnostics.Process;
+    use System.Diagnostics.ProcessStartInfo;
+    use System.Text.StringBuilder;
+    use System.Text.UTF8Encoding;
+
+    use Collections.LIST;
+
+    // Form-feed (ASCII 12) — terminates every analyser response frame and
+    // each file's content in an EDIT request.
+    FORM_FEED: char static => cast char(12);
+
+    // Drives a `dotnet ghul-compiler --analyse` subprocess over the analyser's
+    // line/form-feed text protocol. Uses the canned `--v3 --test-run`
+    // resolution — the same mode ghul-test CI uses — so no `.assemblies.json`
+    // or response file is needed; `ghul-runtime.dll` must be present in the
+    // working directory.
+    //
+    // Adapted (slimmed) from the compiler repo's analysis-protocol library.
+    class ANALYSER_PROCESS: Disposable is
+        _process: Process;
+        _stderr_capture: StringBuilder;
+
+        init(working_directory: string) is
+            let start_info = ProcessStartInfo();
+
+            start_info.file_name = "dotnet";
+            start_info.arguments = "ghul-compiler --analyse --v3 --test-run";
+            start_info.working_directory = working_directory;
+
+            start_info.use_shell_execute = false;
+            start_info.redirect_standard_input = true;
+            start_info.redirect_standard_output = true;
+            start_info.redirect_standard_error = true;
+
+            start_info.standard_input_encoding = UTF8Encoding();
+            start_info.standard_output_encoding = UTF8Encoding();
+            start_info.standard_error_encoding = UTF8Encoding();
+
+            _process = Process.start(start_info);
+
+            if !_process? then
+                throw Exception("failed to start ghul-compiler analyser process");
+            fi
+
+            _stderr_capture = StringBuilder();
+
+            // Drain stderr in the background so a chatty analyser can't fill
+            // its stderr pipe and block.
+            System.Threading.Tasks.Task.run(
+                () is
+                    try
+                        do
+                            let line = _process.standard_error.read_line();
+                            if !line? then
+                                break;
+                            fi
+                            _stderr_capture.append(line);
+                            _stderr_capture.append('\n');
+                        od
+                    catch ex: Exception
+                    yrt
+                si
+            );
+
+            try
+                let listen = read_response();
+                if listen.header !~ "LISTEN" then
+                    throw Exception("expected LISTEN as first frame, got '{listen.header}'\n{_stderr_capture}");
+                fi
+            catch ex: Exception
+                dispose();
+                throw ex;
+            yrt
+        si
+
+        write(text: string) is
+            _process.standard_input.write(text);
+        si
+
+        flush() is
+            _process.standard_input.flush();
+        si
+
+        // Single-file EDIT — path list (one path), blank-line terminator,
+        // then form-feed-terminated source.
+        send_edit(path: string, source: string) is
+            write("#EDIT#\n");
+            write("{path}\n");
+            write("\n");
+            write(source);
+            write("{FORM_FEED}");
+            flush();
+        si
+
+        send_hover_map(path: string) is
+            write("#HOVERMAP#\n");
+            write("{path}\n");
+            flush();
+        si
+
+        // Read a response, transparently draining a leading DIAGNOSTICS frame
+        // (a query can be preceded by one when the analyser recompiles).
+        read_query_response() -> RESPONSE is
+            let response mut = read_response();
+
+            if response.header =~ "DIAGNOSTICS" then
+                response = read_response();
+            fi
+
+            return response;
+        si
+
+        // Read characters until the form-feed terminator; split into a header
+        // line and body lines.
+        read_response() -> RESPONSE is
+            let buffer = StringBuilder();
+
+            do
+                let c = _process.standard_output.read();
+
+                if c < 0 then
+                    throw Exception(
+                        "analyser stdout closed before form-feed\n"
+                        "buffer:\n{buffer}\nstderr:\n{_stderr_capture}"
+                    );
+                fi
+
+                if c == 12 then
+                    break;
+                fi
+
+                if c != 13 then
+                    buffer.append(cast char(c));
+                fi
+            od
+
+            let lines = LIST[string](buffer.to_string().split(['\n']));
+
+            if lines.count == 0 then
+                throw Exception("empty response frame");
+            fi
+
+            let header = lines[0];
+
+            let body = LIST[string]();
+
+            for i in 1..lines.count do
+                let line = lines[i];
+
+                if i == lines.count - 1 /\ line.length == 0 then
+                    continue;
+                fi
+
+                body.add(line);
+            od
+
+            return RESPONSE(header, body);
+        si
+
+        stderr_capture: string => _stderr_capture.to_string();
+
+        dispose() is
+            try
+                _process.standard_input.close();
+            catch ex: Exception
+            yrt
+
+            if !_process.wait_for_exit(2000) then
+                try
+                    _process.kill();
+                catch ex: Exception
+                yrt
+            fi
+        si
+    si
+si

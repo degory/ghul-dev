@@ -1,0 +1,19 @@
+use IO.Std.write_line;
+
+// >>>
+fib(n: int) -> int is
+    if n < 0 then
+        return 0;
+    elif n == 1 then
+        return 1;
+    else
+        return fib(n - 1) + fib(n - 2);
+    fi
+si
+// <<<
+
+entry() is
+    for i in 0::10 do
+        write_line("fib({i}) = {fib(i)}");
+    od
+si

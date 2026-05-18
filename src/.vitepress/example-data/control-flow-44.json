@@ -1,0 +1,23 @@
+{
+  "name": "control-flow-44",
+  "code": "fib(n: int) -> int is\n    if n < 0 then\n        return 0;\n    elif n == 1 then\n        return 1;\n    else\n        return fib(n - 1) + fib(n - 2);\n    fi\nsi",
+  "output": "fib(0) = 0\nfib(1) = 1\nfib(2) = 1\nfib(3) = 2\nfib(4) = 3\nfib(5) = 5\nfib(6) = 8\nfib(7) = 13\nfib(8) = 21\nfib(9) = 34\nfib(10) = 55\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 3, "text": "fib(n: Ghul.int) -> Ghul.int // global function" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "n: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 10, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 18, "text": "struct Ghul.int" },
+    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 8, "text": "n: Ghul.int // local argument" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 10, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" },
+    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 10, "text": "n: Ghul.int // local argument" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 13, "text": "Ghul.==(a: Ghul.int, b: Ghul.int) -> Ghul.bool // innate function compare.value" },
+    { "startLine": 7, "startColumn": 16, "endLine": 7, "endColumn": 18, "text": "fib(n: Ghul.int) -> Ghul.int // global function" },
+    { "startLine": 7, "startColumn": 20, "endLine": 7, "endColumn": 20, "text": "n: Ghul.int // local argument" },
+    { "startLine": 7, "startColumn": 22, "endLine": 7, "endColumn": 22, "text": "Ghul.-(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.sub" },
+    { "startLine": 7, "startColumn": 29, "endLine": 7, "endColumn": 31, "text": "fib(n: Ghul.int) -> Ghul.int // global function" },
+    { "startLine": 7, "startColumn": 33, "endLine": 7, "endColumn": 33, "text": "n: Ghul.int // local argument" },
+    { "startLine": 7, "startColumn": 35, "endLine": 7, "endColumn": 35, "text": "Ghul.-(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.sub" },
+    { "startLine": 7, "startColumn": 27, "endLine": 7, "endColumn": 27, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" }
+  ]
+}

@@ -1,0 +1,19 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    // variable declaration statement
+    let x = 10;
+
+    // expression used as part of a declaration statement
+    let y = x * 2;
+
+    // 'if' is a statement, 'x > 5' is an expression
+    if x > 5 then
+        write_line("x is greater than 5");
+    fi
+
+    // 'if' can also be used as an expression
+    let z = if x > 5 then x else y fi;
+// <<<
+si

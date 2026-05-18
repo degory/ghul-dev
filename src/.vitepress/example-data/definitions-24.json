@@ -1,0 +1,7 @@
+{
+  "name": "definitions-24",
+  "code": "namespace Example is\n    ...\nsi",
+  "output": "",
+  "diagnostics": [],
+  "hovers": []
+}
