@@ -1,0 +1,11 @@
+// >>>
+class THING is
+    init() is si // constructor
+si
+// <<<
+
+entry() is
+// >>>
+    let a_thing = THING();
+// <<<
+si

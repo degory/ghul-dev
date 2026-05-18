@@ -1,0 +1,21 @@
+{
+  "name": "expressions-13",
+  "code": "// Define a list to hold the closures:\nlet closure_list = LIST();\n\n// Iterate over an integer range:\nfor i in 1::10 do\n    // Create a closure capturing i's current value\n    let closure = () => i;\n\n    // Add the closure to the list:\n    closure_list.add(closure);\nod\n\n// Each closure captured the value of i at the\n// time of its creation:\nfor closure in closure_list do\n    write_line(\"Closure captured value: {closure()}\");\nod",
+  "output": "Closure captured value: 1\nClosure captured value: 2\nClosure captured value: 3\nClosure captured value: 4\nClosure captured value: 5\nClosure captured value: 6\nClosure captured value: 7\nClosure captured value: 8\nClosure captured value: 9\nClosure captured value: 10\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 16, "text": "closure_list: Collections.LIST[() -> Ghul.int] // local value" },
+    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 23, "text": "Collections.LIST[() -> Ghul.int].init() -> Ghul.void // method" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 5, "text": "i: Ghul.int // captured value" },
+    { "startLine": 5, "startColumn": 11, "endLine": 5, "endColumn": 12, "text": "Ghul.::(from: Ghul.int, to: Ghul.int) -> Ghul.INT_RANGE_INCLUSIVE // innate function range.inclusive" },
+    { "startLine": 7, "startColumn": 9, "endLine": 7, "endColumn": 15, "text": "closure: () -> Ghul.int // local value" },
+    { "startLine": 7, "startColumn": 25, "endLine": 7, "endColumn": 25, "text": "i: Ghul.int // captured value" },
+    { "startLine": 15, "startColumn": 5, "endLine": 15, "endColumn": 11, "text": "closure: () -> Ghul.int // local value" },
+    { "startLine": 15, "startColumn": 16, "endLine": 15, "endColumn": 27, "text": "closure_list: Collections.LIST[() -> Ghul.int] // local value" },
+    { "startLine": 10, "startColumn": 5, "endLine": 10, "endColumn": 16, "text": "closure_list: Collections.LIST[() -> Ghul.int] // local value" },
+    { "startLine": 10, "startColumn": 18, "endLine": 10, "endColumn": 20, "text": "Collections.LIST[() -> Ghul.int].add(item: () -> Ghul.int) -> Ghul.void // method" },
+    { "startLine": 10, "startColumn": 22, "endLine": 10, "endColumn": 28, "text": "closure: () -> Ghul.int // local value" },
+    { "startLine": 16, "startColumn": 5, "endLine": 16, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 16, "startColumn": 42, "endLine": 16, "endColumn": 48, "text": "closure: () -> Ghul.int // local value" }
+  ]
+}

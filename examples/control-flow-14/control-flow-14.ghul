@@ -1,0 +1,28 @@
+use IO.Std.write_line;
+
+class Animal is si
+
+class Cat: Animal is
+    name: string;
+    init(name: string) is self.name = name; si
+    purr() -> string => "{name} purrs";
+si
+
+class Dog: Animal is
+    name: string;
+    init(name: string) is self.name = name; si
+    bark() -> string => "{name} barks";
+si
+
+entry() is
+    let a: Animal = Dog("rover");
+// >>>
+    if let c: Cat = a then
+        write_line(c.purr());
+    elif let d: Dog = a then
+        write_line(d.bark());
+    else
+        write_line("some other animal");
+    fi
+// <<<
+si

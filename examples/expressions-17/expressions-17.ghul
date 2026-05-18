@@ -1,0 +1,7 @@
+entry() is
+// >>>
+    let logical_and = true /\ false;    // Logical AND
+    let logical_or = true \/ false;     // Logical OR
+    let logical_not = !true;            // Logical NOT
+// <<<
+si

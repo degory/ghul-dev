@@ -1,0 +1,22 @@
+use IO.Std.write_line;
+
+process(item: int) is
+si
+
+entry() is
+    let x = 1;
+    let my_list = [1, 2, 3];
+// >>>
+    if x > 0 then
+        write_line("Positive");
+    elif x < 0 then
+        write_line("Negative");
+    else
+        write_line("Zero");
+    fi
+
+    for item in my_list do
+        process(item);
+    od
+// <<<
+si

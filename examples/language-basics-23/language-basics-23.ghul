@@ -1,0 +1,9 @@
+entry() is
+// >>>
+    let integer_literal = 42;
+    let floating_point_literal = 3.14;
+    let string_literal = "Hello, world!";
+    let boolean_literal_true = true;
+    let boolean_literal_false = false;
+// <<<
+si

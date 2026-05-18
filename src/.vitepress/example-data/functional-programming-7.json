@@ -1,0 +1,16 @@
+{
+  "name": "functional-programming-7",
+  "code": "let tuple = (1, 2, 3, 4, 5);\n\nlet element = tuple.`3; // elements can be read\n\ntuple.`3 = 6;",
+  "output": "",
+  "diagnostics": [
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 9, "severity": "error", "message": "`3: int is not publicly assignable" }
+  ],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "tuple: (int, int, int, int, int) // local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "text": "element: Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 19, "text": "tuple: (int, int, int, int, int) // local value" },
+    { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 22, "text": "(int, int, int, int, int).`3: Ghul.int // field" },
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 5, "text": "tuple: (int, int, int, int, int) // local value" },
+    { "startLine": 5, "startColumn": 7, "endLine": 5, "endColumn": 8, "text": "(int, int, int, int, int).`3: Ghul.int // field" }
+  ]
+}

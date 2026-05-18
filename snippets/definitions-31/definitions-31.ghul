@@ -1,0 +1,5 @@
+use Example.TEST;
+
+...
+
+let t = TEST();

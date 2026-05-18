@@ -1,0 +1,6 @@
+# Compiler / run artifacts produced by example-tool — only each example's
+# <name>.ghul source is committed.
+**/binary.exe
+**/binary.runtimeconfig.json
+**/ghul-runtime.dll
+**/*.il

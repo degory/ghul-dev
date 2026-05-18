@@ -1,0 +1,9 @@
+use IO.Std.write_line;
+
+greet(name: string) is
+    write_line("hello, {name}");
+si
+
+entry() is
+    greet("world");
+si

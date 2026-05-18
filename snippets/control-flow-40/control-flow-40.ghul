@@ -1,0 +1,5 @@
+try
+    // Code that might throw an exception
+finally
+    // Clean-up code, always executed
+yrt

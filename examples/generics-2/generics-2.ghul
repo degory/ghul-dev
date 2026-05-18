@@ -1,0 +1,10 @@
+use IO.Std.write_line;
+
+print_something[T](t: T) => write_line("something is {t}");
+
+entry() is
+// >>>
+    print_something[int](1234);
+    print_something[string]("hello");
+// <<<
+si

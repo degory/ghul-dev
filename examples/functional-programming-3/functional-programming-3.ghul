@@ -1,0 +1,15 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    // factorial
+    let factorial = n rec =>
+        if n == 0 then 1 else n * rec(n - 1) fi;
+    write_line("factorial(5): {factorial(5)}");
+
+    // fibonacci
+    let fibonacci = n rec =>
+        if n <= 1 then n else rec(n - 1) + rec(n - 2) fi;
+    write_line("fibonacci(10): {fibonacci(10)}");
+// <<<
+si

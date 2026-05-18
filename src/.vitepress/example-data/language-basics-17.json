@@ -1,0 +1,15 @@
+{
+  "name": "language-basics-17",
+  "code": "let here: int? = OPTION[int](42); // present\nlet gone: int? = null; // absent",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "here: Ghul.int? // local value" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 13, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 27, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 23, "text": "struct Ghul.OPTION" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 29, "text": "Ghul.OPTION[Ghul.int].init(value: Ghul.int) -> Ghul.void // method" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "gone: Ghul.int? // local value" },
+    { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 13, "text": "struct Ghul.int" }
+  ]
+}

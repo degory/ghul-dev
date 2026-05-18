@@ -1,0 +1,79 @@
+use IO.Std.write_line;
+// >>>
+use Ghul.Pipes.STREAM;
+use Ghul.Pipes.stream;
+use STREAM.DONE;
+use STREAM.YIELD;
+// <<<
+
+entry() is
+// >>>
+    // counting down — state and output are both int;
+    // the sequence ends when the state reaches zero.
+    let counting = (n: int) =>
+        stream(
+            n,
+            i =>
+                if i == 0 then
+                    DONE[int, int]()
+                else
+                    i || (i - 1)
+                fi
+        );
+
+    // fibonacci. State is the named tuple
+    // (prev, current); output is int — the state and
+    // output types differ.
+    let fibonacci = stream(
+        (prev = 1, current = 1),
+        s =>
+            s.current || (
+                prev = s.current,
+                current = s.prev + s.current
+            )
+    );
+
+    // factorial. State is (n, prev); output is int.
+    let factorial = stream(
+        (n = 1, prev = 1),
+        s =>
+            let next_n = s.n + 1, next = s.prev * next_n in
+            next || (n = next_n, prev = next)
+    );
+
+    // chars of a string: state is an int cursor,
+    // output is char. The input string is captured by
+    // the lambda; the integer state is hidden inside
+    // the resulting Pipe[char].
+    let chars_of = (s: string) =>
+        let xs = s.to_char_array() in
+        stream(
+            0,
+            i =>
+                if i == xs.count then
+                    DONE[char, int]()
+                else
+                    xs[i] || (i + 1)
+                fi
+        );
+
+    write_line(
+        "counting down from 5: {counting(5)}"
+    );
+    write_line(
+        "first 10 fibonacci numbers: {fibonacci | .take(10)}"
+    );
+    write_line(
+        "first 10 factorial numbers: {factorial | .take(10)}"
+    );
+    write_line("chars of hello: {chars_of("hello")}");
+
+    let indexed =
+        fibonacci | .zip(factorial) .take(10) .index();
+
+    for (i, (fib, fact)) in indexed do
+        write_line("fibonacci {i} is {fib}");
+        write_line("factorial {i} is {fact}");
+    od;
+// <<<
+si

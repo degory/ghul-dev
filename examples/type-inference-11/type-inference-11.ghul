@@ -1,0 +1,7 @@
+entry() is
+// >>>
+    let int_string = [(123, "hello"), (456, "goodbye")];
+
+    let int_object = [(123, 456), (798, "wibble")];
+// <<<
+si

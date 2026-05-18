@@ -1,0 +1,14 @@
+{
+  "name": "generics-1",
+  "code": "print_something[T](t: T) => write_line(\"something is {t}\");",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "text": "print_something[T](t: T) -> Ghul.void // global function" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "text": "T // type variable" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "text": "t: T // local argument" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "text": "T // type variable" },
+    { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 38, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 1, "startColumn": 55, "endLine": 1, "endColumn": 55, "text": "t: T // local argument" }
+  ]
+}

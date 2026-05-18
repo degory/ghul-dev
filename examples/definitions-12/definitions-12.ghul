@@ -1,0 +1,20 @@
+struct POINT is
+    x: double;
+    y: double;
+
+    init(x: double, y: double) is
+        self.x = x;
+        self.y = y;
+    si
+si
+
+entry() is
+    let origin = POINT(0.0D, 0.0D);
+    let right = POINT(1.0D, 0.0D);
+// >>>
+    let zero_zero = POINT(0.0D, 0.0D);
+
+    assert origin == zero_zero;
+    assert origin != right;
+// <<<
+si

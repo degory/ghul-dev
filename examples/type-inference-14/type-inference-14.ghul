@@ -1,0 +1,19 @@
+class Base is
+    init() is si
+si
+
+class DERIVED: Base is
+    init() is super.init() si
+si
+
+// >>>
+do_something[T](a: T, b: T) -> T => a;
+// <<<
+
+entry() is
+// >>>
+    let base = do_something(Base(), DERIVED());
+    let derived = do_something(DERIVED(), DERIVED());
+    let obj = do_something(object(), DERIVED());
+// <<<
+si

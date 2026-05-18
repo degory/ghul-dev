@@ -1,0 +1,24 @@
+{
+  "name": "definitions-19",
+  "code": "let leaf1 = Tree.LEAF(123);\nlet leaf2 = Tree.LEAF(123);\nlet leaf3 = Tree.LEAF(456);\n\nassert leaf1 =~ leaf2;\nassert !(leaf1 =~ leaf3);",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "leaf1: Tree.LEAF // local value" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 16, "text": "union Tree" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 21, "text": "Tree.LEAF.init(value: Ghul.int) // constructor" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "leaf2: Tree.LEAF // local value" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 16, "text": "union Tree" },
+    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 21, "text": "Tree.LEAF.init(value: Ghul.int) // constructor" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "text": "leaf3: Tree.LEAF // local value" },
+    { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 16, "text": "union Tree" },
+    { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 21, "text": "Tree.LEAF.init(value: Ghul.int) // constructor" },
+    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 12, "text": "leaf1: Tree.LEAF // local value" },
+    { "startLine": 5, "startColumn": 17, "endLine": 5, "endColumn": 21, "text": "leaf2: Tree.LEAF // local value" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 15, "text": "Tree.LEAF.=~(other: Tree) -> Ghul.bool // method" },
+    { "startLine": 6, "startColumn": 10, "endLine": 6, "endColumn": 14, "text": "leaf1: Tree.LEAF // local value" },
+    { "startLine": 6, "startColumn": 19, "endLine": 6, "endColumn": 23, "text": "leaf3: Tree.LEAF // local value" },
+    { "startLine": 6, "startColumn": 16, "endLine": 6, "endColumn": 17, "text": "Tree.LEAF.=~(other: Tree) -> Ghul.bool // method" },
+    { "startLine": 6, "startColumn": 8, "endLine": 6, "endColumn": 8, "text": "Ghul.!(a: Ghul.bool) -> Ghul.bool // innate function bool.not" }
+  ]
+}

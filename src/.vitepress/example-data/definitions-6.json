@@ -1,0 +1,30 @@
+{
+  "name": "definitions-6",
+  "code": "sum_two_ints(i: int, j: int) -> int => i + j;\n\nsum_three_ints(i: int, j: int, k: int) -> int is\n    return i + j + k;\nsi",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 12, "text": "sum_two_ints(i: Ghul.int, j: Ghul.int) -> Ghul.int // global function" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "i: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 22, "text": "j: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 19, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 27, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 35, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 40, "endLine": 1, "endColumn": 40, "text": "i: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 44, "endLine": 1, "endColumn": 44, "text": "j: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 42, "endLine": 1, "endColumn": 42, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 14, "text": "sum_three_ints(i: Ghul.int, j: Ghul.int, k: Ghul.int) -> Ghul.int // global function" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 16, "text": "i: Ghul.int // local argument" },
+    { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 24, "text": "j: Ghul.int // local argument" },
+    { "startLine": 3, "startColumn": 32, "endLine": 3, "endColumn": 32, "text": "k: Ghul.int // local argument" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 21, "text": "struct Ghul.int" },
+    { "startLine": 3, "startColumn": 27, "endLine": 3, "endColumn": 29, "text": "struct Ghul.int" },
+    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 37, "text": "struct Ghul.int" },
+    { "startLine": 3, "startColumn": 43, "endLine": 3, "endColumn": 45, "text": "struct Ghul.int" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 12, "text": "i: Ghul.int // local argument" },
+    { "startLine": 4, "startColumn": 16, "endLine": 4, "endColumn": 16, "text": "j: Ghul.int // local argument" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },
+    { "startLine": 4, "startColumn": 20, "endLine": 4, "endColumn": 20, "text": "k: Ghul.int // local argument" },
+    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 18, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" }
+  ]
+}

@@ -1,0 +1,9 @@
+// >>>
+union Tree is
+    NODE(left: Tree, right: Tree);
+    LEAF(value: int);
+si
+// <<<
+
+entry() is
+si

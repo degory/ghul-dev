@@ -1,0 +1,12 @@
+{
+  "name": "hello-world",
+  "code": "entry() =>\n    IO.Std.write_line(\"hello, world\");",
+  "output": "hello, world\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 5, "text": "entry() -> Ghul.void // global function" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 6, "text": "namespace IO" },
+    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 10, "text": "class IO.Std" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 21, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" }
+  ]
+}

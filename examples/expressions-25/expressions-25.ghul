@@ -1,0 +1,20 @@
+entry() is
+    let x = 10;
+    let y = 5;
+    let sum = x + y;
+    let product = x * y;
+    let is_greater = x > y;
+
+    if is_greater then
+        IO.Std.write_line("x is greater than y");
+    else
+        IO.Std.write_line("x is not greater than y");
+    fi
+
+    let numbers = [1, 2, 3, 4, 5];
+    let first_number = numbers[0];
+
+    IO.Std.write_line(
+        "The first number is: {first_number}"
+    );
+si

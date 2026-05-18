@@ -1,0 +1,16 @@
+entry() is
+// >>>
+    let list = [1, 2, 3];
+
+    let index = 4;
+    let search_value = 3;
+
+    // false
+    let and_then =
+        index < list.count /\ list[index] == search_value;
+
+    // true
+    let or_else =
+        index >= list.count \/ list[index] != search_value;
+// <<<
+si

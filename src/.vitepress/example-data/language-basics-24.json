@@ -1,0 +1,18 @@
+{
+  "name": "language-basics-24",
+  "code": "let add = 1 + 2;\nlet sub = 3 - 1;\nlet mul = 3 * 3;\nlet div = 12 / 3;\nlet mod = 13 % 4;",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 7, "text": "add: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "text": "sub: Ghul.int // local value" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 13, "text": "Ghul.-(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.sub" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 7, "text": "mul: Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 13, "text": "Ghul.*(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.mul" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 7, "text": "div: Ghul.int // local value" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "text": "Ghul./(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.div" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 7, "text": "mod: Ghul.int // local value" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 14, "text": "Ghul.%(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.rem" }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "control-flow-11",
+  "code": "classify(a: Animal) is\n    if !isa Cat(a) then\n        write_line(\"not a cat\");\n        return;\n    fi\n\n    // every non-Cat has returned, so a is\n    // narrowed to Cat from here on\n    write_line(a.purr());\nsi",
+  "output": "whiskers purrs\nnot a cat\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 8, "text": "classify(a: Animal) -> Ghul.void // global function" },
+    { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 10, "text": "a: Animal // local argument" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 18, "text": "class Animal" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 15, "text": "class Cat" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "text": "a: Animal // local argument" },
+    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 8, "text": "Ghul.!(a: Ghul.bool) -> Ghul.bool // innate function bool.not" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 18, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 9, "startColumn": 16, "endLine": 9, "endColumn": 16, "text": "a: Cat // local argument" },
+    { "startLine": 9, "startColumn": 18, "endLine": 9, "endColumn": 21, "text": "Cat.purr() -> Ghul.string // method" }
+  ]
+}

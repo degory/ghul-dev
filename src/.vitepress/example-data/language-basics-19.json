@@ -1,0 +1,17 @@
+{
+  "name": "language-basics-19",
+  "code": "let maybe = lookup();\n\nif maybe? then\n    // fine: maybe is known to be present here\n    let title: string = maybe;\nfi\n\n// fine: ! asserts the value is present\nlet forced: string = maybe!;",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "maybe: Ghul.string? // local value" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 18, "text": "lookup() -> Ghul.string? // global function" },
+    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "text": "title: Ghul.string // local value" },
+    { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 21, "text": "class Ghul.string" },
+    { "startLine": 5, "startColumn": 25, "endLine": 5, "endColumn": 29, "text": "maybe: Ghul.string // local value" },
+    { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 10, "text": "forced: Ghul.string // local value" },
+    { "startLine": 9, "startColumn": 13, "endLine": 9, "endColumn": 18, "text": "class Ghul.string" },
+    { "startLine": 9, "startColumn": 22, "endLine": 9, "endColumn": 26, "text": "maybe: Ghul.string? // local value" },
+    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 8, "text": "maybe: Ghul.string? // local value" }
+  ]
+}

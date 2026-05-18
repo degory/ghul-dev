@@ -1,0 +1,18 @@
+{
+  "name": "expressions-15",
+  "code": "let sum = 10 + 5;           // Addition\nlet difference = 10 - 5;    // Subtraction\nlet product = 10 * 5;       // Multiplication\nlet quotient = 10 / 5;      // Division\nlet remainder = 10 % 3;     // Modulo (remainder)",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 7, "text": "sum: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "difference: Ghul.int // local value" },
+    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 21, "text": "Ghul.-(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.sub" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "text": "product: Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 18, "text": "Ghul.*(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.mul" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 12, "text": "quotient: Ghul.int // local value" },
+    { "startLine": 4, "startColumn": 19, "endLine": 4, "endColumn": 19, "text": "Ghul./(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.div" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 13, "text": "remainder: Ghul.int // local value" },
+    { "startLine": 5, "startColumn": 20, "endLine": 5, "endColumn": 20, "text": "Ghul.%(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.rem" }
+  ]
+}

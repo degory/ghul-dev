@@ -1,0 +1,24 @@
+{
+  "name": "functional-programming-19",
+  "code": "let curried_add = x => y => x + y;\n\nwrite_line(\"curried_add(5)(3): {curried_add(5)(3)}\");\n\nlet add_5 = curried_add(5);\nwrite_line(\"add_5(3): {add_5(3)}\");\n\nlet add_10 = curried_add(10);\nwrite_line(\"add_10(3): {add_10(3)}\");",
+  "output": "curried_add(5)(3): 8\nadd_5(3): 8\nadd_10(3): 13\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 19, "text": "x: Ghul.int // captured value" },
+    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 24, "text": "y: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "text": "curried_add: Ghul.int -> Ghul.int -> Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 29, "text": "x: Ghul.int // captured value" },
+    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 33, "text": "y: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 31, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 9, "text": "add_5: Ghul.int -> Ghul.int // local value" },
+    { "startLine": 5, "startColumn": 13, "endLine": 5, "endColumn": 23, "text": "curried_add: Ghul.int -> Ghul.int -> Ghul.int // local value" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 10, "text": "add_10: Ghul.int -> Ghul.int // local value" },
+    { "startLine": 8, "startColumn": 14, "endLine": 8, "endColumn": 24, "text": "curried_add: Ghul.int -> Ghul.int -> Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 3, "startColumn": 33, "endLine": 3, "endColumn": 43, "text": "curried_add: Ghul.int -> Ghul.int -> Ghul.int // local value" },
+    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 6, "startColumn": 24, "endLine": 6, "endColumn": 28, "text": "add_5: Ghul.int -> Ghul.int // local value" },
+    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 9, "startColumn": 25, "endLine": 9, "endColumn": 30, "text": "add_10: Ghul.int -> Ghul.int // local value" }
+  ]
+}

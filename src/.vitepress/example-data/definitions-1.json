@@ -1,0 +1,9 @@
+{
+  "name": "definitions-1",
+  "code": "let x = 10;",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "x: Ghul.int // local value" }
+  ]
+}

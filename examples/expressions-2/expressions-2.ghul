@@ -1,0 +1,6 @@
+entry() is
+// >>>
+    let c = 'c';
+    let u_macron = 'ū'
+// <<<
+si

@@ -1,0 +1,23 @@
+{
+  "name": "type-inference-4",
+  "code": "class CARRIER is\n    occupant: Animal;\n\n    init(occupant: Animal) is\n        self.occupant = occupant;\n    si\nsi\ndescribe(carrier: CARRIER) is\n    if isa Cat(carrier.occupant) then\n        // carrier.occupant is a property access,\n        // not a local variable — it is not narrowed,\n        // so carrier.occupant.purr() would not\n        // compile here\n        write_line(\"the carrier holds a cat\");\n    fi\nsi",
+  "output": "the carrier holds a cat\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "text": "class CARRIER" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "CARRIER.occupant: Animal // instance property" },
+    { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 20, "text": "class Animal" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 8, "text": "CARRIER.init(occupant: Animal) // constructor" },
+    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 17, "text": "occupant: Animal // local argument" },
+    { "startLine": 4, "startColumn": 20, "endLine": 4, "endColumn": 25, "text": "class Animal" },
+    { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 8, "text": "describe(carrier: CARRIER) -> Ghul.void // global function" },
+    { "startLine": 8, "startColumn": 10, "endLine": 8, "endColumn": 16, "text": "carrier: CARRIER // local argument" },
+    { "startLine": 8, "startColumn": 19, "endLine": 8, "endColumn": 25, "text": "class CARRIER" },
+    { "startLine": 9, "startColumn": 12, "endLine": 9, "endColumn": 14, "text": "class Cat" },
+    { "startLine": 9, "startColumn": 16, "endLine": 9, "endColumn": 22, "text": "carrier: CARRIER // local argument" },
+    { "startLine": 9, "startColumn": 24, "endLine": 9, "endColumn": 31, "text": "CARRIER.occupant: Animal // instance property" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 21, "text": "CARRIER.occupant: Animal // instance property" },
+    { "startLine": 5, "startColumn": 25, "endLine": 5, "endColumn": 32, "text": "occupant: Animal // local argument" },
+    { "startLine": 14, "startColumn": 9, "endLine": 14, "endColumn": 18, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" }
+  ]
+}

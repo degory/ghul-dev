@@ -1,0 +1,16 @@
+{
+  "name": "functional-programming-6",
+  "code": "let list = [1, 2, 3, 4, 5];\n\nlet element = list[3]; // elements can be read\n\nlist[3] = 6;",
+  "output": "",
+  "diagnostics": [
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 8, "severity": "error", "message": "indexer is read-only in Ghul.int[]" }
+  ],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "list: Ghul.int[] // local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "text": "element: Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 18, "text": "list: Ghul.int[] // local value" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 19, "text": "Collections.List[Ghul.int].get_Item(index: Ghul.int) -> Ghul.int // abstract method" },
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 4, "text": "list: Ghul.int[] // local value" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 5, "text": "Collections.List[Ghul.int].get_Item(index: Ghul.int) -> Ghul.int // abstract method" }
+  ]
+}

@@ -1,0 +1,12 @@
+// >>>
+union Option[T] is
+    SOME(value: T);
+    NONE;
+si
+// <<<
+
+entry() is
+// >>>
+    let some_int = Option.SOME(1234);
+// <<<
+si

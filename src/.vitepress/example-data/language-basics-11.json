@@ -1,0 +1,14 @@
+{
+  "name": "language-basics-11",
+  "code": "let point: (int, int) = (10, 20);\nlet person: (string, int) = (\"Alice\", 30);",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "point: (int, int) // local value" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 20, "text": "struct Ghul.int" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "person: (string, int) // local value" },
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 19, "text": "class Ghul.string" },
+    { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 24, "text": "struct Ghul.int" }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "language-basics-15",
+  "code": "let name: string? = \"Alice\"; // present\nlet nickname: string? = null; // absent",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "name: Ghul.string? // local value" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 16, "text": "class Ghul.string" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "nickname: Ghul.string? // local value" },
+    { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 20, "text": "class Ghul.string" }
+  ]
+}

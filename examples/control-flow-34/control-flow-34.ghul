@@ -1,0 +1,10 @@
+// >>>
+class InsufficientFundsException: System.Exception is
+    init(message: string) is
+        super.init(message);
+    si
+si
+// <<<
+
+entry() is
+si

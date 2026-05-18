@@ -56,12 +56,4 @@ In general during the course of exception handling or function return, you can i
 
 That object passes through enclosing catch and finally blocks, where it can be replaced by a different exception or return value, until control flow finally leaves the function.
 
-```ghul
-swallow(i: int) -> int is
-    try
-        return do_something_risky(i);
-    catch e: Exception
-        return 1234; // I'm sure it was fine
-    yrt
-si
-```
+<GhulExample name="todo-1" />

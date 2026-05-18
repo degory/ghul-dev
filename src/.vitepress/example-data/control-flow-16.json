@@ -1,0 +1,7 @@
+{
+  "name": "control-flow-16",
+  "code": "if let (name, _) = lookup(id) then\n    write_line(\"found {name}\");\nfi",
+  "output": "",
+  "diagnostics": [],
+  "hovers": []
+}

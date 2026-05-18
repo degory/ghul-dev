@@ -1,0 +1,22 @@
+{
+  "name": "definitions-23",
+  "code": "class COUNTER is\n    count: int;\n\n    init() is\n        count = 0;\n    si\n\n    init(initial_count: int) is\n        count = initial_count;\n    si\nsi\n// calls the parameterless overload of init()\nlet c = COUNTER();\n\n// calls init(initial_count: int)\nlet d = COUNTER(50);",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "text": "class COUNTER" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "COUNTER.count: Ghul.int // instance property" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "struct Ghul.int" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 8, "text": "COUNTER.init() // constructor" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "text": "COUNTER.init(initial_count: Ghul.int) // constructor" },
+    { "startLine": 8, "startColumn": 10, "endLine": 8, "endColumn": 22, "text": "initial_count: Ghul.int // local argument" },
+    { "startLine": 8, "startColumn": 25, "endLine": 8, "endColumn": 27, "text": "struct Ghul.int" },
+    { "startLine": 13, "startColumn": 5, "endLine": 13, "endColumn": 5, "text": "c: COUNTER // local value" },
+    { "startLine": 13, "startColumn": 9, "endLine": 13, "endColumn": 15, "text": "COUNTER.init() // constructor" },
+    { "startLine": 16, "startColumn": 5, "endLine": 16, "endColumn": 5, "text": "d: COUNTER // local value" },
+    { "startLine": 16, "startColumn": 9, "endLine": 16, "endColumn": 15, "text": "COUNTER.init(initial_count: Ghul.int) // constructor" },
+    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "text": "COUNTER.count: Ghul.int // instance property" },
+    { "startLine": 9, "startColumn": 9, "endLine": 9, "endColumn": 13, "text": "COUNTER.count: Ghul.int // instance property" },
+    { "startLine": 9, "startColumn": 17, "endLine": 9, "endColumn": 29, "text": "initial_count: Ghul.int // local argument" }
+  ]
+}

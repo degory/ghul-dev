@@ -1,0 +1,19 @@
+{
+  "name": "type-inference-5",
+  "code": "describe(carrier: CARRIER) is\n    // copy the property into a local variable\n    let occupant = carrier.occupant;\n\n    if isa Cat(occupant) then\n        // occupant is a local variable, narrowed\n        // to Cat in this branch\n        write_line(occupant.purr());\n    fi\nsi",
+  "output": "purr\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 8, "text": "describe(carrier: CARRIER) -> Ghul.void // global function" },
+    { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 16, "text": "carrier: CARRIER // local argument" },
+    { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 25, "text": "class CARRIER" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 16, "text": "occupant: Animal // local value" },
+    { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 26, "text": "carrier: CARRIER // local argument" },
+    { "startLine": 3, "startColumn": 28, "endLine": 3, "endColumn": 35, "text": "CARRIER.occupant: Animal // instance property" },
+    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 14, "text": "class Cat" },
+    { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 23, "text": "occupant: Animal // local value" },
+    { "startLine": 8, "startColumn": 9, "endLine": 8, "endColumn": 18, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 8, "startColumn": 20, "endLine": 8, "endColumn": 27, "text": "occupant: Cat // local value" },
+    { "startLine": 8, "startColumn": 29, "endLine": 8, "endColumn": 32, "text": "Cat.purr() -> Ghul.string // method" }
+  ]
+}

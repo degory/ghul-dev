@@ -1,0 +1,16 @@
+// >>>
+class THING[T] is
+    value: T;
+
+    init(value: T) is
+        self.value = value;
+    si
+si
+// <<<
+
+entry() is
+// >>>
+    let int_thing = THING(1234);
+    let string_thing = THING("hello");
+// <<<
+si

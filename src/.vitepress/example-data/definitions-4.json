@@ -1,0 +1,12 @@
+{
+  "name": "definitions-4",
+  "code": "let\n    initialize_now = 123,\n    initialize_later: int,\n    why_are_we_doing_this = \"I don't know\";",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 18, "text": "initialize_now: Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 20, "text": "initialize_later: Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 23, "endLine": 3, "endColumn": 25, "text": "struct Ghul.int" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 25, "text": "why_are_we_doing_this: Ghul.string // local value" }
+  ]
+}

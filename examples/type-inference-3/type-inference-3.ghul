@@ -1,0 +1,24 @@
+use IO.Std.write_line;
+
+class Animal is
+    init() is si
+si
+
+class Cat: Animal is
+    init() is super.init(); si
+    purr() -> string => "purr";
+si
+
+// >>>
+greet(a: Animal) is
+    if isa Cat(a) then
+        // a is a parameter of greet, narrowed to Cat
+        // in this branch
+        write_line(a.purr());
+    fi
+si
+// <<<
+
+entry() is
+    greet(Cat());
+si

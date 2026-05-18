@@ -1,0 +1,27 @@
+{
+  "name": "definitions-14",
+  "code": "class BOOK: Printable is\n    title: string;\n    author: string;\n\n    init(title: string, author: string) is\n        self.title = title;\n        self.author = author;\n    si\n\n    print() is\n        write_line(\"Title: {title}, Author: {author}\");\n    si\nsi",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 10, "text": "class BOOK" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 21, "text": "trait Printable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "BOOK.title: Ghul.string // instance property" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 17, "text": "class Ghul.string" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 10, "text": "BOOK.author: Ghul.string // instance property" },
+    { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 18, "text": "class Ghul.string" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 8, "text": "BOOK.init(title: Ghul.string, author: Ghul.string) // constructor" },
+    { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 14, "text": "title: Ghul.string // local argument" },
+    { "startLine": 5, "startColumn": 25, "endLine": 5, "endColumn": 30, "text": "author: Ghul.string // local argument" },
+    { "startLine": 5, "startColumn": 17, "endLine": 5, "endColumn": 22, "text": "class Ghul.string" },
+    { "startLine": 5, "startColumn": 33, "endLine": 5, "endColumn": 38, "text": "class Ghul.string" },
+    { "startLine": 10, "startColumn": 5, "endLine": 10, "endColumn": 9, "text": "BOOK.print() -> Ghul.void // method" },
+    { "startLine": 6, "startColumn": 14, "endLine": 6, "endColumn": 18, "text": "BOOK.title: Ghul.string // instance property" },
+    { "startLine": 6, "startColumn": 22, "endLine": 6, "endColumn": 26, "text": "title: Ghul.string // local argument" },
+    { "startLine": 7, "startColumn": 14, "endLine": 7, "endColumn": 19, "text": "BOOK.author: Ghul.string // instance property" },
+    { "startLine": 7, "startColumn": 23, "endLine": 7, "endColumn": 28, "text": "author: Ghul.string // local argument" },
+    { "startLine": 11, "startColumn": 9, "endLine": 11, "endColumn": 18, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 11, "startColumn": 29, "endLine": 11, "endColumn": 33, "text": "BOOK.title: Ghul.string // instance property" },
+    { "startLine": 11, "startColumn": 46, "endLine": 11, "endColumn": 51, "text": "BOOK.author: Ghul.string // instance property" }
+  ]
+}

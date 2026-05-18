@@ -1,0 +1,13 @@
+side_effect() -> int => 0;
+
+entry() is
+    let counter mut = 0;
+// >>>
+    let _ = side_effect();
+    let (_, _, third) = (1, 2, 3);
+    let only_first = (x: int, _: int) => x;
+    for _ in 1..10 do
+        counter = counter + 1;
+    od
+// <<<
+si

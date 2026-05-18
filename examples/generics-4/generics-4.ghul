@@ -1,0 +1,14 @@
+struct HOLD_SOMETHING[T] is
+    value: T;
+
+    init(value: T) is
+        self.value = value;
+    si
+si
+
+entry() is
+// >>>
+    let holds_int = HOLD_SOMETHING(1234);
+    let holds_string = HOLD_SOMETHING("hello");
+// <<<
+si

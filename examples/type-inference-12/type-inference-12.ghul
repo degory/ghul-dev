@@ -1,0 +1,25 @@
+class Base is
+    init() is si
+si
+
+class DERIVED: Base is
+    init() is super.init() si
+si
+
+entry() is
+// >>>
+    let derived =
+        if true then
+            DERIVED()
+        else
+            DERIVED()
+        fi;
+
+    let base =
+        if true then
+            DERIVED()
+        else
+            Base()
+        fi;
+// <<<
+si

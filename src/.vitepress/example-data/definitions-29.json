@@ -1,0 +1,12 @@
+{
+  "name": "definitions-29",
+  "code": "// the compiler places this in an auto-generated\n// namespace private to this source file\nentry() is\n    IO.Std.write_line(\"Hello, world!\");\nsi",
+  "output": "Hello, world!\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 5, "text": "entry() -> Ghul.void // global function" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 6, "text": "namespace IO" },
+    { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 10, "text": "class IO.Std" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 21, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" }
+  ]
+}

@@ -1,0 +1,26 @@
+use IO.Std.write_line;
+
+class InsufficientFundsException: System.Exception is
+    init(message: string) is
+        super.init(message);
+    si
+si
+
+withdraw(account: int, amount: int) -> int is
+    if amount > account then
+        throw InsufficientFundsException("only {account} available");
+    fi
+
+    return account - amount;
+si
+
+entry() is
+    let account = 50;
+// >>>
+    try
+        withdraw(account, 100);
+    catch e: InsufficientFundsException
+        write_line("declined: {e.message}");
+    yrt
+// <<<
+si

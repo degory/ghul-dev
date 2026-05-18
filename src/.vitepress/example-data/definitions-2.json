@@ -1,0 +1,10 @@
+{
+  "name": "definitions-2",
+  "code": "let x: int;",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "x: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 10, "text": "struct Ghul.int" }
+  ]
+}

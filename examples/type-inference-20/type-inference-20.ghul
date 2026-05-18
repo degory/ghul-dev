@@ -1,0 +1,8 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    let length_of = x => x.length;
+    write_line("{length_of("hello")}");
+// <<<
+si

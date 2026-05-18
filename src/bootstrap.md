@@ -9,7 +9,7 @@ The discussions on bootstrapping use [tombstone diagrams](https://en.wikipedia.o
 
 For example a compiler C that reads source in language S, translates it to language T, and is implemented in language I, would be depicted like this:
 
-![Example tombstone showing compiler for language S, targeting language T, written in language I](bootstrap-tombstone-example.drawio.svg)
+![Example tombstone showing compiler for language S, targeting language T, written in language I](/bootstrap-tombstone-example.drawio.svg)
 
 To use compiler C, we need a compiler for source language I, and a machine to execute target code T. Provided we have those, we can compile C with the compiler for I, and when we run the resulting executable, it will consume source code written in S, and produce target code that will execute on T. If the compiler for I won't run on the machine that executes T, then compiler C is a [cross compiler](https://en.wikipedia.org/wiki/Cross_compiler)
 
@@ -29,7 +29,7 @@ The initial bootstrap of ghūl involved several stages and I'll cover it in deta
 
 The original basis for the compiler was written many years ago. I was a compiler for a language quite different from ghūl - a language I called L. This L compiler was originally written in C++, and compiled the L language to x64 assembly language. I manually bootstrapped the L compiler by hand translating its C++ source code into L. This was made easier (if no less tedious) by carefully sticking to an L-compatible subset of C++ when writing the L compiler.
 
-![bootstrapping the L compiler](bootstrap-L-compiler-bootstrap-from-C++.drawio.svg)
+![bootstrapping the L compiler](/bootstrap-L-compiler-bootstrap-from-C++.drawio.svg)
 
 ## bootstrapping the ghūl compiler
 
@@ -42,13 +42,13 @@ The first version of the ghūl compiler was written in a language named L. L was
 
 A few years later, when I decided to design the ghūl programming language, I needed a new compiler. I wrote this first version of the ghūl compiler in L. Initially, this compiler was a simple source-level L to L transpiler, and did not understand the ghūl language at all:
 
-![The L to L transpiling 'ghul compiler'](bootstrap-L-to-L-transpiler.drawio.svg)
+![The L to L transpiling 'ghul compiler'](/bootstrap-L-to-L-transpiler.drawio.svg)
 
 As this simple 'ghūl compiler' performing no semantic analysis and generated L source code as its 'object code', it relied on the L compiler for semantic error detection and reporting and for x64 code generation.
 
 The combination of this L to L transpiler plus the self hosting L compiler was an L compiler that produced x64 executables with an intermediate step of transpiled L as an intermediate language. 
 
-![L compiler and the L to L transpiling 'ghul compiler'](bootstrap-L-to-L-transpiler-with-L-compiler.drawio.svg)
+![L compiler and the L to L transpiling 'ghul compiler'](/bootstrap-L-to-L-transpiler-with-L-compiler.drawio.svg)
 
 Note we are running the transpiler and the compiler together in sequence as if the combination of the two was a single compiler. The input language of the transpiler is translated into the output language of the compiler. This is not yet bootstrapping, so we're not nesting the tombstone diagrams together as we would for a bootstrap.
 
@@ -60,19 +60,19 @@ The reason the initial transpiler translated L to L is that I needed it to be ab
 
 I then enhanced this L to L transpiler so it could transpile L to ghūl and ghūl to L. Both versions of this transpiler were still written in L and still relied on the L compiler as a backend to generate the x64 executable from transpiled the L code.
 
-![Transpilers handling both L and ghul](bootstrap-ghūl-and-L-transpilers.drawio.svg)
+![Transpilers handling both L and ghul](/bootstrap-ghūl-and-L-transpilers.drawio.svg)
 
 ### transpiler bootstrap
 
 I passed the L source code of the ghūl to L transpiler through the L to ghūl transpiler, generating output in ghūl. This yielded a ghūl to L transpiler written in ghūl
 
-![Bootstrapping the ghūl to L transpiler](bootstrap-ghūl-self-hosting-transpiler.drawio.svg)
+![Bootstrapping the ghūl to L transpiler](/bootstrap-ghūl-self-hosting-transpiler.drawio.svg)
 
 **This step is the first bootstrap**: the source code of the ghūl to L transpiler that was L, has been transformed into ghūl, and so it can now transpile itself.
 
 I enhanced the ghūl to L transpiler so it called the L compiler automatically, and this combination of ghūl to L transpiler followed by the self hosting L compiler became the self-hosting ghūl language compiler front end.
 
-![All transpilers](bootstrap-all-transpilers.drawio.svg)
+![All transpilers](/bootstrap-all-transpilers.drawio.svg)
 
 However, this early version of the ghūl compiler was very crude and still depended on the L compiler for semantic analysis, error checking, and code generation.
 

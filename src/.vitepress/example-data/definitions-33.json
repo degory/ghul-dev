@@ -1,0 +1,16 @@
+{
+  "name": "definitions-33",
+  "code": "namespace UseExample is\n    use Example;\n\n    class ANOTHER_TEST: Test is\n        run() is si\n    si\nsi\n\nnamespace UseExample is\n    // Test still needs qualification here\n    class YET_ANOTHER_TEST: Example.Test is\n        run() is si\n    si\nsi",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 20, "text": "namespace UseExample" },
+    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 22, "text": "class UseExample.ANOTHER_TEST" },
+    { "startLine": 4, "startColumn": 25, "endLine": 4, "endColumn": 28, "text": "trait Example.Test" },
+    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 11, "text": "UseExample.ANOTHER_TEST.run() -> Ghul.void // method" },
+    { "startLine": 11, "startColumn": 11, "endLine": 11, "endColumn": 26, "text": "class UseExample.YET_ANOTHER_TEST" },
+    { "startLine": 11, "startColumn": 37, "endLine": 11, "endColumn": 40, "text": "trait Example.Test" },
+    { "startLine": 12, "startColumn": 9, "endLine": 12, "endColumn": 11, "text": "UseExample.YET_ANOTHER_TEST.run() -> Ghul.void // method" },
+    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 15, "text": "namespace Example" }
+  ]
+}

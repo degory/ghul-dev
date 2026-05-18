@@ -1,0 +1,3 @@
+if condition then
+    // code to execute if condition is true
+fi

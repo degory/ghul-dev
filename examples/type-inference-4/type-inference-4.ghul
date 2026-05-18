@@ -1,0 +1,36 @@
+use IO.Std.write_line;
+
+class Animal is
+    init() is si
+si
+
+class Cat: Animal is
+    init() is super.init(); si
+    purr() -> string => "purr";
+si
+
+// >>>
+class CARRIER is
+    occupant: Animal;
+
+    init(occupant: Animal) is
+        self.occupant = occupant;
+    si
+si
+// <<<
+
+// >>>
+describe(carrier: CARRIER) is
+    if isa Cat(carrier.occupant) then
+        // carrier.occupant is a property access,
+        // not a local variable — it is not narrowed,
+        // so carrier.occupant.purr() would not
+        // compile here
+        write_line("the carrier holds a cat");
+    fi
+si
+// <<<
+
+entry() is
+    describe(CARRIER(Cat()));
+si

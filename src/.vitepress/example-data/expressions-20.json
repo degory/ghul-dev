@@ -1,0 +1,10 @@
+{
+  "name": "expressions-20",
+  "code": "let length = \"Hello\".length;",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "length: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 27, "text": "Ghul.string.length: Ghul.int // instance property" }
+  ]
+}

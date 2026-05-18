@@ -1,0 +1,13 @@
+{
+  "name": "expressions-1",
+  "code": "let i = 12_345_678; // int\nlet hex = 0x1234_ABCD; // int\nlet long = 1_000_000_000_000_000L; // long\n\nlet hex_unsigned_long = 0x1234_5678__9ABC_DEF0_UL; // ulong\n\nlet b = 99b; // byte",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: Ghul.int // local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "text": "hex: Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "long: Ghul.long // local value" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 21, "text": "hex_unsigned_long: Ghul.ulong // local value" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 5, "text": "b: Ghul.byte // local value" }
+  ]
+}

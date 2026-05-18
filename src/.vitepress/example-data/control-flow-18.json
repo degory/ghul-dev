@@ -1,0 +1,7 @@
+{
+  "name": "control-flow-18",
+  "code": "while condition do\n    // code to execute while the condition is true\nod",
+  "output": "",
+  "diagnostics": [],
+  "hovers": []
+}

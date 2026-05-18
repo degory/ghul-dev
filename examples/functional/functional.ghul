@@ -1,0 +1,53 @@
+use IO.Std.write_line;
+use Ghul.Pipes.stream;
+
+entry() is
+    // lazily generates an infinite sequence of
+    // fibonacci numbers:
+    let fibonacci_sequence = stream(
+        (prev = 1, current = 1),
+        s =>
+            s.current || (
+                prev = s.current,
+                current = s.prev + s.current
+            )
+    );
+
+    // lazily generates an infinite sequence of
+    // factorials:
+    let factorial_sequence = stream(
+        (n = 1, prev = 1),
+        s =>
+            let next_n = s.n + 1, next = s.prev * next_n in
+            next || (n = next_n, prev = next)
+    );
+
+    let first_10_fib = fibonacci_sequence | .take(10);
+    let first_10_fact = factorial_sequence | .take(10);
+
+    let first_10_even =
+        fibonacci_sequence
+            | .filter(x => x % 2 == 0)
+            .take(10);
+
+    write_line(
+        "first 10 fibonacci numbers: {first_10_fib}"
+    );
+    write_line(
+        "first 10 factorial numbers: {first_10_fact}"
+    );
+    write_line(
+        "first 10 even fibonacci numbers: {first_10_even}"
+    );
+
+    let indexed =
+        fibonacci_sequence
+            | .zip(factorial_sequence)
+            .take(10)
+            .index();
+
+    for (i, (fib, fact)) in indexed do
+        write_line("fibonacci {i} is {fib}");
+        write_line("factorial {i} is {fact}");
+    od;
+si

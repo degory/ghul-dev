@@ -1,0 +1,10 @@
+entry() is
+// >>>
+    let a = default[int];   // 0
+    let b: string = default;   // null
+// <<<
+si
+
+// >>>
+zero[T]() -> T => default;
+// <<<

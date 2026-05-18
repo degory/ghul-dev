@@ -1,0 +1,19 @@
+{
+  "name": "definitions-5",
+  "code": "let _ = side_effect();\nlet (_, _, third) = (1, 2, 3);\nlet only_first = (x: int, _: int) => x;\nfor _ in 1..10 do\n    counter = counter + 1;\nod",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 16, "text": "third: Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 19, "text": "x: Ghul.int // local argument" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "only_first: (Ghul.int, Ghul.int) -> Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 24, "text": "struct Ghul.int" },
+    { "startLine": 3, "startColumn": 30, "endLine": 3, "endColumn": 32, "text": "struct Ghul.int" },
+    { "startLine": 3, "startColumn": 38, "endLine": 3, "endColumn": 38, "text": "x: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 19, "text": "side_effect() -> Ghul.int // global function" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 12, "text": "Ghul...(from: Ghul.int, to: Ghul.int) -> Ghul.INT_RANGE // innate function range.exclusive" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 11, "text": "counter: Ghul.int // local variable" },
+    { "startLine": 5, "startColumn": 15, "endLine": 5, "endColumn": 21, "text": "counter: Ghul.int // local variable" },
+    { "startLine": 5, "startColumn": 23, "endLine": 5, "endColumn": 23, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" }
+  ]
+}

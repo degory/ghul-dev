@@ -1,0 +1,16 @@
+use IO.Std.write_line;
+
+union Option[T] is
+    SOME(value: T);
+    NONE;
+si
+
+entry() is
+    let an_option: Option[int] = Option.SOME(42);
+// >>>
+    if an_option.is_some then
+        let value = an_option.value;
+        write_line("the option holds {value}");
+    fi
+// <<<
+si

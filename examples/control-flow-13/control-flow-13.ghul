@@ -1,0 +1,22 @@
+use IO.Std.write_line;
+
+class Animal is si
+
+class Cat: Animal is
+    name: string;
+    init(name: string) is self.name = name; si
+    purr() -> string => "{name} purrs";
+si
+
+entry() is
+    let a: Animal = Cat("whiskers");
+// >>>
+    if let c: Cat = a then
+        // c has type Cat here; it is not in scope in
+        // the else branch, or after the fi
+        write_line(c.purr());
+    else
+        write_line("not a cat");
+    fi
+// <<<
+si

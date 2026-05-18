@@ -1,0 +1,7 @@
+{
+  "name": "control-flow-40",
+  "code": "try\n    // Code that might throw an exception\nfinally\n    // Clean-up code, always executed\nyrt",
+  "output": "",
+  "diagnostics": [],
+  "hovers": []
+}

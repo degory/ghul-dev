@@ -1,0 +1,16 @@
+{
+  "name": "language-basics-7",
+  "code": "let my_int: int = 42;\nlet my_float: double = 3.14d;\nlet my_bool: bool = true;\nlet my_char: char = 'A';",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "my_int: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "text": "struct Ghul.int" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "my_float: Ghul.double // local value" },
+    { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 20, "text": "struct Ghul.double" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "text": "my_bool: Ghul.bool // local value" },
+    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 17, "text": "struct Ghul.bool" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "text": "my_char: Ghul.char // local value" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 17, "text": "struct Ghul.char" }
+  ]
+}

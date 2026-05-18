@@ -1,0 +1,18 @@
+{
+  "name": "type-inference-15",
+  "code": "let returns_int = (i: int) => i * 2;\nlet returns_string = (s: string) => \"{s}{s}\";",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "text": "i: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "text": "returns_int: Ghul.int -> Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 25, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 31, "text": "i: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 33, "text": "Ghul.*(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.mul" },
+    { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 23, "text": "s: Ghul.string // local argument" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 18, "text": "returns_string: Ghul.string -> Ghul.string // local value" },
+    { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 31, "text": "class Ghul.string" },
+    { "startLine": 2, "startColumn": 39, "endLine": 2, "endColumn": 39, "text": "s: Ghul.string // local argument" },
+    { "startLine": 2, "startColumn": 42, "endLine": 2, "endColumn": 42, "text": "s: Ghul.string // local argument" }
+  ]
+}

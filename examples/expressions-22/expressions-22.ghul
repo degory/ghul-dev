@@ -1,0 +1,15 @@
+class POINT is
+    x: int;
+    y: int;
+
+    init(x: int, y: int) is
+        self.x = x;
+        self.y = y;
+    si
+si
+
+entry() is
+// >>>
+    let point = POINT(10, 20);
+// <<<
+si

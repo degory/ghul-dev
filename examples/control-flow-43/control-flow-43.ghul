@@ -1,0 +1,18 @@
+// >>>
+tries: int;
+// <<<
+
+// >>>
+try_something(limit: int) is
+    if tries > limit then
+        return; // give up
+    fi
+
+    tries = tries + 1;
+
+    // do stuff
+si
+// <<<
+
+entry() is
+si

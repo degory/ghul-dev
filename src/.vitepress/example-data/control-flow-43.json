@@ -1,0 +1,19 @@
+{
+  "name": "control-flow-43",
+  "code": "tries: int;\ntry_something(limit: int) is\n    if tries > limit then\n        return; // give up\n    fi\n\n    tries = tries + 1;\n\n    // do stuff\nsi",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 5, "text": "tries: Ghul.int // global property" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 10, "text": "struct Ghul.int" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 13, "text": "try_something(limit: Ghul.int) -> Ghul.void // global function" },
+    { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 19, "text": "limit: Ghul.int // local argument" },
+    { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 24, "text": "struct Ghul.int" },
+    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 12, "text": "tries: Ghul.int // global property" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 20, "text": "limit: Ghul.int // local argument" },
+    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 9, "text": "tries: Ghul.int // global property" },
+    { "startLine": 7, "startColumn": 13, "endLine": 7, "endColumn": 17, "text": "tries: Ghul.int // global property" },
+    { "startLine": 7, "startColumn": 19, "endLine": 7, "endColumn": 19, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" }
+  ]
+}

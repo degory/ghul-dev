@@ -1,0 +1,15 @@
+{
+  "name": "control-flow-34",
+  "code": "class InsufficientFundsException: System.Exception is\n    init(message: string) is\n        super.init(message);\n    si\nsi",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 32, "text": "class InsufficientFundsException" },
+    { "startLine": 1, "startColumn": 42, "endLine": 1, "endColumn": 50, "text": "class System.Exception" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "InsufficientFundsException.init(message: Ghul.string) // constructor" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 16, "text": "message: Ghul.string // local argument" },
+    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "text": "class Ghul.string" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 18, "text": "System.Exception.init(message: Ghul.string) -> Ghul.void // method" },
+    { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 26, "text": "message: Ghul.string // local argument" }
+  ]
+}

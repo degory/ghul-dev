@@ -1,0 +1,7 @@
+{
+  "name": "control-flow-2",
+  "code": "if condition then\n    // code to execute if condition is true\nfi",
+  "output": "",
+  "diagnostics": [],
+  "hovers": []
+}

@@ -1,0 +1,15 @@
+{
+  "name": "control-flow-13",
+  "code": "if let c: Cat = a then\n    // c has type Cat here; it is not in scope in\n    // the else branch, or after the fi\n    write_line(c.purr());\nelse\n    write_line(\"not a cat\");\nfi",
+  "output": "whiskers purrs\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 8, "text": "c: Cat // local value" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 13, "text": "class Cat" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "text": "a: Animal // local value" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 4, "startColumn": 16, "endLine": 4, "endColumn": 16, "text": "c: Cat // local value" },
+    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 21, "text": "Cat.purr() -> Ghul.string // method" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" }
+  ]
+}

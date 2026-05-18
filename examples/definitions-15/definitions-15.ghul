@@ -1,0 +1,25 @@
+use IO.Std.write_line;
+
+// >>>
+trait Logged is
+    log() is
+        write_line("(no log message provided)");
+    si
+si
+
+class SILENT: Logged is
+    init() is si
+si
+
+class NOISY: Logged is
+    init() is si
+
+    log() is
+        super.log();
+        write_line("plus my own message");
+    si
+si
+// <<<
+
+entry() is
+si

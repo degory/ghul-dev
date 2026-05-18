@@ -1,0 +1,26 @@
+{
+  "name": "functional-programming-20",
+  "code": "let add = (x, y) => x + y;\n\nlet add_5 = y => add(5, y);\nwrite_line(\"add_5(3): {add_5(3)}\");\n\nlet add_10 = y => add(10, y);\nwrite_line(\"add_10(3): {add_10(3)}\");",
+  "output": "add_5(3): 8\nadd_10(3): 13\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 12, "text": "x: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 15, "text": "y: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 7, "text": "add: (Ghul.int, Ghul.int) -> Ghul.int // captured value" },
+    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 21, "text": "x: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "text": "y: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },
+    { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 13, "text": "y: Ghul.int // local argument" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "text": "add_5: Ghul.int -> Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 20, "text": "add: (Ghul.int, Ghul.int) -> Ghul.int // captured value" },
+    { "startLine": 3, "startColumn": 25, "endLine": 3, "endColumn": 25, "text": "y: Ghul.int // local argument" },
+    { "startLine": 6, "startColumn": 14, "endLine": 6, "endColumn": 14, "text": "y: Ghul.int // local argument" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 10, "text": "add_10: Ghul.int -> Ghul.int // local value" },
+    { "startLine": 6, "startColumn": 19, "endLine": 6, "endColumn": 21, "text": "add: (Ghul.int, Ghul.int) -> Ghul.int // captured value" },
+    { "startLine": 6, "startColumn": 27, "endLine": 6, "endColumn": 27, "text": "y: Ghul.int // local argument" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 4, "startColumn": 24, "endLine": 4, "endColumn": 28, "text": "add_5: Ghul.int -> Ghul.int // local value" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 7, "startColumn": 25, "endLine": 7, "endColumn": 30, "text": "add_10: Ghul.int -> Ghul.int // local value" }
+  ]
+}

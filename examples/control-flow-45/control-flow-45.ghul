@@ -1,0 +1,16 @@
+// expect: warning
+use IO.Std.write_line;
+
+// >>>
+default_return() -> int is
+    // do nothing, return 0
+si
+// <<<
+
+entry() is
+// >>>
+    let i = default_return();
+    assert i == 0;
+// <<<
+    write_line("default return value is {i}");
+si

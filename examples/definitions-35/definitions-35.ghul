@@ -1,0 +1,12 @@
+// >>>
+class THING is
+    do_something_public() is
+    si
+
+    _do_something_protected() is
+    si
+si
+// <<<
+
+entry() is
+si

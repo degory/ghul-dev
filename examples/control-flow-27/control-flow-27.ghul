@@ -1,0 +1,12 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    for counter in 0..10 do
+        if counter == 5 then
+            break;
+        fi
+        write_line(counter);
+    od
+// <<<
+si

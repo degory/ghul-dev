@@ -1,0 +1,15 @@
+{
+  "name": "control-flow-3",
+  "code": "let list = [1, 2, 3, 4];\n\nif list.count > 0 then\n    write_line(\"list has {list.count} elements\");\nfi",
+  "output": "list has 4 elements\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "list: Ghul.int[] // local value" },
+    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 7, "text": "list: Ghul.int[] // local value" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 13, "text": "Collections.Bag.count: Ghul.int // instance property" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 15, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 4, "startColumn": 27, "endLine": 4, "endColumn": 30, "text": "list: Ghul.int[] // local value" },
+    { "startLine": 4, "startColumn": 32, "endLine": 4, "endColumn": 36, "text": "Collections.Bag.count: Ghul.int // instance property" }
+  ]
+}

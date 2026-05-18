@@ -1,0 +1,3 @@
+for variable in iterable do
+    // variable is set to each element of iterator in turn
+od

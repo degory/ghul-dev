@@ -1,0 +1,10 @@
+{
+  "name": "definitions-13",
+  "code": "trait Printable is\n    print();\nsi",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 15, "text": "trait Printable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "Printable.print() -> Ghul.void // abstract method" }
+  ]
+}

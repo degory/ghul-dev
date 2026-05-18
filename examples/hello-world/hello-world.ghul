@@ -1,0 +1,2 @@
+entry() =>
+    IO.Std.write_line("hello, world");

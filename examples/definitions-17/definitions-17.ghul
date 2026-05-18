@@ -1,0 +1,19 @@
+use IO.Std.write_line;
+
+union Tree is
+    NODE(left: Tree, right: Tree);
+    LEAF(value: int);
+si
+
+entry() is
+// >>>
+    let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));
+    let leaf = Tree.LEAF(123);
+
+    if tree.is_node then
+        write_line("have tree node");
+    elif tree.is_leaf then
+        write_line("have tree leaf");
+    fi
+// <<<
+si

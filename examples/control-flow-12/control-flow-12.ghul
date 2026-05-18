@@ -1,0 +1,20 @@
+use IO.Std.write_line;
+
+class Animal is si
+
+class Cat: Animal is
+    name: string;
+    init(name: string) is self.name = name; si
+    purr() -> string => "{name} purrs";
+si
+
+entry() is
+    let a: Animal = Cat("whiskers");
+// >>>
+    let c = cast Cat(a);
+
+    if c? then
+        write_line(c.purr());
+    fi
+// <<<
+si

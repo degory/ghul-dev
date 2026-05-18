@@ -1,0 +1,7 @@
+entry() is
+// >>>
+    let a_string = "12345";
+    let an_int = 12345;
+    let an_int_array = [1, 2, 3, 4, 5];
+// <<<
+si

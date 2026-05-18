@@ -1,0 +1,24 @@
+/* Fira Code (variable) for the runnable example component — ligatures,
+   including ss07's `=~` / `!~`, are enabled where it is applied. */
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url('https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/woff2/FiraCode-VF.woff2') format('woff2');
+}
+
+/* ghūl brand green, carried over from the previous VuePress palette. */
+:root {
+  --vp-c-brand-1: #338b63;
+  --vp-c-brand-2: #3eaf7c;
+  --vp-c-brand-3: #3eaf7c;
+  --vp-c-brand-soft: rgba(62, 175, 124, 0.14);
+}
+
+.dark {
+  --vp-c-brand-1: #4cc08c;
+  --vp-c-brand-2: #3eaf7c;
+  --vp-c-brand-3: #338b63;
+  --vp-c-brand-soft: rgba(62, 175, 124, 0.16);
+}

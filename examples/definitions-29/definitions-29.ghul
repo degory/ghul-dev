@@ -1,0 +1,5 @@
+// the compiler places this in an auto-generated
+// namespace private to this source file
+entry() is
+    IO.Std.write_line("Hello, world!");
+si

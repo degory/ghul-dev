@@ -1,0 +1,5 @@
+use Example; // imports Example.TEST and Example.Test
+
+...
+
+let t: Test;

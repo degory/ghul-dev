@@ -1,0 +1,8 @@
+if first_condition then
+    // code for first condition
+elif second_condition then
+    // code for second condition
+// ... (more elif conditions if needed) ...
+else
+    // code if all conditions are false
+fi

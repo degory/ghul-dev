@@ -1,0 +1,17 @@
+// >>>
+class Base is
+    init() is si
+si
+
+class DERIVED: Base is
+    init() is super.init() si
+si
+// <<<
+
+entry() is
+// >>>
+    let array_of_base = [Base(), DERIVED()];
+    let array_of_object = [Base(), DERIVED(), object()];
+    let array_of_int = [1, 2, 3, 4, 5];
+// <<<
+si

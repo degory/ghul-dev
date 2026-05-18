@@ -1,0 +1,14 @@
+{
+  "name": "control-flow-32",
+  "code": "case value\nwhen -1:\n    return \"minus one\";\n\nwhen 0:\n    let result = \"zero\";\n    return result;\n\nwhen 1:\n    return \"one\";\n\nwhen 2:\n    return \"two\";\n\nwhen 3:\n    return \"three\";\n\nwhen 4:\n    return \"four\";\n\nwhen 5:\n    let result = \"five\";\n    return result;\n\nwhen 6, 7, 8, 9:\n    return \"more than five and less than ten\";\n\nwhen 13:\n    return \"unlucky\";\n\ndefault\n    return \"less than -1 or more than nine\";\nesac",
+  "output": "zero\nthree\nmore than five and less than ten\nunlucky\nless than -1 or more than nine\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 6, "startColumn": 9, "endLine": 6, "endColumn": 14, "text": "result: Ghul.string // local value" },
+    { "startLine": 22, "startColumn": 9, "endLine": 22, "endColumn": 14, "text": "result: Ghul.string // local value" },
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 10, "text": "value: Ghul.int // local argument" },
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 6, "text": "Ghul.-(a: Ghul.int) -> Ghul.int // innate function arithmetic.neg" },
+    { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 17, "text": "result: Ghul.string // local value" },
+    { "startLine": 23, "startColumn": 12, "endLine": 23, "endColumn": 17, "text": "result: Ghul.string // local value" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "control-flow-30",
+  "code": "let counter mut = 0;\ndo\n    write_line(counter);\n    counter = counter + 1;\n    if counter == 5 then\n        break;\n    fi\nod",
+  "output": "0\n1\n2\n3\n4\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "counter: Ghul.int // local variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.int) -> Ghul.void // class method" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "text": "counter: Ghul.int // local variable" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "text": "counter: Ghul.int // local variable" },
+    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 21, "text": "counter: Ghul.int // local variable" },
+    { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 23, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },
+    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 14, "text": "counter: Ghul.int // local variable" },
+    { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 17, "text": "Ghul.==(a: Ghul.int, b: Ghul.int) -> Ghul.bool // innate function compare.value" }
+  ]
+}

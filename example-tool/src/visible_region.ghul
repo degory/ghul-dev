@@ -1,0 +1,230 @@
+namespace ExampleTool is
+    use Collections.LIST;
+    use Collections.MAP;
+    use System.Text.StringBuilder;
+
+    // A `// >>>` line opens a visible region; `// <<<` closes it. The marker
+    // lines and everything outside a region are scaffold — compiled and run,
+    // but not displayed.
+    MARKER_OPEN: string static => "// >>>";
+    MARKER_CLOSE: string static => "// <<<";
+
+    // A hover span. Coordinates are 1-based line/column — both as the
+    // analyser reports them (whole-file) and, after `VISIBLE_REGION.translate`,
+    // relative to the displayed slice.
+    class HOVER is
+        start_line: int public;
+        start_column: int public;
+        end_line: int public;
+        end_column: int public;
+        text: string public;
+
+        init(start_line: int, start_column: int, end_line: int, end_column: int, text: string) is
+            self.start_line = start_line;
+            self.start_column = start_column;
+            self.end_line = end_line;
+            self.end_column = end_column;
+            self.text = text;
+        si
+    si
+
+    // A compiler diagnostic. Coordinates are 1-based line/column — as the
+    // compiler reports them (whole-file) and, after
+    // `VISIBLE_REGION.translate_diagnostic`, relative to the displayed slice.
+    // `severity` is "error" or "warning".
+    class DIAGNOSTIC is
+        start_line: int public;
+        start_column: int public;
+        end_line: int public;
+        end_column: int public;
+        severity: string public;
+        message: string public;
+
+        init(start_line: int, start_column: int, end_line: int, end_column: int, severity: string, message: string) is
+            self.start_line = start_line;
+            self.start_column = start_column;
+            self.end_line = end_line;
+            self.end_column = end_column;
+            self.severity = severity;
+            self.message = message;
+        si
+    si
+
+    // Where one original source line lands in the displayed slice.
+    class DISPLAY_LINE is
+        line: int public;     // 1-based line in the displayed code
+        dedent: int public;   // leading-whitespace columns stripped from it
+
+        init(line: int, dedent: int) is
+            self.line = line;
+            self.dedent = dedent;
+        si
+    si
+
+    // The displayed slice of an example: scaffold removed, each visible
+    // region de-indented to column 1. Knows how to translate an analyser
+    // hover (whole-file, 1-based) onto the displayed text.
+    class VISIBLE_REGION is
+        code: string public;
+        _lines: MAP[int, DISPLAY_LINE];
+
+        init(code: string, lines: MAP[int, DISPLAY_LINE]) is
+            self.code = code;
+            _lines = lines;
+        si
+
+        // Translate one hover onto the displayed text. Null when the hover
+        // does not lie wholly within visible lines, or when de-indenting
+        // would place a column before the start of the line.
+        translate(hover: HOVER) -> HOVER? is
+            if
+                !_lines.contains_key(hover.start_line) \/
+                !_lines.contains_key(hover.end_line)
+            then
+                return null;
+            fi
+
+            let start = _lines[hover.start_line];
+            let end = _lines[hover.end_line];
+
+            let start_column = hover.start_column - start.dedent;
+            let end_column = hover.end_column - end.dedent;
+
+            if start_column < 1 \/ end_column < 1 then
+                return null;
+            fi
+
+            return HOVER(start.line, start_column, end.line, end_column, hover.text);
+        si
+
+        // Translate one diagnostic onto the displayed text. Null when it does
+        // not lie wholly within visible lines. A column pushed before the
+        // start of its line by de-indenting is clamped to column 1 rather
+        // than dropped — the squiggle should still mark the visible text.
+        translate_diagnostic(diagnostic: DIAGNOSTIC) -> DIAGNOSTIC? is
+            if
+                !_lines.contains_key(diagnostic.start_line) \/
+                !_lines.contains_key(diagnostic.end_line)
+            then
+                return null;
+            fi
+
+            let start = _lines[diagnostic.start_line];
+            let end = _lines[diagnostic.end_line];
+
+            let raw_start = diagnostic.start_column - start.dedent;
+            let raw_end = diagnostic.end_column - end.dedent;
+
+            let start_column = if raw_start < 1 then 1 else raw_start fi;
+            let end_column = if raw_end < 1 then 1 else raw_end fi;
+
+            return DIAGNOSTIC(
+                start.line, start_column, end.line, end_column,
+                diagnostic.severity, diagnostic.message
+            );
+        si
+    si
+
+    _leading_whitespace(line: string) -> int is
+        let n mut = 0;
+        for c in line do
+            if c == ' ' \/ c == '\t' then
+                n = n + 1;
+            else
+                break;
+            fi
+        od
+        return n;
+    si
+
+    // Slice the visible region(s) out of an example source and de-indent
+    // each region so it starts at column 1. A source with no markers is
+    // displayed whole.
+    extract_visible(source: string) -> VISIBLE_REGION is
+        // A trailing newline would split into a spurious empty final line.
+        let body =
+            if source.length > 0 /\ source.ends_with('\n') then
+                source.substring(0, source.length - 1)
+            else
+                source
+            fi;
+
+        let raw = LIST[string](body.split(['\n']));
+
+        let has_markers mut = false;
+        for line in raw do
+            if line.trim() =~ MARKER_OPEN then
+                has_markers = true;
+            fi
+        od
+
+        // Group visible lines into regions, carrying original 1-based numbers.
+        let regions = LIST[LIST[int]]();
+
+        if has_markers then
+            let current: LIST[int]? mut = null;
+            let i mut = 0;
+            while i < raw.count do
+                let trimmed = raw[i].trim();
+
+                if trimmed =~ MARKER_OPEN then
+                    let fresh = LIST[int]();
+                    regions.add(fresh);
+                    current = fresh;
+                elif trimmed =~ MARKER_CLOSE then
+                    current = null;
+                elif current? then
+                    current.add(i + 1);
+                fi
+
+                i = i + 1;
+            od
+        else
+            let all = LIST[int]();
+            let i mut = 0;
+            while i < raw.count do
+                all.add(i + 1);
+                i = i + 1;
+            od
+            regions.add(all);
+        fi
+
+        let code = StringBuilder();
+        let lines = MAP[int, DISPLAY_LINE]();
+        let display mut = 0;
+        let first mut = true;
+
+        for region in regions do
+            // Common leading whitespace across this region's non-blank lines.
+            let dedent mut = 1_000_000_000;
+            for original in region do
+                let text = raw[original - 1];
+                let ws = _leading_whitespace(text);
+                if ws < text.length /\ ws < dedent then
+                    dedent = ws;
+                fi
+            od
+            if dedent == 1_000_000_000 then
+                dedent = 0;
+            fi
+
+            for original in region do
+                let text = raw[original - 1];
+                display = display + 1;
+
+                if !first then
+                    code.append('\n');
+                fi
+                first = false;
+
+                if text.length > dedent then
+                    code.append(text.substring(dedent));
+                fi
+
+                lines[original] = DISPLAY_LINE(display, dedent);
+            od
+        od
+
+        return VISIBLE_REGION(code.to_string(), lines);
+    si
+si

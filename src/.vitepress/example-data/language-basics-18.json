@@ -1,0 +1,18 @@
+{
+  "name": "language-basics-18",
+  "code": "let label: string = null;\n\nlet maybe = lookup();\n\nlet title: string = maybe;",
+  "output": "",
+  "diagnostics": [
+    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 25, "severity": "warning", "message": "null where a non-optional Ghul.string is expected" },
+    { "startLine": 5, "startColumn": 21, "endLine": 5, "endColumn": 26, "severity": "warning", "message": "maybe may not hold a value, but a non-optional Ghul.string is expected" }
+  ],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "label: Ghul.string // local value" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 17, "text": "class Ghul.string" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "text": "maybe: Ghul.string? // local value" },
+    { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 18, "text": "lookup() -> Ghul.string? // global function" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 9, "text": "title: Ghul.string // local value" },
+    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 17, "text": "class Ghul.string" },
+    { "startLine": 5, "startColumn": 21, "endLine": 5, "endColumn": 25, "text": "maybe: Ghul.string? // local value" }
+  ]
+}

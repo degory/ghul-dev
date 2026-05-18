@@ -1,0 +1,12 @@
+try
+    let content = File.read_all_text("file.txt");
+    write_line(content);
+
+    write_line("File processing completed.");
+catch e: FileNotFoundException
+    // Handle the case where the file is not found
+    write_line("Error: file not found: {e.message}");
+catch e: IOException
+    // Handle errors during file reading
+    write_line("Error: reading file: {e.message}");
+yrt

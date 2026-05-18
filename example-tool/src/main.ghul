@@ -1,0 +1,332 @@
+namespace ExampleTool is
+    use IO.Std;
+    use IO.File;
+    use IO.Path;
+    use IO.Directory;
+
+    use Collections.LIST;
+
+    use Analysis.Protocol.ANALYSER_PROCESS;
+
+    // Generates a rendered-example artifact (<name>.json) for every example
+    // directory under the given root. An example directory holds a single
+    // `<dirname>.ghul` source file — nothing else.
+    //
+    // Per example, driving the pinned compiler directly (no ghul-test, no
+    // MSBuild): compile it, run the compiled binary capturing its output,
+    // and drive the analyser for hover data; then slice and de-indent the
+    // visible region, translate hover coordinates onto the displayed text,
+    // and write <output-dir>/<name>.json.
+    entry(arguments: string[]) is
+        if arguments.count < 2 then
+            Std.error.write_line("usage: example-tool <examples-root-dir> <output-dir>");
+            return;
+        fi
+
+        let examples_root = arguments[0];
+        let output_dir = arguments[1];
+
+        Directory.create_directory(output_dir);
+
+        let failed mut = false;
+
+        for example_dir in Directory.get_directories(examples_root) do
+            let name = Path.get_file_name(example_dir);
+
+            if File.exists(Path.combine(example_dir, "{name}.ghul")) then
+                if !generate(example_dir, output_dir) then
+                    failed = true;
+                fi
+            fi
+        od
+
+        // Snippets — illustrative ghūl that can't reasonably compile — live
+        // in a sibling `snippets/` directory and are rendered code-only.
+        let snippets_root = Path.combine(Path.get_directory_name(examples_root), "snippets");
+
+        if Directory.exists(snippets_root) then
+            for snippet_dir in Directory.get_directories(snippets_root) do
+                let name = Path.get_file_name(snippet_dir);
+
+                if File.exists(Path.combine(snippet_dir, "{name}.ghul")) then
+                    generate_snippet(snippet_dir, output_dir);
+                fi
+            od
+        fi
+
+        if failed then
+            System.Environment.exit(1);
+        fi
+    si
+
+    // A snippet is illustrative ghūl that cannot reasonably compile (a syntax
+    // skeleton with placeholders). It is rendered with the same markup as a
+    // real example — just no hover, no diagnostics, no output panel.
+    generate_snippet(snippet_dir: string, output_dir: string) is
+        let name = Path.get_file_name(snippet_dir);
+        let source = File.read_all_text(Path.combine(snippet_dir, "{name}.ghul"));
+
+        let region = extract_visible(source);
+
+        let json = build_artifact_json(
+            name, region.code, Collections.LIST[HOVER](), "", Collections.LIST[DIAGNOSTIC]()
+        );
+        File.write_all_text(Path.combine(output_dir, "{name}.json"), json);
+
+        Std.out.write_line("snippet {name}");
+    si
+
+    // An example declares its intended compile outcome with a scaffold
+    // comment `// expect: ok | warning | error` (absent ⇒ `ok`). The tool
+    // fails the build when the actual outcome class differs — so an example
+    // that silently starts failing, or a deliberate-error demo that starts
+    // compiling, is caught.
+    _parse_expect(source: string) -> string is
+        let marker = "// expect:";
+
+        for line in source.split(['\n']) do
+            let trimmed = line.trim();
+            if trimmed.starts_with(marker) then
+                let value = trimmed.substring(marker.length).trim();
+                if value =~ "ok" \/ value =~ "warning" \/ value =~ "error" then
+                    return value;
+                fi
+            fi
+        od
+
+        return "ok";
+    si
+
+    // Parse compiler diagnostics from a build's combined output. The compiler
+    // prints one diagnostic per line as
+    //   <source-file>: <sl>,<sc>..<el>,<ec>: <error|warn>: <message>
+    // Lines that are not in that shape (banners, ICE traces) are skipped.
+    _parse_diagnostics(text: string, source_file: string) -> LIST[DIAGNOSTIC] is
+        let result = LIST[DIAGNOSTIC]();
+        let prefix = "{source_file}: ";
+
+        for raw in text.split(['\n']) do
+            let line = raw.trim_end(['\r']);
+
+            if !line.starts_with(prefix) then
+                continue;
+            fi
+
+            let rest = line.substring(prefix.length);
+
+            let location_end = rest.index_of(": ");
+            if location_end < 0 then
+                continue;
+            fi
+
+            let location = rest.substring(0, location_end);
+            let after = rest.substring(location_end + 2);
+
+            let severity_end = after.index_of(": ");
+            if severity_end < 0 then
+                continue;
+            fi
+
+            let severity_word = after.substring(0, severity_end);
+            let message = after.substring(severity_end + 2);
+
+            let severity =
+                if severity_word =~ "warn" then
+                    "warning"
+                elif severity_word =~ "error" then
+                    "error"
+                else
+                    ""
+                fi;
+
+            if severity.length == 0 then
+                continue;
+            fi
+
+            let parsed = _parse_location(location, severity, message);
+            if parsed? then
+                result.add(parsed);
+            fi
+        od
+
+        return result;
+    si
+
+    // Parse a `<sl>,<sc>..<el>,<ec>` location into a DIAGNOSTIC.
+    _parse_location(location: string, severity: string, message: string) -> DIAGNOSTIC? is
+        let separator = location.index_of("..");
+        if separator < 0 then
+            return null;
+        fi
+
+        let start = location.substring(0, separator);
+        let end = location.substring(separator + 2);
+
+        let start_comma = start.index_of(",");
+        let end_comma = end.index_of(",");
+        if start_comma < 0 \/ end_comma < 0 then
+            return null;
+        fi
+
+        try
+            return DIAGNOSTIC(
+                System.Convert.to_int32(start.substring(0, start_comma)),
+                System.Convert.to_int32(start.substring(start_comma + 1)),
+                System.Convert.to_int32(end.substring(0, end_comma)),
+                System.Convert.to_int32(end.substring(end_comma + 1)),
+                severity,
+                message
+            );
+        catch ex: System.FormatException
+            return null;
+        yrt
+    si
+
+    generate(example_dir: string, output_dir: string) -> bool is
+        let name = Path.get_file_name(example_dir);
+        let source_file = "{name}.ghul";
+        let source = File.read_all_text(Path.combine(example_dir, source_file));
+
+        let expected = _parse_expect(source);
+
+        // The compiler — building and analysing — resolves the runtime from
+        // ghul-runtime.dll in its working directory, and the compiled binary
+        // loads it from there too.
+        _provision_runtime(example_dir);
+
+        let compile = run_process(
+            "dotnet",
+            "ghul-compiler --v3 --test-run --dotnet {source_file} -o binary.exe",
+            example_dir
+        );
+
+        let raw_diagnostics = _parse_diagnostics(
+            "{compile.standard_error}\n{compile.standard_output}", source_file
+        );
+
+        let compiled = File.exists(Path.combine(example_dir, "binary.exe"));
+
+        let has_error mut = !compiled;
+        let has_warning mut = false;
+        for diagnostic in raw_diagnostics do
+            if diagnostic.severity =~ "error" then
+                has_error = true;
+            elif diagnostic.severity =~ "warning" then
+                has_warning = true;
+            fi
+        od
+
+        let actual =
+            if has_error then
+                "error"
+            elif has_warning then
+                "warning"
+            else
+                "ok"
+            fi;
+
+        if !(actual =~ expected) then
+            Std.error.write_line("FAILED example '{name}': expected {expected}, got {actual}");
+            Std.error.write_line(compile.standard_error);
+            return false;
+        fi
+
+        // No binary for a deliberate-error example — only diagnostics. The
+        // analyser still resolves what it can, so hover survives the failure.
+        let output =
+            if compiled then
+                run_process("dotnet", "binary.exe", example_dir).standard_output
+            else
+                ""
+            fi;
+
+        let collected = _collect_hovers(example_dir, source_file, source);
+
+        let diagnostics = LIST[DIAGNOSTIC]();
+        for diagnostic in raw_diagnostics do
+            let translated = collected.region.translate_diagnostic(diagnostic);
+            if translated? then
+                diagnostics.add(translated);
+            fi
+        od
+
+        let json = build_artifact_json(
+            name, collected.region.code, collected.hovers, output, diagnostics
+        );
+        File.write_all_text(Path.combine(output_dir, "{name}.json"), json);
+
+        Std.out.write_line(
+            "generated {name} [{actual}]: {collected.hovers.count} hover(s), {diagnostics.count} diagnostic(s)"
+        );
+
+        return true;
+    si
+
+    // Drive the analyser over the example for #HOVERMAP#, then slice the
+    // visible region and translate each hover onto the displayed text.
+    _collect_hovers(example_dir: string, source_file: string, source: string) -> (region: VISIBLE_REGION, hovers: LIST[HOVER]) is
+        let hover_lines = LIST[string]();
+
+        let use analyser = ANALYSER_PROCESS(example_dir);
+
+        analyser.send_edit(source_file, source);
+        analyser.read_response();   // DIAGNOSTICS
+        analyser.read_response();   // PARTIAL DONE
+
+        analyser.send_hover_map(source_file);
+        let hover_map = analyser.read_query_response();
+
+        for line in hover_map.lines do
+            hover_lines.add(line);
+        od
+
+        let region = extract_visible(source);
+
+        let hovers = LIST[HOVER]();
+        for line in hover_lines do
+            let parsed = _parse_hover(line);
+            if parsed? then
+                let translated = region.translate(parsed);
+                if translated? then
+                    hovers.add(translated);
+                fi
+            fi
+        od
+
+        return (region = region, hovers = hovers);
+    si
+
+    // Parse one #HOVERMAP# row: startLine, startColumn, endLine, endColumn,
+    // description — tab-separated, 1-based coordinates.
+    _parse_hover(line: string) -> HOVER? is
+        let fields = LIST[string](line.split(['\t']));
+
+        if fields.count < 5 then
+            return null;
+        fi
+
+        try
+            return HOVER(
+                System.Convert.to_int32(fields[0]),
+                System.Convert.to_int32(fields[1]),
+                System.Convert.to_int32(fields[2]),
+                System.Convert.to_int32(fields[3]),
+                fields[4]
+            );
+        catch ex: System.Exception
+            return null;
+        yrt
+    si
+
+    // Copy the tool's own ghul-runtime.dll (from its ghul.runtime package
+    // reference) into the example directory, overwriting any stale copy.
+    _provision_runtime(example_dir: string) is
+        let tool_dir = Path.get_directory_name(System.Reflection.Assembly.get_executing_assembly().location);
+        let source = Path.combine(tool_dir, "ghul-runtime.dll");
+        let target = Path.combine(example_dir, "ghul-runtime.dll");
+
+        if File.exists(source) then
+            File.copy(source, target, true);
+        fi
+    si
+si

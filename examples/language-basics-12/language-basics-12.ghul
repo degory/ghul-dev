@@ -1,0 +1,10 @@
+entry() is
+    let point: (int, int) = (10, 20);
+    let person: (string, int) = ("Alice", 30);
+// >>>
+    let x = point.`0;
+    let y = point.`1;
+    let name = person.`0;
+    let age = person.`1;
+// <<<
+si

@@ -1,0 +1,22 @@
+{
+  "name": "type-inference-10",
+  "code": "class Base is\n    init() is si\nsi\n\nclass DERIVED: Base is\n    init() is super.init() si\nsi\nlet array_of_base = [Base(), DERIVED()];\nlet array_of_object = [Base(), DERIVED(), object()];\nlet array_of_int = [1, 2, 3, 4, 5];",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 10, "text": "class Base" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "Base.init() // constructor" },
+    { "startLine": 5, "startColumn": 7, "endLine": 5, "endColumn": 13, "text": "class DERIVED" },
+    { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 19, "text": "class Base" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 8, "text": "DERIVED.init() // constructor" },
+    { "startLine": 6, "startColumn": 21, "endLine": 6, "endColumn": 24, "text": "Base.init() // constructor" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 17, "text": "array_of_base: Base[] // local value" },
+    { "startLine": 8, "startColumn": 22, "endLine": 8, "endColumn": 25, "text": "Base.init() // constructor" },
+    { "startLine": 8, "startColumn": 30, "endLine": 8, "endColumn": 36, "text": "DERIVED.init() // constructor" },
+    { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 19, "text": "array_of_object: Ghul.object[] // local value" },
+    { "startLine": 9, "startColumn": 24, "endLine": 9, "endColumn": 27, "text": "Base.init() // constructor" },
+    { "startLine": 9, "startColumn": 32, "endLine": 9, "endColumn": 38, "text": "DERIVED.init() // constructor" },
+    { "startLine": 9, "startColumn": 43, "endLine": 9, "endColumn": 48, "text": "Ghul.object.init() -> Ghul.void // method" },
+    { "startLine": 10, "startColumn": 5, "endLine": 10, "endColumn": 16, "text": "array_of_int: Ghul.int[] // local value" }
+  ]
+}

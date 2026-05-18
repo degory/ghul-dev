@@ -1,0 +1,17 @@
+use System.Exception;
+
+do_something_risky(i: int) -> int => i;
+
+entry() is
+    swallow(1);
+si
+
+// >>>
+swallow(i: int) -> int is
+    try
+        return do_something_risky(i);
+    catch e: Exception
+        return 1234; // I'm sure it was fine
+    yrt
+si
+// <<<

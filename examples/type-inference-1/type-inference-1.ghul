@@ -1,0 +1,21 @@
+// >>>
+// the signature is explicit: the parameter type
+// and the return type are written out
+totals(
+    values: Collections.Iterable[int]
+) -> (sum: int, count: int) is
+    let sum = 0;
+    let count = 0;
+
+    for v in values do
+        sum = sum + v;
+        count = count + 1;
+    od
+
+    return (sum, count);
+si
+// <<<
+
+entry() is
+    totals([1, 2, 3]);
+si
