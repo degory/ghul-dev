@@ -43,7 +43,7 @@ On large projects the extension updates this analysis in two stages — a quick 
 
 A [development container image](https://github.com/users/degory/packages/container/package/ghul%2Fdevcontainer) is published with the compiler, the .NET SDK, and the supporting tools pre-installed. Opening a project in this container — locally with the VS Code Dev Containers extension, or in a GitHub Codespace — gives you a ready-to-build ghūl environment with nothing to install.
 
-The [ghūl examples repository](https://github.com/degory/ghul-examples) and the [ghūl repository template](https://github.com/degory/ghul-repository-template) are both set up to open in this container.
+The [ghūl repository template](https://github.com/degory/ghul-repository-template) is also set up to open in this container.
 
 ## project templates
 
