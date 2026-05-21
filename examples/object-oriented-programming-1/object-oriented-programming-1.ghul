@@ -69,7 +69,7 @@ class CALCULATOR[T] is
                     | .map(
                         on =>
                             let (name, operation) = on in
-                            Collections.KeyValuePair`2(
+                            Collections.KeyValuePair(
                                 name, operation
                             )
                     )
