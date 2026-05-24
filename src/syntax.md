@@ -2,9 +2,9 @@
 
 ## projects and files
 
-A ghūl project is composed of a set of ghūl source files. Source files should have a `.ghul` file extension, and must be UTF-8 text.
+A ghūl project is composed of a set of ghūl source files. Source files should have a `.ghul`{:text} file extension, and must be UTF-8 text.
 
-Each source file can contain zero, one or more global definitions. Definitions can be in any order and in any file. Source files can have any name, provided they have a `.ghul` extension, and can be in any folder under the project root (subject to any source file glob pattern given in the `.ghulproj`)
+Each source file can contain zero, one or more global definitions. Definitions can be in any order and in any file. Source files can have any name, provided they have a `.ghul`{:text} extension, and can be in any folder under the project root (subject to any source file glob pattern given in the `.ghulproj`{:text})
 
 ## tokens and trees
 

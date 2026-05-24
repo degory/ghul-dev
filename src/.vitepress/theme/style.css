@@ -27,9 +27,13 @@
    .vitepress/config.mts) — Shiki tokens carry per-light/dark colours as
    CSS custom properties, so we just drop VitePress's default brand-green
    `color` on the wrapping <code> and let each token's --shiki-light /
-   --shiki-dark take effect. */
+   --shiki-dark take effect. The `{:text}` opt-out variant has no Shiki
+   tokens at all; the same colour reset keeps it from picking up the
+   brand-green default. */
 :root .ghul-inline,
-.dark .ghul-inline {
+:root .ghul-inline-plain,
+.dark .ghul-inline,
+.dark .ghul-inline-plain {
   color: inherit;
 }
 

@@ -32,7 +32,7 @@ Provides ghūl language support within VSCode.
 ### templates
 .NET New Templates
 - **Repository:** [ghul-templates](https://github.com/degory/ghul-templates)
-- **Package** [ghul.templates](https://www.nuget.org/packages/ghul.templates) (install with `dotnet new install ghul.templates`)
+- **Package** [ghul.templates](https://www.nuget.org/packages/ghul.templates) (install with `dotnet new install ghul.templates`{:sh})
 
 ## contributing
 

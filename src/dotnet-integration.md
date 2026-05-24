@@ -4,7 +4,7 @@ ghūl is hosted on and targets .NET 8 and can consume most types in .NET assembl
 
 ## projects
 
-The ghūl compiler is driven by MSBuild and leverages the .NET SDK targets for most of the build process. Provided you reference the ghūl runtime library package, things should work as you'd expect for any other .NET SDK project. You can add package references, build assemblies and pack NuGet packages etc. all using the normal `dotnet` command line tools.
+The ghūl compiler is driven by MSBuild and leverages the .NET SDK targets for most of the build process. Provided you reference the ghūl runtime library package, things should work as you'd expect for any other .NET SDK project. You can add package references, build assemblies and pack NuGet packages etc. all using the normal `dotnet`{:text} command line tools.
 
 ## name mangling
 When consuming C# code the ghūl compiler transforms symbol names to better match ghūl conventions:

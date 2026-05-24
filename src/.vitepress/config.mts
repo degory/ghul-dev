@@ -12,6 +12,8 @@ const ghulInlineHighlighter = await createHighlighter({
         'utf-8',
       ),
     ),
+    'shell',
+    'xml',
   ],
 })
 
@@ -97,15 +99,42 @@ export default defineConfig({
     languages: [ghulGrammar as any],
     theme: { light: 'light-plus', dark: 'dark-plus' },
 
-    // Highlight inline `code` spans as ghūl. Almost every inline code
-    // mention on this site is a ghūl snippet (keyword, type, expression),
-    // so defaulting to ghūl avoids the bare-monospace look the brand-green
-    // default gave them.
+    // Highlight inline `code` spans as ghūl by default. Almost every
+    // inline code mention on this site is a ghūl snippet (keyword, type,
+    // expression), so defaulting to ghūl avoids the bare-monospace look
+    // the brand-green default gave them.
+    //
+    // A trailing `{:lang}` suffix overrides the language for one span —
+    // `` `dotnet tool restore`{:text} `` opts out of highlighting, and
+    // `` `<Project>`{:xml} `` highlights as XML. The pre-rule walks the
+    // inline token stream, lifts the suffix off the following text token,
+    // and stashes it on the `code_inline` token as `data-lang`.
     config(md) {
+      md.core.ruler.after('inline', 'ghul-inline-lang', state => {
+        for (const block of state.tokens) {
+          if (block.type !== 'inline' || !block.children) continue
+          const children = block.children
+          for (let i = 0; i < children.length - 1; i++) {
+            if (children[i].type !== 'code_inline') continue
+            const next = children[i + 1]
+            if (next.type !== 'text') continue
+            const m = /^\{:([\w+-]+)\}/.exec(next.content)
+            if (!m) continue
+            children[i].attrSet('data-lang', m[1])
+            next.content = next.content.slice(m[0].length)
+          }
+        }
+      })
+
       md.renderer.rules.code_inline = (tokens, idx) => {
-        const text = tokens[idx].content
+        const token = tokens[idx]
+        const text = token.content
+        const lang = token.attrGet('data-lang') ?? 'ghul'
+        if (lang === 'text') {
+          return `<code class="ghul-inline-plain">${md.utils.escapeHtml(text)}</code>`
+        }
         const html = ghulInlineHighlighter.codeToHtml(text, {
-          lang: 'ghul',
+          lang,
           themes: { light: 'light-plus', dark: 'dark-plus' },
           defaultColor: false,
           structure: 'inline',
