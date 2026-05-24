@@ -105,7 +105,7 @@
 				},
 				{
 					"name": "storage.modifier.ghul",
-					"match": "(\\b(?<!\\`)(static|public|protected|private|field|let|rec|@)\\b)|(\\b_(?=[A-Za-z]))"
+					"match": "(\\b(?<!\\`)(static|public|protected|private|field|let|mut|rec|out|@)\\b)|(\\b_(?=[A-Za-z]))"
 				},
 				{
 					"name": "keyword.operator.ghul",
@@ -113,7 +113,7 @@
 				},
 				{
 					"name": "keyword.other.ghul",
-					"match": "\\b(?<!\\`)(new|cast|isa|typeof|namespace|class|struct|union|trait|enum|use|innate|is|si)\\b"
+					"match": "\\b(?<!\\`)(new|cast|isa|typeof|namespace|class|struct|union|trait|enum|use|innate|is|si|optional)\\b"
 				},
 				{
 					"name": "entity.name.type.ghul",
@@ -121,7 +121,7 @@
 				},
 				{
 					"name": "keyword.control.ghul",
-					"match": "\\b(?<!\\`)(assert|if|then|elif|else|fi|for|in|while|do|od|continue|break|case|when|default|esac|throw|try|catch|finally|yrt|return)\\b"
+					"match": "\\b(?<!\\`)(assert|if|then|elif|else|fi|for|in|while|do|od|continue|break|case|when|default|esac|throw|try|catch|finally|yrt|return|await)\\b"
 				},
 				{
 					"name": "entity.name.function.ghul",

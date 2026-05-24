@@ -1,6 +1,6 @@
 entry() is
 // >>>
-    let here: int? = OPTION[int](42); // present
+    let here: int? = 42;   // present
     let gone: int? = null; // absent
 // <<<
 si

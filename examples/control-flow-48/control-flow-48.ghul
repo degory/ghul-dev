@@ -1,0 +1,22 @@
+use IO.Std.write_line;
+
+fetch_async(x: int) -> Tasks.TASK[int] => x * x;
+
+sum_of_squares(xs: Collections.List[int]) -> Tasks.TASK[int] is
+// >>>
+    let total mut = 0;
+
+    for x in xs do
+        let await y = fetch_async(x);
+        total = total + y;
+    od
+
+    return total;
+// <<<
+si
+
+entry() is
+    let result = sum_of_squares([1, 2, 3, 4]).result;
+
+    write_line("sum_of_squares = {result}");
+si
