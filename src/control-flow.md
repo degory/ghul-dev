@@ -269,3 +269,25 @@ In functions of non-void return type, `return` statements must return a value of
 If execution reaches the end of a non-void function without encountering a return statement, then the default value of the function's return type is returned to the caller.
 
 <GhulExample name="control-flow-45" />
+
+## asynchronous code
+
+A function is asynchronous when its declared return type is `Tasks.TASK[T]` (or `Tasks.TASK`, for one that produces no value). `Tasks.TASK[T]` is the standard `System.Threading.Tasks.Task<T>` — the same type used by C# and the rest of .NET.
+
+Inside such a function, `let await x = e;` waits for the task `e` to complete and binds its result to `x`. The statements that follow run once `e` has resolved:
+
+<GhulExample name="control-flow-46" />
+
+The source reads top-to-bottom even though execution is asynchronous — there is no callback nesting at the call site, and each binding is in scope for the statements that follow it.
+
+`await e;` is the value-less form: it waits for `e` to complete and discards any result. Use it when you only care that the work has finished:
+
+<GhulExample name="control-flow-47" />
+
+### limitations
+
+`let await` and `await` are currently restricted to linear code. Inside an asynchronous function the following are not yet permitted:
+
+* `for`, `while` and `do` loops that span a `let await` or `await`, including `break` and `continue` across an await boundary.
+* `try` / `catch` blocks surrounding code that contains `let await` or `await`. A `try` / `catch` at the *call site* — around code that reads `.result` from a returned task — is supported: a faulted task surfaces as a `System.AggregateException`.
+* Awaiting any computation type other than `Tasks.TASK[T]`.

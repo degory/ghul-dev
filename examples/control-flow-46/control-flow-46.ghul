@@ -1,0 +1,19 @@
+use IO.Std.write_line;
+
+double_async(x: int) -> Tasks.TASK[int] => x * 2;
+
+add_async(x: int, y: int) -> Tasks.TASK[int] => x + y;
+
+compute() -> Tasks.TASK[int] is
+// >>>
+    let await a = double_async(10);   // a = 20
+    let await b = double_async(a);    // b = 40
+    let await c = add_async(a, b);    // c = 60
+
+    return Tasks.TASK.from_result(c);
+// <<<
+si
+
+entry() is
+    write_line("{compute().result}");
+si
