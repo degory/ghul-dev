@@ -43,6 +43,8 @@ Some commonly used namespace and type names are re-mapped in line with ghūl con
 | `System.Collections.Generic.Dictionary`              | `Collections.MAP`                   |
 | `System.Collections.Generic.HashSet`                 | `Collections.SET`                   |
 | `System.Collections.Generic.Stack`                   | `Collections.STACK`                 |
+| `System.Threading.Tasks.Task`                        | `Tasks.TASK`                        |
+| `System.Threading.Tasks.Task<T>`                     | `Tasks.TASK[T]`                     |
 
 ### primitive types
 

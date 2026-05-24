@@ -10,7 +10,7 @@ compute() -> Tasks.TASK[int] is
     let await b = double_async(a);    // b = 40
     let await c = add_async(a, b);    // c = 60
 
-    return Tasks.TASK.from_result(c);
+    return c;
 // <<<
 si
 
