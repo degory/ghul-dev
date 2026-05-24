@@ -1,0 +1,13 @@
+{
+  "name": "control-flow-47",
+  "code": "await side_effect(\"first\");\nawait side_effect(\"second\");\n\nreturn Tasks.TASK.completed_task;",
+  "output": "side effect: first\nside effect: second\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 17, "text": "side_effect(label: Ghul.string) -> Tasks.TASK // global function" },
+    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 17, "text": "side_effect(label: Ghul.string) -> Tasks.TASK // global function" },
+    { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 12, "text": "namespace Tasks" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 17, "text": "class Tasks.TASK" },
+    { "startLine": 4, "startColumn": 19, "endLine": 4, "endColumn": 32, "text": "Tasks.TASK.completed_task: Tasks.TASK // class property" }
+  ]
+}

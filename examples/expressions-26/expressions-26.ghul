@@ -1,0 +1,18 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    let counter mut = 0;
+
+    let bump = (n: int) is
+        counter = counter + n;
+    si;
+
+    let peek = () -> int => counter;
+
+    bump(10);
+    bump(5);
+
+    write_line("counter = {counter}, peek() = {peek()}");
+// <<<
+si

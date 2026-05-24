@@ -57,21 +57,26 @@ Argument types usually can be inferred if the function literal is being passed i
 <GhulExample name="expressions-11" />
 
 #### capturing and closure
-In ghūl, function literals can capture and utilize values from their surrounding lexical scope, thereby forming closures. It's important to note that what are captured are the values of variables at the point of the function literal's creation, rather than the variables themselves. This distinction is crucial for understanding how closures work in ghūl.
 
-When a function literal is constructed, it creates read-only snapshots of the values from the outer scopes that are referenced within it. These snapshots are immutable in the sense that the literal cannot alter the captured values. However, the immutability applies to the captured variable, not necessarily to the value itself. In ghūl, like in many .NET languages, a value could be a reference to an object. While the reference is immutable and remains constant throughout the lifetime of the function literal, the object it points to can still be mutable. This means that if the captured value is an object reference, the object's state can be modified either by the closure itself or by other code, but the reference held by the closure will always point to the same object.
+A function literal can refer to identifiers from its surrounding lexical scope; those references form its closure. What the closure sees through each identifier depends on whether the binding it refers to is mutable.
 
-Consider a simple closure that captures a loop variable:
+An immutable binding (`let`) is captured by value at the point the function literal is constructed. The closure holds a snapshot of that value:
+
 <GhulExample name="expressions-12" />
 
-In this case, `g` captures the value of `i` at the moment of `g`'s creation. The variable `i` itself is not captured; only its value at a specific point in time is. Here is a more complete example:
+Inside a loop, each iteration creates its own binding, so each closure captures its own value:
 
 <GhulExample name="expressions-13" />
 
-If the captured value is a reference to an object, like in the following example:
+A mutable binding (`let` followed by `mut`) is captured by reference: the closure shares one live binding with the outer scope and with any other closures over the same name. Reassignments are visible in both directions.
+
+<GhulExample name="expressions-26" />
+
+Mutability of the binding is independent of mutability of the value it holds. When the captured value is a reference to an object, the closure cannot make the binding point at a different object, but it can still call methods or assign to properties on the object it currently refers to:
+
 <GhulExample name="expressions-14" />
 
-Then while `closure` cannot change what `object_reference` points to, it can interact with `object_references`'s properties or methods, which can lead to changes in the state of the `SOME_OBJECT` object referenced by `object_reference`.
+Here `closure` cannot make `object_reference` point somewhere else, but it can read and modify the state of the `SOME_OBJECT` it currently refers to.
 
 ## arithmetic
 
