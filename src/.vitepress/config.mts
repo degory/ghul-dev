@@ -3,6 +3,18 @@ import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
 import { createHighlighter } from 'shiki'
 
+const ghulInlineHighlighter = await createHighlighter({
+  themes: ['light-plus', 'dark-plus'],
+  langs: [
+    JSON.parse(
+      readFileSync(
+        fileURLToPath(new URL('./ghul.tmLanguage.json', import.meta.url)),
+        'utf-8',
+      ),
+    ),
+  ],
+})
+
 // ghūl syntax highlighting uses the same TextMate grammar as the VS Code
 // extension, vendored from ghul-vsce/syntaxes/ghul.tmLanguage.json.
 const ghulGrammar = JSON.parse(
@@ -84,6 +96,23 @@ export default defineConfig({
   markdown: {
     languages: [ghulGrammar as any],
     theme: { light: 'light-plus', dark: 'dark-plus' },
+
+    // Highlight inline `code` spans as ghūl. Almost every inline code
+    // mention on this site is a ghūl snippet (keyword, type, expression),
+    // so defaulting to ghūl avoids the bare-monospace look the brand-green
+    // default gave them.
+    config(md) {
+      md.renderer.rules.code_inline = (tokens, idx) => {
+        const text = tokens[idx].content
+        const html = ghulInlineHighlighter.codeToHtml(text, {
+          lang: 'ghul',
+          themes: { light: 'light-plus', dark: 'dark-plus' },
+          defaultColor: false,
+          structure: 'inline',
+        })
+        return `<code class="ghul-inline">${html}</code>`
+      }
+    },
   },
 
   vite: {
