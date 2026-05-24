@@ -1,6 +1,7 @@
 {
   "name": "type-inference-10",
   "code": "class Base is\n    init() is si\nsi\n\nclass DERIVED: Base is\n    init() is super.init() si\nsi\nlet array_of_base = [Base(), DERIVED()];\nlet array_of_object = [Base(), DERIVED(), object()];\nlet array_of_int = [1, 2, 3, 4, 5];",
+  "fullSource": "class Base is\n    init() is si\nsi\n\nclass DERIVED: Base is\n    init() is super.init() si\nsi\n\nentry() is\n    let array_of_base = [Base(), DERIVED()];\n    let array_of_object = [Base(), DERIVED(), object()];\n    let array_of_int = [1, 2, 3, 4, 5];\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

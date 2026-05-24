@@ -1,6 +1,7 @@
 {
   "name": "definitions-13",
   "code": "trait Printable is\n    print();\nsi",
+  "fullSource": "trait Printable is\n    print();\nsi\n\nentry() is\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

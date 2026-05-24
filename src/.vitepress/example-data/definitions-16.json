@@ -1,6 +1,7 @@
 {
   "name": "definitions-16",
   "code": "union Tree is\n    NODE(left: Tree, right: Tree);\n    LEAF(value: int);\nsi",
+  "fullSource": "union Tree is\n    NODE(left: Tree, right: Tree);\n    LEAF(value: int);\nsi\n\nentry() is\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

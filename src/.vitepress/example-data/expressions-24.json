@@ -1,6 +1,7 @@
 {
   "name": "expressions-24",
   "code": "let a = default[int];   // 0\nlet b: string = default;   // null\nzero[T]() -> T => default;",
+  "fullSource": "entry() is\n    let a = default[int];   // 0\n    let b: string = default;   // null\nsi\n\nzero[T]() -> T => default;\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

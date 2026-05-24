@@ -1,6 +1,7 @@
 {
   "name": "control-flow-10",
   "code": "union Result[T, E] is\n    OK(value: T);\n    ERR(error: E);\nsi\nlet r: Result[int, string] = some_call();\n\nif r.is_ok then\n    write_line(\"ok: {r.value}\");\nelse\n    // r is narrowed to Result.ERR here\n    write_line(\"err: {r.error}\");\nfi",
+  "fullSource": "use IO.Std.write_line;\n\nunion Result[T, E] is\n    OK(value: T);\n    ERR(error: E);\nsi\n\nsome_call() -> Result[int, string] is\n    return Result.OK[int, string](42);\nsi\n\nentry() is\n    let r: Result[int, string] = some_call();\n\n    if r.is_ok then\n        write_line(\"ok: {r.value}\");\n    else\n        // r is narrowed to Result.ERR here\n        write_line(\"err: {r.error}\");\n    fi\nsi\n",
   "output": "ok: 42\n",
   "diagnostics": [],
   "hovers": [

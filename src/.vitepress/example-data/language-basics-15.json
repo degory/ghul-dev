@@ -1,6 +1,7 @@
 {
   "name": "language-basics-15",
   "code": "let name: string? = \"Alice\"; // present\nlet nickname: string? = null; // absent",
+  "fullSource": "entry() is\n    let name: string? = \"Alice\"; // present\n    let nickname: string? = null; // absent\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

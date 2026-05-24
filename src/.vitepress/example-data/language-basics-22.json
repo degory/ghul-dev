@@ -1,6 +1,7 @@
 {
   "name": "language-basics-22",
   "code": "some_function(argument: type)",
+  "fullSource": "some_function(argument: type)\n",
   "output": "",
   "diagnostics": [],
   "hovers": []

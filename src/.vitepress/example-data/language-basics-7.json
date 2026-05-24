@@ -1,6 +1,7 @@
 {
   "name": "language-basics-7",
   "code": "let my_int: int = 42;\nlet my_float: double = 3.14d;\nlet my_bool: bool = true;\nlet my_char: char = 'A';",
+  "fullSource": "entry() is\n    let my_int: int = 42;\n    let my_float: double = 3.14d;\n    let my_bool: bool = true;\n    let my_char: char = 'A';\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

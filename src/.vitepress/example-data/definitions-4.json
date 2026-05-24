@@ -1,6 +1,7 @@
 {
   "name": "definitions-4",
   "code": "let\n    initialize_now = 123,\n    initialize_later: int,\n    why_are_we_doing_this = \"I don't know\";",
+  "fullSource": "entry() is\n    let\n        initialize_now = 123,\n        initialize_later: int,\n        why_are_we_doing_this = \"I don't know\";\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

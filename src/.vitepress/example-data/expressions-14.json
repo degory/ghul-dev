@@ -1,6 +1,7 @@
 {
   "name": "expressions-14",
   "code": "let object_reference = SOME_OBJECT();\nlet closure = () => object_reference.some_property;",
+  "fullSource": "class SOME_OBJECT is\n    some_property: int;\n\n    init() is\n        some_property = 0;\n    si\nsi\n\nentry() is\n    let object_reference = SOME_OBJECT();\n    let closure = () => object_reference.some_property;\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

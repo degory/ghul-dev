@@ -1,6 +1,7 @@
 {
   "name": "definitions-18",
   "code": "if tree.is_node then\n    write_line(\n        \"left {tree.node.left}, right {tree.node.right}\"\n    );\nelif tree.is_leaf then\n    // we don't need tree.leaf.value here\n    write_line(\"leaf value {tree.leaf}\");\nfi",
+  "fullSource": "if tree.is_node then\n    write_line(\n        \"left {tree.node.left}, right {tree.node.right}\"\n    );\nelif tree.is_leaf then\n    // we don't need tree.leaf.value here\n    write_line(\"leaf value {tree.leaf}\");\nfi\n",
   "output": "",
   "diagnostics": [],
   "hovers": []

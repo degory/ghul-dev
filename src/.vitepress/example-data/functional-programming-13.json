@@ -1,6 +1,7 @@
 {
   "name": "functional-programming-13",
   "code": "let times_2 = x => x * 2;\nwrite_line(\"apply(times_2, 5): {apply(times_2, 5)}\");\n\nlet square = x => x * x;\nwrite_line(\"apply(square, 5): {apply(square, 5)}\");\n\n// higher order function consumes another function:\nlet apply_twice = (f: int -> int, x) => f(f(x));\nwrite_line(\n    \"apply_twice(times_2, 5): {apply_twice(times_2, 5)}\"\n);\n\n// higher order function returns another function:\nlet create_apply_twice = (f: int -> int) => x => f(f(x));\nlet apply_twice_times_2 = create_apply_twice(times_2);\n\nwrite_line(\n    \"apply_twice_times_2(5): {apply_twice_times_2(5)}\"\n);",
+  "fullSource": "use IO.Std.write_line;\n\napply[T](f: T -> T, x: T) -> T => f(x);\n\nentry() is\n    let times_2 = x => x * 2;\n    write_line(\"apply(times_2, 5): {apply(times_2, 5)}\");\n\n    let square = x => x * x;\n    write_line(\"apply(square, 5): {apply(square, 5)}\");\n\n    // higher order function consumes another function:\n    let apply_twice = (f: int -> int, x) => f(f(x));\n    write_line(\n        \"apply_twice(times_2, 5): {apply_twice(times_2, 5)}\"\n    );\n\n    // higher order function returns another function:\n    let create_apply_twice = (f: int -> int) => x => f(f(x));\n    let apply_twice_times_2 = create_apply_twice(times_2);\n\n    write_line(\n        \"apply_twice_times_2(5): {apply_twice_times_2(5)}\"\n    );\nsi\n",
   "output": "apply(times_2, 5): 10\napply(square, 5): 25\napply_twice(times_2, 5): 20\napply_twice_times_2(5): 20\n",
   "diagnostics": [],
   "hovers": [

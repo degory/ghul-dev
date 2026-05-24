@@ -1,6 +1,7 @@
 {
   "name": "definitions-10",
   "code": "struct POINT is\n    x: double;\n    y: double;\n\n    init(x: double, y: double) is\n        self.x = x;\n        self.y = y;\n    si\nsi",
+  "fullSource": "struct POINT is\n    x: double;\n    y: double;\n\n    init(x: double, y: double) is\n        self.x = x;\n        self.y = y;\n    si\nsi\n\nentry() is\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

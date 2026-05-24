@@ -1,6 +1,7 @@
 {
   "name": "language-basics-18",
   "code": "let label: string = null;\n\nlet maybe = lookup();\n\nlet title: string = maybe;",
+  "fullSource": "// expect: warning\nlookup() -> string? => null;\n\nentry() is\n    let label: string = null;\n\n    let maybe = lookup();\n\n    let title: string = maybe;\nsi\n",
   "output": "",
   "diagnostics": [
     { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 25, "severity": "warning", "message": "null where a non-optional Ghul.string is expected" },

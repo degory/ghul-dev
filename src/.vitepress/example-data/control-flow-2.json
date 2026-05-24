@@ -1,6 +1,7 @@
 {
   "name": "control-flow-2",
   "code": "if condition then\n    // code to execute if condition is true\nfi",
+  "fullSource": "if condition then\n    // code to execute if condition is true\nfi\n",
   "output": "",
   "diagnostics": [],
   "hovers": []

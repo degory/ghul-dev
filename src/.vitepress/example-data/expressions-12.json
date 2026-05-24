@@ -1,6 +1,7 @@
 {
   "name": "expressions-12",
   "code": "let g = () => i;",
+  "fullSource": "entry() is\n    let i = 5;\n    let g = () => i;\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

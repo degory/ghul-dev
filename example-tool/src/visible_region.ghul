@@ -137,6 +137,45 @@ namespace ExampleTool is
         return n;
     si
 
+    // Strip the `// >>>` / `// <<<` region-marker lines from a source
+    // string, leaving every other line — including original indentation —
+    // intact. The example artifact carries this as `fullSource` for the
+    // copy button, so the user gets a runnable file rather than just the
+    // displayed slice.
+    strip_markers(source: string) -> string is
+        let trailing_newline = source.length > 0 /\ source.ends_with('\n');
+
+        let body =
+            if trailing_newline then
+                source.substring(0, source.length - 1)
+            else
+                source
+            fi;
+
+        let raw = LIST[string](body.split(['\n']));
+        let b = StringBuilder();
+        let first mut = true;
+
+        for line in raw do
+            let trimmed = line.trim();
+            if trimmed =~ MARKER_OPEN \/ trimmed =~ MARKER_CLOSE then
+                continue;
+            fi
+
+            if !first then
+                b.append('\n');
+            fi
+            first = false;
+            b.append(line);
+        od
+
+        if trailing_newline then
+            b.append('\n');
+        fi
+
+        return b.to_string();
+    si
+
     // Slice the visible region(s) out of an example source and de-indent
     // each region so it starts at column 1. A source with no markers is
     // displayed whole.

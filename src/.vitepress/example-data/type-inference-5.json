@@ -1,6 +1,7 @@
 {
   "name": "type-inference-5",
   "code": "describe(carrier: CARRIER) is\n    // copy the property into a local variable\n    let occupant = carrier.occupant;\n\n    if isa Cat(occupant) then\n        // occupant is a local variable, narrowed\n        // to Cat in this branch\n        write_line(occupant.purr());\n    fi\nsi",
+  "fullSource": "use IO.Std.write_line;\n\nclass Animal is\n    init() is si\nsi\n\nclass Cat: Animal is\n    init() is super.init(); si\n    purr() -> string => \"purr\";\nsi\n\nclass CARRIER is\n    occupant: Animal;\n\n    init(occupant: Animal) is\n        self.occupant = occupant;\n    si\nsi\n\ndescribe(carrier: CARRIER) is\n    // copy the property into a local variable\n    let occupant = carrier.occupant;\n\n    if isa Cat(occupant) then\n        // occupant is a local variable, narrowed\n        // to Cat in this branch\n        write_line(occupant.purr());\n    fi\nsi\n\nentry() is\n    describe(CARRIER(Cat()));\nsi\n",
   "output": "purr\n",
   "diagnostics": [],
   "hovers": [

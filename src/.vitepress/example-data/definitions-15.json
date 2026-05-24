@@ -1,6 +1,7 @@
 {
   "name": "definitions-15",
   "code": "trait Logged is\n    log() is\n        write_line(\"(no log message provided)\");\n    si\nsi\n\nclass SILENT: Logged is\n    init() is si\nsi\n\nclass NOISY: Logged is\n    init() is si\n\n    log() is\n        super.log();\n        write_line(\"plus my own message\");\n    si\nsi",
+  "fullSource": "use IO.Std.write_line;\n\ntrait Logged is\n    log() is\n        write_line(\"(no log message provided)\");\n    si\nsi\n\nclass SILENT: Logged is\n    init() is si\nsi\n\nclass NOISY: Logged is\n    init() is si\n\n    log() is\n        super.log();\n        write_line(\"plus my own message\");\n    si\nsi\n\nentry() is\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

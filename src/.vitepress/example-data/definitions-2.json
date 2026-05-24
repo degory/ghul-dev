@@ -1,6 +1,7 @@
 {
   "name": "definitions-2",
   "code": "let x: int;",
+  "fullSource": "entry() is\n    let x: int;\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

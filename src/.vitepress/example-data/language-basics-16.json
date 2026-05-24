@@ -1,6 +1,7 @@
 {
   "name": "language-basics-16",
   "code": "if name? then\n    write_line(\"name is {name!}\");\nfi",
+  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let name: string? = \"Alice\";\n    if name? then\n        write_line(\"name is {name!}\");\n    fi\nsi\n",
   "output": "name is Alice\n",
   "diagnostics": [],
   "hovers": [

@@ -1,6 +1,7 @@
 {
   "name": "definitions-30",
   "code": "namespace Example is\n    entry() is\n        IO.Std.write_line(\"hello from a namespace\");\n    si\nsi\ngreet() is\n    IO.Std.write_line(\"not in a namespace\");\nsi",
+  "fullSource": "// expect: error\nnamespace Example is\n    entry() is\n        IO.Std.write_line(\"hello from a namespace\");\n    si\nsi\n\ngreet() is\n    IO.Std.write_line(\"not in a namespace\");\nsi\n",
   "output": "",
   "diagnostics": [
     { "startLine": 6, "startColumn": 1, "endLine": 8, "endColumn": 3, "severity": "error", "message": "cannot mix global definitions and namespaces in the same file" }

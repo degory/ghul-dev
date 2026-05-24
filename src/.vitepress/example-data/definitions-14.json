@@ -1,6 +1,7 @@
 {
   "name": "definitions-14",
   "code": "class BOOK: Printable is\n    title: string;\n    author: string;\n\n    init(title: string, author: string) is\n        self.title = title;\n        self.author = author;\n    si\n\n    print() is\n        write_line(\"Title: {title}, Author: {author}\");\n    si\nsi",
+  "fullSource": "use IO.Std.write_line;\n\ntrait Printable is\n    print();\nsi\n\nclass BOOK: Printable is\n    title: string;\n    author: string;\n\n    init(title: string, author: string) is\n        self.title = title;\n        self.author = author;\n    si\n\n    print() is\n        write_line(\"Title: {title}, Author: {author}\");\n    si\nsi\n\nentry() is\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

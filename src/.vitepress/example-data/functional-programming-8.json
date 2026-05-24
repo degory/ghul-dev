@@ -1,6 +1,7 @@
 {
   "name": "functional-programming-8",
   "code": "struct THING is\n    name: string;\n\n    init(name: string) is\n        self.name = name;\n    si\nsi\nlet thing = THING(\"a thing\");\n\nthing.name = \"change it\";",
+  "fullSource": "// expect: error\nstruct THING is\n    name: string;\n\n    init(name: string) is\n        self.name = name;\n    si\nsi\n\nentry() is\n    let thing = THING(\"a thing\");\n\n    thing.name = \"change it\";\nsi\n",
   "output": "",
   "diagnostics": [
     { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 11, "severity": "error", "message": "THING.name: Ghul.string is not publicly assignable" }

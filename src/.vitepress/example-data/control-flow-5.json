@@ -1,6 +1,7 @@
 {
   "name": "control-flow-5",
   "code": "if list.count > 0 then\n    write_line(\"list is not empty\");\nelse\n    write_line(\"list is empty\");\nfi",
+  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let list = [1, 2, 3, 4];\n    if list.count > 0 then\n        write_line(\"list is not empty\");\n    else\n        write_line(\"list is empty\");\n    fi\nsi\n",
   "output": "list is not empty\n",
   "diagnostics": [],
   "hovers": [

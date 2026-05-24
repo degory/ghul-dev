@@ -1,6 +1,7 @@
 {
   "name": "control-flow-34",
   "code": "class InsufficientFundsException: System.Exception is\n    init(message: string) is\n        super.init(message);\n    si\nsi",
+  "fullSource": "class InsufficientFundsException: System.Exception is\n    init(message: string) is\n        super.init(message);\n    si\nsi\n\nentry() is\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

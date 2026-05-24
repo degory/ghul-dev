@@ -1,6 +1,7 @@
 {
   "name": "control-flow-27",
   "code": "for counter in 0..10 do\n    if counter == 5 then\n        break;\n    fi\n    write_line(counter);\nod",
+  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    for counter in 0..10 do\n        if counter == 5 then\n            break;\n        fi\n        write_line(counter);\n    od\nsi\n",
   "output": "0\n1\n2\n3\n4\n",
   "diagnostics": [],
   "hovers": [

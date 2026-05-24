@@ -1,6 +1,7 @@
 {
   "name": "control-flow-19",
   "code": "let counter mut = 0;\nwhile counter < 5 do\n    write_line(counter);\n    counter = counter + 1;\nod",
+  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let counter mut = 0;\n    while counter < 5 do\n        write_line(counter);\n        counter = counter + 1;\n    od\nsi\n",
   "output": "0\n1\n2\n3\n4\n",
   "diagnostics": [],
   "hovers": [

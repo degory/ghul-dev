@@ -1,6 +1,7 @@
 {
   "name": "type-inference-13",
   "code": "class THING[T] is\n    value: T;\n\n    init(value: T) is\n        self.value = value;\n    si\nsi\nlet int_thing = THING(1234);\nlet string_thing = THING(\"hello\");",
+  "fullSource": "class THING[T] is\n    value: T;\n\n    init(value: T) is\n        self.value = value;\n    si\nsi\n\nentry() is\n    let int_thing = THING(1234);\n    let string_thing = THING(\"hello\");\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

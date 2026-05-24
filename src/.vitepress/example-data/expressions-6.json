@@ -1,6 +1,7 @@
 {
   "name": "expressions-6",
   "code": "let path_with_id = (path = \"/tmp/my-file.txt\", id = 1234);\n\nlet path = path_with_id.path;\nlet id = path_with_id.id;",
+  "fullSource": "entry() is\n    let path_with_id = (path = \"/tmp/my-file.txt\", id = 1234);\n\n    let path = path_with_id.path;\n    let id = path_with_id.id;\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

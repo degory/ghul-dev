@@ -1,6 +1,7 @@
 {
   "name": "type-inference-16",
   "code": "[1, 2, 2, 4, 5] | .filter(i => i > 3);",
+  "fullSource": "entry() is\n    [1, 2, 2, 4, 5] | .filter(i => i > 3);\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [
