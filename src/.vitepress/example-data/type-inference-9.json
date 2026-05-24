@@ -1,6 +1,7 @@
 {
   "name": "type-inference-9",
   "code": "for i in 1::10 do\n    write_line(\"{i}\");\nod\n\nlet pairs = [(\"a\", 1), (\"b\", 2)];\n\nfor (name, count) in pairs do\n    write_line(\"{name}: {count}\");\nod",
+  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    for i in 1::10 do\n        write_line(\"{i}\");\n    od\n\n    let pairs = [(\"a\", 1), (\"b\", 2)];\n\n    for (name, count) in pairs do\n        write_line(\"{name}: {count}\");\n    od\nsi\n",
   "output": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\na: 1\nb: 2\n",
   "diagnostics": [],
   "hovers": [

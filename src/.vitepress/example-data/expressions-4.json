@@ -1,6 +1,7 @@
 {
   "name": "expressions-4",
   "code": "let hello_world = \"Hello World!\";\nlet unicode = \"ghūl programming language\"",
+  "fullSource": "entry() is\n    let hello_world = \"Hello World!\";\n    let unicode = \"ghūl programming language\"\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

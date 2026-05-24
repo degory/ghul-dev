@@ -69,7 +69,8 @@ namespace ExampleTool is
         let region = extract_visible(source);
 
         let json = build_artifact_json(
-            name, region.code, Collections.LIST[HOVER](), "", Collections.LIST[DIAGNOSTIC]()
+            name, region.code, strip_markers(source),
+            Collections.LIST[HOVER](), "", Collections.LIST[DIAGNOSTIC]()
         );
         File.write_all_text(Path.combine(output_dir, "{name}.json"), json);
 
@@ -251,7 +252,8 @@ namespace ExampleTool is
         od
 
         let json = build_artifact_json(
-            name, collected.region.code, collected.hovers, output, diagnostics
+            name, collected.region.code, strip_markers(source),
+            collected.hovers, output, diagnostics
         );
         File.write_all_text(Path.combine(output_dir, "{name}.json"), json);
 

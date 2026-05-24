@@ -1,6 +1,7 @@
 {
   "name": "control-flow-23",
   "code": "// i not in scope here\n// i defined here\nfor i in [1, 2, 3, 4, 5] do\n    // i in scope here:\n    write_line(i);\nod",
+  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    // i not in scope here\n    // i defined here\n    for i in [1, 2, 3, 4, 5] do\n        // i in scope here:\n        write_line(i);\n    od\nsi\n",
   "output": "1\n2\n3\n4\n5\n",
   "diagnostics": [],
   "hovers": [

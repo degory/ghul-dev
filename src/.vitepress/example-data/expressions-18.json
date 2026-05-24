@@ -1,6 +1,7 @@
 {
   "name": "expressions-18",
   "code": "let max = if a > b then a else b fi;",
+  "fullSource": "entry() is\n    let a = 10;\n    let b = 5;\n    let max = if a > b then a else b fi;\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

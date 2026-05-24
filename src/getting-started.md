@@ -16,11 +16,11 @@ There are a few different ways to get the compiler
 
 ### use a ghūl .NET project template
 
-If you initialize your project using one of the [ghūl .NET project templates](https://www.nuget.org/packages/ghul.templates/), the template will add the compiler to your project folder as a local .NET tool - just run `dotnet tool restore` to restore it. 
+If you initialize your project using one of the [ghūl .NET project templates](https://www.nuget.org/packages/ghul.templates/), the template will add the compiler to your project folder as a local .NET tool - just run `dotnet tool restore`{:sh} to restore it. 
 
 ### clone the ghūl GitHub repository template
 
-If you create a new GitHub repo from the [ghūl repository template](https://github.com/degory/ghul-repository-template), then the compiler will be pre-configured as a local .NET tool in your project folder - run `dotnet tool restore` to restore it.
+If you create a new GitHub repo from the [ghūl repository template](https://github.com/degory/ghul-repository-template), then the compiler will be pre-configured as a local .NET tool in your project folder - run `dotnet tool restore`{:sh} to restore it.
 
 ### use the ghūl development container image
 
@@ -34,11 +34,11 @@ You can manually install the compiler from the [ghūl compiler .NET tool package
 
 ### project file
 
-The compiler expects to be driven by MSBuild using a `.ghulproj` project file.
+The compiler expects to be driven by MSBuild using a `.ghulproj`{:text} project file.
 See the [ghūl test](https://github.com/degory/ghul-test) project for
 a real-world example, or use one of the project templates to get started.
 
-`Directory.build.props`
+`Directory.build.props`{:text}
 ```xml
 <Project>
   <PropertyGroup>
@@ -55,7 +55,7 @@ a real-world example, or use one of the project templates to get started.
 </Project>
 ```
 
-`example.ghulproj`
+`example.ghulproj`{:text}
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
@@ -73,7 +73,7 @@ a real-world example, or use one of the project templates to get started.
 
 ### source files
 
-You'll need some ghūl source files. By convention ghūl source files have the extension `.ghul`, and the `ghul.runtime` provided MSBuild targets will include `**/*.ghul` when building.
+You'll need some ghūl source files. By convention ghūl source files have the extension `.ghul`{:text}, and the `ghul.runtime`{:text} provided MSBuild targets will include `**/*.ghul`{:text} when building.
 
 ### building and running
 

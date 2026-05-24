@@ -1,6 +1,7 @@
 {
   "name": "language-basics-26",
   "code": "let list = [1, 2, 3];\n\nlet index = 4;\nlet search_value = 3;\n\n// false\nlet and_then =\n    index < list.count /\\ list[index] == search_value;\n\n// true\nlet or_else =\n    index >= list.count \\/ list[index] != search_value;",
+  "fullSource": "entry() is\n    let list = [1, 2, 3];\n\n    let index = 4;\n    let search_value = 3;\n\n    // false\n    let and_then =\n        index < list.count /\\ list[index] == search_value;\n\n    // true\n    let or_else =\n        index >= list.count \\/ list[index] != search_value;\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

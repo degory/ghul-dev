@@ -1,6 +1,7 @@
 {
   "name": "control-flow-32",
   "code": "case value\nwhen -1:\n    return \"minus one\";\n\nwhen 0:\n    let result = \"zero\";\n    return result;\n\nwhen 1:\n    return \"one\";\n\nwhen 2:\n    return \"two\";\n\nwhen 3:\n    return \"three\";\n\nwhen 4:\n    return \"four\";\n\nwhen 5:\n    let result = \"five\";\n    return result;\n\nwhen 6, 7, 8, 9:\n    return \"more than five and less than ten\";\n\nwhen 13:\n    return \"unlucky\";\n\ndefault\n    return \"less than -1 or more than nine\";\nesac",
+  "fullSource": "use IO.Std.write_line;\n\nclassify(value: int) -> string is\ncase value\nwhen -1:\n    return \"minus one\";\n\nwhen 0:\n    let result = \"zero\";\n    return result;\n\nwhen 1:\n    return \"one\";\n\nwhen 2:\n    return \"two\";\n\nwhen 3:\n    return \"three\";\n\nwhen 4:\n    return \"four\";\n\nwhen 5:\n    let result = \"five\";\n    return result;\n\nwhen 6, 7, 8, 9:\n    return \"more than five and less than ten\";\n\nwhen 13:\n    return \"unlucky\";\n\ndefault\n    return \"less than -1 or more than nine\";\nesac\nsi\n\nentry() is\n    write_line(classify(0));\n    write_line(classify(3));\n    write_line(classify(7));\n    write_line(classify(13));\n    write_line(classify(-5));\nsi\n",
   "output": "zero\nthree\nmore than five and less than ten\nunlucky\nless than -1 or more than nine\n",
   "diagnostics": [],
   "hovers": [

@@ -1,6 +1,7 @@
 {
   "name": "control-flow-46",
-  "code": "let await a = double_async(10);   // a = 20\nlet await b = double_async(a);    // b = 40\nlet await c = add_async(a, b);    // c = 60\n\nreturn Tasks.TASK.from_result(c);",
+  "code": "let await a = double_async(10);   // a = 20\nlet await b = double_async(a);    // b = 40\nlet await c = add_async(a, b);    // c = 60\n\nreturn c;",
+  "fullSource": "use IO.Std.write_line;\n\ndouble_async(x: int) -> Tasks.TASK[int] => x * 2;\n\nadd_async(x: int, y: int) -> Tasks.TASK[int] => x + y;\n\ncompute() -> Tasks.TASK[int] is\n    let await a = double_async(10);   // a = 20\n    let await b = double_async(a);    // b = 40\n    let await c = add_async(a, b);    // c = 60\n\n    return c;\nsi\n\nentry() is\n    write_line(\"{compute().result}\");\nsi\n",
   "output": "60\n",
   "diagnostics": [],
   "hovers": [
@@ -13,9 +14,6 @@
     { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 23, "text": "add_async(x: Ghul.int, y: Ghul.int) -> Tasks.TASK[Ghul.int] // global function" },
     { "startLine": 3, "startColumn": 25, "endLine": 3, "endColumn": 25, "text": "a: Ghul.int // captured value" },
     { "startLine": 3, "startColumn": 28, "endLine": 3, "endColumn": 28, "text": "b: Ghul.int // local value" },
-    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 12, "text": "namespace Tasks" },
-    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 17, "text": "class Tasks.TASK" },
-    { "startLine": 5, "startColumn": 19, "endLine": 5, "endColumn": 29, "text": "Tasks.TASK.from_result[Ghul.int](result: Ghul.int) -> Tasks.TASK[Ghul.int] // class method" },
-    { "startLine": 5, "startColumn": 31, "endLine": 5, "endColumn": 31, "text": "c: Ghul.int // local value" }
+    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 8, "text": "c: Ghul.int // local value" }
   ]
 }

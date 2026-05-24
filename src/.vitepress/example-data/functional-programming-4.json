@@ -1,6 +1,7 @@
 {
   "name": "functional-programming-4",
   "code": "let is_even = (n, is_odd: int -> bool) =>\n    if n == 0 then true else is_odd(n - 1) fi;\n\nlet is_odd = n rec =>\n    if n == 0 then false else is_even(n - 1, rec) fi;\n\nwrite_line(\"even(10): {is_even(10, is_odd)}\");\nwrite_line(\"odd(10): {is_odd(10)}\");",
+  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let is_even = (n, is_odd: int -> bool) =>\n        if n == 0 then true else is_odd(n - 1) fi;\n\n    let is_odd = n rec =>\n        if n == 0 then false else is_even(n - 1, rec) fi;\n\n    write_line(\"even(10): {is_even(10, is_odd)}\");\n    write_line(\"odd(10): {is_odd(10)}\");\nsi\n",
   "output": "even(10): True\nodd(10): False\n",
   "diagnostics": [],
   "hovers": [

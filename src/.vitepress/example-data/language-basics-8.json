@@ -1,6 +1,7 @@
 {
   "name": "language-basics-8",
   "code": "let numbers: int[];",
+  "fullSource": "entry() is\n    let numbers: int[];\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

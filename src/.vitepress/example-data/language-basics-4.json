@@ -1,6 +1,7 @@
 {
   "name": "language-basics-4",
   "code": "square(x: int) -> int => x * x;",
+  "fullSource": "square(x: int) -> int => x * x;\n\nentry() is\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

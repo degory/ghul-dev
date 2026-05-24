@@ -1,6 +1,7 @@
 {
   "name": "expressions-11",
   "code": "let list = [1, 2, 3, 4, 5];\n\nlist | .filter(element => element < 3);",
+  "fullSource": "entry() is\n    let list = [1, 2, 3, 4, 5];\n\n    list | .filter(element => element < 3);\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

@@ -1,6 +1,7 @@
 {
   "name": "language-basics-5",
   "code": "if x > 0 then\n    write_line(\"Positive\");\nelif x < 0 then\n    write_line(\"Negative\");\nelse\n    write_line(\"Zero\");\nfi\n\nfor item in my_list do\n    process(item);\nod",
+  "fullSource": "use IO.Std.write_line;\n\nprocess(item: int) is\nsi\n\nentry() is\n    let x = 1;\n    let my_list = [1, 2, 3];\n    if x > 0 then\n        write_line(\"Positive\");\n    elif x < 0 then\n        write_line(\"Negative\");\n    else\n        write_line(\"Zero\");\n    fi\n\n    for item in my_list do\n        process(item);\n    od\nsi\n",
   "output": "Positive\n",
   "diagnostics": [],
   "hovers": [

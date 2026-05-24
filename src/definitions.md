@@ -153,10 +153,10 @@ A dotted namespace name is shorthand for nesting namespaces
 
 A namespace definition is an instance of that namespace. Namespace instances are aggregated across all source files to form a single namespace scope. This means that all definitions within a namespace instance are visible unqualified within all other instances of that namespace in all source files:
 
-`source-file-1.ghul`:
+`source-file-1.ghul`{:text}:
 <GhulExample name="definitions-27" />
 
-`source-file-2.ghul`:
+`source-file-2.ghul`{:text}:
 <GhulExample name="definitions-28" />
 
 ### definitions outside any namespace

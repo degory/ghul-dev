@@ -1,6 +1,7 @@
 {
   "name": "functional-programming-7",
   "code": "let tuple = (1, 2, 3, 4, 5);\n\nlet element = tuple.`3; // elements can be read\n\ntuple.`3 = 6;",
+  "fullSource": "// expect: error\nentry() is\n    let tuple = (1, 2, 3, 4, 5);\n\n    let element = tuple.`3; // elements can be read\n\n    tuple.`3 = 6;\nsi\n",
   "output": "",
   "diagnostics": [
     { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 9, "severity": "error", "message": "`3: int is not publicly assignable" }

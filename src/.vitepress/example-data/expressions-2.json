@@ -1,6 +1,7 @@
 {
   "name": "expressions-2",
   "code": "let c = 'c';\nlet u_macron = 'ū'",
+  "fullSource": "entry() is\n    let c = 'c';\n    let u_macron = 'ū'\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

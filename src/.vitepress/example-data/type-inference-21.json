@@ -1,6 +1,7 @@
 {
   "name": "type-inference-21",
   "code": "class Animal is\n    init() is si\n    speak() -> string => \"animal\";\nsi\n\nclass Cat: Animal is\n    init() is si\nsi\n\nclass Dog: Animal is\n    init() is si\nsi\n\nmerge[T](a: T, b: T) -> T => a;\nlet a = merge(Cat(), Dog());",
+  "fullSource": "class Animal is\n    init() is si\n    speak() -> string => \"animal\";\nsi\n\nclass Cat: Animal is\n    init() is si\nsi\n\nclass Dog: Animal is\n    init() is si\nsi\n\nmerge[T](a: T, b: T) -> T => a;\n\nentry() is\n    let a = merge(Cat(), Dog());\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

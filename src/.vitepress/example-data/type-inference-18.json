@@ -1,6 +1,7 @@
 {
   "name": "type-inference-18",
   "code": "let f = x => x + 1;\nwrite_line(\"{f(42)}\");",
+  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let f = x => x + 1;\n    write_line(\"{f(42)}\");\nsi\n",
   "output": "43\n",
   "diagnostics": [],
   "hovers": [

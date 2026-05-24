@@ -1,6 +1,7 @@
 {
   "name": "functional-programming-9",
   "code": "let list = [1, 2, 3, 4, 5];\n\nlet doubled = list | .map(x => x * 2);\n\n// original list is still the same:\nwrite_line(\"list: {list}\");",
+  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let list = [1, 2, 3, 4, 5];\n\n    let doubled = list | .map(x => x * 2);\n\n    // original list is still the same:\n    write_line(\"list: {list}\");\nsi\n",
   "output": "list: System.Int32[]\n",
   "diagnostics": [],
   "hovers": [

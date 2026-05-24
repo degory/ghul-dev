@@ -1,6 +1,7 @@
 {
   "name": "functional-programming-2",
   "code": "// map\nlet doubled = [1, 2, 3, 4, 5] | .map(x => x * 2);\nwrite_line(\"doubled: {doubled}\");\n\n// filter\nlet evens = [1, 2, 3, 4, 5] | .filter(x => x % 2 == 0);\nwrite_line(\"evens: {evens}\");\n\n// reduce\nlet sum = [1, 2, 3, 4, 5] | .reduce(0, (acc, x) => acc + x);\nwrite_line(\"sum: {sum}\");",
+  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    // map\n    let doubled = [1, 2, 3, 4, 5] | .map(x => x * 2);\n    write_line(\"doubled: {doubled}\");\n\n    // filter\n    let evens = [1, 2, 3, 4, 5] | .filter(x => x % 2 == 0);\n    write_line(\"evens: {evens}\");\n\n    // reduce\n    let sum = [1, 2, 3, 4, 5] | .reduce(0, (acc, x) => acc + x);\n    write_line(\"sum: {sum}\");\nsi\n",
   "output": "doubled: 2, 4, 6, 8, 10\nevens: 2, 4\nsum: 15\n",
   "diagnostics": [],
   "hovers": [

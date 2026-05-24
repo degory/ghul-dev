@@ -166,7 +166,10 @@ const copied = ref(false)
 
 function copy() {
   if (!example.value) return
-  navigator.clipboard?.writeText(example.value.code)
+  // `fullSource` is the original example file with the `// >>>` / `// <<<`
+  // region markers stripped — what the user actually wants to paste into
+  // their own project. `code` is the slice displayed on the page.
+  navigator.clipboard?.writeText(example.value.fullSource ?? example.value.code)
   copied.value = true
   setTimeout(() => { copied.value = false }, 2000)
 }

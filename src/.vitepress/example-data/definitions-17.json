@@ -1,6 +1,7 @@
 {
   "name": "definitions-17",
   "code": "let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));\nlet leaf = Tree.LEAF(123);\n\nif tree.is_node then\n    write_line(\"have tree node\");\nelif tree.is_leaf then\n    write_line(\"have tree leaf\");\nfi",
+  "fullSource": "use IO.Std.write_line;\n\nunion Tree is\n    NODE(left: Tree, right: Tree);\n    LEAF(value: int);\nsi\n\nentry() is\n    let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));\n    let leaf = Tree.LEAF(123);\n\n    if tree.is_node then\n        write_line(\"have tree node\");\n    elif tree.is_leaf then\n        write_line(\"have tree leaf\");\n    fi\nsi\n",
   "output": "have tree node\n",
   "diagnostics": [],
   "hovers": [

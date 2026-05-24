@@ -1,6 +1,7 @@
 {
   "name": "expressions-8",
   "code": "let simple_add = (x: int, y: int) -> int => x + y;",
+  "fullSource": "entry() is\n    let simple_add = (x: int, y: int) -> int => x + y;\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

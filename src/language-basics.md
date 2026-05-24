@@ -115,7 +115,7 @@ ghūl does not perform implicit type conversion (coercion) between scalar types;
 
 ## variables
 
-ghūl has three kinds of variables: locals declared within the body of a function or method, function or method arguments and bindings captured by a function literal.
+ghūl has three kinds of variables: locals declared within the body of a function or method, function or method arguments and variables captured by a function literal.
 
 ### locals
 
@@ -131,8 +131,8 @@ Arguments will be covered in detail with functions and methods, but the basic fo
 
 <GhulExample name="language-basics-22" />
 
-### captured bindings
-Bindings captured by a function literal will be covered with [function literals](/expressions.html#capturing-and-closure). They are not explicitly declared but inferred from each function literal's body.
+### captured variables
+Variables captured by a function literal will be covered with [function literals](/expressions.html#capturing-and-closure). They are not explicitly declared but inferred from each function literal's body.
 
 ### scope
 

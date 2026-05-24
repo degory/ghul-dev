@@ -1,6 +1,7 @@
 {
   "name": "control-flow-24",
   "code": "for i in 0..5 do\n    // i will take values 0, 1, 2, 3, 4 in sequence\n    write_line(i);\nod",
+  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    for i in 0..5 do\n        // i will take values 0, 1, 2, 3, 4 in sequence\n        write_line(i);\n    od\nsi\n",
   "output": "0\n1\n2\n3\n4\n",
   "diagnostics": [],
   "hovers": [

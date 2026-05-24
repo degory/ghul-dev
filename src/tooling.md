@@ -4,15 +4,15 @@ The ghūl compiler is a .NET tool, and ghūl projects are ordinary .NET SDK proj
 
 ## the compiler
 
-The compiler is published as the [`ghul.compiler`](https://www.nuget.org/packages/ghul.compiler) .NET tool. Once installed it is invoked as `dotnet ghul-compiler`.
+The compiler is published as the [`ghul.compiler`{:text}](https://www.nuget.org/packages/ghul.compiler) .NET tool. Once installed it is invoked as `dotnet ghul-compiler`{:sh}.
 
-You don't usually run the compiler by hand. ghūl projects are built with MSBuild through a `.ghulproj` project file, and the `ghul.runtime` package supplies the MSBuild targets that drive the compiler for you. See [getting started](/getting-started.html) for installing the compiler and setting up a project.
+You don't usually run the compiler by hand. ghūl projects are built with MSBuild through a `.ghulproj`{:text} project file, and the `ghul.runtime`{:text} package supplies the MSBuild targets that drive the compiler for you. See [getting started](/getting-started.html) for installing the compiler and setting up a project.
 
-The compiler is normally installed as a *local* .NET tool, pinned per project in `.config/dotnet-tools.json`, so everyone building the project uses the same compiler version. `dotnet tool restore` restores it.
+The compiler is normally installed as a *local* .NET tool, pinned per project in `.config/dotnet-tools.json`{:text}, so everyone building the project uses the same compiler version. `dotnet tool restore`{:sh} restores it.
 
 ## building and running
 
-Because a ghūl project is a normal .NET SDK project, the standard `dotnet` commands all work:
+Because a ghūl project is a normal .NET SDK project, the standard `dotnet`{:text} commands all work:
 
 ```bash
 dotnet build   # compile the project
@@ -47,10 +47,10 @@ The [ghūl repository template](https://github.com/degory/ghul-repository-templa
 
 ## project templates
 
-The [`ghul.templates`](https://www.nuget.org/packages/ghul.templates) package adds ghūl project templates to the .NET SDK:
+The [`ghul.templates`{:text}](https://www.nuget.org/packages/ghul.templates) package adds ghūl project templates to the .NET SDK:
 
 ```bash
 dotnet new install ghul.templates
 ```
 
-Once installed, `dotnet new` can scaffold a ghūl project pre-configured with a `.ghulproj`, the compiler pinned as a local tool, and a starting source file. See [getting started](/getting-started.html) for the other ways to get a project off the ground.
+Once installed, `dotnet new`{:sh} can scaffold a ghūl project pre-configured with a `.ghulproj`{:text}, the compiler pinned as a local tool, and a starting source file. See [getting started](/getting-started.html) for the other ways to get a project off the ground.

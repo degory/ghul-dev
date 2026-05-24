@@ -1,6 +1,7 @@
 {
   "name": "control-flow-3",
   "code": "let list = [1, 2, 3, 4];\n\nif list.count > 0 then\n    write_line(\"list has {list.count} elements\");\nfi",
+  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let list = [1, 2, 3, 4];\n\n    if list.count > 0 then\n        write_line(\"list has {list.count} elements\");\n    fi\nsi\n",
   "output": "list has 4 elements\n",
   "diagnostics": [],
   "hovers": [

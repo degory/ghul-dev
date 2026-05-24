@@ -1,6 +1,7 @@
 {
   "name": "functional-programming-19",
   "code": "let curried_add = x => y => x + y;\n\nwrite_line(\"curried_add(5)(3): {curried_add(5)(3)}\");\n\nlet add_5 = curried_add(5);\nwrite_line(\"add_5(3): {add_5(3)}\");\n\nlet add_10 = curried_add(10);\nwrite_line(\"add_10(3): {add_10(3)}\");",
+  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let curried_add = x => y => x + y;\n\n    write_line(\"curried_add(5)(3): {curried_add(5)(3)}\");\n\n    let add_5 = curried_add(5);\n    write_line(\"add_5(3): {add_5(3)}\");\n\n    let add_10 = curried_add(10);\n    write_line(\"add_10(3): {add_10(3)}\");\nsi\n",
   "output": "curried_add(5)(3): 8\nadd_5(3): 8\nadd_10(3): 13\n",
   "diagnostics": [],
   "hovers": [

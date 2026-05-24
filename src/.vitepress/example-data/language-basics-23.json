@@ -1,6 +1,7 @@
 {
   "name": "language-basics-23",
   "code": "let integer_literal = 42;\nlet floating_point_literal = 3.14;\nlet string_literal = \"Hello, world!\";\nlet boolean_literal_true = true;\nlet boolean_literal_false = false;",
+  "fullSource": "entry() is\n    let integer_literal = 42;\n    let floating_point_literal = 3.14;\n    let string_literal = \"Hello, world!\";\n    let boolean_literal_true = true;\n    let boolean_literal_false = false;\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

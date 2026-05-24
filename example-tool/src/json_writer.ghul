@@ -35,6 +35,7 @@ namespace ExampleTool is
     build_artifact_json(
         name: string,
         code: string,
+        full_source: string,
         hovers: Iterable[HOVER],
         output: string,
         diagnostics: Iterable[DIAGNOSTIC]
@@ -44,6 +45,7 @@ namespace ExampleTool is
         b.append("{{\n");
         b.append("  \"name\": "); b.append(_json_string(name)); b.append(",\n");
         b.append("  \"code\": "); b.append(_json_string(code)); b.append(",\n");
+        b.append("  \"fullSource\": "); b.append(_json_string(full_source)); b.append(",\n");
         b.append("  \"output\": "); b.append(_json_string(output)); b.append(",\n");
         b.append("  \"diagnostics\": [");
 

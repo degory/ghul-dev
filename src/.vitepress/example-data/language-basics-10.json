@@ -1,6 +1,7 @@
 {
   "name": "language-basics-10",
   "code": "let p = primes[i];",
+  "fullSource": "entry() is\n    let primes = [2, 3, 5, 7, 11];\n    let i = 2;\n    let p = primes[i];\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

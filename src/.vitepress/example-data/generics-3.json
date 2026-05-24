@@ -1,6 +1,7 @@
 {
   "name": "generics-3",
   "code": "struct HOLD_SOMETHING[T] is\n    value: T;\n\n    init(value: T) is\n        self.value = value;\n    si\nsi",
+  "fullSource": "struct HOLD_SOMETHING[T] is\n    value: T;\n\n    init(value: T) is\n        self.value = value;\n    si\nsi\n\nentry() is\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

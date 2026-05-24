@@ -1,6 +1,7 @@
 {
   "name": "expressions-22",
   "code": "let point = POINT(10, 20);",
+  "fullSource": "class POINT is\n    x: int;\n    y: int;\n\n    init(x: int, y: int) is\n        self.x = x;\n        self.y = y;\n    si\nsi\n\nentry() is\n    let point = POINT(10, 20);\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

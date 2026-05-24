@@ -1,6 +1,7 @@
 {
   "name": "type-inference-4",
   "code": "class CARRIER is\n    occupant: Animal;\n\n    init(occupant: Animal) is\n        self.occupant = occupant;\n    si\nsi\ndescribe(carrier: CARRIER) is\n    if isa Cat(carrier.occupant) then\n        // carrier.occupant is a property access,\n        // not a local variable — it is not narrowed,\n        // so carrier.occupant.purr() would not\n        // compile here\n        write_line(\"the carrier holds a cat\");\n    fi\nsi",
+  "fullSource": "use IO.Std.write_line;\n\nclass Animal is\n    init() is si\nsi\n\nclass Cat: Animal is\n    init() is super.init(); si\n    purr() -> string => \"purr\";\nsi\n\nclass CARRIER is\n    occupant: Animal;\n\n    init(occupant: Animal) is\n        self.occupant = occupant;\n    si\nsi\n\ndescribe(carrier: CARRIER) is\n    if isa Cat(carrier.occupant) then\n        // carrier.occupant is a property access,\n        // not a local variable — it is not narrowed,\n        // so carrier.occupant.purr() would not\n        // compile here\n        write_line(\"the carrier holds a cat\");\n    fi\nsi\n\nentry() is\n    describe(CARRIER(Cat()));\nsi\n",
   "output": "the carrier holds a cat\n",
   "diagnostics": [],
   "hovers": [
