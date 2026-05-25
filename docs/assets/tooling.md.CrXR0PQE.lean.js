@@ -1,1 +1,0 @@
-import{_ as a,I as i,g as t,j as s}from"./chunks/framework.CbuNJfvM.js";const g=JSON.parse('{"title":"tooling","description":"","frontmatter":{},"headers":[],"relativePath":"tooling.md","filePath":"tooling.md"}'),n={name:"tooling.md"};function l(o,e,r,p,h,d){return i(),t("div",null,[...e[0]||(e[0]=[s("",22)])])}const u=a(n,[["render",l]]);export{g as __pageData,u as default};
