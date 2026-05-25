@@ -22,9 +22,9 @@ If you initialize your project using one of the [ghūl .NET project templates](h
 
 If you create a new GitHub repo from the [ghūl repository template](https://github.com/degory/ghul-repository-template), then the compiler will be pre-configured as a local .NET tool in your project folder - run `dotnet tool restore`{:sh} to restore it.
 
-### use the ghūl development container image
+### use a dev container
 
-The compiler is pre-installed globally in the [ghūl development container](https://github.com/users/degory/packages/container/package/ghul%2Fdevcontainer)
+The [examples repository](https://github.com/degory/ghul-examples) and the [ghūl repository template](https://github.com/degory/ghul-repository-template) both ship a `.devcontainer` configured to use a standard .NET 8 dev container image — for example [`mcr.microsoft.com/devcontainers/dotnet:8.0`](https://hub.docker.com/r/microsoft/devcontainers-dotnet). Open the project in VS Code with the Dev Containers extension, or in a GitHub Codespace, and run `dotnet tool restore`{:sh} to install the compiler from the local tool manifest.
 
 ### install the compiler as a local or global .NET tool
 

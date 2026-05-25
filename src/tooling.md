@@ -39,11 +39,9 @@ Behind the scenes the extension runs the ghūl compiler in its analysis mode: th
 
 On large projects the extension updates this analysis in two stages — a quick partial pass over the file you are editing, followed by a full pass once you pause. This is usually invisible, though it does mean a diagnostic can occasionally appear or disappear a moment after an edit.
 
-## the development container
+## dev containers
 
-A [development container image](https://github.com/users/degory/packages/container/package/ghul%2Fdevcontainer) is published with the compiler, the .NET SDK, and the supporting tools pre-installed. Opening a project in this container — locally with the VS Code Dev Containers extension, or in a GitHub Codespace — gives you a ready-to-build ghūl environment with nothing to install.
-
-The [ghūl repository template](https://github.com/degory/ghul-repository-template) is also set up to open in this container.
+The ghūl repository template and the examples repo both ship a `.devcontainer` configured to use a standard .NET 8 dev container image — for example [`mcr.microsoft.com/devcontainers/dotnet:8.0`](https://hub.docker.com/r/microsoft/devcontainers-dotnet). Open the project in VS Code with the Dev Containers extension, or in a GitHub Codespace, and `dotnet tool restore`{:sh} will install the compiler from the local tool manifest. Any image with the .NET 8 SDK and `dotnet`{:text} on the PATH will work.
 
 ## project templates
 
