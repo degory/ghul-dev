@@ -1,0 +1,35 @@
+{
+  "name": "generics-9",
+  "code": "// T: new requires the caller to pass a type with a parameterless constructor\necho[T: new](x: T) -> T => x;\nlet w = echo(WIDGET());   // OK: WIDGET has init()\n\nwrite_line(w.describe());",
+  "fullSource": "use IO.Std.write_line;\n\n// T: new requires the caller to pass a type with a parameterless constructor\necho[T: new](x: T) -> T => x;\n\nclass WIDGET is\n    init() is si\n\n    describe() -> string => \"a widget\";\nsi\n\nentry() is\n    let w = echo(WIDGET());   // OK: WIDGET has init()\n\n    write_line(w.describe());\nsi\n",
+  "output": "a widget\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 4, "text": "echo[T](x: T) -> T // global function" },
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 6, "text": "T // type variable" },
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 14, "text": "x: T // local argument" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "text": "T // type variable" },
+    { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 23, "text": "T // type variable" },
+    { "startLine": 2, "startColumn": 28, "endLine": 2, "endColumn": 28, "text": "x: T // local argument" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "w: WIDGET // local value" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 12, "text": "echo[WIDGET](x: WIDGET) -> WIDGET // global function" },
+    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 19, "text": "WIDGET.init() // constructor" },
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 12, "text": "w: WIDGET // local value" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 21, "text": "WIDGET.describe() -> Ghul.string // method" }
+  ],
+  "semanticTokens": [
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 4, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 6, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 14, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 23, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 28, "endLine": 2, "endColumn": 28, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 12, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 19, "tokenType": "method" },
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 21, "tokenType": "method" }
+  ]
+}

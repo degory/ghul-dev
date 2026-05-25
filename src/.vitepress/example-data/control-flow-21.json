@@ -15,5 +15,17 @@
     { "startLine": 4, "startColumn": 16, "endLine": 4, "endColumn": 17, "text": "Ghul.==(a: Ghul.int, b: Ghul.int) -> Ghul.bool // innate function compare.value" },
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.int) -> Ghul.void // class method" },
     { "startLine": 7, "startColumn": 16, "endLine": 7, "endColumn": 22, "text": "counter: Ghul.int // local variable" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "variable" },
+    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 13, "tokenType": "variable" },
+    { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 15, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "tokenType": "variable" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 21, "tokenType": "variable" },
+    { "startLine": 3, "startColumn": 23, "endLine": 3, "endColumn": 23, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 14, "tokenType": "variable" },
+    { "startLine": 4, "startColumn": 16, "endLine": 4, "endColumn": 17, "tokenType": "function" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 7, "startColumn": 16, "endLine": 7, "endColumn": 22, "tokenType": "variable" }
   ]
 }

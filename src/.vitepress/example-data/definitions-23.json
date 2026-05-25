@@ -19,5 +19,21 @@
     { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "text": "COUNTER.count: Ghul.int // instance property" },
     { "startLine": 9, "startColumn": 9, "endLine": 9, "endColumn": 13, "text": "COUNTER.count: Ghul.int // instance property" },
     { "startLine": 9, "startColumn": 17, "endLine": 9, "endColumn": 29, "text": "initial_count: Ghul.int // local argument" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "tokenType": "class" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "tokenType": "struct" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 8, "tokenType": "method" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "tokenType": "method" },
+    { "startLine": 8, "startColumn": 10, "endLine": 8, "endColumn": 22, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 25, "endLine": 8, "endColumn": 27, "tokenType": "struct" },
+    { "startLine": 13, "startColumn": 5, "endLine": 13, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 13, "startColumn": 9, "endLine": 13, "endColumn": 15, "tokenType": "method" },
+    { "startLine": 16, "startColumn": 5, "endLine": 16, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 16, "startColumn": 9, "endLine": 16, "endColumn": 15, "tokenType": "method" },
+    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "tokenType": "property" },
+    { "startLine": 9, "startColumn": 9, "endLine": 9, "endColumn": 13, "tokenType": "property" },
+    { "startLine": 9, "startColumn": 17, "endLine": 9, "endColumn": 29, "tokenType": "parameter", "modifiers": "readonly" }
   ]
 }

@@ -100,6 +100,12 @@ namespace Analysis.Protocol is
             flush();
         si
 
+        send_semantic_tokens(path: string) is
+            write("#SEMANTICTOKENS#\n");
+            write("{path}\n");
+            flush();
+        si
+
         // Read a response, transparently draining a leading DIAGNOSTICS frame
         // (a query can be preceded by one when the analyser recompiles).
         read_query_response() -> RESPONSE is

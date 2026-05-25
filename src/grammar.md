@@ -66,7 +66,7 @@ a backtick: `` `field ``, `` `+ ``.
 The following words are keywords and cannot be used as plain identifiers:
 
 ```
-assert    break     case      cast      catch     class     const
+assert    await     break     case      cast      catch     class
 continue  default   do        elif      else      enum      esac
 false     fi        field     finally   for       if        in
 innate    is        isa       let       mut       namespace new
@@ -75,6 +75,8 @@ ref       return    self      si        static    struct    super
 then      throw     trait     true      try       typeof    union
 use       when      while     yrt
 ```
+
+A few words are *contextual* — they look like identifiers to the tokenizer but the parser recognises them in specific positions: `optional` as a type-parameter kind constraint, `out` as a type-parameter variance modifier.
 
 ### numeric literals
 
@@ -194,23 +196,32 @@ Struct ::= "struct" Identifier TypeParameters? Ancestors? Modifiers
            "is" Definition* "si"
 
 TypeParameters ::= "[" TypeParameter ( "," TypeParameter )* "]"
-TypeParameter  ::= Identifier ( ":" TypeParameterConstraint )?
-TypeParameterConstraint ::= "class" | "struct" | "option"
+TypeParameter  ::= Identifier ( ":" TypeParameterConstraints )? Variance?
+TypeParameterConstraints
+               ::= TypeExpression KindConstraint? "new"?    /* type bound */
+                 | KindConstraint "new"?                    /* kind only */
+                 | "new"                                    /* ctor only */
+KindConstraint ::= "class" | "struct" | "optional"
+Variance       ::= "out" | "in"
 
 Ancestors ::= ":" TypeList
 ```
 
 `Ancestors` lists the base class and/or implemented traits.
 
+A type parameter may carry a *type bound* (which the actual type argument must derive from), a *kind constraint* (`class` / `struct` / `optional`), a *constructor constraint* (`new`), and on a trait a *variance* modifier (`out` for covariant, `in` for contravariant) — in that order. Only a single type bound per parameter is currently supported. Variance is only legal on a trait's type parameters.
+
 ### union
 
 ```ebnf
 Union   ::= "union" Identifier TypeParameters? Modifiers "is" Variant+ "si"
-Variant ::= Identifier ( "(" VariableList ")" )? ";"
+Variant ::= Identifier ( "(" VariableList ")" )? "default"? ";"
 ```
 
 Each `Variant` optionally carries fields, written as a parenthesised list of
-`name: Type` variables.
+`name: Type` variables. A trailing `default` marks one variant as the union's
+*default* — the one the `?` test and `!` unwrap operators target on a union
+value.
 
 ### enum
 
@@ -273,7 +284,7 @@ Indexer ::= Identifier? "[" Variable "]" ( ":" TypeExpression )? Modifiers
 ```ebnf
 Modifiers      ::= AccessModifier? StorageClass?
 AccessModifier ::= "public" | "protected" | "private"
-StorageClass   ::= "static" | "const" | "field"
+StorageClass   ::= "static" | "field"
 ```
 
 ### pragmas
@@ -334,6 +345,7 @@ optional elsewhere.
 StatementList ::= ( Statement ";"? )*
 
 Statement ::= Let
+            | Await
             | Return
             | Throw
             | Assert
@@ -353,15 +365,24 @@ Statement ::= Let
 ### local variable definitions, return, throw, assert
 
 ```ebnf
-Let    ::= "let" "use"? VariableList ( "in" Expression )?
+Let    ::= "let" "use"? "await"? VariableList ( "in" Expression )?
+Await  ::= "await" Expression
 Return ::= "return" Expression?
 Throw  ::= "throw" Expression?
 Assert ::= "assert" Expression ( "else" Expression )?
 ```
 
 `let use` defines a local variable holding a disposable, whose `dispose` is called
-when the variable goes out of scope. The `let … in …` form is a
-[let-in expression](#primary-expressions) used as a statement.
+when the variable goes out of scope.
+
+`let await x = e;` and the value-less `await e;` are
+[asynchronous](/control-flow.html#asynchronous-code) forms permitted inside a
+function whose return type is `Tasks.TASK[T]` (or `Tasks.TASK`). `let await`
+waits for the task to complete and binds its result; `await` waits and discards
+the result.
+
+The `let … in …` form is a [let-in expression](#primary-expressions) used as a
+statement.
 
 ### if
 

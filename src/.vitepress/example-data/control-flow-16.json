@@ -1,8 +1,21 @@
 {
   "name": "control-flow-16",
   "code": "if let (name, _) = lookup(id) then\n    write_line(\"found {name}\");\nfi",
-  "fullSource": "if let (name, _) = lookup(id) then\n    write_line(\"found {name}\");\nfi\n",
-  "output": "",
+  "fullSource": "use IO.Std.write_line;\nuse Collections.MAP;\n\nlookup(id: int) -> (name: string, score: int)? is\n    let book = MAP[int, (name: string, score: int)]();\n    book[1] = (name = \"ada\",     score = 95);\n    book[2] = (name = \"grace\",   score = 88);\n\n    if book.contains_key(id) then\n        return book[id];\n    fi\n\n    return null;\nsi\n\nentry() is\n    let id = 1;\n    if let (name, _) = lookup(id) then\n        write_line(\"found {name}\");\n    fi\nsi\n",
+  "output": "found ada\n",
   "diagnostics": [],
-  "hovers": []
+  "hovers": [
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 12, "text": "name: Ghul.string // local value" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "text": "lookup(id: Ghul.int) -> (name: string, score: int)? // global function" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 28, "text": "id: Ghul.int // local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 2, "startColumn": 24, "endLine": 2, "endColumn": 27, "text": "name: Ghul.string // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 28, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 2, "startColumn": 24, "endLine": 2, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" }
+  ]
 }

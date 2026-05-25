@@ -10,5 +10,12 @@
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 18, "text": "string_literal: Ghul.string // local value" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 24, "text": "boolean_literal_true: Ghul.bool // local value" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 25, "text": "boolean_literal_false: Ghul.bool // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 26, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 24, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 25, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

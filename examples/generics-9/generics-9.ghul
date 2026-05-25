@@ -1,0 +1,20 @@
+use IO.Std.write_line;
+
+// >>>
+// T: new requires the caller to pass a type with a parameterless constructor
+echo[T: new](x: T) -> T => x;
+// <<<
+
+class WIDGET is
+    init() is si
+
+    describe() -> string => "a widget";
+si
+
+entry() is
+// >>>
+    let w = echo(WIDGET());   // OK: WIDGET has init()
+
+    write_line(w.describe());
+// <<<
+si

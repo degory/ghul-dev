@@ -16,5 +16,16 @@
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 6, "text": "namespace IO" },
     { "startLine": 7, "startColumn": 8, "endLine": 7, "endColumn": 10, "text": "class IO.Std" },
     { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 21, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 17, "tokenType": "namespace" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "tokenType": "function" },
+    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 5, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 10, "tokenType": "namespace" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 14, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 25, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 6, "tokenType": "namespace" },
+    { "startLine": 7, "startColumn": 8, "endLine": 7, "endColumn": 10, "tokenType": "class" },
+    { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 21, "tokenType": "method", "modifiers": "static" }
   ]
 }

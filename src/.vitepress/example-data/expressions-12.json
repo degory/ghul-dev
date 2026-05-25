@@ -7,5 +7,9 @@
   "hovers": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "g: () -> Ghul.int // local value" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 15, "text": "i: Ghul.int // captured value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

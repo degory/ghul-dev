@@ -38,7 +38,8 @@ namespace ExampleTool is
         full_source: string,
         hovers: Iterable[HOVER],
         output: string,
-        diagnostics: Iterable[DIAGNOSTIC]
+        diagnostics: Iterable[DIAGNOSTIC],
+        semantic_tokens: Iterable[SEMANTIC_TOKEN]
     ) -> string is
         let b = StringBuilder();
 
@@ -90,6 +91,34 @@ namespace ExampleTool is
         od
 
         if !first then
+            b.append("\n  ");
+        fi
+
+        b.append("],\n");
+        b.append("  \"semanticTokens\": [");
+
+        let first_token mut = true;
+        for t in semantic_tokens do
+            if !first_token then
+                b.append(",");
+            fi
+            first_token = false;
+
+            b.append("\n    {{ ");
+            b.append("\"startLine\": {t.start_line}, ");
+            b.append("\"startColumn\": {t.start_column}, ");
+            b.append("\"endLine\": {t.end_line}, ");
+            b.append("\"endColumn\": {t.end_column}, ");
+            b.append("\"tokenType\": "); b.append(_json_string(t.token_type));
+
+            if t.modifiers.length > 0 then
+                b.append(", \"modifiers\": "); b.append(_json_string(t.modifiers));
+            fi
+
+            b.append(" }}");
+        od
+
+        if !first_token then
             b.append("\n  ");
         fi
 

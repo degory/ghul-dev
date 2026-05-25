@@ -10,5 +10,12 @@
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 11, "text": "closure: () -> Ghul.int // local value" },
     { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 36, "text": "object_reference: SOME_OBJECT // captured value" },
     { "startLine": 2, "startColumn": 38, "endLine": 2, "endColumn": 50, "text": "SOME_OBJECT.some_property: Ghul.int // instance property" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 20, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 34, "tokenType": "method" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 36, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 38, "endLine": 2, "endColumn": 50, "tokenType": "property" }
   ]
 }

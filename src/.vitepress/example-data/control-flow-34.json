@@ -12,5 +12,14 @@
     { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "text": "class Ghul.string" },
     { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 18, "text": "System.Exception.init(message: Ghul.string) -> Ghul.void // method" },
     { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 26, "text": "message: Ghul.string // local argument" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 32, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 42, "endLine": 1, "endColumn": 50, "tokenType": "class" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "tokenType": "method" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 16, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 18, "tokenType": "method" },
+    { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 26, "tokenType": "parameter", "modifiers": "readonly" }
   ]
 }

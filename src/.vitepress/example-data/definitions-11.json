@@ -9,5 +9,11 @@
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 18, "text": "POINT.init(x: Ghul.double, y: Ghul.double) // constructor" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 9, "text": "right: POINT // local value" },
     { "startLine": 5, "startColumn": 13, "endLine": 5, "endColumn": 17, "text": "POINT.init(x: Ghul.double, y: Ghul.double) // constructor" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 18, "tokenType": "method" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 13, "endLine": 5, "endColumn": 17, "tokenType": "method" }
   ]
 }

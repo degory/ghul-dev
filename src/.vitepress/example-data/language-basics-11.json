@@ -11,5 +11,13 @@
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "person: (string, int) // local value" },
     { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 19, "text": "class Ghul.string" },
     { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 24, "text": "struct Ghul.int" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 20, "tokenType": "struct" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 19, "tokenType": "class" },
+    { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 24, "tokenType": "struct" }
   ]
 }

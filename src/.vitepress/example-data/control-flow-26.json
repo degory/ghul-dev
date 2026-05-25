@@ -10,7 +10,7 @@
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 16, "text": "five_to_nine: Ghul.INT_RANGE // local value" },
     { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 22, "text": "Ghul...(from: Ghul.int, to: Ghul.int) -> Ghul.INT_RANGE // innate function range.exclusive" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 16, "text": "zero_to_nine: Ghul.Pipes.Pipe[Ghul.int] // local value" },
-    { "startLine": 4, "startColumn": 33, "endLine": 4, "endColumn": 33, "text": "Ghul.Pipes.$globals.pipe[Ghul.int](source: Collections.Iterable[Ghul.int]) -> Ghul.Pipes.Pipe[Ghul.int] // class method" },
+    { "startLine": 4, "startColumn": 33, "endLine": 4, "endColumn": 33, "text": "Ghul.Pipes.pipe[Ghul.int](source: Collections.Iterable[Ghul.int]) -> Ghul.Pipes.Pipe[Ghul.int] // global function" },
     { "startLine": 4, "startColumn": 20, "endLine": 4, "endColumn": 31, "text": "zero_to_four: Ghul.INT_RANGE // local value" },
     { "startLine": 4, "startColumn": 36, "endLine": 4, "endColumn": 38, "text": "Ghul.Pipes.Pipe[Ghul.int].cat(right: Collections.Iterable[Ghul.int]) -> Ghul.Pipes.Pipe[Ghul.int] // default trait method" },
     { "startLine": 4, "startColumn": 40, "endLine": 4, "endColumn": 51, "text": "five_to_nine: Ghul.INT_RANGE // local value" },
@@ -19,5 +19,21 @@
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.int) -> Ghul.void // class method" },
     { "startLine": 7, "startColumn": 16, "endLine": 7, "endColumn": 27, "text": "zero_to_nine: Ghul.Pipes.Pipe[Ghul.int] // local value" },
     { "startLine": 7, "startColumn": 29, "endLine": 7, "endColumn": 35, "text": "Collections.Iterator.current: Ghul.int // instance property" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 22, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 22, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 33, "endLine": 4, "endColumn": 33, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 20, "endLine": 4, "endColumn": 31, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 36, "endLine": 4, "endColumn": 38, "tokenType": "method" },
+    { "startLine": 4, "startColumn": 40, "endLine": 4, "endColumn": 51, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 7, "endLine": 6, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 28, "tokenType": "method" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 7, "startColumn": 16, "endLine": 7, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 7, "startColumn": 29, "endLine": 7, "endColumn": 35, "tokenType": "property" }
   ]
 }

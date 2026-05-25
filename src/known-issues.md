@@ -23,17 +23,16 @@ This is a result of how the language extension and compiler operate. As you edit
 ### valid errors not cleared after edits to correct them
 Very occasionally, if you have an error in your code and you make an edit that corrects it, you may find the error doesn't disappear. This can be caused by the state machine in the extension failing to queue a compile or by the extension's copy of the diagnostic state getting out of step with the compiler. Recent changes to the compiler and language extension have greatly reduced incidences of this problem but not completely eliminated it. The workaround for the first scenario is to make another change to the source to force a recompile (adding and immediately removing a space character for example). The workaround for the second scenario is to reload your project with `<ctrl>` + `P` then `Developer: Reload Window`.
 
-## issues with generic types
+## limitations of generics
 
-The ghūl language, compiler and language extension all support generics, but the language support is limited compared to generics in for example C#, plus there are issues in the implementation.
+ghūl supports generics on classes, structs, traits, methods, unions and global functions, with type-parameter constraints (type bound, kind, `new`) and declared variance on traits. A few limitations remain.
 
-### type constraints are not enforced
-The parser supports a limited syntax for type constraints in generic type definitions. However generic type constraints **are currently not enforced at all**, neither for ghūl types that include them or for types imported from non-ghūl assemblies, including the .NET library. This is obviously quite dangerous. It can result in IL that doesn't assemble, causing confusing unhelpful build errors that don't reference the root cause or the location of the issue in the source code. Worse still it can result in IL that assembles but either crashes at runtime or silently executes incorrectly.
+### only a single type bound per parameter
 
-The workaround here is to either completely avoid consuming types that have constraints on any type parameters, or manually ensure your ghūl code meets those constraints: the compiler will issue a warning when types with constraints are referenced.
+The parser accepts `[T: A]` — a single type bound — and `[T: A class new]` — a bound combined with kind and constructor constraints. Multiple type bounds (`[T: A /\ B]`) are not yet supported and are rejected with a clear diagnostic.
 
-### generic type checks are not always correct
-In rare cases the compiler may allow assignments or method/function calls involving generics that should have been blocked due to incompatible types. Similarly to with type constraints, this could result in unhelpful errors from the IL assembler or incorrect runtime behavior. If you encounter this kind of error, please raise an issue with example code that reproduces it.
+### variance is declared only on traits
 
-------
-Despite these issues, generics in ghūl are generally functional, provided you stick to types without constraints. The ghūl compiler itself makes extensive use of generics.
+The CLR permits variance only on interfaces, so `out` / `in` modifiers can be declared only on a trait's type parameters. Declaring variance on a class or struct is rejected at parse time.
+
+Type variance for built-in types is fixed and is not user-declarable. Function types are contravariant in their parameters and covariant in their return; arrays of reference types are covariant; everything else (including `List[T]`, `Map[K, V]`, `Iterable[T]`) is invariant.

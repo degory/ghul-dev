@@ -4,5 +4,6 @@
   "fullSource": "read_file(path: string) -> string is\n    let reader = StreamReader(path);\n\n    try\n        return reader.read_to_end();\n    finally\n        reader.close(); // runs before the function returns\n    yrt\nsi\n",
   "output": "",
   "diagnostics": [],
-  "hovers": []
+  "hovers": [],
+  "semanticTokens": []
 }

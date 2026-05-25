@@ -7,5 +7,9 @@
   "hovers": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "text": "hello_world: Ghul.string // local value" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 11, "text": "unicode: Ghul.string // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

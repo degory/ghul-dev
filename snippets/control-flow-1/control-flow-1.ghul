@@ -1,7 +1,0 @@
-assert true else "all bets are off"; // should not throw
-assert false else "expect AssertionFailedException";
-
-let list = [1, 2, 3, 4, 5];
-
-assert 3 < list.count
-    else ArgumentOutOfRangeException("list");

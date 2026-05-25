@@ -9,5 +9,11 @@
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "t: Ghul.single // local value" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "text": "d: Ghul.double // local value" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 5, "text": "e: Ghul.double // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

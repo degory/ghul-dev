@@ -21,5 +21,23 @@
     { "startLine": 6, "startColumn": 19, "endLine": 6, "endColumn": 23, "text": "leaf3: Tree.LEAF // local value" },
     { "startLine": 6, "startColumn": 16, "endLine": 6, "endColumn": 17, "text": "Tree.LEAF.=~(other: Tree) -> Ghul.bool // method" },
     { "startLine": 6, "startColumn": 8, "endLine": 6, "endColumn": 8, "text": "Ghul.!(a: Ghul.bool) -> Ghul.bool // innate function bool.not" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 16, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 21, "tokenType": "method" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 16, "tokenType": "class" },
+    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 21, "tokenType": "method" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 16, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 21, "tokenType": "method" },
+    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 17, "endLine": 5, "endColumn": 21, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 15, "tokenType": "method" },
+    { "startLine": 6, "startColumn": 10, "endLine": 6, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 19, "endLine": 6, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 16, "endLine": 6, "endColumn": 17, "tokenType": "method" },
+    { "startLine": 6, "startColumn": 8, "endLine": 6, "endColumn": 8, "tokenType": "function" }
   ]
 }

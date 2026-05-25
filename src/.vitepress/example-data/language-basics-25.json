@@ -17,5 +17,19 @@
     { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 13, "text": "Ghul.==(a: Ghul.int, b: Ghul.int) -> Ghul.bool // innate function compare.value" },
     { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 7, "text": "neq: Ghul.bool // local value" },
     { "startLine": 6, "startColumn": 13, "endLine": 6, "endColumn": 14, "text": "Ghul.==(a: Ghul.int, b: Ghul.int) -> Ghul.bool // innate function compare.value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 6, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 12, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 14, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 6, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 12, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 13, "endLine": 4, "endColumn": 14, "tokenType": "function" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 6, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 13, "tokenType": "function" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 13, "endLine": 6, "endColumn": 14, "tokenType": "function" }
   ]
 }

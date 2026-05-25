@@ -16,5 +16,18 @@
     { "startLine": 8, "startColumn": 10, "endLine": 8, "endColumn": 12, "text": "struct Ghul.int" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
     { "startLine": 3, "startColumn": 32, "endLine": 3, "endColumn": 36, "text": "thing: Ghul.string // local argument" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 21, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 24, "endLine": 2, "endColumn": 29, "tokenType": "class" },
+    { "startLine": 6, "startColumn": 7, "endLine": 6, "endColumn": 12, "tokenType": "class" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 8, "tokenType": "property" },
+    { "startLine": 7, "startColumn": 11, "endLine": 7, "endColumn": 16, "tokenType": "class" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 7, "tokenType": "property" },
+    { "startLine": 8, "startColumn": 10, "endLine": 8, "endColumn": 12, "tokenType": "struct" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 3, "startColumn": 32, "endLine": 3, "endColumn": 36, "tokenType": "parameter", "modifiers": "readonly" }
   ]
 }

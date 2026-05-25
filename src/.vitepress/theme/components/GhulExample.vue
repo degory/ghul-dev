@@ -29,6 +29,7 @@ const example = computed(() => {
 })
 
 const diagnostics = computed(() => example.value?.diagnostics ?? [])
+const semanticTokens = computed(() => example.value?.semanticTokens ?? [])
 
 // The compiler reports some diagnostics over a whole multi-line declaration.
 // A wavy underline spanning many lines is noisy, so a multi-line diagnostic
@@ -49,13 +50,18 @@ const lines = computed(() => {
     ?? ex.code.split('\n').map(text => [{ text, style: '' }])
 
   return tokenLines.map((tokens, i) =>
-    mergeLine(tokens, i + 1, ex.hovers ?? [], squiggleDiagnostics.value))
+    mergeLine(tokens, i + 1, ex.hovers ?? [], squiggleDiagnostics.value, semanticTokens.value))
 })
 
-// Merge one line's colour tokens with the hovers and diagnostics that cover
-// it, producing runs of text that each carry a colour style and, optionally,
-// a hover and a diagnostic.
-function mergeLine(colourTokens, lineNumber, hovers, diags) {
+// Merge one line's colour tokens with the hovers, diagnostics and semantic
+// tokens that cover it, producing runs of text that each carry a colour
+// style and, optionally, a hover, a diagnostic and a semantic-token class.
+//
+// When a character is covered by a semantic token the TextMate-derived
+// Shiki colour is dropped — the semantic class colours it via CSS — so an
+// identifier reliably reflects what the compiler resolved it to (`class`,
+// `method`, `property`, `parameter`, …) rather than the regex-based guess.
+function mergeLine(colourTokens, lineNumber, hovers, diags, semantic) {
   const chars = []
   const styles = []
   for (const token of colourTokens) {
@@ -69,26 +75,33 @@ function mergeLine(colourTokens, lineNumber, hovers, diags) {
   // For each 1-based column, the innermost (shortest) span covering it.
   const hoverAt = pickSpans(hovers, lineNumber, length)
   const diagAt = pickSpans(diags, lineNumber, length)
+  const semanticAt = pickSpans(semantic, lineNumber, length)
 
-  // Group consecutive characters sharing the same colour, hover and diagnostic.
+  // Group consecutive characters sharing the same colour, hover, diagnostic
+  // and semantic token.
   const segments = []
   let column = 0
   while (column < length) {
     const style = styles[column]
     const hover = hoverAt[column]
     const diagnostic = diagAt[column]
+    const sem = semanticAt[column]
     let end = column
     while (
       end < length &&
       styles[end] === style &&
       hoverAt[end] === hover &&
-      diagAt[end] === diagnostic
+      diagAt[end] === diagnostic &&
+      semanticAt[end] === sem
     ) end++
     segments.push({
       text: chars.slice(column, end).join(''),
-      style,
+      // A semantic token's CSS class supplies the colour; drop the Shiki
+      // style on that range so the class isn't fighting an inline `color`.
+      style: sem ? null : style,
       hover,
       diagnostic,
+      semantic: sem,
     })
     column = end
   }
@@ -219,11 +232,16 @@ const panelLabel = computed(() =>
           v-for="(segment, j) in segments"
           :key="j"
           :style="segment.style"
-          :class="['ghul-example-tok', {
-            'ghul-example-hover': segment.hover,
-            'ghul-example-squiggle-error': segment.diagnostic && segment.diagnostic.severity === 'error',
-            'ghul-example-squiggle-warning': segment.diagnostic && segment.diagnostic.severity === 'warning',
-          }]"
+          :class="[
+            'ghul-example-tok',
+            segment.semantic ? 'ghul-sem-' + segment.semantic.tokenType : null,
+            segment.semantic && segment.semantic.modifiers && segment.semantic.modifiers.includes('static') ? 'ghul-sem-mod-static' : null,
+            {
+              'ghul-example-hover': segment.hover,
+              'ghul-example-squiggle-error': segment.diagnostic && segment.diagnostic.severity === 'error',
+              'ghul-example-squiggle-warning': segment.diagnostic && segment.diagnostic.severity === 'warning',
+            }
+          ]"
           @mouseenter="onEnter($event, segment)"
           @mouseleave="onLeave(segment)"
         >{{ segment.text }}</span>
@@ -315,6 +333,42 @@ const panelLabel = computed(() =>
 
 .dark .ghul-example-tok {
   color: var(--shiki-dark);
+}
+
+/* Semantic-token colours — what the compiler resolved each identifier to.
+   Light+ / Dark+ values come from VS Code's stock themes so a ghul.dev
+   example reads the same as it would in the editor. The TextMate-derived
+   Shiki colour is dropped on these ranges in mergeLine, so these classes
+   colour them directly. */
+.ghul-sem-namespace      { color: #267F99; }
+.ghul-sem-class          { color: #267F99; }
+.ghul-sem-interface      { color: #267F99; }
+.ghul-sem-struct         { color: #267F99; }
+.ghul-sem-enum           { color: #267F99; }
+.ghul-sem-typeParameter  { color: #267F99; }
+.ghul-sem-enumMember     { color: #0070C1; }
+.ghul-sem-method         { color: #795E26; }
+.ghul-sem-function       { color: #795E26; }
+.ghul-sem-property       { color: #001080; }
+.ghul-sem-variable       { color: #001080; }
+.ghul-sem-parameter      { color: #001080; }
+
+.dark .ghul-sem-namespace      { color: #4EC9B0; }
+.dark .ghul-sem-class          { color: #4EC9B0; }
+.dark .ghul-sem-interface      { color: #B8D7A3; }
+.dark .ghul-sem-struct         { color: #4EC9B0; }
+.dark .ghul-sem-enum           { color: #4EC9B0; }
+.dark .ghul-sem-typeParameter  { color: #4EC9B0; }
+.dark .ghul-sem-enumMember     { color: #4FC1FF; }
+.dark .ghul-sem-method         { color: #DCDCAA; }
+.dark .ghul-sem-function       { color: #DCDCAA; }
+.dark .ghul-sem-property       { color: #9CDCFE; }
+.dark .ghul-sem-variable       { color: #9CDCFE; }
+.dark .ghul-sem-parameter      { color: #9CDCFE; }
+
+/* The `static` modifier — visible cue without changing colour. */
+.ghul-sem-mod-static {
+  font-style: italic;
 }
 
 .ghul-example-hover:hover {

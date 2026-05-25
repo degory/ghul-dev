@@ -70,7 +70,8 @@ namespace ExampleTool is
 
         let json = build_artifact_json(
             name, region.code, strip_markers(source),
-            Collections.LIST[HOVER](), "", Collections.LIST[DIAGNOSTIC]()
+            Collections.LIST[HOVER](), "", Collections.LIST[DIAGNOSTIC](),
+            Collections.LIST[SEMANTIC_TOKEN]()
         );
         File.write_all_text(Path.combine(output_dir, "{name}.json"), json);
 
@@ -241,7 +242,7 @@ namespace ExampleTool is
                 ""
             fi;
 
-        let collected = _collect_hovers(example_dir, source_file, source);
+        let collected = _collect_hovers_and_tokens(example_dir, source_file, source);
 
         let diagnostics = LIST[DIAGNOSTIC]();
         for diagnostic in raw_diagnostics do
@@ -253,22 +254,26 @@ namespace ExampleTool is
 
         let json = build_artifact_json(
             name, collected.region.code, strip_markers(source),
-            collected.hovers, output, diagnostics
+            collected.hovers, output, diagnostics, collected.semantic_tokens
         );
         File.write_all_text(Path.combine(output_dir, "{name}.json"), json);
 
         Std.out.write_line(
-            "generated {name} [{actual}]: {collected.hovers.count} hover(s), {diagnostics.count} diagnostic(s)"
+            "generated {name} [{actual}]: {collected.hovers.count} hover(s), "
+            "{collected.semantic_tokens.count} token(s), {diagnostics.count} diagnostic(s)"
         );
 
         return true;
     si
 
-    // Drive the analyser over the example for #HOVERMAP#, then slice the
-    // visible region and translate each hover onto the displayed text.
-    _collect_hovers(example_dir: string, source_file: string, source: string) -> (region: VISIBLE_REGION, hovers: LIST[HOVER]) is
-        let hover_lines = LIST[string]();
-
+    // Drive the analyser over the example for #HOVERMAP# and
+    // #SEMANTICTOKENS#, then slice the visible region and translate
+    // each hover and semantic token onto the displayed text. Both
+    // queries are issued under one EDIT so the cost (parse + resolve)
+    // is amortized over both.
+    _collect_hovers_and_tokens(
+        example_dir: string, source_file: string, source: string
+    ) -> (region: VISIBLE_REGION, hovers: LIST[HOVER], semantic_tokens: LIST[SEMANTIC_TOKEN]) is
         let use analyser = ANALYSER_PROCESS(example_dir);
 
         analyser.send_edit(source_file, source);
@@ -278,14 +283,13 @@ namespace ExampleTool is
         analyser.send_hover_map(source_file);
         let hover_map = analyser.read_query_response();
 
-        for line in hover_map.lines do
-            hover_lines.add(line);
-        od
+        analyser.send_semantic_tokens(source_file);
+        let token_map = analyser.read_query_response();
 
         let region = extract_visible(source);
 
         let hovers = LIST[HOVER]();
-        for line in hover_lines do
+        for line in hover_map.lines do
             let parsed = _parse_hover(line);
             if parsed? then
                 let translated = region.translate(parsed);
@@ -295,7 +299,18 @@ namespace ExampleTool is
             fi
         od
 
-        return (region = region, hovers = hovers);
+        let semantic_tokens = LIST[SEMANTIC_TOKEN]();
+        for line in token_map.lines do
+            let parsed = _parse_semantic_token(line);
+            if parsed? then
+                let translated = region.translate_semantic_token(parsed);
+                if translated? then
+                    semantic_tokens.add(translated);
+                fi
+            fi
+        od
+
+        return (region = region, hovers = hovers, semantic_tokens = semantic_tokens);
     si
 
     // Parse one #HOVERMAP# row: startLine, startColumn, endLine, endColumn,
@@ -314,6 +329,31 @@ namespace ExampleTool is
                 System.Convert.to_int32(fields[2]),
                 System.Convert.to_int32(fields[3]),
                 fields[4]
+            );
+        catch ex: System.Exception
+            return null;
+        yrt
+    si
+
+    // Parse one #SEMANTICTOKENS# row: startLine, startColumn, endLine,
+    // endColumn, tokenType, modifiers — tab-separated, 1-based
+    // coordinates. The modifiers field may be empty.
+    _parse_semantic_token(line: string) -> SEMANTIC_TOKEN? is
+        let fields = LIST[string](line.split(['\t']));
+
+        if fields.count < 5 then
+            return null;
+        fi
+
+        try
+            let modifiers = if fields.count >= 6 then fields[5] else "" fi;
+            return SEMANTIC_TOKEN(
+                System.Convert.to_int32(fields[0]),
+                System.Convert.to_int32(fields[1]),
+                System.Convert.to_int32(fields[2]),
+                System.Convert.to_int32(fields[3]),
+                fields[4],
+                modifiers
             );
         catch ex: System.Exception
             return null;

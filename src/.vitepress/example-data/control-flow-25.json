@@ -9,5 +9,11 @@
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 12, "text": "Ghul.::(from: Ghul.int, to: Ghul.int) -> Ghul.INT_RANGE_INCLUSIVE // innate function range.inclusive" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.int) -> Ghul.void // class method" },
     { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 16, "text": "i: Ghul.int // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 12, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

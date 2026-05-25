@@ -9,5 +9,11 @@
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "THING.init() // constructor" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "text": "a_thing: THING // local value" },
     { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 19, "text": "THING.init() // constructor" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "tokenType": "class" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "tokenType": "method" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 19, "tokenType": "method" }
   ]
 }

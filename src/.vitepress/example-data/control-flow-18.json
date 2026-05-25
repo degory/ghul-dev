@@ -4,5 +4,6 @@
   "fullSource": "while condition do\n    // code to execute while the condition is true\nod\n",
   "output": "",
   "diagnostics": [],
-  "hovers": []
+  "hovers": [],
+  "semanticTokens": []
 }

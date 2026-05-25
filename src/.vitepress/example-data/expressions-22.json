@@ -7,5 +7,9 @@
   "hovers": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "point: POINT // local value" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 17, "text": "POINT.init(x: Ghul.int, y: Ghul.int) // constructor" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 17, "tokenType": "method" }
   ]
 }

@@ -21,5 +21,23 @@
     { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 7, "text": "age: Ghul.int // local value" },
     { "startLine": 6, "startColumn": 11, "endLine": 6, "endColumn": 16, "text": "person: (name: string, age: int) // local value" },
     { "startLine": 6, "startColumn": 18, "endLine": 6, "endColumn": 20, "text": "(name: string, age: int).`1: Ghul.int // field" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 18, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 26, "tokenType": "struct" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 15, "tokenType": "property", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 15, "tokenType": "property", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 19, "endLine": 5, "endColumn": 22, "tokenType": "property", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 11, "endLine": 6, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 18, "endLine": 6, "endColumn": 20, "tokenType": "property", "modifiers": "readonly" }
   ]
 }

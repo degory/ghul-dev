@@ -1,0 +1,31 @@
+use IO.Std.write_line;
+
+// >>>
+// T: out marks Box[T] as covariant in T — a Box[CAT] is also a Box[Animal]
+trait Box[T: out] is
+    contents() -> T;
+si
+// <<<
+
+trait Animal is
+    speak() -> string;
+si
+
+class CAT: Animal is
+    init() is si
+    speak() -> string => "meow";
+si
+
+class CAT_BOX: Box[CAT] is
+    init() is si
+    contents() -> CAT => CAT();
+si
+
+entry() is
+// >>>
+    let cats: Box[CAT] = CAT_BOX();
+    let animals: Box[Animal] = cats;   // covariance
+
+    write_line(animals.contents().speak());
+// <<<
+si

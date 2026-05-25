@@ -8,5 +8,10 @@
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 10, "text": "class Example.TEST" },
     { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 16, "text": "trait Example.Test" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 7, "text": "Example.TEST.run() -> Ghul.void // method" }
+  ],
+  "semanticTokens": [
+    { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 10, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 16, "tokenType": "interface" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 7, "tokenType": "method" }
   ]
 }

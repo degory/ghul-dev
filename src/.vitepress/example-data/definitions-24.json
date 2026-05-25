@@ -4,5 +4,6 @@
   "fullSource": "namespace Example is\n    ...\nsi\n",
   "output": "",
   "diagnostics": [],
-  "hovers": []
+  "hovers": [],
+  "semanticTokens": []
 }

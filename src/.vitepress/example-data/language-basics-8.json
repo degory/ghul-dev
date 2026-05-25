@@ -7,5 +7,9 @@
   "hovers": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "numbers: Ghul.int[] // local value" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 16, "text": "struct Ghul.int" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 16, "tokenType": "struct" }
   ]
 }

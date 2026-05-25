@@ -4,5 +4,6 @@
   "fullSource": "try\n    // Code that might throw an exception\ncatch e: SomeExceptionType\n    // Exception handling code\nyrt\n",
   "output": "",
   "diagnostics": [],
-  "hovers": []
+  "hovers": [],
+  "semanticTokens": []
 }

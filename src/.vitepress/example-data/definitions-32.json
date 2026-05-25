@@ -4,5 +4,6 @@
   "fullSource": "use Example; // imports Example.TEST and Example.Test\n\n...\n\nlet t: Test;\n",
   "output": "",
   "diagnostics": [],
-  "hovers": []
+  "hovers": [],
+  "semanticTokens": []
 }

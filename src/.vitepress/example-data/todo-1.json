@@ -13,5 +13,15 @@
     { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 22, "text": "class System.Exception" },
     { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 33, "text": "do_something_risky(i: Ghul.int) -> Ghul.int // global function" },
     { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "text": "i: Ghul.int // local argument" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 7, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 14, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 22, "tokenType": "struct" },
+    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 22, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 33, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "tokenType": "parameter", "modifiers": "readonly" }
   ]
 }

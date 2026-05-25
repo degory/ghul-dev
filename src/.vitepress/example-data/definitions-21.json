@@ -19,5 +19,21 @@
     { "startLine": 10, "startColumn": 29, "endLine": 10, "endColumn": 29, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" },
     { "startLine": 12, "startColumn": 13, "endLine": 12, "endColumn": 17, "text": "Sized._size: Ghul.int // field" },
     { "startLine": 12, "startColumn": 21, "endLine": 12, "endColumn": 28, "text": "new_size: Ghul.int // local argument" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "tokenType": "class" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "tokenType": "struct" },
+    { "startLine": 5, "startColumn": 7, "endLine": 5, "endColumn": 11, "tokenType": "class" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 9, "tokenType": "property", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 12, "endLine": 6, "endColumn": 14, "tokenType": "struct" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "tokenType": "property" },
+    { "startLine": 8, "startColumn": 11, "endLine": 8, "endColumn": 13, "tokenType": "struct" },
+    { "startLine": 8, "startColumn": 18, "endLine": 8, "endColumn": 22, "tokenType": "property", "modifiers": "readonly" },
+    { "startLine": 9, "startColumn": 11, "endLine": 9, "endColumn": 18, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 10, "startColumn": 20, "endLine": 10, "endColumn": 27, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 10, "startColumn": 29, "endLine": 10, "endColumn": 29, "tokenType": "function" },
+    { "startLine": 12, "startColumn": 13, "endLine": 12, "endColumn": 17, "tokenType": "property", "modifiers": "readonly" },
+    { "startLine": 12, "startColumn": 21, "endLine": 12, "endColumn": 28, "tokenType": "parameter", "modifiers": "readonly" }
   ]
 }

@@ -17,5 +17,19 @@
     { "startLine": 5, "startColumn": 28, "endLine": 5, "endColumn": 29, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" },
     { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 25, "text": "greater_than_or_equal: Ghul.bool // local value" },
     { "startLine": 6, "startColumn": 32, "endLine": 6, "endColumn": 33, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 16, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 20, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 19, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 23, "tokenType": "function" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 28, "endLine": 5, "endColumn": 29, "tokenType": "function" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 25, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 32, "endLine": 6, "endColumn": 33, "tokenType": "function" }
   ]
 }

@@ -1,3 +1,0 @@
-if let (name, _) = lookup(id) then
-    write_line("found {name}");
-fi

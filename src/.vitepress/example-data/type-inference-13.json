@@ -18,5 +18,20 @@
     { "startLine": 9, "startColumn": 20, "endLine": 9, "endColumn": 24, "text": "THING[Ghul.string].init(value: Ghul.string) // constructor" },
     { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 18, "text": "THING.value: T // instance property" },
     { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 26, "text": "value: T // local argument" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 12, "tokenType": "typeParameter" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 8, "tokenType": "method" },
+    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 14, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 17, "endLine": 4, "endColumn": 17, "tokenType": "typeParameter" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 17, "endLine": 8, "endColumn": 21, "tokenType": "method" },
+    { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 9, "startColumn": 20, "endLine": 9, "endColumn": 24, "tokenType": "method" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 18, "tokenType": "property" },
+    { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 26, "tokenType": "parameter", "modifiers": "readonly" }
   ]
 }

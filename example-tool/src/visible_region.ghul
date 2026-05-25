@@ -28,6 +28,30 @@ namespace ExampleTool is
         si
     si
 
+    // A semantic-token span. `token_type` is the LSP token-type name
+    // emitted by the analyser's `#SEMANTICTOKENS#` command (`class`,
+    // `interface`, `struct`, `enum`, `enumMember`, `typeParameter`,
+    // `namespace`, `method`, `function`, `property`, `variable`,
+    // `parameter`). `modifiers` is the analyser's raw comma-separated
+    // string (possibly empty) — `static`, `readonly`.
+    class SEMANTIC_TOKEN is
+        start_line: int public;
+        start_column: int public;
+        end_line: int public;
+        end_column: int public;
+        token_type: string public;
+        modifiers: string public;
+
+        init(start_line: int, start_column: int, end_line: int, end_column: int, token_type: string, modifiers: string) is
+            self.start_line = start_line;
+            self.start_column = start_column;
+            self.end_line = end_line;
+            self.end_column = end_column;
+            self.token_type = token_type;
+            self.modifiers = modifiers;
+        si
+    si
+
     // A compiler diagnostic. Coordinates are 1-based line/column — as the
     // compiler reports them (whole-file) and, after
     // `VISIBLE_REGION.translate_diagnostic`, relative to the displayed slice.
@@ -121,6 +145,34 @@ namespace ExampleTool is
             return DIAGNOSTIC(
                 start.line, start_column, end.line, end_column,
                 diagnostic.severity, diagnostic.message
+            );
+        si
+
+        // Translate one semantic token onto the displayed text. Null
+        // when the token does not lie wholly within visible lines, or
+        // when de-indenting would place a column before the start of
+        // the line.
+        translate_semantic_token(token: SEMANTIC_TOKEN) -> SEMANTIC_TOKEN? is
+            if
+                !_lines.contains_key(token.start_line) \/
+                !_lines.contains_key(token.end_line)
+            then
+                return null;
+            fi
+
+            let start = _lines[token.start_line];
+            let end = _lines[token.end_line];
+
+            let start_column = token.start_column - start.dedent;
+            let end_column = token.end_column - end.dedent;
+
+            if start_column < 1 \/ end_column < 1 then
+                return null;
+            fi
+
+            return SEMANTIC_TOKEN(
+                start.line, start_column, end.line, end_column,
+                token.token_type, token.modifiers
             );
         si
     si

@@ -13,5 +13,13 @@
     { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 22, "text": "(int, int, int, int, int).`3: Ghul.int // field" },
     { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 5, "text": "tuple: (int, int, int, int, int) // local value" },
     { "startLine": 5, "startColumn": 7, "endLine": 5, "endColumn": 8, "text": "(int, int, int, int, int).`3: Ghul.int // field" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 22, "tokenType": "property", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 7, "endLine": 5, "endColumn": 8, "tokenType": "property", "modifiers": "readonly" }
   ]
 }

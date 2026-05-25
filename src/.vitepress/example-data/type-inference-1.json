@@ -1,7 +1,7 @@
 {
   "name": "type-inference-1",
-  "code": "// the signature is explicit: the parameter type\n// and the return type are written out\ntotals(\n    values: Collections.Iterable[int]\n) -> (sum: int, count: int) is\n    let sum = 0;\n    let count = 0;\n\n    for v in values do\n        sum = sum + v;\n        count = count + 1;\n    od\n\n    return (sum, count);\nsi",
-  "fullSource": "// the signature is explicit: the parameter type\n// and the return type are written out\ntotals(\n    values: Collections.Iterable[int]\n) -> (sum: int, count: int) is\n    let sum = 0;\n    let count = 0;\n\n    for v in values do\n        sum = sum + v;\n        count = count + 1;\n    od\n\n    return (sum, count);\nsi\n\nentry() is\n    totals([1, 2, 3]);\nsi\n",
+  "code": "// the signature is explicit: the parameter type\n// and the return type are written out\ntotals(\n    values: Collections.Iterable[int]\n) -> (sum: int, count: int) is\n    let sum mut = 0;\n    let count mut = 0;\n\n    for v in values do\n        sum = sum + v;\n        count = count + 1;\n    od\n\n    return (sum, count);\nsi",
+  "fullSource": "// the signature is explicit: the parameter type\n// and the return type are written out\ntotals(\n    values: Collections.Iterable[int]\n) -> (sum: int, count: int) is\n    let sum mut = 0;\n    let count mut = 0;\n\n    for v in values do\n        sum = sum + v;\n        count = count + 1;\n    od\n\n    return (sum, count);\nsi\n\nentry() is\n    totals([1, 2, 3]);\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [
@@ -24,5 +24,26 @@
     { "startLine": 11, "startColumn": 23, "endLine": 11, "endColumn": 23, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },
     { "startLine": 14, "startColumn": 13, "endLine": 14, "endColumn": 15, "text": "sum: Ghul.int // local variable" },
     { "startLine": 14, "startColumn": 18, "endLine": 14, "endColumn": 22, "text": "count: Ghul.int // local variable" }
+  ],
+  "semanticTokens": [
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 6, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 10, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 34, "endLine": 4, "endColumn": 36, "tokenType": "struct" },
+    { "startLine": 4, "startColumn": 25, "endLine": 4, "endColumn": 32, "tokenType": "interface" },
+    { "startLine": 6, "startColumn": 9, "endLine": 6, "endColumn": 11, "tokenType": "variable" },
+    { "startLine": 7, "startColumn": 9, "endLine": 7, "endColumn": 13, "tokenType": "variable" },
+    { "startLine": 9, "startColumn": 9, "endLine": 9, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 9, "startColumn": 14, "endLine": 9, "endColumn": 19, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 14, "tokenType": "struct" },
+    { "startLine": 5, "startColumn": 24, "endLine": 5, "endColumn": 26, "tokenType": "struct" },
+    { "startLine": 10, "startColumn": 9, "endLine": 10, "endColumn": 11, "tokenType": "variable" },
+    { "startLine": 10, "startColumn": 15, "endLine": 10, "endColumn": 17, "tokenType": "variable" },
+    { "startLine": 10, "startColumn": 21, "endLine": 10, "endColumn": 21, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 10, "startColumn": 19, "endLine": 10, "endColumn": 19, "tokenType": "function" },
+    { "startLine": 11, "startColumn": 9, "endLine": 11, "endColumn": 13, "tokenType": "variable" },
+    { "startLine": 11, "startColumn": 17, "endLine": 11, "endColumn": 21, "tokenType": "variable" },
+    { "startLine": 11, "startColumn": 23, "endLine": 11, "endColumn": 23, "tokenType": "function" },
+    { "startLine": 14, "startColumn": 13, "endLine": 14, "endColumn": 15, "tokenType": "variable" },
+    { "startLine": 14, "startColumn": 18, "endLine": 14, "endColumn": 22, "tokenType": "variable" }
   ]
 }

@@ -10,5 +10,12 @@
     { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 12, "text": "namespace Tasks" },
     { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 17, "text": "class Tasks.TASK" },
     { "startLine": 4, "startColumn": 19, "endLine": 4, "endColumn": 32, "text": "Tasks.TASK.completed_task: Tasks.TASK // class property" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 17, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 17, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 12, "tokenType": "namespace" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 17, "tokenType": "class" },
+    { "startLine": 4, "startColumn": 19, "endLine": 4, "endColumn": 32, "tokenType": "property", "modifiers": "static" }
   ]
 }

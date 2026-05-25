@@ -25,5 +25,27 @@
     { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 22, "text": "do_something[Ghul.object](a: Ghul.object, b: Ghul.object) -> Ghul.object // global function" },
     { "startLine": 4, "startColumn": 24, "endLine": 4, "endColumn": 29, "text": "Ghul.object.init() -> Ghul.void // method" },
     { "startLine": 4, "startColumn": 34, "endLine": 4, "endColumn": 40, "text": "DERIVED.init() // constructor" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 12, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 26, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 32, "endLine": 1, "endColumn": 32, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 37, "endLine": 1, "endColumn": 37, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 23, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 25, "endLine": 2, "endColumn": 28, "tokenType": "method" },
+    { "startLine": 2, "startColumn": 33, "endLine": 2, "endColumn": 39, "tokenType": "method" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 26, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 28, "endLine": 3, "endColumn": 34, "tokenType": "method" },
+    { "startLine": 3, "startColumn": 39, "endLine": 3, "endColumn": 45, "tokenType": "method" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 22, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 24, "endLine": 4, "endColumn": 29, "tokenType": "method" },
+    { "startLine": 4, "startColumn": 34, "endLine": 4, "endColumn": 40, "tokenType": "method" }
   ]
 }

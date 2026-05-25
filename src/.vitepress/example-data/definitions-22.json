@@ -15,5 +15,17 @@
     { "startLine": 4, "startColumn": 39, "endLine": 4, "endColumn": 43, "text": "value: Ghul.double // local argument" },
     { "startLine": 4, "startColumn": 47, "endLine": 4, "endColumn": 52, "text": "SCALER._scale: Ghul.double // field" },
     { "startLine": 4, "startColumn": 45, "endLine": 4, "endColumn": 45, "text": "Ghul.*(a: Ghul.double, b: Ghul.double) -> Ghul.double // innate function arithmetic.mul" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "tokenType": "class" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "property", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 18, "tokenType": "struct" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 9, "tokenType": "method" },
+    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 15, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 23, "tokenType": "struct" },
+    { "startLine": 4, "startColumn": 29, "endLine": 4, "endColumn": 34, "tokenType": "struct" },
+    { "startLine": 4, "startColumn": 39, "endLine": 4, "endColumn": 43, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 47, "endLine": 4, "endColumn": 52, "tokenType": "property", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 45, "endLine": 4, "endColumn": 45, "tokenType": "function" }
   ]
 }

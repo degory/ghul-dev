@@ -9,5 +9,11 @@
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 14, "text": "primes: Ghul.int[] // local value" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "text": "i: Ghul.int // local value" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 15, "text": "Collections.List[Ghul.int].get_Item(index: Ghul.int) -> Ghul.int // abstract method" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 15, "tokenType": "method" }
   ]
 }

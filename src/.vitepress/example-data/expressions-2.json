@@ -7,5 +7,9 @@
   "hovers": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "c: Ghul.char // local value" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "u_macron: Ghul.char // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

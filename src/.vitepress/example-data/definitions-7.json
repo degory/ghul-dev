@@ -4,5 +4,6 @@
   "fullSource": "do_something(what: string, why: string, to: int);\n",
   "output": "",
   "diagnostics": [],
-  "hovers": []
+  "hovers": [],
+  "semanticTokens": []
 }

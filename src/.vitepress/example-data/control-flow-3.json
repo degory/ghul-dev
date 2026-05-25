@@ -12,5 +12,14 @@
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
     { "startLine": 4, "startColumn": 27, "endLine": 4, "endColumn": 30, "text": "list: Ghul.int[] // local value" },
     { "startLine": 4, "startColumn": 32, "endLine": 4, "endColumn": 36, "text": "Collections.Bag.count: Ghul.int // instance property" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 13, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 15, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 4, "startColumn": 27, "endLine": 4, "endColumn": 30, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 32, "endLine": 4, "endColumn": 36, "tokenType": "property" }
   ]
 }
