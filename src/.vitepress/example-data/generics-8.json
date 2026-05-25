@@ -1,0 +1,43 @@
+{
+  "name": "generics-8",
+  "code": "// T: out marks Box[T] as covariant in T — a Box[CAT] is also a Box[Animal]\ntrait Box[T: out] is\n    contents() -> T;\nsi\nlet cats: Box[CAT] = CAT_BOX();\nlet animals: Box[Animal] = cats;   // covariance\n\nwrite_line(animals.contents().speak());",
+  "fullSource": "use IO.Std.write_line;\n\n// T: out marks Box[T] as covariant in T — a Box[CAT] is also a Box[Animal]\ntrait Box[T: out] is\n    contents() -> T;\nsi\n\ntrait Animal is\n    speak() -> string;\nsi\n\nclass CAT: Animal is\n    init() is si\n    speak() -> string => \"meow\";\nsi\n\nclass CAT_BOX: Box[CAT] is\n    init() is si\n    contents() -> CAT => CAT();\nsi\n\nentry() is\n    let cats: Box[CAT] = CAT_BOX();\n    let animals: Box[Animal] = cats;   // covariance\n\n    write_line(animals.contents().speak());\nsi\n",
+  "output": "meow\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 9, "text": "trait Box" },
+    { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 11, "text": "T // type variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 12, "text": "Box.contents() -> T // abstract method" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 19, "text": "T // type variable" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 8, "text": "cats: Box[CAT] // local value" },
+    { "startLine": 5, "startColumn": 15, "endLine": 5, "endColumn": 17, "text": "class CAT" },
+    { "startLine": 5, "startColumn": 11, "endLine": 5, "endColumn": 13, "text": "trait Box" },
+    { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 28, "text": "CAT_BOX.init() // constructor" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 11, "text": "animals: Box[Animal] // local value" },
+    { "startLine": 6, "startColumn": 18, "endLine": 6, "endColumn": 23, "text": "trait Animal" },
+    { "startLine": 6, "startColumn": 14, "endLine": 6, "endColumn": 16, "text": "trait Box" },
+    { "startLine": 6, "startColumn": 28, "endLine": 6, "endColumn": 31, "text": "cats: Box[CAT] // local value" },
+    { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 8, "startColumn": 12, "endLine": 8, "endColumn": 18, "text": "animals: Box[Animal] // local value" },
+    { "startLine": 8, "startColumn": 20, "endLine": 8, "endColumn": 27, "text": "Box[Animal].contents() -> Animal // abstract method" },
+    { "startLine": 8, "startColumn": 31, "endLine": 8, "endColumn": 35, "text": "Animal.speak() -> Ghul.string // abstract method" }
+  ],
+  "semanticTokens": [
+    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 9, "tokenType": "interface" },
+    { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 11, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 12, "tokenType": "method" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 19, "tokenType": "typeParameter" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 15, "endLine": 5, "endColumn": 17, "tokenType": "class" },
+    { "startLine": 5, "startColumn": 11, "endLine": 5, "endColumn": 13, "tokenType": "interface" },
+    { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 28, "tokenType": "method" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 18, "endLine": 6, "endColumn": 23, "tokenType": "interface" },
+    { "startLine": 6, "startColumn": 14, "endLine": 6, "endColumn": 16, "tokenType": "interface" },
+    { "startLine": 6, "startColumn": 28, "endLine": 6, "endColumn": 31, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 8, "startColumn": 12, "endLine": 8, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 20, "endLine": 8, "endColumn": 27, "tokenType": "method" },
+    { "startLine": 8, "startColumn": 31, "endLine": 8, "endColumn": 35, "tokenType": "method" }
+  ]
+}

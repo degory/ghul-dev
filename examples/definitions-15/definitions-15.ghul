@@ -2,24 +2,28 @@ use IO.Std.write_line;
 
 // >>>
 trait Logged is
-    log() is
-        write_line("(no log message provided)");
+    log(message: string) is
+        // the default body writes the message with a [log] prefix
+        write_line("[log] {message}");
     si
 si
 
-class SILENT: Logged is
+class PLAIN: Logged is
     init() is si
+    // no override — uses the trait default
 si
 
-class NOISY: Logged is
+class LOUD: Logged is
     init() is si
 
-    log() is
-        super.log();
-        write_line("plus my own message");
+    // override the default, while still calling through to it with super
+    log(message: string) is
+        super.log(message.to_upper());
     si
 si
-// <<<
 
 entry() is
+    PLAIN().log("hello");
+    LOUD().log("hello");
+// <<<
 si

@@ -13,5 +13,15 @@
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
     { "startLine": 4, "startColumn": 25, "endLine": 4, "endColumn": 28, "text": "name: Ghul.string // local argument" },
     { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 9, "text": "greet(name: Ghul.string) -> Ghul.void // global function" }
+  ],
+  "semanticTokens": [
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 5, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 10, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 18, "tokenType": "class" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 5, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 4, "startColumn": 25, "endLine": 4, "endColumn": 28, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 9, "tokenType": "function" }
   ]
 }

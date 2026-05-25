@@ -20,5 +20,22 @@
     { "startLine": 7, "startColumn": 33, "endLine": 7, "endColumn": 33, "text": "n: Ghul.int // local argument" },
     { "startLine": 7, "startColumn": 35, "endLine": 7, "endColumn": 35, "text": "Ghul.-(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.sub" },
     { "startLine": 7, "startColumn": 27, "endLine": 7, "endColumn": 27, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 3, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 10, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 18, "tokenType": "struct" },
+    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 8, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 10, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 10, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 13, "tokenType": "function" },
+    { "startLine": 7, "startColumn": 16, "endLine": 7, "endColumn": 18, "tokenType": "function" },
+    { "startLine": 7, "startColumn": 20, "endLine": 7, "endColumn": 20, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 7, "startColumn": 22, "endLine": 7, "endColumn": 22, "tokenType": "function" },
+    { "startLine": 7, "startColumn": 29, "endLine": 7, "endColumn": 31, "tokenType": "function" },
+    { "startLine": 7, "startColumn": 33, "endLine": 7, "endColumn": 33, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 7, "startColumn": 35, "endLine": 7, "endColumn": 35, "tokenType": "function" },
+    { "startLine": 7, "startColumn": 27, "endLine": 7, "endColumn": 27, "tokenType": "function" }
   ]
 }

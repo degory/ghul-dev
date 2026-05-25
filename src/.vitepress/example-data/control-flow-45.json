@@ -13,5 +13,13 @@
     { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 22, "text": "default_return() -> Ghul.int // global function" },
     { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 8, "text": "i: Ghul.int // local value" },
     { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 11, "text": "Ghul.==(a: Ghul.int, b: Ghul.int) -> Ghul.bool // innate function compare.value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 14, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 23, "tokenType": "struct" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 22, "tokenType": "function" },
+    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 11, "tokenType": "function" }
   ]
 }

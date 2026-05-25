@@ -1,0 +1,23 @@
+use IO.Std.write_line;
+use Collections.MAP;
+
+lookup(id: int) -> (name: string, score: int)? is
+    let book = MAP[int, (name: string, score: int)]();
+    book[1] = (name = "ada",     score = 95);
+    book[2] = (name = "grace",   score = 88);
+
+    if book.contains_key(id) then
+        return book[id];
+    fi
+
+    return null;
+si
+
+entry() is
+    let id = 1;
+// >>>
+    if let (name, _) = lookup(id) then
+        write_line("found {name}");
+    fi
+// <<<
+si

@@ -18,5 +18,20 @@
     { "startLine": 4, "startColumn": 16, "endLine": 4, "endColumn": 16, "text": "d: Dog // local value" },
     { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 21, "text": "Dog.bark() -> Ghul.string // method" },
     { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 13, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 15, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 21, "tokenType": "method" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 4, "startColumn": 16, "endLine": 4, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 21, "tokenType": "method" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 14, "tokenType": "method", "modifiers": "static" }
   ]
 }

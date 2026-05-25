@@ -9,5 +9,11 @@
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 6, "text": "namespace IO" },
     { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 10, "text": "class IO.Std" },
     { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 21, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" }
+  ],
+  "semanticTokens": [
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 5, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 6, "tokenType": "namespace" },
+    { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 10, "tokenType": "class" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 21, "tokenType": "method", "modifiers": "static" }
   ]
 }

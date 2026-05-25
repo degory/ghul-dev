@@ -12,5 +12,14 @@
     { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 4, "text": "zero[T]() -> T // global function" },
     { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "text": "T // type variable" },
     { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "text": "T // type variable" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 19, "tokenType": "struct" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 13, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 4, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "tokenType": "typeParameter" }
   ]
 }

@@ -14,5 +14,16 @@
     { "startLine": 1, "startColumn": 45, "endLine": 1, "endColumn": 45, "text": "x: Ghul.int // local argument" },
     { "startLine": 1, "startColumn": 49, "endLine": 1, "endColumn": 49, "text": "y: Ghul.int // local argument" },
     { "startLine": 1, "startColumn": 47, "endLine": 1, "endColumn": 47, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 19, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 38, "endLine": 1, "endColumn": 40, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 24, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 30, "endLine": 1, "endColumn": 32, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 45, "endLine": 1, "endColumn": 45, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 49, "endLine": 1, "endColumn": 49, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 47, "endLine": 1, "endColumn": 47, "tokenType": "function" }
   ]
 }

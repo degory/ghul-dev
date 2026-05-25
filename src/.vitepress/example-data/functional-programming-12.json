@@ -31,5 +31,33 @@
     { "startLine": 8, "startColumn": 30, "endLine": 8, "endColumn": 30, "text": "f: T -> T // local argument" },
     { "startLine": 8, "startColumn": 32, "endLine": 8, "endColumn": 32, "text": "x: T // local argument" },
     { "startLine": 8, "startColumn": 40, "endLine": 8, "endColumn": 40, "text": "x: T // local argument" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 28, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 30, "endLine": 1, "endColumn": 30, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 11, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 22, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 19, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 14, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 25, "endLine": 2, "endColumn": 25, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 31, "endLine": 2, "endColumn": 31, "tokenType": "typeParameter" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 12, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 6, "startColumn": 9, "endLine": 6, "endColumn": 9, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 20, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 26, "endLine": 6, "endColumn": 34, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 17, "endLine": 6, "endColumn": 17, "tokenType": "typeParameter" },
+    { "startLine": 6, "startColumn": 12, "endLine": 6, "endColumn": 12, "tokenType": "typeParameter" },
+    { "startLine": 6, "startColumn": 23, "endLine": 6, "endColumn": 23, "tokenType": "typeParameter" },
+    { "startLine": 6, "startColumn": 42, "endLine": 6, "endColumn": 45, "tokenType": "struct" },
+    { "startLine": 6, "startColumn": 37, "endLine": 6, "endColumn": 37, "tokenType": "typeParameter" },
+    { "startLine": 7, "startColumn": 10, "endLine": 7, "endColumn": 10, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 9, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 11, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 12, "endLine": 8, "endColumn": 20, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 22, "endLine": 8, "endColumn": 22, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 30, "endLine": 8, "endColumn": 30, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 32, "endLine": 8, "endColumn": 32, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 40, "endLine": 8, "endColumn": 40, "tokenType": "parameter", "modifiers": "readonly" }
   ]
 }

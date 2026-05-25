@@ -7,5 +7,9 @@
   "hovers": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "text": "int_string: (int, string)[] // local value" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "int_object: (int, object)[] // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

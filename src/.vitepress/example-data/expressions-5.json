@@ -8,5 +8,10 @@
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "animals: Ghul.string[] // local value" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "things: Ghul.object[] // local value" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "text": "lists: Ghul.int[][] // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

@@ -27,5 +27,29 @@
     { "startLine": 8, "startColumn": 38, "endLine": 8, "endColumn": 38, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },
     { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
     { "startLine": 9, "startColumn": 29, "endLine": 9, "endColumn": 37, "text": "fibonacci: Ghul.int -> Ghul.int // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 7, "startColumn": 17, "endLine": 7, "endColumn": 17, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 8, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 11, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 27, "endLine": 3, "endColumn": 27, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 37, "endLine": 3, "endColumn": 37, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 29, "endLine": 3, "endColumn": 29, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 4, "startColumn": 28, "endLine": 4, "endColumn": 36, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 8, "endLine": 8, "endColumn": 8, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 10, "endLine": 8, "endColumn": 11, "tokenType": "function" },
+    { "startLine": 8, "startColumn": 20, "endLine": 8, "endColumn": 20, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 31, "endLine": 8, "endColumn": 31, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 33, "endLine": 8, "endColumn": 33, "tokenType": "function" },
+    { "startLine": 8, "startColumn": 44, "endLine": 8, "endColumn": 44, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 46, "endLine": 8, "endColumn": 46, "tokenType": "function" },
+    { "startLine": 8, "startColumn": 38, "endLine": 8, "endColumn": 38, "tokenType": "function" },
+    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 9, "startColumn": 29, "endLine": 9, "endColumn": 37, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

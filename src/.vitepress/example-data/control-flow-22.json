@@ -4,5 +4,6 @@
   "fullSource": "for variable in iterable do\n    // variable is set to each element of iterator in turn\nod\n",
   "output": "",
   "diagnostics": [],
-  "hovers": []
+  "hovers": [],
+  "semanticTokens": []
 }

@@ -4,8 +4,8 @@
 totals(
     values: Collections.Iterable[int]
 ) -> (sum: int, count: int) is
-    let sum = 0;
-    let count = 0;
+    let sum mut = 0;
+    let count mut = 0;
 
     for v in values do
         sum = sum + v;

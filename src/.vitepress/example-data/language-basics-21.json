@@ -10,5 +10,12 @@
     { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 10, "text": "struct Ghul.int" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "k: Ghul.int // local value" },
     { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 10, "text": "struct Ghul.int" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 10, "tokenType": "struct" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 10, "tokenType": "struct" }
   ]
 }

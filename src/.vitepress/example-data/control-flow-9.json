@@ -11,5 +11,13 @@
     { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 7, "text": "name: Ghul.string? // local value" },
     { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
     { "startLine": 6, "startColumn": 25, "endLine": 6, "endColumn": 28, "text": "name: Ghul.string // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 16, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 26, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 6, "startColumn": 25, "endLine": 6, "endColumn": 28, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

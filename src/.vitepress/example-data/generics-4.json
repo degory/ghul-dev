@@ -9,5 +9,11 @@
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 30, "text": "HOLD_SOMETHING[Ghul.int].init(value: Ghul.int) // constructor" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 16, "text": "holds_string: HOLD_SOMETHING[Ghul.string] // local value" },
     { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 33, "text": "HOLD_SOMETHING[Ghul.string].init(value: Ghul.string) // constructor" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 30, "tokenType": "method" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 33, "tokenType": "method" }
   ]
 }

@@ -7,5 +7,9 @@
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 15, "text": "trait Printable" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "Printable.print() -> Ghul.void // abstract method" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 15, "tokenType": "interface" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "tokenType": "method" }
   ]
 }

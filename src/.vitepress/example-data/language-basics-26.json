@@ -30,5 +30,32 @@
     { "startLine": 12, "startColumn": 43, "endLine": 12, "endColumn": 54, "text": "search_value: Ghul.int // local value" },
     { "startLine": 12, "startColumn": 40, "endLine": 12, "endColumn": 41, "text": "Ghul.==(a: Ghul.int, b: Ghul.int) -> Ghul.bool // innate function compare.value" },
     { "startLine": 12, "startColumn": 25, "endLine": 12, "endColumn": 26, "text": "Ghul.\\/(a: Ghul.bool, b: Ghul.bool) -> Ghul.bool // innate function bool.or_else" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 11, "startColumn": 5, "endLine": 11, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 13, "endLine": 8, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 18, "endLine": 8, "endColumn": 22, "tokenType": "property" },
+    { "startLine": 8, "startColumn": 11, "endLine": 8, "endColumn": 11, "tokenType": "function" },
+    { "startLine": 8, "startColumn": 27, "endLine": 8, "endColumn": 30, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 32, "endLine": 8, "endColumn": 36, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 31, "endLine": 8, "endColumn": 35, "tokenType": "method" },
+    { "startLine": 8, "startColumn": 42, "endLine": 8, "endColumn": 53, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 39, "endLine": 8, "endColumn": 40, "tokenType": "function" },
+    { "startLine": 8, "startColumn": 24, "endLine": 8, "endColumn": 25, "tokenType": "function" },
+    { "startLine": 12, "startColumn": 5, "endLine": 12, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 12, "startColumn": 14, "endLine": 12, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 12, "startColumn": 19, "endLine": 12, "endColumn": 23, "tokenType": "property" },
+    { "startLine": 12, "startColumn": 11, "endLine": 12, "endColumn": 12, "tokenType": "function" },
+    { "startLine": 12, "startColumn": 28, "endLine": 12, "endColumn": 31, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 12, "startColumn": 33, "endLine": 12, "endColumn": 37, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 12, "startColumn": 32, "endLine": 12, "endColumn": 36, "tokenType": "method" },
+    { "startLine": 12, "startColumn": 43, "endLine": 12, "endColumn": 54, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 12, "startColumn": 40, "endLine": 12, "endColumn": 41, "tokenType": "function" },
+    { "startLine": 12, "startColumn": 25, "endLine": 12, "endColumn": 26, "tokenType": "function" }
   ]
 }

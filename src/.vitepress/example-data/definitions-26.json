@@ -13,5 +13,15 @@
     { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 5, "text": "namespace Outer" },
     { "startLine": 6, "startColumn": 7, "endLine": 6, "endColumn": 11, "text": "namespace Outer.Inner" },
     { "startLine": 6, "startColumn": 13, "endLine": 6, "endColumn": 24, "text": "Outer.Inner.do_something() -> Ghul.void // global function" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 21, "tokenType": "namespace" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 16, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 10, "tokenType": "namespace" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 14, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 25, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 5, "tokenType": "namespace" },
+    { "startLine": 6, "startColumn": 7, "endLine": 6, "endColumn": 11, "tokenType": "namespace" },
+    { "startLine": 6, "startColumn": 13, "endLine": 6, "endColumn": 24, "tokenType": "function" }
   ]
 }

@@ -13,5 +13,15 @@
     { "startLine": 11, "startColumn": 37, "endLine": 11, "endColumn": 40, "text": "trait Example.Test" },
     { "startLine": 12, "startColumn": 9, "endLine": 12, "endColumn": 11, "text": "UseExample.YET_ANOTHER_TEST.run() -> Ghul.void // method" },
     { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 15, "text": "namespace Example" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 20, "tokenType": "namespace" },
+    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 22, "tokenType": "class" },
+    { "startLine": 4, "startColumn": 25, "endLine": 4, "endColumn": 28, "tokenType": "interface" },
+    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 11, "tokenType": "method" },
+    { "startLine": 11, "startColumn": 11, "endLine": 11, "endColumn": 26, "tokenType": "class" },
+    { "startLine": 11, "startColumn": 37, "endLine": 11, "endColumn": 40, "tokenType": "interface" },
+    { "startLine": 12, "startColumn": 9, "endLine": 12, "endColumn": 11, "tokenType": "method" },
+    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 15, "tokenType": "namespace" }
   ]
 }

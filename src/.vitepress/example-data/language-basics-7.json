@@ -13,5 +13,15 @@
     { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 17, "text": "struct Ghul.bool" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "text": "my_char: Ghul.char // local value" },
     { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 17, "text": "struct Ghul.char" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "tokenType": "struct" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 20, "tokenType": "struct" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 17, "tokenType": "struct" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 17, "tokenType": "struct" }
   ]
 }

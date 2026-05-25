@@ -7,5 +7,9 @@
   "hovers": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "result: Ghul.int // local value" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 16, "text": "sum(x: Ghul.int, y: Ghul.int) -> Ghul.int // global function" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 16, "tokenType": "function" }
   ]
 }

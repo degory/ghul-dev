@@ -11,5 +11,13 @@
     { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 9, "text": "name: Ghul.string // local value" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "age: Ghul.int // local value" },
     { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "text": "person: (string, int) // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

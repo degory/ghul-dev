@@ -8,5 +8,10 @@
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "i: Ghul.int // local value" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.int) -> Ghul.void // class method" },
     { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 16, "text": "i: Ghul.int // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

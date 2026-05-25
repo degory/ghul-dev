@@ -1,0 +1,23 @@
+use IO.Std.write_line;
+
+// >>>
+trait Greetable is
+    name: string;
+si
+
+// T must derive from Greetable, so .name is available on T
+greet[T: Greetable](x: T) is
+    write_line("hello, {x.name}");
+si
+
+class CAT: Greetable is
+    name: string;
+    init(name: string) is self.name = name; si
+si
+// <<<
+
+entry() is
+// >>>
+    greet(CAT("whiskers"));
+// <<<
+si

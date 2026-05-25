@@ -14,5 +14,16 @@
     { "startLine": 9, "startColumn": 13, "endLine": 9, "endColumn": 18, "text": "class Ghul.string" },
     { "startLine": 9, "startColumn": 22, "endLine": 9, "endColumn": 26, "text": "maybe: Ghul.string? // local value" },
     { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 8, "text": "maybe: Ghul.string? // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 18, "tokenType": "function" },
+    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 21, "tokenType": "class" },
+    { "startLine": 5, "startColumn": 25, "endLine": 5, "endColumn": 29, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 9, "startColumn": 13, "endLine": 9, "endColumn": 18, "tokenType": "class" },
+    { "startLine": 9, "startColumn": 22, "endLine": 9, "endColumn": 26, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

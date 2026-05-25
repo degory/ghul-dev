@@ -4,5 +4,6 @@
   "fullSource": "use Example.TEST;\n\n...\n\nlet t = TEST();\n",
   "output": "",
   "diagnostics": [],
-  "hovers": []
+  "hovers": [],
+  "semanticTokens": []
 }

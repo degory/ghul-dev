@@ -4,5 +4,6 @@
   "fullSource": "some_function(argument: type)\n",
   "output": "",
   "diagnostics": [],
-  "hovers": []
+  "hovers": [],
+  "semanticTokens": []
 }

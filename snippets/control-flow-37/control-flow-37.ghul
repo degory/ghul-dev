@@ -1,4 +1,4 @@
-let reader: StreamReader;
+let reader mut: StreamReader;
 
 try
     reader = StreamReader("file.txt");

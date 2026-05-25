@@ -21,5 +21,23 @@
     { "startLine": 6, "startColumn": 24, "endLine": 6, "endColumn": 28, "text": "add_5: Ghul.int -> Ghul.int // local value" },
     { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
     { "startLine": 9, "startColumn": 25, "endLine": 9, "endColumn": 30, "text": "add_10: Ghul.int -> Ghul.int // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 19, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 24, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 29, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 33, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 31, "tokenType": "function" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 13, "endLine": 5, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 14, "endLine": 8, "endColumn": 24, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 3, "startColumn": 33, "endLine": 3, "endColumn": 43, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 6, "startColumn": 24, "endLine": 6, "endColumn": 28, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 9, "startColumn": 25, "endLine": 9, "endColumn": 30, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

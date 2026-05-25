@@ -17,5 +17,16 @@
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 12, "text": "some_int: Option.SOME[Ghul.int] // local value" },
     { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 21, "text": "union Option" },
     { "startLine": 5, "startColumn": 23, "endLine": 5, "endColumn": 26, "text": "Option.SOME[Ghul.int].init(value: Ghul.int) // constructor" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "tokenType": "class" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 14, "tokenType": "property", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "tokenType": "class" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 21, "tokenType": "class" },
+    { "startLine": 5, "startColumn": 23, "endLine": 5, "endColumn": 26, "tokenType": "method" }
   ]
 }
