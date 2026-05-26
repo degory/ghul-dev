@@ -11,7 +11,7 @@ run_side_effects() -> Tasks.TASK is
     await side_effect("first");
     await side_effect("second");
 
-    return Tasks.TASK.completed_task;
+    return;
 // <<<
 si
 

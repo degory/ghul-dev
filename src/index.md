@@ -25,6 +25,10 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 
 - **generics**: ghūl types, methods, and functions can have generic type parameters.
 
+- **async/await**: functions returning `Tasks.TASK[T]` may use `await` to wait on a task and resume with its result.
+
+- **generators**: functions returning `Iterable[T]` may use `yield` to produce a sequence of values lazily.
+
 - **.NET integration**: ghūl targets .NET, producing and consuming NuGet packages and supporting inter-operation with other .NET languages.
 
 ## examples

@@ -1,0 +1,25 @@
+use IO.Std.write_line;
+
+fibs() -> Collections.Iterable[int] is
+// >>>
+    let a mut = 0;
+    let b mut = 1;
+    do
+        yield a;
+        let next = a + b;
+        a = b;
+        b = next;
+    od
+// <<<
+si
+
+entry() is
+    let count mut = 0;
+    for f in fibs() do
+        write_line(f);
+        count = count + 1;
+        if count >= 8 then
+            break;
+        fi
+    od
+si
