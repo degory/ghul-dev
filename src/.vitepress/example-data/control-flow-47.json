@@ -1,21 +1,15 @@
 {
   "name": "control-flow-47",
-  "code": "await side_effect(\"first\");\nawait side_effect(\"second\");\n\nreturn Tasks.TASK.completed_task;",
-  "fullSource": "use IO.Std.write_line;\n\nside_effect(label: string) -> Tasks.TASK is\n    write_line(\"side effect: {label}\");\n\n    return Tasks.TASK.completed_task;\nsi\n\nrun_side_effects() -> Tasks.TASK is\n    await side_effect(\"first\");\n    await side_effect(\"second\");\n\n    return Tasks.TASK.completed_task;\nsi\n\nentry() is\n    run_side_effects().wait();\nsi\n",
+  "code": "await side_effect(\"first\");\nawait side_effect(\"second\");\n\nreturn;",
+  "fullSource": "use IO.Std.write_line;\n\nside_effect(label: string) -> Tasks.TASK is\n    write_line(\"side effect: {label}\");\n\n    return Tasks.TASK.completed_task;\nsi\n\nrun_side_effects() -> Tasks.TASK is\n    await side_effect(\"first\");\n    await side_effect(\"second\");\n\n    return;\nsi\n\nentry() is\n    run_side_effects().wait();\nsi\n",
   "output": "side effect: first\nside effect: second\n",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 17, "text": "side_effect(label: Ghul.string) -> Tasks.TASK // global function" },
-    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 17, "text": "side_effect(label: Ghul.string) -> Tasks.TASK // global function" },
-    { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 12, "text": "namespace Tasks" },
-    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 17, "text": "class Tasks.TASK" },
-    { "startLine": 4, "startColumn": 19, "endLine": 4, "endColumn": 32, "text": "Tasks.TASK.completed_task: Tasks.TASK // class property" }
+    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 17, "text": "side_effect(label: Ghul.string) -> Tasks.TASK // global function" }
   ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 17, "tokenType": "function" },
-    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 17, "tokenType": "function" },
-    { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 12, "tokenType": "namespace" },
-    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 17, "tokenType": "class" },
-    { "startLine": 4, "startColumn": 19, "endLine": 4, "endColumn": 32, "tokenType": "property", "modifiers": "static" }
+    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 17, "tokenType": "function" }
   ]
 }

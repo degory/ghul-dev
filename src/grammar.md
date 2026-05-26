@@ -345,10 +345,10 @@ optional elsewhere.
 StatementList ::= ( Statement ";"? )*
 
 Statement ::= Let
-            | Await
             | Return
             | Throw
             | Assert
+            | Yield
             | If
             | Case
             | Try
@@ -362,27 +362,24 @@ Statement ::= Let
             | ExpressionStatement
 ```
 
-### local variable definitions, return, throw, assert
+### local variable definitions, return, throw, assert, yield
 
 ```ebnf
-Let    ::= "let" "use"? "await"? VariableList ( "in" Expression )?
-Await  ::= "await" Expression
+Let    ::= "let" "use"? VariableList ( "in" Expression )?
 Return ::= "return" Expression?
 Throw  ::= "throw" Expression?
 Assert ::= "assert" Expression ( "else" Expression )?
+Yield  ::= "yield" Expression
 ```
 
 `let use` defines a local variable holding a disposable, whose `dispose` is called
 when the variable goes out of scope.
 
-`let await x = e;` and the value-less `await e;` are
-[asynchronous](/control-flow.html#asynchronous-code) forms permitted inside a
-function whose return type is `Tasks.TASK[T]` (or `Tasks.TASK`). `let await`
-waits for the task to complete and binds its result; `await` waits and discards
-the result.
-
 The `let … in …` form is a [let-in expression](#primary-expressions) used as a
 statement.
+
+`yield` is permitted only inside a [generator function](/control-flow.html#generators)
+— one whose return type is `Collections.Iterable[T]` or `Collections.Iterator[T]`.
 
 ### if
 
@@ -462,8 +459,15 @@ lowest precedence and does not chain.
 
 ```ebnf
 UnaryExpression ::= Operator UnaryExpression      /* prefix operator */
+                  | "await"  UnaryExpression      /* await expression */
                   | PostfixExpression
 ```
+
+An `await E` expression is permitted only inside an
+[asynchronous function](/control-flow.html#asynchronous-code) — one whose
+return type is `Tasks.TASK[T]` (or `Tasks.TASK`) — and evaluates to the result
+of the awaited task once it completes. Used as the right-hand side of `let`, as
+a bare statement (`await E;`), or in any operand position.
 
 ### postfix expressions
 

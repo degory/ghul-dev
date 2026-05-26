@@ -274,18 +274,30 @@ If execution reaches the end of a non-void function without encountering a retur
 
 A function is asynchronous when its declared return type is `Tasks.TASK[T]` (or `Tasks.TASK`, for one that produces no value).
 
-Inside such a function, `let await x = e;` waits for the task `e` to complete; `x` is then initialized to its result and the rest of the function continues:
+Inside such a function, `await e` evaluates to the result of the task `e` once it completes. `let x = await e;` binds the result to a local and the rest of the function continues:
 
 <GhulExample name="control-flow-46" />
 
-`await e;` is the value-less form: it waits for `e` to complete and discards any result. Use it when you only care that the work has finished:
+`await e;` as a bare statement is the value-less form: it waits for `e` to complete and discards any result. Use it when you only care that the work has finished:
 
 <GhulExample name="control-flow-47" />
 
-`let await` and `await` may also appear inside the body of a `for` or `while` loop: the loop iterates, awaiting and resuming once per iteration. A `return` from inside an awaiting loop body propagates out through the loop as usual:
+`await` may also appear inside the body of a `for` or `while` loop: the loop iterates, awaiting and resuming once per iteration. A `return` from inside an awaiting loop body propagates out through the loop as usual:
 
 <GhulExample name="control-flow-48" />
 
 ### limitations
 
-A `try` / `catch` block may not surround code that contains a `let await` or `await`. To handle a faulted task, wrap the call at the *call site* instead — reading `.result` on a returned task surfaces a faulted task as a `System.AggregateException`.
+A `try` / `catch` block may not surround code that contains an `await`. To handle a faulted task, wrap the call at the *call site* instead — reading `.result` on a returned task surfaces a faulted task as a `System.AggregateException`.
+
+## generators
+
+A function is a generator when its declared return type is `Collections.Iterable[T]` or `Collections.Iterator[T]`. Inside such a function, `yield E;` produces the next value in the sequence; execution suspends until the caller asks for another value, then resumes from the statement after the `yield`:
+
+<GhulExample name="control-flow-49" />
+
+A generator may appear anywhere an iterable is expected, including the right-hand side of a `for` loop:
+
+<GhulExample name="control-flow-50" />
+
+`return;` ends the sequence early; falling off the end of the body has the same effect.
