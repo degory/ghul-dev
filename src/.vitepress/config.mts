@@ -170,6 +170,7 @@ export default defineConfig({
       { text: '.NET integration', link: '/dotnet-integration' },
       { text: 'tooling', link: '/tooling' },
       { text: 'grammar', link: '/grammar' },
+      { text: 'implementation', link: '/implementation' },
       { text: 'known issues', link: '/known-issues' },
       { text: 'resources', link: '/resources' },
       { text: 'history', link: '/history' },
