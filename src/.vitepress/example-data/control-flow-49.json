@@ -1,7 +1,7 @@
 {
   "name": "control-flow-49",
   "code": "let i mut = 1;\nwhile i <= limit do\n    yield i * i;\n    i = i + 1;\nod",
-  "fullSource": "use IO.Std.write_line;\n\nsquares(limit: int) -> Collections.Iterable[int] is\n    let i mut = 1;\n    while i <= limit do\n        yield i * i;\n        i = i + 1;\n    od\nsi\n\nentry() is\n    for s in squares(4) do\n        write_line(s);\n    od\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\nsquares(limit: int) -> Ghul.Pipes.Pipe[int] is\n    let i mut = 1;\n    while i <= limit do\n        yield i * i;\n        i = i + 1;\n    od\nsi\n\nentry() is\n    for s in squares(4) do\n        write_line(s);\n    od\nsi\n",
   "output": "1\n4\n9\n16\n",
   "diagnostics": [],
   "hovers": [

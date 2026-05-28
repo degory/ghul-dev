@@ -1,6 +1,6 @@
 use IO.Std.write_line;
 
-squares(limit: int) -> Collections.Iterable[int] is
+squares(limit: int) -> Ghul.Pipes.Pipe[int] is
 // >>>
     let i mut = 1;
     while i <= limit do

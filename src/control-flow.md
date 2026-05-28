@@ -292,11 +292,11 @@ A `try` / `catch` block may not surround code that contains an `await`. To handl
 
 ## generators
 
-A function is a generator when its declared return type is `Collections.Iterable[T]` or `Collections.Iterator[T]`. Inside such a function, `yield E;` produces the next value in the sequence; execution suspends until the caller asks for another value, then resumes from the statement after the `yield`:
+A function is a generator when its declared return type is `Pipe[T]` (`Ghul.Pipes.Pipe[T]`) and its body contains `yield E;`. Each `yield` produces the next value in the sequence; execution suspends until the caller asks for another value, then resumes from the statement after the `yield`:
 
 <GhulExample name="control-flow-49" />
 
-A generator may appear anywhere an iterable is expected, including the right-hand side of a `for` loop:
+A generator *is* a [pipe](/functional-programming.html#lazy-sequences), so it can be looped over directly and composed with `map` / `filter` / `take` and the other pipe operators:
 
 <GhulExample name="control-flow-50" />
 
