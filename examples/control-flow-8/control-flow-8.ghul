@@ -19,7 +19,7 @@ entry() is
 // >>>
     let m: Maybe[int] = Maybe.YES(42);
 
-    if m.is_yes then
+    if isa Maybe.YES(m) then
         // m is narrowed to Maybe.YES inside the branch,
         // so m.value is in scope
         write_line("got value {m.value}");

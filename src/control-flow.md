@@ -46,7 +46,7 @@ This form is used for multiple conditions. If the initial condition is false, th
 
 ### type narrowing
 
-When an `if` predicate proves a stronger fact about a variable's type, the then-branch sees that variable at the narrower type. The most common cases are union variant tags and `isa` class tests:
+When an `if` predicate proves a stronger fact about a variable's type, the then-branch sees that variable at the narrower type. The most common case is an `isa` test — for a union variant or for a class:
 
 <GhulExample name="control-flow-8" />
 
@@ -274,7 +274,7 @@ If execution reaches the end of a non-void function without encountering a retur
 
 A function is asynchronous when its declared return type is `Tasks.TASK[T]` (or `Tasks.TASK`, for one that produces no value).
 
-Inside such a function, `await e` evaluates to the result of the task `e` once it completes. `let x = await e;` binds the result to a local and the rest of the function continues:
+Inside such a function, `await e` evaluates to the result of the task `e` once it completes. `let x = await e;` assigns the result to a local and the rest of the function continues:
 
 <GhulExample name="control-flow-46" />
 
