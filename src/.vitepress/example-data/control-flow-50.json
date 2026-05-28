@@ -6,7 +6,7 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "f: Ghul.int // local value" },
-    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "text": "Ghul.Pipes.pipe[Ghul.int](source: Collections.Iterable[Ghul.int]) -> Ghul.Pipes.Pipe[Ghul.int] // global function" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "text": "Ghul.Pipes.pipe[T](source: Collections.Iterable[T]) -> Ghul.Pipes.Pipe[T] // global function" },
     { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 13, "text": "fibs() -> Ghul.Pipes.Pipe[Ghul.int] // generator (global)" },
     { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 23, "text": "Ghul.Pipes.Pipe[Ghul.int].take(count: Ghul.int) -> Ghul.Pipes.Pipe[Ghul.int] // default trait method" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.int) -> Ghul.void // class method" },
