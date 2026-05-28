@@ -1,7 +1,7 @@
 {
   "name": "definitions-17",
-  "code": "let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));\nlet leaf = Tree.LEAF(123);\n\nif tree.is_node then\n    write_line(\"have tree node\");\nelif tree.is_leaf then\n    write_line(\"have tree leaf\");\nfi",
-  "fullSource": "use IO.Std.write_line;\n\nunion Tree is\n    NODE(left: Tree, right: Tree);\n    LEAF(value: int);\nsi\n\nentry() is\n    let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));\n    let leaf = Tree.LEAF(123);\n\n    if tree.is_node then\n        write_line(\"have tree node\");\n    elif tree.is_leaf then\n        write_line(\"have tree leaf\");\n    fi\nsi\n",
+  "code": "let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));\nlet leaf = Tree.LEAF(123);\n\nif isa Tree.NODE(tree) then\n    write_line(\"have tree node\");\nelif isa Tree.LEAF(tree) then\n    write_line(\"have tree leaf\");\nfi",
+  "fullSource": "use IO.Std.write_line;\n\nunion Tree is\n    NODE(left: Tree, right: Tree);\n    LEAF(value: int);\nsi\n\nentry() is\n    let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));\n    let leaf = Tree.LEAF(123);\n\n    if isa Tree.NODE(tree) then\n        write_line(\"have tree node\");\n    elif isa Tree.LEAF(tree) then\n        write_line(\"have tree leaf\");\n    fi\nsi\n",
   "output": "have tree node\n",
   "diagnostics": [],
   "hovers": [
@@ -16,11 +16,11 @@
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "leaf: Tree.LEAF // local value" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 15, "text": "union Tree" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 20, "text": "Tree.LEAF.init(value: Ghul.int) // constructor" },
-    { "startLine": 4, "startColumn": 4, "endLine": 4, "endColumn": 7, "text": "tree: Tree // local value" },
-    { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 15, "text": "Tree.is_node: Ghul.bool // instance property" },
+    { "startLine": 4, "startColumn": 13, "endLine": 4, "endColumn": 16, "text": "variant Tree.NODE(left: Tree, right: Tree)" },
+    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 21, "text": "tree: Tree // local value" },
+    { "startLine": 6, "startColumn": 15, "endLine": 6, "endColumn": 18, "text": "variant Tree.LEAF(value: Ghul.int)" },
+    { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 23, "text": "tree: Tree.LEAF // local value" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
-    { "startLine": 6, "startColumn": 6, "endLine": 6, "endColumn": 9, "text": "tree: Tree.LEAF // local value" },
-    { "startLine": 6, "startColumn": 11, "endLine": 6, "endColumn": 17, "text": "Tree.LEAF.is_leaf: Ghul.bool // instance property" },
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" }
   ],
   "semanticTokens": [
@@ -35,11 +35,11 @@
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 15, "tokenType": "class" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 20, "tokenType": "method" },
-    { "startLine": 4, "startColumn": 4, "endLine": 4, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 15, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 13, "endLine": 4, "endColumn": 16, "tokenType": "class" },
+    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 21, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 15, "endLine": 6, "endColumn": 18, "tokenType": "class" },
+    { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 6, "startColumn": 6, "endLine": 6, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 6, "startColumn": 11, "endLine": 6, "endColumn": 17, "tokenType": "property" },
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 14, "tokenType": "method", "modifiers": "static" }
   ]
 }

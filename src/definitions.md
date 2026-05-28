@@ -88,11 +88,11 @@ Traits can only be defined at global scope. Trait methods and properties can be 
 
 A union consists of a name and then a union body, which contains one or more variants. Each variant has a name, and then an optional list of fields:
 <GhulExample name="definitions-16" />
-Unions are a reference type. A reference of union type can point to only one variant at a time. The active variant can be determined by checking the union's tag properties. These are auto named by convention based on the variant names.
+Unions are a reference type. A reference of union type can point to only one variant at a time. To discover which variant a union currently holds, test it with `isa Variant(value)`:
 
 <GhulExample name="definitions-17" />
 
-The active variant can be accessed by name, which returns either the variant instance (if it holds multiple fields), or just the field value if it holds a single field. Unit variants (those with no fields) cannot be accessed as they have no value.
+`isa Variant(value)` does two things at once: it tests the variant, and within the then-branch it narrows the value to that variant, so the variant's own fields are accessible directly:
 
 <GhulExample name="definitions-18" />
 

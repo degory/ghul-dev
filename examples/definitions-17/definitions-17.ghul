@@ -10,9 +10,9 @@ entry() is
     let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));
     let leaf = Tree.LEAF(123);
 
-    if tree.is_node then
+    if isa Tree.NODE(tree) then
         write_line("have tree node");
-    elif tree.is_leaf then
+    elif isa Tree.LEAF(tree) then
         write_line("have tree leaf");
     fi
 // <<<

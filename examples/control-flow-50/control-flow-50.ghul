@@ -1,7 +1,6 @@
 use IO.Std.write_line;
 
-fibs() -> Collections.Iterable[int] is
-// >>>
+fibs() -> Ghul.Pipes.Pipe[int] is
     let a mut = 0;
     let b mut = 1;
     do
@@ -10,16 +9,13 @@ fibs() -> Collections.Iterable[int] is
         a = b;
         b = next;
     od
-// <<<
 si
 
 entry() is
-    let count mut = 0;
-    for f in fibs() do
+// >>>
+    // fibs() is an infinite generator; take(8) bounds it
+    for f in fibs() | .take(8) do
         write_line(f);
-        count = count + 1;
-        if count >= 8 then
-            break;
-        fi
     od
+// <<<
 si

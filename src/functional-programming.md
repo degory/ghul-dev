@@ -108,7 +108,7 @@ Unions hold a value of one of several different types (variants). Each variant c
 
 <GhulExample name="functional-programming-14" />
 
-Accessing the data held by a union's variant requires first checking which variant the union currently holds. Unions provide properties for this for each of their variants:
+Accessing the data held by a union's variant requires first checking which variant the union currently holds. An `isa Variant(value)` test checks the variant and, in the then-branch, narrows the value to it so the variant's fields are reachable:
 
 <GhulExample name="functional-programming-15" />
 
@@ -124,7 +124,7 @@ ghūl has no dedicated `match` construct. Discovering which variant a union hold
 
 <GhulExample name="functional-programming-18" />
 
-Union variant tags (`s.is_circle`) and `else`-branch narrowing cover the same ground; see [type narrowing and `if let`](/control-flow.html#type-narrowing) in the control flow chapter for the full picture.
+`isa` variant tests and `else`-branch narrowing cover the same ground; see [type narrowing and `if let`](/control-flow.html#type-narrowing) in the control flow chapter for the full picture.
 
 ## currying
 <GhulExample name="functional-programming-19" />

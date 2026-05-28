@@ -8,7 +8,7 @@ si
 entry() is
     let an_option: Option[int] = Option.SOME(42);
 // >>>
-    if an_option.is_some then
+    if isa Option.SOME(an_option) then
         let value = an_option.value;
         write_line("the option holds {value}");
     fi

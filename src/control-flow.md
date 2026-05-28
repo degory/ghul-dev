@@ -46,7 +46,7 @@ This form is used for multiple conditions. If the initial condition is false, th
 
 ### type narrowing
 
-When an `if` predicate proves a stronger fact about a variable's type, the then-branch sees that variable at the narrower type. The most common cases are union variant tags and `isa` class tests:
+When an `if` predicate proves a stronger fact about a variable's type, the then-branch sees that variable at the narrower type. The most common case is an `isa` test — for a union variant or for a class:
 
 <GhulExample name="control-flow-8" />
 
@@ -274,7 +274,7 @@ If execution reaches the end of a non-void function without encountering a retur
 
 A function is asynchronous when its declared return type is `Tasks.TASK[T]` (or `Tasks.TASK`, for one that produces no value).
 
-Inside such a function, `await e` evaluates to the result of the task `e` once it completes. `let x = await e;` binds the result to a local and the rest of the function continues:
+Inside such a function, `await e` evaluates to the result of the task `e` once it completes. `let x = await e;` assigns the result to a local and the rest of the function continues:
 
 <GhulExample name="control-flow-46" />
 
@@ -292,11 +292,11 @@ A `try` / `catch` block may not surround code that contains an `await`. To handl
 
 ## generators
 
-A function is a generator when its declared return type is `Collections.Iterable[T]` or `Collections.Iterator[T]`. Inside such a function, `yield E;` produces the next value in the sequence; execution suspends until the caller asks for another value, then resumes from the statement after the `yield`:
+A function is a generator when its declared return type is `Pipe[T]` (`Ghul.Pipes.Pipe[T]`) and its body contains `yield E;`. Each `yield` produces the next value in the sequence; execution suspends until the caller asks for another value, then resumes from the statement after the `yield`:
 
 <GhulExample name="control-flow-49" />
 
-A generator may appear anywhere an iterable is expected, including the right-hand side of a `for` loop:
+A generator *is* a [pipe](/functional-programming.html#lazy-sequences), so it can be looped over directly and composed with `map` / `filter` / `take` and the other pipe operators:
 
 <GhulExample name="control-flow-50" />
 

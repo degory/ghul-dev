@@ -1,8 +1,7 @@
-if tree.is_node then
+if isa Tree.NODE(tree) then
     write_line(
-        "left {tree.node.left}, right {tree.node.right}"
+        "left {tree.left}, right {tree.right}"
     );
-elif tree.is_leaf then
-    // we don't need tree.leaf.value here
-    write_line("leaf value {tree.leaf}");
+elif isa Tree.LEAF(tree) then
+    write_line("leaf value {tree.value}");
 fi

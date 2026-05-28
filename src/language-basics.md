@@ -93,7 +93,7 @@ The postfix `?` operator tests whether an optional has a value. The postfix `!` 
 
 Most of the time you don't need `!` directly — `if let` tests an optional and reads its value into a local variable in one step (see [control flow](/control-flow.html#if-let)).
 
-Optional types work for both reference types and value types. An optional value type is backed by `OPTION[T]` — the .NET `Nullable[T]` — so a present value is constructed explicitly:
+Optional types work for both reference types and value types. A value-type optional like `int?` is backed by the .NET `Nullable[T]`, but you don't construct it explicitly — assigning a plain value where an optional is expected widens it automatically, and `null` marks the absent case:
 
 <GhulExample name="language-basics-17" />
 

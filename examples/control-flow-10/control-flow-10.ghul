@@ -15,7 +15,7 @@ entry() is
 // >>>
     let r: Result[int, string] = some_call();
 
-    if r.is_ok then
+    if isa Result.OK(r) then
         write_line("ok: {r.value}");
     else
         // r is narrowed to Result.ERR here

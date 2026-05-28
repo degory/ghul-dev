@@ -92,7 +92,7 @@ Comparison expressions allow you to compare values using operators such as `==`,
 
 ## short circuit logical
 
-Logical expressions allow you to combine or negate boolean values using the `&&` (logical AND), `||` (logical OR), and `!` (logical NOT) operators.
+Logical expressions allow you to combine or negate boolean values using the `/\` (logical AND), `\/` (logical OR), and `!` (logical NOT) operators.
 
 <GhulExample name="expressions-17" />
 
