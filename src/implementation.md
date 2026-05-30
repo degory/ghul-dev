@@ -118,7 +118,7 @@ A short overview of each:
 ghūl's conditional compilation is a pragma annotation: a `@IF.flag()`
 applied to a single definition or statement gates that item on whether
 `flag` was passed at compile time. There is no else/endif form; a
-disabled item is simply omitted. This pass walks the syntax tree and
+disabled item is omitted. This pass walks the syntax tree and
 nullifies each disabled item - definitions are replaced by an empty
 definition list, statements by `null` - so subsequent passes can skip
 them.
@@ -195,8 +195,8 @@ declared, the pass injects the default one - `Object` for classes, traits
 and unions, `VALUE_TYPE` for structs, `ENUM_TYPE` for enums.
 
 It also validates the inheritance constraints: at most one class ancestor,
-class before any traits, traits and structs may only inherit traits, no
-ancestor may be `void`.
+class before any traits, traits and structs can only inherit traits, no
+ancestor can be `void`.
 
 The inheritance graph is then available for later passes to walk. Member
 symbols are not yet pulled down into the derived type's scope; that
@@ -282,8 +282,8 @@ body and:
   arguments at call sites, and generic constructors;
 - applies flow-sensitive type narrowing through `isa` checks, `if let`,
   null tests, variant tests, and divergent guards (where an early `return`
-  / `throw` / `break` / `continue` lets the narrower type carry through
-  the code below the guard);
+  / `throw` / `break` / `continue` leaves the code below the guard narrowed
+  to the stronger type);
 - produces *IR values* that describe, for each expression, the sequence
   of IL operations it stands for.
 
