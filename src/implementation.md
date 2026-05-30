@@ -10,13 +10,13 @@ repository.
 A ghūl build moves through three broad stages:
 
 1. **Read the source.** Source text is split into tokens, and the tokens
-   are parsed into an AST: a tree of objects describing the program.
-2. **Make sense of the source.** A series of passes walks the AST, working
-   out what every name refers to, what type every expression has, and
-   reporting any errors.
-3. **Emit IL.** A final pass walks the AST and produces .NET intermediate
-   language, which is assembled into a `.dll`{:text} or `.exe`{:text} on
-   disk.
+   are parsed into a syntax tree describing the program.
+2. **Make sense of the source.** A series of passes walks the syntax tree,
+   working out what every name refers to, what type every expression has,
+   and reporting any errors.
+3. **Emit IL.** A final pass walks the syntax tree and produces .NET
+   intermediate language, which is assembled into a `.dll`{:text} or
+   `.exe`{:text} on disk.
 
 When the compiler runs as the back end of the VS Code extension it follows
 the same first two stages but stops short of emitting IL, and runs many
@@ -31,16 +31,16 @@ concern:
 | Folder            | Role                                                           |
 |-------------------|----------------------------------------------------------------|
 | `lexical/`{:text}    | Turns source text into a stream of tokens.                  |
-| `syntax/trees/`{:text} | The AST node classes themselves.                          |
-| `syntax/parsers/`{:text} | Recursive-descent parsers that build the AST from tokens. |
-| `syntax/process/`{:text} | Passes that walk the AST: name resolution, type checking, IL generation, plus the editor-facing passes for completion and signature help. |
+| `syntax/trees/`{:text} | The syntax-tree node classes themselves.                  |
+| `syntax/parsers/`{:text} | Recursive-descent parsers that build the syntax tree from tokens. |
+| `syntax/process/`{:text} | Passes that walk the syntax tree: name resolution, type checking, IL generation, plus the editor-facing passes for completion and signature help. |
 | `semantic/`{:text}   | The symbol table, scopes, types and supporting machinery used by the passes. |
 | `ir/`{:text}         | A small set of nodes that model individual IL instructions, used while emitting code. |
 | `compiler/`{:text}   | The `COMPILER` orchestrator that registers the passes and runs them over each source file. |
 | `driver/`{:text}     | A thin command-line front-end that parses arguments and decides whether to run a build or the language service. |
 | `analysis/`{:text}   | The language-service request handlers used in analysis mode. |
 | `ioc/`{:text}        | A small inversion-of-control container. Mostly used by the parsers so they can refer to one another without circular constructor wiring. |
-| `source/`{:text}     | Source-location bookkeeping. Every AST node has a `LOCATION`, so diagnostics, hovers and go-to-definition can point at the right span of text. |
+| `source/`{:text}     | Source-location bookkeeping. Every syntax-tree node has a `LOCATION`, so diagnostics, hovers and go-to-definition can point at the right span of text. |
 | `logging/`{:text}    | Diagnostic reporting and per-pass timers. All compiler messages flow through `Logger` so that the IDE can intercept them. |
 
 The boundaries are deliberately ordinary: anyone who has worked on a
@@ -52,9 +52,7 @@ inside `syntax/process/`{:text} and `semantic/`{:text}.
 The tokenizer in `lexical/`{:text} reads source text a character at a time
 and produces a sequence of `TOKEN` values. Whitespace and comments are
 discarded; tokens know their kind (identifier, keyword, operator, string
-literal, …), their text and their source location. The tokenizer also
-handles a couple of features that are usually thought of as lexical: line
-continuation rules and the `#if` / `#else` preprocessor directives.
+literal, …), their text and their source location.
 
 The parser in `syntax/parsers/`{:text} is a hand-written recursive-descent
 parser. Each grammar production has its own parser class implementing a
@@ -63,27 +61,27 @@ small `Parser[T]` trait. Because the parsers refer to one another freely
 expression parser), they are wired up through the IoC container so their
 references can be resolved lazily rather than via constructor arguments.
 
-The output of the parser is an AST: a tree of `Node` subclasses defined in
+The output of the parser is a tree of `Node` subclasses defined in
 `syntax/trees/`{:text}. The nodes fall into four broad groups:
 
 - **Definitions** - namespaces, classes, traits, structs, variants,
   functions, methods, fields, properties.
 - **Statements** - `if`, `for`, `while`, `try`, and so on.
-- **Expressions** - literals, calls, operators, lambdas, tuple constructors.
+- **Expressions** - literals, calls, operators, anonymous functions, tuple constructors.
 - **Type expressions** - types as they appear written in source, before
   the semantic layer turns them into the type objects described below.
 
 Every node knows the source location it came from, and the tree is the
 single shared data structure that the rest of the compiler walks.
 
-## passes over the AST
+## passes over the syntax tree
 
-The bulk of the compiler is a series of *passes* over the AST. Each pass
-is a class whose name describes what it does; most are subclasses of the
-`Visitor` hierarchy in `syntax/process/`{:text}. The `COMPILER` class
-registers them in order, and each pass runs over every source file before
-the next pass starts. This means later passes can rely on the work the
-earlier passes have already done.
+The bulk of the compiler is a series of *passes* over the syntax tree.
+Each pass is a class whose name describes what it does; most are
+subclasses of the `Visitor` hierarchy in `syntax/process/`{:text}. The
+`COMPILER` class registers them in order, and each pass runs over every
+source file before the next pass starts. This means later passes can rely
+on the work the earlier passes have already done.
 
 The order matters. For example, the pass that works out the type of an
 expression depends on the pass that has already resolved what every name
@@ -94,19 +92,19 @@ The full pass list, in the order `COMPILER` runs them:
 
 | Pass                                  | What it does |
 |---------------------------------------|--------------|
-| `conditional-compilation`{:text}      | Removes any code disabled by `#if` directives. |
-| `rewrite-syntax-trees`{:text}         | Light AST rewrites that simplify later passes: expanding nested namespaces into a flat list, generating accessor methods for properties, and spilling operand-position subexpressions sitting to the left of an `await` so their values survive the suspend. |
-| `declare-symbols`{:text}              | Walks the AST and registers every declaration (type, function, field, parameter, local) in the symbol table, attached to the appropriate scope. |
-| `resolve-uses`{:text}                 | Resolves identifier references to the declarations they name, using the scopes the previous pass set up. |
-| `resolve-type-expressions`{:text}     | Turns type annotations as written in source into the semantic `Type` objects used by the rest of the compiler. |
-| `resolve-ancestors`{:text}            | Attaches base classes and trait parents to the classes and traits that name them. |
-| `resolve-explicit-types`{:text}       | Checks variables whose type is written out against the type of their initializer. |
-| `resolve-overrides`{:text}            | Verifies that methods marked `override` match an inherited signature, and that overrides do not conflict. |
-| `record-type-argument-uses`{:text}    | Notes which generic types are instantiated with which type arguments, so the IL pass can later produce the right open-generic references. |
-| `mark-boxed-locals`{:text}            | Marks variables that have to live on the heap rather than in a local slot, typically because they are captured by a closure or by a generator's state machine. |
-| `compile-expressions`{:text}          | The largest pass. Walks every expression in every function body, working out its type, resolving operator and method overloads, running type inference, narrowing, and producing IR values that describe what the IL should look like. |
+| `conditional-compilation`{:text}      | Nullifies any definition or statement disabled by its `@IF.flag()` pragma. |
+| `rewrite-syntax-trees`{:text}         | Light syntax-tree rewrites that simplify later passes: expanding dotted namespace names into nested form, synthesising accessor methods for properties, indexers and union variants, and spilling operand-position subexpressions sitting to the left of an `await` so their values survive the suspend. |
+| `declare-symbols`{:text}              | Walks the syntax tree and registers every declaration (type, function, field, parameter, local) in the symbol table, attached to the appropriate scope. |
+| `resolve-uses`{:text}                 | Resolves the `use` declarations in each namespace block against the namespaces or members they name, so short names work in subsequent passes. |
+| `resolve-type-expressions`{:text}     | Turns type annotations in declarations, signatures, and in expression-position uses like `cast`, `isa`, `typeof` and `default` into the semantic `Type` objects later passes use. |
+| `resolve-ancestors`{:text}            | Attaches base classes, trait parents and default ancestors to classes, traits, structs, unions and enums, and validates the inheritance constraints. |
+| `resolve-explicit-types`{:text}       | Registers each variable's, property's and parameter's declared type on its symbol, so the declared type is available to constrain inference later. |
+| `resolve-overrides`{:text}            | Pulls inherited symbols down into each container type's scope; for every method whose signature matches an ancestor's virtual or abstract method, records the override link and checks the override is consistent. Reports duplicate top-level functions. |
+| `record-type-argument-uses`{:text}    | For every closure body, records which of the enclosing scope's generic type parameters the body references, so the closure frame can plumb them through at runtime. |
+| `mark-boxed-locals`{:text}            | Marks `let mut` locals (and parameters) that are both captured by an anonymous function and reassigned, so the IL pass wraps them in a `Ghul.BOX[T]` cell shared between the enclosing scope and every capturer. |
+| `compile-expressions`{:text}          | The largest pass. Walks every expression in every function body, working out its type, resolving operator and method overloads, running type inference, applying flow-sensitive narrowing, and producing IR values that describe what the IL should look like. |
 | `warn-implicit-mutable-let`{:text}    | Emits warnings for `let` variables that are mutated but were not declared `mut`, when the corresponding compiler flag is set. |
-| `generate-il`{:text}                  | Walks the AST one last time and emits .NET IL, using the IR values produced by `compile-expressions`{:text}. |
+| `generate-il`{:text}                  | Walks the syntax tree one last time and emits .NET IL, using the IR values produced by `compile-expressions`{:text}. |
 
 Whether each pass actually runs depends on the build flags. A plain syntax
 check stops after the early passes; a full build runs all of them.
@@ -117,35 +115,42 @@ A short overview of each:
 
 ### `conditional-compilation`{:text}
 
-ghūl has a `#if` / `#else` / `#end` preprocessor for conditional
-compilation. This pass walks the AST and removes the branches that the
-current build flags exclude, so subsequent passes do not have to think
-about disabled code.
+ghūl's conditional compilation is a pragma annotation: a `@IF.flag()`
+applied to a single definition or statement gates that item on whether
+`flag` was passed at compile time. There is no else/endif form; a
+disabled item is omitted. This pass walks the syntax tree and
+nullifies each disabled item - definitions are replaced by an empty
+definition list, statements by `null` - so subsequent passes can skip
+them.
 
 ### `rewrite-syntax-trees`{:text}
 
-A handful of AST rewrites that are easier to do up front than to handle
-everywhere afterwards. The notable ones are:
+A handful of syntax-tree rewrites that are easier to do up front than to
+handle everywhere afterwards. The notable ones are:
 
-- **expand namespaces** - flattens nested namespaces like
-  `namespace Foo.Bar is …` into the equivalent nested form
+- **expand namespaces** - expands dotted namespace names like
+  `namespace Foo.Bar is …` into explicitly nested form
   `namespace Foo is namespace Bar is … si si`.
-- **add accessors for properties** - synthesises the underlying getter
-  and setter methods that a property declaration stands for.
+- **add accessors** - synthesises the getter and setter methods that a
+  property declaration stands for, and (despite the historical name) the
+  equivalent accessors for indexers and for union variants (the per-variant
+  `=~`, `get_hash_code`, `value` and `has_value` members).
 - **spill awaits** - at each composite expression containing an `await`,
   wraps every earlier-evaluated sub-expression in a `SPILL` node. The
   async state machine described below suspends with an internal `leave`
   instruction, and the CLR requires its evaluation stack to be empty at
   the suspend point; anything spilled is stashed into a field on the
-  state-machine frame so it survives the suspend.
+  state-machine frame so it survives the suspend. The rule is purely
+  structural - if a later-evaluated child contains an `await`, every
+  earlier child is wrapped - so no type information is needed yet.
 
 ### `declare-symbols`{:text}
 
-Walks definitions in the AST and creates the symbol-table entries for
-them: types for each class, trait, struct and variant; functions and
-methods; fields, properties, parameters and local variables. Each
-declaration goes into the appropriate scope so that later passes can look
-it up.
+Walks the definitions in the syntax tree and creates symbol-table entries
+for them: types for each class, trait, struct, union, variant and enum;
+functions and methods; fields, properties, parameters and local variables.
+Each declaration goes into the appropriate scope so that later passes can
+look it up.
 
 This pass also scans every function body for `yield` and `await`
 expressions and classifies the function accordingly: plain, generator
@@ -156,57 +161,114 @@ method body.
 
 ### `resolve-uses`{:text}
 
-For every identifier used in the program, finds the declaration it refers
-to. Lexical scoping rules and namespace `use` statements are honoured
-here. Failed resolution becomes an `unknown symbol` diagnostic.
+Processes the `use` declarations that appear in each `namespace` block,
+resolving each one to the namespace, static function group or non-instance
+member it names, and attaching the result to the namespace's scope. After
+this pass, short names introduced by `use` are findable by the
+namespace-scope lookups that subsequent passes perform.
+
+This is the entire job of the pass. Identifier resolution inside
+expressions and function bodies - looking up a local, a parameter, a
+field, or a member access - is deferred to `compile-expressions`{:text},
+where types are available to resolve overloads.
 
 ### `resolve-type-expressions`{:text}
 
 The shape of a type as written in source (`List[Pair[int, string]]`,
-`(int, string) -> bool`, and so on) is parsed into AST nodes under
-`type_expressions/`{:text}. This pass turns those into the `Type` objects
-(described under [types](#types) below) that the rest of the compiler
-manipulates.
+`(int, string) -> bool`, and so on) is parsed into syntax-tree nodes
+under `type_expressions/`{:text}. This pass turns the type expressions
+that appear in declarations and signatures - return types, parameter
+types, field and property types, generic-parameter bounds, ancestor type
+references - and in expression-position uses like `cast`, `isa`, `typeof`
+and `default` into the `Type` objects (described under [types](#types)
+below) that the rest of the compiler manipulates. Type arguments that the
+compiler has to *infer* at a call site are produced later, in
+`compile-expressions`{:text}, when argument types are known.
 
 ### `resolve-ancestors`{:text}
 
-Once class and trait names can be resolved to types, this pass attaches a
-class to its base class and the traits it implements, and a trait to its
-parent traits. The inheritance graph is then available for later passes
-to walk.
+Attaches each container type to the types it inherits from: a class to its
+declared base class and traits, a trait to its parent traits, a struct to
+the traits it implements, a union variant to its enclosing union (with
+the union's generic arguments threaded through). Where no ancestor is
+declared, the pass injects the default one - `Object` for classes, traits
+and unions, `VALUE_TYPE` for structs, `ENUM_TYPE` for enums.
+
+It also validates the inheritance constraints: at most one class ancestor,
+class before any traits, traits and structs can only inherit traits, no
+ancestor can be `void`.
+
+The inheritance graph is then available for later passes to walk. Member
+symbols are not yet pulled down into the derived type's scope; that
+happens in `resolve-overrides`{:text}.
 
 ### `resolve-explicit-types`{:text}
 
-For every variable whose type is written out, checks that the
-initializer's type is assignable to it. The check itself is mostly
-delegated to the type system; the pass exists to make the checks happen
-at a well-defined point.
+For every variable, property, parameter or function return whose type is
+written out, attaches the resolved `Type` to the corresponding symbol.
+By the time `compile-expressions`{:text} runs, every explicitly-typed
+symbol already knows its declared type, and that declared type becomes
+one of the constraints that bidirectional inference uses for the
+unannotated parts of the same expression. The pass also performs a few
+annotation-only checks (field and property types can't be reference
+types; variable types can't be `void`).
+
+Note that this pass does *not* check that an initializer's type matches
+the declared type. It cannot - `compile-expressions`{:text} has not yet
+typed any expression. The assignability check happens there, against the
+declared type this pass attached.
 
 ### `resolve-overrides`{:text}
 
-For every method marked `override`, checks that an ancestor defines a
-matching virtual or abstract method, and that the override is consistent
-with it. Reports duplicate global functions where two top-level functions
-cannot be told apart by their signatures.
+Two jobs. First, for every container type, the pass walks its ancestors
+and pulls their inherited symbols down into the container's own scope, so
+that later lookups against a derived class find the members it inherits.
+
+Second, for every method whose signature matches a virtual or abstract
+method on an ancestor, the pass records the override link and checks the
+override is consistent: covariant return type, matching IL name, no
+override of a non-virtual member, and so on. ghūl has no `override`
+keyword - whether a method overrides its ancestor is determined by
+signature match, not by source annotation - so this pass is where the
+override relationship is established. It also reports a handful of
+related conditions: ineffective override of a trait default, a static
+method accidentally hiding an instance method, a method whose signature
+narrows an ancestor's argument types just enough to miss the override.
+
+Once every source file has been visited, the pass reports any pair of
+top-level functions whose signatures cannot be told apart.
 
 ### `record-type-argument-uses`{:text}
 
-Collects the set of concrete generic-argument combinations the program
-actually uses, so that the IL pass can emit the right references. The
-ghūl IL emitter prefers open-generic references (`!0` for the first
-class-level type parameter, `!!0` for the first method-level one) rather
-than substituting the concrete type into the signature itself; this pass
-collects the information that lets it do so.
+For every closure (anonymous function) body, this pass records which of
+the enclosing function's or type's generic type parameters the body
+references. The closure compiler later uses that list to plumb those type
+parameters through the closure frame at runtime, so the closure can be
+invoked with the right instantiation.
+
+Despite the name, this pass does *not* collect a program-wide map of
+which generic types are instantiated with which type arguments. ghūl's
+preference for emitting generic IL references in their open-generic form
+(`!0` for the first class-level type parameter, `!!0` for the first
+method-level one) is established at IL-emit time, from the
+`unspecialized_*` fields on each function and field symbol; this pass is
+about closure plumbing, not the IL contract.
 
 ### `mark-boxed-locals`{:text}
 
-Some variables cannot live in a local slot. The clearest case is a local
-captured by a lambda: the lambda outlives the call that created it, so
-the local has to move onto the heap. Generator and asynchronous functions
-are a similar case: both compile to state-machine classes whose locals
-become fields, so that the function's state survives a `yield` or
-`await`. This pass walks the AST and marks each affected variable so the
-IL pass emits the right shape of code for it.
+A `let mut` local that is both captured by an anonymous function and
+reassigned has to be shared between the enclosing scope and every
+capturer; if it stayed in a normal local slot, the two would see
+independent copies. This pass walks the syntax tree and marks each such
+local (and parameter that meets the same conditions) so the IL pass
+wraps it in a `Ghul.BOX[T]` cell - one heap-allocated holder that every
+party reads and writes through.
+
+That is the whole job of the pass. Generator and async functions are
+also state-machine-compiled so their locals survive `yield` or `await`,
+but that lowering is done by `generate-il`{:text} (with help from
+information attached by `declare-symbols`{:text} and the `spill-awaits`
+rewrite), not here.
 
 ### `compile-expressions`{:text}
 
@@ -215,11 +277,13 @@ body and:
 
 - works out the type of every expression and sub-expression;
 - resolves operator and method overloads;
-- runs type inference for unannotated locals, lambda parameters, list
-  literal element types, generic type arguments at call sites, and
-  generic constructors;
-- applies type narrowing through `isa` checks, `if let`, null tests and
-  variant tests;
+- runs type inference for unannotated locals, anonymous function
+  parameters and return types, list literal element types, generic type
+  arguments at call sites, and generic constructors;
+- applies flow-sensitive type narrowing through `isa` checks, `if let`,
+  null tests, variant tests, and divergent guards (where an early `return`
+  / `throw` / `break` / `continue` leaves the code below the guard narrowed
+  to the stronger type);
 - produces *IR values* that describe, for each expression, the sequence
   of IL operations it stands for.
 
@@ -233,10 +297,10 @@ visible from outside the function.
 
 A `let` that is assigned to after its initializer counts as a mutable
 variable but does not say so on its declaration. When the corresponding
-warning is enabled, this pass walks the AST and reports each one. It is
-structurally independent of `compile-expressions`{:text} but runs after
-it because it needs the assignment information that pass has already
-collected.
+warning is enabled, this pass walks the syntax tree and reports each
+local variable or parameter whose `is_reassigned` flag was set by the
+assignment handling in `compile-expressions`{:text}. Captured variables
+and explicit `let mut` declarations are skipped.
 
 ### `generate-il`{:text}
 
@@ -249,7 +313,7 @@ from the .NET SDK to assemble it into a `.dll`{:text} or `.exe`{:text}.
 
 A handful of data structures are visible across most of the passes.
 
-### the AST
+### the syntax tree
 
 The output of the parser and the working medium of every subsequent pass.
 Each `Node` subclass models one piece of syntax (a class definition, an
@@ -290,8 +354,8 @@ The hierarchy under `semantic/types/`{:text} is fairly small:
   primitive).
 - `GENERIC` - a generic type applied to type arguments, such as
   `List[int]`.
-- `FUNCTION` - a function type, used for first-class functions, lambdas,
-  and methods.
+- `FUNCTION` - a function type, used for first-class functions, anonymous
+  functions, and methods.
 - `TUPLE` - a tuple type, with optional element names.
 - `ARRAY` - a fixed array type.
 - `OPTION`, `ONE_OF`, `NONE`, `NULL` - optional and union variations.
@@ -341,9 +405,9 @@ The interesting work happens around two requests:
 
 - **`#EDIT#`{:text}** - sent on every keystroke (after a short debounce).
   Re-parses the file the user is editing and re-runs the early passes
-  over it, keeping the rest of the project's AST untouched. This is fast
-  enough to keep up with typing, and it is what produces the squiggles
-  and hovers that appear as the user types.
+  over it, keeping the rest of the project's syntax trees untouched.
+  This is fast enough to keep up with typing, and it is what produces the
+  squiggles and hovers that appear as the user types.
 - **`#COMPILE#`{:text}** - sent during a longer pause in typing. Runs the
   full pass sequence over the whole project so that any consequences of
   the edit ripple through the rest of the analysis.
@@ -351,8 +415,8 @@ The interesting work happens around two requests:
 This two-stage pattern keeps the typical-case latency low without
 sacrificing correctness once the user pauses. Hover information,
 go-to-definition, completions and signature help all come from the state
-these passes maintain: the symbol table, the scopes, the per-AST-node
-type annotations and the symbol-use map.
+these passes maintain: the symbol table, the scopes, the per-node type
+annotations and the symbol-use map.
 
 Two convenience requests, `#HOVERMAP#`{:text} and
 `#SEMANTICTOKENS#`{:text}, dump every recorded hover or every recorded
