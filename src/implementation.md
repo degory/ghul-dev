@@ -247,14 +247,6 @@ references. The closure compiler later uses that list to plumb those type
 parameters through the closure frame at runtime, so the closure can be
 invoked with the right instantiation.
 
-Despite the name, this pass does *not* collect a program-wide map of
-which generic types are instantiated with which type arguments. ghūl's
-preference for emitting generic IL references in their open-generic form
-(`!0` for the first class-level type parameter, `!!0` for the first
-method-level one) is established at IL-emit time, from the
-`unspecialized_*` fields on each function and field symbol; this pass is
-about closure plumbing, not the IL contract.
-
 ### `mark-boxed-locals`{:text}
 
 A `let mut` local that is both captured by an anonymous function and
