@@ -56,10 +56,11 @@ literal, …), their text and their source location.
 
 The parser in `syntax/parsers/`{:text} is a hand-written recursive-descent
 parser. Each grammar production has its own parser class implementing a
-small `Parser[T]` trait. Because the parsers refer to one another freely
-(an expression parser needs a statement parser, which in turn needs the
-expression parser), they are wired up through the IoC container so their
-references can be resolved lazily rather than via constructor arguments.
+small `Parser[T]` trait. The grammar is mutually recursive (an expression
+parser needs a statement parser which itself needs the expression
+parser), so the parser classes are too. The IoC container breaks the
+resulting cyclic constructor dependency by resolving each parser's
+references lazily.
 
 The output of the parser is a tree of `Node` subclasses defined in
 `syntax/trees/`{:text}. The nodes fall into four broad groups:
