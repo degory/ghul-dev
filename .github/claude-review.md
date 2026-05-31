@@ -51,8 +51,14 @@ Silence on a low-confidence finding is better than noise.
 
 A pure-CSS or workflow-only PR doesn't need prose scrutiny - skim, approve with a one-line summary if there's nothing to say.
 
+## versioning
+
+This repo isn't published as a versioned artefact - the site rebuilds from `main` on push. No semver applies; there is no `VERSION` file.
+
+`#minor` / `#major` markers in a PR body do nothing here (and do nothing in the published `degory/ghul` / `degory/ghul-runtime` / `degory/ghul-vsce` repos either, since those gate non-patch releases on a code-owned `VERSION` file instead). Don't add them. PRs to this repo carry no version implications - flag only if a PR body claims a version bump that wouldn't fire.
+
 ## posting mechanics - reminder
 
 - Inline: `mcp__github_inline_comment__create_inline_comment` with `confirmed: true`.
-- Verdict (exactly one, always): `gh pr review <N> --approve|--request-changes|--comment --body "..."`.
+- Verdict (exactly one, always): `gh pr review <N> --approve|--request-changes --body "..."`. Approve only when you've raised nothing the author should act on; otherwise request changes.
 - Chat output is invisible. If you didn't post it to GitHub, it didn't happen.
