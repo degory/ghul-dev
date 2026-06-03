@@ -1,8 +1,5 @@
-// >>>
-class THING is
-    init() is si // constructor
+class THING() is
 si
-// <<<
 
 entry() is
 // >>>

@@ -1,0 +1,13 @@
+use IO.Std.write_line;
+
+// >>>
+class PERSON(name: string, age: int) is
+    describe() is
+        write_line("{name} is {age} years old");
+    si
+si
+// <<<
+
+entry() is
+    PERSON("alice", 30).describe();
+si

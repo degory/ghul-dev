@@ -1,0 +1,23 @@
+use IO.Std.write_line;
+
+// >>>
+class POINT(x: int, y: int) is
+    // capture the primary parameters as renamed private fields
+    _x;
+    _y;
+
+    show() is
+        write_line("({_x}, {_y})");
+    si
+si
+
+class BOX(width: int public, height: int field, _depth: int) is
+    // width is a public read-write property
+    // height is a plain field
+    // _depth is a private field
+si
+// <<<
+
+entry() is
+    POINT(10, 20).show();
+si

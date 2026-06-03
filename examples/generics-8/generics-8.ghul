@@ -1,7 +1,7 @@
 use IO.Std.write_line;
 
 // >>>
-// T: out marks Box[T] as covariant in T — a Box[CAT] is also a Box[Animal]
+// T: out marks Box[T] as covariant in T - a Box[CAT] is also a Box[Animal]
 trait Box[T: out] is
     contents() -> T;
 si
@@ -11,13 +11,11 @@ trait Animal is
     speak() -> string;
 si
 
-class CAT: Animal is
-    init() is si
+class CAT(): Animal is
     speak() -> string => "meow";
 si
 
-class CAT_BOX: Box[CAT] is
-    init() is si
+class CAT_BOX(): Box[CAT] is
     contents() -> CAT => CAT();
 si
 

@@ -2,15 +2,11 @@ use IO.Std.write_line;
 
 class Animal is si
 
-class Cat: Animal is
-    name: string;
-    init(name: string) is self.name = name; si
+class Cat(name: string): Animal is
     purr() -> string => "{name} purrs";
 si
 
-class Dog: Animal is
-    name: string;
-    init(name: string) is self.name = name; si
+class Dog(name: string): Animal is
     bark() -> string => "{name} barks";
 si
 

@@ -1,9 +1,7 @@
-class Base is
-    init() is si
+class Base() is
 si
 
-class DERIVED: Base is
-    init() is super.init() si
+class DERIVED(): Base is
 si
 
 // >>>

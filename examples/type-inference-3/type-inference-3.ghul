@@ -1,11 +1,9 @@
 use IO.Std.write_line;
 
-class Animal is
-    init() is si
+class Animal() is
 si
 
-class Cat: Animal is
-    init() is super.init(); si
+class Cat(): Animal is
     purr() -> string => "purr";
 si
 

@@ -1,11 +1,6 @@
 // expect: error
 // >>>
-struct THING is
-    name: string;
-
-    init(name: string) is
-        self.name = name;
-    si
+struct THING(name: string) is
 si
 // <<<
 

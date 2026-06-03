@@ -1,10 +1,5 @@
 // >>>
-class THING[T] is
-    value: T;
-
-    init(value: T) is
-        self.value = value;
-    si
+class THING[T](value: T) is
 si
 // <<<
 

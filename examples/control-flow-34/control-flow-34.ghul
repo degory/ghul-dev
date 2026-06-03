@@ -1,8 +1,6 @@
 // >>>
-class InsufficientFundsException: System.Exception is
-    init(message: string) is
-        super.init(message);
-    si
+class InsufficientFundsException(message: string): System.Exception is
+    super(message);
 si
 // <<<
 
