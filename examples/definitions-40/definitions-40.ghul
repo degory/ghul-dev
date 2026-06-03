@@ -1,0 +1,11 @@
+// >>>
+// a primary header with no body declarations:
+class POINT(x: int, y: int);
+
+// is equivalent to an explicit empty 'is' / 'si' body:
+class VECTOR(dx: int, dy: int) is
+si
+// <<<
+
+entry() is
+si

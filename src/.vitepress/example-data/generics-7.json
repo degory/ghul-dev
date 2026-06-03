@@ -1,7 +1,7 @@
 {
   "name": "generics-7",
-  "code": "trait Greetable is\n    name: string;\nsi\n\n// T must derive from Greetable, so .name is available on T\ngreet[T: Greetable](x: T) is\n    write_line(\"hello, {x.name}\");\nsi\n\nclass CAT(name: string): Greetable is\nsi\ngreet(CAT(\"whiskers\"));",
-  "fullSource": "use IO.Std.write_line;\n\ntrait Greetable is\n    name: string;\nsi\n\n// T must derive from Greetable, so .name is available on T\ngreet[T: Greetable](x: T) is\n    write_line(\"hello, {x.name}\");\nsi\n\nclass CAT(name: string): Greetable is\nsi\n\nentry() is\n    greet(CAT(\"whiskers\"));\nsi\n",
+  "code": "trait Greetable is\n    name: string;\nsi\n\n// T must derive from Greetable, so .name is available on T\ngreet[T: Greetable](x: T) is\n    write_line(\"hello, {x.name}\");\nsi\n\nclass CAT(name: string): Greetable;\ngreet(CAT(\"whiskers\"));",
+  "fullSource": "use IO.Std.write_line;\n\ntrait Greetable is\n    name: string;\nsi\n\n// T must derive from Greetable, so .name is available on T\ngreet[T: Greetable](x: T) is\n    write_line(\"hello, {x.name}\");\nsi\n\nclass CAT(name: string): Greetable;\n\nentry() is\n    greet(CAT(\"whiskers\"));\nsi\n",
   "output": "hello, whiskers\n",
   "diagnostics": [],
   "hovers": [
@@ -15,14 +15,13 @@
     { "startLine": 6, "startColumn": 24, "endLine": 6, "endColumn": 24, "text": "T // type variable" },
     { "startLine": 10, "startColumn": 7, "endLine": 10, "endColumn": 9, "text": "class CAT" },
     { "startLine": 10, "startColumn": 11, "endLine": 10, "endColumn": 14, "text": "CAT.name: Ghul.string // instance property" },
-    { "startLine": 10, "startColumn": 1, "endLine": 11, "endColumn": 2, "text": "CAT.init(name: Ghul.string) // constructor" },
     { "startLine": 10, "startColumn": 26, "endLine": 10, "endColumn": 34, "text": "trait Greetable" },
     { "startLine": 10, "startColumn": 17, "endLine": 10, "endColumn": 22, "text": "class Ghul.string" },
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
     { "startLine": 7, "startColumn": 25, "endLine": 7, "endColumn": 25, "text": "x: T // local argument" },
     { "startLine": 7, "startColumn": 27, "endLine": 7, "endColumn": 30, "text": "Greetable.name: Ghul.string // instance property" },
-    { "startLine": 12, "startColumn": 1, "endLine": 12, "endColumn": 5, "text": "greet[CAT](x: CAT) -> Ghul.void // global function" },
-    { "startLine": 12, "startColumn": 7, "endLine": 12, "endColumn": 9, "text": "CAT.init(name: Ghul.string) // constructor" }
+    { "startLine": 11, "startColumn": 1, "endLine": 11, "endColumn": 5, "text": "greet[CAT](x: CAT) -> Ghul.void // global function" },
+    { "startLine": 11, "startColumn": 7, "endLine": 11, "endColumn": 9, "text": "CAT.init(name: Ghul.string) // constructor" }
   ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 15, "tokenType": "interface" },
@@ -40,7 +39,7 @@
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
     { "startLine": 7, "startColumn": 25, "endLine": 7, "endColumn": 25, "tokenType": "parameter", "modifiers": "readonly" },
     { "startLine": 7, "startColumn": 27, "endLine": 7, "endColumn": 30, "tokenType": "property" },
-    { "startLine": 12, "startColumn": 1, "endLine": 12, "endColumn": 5, "tokenType": "function" },
-    { "startLine": 12, "startColumn": 7, "endLine": 12, "endColumn": 9, "tokenType": "method" }
+    { "startLine": 11, "startColumn": 1, "endLine": 11, "endColumn": 5, "tokenType": "function" },
+    { "startLine": 11, "startColumn": 7, "endLine": 11, "endColumn": 9, "tokenType": "method" }
   ]
 }

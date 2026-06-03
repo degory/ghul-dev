@@ -1,7 +1,6 @@
 use IO.Std.write_line;
 
-class ANIMAL(name: string) is
-si
+class ANIMAL(name: string);
 
 // >>>
 class DOG(name: string, breed: string): ANIMAL is

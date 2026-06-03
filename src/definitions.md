@@ -162,6 +162,10 @@ A class with a primary header can also include a `super(...)` body declaration t
 
 <GhulExample name="definitions-39" />
 
+A class or struct with a primary header and no body declarations can end with a terminating `;` instead of `is ... si`:
+
+<GhulExample name="definitions-40" />
+
 The classic form is the better fit when the body owns extra fields or properties beyond what the primary parameters cover.
 
 ## namespaces

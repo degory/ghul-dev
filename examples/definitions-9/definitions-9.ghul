@@ -1,5 +1,4 @@
-class THING() is
-si
+class THING();
 
 entry() is
 // >>>

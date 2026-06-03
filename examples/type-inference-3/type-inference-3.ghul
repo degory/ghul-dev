@@ -1,7 +1,6 @@
 use IO.Std.write_line;
 
-class Animal() is
-si
+class Animal();
 
 class Cat(): Animal is
     purr() -> string => "purr";

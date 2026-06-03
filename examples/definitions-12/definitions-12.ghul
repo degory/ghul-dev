@@ -1,5 +1,4 @@
-struct POINT(x: double, y: double) is
-si
+struct POINT(x: double, y: double);
 
 entry() is
     let origin = POINT(0.0D, 0.0D);

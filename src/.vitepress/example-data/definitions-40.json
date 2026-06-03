@@ -1,0 +1,33 @@
+{
+  "name": "definitions-40",
+  "code": "// a primary header with no body declarations:\nclass POINT(x: int, y: int);\n\n// is equivalent to an explicit empty 'is' / 'si' body:\nclass VECTOR(dx: int, dy: int) is\nsi",
+  "fullSource": "// a primary header with no body declarations:\nclass POINT(x: int, y: int);\n\n// is equivalent to an explicit empty 'is' / 'si' body:\nclass VECTOR(dx: int, dy: int) is\nsi\n\nentry() is\nsi\n",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 11, "text": "class POINT" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 13, "text": "POINT.x: Ghul.int // instance property" },
+    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 21, "text": "POINT.y: Ghul.int // instance property" },
+    { "startLine": 2, "startColumn": 1, "endLine": 5, "endColumn": 5, "text": "POINT.init(x: Ghul.int, y: Ghul.int) // constructor" },
+    { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 18, "text": "struct Ghul.int" },
+    { "startLine": 2, "startColumn": 24, "endLine": 2, "endColumn": 26, "text": "struct Ghul.int" },
+    { "startLine": 5, "startColumn": 7, "endLine": 5, "endColumn": 12, "text": "class VECTOR" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 15, "text": "VECTOR.dx: Ghul.int // instance property" },
+    { "startLine": 5, "startColumn": 23, "endLine": 5, "endColumn": 24, "text": "VECTOR.dy: Ghul.int // instance property" },
+    { "startLine": 5, "startColumn": 1, "endLine": 6, "endColumn": 2, "text": "VECTOR.init(dx: Ghul.int, dy: Ghul.int) // constructor" },
+    { "startLine": 5, "startColumn": 18, "endLine": 5, "endColumn": 20, "text": "struct Ghul.int" },
+    { "startLine": 5, "startColumn": 27, "endLine": 5, "endColumn": 29, "text": "struct Ghul.int" }
+  ],
+  "semanticTokens": [
+    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 11, "tokenType": "class" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 13, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 21, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 18, "tokenType": "struct" },
+    { "startLine": 2, "startColumn": 24, "endLine": 2, "endColumn": 26, "tokenType": "struct" },
+    { "startLine": 5, "startColumn": 7, "endLine": 5, "endColumn": 12, "tokenType": "class" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 15, "tokenType": "property" },
+    { "startLine": 5, "startColumn": 23, "endLine": 5, "endColumn": 24, "tokenType": "property" },
+    { "startLine": 5, "startColumn": 18, "endLine": 5, "endColumn": 20, "tokenType": "struct" },
+    { "startLine": 5, "startColumn": 27, "endLine": 5, "endColumn": 29, "tokenType": "struct" }
+  ]
+}
