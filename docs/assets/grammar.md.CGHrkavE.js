@@ -45,13 +45,16 @@ import{_ as a,I as i,g as e,j as n}from"./chunks/framework.CbuNJfvM.js";const u=
 <span class="line"><span></span></span>
 <span class="line"><span>Use ::= &quot;use&quot; QualifiedIdentifier &quot;;&quot;</span></span>
 <span class="line"><span>      | &quot;use&quot; Identifier &quot;=&quot; QualifiedIdentifier &quot;;&quot;</span></span></code></pre></div><p>The second form of <code class="ghul-inline"><span style="--shiki-light:#267F99;--shiki-dark:#4EC9B0;">Use</span></code> introduces an alias for a namespace or symbol.</p><h3 id="class-trait-and-struct" tabindex="-1">class, trait and struct <a class="header-anchor" href="#class-trait-and-struct" aria-label="Permalink to &quot;class, trait and struct&quot;">​</a></h3><div class="language-ebnf vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">ebnf</span><pre class="shiki shiki-themes light-plus dark-plus vp-code" tabindex="0"><code><span class="line"><span>Class  ::= &quot;class&quot;  Identifier TypeParameters? PrimaryParameters? Ancestors? Modifiers</span></span>
-<span class="line"><span>           &quot;is&quot; ClassBodyDefinition* &quot;si&quot;</span></span>
+<span class="line"><span>           ClassyBody</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>Trait  ::= &quot;trait&quot;  Identifier TypeParameters? Ancestors? Modifiers</span></span>
 <span class="line"><span>           &quot;is&quot; Definition* &quot;si&quot;</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>Struct ::= &quot;struct&quot; Identifier TypeParameters? PrimaryParameters? Ancestors? Modifiers</span></span>
-<span class="line"><span>           &quot;is&quot; ClassBodyDefinition* &quot;si&quot;</span></span>
+<span class="line"><span>           ClassyBody</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>ClassyBody ::= &quot;is&quot; ClassBodyDefinition* &quot;si&quot;</span></span>
+<span class="line"><span>             | &quot;;&quot;           /* requires PrimaryParameters; equivalent to an empty \`is\` ... \`si\` body */</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>TypeParameters ::= &quot;[&quot; TypeParameter ( &quot;,&quot; TypeParameter )* &quot;]&quot;</span></span>
 <span class="line"><span>TypeParameter  ::= Identifier ( &quot;:&quot; TypeParameterConstraints )? Variance?</span></span>
