@@ -1,5 +1,6 @@
 // >>>
-struct POINT(x: double, y: double);
+struct POINT(x: double, y: double) is
+si
 // <<<
 
 entry() is
