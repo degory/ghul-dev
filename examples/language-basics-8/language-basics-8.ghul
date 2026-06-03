@@ -1,5 +1,5 @@
 entry() is
 // >>>
-    let numbers: int[];
+    let numbers: int[] = [1, 2, 3];
 // <<<
 si

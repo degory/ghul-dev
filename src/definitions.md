@@ -2,19 +2,19 @@
 
 ## variables
 
-In ghūl variables are introduced with the `let` keyword:
+In ghūl variables are introduced with the `let` keyword. Every local has an initializer, and the compiler infers the type from it:
 
 <GhulExample name="definitions-1" />
 
-The compiler will infer the type from the initializer, if there is one. If there is no initializer, then a type must be explicitly specified.
+An explicit type can be given alongside the initializer. The initializer must be assignment compatible with the type:
 
 <GhulExample name="definitions-2" />
 
-If both an initializer and a type are present, then the initializer must be assignment compatible with the type
+The explicit type can be wider than the initializer expression:
 
 <GhulExample name="definitions-3" />
 
-Multiple variables can be defined in the same `let` statement, including a mix of types and with or without initializers
+Multiple variables can be defined in the same `let` statement, with each variable either taking its type from its initializer or carrying an explicit one:
 
 <GhulExample name="definitions-4" />
 

@@ -1,8 +1,8 @@
 entry() is
 // >>>
     let
-        initialize_now = 123,
-        initialize_later: int,
-        why_are_we_doing_this = "I don't know";
+        an_inferred_int = 123,
+        an_explicit_int: int = 456,
+        a_string = "hello";
 // <<<
 si

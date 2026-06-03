@@ -1,19 +1,19 @@
 {
   "name": "definitions-4",
-  "code": "let\n    initialize_now = 123,\n    initialize_later: int,\n    why_are_we_doing_this = \"I don't know\";",
-  "fullSource": "entry() is\n    let\n        initialize_now = 123,\n        initialize_later: int,\n        why_are_we_doing_this = \"I don't know\";\nsi\n",
+  "code": "let\n    an_inferred_int = 123,\n    an_explicit_int: int = 456,\n    a_string = \"hello\";",
+  "fullSource": "entry() is\n    let\n        an_inferred_int = 123,\n        an_explicit_int: int = 456,\n        a_string = \"hello\";\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 18, "text": "initialize_now: Ghul.int // local value" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 20, "text": "initialize_later: Ghul.int // local value" },
-    { "startLine": 3, "startColumn": 23, "endLine": 3, "endColumn": 25, "text": "struct Ghul.int" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 25, "text": "why_are_we_doing_this: Ghul.string // local value" }
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 19, "text": "an_inferred_int: Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 19, "text": "an_explicit_int: Ghul.int // local value" },
+    { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 24, "text": "struct Ghul.int" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 12, "text": "a_string: Ghul.string // local value" }
   ],
   "semanticTokens": [
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 20, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 23, "endLine": 3, "endColumn": 25, "tokenType": "struct" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 25, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 24, "tokenType": "struct" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

@@ -119,11 +119,9 @@ ghūl has three kinds of variables: locals declared within the body of a functio
 
 ### locals
 
-Local variables are declared with `let` followed by the variable name, plus a type and/or an initializer.
+Local variables are declared with `let` followed by the variable name, an optional explicit type, and an initializer:
 
 <GhulExample name="language-basics-21" />
-
-Local variables with no explicit initializer are initialized to the default value for their type (zero, false, or null)
 
 ### arguments
 
@@ -139,7 +137,7 @@ Variables captured by a function literal will be covered with [function literals
 The scope of all variable definitions is from the point of declaration to the end of the innermost block that contains the declaration. Blocks will be covered later, but generally a block is a control flow statement or a function or method body.
 
 ### type inference and explicit types
-ghūl can infer the type of local variables from their initializer if present. It's a compile time error if a variable doesn't have either an explicit type or an initializer, or if an initializer is not assignment compatible with any explicit type.
+ghūl infers the type of a local variable from its initializer. An explicit type can be given alongside; it's a compile time error if the initializer is not assignment compatible with it.
 
 ## literals
 Literal expressions represent fixed values of a specific type.
