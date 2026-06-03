@@ -162,7 +162,7 @@ A class with a primary header can also include a `super(...)` body declaration t
 
 <GhulExample name="definitions-39" />
 
-A class or struct with a primary header and no body declarations may end with a terminating `;` instead of `is ... si`:
+A class or struct with a primary header and no body declarations can end with a terminating `;` instead of `is ... si`:
 
 <GhulExample name="definitions-10" />
 
