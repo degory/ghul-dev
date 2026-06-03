@@ -1,5 +1,4 @@
-class POINT(x: int, y: int) is
-si
+class POINT(x: int, y: int);
 
 entry() is
 // >>>

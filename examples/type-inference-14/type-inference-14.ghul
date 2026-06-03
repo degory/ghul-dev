@@ -1,8 +1,6 @@
-class Base() is
-si
+class Base();
 
-class DERIVED(): Base is
-si
+class DERIVED(): Base;
 
 // >>>
 do_something[T](a: T, b: T) -> T => a;

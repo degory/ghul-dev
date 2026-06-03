@@ -1,7 +1,7 @@
 {
   "name": "definitions-39",
   "code": "class DOG(name: string, breed: string): ANIMAL is\n    // forward name to the superclass; the local DOG keeps breed as a field\n    super(name);\n\n    init(.., trick: string) is\n        // .. expands to (name, breed); the primary init has already run\n        write_line(\"{name} the {breed} can {trick}\");\n    si\nsi",
-  "fullSource": "use IO.Std.write_line;\n\nclass ANIMAL(name: string) is\nsi\n\nclass DOG(name: string, breed: string): ANIMAL is\n    // forward name to the superclass; the local DOG keeps breed as a field\n    super(name);\n\n    init(.., trick: string) is\n        // .. expands to (name, breed); the primary init has already run\n        write_line(\"{name} the {breed} can {trick}\");\n    si\nsi\n\nentry() is\n    DOG(\"rex\", \"labrador\", \"sit\");\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\nclass ANIMAL(name: string);\n\nclass DOG(name: string, breed: string): ANIMAL is\n    // forward name to the superclass; the local DOG keeps breed as a field\n    super(name);\n\n    init(.., trick: string) is\n        // .. expands to (name, breed); the primary init has already run\n        write_line(\"{name} the {breed} can {trick}\");\n    si\nsi\n\nentry() is\n    DOG(\"rex\", \"labrador\", \"sit\");\nsi\n",
   "output": "rex the labrador can sit\n",
   "diagnostics": [],
   "hovers": [

@@ -1,14 +1,12 @@
 use IO.Std.write_line;
 
-class Animal() is
-si
+class Animal();
 
 class Cat(): Animal is
     purr() -> string => "purr";
 si
 
-class CARRIER(occupant: Animal) is
-si
+class CARRIER(occupant: Animal);
 
 // >>>
 describe(carrier: CARRIER) is

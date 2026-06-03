@@ -3,11 +3,9 @@ class Animal() is
     speak() -> string => "animal";
 si
 
-class Cat(): Animal is
-si
+class Cat(): Animal;
 
-class Dog(): Animal is
-si
+class Dog(): Animal;
 
 merge[T](a: T, b: T) -> T => a;
 // <<<

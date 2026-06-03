@@ -1,14 +1,13 @@
 {
   "name": "definitions-10",
-  "code": "struct POINT(x: double, y: double) is\nsi",
-  "fullSource": "struct POINT(x: double, y: double) is\nsi\n\nentry() is\nsi\n",
+  "code": "struct POINT(x: double, y: double);",
+  "fullSource": "struct POINT(x: double, y: double);\n\nentry() is\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 12, "text": "struct POINT" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "POINT.x: Ghul.double // instance property" },
     { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "text": "POINT.y: Ghul.double // instance property" },
-    { "startLine": 1, "startColumn": 1, "endLine": 2, "endColumn": 2, "text": "POINT.init(x: Ghul.double, y: Ghul.double) // constructor" },
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 22, "text": "struct Ghul.double" },
     { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 33, "text": "struct Ghul.double" }
   ],

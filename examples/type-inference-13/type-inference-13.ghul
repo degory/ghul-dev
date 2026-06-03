@@ -1,6 +1,5 @@
 // >>>
-class THING[T](value: T) is
-si
+class THING[T](value: T);
 // <<<
 
 entry() is

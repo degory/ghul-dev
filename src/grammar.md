@@ -187,13 +187,16 @@ The second form of `Use` introduces an alias for a namespace or symbol.
 
 ```ebnf
 Class  ::= "class"  Identifier TypeParameters? PrimaryParameters? Ancestors? Modifiers
-           "is" ClassBodyDefinition* "si"
+           ClassyBody
 
 Trait  ::= "trait"  Identifier TypeParameters? Ancestors? Modifiers
            "is" Definition* "si"
 
 Struct ::= "struct" Identifier TypeParameters? PrimaryParameters? Ancestors? Modifiers
-           "is" ClassBodyDefinition* "si"
+           ClassyBody
+
+ClassyBody ::= "is" ClassBodyDefinition* "si"
+             | ";"           /* requires PrimaryParameters; equivalent to an empty `is` ... `si` body */
 
 TypeParameters ::= "[" TypeParameter ( "," TypeParameter )* "]"
 TypeParameter  ::= Identifier ( ":" TypeParameterConstraints )? Variance?

@@ -1,7 +1,6 @@
 // expect: error
 // >>>
-struct THING(name: string) is
-si
+struct THING(name: string);
 // <<<
 
 entry() is

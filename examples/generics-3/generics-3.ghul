@@ -1,6 +1,5 @@
 // >>>
-struct HOLD_SOMETHING[T](value: T) is
-si
+struct HOLD_SOMETHING[T](value: T);
 // <<<
 
 entry() is

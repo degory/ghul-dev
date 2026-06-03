@@ -1,7 +1,7 @@
 {
   "name": "definitions-9",
   "code": "let a_thing = THING();",
-  "fullSource": "class THING() is\nsi\n\nentry() is\n    let a_thing = THING();\nsi\n",
+  "fullSource": "class THING();\n\nentry() is\n    let a_thing = THING();\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

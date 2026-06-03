@@ -61,7 +61,7 @@ Classes can only be defined at global scope. Classes can be generic, which will 
 
 ### structs
 
-Structs consist of a name, then the types of any traits implemented, and then the struct body again enclosed in `is` / `si`. A struct can also use the primary-constructor header form:
+Structs consist of a name, the types of any traits implemented, and the struct body. As with classes, a struct can use either the classic `init`-based form or a primary-constructor header:
 <GhulExample name="definitions-10" />
 
 Structs are constructed the same way as classes, with a constructor expression:
@@ -161,6 +161,10 @@ A body field or property declaration with a name matching the parameter (under t
 A class with a primary header can also include a `super(...)` body declaration that forwards expressions to its superclass `init`, and secondary `init(.., extras)` overloads. The `..` splice expands to the primary parameters; an implicit chain to the primary `init` runs before the secondary's body:
 
 <GhulExample name="definitions-39" />
+
+A class or struct with a primary header and no body declarations may end with a terminating `;` instead of `is ... si`:
+
+<GhulExample name="definitions-10" />
 
 The classic form is the better fit when the body owns extra fields or properties beyond what the primary parameters cover.
 
