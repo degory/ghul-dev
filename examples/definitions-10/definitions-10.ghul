@@ -1,12 +1,5 @@
 // >>>
-struct POINT is
-    x: double;
-    y: double;
-
-    init(x: double, y: double) is
-        self.x = x;
-        self.y = y;
-    si
+struct POINT(x: double, y: double) is
 si
 // <<<
 

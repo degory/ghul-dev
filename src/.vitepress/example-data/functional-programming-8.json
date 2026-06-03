@@ -1,37 +1,28 @@
 {
   "name": "functional-programming-8",
-  "code": "struct THING is\n    name: string;\n\n    init(name: string) is\n        self.name = name;\n    si\nsi\nlet thing = THING(\"a thing\");\n\nthing.name = \"change it\";",
-  "fullSource": "// expect: error\nstruct THING is\n    name: string;\n\n    init(name: string) is\n        self.name = name;\n    si\nsi\n\nentry() is\n    let thing = THING(\"a thing\");\n\n    thing.name = \"change it\";\nsi\n",
+  "code": "struct THING(name: string) is\nsi\nlet thing = THING(\"a thing\");\n\nthing.name = \"change it\";",
+  "fullSource": "// expect: error\nstruct THING(name: string) is\nsi\n\nentry() is\n    let thing = THING(\"a thing\");\n\n    thing.name = \"change it\";\nsi\n",
   "output": "",
   "diagnostics": [
-    { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 11, "severity": "error", "message": "THING.name: Ghul.string is not publicly assignable" }
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 11, "severity": "error", "message": "THING.name: Ghul.string is not publicly assignable" }
   ],
   "hovers": [
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 12, "text": "struct THING" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "THING.name: Ghul.string // instance property" },
-    { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 16, "text": "class Ghul.string" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 8, "text": "THING.init(name: Ghul.string) // constructor" },
-    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 13, "text": "name: Ghul.string // local argument" },
-    { "startLine": 4, "startColumn": 16, "endLine": 4, "endColumn": 21, "text": "class Ghul.string" },
-    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 9, "text": "thing: THING // local value" },
-    { "startLine": 8, "startColumn": 13, "endLine": 8, "endColumn": 17, "text": "THING.init(name: Ghul.string) // constructor" },
-    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 17, "text": "THING.name: Ghul.string // instance property" },
-    { "startLine": 5, "startColumn": 21, "endLine": 5, "endColumn": 24, "text": "name: Ghul.string // local argument" },
-    { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 5, "text": "thing: THING // local value" },
-    { "startLine": 10, "startColumn": 7, "endLine": 10, "endColumn": 10, "text": "THING.name: Ghul.string // instance property" }
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 17, "text": "THING.name: Ghul.string // instance property" },
+    { "startLine": 1, "startColumn": 1, "endLine": 2, "endColumn": 2, "text": "THING.init(name: Ghul.string) // constructor" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "text": "class Ghul.string" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "text": "thing: THING // local value" },
+    { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 17, "text": "THING.init(name: Ghul.string) // constructor" },
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 5, "text": "thing: THING // local value" },
+    { "startLine": 5, "startColumn": 7, "endLine": 5, "endColumn": 10, "text": "THING.name: Ghul.string // instance property" }
   ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 12, "tokenType": "struct" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "tokenType": "property" },
-    { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 16, "tokenType": "class" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 8, "tokenType": "method" },
-    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 13, "tokenType": "parameter", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 16, "endLine": 4, "endColumn": 21, "tokenType": "class" },
-    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 8, "startColumn": 13, "endLine": 8, "endColumn": 17, "tokenType": "method" },
-    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 17, "tokenType": "property" },
-    { "startLine": 5, "startColumn": 21, "endLine": 5, "endColumn": 24, "tokenType": "parameter", "modifiers": "readonly" },
-    { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 10, "startColumn": 7, "endLine": 10, "endColumn": 10, "tokenType": "property" }
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 17, "tokenType": "property" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 17, "tokenType": "method" },
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 7, "endLine": 5, "endColumn": 10, "tokenType": "property" }
   ]
 }

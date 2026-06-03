@@ -1,0 +1,30 @@
+{
+  "name": "definitions-37",
+  "code": "class PERSON(name: string, age: int) is\n    describe() is\n        write_line(\"{name} is {age} years old\");\n    si\nsi",
+  "fullSource": "use IO.Std.write_line;\n\nclass PERSON(name: string, age: int) is\n    describe() is\n        write_line(\"{name} is {age} years old\");\n    si\nsi\n\nentry() is\n    PERSON(\"alice\", 30).describe();\nsi\n",
+  "output": "alice is 30 years old\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "text": "class PERSON" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 17, "text": "PERSON.name: Ghul.string // instance property" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 30, "text": "PERSON.age: Ghul.int // instance property" },
+    { "startLine": 1, "startColumn": 1, "endLine": 5, "endColumn": 2, "text": "PERSON.init(name: Ghul.string, age: Ghul.int) // constructor" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "text": "class Ghul.string" },
+    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 35, "text": "struct Ghul.int" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "PERSON.describe() -> Ghul.void // method" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 18, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 25, "text": "PERSON.name: Ghul.string // instance property" },
+    { "startLine": 3, "startColumn": 32, "endLine": 3, "endColumn": 34, "text": "PERSON.age: Ghul.int // instance property" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 17, "tokenType": "property" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 30, "tokenType": "property" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 35, "tokenType": "struct" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "tokenType": "method" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 18, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 25, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 32, "endLine": 3, "endColumn": 34, "tokenType": "property" }
+  ]
+}

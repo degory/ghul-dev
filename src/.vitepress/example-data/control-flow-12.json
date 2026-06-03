@@ -1,7 +1,7 @@
 {
   "name": "control-flow-12",
   "code": "let c = cast Cat(a);\n\nif c? then\n    write_line(c.purr());\nfi",
-  "fullSource": "use IO.Std.write_line;\n\nclass Animal is si\n\nclass Cat: Animal is\n    name: string;\n    init(name: string) is self.name = name; si\n    purr() -> string => \"{name} purrs\";\nsi\n\nentry() is\n    let a: Animal = Cat(\"whiskers\");\n    let c = cast Cat(a);\n\n    if c? then\n        write_line(c.purr());\n    fi\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\nclass Animal is si\n\nclass Cat(name: string): Animal is\n    purr() -> string => \"{name} purrs\";\nsi\n\nentry() is\n    let a: Animal = Cat(\"whiskers\");\n    let c = cast Cat(a);\n\n    if c? then\n        write_line(c.purr());\n    fi\nsi\n",
   "output": "whiskers purrs\n",
   "diagnostics": [],
   "hovers": [

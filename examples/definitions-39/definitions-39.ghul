@@ -1,0 +1,20 @@
+use IO.Std.write_line;
+
+class ANIMAL(name: string) is
+si
+
+// >>>
+class DOG(name: string, breed: string): ANIMAL is
+    // forward name to the superclass; the local DOG keeps breed as a field
+    super(name);
+
+    init(.., trick: string) is
+        // .. expands to (name, breed); the primary init has already run
+        write_line("{name} the {breed} can {trick}");
+    si
+si
+// <<<
+
+entry() is
+    DOG("rex", "labrador", "sit");
+si

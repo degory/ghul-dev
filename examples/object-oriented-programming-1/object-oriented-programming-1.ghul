@@ -110,27 +110,19 @@ class CALCULATOR[T] is
     si
 si
 
-class INTEGER_ADDITION: Operation[int] is
-    init() is si
-
+class INTEGER_ADDITION(): Operation[int] is
     execute(left: int, right: int) -> int => left + right;
 si
 
-class INTEGER_SUBTRACTION: Operation[int] is
-    init() is si
-
+class INTEGER_SUBTRACTION(): Operation[int] is
     execute(left: int, right: int) -> int => left - right;
 si
 
-class INTEGER_MULTIPLICATION: Operation[int] is
-    init() is si
-
+class INTEGER_MULTIPLICATION(): Operation[int] is
     execute(left: int, right: int) -> int => left * right;
 si
 
-class INTEGER_DIVISION: Operation[int] is
-    init() is si
-
+class INTEGER_DIVISION(): Operation[int] is
     execute(left: int, right: int) -> int =>
         if right == 0 then
             throw System.InvalidOperationException(
@@ -141,16 +133,12 @@ class INTEGER_DIVISION: Operation[int] is
         fi;
 si
 
-class STRING_CONCATENATION: Operation[string] is
-    init() is si
-
+class STRING_CONCATENATION(): Operation[string] is
     execute(left: string, right: string) -> string =>
         "{left}{right}";
 si
 
-class STRING_SUBTRACTION: Operation[string] is
-    init() is si
-
+class STRING_SUBTRACTION(): Operation[string] is
     execute(left: string, right: string) -> string =>
         left.replace(right, "");
 si

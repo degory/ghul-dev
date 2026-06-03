@@ -1,7 +1,7 @@
 {
   "name": "language-basics-21",
-  "code": "let i = 1234;\nlet j: int;\nlet k: int = 5678;",
-  "fullSource": "entry() is\n    let i = 1234;\n    let j: int;\n    let k: int = 5678;\nsi\n",
+  "code": "let i = 1234;\nlet j: int = 0;\nlet k: int = 5678;",
+  "fullSource": "entry() is\n    let i = 1234;\n    let j: int = 0;\n    let k: int = 5678;\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

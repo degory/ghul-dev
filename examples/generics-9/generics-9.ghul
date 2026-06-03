@@ -5,9 +5,7 @@ use IO.Std.write_line;
 echo[T: new](x: T) -> T => x;
 // <<<
 
-class WIDGET is
-    init() is si
-
+class WIDGET() is
     describe() -> string => "a widget";
 si
 

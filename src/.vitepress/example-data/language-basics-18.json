@@ -4,8 +4,8 @@
   "fullSource": "// expect: warning\nlookup() -> string? => null;\n\nentry() is\n    let label: string = null;\n\n    let maybe = lookup();\n\n    let title: string = maybe;\nsi\n",
   "output": "",
   "diagnostics": [
-    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 25, "severity": "warning", "message": "null where a non-optional Ghul.string is expected" },
-    { "startLine": 5, "startColumn": 21, "endLine": 5, "endColumn": 26, "severity": "warning", "message": "maybe may not hold a value, but a non-optional Ghul.string is expected" }
+    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 25, "severity": "warning", "message": "[non-optional] null where non-optional Ghul.string expected" },
+    { "startLine": 5, "startColumn": 21, "endLine": 5, "endColumn": 26, "severity": "warning", "message": "[non-optional] Ghul.string expected but maybe may not hold a value" }
   ],
   "hovers": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "label: Ghul.string // local value" },

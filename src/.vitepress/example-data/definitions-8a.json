@@ -1,0 +1,22 @@
+{
+  "name": "definitions-8a",
+  "code": "class POINT(x: int, y: int) is\nsi",
+  "fullSource": "class POINT(x: int, y: int) is\nsi\n\nentry() is\nsi\n",
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "text": "class POINT" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "text": "POINT.x: Ghul.int // instance property" },
+    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 21, "text": "POINT.y: Ghul.int // instance property" },
+    { "startLine": 1, "startColumn": 1, "endLine": 2, "endColumn": 2, "text": "POINT.init(x: Ghul.int, y: Ghul.int) // constructor" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 18, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 26, "text": "struct Ghul.int" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "tokenType": "property" },
+    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 21, "tokenType": "property" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 18, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 26, "tokenType": "struct" }
+  ]
+}

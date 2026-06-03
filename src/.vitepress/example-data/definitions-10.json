@@ -1,39 +1,22 @@
 {
   "name": "definitions-10",
-  "code": "struct POINT is\n    x: double;\n    y: double;\n\n    init(x: double, y: double) is\n        self.x = x;\n        self.y = y;\n    si\nsi",
-  "fullSource": "struct POINT is\n    x: double;\n    y: double;\n\n    init(x: double, y: double) is\n        self.x = x;\n        self.y = y;\n    si\nsi\n\nentry() is\nsi\n",
+  "code": "struct POINT(x: double, y: double) is\nsi",
+  "fullSource": "struct POINT(x: double, y: double) is\nsi\n\nentry() is\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 12, "text": "struct POINT" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "POINT.x: Ghul.double // instance property" },
-    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 13, "text": "struct Ghul.double" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "POINT.y: Ghul.double // instance property" },
-    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 13, "text": "struct Ghul.double" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 8, "text": "POINT.init(x: Ghul.double, y: Ghul.double) // constructor" },
-    { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 10, "text": "x: Ghul.double // local argument" },
-    { "startLine": 5, "startColumn": 21, "endLine": 5, "endColumn": 21, "text": "y: Ghul.double // local argument" },
-    { "startLine": 5, "startColumn": 13, "endLine": 5, "endColumn": 18, "text": "struct Ghul.double" },
-    { "startLine": 5, "startColumn": 24, "endLine": 5, "endColumn": 29, "text": "struct Ghul.double" },
-    { "startLine": 6, "startColumn": 14, "endLine": 6, "endColumn": 14, "text": "POINT.x: Ghul.double // instance property" },
-    { "startLine": 6, "startColumn": 18, "endLine": 6, "endColumn": 18, "text": "x: Ghul.double // local argument" },
-    { "startLine": 7, "startColumn": 14, "endLine": 7, "endColumn": 14, "text": "POINT.y: Ghul.double // instance property" },
-    { "startLine": 7, "startColumn": 18, "endLine": 7, "endColumn": 18, "text": "y: Ghul.double // local argument" }
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "POINT.x: Ghul.double // instance property" },
+    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "text": "POINT.y: Ghul.double // instance property" },
+    { "startLine": 1, "startColumn": 1, "endLine": 2, "endColumn": 2, "text": "POINT.init(x: Ghul.double, y: Ghul.double) // constructor" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 22, "text": "struct Ghul.double" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 33, "text": "struct Ghul.double" }
   ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 12, "tokenType": "struct" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "tokenType": "property" },
-    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 13, "tokenType": "struct" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "tokenType": "property" },
-    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 13, "tokenType": "struct" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 8, "tokenType": "method" },
-    { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 10, "tokenType": "parameter", "modifiers": "readonly" },
-    { "startLine": 5, "startColumn": 21, "endLine": 5, "endColumn": 21, "tokenType": "parameter", "modifiers": "readonly" },
-    { "startLine": 5, "startColumn": 13, "endLine": 5, "endColumn": 18, "tokenType": "struct" },
-    { "startLine": 5, "startColumn": 24, "endLine": 5, "endColumn": 29, "tokenType": "struct" },
-    { "startLine": 6, "startColumn": 14, "endLine": 6, "endColumn": 14, "tokenType": "property" },
-    { "startLine": 6, "startColumn": 18, "endLine": 6, "endColumn": 18, "tokenType": "parameter", "modifiers": "readonly" },
-    { "startLine": 7, "startColumn": 14, "endLine": 7, "endColumn": 14, "tokenType": "property" },
-    { "startLine": 7, "startColumn": 18, "endLine": 7, "endColumn": 18, "tokenType": "parameter", "modifiers": "readonly" }
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "tokenType": "property" },
+    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "tokenType": "property" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 22, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 33, "tokenType": "struct" }
   ]
 }

@@ -9,9 +9,7 @@ si
 
 class Animal is si
 
-class Cat: Animal is
-    name: string;
-    init(name: string) is self.name = name; si
+class Cat(name: string): Animal is
     purr() -> string => "{name} purrs";
 si
 

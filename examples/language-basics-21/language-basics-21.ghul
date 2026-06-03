@@ -1,7 +1,7 @@
 entry() is
 // >>>
     let i = 1234;
-    let j: int;
+    let j: int = 0;
     let k: int = 5678;
 // <<<
 si

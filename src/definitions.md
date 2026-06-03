@@ -2,19 +2,19 @@
 
 ## variables
 
-In ghūl variables are introduced with the `let` keyword:
+In ghūl variables are introduced with the `let` keyword. Every local has an initializer, and the compiler infers the type from it:
 
 <GhulExample name="definitions-1" />
 
-The compiler will infer the type from the initializer, if there is one. If there is no initializer, then a type must be explicitly specified.
+An explicit type can be given alongside the initializer. The initializer must be assignment compatible with the type:
 
 <GhulExample name="definitions-2" />
 
-If both an initializer and a type are present, then the initializer must be assignment compatible with the type
+The explicit type can be wider than the initializer expression:
 
 <GhulExample name="definitions-3" />
 
-Multiple variables can be defined in the same `let` statement, including a mix of types and with or without initializers
+Multiple variables can be defined in the same `let` statement, with each variable either taking its type from its initializer or carrying an explicit one:
 
 <GhulExample name="definitions-4" />
 
@@ -49,14 +49,19 @@ Classes consist of a name optionally followed by a superclass name and the types
 
 A class defines a new reference type, instances of which are assignment compatible with its superclass type and any traits it implements.
 
-Instances of classes are created via a constructor expression, which consists of a type expression followed by a parenthesis delimited list of actual constructor arguments. For a class, the type expression is simply the class name, qualified with any namespaces if needed:
+Instances of classes are created via a constructor expression, which consists of a type expression followed by a parenthesis delimited list of actual constructor arguments. For a class, the type expression is the class name, qualified with any namespaces if needed:
 <GhulExample name="definitions-9" />
+
+A class can also declare its constructor parameters directly in the header. Each parameter becomes a parameter of the synthesised constructor, and an auto-generated same-named field or property holds the supplied value:
+<GhulExample name="definitions-8a" />
+
+The two forms are equivalent. The primary form is the shorter shape when every field is initialized from a constructor argument; the classic form is the better fit when the body owns extra fields or properties beyond what the constructor takes. See [constructors](#constructors) for the rest of the primary-constructor surface area.
 
 Classes can only be defined at global scope. Classes can be generic, which will be covered later. Concrete class names should be in `MACRO_CASE`. Abstract class names should be in `PascalCase`.
 
 ### structs
 
-Structs consist of a name, then the types of any traits implemented, and then the struct body again enclosed in `is` / `si`:
+Structs consist of a name, then the types of any traits implemented, and then the struct body again enclosed in `is` / `si`. A struct can also use the primary-constructor header form:
 <GhulExample name="definitions-10" />
 
 Structs are constructed the same way as classes, with a constructor expression:
@@ -130,11 +135,34 @@ As with functions, methods should be named in `snake_case`
 
 ## constructors
 
-In ghūl methods named `init` are constructors. When an object is constructed using a constructor expression, the corresponding `init` method overload will be called based on the actual argument types
+In ghūl methods named `init` are constructors. When an object is constructed using a constructor expression, the corresponding `init` method overload will be called based on the actual argument types:
 
 <GhulExample name="definitions-23" />
 
-Constructors can be defined in classes and structs
+Constructors can be defined in classes and structs.
+
+### primary constructors
+
+When the constructor only assigns its arguments to same-named fields, the class or struct header can declare those parameters directly. The compiler synthesises the matching `init` and a same-named field or property for each parameter:
+
+<GhulExample name="definitions-37" />
+
+A trailing modifier on a primary parameter overrides the default visibility:
+
+- `x: int public` - public read and write.
+- `x: int field` - plain field rather than the default auto-property.
+- `_x: int` - private field, named `_x`.
+- `x: int init` - no field is generated; `x` is in scope only inside `init`.
+
+A body field or property declaration with a name matching the parameter (under the same `_x`/`x` rule) overrides auto-generation and receives the auto-init copy. This is also how to rename the underlying storage without using the modifier suffix:
+
+<GhulExample name="definitions-38" />
+
+A class with a primary header can also include a `super(...)` body declaration that forwards expressions to its superclass `init`, and secondary `init(.., extras)` overloads. The `..` splice expands to the primary parameters; an implicit chain to the primary `init` runs before the secondary's body:
+
+<GhulExample name="definitions-39" />
+
+The classic form is the better fit when the body owns extra fields or properties beyond what the primary parameters cover.
 
 ## namespaces
 

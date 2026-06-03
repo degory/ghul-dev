@@ -6,11 +6,9 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 19, "text": "struct Ghul.int" },
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "text": "print_something[T](t: T) -> Ghul.void // global function" },
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 21, "text": "print_something[Ghul.int](t: Ghul.int) -> Ghul.void // global function" },
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "text": "print_something[Ghul.int](t: Ghul.int) -> Ghul.void // global function" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 22, "text": "class Ghul.string" },
-    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "text": "print_something[T](t: T) -> Ghul.void // global function" },
-    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 24, "text": "print_something[Ghul.string](t: Ghul.string) -> Ghul.void // global function" }
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "text": "print_something[Ghul.string](t: Ghul.string) -> Ghul.void // global function" }
   ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 19, "tokenType": "struct" },

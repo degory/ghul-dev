@@ -1,9 +1,4 @@
-struct HOLD_SOMETHING[T] is
-    value: T;
-
-    init(value: T) is
-        self.value = value;
-    si
+struct HOLD_SOMETHING[T](value: T) is
 si
 
 entry() is

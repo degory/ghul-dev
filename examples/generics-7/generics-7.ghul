@@ -10,9 +10,7 @@ greet[T: Greetable](x: T) is
     write_line("hello, {x.name}");
 si
 
-class CAT: Greetable is
-    name: string;
-    init(name: string) is self.name = name; si
+class CAT(name: string): Greetable is
 si
 // <<<
 

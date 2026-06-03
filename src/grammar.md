@@ -186,14 +186,14 @@ The second form of `Use` introduces an alias for a namespace or symbol.
 ### class, trait and struct
 
 ```ebnf
-Class  ::= "class"  Identifier TypeParameters? Ancestors? Modifiers
-           "is" Definition* "si"
+Class  ::= "class"  Identifier TypeParameters? PrimaryParameters? Ancestors? Modifiers
+           "is" ClassBodyDefinition* "si"
 
 Trait  ::= "trait"  Identifier TypeParameters? Ancestors? Modifiers
            "is" Definition* "si"
 
-Struct ::= "struct" Identifier TypeParameters? Ancestors? Modifiers
-           "is" Definition* "si"
+Struct ::= "struct" Identifier TypeParameters? PrimaryParameters? Ancestors? Modifiers
+           "is" ClassBodyDefinition* "si"
 
 TypeParameters ::= "[" TypeParameter ( "," TypeParameter )* "]"
 TypeParameter  ::= Identifier ( ":" TypeParameterConstraints )? Variance?
@@ -205,11 +205,22 @@ KindConstraint ::= "class" | "struct" | "optional"
 Variance       ::= "out" | "in"
 
 Ancestors ::= ":" TypeList
+
+PrimaryParameters     ::= "(" PrimaryParameter ( "," PrimaryParameter )* ")"
+PrimaryParameter      ::= Identifier ":" TypeExpression PrimaryParamModifier?
+PrimaryParamModifier  ::= "public" | "field" | "init"
+
+ClassBodyDefinition ::= Definition | SuperCallDeclaration
+SuperCallDeclaration ::= "super" "(" ExpressionList? ")" ";"
 ```
 
 `Ancestors` lists the base class and/or implemented traits.
 
-A type parameter may carry a *type bound* (which the actual type argument must derive from), a *kind constraint* (`class` / `struct` / `optional`), a *constructor constraint* (`new`), and on a trait a *variance* modifier (`out` for covariant, `in` for contravariant) — in that order. Only a single type bound per parameter is currently supported. Variance is only legal on a trait's type parameters.
+A type parameter has zero or more constraints: a *type bound* (which the actual type argument must derive from), a *kind constraint* (`class` / `struct` / `optional`), a *constructor constraint* (`new`), and on a trait a *variance* modifier (`out` for covariant, `in` for contravariant) - in that order. Only a single type bound per parameter is currently supported. Variance is only legal on a trait's type parameters.
+
+`PrimaryParameters` declare a class or struct's primary constructor inline. Each parameter becomes a parameter of the synthesised `init` and an auto-generated field or property of the same name and declared type. A trailing modifier on a parameter overrides the default visibility - `public` for a public read-write property, `field` for a plain field, `init` to suppress field generation. A parameter named `_x` produces a private field; a body field or property declaration matching the parameter (under the same `_x`/`x` rule) overrides auto-generation.
+
+A `SuperCallDeclaration` is a class-body shorthand for calling the superclass `init` with the given expressions. Each expression resolves with the primary parameters in scope. Primary parameters consumed by `super(...)` are excluded from auto-generation. A secondary `init(.., extras)` overload uses `..` to splice the primary parameters into its argument list; an implicit chain to the primary `init` runs before the secondary's body.
 
 ### union
 

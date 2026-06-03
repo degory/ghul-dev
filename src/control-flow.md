@@ -191,7 +191,7 @@ The block statement body of the do statement, delimited by `do` and `od` forms a
 
 ### scope
 
-Each arm of the case statement, delimited by either a `when` clause or `default` forms a separate scope for local variable definitions.
+Each arm of the case statement, delimited by either a `when` clause or `else`, forms a separate scope for local variable definitions.
 
 
 ## throw statement

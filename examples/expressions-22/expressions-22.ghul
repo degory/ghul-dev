@@ -1,11 +1,4 @@
-class POINT is
-    x: int;
-    y: int;
-
-    init(x: int, y: int) is
-        self.x = x;
-        self.y = y;
-    si
+class POINT(x: int, y: int) is
 si
 
 entry() is

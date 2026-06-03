@@ -1,19 +1,15 @@
 {
   "name": "definitions-9",
-  "code": "class THING is\n    init() is si // constructor\nsi\nlet a_thing = THING();",
-  "fullSource": "class THING is\n    init() is si // constructor\nsi\n\nentry() is\n    let a_thing = THING();\nsi\n",
+  "code": "let a_thing = THING();",
+  "fullSource": "class THING() is\nsi\n\nentry() is\n    let a_thing = THING();\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "text": "class THING" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "THING.init() // constructor" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "text": "a_thing: THING // local value" },
-    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 19, "text": "THING.init() // constructor" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "a_thing: THING // local value" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 19, "text": "THING.init() // constructor" }
   ],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "tokenType": "class" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "tokenType": "method" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 19, "tokenType": "method" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 19, "tokenType": "method" }
   ]
 }

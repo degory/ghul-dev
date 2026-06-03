@@ -8,7 +8,7 @@
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "text": "union Result" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "T // type variable" },
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "text": "E // type variable" },
-    { "startLine": 1, "startColumn": 1, "endLine": 4, "endColumn": 2, "text": "System.Exception.init(message: Ghul.string) -> Ghul.void // method" },
+    { "startLine": 1, "startColumn": 1, "endLine": 4, "endColumn": 2, "text": "Ghul./\\(a: Ghul.bool, b: Ghul.bool) -> Ghul.bool // innate function bool.and_then" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 6, "text": "variant Result.OK(value: T)" },
     { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 12, "text": "Result.OK.value: T // variant field" },
     { "startLine": 2, "startColumn": 5, "endLine": 3, "endColumn": 7, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },
