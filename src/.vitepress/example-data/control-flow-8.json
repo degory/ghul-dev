@@ -1,7 +1,7 @@
 {
   "name": "control-flow-8",
   "code": "union Maybe[T] is\n    YES(value: T);\n    NO;\nsi\nlet m: Maybe[int] = Maybe.YES(42);\n\nif isa Maybe.YES(m) then\n    // m is narrowed to Maybe.YES inside the branch,\n    // so m.value is in scope\n    write_line(\"got value {m.value}\");\nfi\n\nlet a: Animal = Cat(\"whiskers\");\nif isa Cat(a) then\n    // a is narrowed to Cat inside the branch\n    write_line(a.purr());\nfi",
-  "fullSource": "use IO.Std.write_line;\n\nunion Maybe[T] is\n    YES(value: T);\n    NO;\nsi\n\nclass Animal is si\n\nclass Cat: Animal is\n    name: string;\n    init(name: string) is self.name = name; si\n    purr() -> string => \"{name} purrs\";\nsi\n\nentry() is\n    let m: Maybe[int] = Maybe.YES(42);\n\n    if isa Maybe.YES(m) then\n        // m is narrowed to Maybe.YES inside the branch,\n        // so m.value is in scope\n        write_line(\"got value {m.value}\");\n    fi\n\n    let a: Animal = Cat(\"whiskers\");\n    if isa Cat(a) then\n        // a is narrowed to Cat inside the branch\n        write_line(a.purr());\n    fi\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\nunion Maybe[T] is\n    YES(value: T);\n    NO;\nsi\n\nclass Animal is si\n\nclass Cat(name: string): Animal is\n    purr() -> string => \"{name} purrs\";\nsi\n\nentry() is\n    let m: Maybe[int] = Maybe.YES(42);\n\n    if isa Maybe.YES(m) then\n        // m is narrowed to Maybe.YES inside the branch,\n        // so m.value is in scope\n        write_line(\"got value {m.value}\");\n    fi\n\n    let a: Animal = Cat(\"whiskers\");\n    if isa Cat(a) then\n        // a is narrowed to Cat inside the branch\n        write_line(a.purr());\n    fi\nsi\n",
   "output": "got value 42\nwhiskers purrs\n",
   "diagnostics": [],
   "hovers": [

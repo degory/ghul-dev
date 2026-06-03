@@ -6,7 +6,7 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "text": "union Shape" },
-    { "startLine": 1, "startColumn": 1, "endLine": 4, "endColumn": 2, "text": "System.Exception.init(message: Ghul.string) -> Ghul.void // method" },
+    { "startLine": 1, "startColumn": 1, "endLine": 4, "endColumn": 2, "text": "Ghul./\\(a: Ghul.bool, b: Ghul.bool) -> Ghul.bool // innate function bool.and_then" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "variant Shape.CIRCLE(radius: Ghul.double)" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 17, "text": "Shape.CIRCLE.radius: Ghul.double // variant field" },
     { "startLine": 2, "startColumn": 5, "endLine": 3, "endColumn": 10, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },
@@ -27,7 +27,7 @@
     { "startLine": 11, "startColumn": 7, "endLine": 11, "endColumn": 12, "text": "union Result" },
     { "startLine": 11, "startColumn": 14, "endLine": 11, "endColumn": 14, "text": "T // type variable" },
     { "startLine": 11, "startColumn": 17, "endLine": 11, "endColumn": 17, "text": "E // type variable" },
-    { "startLine": 11, "startColumn": 1, "endLine": 14, "endColumn": 2, "text": "System.Exception.init(message: Ghul.string) -> Ghul.void // method" },
+    { "startLine": 11, "startColumn": 1, "endLine": 14, "endColumn": 2, "text": "Ghul./\\(a: Ghul.bool, b: Ghul.bool) -> Ghul.bool // innate function bool.and_then" },
     { "startLine": 12, "startColumn": 5, "endLine": 12, "endColumn": 6, "text": "variant Result.OK(value: T)" },
     { "startLine": 12, "startColumn": 8, "endLine": 12, "endColumn": 12, "text": "Result.OK.value: T // variant field" },
     { "startLine": 12, "startColumn": 5, "endLine": 13, "endColumn": 9, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },

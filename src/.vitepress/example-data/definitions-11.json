@@ -1,7 +1,7 @@
 {
   "name": "definitions-11",
   "code": "let origin = POINT(0.0D, 0.0D);\n\n// or up, or down, or even left, depending on\n// your co-ordinate system!\nlet right = POINT(1.0D, 0.0D);",
-  "fullSource": "struct POINT is\n    x: double;\n    y: double;\n\n    init(x: double, y: double) is\n        self.x = x;\n        self.y = y;\n    si\nsi\n\nentry() is\n    let origin = POINT(0.0D, 0.0D);\n\n    // or up, or down, or even left, depending on\n    // your co-ordinate system!\n    let right = POINT(1.0D, 0.0D);\nsi\n",
+  "fullSource": "struct POINT(x: double, y: double) is\nsi\n\nentry() is\n    let origin = POINT(0.0D, 0.0D);\n\n    // or up, or down, or even left, depending on\n    // your co-ordinate system!\n    let right = POINT(1.0D, 0.0D);\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

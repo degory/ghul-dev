@@ -1,37 +1,28 @@
 {
   "name": "type-inference-13",
-  "code": "class THING[T] is\n    value: T;\n\n    init(value: T) is\n        self.value = value;\n    si\nsi\nlet int_thing = THING(1234);\nlet string_thing = THING(\"hello\");",
-  "fullSource": "class THING[T] is\n    value: T;\n\n    init(value: T) is\n        self.value = value;\n    si\nsi\n\nentry() is\n    let int_thing = THING(1234);\n    let string_thing = THING(\"hello\");\nsi\n",
+  "code": "class THING[T](value: T) is\nsi\nlet int_thing = THING(1234);\nlet string_thing = THING(\"hello\");",
+  "fullSource": "class THING[T](value: T) is\nsi\n\nentry() is\n    let int_thing = THING(1234);\n    let string_thing = THING(\"hello\");\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "text": "class THING" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "text": "T // type variable" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "THING.value: T // instance property" },
-    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 12, "text": "T // type variable" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 8, "text": "THING.init(value: T) // constructor" },
-    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 14, "text": "value: T // local argument" },
-    { "startLine": 4, "startColumn": 17, "endLine": 4, "endColumn": 17, "text": "T // type variable" },
-    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 13, "text": "int_thing: THING[Ghul.int] // local value" },
-    { "startLine": 8, "startColumn": 17, "endLine": 8, "endColumn": 21, "text": "THING[Ghul.int].init(value: Ghul.int) // constructor" },
-    { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 16, "text": "string_thing: THING[Ghul.string] // local value" },
-    { "startLine": 9, "startColumn": 20, "endLine": 9, "endColumn": 24, "text": "THING[Ghul.string].init(value: Ghul.string) // constructor" },
-    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 18, "text": "THING.value: T // instance property" },
-    { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 26, "text": "value: T // local argument" }
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 20, "text": "THING.value: T // instance property" },
+    { "startLine": 1, "startColumn": 1, "endLine": 2, "endColumn": 2, "text": "THING.init(value: T) // constructor" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "text": "T // type variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 13, "text": "int_thing: THING[Ghul.int] // local value" },
+    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 21, "text": "THING[Ghul.int].init(value: Ghul.int) // constructor" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 16, "text": "string_thing: THING[Ghul.string] // local value" },
+    { "startLine": 4, "startColumn": 20, "endLine": 4, "endColumn": 24, "text": "THING[Ghul.string].init(value: Ghul.string) // constructor" }
   ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "tokenType": "class" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "tokenType": "typeParameter" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "tokenType": "property" },
-    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 12, "tokenType": "typeParameter" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 8, "tokenType": "method" },
-    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 14, "tokenType": "parameter", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 17, "endLine": 4, "endColumn": 17, "tokenType": "typeParameter" },
-    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 8, "startColumn": 17, "endLine": 8, "endColumn": 21, "tokenType": "method" },
-    { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 9, "startColumn": 20, "endLine": 9, "endColumn": 24, "tokenType": "method" },
-    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 18, "tokenType": "property" },
-    { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 26, "tokenType": "parameter", "modifiers": "readonly" }
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 20, "tokenType": "property" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 21, "tokenType": "method" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 20, "endLine": 4, "endColumn": 24, "tokenType": "method" }
   ]
 }

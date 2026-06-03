@@ -1,7 +1,7 @@
 {
   "name": "type-inference-12",
   "code": "let derived =\n    if true then\n        DERIVED()\n    else\n        DERIVED()\n    fi;\n\nlet base =\n    if true then\n        DERIVED()\n    else\n        Base()\n    fi;",
-  "fullSource": "class Base is\n    init() is si\nsi\n\nclass DERIVED: Base is\n    init() is super.init() si\nsi\n\nentry() is\n    let derived =\n        if true then\n            DERIVED()\n        else\n            DERIVED()\n        fi;\n\n    let base =\n        if true then\n            DERIVED()\n        else\n            Base()\n        fi;\nsi\n",
+  "fullSource": "class Base() is\nsi\n\nclass DERIVED(): Base is\nsi\n\nentry() is\n    let derived =\n        if true then\n            DERIVED()\n        else\n            DERIVED()\n        fi;\n\n    let base =\n        if true then\n            DERIVED()\n        else\n            Base()\n        fi;\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

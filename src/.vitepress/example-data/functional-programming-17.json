@@ -28,7 +28,7 @@
     { "startLine": 10, "startColumn": 25, "endLine": 10, "endColumn": 28, "text": "union List" },
     { "startLine": 13, "startColumn": 7, "endLine": 13, "endColumn": 10, "text": "union Tree" },
     { "startLine": 13, "startColumn": 12, "endLine": 13, "endColumn": 12, "text": "T // type variable" },
-    { "startLine": 13, "startColumn": 1, "endLine": 16, "endColumn": 2, "text": "System.Exception.init(message: Ghul.string) -> Ghul.void // method" },
+    { "startLine": 13, "startColumn": 1, "endLine": 16, "endColumn": 2, "text": "Ghul./\\(a: Ghul.bool, b: Ghul.bool) -> Ghul.bool // innate function bool.and_then" },
     { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 8, "text": "variant Tree.LEAF(value: T)" },
     { "startLine": 14, "startColumn": 10, "endLine": 14, "endColumn": 14, "text": "Tree.LEAF.value: T // variant field" },
     { "startLine": 14, "startColumn": 5, "endLine": 15, "endColumn": 8, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" },

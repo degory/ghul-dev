@@ -1,7 +1,7 @@
 {
   "name": "definitions-12",
   "code": "let zero_zero = POINT(0.0D, 0.0D);\n\nassert origin == zero_zero;\nassert origin != right;",
-  "fullSource": "struct POINT is\n    x: double;\n    y: double;\n\n    init(x: double, y: double) is\n        self.x = x;\n        self.y = y;\n    si\nsi\n\nentry() is\n    let origin = POINT(0.0D, 0.0D);\n    let right = POINT(1.0D, 0.0D);\n    let zero_zero = POINT(0.0D, 0.0D);\n\n    assert origin == zero_zero;\n    assert origin != right;\nsi\n",
+  "fullSource": "struct POINT(x: double, y: double) is\nsi\n\nentry() is\n    let origin = POINT(0.0D, 0.0D);\n    let right = POINT(1.0D, 0.0D);\n    let zero_zero = POINT(0.0D, 0.0D);\n\n    assert origin == zero_zero;\n    assert origin != right;\nsi\n",
   "output": "",
   "diagnostics": [],
   "hovers": [

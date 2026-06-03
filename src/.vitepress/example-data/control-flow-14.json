@@ -1,7 +1,7 @@
 {
   "name": "control-flow-14",
   "code": "if let c: Cat = a then\n    write_line(c.purr());\nelif let d: Dog = a then\n    write_line(d.bark());\nelse\n    write_line(\"some other animal\");\nfi",
-  "fullSource": "use IO.Std.write_line;\n\nclass Animal is si\n\nclass Cat: Animal is\n    name: string;\n    init(name: string) is self.name = name; si\n    purr() -> string => \"{name} purrs\";\nsi\n\nclass Dog: Animal is\n    name: string;\n    init(name: string) is self.name = name; si\n    bark() -> string => \"{name} barks\";\nsi\n\nentry() is\n    let a: Animal = Dog(\"rover\");\n    if let c: Cat = a then\n        write_line(c.purr());\n    elif let d: Dog = a then\n        write_line(d.bark());\n    else\n        write_line(\"some other animal\");\n    fi\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\nclass Animal is si\n\nclass Cat(name: string): Animal is\n    purr() -> string => \"{name} purrs\";\nsi\n\nclass Dog(name: string): Animal is\n    bark() -> string => \"{name} barks\";\nsi\n\nentry() is\n    let a: Animal = Dog(\"rover\");\n    if let c: Cat = a then\n        write_line(c.purr());\n    elif let d: Dog = a then\n        write_line(d.bark());\n    else\n        write_line(\"some other animal\");\n    fi\nsi\n",
   "output": "rover barks\n",
   "diagnostics": [],
   "hovers": [
