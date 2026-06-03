@@ -1,0 +1,161 @@
+namespace ExampleTool is
+    use System.Exception;
+    use System.Diagnostics.Process;
+    use System.Diagnostics.ProcessStartInfo;
+    use System.Text.StringBuilder;
+
+    use IO.File;
+    use IO.Directory;
+    use IO.Path;
+
+    use Collections.Iterable;
+
+    // Locate the .NET reference-assembly directory to hand the compiler via
+    // `--sdk-ref-path`. The target framework follows what this tool was *built*
+    // for (read from its runtimeconfig.json), not the runtime it rolls forward
+    // onto. The install root comes from `dotnet --list-sdks`; we take the
+    // highest ref pack matching the target framework's major.minor.
+    //
+    // Mirrors the discovery logic in degory/ghul-test's compiler-under-test.
+    discover_sdk_reference_path() -> string is
+        let target_framework = _get_target_framework();
+        // "net8.0" -> "8.0", to match ref-pack directory names like "8.0.27".
+        let framework_version = target_framework.substring(3, target_framework.length - 3);
+
+        let dotnet_root = _find_dotnet_root();
+        let packs_root = Path.combine(dotnet_root, Path.combine("packs", "Microsoft.NETCore.App.Ref"));
+
+        if !Directory.exists(packs_root) then
+            throw Exception("no .NET reference assembly packs found at {packs_root}");
+        fi
+
+        let pack = _find_latest_ref_pack(packs_root, framework_version);
+
+        if !pack? then
+            throw Exception("no Microsoft.NETCore.App.Ref pack matching {framework_version}.* under {packs_root}");
+        fi
+
+        let reference_path = Path.combine(pack, Path.combine("ref", target_framework));
+
+        if !Directory.exists(reference_path) then
+            throw Exception("reference assemblies not found at {reference_path}");
+        fi
+
+        return reference_path;
+    si
+
+    _get_target_framework() -> string is
+        let assembly = System.Reflection.Assembly.get_executing_assembly();
+        let assembly_path = Path.get_full_path(assembly.location);
+        let directory = Path.get_directory_name(assembly_path);
+        let name = Path.get_file_name_without_extension(assembly_path);
+        let config_path = Path.combine(directory, "{name}.runtimeconfig.json");
+
+        if !File.exists(config_path) then
+            throw Exception("runtime config not found at {config_path}");
+        fi
+
+        let target_framework = _extract_json_string(File.read_all_text(config_path), "tfm");
+
+        if !target_framework? then
+            throw Exception("no \"tfm\" entry found in {config_path}");
+        fi
+
+        return target_framework;
+    si
+
+    // Minimal extractor for a string-valued key in flat JSON; enough for the
+    // fixed shape of runtimeconfig.json (no nested escaping in `tfm`).
+    _extract_json_string(content: string, key: string) -> string? is
+        let key_index = content.index_of("\"{key}\"");
+
+        if key_index < 0 then
+            return null;
+        fi
+
+        let colon = content.index_of(':', key_index);
+        let open = if colon >= 0 then content.index_of('"', colon) else -1 fi;
+        let close = if open >= 0 then content.index_of('"', open + 1) else -1 fi;
+
+        if close < 0 then
+            return null;
+        fi
+
+        return content.substring(open + 1, close - open - 1);
+    si
+
+    _find_dotnet_root() -> string is
+        let output = _run_and_capture("dotnet", "--list-sdks");
+
+        for line in output.split(['\n']) do
+            let trimmed = line.trim();
+            let open = trimmed.index_of('[');
+            let close = trimmed.last_index_of(']');
+
+            if open >= 0 /\ close > open then
+                // `dotnet --list-sdks` prints `<version> [<root>/sdk]`.
+                let sdk_directory = trimmed.substring(open + 1, close - open - 1).trim();
+                let root = Path.get_directory_name(sdk_directory);
+
+                if root? /\ Directory.exists(root) then
+                    return root;
+                fi
+            fi
+        od
+
+        throw Exception("could not determine the .NET install root from `dotnet --list-sdks`");
+    si
+
+    _find_latest_ref_pack(packs_root: string, framework_version: string) -> string? is
+        let best: string? mut = null;
+        let best_version: System.Version? mut = null;
+
+        for directory in Directory.get_directories(packs_root, "{framework_version}.*") do
+            let version = _try_parse_version(Path.get_file_name(directory));
+
+            if version? /\ (!best_version? \/ version.compare_to(best_version) > 0) then
+                best_version = version;
+                best = directory;
+            fi
+        od
+
+        return best;
+    si
+
+    _try_parse_version(text: string) -> System.Version? is
+        try
+            return System.Version.parse(text);
+        catch ex: Exception
+            return null;
+        yrt
+    si
+
+    _run_and_capture(path: string, arguments: string) -> string is
+        let start_info = ProcessStartInfo();
+
+        start_info.file_name = path;
+        start_info.arguments = arguments;
+        start_info.use_shell_execute = false;
+        start_info.redirect_standard_output = true;
+        start_info.redirect_standard_error = true;
+
+        let process = Process.start(start_info);
+        if !process? then
+            throw Exception("failed to start {path} {arguments}");
+        fi
+
+        let output = StringBuilder();
+        do
+            let line = process.standard_output.read_line();
+            if !line? then
+                break;
+            fi
+            output.append(line);
+            output.append('\n');
+        od
+
+        process.wait_for_exit();
+
+        return output.to_string();
+    si
+si

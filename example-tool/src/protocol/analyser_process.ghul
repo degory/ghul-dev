@@ -4,29 +4,31 @@ namespace Analysis.Protocol is
     use System.Diagnostics.ProcessStartInfo;
     use System.Text.StringBuilder;
     use System.Text.UTF8Encoding;
+    use System.Text.Json.JsonSerializer;
+    use System.Text.Json.JsonSerializerOptions;
 
     use Collections.LIST;
 
-    // Form-feed (ASCII 12) — terminates every analyser response frame and
-    // each file's content in an EDIT request.
-    FORM_FEED: char static => cast char(12);
-
-    // Drives a `dotnet ghul-compiler --analyse` subprocess over the analyser's
-    // line/form-feed text protocol. Uses the canned `--v3 --test-run`
-    // resolution — the same mode ghul-test CI uses — so no `.assemblies.json`
-    // or response file is needed; `ghul-runtime.dll` must be present in the
-    // working directory.
-    //
-    // Adapted (slimmed) from the compiler repo's analysis-protocol library.
+    // Drives a `dotnet ghul-compiler --analyse` subprocess over the JSON
+    // analysis protocol: one JSON object per line, newline-terminated; requests
+    // discriminated by `command`, responses by `kind`. Uses the canned
+    // `--v3 --test-run` resolution so no `.assemblies.json` is needed;
+    // `ghul-runtime.dll` must be present in the working directory.
     class ANALYSER_PROCESS: Disposable is
         _process: Process;
         _stderr_capture: StringBuilder;
+        _options: JsonSerializerOptions;
 
-        init(working_directory: string) is
+        init(working_directory: string, sdk_ref_path: string) is
+            _options = JsonSerializerOptions();
+            // Variant constructor args emit as public CLR fields, not
+            // properties — System.Text.Json's default is to skip fields.
+            _options.include_fields = true;
+
             let start_info = ProcessStartInfo();
 
             start_info.file_name = "dotnet";
-            start_info.arguments = "ghul-compiler --analyse --v3 --test-run";
+            start_info.arguments = "ghul-compiler --analyse --v3 --test-run --sdk-ref-path \"{sdk_ref_path}\"";
             start_info.working_directory = working_directory;
 
             start_info.use_shell_execute = false;
@@ -65,9 +67,9 @@ namespace Analysis.Protocol is
             );
 
             try
-                let listen = read_response();
-                if listen.header !~ "LISTEN" then
-                    throw Exception("expected LISTEN as first frame, got '{listen.header}'\n{_stderr_capture}");
+                let first = read_response();
+                if !isa Response.LISTEN(first) then
+                    throw Exception("expected listen as first response, got a different variant\nstderr so far:\n{_stderr_capture}");
                 fi
             catch ex: Exception
                 dispose();
@@ -75,52 +77,23 @@ namespace Analysis.Protocol is
             yrt
         si
 
-        write(text: string) is
-            _process.standard_input.write(text);
-        si
-
-        flush() is
-            _process.standard_input.flush();
-        si
-
-        // Single-file EDIT — path list (one path), blank-line terminator,
-        // then form-feed-terminated source.
-        send_edit(path: string, source: string) is
-            write("#EDIT#\n");
-            write("{path}\n");
-            write("\n");
-            write(source);
-            write("{FORM_FEED}");
-            flush();
-        si
-
-        send_hover_map(path: string) is
-            write("#HOVERMAP#\n");
-            write("{path}\n");
-            flush();
-        si
-
-        send_semantic_tokens(path: string) is
-            write("#SEMANTICTOKENS#\n");
-            write("{path}\n");
-            flush();
-        si
-
-        // Read a response, transparently draining a leading DIAGNOSTICS frame
-        // (a query can be preceded by one when the analyser recompiles).
-        read_query_response() -> RESPONSE is
+        // Read a response that may be preceded by an unsolicited diagnostics
+        // frame. Query commands fall through to a compile when the queried
+        // position isn't cached; that path writes a diagnostics response
+        // before the handler's own response.
+        read_query_response() -> Response is
             let response mut = read_response();
 
-            if response.header =~ "DIAGNOSTICS" then
+            if isa Response.DIAGNOSTICS(response) then
                 response = read_response();
             fi
 
             return response;
         si
 
-        // Read characters until the form-feed terminator; split into a header
-        // line and body lines.
-        read_response() -> RESPONSE is
+        // Read one JSON line from stdout (a JSON message never contains a raw
+        // newline) and deserialize into a Response.
+        read_response() -> Response is
             let buffer = StringBuilder();
 
             do
@@ -128,12 +101,13 @@ namespace Analysis.Protocol is
 
                 if c < 0 then
                     throw Exception(
-                        "analyser stdout closed before form-feed\n"
-                        "buffer:\n{buffer}\nstderr:\n{_stderr_capture}"
+                        "analyser stdout closed before a response line\n"
+                        "buffer so far:\n{buffer}\n"
+                        "stderr so far:\n{_stderr_capture}"
                     );
                 fi
 
-                if c == 12 then
+                if c == 10 then
                     break;
                 fi
 
@@ -142,27 +116,27 @@ namespace Analysis.Protocol is
                 fi
             od
 
-            let lines = LIST[string](buffer.to_string().split(['\n']));
+            return JsonSerializer.deserialize[Response](buffer.to_string(), _options);
+        si
 
-            if lines.count == 0 then
-                throw Exception("empty response frame");
-            fi
+        write_request(request: Request) is
+            _process.standard_input.write(JsonSerializer.serialize[Request](request, _options));
+            _process.standard_input.write("\n");
+            _process.standard_input.flush();
+        si
 
-            let header = lines[0];
+        send_edit(path: string, source: string) is
+            let files = LIST[EDIT_FILE]();
+            files.add(EDIT_FILE(path, source));
+            write_request(Request.EDIT(files));
+        si
 
-            let body = LIST[string]();
+        send_hover_map(path: string) is
+            write_request(Request.HOVER_MAP(path));
+        si
 
-            for i in 1..lines.count do
-                let line = lines[i];
-
-                if i == lines.count - 1 /\ line.length == 0 then
-                    continue;
-                fi
-
-                body.add(line);
-            od
-
-            return RESPONSE(header, body);
+        send_semantic_tokens(path: string) is
+            write_request(Request.SEMANTIC_TOKENS(path));
         si
 
         stderr_capture: string => _stderr_capture.to_string();

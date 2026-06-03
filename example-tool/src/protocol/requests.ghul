@@ -1,0 +1,29 @@
+namespace Analysis.Protocol is
+    use Collections.LIST;
+
+    // Client-side request DTOs for the JSON analysis protocol. Mirrors the
+    // compiler-side Request union; the wire `command` discriminator selects
+    // the variant.
+
+    class EDIT_FILE is
+        path: string public;
+        source: string public;
+
+        init() is si
+
+        init(path: string, source: string) is
+            self.path = path;
+            self.source = source;
+        si
+    si
+
+    @System.Text.Json.Serialization.JsonPolymorphic(type_discriminator_property_name = "command")
+    @System.Text.Json.Serialization.JsonDerivedType(typeof Request.EDIT, "edit")
+    @System.Text.Json.Serialization.JsonDerivedType(typeof Request.HOVER_MAP, "hover_map")
+    @System.Text.Json.Serialization.JsonDerivedType(typeof Request.SEMANTIC_TOKENS, "semantic_tokens")
+    union Request is
+        EDIT(files: LIST[EDIT_FILE]);
+        HOVER_MAP(path: string);
+        SEMANTIC_TOKENS(path: string);
+    si
+si

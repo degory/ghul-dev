@@ -7,6 +7,7 @@ namespace ExampleTool is
     use Collections.LIST;
 
     use Analysis.Protocol.ANALYSER_PROCESS;
+    use Analysis.Protocol.Response;
 
     // Generates a rendered-example artifact (<name>.json) for every example
     // directory under the given root. An example directory holds a single
@@ -26,6 +27,11 @@ namespace ExampleTool is
         let examples_root = arguments[0];
         let output_dir = arguments[1];
 
+        // Newer compilers require an explicit SDK reference-assembly directory
+        // (no implicit search). Discover it once and pass it through to every
+        // compiler and analyser invocation.
+        let sdk_ref_path = discover_sdk_reference_path();
+
         Directory.create_directory(output_dir);
 
         let failed mut = false;
@@ -34,7 +40,7 @@ namespace ExampleTool is
             let name = Path.get_file_name(example_dir);
 
             if File.exists(Path.combine(example_dir, "{name}.ghul")) then
-                if !generate(example_dir, output_dir) then
+                if !generate(example_dir, output_dir, sdk_ref_path) then
                     failed = true;
                 fi
             fi
@@ -184,7 +190,7 @@ namespace ExampleTool is
         yrt
     si
 
-    generate(example_dir: string, output_dir: string) -> bool is
+    generate(example_dir: string, output_dir: string, sdk_ref_path: string) -> bool is
         let name = Path.get_file_name(example_dir);
         let source_file = "{name}.ghul";
         let source = File.read_all_text(Path.combine(example_dir, source_file));
@@ -198,7 +204,7 @@ namespace ExampleTool is
 
         let compile = run_process(
             "dotnet",
-            "ghul-compiler --v3 --test-run --dotnet {source_file} -o binary.exe",
+            "ghul-compiler --v3 --test-run --dotnet --sdk-ref-path \"{sdk_ref_path}\" {source_file} -o binary.exe",
             example_dir
         );
 
@@ -242,7 +248,7 @@ namespace ExampleTool is
                 ""
             fi;
 
-        let collected = _collect_hovers_and_tokens(example_dir, source_file, source);
+        let collected = _collect_hovers_and_tokens(example_dir, source_file, source, sdk_ref_path);
 
         let diagnostics = LIST[DIAGNOSTIC]();
         for diagnostic in raw_diagnostics do
@@ -266,98 +272,57 @@ namespace ExampleTool is
         return true;
     si
 
-    // Drive the analyser over the example for #HOVERMAP# and
-    // #SEMANTICTOKENS#, then slice the visible region and translate
-    // each hover and semantic token onto the displayed text. Both
-    // queries are issued under one EDIT so the cost (parse + resolve)
-    // is amortized over both.
+    // Drive the analyser over the example for hover_map and semantic_tokens,
+    // then slice the visible region and translate each entry onto the
+    // displayed text. Both queries are issued under one edit so the cost
+    // (parse + resolve) is amortized over both.
     _collect_hovers_and_tokens(
-        example_dir: string, source_file: string, source: string
+        example_dir: string, source_file: string, source: string, sdk_ref_path: string
     ) -> (region: VISIBLE_REGION, hovers: LIST[HOVER], semantic_tokens: LIST[SEMANTIC_TOKEN]) is
-        let use analyser = ANALYSER_PROCESS(example_dir);
+        let use analyser = ANALYSER_PROCESS(example_dir, sdk_ref_path);
 
         analyser.send_edit(source_file, source);
-        analyser.read_response();   // DIAGNOSTICS
-        analyser.read_response();   // PARTIAL DONE
+        analyser.read_response();   // diagnostics
 
         analyser.send_hover_map(source_file);
-        let hover_map = analyser.read_query_response();
+        let hover_response = analyser.read_query_response();
 
         analyser.send_semantic_tokens(source_file);
-        let token_map = analyser.read_query_response();
+        let token_response = analyser.read_query_response();
 
         let region = extract_visible(source);
 
         let hovers = LIST[HOVER]();
-        for line in hover_map.lines do
-            let parsed = _parse_hover(line);
-            if parsed? then
-                let translated = region.translate(parsed);
+        if let hover_map: Response.HOVER_MAP = hover_response then
+            for entry in hover_map.entries do
+                let raw = HOVER(
+                    entry.start_line, entry.start_column,
+                    entry.end_line, entry.end_column,
+                    entry.description
+                );
+                let translated = region.translate(raw);
                 if translated? then
                     hovers.add(translated);
                 fi
-            fi
-        od
+            od
+        fi
 
         let semantic_tokens = LIST[SEMANTIC_TOKEN]();
-        for line in token_map.lines do
-            let parsed = _parse_semantic_token(line);
-            if parsed? then
-                let translated = region.translate_semantic_token(parsed);
+        if let tokens_resp: Response.SEMANTIC_TOKENS = token_response then
+            for token in tokens_resp.tokens do
+                let raw = SEMANTIC_TOKEN(
+                    token.start_line, token.start_column,
+                    token.end_line, token.end_column,
+                    token.token_type, token.modifiers
+                );
+                let translated = region.translate_semantic_token(raw);
                 if translated? then
                     semantic_tokens.add(translated);
                 fi
-            fi
-        od
+            od
+        fi
 
         return (region = region, hovers = hovers, semantic_tokens = semantic_tokens);
-    si
-
-    // Parse one #HOVERMAP# row: startLine, startColumn, endLine, endColumn,
-    // description — tab-separated, 1-based coordinates.
-    _parse_hover(line: string) -> HOVER? is
-        let fields = LIST[string](line.split(['\t']));
-
-        if fields.count < 5 then
-            return null;
-        fi
-
-        try
-            return HOVER(
-                System.Convert.to_int32(fields[0]),
-                System.Convert.to_int32(fields[1]),
-                System.Convert.to_int32(fields[2]),
-                System.Convert.to_int32(fields[3]),
-                fields[4]
-            );
-        catch ex: System.Exception
-            return null;
-        yrt
-    si
-
-    // Parse one #SEMANTICTOKENS# row: startLine, startColumn, endLine,
-    // endColumn, tokenType, modifiers — tab-separated, 1-based
-    // coordinates. The modifiers field may be empty.
-    _parse_semantic_token(line: string) -> SEMANTIC_TOKEN? is
-        let fields = LIST[string](line.split(['\t']));
-
-        if fields.count < 5 then
-            return null;
-        fi
-
-        try
-            let modifiers = if fields.count >= 6 then fields[5] else "" fi;
-            return SEMANTIC_TOKEN(
-                System.Convert.to_int32(fields[0]),
-                System.Convert.to_int32(fields[1]),
-                System.Convert.to_int32(fields[2]),
-                System.Convert.to_int32(fields[3]),
-                fields[4],
-                modifiers
-            );
-        catch ex: System.Exception
-            return null;
-        yrt
     si
 
     // Copy the tool's own ghul-runtime.dll (from its ghul.runtime package
