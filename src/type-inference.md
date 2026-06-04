@@ -21,17 +21,15 @@ ghūl also performs **type narrowing** - within parts of a function a symbol may
 
 The examples below leave inferred types unannotated — hover over any variable to see the type the compiler worked out for it.
 
-## inference is function-local
+## what stays explicit
 
 A function's signature is written out explicitly; inference works within the body.
 
 <GhulExample name="type-inference-1" />
 
-Inference does not read types out of a body into that function's signature, and does not carry from one function into another: each body is checked on its own, against the explicit signatures of everything it calls.
+Inference does not read types out of a body into the function's signature, and does not carry from one function into another: each body is checked on its own, against the explicit signatures of everything it calls.
 
-## inference applies to local symbols
-
-Because inference is function-local, it only works out the types of symbols local to a function body. A field or property belongs to a type rather than to a function body, so its type is always written out explicitly - for private members as well as public ones.
+Fields and properties belong to a type rather than to a function body, so their types are written out too - for private members as well as public ones.
 
 <GhulExample name="type-inference-2" />
 
