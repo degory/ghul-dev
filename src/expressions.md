@@ -58,25 +58,13 @@ Argument types usually can be inferred if the function literal is being passed i
 
 #### capturing and closure
 
-A function literal can refer to identifiers from its surrounding lexical scope; those references form its closure. What the closure sees through each identifier depends on whether the local variable it refers to is mutable.
-
-An immutable local (`let`) is captured by value at the point the function literal is constructed. The closure holds a snapshot of that value:
-
-<GhulExample name="expressions-12" />
-
-Inside a loop, each iteration produces its own local, so each closure captures its own value:
+A function literal can refer to identifiers from its surrounding lexical scope; those references form its closure. The closure captures the variable, not a copy of its value, so an immutable `let` keeps the same value throughout its scope and every closure over it sees that value. Inside a loop, each iteration produces its own local, so each closure captures its own variable rather than the loop's final value:
 
 <GhulExample name="expressions-13" />
 
-A mutable local (`let` followed by `mut`) is captured by reference: the closure shares one live variable with the outer scope and with any other closures over the same name. Assignments are visible in both directions.
+A mutable `let mut` is shared with the surrounding scope; assignments are visible in either direction:
 
 <GhulExample name="expressions-26" />
-
-Mutability of the captured variable is independent of mutability of the value it holds. When the captured value is a reference to an object, the closure cannot reassign the variable to point at a different object, but it can still call methods or assign to properties on the object it currently refers to:
-
-<GhulExample name="expressions-14" />
-
-Here `closure` cannot make `object_reference` point somewhere else, but it can read and modify the state of the `SOME_OBJECT` it currently refers to.
 
 ## arithmetic
 
