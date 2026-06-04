@@ -62,7 +62,7 @@ A function literal can refer to identifiers from its surrounding lexical scope; 
 
 <GhulExample name="expressions-13" />
 
-A mutable `let mut` is shared with the surrounding scope:
+A `let mut` is shared with the surrounding scope:
 
 <GhulExample name="expressions-26" />
 
