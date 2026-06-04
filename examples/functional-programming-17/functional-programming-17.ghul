@@ -30,9 +30,9 @@ si
 
 test_option() is
     let some_int = SOME(42);
-    let none_int = NONE[int]();
+    let none_int = NONE();
 
-    let stringify_option = (o: Option[int]) rec =>
+    let stringify_option = o rec =>
         if isa SOME(o) then
             "{o.value}"
         else
@@ -46,7 +46,7 @@ si
 test_list() is
     let list = CONS(1, CONS(2, CONS(3, NIL())));
 
-    let stringify_list = (l: List[int]) rec =>
+    let stringify_list = l rec =>
         if isa CONS(l) then
             let (head, tail) = l in
             "{head}, {rec(tail)}"
@@ -69,7 +69,7 @@ test_tree() is
         )
     );
 
-    let stringify_tree = (t: Tree[int]) rec =>
+    let stringify_tree = t rec =>
         if isa NODE(t) then
             let (left, right) = t in
             "({rec(left)}, {rec(right)})"
