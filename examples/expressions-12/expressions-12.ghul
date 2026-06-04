@@ -1,6 +1,0 @@
-entry() is
-    let i = 5;
-// >>>
-    let g = () => i;
-// <<<
-si
