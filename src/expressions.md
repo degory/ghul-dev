@@ -58,11 +58,11 @@ Argument types usually can be inferred if the function literal is being passed i
 
 #### capturing and closure
 
-A function literal can refer to identifiers from its surrounding lexical scope; those references form its closure. The closure captures the variable, not a copy of its value, so an immutable `let` keeps the same value throughout its scope and every closure over it sees that value. Inside a loop, each iteration produces its own local, so each closure captures its own variable rather than the loop's final value:
+A function literal can refer to identifiers from its surrounding lexical scope; those references form its closure:
 
 <GhulExample name="expressions-13" />
 
-A mutable `let mut` is shared with the surrounding scope; assignments are visible in either direction:
+A mutable `let mut` is shared with the surrounding scope:
 
 <GhulExample name="expressions-26" />
 
