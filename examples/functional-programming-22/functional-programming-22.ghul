@@ -15,7 +15,7 @@ entry() is
             n,
             i =>
                 if i == 0 then
-                    DONE[int, int]()
+                    DONE()
                 else
                     i || (i - 1)
                 fi
@@ -51,7 +51,7 @@ entry() is
             0,
             i =>
                 if i == xs.count then
-                    DONE[char, int]()
+                    DONE()
                 else
                     xs[i] || (i + 1)
                 fi
