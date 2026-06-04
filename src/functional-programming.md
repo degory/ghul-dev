@@ -100,6 +100,8 @@ pure functions
 
 <GhulExample name="functional-programming-13" />
 
+Anonymous functions take a single concrete type from context; there is no generic equivalent to the two preceding forms. For polymorphic behaviour, declare a generic global function or method.
+
 ## union types
 
 Unions are under development [(see GitHub issue #1132)](https://github.com/degory/ghul/issues/1132)
