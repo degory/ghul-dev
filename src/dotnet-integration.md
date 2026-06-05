@@ -1,6 +1,6 @@
 # .NET integration
 
-ghūl is hosted on and targets .NET 8 and can consume most types in .NET assemblies built with C#.
+ghūl is hosted on and targets .NET 10 and can consume most types in .NET assemblies built with C#. Older target frameworks (e.g. `net8.0`{:text}) are also supported - set the target in your `.ghulproj`{:text} and pin `ghul.runtime`{:text} to a net8.0-compatible release, since the 4.x line is net10.0-only.
 
 ## projects
 
