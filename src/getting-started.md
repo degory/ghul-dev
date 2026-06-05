@@ -4,11 +4,11 @@
 
 ## prerequisites
 
-The ghūl programming language compiler requires the [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+The ghūl programming language compiler requires the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0). The SDK includes the .NET 10 runtime that the compiler tool itself runs on, and will fetch reference packs for any target framework you build against on demand.
 
 ## target
 
-The compiler produces standard .NET assemblies and packages targeting .NET 8.0
+The compiler produces standard .NET assemblies and packages targeting .NET 10 by default. Earlier target frameworks work too — set `<TargetFramework>net8.0</TargetFramework>`{:text} (or similar) in your `.ghulproj`{:text} and pin `ghul.runtime`{:text} to a net8.0-compatible release (e.g. `3.0.19`{:text}), since the 4.x line is net10.0-only.
 
 ## getting the ghūl compiler
 
@@ -24,7 +24,7 @@ If you create a new GitHub repo from the [ghūl repository template](https://git
 
 ### use a dev container
 
-The [examples repository](https://github.com/degory/ghul-examples) and the [ghūl repository template](https://github.com/degory/ghul-repository-template) both ship a `.devcontainer` configured to use a standard .NET 8 dev container image — for example [`mcr.microsoft.com/devcontainers/dotnet:8.0`](https://hub.docker.com/r/microsoft/devcontainers-dotnet). Open the project in VS Code with the Dev Containers extension, or in a GitHub Codespace, and run `dotnet tool restore`{:sh} to install the compiler from the local tool manifest.
+The [examples repository](https://github.com/degory/ghul-examples) and the [ghūl repository template](https://github.com/degory/ghul-repository-template) both ship a `.devcontainer` configured to use a standard .NET 10 dev container image — for example [`mcr.microsoft.com/devcontainers/dotnet:10.0`](https://hub.docker.com/r/microsoft/devcontainers-dotnet). Open the project in VS Code with the Dev Containers extension, or in a GitHub Codespace, and run `dotnet tool restore`{:sh} to install the compiler from the local tool manifest.
 
 ### install the compiler as a local or global .NET tool
 
@@ -60,7 +60,7 @@ a real-world example, or use one of the project templates to get started.
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
 
     <GhulCompiler>dotnet ghul-compiler</GhulCompiler>
   </PropertyGroup>
@@ -94,7 +94,7 @@ dotnet run
 
 ### runtime dependencies for ghūl applications
 
-Applications written in ghūl require the [.NET 8.0](https://dotnet.microsoft.com/download/dotnet/8.0) runtime
+Applications written in ghūl require the .NET runtime matching whatever target framework you built for — the [.NET 10 runtime](https://dotnet.microsoft.com/download/dotnet/10.0) by default, or e.g. the [.NET 8 runtime](https://dotnet.microsoft.com/download/dotnet/8.0) if you targeted `net8.0`{:text}.
 
 ## development environment
 
