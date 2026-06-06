@@ -33,7 +33,7 @@ Generic argument types can be inferred from context for generic constructor invo
 
 ## type-parameter constraints
 
-A type parameter can carry one or more constraints, listed inside its declaration. Constraints both narrow the operations the generic body may perform on values of that type and restrict the actual types that callers can supply. The compiler enforces all constraints, both for ghūl types that declare them and for types imported from .NET assemblies.
+A type parameter can have one or more constraints, listed inside its declaration. Constraints both narrow the operations the generic body can perform on values of that type and restrict the actual types that callers can supply. The compiler enforces all constraints, both for ghūl types that declare them and for types imported from .NET assemblies.
 
 ### type bound
 
