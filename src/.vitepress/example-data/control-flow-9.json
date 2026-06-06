@@ -1,7 +1,7 @@
 {
   "name": "control-flow-9",
-  "code": "let name: string? = lookup();\n\nif name? then\n    // name is narrowed to non-optional string\n    // here — no ! needed\n    write_line(\"hello, {name}\");\nfi",
-  "fullSource": "use IO.Std.write_line;\n\nlookup() -> string? => \"world\";\n\nentry() is\n    let name: string? = lookup();\n\n    if name? then\n        // name is narrowed to non-optional string\n        // here — no ! needed\n        write_line(\"hello, {name}\");\n    fi\nsi\n",
+  "code": "let name: string? = lookup();\n\nif name? then\n    // name is narrowed to non-optional string\n    // here, no ! needed\n    write_line(\"hello, {name}\");\nfi",
+  "fullSource": "use IO.Std.write_line;\n\nlookup() -> string? => \"world\";\n\nentry() is\n    let name: string? = lookup();\n\n    if name? then\n        // name is narrowed to non-optional string\n        // here, no ! needed\n        write_line(\"hello, {name}\");\n    fi\nsi\n",
   "output": "hello, world\n",
   "diagnostics": [],
   "hovers": [

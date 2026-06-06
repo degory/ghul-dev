@@ -1,7 +1,7 @@
 # control flow in ghūl
 
 ::: tip runnable examples
-The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples — open it in a GitHub Codespace or a dev container to build and run them.
+The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples. Open it in a GitHub Codespace or a dev container to build and run them.
 :::
 
 ## block scope
@@ -46,7 +46,7 @@ This form is used for multiple conditions. If the initial condition is false, th
 
 ### type narrowing
 
-When an `if` predicate proves a stronger fact about a variable's type, the then-branch sees that variable at the narrower type. The most common case is an `isa` test — for a union variant or for a class:
+When an `if` predicate proves a stronger fact about a variable's type, the then-branch sees that variable at the narrower type. The most common case is an `isa` test, for a union variant or for a class:
 
 <GhulExample name="control-flow-8" />
 
@@ -58,17 +58,17 @@ For a two-variant union, the `else` branch is narrowed to the complementary vari
 
 <GhulExample name="control-flow-10" />
 
-Narrowing is flow-sensitive — it follows the control flow rather than being confined to a branch body. If a guard rejects the narrower type and then leaves the enclosing block — by `return`, `throw`, `break` or `continue` — the code after the guard is narrowed:
+Narrowing is flow-sensitive: it follows the control flow rather than being confined to a branch body. If a guard rejects the narrower type and then leaves the enclosing block, by `return`, `throw`, `break` or `continue`, the code after the guard is narrowed:
 
 <GhulExample name="control-flow-11" />
 
 ### if let
 
-`cast T(x)` views `x` as type `T`, and yields null — rather than throwing — when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test:
+`cast T(x)` views `x` as type `T`, and yields null (rather than throwing) when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test:
 
 <GhulExample name="control-flow-12" />
 
-`if let` folds that into the `if` itself: it puts a `let` definition in the condition of an `if` or `elif`. The then-branch runs only when the value is present, with the variable in scope — and narrowed — just within that branch:
+`if let` folds that into the `if` itself: it puts a `let` definition in the condition of an `if` or `elif`. The then-branch runs only when the value is present, with the variable in scope (and narrowed) just within that branch:
 
 <GhulExample name="control-flow-13" />
 
@@ -200,7 +200,7 @@ The `throw` statement raises an exception. Control leaves the current block imme
 
 <GhulExample name="control-flow-33" />
 
-The thrown value must be an exception — `System.Exception`, or a type derived from it.
+The thrown value must be an exception: `System.Exception`, or a type derived from it.
 
 ### exception types
 
@@ -246,7 +246,7 @@ The catch clause can be omitted if no exceptions need to be caught but clean-up 
 
 ### finally and return
 
-A `finally` block runs whenever control leaves the `try` block — including when the `try` block, or a `catch` block, executes a `return`. The `finally` block runs first, then control returns to the caller:
+A `finally` block runs whenever control leaves the `try` block, including when the `try` block, or a `catch` block, executes a `return`. The `finally` block runs first, then control returns to the caller:
 
 <GhulExample name="control-flow-42" />
 
@@ -288,7 +288,7 @@ Inside such a function, `await e` evaluates to the result of the task `e` once i
 
 ### limitations
 
-A `try` / `catch` block may not surround code that contains an `await`. To handle a faulted task, wrap the call at the *call site* instead — reading `.result` on a returned task surfaces a faulted task as a `System.AggregateException`.
+A `try` / `catch` block may not surround code that contains an `await`. To handle a faulted task, wrap the call at the *call site* instead: reading `.result` on a returned task surfaces a faulted task as a `System.AggregateException`.
 
 ## generators
 

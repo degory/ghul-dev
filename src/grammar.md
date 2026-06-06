@@ -2,7 +2,7 @@
 
 This page gives the full grammar of ghūl, derived from the compiler's parser.
 
-The grammar is written in [W3C EBNF](https://www.w3.org/TR/xml/#sec-notation) — the
+The grammar is written in [W3C EBNF](https://www.w3.org/TR/xml/#sec-notation), the
 notation used by the XML and XPath specifications:
 
 | Notation      | Meaning                                  |
@@ -30,8 +30,8 @@ operator precedence table is given [at the end](#operator-precedence).
 
 ## lexical grammar
 
-The tokenizer turns source text into a stream of tokens. Whitespace — spaces, tabs,
-carriage returns and newlines — separates tokens but is otherwise insignificant:
+The tokenizer turns source text into a stream of tokens. Whitespace (spaces, tabs,
+carriage returns and newlines) separates tokens but is otherwise insignificant:
 ghūl is **not** indentation-sensitive. Whitespace and comments are discarded before
 parsing.
 
@@ -58,7 +58,7 @@ QualifiedIdentifier ::= Identifier ( "." Identifier )*
 ```
 
 A `PlainIdentifier` may not be one of the [reserved words](#reserved-words). To use
-a reserved word — or an operator symbol — as an ordinary identifier, prefix it with
+a reserved word (or an operator symbol) as an ordinary identifier, prefix it with
 a backtick: `` `field ``, `` `+ ``.
 
 ### reserved words
@@ -76,7 +76,7 @@ then      throw     trait     true      try       typeof    union
 use       when      while     yrt
 ```
 
-A few words are *contextual* — they look like identifiers to the tokenizer but the parser recognises them in specific positions: `optional` as a type-parameter kind constraint, `out` as a type-parameter variance modifier.
+A few words are *contextual*: they look like identifiers to the tokenizer but the parser recognises them in specific positions. `optional` as a type-parameter kind constraint, `out` as a type-parameter variance modifier.
 
 ### numeric literals
 
@@ -141,8 +141,8 @@ OperatorChar ::= [-!$%^&*+=|:@~#\<>.?/] | UnicodeSymbol
 `UnicodeSymbol` is any character above U+007E that .NET classifies as a symbol
 (this admits operators such as `×`, `÷`, `∩`, `∪`, `∧`, `∨`, `≈`, `≡`).
 
-Operators are tokenized greedily — the longest run of operator characters forms one
-operator — with one exception: a `.` immediately after a leading `!` or `?` ends
+Operators are tokenized greedily: the longest run of operator characters forms one
+operator, with one exception: a `.` immediately after a leading `!` or `?` ends
 the operator, so that `x!.foo` and `x?.foo` parse as a member access on an
 unwrap/has-value, not as the operators `!.` or `?.`.
 
@@ -234,7 +234,7 @@ Variant ::= Identifier ( "(" VariableList ")" )? "default"? ";"
 
 Each `Variant` optionally carries fields, written as a parenthesised list of
 `name: Type` variables. A trailing `default` marks one variant as the union's
-*default* — the one the `?` test and `!` unwrap operators target on a union
+*default*: the one the `?` test and `!` unwrap operators target on a union
 value.
 
 ### enum
@@ -332,7 +332,7 @@ TypeSuffix ::= "[]"                  /* array */
 TypeList ::= TypeExpression ( "," TypeExpression )*
 ```
 
-`( T )` is just `T` in parentheses — parentheses group, e.g. to disambiguate
+`( T )` is just `T` in parentheses; parentheses group, e.g. to disambiguate
 `(a -> b) -> c` from `a -> b -> c`. A parenthesised list of two or more types is a
 tuple type. Empty parentheses are meaningful only as `( ) -> T`, a function type
 taking no arguments. A `name: Type` element gives a tuple element a name.
@@ -392,8 +392,8 @@ when the variable goes out of scope.
 The `let … in …` form is a [let-in expression](#primary-expressions) used as a
 statement.
 
-`yield` is permitted only inside a [generator function](/control-flow.html#generators)
-— one whose return type is `Collections.Iterable[T]` or `Collections.Iterator[T]`.
+`yield` is permitted only inside a [generator function](/control-flow.html#generators),
+one whose return type is `Collections.Iterable[T]` or `Collections.Iterator[T]`.
 
 ### if
 
@@ -478,8 +478,8 @@ UnaryExpression ::= Operator UnaryExpression      /* prefix operator */
 ```
 
 An `await E` expression is permitted only inside an
-[asynchronous function](/control-flow.html#asynchronous-code) — one whose
-return type is `Tasks.TASK[T]` (or `Tasks.TASK`) — and evaluates to the result
+[asynchronous function](/control-flow.html#asynchronous-code), one whose
+return type is `Tasks.TASK[T]` (or `Tasks.TASK`), and evaluates to the result
 of the awaited task once it completes. Used as the right-hand side of `let`, as
 a bare statement (`await E;`), or in any operand position.
 
@@ -498,14 +498,14 @@ PostfixSuffix ::= "(" ExpressionList? ")"     /* call */
                 | "|"                         /* pipe */
 ```
 
-A `[ ... ]` suffix is either an index expression — an access through an
-[indexer](#indexer) — or a generic type application, depending on whether its
+A `[ ... ]` suffix is either an index expression (an access through an
+[indexer](#indexer)) or a generic type application, depending on whether its
 contents resolve as expressions or as types; `` `[ ... ] `` forces the
 generic-application reading.
 
 ### function literals
 
-A primary expression — or a parenthesised argument list — followed by `->`, `=>`,
+A primary expression (or a parenthesised argument list) followed by `->`, `=>`,
 `is` or `rec` is a function literal:
 
 ```ebnf
@@ -549,7 +549,7 @@ A list literal `[ a, b, ... ]` builds a `List`; it requires at least one element
 
 Within an `ExpressionList` that forms call arguments or a tuple, an element of the
 form `Identifier ":" TypeExpression? ( "=" Expression )?` is an inline local
-variable definition rather than a plain identifier — this is the only place that
+variable definition rather than a plain identifier; this is the only place that
 form is accepted.
 
 ## operator precedence
@@ -562,14 +562,14 @@ the following levels, **tightest first**:
 
 | Precedence       | Operators                                   |
 |------------------|---------------------------------------------|
-| *(prefix unary, member access, call, index — tightest)* | |
+| *(prefix unary, member access, call, index - tightest)* | |
 | user&#8209;8     | *(user-defined)*                            |
 | multiplication   | `*` `×` `✕` `/` `%` `÷`                      |
 | user&#8209;7     | *(user-defined)*                            |
 | addition         | `+`  `-`                                    |
 | user&#8209;6     | *(user-defined)*                            |
 | bitwise          | `&` `\|` `¦` `^` `∩` `∪`                     |
-| user&#8209;5     | *(user-defined — default)*                  |
+| user&#8209;5     | *(user-defined, default)*                   |
 | shift            | `<<`  `>>`                                  |
 | user&#8209;4     | *(user-defined)*                            |
 | range            | `..`  `::`                                  |
@@ -583,12 +583,12 @@ the following levels, **tightest first**:
 All binary operators are left-associative. Prefix unary operators, member access,
 calls and indexing bind more tightly than any binary operator.
 
-A user-defined operator — any operator not in the table above — is assigned a
+A user-defined operator (any operator not in the table above) is assigned a
 precedence from its **first character**, modelled on OCaml and F#: operators
 starting with `*` `/` `%` bind as multiplication, `+` `-` as addition, and so on;
 an operator with no recognised first character defaults to user&#8209;5. The
 `@precedence("op", "level")` pragma overrides the precedence of a named operator.
-Both arguments must be string literals — a numeric `level` is not accepted —
+Both arguments must be string literals (a numeric `level` is not accepted),
 and `level` names a precedence level: `user-1` … `user-8`, or one of the built-in
 level names `boolean`, `relational`, `range`, `shift`, `bitwise`, `addition` and
 `multiplication`.

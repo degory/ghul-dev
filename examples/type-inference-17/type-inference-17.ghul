@@ -14,7 +14,7 @@ si
 
 entry() is
 // >>>
-    // m is Box[?] here — the type argument is not
+    // m is Box[?] here; the type argument is not
     // yet known
     let m = Box();
 
