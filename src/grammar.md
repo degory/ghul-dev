@@ -76,7 +76,7 @@ then      throw     trait     true      try       typeof    union
 use       when      while     yrt
 ```
 
-A few words are *contextual*: they look like identifiers to the tokenizer but the parser recognises them in specific positions. `optional` as a type-parameter kind constraint, `out` as a type-parameter variance modifier.
+A few words are *contextual*: they look like identifiers to the tokenizer but the parser recognises them in specific positions: `optional` as a type-parameter kind constraint, `out` as a type-parameter variance modifier.
 
 ### numeric literals
 
