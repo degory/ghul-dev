@@ -83,7 +83,7 @@ ghūl also supports tuple destructuring:
 
 ### optional types
 
-A type followed by `?` is an **optional** type: a value of that type may be present, or it may be absent. The same type written without the `?` is non-optional — a value is always expected to be there.
+A type followed by `?` is an **optional** type: a value of that type may be present, or it may be absent. The same type written without the `?` is non-optional: a value is always expected to be there.
 
 <GhulExample name="language-basics-15" />
 
@@ -91,9 +91,9 @@ The postfix `?` operator tests whether an optional has a value. The postfix `!` 
 
 <GhulExample name="language-basics-16" />
 
-Most of the time you don't need `!` directly — `if let` tests an optional and reads its value into a local variable in one step (see [control flow](/control-flow.html#if-let)).
+Most of the time you don't need `!` directly: `if let` tests an optional and reads its value into a local variable in one step (see [control flow](/control-flow.html#if-let)).
 
-Optional types work for both reference types and value types. A value-type optional like `int?` is backed by the .NET `Nullable[T]`, but you don't construct it explicitly — assigning a plain value where an optional is expected widens it automatically, and `null` marks the absent case:
+Optional types work for both reference types and value types. A value-type optional like `int?` is backed by the .NET `Nullable[T]`, but you don't construct it explicitly: assigning a plain value where an optional is expected widens it automatically, and `null` marks the absent case:
 
 <GhulExample name="language-basics-17" />
 
@@ -101,7 +101,7 @@ A non-optional type does not expect to be absent. Putting `null`, or an optional
 
 <GhulExample name="language-basics-18" />
 
-The warning clears once the value is known to be present — inside an `if name?` check, inside an `if let`, or with an explicit `!`:
+The warning clears once the value is known to be present, inside an `if name?` check, inside an `if let`, or with an explicit `!`:
 
 <GhulExample name="language-basics-19" />
 

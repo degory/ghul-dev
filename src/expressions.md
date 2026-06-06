@@ -126,7 +126,7 @@ Type cast expressions allow you to explicitly convert a value from one type to a
 
 A `default` expression evaluates to the default value of a type: `null` for reference types, the zero value for numeric and other value types.
 
-`default[T]` pins the type explicitly. A bare `default` takes its type from the surrounding context — a typed `let`, an assignment, or a return:
+`default[T]` pins the type explicitly. A bare `default` takes its type from the surrounding context: a typed `let`, an assignment, or a return:
 
 <GhulExample name="expressions-24" />
 

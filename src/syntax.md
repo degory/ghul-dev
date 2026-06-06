@@ -43,7 +43,7 @@ Blocks in ghūl can contain definitions, statements, or a mix of both. Which is 
 
 ## file structure
 
-At its top level a ghūl source file contains [definitions](/definitions.html) and `use` directives. There is no required ordering and no file header — a source file is simply a collection of definitions.
+At its top level a ghūl source file contains [definitions](/definitions.html) and `use` directives. There is no required ordering and no file header; a source file is simply a collection of definitions.
 
 <GhulExample name="syntax-2" />
 

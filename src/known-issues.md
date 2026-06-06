@@ -29,7 +29,7 @@ ghūl supports generics on classes, structs, traits, methods, unions and global 
 
 ### only a single type bound per parameter
 
-The parser accepts `[T: A]` — a single type bound — and `[T: A class new]` — a bound combined with kind and constructor constraints. Multiple type bounds (`[T: A /\ B]`) are not yet supported and are rejected with a clear diagnostic.
+The parser accepts `[T: A]` (a single type bound) and `[T: A class new]` (a bound combined with kind and constructor constraints). Multiple type bounds (`[T: A /\ B]`) are not yet supported and are rejected with a clear diagnostic.
 
 ### variance is declared only on traits
 

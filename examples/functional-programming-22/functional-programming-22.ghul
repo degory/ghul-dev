@@ -8,7 +8,7 @@ use STREAM.YIELD;
 
 entry() is
 // >>>
-    // counting down — state and output are both int;
+    // counting down. State and output are both int;
     // the sequence ends when the state reaches zero.
     let counting = (n: int) =>
         stream(
@@ -22,7 +22,7 @@ entry() is
         );
 
     // fibonacci. State is the named tuple
-    // (prev, current); output is int — the state and
+    // (prev, current); output is int. The state and
     // output types differ.
     let fibonacci = stream(
         (prev = 1, current = 1),

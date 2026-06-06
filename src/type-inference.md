@@ -1,10 +1,10 @@
 # type inference
 
 ::: tip runnable examples
-The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller, runnable type-inference examples — open it in a GitHub Codespace or a dev container to build and run them.
+The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller, runnable type-inference examples. Open it in a GitHub Codespace or a dev container to build and run them.
 :::
 
-ghūl infers types pervasively inside a method or function body — most local variables, loop variables, destructured variables and anonymous function parameters can be left unannotated, and the compiler works their types out from how they are initialized and used.
+ghūl infers types pervasively inside a method or function body: most local variables, loop variables, destructured variables and anonymous function parameters can be left unannotated, and the compiler works their types out from how they are initialized and used.
 
 Type inference is **function-local**: types inferred within one function are not visible outside it. Outside function bodies all types are explicit, including the signatures of methods and global functions, whose parameter and return types are always written out.
 
@@ -21,7 +21,7 @@ In each case the inferred type is concrete. The compiler does not introduce new 
 
 ghūl also performs **type narrowing** - within parts of a function a symbol may be observed at a more specific type than the one it was declared with. Narrowing applies only to local variables: function parameters, `let` variables, loop variables, destructured variables and anonymous function parameters. It does not apply to fields or properties.
 
-The examples below leave inferred types unannotated — hover over any variable to see the type the compiler worked out for it.
+The examples below leave inferred types unannotated; hover over any variable to see the type the compiler worked out for it.
 
 ## what stays explicit
 

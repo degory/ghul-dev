@@ -8,7 +8,7 @@ entry() is
 
     if name? then
         // name is narrowed to non-optional string
-        // here — no ! needed
+        // here, no ! needed
         write_line("hello, {name}");
     fi
 // <<<

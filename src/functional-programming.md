@@ -1,7 +1,7 @@
 # functional programming
 
 ::: tip runnable examples
-The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/functional) has fuller, runnable functional-programming examples — open it in a GitHub Codespace or a dev container to build and run them.
+The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/functional) has fuller, runnable functional-programming examples. Open it in a GitHub Codespace or a dev container to build and run them.
 :::
 
 ghūl has some support for basic functional programming
@@ -122,7 +122,7 @@ Unions shaped like `Option` types (exactly one non-unit variant) support the `?`
 
 ## pattern matching
 
-ghūl has no dedicated `match` construct. Discovering which variant a union holds, and branching on the result is done with `if let` — a `let` definition in an `if` / `elif` condition, where the branch runs only on a match, with the variable narrowed and in scope:
+ghūl has no dedicated `match` construct. Discovering which variant a union holds, and branching on the result, is done with `if let`: a `let` definition in an `if` / `elif` condition, where the branch runs only on a match, with the variable narrowed and in scope:
 
 <GhulExample name="functional-programming-18" />
 
@@ -139,14 +139,14 @@ ghūl has no dedicated `match` construct. Discovering which variant a union hold
 Lazy infinite and finite sequences are expressed with the
 `Ghul.Pipes.STREAM[T, S]` union and the `stream(initial, advance)`
 factory. State type `S` and output type `T` are independent, so the
-state of a stream is hidden from its consumers — `stream()` returns a
+state of a stream is hidden from its consumers; `stream()` returns a
 plain `Pipe[T]`.
 
 <GhulExample name="functional-programming-21" />
 
 `advance` is a pure step function: it receives the current state and
-returns either `DONE` (sequence is over) or `YIELD(value, next_state)`
-— the yielded element and the state to feed back in on the next step.
+returns either `DONE` (sequence is over) or `YIELD(value, next_state)`,
+the yielded element and the state to feed back in on the next step.
 The `||` infix is parser sugar for `YIELD(value, next_state)`, so a
 step body usually reads `value || next_state`.
 
@@ -157,7 +157,7 @@ and the lambda's yield expression. Multi-component state reads more
 clearly as a named tuple (`(n = 1, prev = 1)` with `s.n` and `s.prev`
 field access) than as a positional tuple needing destructuring. The
 no-argument `DONE[T, S]()` constructor in terminating sequences keeps
-its explicit type arguments — the surrounding `if/else` widens to
+its explicit type arguments because the surrounding `if/else` widens to
 `object` before the outer lambda return type can constrain it.
 
 The factory returns `Pipe[T]` directly so combinators like `.take`,
