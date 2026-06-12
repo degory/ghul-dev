@@ -34,7 +34,7 @@ You're invoked only after the site build passes. That means: VitePress accepted 
 
 Flag:
 
-- Prose that violates `STYLE.md`. Lead with the strongest evidence: hard-banned words (`binding`, `carry`, `simply`, `may` in the capability sense), em-dash use, capitalised-first-letter comments, banner-style headings (`// === === ===`, `// --- ---`), marketing register, page-opening clichés (`In this guide...`, `Let's dive into...`), summary-style page closings.
+- Prose that violates `STYLE.md`. Lead with the strongest evidence: hard-banned words (`binding`, `carry`, `lambda`); conditional bans (`may` only in the capability sense, `simply`/`just`/`easily`/`of course`/`obviously` only when the sentence reads the same without them - see `STYLE.md` "conditional bans" for the deletion test); em-dash use; capitalised-first-letter comments; banner-style headings (`// === === ===`, `// --- ---`); marketing register; page-opening clichés (`In this guide...`, `Let's dive into...`); summary-style page closings.
 - Prose that drifts away from the user's voice as captured by `STYLE.md`'s `imitate these` section. Compare against pre-2026-05-01 baselines of files in the same kind (about/why, reference, how-to, honest-limitations).
 - `<GhulExample/>` or inline ghūl code that uses deprecated idioms (`new Type(...)` instead of `Type(...)`, see GHUL.md).
 - Pages whose code blocks contradict each other or the language reference.
