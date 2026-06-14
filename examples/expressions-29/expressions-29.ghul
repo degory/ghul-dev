@@ -1,0 +1,16 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    let n = 2;
+
+    let size =
+        case n
+        when 0 then "none"
+        when 1, 2, 3 then "small"
+        else "large"
+        esac;
+
+    write_line("size = {size}");
+// <<<
+si

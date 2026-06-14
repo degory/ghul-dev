@@ -1,0 +1,13 @@
+use IO.Std.write_line;
+
+entry() is
+// >>>
+    let area = val
+        let width = 4;
+        let height = 5;
+        width * height
+    lav;
+
+    write_line("area = {area}");
+// <<<
+si

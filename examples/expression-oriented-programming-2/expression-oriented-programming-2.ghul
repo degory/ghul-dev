@@ -1,0 +1,15 @@
+use IO.Std.write_line;
+
+// >>>
+day_kind(day: int) -> string =>
+    case day
+    when 0, 6 then "weekend"
+    else "weekday"
+    esac;
+
+entry() is
+    write_line(day_kind(0));
+    write_line(day_kind(3));
+    write_line(day_kind(6));
+si
+// <<<

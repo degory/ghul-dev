@@ -1,0 +1,43 @@
+{
+  "name": "expression-oriented-programming-1",
+  "code": "sign(n: int) -> string =>\n    if n < 0 then \"negative\"\n    elif n == 0 then \"zero\"\n    else \"positive\"\n    fi;\n\nentry() is\n    write_line(sign(-4));\n    write_line(sign(0));\n    write_line(sign(7));\nsi",
+  "fullSource": "use IO.Std.write_line;\n\nsign(n: int) -> string =>\n    if n < 0 then \"negative\"\n    elif n == 0 then \"zero\"\n    else \"positive\"\n    fi;\n\nentry() is\n    write_line(sign(-4));\n    write_line(sign(0));\n    write_line(sign(7));\nsi\n",
+  "output": "negative\nzero\npositive\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 4, "text": "sign(n: Ghul.int) -> Ghul.string // global function" },
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "text": "n: Ghul.int // local argument" },
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 11, "text": "struct Ghul.int" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 22, "text": "class Ghul.string" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 5, "text": "entry() -> Ghul.void // global function" },
+    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 8, "text": "n: Ghul.int // local argument" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 10, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" },
+    { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 10, "text": "n: Ghul.int // local argument" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 13, "text": "Ghul.==(a: Ghul.int, b: Ghul.int) -> Ghul.bool // innate function compare.value" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 8, "startColumn": 16, "endLine": 8, "endColumn": 19, "text": "sign(n: Ghul.int) -> Ghul.string // global function" },
+    { "startLine": 8, "startColumn": 21, "endLine": 8, "endColumn": 21, "text": "Ghul.-(a: Ghul.int) -> Ghul.int // innate function arithmetic.neg" },
+    { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 9, "startColumn": 16, "endLine": 9, "endColumn": 19, "text": "sign(n: Ghul.int) -> Ghul.string // global function" },
+    { "startLine": 10, "startColumn": 5, "endLine": 10, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 10, "startColumn": 16, "endLine": 10, "endColumn": 19, "text": "sign(n: Ghul.int) -> Ghul.string // global function" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 4, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 11, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 22, "tokenType": "class" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 5, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 8, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 10, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 10, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 13, "tokenType": "function" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 8, "startColumn": 16, "endLine": 8, "endColumn": 19, "tokenType": "function" },
+    { "startLine": 8, "startColumn": 21, "endLine": 8, "endColumn": 21, "tokenType": "function" },
+    { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 9, "startColumn": 16, "endLine": 9, "endColumn": 19, "tokenType": "function" },
+    { "startLine": 10, "startColumn": 5, "endLine": 10, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 10, "startColumn": 16, "endLine": 10, "endColumn": 19, "tokenType": "function" }
+  ]
+}
