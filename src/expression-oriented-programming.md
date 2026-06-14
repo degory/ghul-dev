@@ -16,12 +16,6 @@ A `case` yields the value of the matched arm. As an expression it needs an `else
 
 <GhulExample name="expression-oriented-programming-2" />
 
-## let in
-
-A `let ... in ...` expression introduces one or more local variables scoped to a single trailing expression. It is the lightweight form when a value needs a local or two but not a full block:
-
-<GhulExample name="expression-oriented-programming-6" />
-
 ## val blocks
 
 A `val ... lav` block runs a sequence of statements and yields a value: its tail expression, or any `return` that targets the block. It gives an expression room for intermediate local variables, loops, and early exits:
@@ -29,6 +23,12 @@ A `val ... lav` block runs a sequence of statements and yields a value: its tail
 <GhulExample name="expression-oriented-programming-3" />
 
 A `return` inside the block yields from the block, not from the enclosing function.
+
+## let in
+
+A `let ... in ...` expression introduces one or more local variables scoped to a single trailing expression. It is lighter than a `val ... lav` block when a value needs only a local or two:
+
+<GhulExample name="expression-oriented-programming-6" />
 
 ## expression bodies
 
