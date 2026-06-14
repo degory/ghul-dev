@@ -377,6 +377,49 @@ Errors, warnings and informational messages all flow through `Logger` in
 stores them in `DIAGNOSTICS_STORE`. The IDE retrieves diagnostics by
 reading the store after a compile.
 
+## type inference
+
+Type inference runs inside `compile-expressions`{:text} and stays within
+function bodies; every declared signature is explicit, so inference never
+changes anything visible from outside a function. The [type inference](/type-inference)
+chapter covers what is and isn't inferred; this section is the mechanism.
+
+It is bidirectional. Bottom-up, an expression's type is computed from its
+sub-expressions. Top-down, the context the expression sits in - a typed
+`let`, an assignment, a `return`, a call argument, an `if` or `case`
+branch - pushes an expected type back down into it. Where several types
+meet, such as the branches of an `if` or the elements of a list literal,
+`LEAST_UPPER_BOUND_MAP` finds the most specific type compatible with all
+of them.
+
+An unknown type - a local whose type isn't settled yet, an anonymous
+function parameter, a not-yet-bound generic argument - is held by an
+`INFERRED_VARIABLE_TYPE` placeholder. As the body is walked, each use of
+the variable attaches a *constraint* to the placeholder: a member access
+records that the type must have that member, a call records an argument
+and return shape, a `for` loop records that it must be iterable, an
+index records an indexer. These are the `MEMBER_CONSTRAINT`,
+`CALL_CONSTRAINT`, `ITERABLE_CONSTRAINT`, `INDEX_CONSTRAINT` and
+`DESTRUCTURE_CONSTRAINT` types under `semantic/`{:text}. When the
+placeholder is resolved, the accumulated constraints filter the candidate
+types, rejecting any that don't support how the variable is used.
+
+One walk of a body cannot always see enough: a `let`-bound anonymous
+function is used after it is defined, and a constructor's type arguments
+can be fixed by a later call. So `compile-expressions`{:text} re-walks
+each function body. Constraints attached during a walk persist into the
+next and only ever narrow, so each pass either tightens the unknowns or
+leaves them unchanged; the walk repeats until it settles - no new errors
+and no expression left consuming an unresolved type. Anything still
+unknown at that point is reported where it could not be inferred.
+
+Inference is interleaved with flow-sensitive narrowing. Alongside each
+variable's inferred type, the pass tracks what the control flow has
+proved about it - that an `isa` test succeeded, that an optional was
+checked for presence, that a guard returned on the other case - and
+joins those facts where branches merge. Narrowing changes the type a
+variable is seen at within a region without changing its declared type.
+
 ## analysis mode
 
 The same compiler executable runs the IDE's language service. When the
