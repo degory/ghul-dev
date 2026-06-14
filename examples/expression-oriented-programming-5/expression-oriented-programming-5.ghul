@@ -1,0 +1,22 @@
+use IO.Std.write_line;
+
+// >>>
+// one expression body holding a case expression, an if expression, and a val block:
+grade(score: int) -> string => val
+    let band =
+        case score / 10
+        when 10, 9 then "A"
+        when 8 then "B"
+        when 7 then "C"
+        else "F"
+        esac;
+
+    if band == "F" then "fail" else "pass ({band})" fi
+lav;
+
+entry() is
+    write_line(grade(95));
+    write_line(grade(82));
+    write_line(grade(60));
+si
+// <<<

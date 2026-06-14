@@ -1,0 +1,15 @@
+use IO.Std.write_line;
+
+// >>>
+sign(n: int) -> string =>
+    if n < 0 then "negative"
+    elif n == 0 then "zero"
+    else "positive"
+    fi;
+
+entry() is
+    write_line(sign(-4));
+    write_line(sign(0));
+    write_line(sign(7));
+si
+// <<<

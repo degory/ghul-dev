@@ -80,12 +80,10 @@ pipes make it easy to iterate over lists and generators producing
 transformed output without mutating the source data
 
 <GhulExample name="functional-programming-9" />
-### expression oriented programming
-Expression bodied functions and some support for
-expression oriented programming help in writing
-pure functions
 
-<GhulExample name="functional-programming-10" />
+### expression oriented programming
+
+Expression bodies and value-producing `if`, `case`, and `val ... lav` blocks help in writing pure functions; see [expression oriented programming](/expression-oriented-programming).
 
 ## higher order functions
 

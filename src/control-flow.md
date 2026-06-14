@@ -18,7 +18,7 @@ In ghūl the `assert` statement is used to ensure an expected condition holds an
 
 ## if statement
 
-If statements allow the execution of different code blocks based on specific conditions. 
+If statements allow the execution of different code blocks based on specific conditions. An `if` is also an expression that yields the value of its chosen branch; see [if as an expression](/expressions#conditional).
 
 ### if-then-fi
 
@@ -186,6 +186,8 @@ The block statement body of the do statement, delimited by `do` and `od` forms a
 
 
 ## case statement
+
+A `case` is also an expression that yields the value of the matched arm; see [case as an expression](/expressions#case-expression).
 
 <GhulExample name="control-flow-32" />
 

@@ -1,0 +1,25 @@
+use IO.Std.write_line;
+
+// >>>
+// a val ... lav block runs its statements, then yields the tail expression:
+midpoint(lo: int, hi: int) -> int => val
+    let span = hi - lo;
+    lo + span / 2
+lav;
+
+// an early return yields from the block, not the enclosing function:
+first_even(xs: int[]) -> int => val
+    for x in xs do
+        if x % 2 == 0 then
+            return x;
+        fi
+    od
+    -1
+lav;
+
+entry() is
+    write_line("midpoint = {midpoint(10, 20)}");
+    write_line("first_even = {first_even([1, 3, 4, 7])}");
+    write_line("first_even = {first_even([1, 3, 5])}");
+si
+// <<<

@@ -163,6 +163,7 @@ export default defineConfig({
       { text: 'definitions', link: '/definitions' },
       { text: 'expressions', link: '/expressions' },
       { text: 'control flow', link: '/control-flow' },
+      { text: 'expression oriented programming', link: '/expression-oriented-programming' },
       { text: 'functional programming', link: '/functional-programming' },
       { text: 'object oriented programming', link: '/object-oriented-programming' },
       { text: 'generics', link: '/generics' },

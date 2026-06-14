@@ -1,0 +1,25 @@
+{
+  "name": "expressions-27",
+  "code": "let area = let r = 5 in r * r;\n\nwrite_line(\"area = {area}\");",
+  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let area = let r = 5 in r * r;\n\n    write_line(\"area = {area}\");\nsi\n",
+  "output": "area = 25\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "text": "r: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "area: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "text": "r: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 29, "text": "r: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "text": "Ghul.*(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.mul" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 24, "text": "area: Ghul.int // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 29, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 24, "tokenType": "variable", "modifiers": "readonly" }
+  ]
+}

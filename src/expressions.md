@@ -92,6 +92,12 @@ Conditional expressions allow you to evaluate different expressions based on a c
 
 <GhulExample name="expressions-18" />
 
+## case expression
+
+A `case` expression yields the value of the matched arm. It needs an `else` arm so that every value is covered; the arm values and the `else` agree on a type:
+
+<GhulExample name="expressions-29" />
+
 ## function call
 
 Function call expressions allow you to invoke functions and methods by providing the necessary arguments.
@@ -131,6 +137,20 @@ A `default` expression evaluates to the default value of a type: `null` for refe
 <GhulExample name="expressions-24" />
 
 `let a = default` initialises a local to its type's default value, where the type is inferred from how the local is later used.
+
+## let in
+
+A `let ... in ...` expression introduces one or more local variables that are in scope only within the trailing expression.
+
+<GhulExample name="expressions-27" />
+
+## block
+
+A `val ... lav` block is a sequence of statements that produces a value. The value is the block's tail expression, or any `return E` whose target is the block. A block gives an expression room for intermediate local variables, loops, and early exits:
+
+<GhulExample name="expressions-28" />
+
+A `return E` inside a `val ... lav` block yields from the block, not from the enclosing function.
 
 These are the main types of expressions in ghūl. They can be combined and nested to form more complex expressions and statements:
 

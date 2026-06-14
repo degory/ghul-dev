@@ -1,0 +1,30 @@
+use IO.Std.write_line;
+
+// >>>
+// expression-bodied free function:
+square(n: int) -> int => n * n;
+
+class COUNTER is
+    _count: int;
+
+    init() is si
+
+    // an expression body can be a val ... lav block:
+    bump() -> int => val
+        _count = _count + 1;
+        _count
+    lav;
+si
+
+entry() is
+    write_line("square(6) = {square(6)}");
+
+    let c = COUNTER();
+    write_line("bump = {c.bump()}");
+    write_line("bump = {c.bump()}");
+
+    // expression-bodied anonymous function:
+    let twice = (n: int) => n * 2;
+    write_line("twice(21) = {twice(21)}");
+si
+// <<<
