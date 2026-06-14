@@ -33,8 +33,7 @@ can all call themselves or each other recursively
 
 ### mutual recursion in anonymous functions
 
-Mutual recursion for anonymous functions is slightly awkward, but possible
-by passing one function into the other as an argument:
+Mutual recursion for anonymous functions is slightly awkward because of the forward reference. One way is to declare one as a mutable variable, define the other, then assign to it: the `let mut` is captured by reference, so the first function sees the second once it is assigned:
 
 <GhulExample name="functional-programming-4" />
 
@@ -47,10 +46,10 @@ While ghūl supports imperitive code it also aims to support
 writing pure functions with appropriate constructs and defaults
 
 ### lists are immutable by default
-The standard trait for lists `Collections.List[T]` is immutable (it maps to .NET's ``System.Collections.Generic.IReadOnlyList`1[T]``)
+The standard trait for lists `Collections.List[T]` is immutable
 
 ### maps are immutable by default
-The standard trait for maps `Collections.Map[T]` is immutable (it maps to .NET's ``System.Collections.Generic.IReadOnlyDictionary`2[K,V]``)
+The standard trait for maps `Collections.Map[T]` is immutable
 
 ### arrays are immutable
 The ghūl array type `T[]` does not expose an assign indexer
