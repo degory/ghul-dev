@@ -15,6 +15,12 @@ pretty much anything else you can do with any other ghūl value
 
 <GhulExample name="functional-programming-1" />
 
+## closures
+
+A function literal can refer to identifiers from its surrounding lexical scope; those references form its closure. A `let mut` is captured by reference, so a write from inside the closure is visible to the surrounding scope and vice versa; an immutable `let` cannot be reassigned anywhere, so the closure reads the value the variable holds. The captured values stay live for as long as the function itself does, including after the surrounding scope has returned.
+
+The [closures sub-project](https://github.com/degory/ghul-examples/tree/main/examples/closures) of the ghul-examples repository has a runnable closures example.
+
 ## filter, map, reduce
 
 ghūl pipes provide filter, map and reduce as well as other ways to
