@@ -17,19 +17,27 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 
 - **type safety**: ghūl enforces type safety at compile-time.
 
-- **functional programming elements**: ghūl supports anonymous functions with closures.
+- **type inference**: local variables, loop variables, destructured variables, anonymous function parameter and return types, and generic type arguments at call sites are inferred from initializers and use sites. Inference is bidirectional and iterative within a function body.
 
-- **OOP**: ghūl supports classes, objects, inheritance, polymorphism, and other Object-Oriented Programming concepts.
+- **type narrowing**: union variant tests, `isa` checks, null checks, and `if let` narrow a local variable's type within the code the check covers.
 
-- **error handling**: the language includes try/catch/finally for error handling.
+- **functional programming**: first-class anonymous functions with closures, higher order functions, and non-mutating pipe operations over lists. Arrays, tuples, and list literals are immutable.
 
-- **generics**: ghūl types, methods, and functions can have generic type parameters.
+- **pattern matching**: `if let` and `case`/`when` arms with type tests, destructuring with literal leaves, and value lists. `case` arms over a union or `bool` are checked for exhaustiveness; other scrutinees need `else`.
 
-- **async/await**: functions returning `Tasks.TASK[T]` may use `await` to wait on a task and resume with its result.
+- **expression-oriented**: `if`, `case`, and block forms are expressions.
 
-- **generators**: functions returning `Iterable[T]` may use `yield` to produce a sequence of values lazily.
+- **OOP**: classes, structs, traits, inheritance, polymorphism, properties, and indexers.
 
-- **.NET integration**: ghūl targets .NET, producing and consuming NuGet packages and supporting inter-operation with other .NET languages.
+- **error handling**: `try`/`catch`/`finally` over .NET exceptions.
+
+- **generics**: types, methods, and functions can have generic type parameters. Traits can be declared covariant or contravariant with `[T: out]` / `[T: in]`; variance on imported .NET generics is read from metadata.
+
+- **async/await**: functions returning `Tasks.TASK[T]` can use `await` to wait on a task and resume with its result.
+
+- **generators**: functions returning `Iterable[T]` can use `yield` to produce a sequence of values lazily.
+
+- **.NET integration**: ghūl targets .NET, producing and consuming NuGet packages and inter-operating with other .NET languages.
 
 ## examples
 
