@@ -21,11 +21,11 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 
 - **type narrowing**: union variant tests, `isa` checks, null checks, and `if let` narrow a local variable's type within the code the check covers.
 
-- **functional programming**: first-class anonymous functions with closures, higher order functions, and non-mutating pipe operations over lists. Arrays, tuples, and list literals are immutable.
+- **functional programming**: first-class anonymous functions with closures, higher order functions, and non-mutating pipe operations over lists; arrays, tuples, and list literals are immutable.
 
 - **pattern matching**: `if let` and `case`/`when` arms with type tests, destructuring with literal leaves, and value lists. `case` arms over a union or `bool` are checked for exhaustiveness; other scrutinees need `else`.
 
-- **expression-oriented**: `if`, `case`, and block forms are expressions, so most control flow constructs return a value.
+- **expression-oriented**: `if`, `case`, and block forms are expressions.
 
 - **OOP**: classes, structs, traits, inheritance, polymorphism, properties, and indexers.
 
