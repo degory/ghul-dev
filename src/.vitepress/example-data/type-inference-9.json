@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    for i in 1::10 do\n        write_line(\"{i}\");\n    od\n\n    let pairs = [(\"a\", 1), (\"b\", 2)];\n\n    for (name, count) in pairs do\n        write_line(\"{name}: {count}\");\n    od\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\na: 1\nb: 2\n",
   "diagnostics": [],
   "hovers": [

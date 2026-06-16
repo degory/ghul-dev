@@ -196,7 +196,29 @@ function copy() {
 // of the rich hover and diagnostic markup the displayed slice carries.
 const hiddenBefore = computed(() => example.value?.hiddenBefore === true)
 const hiddenAfter = computed(() => example.value?.hiddenAfter === true)
-const canExpand = computed(() => hiddenBefore.value || hiddenAfter.value)
+const hiddenGaps = computed(() => {
+  const raw = example.value?.hiddenGapsAfterLine
+  return Array.isArray(raw) ? new Set(raw) : new Set()
+})
+const canExpand = computed(() =>
+  hiddenBefore.value || hiddenAfter.value || hiddenGaps.value.size > 0)
+
+// Interleave the visible-code lines with faint ellipsis rows wherever
+// the artifact says scaffold is hidden. Edges follow the
+// hiddenBefore/hiddenAfter content-based rule; gaps between visible
+// regions are driven by hiddenGapsAfterLine and are present whenever
+// the author wrote a // <<< / // >>> pair, regardless of content.
+const displayItems = computed(() => {
+  const items = []
+  if (hiddenBefore.value) items.push({ type: 'ellipsis', key: 'top' })
+  const gaps = hiddenGaps.value
+  lines.value.forEach((segments, i) => {
+    items.push({ type: 'line', segments, key: 'l' + i })
+    if (gaps.has(i + 1)) items.push({ type: 'ellipsis', key: 'g' + (i + 1) })
+  })
+  if (hiddenAfter.value) items.push({ type: 'ellipsis', key: 'bot' })
+  return items
+})
 
 const expanded = ref(false)
 
@@ -267,27 +289,28 @@ const panelLabel = computed(() =>
     <div class="ghul-example-code">
       <pre v-if="expanded" class="ghul-example-full-source">{{ example.fullSource }}</pre>
       <template v-else>
-        <div v-if="hiddenBefore" class="ghul-example-ellipsis" aria-hidden="true">&hellip;</div>
-        <div v-for="(segments, i) in lines" :key="i" class="ghul-example-line">
-          <span
-            v-for="(segment, j) in segments"
-            :key="j"
-            :style="segment.style"
-            :class="[
-              'ghul-example-tok',
-              segment.semantic ? 'ghul-sem-' + segment.semantic.tokenType : null,
-              segment.semantic && segment.semantic.modifiers && segment.semantic.modifiers.includes('static') ? 'ghul-sem-mod-static' : null,
-              {
-                'ghul-example-hover': segment.hover,
-                'ghul-example-squiggle-error': segment.diagnostic && segment.diagnostic.severity === 'error',
-                'ghul-example-squiggle-warning': segment.diagnostic && segment.diagnostic.severity === 'warning',
-              }
-            ]"
-            @mouseenter="onEnter($event, segment)"
-            @mouseleave="onLeave(segment)"
-          >{{ segment.text }}</span>
-        </div>
-        <div v-if="hiddenAfter" class="ghul-example-ellipsis" aria-hidden="true">&hellip;</div>
+        <template v-for="item in displayItems" :key="item.key">
+          <div v-if="item.type === 'ellipsis'" class="ghul-example-ellipsis" aria-hidden="true">&hellip;</div>
+          <div v-else class="ghul-example-line">
+            <span
+              v-for="(segment, j) in item.segments"
+              :key="j"
+              :style="segment.style"
+              :class="[
+                'ghul-example-tok',
+                segment.semantic ? 'ghul-sem-' + segment.semantic.tokenType : null,
+                segment.semantic && segment.semantic.modifiers && segment.semantic.modifiers.includes('static') ? 'ghul-sem-mod-static' : null,
+                {
+                  'ghul-example-hover': segment.hover,
+                  'ghul-example-squiggle-error': segment.diagnostic && segment.diagnostic.severity === 'error',
+                  'ghul-example-squiggle-warning': segment.diagnostic && segment.diagnostic.severity === 'warning',
+                }
+              ]"
+              @mouseenter="onEnter($event, segment)"
+              @mouseleave="onLeave(segment)"
+            >{{ segment.text }}</span>
+          </div>
+        </template>
       </template>
     </div>
     <div v-if="example.output || diagnostics.length" class="ghul-example-output">

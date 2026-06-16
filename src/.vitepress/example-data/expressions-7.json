@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let things = (\"thing\", 12.34);\n\n    let name = things.`0;\n    let weight = things.`1;\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

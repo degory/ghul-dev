@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let c = 'c';\n    let u_macron = 'ū'\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let gt = 3 > 1; // true\n    let gte = 4 >= 4; // true\n    let lt = 3 < 1; // false\n    let lte = 4 <= 4; // true\n    let eq = 1 == 2; // false\n    let neq = 1 != 2; // true\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

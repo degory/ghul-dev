@@ -4,6 +4,7 @@
   "fullSource": "struct POINT(x: double, y: double);\n\nentry() is\n    let origin = POINT(0.0D, 0.0D);\n\n    // or up, or down, or even left, depending on\n    // your co-ordinate system!\n    let right = POINT(1.0D, 0.0D);\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

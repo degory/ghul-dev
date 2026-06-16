@@ -4,6 +4,7 @@
   "fullSource": "class Base();\n\nclass DERIVED(): Base;\n\ndo_something[T](a: T, b: T) -> T => a;\n\nentry() is\n    let base = do_something(Base(), DERIVED());\n    let derived = do_something(DERIVED(), DERIVED());\n    let obj = do_something(object(), DERIVED());\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [1],
   "output": "",
   "diagnostics": [],
   "hovers": [

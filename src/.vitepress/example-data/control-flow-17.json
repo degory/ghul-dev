@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let a = 5;\n\n    if a > 0 then\n        // new scope - neither y nor z are in scope here\n        let x = 10;\n        write_line(\"x is {x}\");\n    elif a < 0 then\n        // new scope - neither x nor z are in scope here\n        let y = 20;\n        write_line(\"y is {y}\");\n    else\n        // new scope - neither x nor y are in scope here\n        let z = 30;\n        write_line(\"z is {z}\");\n    fi\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "x is 10\n",
   "diagnostics": [],
   "hovers": [

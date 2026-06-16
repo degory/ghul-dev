@@ -4,6 +4,7 @@
   "fullSource": "namespace Example is\n    ...\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [],

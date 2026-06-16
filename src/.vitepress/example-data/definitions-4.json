@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let\n        an_inferred_int = 123,\n        an_explicit_int: int = 456,\n        a_string = \"hello\";\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

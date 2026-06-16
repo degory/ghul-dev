@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let a = default[int];   // 0\n    let b: string = default;   // null\nsi\n\nzero[T]() -> T => default;\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
+  "hiddenGapsAfterLine": [2],
   "output": "",
   "diagnostics": [],
   "hovers": [

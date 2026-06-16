@@ -4,6 +4,7 @@
   "fullSource": "sum(x: int, y: int) -> int => x + y;\n\nentry() is\n    let result = sum(10, 5);\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

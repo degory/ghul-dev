@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let s = 123.456; // single\n    let t = 123.456E5; // single\n\n    let d = 123.456D; // double\n    let e = 123_456_789_000.0D // double\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

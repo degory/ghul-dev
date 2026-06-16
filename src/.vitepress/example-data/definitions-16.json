@@ -4,6 +4,7 @@
   "fullSource": "union Tree is\n    NODE(left: Tree, right: Tree);\n    LEAF(value: int);\nsi\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

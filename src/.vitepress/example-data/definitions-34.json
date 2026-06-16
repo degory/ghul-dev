@@ -4,6 +4,7 @@
   "fullSource": "class PUBLIC is\nsi\n\npublic_function() -> int => 0;\n\npublic_property: int;\n\nclass _PRIVATE is\nsi\n\n_private_function() -> int => 0;\n\n_private_property: int;\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

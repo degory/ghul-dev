@@ -4,6 +4,7 @@
   "fullSource": "class InsufficientFundsException(message: string): System.Exception is\n    super(message);\nsi\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

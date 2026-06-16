@@ -4,6 +4,7 @@
   "fullSource": "class THING is\n    do_something_public() is\n    si\n\n    _do_something_protected() is\n    si\nsi\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nclass Animal is si\n\nclass Cat(name: string): Animal is\n    purr() -> string => \"{name} purrs\";\nsi\n\nentry() is\n    let a: Animal = Cat(\"whiskers\");\n    let c = cast Cat(a);\n\n    if c? then\n        write_line(c.purr());\n    fi\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "whiskers purrs\n",
   "diagnostics": [],
   "hovers": [

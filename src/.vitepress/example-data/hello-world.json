@@ -4,6 +4,7 @@
   "fullSource": "entry() =>\n    IO.Std.write_line(\"hello, world\");\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
   "output": "hello, world\n",
   "diagnostics": [],
   "hovers": [

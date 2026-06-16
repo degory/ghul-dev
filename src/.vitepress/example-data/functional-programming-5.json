@@ -4,6 +4,7 @@
   "fullSource": "is_even(n: int) -> bool =>\n    if n == 0 then true else is_odd(n - 1) fi;\n\nis_odd(n: int) -> bool =>\n    if n == 0 then false else is_even(n - 1) fi;\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

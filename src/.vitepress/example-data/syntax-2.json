@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\ngreet(name: string) is\n    write_line(\"hello, {name}\");\nsi\n\nentry() is\n    greet(\"world\");\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
   "output": "hello, world\n",
   "diagnostics": [],
   "hovers": [

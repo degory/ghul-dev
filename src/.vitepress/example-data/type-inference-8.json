@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let person = (\"alice\", 30);\n    let (name, age) = person;\n\n    let ((first, second), third) = ((\"a\", \"b\"), \"c\");\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

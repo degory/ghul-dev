@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nclass BOX is\n    property: int public;\n\n    init() is si\nsi\n\nentry() is\n    let thing = BOX();\n    let i mut = 0;\n    let j = 10;\n    let s mut = \"Hello\";\n\n    i = i + j;\n    s = \"{s} World!\";\n\n    thing.property = i + j;\n    write_line(\"i = {i}, s = {s}, thing.property = {thing.property}\");\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "i = 10, s = Hello World!, thing.property = 20\n",
   "diagnostics": [],
   "hovers": [

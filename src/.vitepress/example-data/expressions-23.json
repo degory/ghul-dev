@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let integer_value = cast int(3.14);\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

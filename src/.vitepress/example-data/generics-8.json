@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\n// T: out marks Box[T] as covariant in T - a Box[CAT] is also a Box[Animal]\ntrait Box[T: out] is\n    contents() -> T;\nsi\n\ntrait Animal is\n    speak() -> string;\nsi\n\nclass CAT(): Animal is\n    speak() -> string => \"meow\";\nsi\n\nclass CAT_BOX(): Box[CAT] is\n    contents() -> CAT => CAT();\nsi\n\nentry() is\n    let cats: Box[CAT] = CAT_BOX();\n    let animals: Box[Animal] = cats;   // covariance\n\n    write_line(animals.contents().speak());\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [4],
   "output": "meow\n",
   "diagnostics": [],
   "hovers": [

@@ -4,6 +4,7 @@
   "fullSource": "side_effect() -> int => 0;\n\nentry() is\n    let counter mut = 0;\n    let _ = side_effect();\n    let (_, _, third) = (1, 2, 3);\n    let only_first = (x: int, _: int) => x;\n    for _ in 1..10 do\n        counter = counter + 1;\n    od\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

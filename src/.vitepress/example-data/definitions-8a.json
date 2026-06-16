@@ -4,6 +4,7 @@
   "fullSource": "class POINT(x: int, y: int) is\nsi\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

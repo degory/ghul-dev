@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let factorial = n rec =>\n        if n == 0 then 1 else n * rec(n - 1) fi;\n    write_line(\"{factorial(5)}\");\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "120\n",
   "diagnostics": [],
   "hovers": [

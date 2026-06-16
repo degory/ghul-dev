@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let is_odd mut = default;\n\n    let is_even = n =>\n        if n == 0 then true else is_odd(n - 1) fi;\n\n    is_odd = n =>\n        if n == 0 then false else is_even(n - 1) fi;\n\n    write_line(\"even(10): {is_even(10)}\");\n    write_line(\"odd(10): {is_odd(10)}\");\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "even(10): True\nodd(10): False\n",
   "diagnostics": [],
   "hovers": [

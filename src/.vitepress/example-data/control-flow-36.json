@@ -4,6 +4,7 @@
   "fullSource": "try\n    // Code that might throw an exception\ncatch e: SomeExceptionType\n    // Exception handling code\nfinally\n    // Clean-up code, always executed\nyrt\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [],

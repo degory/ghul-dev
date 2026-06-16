@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let counter mut = 0;\n    do\n        counter = counter + 1;\n        if counter == 3 then\n            continue;\n        fi\n        write_line(counter);\n        if counter == 5 then\n            break;\n        fi\n    od\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "1\n2\n4\n5\n",
   "diagnostics": [],
   "hovers": [

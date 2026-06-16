@@ -4,6 +4,7 @@
   "fullSource": "tries: int;\n\ntry_something(limit: int) is\n    if tries > limit then\n        return; // give up\n    fi\n\n    tries = tries + 1;\n\n    // do stuff\nsi\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [1],
   "output": "",
   "diagnostics": [],
   "hovers": [

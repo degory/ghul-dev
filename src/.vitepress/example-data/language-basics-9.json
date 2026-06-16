@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let primes = [2, 3, 5, 7, 11];\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
