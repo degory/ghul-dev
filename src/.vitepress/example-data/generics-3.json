@@ -2,12 +2,15 @@
   "name": "generics-3",
   "code": "struct HOLD_SOMETHING[T](value: T);",
   "fullSource": "struct HOLD_SOMETHING[T](value: T);\n\nentry() is\nsi\n",
+  "hiddenBefore": false,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 21, "text": "struct HOLD_SOMETHING" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "text": "T // type variable" },
     { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 30, "text": "HOLD_SOMETHING.value: T // instance property" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 33, "text": "HOLD_SOMETHING.init(value: T) // constructor" },
     { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 33, "text": "T // type variable" }
   ],
   "semanticTokens": [

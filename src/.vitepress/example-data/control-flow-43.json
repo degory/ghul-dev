@@ -2,6 +2,8 @@
   "name": "control-flow-43",
   "code": "tries: int;\ntry_something(limit: int) is\n    if tries > limit then\n        return; // give up\n    fi\n\n    tries = tries + 1;\n\n    // do stuff\nsi",
   "fullSource": "tries: int;\n\ntry_something(limit: int) is\n    if tries > limit then\n        return; // give up\n    fi\n\n    tries = tries + 1;\n\n    // do stuff\nsi\n\nentry() is\nsi\n",
+  "hiddenBefore": false,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

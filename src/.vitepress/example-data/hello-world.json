@@ -2,6 +2,8 @@
   "name": "hello-world",
   "code": "entry() =>\n    IO.Std.write_line(\"hello, world\");",
   "fullSource": "entry() =>\n    IO.Std.write_line(\"hello, world\");\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "output": "hello, world\n",
   "diagnostics": [],
   "hovers": [

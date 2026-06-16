@@ -2,6 +2,8 @@
   "name": "control-flow-33",
   "code": "withdraw(balance: int, amount: int) -> int is\n    if amount > balance then\n        throw System.InvalidOperationException(\n            \"insufficient funds\"\n        );\n    fi\n\n    return balance - amount;\nsi",
   "fullSource": "withdraw(balance: int, amount: int) -> int is\n    if amount > balance then\n        throw System.InvalidOperationException(\n            \"insufficient funds\"\n        );\n    fi\n\n    return balance - amount;\nsi\n\nentry() is\nsi\n",
+  "hiddenBefore": false,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

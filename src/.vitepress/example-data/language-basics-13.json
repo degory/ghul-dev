@@ -2,6 +2,8 @@
   "name": "language-basics-13",
   "code": "let point: (x: int, y: int) = (10, 20);\nlet person = (name = \"Alice\", age = 30);\nlet x = point.x;\nlet y = point.y;\nlet name = person.name;\nlet age = person.age;",
   "fullSource": "entry() is\n    let point: (x: int, y: int) = (10, 20);\n    let person = (name = \"Alice\", age = 30);\n    let x = point.x;\n    let y = point.y;\n    let name = person.name;\n    let age = person.age;\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

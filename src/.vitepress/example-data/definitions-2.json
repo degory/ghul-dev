@@ -2,6 +2,8 @@
   "name": "definitions-2",
   "code": "let x: int = 42;",
   "fullSource": "entry() is\n    let x: int = 42;\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

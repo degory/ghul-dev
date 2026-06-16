@@ -2,6 +2,8 @@
   "name": "expressions-20",
   "code": "let length = \"Hello\".length;",
   "fullSource": "entry() is\n    let length = \"Hello\".length;\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

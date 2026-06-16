@@ -2,6 +2,8 @@
   "name": "control-flow-35",
   "code": "try\n    withdraw(account, 100);\ncatch e: InsufficientFundsException\n    write_line(\"declined: {e.message}\");\nyrt",
   "fullSource": "use IO.Std.write_line;\n\nclass InsufficientFundsException(message: string): System.Exception is\n    super(message);\nsi\n\nwithdraw(account: int, amount: int) -> int is\n    if amount > account then\n        throw InsufficientFundsException(\"only {account} available\");\n    fi\n\n    return account - amount;\nsi\n\nentry() is\n    let account = 50;\n    try\n        withdraw(account, 100);\n    catch e: InsufficientFundsException\n        write_line(\"declined: {e.message}\");\n    yrt\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "declined: only 50 available\n",
   "diagnostics": [],
   "hovers": [

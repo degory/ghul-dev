@@ -2,6 +2,8 @@
   "name": "functional-programming-6",
   "code": "let list = [1, 2, 3, 4, 5];\n\nlet element = list[3]; // elements can be read\n\nlist[3] = 6;",
   "fullSource": "// expect: error\nentry() is\n    let list = [1, 2, 3, 4, 5];\n\n    let element = list[3]; // elements can be read\n\n    list[3] = 6;\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [
     { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 8, "severity": "error", "message": "indexer is read-only in Ghul.int[]" }

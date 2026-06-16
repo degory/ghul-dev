@@ -2,6 +2,8 @@
   "name": "control-flow-44",
   "code": "fib(n: int) -> int is\n    if n < 0 then\n        return 0;\n    elif n == 1 then\n        return 1;\n    else\n        return fib(n - 1) + fib(n - 2);\n    fi\nsi",
   "fullSource": "use IO.Std.write_line;\n\nfib(n: int) -> int is\n    if n < 0 then\n        return 0;\n    elif n == 1 then\n        return 1;\n    else\n        return fib(n - 1) + fib(n - 2);\n    fi\nsi\n\nentry() is\n    for i in 0::10 do\n        write_line(\"fib({i}) = {fib(i)}\");\n    od\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "fib(0) = 0\nfib(1) = 1\nfib(2) = 1\nfib(3) = 2\nfib(4) = 3\nfib(5) = 5\nfib(6) = 8\nfib(7) = 13\nfib(8) = 21\nfib(9) = 34\nfib(10) = 55\n",
   "diagnostics": [],
   "hovers": [

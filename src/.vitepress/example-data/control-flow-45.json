@@ -2,6 +2,8 @@
   "name": "control-flow-45",
   "code": "default_return() -> int is\n    // do nothing, return 0\nsi\nlet i = default_return();\nassert i == 0;",
   "fullSource": "// expect: warning\nuse IO.Std.write_line;\n\ndefault_return() -> int is\n    // do nothing, return 0\nsi\n\nentry() is\n    let i = default_return();\n    assert i == 0;\n    write_line(\"default return value is {i}\");\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "default return value is 0\n",
   "diagnostics": [
     { "startLine": 1, "startColumn": 1, "endLine": 3, "endColumn": 3, "severity": "warning", "message": "[definite-return] function may not return a value on all paths" }

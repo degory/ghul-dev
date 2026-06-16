@@ -2,6 +2,8 @@
   "name": "control-flow-26",
   "code": "let zero_to_four = 0..5;\nlet five_to_nine = 5..10;\n\nlet zero_to_nine = zero_to_four | .cat(five_to_nine);\n\nwhile zero_to_nine.move_next() do\n    write_line(zero_to_nine.current);\nod",
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let zero_to_four = 0..5;\n    let five_to_nine = 5..10;\n\n    let zero_to_nine = zero_to_four | .cat(five_to_nine);\n\n    while zero_to_nine.move_next() do\n        write_line(zero_to_nine.current);\n    od\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n",
   "diagnostics": [],
   "hovers": [

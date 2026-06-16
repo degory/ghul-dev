@@ -2,6 +2,8 @@
   "name": "definitions-22",
   "code": "class SCALER is\n    _scale: double;\n\n    scale(value: double) -> double => value * _scale;\nsi",
   "fullSource": "class SCALER is\n    _scale: double;\n\n    scale(value: double) -> double => value * _scale;\nsi\n\nentry() is\nsi\n",
+  "hiddenBefore": false,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

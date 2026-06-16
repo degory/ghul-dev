@@ -2,6 +2,8 @@
   "name": "expressions-21",
   "code": "let first_element = [1, 2, 3][0];",
   "fullSource": "entry() is\n    let first_element = [1, 2, 3][0];\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

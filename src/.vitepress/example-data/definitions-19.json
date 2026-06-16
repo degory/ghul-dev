@@ -2,6 +2,8 @@
   "name": "definitions-19",
   "code": "let leaf1 = Tree.LEAF(123);\nlet leaf2 = Tree.LEAF(123);\nlet leaf3 = Tree.LEAF(456);\n\nassert leaf1 =~ leaf2;\nassert !(leaf1 =~ leaf3);",
   "fullSource": "union Tree is\n    NODE(left: Tree, right: Tree);\n    LEAF(value: int);\nsi\n\nentry() is\n    let leaf1 = Tree.LEAF(123);\n    let leaf2 = Tree.LEAF(123);\n    let leaf3 = Tree.LEAF(456);\n\n    assert leaf1 =~ leaf2;\n    assert !(leaf1 =~ leaf3);\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

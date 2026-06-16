@@ -87,13 +87,25 @@ namespace ExampleTool is
 
     // The displayed slice of an example: scaffold removed, each visible
     // region de-indented to column 1. Knows how to translate an analyser
-    // hover (whole-file, 1-based) onto the displayed text.
+    // hover (whole-file, 1-based) onto the displayed text. `hidden_before`
+    // / `hidden_after` flag whether any non-blank scaffold line exists
+    // outside the visible region(s) - the Vue component renders a faint
+    // ellipsis at the corresponding edge of the rendered slice when set.
     class VISIBLE_REGION is
         code: string public;
+        hidden_before: bool public;
+        hidden_after: bool public;
         _lines: MAP[int, DISPLAY_LINE];
 
-        init(code: string, lines: MAP[int, DISPLAY_LINE]) is
+        init(
+            code: string,
+            hidden_before: bool,
+            hidden_after: bool,
+            lines: MAP[int, DISPLAY_LINE]
+        ) is
             self.code = code;
+            self.hidden_before = hidden_before;
+            self.hidden_after = hidden_after;
             _lines = lines;
         si
 
@@ -316,6 +328,32 @@ namespace ExampleTool is
             od
         od
 
-        return VISIBLE_REGION(code.to_string(), lines);
+        let hidden_before mut = false;
+        let hidden_after mut = false;
+        if has_markers /\ regions.count > 0 /\ regions[0].count > 0 then
+            let first_visible = regions[0][0];
+            let last_region = regions[regions.count - 1];
+            let last_visible = last_region[last_region.count - 1];
+
+            let i mut = 0;
+            while i < first_visible - 1 do
+                let trimmed = raw[i].trim();
+                if trimmed.length > 0 /\ !(trimmed =~ MARKER_OPEN) /\ !(trimmed =~ MARKER_CLOSE) then
+                    hidden_before = true;
+                fi
+                i = i + 1;
+            od
+
+            let j mut = last_visible;
+            while j < raw.count do
+                let trimmed = raw[j].trim();
+                if trimmed.length > 0 /\ !(trimmed =~ MARKER_OPEN) /\ !(trimmed =~ MARKER_CLOSE) then
+                    hidden_after = true;
+                fi
+                j = j + 1;
+            od
+        fi
+
+        return VISIBLE_REGION(code.to_string(), hidden_before, hidden_after, lines);
     si
 si

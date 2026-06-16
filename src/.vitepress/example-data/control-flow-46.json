@@ -2,6 +2,8 @@
   "name": "control-flow-46",
   "code": "let a = await double_async(10);   // a = 20\nlet b = await double_async(a);    // b = 40\nlet c = await add_async(a, b);    // c = 60\n\nreturn c;",
   "fullSource": "use IO.Std.write_line;\n\ndouble_async(x: int) -> Tasks.TASK[int] => x * 2;\n\nadd_async(x: int, y: int) -> Tasks.TASK[int] => x + y;\n\ncompute() -> Tasks.TASK[int] is\n    let a = await double_async(10);   // a = 20\n    let b = await double_async(a);    // b = 40\n    let c = await add_async(a, b);    // c = 60\n\n    return c;\nsi\n\nentry() is\n    write_line(\"{compute().result}\");\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "60\n",
   "diagnostics": [],
   "hovers": [

@@ -2,6 +2,8 @@
   "name": "control-flow-47",
   "code": "await side_effect(\"first\");\nawait side_effect(\"second\");\n\nreturn;",
   "fullSource": "use IO.Std.write_line;\n\nside_effect(label: string) -> Tasks.TASK is\n    write_line(\"side effect: {label}\");\n\n    return Tasks.TASK.completed_task;\nsi\n\nrun_side_effects() -> Tasks.TASK is\n    await side_effect(\"first\");\n    await side_effect(\"second\");\n\n    return;\nsi\n\nentry() is\n    run_side_effects().wait();\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "side effect: first\nside effect: second\n",
   "diagnostics": [],
   "hovers": [

@@ -2,6 +2,8 @@
   "name": "language-basics-27",
   "code": "let i mut = 0;\nlet j = 10;\nlet s mut = \"Hello\";\n\ni = i + j;\ns = \"{s} World!\";\n\nthing.property = i + j;",
   "fullSource": "use IO.Std.write_line;\n\nclass BOX is\n    property: int public;\n\n    init() is si\nsi\n\nentry() is\n    let thing = BOX();\n    let i mut = 0;\n    let j = 10;\n    let s mut = \"Hello\";\n\n    i = i + j;\n    s = \"{s} World!\";\n\n    thing.property = i + j;\n    write_line(\"i = {i}, s = {s}, thing.property = {thing.property}\");\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "i = 10, s = Hello World!, thing.property = 20\n",
   "diagnostics": [],
   "hovers": [

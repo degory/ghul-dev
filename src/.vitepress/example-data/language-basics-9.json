@@ -2,6 +2,8 @@
   "name": "language-basics-9",
   "code": "let primes = [2, 3, 5, 7, 11];",
   "fullSource": "entry() is\n    let primes = [2, 3, 5, 7, 11];\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

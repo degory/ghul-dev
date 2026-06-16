@@ -2,6 +2,8 @@
   "name": "control-flow-29",
   "code": "do\n    // code to execute indefinitely\n    // break statement to exit loop\nod",
   "fullSource": "do\n    // code to execute indefinitely\n    // break statement to exit loop\nod\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "output": "",
   "diagnostics": [],
   "hovers": [],

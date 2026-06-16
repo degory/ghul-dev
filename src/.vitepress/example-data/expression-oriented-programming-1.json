@@ -2,6 +2,8 @@
   "name": "expression-oriented-programming-1",
   "code": "sign(n: int) -> string =>\n    if n < 0 then \"negative\"\n    elif n == 0 then \"zero\"\n    else \"positive\"\n    fi;\n\nentry() is\n    write_line(sign(-4));\n    write_line(sign(0));\n    write_line(sign(7));\nsi",
   "fullSource": "use IO.Std.write_line;\n\nsign(n: int) -> string =>\n    if n < 0 then \"negative\"\n    elif n == 0 then \"zero\"\n    else \"positive\"\n    fi;\n\nentry() is\n    write_line(sign(-4));\n    write_line(sign(0));\n    write_line(sign(7));\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
   "output": "negative\nzero\npositive\n",
   "diagnostics": [],
   "hovers": [

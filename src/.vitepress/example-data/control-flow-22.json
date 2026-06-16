@@ -2,6 +2,8 @@
   "name": "control-flow-22",
   "code": "for variable in iterable do\n    // variable is set to each element of iterator in turn\nod",
   "fullSource": "for variable in iterable do\n    // variable is set to each element of iterator in turn\nod\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "output": "",
   "diagnostics": [],
   "hovers": [],

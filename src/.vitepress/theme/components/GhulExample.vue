@@ -187,6 +187,23 @@ function copy() {
   setTimeout(() => { copied.value = false }, 2000)
 }
 
+// `hiddenBefore` / `hiddenAfter` come from the example artifact and flag
+// whether non-blank scaffold exists outside the displayed slice. A faint
+// ellipsis row marks the corresponding edge so the reader can tell the
+// code is part of a larger source. The expand button (visible only when
+// at least one edge is hidden) swaps the displayed slice for `fullSource`
+// in plain text - useful for seeing the surrounding scaffold, at the cost
+// of the rich hover and diagnostic markup the displayed slice carries.
+const hiddenBefore = computed(() => example.value?.hiddenBefore === true)
+const hiddenAfter = computed(() => example.value?.hiddenAfter === true)
+const canExpand = computed(() => hiddenBefore.value || hiddenAfter.value)
+
+const expanded = ref(false)
+
+function toggleExpanded() {
+  expanded.value = !expanded.value
+}
+
 // The panel below the code can be toggled fully collapsed or expanded. It
 // defaults to expanded for a diagnostic example (the diagnostics are the
 // point) or one or two lines of output, collapsed for longer output.
@@ -211,6 +228,27 @@ const panelLabel = computed(() =>
   <div v-if="example" class="ghul-example">
     <span class="ghul-example-lang">ghul</span>
     <button
+      v-if="canExpand"
+      type="button"
+      class="ghul-example-expand"
+      :title="expanded ? 'show only the example' : 'show the full source'"
+      :aria-pressed="expanded"
+      @click="toggleExpanded"
+    >
+      <svg v-if="!expanded" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 3 21 3 21 9" />
+        <polyline points="9 21 3 21 3 15" />
+        <line x1="21" y1="3" x2="14" y2="10" />
+        <line x1="3" y1="21" x2="10" y2="14" />
+      </svg>
+      <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="4 14 10 14 10 20" />
+        <polyline points="20 10 14 10 14 4" />
+        <line x1="14" y1="10" x2="21" y2="3" />
+        <line x1="3" y1="21" x2="10" y2="14" />
+      </svg>
+    </button>
+    <button
       type="button"
       class="ghul-example-copy"
       :class="{ copied }"
@@ -227,25 +265,30 @@ const panelLabel = computed(() =>
     </button>
 
     <div class="ghul-example-code">
-      <div v-for="(segments, i) in lines" :key="i" class="ghul-example-line">
-        <span
-          v-for="(segment, j) in segments"
-          :key="j"
-          :style="segment.style"
-          :class="[
-            'ghul-example-tok',
-            segment.semantic ? 'ghul-sem-' + segment.semantic.tokenType : null,
-            segment.semantic && segment.semantic.modifiers && segment.semantic.modifiers.includes('static') ? 'ghul-sem-mod-static' : null,
-            {
-              'ghul-example-hover': segment.hover,
-              'ghul-example-squiggle-error': segment.diagnostic && segment.diagnostic.severity === 'error',
-              'ghul-example-squiggle-warning': segment.diagnostic && segment.diagnostic.severity === 'warning',
-            }
-          ]"
-          @mouseenter="onEnter($event, segment)"
-          @mouseleave="onLeave(segment)"
-        >{{ segment.text }}</span>
-      </div>
+      <pre v-if="expanded" class="ghul-example-full-source">{{ example.fullSource }}</pre>
+      <template v-else>
+        <div v-if="hiddenBefore" class="ghul-example-ellipsis" aria-hidden="true">&hellip;</div>
+        <div v-for="(segments, i) in lines" :key="i" class="ghul-example-line">
+          <span
+            v-for="(segment, j) in segments"
+            :key="j"
+            :style="segment.style"
+            :class="[
+              'ghul-example-tok',
+              segment.semantic ? 'ghul-sem-' + segment.semantic.tokenType : null,
+              segment.semantic && segment.semantic.modifiers && segment.semantic.modifiers.includes('static') ? 'ghul-sem-mod-static' : null,
+              {
+                'ghul-example-hover': segment.hover,
+                'ghul-example-squiggle-error': segment.diagnostic && segment.diagnostic.severity === 'error',
+                'ghul-example-squiggle-warning': segment.diagnostic && segment.diagnostic.severity === 'warning',
+              }
+            ]"
+            @mouseenter="onEnter($event, segment)"
+            @mouseleave="onLeave(segment)"
+          >{{ segment.text }}</span>
+        </div>
+        <div v-if="hiddenAfter" class="ghul-example-ellipsis" aria-hidden="true">&hellip;</div>
+      </template>
     </div>
     <div v-if="example.output || diagnostics.length" class="ghul-example-output">
       <button
@@ -406,10 +449,10 @@ const panelLabel = computed(() =>
   transition: opacity 0.2s;
 }
 
-.ghul-example-copy {
+.ghul-example-copy,
+.ghul-example-expand {
   position: absolute;
   top: 8px;
-  right: 8px;
   z-index: 2;
   display: flex;
   align-items: center;
@@ -425,15 +468,25 @@ const panelLabel = computed(() =>
   transition: opacity 0.2s, color 0.2s;
 }
 
+.ghul-example-copy {
+  right: 8px;
+}
+
+.ghul-example-expand {
+  right: 40px;
+}
+
 .ghul-example:hover .ghul-example-lang {
   opacity: 0;
 }
 
-.ghul-example:hover .ghul-example-copy {
+.ghul-example:hover .ghul-example-copy,
+.ghul-example:hover .ghul-example-expand {
   opacity: 1;
 }
 
-.ghul-example-copy:hover {
+.ghul-example-copy:hover,
+.ghul-example-expand:hover {
   color: var(--vp-c-text-1);
 }
 
@@ -442,9 +495,34 @@ const panelLabel = computed(() =>
   opacity: 1;
 }
 
-.ghul-example-copy svg {
+.ghul-example-expand[aria-pressed="true"] {
+  color: var(--vp-c-brand-1);
+  opacity: 1;
+}
+
+.ghul-example-copy svg,
+.ghul-example-expand svg {
   width: 16px;
   height: 16px;
+}
+
+.ghul-example-ellipsis {
+  color: var(--vp-c-text-3);
+  opacity: 0.55;
+  letter-spacing: 0.15em;
+  user-select: none;
+  min-height: 1.6em;
+}
+
+.ghul-example-full-source {
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--vp-c-text-1);
+  white-space: pre;
 }
 
 .ghul-example-output {

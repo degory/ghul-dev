@@ -2,6 +2,8 @@
   "name": "definitions-31",
   "code": "use Example.TEST;\n\n...\n\nlet t = TEST();",
   "fullSource": "use Example.TEST;\n\n...\n\nlet t = TEST();\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "output": "",
   "diagnostics": [],
   "hovers": [],

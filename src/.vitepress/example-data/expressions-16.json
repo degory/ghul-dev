@@ -2,6 +2,8 @@
   "name": "expressions-16",
   "code": "let equal = 5 == 5; // Equality\nlet not_equal = 5 != 10; // Inequality\nlet less_than = 5 < 10; // Less than\nlet greater_than = 10 > 5; // Greater than\nlet less_than_or_equal = 5 <= 5; // Less or equal\nlet greater_than_or_equal = 10 >= 10; // Greater or equal",
   "fullSource": "entry() is\n    let equal = 5 == 5; // Equality\n    let not_equal = 5 != 10; // Inequality\n    let less_than = 5 < 10; // Less than\n    let greater_than = 10 > 5; // Greater than\n    let less_than_or_equal = 5 <= 5; // Less or equal\n    let greater_than_or_equal = 10 >= 10; // Greater or equal\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [
