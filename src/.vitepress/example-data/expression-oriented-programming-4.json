@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\n// expression-bodied free function:\nsquare(n: int) -> int => n * n;\n\nclass COUNTER is\n    _count: int;\n\n    init() is si\n\n    // an expression body can be a val ... lav block:\n    bump() -> int => val\n        _count = _count + 1;\n        _count\n    lav;\nsi\n\nentry() is\n    write_line(\"square(6) = {square(6)}\");\n\n    let c = COUNTER();\n    write_line(\"bump = {c.bump()}\");\n    write_line(\"bump = {c.bump()}\");\n\n    // expression-bodied anonymous function:\n    let twice = (n: int) => n * 2;\n    write_line(\"twice(21) = {twice(21)}\");\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
   "output": "square(6) = 36\nbump = 1\nbump = 2\ntwice(21) = 42\n",
   "diagnostics": [],
   "hovers": [

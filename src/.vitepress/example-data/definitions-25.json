@@ -4,6 +4,7 @@
   "fullSource": "namespace Outer is\n    namespace Inner is\n        do_something() is\n            IO.Std.write_line(\"did something\");\n        si\n    si\nsi\n\nnamespace Demo is\n    entry() is\n        Outer.Inner.do_something();\n    si\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [7],
   "output": "did something\n",
   "diagnostics": [],
   "hovers": [

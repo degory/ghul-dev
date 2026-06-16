@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nprint_something[T](t: T) => write_line(\"something is {t}\");\n\nentry() is\n    print_something[int](1234);\n    print_something[string](\"hello\");\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "something is 1234\nsomething is hello\n",
   "diagnostics": [],
   "hovers": [

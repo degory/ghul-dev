@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let x = 3;\n    let y = 7;\n\n    if x > y then\n        write_line(\"x > y\")\n    else\n        write_line(\"x <= y\")\n    fi\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "x <= y\n",
   "diagnostics": [],
   "hovers": [

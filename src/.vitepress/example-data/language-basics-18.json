@@ -4,6 +4,7 @@
   "fullSource": "// expect: warning\nlookup() -> string? => null;\n\nentry() is\n    let label: string = null;\n\n    let maybe = lookup();\n\n    let title: string = maybe;\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [
     { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 25, "severity": "warning", "message": "[non-optional] null where non-optional Ghul.string expected" },

@@ -4,6 +4,7 @@
   "fullSource": "struct POINT(x: double, y: double) is\nsi\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

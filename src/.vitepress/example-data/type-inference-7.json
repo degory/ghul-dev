@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let a_string = \"12345\";\n    let an_int = 12345;\n    let an_int_array = [1, 2, 3, 4, 5];\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

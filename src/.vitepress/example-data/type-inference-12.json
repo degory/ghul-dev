@@ -4,6 +4,7 @@
   "fullSource": "class Base();\n\nclass DERIVED(): Base;\n\nentry() is\n    let derived =\n        if true then\n            DERIVED()\n        else\n            DERIVED()\n        fi;\n\n    let base =\n        if true then\n            DERIVED()\n        else\n            Base()\n        fi;\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

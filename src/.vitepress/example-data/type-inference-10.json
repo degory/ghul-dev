@@ -4,6 +4,7 @@
   "fullSource": "class Base();\n\nclass DERIVED(): Base;\n\nentry() is\n    let array_of_base = [Base(), DERIVED()];\n    let array_of_object = [Base(), DERIVED(), object()];\n    let array_of_int = [1, 2, 3, 4, 5];\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [3],
   "output": "",
   "diagnostics": [],
   "hovers": [

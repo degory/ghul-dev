@@ -4,6 +4,7 @@
   "fullSource": "square(x: int) -> int => x * x;\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

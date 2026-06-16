@@ -4,6 +4,7 @@
   "fullSource": "do\n    // code to execute indefinitely\n    // break statement to exit loop\nod\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [],

@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let my_int: int = 42;\n    let my_float: double = 3.14d;\n    let my_bool: bool = true;\n    let my_char: char = 'A';\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

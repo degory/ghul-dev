@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let length = \"Hello\".length;\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

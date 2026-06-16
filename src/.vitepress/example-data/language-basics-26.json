@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let list = [1, 2, 3];\n\n    let index = 4;\n    let search_value = 3;\n\n    // false\n    let and_then =\n        index < list.count /\\ list[index] == search_value;\n\n    // true\n    let or_else =\n        index >= list.count \\/ list[index] != search_value;\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

@@ -4,6 +4,7 @@
   "fullSource": "class POINT(x: int, y: int);\n\nentry() is\n    let point = POINT(10, 20);\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

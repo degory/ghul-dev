@@ -4,6 +4,7 @@
   "fullSource": "// a primary header with no body declarations:\nclass POINT(x: int, y: int);\n\n// is equivalent to an explicit empty 'is' / 'si' body:\nclass VECTOR(dx: int, dy: int) is\nsi\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

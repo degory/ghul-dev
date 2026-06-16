@@ -4,6 +4,7 @@
   "fullSource": "some_function(argument: type)\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [],

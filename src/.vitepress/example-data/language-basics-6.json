@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let x: int = 42;\n    let y = \"Hello\";\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

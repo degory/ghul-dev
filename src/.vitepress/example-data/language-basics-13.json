@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let point: (x: int, y: int) = (10, 20);\n    let person = (name = \"Alice\", age = 30);\n    let x = point.x;\n    let y = point.y;\n    let name = person.name;\n    let age = person.age;\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

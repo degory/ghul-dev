@@ -4,6 +4,7 @@
   "fullSource": "// expect: error\nstruct THING(name: string);\n\nentry() is\n    let thing = THING(\"a thing\");\n\n    thing.name = \"change it\";\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [1],
   "output": "",
   "diagnostics": [
     { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 11, "severity": "error", "message": "THING.name: Ghul.string is not publicly assignable" }

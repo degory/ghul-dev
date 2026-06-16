@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let here: int? = 42;   // present\n    let gone: int? = null; // absent\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

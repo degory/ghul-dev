@@ -4,6 +4,7 @@
   "fullSource": "union Shape is\n    CIRCLE(radius: double);\n    SQUARE(side: double);\nsi\n\nunion Option[T] is\n    SOME(value: T);\n    NONE;\nsi\n\nunion Result[T, E] is\n    OK(value: T);\n    ERROR(error: E);\nsi\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

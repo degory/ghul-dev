@@ -4,6 +4,7 @@
   "fullSource": "class THING();\n\nentry() is\n    let a_thing = THING();\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

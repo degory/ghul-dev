@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nclass Animal();\n\nclass Cat(): Animal is\n    purr() -> string => \"purr\";\nsi\n\nclass CARRIER(occupant: Animal);\n\ndescribe(carrier: CARRIER) is\n    // copy the property into a local variable\n    let occupant = carrier.occupant;\n\n    if isa Cat(occupant) then\n        // occupant is a local variable, narrowed\n        // to Cat in this branch\n        write_line(occupant.purr());\n    fi\nsi\n\nentry() is\n    describe(CARRIER(Cat()));\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "purr\n",
   "diagnostics": [],
   "hovers": [

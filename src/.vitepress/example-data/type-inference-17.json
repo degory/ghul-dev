@@ -4,6 +4,7 @@
   "fullSource": "class Box[T] is\n    _value: T;\n\n    init() is\n        _value = default;\n    si\n\n    set(value: T) is\n        _value = value;\n    si\n\n    get() -> T => _value;\nsi\n\nentry() is\n    // m is Box[?] here; the type argument is not\n    // yet known\n    let m = Box();\n\n    // the set call carries an int, so m is Box[int]\n    m.set(42);\n\n    let x = m.get();\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

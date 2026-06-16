@@ -4,6 +4,7 @@
   "fullSource": "if isa Tree.NODE(tree) then\n    write_line(\n        \"left {tree.left}, right {tree.right}\"\n    );\nelif isa Tree.LEAF(tree) then\n    write_line(\"leaf value {tree.value}\");\nfi\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [],

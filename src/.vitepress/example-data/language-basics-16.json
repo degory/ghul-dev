@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let name: string? = \"Alice\";\n    if name? then\n        write_line(\"name is {name!}\");\n    fi\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "name is Alice\n",
   "diagnostics": [],
   "hovers": [

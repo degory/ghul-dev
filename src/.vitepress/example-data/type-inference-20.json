@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let length_of = x => x.length;\n    write_line(\"{length_of(\"hello\")}\");\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "5\n",
   "diagnostics": [],
   "hovers": [

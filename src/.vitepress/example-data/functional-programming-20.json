@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let add = (x, y) => x + y;\n\n    let add_5 = y => add(5, y);\n    write_line(\"add_5(3): {add_5(3)}\");\n\n    let add_10 = y => add(10, y);\n    write_line(\"add_10(3): {add_10(3)}\");\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "add_5(3): 8\nadd_10(3): 13\n",
   "diagnostics": [],
   "hovers": [

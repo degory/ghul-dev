@@ -4,6 +4,7 @@
   "fullSource": "lookup() -> string? => null;\n\nentry() is\n    let maybe = lookup();\n\n    if maybe? then\n        // fine: maybe is known to be present here\n        let title: string = maybe;\n    fi\n\n    // fine: ! asserts the value is present\n    let forced: string = maybe!;\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
