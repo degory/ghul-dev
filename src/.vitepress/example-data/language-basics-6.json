@@ -2,6 +2,8 @@
   "name": "language-basics-6",
   "code": "let x: int = 42;\nlet y = \"Hello\";",
   "fullSource": "entry() is\n    let x: int = 42;\n    let y = \"Hello\";\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

@@ -2,6 +2,8 @@
   "name": "type-inference-15",
   "code": "let returns_int = (i: int) => i * 2;\nlet returns_string = (s: string) => \"{s}{s}\";",
   "fullSource": "entry() is\n    let returns_int = (i: int) => i * 2;\n    let returns_string = (s: string) => \"{s}{s}\";\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

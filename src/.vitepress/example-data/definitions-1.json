@@ -2,6 +2,8 @@
   "name": "definitions-1",
   "code": "let x = 10;",
   "fullSource": "entry() is\n    let x = 10;\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

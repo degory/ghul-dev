@@ -2,6 +2,8 @@
   "name": "definitions-8",
   "code": "class THING is\n    // class body\nsi",
   "fullSource": "class THING is\n    // class body\nsi\n\nentry() is\nsi\n",
+  "hiddenBefore": false,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

@@ -2,6 +2,8 @@
   "name": "definitions-3",
   "code": "let o: object = \"a string\";",
   "fullSource": "entry() is\n    let o: object = \"a string\";\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

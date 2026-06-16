@@ -2,6 +2,8 @@
   "name": "language-basics-8",
   "code": "let numbers: int[] = [1, 2, 3];",
   "fullSource": "entry() is\n    let numbers: int[] = [1, 2, 3];\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

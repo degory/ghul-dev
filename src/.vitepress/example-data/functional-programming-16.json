@@ -2,6 +2,8 @@
   "name": "functional-programming-16",
   "code": "if an_option? then\n    let value = an_option!;\n    write_line(\"the option holds {value}\");\nfi",
   "fullSource": "use IO.Std.write_line;\n\nunion Option[T] is\n    SOME(value: T);\n    NONE;\nsi\n\nentry() is\n    let an_option: Option[int] = Option.SOME(42);\n    if an_option? then\n        let value = an_option!;\n        write_line(\"the option holds {value}\");\n    fi\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "the option holds 42\n",
   "diagnostics": [],
   "hovers": [

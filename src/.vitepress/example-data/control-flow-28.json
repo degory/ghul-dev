@@ -2,6 +2,8 @@
   "name": "control-flow-28",
   "code": "for counter in 0..5 do\n    if counter == 3 then\n        continue;\n    fi\n    write_line(counter);\nod",
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    for counter in 0..5 do\n        if counter == 3 then\n            continue;\n        fi\n        write_line(counter);\n    od\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "0\n1\n2\n4\n",
   "diagnostics": [],
   "hovers": [

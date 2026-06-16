@@ -2,6 +2,8 @@
   "name": "control-flow-4",
   "code": "if condition then\n    // code to execute if condition is true\nelse\n    // code to execute if condition is false\nfi",
   "fullSource": "if condition then\n    // code to execute if condition is true\nelse\n    // code to execute if condition is false\nfi\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "output": "",
   "diagnostics": [],
   "hovers": [],

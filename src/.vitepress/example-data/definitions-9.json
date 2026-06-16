@@ -2,6 +2,8 @@
   "name": "definitions-9",
   "code": "let a_thing = THING();",
   "fullSource": "class THING();\n\nentry() is\n    let a_thing = THING();\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

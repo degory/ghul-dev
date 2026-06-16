@@ -2,6 +2,8 @@
   "name": "expression-oriented-programming-2",
   "code": "day_kind(day: int) -> string =>\n    case day\n    when 0, 6 then \"weekend\"\n    else \"weekday\"\n    esac;\n\nentry() is\n    write_line(day_kind(0));\n    write_line(day_kind(3));\n    write_line(day_kind(6));\nsi",
   "fullSource": "use IO.Std.write_line;\n\nday_kind(day: int) -> string =>\n    case day\n    when 0, 6 then \"weekend\"\n    else \"weekday\"\n    esac;\n\nentry() is\n    write_line(day_kind(0));\n    write_line(day_kind(3));\n    write_line(day_kind(6));\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
   "output": "weekend\nweekday\nweekend\n",
   "diagnostics": [],
   "hovers": [

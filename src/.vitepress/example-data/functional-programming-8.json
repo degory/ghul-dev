@@ -2,6 +2,8 @@
   "name": "functional-programming-8",
   "code": "struct THING(name: string);\nlet thing = THING(\"a thing\");\n\nthing.name = \"change it\";",
   "fullSource": "// expect: error\nstruct THING(name: string);\n\nentry() is\n    let thing = THING(\"a thing\");\n\n    thing.name = \"change it\";\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [
     { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 11, "severity": "error", "message": "THING.name: Ghul.string is not publicly assignable" }
@@ -9,6 +11,7 @@
   "hovers": [
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 12, "text": "struct THING" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 17, "text": "THING.name: Ghul.string // instance property" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 25, "text": "THING.init(name: Ghul.string) // constructor" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "text": "class Ghul.string" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "thing: THING // local value" },
     { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 17, "text": "THING.init(name: Ghul.string) // constructor" },

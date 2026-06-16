@@ -2,6 +2,8 @@
   "name": "expressions-23",
   "code": "let integer_value = cast int(3.14);",
   "fullSource": "entry() is\n    let integer_value = cast int(3.14);\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

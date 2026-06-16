@@ -2,6 +2,8 @@
   "name": "language-basics-2",
   "code": "// variable declaration statement\nlet x = 10;\n\n// expression used as part of a declaration statement\nlet y = x * 2;\n\n// 'if' is a statement, 'x > 5' is an expression\nif x > 5 then\n    write_line(\"x is greater than 5\");\nfi\n\n// 'if' can also be used as an expression\nlet z = if x > 5 then x else y fi;",
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    // variable declaration statement\n    let x = 10;\n\n    // expression used as part of a declaration statement\n    let y = x * 2;\n\n    // 'if' is a statement, 'x > 5' is an expression\n    if x > 5 then\n        write_line(\"x is greater than 5\");\n    fi\n\n    // 'if' can also be used as an expression\n    let z = if x > 5 then x else y fi;\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "x is greater than 5\n",
   "diagnostics": [],
   "hovers": [

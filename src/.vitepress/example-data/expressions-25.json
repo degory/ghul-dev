@@ -2,6 +2,8 @@
   "name": "expressions-25",
   "code": "entry() is\n    let x = 10;\n    let y = 5;\n    let sum = x + y;\n    let product = x * y;\n    let is_greater = x > y;\n\n    if is_greater then\n        IO.Std.write_line(\"x is greater than y\");\n    else\n        IO.Std.write_line(\"x is not greater than y\");\n    fi\n\n    let numbers = [1, 2, 3, 4, 5];\n    let first_number = numbers[0];\n\n    IO.Std.write_line(\n        \"The first number is: {first_number}\"\n    );\nsi",
   "fullSource": "entry() is\n    let x = 10;\n    let y = 5;\n    let sum = x + y;\n    let product = x * y;\n    let is_greater = x > y;\n\n    if is_greater then\n        IO.Std.write_line(\"x is greater than y\");\n    else\n        IO.Std.write_line(\"x is not greater than y\");\n    fi\n\n    let numbers = [1, 2, 3, 4, 5];\n    let first_number = numbers[0];\n\n    IO.Std.write_line(\n        \"The first number is: {first_number}\"\n    );\nsi\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "output": "x is greater than y\nThe first number is: 1\n",
   "diagnostics": [],
   "hovers": [

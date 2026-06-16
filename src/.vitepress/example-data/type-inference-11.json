@@ -2,6 +2,8 @@
   "name": "type-inference-11",
   "code": "let int_string = [(123, \"hello\"), (456, \"goodbye\")];\n\nlet int_object = [(123, 456), (798, \"wibble\")];",
   "fullSource": "entry() is\n    let int_string = [(123, \"hello\"), (456, \"goodbye\")];\n\n    let int_object = [(123, 456), (798, \"wibble\")];\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

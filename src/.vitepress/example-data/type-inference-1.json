@@ -2,6 +2,8 @@
   "name": "type-inference-1",
   "code": "// the signature is explicit: the parameter type\n// and the return type are written out\ntotals(\n    values: Collections.Iterable[int]\n) -> (sum: int, count: int) is\n    let sum mut = 0;\n    let count mut = 0;\n\n    for v in values do\n        sum = sum + v;\n        count = count + 1;\n    od\n\n    return (sum, count);\nsi",
   "fullSource": "// the signature is explicit: the parameter type\n// and the return type are written out\ntotals(\n    values: Collections.Iterable[int]\n) -> (sum: int, count: int) is\n    let sum mut = 0;\n    let count mut = 0;\n\n    for v in values do\n        sum = sum + v;\n        count = count + 1;\n    od\n\n    return (sum, count);\nsi\n\nentry() is\n    totals([1, 2, 3]);\nsi\n",
+  "hiddenBefore": false,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

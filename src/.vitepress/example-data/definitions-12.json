@@ -2,6 +2,8 @@
   "name": "definitions-12",
   "code": "let zero_zero = POINT(0.0D, 0.0D);\n\nassert origin == zero_zero;\nassert origin != right;",
   "fullSource": "struct POINT(x: double, y: double);\n\nentry() is\n    let origin = POINT(0.0D, 0.0D);\n    let right = POINT(1.0D, 0.0D);\n    let zero_zero = POINT(0.0D, 0.0D);\n\n    assert origin == zero_zero;\n    assert origin != right;\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

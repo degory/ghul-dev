@@ -2,6 +2,8 @@
   "name": "language-basics-19",
   "code": "let maybe = lookup();\n\nif maybe? then\n    // fine: maybe is known to be present here\n    let title: string = maybe;\nfi\n\n// fine: ! asserts the value is present\nlet forced: string = maybe!;",
   "fullSource": "lookup() -> string? => null;\n\nentry() is\n    let maybe = lookup();\n\n    if maybe? then\n        // fine: maybe is known to be present here\n        let title: string = maybe;\n    fi\n\n    // fine: ! asserts the value is present\n    let forced: string = maybe!;\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

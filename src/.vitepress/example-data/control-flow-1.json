@@ -2,6 +2,8 @@
   "name": "control-flow-1",
   "code": "assert true else \"all bets are off\"; // does not throw\n\nlet list = [1, 2, 3, 4, 5];\n\nassert 3 < list.count\n    else System.ArgumentOutOfRangeException(\"list\");\n\nwrite_line(\"ok: {list.count} elements\");",
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    assert true else \"all bets are off\"; // does not throw\n\n    let list = [1, 2, 3, 4, 5];\n\n    assert 3 < list.count\n        else System.ArgumentOutOfRangeException(\"list\");\n\n    write_line(\"ok: {list.count} elements\");\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "ok: 5 elements\n",
   "diagnostics": [],
   "hovers": [

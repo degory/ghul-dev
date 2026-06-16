@@ -2,6 +2,8 @@
   "name": "language-basics-17",
   "code": "let here: int? = 42;   // present\nlet gone: int? = null; // absent",
   "fullSource": "entry() is\n    let here: int? = 42;   // present\n    let gone: int? = null; // absent\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

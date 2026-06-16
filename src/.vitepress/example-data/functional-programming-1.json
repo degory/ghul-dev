@@ -2,6 +2,8 @@
   "name": "functional-programming-1",
   "code": "let f = i => i * 2;\nf(123);\nlet g = f;\ng(456);\n\nlet ff = (f: int -> int, i) => f(f(i));",
   "fullSource": "entry() is\n    let f = i => i * 2;\n    f(123);\n    let g = f;\n    g(456);\n\n    let ff = (f: int -> int, i) => f(f(i));\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

@@ -2,6 +2,8 @@
   "name": "functional-programming-12",
   "code": "class HIGHER_ORDER_FUNCTIONS[T] is\n    apply(f: T -> T, x: T) -> T static =>\n        f(x);\n\n    apply_if(\n        f: T -> T, x: T, predicate: T -> bool\n    ) -> T static =>\n        if predicate(x) then f(x) else x fi;\nsi",
   "fullSource": "class HIGHER_ORDER_FUNCTIONS[T] is\n    apply(f: T -> T, x: T) -> T static =>\n        f(x);\n\n    apply_if(\n        f: T -> T, x: T, predicate: T -> bool\n    ) -> T static =>\n        if predicate(x) then f(x) else x fi;\nsi\n\nentry() is\nsi\n",
+  "hiddenBefore": false,
+  "hiddenAfter": true,
   "output": "",
   "diagnostics": [],
   "hovers": [

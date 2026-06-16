@@ -2,6 +2,8 @@
   "name": "definitions-17",
   "code": "let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));\nlet leaf = Tree.LEAF(123);\n\nif isa Tree.NODE(tree) then\n    write_line(\"have tree node\");\nelif isa Tree.LEAF(tree) then\n    write_line(\"have tree leaf\");\nfi",
   "fullSource": "use IO.Std.write_line;\n\nunion Tree is\n    NODE(left: Tree, right: Tree);\n    LEAF(value: int);\nsi\n\nentry() is\n    let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));\n    let leaf = Tree.LEAF(123);\n\n    if isa Tree.NODE(tree) then\n        write_line(\"have tree node\");\n    elif isa Tree.LEAF(tree) then\n        write_line(\"have tree leaf\");\n    fi\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
   "output": "have tree node\n",
   "diagnostics": [],
   "hovers": [

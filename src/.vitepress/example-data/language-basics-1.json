@@ -2,6 +2,8 @@
   "name": "language-basics-1",
   "code": "let my_variable = 42;\nprint_something(thing: string) is\n    write_line(\"The thing is: {thing}\");\nsi\n\nclass PERSON is\n    name: string;\n    age: int;\nsi",
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let my_variable = 42;\n    print_something(\"a hello\");\nsi\n\nprint_something(thing: string) is\n    write_line(\"The thing is: {thing}\");\nsi\n\nclass PERSON is\n    name: string;\n    age: int;\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
   "output": "The thing is: a hello\n",
   "diagnostics": [],
   "hovers": [
