@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\ntrait Logged is\n    log(message: string) is\n        // the default body writes the message with a [log] prefix\n        write_line(\"[log] {message}\");\n    si\nsi\n\nclass PLAIN(): Logged is\n    // no override - uses the trait default\nsi\n\nclass LOUD(): Logged is\n    // override the default, while still calling through to it with super\n    log(message: string) is\n        super.log(message.to_upper());\n    si\nsi\n\nentry() is\n    PLAIN().log(\"hello\");\n    LOUD().log(\"hello\");\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "[log] hello\n[log] HELLO\n",
   "diagnostics": [],
   "hovers": [

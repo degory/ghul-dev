@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let f = x => x + 1;\n    write_line(\"{f(42)}\");\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "43\n",
   "diagnostics": [],
   "hovers": [

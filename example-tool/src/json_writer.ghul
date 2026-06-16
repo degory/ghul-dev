@@ -38,6 +38,7 @@ namespace ExampleTool is
         full_source: string,
         hidden_before: bool,
         hidden_after: bool,
+        hidden_gaps_after_line: Iterable[int],
         hovers: Iterable[HOVER],
         output: string,
         diagnostics: Iterable[DIAGNOSTIC],
@@ -51,6 +52,16 @@ namespace ExampleTool is
         b.append("  \"fullSource\": "); b.append(_json_string(full_source)); b.append(",\n");
         b.append("  \"hiddenBefore\": "); b.append(if hidden_before then "true" else "false" fi); b.append(",\n");
         b.append("  \"hiddenAfter\": "); b.append(if hidden_after then "true" else "false" fi); b.append(",\n");
+        b.append("  \"hiddenGapsAfterLine\": [");
+        let first_gap mut = true;
+        for gap in hidden_gaps_after_line do
+            if !first_gap then
+                b.append(", ");
+            fi
+            first_gap = false;
+            b.append("{gap}");
+        od
+        b.append("],\n");
         b.append("  \"output\": "); b.append(_json_string(output)); b.append(",\n");
         b.append("  \"diagnostics\": [");
 

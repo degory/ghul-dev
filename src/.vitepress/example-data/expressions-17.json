@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let logical_and = true /\\ false;    // Logical AND\n    let logical_or = true \\/ false;     // Logical OR\n    let logical_not = !true;            // Logical NOT\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

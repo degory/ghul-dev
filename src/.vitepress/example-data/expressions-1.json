@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let i = 12_345_678; // int\n    let hex = 0x1234_ABCD; // int\n    let long = 1_000_000_000_000_000L; // long\n\n    let hex_unsigned_long = 0x1234_5678__9ABC_DEF0_UL; // ulong\n\n    let b = 99b; // byte\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

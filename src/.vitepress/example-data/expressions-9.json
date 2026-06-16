@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let complex_add = (x: int, y: int) -> int is\n        let result = x + y;\n        return result;\n    si;\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

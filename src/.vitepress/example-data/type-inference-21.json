@@ -4,6 +4,7 @@
   "fullSource": "class Animal() is\n    speak() -> string => \"animal\";\nsi\n\nclass Cat(): Animal;\n\nclass Dog(): Animal;\n\nmerge[T](a: T, b: T) -> T => a;\n\nentry() is\n    let a = merge(Cat(), Dog());\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [9],
   "output": "",
   "diagnostics": [],
   "hovers": [

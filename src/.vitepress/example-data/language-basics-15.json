@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let name: string? = \"Alice\"; // present\n    let nickname: string? = null; // absent\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

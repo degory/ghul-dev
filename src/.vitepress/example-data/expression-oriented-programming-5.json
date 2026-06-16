@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\n// one expression body holding a case expression, an if expression, and a val block:\ngrade(score: int) -> string => val\n    let band =\n        case score / 10\n        when 10, 9 then \"A\"\n        when 8 then \"B\"\n        when 7 then \"C\"\n        else \"F\"\n        esac;\n\n    if band == \"F\" then \"fail\" else \"pass ({band})\" fi\nlav;\n\nentry() is\n    write_line(grade(95));\n    write_line(grade(82));\n    write_line(grade(60));\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
   "output": "pass (A)\npass (B)\nfail\n",
   "diagnostics": [],
   "hovers": [

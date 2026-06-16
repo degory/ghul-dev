@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let counter mut = 0;\n\n    let bump = (n: int) is\n        counter = counter + n;\n    si;\n\n    let peek = () -> int => counter;\n\n    bump(10);\n    bump(5);\n\n    write_line(\"counter = {counter}, peek() = {peek()}\");\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "counter = 15, peek() = 15\n",
   "diagnostics": [],
   "hovers": [

@@ -4,6 +4,7 @@
   "fullSource": "class SCALER is\n    _scale: double;\n\n    scale(value: double) -> double => value * _scale;\nsi\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

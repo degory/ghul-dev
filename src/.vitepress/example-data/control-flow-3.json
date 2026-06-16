@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let list = [1, 2, 3, 4];\n\n    if list.count > 0 then\n        write_line(\"list has {list.count} elements\");\n    fi\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "list has 4 elements\n",
   "diagnostics": [],
   "hovers": [

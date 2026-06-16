@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let area = val\n        let width = 4;\n        let height = 5;\n        width * height\n    lav;\n\n    write_line(\"area = {area}\");\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "area = 20\n",
   "diagnostics": [],
   "hovers": [

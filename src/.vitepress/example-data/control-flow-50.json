@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nfibs() -> Ghul.Pipes.Pipe[int] is\n    let a mut = 0;\n    let b mut = 1;\n    do\n        yield a;\n        let next = a + b;\n        a = b;\n        b = next;\n    od\nsi\n\nentry() is\n    // fibs() is an infinite generator; take(8) bounds it\n    for f in fibs() | .take(8) do\n        write_line(f);\n    od\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "0\n1\n1\n2\n3\n5\n8\n13\n",
   "diagnostics": [],
   "hovers": [

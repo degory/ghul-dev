@@ -89,23 +89,28 @@ namespace ExampleTool is
     // region de-indented to column 1. Knows how to translate an analyser
     // hover (whole-file, 1-based) onto the displayed text. `hidden_before`
     // / `hidden_after` flag whether any non-blank scaffold line exists
-    // outside the visible region(s) - the Vue component renders a faint
-    // ellipsis at the corresponding edge of the rendered slice when set.
+    // outside the visible region(s); `hidden_gaps_after_line` lists the
+    // display-line numbers after which a marker-delimited gap separates
+    // two visible regions. The Vue component renders a faint ellipsis at
+    // each marked position.
     class VISIBLE_REGION is
         code: string public;
         hidden_before: bool public;
         hidden_after: bool public;
+        hidden_gaps_after_line: LIST[int] public;
         _lines: MAP[int, DISPLAY_LINE];
 
         init(
             code: string,
             hidden_before: bool,
             hidden_after: bool,
+            hidden_gaps_after_line: LIST[int],
             lines: MAP[int, DISPLAY_LINE]
         ) is
             self.code = code;
             self.hidden_before = hidden_before;
             self.hidden_after = hidden_after;
+            self.hidden_gaps_after_line = hidden_gaps_after_line;
             _lines = lines;
         si
 
@@ -296,6 +301,8 @@ namespace ExampleTool is
         let lines = MAP[int, DISPLAY_LINE]();
         let display mut = 0;
         let first mut = true;
+        let hidden_gaps_after_line = LIST[int]();
+        let region_index mut = 0;
 
         for region in regions do
             // Common leading whitespace across this region's non-blank lines.
@@ -326,6 +333,11 @@ namespace ExampleTool is
 
                 lines[original] = DISPLAY_LINE(display, dedent);
             od
+
+            if region_index < regions.count - 1 /\ region.count > 0 then
+                hidden_gaps_after_line.add(display);
+            fi
+            region_index = region_index + 1;
         od
 
         let hidden_before mut = false;
@@ -354,6 +366,10 @@ namespace ExampleTool is
             od
         fi
 
-        return VISIBLE_REGION(code.to_string(), hidden_before, hidden_after, lines);
+        return VISIBLE_REGION(
+            code.to_string(),
+            hidden_before, hidden_after, hidden_gaps_after_line,
+            lines
+        );
     si
 si

@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nhypotenuse_squared(a: int, b: int) -> int =>\n    let a2 = a * a, b2 = b * b in a2 + b2;\n\nentry() is\n    write_line(\"h2 = {hypotenuse_squared(3, 4)}\");\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
   "output": "h2 = 25\n",
   "diagnostics": [],
   "hovers": [

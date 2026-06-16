@@ -4,6 +4,7 @@
   "fullSource": "union Option[T] is\n    SOME(value: T);\n    NONE;\nsi\n\nentry() is\n    let some_int = Option.SOME(1234);\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [4],
   "output": "",
   "diagnostics": [],
   "hovers": [

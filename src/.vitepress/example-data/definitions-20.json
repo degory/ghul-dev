@@ -4,6 +4,7 @@
   "fullSource": "enum SUITS is\n    SPADES,\n    HEARTS,\n    DIAMONDS,\n    CLUBS\nsi\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

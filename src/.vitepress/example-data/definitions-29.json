@@ -4,6 +4,7 @@
   "fullSource": "// the compiler places this in an auto-generated\n// namespace private to this source file\nentry() is\n    IO.Std.write_line(\"Hello, world!\");\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
   "output": "Hello, world!\n",
   "diagnostics": [],
   "hovers": [

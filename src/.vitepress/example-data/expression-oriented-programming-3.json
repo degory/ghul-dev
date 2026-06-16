@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\n// a val ... lav block runs its statements, then yields the tail expression:\nmidpoint(lo: int, hi: int) -> int => val\n    let span = hi - lo;\n    lo + span / 2\nlav;\n\n// an early return yields from the block, not the enclosing function:\nfirst_even(xs: int[]) -> int => val\n    for x in xs do\n        if x % 2 == 0 then\n            return x;\n        fi\n    od\n    -1\nlav;\n\nentry() is\n    write_line(\"midpoint = {midpoint(10, 20)}\");\n    write_line(\"first_even = {first_even([1, 3, 4, 7])}\");\n    write_line(\"first_even = {first_even([1, 3, 5])}\");\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
   "output": "midpoint = 15\nfirst_even = 4\nfirst_even = -1\n",
   "diagnostics": [],
   "hovers": [

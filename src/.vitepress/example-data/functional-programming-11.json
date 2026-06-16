@@ -4,6 +4,7 @@
   "fullSource": "apply[T](f: T -> T, x: T) -> T =>\n    f(x);\n\napply_if[T](f: T -> T, x: T, predicate: T -> bool) -> T =>\n    if predicate(x) then f(x) else x fi;\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

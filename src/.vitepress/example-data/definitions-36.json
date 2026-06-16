@@ -4,6 +4,7 @@
   "fullSource": "// expect: error\nuse IO.Std.write_line;\n\nstruct VALUE is\n    public_property: int;\n\n    _protected_property: string;\n\n    init(value: int) is\n        public_property = value;\n        _protected_property = \"value is {value}\";\n    si\nsi\n\nentry() is\n    let v = VALUE(1234);\n\n    // OK: public_property is publicly readable\n    write_line(v.public_property);\n\n    write_line(v._protected_property);\n\n    v.public_property = 5678;\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [10],
   "output": "",
   "diagnostics": [
     { "startLine": 16, "startColumn": 12, "endLine": 16, "endColumn": 33, "severity": "error", "message": "_protected_property: string is not publicly readable" },

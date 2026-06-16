@@ -4,6 +4,7 @@
   "fullSource": "use Example; // imports Example.TEST and Example.Test\n\n...\n\nlet t: Test;\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [],

@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nclass Animal();\n\nclass Cat(name: string): Animal is\n    purr() -> string => \"{name} purrs\";\nsi\n\nclassify(a: Animal) is\n    if !isa Cat(a) then\n        write_line(\"not a cat\");\n        return;\n    fi\n\n    // every non-Cat has returned, so a is\n    // narrowed to Cat from here on\n    write_line(a.purr());\nsi\n\nentry() is\n    classify(Cat(\"whiskers\"));\n    classify(Animal());\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "whiskers purrs\nnot a cat\n",
   "diagnostics": [],
   "hovers": [

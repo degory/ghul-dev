@@ -4,6 +4,7 @@
   "fullSource": "use IO.Std.write_line;\n\nclassify(value: int) -> string is\ncase value\nwhen -1 then\n    return \"minus one\";\n\nwhen 0 then\n    let result = \"zero\";\n    return result;\n\nwhen 1 then\n    return \"one\";\n\nwhen 2 then\n    return \"two\";\n\nwhen 3 then\n    return \"three\";\n\nwhen 4 then\n    return \"four\";\n\nwhen 5 then\n    let result = \"five\";\n    return result;\n\nwhen 6, 7, 8, 9 then\n    return \"more than five and less than ten\";\n\nwhen 13 then\n    return \"unlucky\";\n\nelse\n    return \"less than -1 or more than nine\";\nesac\nsi\n\nentry() is\n    write_line(classify(0));\n    write_line(classify(3));\n    write_line(classify(7));\n    write_line(classify(13));\n    write_line(classify(-5));\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "zero\nthree\nmore than five and less than ten\nunlucky\nless than -1 or more than nine\n",
   "diagnostics": [],
   "hovers": [

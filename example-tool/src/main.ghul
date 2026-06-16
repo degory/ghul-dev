@@ -76,7 +76,7 @@ namespace ExampleTool is
 
         let json = build_artifact_json(
             name, region.code, strip_markers(source),
-            region.hidden_before, region.hidden_after,
+            region.hidden_before, region.hidden_after, region.hidden_gaps_after_line,
             Collections.LIST[HOVER](), "", Collections.LIST[DIAGNOSTIC](),
             Collections.LIST[SEMANTIC_TOKEN]()
         );
@@ -262,6 +262,7 @@ namespace ExampleTool is
         let json = build_artifact_json(
             name, collected.region.code, strip_markers(source),
             collected.region.hidden_before, collected.region.hidden_after,
+            collected.region.hidden_gaps_after_line,
             collected.hovers, output, diagnostics, collected.semantic_tokens
         );
         File.write_all_text(Path.combine(output_dir, "{name}.json"), json);

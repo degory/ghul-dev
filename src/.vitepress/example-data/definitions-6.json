@@ -4,6 +4,7 @@
   "fullSource": "sum_two_ints(i: int, j: int) -> int => i + j;\n\nsum_three_ints(i: int, j: int, k: int) -> int is\n    return i + j + k;\nsi\n\nentry() is\nsi\n",
   "hiddenBefore": false,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [

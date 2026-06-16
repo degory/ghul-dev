@@ -4,6 +4,7 @@
   "fullSource": "entry() is\n    let numbers: int[] = [1, 2, 3];\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
