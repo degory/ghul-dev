@@ -43,7 +43,7 @@ When a check guarantees a value has a more specific type, ghūl narrows that val
 
 <GhulExample name="type-inference-3" />
 
-A presence test (`?` or `!= null`) also narrows a member-access path: after `if x.field? then`, uses of `x.field` inside the branch are non-optional.
+A presence test (`?`) also narrows a member-access path: after `if x.field? then`, uses of `x.field` inside the branch are non-optional.
 
 <GhulExample name="type-inference-4a" />
 
