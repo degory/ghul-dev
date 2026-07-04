@@ -31,7 +31,7 @@ A function's signature is written out explicitly; inference works within the bod
 
 <GhulExample name="type-inference-1" />
 
-Inference does not read types out of a body into the function's signature, and does not carry from one function into another: each body is checked on its own, against the explicit signatures of everything it calls.
+Inference does not read types out of a body into the function's signature, and does not flow from one function into another: each body is checked on its own, against the explicit signatures of everything it calls.
 
 Fields and properties belong to a type rather than to a function body, so their types are written out too - for private members as well as public ones.
 
@@ -39,7 +39,7 @@ Fields and properties belong to a type rather than to a function body, so their 
 
 ## type narrowing
 
-When a check proves a stronger fact about a value's type, ghūl narrows that value to the narrower type for the code the fact covers. Narrowing applies to local variables, including a function's own parameters.
+When a check guarantees a value has a more specific type, ghūl narrows that value to it for the code the check covers. Narrowing applies to local variables, including a function's own parameters.
 
 <GhulExample name="type-inference-3" />
 

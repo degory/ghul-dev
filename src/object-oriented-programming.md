@@ -20,7 +20,7 @@ A class extends at most one superclass, named after a colon in the header, and i
 
 <GhulExample name="object-oriented-programming-2" />
 
-`describe` is defined once on `ANIMAL` but calls `speak`, which each subclass overrides, so one `describe` produces different output per animal. Holding the subclass instances in an `ANIMAL[]` and calling through it is polymorphism: the static type is `ANIMAL`, the behaviour is the subclass's.
+Calling `describe` through the `Animal[]` is polymorphism: the static type is `Animal`, the behaviour is each subclass's overriding `speak`.
 
 ## abstract and closed classes
 
@@ -39,7 +39,5 @@ A trait member can provide a default body, which an implementing type inherits a
 Discovering an object's concrete type at runtime uses `isa` or `if let`, which test the type and narrow the value to it inside the matching branch, and a `case` over a closed hierarchy is checked for exhaustiveness. The [control flow](/control-flow.html#type-narrowing) chapter covers narrowing in full.
 
 ## a worked example
-
-This calculator ties the pieces together: a generic trait `Operation[T]` with one implementation per operation, a generic `CALCULATOR[T]` that stores them in a map and dispatches through the trait, and `default` to reset its running memory:
 
 <GhulExample name="object-oriented-programming-1" />

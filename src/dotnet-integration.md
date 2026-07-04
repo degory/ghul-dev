@@ -4,7 +4,7 @@ ghūl is hosted on and targets .NET 10 and can consume most types in .NET assemb
 
 ## projects
 
-The ghūl compiler is driven by MSBuild and leverages the .NET SDK targets for most of the build process. Provided you reference the ghūl runtime library package, things should work as you'd expect for any other .NET SDK project. You can add package references, build assemblies and pack NuGet packages etc. all using the normal `dotnet`{:text} command line tools.
+The ghūl compiler is driven by MSBuild and uses the .NET SDK targets for most of the build process. Provided you reference the ghūl runtime library package, things should work as you'd expect for any other .NET SDK project. You can add package references, build assemblies and pack NuGet packages etc. all using the normal `dotnet`{:text} command line tools.
 
 ## name mangling
 When consuming C# code the ghūl compiler transforms symbol names to better match ghūl conventions:
@@ -64,6 +64,7 @@ Some commonly used namespace and type names are re-mapped in line with ghūl con
 | `System.IntPtr`   | `Ghul.word`          |
 | `System.Single`   | `Ghul.single`        |
 | `System.Double`   | `Ghul.double`        |
+| `System.Decimal`  | `Ghul.decimal`       |
 | `System.Object`   | `Ghul.object`        |
 | `System.String`   | `Ghul.string`        |
 

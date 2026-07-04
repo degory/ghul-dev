@@ -16,7 +16,7 @@ In ghūl the `assert` statement is used to ensure an expected condition holds an
 
 <GhulExample name="control-flow-1" />
 
-`assert` is also an expression. `assert cond else "msg" in expr` guards a value and chains like `let x in expr`: a failing assert throws, a passing one yields the trailing expression. The narrowing the condition proves flows into that expression, so a value checked present reads directly there:
+`assert` is also an expression. `assert cond else "msg" in expr` guards a value and chains like `let x in expr`: a failing assert throws, a passing one yields the trailing expression. Any narrowing the condition establishes flows into that expression, so a value checked present reads directly there:
 
 <GhulExample name="control-flow-51" />
 
