@@ -1,8 +1,8 @@
 use IO.Std.write_line;
 
-class Animal();
+class Animal abstract is si
 
-class Cat(): Animal is
+class CAT(): Animal is
     purr() -> string => "purr";
 si
 
@@ -12,7 +12,7 @@ class CARRIER(occupant: Animal);
 
 // >>>
 describe(carrier: CARRIER) is
-    if isa Cat(carrier.occupant) then
+    if isa CAT(carrier.occupant) then
         // carrier.occupant is a property access,
         // not a local variable - it is not narrowed,
         // so carrier.occupant.purr() would not
@@ -23,5 +23,5 @@ si
 // <<<
 
 entry() is
-    describe(CARRIER(Cat()));
+    describe(CARRIER(CAT()));
 si

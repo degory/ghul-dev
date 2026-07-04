@@ -7,9 +7,9 @@ union Maybe[T] is
 si
 // <<<
 
-class Animal is si
+class Animal abstract is si
 
-class Cat(name: string): Animal is
+class CAT(name: string): Animal is
     purr() -> string => "{name} purrs";
 si
 
@@ -23,9 +23,9 @@ entry() is
         write_line("got value {m.value}");
     fi
 
-    let a: Animal = Cat("whiskers");
-    if isa Cat(a) then
-        // a is narrowed to Cat inside the branch
+    let a: Animal = CAT("whiskers");
+    if isa CAT(a) then
+        // a is narrowed to CAT inside the branch
         write_line(a.purr());
     fi
 // <<<

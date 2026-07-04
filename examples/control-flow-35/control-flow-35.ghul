@@ -1,12 +1,12 @@
 use IO.Std.write_line;
 
-class InsufficientFundsException(message: string): System.Exception is
+class INSUFFICIENT_FUNDS_EXCEPTION(message: string): System.Exception is
     super(message);
 si
 
 withdraw(account: int, amount: int) -> int is
     if amount > account then
-        throw InsufficientFundsException("only {account} available");
+        throw INSUFFICIENT_FUNDS_EXCEPTION("only {account} available");
     fi
 
     return account - amount;
@@ -17,7 +17,7 @@ entry() is
 // >>>
     try
         withdraw(account, 100);
-    catch e: InsufficientFundsException
+    catch e: INSUFFICIENT_FUNDS_EXCEPTION
         write_line("declined: {e.message}");
     yrt
 // <<<

@@ -1,20 +1,20 @@
 {
   "name": "control-flow-12",
-  "code": "let c = cast Cat(a);\n\nif c? then\n    write_line(c.purr());\nfi",
-  "fullSource": "use IO.Std.write_line;\n\nclass Animal is si\n\nclass Cat(name: string): Animal is\n    purr() -> string => \"{name} purrs\";\nsi\n\nentry() is\n    let a: Animal = Cat(\"whiskers\");\n    let c = cast Cat(a);\n\n    if c? then\n        write_line(c.purr());\n    fi\nsi\n",
+  "code": "let c = cast CAT(a);\n\nif c? then\n    write_line(c.purr());\nfi",
+  "fullSource": "use IO.Std.write_line;\n\nclass Animal abstract is si\n\nclass CAT(name: string): Animal is\n    purr() -> string => \"{name} purrs\";\nsi\n\nentry() is\n    let a: Animal = CAT(\"whiskers\");\n    let c = cast CAT(a);\n\n    if c? then\n        write_line(c.purr());\n    fi\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],
   "output": "whiskers purrs\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "c: Cat // local value" },
-    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 16, "text": "class Cat" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "c: CAT // local value" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 16, "text": "class CAT" },
     { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 18, "text": "a: Animal // local value" },
-    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 4, "text": "c: Cat // local value" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
-    { "startLine": 4, "startColumn": 16, "endLine": 4, "endColumn": 16, "text": "c: Cat // local value" },
-    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 21, "text": "Cat.purr() -> Ghul.string // method" }
+    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 4, "text": "c: CAT // local value" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string?) -> Ghul.void // class method" },
+    { "startLine": 4, "startColumn": 16, "endLine": 4, "endColumn": 16, "text": "c: CAT // local value" },
+    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 21, "text": "CAT.purr() -> Ghul.string // method" }
   ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },

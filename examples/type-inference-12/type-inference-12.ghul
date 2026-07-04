@@ -1,6 +1,6 @@
-class Base();
+class BASE();
 
-class DERIVED(): Base;
+class DERIVED(): BASE;
 
 entry() is
 // >>>
@@ -15,7 +15,7 @@ entry() is
         if true then
             DERIVED()
         else
-            Base()
+            BASE()
         fi;
 // <<<
 si

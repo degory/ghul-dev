@@ -80,7 +80,7 @@ Narrowing applies to local variables, including a function's own parameters, nev
 
 <GhulExample name="control-flow-13" />
 
-A type on the variable (`c: Cat`) makes it a type test. `elif let` chains these, so a sequence of type tests reads as one construct:
+A type on the variable (`c: CAT`) makes it a type test. `elif let` chains these, so a sequence of type tests reads as one construct:
 
 <GhulExample name="control-flow-14" />
 
@@ -98,7 +98,7 @@ A trailing `/\` guard gates the branch on a further condition, evaluated with th
 
 Several comma-separated clauses can appear in one `if let`; every clause's test and any guard must pass, and later clauses see the variables the earlier ones introduced, as in `if let outer = holder, inner = outer.value then`. A destructure leaf can also be a literal - an integer, string, character, boolean, `null`, or a qualified enum member - which adds an equality test at that position rather than introducing a variable, so `if let (1, name) = pair then` matches only when the first element is 1. Literal leaves are allowed only in refutable positions like `if let` and `case`.
 
-When the tested value is a member path and the local should take the path's last name, the `name =` can be dropped: `if let order.customer?` introduces `customer` holding `order.customer`, and `if let zoo.pet: Cat` does the same with a type test.
+When the tested value is a member path and the local should take the path's last name, the `name =` can be dropped: `if let order.customer?` introduces `customer` holding `order.customer`, and `if let zoo.pet: CAT` does the same with a type test.
 
 ### scope
 Each branch of an if statement constitutes a separate scope
@@ -138,7 +138,7 @@ The block statement body of the while statement, delimited by `do` and `od` form
 
 <GhulExample name="control-flow-52" />
 
-A `while` condition also narrows its body the same way an `if` condition narrows its then-branch, so `while isa Cat(a) do a.purr() od` reaches a `Cat`-only member without an inner cast.
+A `while` condition also narrows its body the same way an `if` condition narrows its then-branch, so `while isa CAT(a) do a.purr() od` reaches a `CAT`-only member without an inner cast.
 
 ## for statement
 
