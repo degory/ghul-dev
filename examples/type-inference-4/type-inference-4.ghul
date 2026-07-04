@@ -13,10 +13,10 @@ class CARRIER(occupant: Animal);
 // >>>
 describe(carrier: CARRIER) is
     if isa CAT(carrier.occupant) then
-        // carrier.occupant is a property access,
-        // not a local variable - it is not narrowed,
-        // so carrier.occupant.purr() would not
-        // compile here
+        // an isa test written against a member-access
+        // path does not narrow it, so
+        // carrier.occupant.purr() would not compile
+        // here
         write_line("the carrier holds a cat");
     fi
 si

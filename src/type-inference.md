@@ -21,7 +21,7 @@ Within a function, types are inferred for:
 
 In each case the inferred type is concrete. The compiler does not introduce new type parameters during inference, so an anonymous function literal takes a single concrete function type from its context - it cannot itself be generic. For polymorphic behaviour, declare a generic global function or method and pass it where the function value is needed.
 
-ghūl also performs **type narrowing** - within parts of a function a symbol may be observed at a more specific type than the one it was declared with. Narrowing applies only to local variables: function parameters, `let` variables, loop variables, destructured variables and anonymous function parameters. It does not apply to fields or properties.
+ghūl also performs **type narrowing** - within parts of a function a value can be observed at a more specific type than the one it was declared with. Narrowing applies to local variables (function parameters, `let` variables, loop variables, destructured variables and anonymous function parameters); a presence test also narrows a member-access path like `x.field` or `x.property`. An `isa` or variant test written directly against a member-access path does not narrow it - copy it into a local first, or use `if let`.
 
 The examples below leave inferred types unannotated; hover over any variable to see the type the compiler worked out for it.
 
@@ -43,15 +43,19 @@ When a check guarantees a value has a more specific type, ghūl narrows that val
 
 <GhulExample name="type-inference-3" />
 
-A field or property is **not** narrowed - an `isa` check or variant test written directly against one narrows nothing.
+A presence test (`?`) also narrows a member-access path: after `if x.field? then`, uses of `x.field` inside the branch are non-optional.
+
+<GhulExample name="type-inference-4a" />
+
+An `isa` check or variant test written against a member-access path does not narrow it - the same test on the same path can read a different value each time.
 
 <GhulExample name="type-inference-4" />
 
-To narrow a property, copy it into a local variable and narrow that.
+To narrow one of these, copy the path into a local variable and narrow that.
 
 <GhulExample name="type-inference-5" />
 
-`if let` does the same in one step: it introduces a fresh local variable from the property expression, and that local narrows.
+`if let` does the same in one step: it introduces a fresh local variable from the path expression, and that local narrows.
 
 <GhulExample name="type-inference-6" />
 

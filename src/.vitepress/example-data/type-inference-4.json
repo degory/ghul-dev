@@ -1,7 +1,7 @@
 {
   "name": "type-inference-4",
-  "code": "class CARRIER(occupant: Animal);\ndescribe(carrier: CARRIER) is\n    if isa CAT(carrier.occupant) then\n        // carrier.occupant is a property access,\n        // not a local variable - it is not narrowed,\n        // so carrier.occupant.purr() would not\n        // compile here\n        write_line(\"the carrier holds a cat\");\n    fi\nsi",
-  "fullSource": "use IO.Std.write_line;\n\nclass Animal abstract is si\n\nclass CAT(): Animal is\n    purr() -> string => \"purr\";\nsi\n\nclass CARRIER(occupant: Animal);\n\ndescribe(carrier: CARRIER) is\n    if isa CAT(carrier.occupant) then\n        // carrier.occupant is a property access,\n        // not a local variable - it is not narrowed,\n        // so carrier.occupant.purr() would not\n        // compile here\n        write_line(\"the carrier holds a cat\");\n    fi\nsi\n\nentry() is\n    describe(CARRIER(CAT()));\nsi\n",
+  "code": "class CARRIER(occupant: Animal);\ndescribe(carrier: CARRIER) is\n    if isa CAT(carrier.occupant) then\n        // an isa test written against a member-access\n        // path does not narrow it, so\n        // carrier.occupant.purr() would not compile\n        // here\n        write_line(\"the carrier holds a cat\");\n    fi\nsi",
+  "fullSource": "use IO.Std.write_line;\n\nclass Animal abstract is si\n\nclass CAT(): Animal is\n    purr() -> string => \"purr\";\nsi\n\nclass CARRIER(occupant: Animal);\n\ndescribe(carrier: CARRIER) is\n    if isa CAT(carrier.occupant) then\n        // an isa test written against a member-access\n        // path does not narrow it, so\n        // carrier.occupant.purr() would not compile\n        // here\n        write_line(\"the carrier holds a cat\");\n    fi\nsi\n\nentry() is\n    describe(CARRIER(CAT()));\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [1],
@@ -9,16 +9,16 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "text": "class CARRIER" },
-    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 22, "text": "CARRIER.occupant: Animal // instance property" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 22, "text": "CARRIER.occupant: Animal // pure instance property" },
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 30, "text": "CARRIER.init(occupant: Animal) // constructor" },
     { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 30, "text": "class Animal" },
-    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 8, "text": "describe(carrier: CARRIER) -> Ghul.void // global function" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 8, "text": "describe(carrier: CARRIER) -> Ghul.void // pure global function" },
     { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 16, "text": "carrier: CARRIER // local argument" },
     { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 25, "text": "class CARRIER" },
     { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 14, "text": "class CAT" },
     { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "text": "carrier: CARRIER // local argument" },
-    { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 31, "text": "CARRIER.occupant: Animal // instance property" },
-    { "startLine": 8, "startColumn": 9, "endLine": 8, "endColumn": 18, "text": "IO.Std.write_line(value: Ghul.string?) -> Ghul.void // class method" }
+    { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 31, "text": "CARRIER.occupant: Animal // pure instance property" },
+    { "startLine": 8, "startColumn": 9, "endLine": 8, "endColumn": 18, "text": "IO.Std.write_line(value: Ghul.string?) -> Ghul.void // pure class method" }
   ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "tokenType": "class" },

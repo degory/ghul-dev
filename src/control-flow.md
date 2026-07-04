@@ -68,7 +68,7 @@ Narrowing is flow-sensitive: it follows the control flow rather than being confi
 
 The `else` narrowing extends to a class hierarchy declared in the current assembly without `open`: ruling out one subclass on the `else` edge narrows to the rest, and when the root is `abstract` the chain can collapse to a single remaining subclass.
 
-Narrowing applies to local variables, including a function's own parameters, never to a field or property. To narrow a field, copy it into a local first, or use `if let`, which introduces one.
+Narrowing applies to local variables, including a function's own parameters. A presence test extends it to a member-access path: after `if x.field? then`, uses of `x.field` inside the branch are non-optional. An `isa` or variant test against a member-access path does not narrow it, since the path can read a different value each time - copy it into a local first, or use `if let`, which introduces one.
 
 ### if let
 
