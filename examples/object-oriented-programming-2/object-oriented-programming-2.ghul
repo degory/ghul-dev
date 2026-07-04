@@ -1,27 +1,27 @@
 use IO.Std.write_line;
 
-class ANIMAL is
+class Animal is
     _name: string;
     init(name: string) is _name = name; si
 
     name: string => _name;
-    speak() -> string;                     // body-less: ANIMAL is implicitly abstract
+    speak() -> string;                     // body-less: Animal is implicitly abstract
     describe() -> string => "{_name} says {speak()}";
 si
 
-class DOG: ANIMAL is
+class DOG: Animal is
     init(name: string) is super.init(name); si
     speak() -> string => "woof";
 si
 
-class CAT: ANIMAL is
+class CAT: Animal is
     init(name: string) is super.init(name); si
     speak() -> string => "meow";
 si
 
 entry() is
 // >>>
-    let animals: ANIMAL[] = [DOG("Rex"), CAT("Tom")];
+    let animals: Animal[] = [DOG("Rex"), CAT("Tom")];
 
     for a in animals do
         write_line(a.describe()); // describe calls the overriding speak

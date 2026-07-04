@@ -96,7 +96,7 @@ The postfix `?` operator tests whether an optional has a value. A plain `if x?` 
 
 `!` reads the value out where narrowing hasn't already done it, but is rarely needed: `if let` tests an optional and reads its value into a local variable in one step (see [control flow](/control-flow.html#if-let)).
 
-Optional types work for reference and value types alike. A value-type optional like `int?` is backed by the .NET `Nullable[T]`, and you don't construct it explicitly: a plain value where an optional is expected widens automatically, and `null` marks the absent case:
+Optional types work for reference and value types alike. A value-type optional like `int?` holds either a value or nothing, and you don't construct it explicitly: a plain value where an optional is expected widens automatically, and `null` marks the absent case:
 
 <GhulExample name="language-basics-17" />
 
@@ -108,7 +108,7 @@ To pass a `T?` where a `T` is wanted, make the value present first: narrow it wi
 
 <GhulExample name="language-basics-19" />
 
-Reading a member through an optional the compiler has not proven present draws a `null-deref` warning; `x?.y`, `x.has_value`, `x!`, and `if let` are the warning-free routes. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
+Reading a member through an optional not known to be present draws a `null-deref` warning; `x?.y`, `x.has_value`, `x!`, and `if let` are the warning-free routes. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
 
 The `??` operator supplies a fallback: `a ?? b` is `a` when it is present, otherwise `b`, and `b` is evaluated only when needed. It is right-associative, so `a ?? b ?? c` tries each in turn, and the result stays optional until a non-optional value closes the chain:
 

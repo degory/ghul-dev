@@ -174,7 +174,7 @@ A class with a primary header can also include a `super(...)` body declaration t
 
 <GhulExample name="definitions-39" />
 
-A primary-constructor class or struct also gets a synthesised `deconstruct` (exposed as .NET `Deconstruct`) built from its public-readable parameters, so `let (x, y) = POINT(3, 4)` destructures without writing one out.
+A primary-constructor class or struct also gets a synthesised `deconstruct` built from its public-readable parameters, so `let (x, y) = POINT(3, 4)` destructures without writing one out.
 
 A class or struct with a primary header and no body declarations can end with a terminating `;` instead of `is ... si`:
 

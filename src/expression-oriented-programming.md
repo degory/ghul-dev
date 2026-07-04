@@ -1,6 +1,6 @@
 # expression oriented programming
 
-ghūl is expression-oriented: most control-flow constructs produce a value, so they can be assigned to a local variable, returned, or passed as an argument. With expression bodies on functions and methods, a computation can read as one value-producing expression rather than a sequence of assignments.
+ghūl supports expression-oriented programming: most control-flow constructs produce a value, so they can be assigned to a local variable, returned, or passed as an argument. With expression bodies on functions and methods, a computation can read as one value-producing expression rather than a sequence of assignments.
 
 The constructs are covered in full elsewhere: [if](/expressions#conditional) and [case](/expressions#case-expression) as expressions on the expressions page, and the [if](/control-flow#if-statement) and [case](/control-flow#case-statement) statement forms under control flow. This page shows them working together.
 
@@ -38,6 +38,6 @@ A function, method, property, or anonymous function can replace its block body w
 
 ## composing them
 
-These forms nest, so one expression body can hold a `case`, an `if`, and a `val` block:
+These forms nest, so a `val` block can hold a `case` and an `if`:
 
 <GhulExample name="expression-oriented-programming-5" />
