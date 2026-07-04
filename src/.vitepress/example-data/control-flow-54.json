@@ -1,0 +1,32 @@
+{
+  "name": "control-flow-54",
+  "code": "case a\nwhen c: CAT then c.meow()\nwhen d: DOG then d.bark()\nesac;",
+  "fullSource": "use IO.Std.write_line;\n\nclass Animal abstract is\n    init() is si\nsi\n\nclass CAT: Animal is\n    init() is super.init(); si\n    meow() -> string => \"meow\";\nsi\n\nclass DOG: Animal is\n    init() is super.init(); si\n    bark() -> string => \"woof\";\nsi\n\ndescribe(a: Animal) -> string =>\n    case a\n    when c: CAT then c.meow()\n    when d: DOG then d.bark()\n    esac;\n\nentry() is\n    write_line(describe(CAT()));\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "meow\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 6, "text": "c: CAT // local value" },
+    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 11, "text": "class CAT" },
+    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 18, "text": "c: CAT // local value" },
+    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 23, "text": "CAT.meow() -> Ghul.string // method" },
+    { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "text": "d: DOG // local value" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 11, "text": "class DOG" },
+    { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 18, "text": "d: DOG // local value" },
+    { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 23, "text": "DOG.bark() -> Ghul.string // method" },
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "text": "a: Animal // local argument" }
+  ],
+  "semanticTokens": [
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 6, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 11, "tokenType": "class" },
+    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 23, "tokenType": "method" },
+    { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 11, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 23, "tokenType": "method" },
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "tokenType": "variable", "modifiers": "readonly" }
+  ]
+}

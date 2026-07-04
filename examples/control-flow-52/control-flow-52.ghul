@@ -1,0 +1,24 @@
+use IO.Std.write_line;
+
+class COUNTDOWN is
+    _n: int;
+    init(n: int) is _n = n; si
+
+    next() -> int? is
+        if _n <= 0 then
+            return null;
+        fi
+        let v = _n;
+        _n = _n - 1;
+        return v;
+    si
+si
+
+entry() is
+    let c = COUNTDOWN(3);
+// >>>
+    while let n = c.next() do
+        write_line(n);
+    od
+// <<<
+si

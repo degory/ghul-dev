@@ -16,6 +16,10 @@ In ghūl the `assert` statement is used to ensure an expected condition holds an
 
 <GhulExample name="control-flow-1" />
 
+`assert` is also an expression. `assert cond else "msg" in expr` guards a value and chains like `let x in expr`: a failing assert throws, a passing one yields the trailing expression. The narrowing the condition proves flows into that expression, so a value checked present reads directly there:
+
+<GhulExample name="control-flow-51" />
+
 ## if statement
 
 If statements allow the execution of different code blocks based on specific conditions. An `if` is also an expression that yields the value of its chosen branch; see [if as an expression](/expressions#conditional).
@@ -46,7 +50,7 @@ This form is used for multiple conditions. If the initial condition is false, th
 
 ### type narrowing
 
-When an `if` predicate proves a stronger fact about a variable's type, the then-branch sees that variable at the narrower type. The most common case is an `isa` test, for a union variant or for a class:
+An `isa` test in an `if` condition narrows the variable to the tested type inside the then-branch. This holds for a union variant or a class:
 
 <GhulExample name="control-flow-8" />
 
@@ -62,6 +66,10 @@ Narrowing is flow-sensitive: it follows the control flow rather than being confi
 
 <GhulExample name="control-flow-11" />
 
+The `else` narrowing extends to a class hierarchy declared in the current assembly without `open`: ruling out one subclass on the `else` edge narrows to the rest, and when the root is `abstract` the chain can collapse to a single remaining subclass.
+
+Narrowing applies to local variables, including a function's own parameters, never to a field or property. To narrow a field, copy it into a local first, or use `if let`, which introduces one.
+
 ### if let
 
 `cast T(x)` views `x` as type `T`, and yields null (rather than throwing) when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test:
@@ -76,13 +84,21 @@ A type on the variable (`c: Cat`) makes it a type test. `elif let` chains these,
 
 <GhulExample name="control-flow-14" />
 
-With no type given for the local variable, `if let` simply tests that the value is present. This is the natural way to consume an [optional type](/language-basics.html#optional-types): the local variable has the non-optional type within the then-branch, so there is no need for an explicit `!`.
+With no type given for the local variable, `if let` tests that the value is present. This is the natural way to consume an [optional type](/language-basics.html#optional-types): the local variable has the non-optional type within the then-branch, so there is no need for an explicit `!`.
 
 <GhulExample name="control-flow-15" />
 
 An `if let` can also destructure, exactly like a plain `let`, including `_` to discard a field that is not needed:
 
 <GhulExample name="control-flow-16" />
+
+A trailing `/\` guard gates the branch on a further condition, evaluated with the new variable already in scope:
+
+<GhulExample name="control-flow-55" />
+
+Several comma-separated clauses can appear in one `if let`; every clause's test and any guard must pass, and later clauses see the variables the earlier ones introduced, as in `if let outer = holder, inner = outer.value then`. A destructure leaf can also be a literal - an integer, string, character, boolean, `null`, or a qualified enum member - which adds an equality test at that position rather than a binding, so `if let (1, name) = pair then` matches only when the first element is 1. Literal leaves are allowed only in refutable positions like `if let` and `case`.
+
+When the tested value is a member path and the local should take the path's last name, the `name =` can be dropped: `if let order.customer?` introduces `customer` holding `order.customer`, and `if let zoo.pet: Cat` does the same with a type test.
 
 ### scope
 Each branch of an if statement constitutes a separate scope
@@ -115,6 +131,14 @@ This loop skips the call to `write_line` when counter is 3.
 ### scope
 
 The block statement body of the while statement, delimited by `do` and `od` forms a scope for local variable definitions.
+
+### while let
+
+`while let` is the loop form of `if let`: the loop runs while the refutable binding matches, with the bound names fresh on each iteration. It takes the same shapes as `if let` - bare presence, type ascription, destructure, `/\` guards, and comma-separated clauses:
+
+<GhulExample name="control-flow-52" />
+
+A `while` condition also narrows its body the same way an `if` condition narrows its then-branch, so `while isa Cat(a) do a.purr() od` reaches a `Cat`-only member without an inner cast.
 
 ## for statement
 
@@ -187,9 +211,23 @@ The block statement body of the do statement, delimited by `do` and `od` forms a
 
 ## case statement
 
-A `case` is also an expression that yields the value of the matched arm; see [case as an expression](/expressions#case-expression).
+`case` branches on a scrutinee value. Each `when` arm is introduced by `then`, an optional `else` catches the rest, and the construct closes with `esac`. There is no fall-through, and a `when` can list several values matched by equality:
 
 <GhulExample name="control-flow-32" />
+
+`case` is also an expression: each arm's last expression is the arm's value, and the `case` evaluates to whichever arm matched:
+
+<GhulExample name="control-flow-53" />
+
+### binding patterns
+
+A `when` arm can carry a binding pattern instead of an equality list, mirroring [`if let`](#if-let): `when v: T then` type-tests and binds, `when (a, b) then` destructures, and `when _: T then` type-tests without binding. A bare identifier stays an equality test - `when v then` compares against the value of `v` in scope, it does not bind a new local:
+
+<GhulExample name="control-flow-54" />
+
+### exhaustiveness
+
+A `case` over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - is checked for exhaustiveness. A missing case warns (`non-exhaustive-case`), an arm that matches nothing the earlier arms left warns (`redundant-case-arm`), and an `else` that can never run warns (`dead-case-else`). An expression-position `case` over an open domain needs an `else`, unless the expected type has a default value to fall back on.
 
 ### scope
 

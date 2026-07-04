@@ -1,0 +1,24 @@
+{
+  "name": "control-flow-52",
+  "code": "while let n = c.next() do\n    write_line(n);\nod",
+  "fullSource": "use IO.Std.write_line;\n\nclass COUNTDOWN is\n    _n: int;\n    init(n: int) is _n = n; si\n\n    next() -> int? is\n        if _n <= 0 then\n            return null;\n        fi\n        let v = _n;\n        _n = _n - 1;\n        return v;\n    si\nsi\n\nentry() is\n    let c = COUNTDOWN(3);\n    while let n = c.next() do\n        write_line(n);\n    od\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "3\n2\n1\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 11, "text": "n: Ghul.int // local value" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 15, "text": "c: COUNTDOWN // local value" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 20, "text": "COUNTDOWN.next() -> Ghul.int? // method" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.int) -> Ghul.void // class method" },
+    { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 16, "text": "n: Ghul.int // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 20, "tokenType": "method" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" }
+  ]
+}

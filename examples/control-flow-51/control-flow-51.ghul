@@ -1,0 +1,11 @@
+use IO.Std.write_line;
+
+// >>>
+length_of(key: string?) -> int =>
+    assert key? else "key is null" in
+    key.length;
+// <<<
+
+entry() is
+    write_line(length_of("hello"));
+si
