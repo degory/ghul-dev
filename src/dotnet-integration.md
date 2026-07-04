@@ -27,7 +27,6 @@ Some commonly used namespace and type names are re-mapped in line with ghūl con
 | Original Type                                        | Mapped Type                         |
 |------------------------------------------------------|-------------------------------------|
 | `System.IDisposable`                                 | `Ghul.Disposable`                   |
-| `System.Type`                                        | `System.Type2`                      |
 | `System.Console`                                     | `IO.Std`                            |
 | `System.Collections.IEnumerable`                     | `Collections.NonGenericIterable`    |
 | `System.Collections.Generic.IReadOnlyCollection`     | `Collections.Bag`                   |

@@ -66,17 +66,18 @@ a backtick: `` `field ``, `` `+ ``.
 The following words are keywords and cannot be used as plain identifiers:
 
 ```
-assert    await     break     case      cast      catch     class
-continue  default   do        elif      else      enum      esac
-false     fi        field     finally   for       if        in
-innate    is        isa       let       mut       namespace new
-null      od        private   protected ptr       public    rec
-ref       return    self      si        static    struct    super
-then      throw     trait     true      try       typeof    union
-use       when      while     yrt
+abstract  assert    await     break     case      cast      catch
+class     continue  default   do        elif      else      enum
+esac      false     fi        field     finally   for       if
+in        innate    is        isa       lav       let       mut
+namespace new       null      od        operator  private   protected
+ptr       public    rec       ref       return    self      si
+static    struct    super     then      throw     trait     true
+try       typeof    union     use       val       when      while
+yield     yrt
 ```
 
-A few words are *contextual*: they look like identifiers to the tokenizer but the parser recognises them in specific positions: `optional` as a type-parameter kind constraint, `out` as a type-parameter variance modifier.
+A few words are *contextual*: they look like identifiers to the tokenizer but the parser recognises them in specific positions: `optional` as a type-parameter kind constraint, `out` as a type-parameter variance modifier, `open` as a class extensibility modifier.
 
 ### numeric literals
 
@@ -382,7 +383,7 @@ Statement ::= Let
 Let    ::= "let" "use"? VariableList ( "in" Expression )?
 Return ::= "return" Expression?
 Throw  ::= "throw" Expression?
-Assert ::= "assert" Expression ( "else" Expression )?
+Assert ::= "assert" Expression ( "else" Expression )? ( "in" Expression )?
 Yield  ::= "yield" Expression
 ```
 
@@ -390,10 +391,11 @@ Yield  ::= "yield" Expression
 when the variable goes out of scope.
 
 The `let … in …` form is a [let-in expression](#primary-expressions) used as a
-statement.
+statement. The `assert … in …` tail behaves the same way: a passing assert yields
+the trailing expression, a failing one throws.
 
 `yield` is permitted only inside a [generator function](/control-flow.html#generators),
-one whose return type is `Collections.Iterable[T]` or `Collections.Iterator[T]`.
+one whose return type is `Ghul.Pipes.Pipe[T]`.
 
 ### if
 
@@ -413,10 +415,15 @@ type ascription on it (`if let c: T = e`) tests that the value is a `T`.
 
 ```ebnf
 Case ::= "case" Expression
-         ( "when" ExpressionList ":" StatementList )*
-         ( "default" StatementList )?
+         ( "when" ( ExpressionList | Variable ) "then" StatementList )*
+         ( "else" StatementList )?
          "esac"
 ```
+
+Each `when` carries either a comma-separated list of value-equality expressions or
+a binding pattern, matching the same type-test, destructure, and literal-leaf forms
+as [`if let`](/control-flow.html#if-let). `case` is also an
+[expression](#primary-expressions): each arm's last expression is the arm's value.
 
 ### try
 
@@ -531,7 +538,10 @@ PrimaryExpression ::= Identifier
                     | "super"
                     | "rec"
                     | If                                     /* if-expression */
+                    | Case                                   /* case-expression */
+                    | "val" StatementList "lav"              /* block expression */
                     | "let" "use"? VariableList "in" Expression   /* let-in */
+                    | "assert" Expression ( "else" Expression )? "in" Expression  /* assert-in */
 
 Literal ::= IntegerLiteral
           | FloatLiteral
