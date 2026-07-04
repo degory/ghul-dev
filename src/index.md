@@ -23,7 +23,7 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 
 - **functional programming**: first-class anonymous functions with closures, higher order functions, and non-mutating pipe operations over lists. Arrays, tuples, and list literals are immutable.
 
-- **pattern matching**: `if let` and `case`/`when` arms with type tests, destructuring with literal leaves, and value lists. `case` arms over a union or `bool` are checked for exhaustiveness; other scrutinees need `else`.
+- **pattern matching**: `if let` and `case`/`when` arms with type tests, destructuring with literal leaves, and value lists. `case` arms over a union, enum, `bool`, or closed class hierarchy are checked for exhaustiveness; open-domain scrutinees need `else`.
 
 - **expression-oriented**: `if`, `case`, and block forms are expressions.
 
@@ -35,7 +35,7 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 
 - **async/await**: functions returning `Tasks.TASK[T]` can use `await` to wait on a task and resume with its result.
 
-- **generators**: functions returning `Iterable[T]` can use `yield` to produce a sequence of values lazily.
+- **generators**: functions returning `Pipe[T]` can use `yield` to produce a sequence of values lazily.
 
 - **.NET integration**: ghūl targets .NET, producing and consuming NuGet packages and inter-operating with other .NET languages.
 

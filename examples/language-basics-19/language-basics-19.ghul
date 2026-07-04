@@ -1,15 +1,16 @@
-lookup() -> string? => null;
+use IO.Std.write_line;
+
+lookup() -> string? => "found";
 
 entry() is
-// >>>
     let maybe = lookup();
-
+// >>>
     if maybe? then
-        // fine: maybe is known to be present here
-        let title: string = maybe;
+        let narrowed: string = maybe; // narrowed to string here
+        write_line(narrowed);
     fi
 
-    // fine: ! asserts the value is present
-    let forced: string = maybe!;
+    let forced: string = maybe!;            // asserts present, throws if absent
+    let safe: string = maybe ?? "fallback"; // falls back when absent
 // <<<
 si

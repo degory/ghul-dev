@@ -1,0 +1,26 @@
+{
+  "name": "language-basics-28",
+  "code": "let name = lookup();\nlet greeting = \"hello, {name ?? \"stranger\"}\";\nwrite_line(greeting);",
+  "fullSource": "use IO.Std.write_line;\n\nlookup() -> string? => null;\n\nentry() is\n    let name = lookup();\n    let greeting = \"hello, {name ?? \"stranger\"}\";\n    write_line(greeting);\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "hello, stranger\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "name: Ghul.string? // local value" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 17, "text": "lookup() -> Ghul.string? // global function" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "greeting: Ghul.string // local value" },
+    { "startLine": 2, "startColumn": 25, "endLine": 2, "endColumn": 28, "text": "name: Ghul.string? // local value" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string?) -> Ghul.void // class method" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 19, "text": "greeting: Ghul.string // local value" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 17, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 25, "endLine": 2, "endColumn": 28, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" }
+  ]
+}

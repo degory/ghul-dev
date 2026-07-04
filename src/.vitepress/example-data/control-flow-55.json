@@ -1,0 +1,30 @@
+{
+  "name": "control-flow-55",
+  "code": "if let c: CAT = find() /\\ c.is_friendly then\n    write_line(\"friendly cat: {c.name}\");\nfi",
+  "fullSource": "use IO.Std.write_line;\n\nclass CAT is\n    name: string;\n    is_friendly: bool;\n    init(name: string, is_friendly: bool) is\n        self.name = name;\n        self.is_friendly = is_friendly;\n    si\nsi\n\nfind() -> CAT? => CAT(\"Tom\", true);\n\nentry() is\n    if let c: CAT = find() /\\ c.is_friendly then\n        write_line(\"friendly cat: {c.name}\");\n    fi\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "friendly cat: Tom\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 8, "text": "c: CAT // local value" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 13, "text": "class CAT" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 20, "text": "find() -> CAT? // global function" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "text": "c: CAT // local value" },
+    { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 39, "text": "CAT.is_friendly: Ghul.bool // instance property" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string?) -> Ghul.void // class method" },
+    { "startLine": 2, "startColumn": 32, "endLine": 2, "endColumn": 32, "text": "c: CAT // local value" },
+    { "startLine": 2, "startColumn": 34, "endLine": 2, "endColumn": 37, "text": "CAT.name: Ghul.string // instance property" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 13, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 20, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 39, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 2, "startColumn": 32, "endLine": 2, "endColumn": 32, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 34, "endLine": 2, "endColumn": 37, "tokenType": "property" }
+  ]
+}

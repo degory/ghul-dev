@@ -38,18 +38,18 @@ Mutual recursion for anonymous functions is slightly awkward because of the forw
 <GhulExample name="functional-programming-4" />
 
 ### mutual recursion in named functions
-Mututal recursion with named functions, doesn't require any workarounds
+Mutual recursion with named functions doesn't require any workarounds
 
 <GhulExample name="functional-programming-5" />
 ## immutable data structures and pure functions
-While ghūl supports imperitive code it also aims to support
+While ghūl supports imperative code it also aims to support
 writing pure functions with appropriate constructs and defaults
 
 ### lists are immutable by default
 The standard trait for lists `Collections.List[T]` is immutable
 
 ### maps are immutable by default
-The standard trait for maps `Collections.Map[T]` is immutable
+The standard trait for maps `Collections.Map[K, V]` is immutable
 
 ### arrays are immutable
 The ghūl array type `T[]` does not expose an assign indexer
@@ -101,9 +101,7 @@ Anonymous functions take a single concrete type from context; there is no generi
 
 ## union types
 
-Unions are under development [(see GitHub issue #1132)](https://github.com/degory/ghul/issues/1132)
-
-Unions hold a value of one of several different types (variants). Each variant can have its own set of fields. This is useful for creating types that can represent multiple kinds of data in a single structure.
+A union holds a value of one of several variants, each with its own set of fields: one type that represents several kinds of data. The [definitions page](/definitions.html#unions) covers the full surface - unit variants, the `default` variant, primary-constructor headers, and traits; here they appear in the functional idiom.
 
 <GhulExample name="functional-programming-14" />
 
@@ -111,7 +109,7 @@ Accessing the data held by a union's variant requires first checking which varia
 
 <GhulExample name="functional-programming-15" />
 
-Unions shaped like `Option` types (exactly one non-unit variant) support the `?` and `!` operators for testing if they hold a value and for unwrapping that value, respectively:
+Unions shaped like `Option` types - a single field-carrying variant, or one variant marked `default` - support the `?` and `!` operators, for testing whether they hold a value and for unwrapping it:
 
 <GhulExample name="functional-programming-16" />
 
@@ -150,12 +148,12 @@ step body usually reads `value || next_state`.
 <GhulExample name="functional-programming-22" />
 
 Type arguments to `stream` are inferred from the initial-state value
-and the lambda's yield expression. Multi-component state reads more
+and the anonymous function's yield expression. Multi-component state reads more
 clearly as a named tuple (`(n = 1, prev = 1)` with `s.n` and `s.prev`
 field access) than as a positional tuple needing destructuring. The
 no-argument `DONE[T, S]()` constructor in terminating sequences keeps
 its explicit type arguments because the surrounding `if/else` widens to
-`object` before the outer lambda return type can constrain it.
+`object` before the outer anonymous function's return type can constrain it.
 
 The factory returns `Pipe[T]` directly so combinators like `.take`,
 `.filter`, `.map`, `.zip`, and `.index` chain straight onto a stream
