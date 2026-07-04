@@ -1,0 +1,19 @@
+use IO.Std.write_line;
+
+class ORDER(customer: string?);
+
+// >>>
+describe(order: ORDER) is
+    if order.customer? then
+        // a presence test narrows the path itself:
+        // within this branch order.customer is the
+        // non-optional string, so .length is
+        // reachable directly
+        write_line("customer name has {order.customer.length} chars");
+    fi
+si
+// <<<
+
+entry() is
+    describe(ORDER("alice"));
+si
