@@ -233,7 +233,7 @@ Union   ::= "union" Identifier TypeParameters? Modifiers "is" Variant+ "si"
 Variant ::= Identifier ( "(" VariableList ")" )? "default"? ";"
 ```
 
-Each `Variant` optionally carries fields, written as a parenthesised list of
+Each `Variant` optionally has fields, written as a parenthesised list of
 `name: Type` variables. A trailing `default` marks one variant as the union's
 *default*: the one the `?` test and `!` unwrap operators target on a union
 value.
@@ -420,8 +420,8 @@ Case ::= "case" Expression
          "esac"
 ```
 
-Each `when` carries either a comma-separated list of value-equality expressions or
-a binding pattern, matching the same type-test, destructure, and literal-leaf forms
+Each `when` takes either a comma-separated list of value-equality expressions or
+a pattern, matching the same type-test, destructure, and literal-leaf forms
 as [`if let`](/control-flow.html#if-let). `case` is also an
 [expression](#primary-expressions): each arm's last expression is the arm's value.
 

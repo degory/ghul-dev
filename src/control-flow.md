@@ -96,7 +96,7 @@ A trailing `/\` guard gates the branch on a further condition, evaluated with th
 
 <GhulExample name="control-flow-55" />
 
-Several comma-separated clauses can appear in one `if let`; every clause's test and any guard must pass, and later clauses see the variables the earlier ones introduced, as in `if let outer = holder, inner = outer.value then`. A destructure leaf can also be a literal - an integer, string, character, boolean, `null`, or a qualified enum member - which adds an equality test at that position rather than a binding, so `if let (1, name) = pair then` matches only when the first element is 1. Literal leaves are allowed only in refutable positions like `if let` and `case`.
+Several comma-separated clauses can appear in one `if let`; every clause's test and any guard must pass, and later clauses see the variables the earlier ones introduced, as in `if let outer = holder, inner = outer.value then`. A destructure leaf can also be a literal - an integer, string, character, boolean, `null`, or a qualified enum member - which adds an equality test at that position rather than introducing a variable, so `if let (1, name) = pair then` matches only when the first element is 1. Literal leaves are allowed only in refutable positions like `if let` and `case`.
 
 When the tested value is a member path and the local should take the path's last name, the `name =` can be dropped: `if let order.customer?` introduces `customer` holding `order.customer`, and `if let zoo.pet: Cat` does the same with a type test.
 
@@ -134,7 +134,7 @@ The block statement body of the while statement, delimited by `do` and `od` form
 
 ### while let
 
-`while let` is the loop form of `if let`: the loop runs while the refutable binding matches, with the bound names fresh on each iteration. It takes the same shapes as `if let` - bare presence, type ascription, destructure, `/\` guards, and comma-separated clauses:
+`while let` is the loop form of `if let`: the loop runs while the refutable pattern matches, with the bound names fresh on each iteration. It takes the same shapes as `if let` - bare presence, type ascription, destructure, `/\` guards, and comma-separated clauses:
 
 <GhulExample name="control-flow-52" />
 
@@ -219,9 +219,9 @@ The block statement body of the do statement, delimited by `do` and `od` forms a
 
 <GhulExample name="control-flow-53" />
 
-### binding patterns
+### pattern arms
 
-A `when` arm can carry a binding pattern instead of an equality list, mirroring [`if let`](#if-let): `when v: T then` type-tests and binds, `when (a, b) then` destructures, and `when _: T then` type-tests without binding. A bare identifier stays an equality test - `when v then` compares against the value of `v` in scope, it does not bind a new local:
+A `when` arm can take a pattern instead of an equality list, mirroring [`if let`](#if-let): `when v: T then` type-tests and introduces the variable, `when (a, b) then` destructures, and `when _: T then` type-tests without introducing one. A bare identifier stays an equality test - `when v then` compares against the value of `v` in scope and introduces no new local:
 
 <GhulExample name="control-flow-54" />
 
@@ -322,13 +322,13 @@ Inside such a function, `await e` evaluates to the result of the task `e` once i
 
 <GhulExample name="control-flow-47" />
 
-`await` may also appear inside the body of a `for` or `while` loop: the loop iterates, awaiting and resuming once per iteration. A `return` from inside an awaiting loop body propagates out through the loop as usual:
+`await` can also appear inside the body of a `for` or `while` loop: the loop iterates, awaiting and resuming once per iteration. A `return` from inside an awaiting loop body propagates out through the loop as usual:
 
 <GhulExample name="control-flow-48" />
 
 ### limitations
 
-A `try` / `catch` block may not surround code that contains an `await`. To handle a faulted task, wrap the call at the *call site* instead: reading `.result` on a returned task surfaces a faulted task as a `System.AggregateException`.
+A `try` / `catch` block cannot surround code that contains an `await`. To handle a faulted task, wrap the call at the *call site* instead: reading `.result` on a returned task surfaces a faulted task as a `System.AggregateException`.
 
 ## generators
 

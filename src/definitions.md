@@ -20,11 +20,11 @@ Multiple variables can be defined in the same `let` statement, with each variabl
 
 <GhulExample name="definitions-4" />
 
-The name `_` is a discard placeholder. It can stand in for any variable name, but the value that would be assigned to it is discarded. `_` is accepted in `let` definitions, tuple destructuring, lambda parameters, and `for` loop variables:
+The name `_` is a discard placeholder. It can stand in for any variable name, but the value that would be assigned to it is discarded. `_` is accepted in `let` definitions, tuple destructuring, anonymous function parameters, and `for` loop variables:
 
 <GhulExample name="definitions-5" />
 
-Variables may only be defined within functions, methods or property bodies. Variable names should be in `snake_case`
+Variables can only be defined within functions, methods or property bodies. Variable names should be in `snake_case`
 
 ## functions
 
@@ -188,7 +188,7 @@ Namespaces are introduced with the `namespace` keyword followed by the namespace
 
 <GhulExample name="definitions-24" />
 
-Namespaces may be nested inside other namespaces
+Namespaces can be nested inside other namespaces
 <GhulExample name="definitions-25" />
 
 A dotted namespace name is shorthand for nesting namespaces
