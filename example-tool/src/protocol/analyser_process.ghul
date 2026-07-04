@@ -40,11 +40,13 @@ namespace Analysis.Protocol is
             start_info.standard_output_encoding = UTF8Encoding();
             start_info.standard_error_encoding = UTF8Encoding();
 
-            _process = Process.start(start_info);
+            let started = Process.start(start_info);
 
-            if !_process? then
+            if !started? then
                 throw Exception("failed to start ghul-compiler analyser process");
             fi
+
+            _process = started;
 
             _stderr_capture = StringBuilder();
 
@@ -116,7 +118,13 @@ namespace Analysis.Protocol is
                 fi
             od
 
-            return JsonSerializer.deserialize[Response](buffer.to_string(), _options);
+            let response = JsonSerializer.deserialize[Response](buffer.to_string(), _options);
+
+            if !response? then
+                throw Exception("analyser response did not deserialize\nbuffer:\n{buffer}");
+            fi
+
+            return response;
         si
 
         write_request(request: Request) is

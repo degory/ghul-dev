@@ -48,6 +48,11 @@ namespace ExampleTool is
         let assembly = System.Reflection.Assembly.get_executing_assembly();
         let assembly_path = Path.get_full_path(assembly.location);
         let directory = Path.get_directory_name(assembly_path);
+
+        if !directory? then
+            throw Exception("could not determine the directory of {assembly_path}");
+        fi
+
         let name = Path.get_file_name_without_extension(assembly_path);
         let config_path = Path.combine(directory, "{name}.runtimeconfig.json");
 
@@ -111,7 +116,7 @@ namespace ExampleTool is
         let best_version: System.Version? mut = null;
 
         for directory in Directory.get_directories(packs_root, "{framework_version}.*") do
-            let version = _try_parse_version(Path.get_file_name(directory));
+            let version = _try_parse_version(Path.get_file_name(directory)!);
 
             if version? /\ (!best_version? \/ version.compare_to(best_version) > 0) then
                 best_version = version;

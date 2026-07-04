@@ -48,7 +48,7 @@ namespace ExampleTool is
 
         // Snippets — illustrative ghūl that can't reasonably compile — live
         // in a sibling `snippets/` directory and are rendered code-only.
-        let snippets_root = Path.combine(Path.get_directory_name(examples_root), "snippets");
+        let snippets_root = Path.combine(Path.get_directory_name(examples_root)!, "snippets");
 
         if Directory.exists(snippets_root) then
             for snippet_dir in Directory.get_directories(snippets_root) do
@@ -69,7 +69,7 @@ namespace ExampleTool is
     // skeleton with placeholders). It is rendered with the same markup as a
     // real example — just no hover, no diagnostics, no output panel.
     generate_snippet(snippet_dir: string, output_dir: string) is
-        let name = Path.get_file_name(snippet_dir);
+        let name = Path.get_file_name(snippet_dir)!;
         let source = File.read_all_text(Path.combine(snippet_dir, "{name}.ghul"));
 
         let region = extract_visible(source);
@@ -192,7 +192,7 @@ namespace ExampleTool is
     si
 
     generate(example_dir: string, output_dir: string, sdk_ref_path: string) -> bool is
-        let name = Path.get_file_name(example_dir);
+        let name = Path.get_file_name(example_dir)!;
         let source_file = "{name}.ghul";
         let source = File.read_all_text(Path.combine(example_dir, source_file));
 
@@ -331,7 +331,7 @@ namespace ExampleTool is
     // Copy the tool's own ghul-runtime.dll (from its ghul.runtime package
     // reference) into the example directory, overwriting any stale copy.
     _provision_runtime(example_dir: string) is
-        let tool_dir = Path.get_directory_name(System.Reflection.Assembly.get_executing_assembly().location);
+        let tool_dir = Path.get_directory_name(System.Reflection.Assembly.get_executing_assembly().location)!;
         let source = Path.combine(tool_dir, "ghul-runtime.dll");
         let target = Path.combine(example_dir, "ghul-runtime.dll");
 
