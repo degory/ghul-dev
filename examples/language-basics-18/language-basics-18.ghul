@@ -1,12 +1,10 @@
-// expect: warning
+// expect: error
 lookup() -> string? => null;
 
 entry() is
-// >>>
-    let label: string = null;
-
     let maybe = lookup();
-
+// >>>
+    // rejected: a string? is not assignable to a string
     let title: string = maybe;
 // <<<
 si

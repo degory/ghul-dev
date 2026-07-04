@@ -1,15 +1,15 @@
 {
   "name": "language-basics-16",
-  "code": "if name? then\n    write_line(\"name is {name!}\");\nfi",
-  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let name: string? = \"Alice\";\n    if name? then\n        write_line(\"name is {name!}\");\n    fi\nsi\n",
+  "code": "if name? then\n    write_line(\"name is {name}\"); // name is non-optional here\nfi",
+  "fullSource": "use IO.Std.write_line;\n\nlookup() -> string? => \"Alice\";\n\nentry() is\n    let name = lookup();\n    if name? then\n        write_line(\"name is {name}\"); // name is non-optional here\n    fi\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],
   "output": "name is Alice\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 7, "text": "name: Ghul.string // local value" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 7, "text": "name: Ghul.string? // local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string?) -> Ghul.void // class method" },
     { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 29, "text": "name: Ghul.string // local value" }
   ],
   "semanticTokens": [

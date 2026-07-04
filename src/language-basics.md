@@ -6,7 +6,7 @@ ghūl syntax is inspired by a number of non-brace languages, including ALGOL 68 
 
 ### identifiers and keywords
 
-Identifiers in ghūl follow the convention of `snake_case` for variables, functions, and properties, `PascalCase` for namespaces and traits, and `MACRO_CASE` for concrete types like classes, structs, and enums. ghūl keywords are lowercase.
+Identifiers in ghūl follow the convention of `snake_case` for variables, functions, methods, and properties, `PascalCase` for namespaces, traits, abstract classes, unions, and enums, and `MACRO_CASE` for concrete classes, structs, variants, and enum members. ghūl keywords are lowercase.
 
 ghūl relies on keywords for block structure where other languages use braces or indentation. Keywords are context specific and generally come in pairs where the closing keyword is the reverse or mirror image of the opening keyword. In the examples below `is` introduces a method or class body and its block is closed by the reverse keyword `si`
 
@@ -47,6 +47,7 @@ ghūl provides the following primitive data types:
 
 * integer types: `byte`, `ubyte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `word`, `uword`
 * floating-point types: `single`, `double`
+* fixed-point type: `decimal`
 * boolean type: `bool`
 * character type: `char`
 * void type: `void`
@@ -67,7 +68,7 @@ Array elements can be read with indexer syntax
 <GhulExample name="language-basics-10" />
 
 ### tuples
-Tuples in ghūl are lightweight, immutable data structures that can hold a fixed number of elements of different types. Tuple types use parentheses `(` `)`, with elements separated by commas. Tuple literals are similarly constructed with `(` `)` and comma delimited elements
+Tuples in ghūl are lightweight, immutable data structures that can hold a fixed number of elements of different types. Tuple types use parentheses `(` `)`, with elements separated by commas. Tuple literals are similarly constructed with `(` `)` and comma delimited elements. Tuples compare by structural equality: two tuples are equal when their corresponding elements are.
 
 <GhulExample name="language-basics-11" />
 
@@ -81,29 +82,41 @@ Tuple elements can be given more descriptive names, either in the type or in the
 ghūl also supports tuple destructuring:
 <GhulExample name="language-basics-14" />
 
+Destructuring also has a by-name form, `(local = field, ...)`, that pulls each element from a named field rather than by position; the positional and by-name forms are covered with [pattern matching](/control-flow.html#if-let).
+
 ### optional types
 
-A type followed by `?` is an **optional** type: a value of that type may be present, or it may be absent. The same type written without the `?` is non-optional: a value is always expected to be there.
+A type followed by `?` is an **optional** type: a value of `T?` can be present or absent. The same type written without the `?` is non-optional, and a non-optional value is always there.
 
 <GhulExample name="language-basics-15" />
 
-The postfix `?` operator tests whether an optional has a value. The postfix `!` operator reads the value out:
+The postfix `?` operator tests whether an optional has a value. A plain `if x?` narrows `x` to its non-optional form inside the branch, so the value reads directly:
 
 <GhulExample name="language-basics-16" />
 
-Most of the time you don't need `!` directly: `if let` tests an optional and reads its value into a local variable in one step (see [control flow](/control-flow.html#if-let)).
+`!` reads the value out where narrowing hasn't already done it, but is rarely needed: `if let` tests an optional and reads its value into a local variable in one step (see [control flow](/control-flow.html#if-let)).
 
-Optional types work for both reference types and value types. A value-type optional like `int?` is backed by the .NET `Nullable[T]`, but you don't construct it explicitly: assigning a plain value where an optional is expected widens it automatically, and `null` marks the absent case:
+Optional types work for reference and value types alike. A value-type optional like `int?` is backed by the .NET `Nullable[T]`, and you don't construct it explicitly: a plain value where an optional is expected widens automatically, and `null` marks the absent case:
 
 <GhulExample name="language-basics-17" />
 
-A non-optional type does not expect to be absent. Putting `null`, or an optional the compiler cannot see has a value, where a non-optional type is expected produces a warning:
+A non-optional type never holds the absent case, so a `T?` is not assignable to a `T`. The compiler rejects it rather than warning:
 
 <GhulExample name="language-basics-18" />
 
-The warning clears once the value is known to be present, inside an `if name?` check, inside an `if let`, or with an explicit `!`:
+To pass a `T?` where a `T` is wanted, make the value present first: narrow it with `if x?` or `if let`, assert it with `x!` (which throws when absent), or supply a fallback with `x ?? other`:
 
 <GhulExample name="language-basics-19" />
+
+Reading a member through an optional the compiler has not proven present draws a `null-deref` warning; `x?.y`, `x.has_value`, `x!`, and `if let` are the warning-free routes. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
+
+The `??` operator supplies a fallback: `a ?? b` is `a` when it is present, otherwise `b`, and `b` is evaluated only when needed. It is right-associative, so `a ?? b ?? c` tries each in turn, and the result stays optional until a non-optional value closes the chain:
+
+<GhulExample name="language-basics-28" />
+
+The `?.` operator reads a member only when the receiver is present: `a?.b` is `b` when `a` is present, otherwise the absent case. The result is always optional, and `?.` chains, so a whole access path folds down to one optional. Only field and property access compose with `?.`; a method call needs an `if a?` guard first.
+
+<GhulExample name="language-basics-29" />
 
 These are the basic data types available in ghūl. The language also supports more advanced types such as classes, structs, traits, enums, and unions, which will be covered in later sections of the documentation.
 
