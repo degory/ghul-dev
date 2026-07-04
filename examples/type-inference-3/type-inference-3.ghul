@@ -1,15 +1,15 @@
 use IO.Std.write_line;
 
-class Animal();
+class Animal abstract is si
 
-class Cat(): Animal is
+class CAT(): Animal is
     purr() -> string => "purr";
 si
 
 // >>>
 greet(a: Animal) is
-    if isa Cat(a) then
-        // a is a parameter of greet, narrowed to Cat
+    if isa CAT(a) then
+        // a is a parameter of greet, narrowed to CAT
         // in this branch
         write_line(a.purr());
     fi
@@ -17,5 +17,5 @@ si
 // <<<
 
 entry() is
-    greet(Cat());
+    greet(CAT());
 si

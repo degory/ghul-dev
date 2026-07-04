@@ -1,4 +1,4 @@
-class Box[T] is
+class BOX[T] is
     _value: T;
 
     init() is
@@ -14,11 +14,11 @@ si
 
 entry() is
 // >>>
-    // m is Box[?] here; the type argument is not
+    // m is BOX[?] here; the type argument is not
     // yet known
-    let m = Box();
+    let m = BOX();
 
-    // the set call carries an int, so m is Box[int]
+    // the set call carries an int, so m is BOX[int]
     m.set(42);
 
     let x = m.get();

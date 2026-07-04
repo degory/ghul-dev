@@ -3,7 +3,7 @@ class COUNTER is
     count: int;
 si
 
-class Sized is
+class SIZED is
     _size: int;
 
     size: int => _size,

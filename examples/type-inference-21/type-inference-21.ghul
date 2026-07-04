@@ -1,17 +1,17 @@
 // >>>
-class Animal() is
+class Animal abstract is
     speak() -> string => "animal";
 si
 
-class Cat(): Animal;
+class CAT(): Animal;
 
-class Dog(): Animal;
+class DOG(): Animal;
 
 merge[T](a: T, b: T) -> T => a;
 // <<<
 
 entry() is
 // >>>
-    let a = merge(Cat(), Dog());
+    let a = merge(CAT(), DOG());
 // <<<
 si

@@ -1,8 +1,8 @@
 use IO.Std.write_line;
 
-class Animal();
+class Animal abstract is si
 
-class Cat(): Animal is
+class CAT(): Animal is
     purr() -> string => "purr";
 si
 
@@ -13,14 +13,14 @@ describe(carrier: CARRIER) is
     // copy the property into a local variable
     let occupant = carrier.occupant;
 
-    if isa Cat(occupant) then
+    if isa CAT(occupant) then
         // occupant is a local variable, narrowed
-        // to Cat in this branch
+        // to CAT in this branch
         write_line(occupant.purr());
     fi
 si
 // <<<
 
 entry() is
-    describe(CARRIER(Cat()));
+    describe(CARRIER(CAT()));
 si

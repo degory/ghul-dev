@@ -1,8 +1,8 @@
 use IO.Std.write_line;
 
-class Animal();
+class Animal abstract is si
 
-class Cat(): Animal is
+class CAT(): Animal is
     purr() -> string => "purr";
 si
 
@@ -10,12 +10,12 @@ class CARRIER(occupant: Animal);
 
 // >>>
 describe(carrier: CARRIER) is
-    if let cat: Cat = carrier.occupant then
+    if let cat: CAT = carrier.occupant then
         write_line(cat.purr());
     fi
 si
 // <<<
 
 entry() is
-    describe(CARRIER(Cat()));
+    describe(CARRIER(CAT()));
 si

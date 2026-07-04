@@ -1,13 +1,13 @@
 // >>>
-class Base();
+class BASE();
 
-class DERIVED(): Base;
+class DERIVED(): BASE;
 // <<<
 
 entry() is
 // >>>
-    let array_of_base = [Base(), DERIVED()];
-    let array_of_object = [Base(), DERIVED(), object()];
+    let array_of_base = [BASE(), DERIVED()];
+    let array_of_object = [BASE(), DERIVED(), object()];
     let array_of_int = [1, 2, 3, 4, 5];
 // <<<
 si

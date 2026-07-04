@@ -1,15 +1,15 @@
 use IO.Std.write_line;
 
-class Animal is si
+class Animal abstract is si
 
-class Cat(name: string): Animal is
+class CAT(name: string): Animal is
     purr() -> string => "{name} purrs";
 si
 
 entry() is
-    let a: Animal = Cat("whiskers");
+    let a: Animal = CAT("whiskers");
 // >>>
-    let c = cast Cat(a);
+    let c = cast CAT(a);
 
     if c? then
         write_line(c.purr());
