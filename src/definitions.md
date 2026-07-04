@@ -2,7 +2,7 @@
 
 ## variables
 
-In ghūl variables are introduced with the `let` keyword. Every local has an initializer, and the compiler infers the type from it:
+In ghūl local variables are introduced with the `let` keyword. A bare `let` is immutable: it takes an initializer, and reassigning the variable afterwards is rejected. The compiler infers the type from the initializer:
 
 <GhulExample name="definitions-1" />
 
@@ -14,7 +14,9 @@ The explicit type can be wider than the initializer expression:
 
 <GhulExample name="definitions-3" />
 
-Multiple variables can be defined in the same `let` statement, with each variable either taking its type from its initializer or carrying an explicit one:
+A trailing `mut` makes the variable reassignable, and then the initializer can be dropped for a deferred-init local that starts at its type's default value: `let total mut = 0` reassigns later, and `let result: int mut;` defaults to 0. Either form can also take its value from `default`, which initializes to the default of the type the context expects - `let x = default`, or `default[T]` to pin the type.
+
+Multiple variables can be defined in the same `let` statement, with each variable either taking its type from its initializer or given an explicit one:
 
 <GhulExample name="definitions-4" />
 
@@ -22,11 +24,11 @@ The name `_` is a discard placeholder. It can stand in for any variable name, bu
 
 <GhulExample name="definitions-5" />
 
-Variables may only be defined within functions, methods or property bodies. Variables names should be in `snake_case`
+Variables may only be defined within functions, methods or property bodies. Variable names should be in `snake_case`
 
 ## functions
 
-In ghūl functions consist of a name and a parenthesized formal arguments list, followed by a return type, and then either a return expression or a function body:
+In ghūl functions consist of a name and a parenthesized formal arguments list, followed by an optional return type after `->` (omitting it makes the function `void`), and then either a return expression or a function body:
 
 <GhulExample name="definitions-6" />
 
@@ -57,6 +59,8 @@ A class can also declare its constructor parameters directly in the header. Each
 
 The two forms are equivalent. The primary form is the shorter shape when every field is initialized from a constructor argument; the classic form is the better fit when the body owns extra fields or properties beyond what the constructor takes. See [constructors](#constructors) for the rest of the primary-constructor surface area.
 
+Two postfix modifiers shape the hierarchy. Without `open`, a class can be subclassed only within the assembly that declares it; `open` opts in to cross-assembly subclassing. `abstract` bars direct construction, so only subclasses exist at runtime, and a class is implicitly abstract when it declares a body-less instance method, since that method is a contract for subclasses to satisfy. The closure feeds [type narrowing](/control-flow.html#type-narrowing): on the `else` edge of an `isa` test the compiler can rule the tested subclass out, and an `abstract` root can leave a single remaining subclass.
+
 Classes can only be defined at global scope. Classes can be generic, which will be covered later. Concrete class names should be in `MACRO_CASE`. Abstract class names should be in `PascalCase`.
 
 ### structs
@@ -78,7 +82,7 @@ A trait consists of a name, the types of any parent traits that must also be imp
 
 <GhulExample name="definitions-13" />
 
-Traits are similar to interfaces in other languages. Trait methods and properties without a default implementation must be implemented by any class that inherits from the trait:
+Traits are similar to interfaces in other languages. Trait methods and properties without a default implementation must be implemented by any class, struct, or union that declares the trait:
 <GhulExample name="definitions-14" />
 
 A trait method or property can provide a default body. Implementing classes inherit the default and only need to override it to change the behaviour:
@@ -105,6 +109,14 @@ Unions support structural equality through the `=~` operator. Two union referenc
 
 <GhulExample name="definitions-19" />
 
+A variant with no fields is a *unit variant*: it is referenced by name without parentheses, and interned to one shared value per generic instantiation. A union with a single field-carrying variant, or one variant marked `default`, is option-shaped, so `u?` tests whether that variant is present and `u!` unwraps its value:
+
+<GhulExample name="definitions-41" />
+
+A union can declare a primary-constructor header for state shared across every variant. Each variant splices the shared parameters into its field list with `..`, and a variant with no extra fields drops the list entirely. A union can also implement traits after its header, with each trait member satisfied by a default or by a property the union supplies:
+
+<GhulExample name="definitions-42" />
+
 Unions can only be defined at global scope. Union names should be in `PascalCase` and variant names should be in `MACRO_CASE`
 
 ### enums
@@ -113,7 +125,7 @@ An enum consists of a name and then an enum body, which contains one or more ele
 
 <GhulExample name="definitions-20" />
 
-Enums can only be defined at global scope. Enums and their members should be named in `MACRO_CASE`
+Enums can only be defined at global scope. An enum type name should be in `PascalCase`, and its members in `MACRO_CASE`
 
 ## properties
 
@@ -123,7 +135,7 @@ A property consists of the property name followed by the property's type and, op
 
 Public properties with no getter or setter are automatically backed by a hidden field. Private properties with no getter or setter are implemented as a plain field.
 
-Properties can be defined within globally and within classes, structs and traits. Property names should be in `snake_case`.
+Properties can be defined globally and within classes, structs and traits. Property names should be in `snake_case`.
 
 ## methods
 
@@ -161,6 +173,8 @@ A body field or property declaration with a name matching the parameter (under t
 A class with a primary header can also include a `super(...)` body declaration that forwards expressions to its superclass `init`, and secondary `init(.., extras)` overloads. The `..` splice expands to the primary parameters; an implicit chain to the primary `init` runs before the secondary's body:
 
 <GhulExample name="definitions-39" />
+
+A primary-constructor class or struct also gets a synthesised `deconstruct` (exposed as .NET `Deconstruct`) built from its public-readable parameters, so `let (x, y) = POINT(3, 4)` destructures without writing one out.
 
 A class or struct with a primary header and no body declarations can end with a terminating `;` instead of `is ... si`:
 
@@ -218,7 +232,7 @@ Note that `use` only applies within the current `namespace` definition. It does 
 
 ## visibility of symbols
 
-In ghūl, the visibility of symbols outside their defining scope is managed by a naming convention which is partially enforced by the compiler
+In ghūl, the visibility of symbols outside their defining scope is managed by a naming convention which is partially enforced by the compiler. The compiler also warns when a declaration's name doesn't match the convention for its kind - `non-snake-case-name`, `non-pascal-case-name`, or `non-upper-snake-case-name` - each suppressible per declaration, per file, or project-wide. A class with only `static` members is a utility container that is never constructed, and accepts either `PascalCase` or `MACRO_CASE`.
 
 ### global symbols
 

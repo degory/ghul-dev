@@ -1,0 +1,19 @@
+use IO.Std.write_line;
+
+trait NAMED is
+    name: string;
+    label() -> string => "[{name}]";
+si
+
+union TOKEN(name: string): NAMED is
+    KEYWORD(..);
+    IDENTIFIER(text: string, ..);
+si
+
+entry() is
+// >>>
+    let t = TOKEN.IDENTIFIER("count", "identifier");
+    write_line(t.name);    // identifier - shared primary-header field
+    write_line(t.label()); // [identifier] - inherited trait default
+// <<<
+si
