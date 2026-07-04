@@ -8,7 +8,7 @@ The ghūl programming language compiler requires the [.NET 10 SDK](https://dotne
 
 ## target
 
-The compiler produces standard .NET assemblies and packages targeting .NET 10 by default. Earlier target frameworks work too - set `<TargetFramework>net8.0</TargetFramework>`{:text} (or similar) in your `.ghulproj`{:text} and pin `ghul.runtime`{:text} to a net8.0-compatible release (e.g. `3.0.19`{:text}), since the 4.x line is net10.0-only.
+The compiler produces standard .NET assemblies and packages targeting .NET 10.
 
 ## getting the ghūl compiler
 
@@ -94,7 +94,7 @@ dotnet run
 
 ### runtime dependencies for ghūl applications
 
-Applications written in ghūl require the .NET runtime matching whatever target framework you built for - the [.NET 10 runtime](https://dotnet.microsoft.com/download/dotnet/10.0) by default, or e.g. the [.NET 8 runtime](https://dotnet.microsoft.com/download/dotnet/8.0) if you targeted `net8.0`{:text}.
+Applications written in ghūl require the [.NET 10 runtime](https://dotnet.microsoft.com/download/dotnet/10.0).
 
 ## development environment
 
