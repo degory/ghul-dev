@@ -139,12 +139,24 @@ namespace Analysis.Protocol is
             write_request(Request.EDIT(files));
         si
 
+        // Fire-and-forget: no response frame. Declares `path` open so the
+        // analyser records editor-only inlay hints for it during the EDIT.
+        send_set_open_files(path: string) is
+            let paths = LIST[string]();
+            paths.add(path);
+            write_request(Request.SET_OPEN_FILES(paths));
+        si
+
         send_hover_map(path: string) is
             write_request(Request.HOVER_MAP(path));
         si
 
         send_semantic_tokens(path: string) is
             write_request(Request.SEMANTIC_TOKENS(path));
+        si
+
+        send_inlay_hints(path: string) is
+            write_request(Request.INLAY_HINTS(path));
         si
 
         stderr_capture: string => _stderr_capture.to_string();

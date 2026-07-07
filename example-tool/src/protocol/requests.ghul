@@ -19,11 +19,20 @@ namespace Analysis.Protocol is
 
     @System.Text.Json.Serialization.JsonPolymorphic(type_discriminator_property_name = "command")
     @System.Text.Json.Serialization.JsonDerivedType(typeof Request.EDIT, "edit")
+    @System.Text.Json.Serialization.JsonDerivedType(typeof Request.SET_OPEN_FILES, "set_open_files")
     @System.Text.Json.Serialization.JsonDerivedType(typeof Request.HOVER_MAP, "hover_map")
     @System.Text.Json.Serialization.JsonDerivedType(typeof Request.SEMANTIC_TOKENS, "semantic_tokens")
+    @System.Text.Json.Serialization.JsonDerivedType(typeof Request.INLAY_HINTS, "inlay_hints")
     union Request is
         EDIT(files: LIST[EDIT_FILE]);
+
+        // Editor-only hints — inlay hints among them — are produced only for
+        // files the client declares open. Sent before the EDIT so the open
+        // set is populated before compile-expressions records the hints.
+        SET_OPEN_FILES(paths: LIST[string]);
+
         HOVER_MAP(path: string);
         SEMANTIC_TOKENS(path: string);
+        INLAY_HINTS(path: string);
     si
 si

@@ -29,9 +29,10 @@ namespace ExampleTool is
     si
 
     // Render one example's artifact as JSON: the displayed code, the run
-    // output, the translated diagnostics, and the translated hovers — all in
-    // displayed-slice coordinates. Literal JSON braces are doubled — a bare
-    // `{`/`}` in a ghūl string is interpolation syntax.
+    // output, the translated diagnostics, the translated hovers, and the
+    // translated narrowing inlay hints — all in displayed-slice coordinates.
+    // Literal JSON braces are doubled — a bare `{`/`}` in a ghūl string is
+    // interpolation syntax.
     build_artifact_json(
         name: string,
         code: string,
@@ -42,7 +43,8 @@ namespace ExampleTool is
         hovers: Iterable[HOVER],
         output: string,
         diagnostics: Iterable[DIAGNOSTIC],
-        semantic_tokens: Iterable[SEMANTIC_TOKEN]
+        semantic_tokens: Iterable[SEMANTIC_TOKEN],
+        inlay_hints: Iterable[INLAY_HINT]
     ) -> string is
         let b = StringBuilder();
 
@@ -101,11 +103,36 @@ namespace ExampleTool is
             b.append("\"startColumn\": {h.start_column}, ");
             b.append("\"endLine\": {h.end_line}, ");
             b.append("\"endColumn\": {h.end_column}, ");
-            b.append("\"text\": "); b.append(_json_string(h.text));
+            b.append("\"text\": "); b.append(_json_string(h.signature)); b.append(", ");
+            b.append("\"signature\": "); b.append(_json_string(h.signature)); b.append(", ");
+            b.append("\"kindLabel\": "); b.append(_json_string(h.kind_label ?? ""));
             b.append(" }}");
         od
 
         if !first then
+            b.append("\n  ");
+        fi
+
+        b.append("],\n");
+        b.append("  \"inlayHints\": [");
+
+        let first_inlay mut = true;
+        for i in inlay_hints do
+            if !first_inlay then
+                b.append(",");
+            fi
+            first_inlay = false;
+
+            b.append("\n    {{ ");
+            b.append("\"line\": {i.line}, ");
+            b.append("\"column\": {i.column}, ");
+            b.append("\"label\": "); b.append(_json_string(i.label)); b.append(", ");
+            b.append("\"detail\": "); b.append(_json_string(i.detail)); b.append(", ");
+            b.append("\"code\": "); b.append(_json_string(i.code));
+            b.append(" }}");
+        od
+
+        if !first_inlay then
             b.append("\n  ");
         fi
 
