@@ -8,23 +8,24 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 13, "text": "zero_zero: POINT // local value" },
-    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 21, "text": "POINT.init(x: Ghul.double, y: Ghul.double) // constructor" },
-    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 13, "text": "origin: POINT // local value" },
-    { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 26, "text": "zero_zero: POINT // local value" },
-    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 16, "text": "Ghul.==(a: POINT, b: POINT) -> Ghul.bool // innate function compare.value" },
-    { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 13, "text": "origin: POINT // local value" },
-    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 22, "text": "right: POINT // local value" },
-    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 16, "text": "Ghul.==(a: POINT, b: POINT) -> Ghul.bool // innate function compare.value" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 13, "text": "zero_zero: POINT", "signature": "zero_zero: POINT", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 21, "text": "POINT.init(x: double, y: double)", "signature": "POINT.init(x: double, y: double)", "kindLabel": "constructor" },
+    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 13, "text": "origin: POINT", "signature": "origin: POINT", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 26, "text": "zero_zero: POINT", "signature": "zero_zero: POINT", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 16, "text": "Ghul.==[POINT](a: POINT, b: POINT) -> bool", "signature": "Ghul.==[POINT](a: POINT, b: POINT) -> bool", "kindLabel": "innate function compare.value" },
+    { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 13, "text": "origin: POINT", "signature": "origin: POINT", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 22, "text": "right: POINT", "signature": "right: POINT", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 16, "text": "Ghul.==[POINT](a: POINT, b: POINT) -> bool", "signature": "Ghul.==[POINT](a: POINT, b: POINT) -> bool", "kindLabel": "innate function compare.value" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 21, "tokenType": "method" },
     { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 26, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 16, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 16, "tokenType": "operator" },
     { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 16, "tokenType": "function" }
+    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 16, "tokenType": "operator" }
   ]
 }

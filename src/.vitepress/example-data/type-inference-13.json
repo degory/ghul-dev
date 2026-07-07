@@ -8,16 +8,17 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "text": "class THING" },
-    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "text": "T // type variable" },
-    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 20, "text": "THING.value: T // instance property" },
-    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 23, "text": "THING.init(value: T) // constructor" },
-    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "text": "T // type variable" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "text": "int_thing: THING[Ghul.int] // local value" },
-    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 21, "text": "THING[Ghul.int].init(value: Ghul.int) // constructor" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "text": "string_thing: THING[Ghul.string] // local value" },
-    { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 24, "text": "THING[Ghul.string].init(value: Ghul.string) // constructor" }
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "text": "class THING[T](value: T)", "signature": "class THING[T](value: T)", "kindLabel": "class" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 20, "text": "THING[T].value: T", "signature": "THING[T].value: T", "kindLabel": "pure instance property" },
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 23, "text": "THING[T].init(value: T)", "signature": "THING[T].init(value: T)", "kindLabel": "constructor" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "text": "int_thing: THING[int]", "signature": "int_thing: THING[int]", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 21, "text": "THING[int].init(value: int)", "signature": "THING[int].init(value: int)", "kindLabel": "constructor" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "text": "string_thing: THING[string]", "signature": "string_thing: THING[string]", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 24, "text": "THING[string].init(value: string)", "signature": "THING[string].init(value: string)", "kindLabel": "constructor" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "tokenType": "class" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "tokenType": "typeParameter" },

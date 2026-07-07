@@ -7,14 +7,15 @@
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 26, "severity": "error", "message": "Ghul.string? is not assignable to Ghul.string" },
-    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 26, "severity": "warning", "message": "[non-optional] Ghul.string expected but maybe may not hold a value" }
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 26, "severity": "error", "message": "string? is not assignable to string" },
+    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 26, "severity": "warning", "message": "[non-optional] string expected but maybe may not hold a value" }
   ],
   "hovers": [
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "title: Ghul.string // local value" },
-    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 17, "text": "class Ghul.string" },
-    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 25, "text": "maybe: Ghul.string? // local value" }
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "title: string", "signature": "title: string", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 17, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 25, "text": "maybe: string?", "signature": "maybe: string?", "kindLabel": "local value" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 17, "tokenType": "class" },

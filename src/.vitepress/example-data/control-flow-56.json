@@ -1,0 +1,38 @@
+{
+  "name": "control-flow-56",
+  "code": "if isa CAT(pet) then\n    write_line(pet.purr());\n\n    pet = DOG();\n    // reassigning pet drops the narrowing:\n    // pet is Animal again here\n    write_line(pet.name());\nfi",
+  "fullSource": "use IO.Std.write_line;\n\nclass Animal abstract is\n    name() -> string;\nsi\n\nclass CAT: Animal is\n    init() is si\n    name() -> string => \"cat\";\n    purr() -> string => \"purr\";\nsi\n\nclass DOG: Animal is\n    init() is si\n    name() -> string => \"dog\";\nsi\n\nany_animal() -> Animal => CAT();\n\nentry() is\n    let pet mut = any_animal();\n    if isa CAT(pet) then\n        write_line(pet.purr());\n\n        pet = DOG();\n        // reassigning pet drops the narrowing:\n        // pet is Animal again here\n        write_line(pet.name());\n    fi\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "purr\ndog\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 10, "text": "class CAT", "signature": "class CAT", "kindLabel": "class" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 14, "text": "pet: Animal", "signature": "pet: Animal", "kindLabel": "local variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 18, "text": "pet: Animal\n    ► CAT", "signature": "pet: Animal\n    ► CAT", "kindLabel": "local variable" },
+    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 23, "text": "CAT.purr() -> string", "signature": "CAT.purr() -> string", "kindLabel": "pure method" },
+    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 13, "text": "DOG.init()", "signature": "DOG.init()", "kindLabel": "constructor" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 7, "text": "pet: Animal", "signature": "pet: Animal", "kindLabel": "local variable" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 7, "startColumn": 16, "endLine": 7, "endColumn": 18, "text": "pet: Animal", "signature": "pet: Animal", "kindLabel": "local variable" },
+    { "startLine": 7, "startColumn": 20, "endLine": 7, "endColumn": 23, "text": "Animal.name() -> string", "signature": "Animal.name() -> string", "kindLabel": "pure method" }
+  ],
+  "inlayHints": [
+    { "line": 1, "column": 12, "label": "►", "detail": "► CAT\n> DOG", "code": "narrowing-isa" },
+    { "line": 4, "column": 5, "label": "◄", "detail": "pet\n    ◄ Animal\n\npet is reassigned", "code": "narrowing-killed" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 10, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 14, "tokenType": "variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 18, "tokenType": "variable" },
+    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 23, "tokenType": "method" },
+    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 13, "tokenType": "method" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 7, "tokenType": "variable" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 7, "startColumn": 16, "endLine": 7, "endColumn": 18, "tokenType": "variable" },
+    { "startLine": 7, "startColumn": 20, "endLine": 7, "endColumn": 23, "tokenType": "method" }
+  ]
+}

@@ -8,21 +8,22 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "list: Ghul.int[] // local value" },
-    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "text": "element: Ghul.int // local argument" },
-    { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "text": "Ghul.Pipes.pipe[Ghul.int](source: Collections.Iterable[Ghul.int]) -> Ghul.Pipes.Pipe[Ghul.int] // global function" },
-    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 4, "text": "list: Ghul.int[] // local value" },
-    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 14, "text": "Ghul.Pipes.Pipe[Ghul.int].filter(predicate: Ghul.int -> Ghul.bool) -> Ghul.Pipes.Pipe[Ghul.int] // default trait method" },
-    { "startLine": 3, "startColumn": 27, "endLine": 3, "endColumn": 33, "text": "element: Ghul.int // local argument" },
-    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "text": "Ghul.<>(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function compare.order" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "list: int[]", "signature": "list: int[]", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "text": "element: int", "signature": "element: int", "kindLabel": "local argument" },
+    { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "text": "Ghul.Pipes.pipe[int](source: Collections.Iterable[int]) -> Ghul.Pipes.Pipe[int]", "signature": "Ghul.Pipes.pipe[int](source: Collections.Iterable[int]) -> Ghul.Pipes.Pipe[int]", "kindLabel": "global function" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 4, "text": "list: int[]", "signature": "list: int[]", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 14, "text": "Ghul.Pipes.Pipe[int].filter(predicate: int -> bool) -> Ghul.Pipes.Pipe[int]", "signature": "Ghul.Pipes.Pipe[int].filter(predicate: int -> bool) -> Ghul.Pipes.Pipe[int]", "kindLabel": "default trait method" },
+    { "startLine": 3, "startColumn": 27, "endLine": 3, "endColumn": 33, "text": "element: int", "signature": "element: int", "kindLabel": "local argument" },
+    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "tokenType": "function" },
     { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 4, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 14, "tokenType": "method" },
-    { "startLine": 3, "startColumn": 27, "endLine": 3, "endColumn": 33, "tokenType": "parameter", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "tokenType": "function" }
+    { "startLine": 3, "startColumn": 27, "endLine": 3, "endColumn": 33, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "tokenType": "operator" }
   ]
 }

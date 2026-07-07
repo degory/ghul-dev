@@ -8,16 +8,17 @@
   "output": "Rex says woof\nTom says meow\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "animals: Animal[] // local value" },
-    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 19, "text": "class Animal" },
-    { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 28, "text": "DOG.init(name: Ghul.string) // constructor" },
-    { "startLine": 1, "startColumn": 38, "endLine": 1, "endColumn": 40, "text": "CAT.init(name: Ghul.string) // constructor" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "a: Animal // local value" },
-    { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 16, "text": "animals: Animal[] // local value" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string?) -> Ghul.void // class method" },
-    { "startLine": 4, "startColumn": 16, "endLine": 4, "endColumn": 16, "text": "a: Animal // local value" },
-    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 25, "text": "Animal.describe() -> Ghul.string // method" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "animals: Animal[]", "signature": "animals: Animal[]", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 19, "text": "class Animal", "signature": "class Animal", "kindLabel": "class" },
+    { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 28, "text": "DOG.init(name: string)", "signature": "DOG.init(name: string)", "kindLabel": "constructor" },
+    { "startLine": 1, "startColumn": 38, "endLine": 1, "endColumn": 40, "text": "CAT.init(name: string)", "signature": "CAT.init(name: string)", "kindLabel": "constructor" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "a: Animal", "signature": "a: Animal", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 16, "text": "animals: Animal[]", "signature": "animals: Animal[]", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 4, "startColumn": 16, "endLine": 4, "endColumn": 16, "text": "a: Animal", "signature": "a: Animal", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 25, "text": "Animal.describe() -> string", "signature": "Animal.describe() -> string", "kindLabel": "pure method" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 19, "tokenType": "class" },

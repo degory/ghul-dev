@@ -8,14 +8,15 @@
   "output": "0\n1\n2\n3\n4\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: Ghul.int // local value" },
-    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 12, "text": "Ghul...(from: Ghul.int, to: Ghul.int) -> Ghul.INT_RANGE // innate function range.exclusive" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.int) -> Ghul.void // class method" },
-    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 16, "text": "i: Ghul.int // local value" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: int", "signature": "i: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 12, "text": "Ghul...(from: int, to: int) -> INT_RANGE", "signature": "Ghul...(from: int, to: int) -> INT_RANGE", "kindLabel": "innate function range.exclusive" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: int) -> void", "signature": "IO.Std.write_line(value: int) -> void", "kindLabel": "pure class method" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 16, "text": "i: int", "signature": "i: int", "kindLabel": "local value" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 12, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 12, "tokenType": "operator" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
     { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" }
   ]

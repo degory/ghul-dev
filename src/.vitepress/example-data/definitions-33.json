@@ -8,15 +8,16 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 20, "text": "namespace UseExample" },
-    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 22, "text": "class UseExample.ANOTHER_TEST" },
-    { "startLine": 4, "startColumn": 25, "endLine": 4, "endColumn": 28, "text": "trait Example.Test" },
-    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 11, "text": "UseExample.ANOTHER_TEST.run() -> Ghul.void // method" },
-    { "startLine": 11, "startColumn": 11, "endLine": 11, "endColumn": 26, "text": "class UseExample.YET_ANOTHER_TEST" },
-    { "startLine": 11, "startColumn": 37, "endLine": 11, "endColumn": 40, "text": "trait Example.Test" },
-    { "startLine": 12, "startColumn": 9, "endLine": 12, "endColumn": 11, "text": "UseExample.YET_ANOTHER_TEST.run() -> Ghul.void // method" },
-    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 15, "text": "namespace Example" }
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 20, "text": "namespace UseExample", "signature": "namespace UseExample", "kindLabel": "" },
+    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 22, "text": "class ANOTHER_TEST", "signature": "class ANOTHER_TEST", "kindLabel": "class" },
+    { "startLine": 4, "startColumn": 25, "endLine": 4, "endColumn": 28, "text": "trait Test", "signature": "trait Test", "kindLabel": "trait" },
+    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 11, "text": "ANOTHER_TEST.run() -> void", "signature": "ANOTHER_TEST.run() -> void", "kindLabel": "pure method" },
+    { "startLine": 11, "startColumn": 11, "endLine": 11, "endColumn": 26, "text": "class YET_ANOTHER_TEST", "signature": "class YET_ANOTHER_TEST", "kindLabel": "class" },
+    { "startLine": 11, "startColumn": 37, "endLine": 11, "endColumn": 40, "text": "trait Example.Test", "signature": "trait Example.Test", "kindLabel": "trait" },
+    { "startLine": 12, "startColumn": 9, "endLine": 12, "endColumn": 11, "text": "YET_ANOTHER_TEST.run() -> void", "signature": "YET_ANOTHER_TEST.run() -> void", "kindLabel": "pure method" },
+    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 15, "text": "namespace Example", "signature": "namespace Example", "kindLabel": "" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 20, "tokenType": "namespace" },
     { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 22, "tokenType": "class" },

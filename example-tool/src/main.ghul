@@ -78,7 +78,7 @@ namespace ExampleTool is
             name, region.code, strip_markers(source),
             region.hidden_before, region.hidden_after, region.hidden_gaps_after_line,
             Collections.LIST[HOVER](), "", Collections.LIST[DIAGNOSTIC](),
-            Collections.LIST[SEMANTIC_TOKEN]()
+            Collections.LIST[SEMANTIC_TOKEN](), Collections.LIST[INLAY_HINT]()
         );
         File.write_all_text(Path.combine(output_dir, "{name}.json"), json);
 
@@ -263,26 +263,37 @@ namespace ExampleTool is
             name, collected.region.code, strip_markers(source),
             collected.region.hidden_before, collected.region.hidden_after,
             collected.region.hidden_gaps_after_line,
-            collected.hovers, output, diagnostics, collected.semantic_tokens
+            collected.hovers, output, diagnostics, collected.semantic_tokens,
+            collected.inlay_hints
         );
         File.write_all_text(Path.combine(output_dir, "{name}.json"), json);
 
         Std.out.write_line(
             "generated {name} [{actual}]: {collected.hovers.count} hover(s), "
-            "{collected.semantic_tokens.count} token(s), {diagnostics.count} diagnostic(s)"
+            "{collected.semantic_tokens.count} token(s), {diagnostics.count} diagnostic(s), "
+            "{collected.inlay_hints.count} inlay(s)"
         );
 
         return true;
     si
 
-    // Drive the analyser over the example for hover_map and semantic_tokens,
-    // then slice the visible region and translate each entry onto the
-    // displayed text. Both queries are issued under one edit so the cost
-    // (parse + resolve) is amortized over both.
+    // Drive the analyser over the example for hover_map, semantic_tokens and
+    // inlay_hints, then slice the visible region and translate each entry onto
+    // the displayed text. The queries are issued under one edit so the cost
+    // (parse + resolve) is amortized over all three. `set_open_files` precedes
+    // the edit so the analyser records this file's editor-only inlay hints
+    // during compile-expressions.
     _collect_hovers_and_tokens(
         example_dir: string, source_file: string, source: string, sdk_ref_path: string
-    ) -> (region: VISIBLE_REGION, hovers: LIST[HOVER], semantic_tokens: LIST[SEMANTIC_TOKEN]) is
+    ) -> (
+        region: VISIBLE_REGION,
+        hovers: LIST[HOVER],
+        semantic_tokens: LIST[SEMANTIC_TOKEN],
+        inlay_hints: LIST[INLAY_HINT]
+    ) is
         let use analyser = ANALYSER_PROCESS(example_dir, sdk_ref_path);
+
+        analyser.send_set_open_files(source_file);
 
         analyser.send_edit(source_file, source);
         analyser.read_response();   // diagnostics
@@ -293,6 +304,9 @@ namespace ExampleTool is
         analyser.send_semantic_tokens(source_file);
         let token_response = analyser.read_query_response();
 
+        analyser.send_inlay_hints(source_file);
+        let inlay_response = analyser.read_query_response();
+
         let region = extract_visible(source);
 
         let hovers = LIST[HOVER]();
@@ -301,7 +315,7 @@ namespace ExampleTool is
                 let raw = HOVER(
                     entry.start_line, entry.start_column,
                     entry.end_line, entry.end_column,
-                    entry.description
+                    entry.description, entry.kind_label
                 );
                 let translated = region.translate(raw);
                 if translated? then
@@ -325,7 +339,25 @@ namespace ExampleTool is
             od
         fi
 
-        return (region = region, hovers = hovers, semantic_tokens = semantic_tokens);
+        let inlay_hints = LIST[INLAY_HINT]();
+        if let inlays_resp: Response.INLAY_HINTS = inlay_response then
+            for hint in inlays_resp.hints do
+                let raw = INLAY_HINT(
+                    hint.line, hint.column, hint.label, hint.detail, hint.code
+                );
+                let translated = region.translate_inlay(raw);
+                if translated? then
+                    inlay_hints.add(translated);
+                fi
+            od
+        fi
+
+        return (
+            region = region,
+            hovers = hovers,
+            semantic_tokens = semantic_tokens,
+            inlay_hints = inlay_hints
+        );
     si
 
     // Copy the tool's own ghul-runtime.dll (from its ghul.runtime package

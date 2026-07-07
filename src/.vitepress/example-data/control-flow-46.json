@@ -8,17 +8,18 @@
   "output": "60\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "a: Ghul.int // local value" },
-    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 26, "text": "double_async(x: Ghul.int) -> Tasks.TASK[Ghul.int] // global function" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "b: Ghul.int // local value" },
-    { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 26, "text": "double_async(x: Ghul.int) -> Tasks.TASK[Ghul.int] // global function" },
-    { "startLine": 2, "startColumn": 28, "endLine": 2, "endColumn": 28, "text": "a: Ghul.int // local value" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "c: Ghul.int // local value" },
-    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 23, "text": "add_async(x: Ghul.int, y: Ghul.int) -> Tasks.TASK[Ghul.int] // global function" },
-    { "startLine": 3, "startColumn": 25, "endLine": 3, "endColumn": 25, "text": "a: Ghul.int // local value" },
-    { "startLine": 3, "startColumn": 28, "endLine": 3, "endColumn": 28, "text": "b: Ghul.int // local value" },
-    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 8, "text": "c: Ghul.int // local value" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "a: int", "signature": "a: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 26, "text": "double_async(x: int) -> Tasks.TASK[int]", "signature": "double_async(x: int) -> Tasks.TASK[int]", "kindLabel": "pure global function" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "b: int", "signature": "b: int", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 26, "text": "double_async(x: int) -> Tasks.TASK[int]", "signature": "double_async(x: int) -> Tasks.TASK[int]", "kindLabel": "pure global function" },
+    { "startLine": 2, "startColumn": 28, "endLine": 2, "endColumn": 28, "text": "a: int", "signature": "a: int", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "c: int", "signature": "c: int", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 23, "text": "add_async(x: int, y: int) -> Tasks.TASK[int]", "signature": "add_async(x: int, y: int) -> Tasks.TASK[int]", "kindLabel": "pure global function" },
+    { "startLine": 3, "startColumn": 25, "endLine": 3, "endColumn": 25, "text": "a: int", "signature": "a: int", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 28, "endLine": 3, "endColumn": 28, "text": "b: int", "signature": "b: int", "kindLabel": "local value" },
+    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 8, "text": "c: int", "signature": "c: int", "kindLabel": "local value" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 26, "tokenType": "function" },

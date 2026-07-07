@@ -8,8 +8,9 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "text": "class THING" }
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "text": "class THING", "signature": "class THING", "kindLabel": "class" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "tokenType": "class" }
   ]

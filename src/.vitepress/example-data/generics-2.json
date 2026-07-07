@@ -8,11 +8,12 @@
   "output": "something is 1234\nsomething is hello\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 19, "text": "struct Ghul.int" },
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "text": "print_something[Ghul.int](t: Ghul.int) -> Ghul.void // global function" },
-    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 22, "text": "class Ghul.string" },
-    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "text": "print_something[Ghul.string](t: Ghul.string) -> Ghul.void // global function" }
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 19, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "text": "print_something[int](t: int) -> void", "signature": "print_something[int](t: int) -> void", "kindLabel": "global function" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 22, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "text": "print_something[string](t: string) -> void", "signature": "print_something[string](t: string) -> void", "kindLabel": "global function" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 19, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "tokenType": "function" },

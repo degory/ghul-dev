@@ -2,13 +2,14 @@ use IO.Std.write_line;
 
 // >>>
 day_kind(day: int) -> string =>
+    // days run Monday (0) to Sunday (6)
     case day
-    when 0, 6 then "weekend"
+    when 5, 6 then "weekend"
     else "weekday"
     esac;
 
 entry() is
-    write_line(day_kind(0));
+    write_line(day_kind(5));
     write_line(day_kind(3));
     write_line(day_kind(6));
 si

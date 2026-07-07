@@ -8,10 +8,11 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 17, "text": "namespace Example" },
-    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 14, "text": "trait Example.Test" },
-    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 11, "text": "Example.Test.run() -> Ghul.void // abstract method" }
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 17, "text": "namespace Example", "signature": "namespace Example", "kindLabel": "" },
+    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 14, "text": "trait Test", "signature": "trait Test", "kindLabel": "trait" },
+    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 11, "text": "Test.run() -> void", "signature": "Test.run() -> void", "kindLabel": "abstract method" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 17, "tokenType": "namespace" },
     { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 14, "tokenType": "interface" },

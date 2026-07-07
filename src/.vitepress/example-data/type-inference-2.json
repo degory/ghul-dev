@@ -8,18 +8,19 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "text": "class COUNTER" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "COUNTER.count: Ghul.int // instance property" },
-    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "struct Ghul.int" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 8, "text": "COUNTER.init() // constructor" },
-    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "text": "COUNTER.tick() -> Ghul.void // method" },
-    { "startLine": 11, "startColumn": 13, "endLine": 11, "endColumn": 16, "text": "step: Ghul.int // local value" },
-    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "text": "COUNTER.count: Ghul.int // instance property" },
-    { "startLine": 12, "startColumn": 9, "endLine": 12, "endColumn": 13, "text": "COUNTER.count: Ghul.int // instance property" },
-    { "startLine": 12, "startColumn": 17, "endLine": 12, "endColumn": 21, "text": "COUNTER.count: Ghul.int // instance property" },
-    { "startLine": 12, "startColumn": 25, "endLine": 12, "endColumn": 28, "text": "step: Ghul.int // local value" },
-    { "startLine": 12, "startColumn": 23, "endLine": 12, "endColumn": 23, "text": "Ghul.+(a: Ghul.int, b: Ghul.int) -> Ghul.int // innate function arithmetic.add" }
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "text": "class COUNTER", "signature": "class COUNTER", "kindLabel": "class" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "COUNTER.count: int", "signature": "COUNTER.count: int", "kindLabel": "pure instance property" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 8, "text": "COUNTER.init()", "signature": "COUNTER.init()", "kindLabel": "constructor" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "text": "COUNTER.tick() -> void", "signature": "COUNTER.tick() -> void", "kindLabel": "method" },
+    { "startLine": 11, "startColumn": 13, "endLine": 11, "endColumn": 16, "text": "step: int", "signature": "step: int", "kindLabel": "local value" },
+    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "text": "count: int", "signature": "count: int", "kindLabel": "pure instance property" },
+    { "startLine": 12, "startColumn": 17, "endLine": 12, "endColumn": 21, "text": "count: int", "signature": "count: int", "kindLabel": "pure instance property" },
+    { "startLine": 12, "startColumn": 25, "endLine": 12, "endColumn": 28, "text": "step: int", "signature": "step: int", "kindLabel": "local value" },
+    { "startLine": 12, "startColumn": 23, "endLine": 12, "endColumn": 23, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
+    { "startLine": 12, "startColumn": 9, "endLine": 12, "endColumn": 13, "text": "count: int", "signature": "count: int", "kindLabel": "pure instance property" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "tokenType": "class" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "tokenType": "property" },
@@ -28,9 +29,9 @@
     { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "tokenType": "method" },
     { "startLine": 11, "startColumn": 13, "endLine": 11, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "tokenType": "property" },
-    { "startLine": 12, "startColumn": 9, "endLine": 12, "endColumn": 13, "tokenType": "property" },
     { "startLine": 12, "startColumn": 17, "endLine": 12, "endColumn": 21, "tokenType": "property" },
     { "startLine": 12, "startColumn": 25, "endLine": 12, "endColumn": 28, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 12, "startColumn": 23, "endLine": 12, "endColumn": 23, "tokenType": "function" }
+    { "startLine": 12, "startColumn": 23, "endLine": 12, "endColumn": 23, "tokenType": "operator" },
+    { "startLine": 12, "startColumn": 9, "endLine": 12, "endColumn": 13, "tokenType": "property" }
   ]
 }

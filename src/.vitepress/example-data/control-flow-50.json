@@ -8,13 +8,14 @@
   "output": "0\n1\n1\n2\n3\n5\n8\n13\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "f: Ghul.int // local value" },
-    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "text": "Ghul.Pipes.pipe[T](source: Collections.Iterable[T]) -> Ghul.Pipes.Pipe[T] // global function" },
-    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 13, "text": "fibs() -> Ghul.Pipes.Pipe[Ghul.int] // generator (global)" },
-    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 23, "text": "Ghul.Pipes.Pipe[Ghul.int].take(count: Ghul.int) -> Ghul.Pipes.Pipe[Ghul.int] // default trait method" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.int) -> Ghul.void // class method" },
-    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 16, "text": "f: Ghul.int // local value" }
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "f: int", "signature": "f: int", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "text": "Ghul.Pipes.pipe[T](source: Collections.Iterable[T]) -> Ghul.Pipes.Pipe[T]", "signature": "Ghul.Pipes.pipe[T](source: Collections.Iterable[T]) -> Ghul.Pipes.Pipe[T]", "kindLabel": "global function" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 13, "text": "fibs() -> Ghul.Pipes.Pipe[int]", "signature": "fibs() -> Ghul.Pipes.Pipe[int]", "kindLabel": "global generator" },
+    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 23, "text": "Ghul.Pipes.Pipe[int].take(count: int) -> Ghul.Pipes.Pipe[int]", "signature": "Ghul.Pipes.Pipe[int].take(count: int) -> Ghul.Pipes.Pipe[int]", "kindLabel": "default trait method" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: int) -> void", "signature": "IO.Std.write_line(value: int) -> void", "kindLabel": "pure class method" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 16, "text": "f: int", "signature": "f: int", "kindLabel": "local value" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "tokenType": "function" },

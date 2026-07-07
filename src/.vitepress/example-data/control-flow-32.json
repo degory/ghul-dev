@@ -8,18 +8,19 @@
   "output": "zero\nthree\nmore than five and less than ten\nunlucky\nless than -1 or more than nine\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 6, "startColumn": 9, "endLine": 6, "endColumn": 14, "text": "result: Ghul.string // local value" },
-    { "startLine": 22, "startColumn": 9, "endLine": 22, "endColumn": 14, "text": "result: Ghul.string // local value" },
-    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 10, "text": "value: Ghul.int // local argument" },
-    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 6, "text": "Ghul.-(a: Ghul.int) -> Ghul.int // innate function arithmetic.neg" },
-    { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 17, "text": "result: Ghul.string // local value" },
-    { "startLine": 23, "startColumn": 12, "endLine": 23, "endColumn": 17, "text": "result: Ghul.string // local value" }
+    { "startLine": 6, "startColumn": 9, "endLine": 6, "endColumn": 14, "text": "result: string", "signature": "result: string", "kindLabel": "local value" },
+    { "startLine": 22, "startColumn": 9, "endLine": 22, "endColumn": 14, "text": "result: string", "signature": "result: string", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 10, "text": "value: int", "signature": "value: int", "kindLabel": "local argument" },
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 6, "text": "Ghul.-(a: int) -> int", "signature": "Ghul.-(a: int) -> int", "kindLabel": "innate function arithmetic.neg" },
+    { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 17, "text": "result: string", "signature": "result: string", "kindLabel": "local value" },
+    { "startLine": 23, "startColumn": 12, "endLine": 23, "endColumn": 17, "text": "result: string", "signature": "result: string", "kindLabel": "local value" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 6, "startColumn": 9, "endLine": 6, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 22, "startColumn": 9, "endLine": 22, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 10, "tokenType": "parameter", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 6, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 6, "tokenType": "operator" },
     { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 23, "startColumn": 12, "endLine": 23, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" }
   ]

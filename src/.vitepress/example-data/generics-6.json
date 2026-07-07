@@ -8,9 +8,10 @@
   "output": "something is 1234\nsomething is hello\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "text": "print_something[Ghul.int](t: Ghul.int) -> Ghul.void // global function" },
-    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "text": "print_something[Ghul.string](t: Ghul.string) -> Ghul.void // global function" }
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "text": "print_something[int](t: int) -> void", "signature": "print_something[int](t: int) -> void", "kindLabel": "global function" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "text": "print_something[string](t: string) -> void", "signature": "print_something[string](t: string) -> void", "kindLabel": "global function" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "tokenType": "function" },
     { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "tokenType": "function" }

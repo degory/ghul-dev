@@ -8,23 +8,24 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 7, "text": "swallow(i: Ghul.int) -> Ghul.int // global function" },
-    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "text": "i: Ghul.int // local argument" },
-    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 14, "text": "struct Ghul.int" },
-    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 22, "text": "struct Ghul.int" },
-    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 11, "text": "e: System.Exception // local value" },
-    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 22, "text": "class System.Exception" },
-    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 33, "text": "do_something_risky(i: Ghul.int) -> Ghul.int // global function" },
-    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "text": "i: Ghul.int // local argument" }
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 7, "text": "swallow(i: int) -> int", "signature": "swallow(i: int) -> int", "kindLabel": "pure global function" },
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "text": "i: int", "signature": "i: int", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 14, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 22, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 11, "text": "e: Exception", "signature": "e: Exception", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 22, "text": "class Exception", "signature": "class Exception", "kindLabel": "class" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 33, "text": "do_something_risky(i: int) -> int", "signature": "do_something_risky(i: int) -> int", "kindLabel": "pure global function" },
+    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "text": "i: int", "signature": "i: int", "kindLabel": "local argument" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 7, "tokenType": "function" },
-    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "tokenType": "parameter", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 14, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 22, "tokenType": "struct" },
     { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 22, "tokenType": "class" },
     { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 33, "tokenType": "function" },
-    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "tokenType": "parameter", "modifiers": "readonly" }
+    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

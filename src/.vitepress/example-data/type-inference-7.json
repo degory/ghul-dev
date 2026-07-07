@@ -8,10 +8,11 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 12, "text": "a_string: Ghul.string // local value" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "an_int: Ghul.int // local value" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "text": "an_int_array: Ghul.int[] // local value" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 12, "text": "a_string: string", "signature": "a_string: string", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "an_int: int", "signature": "an_int: int", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "text": "an_int_array: int[]", "signature": "an_int_array: int[]", "kindLabel": "local value" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },

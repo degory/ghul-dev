@@ -6,16 +6,24 @@ class CAT(): Animal is
     purr() -> string => "purr";
 si
 
-class CARRIER(occupant: Animal);
+class CARRIER(occupant: Animal) is
+    handled: int;
+
+    handle() is
+        handled = handled + 1;
+    si
+si
 
 // >>>
 describe(carrier: CARRIER) is
-    // copy the property into a local variable
+    // handle() can write to the heap, so it would drop
+    // a narrow on carrier.occupant - copy the value into
+    // a local, whose type no other call can change
     let occupant = carrier.occupant;
 
     if isa CAT(occupant) then
-        // occupant is a local variable, narrowed
-        // to CAT in this branch
+        carrier.handle();
+        // occupant is still a CAT after the call
         write_line(occupant.purr());
     fi
 si
