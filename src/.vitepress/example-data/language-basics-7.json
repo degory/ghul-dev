@@ -8,17 +8,18 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "my_int: Ghul.int // local value" },
-    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "text": "struct Ghul.int" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "my_float: Ghul.double // local value" },
-    { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 20, "text": "struct Ghul.double" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "my_decimal: Ghul.decimal // local value" },
-    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 23, "text": "struct Ghul.decimal" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "text": "my_bool: Ghul.bool // local value" },
-    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 17, "text": "struct Ghul.bool" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 11, "text": "my_char: Ghul.char // local value" },
-    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 17, "text": "struct Ghul.char" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "my_int: int", "signature": "my_int: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "my_float: double", "signature": "my_float: double", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 20, "text": "struct double", "signature": "struct double", "kindLabel": "struct" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "my_decimal: decimal", "signature": "my_decimal: decimal", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 23, "text": "struct decimal", "signature": "struct decimal", "kindLabel": "struct" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "text": "my_bool: bool", "signature": "my_bool: bool", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 17, "text": "struct bool", "signature": "struct bool", "kindLabel": "struct" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 11, "text": "my_char: char", "signature": "my_char: char", "kindLabel": "local value" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 17, "text": "struct char", "signature": "struct char", "kindLabel": "struct" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "tokenType": "struct" },

@@ -8,16 +8,17 @@
   "output": "identifier\n[identifier]\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "t: Token.IDENTIFIER // local value" },
-    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 13, "text": "union Token" },
-    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 24, "text": "Token.IDENTIFIER.init(text: Ghul.string, name: Ghul.string) // constructor" },
-    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string?) -> Ghul.void // class method" },
-    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 12, "text": "t: Token.IDENTIFIER // local value" },
-    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 17, "text": "Token.name: Ghul.string // instance property" },
-    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "text": "IO.Std.write_line(value: Ghul.string?) -> Ghul.void // class method" },
-    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 12, "text": "t: Token.IDENTIFIER // local value" },
-    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 18, "text": "Named.label() -> Ghul.string // default trait method" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "t: Token.IDENTIFIER", "signature": "t: Token.IDENTIFIER", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 13, "text": "union Token", "signature": "union Token", "kindLabel": "union" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 24, "text": "Token.IDENTIFIER.init(text: string, name: string)", "signature": "Token.IDENTIFIER.init(text: string, name: string)", "kindLabel": "constructor" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 12, "text": "t: Token.IDENTIFIER", "signature": "t: Token.IDENTIFIER", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 17, "text": "Token.name: string", "signature": "Token.name: string", "kindLabel": "instance property" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 12, "text": "t: Token.IDENTIFIER", "signature": "t: Token.IDENTIFIER", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 18, "text": "Named.label() -> string", "signature": "Named.label() -> string", "kindLabel": "default trait method" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 13, "tokenType": "class" },

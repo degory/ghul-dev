@@ -13,11 +13,9 @@ class CARRIER(occupant: Animal);
 // >>>
 describe(carrier: CARRIER) is
     if isa CAT(carrier.occupant) then
-        // an isa test written against a member-access
-        // path does not narrow it, so
-        // carrier.occupant.purr() would not compile
-        // here
-        write_line("the carrier holds a cat");
+        // carrier.occupant is a CAT within this branch,
+        // so its purr() is reachable directly
+        write_line(carrier.occupant.purr());
     fi
 si
 // <<<

@@ -8,9 +8,10 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "o: Ghul.object // local value" },
-    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 13, "text": "class Ghul.object" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "o: object", "signature": "o: object", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 13, "text": "class object", "signature": "class object", "kindLabel": "class" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 13, "tokenType": "class" }

@@ -1,7 +1,7 @@
 entry() is
 // >>>
     let a = default[int];   // 0
-    let b: string = default;   // null
+    let b: string? = default;   // null
 // <<<
 si
 

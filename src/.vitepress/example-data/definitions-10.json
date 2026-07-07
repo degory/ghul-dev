@@ -8,13 +8,14 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 12, "text": "struct POINT" },
-    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "POINT.x: Ghul.double // instance property" },
-    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "text": "POINT.y: Ghul.double // instance property" },
-    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 33, "text": "POINT.init(x: Ghul.double, y: Ghul.double) // constructor" },
-    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 22, "text": "struct Ghul.double" },
-    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 33, "text": "struct Ghul.double" }
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 12, "text": "struct POINT(x: double, y: double)", "signature": "struct POINT(x: double, y: double)", "kindLabel": "struct" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "POINT.x: double", "signature": "POINT.x: double", "kindLabel": "pure instance property" },
+    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "text": "POINT.y: double", "signature": "POINT.y: double", "kindLabel": "pure instance property" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 33, "text": "POINT.init(x: double, y: double)", "signature": "POINT.init(x: double, y: double)", "kindLabel": "constructor" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 22, "text": "struct double", "signature": "struct double", "kindLabel": "struct" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 33, "text": "struct double", "signature": "struct double", "kindLabel": "struct" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 12, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "tokenType": "property" },

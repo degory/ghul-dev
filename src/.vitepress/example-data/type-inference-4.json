@@ -1,24 +1,30 @@
 {
   "name": "type-inference-4",
-  "code": "class CARRIER(occupant: Animal);\ndescribe(carrier: CARRIER) is\n    if isa CAT(carrier.occupant) then\n        // an isa test written against a member-access\n        // path does not narrow it, so\n        // carrier.occupant.purr() would not compile\n        // here\n        write_line(\"the carrier holds a cat\");\n    fi\nsi",
-  "fullSource": "use IO.Std.write_line;\n\nclass Animal abstract is si\n\nclass CAT(): Animal is\n    purr() -> string => \"purr\";\nsi\n\nclass CARRIER(occupant: Animal);\n\ndescribe(carrier: CARRIER) is\n    if isa CAT(carrier.occupant) then\n        // an isa test written against a member-access\n        // path does not narrow it, so\n        // carrier.occupant.purr() would not compile\n        // here\n        write_line(\"the carrier holds a cat\");\n    fi\nsi\n\nentry() is\n    describe(CARRIER(CAT()));\nsi\n",
+  "code": "class CARRIER(occupant: Animal);\ndescribe(carrier: CARRIER) is\n    if isa CAT(carrier.occupant) then\n        // carrier.occupant is a CAT within this branch,\n        // so its purr() is reachable directly\n        write_line(carrier.occupant.purr());\n    fi\nsi",
+  "fullSource": "use IO.Std.write_line;\n\nclass Animal abstract is si\n\nclass CAT(): Animal is\n    purr() -> string => \"purr\";\nsi\n\nclass CARRIER(occupant: Animal);\n\ndescribe(carrier: CARRIER) is\n    if isa CAT(carrier.occupant) then\n        // carrier.occupant is a CAT within this branch,\n        // so its purr() is reachable directly\n        write_line(carrier.occupant.purr());\n    fi\nsi\n\nentry() is\n    describe(CARRIER(CAT()));\nsi\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [1],
-  "output": "the carrier holds a cat\n",
+  "output": "purr\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "text": "class CARRIER" },
-    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 22, "text": "CARRIER.occupant: Animal // pure instance property" },
-    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 30, "text": "CARRIER.init(occupant: Animal) // constructor" },
-    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 30, "text": "class Animal" },
-    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 8, "text": "describe(carrier: CARRIER) -> Ghul.void // pure global function" },
-    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 16, "text": "carrier: CARRIER // local argument" },
-    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 25, "text": "class CARRIER" },
-    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 14, "text": "class CAT" },
-    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "text": "carrier: CARRIER // local argument" },
-    { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 31, "text": "CARRIER.occupant: Animal // pure instance property" },
-    { "startLine": 8, "startColumn": 9, "endLine": 8, "endColumn": 18, "text": "IO.Std.write_line(value: Ghul.string?) -> Ghul.void // pure class method" }
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "text": "class CARRIER(occupant: Animal)", "signature": "class CARRIER(occupant: Animal)", "kindLabel": "class" },
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 22, "text": "CARRIER.occupant: Animal", "signature": "CARRIER.occupant: Animal", "kindLabel": "pure instance property" },
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 30, "text": "CARRIER.init(occupant: Animal)", "signature": "CARRIER.init(occupant: Animal)", "kindLabel": "constructor" },
+    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 30, "text": "class Animal", "signature": "class Animal", "kindLabel": "class" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 8, "text": "describe(carrier: CARRIER) -> void", "signature": "describe(carrier: CARRIER) -> void", "kindLabel": "global function" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 16, "text": "carrier: CARRIER", "signature": "carrier: CARRIER", "kindLabel": "local argument" },
+    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 25, "text": "class CARRIER(occupant: Animal)", "signature": "class CARRIER(occupant: Animal)", "kindLabel": "class" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 14, "text": "class CAT", "signature": "class CAT", "kindLabel": "class" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "text": "carrier: CARRIER", "signature": "carrier: CARRIER", "kindLabel": "local argument" },
+    { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 31, "text": "CARRIER.occupant: Animal", "signature": "CARRIER.occupant: Animal", "kindLabel": "pure instance property" },
+    { "startLine": 6, "startColumn": 9, "endLine": 6, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 26, "text": "carrier: CARRIER", "signature": "carrier: CARRIER", "kindLabel": "local argument" },
+    { "startLine": 6, "startColumn": 28, "endLine": 6, "endColumn": 35, "text": "CARRIER.occupant: Animal", "signature": "CARRIER.occupant: Animal", "kindLabel": "pure instance property" },
+    { "startLine": 6, "startColumn": 37, "endLine": 6, "endColumn": 40, "text": "CAT.purr() -> string", "signature": "CAT.purr() -> string", "kindLabel": "pure method" }
+  ],
+  "inlayHints": [
+    { "line": 3, "column": 16, "label": "►", "detail": "► CAT", "code": "narrowing-isa" }
   ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "tokenType": "class" },
@@ -30,6 +36,9 @@
     { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 14, "tokenType": "class" },
     { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 31, "tokenType": "property" },
-    { "startLine": 8, "startColumn": 9, "endLine": 8, "endColumn": 18, "tokenType": "method", "modifiers": "static" }
+    { "startLine": 6, "startColumn": 9, "endLine": 6, "endColumn": 18, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 26, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 28, "endLine": 6, "endColumn": 35, "tokenType": "property" },
+    { "startLine": 6, "startColumn": 37, "endLine": 6, "endColumn": 40, "tokenType": "method" }
   ]
 }

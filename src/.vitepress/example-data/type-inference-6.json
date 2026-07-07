@@ -8,17 +8,18 @@
   "output": "purr\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 8, "text": "describe(carrier: CARRIER) -> Ghul.void // global function" },
-    { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 16, "text": "carrier: CARRIER // local argument" },
-    { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 25, "text": "class CARRIER" },
-    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "cat: CAT // local value" },
-    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 19, "text": "class CAT" },
-    { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 29, "text": "carrier: CARRIER // local argument" },
-    { "startLine": 2, "startColumn": 31, "endLine": 2, "endColumn": 38, "text": "CARRIER.occupant: Animal // instance property" },
-    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 18, "text": "IO.Std.write_line(value: Ghul.string?) -> Ghul.void // class method" },
-    { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 22, "text": "cat: CAT // local value" },
-    { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 27, "text": "CAT.purr() -> Ghul.string // method" }
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 8, "text": "describe(carrier: CARRIER) -> void", "signature": "describe(carrier: CARRIER) -> void", "kindLabel": "global function" },
+    { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 16, "text": "carrier: CARRIER", "signature": "carrier: CARRIER", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 25, "text": "class CARRIER(occupant: Animal)", "signature": "class CARRIER(occupant: Animal)", "kindLabel": "class" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "cat: CAT", "signature": "cat: CAT", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 19, "text": "class CAT", "signature": "class CAT", "kindLabel": "class" },
+    { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 29, "text": "carrier: CARRIER", "signature": "carrier: CARRIER", "kindLabel": "local argument" },
+    { "startLine": 2, "startColumn": 31, "endLine": 2, "endColumn": 38, "text": "CARRIER.occupant: Animal", "signature": "CARRIER.occupant: Animal", "kindLabel": "pure instance property" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 22, "text": "cat: CAT", "signature": "cat: CAT", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 27, "text": "CAT.purr() -> string", "signature": "CAT.purr() -> string", "kindLabel": "pure method" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 8, "tokenType": "function" },
     { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },

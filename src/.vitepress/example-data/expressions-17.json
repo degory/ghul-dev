@@ -8,19 +8,20 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "text": "logical_and: Ghul.bool // local value" },
-    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 25, "text": "Ghul./\\(a: Ghul.bool, b: Ghul.bool) -> Ghul.bool // innate function bool.and_then" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "logical_or: Ghul.bool // local value" },
-    { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 24, "text": "Ghul.\\/(a: Ghul.bool, b: Ghul.bool) -> Ghul.bool // innate function bool.or_else" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 15, "text": "logical_not: Ghul.bool // local value" },
-    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 19, "text": "Ghul.!(a: Ghul.bool) -> Ghul.bool // innate function bool.not" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "text": "logical_and: bool", "signature": "logical_and: bool", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 25, "text": "Ghul./\\(a: bool, b: bool) -> bool", "signature": "Ghul./\\(a: bool, b: bool) -> bool", "kindLabel": "innate function bool.and_then" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "logical_or: bool", "signature": "logical_or: bool", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 24, "text": "Ghul.\\/(a: bool, b: bool) -> bool", "signature": "Ghul.\\/(a: bool, b: bool) -> bool", "kindLabel": "innate function bool.or_else" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 15, "text": "logical_not: bool", "signature": "logical_not: bool", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 19, "text": "Ghul.!(a: bool) -> bool", "signature": "Ghul.!(a: bool) -> bool", "kindLabel": "innate function bool.not" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 25, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 25, "tokenType": "operator" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 24, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 24, "tokenType": "operator" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 19, "tokenType": "function" }
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 19, "tokenType": "operator" }
   ]
 }

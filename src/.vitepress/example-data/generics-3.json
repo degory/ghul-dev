@@ -8,12 +8,13 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 21, "text": "struct HOLD_SOMETHING" },
-    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "text": "T // type variable" },
-    { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 30, "text": "HOLD_SOMETHING.value: T // instance property" },
-    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 33, "text": "HOLD_SOMETHING.init(value: T) // constructor" },
-    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 33, "text": "T // type variable" }
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 21, "text": "struct HOLD_SOMETHING[T](value: T)", "signature": "struct HOLD_SOMETHING[T](value: T)", "kindLabel": "struct" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 30, "text": "HOLD_SOMETHING[T].value: T", "signature": "HOLD_SOMETHING[T].value: T", "kindLabel": "pure instance property" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 33, "text": "HOLD_SOMETHING[T].init(value: T)", "signature": "HOLD_SOMETHING[T].init(value: T)", "kindLabel": "constructor" },
+    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 33, "text": "T", "signature": "T", "kindLabel": "type variable" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 21, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "tokenType": "typeParameter" },

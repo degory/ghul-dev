@@ -8,16 +8,17 @@
   "output": "meow\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 6, "text": "c: CAT // local value" },
-    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 11, "text": "class CAT" },
-    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 18, "text": "c: CAT // local value" },
-    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 23, "text": "CAT.meow() -> Ghul.string // method" },
-    { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "text": "d: DOG // local value" },
-    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 11, "text": "class DOG" },
-    { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 18, "text": "d: DOG // local value" },
-    { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 23, "text": "DOG.bark() -> Ghul.string // method" },
-    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "text": "a: Animal // local argument" }
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 6, "text": "c: CAT", "signature": "c: CAT", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 11, "text": "class CAT", "signature": "class CAT", "kindLabel": "class" },
+    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 18, "text": "c: CAT", "signature": "c: CAT", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 23, "text": "CAT.meow() -> string", "signature": "CAT.meow() -> string", "kindLabel": "pure method" },
+    { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "text": "d: DOG", "signature": "d: DOG", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 11, "text": "class DOG", "signature": "class DOG", "kindLabel": "class" },
+    { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 18, "text": "d: DOG", "signature": "d: DOG", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 23, "text": "DOG.bark() -> string", "signature": "DOG.bark() -> string", "kindLabel": "pure method" },
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "text": "a: Animal", "signature": "a: Animal", "kindLabel": "local argument" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 6, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 11, "tokenType": "class" },

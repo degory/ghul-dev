@@ -8,17 +8,18 @@
   "output": "alice is 30 years old\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "text": "class PERSON" },
-    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 17, "text": "PERSON.name: Ghul.string // instance property" },
-    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 30, "text": "PERSON.age: Ghul.int // instance property" },
-    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 35, "text": "PERSON.init(name: Ghul.string, age: Ghul.int) // constructor" },
-    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "text": "class Ghul.string" },
-    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 35, "text": "struct Ghul.int" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "PERSON.describe() -> Ghul.void // method" },
-    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 18, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
-    { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 25, "text": "PERSON.name: Ghul.string // instance property" },
-    { "startLine": 3, "startColumn": 32, "endLine": 3, "endColumn": 34, "text": "PERSON.age: Ghul.int // instance property" }
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "text": "class PERSON(name: string, age: int)", "signature": "class PERSON(name: string, age: int)", "kindLabel": "class" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 17, "text": "PERSON.name: string", "signature": "PERSON.name: string", "kindLabel": "pure instance property" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 30, "text": "PERSON.age: int", "signature": "PERSON.age: int", "kindLabel": "pure instance property" },
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 35, "text": "PERSON.init(name: string, age: int)", "signature": "PERSON.init(name: string, age: int)", "kindLabel": "constructor" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 35, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "PERSON.describe() -> void", "signature": "PERSON.describe() -> void", "kindLabel": "pure method" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 25, "text": "name: string", "signature": "name: string", "kindLabel": "pure instance property" },
+    { "startLine": 3, "startColumn": 32, "endLine": 3, "endColumn": 34, "text": "age: int", "signature": "age: int", "kindLabel": "pure instance property" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "tokenType": "class" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 17, "tokenType": "property" },

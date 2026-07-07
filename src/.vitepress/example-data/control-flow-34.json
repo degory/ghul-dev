@@ -8,14 +8,15 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 34, "text": "class INSUFFICIENT_FUNDS_EXCEPTION" },
-    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 50, "text": "INSUFFICIENT_FUNDS_EXCEPTION.init(message: Ghul.string) // constructor" },
-    { "startLine": 1, "startColumn": 36, "endLine": 1, "endColumn": 42, "text": "message: Ghul.string // local argument" },
-    { "startLine": 1, "startColumn": 61, "endLine": 1, "endColumn": 69, "text": "class System.Exception" },
-    { "startLine": 1, "startColumn": 45, "endLine": 1, "endColumn": 50, "text": "class Ghul.string" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 19, "text": "System.Exception.init(message: Ghul.string?) -> Ghul.void // method" },
-    { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 17, "text": "message: Ghul.string // local argument" }
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 34, "text": "class INSUFFICIENT_FUNDS_EXCEPTION(message: string)", "signature": "class INSUFFICIENT_FUNDS_EXCEPTION(message: string)", "kindLabel": "class" },
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 50, "text": "INSUFFICIENT_FUNDS_EXCEPTION.init(message: string)", "signature": "INSUFFICIENT_FUNDS_EXCEPTION.init(message: string)", "kindLabel": "constructor" },
+    { "startLine": 1, "startColumn": 36, "endLine": 1, "endColumn": 42, "text": "message: string", "signature": "message: string", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 61, "endLine": 1, "endColumn": 69, "text": "class System.Exception", "signature": "class System.Exception", "kindLabel": "class" },
+    { "startLine": 1, "startColumn": 45, "endLine": 1, "endColumn": 50, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 19, "text": "System.Exception.init(message: string?) -> void", "signature": "System.Exception.init(message: string?) -> void", "kindLabel": "method" },
+    { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 17, "text": "message: string", "signature": "message: string", "kindLabel": "local argument" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 34, "tokenType": "class" },
     { "startLine": 1, "startColumn": 36, "endLine": 1, "endColumn": 42, "tokenType": "variable", "modifiers": "readonly" },

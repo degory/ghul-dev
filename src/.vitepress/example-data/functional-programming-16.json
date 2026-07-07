@@ -8,11 +8,14 @@
   "output": "the option holds 42\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 13, "text": "value: Ghul.int // local value" },
-    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 25, "text": "an_option: Option[Ghul.int] // local value" },
-    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 12, "text": "an_option: Option[Ghul.int] // local value" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: Ghul.string) -> Ghul.void // class method" },
-    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 39, "text": "value: Ghul.int // local value" }
+    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 13, "text": "value: int", "signature": "value: int", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 25, "text": "an_option: Option[int]\n    ► Option.SOME[int]", "signature": "an_option: Option[int]\n    ► Option.SOME[int]", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 12, "text": "an_option: Option[int]", "signature": "an_option: Option[int]", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 39, "text": "value: int", "signature": "value: int", "kindLabel": "local value" }
+  ],
+  "inlayHints": [
+    { "line": 1, "column": 4, "label": "►", "detail": "► Option.SOME[int]\n> Option.NONE[int]", "code": "narrowing-default-variant" }
   ],
   "semanticTokens": [
     { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },

@@ -1,0 +1,32 @@
+use IO.Std.write_line;
+
+class Animal abstract is
+    name() -> string;
+si
+
+class CAT: Animal is
+    init() is si
+    name() -> string => "cat";
+    purr() -> string => "purr";
+si
+
+class DOG: Animal is
+    init() is si
+    name() -> string => "dog";
+si
+
+any_animal() -> Animal => CAT();
+
+entry() is
+    let pet mut = any_animal();
+// >>>
+    if isa CAT(pet) then
+        write_line(pet.purr());
+
+        pet = DOG();
+        // reassigning pet drops the narrowing:
+        // pet is Animal again here
+        write_line(pet.name());
+    fi
+// <<<
+si

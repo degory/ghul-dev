@@ -68,11 +68,19 @@ Narrowing is flow-sensitive: it follows the control flow rather than being confi
 
 The `else` narrowing extends to a class hierarchy declared in the current assembly without `open`: ruling out one subclass on the `else` edge narrows to the rest, and when the root is `abstract` the chain can collapse to a single remaining subclass.
 
-Narrowing applies to local variables, including a function's own parameters. A presence test extends it to a member-access path: after `if x.field? then`, uses of `x.field` inside the branch are non-optional. An `isa` or variant test against a member-access path does not narrow it, since the path can read a different value each time - copy it into a local first, or use `if let`, which introduces one.
+Narrowing applies to local variables, including a function's own parameters, and to a member-access path. After `if isa CAT(x.pet) then`, or a presence test `if x.field? then`, uses of `x.pet` or `x.field` inside the branch see the narrower type.
+
+A path narrow is less durable than one on a local variable. A local holds its value, which no other call can change, so its narrowing lasts until the variable is reassigned. A path reads a fresh value each time, so its narrowing lasts only while nothing can change what it reads: a call to a method or property that can write to the heap drops it, as does an assignment that can change the path. To keep the narrower type across such a call, copy the path into a local variable, or use `if let` to introduce one.
+
+Reassigning the local is what ends its narrowing: the variable reverts to its declared type from that point on.
+
+<GhulExample name="control-flow-56" />
+
+ghūl decides which calls are safe by inferring purity. A method or property that only reads, never writing to the heap, is pure, and a call to a pure one preserves a path narrow - so a plain accessor that reads a field leaves it in place. The inference is automatic; there is nothing to annotate.
 
 ### if let
 
-`cast T(x)` views `x` as type `T`, and yields null (rather than throwing) when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test:
+`cast T?(x)` views `x` as type `T`, and yields null (rather than throwing) when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test:
 
 <GhulExample name="control-flow-12" />
 

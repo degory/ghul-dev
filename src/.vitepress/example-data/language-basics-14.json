@@ -8,13 +8,14 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "text": "a: Ghul.int // local value" },
-    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "text": "b: Ghul.int // local value" },
-    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 18, "text": "point: (int, int) // local value" },
-    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 9, "text": "name: Ghul.string // local value" },
-    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "age: Ghul.int // local value" },
-    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "text": "person: (string, int) // local value" }
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "text": "a: int", "signature": "a: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "text": "b: int", "signature": "b: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 18, "text": "point: (int, int)", "signature": "point: (int, int)", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 9, "text": "name: string", "signature": "name: string", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "age: int", "signature": "age: int", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "text": "person: (string, int)", "signature": "person: (string, int)", "kindLabel": "local value" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },

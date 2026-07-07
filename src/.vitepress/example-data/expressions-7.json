@@ -8,21 +8,22 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "things: (string, single) // local value" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "name: Ghul.string // local value" },
-    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 17, "text": "things: (string, single) // local value" },
-    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 20, "text": "(string, single).`0: Ghul.string // field" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 10, "text": "weight: Ghul.single // local value" },
-    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 19, "text": "things: (string, single) // local value" },
-    { "startLine": 4, "startColumn": 21, "endLine": 4, "endColumn": 22, "text": "(string, single).`1: Ghul.single // field" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "things: (string, single)", "signature": "things: (string, single)", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "name: string", "signature": "name: string", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 17, "text": "things: (string, single)", "signature": "things: (string, single)", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 20, "text": "TUPLE_2[string,single].0: string", "signature": "TUPLE_2[string,single].0: string", "kindLabel": "field" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 10, "text": "weight: single", "signature": "weight: single", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 19, "text": "things: (string, single)", "signature": "things: (string, single)", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 21, "endLine": 4, "endColumn": 22, "text": "TUPLE_2[string,single].1: single", "signature": "TUPLE_2[string,single].1: single", "kindLabel": "field" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 20, "tokenType": "property", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 20, "tokenType": "property" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 21, "endLine": 4, "endColumn": 22, "tokenType": "property", "modifiers": "readonly" }
+    { "startLine": 4, "startColumn": 21, "endLine": 4, "endColumn": 22, "tokenType": "property" }
   ]
 }

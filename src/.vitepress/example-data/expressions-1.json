@@ -8,12 +8,13 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: Ghul.int // local value" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "text": "hex: Ghul.int // local value" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "long: Ghul.long // local value" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 21, "text": "hex_unsigned_long: Ghul.ulong // local value" },
-    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 5, "text": "b: Ghul.byte // local value" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: int", "signature": "i: int", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "text": "hex: int", "signature": "hex: int", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "long: long", "signature": "long: long", "kindLabel": "local value" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 21, "text": "hex_unsigned_long: ulong", "signature": "hex_unsigned_long: ulong", "kindLabel": "local value" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 5, "text": "b: byte", "signature": "b: byte", "kindLabel": "local value" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },

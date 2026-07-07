@@ -8,8 +8,9 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "x: Ghul.int // local value" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "x: int", "signature": "x: int", "kindLabel": "local value" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" }
   ]

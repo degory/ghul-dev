@@ -8,12 +8,13 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: Ghul.int // local value" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "j: Ghul.int // local value" },
-    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 10, "text": "struct Ghul.int" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "k: Ghul.int // local value" },
-    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 10, "text": "struct Ghul.int" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: int", "signature": "i: int", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "j: int", "signature": "j: int", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 10, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "k: int", "signature": "k: int", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 10, "text": "struct int", "signature": "struct int", "kindLabel": "struct" }
   ],
+  "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
