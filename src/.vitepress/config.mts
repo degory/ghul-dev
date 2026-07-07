@@ -67,12 +67,17 @@ function ghulExampleDataPlugin() {
         )
       }
 
-      // The code is multi-line. Each hover description is a single line and
-      // is itself ghūl-coloured — the VSCE renders HOVER text the same way.
+      // The code is multi-line. A hover's `signature` is itself ghūl and is
+      // coloured the same way the VSCE renders it in the hover code block —
+      // and it can span several lines (a narrowed variable's hover carries
+      // its declared type and, beneath, its narrowed type), so every line is
+      // tokenised. `kindLabel` is the plain classifier shown in italics
+      // beneath the block. Older artifacts without the signature/kindLabel
+      // split fall back to the flat `text`.
       data.tokens = tokenise(data.code)
       data.hovers = (data.hovers ?? []).map(hover => ({
         ...hover,
-        tokens: tokenise(hover.text)[0] ?? [],
+        signatureLines: tokenise(hover.signature ?? hover.text ?? ''),
       }))
 
       return { code: JSON.stringify(data), map: null }

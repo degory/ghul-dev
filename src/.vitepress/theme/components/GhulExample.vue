@@ -30,6 +30,7 @@ const example = computed(() => {
 
 const diagnostics = computed(() => example.value?.diagnostics ?? [])
 const semanticTokens = computed(() => example.value?.semanticTokens ?? [])
+const inlayHints = computed(() => example.value?.inlayHints ?? [])
 
 // The compiler reports some diagnostics over a whole multi-line declaration.
 // A wavy underline spanning many lines is noisy, so a multi-line diagnostic
@@ -50,7 +51,7 @@ const lines = computed(() => {
     ?? ex.code.split('\n').map(text => [{ text, style: '' }])
 
   return tokenLines.map((tokens, i) =>
-    mergeLine(tokens, i + 1, ex.hovers ?? [], squiggleDiagnostics.value, semanticTokens.value))
+    mergeLine(tokens, i + 1, ex.hovers ?? [], squiggleDiagnostics.value, semanticTokens.value, inlayHints.value))
 })
 
 // Merge one line's colour tokens with the hovers, diagnostics and semantic
@@ -61,7 +62,7 @@ const lines = computed(() => {
 // Shiki colour is dropped — the semantic class colours it via CSS — so an
 // identifier reliably reflects what the compiler resolved it to (`class`,
 // `method`, `property`, `parameter`, …) rather than the regex-based guess.
-function mergeLine(colourTokens, lineNumber, hovers, diags, semantic) {
+function mergeLine(colourTokens, lineNumber, hovers, diags, semantic, inlays) {
   const chars = []
   const styles = []
   for (const token of colourTokens) {
@@ -77,24 +78,43 @@ function mergeLine(colourTokens, lineNumber, hovers, diags, semantic) {
   const diagAt = pickSpans(diags, lineNumber, length)
   const semanticAt = pickSpans(semantic, lineNumber, length)
 
+  // Narrowing inlay hints anchored on this line, keyed by the 1-based column
+  // they render before. An inlay renders as dimmed ghost text immediately
+  // before the character at its column (clamped to the line's end).
+  const inlayByColumn = new Map()
+  for (const hint of inlays) {
+    if (hint.line !== lineNumber) continue
+    const at = Math.min(Math.max(hint.column, 1), length + 1)
+    if (!inlayByColumn.has(at)) inlayByColumn.set(at, [])
+    inlayByColumn.get(at).push(hint)
+  }
+
   // Group consecutive characters sharing the same colour, hover, diagnostic
-  // and semantic token.
-  const segments = []
+  // and semantic token — breaking a run wherever an inlay must be spliced in —
+  // and interleave the inlay markers between segments.
+  const items = []
+  const flushInlays = column1 => {
+    const hints = inlayByColumn.get(column1)
+    if (hints) for (const hint of hints) items.push({ inlay: hint })
+  }
+
+  flushInlays(1)
   let column = 0
   while (column < length) {
     const style = styles[column]
     const hover = hoverAt[column]
     const diagnostic = diagAt[column]
     const sem = semanticAt[column]
-    let end = column
+    let end = column + 1
     while (
       end < length &&
       styles[end] === style &&
       hoverAt[end] === hover &&
       diagAt[end] === diagnostic &&
-      semanticAt[end] === sem
+      semanticAt[end] === sem &&
+      !inlayByColumn.has(end + 1)
     ) end++
-    segments.push({
+    items.push({
       text: chars.slice(column, end).join(''),
       // A semantic token's CSS class supplies the colour; drop the Shiki
       // style on that range so the class isn't fighting an inline `color`.
@@ -104,8 +124,9 @@ function mergeLine(colourTokens, lineNumber, hovers, diags, semantic) {
       semantic: sem,
     })
     column = end
+    flushInlays(column + 1)
   }
-  return segments
+  return items
 }
 
 // For one line, return a per-column array of the innermost span covering
@@ -134,9 +155,19 @@ function pickSpans(spans, lineNumber, length) {
 
 // A single shared tooltip, teleported to <body> and positioned fixed, so it
 // is never clipped by the code box's overflow. A hover tooltip shows the
-// hover description rendered ghūl-coloured; a diagnostic tooltip shows the
-// plain diagnostic message.
-const tip = ref({ show: false, tokens: [], text: '', severity: '', style: {} })
+// signature rendered ghūl-coloured (over one or more pretty-printed lines,
+// including a narrowed variable's narrowed-to line) with the classifier in
+// italics beneath; a diagnostic tooltip shows the plain diagnostic message;
+// an inlay tooltip shows the narrowing hint's plain explanation.
+const tip = ref({
+  show: false,
+  diagText: '',
+  severity: '',
+  signatureLines: [],
+  kindLabel: '',
+  detailText: '',
+  style: {},
+})
 
 function place(event) {
   const rect = event.currentTarget.getBoundingClientRect()
@@ -154,7 +185,7 @@ function place(event) {
 }
 
 // Like VSCode, a token carrying both a diagnostic and hover info shows
-// both — the diagnostic on top, the hover description below.
+// both — the diagnostic on top, the signature and classifier below.
 function onEnter(event, segment) {
   if (!segment.diagnostic && !segment.hover) {
     return
@@ -162,9 +193,11 @@ function onEnter(event, segment) {
 
   tip.value = {
     show: true,
-    text: segment.diagnostic?.message ?? '',
+    diagText: segment.diagnostic?.message ?? '',
     severity: segment.diagnostic?.severity ?? '',
-    tokens: segment.hover?.tokens ?? [],
+    signatureLines: segment.hover?.signatureLines ?? [],
+    kindLabel: segment.hover?.kindLabel ?? '',
+    detailText: '',
     style: place(event),
   }
 }
@@ -173,6 +206,24 @@ function onLeave(segment) {
   if (segment.hover || segment.diagnostic) {
     tip.value = { ...tip.value, show: false }
   }
+}
+
+// A narrowing inlay marker: on hover, show its plain explanation — the same
+// text VSCode surfaces behind the inlay hint.
+function onInlayEnter(event, inlay) {
+  tip.value = {
+    show: true,
+    diagText: '',
+    severity: '',
+    signatureLines: [],
+    kindLabel: '',
+    detailText: inlay.detail ?? '',
+    style: place(event),
+  }
+}
+
+function onInlayLeave() {
+  tip.value = { ...tip.value, show: false }
 }
 
 const copied = ref(false)
@@ -292,23 +343,31 @@ const panelLabel = computed(() =>
         <template v-for="item in displayItems" :key="item.key">
           <div v-if="item.type === 'ellipsis'" class="ghul-example-ellipsis" aria-hidden="true">&hellip;</div>
           <div v-else class="ghul-example-line">
-            <span
-              v-for="(segment, j) in item.segments"
-              :key="j"
-              :style="segment.style"
-              :class="[
-                'ghul-example-tok',
-                segment.semantic ? 'ghul-sem-' + segment.semantic.tokenType : null,
-                segment.semantic && segment.semantic.modifiers && segment.semantic.modifiers.includes('static') ? 'ghul-sem-mod-static' : null,
-                {
-                  'ghul-example-hover': segment.hover,
-                  'ghul-example-squiggle-error': segment.diagnostic && segment.diagnostic.severity === 'error',
-                  'ghul-example-squiggle-warning': segment.diagnostic && segment.diagnostic.severity === 'warning',
-                }
-              ]"
-              @mouseenter="onEnter($event, segment)"
-              @mouseleave="onLeave(segment)"
-            >{{ segment.text }}</span>
+            <template v-for="(segment, j) in item.segments" :key="j">
+              <span
+                v-if="segment.inlay"
+                class="ghul-example-inlay"
+                :class="{ 'ghul-example-inlay-killed': segment.inlay.code === 'narrowing-killed' }"
+                @mouseenter="onInlayEnter($event, segment.inlay)"
+                @mouseleave="onInlayLeave()"
+              >{{ segment.inlay.label }}</span>
+              <span
+                v-else
+                :style="segment.style"
+                :class="[
+                  'ghul-example-tok',
+                  segment.semantic ? 'ghul-sem-' + segment.semantic.tokenType : null,
+                  segment.semantic && segment.semantic.modifiers && segment.semantic.modifiers.includes('static') ? 'ghul-sem-mod-static' : null,
+                  {
+                    'ghul-example-hover': segment.hover,
+                    'ghul-example-squiggle-error': segment.diagnostic && segment.diagnostic.severity === 'error',
+                    'ghul-example-squiggle-warning': segment.diagnostic && segment.diagnostic.severity === 'warning',
+                  }
+                ]"
+                @mouseenter="onEnter($event, segment)"
+                @mouseleave="onLeave(segment)"
+              >{{ segment.text }}</span>
+            </template>
           </div>
         </template>
       </template>
@@ -353,18 +412,26 @@ const panelLabel = computed(() =>
       class="ghul-example-tooltip"
       :style="tip.style"
     >
-      <div v-if="tip.text" class="ghul-example-tooltip-diagnostic">
+      <div v-if="tip.diagText" class="ghul-example-tooltip-diagnostic">
         <DiagnosticIcon :severity="tip.severity" />
-        <span>{{ tip.text }}</span>
+        <span>{{ tip.diagText }}</span>
       </div>
-      <div v-if="tip.tokens.length" class="ghul-example-tooltip-hover">
-        <span
-          v-for="(token, k) in tip.tokens"
+      <div v-if="tip.signatureLines.length" class="ghul-example-tooltip-hover">
+        <div
+          v-for="(line, k) in tip.signatureLines"
           :key="k"
-          :style="token.style"
-          class="ghul-example-tok"
-        >{{ token.text }}</span>
+          class="ghul-example-tooltip-sig-line"
+        >
+          <span
+            v-for="(token, t) in line"
+            :key="t"
+            :style="token.style"
+            class="ghul-example-tok"
+          >{{ token.text }}</span>
+        </div>
+        <div v-if="tip.kindLabel" class="ghul-example-tooltip-kind">{{ tip.kindLabel }}</div>
       </div>
+      <div v-if="tip.detailText" class="ghul-example-tooltip-inlay">{{ tip.detailText }}</div>
     </div>
   </Teleport>
 </template>
@@ -439,6 +506,33 @@ const panelLabel = computed(() =>
 
 .ghul-example-hover:hover {
   background: var(--vp-c-default-soft);
+}
+
+/* Narrowing inlay hints: dimmed ghost text spliced inline, the way VS Code
+   renders an inlay hint. The sigil marks where a value is narrowed (►) or
+   where a narrowing is dropped (◄); the narrowed-to type and explanation show
+   on hover. A hair of side padding and a faint chip keep it distinct from the
+   surrounding code without stealing weight from it. */
+.ghul-example-inlay {
+  display: inline-block;
+  margin: 0 0.15em;
+  padding: 0 0.25em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  line-height: 1.2;
+  color: var(--vp-c-text-3);
+  background: var(--vp-c-default-soft);
+  cursor: help;
+  user-select: none;
+  vertical-align: baseline;
+}
+
+.ghul-example-inlay:hover {
+  color: var(--vp-c-text-1);
+}
+
+.ghul-example-inlay-killed {
+  color: var(--vp-c-warning-1);
 }
 
 /* IDE-style squiggles: a wavy underline under the diagnostic range. */
@@ -644,10 +738,33 @@ const panelLabel = computed(() =>
   color: var(--vp-c-text-1);
 }
 
-/* The hover half: the description, syntax-coloured from the grammar. */
+/* The hover half: the signature as a ghūl code block (one div per
+   pretty-printed line, exact indentation preserved) with the classifier in
+   italics beneath — mirroring the VS Code hover's fenced block plus its
+   `_classifier_` line. */
 .ghul-example-tooltip-hover {
   padding: 6px 10px;
+}
+
+.ghul-example-tooltip-sig-line {
+  white-space: pre;
+}
+
+.ghul-example-tooltip-kind {
+  margin-top: 4px;
+  font-style: italic;
+  color: var(--vp-c-text-2);
+}
+
+/* The inlay half: the narrowed-to type lines and explanation. The compiler
+   hands this over as a small block that VS Code fences as ghūl code, so the
+   sigils and type names read monospace, one per line. */
+.ghul-example-tooltip-inlay {
+  padding: 6px 10px;
   white-space: pre-wrap;
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.85em;
+  color: var(--vp-c-text-1);
 }
 
 /* When both halves show, a divider sits between them. */
