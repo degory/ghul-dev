@@ -522,7 +522,7 @@ const panelLabel = computed(() =>
   line-height: 1.2;
   color: var(--vp-c-text-3);
   background: var(--vp-c-default-soft);
-  cursor: help;
+  cursor: default;
   user-select: none;
   vertical-align: baseline;
 }
