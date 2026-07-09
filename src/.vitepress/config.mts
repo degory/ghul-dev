@@ -85,6 +85,48 @@ function ghulExampleDataPlugin() {
   }
 }
 
+// Each <GhulExample name="x" /> used to read its data from a folder-wide
+// eager glob in the component, so every page bundled all ~220 examples'
+// artifacts. This plugin instead gives each page a `<script setup>` that
+// statically imports only the examples it uses and passes each one to the
+// component as a prop. Vite then puts an example's artifact in the chunk of
+// the one page it appears on, and the value is still present at prerender
+// so the example stays in the static HTML.
+function ghulExamplePagePlugin() {
+  return {
+    name: 'ghul-example-page-split',
+    enforce: 'pre' as const,
+    transform(src: string, id: string) {
+      if (!id.split('?')[0].endsWith('.md')) return null
+
+      const names: string[] = []
+      for (const m of src.matchAll(/<GhulExample\s+name="([^"]+)"/g)) {
+        if (!names.includes(m[1])) names.push(m[1])
+      }
+      if (names.length === 0) return null
+
+      const imports = names
+        .map((name, i) => `import __ghulExample${i} from './.vitepress/example-data/${name}.json'`)
+        .join('\n')
+      const entries = names
+        .map((name, i) => `  ${JSON.stringify(name)}: __ghulExample${i},`)
+        .join('\n')
+      const script = `<script setup>\n${imports}\nconst __ghulExamples = {\n${entries}\n}\n</script>\n\n`
+
+      // single-quote the key: the binding sits inside a double-quoted attribute
+      const body = src.replace(
+        /<GhulExample\s+name="([^"]+)"/g,
+        (tag, name) => `${tag} :data="__ghulExamples['${name}']"`,
+      )
+
+      // a `<script setup>` must follow any frontmatter, not precede it
+      const frontmatter = /^---\r?\n[\s\S]*?\r?\n---\r?\n/.exec(body)
+      const at = frontmatter ? frontmatter[0].length : 0
+      return { code: body.slice(0, at) + '\n' + script + body.slice(at), map: null }
+    },
+  }
+}
+
 export default defineConfig({
   title: 'ghūl programming language',
   description: 'documentation for the ghūl programming language',
@@ -150,7 +192,7 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [ghulExampleDataPlugin()],
+    plugins: [ghulExamplePagePlugin(), ghulExampleDataPlugin()],
   },
 
   themeConfig: {
