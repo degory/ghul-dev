@@ -6,6 +6,18 @@
 	},
 	"patterns": [
 		{
+			"match": "^(►)",
+			"captures": {
+				"1": { "name": "markup.inserted.narrowing-taken.ghul" }
+			}
+		},
+		{
+			"match": "^(>)",
+			"captures": {
+				"1": { "name": "markup.deleted.narrowing-else.ghul" }
+			}
+		},
+		{
 			"name": "comment.ghul",
 			"match": "//.*$"
 		},
@@ -105,15 +117,32 @@
 				},
 				{
 					"name": "storage.modifier.ghul",
-					"match": "(\\b(?<!\\`)(static|public|protected|private|field|let|mut|rec|out|@)\\b)|(\\b_(?=[A-Za-z]))"
+					"match": "(\\b(?<!\\`)(abstract|static|public|protected|private|field|let|mut|rec|out|init|@)\\b)|(\\b_(?=[A-Za-z]))"
 				},
 				{
 					"name": "keyword.operator.ghul",
 					"match": "(!|\\$|%|\\^|&|\\*|-|\\+|=|\\||~|#|\\\\|<|>|\\.|\\?|\\/|\\*)+"
 				},
 				{
+					"comment": "impl header scope - ends on lookahead for `is`, or at a blank line so an unfinished header doesn't consume the rest of the file.",
+					"begin": "\\b(?<!\\`)(impl)\\b",
+					"end": "\\b(?<!\\`)(?=is\\b)|(?=^\\s*$)",
+					"beginCaptures": {
+						"1": { "name": "keyword.other.ghul" }
+					},
+					"patterns": [
+						{
+							"name": "keyword.other.ghul",
+							"match": "\\b(?<!\\`)(for)\\b"
+						},
+						{
+							"include": "#other"
+						}
+					]
+				},
+				{
 					"name": "keyword.other.ghul",
-					"match": "\\b(?<!\\`)(new|cast|isa|typeof|namespace|class|struct|union|trait|enum|use|innate|is|si|optional)\\b"
+					"match": "\\b(?<!\\`)(new|cast|isa|typeof|namespace|class|struct|union|trait|enum|partial|use|innate|is|si|val|lav|optional)\\b"
 				},
 				{
 					"name": "entity.name.type.ghul",
@@ -121,7 +150,7 @@
 				},
 				{
 					"name": "keyword.control.ghul",
-					"match": "\\b(?<!\\`)(assert|if|then|elif|else|fi|for|in|while|do|od|continue|break|case|when|default|esac|throw|try|catch|finally|yrt|return|await)\\b"
+					"match": "\\b(?<!\\`)(assert|if|then|elif|else|fi|for|in|while|do|od|continue|break|case|when|default|esac|throw|try|catch|finally|yrt|return|yield|await)\\b"
 				},
 				{
 					"name": "entity.name.function.ghul",
@@ -129,7 +158,7 @@
 				},
 				{
 					"name": "entity.name.type.ghul",
-					"match": "\\b(?<!\\`)(void|object|string|ref|ptr|bool|byte|ubyte|short|ushort|int|uint|long|ulong|word|uword|single|double|char)\\b"
+					"match": "\\b(?<!\\`)(void|object|string|ref|ptr|bool|byte|ubyte|short|ushort|int|uint|long|ulong|word|uword|single|double|decimal|char)\\b"
 				},
 				{
 					"name": "entity.name.ghul variable.other.ghul",
