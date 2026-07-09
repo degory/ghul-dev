@@ -127,6 +127,18 @@ An enum consists of a name and then an enum body, which contains one or more ele
 
 Enums can only be defined at global scope. An enum type name should be in `PascalCase`, and its members in `MACRO_CASE`
 
+### partial and impl blocks
+
+Members can be added to a class, struct, or union already declared in the same assembly from a separate block, even in another file. The added members are ordinary members of the target, with the same private access and virtual dispatch as members written in its own body. A `partial` block names the type and adds to it; for a union, whose body holds only variants, it is the only way to give the type methods:
+
+<GhulExample name="definitions-43" />
+
+An `impl Trait for Type` block additionally makes the target implement a trait, so a type can satisfy a trait without naming it in its header. The trait's type arguments are written on the target after `for`, and inside the body `self` has the concrete target type, so a union's variants can be matched directly:
+
+<GhulExample name="definitions-44" />
+
+The target can be a qualified name, including a single union variant (`impl Printer for List.NIL`). The interface must be a trait, and the target a type declared in the same assembly; an imported type cannot be reopened.
+
 ## properties
 
 A property consists of the property name followed by the property's type and, optionally, bodies for getter and setter methods.
@@ -142,6 +154,10 @@ Properties can be defined globally and within classes, structs and traits. Prope
 Methods are syntactically the same as functions, except they are defined within classes, structs or traits.
 
 <GhulExample name="definitions-22" />
+
+A method or function can take a postfix `pure` modifier, which asserts that it only reads and never writes to the heap. The compiler already infers this for many functions; the modifier states it for one the compiler can't prove, and then callers keep [type narrowing](/control-flow.html#type-narrowing) facts across a call to it. Every override of a pure member must itself be pure:
+
+<GhulExample name="definitions-45" />
 
 As with functions, methods should be named in `snake_case`
 

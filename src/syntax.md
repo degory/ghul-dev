@@ -18,7 +18,7 @@ Operators are any contiguous string of operator characters. This is only signifi
 
 ### escaped identifiers
 
-When it appears at the beginning of an identifier, the backtick character `` ` `` acts as an escape. So where `while` is a ghūl keyword, `` `while`` is an identifier which starts with a backtick
+A leading backtick escapes a keyword or operator so it can be used as an ordinary identifier: `` `while`` is the identifier `while`, and `` `+`` is the identifier `+`. The backtick is not part of the escaped name, so escaping a name that is not a keyword, like `` `count``, means the same as plain `count`. A backtick is only meaningful immediately before an identifier, operator, or opening bracket; anywhere else it is a dangling-backtick error.
 
 
 ## block structure

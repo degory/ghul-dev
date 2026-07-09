@@ -1,0 +1,20 @@
+use IO.Std.write_line;
+
+class CUSTOMER is
+    name: string;
+    init(name: string) is self.name = name; si
+si
+
+class ORDER is
+    customer: CUSTOMER?;
+    init(customer: CUSTOMER?) is self.customer = customer; si
+si
+
+entry() is
+    let order = ORDER(CUSTOMER("mimi"));
+// >>>
+    if let order.customer then
+        write_line(customer.name);
+    fi
+// <<<
+si
