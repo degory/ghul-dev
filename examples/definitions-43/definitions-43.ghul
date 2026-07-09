@@ -1,0 +1,21 @@
+use IO.Std.write_line;
+
+// >>>
+union Shape is
+    CIRCLE(radius: int);
+    SQUARE(side: int);
+si
+
+partial Shape is
+    describe() -> string =>
+        case self
+        when c: CIRCLE then "circle r={c.radius}"
+        when s: SQUARE then "square s={s.side}"
+        esac;
+si
+// <<<
+
+entry() is
+    let s: Shape = Shape.SQUARE(4);
+    write_line(s.describe());
+si

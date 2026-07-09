@@ -382,7 +382,7 @@ reading the store after a compile.
 Type inference runs inside `compile-expressions`{:text} and stays within
 function bodies; every declared signature is explicit, so inference never
 changes anything visible from outside a function. The [type inference](/type-inference)
-chapter covers what is and isn't inferred; this section is the mechanism.
+page covers what is and isn't inferred; this section is the mechanism.
 
 It is bidirectional. Bottom-up, an expression's type is computed from its
 sub-expressions. Top-down, the context the expression sits in - a typed

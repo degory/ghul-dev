@@ -72,11 +72,15 @@ Narrowing applies to local variables, including a function's own parameters, and
 
 A path narrow is less durable than one on a local variable. A local holds its value, which no other call can change, so its narrowing lasts until the variable is reassigned. A path reads a fresh value each time, so its narrowing lasts only while nothing can change what it reads: a call to a method or property that can write to the heap drops it, as does an assignment that can change the path. To keep the narrower type across such a call, copy the path into a local variable, or use `if let` to introduce one.
 
-Reassigning the local is what ends its narrowing: the variable reverts to its declared type from that point on.
+Reassigning the local re-narrows it: when the new value's static type is more specific than the declared type, the local narrows to that type from the assignment on, so a following call resolves on the assigned type without an `isa`:
+
+<GhulExample name="control-flow-57" />
+
+Otherwise the assignment drops the narrowing back to the declared type:
 
 <GhulExample name="control-flow-56" />
 
-ghūl decides which calls are safe by inferring purity. A method or property that only reads, never writing to the heap, is pure, and a call to a pure one preserves a path narrow - so a plain accessor that reads a field leaves it in place. The inference is automatic; there is nothing to annotate.
+ghūl decides which calls are safe by inferring purity. A method or property that only reads, never writing to the heap, is pure, and a call to a pure one preserves a path narrow - so a plain accessor that reads a field leaves it in place. The inference is automatic; a function the compiler can't prove pure can assert it with a postfix [`pure` modifier](/definitions.html#methods).
 
 ### if let
 
@@ -106,7 +110,9 @@ A trailing `/\` guard gates the branch on a further condition, evaluated with th
 
 Several comma-separated clauses can appear in one `if let`; every clause's test and any guard must pass, and later clauses see the variables the earlier ones introduced, as in `if let outer = holder, inner = outer.value then`. A destructure leaf can also be a literal - an integer, string, character, boolean, `null`, or a qualified enum member - which adds an equality test at that position rather than introducing a variable, so `if let (1, name) = pair then` matches only when the first element is 1. Literal leaves are allowed only in refutable positions like `if let` and `case`.
 
-When the tested value is a member path and the local should take the path's last name, the `name =` can be dropped: `if let order.customer?` introduces `customer` holding `order.customer`, and `if let zoo.pet: CAT` does the same with a type test.
+When the tested value is a member path and the local should take the path's last name, the `name =` can be dropped: `if let order.customer` introduces `customer` holding `order.customer` and enters the branch when it is present, and `if let zoo.pet: CAT` does the same with a type test. A trailing `?` on the presence form (`if let order.customer?`) is accepted but not required.
+
+<GhulExample name="control-flow-58" />
 
 ### scope
 Each branch of an if statement constitutes a separate scope

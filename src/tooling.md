@@ -23,6 +23,10 @@ dotnet test    # run a test project
 
 A ghūl project can reference NuGet packages, produce libraries or executables, and be packed and published exactly like a C# project.
 
+## diagnostics
+
+Every warning has a slug, shown in its message. A slug can be silenced with `@suppress("<slug>")` on a declaration, a whole file, or the project, or re-levelled on the compiler command line: `--warn-as-hint <slug,…>` downgrades matching warnings to editor-only hints that never appear in a batch build, and `--warn-as-info <slug,…>` downgrades them to informational diagnostics that still show in a build. Suppression wins over a demotion.
+
 ## the Visual Studio Code extension
 
 The [ghūl language extension](https://marketplace.visualstudio.com/items?itemName=degory.ghul) provides rich language support while you edit:

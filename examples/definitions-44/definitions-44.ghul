@@ -1,0 +1,24 @@
+use IO.Std.write_line;
+
+trait Printer is
+    print() -> string;
+si
+
+// >>>
+union List is
+    NIL;
+    CONS(head: int, tail: List);
+si
+
+impl Printer for List is
+    print() -> string =>
+        if let (head, tail): CONS = self then "{head} {tail.print()}"
+        else "nil"
+        fi;
+si
+// <<<
+
+entry() is
+    let xs: Printer = List.CONS(1, List.CONS(2, List.NIL));
+    write_line(xs.print());
+si

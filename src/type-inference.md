@@ -6,7 +6,7 @@ The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main
 
 ghūl infers types pervasively inside a method or function body: most local variables, loop variables, destructured variables and anonymous function parameters can be left unannotated, and the compiler works their types out from how they are initialized and used.
 
-Mechanically it is bidirectional, constraint-based inference: types flow up from expressions and down from the contexts that use them, and the compiler re-walks each function body until the unknowns settle. The [implementation chapter](/implementation#type-inference) describes how.
+Mechanically it is bidirectional, constraint-based inference: types flow up from expressions and down from the contexts that use them, and the compiler re-walks each function body until the unknowns settle. The [implementation page](/implementation#type-inference) describes how.
 
 Type inference is **function-local**: types inferred within one function are not visible outside it. Outside function bodies all types are explicit, including the signatures of methods and global functions, whose parameter and return types are always written out.
 
@@ -59,9 +59,9 @@ A narrow on a path is less durable than one on a local variable. The path reads 
 
 <GhulExample name="type-inference-6" />
 
-The [type narrowing](/control-flow.html#type-narrowing) section of the control flow chapter covers which calls preserve a path narrow.
+The [type narrowing](/control-flow.html#type-narrowing) section of the control flow page covers which calls preserve a path narrow.
 
-Narrowing covers union variant tags, `isa` class checks, null checks (`x?`) and `if let`, and it is flow-sensitive - an early-return guard narrows the code that follows it. See [type narrowing and `if let`](/control-flow.html#type-narrowing) in the control flow chapter for the full picture.
+Narrowing covers union variant tags, `isa` class checks, null checks (`x?`) and `if let`, and it is flow-sensitive - an early-return guard narrows the code that follows it. See [type narrowing and `if let`](/control-flow.html#type-narrowing) in the control flow page for the full picture.
 
 ## what gets inferred
 

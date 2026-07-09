@@ -1,0 +1,15 @@
+use IO.Std.write_line;
+
+class COUNTER is
+    _count: int;
+    init(count: int) is _count = count; si
+// >>>
+    // a pure method only reads: callers keep narrowing facts across a call to it
+    doubled() -> int pure => _count * 2;
+// <<<
+si
+
+entry() is
+    let c = COUNTER(21);
+    write_line(c.doubled());
+si

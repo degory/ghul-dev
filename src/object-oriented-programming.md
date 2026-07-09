@@ -30,13 +30,13 @@ By default a class is closed to subclassing outside its own assembly; the postfi
 
 ## traits
 
-A [trait](/definitions.html#traits) is ghūl's interface: a set of members a type promises to provide. A class, struct, or union implements a trait by naming it in the header, and the value can then be used at the trait's type wherever the trait is expected. A class extends one superclass but implements any number of traits.
+A [trait](/definitions.html#traits) is ghūl's interface: a set of members a type promises to provide. A class, struct, or union implements a trait by naming it in the header, and the value can then be used at the trait's type wherever the trait is expected. A class extends one superclass but implements any number of traits. A type can also implement a trait from a separate [`impl … for` block](/definitions.html#partial-and-impl-blocks) instead of naming it in the header, which is how a union gains trait methods.
 
 A trait member can provide a default body, which an implementing type inherits and overrides only to change, reaching the original with `super`. Traits combine with generics: a generic trait like `Operation[T]` gives a whole family of implementations one shared shape.
 
 ## narrowing
 
-Discovering an object's concrete type at runtime uses `isa` or `if let`, which test the type and narrow the value to it inside the matching branch, and a `case` over a closed hierarchy is checked for exhaustiveness. The [control flow](/control-flow.html#type-narrowing) chapter covers narrowing in full.
+Discovering an object's concrete type at runtime uses `isa` or `if let`, which test the type and narrow the value to it inside the matching branch, and a `case` over a closed hierarchy is checked for exhaustiveness. The [control flow](/control-flow.html#type-narrowing) page covers narrowing in full.
 
 ## a worked example
 

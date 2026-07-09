@@ -1,0 +1,41 @@
+{
+  "name": "generics-10",
+  "code": "// T is bounded by Animal, so a T value narrows through Animal with isa\ndescribe[T: Animal](x: T) -> string =>\n    if isa CAT(x) then x.purr()\n    else x.name()\n    fi;",
+  "fullSource": "use IO.Std.write_line;\n\nclass Animal abstract is\n    name() -> string;\nsi\n\nclass CAT: Animal is\n    init() is si\n    name() -> string => \"cat\";\n    purr() -> string => \"purr\";\nsi\n\n// T is bounded by Animal, so a T value narrows through Animal with isa\ndescribe[T: Animal](x: T) -> string =>\n    if isa CAT(x) then x.purr()\n    else x.name()\n    fi;\n\nentry() is\n    write_line(describe(CAT()));\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "purr\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 8, "text": "describe[T](x: T) -> string", "signature": "describe[T](x: T) -> string", "kindLabel": "global function" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 10, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 21, "text": "x: T", "signature": "x: T", "kindLabel": "local argument" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 18, "text": "class Animal", "signature": "class Animal", "kindLabel": "class" },
+    { "startLine": 2, "startColumn": 24, "endLine": 2, "endColumn": 24, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 2, "startColumn": 30, "endLine": 2, "endColumn": 35, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 14, "text": "class CAT", "signature": "class CAT", "kindLabel": "class" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 16, "text": "x: T", "signature": "x: T", "kindLabel": "local argument" },
+    { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 24, "text": "x: T\n    ► CAT", "signature": "x: T\n    ► CAT", "kindLabel": "local argument" },
+    { "startLine": 3, "startColumn": 26, "endLine": 3, "endColumn": 29, "text": "CAT.purr() -> string", "signature": "CAT.purr() -> string", "kindLabel": "pure method" },
+    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 10, "text": "x: T", "signature": "x: T", "kindLabel": "local argument" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 15, "text": "Animal.name() -> string", "signature": "Animal.name() -> string", "kindLabel": "pure method" }
+  ],
+  "inlayHints": [
+    { "line": 3, "column": 16, "label": "►", "detail": "► CAT", "code": "narrowing-isa" }
+  ],
+  "semanticTokens": [
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 8, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 10, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 21, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 18, "tokenType": "class" },
+    { "startLine": 2, "startColumn": 24, "endLine": 2, "endColumn": 24, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 30, "endLine": 2, "endColumn": 35, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 14, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 24, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 26, "endLine": 3, "endColumn": 29, "tokenType": "method" },
+    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 15, "tokenType": "method" }
+  ]
+}

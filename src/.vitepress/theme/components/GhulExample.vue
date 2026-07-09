@@ -12,21 +12,15 @@ import DiagnosticIcon from './DiagnosticIcon.vue'
 // for the code and each hover's description. Colour tokens, hover spans and
 // diagnostic spans are all character ranges — merged here into one run of
 // spans per line.
+// `data` is the example's build-time artifact, imported per page and passed
+// in by the ghul-example-page-split plugin so each artifact rides in the
+// chunk of the one page that uses it rather than a folder-wide glob.
 const props = defineProps({
-  name: { type: String, required: true }
+  name: { type: String, required: true },
+  data: { type: Object, default: null },
 })
 
-const artifacts = import.meta.glob('../../example-data/*.json', { eager: true })
-
-const example = computed(() => {
-  for (const path in artifacts) {
-    if (path.endsWith('/' + props.name + '.json')) {
-      const module = artifacts[path]
-      return module.default ?? module
-    }
-  }
-  return null
-})
+const example = computed(() => props.data)
 
 const diagnostics = computed(() => example.value?.diagnostics ?? [])
 const semanticTokens = computed(() => example.value?.semanticTokens ?? [])
@@ -522,7 +516,7 @@ const panelLabel = computed(() =>
   line-height: 1.2;
   color: var(--vp-c-text-3);
   background: var(--vp-c-default-soft);
-  cursor: help;
+  cursor: default;
   user-select: none;
   vertical-align: baseline;
 }

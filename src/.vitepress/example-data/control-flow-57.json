@@ -1,0 +1,27 @@
+{
+  "name": "control-flow-57",
+  "code": "pet = CAT();\n// assigning a CAT narrows pet to CAT, so purr() is in reach\nwrite_line(pet.purr());",
+  "fullSource": "use IO.Std.write_line;\n\nclass Animal abstract is\n    name() -> string;\nsi\n\nclass CAT: Animal is\n    init() is si\n    name() -> string => \"cat\";\n    purr() -> string => \"purr\";\nsi\n\nany_animal() -> Animal => CAT();\n\nentry() is\n    let pet mut = any_animal();\n    pet = CAT();\n    // assigning a CAT narrows pet to CAT, so purr() is in reach\n    write_line(pet.purr());\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "purr\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 9, "text": "CAT.init()", "signature": "CAT.init()", "kindLabel": "constructor" },
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 3, "text": "pet: CAT", "signature": "pet: CAT", "kindLabel": "local variable" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 14, "text": "pet: CAT", "signature": "pet: CAT", "kindLabel": "local variable" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 19, "text": "CAT.purr() -> string", "signature": "CAT.purr() -> string", "kindLabel": "pure method" }
+  ],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "►", "detail": "► CAT", "code": "narrowing-assign" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 9, "tokenType": "method" },
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 3, "tokenType": "variable" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 14, "tokenType": "variable" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 19, "tokenType": "method" }
+  ]
+}

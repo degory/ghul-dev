@@ -164,6 +164,8 @@ Definition ::= Namespace
              | Struct
              | Union
              | Enum
+             | Partial
+             | Impl
              | Member
              | PragmaDefinition
 ```
@@ -238,6 +240,15 @@ Each `Variant` optionally has fields, written as a parenthesised list of
 *default*: the one the `?` test and `!` unwrap operators target on a union
 value.
 
+### partial and impl
+
+```ebnf
+Partial ::= "partial" TypeExpression "is" ClassBodyDefinition* "si"
+Impl    ::= "impl" TypeExpression "for" TypeExpression "is" ClassBodyDefinition* "si"
+```
+
+A `Partial` block adds members to a class, struct, or union already declared in the same assembly. An `Impl` block additionally makes its target satisfy a trait; the trait's type arguments are written on the target after `for` (`impl Printer for List[T]`), and inside the body `self` has the target's type. Either target can be a qualified name, including a single union variant. See [partial and impl blocks](/definitions.html#partial-and-impl-blocks).
+
 ### enum
 
 ```ebnf
@@ -297,10 +308,13 @@ Indexer ::= Identifier? "[" Variable "]" ( ":" TypeExpression )? Modifiers
 ### modifiers
 
 ```ebnf
-Modifiers      ::= AccessModifier? StorageClass?
+Modifiers      ::= AccessModifier? StorageClass? TypeModifier* "pure"?
 AccessModifier ::= "public" | "protected" | "private"
 StorageClass   ::= "static" | "field"
+TypeModifier   ::= "abstract" | "open"
 ```
+
+`abstract` and `open` are postfix modifiers on a class (`abstract` bars direct construction, `open` allows cross-assembly subclassing). `pure` is a postfix modifier on a function or method asserting that it only reads and never writes to the heap.
 
 ### pragmas
 

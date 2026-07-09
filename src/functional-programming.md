@@ -121,7 +121,7 @@ ghūl has no dedicated `match` construct. Discovering which variant a union hold
 
 <GhulExample name="functional-programming-18" />
 
-`isa` variant tests and `else`-branch narrowing cover the same ground; see [type narrowing and `if let`](/control-flow.html#type-narrowing) in the control flow chapter for the full picture.
+`isa` variant tests and `else`-branch narrowing cover the same ground; see [type narrowing and `if let`](/control-flow.html#type-narrowing) in the control flow page for the full picture.
 
 ## currying
 <GhulExample name="functional-programming-19" />
