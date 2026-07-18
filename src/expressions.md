@@ -62,6 +62,8 @@ A function literal can refer to identifiers from its surrounding lexical scope; 
 
 <GhulExample name="expressions-13" />
 
+This is not a loop-specific rule. Each pass through a block produces fresh local variables, and a function literal evaluated there captures them. Closures from different passes don't share, so the per-iteration behaviour follows from normal block scoping combined with capture.
+
 A `let mut` is shared with the surrounding scope:
 
 <GhulExample name="expressions-26" />
