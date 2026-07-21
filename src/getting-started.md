@@ -28,7 +28,18 @@ The [examples repository](https://github.com/degory/ghul-examples) and the [ghū
 
 ### install the compiler as a local or global .NET tool
 
-You can manually install the compiler from the [ghūl compiler .NET tool package](https://www.nuget.org/packages/ghul.compiler/)
+You can manually install the compiler from the [ghūl compiler .NET tool package](https://www.nuget.org/packages/ghul.compiler/). To pin it as a local tool in your project folder, so everyone building the project gets the same compiler:
+
+```sh
+dotnet new tool-manifest
+dotnet tool install --local ghul.compiler --version 0.0.0-latest.ghul.compiler
+```
+
+To install it globally instead:
+
+```sh
+dotnet tool install --global ghul.compiler
+```
 
 ## using the compiler
 
@@ -50,7 +61,7 @@ a real-world example, or use one of the project templates to get started.
       ghul.runtime provides MSBuild targets required to drive the 
       ghul compiler
      -->
-    <PackageReference Include="ghul.runtime" Version="5.5.1" />
+    <PackageReference Include="ghul.runtime" Version="0.0.0-latest.ghul.runtime" />
   </ItemGroup>
 </Project>
 ```

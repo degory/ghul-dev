@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
 import { createHighlighter } from 'shiki'
+import { FALLBACK_VERSIONS, fetchLatestStable } from './nuget-versions'
 
 const ghulInlineHighlighter = await createHighlighter({
   themes: ['light-plus', 'dark-plus'],
@@ -127,6 +128,33 @@ function ghulExamplePagePlugin() {
   }
 }
 
+// Install instructions spell a package version as the placeholder
+// `0.0.0-latest.<package id>` rather than a literal. The placeholder is
+// shaped like a version, so it survives syntax highlighting as a single
+// token and can be substituted in the rendered code block.
+const LATEST_VERSION_PLACEHOLDER = /0\.0\.0-latest\.([a-z][a-z0-9.-]*)/g
+
+const resolvedVersions = Object.fromEntries(
+  await Promise.all(
+    Object.entries(FALLBACK_VERSIONS).map(async ([packageId, fallback]) =>
+      [packageId, (await fetchLatestStable(packageId)) ?? fallback] as const,
+    ),
+  ),
+)
+
+// The substituted version is only as current as the last deploy, so the span
+// doubles as a marker the client script re-resolves and updates in place. The
+// copy button reads the code block's text content at click time, so whatever
+// the span holds then is what a reader copies.
+function substituteVersions(html: string) {
+  return html.replace(LATEST_VERSION_PLACEHOLDER, (placeholder, packageId) => {
+    const version = resolvedVersions[packageId]
+    if (!version) return placeholder
+
+    return `<span class="package-version" data-package="${packageId}">${version}</span>`
+  })
+}
+
 export default defineConfig({
   title: 'ghūl programming language',
   description: 'documentation for the ghūl programming language',
@@ -157,6 +185,9 @@ export default defineConfig({
     // inline token stream, lifts the suffix off the following text token,
     // and stashes it on the `code_inline` token as `data-lang`.
     config(md) {
+      const fence = md.renderer.rules.fence!
+      md.renderer.rules.fence = (...args) => substituteVersions(fence(...args))
+
       md.core.ruler.after('inline', 'ghul-inline-lang', state => {
         for (const block of state.tokens) {
           if (block.type !== 'inline' || !block.children) continue
@@ -178,7 +209,9 @@ export default defineConfig({
         const text = token.content
         const lang = token.attrGet('data-lang') ?? 'ghul'
         if (lang === 'text') {
-          return `<code class="ghul-inline-plain">${md.utils.escapeHtml(text)}</code>`
+          return substituteVersions(
+            `<code class="ghul-inline-plain">${md.utils.escapeHtml(text)}</code>`,
+          )
         }
         const html = ghulInlineHighlighter.codeToHtml(text, {
           lang,
@@ -186,7 +219,7 @@ export default defineConfig({
           defaultColor: false,
           structure: 'inline',
         })
-        return `<code class="ghul-inline">${html}</code>`
+        return substituteVersions(`<code class="ghul-inline">${html}</code>`)
       }
     },
   },
