@@ -165,7 +165,8 @@ const tip = ref({
 
 function place(event) {
   const rect = event.currentTarget.getBoundingClientRect()
-  const maxWidth = 480
+  // Keep in step with the tooltip's CSS max-width.
+  const maxWidth = 640
 
   const style = {
     left: Math.max(8, Math.min(rect.left, window.innerWidth - maxWidth - 16)) + 'px'
@@ -717,7 +718,7 @@ const panelLabel = computed(() =>
   border: 1px solid var(--vp-c-divider);
   border-radius: 6px;
   box-shadow: var(--vp-shadow-3);
-  max-width: 480px;
+  max-width: min(640px, calc(100vw - 16px));
   pointer-events: none;
   overflow: hidden;
 }
@@ -740,8 +741,13 @@ const panelLabel = computed(() =>
   padding: 6px 10px;
 }
 
+/* Wrap rather than clip: a signature wider than the tooltip continues on the
+   next line, hanging-indented so the continuation reads as one signature. */
 .ghul-example-tooltip-sig-line {
-  white-space: pre;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  padding-left: 2em;
+  text-indent: -2em;
 }
 
 .ghul-example-tooltip-kind {
