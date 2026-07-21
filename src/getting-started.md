@@ -38,7 +38,7 @@ The compiler expects to be driven by MSBuild using a `.ghulproj`{:text} project 
 See the [ghūl test](https://github.com/degory/ghul-test) project for
 a real-world example, or use one of the project templates to get started.
 
-`Directory.build.props`{:text}
+`Directory.Build.props`{:text}
 ```xml
 <Project>
   <PropertyGroup>
@@ -50,7 +50,7 @@ a real-world example, or use one of the project templates to get started.
       ghul.runtime provides MSBuild targets required to drive the 
       ghul compiler
      -->
-    <PackageReference Include="ghul.runtime" Version="1.3.3" />
+    <PackageReference Include="ghul.runtime" Version="5.5.1" />
   </ItemGroup>
 </Project>
 ```
