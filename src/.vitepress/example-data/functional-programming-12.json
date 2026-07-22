@@ -17,7 +17,7 @@
     { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 14, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 2, "startColumn": 25, "endLine": 2, "endColumn": 25, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 2, "startColumn": 31, "endLine": 2, "endColumn": 31, "text": "T", "signature": "T", "kindLabel": "type variable" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 12, "text": "HIGHER_ORDER_FUNCTIONS[T].apply_if(f: T -> T, x: T, predicate: T -> bool) -> T", "signature": "HIGHER_ORDER_FUNCTIONS[T].apply_if(f: T -> T, x: T, predicate: T -> bool) -> T", "kindLabel": "class method" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 12, "text": "HIGHER_ORDER_FUNCTIONS[T].apply_if(\n    f: T -> T,\n    x: T,\n    predicate: T -> bool\n) -> T", "signature": "HIGHER_ORDER_FUNCTIONS[T].apply_if(\n    f: T -> T,\n    x: T,\n    predicate: T -> bool\n) -> T", "kindLabel": "class method" },
     { "startLine": 6, "startColumn": 9, "endLine": 6, "endColumn": 9, "text": "f: T -> T", "signature": "f: T -> T", "kindLabel": "local argument" },
     { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 20, "text": "x: T", "signature": "x: T", "kindLabel": "local argument" },
     { "startLine": 6, "startColumn": 26, "endLine": 6, "endColumn": 34, "text": "predicate: T -> bool", "signature": "predicate: T -> bool", "kindLabel": "local argument" },

@@ -9,27 +9,29 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "text": "class SCALER", "signature": "class SCALER", "kindLabel": "class" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "SCALER._scale: double", "signature": "SCALER._scale: double", "kindLabel": "field" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "SCALER._scale: double", "signature": "SCALER._scale: double", "kindLabel": "private field" },
     { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 18, "text": "struct double", "signature": "struct double", "kindLabel": "struct" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 9, "text": "SCALER.scale(value: double) -> double", "signature": "SCALER.scale(value: double) -> double", "kindLabel": "pure method" },
     { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 15, "text": "value: double", "signature": "value: double", "kindLabel": "local argument" },
     { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 23, "text": "struct double", "signature": "struct double", "kindLabel": "struct" },
     { "startLine": 4, "startColumn": 29, "endLine": 4, "endColumn": 34, "text": "struct double", "signature": "struct double", "kindLabel": "struct" },
     { "startLine": 4, "startColumn": 39, "endLine": 4, "endColumn": 43, "text": "value: double", "signature": "value: double", "kindLabel": "local argument" },
-    { "startLine": 4, "startColumn": 47, "endLine": 4, "endColumn": 52, "text": "_scale: double", "signature": "_scale: double", "kindLabel": "field" },
+    { "startLine": 4, "startColumn": 47, "endLine": 4, "endColumn": 52, "text": "_scale: double", "signature": "_scale: double", "kindLabel": "private field" },
     { "startLine": 4, "startColumn": 45, "endLine": 4, "endColumn": 45, "text": "Ghul.*(a: double, b: double) -> double", "signature": "Ghul.*(a: double, b: double) -> double", "kindLabel": "innate function arithmetic.mul" }
   ],
   "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "tokenType": "class" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "tokenType": "modifier" },
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 10, "tokenType": "property" },
     { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 18, "tokenType": "struct" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 9, "tokenType": "method" },
     { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 23, "tokenType": "struct" },
     { "startLine": 4, "startColumn": 29, "endLine": 4, "endColumn": 34, "tokenType": "struct" },
     { "startLine": 4, "startColumn": 39, "endLine": 4, "endColumn": 43, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 47, "endLine": 4, "endColumn": 52, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 47, "endLine": 4, "endColumn": 47, "tokenType": "modifier" },
+    { "startLine": 4, "startColumn": 48, "endLine": 4, "endColumn": 52, "tokenType": "property" },
     { "startLine": 4, "startColumn": 45, "endLine": 4, "endColumn": 45, "tokenType": "operator" }
   ]
 }

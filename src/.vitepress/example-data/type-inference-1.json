@@ -8,7 +8,7 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 6, "text": "totals(values: Collections.Iterable[int]) -> (sum: int, count: int)", "signature": "totals(values: Collections.Iterable[int]) -> (sum: int, count: int)", "kindLabel": "global function" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 6, "text": "totals(\n    values: Collections.Iterable[int]\n) -> (sum: int, count: int)", "signature": "totals(\n    values: Collections.Iterable[int]\n) -> (sum: int, count: int)", "kindLabel": "global function" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 10, "text": "values: Collections.Iterable[int]", "signature": "values: Collections.Iterable[int]", "kindLabel": "local argument" },
     { "startLine": 4, "startColumn": 34, "endLine": 4, "endColumn": 36, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 4, "startColumn": 25, "endLine": 4, "endColumn": 32, "text": "trait Collections.Iterable[T]", "signature": "trait Collections.Iterable[T]", "kindLabel": "trait" },
