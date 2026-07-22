@@ -9,11 +9,11 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "text": "class PUBLIC", "signature": "class PUBLIC", "kindLabel": "class" },
+    { "startLine": 8, "startColumn": 7, "endLine": 8, "endColumn": 14, "text": "class _PRIVATE", "signature": "class _PRIVATE", "kindLabel": "class" },
     { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 15, "text": "public_function() -> int", "signature": "public_function() -> int", "kindLabel": "pure global function" },
     { "startLine": 4, "startColumn": 22, "endLine": 4, "endColumn": 24, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 15, "text": "public_property: int", "signature": "public_property: int", "kindLabel": "pure global property" },
     { "startLine": 6, "startColumn": 18, "endLine": 6, "endColumn": 20, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
-    { "startLine": 8, "startColumn": 7, "endLine": 8, "endColumn": 14, "text": "class _PRIVATE", "signature": "class _PRIVATE", "kindLabel": "class" },
     { "startLine": 11, "startColumn": 1, "endLine": 11, "endColumn": 17, "text": "_private_function() -> int", "signature": "_private_function() -> int", "kindLabel": "pure global function" },
     { "startLine": 11, "startColumn": 24, "endLine": 11, "endColumn": 26, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 13, "startColumn": 1, "endLine": 13, "endColumn": 17, "text": "_private_property", "signature": "_private_property", "kindLabel": "" },
@@ -22,14 +22,16 @@
   "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "tokenType": "class" },
+    { "startLine": 8, "startColumn": 7, "endLine": 8, "endColumn": 14, "tokenType": "class" },
     { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 15, "tokenType": "function" },
     { "startLine": 4, "startColumn": 22, "endLine": 4, "endColumn": 24, "tokenType": "struct" },
     { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 15, "tokenType": "property" },
     { "startLine": 6, "startColumn": 18, "endLine": 6, "endColumn": 20, "tokenType": "struct" },
-    { "startLine": 8, "startColumn": 7, "endLine": 8, "endColumn": 14, "tokenType": "class" },
-    { "startLine": 11, "startColumn": 1, "endLine": 11, "endColumn": 17, "tokenType": "function" },
+    { "startLine": 11, "startColumn": 1, "endLine": 11, "endColumn": 1, "tokenType": "modifier" },
+    { "startLine": 11, "startColumn": 2, "endLine": 11, "endColumn": 17, "tokenType": "function" },
     { "startLine": 11, "startColumn": 24, "endLine": 11, "endColumn": 26, "tokenType": "struct" },
-    { "startLine": 13, "startColumn": 1, "endLine": 13, "endColumn": 17, "tokenType": "property" },
+    { "startLine": 13, "startColumn": 1, "endLine": 13, "endColumn": 1, "tokenType": "modifier" },
+    { "startLine": 13, "startColumn": 2, "endLine": 13, "endColumn": 17, "tokenType": "property" },
     { "startLine": 13, "startColumn": 20, "endLine": 13, "endColumn": 22, "tokenType": "struct" }
   ]
 }

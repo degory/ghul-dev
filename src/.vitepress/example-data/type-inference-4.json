@@ -20,7 +20,7 @@
     { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 31, "text": "CARRIER.occupant: Animal", "signature": "CARRIER.occupant: Animal", "kindLabel": "pure instance property" },
     { "startLine": 6, "startColumn": 9, "endLine": 6, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 26, "text": "carrier: CARRIER", "signature": "carrier: CARRIER", "kindLabel": "local argument" },
-    { "startLine": 6, "startColumn": 28, "endLine": 6, "endColumn": 35, "text": "CARRIER.occupant: Animal", "signature": "CARRIER.occupant: Animal", "kindLabel": "pure instance property" },
+    { "startLine": 6, "startColumn": 28, "endLine": 6, "endColumn": 35, "text": "CARRIER.occupant: Animal\n    ► CAT", "signature": "CARRIER.occupant: Animal\n    ► CAT", "kindLabel": "pure instance property" },
     { "startLine": 6, "startColumn": 37, "endLine": 6, "endColumn": 40, "text": "CAT.purr() -> string", "signature": "CAT.purr() -> string", "kindLabel": "pure method" }
   ],
   "inlayHints": [
