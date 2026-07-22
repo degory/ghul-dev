@@ -10,7 +10,7 @@
   "hovers": [
     { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 7, "text": "COUNTER.doubled() -> int", "signature": "COUNTER.doubled() -> int", "kindLabel": "pure method" },
     { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 16, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
-    { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 31, "text": "_count: int", "signature": "_count: int", "kindLabel": "field" },
+    { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 31, "text": "_count: int", "signature": "_count: int", "kindLabel": "private field" },
     { "startLine": 2, "startColumn": 33, "endLine": 2, "endColumn": 33, "text": "Ghul.*(a: int, b: int) -> int", "signature": "Ghul.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" }
   ],
   "inlayHints": [],

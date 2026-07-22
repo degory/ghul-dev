@@ -10,13 +10,13 @@
   "hovers": [
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "list: int[]", "signature": "list: int[]", "kindLabel": "local value" },
     { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 15, "text": "list: int[]", "signature": "list: int[]", "kindLabel": "local value" },
-    { "startLine": 5, "startColumn": 17, "endLine": 5, "endColumn": 21, "text": "Collections.Bag[T].count: int", "signature": "Collections.Bag[T].count: int", "kindLabel": "instance property" },
+    { "startLine": 5, "startColumn": 17, "endLine": 5, "endColumn": 21, "text": "ARRAY[int].count: int", "signature": "ARRAY[int].count: int", "kindLabel": "instance property" },
     { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 10, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
     { "startLine": 6, "startColumn": 10, "endLine": 6, "endColumn": 15, "text": "namespace System", "signature": "namespace System", "kindLabel": "" },
-    { "startLine": 6, "startColumn": 17, "endLine": 6, "endColumn": 43, "text": "System.ArgumentOutOfRangeException.init(paramName: string?) -> void", "signature": "System.ArgumentOutOfRangeException.init(paramName: string?) -> void", "kindLabel": "method" },
+    { "startLine": 6, "startColumn": 17, "endLine": 6, "endColumn": 43, "text": "System.ArgumentOutOfRangeException.init(\n    paramName: string?\n) -> void", "signature": "System.ArgumentOutOfRangeException.init(\n    paramName: string?\n) -> void", "kindLabel": "method" },
     { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 8, "startColumn": 18, "endLine": 8, "endColumn": 21, "text": "list: int[]", "signature": "list: int[]", "kindLabel": "local value" },
-    { "startLine": 8, "startColumn": 23, "endLine": 8, "endColumn": 27, "text": "Collections.Bag[T].count: int", "signature": "Collections.Bag[T].count: int", "kindLabel": "instance property" }
+    { "startLine": 8, "startColumn": 23, "endLine": 8, "endColumn": 27, "text": "ARRAY[int].count: int", "signature": "ARRAY[int].count: int", "kindLabel": "instance property" }
   ],
   "inlayHints": [],
   "semanticTokens": [
