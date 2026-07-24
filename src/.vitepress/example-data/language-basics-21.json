@@ -8,7 +8,6 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 3, "endColumn": 17, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: int", "signature": "i: int", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "j: int", "signature": "j: int", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 10, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },

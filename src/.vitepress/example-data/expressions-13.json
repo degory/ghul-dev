@@ -14,11 +14,11 @@
     { "startLine": 5, "startColumn": 11, "endLine": 5, "endColumn": 12, "text": "Ghul.::(from: int, to: int) -> INT_RANGE_INCLUSIVE", "signature": "Ghul.::(from: int, to: int) -> INT_RANGE_INCLUSIVE", "kindLabel": "innate function range.inclusive" },
     { "startLine": 7, "startColumn": 9, "endLine": 7, "endColumn": 15, "text": "closure: () -> int", "signature": "closure: () -> int", "kindLabel": "local value" },
     { "startLine": 7, "startColumn": 25, "endLine": 7, "endColumn": 25, "text": "i: int", "signature": "i: int", "kindLabel": "captured value" },
+    { "startLine": 15, "startColumn": 5, "endLine": 15, "endColumn": 11, "text": "closure: () -> int", "signature": "closure: () -> int", "kindLabel": "local value" },
+    { "startLine": 15, "startColumn": 16, "endLine": 15, "endColumn": 27, "text": "closure_list: LIST[() -> int]", "signature": "closure_list: LIST[() -> int]", "kindLabel": "local value" },
     { "startLine": 10, "startColumn": 5, "endLine": 10, "endColumn": 16, "text": "closure_list: LIST[() -> int]", "signature": "closure_list: LIST[() -> int]", "kindLabel": "local value" },
     { "startLine": 10, "startColumn": 18, "endLine": 10, "endColumn": 20, "text": "LIST[() -> int].add(item: () -> int) -> void", "signature": "LIST[() -> int].add(item: () -> int) -> void", "kindLabel": "method" },
     { "startLine": 10, "startColumn": 22, "endLine": 10, "endColumn": 28, "text": "closure: () -> int", "signature": "closure: () -> int", "kindLabel": "local value" },
-    { "startLine": 15, "startColumn": 5, "endLine": 15, "endColumn": 11, "text": "closure: () -> int", "signature": "closure: () -> int", "kindLabel": "local value" },
-    { "startLine": 15, "startColumn": 16, "endLine": 15, "endColumn": 27, "text": "closure_list: LIST[() -> int]", "signature": "closure_list: LIST[() -> int]", "kindLabel": "local value" },
     { "startLine": 16, "startColumn": 5, "endLine": 16, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 16, "startColumn": 42, "endLine": 16, "endColumn": 48, "text": "closure: () -> int", "signature": "closure: () -> int", "kindLabel": "local value" }
   ],
@@ -30,11 +30,11 @@
     { "startLine": 5, "startColumn": 11, "endLine": 5, "endColumn": 12, "tokenType": "operator" },
     { "startLine": 7, "startColumn": 9, "endLine": 7, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 7, "startColumn": 25, "endLine": 7, "endColumn": 25, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 15, "startColumn": 5, "endLine": 15, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 15, "startColumn": 16, "endLine": 15, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 10, "startColumn": 5, "endLine": 10, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 10, "startColumn": 18, "endLine": 10, "endColumn": 20, "tokenType": "method" },
     { "startLine": 10, "startColumn": 22, "endLine": 10, "endColumn": 28, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 15, "startColumn": 5, "endLine": 15, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 15, "startColumn": 16, "endLine": 15, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 16, "startColumn": 5, "endLine": 16, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
     { "startLine": 16, "startColumn": 42, "endLine": 16, "endColumn": 48, "tokenType": "variable", "modifiers": "readonly" }
   ]

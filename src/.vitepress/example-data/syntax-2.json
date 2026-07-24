@@ -9,7 +9,6 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
-    { "startLine": 1, "startColumn": 1, "endLine": 7, "endColumn": 14, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 5, "text": "greet(name: string) -> void", "signature": "greet(name: string) -> void", "kindLabel": "pure global function" },
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 10, "text": "name: string", "signature": "name: string", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 18, "text": "class string", "signature": "class string", "kindLabel": "class" },

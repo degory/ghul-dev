@@ -8,35 +8,35 @@
   "output": "found\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 8, "text": "maybe: string?", "signature": "maybe: string?", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 16, "text": "narrowed: string", "signature": "narrowed: string", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 2, "startColumn": 28, "endLine": 2, "endColumn": 32, "text": "maybe: string?\n    ► string", "signature": "maybe: string?\n    ► string", "kindLabel": "local value" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 23, "text": "narrowed: string", "signature": "narrowed: string", "kindLabel": "local value" },
     { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 10, "text": "forced: string", "signature": "forced: string", "kindLabel": "local value" },
     { "startLine": 6, "startColumn": 13, "endLine": 6, "endColumn": 18, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 6, "startColumn": 22, "endLine": 6, "endColumn": 26, "text": "maybe: string?", "signature": "maybe: string?", "kindLabel": "local value" },
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 8, "text": "safe: string", "signature": "safe: string", "kindLabel": "local value" },
     { "startLine": 7, "startColumn": 11, "endLine": 7, "endColumn": 16, "text": "class string", "signature": "class string", "kindLabel": "class" },
-    { "startLine": 7, "startColumn": 20, "endLine": 7, "endColumn": 24, "text": "maybe: string?\n    ► string", "signature": "maybe: string?\n    ► string", "kindLabel": "local value" }
+    { "startLine": 7, "startColumn": 20, "endLine": 7, "endColumn": 24, "text": "maybe: string?\n    ► string", "signature": "maybe: string?\n    ► string", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 8, "text": "maybe: string?", "signature": "maybe: string?", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 23, "text": "narrowed: string", "signature": "narrowed: string", "kindLabel": "local value" }
   ],
   "inlayHints": [
     { "line": 1, "column": 4, "label": "►", "detail": "► string", "code": "narrowing-presence" },
     { "line": 6, "column": 22, "label": "►", "detail": "► string", "code": "narrowing-unwrap" }
   ],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "tokenType": "class" },
     { "startLine": 2, "startColumn": 28, "endLine": 2, "endColumn": 32, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 6, "startColumn": 13, "endLine": 6, "endColumn": 18, "tokenType": "class" },
     { "startLine": 6, "startColumn": 22, "endLine": 6, "endColumn": 26, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 7, "startColumn": 11, "endLine": 7, "endColumn": 16, "tokenType": "class" },
-    { "startLine": 7, "startColumn": 20, "endLine": 7, "endColumn": 24, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 7, "startColumn": 20, "endLine": 7, "endColumn": 24, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

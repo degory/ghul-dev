@@ -10,7 +10,6 @@
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 10, "text": "class BASE", "signature": "class BASE", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "text": "BASE.init()", "signature": "BASE.init()", "kindLabel": "constructor" },
-    { "startLine": 1, "startColumn": 1, "endLine": 6, "endColumn": 34, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "global function" },
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 13, "text": "class DERIVED", "signature": "class DERIVED", "kindLabel": "class" },
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 15, "text": "DERIVED.init()", "signature": "DERIVED.init()", "kindLabel": "constructor" },
     { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 21, "text": "class BASE", "signature": "class BASE", "kindLabel": "class" },

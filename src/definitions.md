@@ -239,7 +239,7 @@ A namespace definition is an instance of that namespace. Namespace instances are
 
 ### definitions outside any namespace
 
-If a source file contains no namespaces, then all definitions in the file are placed in a compiler generated namespace that is private to that source file. This is useful for examples and tests:
+If a source file contains no namespaces, then all definitions in the file are placed in a compiler generated namespace that is private to that source file, and the file can carry [top-level statements](/syntax.html#top-level-statements) that run as the program's entry point. This is useful for examples and tests:
 
 <GhulExample name="definitions-29" />
 For definitions to be visible from other files, they must be placed in an explicitly declared namespace.

@@ -8,7 +8,6 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 6, "endColumn": 2, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 19, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "text": "y: int", "signature": "y: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "text": "simple_add: (int, int) -> int", "signature": "simple_add: (int, int) -> int", "kindLabel": "local value" },

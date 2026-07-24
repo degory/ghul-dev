@@ -6,6 +6,8 @@ A ghūl project is composed of a set of ghūl source files. Source files should 
 
 Each source file can contain zero, one or more global definitions. Definitions can be in any order and in any file. Source files can have any name, provided they have a `.ghul`{:text} extension, and can be in any folder under the project root (subject to any source file glob pattern given in the `.ghulproj`{:text})
 
+A file with no `namespace` can mix definitions with statements at the top level, so a whole program can read as a script with no explicit `entry` function. These are called [top-level statements](#top-level-statements).
+
 ## tokens and trees
 
 Source files are translated into various kinds of tokens. Some tokens are a fixed sequence of characters (like the keyword `while`). Others are composed of characters according to various rules (identifiers, strings, numbers etc.)
@@ -43,7 +45,7 @@ Blocks in ghūl can contain definitions, statements, or a mix of both. Which is 
 
 ## file structure
 
-At its top level a ghūl source file contains [definitions](/definitions.html) and `use` directives. There is no required ordering and no file header; a source file is simply a collection of definitions.
+At its top level a ghūl source file contains [definitions](/definitions.html) and `use` directives; a file with no `namespace` can also contain statements. There is no required ordering and no file header.
 
 <GhulExample name="syntax-2" />
 
@@ -51,5 +53,13 @@ The definitions in a file can be global functions, properties, classes, structs,
 
 A file that declares any `namespace` must place all of its definitions inside namespaces. A file with no namespace at all has its definitions placed in a private namespace of their own, which is convenient for small programs and tests. Namespaces, `use` and symbol visibility are covered in full under [definitions](/definitions.html#namespaces).
 
-Execution of a program begins at a function named `entry`.
+## top-level statements
+
+A file with no `namespace` can also carry statements at its top level. They run in source order as the program's entry point, so a short program needs no `entry` function:
+
+<GhulExample name="top-level-statements-1" />
+
+Definitions in the same file are still hoisted, so a top-level statement can use a function or type declared anywhere in the file. Top-level statements and a `namespace` cannot appear in the same file.
+
+Otherwise, execution of a program begins at a function named `entry`.
 

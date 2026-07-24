@@ -23,8 +23,8 @@ if isa CAT(pet) then
     write_line(pet.purr());
 
     pet = DOG();
-    // reassigning pet drops the narrowing:
-    // pet is Animal again here
+    // reassigning cancels the CAT narrowing and
+    // introduces a DOG one: pet is DOG here
     write_line(pet.name());
 fi
 // <<<
