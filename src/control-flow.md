@@ -4,6 +4,10 @@
 The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples. Open it in a GitHub Codespace or a dev container to build and run them.
 :::
 
+::: tip narrowing inlays
+Open ghūl in an editor with the [ghūl language extension](/tooling.html) and small triangle hints mark where [type narrowing](#type-narrowing) changes: `►` where a variable is narrowed to a more specific type, `◄` where a narrowing ends and the variable widens back to its declared type, and `◄►` where an assignment does both at once. Hovering a hint shows the types and the reason; on an `if` it shows the narrowing for both the taken and the not-taken branch.
+:::
+
 ## block scope
 
 In ghūl, most control flow statements incorporate one or more blocks. A block is a list of one or more statements that forms a scope for local variable definitions. The scope of a variable is the region of code where that variable is visible and can be accessed.
@@ -49,10 +53,6 @@ This form is used for multiple conditions. If the initial condition is false, th
 <GhulExample name="control-flow-7" />
 
 ### type narrowing
-
-::: tip narrowing inlays
-Open ghūl in an editor with the [ghūl language extension](/tooling.html) and small triangle hints mark where narrowing changes: `►` where a variable is narrowed to a more specific type, `◄` where a narrowing ends and the variable widens back to its declared type, and `◄►` where an assignment does both at once. Hovering a hint shows the types and the reason; on an `if` it shows the narrowing for both the taken and the not-taken branch.
-:::
 
 An `isa` test in an `if` condition narrows the variable to the tested type inside the then-branch. This holds for a union variant or a class:
 
