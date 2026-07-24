@@ -1,9 +1,9 @@
 {
   "name": "language-basics-10",
   "code": "let p = primes[i];",
-  "fullSource": "entry() is\n    let primes = [2, 3, 5, 7, 11];\n    let i = 2;\n    let p = primes[i];\nsi\n",
+  "fullSource": "let primes = [2, 3, 5, 7, 11];\nlet i = 2;\nlet p = primes[i];\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
@@ -11,7 +11,7 @@
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "p: int", "signature": "p: int", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 14, "text": "primes: int[]", "signature": "primes: int[]", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "text": "i: int", "signature": "i: int", "kindLabel": "local value" },
-    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 18, "text": "Collections.List[int].get_Item(index: int) -> int", "signature": "Collections.List[int].get_Item(index: int) -> int", "kindLabel": "abstract method" }
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 18, "text": "Collections.List[int].get_Item(index: int) -> int", "signature": "Collections.List[int].get_Item(index: int) -> int", "kindLabel": "pure abstract method" }
   ],
   "inlayHints": [],
   "semanticTokens": [

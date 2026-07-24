@@ -12,15 +12,13 @@ class BOX[T] is
     get() -> T => _value;
 si
 
-entry() is
 // >>>
-    // m is BOX[?] here; the type argument is not
-    // yet known
-    let m = BOX();
+// m is BOX[?] here; the type argument is not
+// yet known
+let m = BOX();
 
-    // the set call carries an int, so m is BOX[int]
-    m.set(42);
+// the set call takes an int, so m is BOX[int]
+m.set(42);
 
-    let x = m.get();
+let x = m.get();
 // <<<
-si

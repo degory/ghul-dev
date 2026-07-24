@@ -19,11 +19,9 @@ class CAT_BOX(): Box[CAT] is
     contents() -> CAT => CAT();
 si
 
-entry() is
 // >>>
-    let cats: Box[CAT] = CAT_BOX();
-    let animals: Box[Animal] = cats;   // covariance
+let cats: Box[CAT] = CAT_BOX();
+let animals: Box[Animal] = cats;   // covariance
 
-    write_line(animals.contents().speak());
+write_line(animals.contents().speak());
 // <<<
-si

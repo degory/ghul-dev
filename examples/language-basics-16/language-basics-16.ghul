@@ -2,11 +2,9 @@ use IO.Std.write_line;
 
 lookup() -> string? => "Alice";
 
-entry() is
-    let name = lookup();
+let name = lookup();
 // >>>
-    if name? then
-        write_line("name is {name}"); // name is non-optional here
-    fi
+if name? then
+    write_line("name is {name}"); // name is non-optional here
+fi
 // <<<
-si

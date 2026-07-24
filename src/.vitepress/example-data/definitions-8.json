@@ -1,9 +1,9 @@
 {
   "name": "definitions-8",
   "code": "class THING is\n    // class body\nsi",
-  "fullSource": "class THING is\n    // class body\nsi\n\nentry() is\nsi\n",
+  "fullSource": "class THING is\n    // class body\nsi\n\n",
   "hiddenBefore": false,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],

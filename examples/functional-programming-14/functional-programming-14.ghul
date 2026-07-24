@@ -15,5 +15,3 @@ union Result[T, E] is
 si
 // <<<
 
-entry() is
-si

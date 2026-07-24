@@ -6,6 +6,4 @@ length_of(key: string?) -> int =>
     key.length;
 // <<<
 
-entry() is
-    write_line(length_of("hello"));
-si
+write_line(length_of("hello"));

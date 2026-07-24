@@ -1,13 +1,14 @@
 {
   "name": "language-basics-24",
   "code": "let add = 1 + 2;\nlet sub = 3 - 1;\nlet mul = 3 * 3;\nlet div = 12 / 3;\nlet mod = 13 % 4;",
-  "fullSource": "entry() is\n    let add = 1 + 2;\n    let sub = 3 - 1;\n    let mul = 3 * 3;\n    let div = 12 / 3;\n    let mod = 13 % 4;\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let add = 1 + 2;\nlet sub = 3 - 1;\nlet mul = 3 * 3;\nlet div = 12 / 3;\nlet mod = 13 % 4;\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 5, "endColumn": 16, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 7, "text": "add: int", "signature": "add: int", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "text": "sub: int", "signature": "sub: int", "kindLabel": "local value" },

@@ -19,12 +19,10 @@ class CAT: Animal is
     speak() -> string => "meow";
 si
 
-entry() is
 // >>>
-    let animals: Animal[] = [DOG("Rex"), CAT("Tom")];
+let animals: Animal[] = [DOG("Rex"), CAT("Tom")];
 
-    for a in animals do
-        write_line(a.describe()); // describe calls the overriding speak
-    od
+for a in animals do
+    write_line(a.describe()); // describe calls the overriding speak
+od
 // <<<
-si

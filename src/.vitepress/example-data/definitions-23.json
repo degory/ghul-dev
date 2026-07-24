@@ -1,27 +1,28 @@
 {
   "name": "definitions-23",
   "code": "class COUNTER is\n    count: int;\n\n    init() is\n        count = 0;\n    si\n\n    init(initial_count: int) is\n        count = initial_count;\n    si\nsi\n// calls the parameterless overload of init()\nlet c = COUNTER();\n\n// calls init(initial_count: int)\nlet d = COUNTER(50);",
-  "fullSource": "class COUNTER is\n    count: int;\n\n    init() is\n        count = 0;\n    si\n\n    init(initial_count: int) is\n        count = initial_count;\n    si\nsi\n\nentry() is\n    // calls the parameterless overload of init()\n    let c = COUNTER();\n\n    // calls init(initial_count: int)\n    let d = COUNTER(50);\nsi\n",
+  "fullSource": "class COUNTER is\n    count: int;\n\n    init() is\n        count = 0;\n    si\n\n    init(initial_count: int) is\n        count = initial_count;\n    si\nsi\n\n// calls the parameterless overload of init()\nlet c = COUNTER();\n\n// calls init(initial_count: int)\nlet d = COUNTER(50);\n",
   "hiddenBefore": false,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [11],
   "output": "",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "text": "class COUNTER", "signature": "class COUNTER", "kindLabel": "class" },
+    { "startLine": 1, "startColumn": 1, "endLine": 16, "endColumn": 19, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "global function" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "COUNTER.count: int", "signature": "COUNTER.count: int", "kindLabel": "pure instance property" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 8, "text": "COUNTER.init()", "signature": "COUNTER.init()", "kindLabel": "constructor" },
     { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "text": "COUNTER.init(initial_count: int)", "signature": "COUNTER.init(initial_count: int)", "kindLabel": "constructor" },
     { "startLine": 8, "startColumn": 10, "endLine": 8, "endColumn": 22, "text": "initial_count: int", "signature": "initial_count: int", "kindLabel": "local argument" },
     { "startLine": 8, "startColumn": 25, "endLine": 8, "endColumn": 27, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "text": "count: int", "signature": "count: int", "kindLabel": "pure instance property" },
+    { "startLine": 9, "startColumn": 17, "endLine": 9, "endColumn": 29, "text": "initial_count: int", "signature": "initial_count: int", "kindLabel": "local argument" },
+    { "startLine": 9, "startColumn": 9, "endLine": 9, "endColumn": 13, "text": "count: int", "signature": "count: int", "kindLabel": "pure instance property" },
     { "startLine": 13, "startColumn": 5, "endLine": 13, "endColumn": 5, "text": "c: COUNTER", "signature": "c: COUNTER", "kindLabel": "local value" },
     { "startLine": 13, "startColumn": 9, "endLine": 13, "endColumn": 15, "text": "COUNTER.init()", "signature": "COUNTER.init()", "kindLabel": "constructor" },
     { "startLine": 16, "startColumn": 5, "endLine": 16, "endColumn": 5, "text": "d: COUNTER", "signature": "d: COUNTER", "kindLabel": "local value" },
-    { "startLine": 16, "startColumn": 9, "endLine": 16, "endColumn": 15, "text": "COUNTER.init(initial_count: int)", "signature": "COUNTER.init(initial_count: int)", "kindLabel": "constructor" },
-    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "text": "count: int", "signature": "count: int", "kindLabel": "pure instance property" },
-    { "startLine": 9, "startColumn": 17, "endLine": 9, "endColumn": 29, "text": "initial_count: int", "signature": "initial_count: int", "kindLabel": "local argument" },
-    { "startLine": 9, "startColumn": 9, "endLine": 9, "endColumn": 13, "text": "count: int", "signature": "count: int", "kindLabel": "pure instance property" }
+    { "startLine": 16, "startColumn": 9, "endLine": 16, "endColumn": 15, "text": "COUNTER.init(initial_count: int)", "signature": "COUNTER.init(initial_count: int)", "kindLabel": "constructor" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -32,12 +33,12 @@
     { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "tokenType": "method" },
     { "startLine": 8, "startColumn": 10, "endLine": 8, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 8, "startColumn": 25, "endLine": 8, "endColumn": 27, "tokenType": "struct" },
+    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "tokenType": "property" },
+    { "startLine": 9, "startColumn": 17, "endLine": 9, "endColumn": 29, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 9, "startColumn": 9, "endLine": 9, "endColumn": 13, "tokenType": "property" },
     { "startLine": 13, "startColumn": 5, "endLine": 13, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 13, "startColumn": 9, "endLine": 13, "endColumn": 15, "tokenType": "method" },
     { "startLine": 16, "startColumn": 5, "endLine": 16, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 16, "startColumn": 9, "endLine": 16, "endColumn": 15, "tokenType": "method" },
-    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "tokenType": "property" },
-    { "startLine": 9, "startColumn": 17, "endLine": 9, "endColumn": 29, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 9, "startColumn": 9, "endLine": 9, "endColumn": 13, "tokenType": "property" }
+    { "startLine": 16, "startColumn": 9, "endLine": 16, "endColumn": 15, "tokenType": "method" }
   ]
 }

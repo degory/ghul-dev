@@ -13,20 +13,18 @@ class CAT(name: string): Animal is
     purr() -> string => "{name} purrs";
 si
 
-entry() is
 // >>>
-    let m: Maybe[int] = Maybe.YES(42);
+let m: Maybe[int] = Maybe.YES(42);
 
-    if isa Maybe.YES(m) then
-        // m is narrowed to Maybe.YES inside the branch,
-        // so m.value is in scope
-        write_line("got value {m.value}");
-    fi
+if isa Maybe.YES(m) then
+    // m is narrowed to Maybe.YES inside the branch,
+    // so m.value is in scope
+    write_line("got value {m.value}");
+fi
 
-    let a: Animal = CAT("whiskers");
-    if isa CAT(a) then
-        // a is narrowed to CAT inside the branch
-        write_line(a.purr());
-    fi
+let a: Animal = CAT("whiskers");
+if isa CAT(a) then
+    // a is narrowed to CAT inside the branch
+    write_line(a.purr());
+fi
 // <<<
-si

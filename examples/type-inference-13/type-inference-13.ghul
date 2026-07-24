@@ -2,9 +2,7 @@
 class THING[T](value: T);
 // <<<
 
-entry() is
 // >>>
-    let int_thing = THING(1234);
-    let string_thing = THING("hello");
+let int_thing = THING(1234);
+let string_thing = THING("hello");
 // <<<
-si

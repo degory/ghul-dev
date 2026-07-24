@@ -1,26 +1,26 @@
 {
   "name": "type-inference-12",
   "code": "let derived =\n    if true then\n        DERIVED()\n    else\n        DERIVED()\n    fi;\n\nlet base =\n    if true then\n        DERIVED()\n    else\n        BASE()\n    fi;",
-  "fullSource": "class BASE();\n\nclass DERIVED(): BASE;\n\nentry() is\n    let derived =\n        if true then\n            DERIVED()\n        else\n            DERIVED()\n        fi;\n\n    let base =\n        if true then\n            DERIVED()\n        else\n            BASE()\n        fi;\nsi\n",
+  "fullSource": "class BASE();\n\nclass DERIVED(): BASE;\n\nlet derived =\n    if true then\n        DERIVED()\n    else\n        DERIVED()\n    fi;\n\nlet base =\n    if true then\n        DERIVED()\n    else\n        BASE()\n    fi;\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "derived: DERIVED", "signature": "derived: DERIVED", "kindLabel": "local value" },
-    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "text": "base: BASE", "signature": "base: BASE", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 15, "text": "DERIVED.init()", "signature": "DERIVED.init()", "kindLabel": "constructor" },
     { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 15, "text": "DERIVED.init()", "signature": "DERIVED.init()", "kindLabel": "constructor" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "text": "base: BASE", "signature": "base: BASE", "kindLabel": "local value" },
     { "startLine": 10, "startColumn": 9, "endLine": 10, "endColumn": 15, "text": "DERIVED.init()", "signature": "DERIVED.init()", "kindLabel": "constructor" },
     { "startLine": 12, "startColumn": 9, "endLine": 12, "endColumn": 12, "text": "BASE.init()", "signature": "BASE.init()", "kindLabel": "constructor" }
   ],
   "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 15, "tokenType": "method" },
     { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 15, "tokenType": "method" },
+    { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 10, "startColumn": 9, "endLine": 10, "endColumn": 15, "tokenType": "method" },
     { "startLine": 12, "startColumn": 9, "endLine": 12, "endColumn": 12, "tokenType": "method" }
   ]

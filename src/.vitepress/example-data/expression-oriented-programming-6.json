@@ -1,14 +1,14 @@
 {
   "name": "expression-oriented-programming-6",
-  "code": "hypotenuse_squared(a: int, b: int) -> int =>\n    let a2 = a * a, b2 = b * b in a2 + b2;\n\nentry() is\n    write_line(\"h2 = {hypotenuse_squared(3, 4)}\");\nsi",
-  "fullSource": "use IO.Std.write_line;\n\nhypotenuse_squared(a: int, b: int) -> int =>\n    let a2 = a * a, b2 = b * b in a2 + b2;\n\nentry() is\n    write_line(\"h2 = {hypotenuse_squared(3, 4)}\");\nsi\n",
+  "code": "hypotenuse_squared(a: int, b: int) -> int =>\n    let a2 = a * a, b2 = b * b in a2 + b2;\n\nwrite_line(\"h2 = {hypotenuse_squared(3, 4)}\");",
+  "fullSource": "use IO.Std.write_line;\n\nhypotenuse_squared(a: int, b: int) -> int =>\n    let a2 = a * a, b2 = b * b in a2 + b2;\n\nwrite_line(\"h2 = {hypotenuse_squared(3, 4)}\");\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "h2 = 25\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 18, "text": "hypotenuse_squared(a: int, b: int) -> int", "signature": "hypotenuse_squared(a: int, b: int) -> int", "kindLabel": "global function" },
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 18, "text": "hypotenuse_squared(a: int, b: int) -> int", "signature": "hypotenuse_squared(a: int, b: int) -> int", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "text": "a: int", "signature": "a: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 28, "text": "b: int", "signature": "b: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 25, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
@@ -25,9 +25,8 @@
     { "startLine": 2, "startColumn": 35, "endLine": 2, "endColumn": 36, "text": "a2: int", "signature": "a2: int", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 40, "endLine": 2, "endColumn": 41, "text": "b2: int", "signature": "b2: int", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 38, "endLine": 2, "endColumn": 38, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
-    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 5, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "global function" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 5, "startColumn": 23, "endLine": 5, "endColumn": 40, "text": "hypotenuse_squared(a: int, b: int) -> int", "signature": "hypotenuse_squared(a: int, b: int) -> int", "kindLabel": "global function" }
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 4, "startColumn": 19, "endLine": 4, "endColumn": 36, "text": "hypotenuse_squared(a: int, b: int) -> int", "signature": "hypotenuse_squared(a: int, b: int) -> int", "kindLabel": "pure global function" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -48,8 +47,7 @@
     { "startLine": 2, "startColumn": 35, "endLine": 2, "endColumn": 36, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 40, "endLine": 2, "endColumn": 41, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 38, "endLine": 2, "endColumn": 38, "tokenType": "operator" },
-    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 5, "tokenType": "function" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 5, "startColumn": 23, "endLine": 5, "endColumn": 40, "tokenType": "function" }
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 4, "startColumn": 19, "endLine": 4, "endColumn": 36, "tokenType": "function" }
   ]
 }

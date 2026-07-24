@@ -1,9 +1,9 @@
 {
   "name": "definitions-20",
   "code": "enum Suits is\n    SPADES,\n    HEARTS,\n    DIAMONDS,\n    CLUBS\nsi",
-  "fullSource": "enum Suits is\n    SPADES,\n    HEARTS,\n    DIAMONDS,\n    CLUBS\nsi\n\nentry() is\nsi\n",
+  "fullSource": "enum Suits is\n    SPADES,\n    HEARTS,\n    DIAMONDS,\n    CLUBS\nsi\n\n",
   "hiddenBefore": false,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],

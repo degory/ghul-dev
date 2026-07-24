@@ -1,8 +1,6 @@
-entry() is
 // >>>
-    let
-        an_inferred_int = 123,
-        an_explicit_int: int = 456,
-        a_string = "hello";
+let
+    an_inferred_int = 123,
+    an_explicit_int: int = 456,
+    a_string = "hello";
 // <<<
-si

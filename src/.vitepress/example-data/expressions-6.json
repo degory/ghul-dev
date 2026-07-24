@@ -1,13 +1,14 @@
 {
   "name": "expressions-6",
   "code": "let path_with_id = (path = \"/tmp/my-file.txt\", id = 1234);\n\nlet path = path_with_id.path;\nlet id = path_with_id.id;",
-  "fullSource": "entry() is\n    let path_with_id = (path = \"/tmp/my-file.txt\", id = 1234);\n\n    let path = path_with_id.path;\n    let id = path_with_id.id;\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let path_with_id = (path = \"/tmp/my-file.txt\", id = 1234);\n\nlet path = path_with_id.path;\nlet id = path_with_id.id;\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 4, "endColumn": 24, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 16, "text": "path_with_id: (path: string, id: int)", "signature": "path_with_id: (path: string, id: int)", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "path: string", "signature": "path: string", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 23, "text": "path_with_id: (path: string, id: int)", "signature": "path_with_id: (path: string, id: int)", "kindLabel": "local value" },

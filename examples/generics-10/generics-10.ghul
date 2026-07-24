@@ -18,6 +18,4 @@ describe[T: Animal](x: T) -> string =>
     fi;
 // <<<
 
-entry() is
-    write_line(describe(CAT()));
-si
+write_line(describe(CAT()));

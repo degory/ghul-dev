@@ -5,12 +5,10 @@ union Option[T] is
     NONE;
 si
 
-entry() is
-    let an_option: Option[int] = Option.SOME(42);
+let an_option: Option[int] = Option.SOME(42);
 // >>>
-    if isa Option.SOME(an_option) then
-        let value = an_option.value;
-        write_line("the option holds {value}");
-    fi
+if isa Option.SOME(an_option) then
+    let value = an_option.value;
+    write_line("the option holds {value}");
+fi
 // <<<
-si

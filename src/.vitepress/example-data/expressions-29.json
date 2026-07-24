@@ -1,9 +1,9 @@
 {
   "name": "expressions-29",
   "code": "let n = 2;\n\nlet size =\n    case n\n    when 0 then \"none\"\n    when 1, 2, 3 then \"small\"\n    else \"large\"\n    esac;\n\nwrite_line(\"size = {size}\");",
-  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let n = 2;\n\n    let size =\n        case n\n        when 0 then \"none\"\n        when 1, 2, 3 then \"small\"\n        else \"large\"\n        esac;\n\n    write_line(\"size = {size}\");\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\nlet n = 2;\n\nlet size =\n    case n\n    when 0 then \"none\"\n    when 1, 2, 3 then \"small\"\n    else \"large\"\n    esac;\n\nwrite_line(\"size = {size}\");\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "size = small\n",
   "diagnostics": [],

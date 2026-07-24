@@ -6,5 +6,3 @@ greet(name: string) -> void is
 si
 // <<<
 
-entry() is
-si

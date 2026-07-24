@@ -21,7 +21,5 @@ classify(a: Animal) is
 si
 // <<<
 
-entry() is
-    classify(CAT("whiskers"));
-    classify(DOG());
-si
+classify(CAT("whiskers"));
+classify(DOG());

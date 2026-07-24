@@ -1,13 +1,14 @@
 {
   "name": "language-basics-21",
   "code": "let i = 1234;\nlet j: int = 0;\nlet k: int = 5678;",
-  "fullSource": "entry() is\n    let i = 1234;\n    let j: int = 0;\n    let k: int = 5678;\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let i = 1234;\nlet j: int = 0;\nlet k: int = 5678;\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 3, "endColumn": 17, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: int", "signature": "i: int", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "j: int", "signature": "j: int", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 10, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },

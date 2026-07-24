@@ -14,11 +14,9 @@ class COUNTDOWN is
     si
 si
 
-entry() is
-    let c = COUNTDOWN(3);
+let c = COUNTDOWN(3);
 // >>>
-    while let n = c.next() do
-        write_line(n);
-    od
+while let n = c.next() do
+    write_line(n);
+od
 // <<<
-si

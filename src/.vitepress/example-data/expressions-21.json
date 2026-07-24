@@ -1,15 +1,16 @@
 {
   "name": "expressions-21",
   "code": "let first_element = [1, 2, 3][0];",
-  "fullSource": "entry() is\n    let first_element = [1, 2, 3][0];\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let first_element = [1, 2, 3][0];\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 32, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 17, "text": "first_element: int", "signature": "first_element: int", "kindLabel": "local value" },
-    { "startLine": 1, "startColumn": 30, "endLine": 1, "endColumn": 32, "text": "Collections.List[int].get_Item(index: int) -> int", "signature": "Collections.List[int].get_Item(index: int) -> int", "kindLabel": "abstract method" }
+    { "startLine": 1, "startColumn": 30, "endLine": 1, "endColumn": 32, "text": "Collections.List[int].get_Item(index: int) -> int", "signature": "Collections.List[int].get_Item(index: int) -> int", "kindLabel": "pure abstract method" }
   ],
   "inlayHints": [],
   "semanticTokens": [

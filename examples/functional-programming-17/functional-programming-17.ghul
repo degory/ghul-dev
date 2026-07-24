@@ -22,11 +22,9 @@ use List.CONS;
 use Tree.LEAF;
 use Tree.NODE;
 
-entry() is
-    test_option();
-    test_list();
-    test_tree();
-si
+test_option();
+test_list();
+test_tree();
 
 test_option() is
     let some_int = SOME(42);

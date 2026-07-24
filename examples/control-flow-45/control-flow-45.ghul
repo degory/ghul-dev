@@ -7,10 +7,8 @@ default_return() -> int is
 si
 // <<<
 
-entry() is
 // >>>
-    let i = default_return();
-    assert i == 0;
+let i = default_return();
+assert i == 0;
 // <<<
-    write_line("default return value is {i}");
-si
+write_line("default return value is {i}");

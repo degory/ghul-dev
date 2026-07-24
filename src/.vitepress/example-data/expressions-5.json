@@ -1,13 +1,14 @@
 {
   "name": "expressions-5",
   "code": "let animals = [\"frog\", \"bat\", \"elephant\"]; // string[]\nlet things = [\"frog\", 1234, 12.5]; // object[]\nlet lists = [[1, 2], [3, 4], [5, 6], [7, 7]]; // int[][]",
-  "fullSource": "entry() is\n    let animals = [\"frog\", \"bat\", \"elephant\"]; // string[]\n    let things = [\"frog\", 1234, 12.5]; // object[]\n    let lists = [[1, 2], [3, 4], [5, 6], [7, 7]]; // int[][]\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let animals = [\"frog\", \"bat\", \"elephant\"]; // string[]\nlet things = [\"frog\", 1234, 12.5]; // object[]\nlet lists = [[1, 2], [3, 4], [5, 6], [7, 7]]; // int[][]\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 3, "endColumn": 44, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "animals: string[]", "signature": "animals: string[]", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "things: object[]", "signature": "things: object[]", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "text": "lists: int[][]", "signature": "lists: int[][]", "kindLabel": "local value" }

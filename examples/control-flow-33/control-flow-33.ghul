@@ -10,5 +10,3 @@ withdraw(balance: int, amount: int) -> int is
 si
 // <<<
 
-entry() is
-si

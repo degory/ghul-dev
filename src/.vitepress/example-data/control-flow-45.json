@@ -1,7 +1,7 @@
 {
   "name": "control-flow-45",
   "code": "default_return() -> int is\n    // do nothing, return 0\nsi\nlet i = default_return();\nassert i == 0;",
-  "fullSource": "// expect: warning\nuse IO.Std.write_line;\n\ndefault_return() -> int is\n    // do nothing, return 0\nsi\n\nentry() is\n    let i = default_return();\n    assert i == 0;\n    write_line(\"default return value is {i}\");\nsi\n",
+  "fullSource": "// expect: warning\nuse IO.Std.write_line;\n\ndefault_return() -> int is\n    // do nothing, return 0\nsi\n\nlet i = default_return();\nassert i == 0;\nwrite_line(\"default return value is {i}\");\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [3],

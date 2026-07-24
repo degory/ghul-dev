@@ -1,9 +1,9 @@
 {
   "name": "language-basics-18",
   "code": "// rejected: a string? is not assignable to a string\nlet title: string = maybe;",
-  "fullSource": "// expect: error\nlookup() -> string? => null;\n\nentry() is\n    let maybe = lookup();\n    // rejected: a string? is not assignable to a string\n    let title: string = maybe;\nsi\n",
+  "fullSource": "// expect: error\nlookup() -> string? => null;\n\nlet maybe = lookup();\n// rejected: a string? is not assignable to a string\nlet title: string = maybe;\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [

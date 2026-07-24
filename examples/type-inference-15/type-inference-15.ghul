@@ -1,6 +1,4 @@
-entry() is
 // >>>
-    let returns_int = (i: int) => i * 2;
-    let returns_string = (s: string) => "{s}{s}";
+let returns_int = (i: int) => i * 2;
+let returns_string = (s: string) => "{s}{s}";
 // <<<
-si

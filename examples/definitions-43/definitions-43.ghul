@@ -15,7 +15,5 @@ partial Shape is
 si
 // <<<
 
-entry() is
-    let s: Shape = Shape.SQUARE(4);
-    write_line(s.describe());
-si
+let s: Shape = Shape.SQUARE(4);
+write_line(s.describe());

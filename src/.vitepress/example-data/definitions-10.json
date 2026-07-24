@@ -1,9 +1,9 @@
 {
   "name": "definitions-10",
   "code": "struct POINT(x: double, y: double) is\nsi",
-  "fullSource": "struct POINT(x: double, y: double) is\nsi\n\nentry() is\nsi\n",
+  "fullSource": "struct POINT(x: double, y: double) is\nsi\n\n",
   "hiddenBefore": false,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],

@@ -1,13 +1,14 @@
 {
   "name": "type-inference-15",
   "code": "let returns_int = (i: int) => i * 2;\nlet returns_string = (s: string) => \"{s}{s}\";",
-  "fullSource": "entry() is\n    let returns_int = (i: int) => i * 2;\n    let returns_string = (s: string) => \"{s}{s}\";\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let returns_int = (i: int) => i * 2;\nlet returns_string = (s: string) => \"{s}{s}\";\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 2, "endColumn": 45, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "text": "i: int", "signature": "i: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "text": "returns_int: int -> int", "signature": "returns_int: int -> int", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 25, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },

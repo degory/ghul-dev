@@ -10,8 +10,6 @@ squares(limit: int) -> Ghul.Pipes.Pipe[int] is
 // <<<
 si
 
-entry() is
-    for s in squares(4) do
-        write_line(s);
-    od
-si
+for s in squares(4) do
+    write_line(s);
+od

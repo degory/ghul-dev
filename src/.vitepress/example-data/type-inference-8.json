@@ -1,13 +1,14 @@
 {
   "name": "type-inference-8",
   "code": "let person = (\"alice\", 30);\nlet (name, age) = person;\n\nlet ((first, second), third) = ((\"a\", \"b\"), \"c\");",
-  "fullSource": "entry() is\n    let person = (\"alice\", 30);\n    let (name, age) = person;\n\n    let ((first, second), third) = ((\"a\", \"b\"), \"c\");\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let person = (\"alice\", 30);\nlet (name, age) = person;\n\nlet ((first, second), third) = ((\"a\", \"b\"), \"c\");\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 4, "endColumn": 49, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "person: (string, int)", "signature": "person: (string, int)", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 9, "text": "name: string", "signature": "name: string", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "age: int", "signature": "age: int", "kindLabel": "local value" },

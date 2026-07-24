@@ -1,7 +1,5 @@
 sum(x: int, y: int) -> int => x + y;
 
-entry() is
 // >>>
-    let result = sum(10, 5);
+let result = sum(10, 5);
 // <<<
-si

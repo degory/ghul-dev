@@ -15,5 +15,3 @@ class SIZED is
 si
 // <<<
 
-entry() is
-si

@@ -1,6 +1,4 @@
-entry() is
 // >>>
-    let here: int? = 42;   // present
-    let gone: int? = null; // absent
+let here: int? = 42;   // present
+let gone: int? = null; // absent
 // <<<
-si

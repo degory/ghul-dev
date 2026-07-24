@@ -14,6 +14,4 @@ compute() -> Tasks.TASK[int] is
 // <<<
 si
 
-entry() is
-    write_line("{compute().result}");
-si
+write_line("{compute().result}");

@@ -1,2 +1,1 @@
-entry() =>
-    IO.Std.write_line("hello, world");
+IO.Std.write_line("hello, world");

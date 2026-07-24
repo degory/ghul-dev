@@ -1,8 +1,6 @@
 use IO.Std.write_line;
 
-entry() is
 // >>>
-    let f = x => x + 1;
-    write_line("{f(42)}");
+let f = x => x + 1;
+write_line("{f(42)}");
 // <<<
-si

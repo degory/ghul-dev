@@ -20,6 +20,4 @@ describe(carrier: CARRIER) is
 si
 // <<<
 
-entry() is
-    describe(CARRIER(CAT()));
-si
+describe(CARRIER(CAT()));

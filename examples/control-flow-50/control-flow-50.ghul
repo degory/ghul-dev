@@ -11,11 +11,9 @@ fibs() -> Ghul.Pipes.Pipe[int] is
     od
 si
 
-entry() is
 // >>>
-    // fibs() is an infinite generator; take(8) bounds it
-    for f in fibs() | .take(8) do
-        write_line(f);
-    od
+// fibs() is an infinite generator; take(8) bounds it
+for f in fibs() | .take(8) do
+    write_line(f);
+od
 // <<<
-si

@@ -1,9 +1,9 @@
 {
   "name": "language-basics-2",
   "code": "// variable declaration statement\nlet x = 10;\n\n// expression used as part of a declaration statement\nlet y = x * 2;\n\n// 'if' is a statement, 'x > 5' is an expression\nif x > 5 then\n    write_line(\"x is greater than 5\");\nfi\n\n// 'if' can also be used as an expression\nlet z = if x > 5 then x else y fi;",
-  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    // variable declaration statement\n    let x = 10;\n\n    // expression used as part of a declaration statement\n    let y = x * 2;\n\n    // 'if' is a statement, 'x > 5' is an expression\n    if x > 5 then\n        write_line(\"x is greater than 5\");\n    fi\n\n    // 'if' can also be used as an expression\n    let z = if x > 5 then x else y fi;\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\n// variable declaration statement\nlet x = 10;\n\n// expression used as part of a declaration statement\nlet y = x * 2;\n\n// 'if' is a statement, 'x > 5' is an expression\nif x > 5 then\n    write_line(\"x is greater than 5\");\nfi\n\n// 'if' can also be used as an expression\nlet z = if x > 5 then x else y fi;\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "x is greater than 5\n",
   "diagnostics": [],
@@ -12,14 +12,14 @@
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 5, "text": "y: int", "signature": "y: int", "kindLabel": "local value" },
     { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 9, "text": "x: int", "signature": "x: int", "kindLabel": "local value" },
     { "startLine": 5, "startColumn": 11, "endLine": 5, "endColumn": 11, "text": "Ghul.*(a: int, b: int) -> int", "signature": "Ghul.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" },
+    { "startLine": 8, "startColumn": 4, "endLine": 8, "endColumn": 4, "text": "x: int", "signature": "x: int", "kindLabel": "local value" },
+    { "startLine": 8, "startColumn": 6, "endLine": 8, "endColumn": 6, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
+    { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 13, "startColumn": 5, "endLine": 13, "endColumn": 5, "text": "z: int", "signature": "z: int", "kindLabel": "local value" },
     { "startLine": 13, "startColumn": 12, "endLine": 13, "endColumn": 12, "text": "x: int", "signature": "x: int", "kindLabel": "local value" },
     { "startLine": 13, "startColumn": 14, "endLine": 13, "endColumn": 14, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
     { "startLine": 13, "startColumn": 23, "endLine": 13, "endColumn": 23, "text": "x: int", "signature": "x: int", "kindLabel": "local value" },
-    { "startLine": 13, "startColumn": 30, "endLine": 13, "endColumn": 30, "text": "y: int", "signature": "y: int", "kindLabel": "local value" },
-    { "startLine": 8, "startColumn": 4, "endLine": 8, "endColumn": 4, "text": "x: int", "signature": "x: int", "kindLabel": "local value" },
-    { "startLine": 8, "startColumn": 6, "endLine": 8, "endColumn": 6, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
-    { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" }
+    { "startLine": 13, "startColumn": 30, "endLine": 13, "endColumn": 30, "text": "y: int", "signature": "y: int", "kindLabel": "local value" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -27,13 +27,13 @@
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 5, "startColumn": 11, "endLine": 5, "endColumn": 11, "tokenType": "operator" },
+    { "startLine": 8, "startColumn": 4, "endLine": 8, "endColumn": 4, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 6, "endLine": 8, "endColumn": 6, "tokenType": "operator" },
+    { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
     { "startLine": 13, "startColumn": 5, "endLine": 13, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 13, "startColumn": 12, "endLine": 13, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 13, "startColumn": 14, "endLine": 13, "endColumn": 14, "tokenType": "operator" },
     { "startLine": 13, "startColumn": 23, "endLine": 13, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 13, "startColumn": 30, "endLine": 13, "endColumn": 30, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 8, "startColumn": 4, "endLine": 8, "endColumn": 4, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 8, "startColumn": 6, "endLine": 8, "endColumn": 6, "tokenType": "operator" },
-    { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 14, "tokenType": "method", "modifiers": "static" }
+    { "startLine": 13, "startColumn": 30, "endLine": 13, "endColumn": 30, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

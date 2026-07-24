@@ -1,13 +1,14 @@
 {
   "name": "type-inference-11",
   "code": "let int_string = [(123, \"hello\"), (456, \"goodbye\")];\n\nlet int_object = [(123, 456), (798, \"wibble\")];",
-  "fullSource": "entry() is\n    let int_string = [(123, \"hello\"), (456, \"goodbye\")];\n\n    let int_object = [(123, 456), (798, \"wibble\")];\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let int_string = [(123, \"hello\"), (456, \"goodbye\")];\n\nlet int_object = [(123, 456), (798, \"wibble\")];\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 3, "endColumn": 46, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "text": "int_string: (int, string)[]", "signature": "int_string: (int, string)[]", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "int_object: (int, object)[]", "signature": "int_object: (int, object)[]", "kindLabel": "local value" }
   ],

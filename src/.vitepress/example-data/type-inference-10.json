@@ -1,15 +1,16 @@
 {
   "name": "type-inference-10",
   "code": "class BASE();\n\nclass DERIVED(): BASE;\nlet array_of_base = [BASE(), DERIVED()];\nlet array_of_object = [BASE(), DERIVED(), object()];\nlet array_of_int = [1, 2, 3, 4, 5];",
-  "fullSource": "class BASE();\n\nclass DERIVED(): BASE;\n\nentry() is\n    let array_of_base = [BASE(), DERIVED()];\n    let array_of_object = [BASE(), DERIVED(), object()];\n    let array_of_int = [1, 2, 3, 4, 5];\nsi\n",
+  "fullSource": "class BASE();\n\nclass DERIVED(): BASE;\n\nlet array_of_base = [BASE(), DERIVED()];\nlet array_of_object = [BASE(), DERIVED(), object()];\nlet array_of_int = [1, 2, 3, 4, 5];\n",
   "hiddenBefore": false,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [3],
   "output": "",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 10, "text": "class BASE", "signature": "class BASE", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "text": "BASE.init()", "signature": "BASE.init()", "kindLabel": "constructor" },
+    { "startLine": 1, "startColumn": 1, "endLine": 6, "endColumn": 34, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "global function" },
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 13, "text": "class DERIVED", "signature": "class DERIVED", "kindLabel": "class" },
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 15, "text": "DERIVED.init()", "signature": "DERIVED.init()", "kindLabel": "constructor" },
     { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 21, "text": "class BASE", "signature": "class BASE", "kindLabel": "class" },

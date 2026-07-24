@@ -12,8 +12,6 @@ fib(n: int) -> int is
 si
 // <<<
 
-entry() is
-    for i in 0::10 do
-        write_line("fib({i}) = {fib(i)}");
-    od
-si
+for i in 0::10 do
+    write_line("fib({i}) = {fib(i)}");
+od

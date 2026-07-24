@@ -1,13 +1,14 @@
 {
   "name": "language-basics-7",
   "code": "let my_int: int = 42;\nlet my_float: double = 3.14d;\nlet my_decimal: decimal = 19.99m;\nlet my_bool: bool = true;\nlet my_char: char = 'A';",
-  "fullSource": "entry() is\n    let my_int: int = 42;\n    let my_float: double = 3.14d;\n    let my_decimal: decimal = 19.99m;\n    let my_bool: bool = true;\n    let my_char: char = 'A';\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let my_int: int = 42;\nlet my_float: double = 3.14d;\nlet my_decimal: decimal = 19.99m;\nlet my_bool: bool = true;\nlet my_char: char = 'A';\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 5, "endColumn": 23, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "my_int: int", "signature": "my_int: int", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "my_float: double", "signature": "my_float: double", "kindLabel": "local value" },

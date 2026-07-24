@@ -13,11 +13,9 @@ lookup(id: int) -> (name: string, score: int)? is
     return null;
 si
 
-entry() is
-    let id = 1;
+let id = 1;
 // >>>
-    if let (name, _) = lookup(id) then
-        write_line("found {name}");
-    fi
+if let (name, _) = lookup(id) then
+    write_line("found {name}");
+fi
 // <<<
-si

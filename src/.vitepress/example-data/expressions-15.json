@@ -1,13 +1,14 @@
 {
   "name": "expressions-15",
   "code": "let sum = 10 + 5;           // Addition\nlet difference = 10 - 5;    // Subtraction\nlet product = 10 * 5;       // Multiplication\nlet quotient = 10 / 5;      // Division\nlet remainder = 10 % 3;     // Modulo (remainder)",
-  "fullSource": "entry() is\n    let sum = 10 + 5;           // Addition\n    let difference = 10 - 5;    // Subtraction\n    let product = 10 * 5;       // Multiplication\n    let quotient = 10 / 5;      // Division\n    let remainder = 10 % 3;     // Modulo (remainder)\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let sum = 10 + 5;           // Addition\nlet difference = 10 - 5;    // Subtraction\nlet product = 10 * 5;       // Multiplication\nlet quotient = 10 / 5;      // Division\nlet remainder = 10 % 3;     // Modulo (remainder)\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 5, "endColumn": 22, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 7, "text": "sum: int", "signature": "sum: int", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "difference: int", "signature": "difference: int", "kindLabel": "local value" },

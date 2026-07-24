@@ -1,9 +1,9 @@
 {
   "name": "expressions-19",
   "code": "let result = sum(10, 5);",
-  "fullSource": "sum(x: int, y: int) -> int => x + y;\n\nentry() is\n    let result = sum(10, 5);\nsi\n",
+  "fullSource": "sum(x: int, y: int) -> int => x + y;\n\nlet result = sum(10, 5);\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],

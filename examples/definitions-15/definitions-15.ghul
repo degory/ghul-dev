@@ -19,8 +19,6 @@ class LOUD(): Logged is
     si
 si
 
-entry() is
-    PLAIN().log("hello");
-    LOUD().log("hello");
+PLAIN().log("hello");
+LOUD().log("hello");
 // <<<
-si

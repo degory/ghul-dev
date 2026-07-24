@@ -1,13 +1,14 @@
 {
   "name": "expressions-4",
   "code": "let hello_world = \"Hello World!\";\nlet unicode = \"ghūl programming language\"",
-  "fullSource": "entry() is\n    let hello_world = \"Hello World!\";\n    let unicode = \"ghūl programming language\"\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let hello_world = \"Hello World!\";\nlet unicode = \"ghūl programming language\"\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 2, "endColumn": 41, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "text": "hello_world: string", "signature": "hello_world: string", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 11, "text": "unicode: string", "signature": "unicode: string", "kindLabel": "local value" }
   ],

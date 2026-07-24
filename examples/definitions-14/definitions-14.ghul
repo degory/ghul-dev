@@ -12,5 +12,3 @@ class BOOK(title: string, author: string): Printable is
 si
 // <<<
 
-entry() is
-si

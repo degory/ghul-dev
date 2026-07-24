@@ -2,5 +2,3 @@
 square(x: int) -> int => x * x;
 // <<<
 
-entry() is
-si

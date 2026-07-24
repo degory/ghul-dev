@@ -4,5 +4,3 @@ trait Printable is
 si
 // <<<
 
-entry() is
-si

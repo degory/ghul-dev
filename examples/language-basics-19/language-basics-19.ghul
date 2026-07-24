@@ -2,15 +2,13 @@ use IO.Std.write_line;
 
 lookup() -> string? => "found";
 
-entry() is
-    let maybe = lookup();
+let maybe = lookup();
 // >>>
-    if maybe? then
-        let narrowed: string = maybe; // narrowed to string here
-        write_line(narrowed);
-    fi
+if maybe? then
+    let narrowed: string = maybe; // narrowed to string here
+    write_line(narrowed);
+fi
 
-    let forced: string = maybe!;            // asserts present, throws if absent
-    let safe: string = maybe ?? "fallback"; // falls back when absent
+let forced: string = maybe!;            // asserts present, throws if absent
+let safe: string = maybe ?? "fallback"; // falls back when absent
 // <<<
-si

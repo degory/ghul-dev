@@ -1,9 +1,9 @@
 {
   "name": "generics-3",
   "code": "struct HOLD_SOMETHING[T](value: T);",
-  "fullSource": "struct HOLD_SOMETHING[T](value: T);\n\nentry() is\nsi\n",
+  "fullSource": "struct HOLD_SOMETHING[T](value: T);\n\n",
   "hiddenBefore": false,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],

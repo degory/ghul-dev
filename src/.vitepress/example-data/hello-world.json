@@ -1,23 +1,22 @@
 {
   "name": "hello-world",
-  "code": "entry() =>\n    IO.Std.write_line(\"hello, world\");",
-  "fullSource": "entry() =>\n    IO.Std.write_line(\"hello, world\");\n",
+  "code": "IO.Std.write_line(\"hello, world\");",
+  "fullSource": "IO.Std.write_line(\"hello, world\");\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "hello, world\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 5, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 6, "text": "namespace IO", "signature": "namespace IO", "kindLabel": "" },
-    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 10, "text": "class IO.Std", "signature": "class IO.Std", "kindLabel": "class" },
-    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 21, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" }
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 33, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 2, "text": "namespace IO", "signature": "namespace IO", "kindLabel": "" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 6, "text": "class IO.Std", "signature": "class IO.Std", "kindLabel": "class" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 17, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 5, "tokenType": "function" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 6, "tokenType": "namespace" },
-    { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 10, "tokenType": "class" },
-    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 21, "tokenType": "method", "modifiers": "static" }
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 2, "tokenType": "namespace" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 6, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 17, "tokenType": "method", "modifiers": "static" }
   ]
 }
