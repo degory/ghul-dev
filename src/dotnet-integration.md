@@ -70,7 +70,7 @@ Some commonly used namespace and type names are re-mapped in line with ghūl con
 
 ## ASP.NET Core
 
-ASP.NET Core minimal APIs work from ghūl. Extension methods aren't surfaced as members, so the fluent builder calls go through the `|>` thread-first operator, which passes the left-hand side as the called method's first argument:
+ASP.NET Core minimal APIs work from ghūl. Extension methods aren't exposed as members, so the fluent builder calls go through the `|>` thread-first operator, which passes the left-hand side as the called method's first argument:
 
 <GhulExample name="dotnet-integration-1" />
 
