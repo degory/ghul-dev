@@ -11,7 +11,6 @@
     { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 4, "text": "zero[T]() -> T", "signature": "zero[T]() -> T", "kindLabel": "pure global function" },
     { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "text": "T", "signature": "T", "kindLabel": "type variable" },
-    { "startLine": 1, "startColumn": 1, "endLine": 3, "endColumn": 26, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "a: int", "signature": "a: int", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 19, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "b: string?", "signature": "b: string?", "kindLabel": "local value" },

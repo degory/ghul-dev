@@ -517,12 +517,18 @@ PostfixSuffix ::= "(" ExpressionList? ")"     /* call */
                 | "!"                         /* unwrap */
                 | "ref"                       /* by-reference */
                 | "|"                         /* pipe */
+                | "|>" PostfixExpression      /* thread-first call */
 ```
 
 A `[ ... ]` suffix is either an index expression (an access through an
 [indexer](#indexer)) or a generic type application, depending on whether its
 contents resolve as expressions or as types; `` `[ ... ] `` forces the
 generic-application reading.
+
+The `|>` thread-first suffix routes its left side into the call on its right as
+that call's first argument, so `x |> f(a)` is `f(x, a)`. Its right side must be
+call-shaped, and chaining is left-associative, so `x |> f(a) |> g(b)` is
+`g(f(x, a), b)`. See [thread-first calls](/expressions.html#thread-first-calls).
 
 ### function literals
 

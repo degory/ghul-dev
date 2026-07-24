@@ -11,7 +11,6 @@
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 12, "text": "union Option[T]", "signature": "union Option[T]", "kindLabel": "union" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 1, "endLine": 4, "endColumn": 2, "text": "Ghul./\\(a: bool, b: bool) -> bool", "signature": "Ghul./\\(a: bool, b: bool) -> bool", "kindLabel": "innate function bool.and_then" },
-    { "startLine": 1, "startColumn": 1, "endLine": 5, "endColumn": 32, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "global function" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "Option.SOME[T](value: T)", "signature": "Option.SOME[T](value: T)", "kindLabel": "variant" },
     { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 14, "text": "Option.SOME[T].value: T", "signature": "Option.SOME[T].value: T", "kindLabel": "variant field" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 19, "text": "object.equals(objA: object?, objB: object?) -> bool", "signature": "object.equals(objA: object?, objB: object?) -> bool", "kindLabel": "class method" },

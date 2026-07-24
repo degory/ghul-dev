@@ -8,7 +8,6 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 6, "endColumn": 20, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "point: (x: int, y: int)", "signature": "point: (x: int, y: int)", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 18, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 26, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },

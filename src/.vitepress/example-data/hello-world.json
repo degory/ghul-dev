@@ -8,7 +8,6 @@
   "output": "hello, world\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 33, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 2, "text": "namespace IO", "signature": "namespace IO", "kindLabel": "" },
     { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 6, "text": "class IO.Std", "signature": "class IO.Std", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 17, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" }

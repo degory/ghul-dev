@@ -8,7 +8,6 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 6, "endColumn": 16, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 6, "text": "gt: bool", "signature": "gt: bool", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 12, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "text": "gte: bool", "signature": "gte: bool", "kindLabel": "local value" },

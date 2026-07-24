@@ -8,7 +8,6 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 4, "endColumn": 24, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 16, "text": "path_with_id: (path: string, id: int)", "signature": "path_with_id: (path: string, id: int)", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "path: string", "signature": "path: string", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 23, "text": "path_with_id: (path: string, id: int)", "signature": "path_with_id: (path: string, id: int)", "kindLabel": "local value" },

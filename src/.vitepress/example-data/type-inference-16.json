@@ -8,7 +8,6 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 37, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "global function" },
     { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "text": "i: int", "signature": "i: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "text": "Ghul.Pipes.pipe[int](\n    source: Collections.Iterable[int]\n) -> Ghul.Pipes.Pipe[int]", "signature": "Ghul.Pipes.pipe[int](\n    source: Collections.Iterable[int]\n) -> Ghul.Pipes.Pipe[int]", "kindLabel": "global function" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "text": "Ghul.Pipes.Pipe[int].filter(\n    predicate: int -> bool\n) -> Ghul.Pipes.Pipe[int]", "signature": "Ghul.Pipes.Pipe[int].filter(\n    predicate: int -> bool\n) -> Ghul.Pipes.Pipe[int]", "kindLabel": "default trait method" },

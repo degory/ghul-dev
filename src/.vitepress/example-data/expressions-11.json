@@ -8,7 +8,6 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 3, "endColumn": 38, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "list: int[]", "signature": "list: int[]", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "text": "element: int", "signature": "element: int", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "text": "Ghul.Pipes.pipe[int](\n    source: Collections.Iterable[int]\n) -> Ghul.Pipes.Pipe[int]", "signature": "Ghul.Pipes.pipe[int](\n    source: Collections.Iterable[int]\n) -> Ghul.Pipes.Pipe[int]", "kindLabel": "global function" },

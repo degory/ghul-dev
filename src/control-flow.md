@@ -4,6 +4,10 @@
 The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples. Open it in a GitHub Codespace or a dev container to build and run them.
 :::
 
+::: tip narrowing inlays
+Open ghūl in an editor with the [ghūl language extension](/tooling.html) and small triangle hints mark where [type narrowing](#type-narrowing) changes: `►` where a variable is narrowed to a more specific type, `◄` where a narrowing ends and the variable widens back to its declared type, and `◄►` where an assignment does both at once. Hovering a hint shows the types and the reason; on an `if` it shows the narrowing for both the taken and the not-taken branch.
+:::
+
 ## block scope
 
 In ghūl, most control flow statements incorporate one or more blocks. A block is a list of one or more statements that forms a scope for local variable definitions. The scope of a variable is the region of code where that variable is visible and can be accessed.
@@ -72,11 +76,11 @@ Narrowing applies to local variables, including a function's own parameters, and
 
 A path narrow is less durable than one on a local variable. A local holds its value, which no other call can change, so its narrowing lasts until the variable is reassigned. A path reads a fresh value each time, so its narrowing lasts only while nothing can change what it reads: a call to a method or property that can write to the heap drops it, as does an assignment that can change the path. To keep the narrower type across such a call, copy the path into a local variable, or use `if let` to introduce one.
 
-Reassigning the local re-narrows it: when the new value's static type is more specific than the declared type, the local narrows to that type from the assignment on, so a following call resolves on the assigned type without an `isa`:
+Reassigning the local narrows it: when the new value's static type is more specific than the declared type, the local narrows to that type from the assignment on, so a following call resolves on the assigned type without an `isa`:
 
 <GhulExample name="control-flow-57" />
 
-Otherwise the assignment drops the narrowing back to the declared type:
+If the local is already narrowed, assigning a value of a different type cancels that narrowing and introduces one for the new type, so the following call resolves on the assigned type:
 
 <GhulExample name="control-flow-56" />
 

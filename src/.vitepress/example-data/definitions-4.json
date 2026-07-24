@@ -8,7 +8,6 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 4, "endColumn": 22, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 19, "text": "an_inferred_int: int", "signature": "an_inferred_int: int", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 19, "text": "an_explicit_int: int", "signature": "an_explicit_int: int", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 24, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },

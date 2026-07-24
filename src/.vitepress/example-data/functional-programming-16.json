@@ -8,9 +8,9 @@
   "output": "the option holds 42\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 12, "text": "an_option: Option[int]", "signature": "an_option: Option[int]", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 13, "text": "value: int", "signature": "value: int", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 25, "text": "an_option: Option[int]\n    ► Option.SOME[int]", "signature": "an_option: Option[int]\n    ► Option.SOME[int]", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 12, "text": "an_option: Option[int]", "signature": "an_option: Option[int]", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 39, "text": "value: int", "signature": "value: int", "kindLabel": "local value" }
   ],
@@ -18,9 +18,9 @@
     { "line": 1, "column": 4, "label": "►", "detail": "► Option.SOME[int]\n> Option.NONE[int]", "code": "narrowing-default-variant" }
   ],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 25, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
     { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 39, "tokenType": "variable", "modifiers": "readonly" }
   ]

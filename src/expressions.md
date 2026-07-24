@@ -104,6 +104,14 @@ Function call expressions allow you to invoke functions and methods by providing
 
 <GhulExample name="expressions-19" />
 
+## thread-first calls
+
+The `|>` operator threads its left side into the call on its right as that call's first argument, so `x |> f(a)` means `f(x, a)`. Chaining is left-to-right, which turns a nest of calls inside-out into a readable pipeline:
+
+<GhulExample name="thread-first-1" />
+
+The right side must be call-shaped: a free function, a constructor, or a method call on a receiver. The left side always becomes the first argument; the call is otherwise resolved exactly as if it had been written without the `|>`. This is separate from the `|` [pipe](/functional-programming.html) operator, which wraps a sequence for lazy `map` and `filter`; `|>` performs an ordinary call.
+
 ## property access
 
 Property access expressions allow you to access the properties of an object using the dot notation.

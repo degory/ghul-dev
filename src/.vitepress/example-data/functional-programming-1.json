@@ -8,15 +8,12 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 6, "endColumn": 38, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "global function" },
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "text": "i: int", "signature": "i: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "f: int -> int", "signature": "f: int -> int", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "i: int", "signature": "i: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "text": "Ghul.*(a: int, b: int) -> int", "signature": "Ghul.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" },
-    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 1, "text": "f: int -> int", "signature": "f: int -> int", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "g: int -> int", "signature": "g: int -> int", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 9, "text": "f: int -> int", "signature": "f: int -> int", "kindLabel": "local value" },
-    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 1, "text": "g: int -> int", "signature": "g: int -> int", "kindLabel": "local value" },
     { "startLine": 6, "startColumn": 11, "endLine": 6, "endColumn": 11, "text": "f: int -> int", "signature": "f: int -> int", "kindLabel": "local argument" },
     { "startLine": 6, "startColumn": 26, "endLine": 6, "endColumn": 26, "text": "i: int", "signature": "i: int", "kindLabel": "local argument" },
     { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 6, "text": "ff: (int -> int, int) -> int", "signature": "ff: (int -> int, int) -> int", "kindLabel": "local value" },
@@ -24,7 +21,9 @@
     { "startLine": 6, "startColumn": 14, "endLine": 6, "endColumn": 16, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 6, "startColumn": 32, "endLine": 6, "endColumn": 32, "text": "f: int -> int", "signature": "f: int -> int", "kindLabel": "local argument" },
     { "startLine": 6, "startColumn": 34, "endLine": 6, "endColumn": 34, "text": "f: int -> int", "signature": "f: int -> int", "kindLabel": "local argument" },
-    { "startLine": 6, "startColumn": 36, "endLine": 6, "endColumn": 36, "text": "i: int", "signature": "i: int", "kindLabel": "local argument" }
+    { "startLine": 6, "startColumn": 36, "endLine": 6, "endColumn": 36, "text": "i: int", "signature": "i: int", "kindLabel": "local argument" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 1, "text": "f: int -> int", "signature": "f: int -> int", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 1, "text": "g: int -> int", "signature": "g: int -> int", "kindLabel": "local value" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -32,10 +31,8 @@
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "tokenType": "operator" },
-    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 1, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 1, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 6, "startColumn": 11, "endLine": 6, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 6, "startColumn": 26, "endLine": 6, "endColumn": 26, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 6, "tokenType": "variable", "modifiers": "readonly" },
@@ -43,6 +40,8 @@
     { "startLine": 6, "startColumn": 14, "endLine": 6, "endColumn": 16, "tokenType": "struct" },
     { "startLine": 6, "startColumn": 32, "endLine": 6, "endColumn": 32, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 6, "startColumn": 34, "endLine": 6, "endColumn": 34, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 6, "startColumn": 36, "endLine": 6, "endColumn": 36, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 6, "startColumn": 36, "endLine": 6, "endColumn": 36, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 1, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 1, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

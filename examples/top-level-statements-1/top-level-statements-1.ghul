@@ -1,0 +1,13 @@
+use IO.Std.write_line;
+
+// in a file with no namespace, statements at the top level run in
+// order as the program's entry point
+write_line("first");
+write_line("second");
+
+// definitions in the same file are still visible, wherever they sit
+greet(name: string) is
+    write_line("hello, {name}");
+si
+
+greet("ghūl");
