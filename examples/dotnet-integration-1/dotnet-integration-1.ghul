@@ -1,7 +1,7 @@
 use Microsoft.AspNetCore.Builder;
 use Microsoft.AspNetCore.Http;
 
-// map_get is an extension method, so use it and call it with |>:
+// map_get is an extension method, so use it and call it with '|>':
 use Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.map_get;
 
 // >>>
@@ -10,7 +10,7 @@ entry(args: string[]) is
 
     let app = builder.build();
 
-    // |> threads app in as map_get's first argument:
+    // '|>' threads app in as map_get's first argument:
     app |> map_get("/hello", () => Results.ok("hello, world"));
 
     app.run(null);
