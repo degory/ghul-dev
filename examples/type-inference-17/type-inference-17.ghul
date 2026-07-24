@@ -17,7 +17,7 @@ si
 // yet known
 let m = BOX();
 
-// the set call carries an int, so m is BOX[int]
+// the set call takes an int, so m is BOX[int]
 m.set(42);
 
 let x = m.get();
