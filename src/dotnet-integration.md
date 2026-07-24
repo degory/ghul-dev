@@ -68,3 +68,29 @@ Some commonly used namespace and type names are re-mapped in line with ghūl con
 | `System.Object`   | `Ghul.object`        |
 | `System.String`   | `Ghul.string`        |
 
+## ASP.NET Core
+
+ASP.NET Core minimal APIs work from ghūl. Extension methods aren't surfaced as members, so the fluent builder calls go through the `|>` thread-first operator, which passes the left-hand side as the called method's first argument:
+
+<GhulExample name="dotnet-integration-1" />
+
+`app |> map_get(...)` calls the `MapGet` extension on `app`; the route handler is an anonymous function returning an `IResult`.
+
+Controller-style APIs rely on attributes, which apply to classes and methods: `[ApiController]`, `[Route(...)]`, `[HttpGet(...)]` and so on. ghūl doesn't yet place attributes on method parameters, so parameter-binding attributes like `[FromBody]` aren't expressible; minimal APIs bind by position and need none of them.
+
+## Entity Framework Core
+
+Entity Framework Core works from ghūl. A context extends `DbContext` and exposes each table as a `DbSet`; EF Core's conventions expect PascalCase names, so `@IL.name` maps the ghūl members onto them:
+
+<GhulExample name="dotnet-integration-2" />
+
+The `Products` set and the entity's `Id` and `Name` are the names EF Core's model builder and SQL generation look for. Reads and writes call the async methods directly, with `await` - `save_changes_async` here.
+
+## mocking with NSubstitute
+
+The .NET base libraries include no mocking framework; [NSubstitute](https://nsubstitute.github.io/) is the lowest-friction third-party option from ghūl, and the compiler's own test suite uses it. `Substitute.for` builds a stand-in for a trait, and the `Returns` extension stubs a call through `|>`:
+
+<GhulExample name="dotnet-integration-3" />
+
+`for` is a reserved word, so the example escapes it with a backtick. Its argument is the substitute's constructor arguments as an `object[]`; a trait has none, so the argument is an empty array. Where a full framework isn't warranted, a hand-written trait implementation is the zero-dependency alternative.
+

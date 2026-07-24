@@ -2,3 +2,8 @@ node_modules
 src/.vitepress/dist/
 src/.vitepress/cache/
 all.md
+
+# project-backed example build artifacts
+examples/*/bin/
+examples/*/obj/
+examples/*/.assemblies.json

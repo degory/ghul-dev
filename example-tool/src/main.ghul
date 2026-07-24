@@ -201,19 +201,60 @@ namespace ExampleTool is
         // The compiler — building and analysing — resolves the runtime from
         // ghul-runtime.dll in its working directory, and the compiled binary
         // loads it from there too.
-        _provision_runtime(example_dir);
+        let project = _find_ghulproj(example_dir);
 
-        let compile = run_process(
-            "dotnet",
-            "ghul-compiler --v3 --test-run --dotnet --sdk-ref-path \"{sdk_ref_path}\" {source_file} -o binary.exe",
-            example_dir
-        );
+        let raw_diagnostics: LIST[DIAGNOSTIC] mut;
+        let compiled: bool mut;
+        let reference_arguments: string mut;
+        let error_output: string mut;
+        let output: string mut;
 
-        let raw_diagnostics = _parse_diagnostics(
-            "{compile.standard_error}\n{compile.standard_output}", source_file
-        );
+        if project? then
+            // Project-backed example: MSBuild restores its packages and
+            // compiles it against the real assemblies, then
+            // GenerateAssembliesJson writes .assemblies.json with the full
+            // reference set for the analyser to resolve hover against.
+            let build = run_process("dotnet", "build -nologo -verbosity:quiet", example_dir);
+            run_process("dotnet", "build -nologo -verbosity:quiet -t:GenerateAssembliesJson", example_dir);
 
-        let compiled = File.exists(Path.combine(example_dir, "binary.exe"));
+            let full_output = "{build.standard_error}\n{build.standard_output}";
+
+            // MSBuild passes the source with its full path, so diagnostics are
+            // prefixed with that rather than the bare file name.
+            let source_path = Path.get_full_path(Path.combine(example_dir, source_file));
+
+            raw_diagnostics = _parse_diagnostics(full_output, source_path);
+            compiled = build.exit_code == 0;
+            reference_arguments = _assembly_reference_arguments(example_dir);
+            error_output = full_output;
+            // The example demonstrates wiring against a framework it can't
+            // start here, so there is no run output to capture.
+            output = "";
+        else
+            _provision_runtime(example_dir);
+
+            let compile = run_process(
+                "dotnet",
+                "ghul-compiler --v3 --test-run --dotnet --sdk-ref-path \"{sdk_ref_path}\" {source_file} -o binary.exe",
+                example_dir
+            );
+
+            raw_diagnostics = _parse_diagnostics(
+                "{compile.standard_error}\n{compile.standard_output}", source_file
+            );
+            compiled = File.exists(Path.combine(example_dir, "binary.exe"));
+            reference_arguments = "--sdk-ref-path \"{sdk_ref_path}\"";
+            error_output = compile.standard_error;
+
+            // No binary for a deliberate-error example — only diagnostics. The
+            // analyser still resolves what it can, so hover survives the failure.
+            output =
+                if compiled then
+                    run_process("dotnet", "binary.exe", example_dir).standard_output
+                else
+                    ""
+                fi;
+        fi
 
         let has_error mut = !compiled;
         let has_warning mut = false;
@@ -236,20 +277,11 @@ namespace ExampleTool is
 
         if !(actual =~ expected) then
             Std.error.write_line("FAILED example '{name}': expected {expected}, got {actual}");
-            Std.error.write_line(compile.standard_error);
+            Std.error.write_line(error_output);
             return false;
         fi
 
-        // No binary for a deliberate-error example — only diagnostics. The
-        // analyser still resolves what it can, so hover survives the failure.
-        let output =
-            if compiled then
-                run_process("dotnet", "binary.exe", example_dir).standard_output
-            else
-                ""
-            fi;
-
-        let collected = _collect_hovers_and_tokens(example_dir, source_file, source, sdk_ref_path);
+        let collected = _collect_hovers_and_tokens(example_dir, source_file, source, reference_arguments);
 
         let diagnostics = LIST[DIAGNOSTIC]();
         for diagnostic in raw_diagnostics do
@@ -284,14 +316,14 @@ namespace ExampleTool is
     // the edit so the analyser records this file's editor-only inlay hints
     // during compile-expressions.
     _collect_hovers_and_tokens(
-        example_dir: string, source_file: string, source: string, sdk_ref_path: string
+        example_dir: string, source_file: string, source: string, reference_arguments: string
     ) -> (
         region: VISIBLE_REGION,
         hovers: LIST[HOVER],
         semantic_tokens: LIST[SEMANTIC_TOKEN],
         inlay_hints: LIST[INLAY_HINT]
     ) is
-        let use analyser = ANALYSER_PROCESS(example_dir, sdk_ref_path);
+        let use analyser = ANALYSER_PROCESS(example_dir, reference_arguments);
 
         analyser.send_set_open_files(source_file);
 
@@ -370,5 +402,55 @@ namespace ExampleTool is
         if File.exists(source) then
             File.copy(source, target, true);
         fi
+    si
+
+    // The .ghulproj in an example directory, or null for a bare-source
+    // example that compiles against ghul-runtime and the SDK alone. Its
+    // presence selects the MSBuild build-and-analyse path, which resolves
+    // package references the bare compiler invocation cannot.
+    _find_ghulproj(example_dir: string) -> string? is
+        for file in Directory.get_files(example_dir) do
+            if file.ends_with(".ghulproj") then
+                return file;
+            fi
+        od
+
+        return null;
+    si
+
+    // Build the analyser reference-flag fragment from a project's
+    // .assemblies.json (written by the GenerateAssembliesJson MSBuild target):
+    // one `-a "path"` per resolved reference assembly, so the analyser sees
+    // the same reference set the build did.
+    _assembly_reference_arguments(example_dir: string) -> string is
+        let json = File.read_all_text(Path.combine(example_dir, ".assemblies.json"));
+
+        // { "assemblies": [ "/path/one.dll", "/path/two.dll" ] } — a flat
+        // string array. Assembly paths hold no quote or comma, so splitting
+        // the bracketed body on commas and trimming the quotes is enough.
+        let open_bracket = json.index_of('[');
+        let close_bracket = json.last_index_of(']');
+
+        if open_bracket < 0 \/ close_bracket <= open_bracket then
+            return "";
+        fi
+
+        let body = json.substring(open_bracket + 1, close_bracket - open_bracket - 1);
+
+        let arguments = System.Text.StringBuilder();
+
+        for raw in body.split([',']) do
+            let path = raw.trim().trim(['"']);
+
+            if path.length > 0 then
+                if arguments.length > 0 then
+                    arguments.append(' ');
+                fi
+
+                arguments.append("-a \"{path}\"");
+            fi
+        od
+
+        return arguments.to_string();
     si
 si

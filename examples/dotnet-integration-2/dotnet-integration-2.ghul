@@ -1,0 +1,36 @@
+use Microsoft.EntityFrameworkCore.DbContext;
+use Microsoft.EntityFrameworkCore.DbSet;
+use Microsoft.EntityFrameworkCore.DbContextOptions;
+
+// >>>
+// @IL.name maps these onto the PascalCase names EF Core's conventions expect.
+@IL.name("Product")
+class PRODUCT is
+    @IL.name("Id")
+    id: int public;
+
+    @IL.name("Name")
+    name: string public;
+
+    init() is si
+si
+
+class STORE_CONTEXT: DbContext is
+    @IL.name("Products")
+    products: DbSet[PRODUCT];
+
+    init(options: DbContextOptions) is
+        super.init(options);
+    si
+si
+
+add_product(context: STORE_CONTEXT, product: PRODUCT) -> Tasks.TASK is
+    context.products.add(product);
+
+    await context.save_changes_async(System.Threading.CancellationToken.none);
+
+    return;
+si
+// <<<
+
+entry() is si
