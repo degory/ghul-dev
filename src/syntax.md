@@ -55,7 +55,7 @@ A file that declares any `namespace` must place all of its definitions inside na
 
 ## top-level statements
 
-A file with no `namespace` can also carry statements at its top level. They run in source order as the program's entry point, so a short program needs no `entry` function:
+A file with no `namespace` can also have statements at its top level. They run in source order as the program's entry point, so a short program needs no `entry` function:
 
 <GhulExample name="top-level-statements-1" />
 
