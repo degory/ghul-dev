@@ -6,5 +6,3 @@ is_odd(n: int) -> bool =>
     if n == 0 then false else is_even(n - 1) fi;
 // <<<
 
-entry() is
-si

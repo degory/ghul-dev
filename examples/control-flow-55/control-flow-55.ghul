@@ -11,10 +11,8 @@ si
 
 find() -> CAT? => CAT("Tom", true);
 
-entry() is
 // >>>
-    if let c: CAT = find() /\ c.is_friendly then
-        write_line("friendly cat: {c.name}");
-    fi
+if let c: CAT = find() /\ c.is_friendly then
+    write_line("friendly cat: {c.name}");
+fi
 // <<<
-si

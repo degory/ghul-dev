@@ -1,9 +1,9 @@
 {
   "name": "generics-9",
   "code": "// T: new requires the caller to pass a type with a parameterless constructor\necho[T: new](x: T) -> T => x;\nlet w = echo(WIDGET());   // OK: WIDGET has init()\n\nwrite_line(w.describe());",
-  "fullSource": "use IO.Std.write_line;\n\n// T: new requires the caller to pass a type with a parameterless constructor\necho[T: new](x: T) -> T => x;\n\nclass WIDGET() is\n    describe() -> string => \"a widget\";\nsi\n\nentry() is\n    let w = echo(WIDGET());   // OK: WIDGET has init()\n\n    write_line(w.describe());\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\n// T: new requires the caller to pass a type with a parameterless constructor\necho[T: new](x: T) -> T => x;\n\nclass WIDGET() is\n    describe() -> string => \"a widget\";\nsi\n\nlet w = echo(WIDGET());   // OK: WIDGET has init()\n\nwrite_line(w.describe());\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [2],
   "output": "a widget\n",
   "diagnostics": [],

@@ -5,5 +5,3 @@ union Tree is
 si
 // <<<
 
-entry() is
-si

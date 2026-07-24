@@ -1,13 +1,14 @@
 {
   "name": "type-inference-7",
   "code": "let a_string = \"12345\";\nlet an_int = 12345;\nlet an_int_array = [1, 2, 3, 4, 5];",
-  "fullSource": "entry() is\n    let a_string = \"12345\";\n    let an_int = 12345;\n    let an_int_array = [1, 2, 3, 4, 5];\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let a_string = \"12345\";\nlet an_int = 12345;\nlet an_int_array = [1, 2, 3, 4, 5];\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 3, "endColumn": 34, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 12, "text": "a_string: string", "signature": "a_string: string", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "an_int: int", "signature": "an_int: int", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "text": "an_int_array: int[]", "signature": "an_int_array: int[]", "kindLabel": "local value" }

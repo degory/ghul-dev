@@ -1,9 +1,9 @@
 {
   "name": "functional-programming-8",
   "code": "struct THING(name: string);\nlet thing = THING(\"a thing\");\n\nthing.name = \"change it\";",
-  "fullSource": "// expect: error\nstruct THING(name: string);\n\nentry() is\n    let thing = THING(\"a thing\");\n\n    thing.name = \"change it\";\nsi\n",
+  "fullSource": "// expect: error\nstruct THING(name: string);\n\nlet thing = THING(\"a thing\");\n\nthing.name = \"change it\";\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [1],
   "output": "",
   "diagnostics": [
@@ -13,6 +13,7 @@
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 12, "text": "struct THING(name: string)", "signature": "struct THING(name: string)", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 17, "text": "THING.name: string", "signature": "THING.name: string", "kindLabel": "pure instance property" },
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 25, "text": "THING.init(name: string)", "signature": "THING.init(name: string)", "kindLabel": "constructor" },
+    { "startLine": 1, "startColumn": 1, "endLine": 4, "endColumn": 24, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "global function" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "thing: THING", "signature": "thing: THING", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 17, "text": "THING.init(name: string)", "signature": "THING.init(name: string)", "kindLabel": "constructor" },

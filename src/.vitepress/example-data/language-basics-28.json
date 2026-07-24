@@ -1,9 +1,9 @@
 {
   "name": "language-basics-28",
   "code": "let name = lookup();\nlet greeting = \"hello, {name ?? \"stranger\"}\";\nwrite_line(greeting);",
-  "fullSource": "use IO.Std.write_line;\n\nlookup() -> string? => null;\n\nentry() is\n    let name = lookup();\n    let greeting = \"hello, {name ?? \"stranger\"}\";\n    write_line(greeting);\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\nlookup() -> string? => null;\n\nlet name = lookup();\nlet greeting = \"hello, {name ?? \"stranger\"}\";\nwrite_line(greeting);\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "hello, stranger\n",
   "diagnostics": [],

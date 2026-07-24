@@ -12,11 +12,9 @@ si
 
 any_animal() -> Animal => CAT();
 
-entry() is
-    let pet mut = any_animal();
+let pet mut = any_animal();
 // >>>
-    pet = CAT();
-    // assigning a CAT narrows pet to CAT, so purr() is in reach
-    write_line(pet.purr());
+pet = CAT();
+// assigning a CAT narrows pet to CAT, so purr() is in reach
+write_line(pet.purr());
 // <<<
-si

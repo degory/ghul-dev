@@ -8,6 +8,4 @@ class PERSON(name: string, age: int) is
 si
 // <<<
 
-entry() is
-    PERSON("alice", 30).describe();
-si
+PERSON("alice", 30).describe();

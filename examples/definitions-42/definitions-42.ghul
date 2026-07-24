@@ -10,10 +10,8 @@ union Token(name: string): Named is
     IDENTIFIER(text: string, ..);
 si
 
-entry() is
 // >>>
-    let t = Token.IDENTIFIER("count", "identifier");
-    write_line(t.name);    // identifier - shared primary-header field
-    write_line(t.label()); // [identifier] - inherited trait default
+let t = Token.IDENTIFIER("count", "identifier");
+write_line(t.name);    // identifier - shared primary-header field
+write_line(t.label()); // [identifier] - inherited trait default
 // <<<
-si

@@ -18,6 +18,4 @@ class BOX(width: int public, height: int field, _depth: int) is
 si
 // <<<
 
-entry() is
-    POINT(10, 20).show();
-si
+POINT(10, 20).show();

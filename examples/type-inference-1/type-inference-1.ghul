@@ -16,6 +16,4 @@ totals(
 si
 // <<<
 
-entry() is
-    totals([1, 2, 3]);
-si
+totals([1, 2, 3]);

@@ -1,7 +1,7 @@
 {
   "name": "expression-oriented-programming-5",
   "code": "grade(score: int) -> string is\n    // a val block as a let initializer, composing a case and an if:\n    let label = val\n        let band =\n            case score / 10\n            when 10, 9 then \"A\"\n            when 8 then \"B\"\n            when 7 then \"C\"\n            else \"F\"\n            esac;\n\n        if band == \"F\" then \"fail\" else \"pass ({band})\" fi\n    lav;\n\n    return label;\nsi",
-  "fullSource": "use IO.Std.write_line;\n\ngrade(score: int) -> string is\n    // a val block as a let initializer, composing a case and an if:\n    let label = val\n        let band =\n            case score / 10\n            when 10, 9 then \"A\"\n            when 8 then \"B\"\n            when 7 then \"C\"\n            else \"F\"\n            esac;\n\n        if band == \"F\" then \"fail\" else \"pass ({band})\" fi\n    lav;\n\n    return label;\nsi\n\nentry() is\n    write_line(grade(95));\n    write_line(grade(82));\n    write_line(grade(60));\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\ngrade(score: int) -> string is\n    // a val block as a let initializer, composing a case and an if:\n    let label = val\n        let band =\n            case score / 10\n            when 10, 9 then \"A\"\n            when 8 then \"B\"\n            when 7 then \"C\"\n            else \"F\"\n            esac;\n\n        if band == \"F\" then \"fail\" else \"pass ({band})\" fi\n    lav;\n\n    return label;\nsi\n\nwrite_line(grade(95));\nwrite_line(grade(82));\nwrite_line(grade(60));\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

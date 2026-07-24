@@ -1,10 +1,8 @@
-entry() is
 // >>>
-    let f = i => i * 2;
-    f(123);
-    let g = f;
-    g(456);
+let f = i => i * 2;
+f(123);
+let g = f;
+g(456);
 
-    let ff = (f: int -> int, i) => f(f(i));
+let ff = (f: int -> int, i) => f(f(i));
 // <<<
-si

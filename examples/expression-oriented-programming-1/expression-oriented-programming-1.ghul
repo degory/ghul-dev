@@ -7,9 +7,7 @@ sign(n: int) -> string =>
     else "positive"
     fi;
 
-entry() is
-    write_line(sign(-4));
-    write_line(sign(0));
-    write_line(sign(7));
-si
+write_line(sign(-4));
+write_line(sign(0));
+write_line(sign(7));
 // <<<

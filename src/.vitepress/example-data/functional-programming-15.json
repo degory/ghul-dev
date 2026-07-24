@@ -1,19 +1,19 @@
 {
   "name": "functional-programming-15",
   "code": "if isa Option.SOME(an_option) then\n    let value = an_option.value;\n    write_line(\"the option holds {value}\");\nfi",
-  "fullSource": "use IO.Std.write_line;\n\nunion Option[T] is\n    SOME(value: T);\n    NONE;\nsi\n\nentry() is\n    let an_option: Option[int] = Option.SOME(42);\n    if isa Option.SOME(an_option) then\n        let value = an_option.value;\n        write_line(\"the option holds {value}\");\n    fi\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\nunion Option[T] is\n    SOME(value: T);\n    NONE;\nsi\n\nlet an_option: Option[int] = Option.SOME(42);\nif isa Option.SOME(an_option) then\n    let value = an_option.value;\n    write_line(\"the option holds {value}\");\nfi\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "the option holds 42\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 13, "text": "value: int", "signature": "value: int", "kindLabel": "local value" },
-    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 25, "text": "an_option: Option[int]\n    ► Option.SOME[int]", "signature": "an_option: Option[int]\n    ► Option.SOME[int]", "kindLabel": "local value" },
-    { "startLine": 2, "startColumn": 27, "endLine": 2, "endColumn": 31, "text": "Option.SOME[int].value: int", "signature": "Option.SOME[int].value: int", "kindLabel": "variant field" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 18, "text": "Option.SOME[T](value: T)", "signature": "Option.SOME[T](value: T)", "kindLabel": "variant" },
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 13, "text": "union Option[T]", "signature": "union Option[T]", "kindLabel": "union" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 28, "text": "an_option: Option[int]", "signature": "an_option: Option[int]", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 13, "text": "value: int", "signature": "value: int", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 25, "text": "an_option: Option[int]\n    ► Option.SOME[int]", "signature": "an_option: Option[int]\n    ► Option.SOME[int]", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 27, "endLine": 2, "endColumn": 31, "text": "Option.SOME[int].value: int", "signature": "Option.SOME[int].value: int", "kindLabel": "variant field" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 39, "text": "value: int", "signature": "value: int", "kindLabel": "local value" }
   ],
@@ -21,12 +21,12 @@
     { "line": 1, "column": 20, "label": "►", "detail": "► Option.SOME[int]\n> Option.NONE[int]", "code": "narrowing-isa" }
   ],
   "semanticTokens": [
-    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 25, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 27, "endLine": 2, "endColumn": 31, "tokenType": "property" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 18, "tokenType": "class" },
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 13, "tokenType": "class" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 28, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 25, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 27, "endLine": 2, "endColumn": 31, "tokenType": "property" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
     { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 39, "tokenType": "variable", "modifiers": "readonly" }
   ]

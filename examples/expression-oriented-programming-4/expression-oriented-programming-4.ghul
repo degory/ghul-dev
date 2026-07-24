@@ -16,15 +16,13 @@ class COUNTER is
     lav;
 si
 
-entry() is
-    write_line("square(6) = {square(6)}");
+write_line("square(6) = {square(6)}");
 
-    let c = COUNTER();
-    write_line("bump = {c.bump()}");
-    write_line("bump = {c.bump()}");
+let c = COUNTER();
+write_line("bump = {c.bump()}");
+write_line("bump = {c.bump()}");
 
-    // expression-bodied anonymous function:
-    let twice = (n: int) => n * 2;
-    write_line("twice(21) = {twice(21)}");
-si
+// expression-bodied anonymous function:
+let twice = (n: int) => n * 2;
+write_line("twice(21) = {twice(21)}");
 // <<<

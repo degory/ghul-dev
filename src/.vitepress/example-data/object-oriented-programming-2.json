@@ -1,9 +1,9 @@
 {
   "name": "object-oriented-programming-2",
   "code": "let animals: Animal[] = [DOG(\"Rex\"), CAT(\"Tom\")];\n\nfor a in animals do\n    write_line(a.describe()); // describe calls the overriding speak\nod",
-  "fullSource": "use IO.Std.write_line;\n\nclass Animal is\n    _name: string;\n    init(name: string) is _name = name; si\n\n    name: string => _name;\n    speak() -> string;                     // body-less: Animal is implicitly abstract\n    describe() -> string => \"{_name} says {speak()}\";\nsi\n\nclass DOG: Animal is\n    init(name: string) is super.init(name); si\n    speak() -> string => \"woof\";\nsi\n\nclass CAT: Animal is\n    init(name: string) is super.init(name); si\n    speak() -> string => \"meow\";\nsi\n\nentry() is\n    let animals: Animal[] = [DOG(\"Rex\"), CAT(\"Tom\")];\n\n    for a in animals do\n        write_line(a.describe()); // describe calls the overriding speak\n    od\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\nclass Animal is\n    _name: string;\n    init(name: string) is _name = name; si\n\n    name: string => _name;\n    speak() -> string;                     // body-less: Animal is implicitly abstract\n    describe() -> string => \"{_name} says {speak()}\";\nsi\n\nclass DOG: Animal is\n    init(name: string) is super.init(name); si\n    speak() -> string => \"woof\";\nsi\n\nclass CAT: Animal is\n    init(name: string) is super.init(name); si\n    speak() -> string => \"meow\";\nsi\n\nlet animals: Animal[] = [DOG(\"Rex\"), CAT(\"Tom\")];\n\nfor a in animals do\n    write_line(a.describe()); // describe calls the overriding speak\nod\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "Rex says woof\nTom says meow\n",
   "diagnostics": [],

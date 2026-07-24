@@ -10,8 +10,6 @@ class DOG(): Animal;
 merge[T](a: T, b: T) -> T => a;
 // <<<
 
-entry() is
 // >>>
-    let a = merge(CAT(), DOG());
+let a = merge(CAT(), DOG());
 // <<<
-si

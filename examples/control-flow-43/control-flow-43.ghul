@@ -14,5 +14,3 @@ try_something(limit: int) is
 si
 // <<<
 
-entry() is
-si

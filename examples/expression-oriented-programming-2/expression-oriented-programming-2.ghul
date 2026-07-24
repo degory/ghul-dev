@@ -8,9 +8,7 @@ day_kind(day: int) -> string =>
     else "weekday"
     esac;
 
-entry() is
-    write_line(day_kind(5));
-    write_line(day_kind(3));
-    write_line(day_kind(6));
-si
+write_line(day_kind(5));
+write_line(day_kind(3));
+write_line(day_kind(6));
 // <<<

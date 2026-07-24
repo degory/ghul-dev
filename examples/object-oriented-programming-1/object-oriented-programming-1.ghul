@@ -1,53 +1,51 @@
 use IO.Std.write_line;
 
-entry() is
-    let int_calculator = CALCULATOR(
-        [
-            ("+", INTEGER_ADDITION()),
-            ("-", INTEGER_SUBTRACTION()),
-            ("*", INTEGER_MULTIPLICATION()),
-            ("/", INTEGER_DIVISION())
-        ]
+let int_calculator = CALCULATOR(
+    [
+        ("+", INTEGER_ADDITION()),
+        ("-", INTEGER_SUBTRACTION()),
+        ("*", INTEGER_MULTIPLICATION()),
+        ("/", INTEGER_DIVISION())
+    ]
+);
+
+write_line(
+    "1 + 2 = {int_calculator.calculate("+", 1, 2)}"
+);
+write_line(
+    "1 - 2 = {int_calculator.calculate("-", 1, 2)}"
+);
+write_line(
+    "1 * 2 = {int_calculator.calculate("*", 1, 2)}"
+);
+write_line(
+    "1 / 2 = {int_calculator.calculate("/", 1, 2)}"
+);
+
+let from_memory =
+    int_calculator.calculate_from_memory("-", 3);
+write_line("1 + 2 - 3 = {from_memory}");
+
+let string_calculator = CALCULATOR(
+    [
+        ("+", STRING_CONCATENATION()),
+        ("-", STRING_SUBTRACTION())
+    ]
+);
+
+let concatenated =
+    string_calculator.calculate("+", "hello", "world");
+write_line("hello + world = {concatenated}");
+
+let subtracted =
+    string_calculator.calculate(
+        "-", "helloworld", "world"
     );
+write_line("helloworld - world = {subtracted}");
 
-    write_line(
-        "1 + 2 = {int_calculator.calculate("+", 1, 2)}"
-    );
-    write_line(
-        "1 - 2 = {int_calculator.calculate("-", 1, 2)}"
-    );
-    write_line(
-        "1 * 2 = {int_calculator.calculate("*", 1, 2)}"
-    );
-    write_line(
-        "1 / 2 = {int_calculator.calculate("/", 1, 2)}"
-    );
+string_calculator.clear_memory();
 
-    let from_memory =
-        int_calculator.calculate_from_memory("-", 3);
-    write_line("1 + 2 - 3 = {from_memory}");
-
-    let string_calculator = CALCULATOR(
-        [
-            ("+", STRING_CONCATENATION()),
-            ("-", STRING_SUBTRACTION())
-        ]
-    );
-
-    let concatenated =
-        string_calculator.calculate("+", "hello", "world");
-    write_line("hello + world = {concatenated}");
-
-    let subtracted =
-        string_calculator.calculate(
-            "-", "helloworld", "world"
-        );
-    write_line("helloworld - world = {subtracted}");
-
-    string_calculator.clear_memory();
-
-    write_line("memory is cleared");
-si
+write_line("memory is cleared");
 
 trait Operation[T] is
     execute(left: T, right: T) -> T;

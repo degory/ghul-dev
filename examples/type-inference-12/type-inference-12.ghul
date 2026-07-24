@@ -2,20 +2,18 @@ class BASE();
 
 class DERIVED(): BASE;
 
-entry() is
 // >>>
-    let derived =
-        if true then
-            DERIVED()
-        else
-            DERIVED()
-        fi;
+let derived =
+    if true then
+        DERIVED()
+    else
+        DERIVED()
+    fi;
 
-    let base =
-        if true then
-            DERIVED()
-        else
-            BASE()
-        fi;
+let base =
+    if true then
+        DERIVED()
+    else
+        BASE()
+    fi;
 // <<<
-si

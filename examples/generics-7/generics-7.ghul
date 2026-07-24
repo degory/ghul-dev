@@ -13,8 +13,6 @@ si
 class CAT(name: string): Greetable;
 // <<<
 
-entry() is
 // >>>
-    greet(CAT("whiskers"));
+greet(CAT("whiskers"));
 // <<<
-si

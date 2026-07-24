@@ -1,23 +1,22 @@
 {
   "name": "definitions-29",
-  "code": "// the compiler places this in an auto-generated\n// namespace private to this source file\nentry() is\n    IO.Std.write_line(\"Hello, world!\");\nsi",
-  "fullSource": "// the compiler places this in an auto-generated\n// namespace private to this source file\nentry() is\n    IO.Std.write_line(\"Hello, world!\");\nsi\n",
+  "code": "// the compiler places this in an auto-generated\n// namespace private to this source file\nIO.Std.write_line(\"Hello, world!\");",
+  "fullSource": "// the compiler places this in an auto-generated\n// namespace private to this source file\nIO.Std.write_line(\"Hello, world!\");\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "Hello, world!\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 5, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 6, "text": "namespace IO", "signature": "namespace IO", "kindLabel": "" },
-    { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 10, "text": "class IO.Std", "signature": "class IO.Std", "kindLabel": "class" },
-    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 21, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" }
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 34, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 2, "text": "namespace IO", "signature": "namespace IO", "kindLabel": "" },
+    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 6, "text": "class IO.Std", "signature": "class IO.Std", "kindLabel": "class" },
+    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 17, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 5, "tokenType": "function" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 6, "tokenType": "namespace" },
-    { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 10, "tokenType": "class" },
-    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 21, "tokenType": "method", "modifiers": "static" }
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 2, "tokenType": "namespace" },
+    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 6, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 17, "tokenType": "method", "modifiers": "static" }
   ]
 }

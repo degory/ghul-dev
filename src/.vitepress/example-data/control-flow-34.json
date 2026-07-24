@@ -1,9 +1,9 @@
 {
   "name": "control-flow-34",
   "code": "class INSUFFICIENT_FUNDS_EXCEPTION(message: string): System.Exception is\n    super(message);\nsi",
-  "fullSource": "class INSUFFICIENT_FUNDS_EXCEPTION(message: string): System.Exception is\n    super(message);\nsi\n\nentry() is\nsi\n",
+  "fullSource": "class INSUFFICIENT_FUNDS_EXCEPTION(message: string): System.Exception is\n    super(message);\nsi\n\n",
   "hiddenBefore": false,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],

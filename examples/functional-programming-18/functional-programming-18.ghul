@@ -20,5 +20,3 @@ area(s: Shape) -> double is
 si
 // <<<
 
-entry() is
-si

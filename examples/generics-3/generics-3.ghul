@@ -2,5 +2,3 @@
 struct HOLD_SOMETHING[T](value: T);
 // <<<
 
-entry() is
-si

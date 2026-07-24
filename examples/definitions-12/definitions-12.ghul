@@ -1,12 +1,10 @@
 struct POINT(x: double, y: double);
 
-entry() is
-    let origin = POINT(0.0D, 0.0D);
-    let right = POINT(1.0D, 0.0D);
+let origin = POINT(0.0D, 0.0D);
+let right = POINT(1.0D, 0.0D);
 // >>>
-    let zero_zero = POINT(0.0D, 0.0D);
+let zero_zero = POINT(0.0D, 0.0D);
 
-    assert origin == zero_zero;
-    assert origin != right;
+assert origin == zero_zero;
+assert origin != right;
 // <<<
-si

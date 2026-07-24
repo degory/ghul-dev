@@ -1,13 +1,14 @@
 {
   "name": "expressions-16",
   "code": "let equal = 5 == 5; // Equality\nlet not_equal = 5 != 10; // Inequality\nlet less_than = 5 < 10; // Less than\nlet greater_than = 10 > 5; // Greater than\nlet less_than_or_equal = 5 <= 5; // Less or equal\nlet greater_than_or_equal = 10 >= 10; // Greater or equal",
-  "fullSource": "entry() is\n    let equal = 5 == 5; // Equality\n    let not_equal = 5 != 10; // Inequality\n    let less_than = 5 < 10; // Less than\n    let greater_than = 10 > 5; // Greater than\n    let less_than_or_equal = 5 <= 5; // Less or equal\n    let greater_than_or_equal = 10 >= 10; // Greater or equal\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let equal = 5 == 5; // Equality\nlet not_equal = 5 != 10; // Inequality\nlet less_than = 5 < 10; // Less than\nlet greater_than = 10 > 5; // Greater than\nlet less_than_or_equal = 5 <= 5; // Less or equal\nlet greater_than_or_equal = 10 >= 10; // Greater or equal\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 6, "endColumn": 36, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "equal: bool", "signature": "equal: bool", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 16, "text": "Ghul.==[int](a: int, b: int) -> bool", "signature": "Ghul.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "text": "not_equal: bool", "signature": "not_equal: bool", "kindLabel": "local value" },

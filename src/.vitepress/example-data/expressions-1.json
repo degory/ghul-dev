@@ -1,13 +1,14 @@
 {
   "name": "expressions-1",
   "code": "let i = 12_345_678; // int\nlet hex = 0x1234_ABCD; // int\nlet long = 1_000_000_000_000_000L; // long\n\nlet hex_unsigned_long = 0x1234_5678__9ABC_DEF0_UL; // ulong\n\nlet b = 99b; // byte",
-  "fullSource": "entry() is\n    let i = 12_345_678; // int\n    let hex = 0x1234_ABCD; // int\n    let long = 1_000_000_000_000_000L; // long\n\n    let hex_unsigned_long = 0x1234_5678__9ABC_DEF0_UL; // ulong\n\n    let b = 99b; // byte\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let i = 12_345_678; // int\nlet hex = 0x1234_ABCD; // int\nlet long = 1_000_000_000_000_000L; // long\n\nlet hex_unsigned_long = 0x1234_5678__9ABC_DEF0_UL; // ulong\n\nlet b = 99b; // byte\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 7, "endColumn": 11, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: int", "signature": "i: int", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "text": "hex: int", "signature": "hex: int", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "long: long", "signature": "long: long", "kindLabel": "local value" },

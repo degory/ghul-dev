@@ -1,7 +1,7 @@
 {
   "name": "control-flow-51",
   "code": "length_of(key: string?) -> int =>\n    assert key? else \"key is null\" in\n    key.length;",
-  "fullSource": "use IO.Std.write_line;\n\nlength_of(key: string?) -> int =>\n    assert key? else \"key is null\" in\n    key.length;\n\nentry() is\n    write_line(length_of(\"hello\"));\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\nlength_of(key: string?) -> int =>\n    assert key? else \"key is null\" in\n    key.length;\n\nwrite_line(length_of(\"hello\"));\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

@@ -11,15 +11,13 @@ some_call() -> Result[int, string] is
     return Result.OK[int, string](42);
 si
 
-entry() is
 // >>>
-    let r: Result[int, string] = some_call();
+let r: Result[int, string] = some_call();
 
-    if isa Result.OK(r) then
-        write_line("ok: {r.value}");
-    else
-        // r is narrowed to Result.ERR here
-        write_line("err: {r.error}");
-    fi
+if isa Result.OK(r) then
+    write_line("ok: {r.value}");
+else
+    // r is narrowed to Result.ERR here
+    write_line("err: {r.error}");
+fi
 // <<<
-si

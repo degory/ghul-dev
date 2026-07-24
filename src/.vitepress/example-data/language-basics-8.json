@@ -1,13 +1,14 @@
 {
   "name": "language-basics-8",
   "code": "let numbers: int[] = [1, 2, 3];",
-  "fullSource": "entry() is\n    let numbers: int[] = [1, 2, 3];\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let numbers: int[] = [1, 2, 3];\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 30, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 16, "text": "struct int", "signature": "struct int", "kindLabel": "struct" }
   ],

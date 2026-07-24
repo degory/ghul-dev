@@ -1,9 +1,9 @@
 {
   "name": "type-inference-20",
   "code": "let length_of = x => x.length;\nwrite_line(\"{length_of(\"hello\")}\");",
-  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let length_of = x => x.length;\n    write_line(\"{length_of(\"hello\")}\");\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\nlet length_of = x => x.length;\nwrite_line(\"{length_of(\"hello\")}\");\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "5\n",
   "diagnostics": [],
@@ -11,7 +11,7 @@
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "text": "x: string", "signature": "x: string", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 13, "text": "length_of: string -> int", "signature": "length_of: string -> int", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 22, "text": "x: string", "signature": "x: string", "kindLabel": "local argument" },
-    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 29, "text": "string.length: int", "signature": "string.length: int", "kindLabel": "instance property" },
+    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 29, "text": "string.length: int", "signature": "string.length: int", "kindLabel": "pure instance property" },
     { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 22, "text": "length_of: string -> int", "signature": "length_of: string -> int", "kindLabel": "local value" }
   ],

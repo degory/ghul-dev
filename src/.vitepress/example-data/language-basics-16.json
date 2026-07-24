@@ -1,9 +1,9 @@
 {
   "name": "language-basics-16",
   "code": "if name? then\n    write_line(\"name is {name}\"); // name is non-optional here\nfi",
-  "fullSource": "use IO.Std.write_line;\n\nlookup() -> string? => \"Alice\";\n\nentry() is\n    let name = lookup();\n    if name? then\n        write_line(\"name is {name}\"); // name is non-optional here\n    fi\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\nlookup() -> string? => \"Alice\";\n\nlet name = lookup();\nif name? then\n    write_line(\"name is {name}\"); // name is non-optional here\nfi\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "name is Alice\n",
   "diagnostics": [],

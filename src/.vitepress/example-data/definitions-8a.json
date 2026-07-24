@@ -1,9 +1,9 @@
 {
   "name": "definitions-8a",
   "code": "class POINT(x: int, y: int) is\nsi",
-  "fullSource": "class POINT(x: int, y: int) is\nsi\n\nentry() is\nsi\n",
+  "fullSource": "class POINT(x: int, y: int) is\nsi\n\n",
   "hiddenBefore": false,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],

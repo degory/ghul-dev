@@ -6,17 +6,15 @@ class BOX is
     init() is si
 si
 
-entry() is
-    let thing = BOX();
+let thing = BOX();
 // >>>
-    let i mut = 0;
-    let j = 10;
-    let s mut = "Hello";
+let i mut = 0;
+let j = 10;
+let s mut = "Hello";
 
-    i = i + j;
-    s = "{s} World!";
+i = i + j;
+s = "{s} World!";
 
-    thing.property = i + j;
+thing.property = i + j;
 // <<<
-    write_line("i = {i}, s = {s}, thing.property = {thing.property}");
-si
+write_line("i = {i}, s = {s}, thing.property = {thing.property}");

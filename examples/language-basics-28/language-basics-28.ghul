@@ -2,10 +2,8 @@ use IO.Std.write_line;
 
 lookup() -> string? => null;
 
-entry() is
 // >>>
-    let name = lookup();
-    let greeting = "hello, {name ?? "stranger"}";
-    write_line(greeting);
+let name = lookup();
+let greeting = "hello, {name ?? "stranger"}";
+write_line(greeting);
 // <<<
-si

@@ -1,13 +1,14 @@
 {
   "name": "expressions-11",
   "code": "let list = [1, 2, 3, 4, 5];\n\nlist | .filter(element => element < 3);",
-  "fullSource": "entry() is\n    let list = [1, 2, 3, 4, 5];\n\n    list | .filter(element => element < 3);\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let list = [1, 2, 3, 4, 5];\n\nlist | .filter(element => element < 3);\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 3, "endColumn": 38, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "list: int[]", "signature": "list: int[]", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "text": "element: int", "signature": "element: int", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "text": "Ghul.Pipes.pipe[int](\n    source: Collections.Iterable[int]\n) -> Ghul.Pipes.Pipe[int]", "signature": "Ghul.Pipes.pipe[int](\n    source: Collections.Iterable[int]\n) -> Ghul.Pipes.Pipe[int]", "kindLabel": "global function" },

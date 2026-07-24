@@ -4,5 +4,3 @@ class INSUFFICIENT_FUNDS_EXCEPTION(message: string): System.Exception is
 si
 // <<<
 
-entry() is
-si

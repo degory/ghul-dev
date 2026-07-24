@@ -6,5 +6,3 @@ sum_three_ints(i: int, j: int, k: int) -> int is
 si
 // <<<
 
-entry() is
-si

@@ -12,13 +12,11 @@ withdraw(account: int, amount: int) -> int is
     return account - amount;
 si
 
-entry() is
-    let account = 50;
+let account = 50;
 // >>>
-    try
-        withdraw(account, 100);
-    catch e: INSUFFICIENT_FUNDS_EXCEPTION
-        write_line("declined: {e.message}");
-    yrt
+try
+    withdraw(account, 100);
+catch e: INSUFFICIENT_FUNDS_EXCEPTION
+    write_line("declined: {e.message}");
+yrt
 // <<<
-si

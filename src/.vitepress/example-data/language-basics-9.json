@@ -1,13 +1,14 @@
 {
   "name": "language-basics-9",
   "code": "let primes = [2, 3, 5, 7, 11];",
-  "fullSource": "entry() is\n    let primes = [2, 3, 5, 7, 11];\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let primes = [2, 3, 5, 7, 11];\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 29, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "primes: int[]", "signature": "primes: int[]", "kindLabel": "local value" }
   ],
   "inlayHints": [],

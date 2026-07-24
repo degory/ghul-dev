@@ -1,9 +1,9 @@
 {
   "name": "control-flow-53",
   "code": "let label = case status\nwhen 200 then \"ok\"\nwhen 500, 501, 502 then \"server error\"\nelse \"other\"\nesac;\n\nwrite_line(label);",
-  "fullSource": "use IO.Std.write_line;\n\nentry() is\n    let status = 500;\n    let label = case status\n    when 200 then \"ok\"\n    when 500, 501, 502 then \"server error\"\n    else \"other\"\n    esac;\n\n    write_line(label);\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\nlet status = 500;\nlet label = case status\nwhen 200 then \"ok\"\nwhen 500, 501, 502 then \"server error\"\nelse \"other\"\nesac;\n\nwrite_line(label);\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "server error\n",
   "diagnostics": [],

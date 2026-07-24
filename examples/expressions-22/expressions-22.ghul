@@ -1,7 +1,5 @@
 class POINT(x: int, y: int);
 
-entry() is
 // >>>
-    let point = POINT(10, 20);
+let point = POINT(10, 20);
 // <<<
-si

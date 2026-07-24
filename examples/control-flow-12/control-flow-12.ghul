@@ -6,13 +6,11 @@ class CAT(name: string): Animal is
     purr() -> string => "{name} purrs";
 si
 
-entry() is
-    let a: Animal = CAT("whiskers");
+let a: Animal = CAT("whiskers");
 // >>>
-    let c = cast CAT?(a);
+let c = cast CAT?(a);
 
-    if c? then
-        write_line(c.purr());
-    fi
+if c? then
+    write_line(c.purr());
+fi
 // <<<
-si

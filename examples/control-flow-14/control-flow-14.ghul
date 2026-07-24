@@ -10,15 +10,13 @@ class DOG(name: string): Animal is
     bark() -> string => "{name} barks";
 si
 
-entry() is
-    let a: Animal = DOG("rover");
+let a: Animal = DOG("rover");
 // >>>
-    if let c: CAT = a then
-        write_line(c.purr());
-    elif let d: DOG = a then
-        write_line(d.bark());
-    else
-        write_line("some other animal");
-    fi
+if let c: CAT = a then
+    write_line(c.purr());
+elif let d: DOG = a then
+    write_line(d.bark());
+else
+    write_line("some other animal");
+fi
 // <<<
-si

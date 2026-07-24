@@ -15,6 +15,4 @@ class COUNTER is
 si
 // <<<
 
-entry() is
-    COUNTER().tick();
-si
+COUNTER().tick();

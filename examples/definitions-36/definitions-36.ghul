@@ -14,15 +14,13 @@ struct VALUE is
 si
 // <<<
 
-entry() is
 // >>>
-    let v = VALUE(1234);
+let v = VALUE(1234);
 
-    // OK: public_property is publicly readable
-    write_line(v.public_property);
+// OK: public_property is publicly readable
+write_line(v.public_property);
 
-    write_line(v._protected_property);
+write_line(v._protected_property);
 
-    v.public_property = 5678;
+v.public_property = 5678;
 // <<<
-si

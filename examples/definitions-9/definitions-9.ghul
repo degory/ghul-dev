@@ -1,7 +1,5 @@
 class THING();
 
-entry() is
 // >>>
-    let a_thing = THING();
+let a_thing = THING();
 // <<<
-si

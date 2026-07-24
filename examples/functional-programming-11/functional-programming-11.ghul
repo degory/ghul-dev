@@ -6,5 +6,3 @@ apply_if[T](f: T -> T, x: T, predicate: T -> bool) -> T =>
     if predicate(x) then f(x) else x fi;
 // <<<
 
-entry() is
-si

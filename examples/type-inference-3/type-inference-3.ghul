@@ -16,6 +16,4 @@ greet(a: Animal) is
 si
 // <<<
 
-entry() is
-    greet(CAT());
-si
+greet(CAT());

@@ -17,16 +17,14 @@ si
 
 any_animal() -> Animal => CAT();
 
-entry() is
-    let pet mut = any_animal();
+let pet mut = any_animal();
 // >>>
-    if isa CAT(pet) then
-        write_line(pet.purr());
+if isa CAT(pet) then
+    write_line(pet.purr());
 
-        pet = DOG();
-        // reassigning pet drops the narrowing:
-        // pet is Animal again here
-        write_line(pet.name());
-    fi
+    pet = DOG();
+    // reassigning pet drops the narrowing:
+    // pet is Animal again here
+    write_line(pet.name());
+fi
 // <<<
-si

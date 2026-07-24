@@ -20,15 +20,13 @@ class STRING_READER is
     si
 si
 
-entry() is
-    let reader = STRING_READER(["the only line"]);
+let reader = STRING_READER(["the only line"]);
 // >>>
-    if let line = reader.read_line() then
-        // reader.read_line() yields string?;
-        // line is string here
-        write_line("read: {line}");
-    else
-        write_line("end of input");
-    fi
+if let line = reader.read_line() then
+    // reader.read_line() yields string?;
+    // line is string here
+    write_line("read: {line}");
+else
+    write_line("end of input");
+fi
 // <<<
-si

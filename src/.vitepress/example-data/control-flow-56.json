@@ -1,9 +1,9 @@
 {
   "name": "control-flow-56",
   "code": "if isa CAT(pet) then\n    write_line(pet.purr());\n\n    pet = DOG();\n    // reassigning pet drops the narrowing:\n    // pet is Animal again here\n    write_line(pet.name());\nfi",
-  "fullSource": "use IO.Std.write_line;\n\nclass Animal abstract is\n    name() -> string;\nsi\n\nclass CAT: Animal is\n    init() is si\n    name() -> string => \"cat\";\n    purr() -> string => \"purr\";\nsi\n\nclass DOG: Animal is\n    init() is si\n    name() -> string => \"dog\";\nsi\n\nany_animal() -> Animal => CAT();\n\nentry() is\n    let pet mut = any_animal();\n    if isa CAT(pet) then\n        write_line(pet.purr());\n\n        pet = DOG();\n        // reassigning pet drops the narrowing:\n        // pet is Animal again here\n        write_line(pet.name());\n    fi\nsi\n",
+  "fullSource": "use IO.Std.write_line;\n\nclass Animal abstract is\n    name() -> string;\nsi\n\nclass CAT: Animal is\n    init() is si\n    name() -> string => \"cat\";\n    purr() -> string => \"purr\";\nsi\n\nclass DOG: Animal is\n    init() is si\n    name() -> string => \"dog\";\nsi\n\nany_animal() -> Animal => CAT();\n\nlet pet mut = any_animal();\nif isa CAT(pet) then\n    write_line(pet.purr());\n\n    pet = DOG();\n    // reassigning pet drops the narrowing:\n    // pet is Animal again here\n    write_line(pet.name());\nfi\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "purr\ndog\n",
   "diagnostics": [],

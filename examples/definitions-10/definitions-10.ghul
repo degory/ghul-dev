@@ -3,5 +3,3 @@ struct POINT(x: double, y: double) is
 si
 // <<<
 
-entry() is
-si

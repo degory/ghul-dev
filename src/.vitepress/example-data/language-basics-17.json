@@ -1,13 +1,14 @@
 {
   "name": "language-basics-17",
   "code": "let here: int? = 42;   // present\nlet gone: int? = null; // absent",
-  "fullSource": "entry() is\n    let here: int? = 42;   // present\n    let gone: int? = null; // absent\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let here: int? = 42;   // present\nlet gone: int? = null; // absent\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 2, "endColumn": 21, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "here: int?", "signature": "here: int?", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 13, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "gone: int?", "signature": "gone: int?", "kindLabel": "local value" },

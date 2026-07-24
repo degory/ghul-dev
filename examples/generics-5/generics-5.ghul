@@ -5,8 +5,6 @@ union Option[T] is
 si
 // <<<
 
-entry() is
 // >>>
-    let some_int = Option.SOME(1234);
+let some_int = Option.SOME(1234);
 // <<<
-si

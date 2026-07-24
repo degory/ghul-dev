@@ -1,13 +1,14 @@
 {
   "name": "language-basics-11",
   "code": "let point: (int, int) = (10, 20);\nlet person: (string, int) = (\"Alice\", 30);",
-  "fullSource": "entry() is\n    let point: (int, int) = (10, 20);\n    let person: (string, int) = (\"Alice\", 30);\nsi\n",
-  "hiddenBefore": true,
-  "hiddenAfter": true,
+  "fullSource": "let point: (int, int) = (10, 20);\nlet person: (string, int) = (\"Alice\", 30);\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 2, "endColumn": 42, "text": "entry() -> void", "signature": "entry() -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "point: (int, int)", "signature": "point: (int, int)", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 20, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },

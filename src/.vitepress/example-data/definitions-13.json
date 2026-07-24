@@ -1,9 +1,9 @@
 {
   "name": "definitions-13",
   "code": "trait Printable is\n    print();\nsi",
-  "fullSource": "trait Printable is\n    print();\nsi\n\nentry() is\nsi\n",
+  "fullSource": "trait Printable is\n    print();\nsi\n\n",
   "hiddenBefore": false,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
