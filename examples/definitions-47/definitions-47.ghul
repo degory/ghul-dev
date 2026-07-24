@@ -5,7 +5,7 @@ class BOX is
         self.value = value;
     si
 // >>>
-    // three-way ordering returning int; <, <=, >, >= all derive from it:
+    // three-way ordering returning int; '<', '<=', '>', '>=' all derive from it:
     <>(other: BOX) -> int => value - other.value;
 // <<<
 si
