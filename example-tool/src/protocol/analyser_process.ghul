@@ -11,15 +11,18 @@ namespace Analysis.Protocol is
 
     // Drives a `dotnet ghul-compiler --analyse` subprocess over the JSON
     // analysis protocol: one JSON object per line, newline-terminated; requests
-    // discriminated by `command`, responses by `kind`. Uses the canned
-    // `--v3 --test-run` resolution so no `.assemblies.json` is needed;
-    // `ghul-runtime.dll` must be present in the working directory.
+    // discriminated by `command`, responses by `kind`. `reference_arguments`
+    // is the compiler flag fragment that resolves the reference set: either
+    // `--sdk-ref-path "..."` (the canned `--v3 --test-run` resolution, with
+    // `ghul-runtime.dll` in the working directory) for a bare-source example,
+    // or a run of `-a "..."` flags from a project's `.assemblies.json` for a
+    // project-backed example.
     class ANALYSER_PROCESS: Disposable is
         _process: Process;
         _stderr_capture: StringBuilder;
         _options: JsonSerializerOptions;
 
-        init(working_directory: string, sdk_ref_path: string) is
+        init(working_directory: string, reference_arguments: string) is
             _options = JsonSerializerOptions();
             // Variant constructor args emit as public CLR fields, not
             // properties — System.Text.Json's default is to skip fields.
@@ -28,7 +31,7 @@ namespace Analysis.Protocol is
             let start_info = ProcessStartInfo();
 
             start_info.file_name = "dotnet";
-            start_info.arguments = "ghul-compiler --analyse --v3 --test-run --sdk-ref-path \"{sdk_ref_path}\"";
+            start_info.arguments = "ghul-compiler --analyse --v3 --test-run {reference_arguments}";
             start_info.working_directory = working_directory;
 
             start_info.use_shell_execute = false;

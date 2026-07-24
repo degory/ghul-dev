@@ -1,0 +1,23 @@
+use NSubstitute;
+use NSubstitute.SubstituteExtensions.returns;
+
+// >>>
+trait Clock is
+    now() -> System.DateTime;
+si
+
+test_uses_a_stubbed_clock() static is
+    // Substitute.for takes the constructor arguments as an object[]; a
+    // trait has none, so pass an empty array.
+    let clock = Substitute.`for[Clock]([]);
+
+    // stub a return value for a call:
+    clock.now() |> returns(System.DateTime(2020, 1, 1, 9, 0, 0), null);
+
+    IO.Std.write_line("stubbed hour is {clock.now().hour}");
+si
+// <<<
+
+entry() is
+    test_uses_a_stubbed_clock();
+si
