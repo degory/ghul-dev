@@ -1,0 +1,17 @@
+class BOX is
+    value: int;
+
+    init(value: int) is
+        self.value = value;
+    si
+// >>>
+    // three-way ordering returning int; '<', '<=', '>', '>=' all derive from it:
+    <>(other: BOX) -> int => value - other.value;
+// <<<
+si
+
+let a = BOX(5);
+let b = BOX(10);
+
+assert a < b;
+assert b >= a;
