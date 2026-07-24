@@ -1,7 +1,7 @@
 {
   "name": "thread-first-1",
-  "code": "use IO.Std.write_line;\n\nclass BOX(value: int);\n\ntwice(x: int) -> int => x * 2;\ndescribe(b: BOX) -> string => \"box of {b.value}\";\n\n// |> threads its left side in as the first argument of the call on\n// its right, so a chain reads left-to-right instead of nesting\n// inside-out. This line means write_line(describe(BOX(twice(21)))).\n21 |> twice() |> BOX() |> describe() |> write_line();",
-  "fullSource": "use IO.Std.write_line;\n\nclass BOX(value: int);\n\ntwice(x: int) -> int => x * 2;\ndescribe(b: BOX) -> string => \"box of {b.value}\";\n\n// |> threads its left side in as the first argument of the call on\n// its right, so a chain reads left-to-right instead of nesting\n// inside-out. This line means write_line(describe(BOX(twice(21)))).\n21 |> twice() |> BOX() |> describe() |> write_line();\n",
+  "code": "use IO.Std.write_line;\n\nclass BOX(value: int);\n\ntwice(x: int) -> int => x * 2;\ndescribe(b: BOX) -> string => \"box of {b.value}\";\n\n// '|>' threads its left side in as the first argument of the call on\n// its right, so a chain reads left-to-right instead of nesting\n// inside-out. This line means write_line(describe(BOX(twice(21)))).\n21 |> twice() |> BOX() |> describe() |> write_line();",
+  "fullSource": "use IO.Std.write_line;\n\nclass BOX(value: int);\n\ntwice(x: int) -> int => x * 2;\ndescribe(b: BOX) -> string => \"box of {b.value}\";\n\n// '|>' threads its left side in as the first argument of the call on\n// its right, so a chain reads left-to-right instead of nesting\n// inside-out. This line means write_line(describe(BOX(twice(21)))).\n21 |> twice() |> BOX() |> describe() |> write_line();\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
