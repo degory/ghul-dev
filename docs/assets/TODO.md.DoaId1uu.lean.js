@@ -8,9 +8,7 @@ si`,k=`use System.Exception;
 
 do_something_risky(i: int) -> int => i;
 
-entry() is
-    swallow(1);
-si
+swallow(1);
 
 swallow(i: int) -> int is
     try
