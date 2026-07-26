@@ -51,7 +51,7 @@ jobs:
         You run in parallel with CI. Whether the site builds is gated by CI before merge - that's not your job. Trust the diff as written.
 
         Read these files first, in order:
-        1. .github/claude-review.md - how to operate, severity bar, what to flag
+        1. .github/claude-review.md - what this repo is, and what to watch for in it
         2. STYLE.md - authoritative terminology, prose, and code-comment rules
         3. GHUL.md - ghūl language reference; consult for any ghūl code in <GhulExample/> blocks or inline backticks
 
