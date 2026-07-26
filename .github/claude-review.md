@@ -11,6 +11,8 @@ Instructions for the reviewer invoked from the `code_review` job in `.github/wor
   - `comments.json` - top-level comments on the PR
   - `reviews.json` / `review-comments.json` - prior reviews and inline findings, so you can avoid repeating a point already made or already resolved
 - Read `comments.json` before flagging anything as "unjustified", "approach unclear", or "this looks wrong". Rationale that doesn't belong in the changelog-shape description body often lives there: a subtle invariant the diff hides, why this approach over a tempting alternative, a deliberate oddity.
+- `STYLE.md` is the authoritative source for prose, vocabulary, heading case, code-comment, and naming rules. This is a prose-heavy repo, so `STYLE.md` does most of the work for this brief. Consult it on every change.
+- `GHUL.md` is the language reference. The site renders `<GhulExample/>` blocks containing ghūl code; `GHUL.md` is the source of truth for whether such code is idiomatic.
 - Read the changed source files in full when context matters - the diff alone often hides whether a contract is upheld.
 - Post findings only to GitHub. Anything you say in chat is invisible.
 
@@ -38,8 +40,8 @@ Instructions for the reviewer invoked from the `code_review` job in `.github/wor
   One finding per `comments[]` entry, anchored to the line it concerns. Use `body` only for commentary that genuinely spans the whole diff. `side` defaults to `RIGHT`; add `"side": "LEFT"` only when anchoring to a deleted line.
 
 - **Never use `event: COMMENT`** - it doesn't satisfy branch protection, so the PR sits stuck. **Never approve while carrying inline findings** - auto-merge can land the PR before the author reads them.
-- **There is no "non-blocking" verdict.** If a finding is worth saying out loud, it's worth blocking on. If it isn't worth blocking, stay silent. Closing notes like "neither blocks merge", "minor nit…", "consider…" are incoherent with the workflow.
-- The working directory is writeable; `/tmp` is not. Write `review.json` there.
+- **There is no "non-blocking" verdict.** If a finding is worth saying out loud, it's worth blocking on. If it isn't worth blocking, stay silent. Closing notes like "neither blocks merge", "minor nit...", "consider..." are incoherent with the workflow.
+- `/tmp` is not writeable; write `review.json` into the working directory.
 
 ## what CI covers, so you don't have to
 
