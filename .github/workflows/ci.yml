@@ -43,20 +43,17 @@ jobs:
       max-attempts: ${{ fromJSON(vars.CLAUDE_REVIEW_MAX_ATTEMPTS || '3') }}
       gh-app-id: ${{ vars.GHUL_REVIEWER_APP_ID }}
       ghul-reference: true
+      style-reference: true
       extra-repositories: ghul-style
       prompt: |
         Review pull request #${{ github.event.pull_request.number }} on ${{ github.repository }}.
 
-        You run in parallel with CI. Whether the site builds is gated by CI before merge — that's not your job. Trust the diff as written.
+        You run in parallel with CI. Whether the site builds is gated by CI before merge - that's not your job. Trust the diff as written.
 
-        First fetch the style guide, which is authoritative for terminology, prose, and code comments here:
-
-            gh api repos/degory/ghul-style/contents/STYLE.md -H "Accept: application/vnd.github.raw" > STYLE.md
-
-        Then read these files, in order:
-        1. .github/claude-review.md — how to operate, severity bar, what to flag
-        2. STYLE.md — terminology, prose, and code-comment rules
-        3. GHUL.md — ghūl language reference; consult for any ghūl code in <GhulExample/> blocks or inline backticks
+        Read these files first, in order:
+        1. .github/claude-review.md - how to operate, severity bar, what to flag
+        2. STYLE.md - authoritative terminology, prose, and code-comment rules
+        3. GHUL.md - ghūl language reference; consult for any ghūl code in <GhulExample/> blocks or inline backticks
 
         Post findings only to GitHub per the brief. Do not put review text in chat messages.
     secrets:
