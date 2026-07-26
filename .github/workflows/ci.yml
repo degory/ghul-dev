@@ -43,6 +43,7 @@ jobs:
       max-attempts: ${{ fromJSON(vars.CLAUDE_REVIEW_MAX_ATTEMPTS || '3') }}
       gh-app-id: ${{ vars.GHUL_REVIEWER_APP_ID }}
       ghul-reference: true
+      extra-repositories: ghul-style
       prompt: |
         Review pull request #${{ github.event.pull_request.number }} on ${{ github.repository }}.
 
