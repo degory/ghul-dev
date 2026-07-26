@@ -1,6 +1,6 @@
 # Cloud code review brief
 
-Instructions for the Anthropic Claude Code Action invoked from the `code_review` job in `.github/workflows/ci.yml`. Not loaded by local Claude Code; only the cloud reviewer reads this.
+Instructions for the cloud reviewer invoked from the `code_review` job in `.github/workflows/ci.yml`. Not loaded by local Claude Code; only the cloud reviewer reads this.
 
 ## how to operate
 
