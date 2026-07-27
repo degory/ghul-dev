@@ -117,11 +117,17 @@ Unions shaped like `Option` types - a single field-carrying variant, or one vari
 
 ## pattern matching
 
-ghūl has no dedicated `match` construct. Discovering which variant a union holds, and branching on the result, is done with `if let`: a `let` definition in an `if` / `elif` condition, where the branch runs only on a match, with the variable narrowed and in scope:
+Discovering which variant a union holds, and branching on the result, is done with `if let`: a `let` definition in an `if` / `elif` condition, where the branch runs only on a match, with the variable narrowed and in scope:
 
 <GhulExample name="functional-programming-18" />
 
 `isa` variant tests and `else`-branch narrowing cover the same ground; see [type narrowing and `if let`](/control-flow.html#type-narrowing) in the control flow page for the full picture.
+
+A `case` expression matches one scrutinee against several `when` arms, which reads better than a chain of `if let`/`elif let` once there are more than a couple of variants to cover. Over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - the compiler checks the arms for exhaustiveness, so `area` needs no fallback return for a variant the `when` arms forgot:
+
+<GhulExample name="functional-programming-23" />
+
+`when` arms accept the same patterns as `if let` - a type test that binds and narrows (`c: CIRCLE`), destructuring, and literal leaves - so `case` is the exhaustive counterpart to `if let` rather than a different matching mechanism. See [the case statement](/control-flow.html#case-statement) for the full picture.
 
 ## currying
 <GhulExample name="functional-programming-19" />
