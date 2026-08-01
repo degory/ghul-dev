@@ -1,0 +1,15 @@
+use Collections.Iterable;
+use Collections.LIST;
+use Collections.MAP;
+use Collections.SET;
+use Ghul.Pipes.INDEXED_VALUE;
+use Ghul.Pipes.Pipe;
+
+// >>>
+zip[T,U](
+    source: Iterable[T],
+    other: Iterable[U]
+) -> Pipe[(T,U)] pure;
+// <<<
+
+entry() is si

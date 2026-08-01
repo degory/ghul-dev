@@ -1,0 +1,12 @@
+use Collections.Iterable;
+use Collections.LIST;
+use Collections.MAP;
+use Collections.SET;
+use Ghul.Pipes.INDEXED_VALUE;
+use Ghul.Pipes.Pipe;
+
+// >>>
+count[T](source: Iterable[T]) -> int pure;
+// <<<
+
+entry() is si

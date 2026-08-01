@@ -1,0 +1,29 @@
+{
+  "name": "pipes-ref-sort_descending-function",
+  "code": "sort_descending[T](source: Iterable[T]) -> Pipe[T] pure;",
+  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\nsort_descending[T](source: Iterable[T]) -> Pipe[T] pure;\n\nentry() is si\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "text": "sort_descending[T](source: Iterable[T]) -> Pipe[T]", "signature": "sort_descending[T](source: Iterable[T]) -> Pipe[T]", "kindLabel": "pure global function" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "text": "source: Iterable[T]", "signature": "source: Iterable[T]", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 37, "endLine": 1, "endColumn": 37, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 35, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
+    { "startLine": 1, "startColumn": 49, "endLine": 1, "endColumn": 49, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 44, "endLine": 1, "endColumn": 47, "text": "trait Pipe[T]", "signature": "trait Pipe[T]", "kindLabel": "trait" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 37, "endLine": 1, "endColumn": 37, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 35, "tokenType": "interface" },
+    { "startLine": 1, "startColumn": 49, "endLine": 1, "endColumn": 49, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 44, "endLine": 1, "endColumn": 47, "tokenType": "interface" }
+  ]
+}

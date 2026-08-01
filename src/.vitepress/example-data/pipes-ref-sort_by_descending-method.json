@@ -1,0 +1,33 @@
+{
+  "name": "pipes-ref-sort_by_descending-method",
+  "code": "sort_by_descending[K: System.IComparable[K]](\n    key_selector: (T) -> K pure\n) -> Pipe[T] pure;",
+  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    sort_by_descending[K: System.IComparable[K]](\n        key_selector: (T) -> K pure\n    ) -> Pipe[T] pure;\nsi\n\nentry() is si\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 18, "text": "Pipe[T].sort_by_descending[K](\n    key_selector: T -> K pure\n) -> Pipe[T]", "signature": "Pipe[T].sort_by_descending[K](\n    key_selector: T -> K pure\n) -> Pipe[T]", "kindLabel": "pure abstract method" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "text": "K", "signature": "K", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 42, "endLine": 1, "endColumn": 42, "text": "K", "signature": "K", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 30, "endLine": 1, "endColumn": 40, "text": "trait System.IComparable[T]", "signature": "trait System.IComparable[T]", "kindLabel": "trait" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 16, "text": "key_selector: T -> K pure", "signature": "key_selector: T -> K pure", "kindLabel": "local argument" },
+    { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 26, "text": "K", "signature": "K", "kindLabel": "type variable" },
+    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 20, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 11, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 9, "text": "trait Pipe[T]", "signature": "trait Pipe[T]", "kindLabel": "trait" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 18, "tokenType": "method" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 42, "endLine": 1, "endColumn": 42, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 30, "endLine": 1, "endColumn": 40, "tokenType": "interface" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 26, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 20, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 11, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 9, "tokenType": "interface" }
+  ]
+}

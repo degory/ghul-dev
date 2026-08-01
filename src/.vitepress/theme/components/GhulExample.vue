@@ -15,9 +15,15 @@ import DiagnosticIcon from './DiagnosticIcon.vue'
 // `data` is the example's build-time artifact, imported per page and passed
 // in by the ghul-example-page-split plugin so each artifact rides in the
 // chunk of the one page that uses it rather than a folder-wide glob.
+// `signature` marks a reference-entry card: a declaration-only stub with no
+// runnable body (see the runtime-library page), rather than code the reader
+// would copy and run. It suppresses the copy button, the expand-to-full-source
+// button, and the hidden-scaffold ellipsis rows - none of them make sense
+// when there's no full source worth expanding to or copying.
 const props = defineProps({
   name: { type: String, required: true },
   data: { type: Object, default: null },
+  signature: { type: Boolean, default: false },
 })
 
 const example = computed(() => props.data)
@@ -240,14 +246,15 @@ function copy() {
 // at least one edge is hidden) swaps the displayed slice for `fullSource`
 // in plain text - useful for seeing the surrounding scaffold, at the cost
 // of the rich hover and diagnostic markup the displayed slice carries.
-const hiddenBefore = computed(() => example.value?.hiddenBefore === true)
-const hiddenAfter = computed(() => example.value?.hiddenAfter === true)
+const hiddenBefore = computed(() => !props.signature && example.value?.hiddenBefore === true)
+const hiddenAfter = computed(() => !props.signature && example.value?.hiddenAfter === true)
 const hiddenGaps = computed(() => {
+  if (props.signature) return new Set()
   const raw = example.value?.hiddenGapsAfterLine
   return Array.isArray(raw) ? new Set(raw) : new Set()
 })
 const canExpand = computed(() =>
-  hiddenBefore.value || hiddenAfter.value || hiddenGaps.value.size > 0)
+  !props.signature && (hiddenBefore.value || hiddenAfter.value || hiddenGaps.value.size > 0))
 
 // Interleave the visible-code lines with faint ellipsis rows wherever
 // the artifact says scaffold is hidden. Edges follow the
@@ -317,6 +324,7 @@ const panelLabel = computed(() =>
       </svg>
     </button>
     <button
+      v-if="!signature"
       type="button"
       class="ghul-example-copy"
       :class="{ copied }"

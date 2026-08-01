@@ -1,0 +1,13 @@
+use Collections.Iterable;
+use Collections.LIST;
+use Collections.MAP;
+use Collections.SET;
+use Ghul.Pipes.INDEXED_VALUE;
+
+trait Pipe[T] is
+// >>>
+    only() -> T pure;
+// <<<
+si
+
+entry() is si

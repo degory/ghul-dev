@@ -1,0 +1,15 @@
+use Collections.Iterable;
+use Collections.LIST;
+use Collections.MAP;
+use Collections.SET;
+use Ghul.Pipes.INDEXED_VALUE;
+use Ghul.Pipes.Pipe;
+
+// >>>
+append_to[T](
+    source: Iterable[T],
+    into: System.Text.StringBuilder
+) -> System.Text.StringBuilder;
+// <<<
+
+entry() is si

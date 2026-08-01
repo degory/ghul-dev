@@ -1,0 +1,27 @@
+{
+  "name": "pipes-ref-find-method",
+  "code": "find(predicate: (T) -> bool pure) -> Ghul.MAYBE[T] pure;",
+  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    find(predicate: (T) -> bool pure) -> Ghul.MAYBE[T] pure;\nsi\n\nentry() is si\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 4, "text": "Pipe[T].find(predicate: T -> bool pure) -> MAYBE[T]", "signature": "Pipe[T].find(predicate: T -> bool pure) -> MAYBE[T]", "kindLabel": "pure abstract method" },
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 14, "text": "predicate: T -> bool pure", "signature": "predicate: T -> bool pure", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 27, "text": "struct bool", "signature": "struct bool", "kindLabel": "struct" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 18, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 49, "endLine": 1, "endColumn": 49, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 43, "endLine": 1, "endColumn": 47, "text": "struct MAYBE[T]", "signature": "struct MAYBE[T]", "kindLabel": "struct" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 4, "tokenType": "method" },
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 27, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 18, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 49, "endLine": 1, "endColumn": 49, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 43, "endLine": 1, "endColumn": 47, "tokenType": "struct" }
+  ]
+}

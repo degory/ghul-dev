@@ -1,0 +1,16 @@
+use Collections.Iterable;
+use Collections.LIST;
+use Collections.MAP;
+use Collections.SET;
+use Ghul.Pipes.INDEXED_VALUE;
+
+trait Pipe[T] is
+// >>>
+    collect_map[K,V](
+        key_selector: (T) -> K pure,
+        value_selector: (T) -> V pure
+    ) -> MAP[K,V] pure;
+// <<<
+si
+
+entry() is si

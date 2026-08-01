@@ -233,9 +233,20 @@ namespace ExampleTool is
         else
             _provision_runtime(example_dir);
 
+            // With no `-a` at all, `--sdk-ref-path` alone makes the
+            // compiler default to its own canned reference set - the base
+            // class library DLLs under sdk_ref_path, plus a `ghul-runtime.dll`
+            // bundled next to the `ghul.compiler` tool itself (whatever
+            // version was current when that compiler version was published,
+            // not the one this tool just provisioned above). Passing `-a`
+            // for our own runtime keeps this in step, but it also opts out
+            // of that canned default entirely, so the base class library
+            // DLLs have to be spelled out here too.
+            let reference_flags = _sdk_and_runtime_reference_flags(sdk_ref_path);
+
             let compile = run_process(
                 "dotnet",
-                "ghul-compiler --v3 --test-run --dotnet --sdk-ref-path \"{sdk_ref_path}\" {source_file} -o binary.exe",
+                "ghul-compiler --v3 --test-run --dotnet --sdk-ref-path \"{sdk_ref_path}\" {reference_flags} {source_file} -o binary.exe",
                 example_dir
             );
 
@@ -243,7 +254,7 @@ namespace ExampleTool is
                 "{compile.standard_error}\n{compile.standard_output}", source_file
             );
             compiled = File.exists(Path.combine(example_dir, "binary.exe"));
-            reference_arguments = "--sdk-ref-path \"{sdk_ref_path}\"";
+            reference_arguments = "--sdk-ref-path \"{sdk_ref_path}\" {reference_flags}";
             error_output = compile.standard_error;
 
             // No binary for a deliberate-error example — only diagnostics. The
@@ -402,6 +413,27 @@ namespace ExampleTool is
         if File.exists(source) then
             File.copy(source, target, true);
         fi
+    si
+
+    // The base class library DLLs `--sdk-ref-path` alone would otherwise add
+    // automatically (see `Semantic.DotNet.ASSEMBLIES.import` in the compiler),
+    // plus the `ghul-runtime.dll` this tool provisioned into the example
+    // directory. Supplying any `-a` opts out of the compiler's own canned
+    // default reference set, so a bare-source example passing `-a` for its
+    // own runtime has to spell these out too, or it fails to load a core
+    // assembly at all.
+    _sdk_and_runtime_reference_flags(sdk_ref_path: string) -> string is
+        let names = ["System.Console", "System.Runtime", "System.IO.FileSystem", "System.Collections", "System.Threading"];
+
+        let flags = System.Text.StringBuilder();
+
+        for name in names do
+            flags.append("-a \"{Path.combine(sdk_ref_path, "{name}.dll")}\" ");
+        od
+
+        flags.append("-a \"ghul-runtime.dll\"");
+
+        return flags.to_string();
     si
 
     // The .ghulproj in an example directory, or null for a bare-source

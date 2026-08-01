@@ -1,0 +1,27 @@
+{
+  "name": "pipes-ref-cat-method",
+  "code": "cat(right: Iterable[T]) -> Pipe[T] pure;",
+  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    cat(right: Iterable[T]) -> Pipe[T] pure;\nsi\n\nentry() is si\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 3, "text": "Pipe[T].cat(right: Iterable[T]) -> Pipe[T]", "signature": "Pipe[T].cat(right: Iterable[T]) -> Pipe[T]", "kindLabel": "pure abstract method" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "right: Iterable[T]", "signature": "right: Iterable[T]", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 21, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 19, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
+    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 33, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 31, "text": "trait Pipe[T]", "signature": "trait Pipe[T]", "kindLabel": "trait" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 3, "tokenType": "method" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 21, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 19, "tokenType": "interface" },
+    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 33, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 31, "tokenType": "interface" }
+  ]
+}

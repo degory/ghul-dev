@@ -1,0 +1,31 @@
+{
+  "name": "pipes-ref-index-function",
+  "code": "index[T](source: Iterable[T]) -> Pipe[INDEXED_VALUE[T]] pure;",
+  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\nindex[T](source: Iterable[T]) -> Pipe[INDEXED_VALUE[T]] pure;\n\nentry() is si\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 5, "text": "index[T](source: Iterable[T]) -> Pipe[INDEXED_VALUE[T]]", "signature": "index[T](source: Iterable[T]) -> Pipe[INDEXED_VALUE[T]]", "kindLabel": "pure global function" },
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 7, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 15, "text": "source: Iterable[T]", "signature": "source: Iterable[T]", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 25, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
+    { "startLine": 1, "startColumn": 53, "endLine": 1, "endColumn": 53, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 51, "text": "struct INDEXED_VALUE[T]", "signature": "struct INDEXED_VALUE[T]", "kindLabel": "struct" },
+    { "startLine": 1, "startColumn": 34, "endLine": 1, "endColumn": 37, "text": "trait Pipe[T]", "signature": "trait Pipe[T]", "kindLabel": "trait" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 5, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 7, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 25, "tokenType": "interface" },
+    { "startLine": 1, "startColumn": 53, "endLine": 1, "endColumn": 53, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 51, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 34, "endLine": 1, "endColumn": 37, "tokenType": "interface" }
+  ]
+}

@@ -1,0 +1,15 @@
+use Collections.Iterable;
+use Collections.LIST;
+use Collections.MAP;
+use Collections.SET;
+use Ghul.Pipes.INDEXED_VALUE;
+use Ghul.Pipes.Pipe;
+
+// >>>
+partition[T](
+    source: Iterable[T],
+    predicate: (T) -> bool pure
+) -> (LIST[T], LIST[T]) pure;
+// <<<
+
+entry() is si

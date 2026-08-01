@@ -1,0 +1,33 @@
+{
+  "name": "pipes-ref-reduce-method",
+  "code": "reduce[TRunning](\n    seed: TRunning,\n    accumulator: (TRunning,T) -> TRunning pure\n) -> TRunning pure;",
+  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    reduce[TRunning](\n        seed: TRunning,\n        accumulator: (TRunning,T) -> TRunning pure\n    ) -> TRunning pure;\nsi\n\nentry() is si\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 6, "text": "Pipe[T].reduce[TRunning](\n    seed: TRunning,\n    accumulator: (TRunning, T) -> TRunning pure\n) -> TRunning", "signature": "Pipe[T].reduce[TRunning](\n    seed: TRunning,\n    accumulator: (TRunning, T) -> TRunning pure\n) -> TRunning", "kindLabel": "pure abstract method" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 15, "text": "TRunning", "signature": "TRunning", "kindLabel": "type variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "seed: TRunning", "signature": "seed: TRunning", "kindLabel": "local argument" },
+    { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 18, "text": "TRunning", "signature": "TRunning", "kindLabel": "type variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 15, "text": "accumulator: (TRunning, T) -> TRunning pure", "signature": "accumulator: (TRunning, T) -> TRunning pure", "kindLabel": "local argument" },
+    { "startLine": 3, "startColumn": 34, "endLine": 3, "endColumn": 41, "text": "TRunning", "signature": "TRunning", "kindLabel": "type variable" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 26, "text": "TRunning", "signature": "TRunning", "kindLabel": "type variable" },
+    { "startLine": 3, "startColumn": 28, "endLine": 3, "endColumn": 28, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 4, "startColumn": 6, "endLine": 4, "endColumn": 13, "text": "TRunning", "signature": "TRunning", "kindLabel": "type variable" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 6, "tokenType": "method" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 15, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 18, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 34, "endLine": 3, "endColumn": 41, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 26, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 28, "endLine": 3, "endColumn": 28, "tokenType": "typeParameter" },
+    { "startLine": 4, "startColumn": 6, "endLine": 4, "endColumn": 13, "tokenType": "typeParameter" }
+  ]
+}
