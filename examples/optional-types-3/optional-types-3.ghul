@@ -1,0 +1,31 @@
+use IO.Std.write_line;
+
+// >>>
+// no declared relationship to T? or Ghul.Maybe[T] - ghūl looks for
+// has_value and value structurally
+struct PERCENTAGE is
+    has_value: bool;
+    value: double;
+
+    init() is
+        has_value = false;
+        value = default;
+    si
+
+    init(v: double) is
+        has_value = true;
+        value = v;
+    si
+si
+
+let full = PERCENTAGE(87.5d);
+let empty = PERCENTAGE();
+
+if full? then
+    write_line("full: {full!}%");
+fi
+
+if !empty? then
+    write_line("empty has no reading");
+fi
+// <<<

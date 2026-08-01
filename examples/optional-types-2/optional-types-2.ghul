@@ -1,0 +1,14 @@
+use IO.Std.write_line;
+
+// >>>
+// MAYBE[T] is what an unconstrained T? lowers to; it's also an
+// ordinary, directly usable type in its own right
+describe(m: Ghul.Maybe[int]) -> string =>
+    if m.has_value then "got {m.value}" else "nothing" fi;
+
+let some = Ghul.MAYBE[int](42);
+let none = Ghul.MAYBE[int]();
+
+write_line(describe(some));
+write_line(describe(none));
+// <<<

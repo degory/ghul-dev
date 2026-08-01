@@ -1,0 +1,26 @@
+use IO.Std.write_line;
+
+union Result[T, E] is
+    OK(value: T) default;
+    ERROR(error: E);
+si
+
+// >>>
+divide(a: int, b: int) -> Result[int, string] =>
+    if b == 0 then
+        Result.ERROR("division by zero")
+    else
+        Result.OK(a / b)
+    fi;
+
+let good = divide(10, 2);
+let bad = divide(10, 0);
+
+if good? then
+    write_line("10 / 2 = {good!}");
+fi
+
+if !bad? then
+    write_line("10 / 0 failed");
+fi
+// <<<

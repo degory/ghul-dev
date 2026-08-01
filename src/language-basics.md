@@ -96,7 +96,7 @@ The postfix `?` operator tests whether an optional has a value. A plain `if x?` 
 
 `!` reads the value out where narrowing hasn't already done it, but is rarely needed: `if let` tests an optional and reads its value into a local variable in one step (see [control flow](/control-flow.html#if-let)).
 
-Optional types work for reference and value types alike. A value-type optional like `int?` holds either a value or nothing, and you don't construct it explicitly: a plain value where an optional is expected widens automatically, and `null` marks the absent case:
+Optional types work for reference and value types alike - and beyond those two, for generic code that doesn't know which one it has, and for user-defined types that never mention `T?` at all. The [optional types](/optional-types) page covers all of that; here's the common case, a value-type optional like `int?`. You don't construct one explicitly: a plain value where an optional is expected widens automatically, and `null` marks the absent case:
 
 <GhulExample name="language-basics-17" />
 

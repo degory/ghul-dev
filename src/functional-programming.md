@@ -115,6 +115,8 @@ Unions shaped like `Option` types - a single field-carrying variant, or one vari
 
 <GhulExample name="functional-programming-17" />
 
+`Option` here is a union built from scratch to show how the shape works, but everyday code rarely needs to: ghūl's own optional types (`T?`) give you this for free, over reference types, value types, and unconstrained generic types alike - see [optional types](/optional-types) for the full picture, including how a user-defined union like this one fits alongside the built-in representations.
+
 ## pattern matching
 
 Discovering which variant a union holds, and branching on the result, is done with `if let`: a `let` definition in an `if` / `elif` condition, where the branch runs only on a match, with the variable narrowed and in scope:
