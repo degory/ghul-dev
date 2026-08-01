@@ -1,0 +1,31 @@
+{
+  "name": "pipes-ref-find_map-method",
+  "code": "find_map[U](\n    mapper: (T) -> Ghul.MAYBE[U] pure\n) -> Ghul.MAYBE[U] pure;",
+  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    find_map[U](\n        mapper: (T) -> Ghul.MAYBE[U] pure\n    ) -> Ghul.MAYBE[U] pure;\nsi\n\nentry() is si\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 8, "text": "Pipe[T].find_map[U](mapper: T -> MAYBE[U] pure) -> MAYBE[U]", "signature": "Pipe[T].find_map[U](mapper: T -> MAYBE[U] pure) -> MAYBE[U]", "kindLabel": "pure abstract method" },
+    { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 10, "text": "U", "signature": "U", "kindLabel": "type variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "mapper: T -> MAYBE[U] pure", "signature": "mapper: T -> MAYBE[U] pure", "kindLabel": "local argument" },
+    { "startLine": 2, "startColumn": 31, "endLine": 2, "endColumn": 31, "text": "U", "signature": "U", "kindLabel": "type variable" },
+    { "startLine": 2, "startColumn": 25, "endLine": 2, "endColumn": 29, "text": "struct MAYBE[T]", "signature": "struct MAYBE[T]", "kindLabel": "struct" },
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 14, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 17, "text": "U", "signature": "U", "kindLabel": "type variable" },
+    { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 15, "text": "struct MAYBE[T]", "signature": "struct MAYBE[T]", "kindLabel": "struct" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 8, "tokenType": "method" },
+    { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 10, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 31, "endLine": 2, "endColumn": 31, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 25, "endLine": 2, "endColumn": 29, "tokenType": "struct" },
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 14, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 17, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 15, "tokenType": "struct" }
+  ]
+}

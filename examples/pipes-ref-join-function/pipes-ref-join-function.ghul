@@ -1,0 +1,12 @@
+use Collections.Iterable;
+use Collections.LIST;
+use Collections.MAP;
+use Collections.SET;
+use Ghul.Pipes.INDEXED_VALUE;
+use Ghul.Pipes.Pipe;
+
+// >>>
+join[T](source: Iterable[T], separator: string) -> string pure;
+// <<<
+
+entry() is si

@@ -1,0 +1,25 @@
+{
+  "name": "pipes-ref-for_each-method",
+  "code": "for_each(action: T -> void) -> void;",
+  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    for_each(action: T -> void) -> void;\nsi\n\nentry() is si\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 8, "text": "Pipe[T].for_each(action: T -> void) -> void", "signature": "Pipe[T].for_each(action: T -> void) -> void", "kindLabel": "abstract method" },
+    { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 15, "text": "action: T -> void", "signature": "action: T -> void", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 26, "text": "struct void", "signature": "struct void", "kindLabel": "struct" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 18, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 32, "endLine": 1, "endColumn": 35, "text": "struct void", "signature": "struct void", "kindLabel": "struct" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 8, "tokenType": "method" },
+    { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 26, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 18, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 32, "endLine": 1, "endColumn": 35, "tokenType": "struct" }
+  ]
+}

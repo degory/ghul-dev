@@ -1,0 +1,15 @@
+use Collections.Iterable;
+use Collections.LIST;
+use Collections.MAP;
+use Collections.SET;
+use Ghul.Pipes.INDEXED_VALUE;
+use Ghul.Pipes.Pipe;
+
+// >>>
+find_or_throw[T](
+    source: Iterable[T],
+    predicate: T -> bool pure
+) -> T pure;
+// <<<
+
+entry() is si

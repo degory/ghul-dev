@@ -249,6 +249,7 @@ export default defineConfig({
       { text: 'object oriented programming', link: '/object-oriented-programming' },
       { text: 'generics', link: '/generics' },
       { text: 'type inference', link: '/type-inference' },
+      { text: 'runtime library', link: '/runtime-library' },
       { text: '.NET integration', link: '/dotnet-integration' },
       { text: 'tooling', link: '/tooling' },
       { text: 'grammar', link: '/grammar' },

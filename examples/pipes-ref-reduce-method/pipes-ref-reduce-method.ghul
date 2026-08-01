@@ -1,0 +1,16 @@
+use Collections.Iterable;
+use Collections.LIST;
+use Collections.MAP;
+use Collections.SET;
+use Ghul.Pipes.INDEXED_VALUE;
+
+trait Pipe[T] is
+// >>>
+    reduce[TRunning](
+        seed: TRunning,
+        accumulator: (TRunning,T) -> TRunning pure
+    ) -> TRunning pure;
+// <<<
+si
+
+entry() is si

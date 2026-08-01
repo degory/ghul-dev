@@ -1,0 +1,31 @@
+{
+  "name": "pipes-ref-partition-method",
+  "code": "partition(\n    predicate: (T) -> bool pure\n) -> (LIST[T], LIST[T]) pure;",
+  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    partition(\n        predicate: (T) -> bool pure\n    ) -> (LIST[T], LIST[T]) pure;\nsi\n\nentry() is si\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 9, "text": "Pipe[T].partition(\n    predicate: T -> bool pure\n) -> (LIST[T], LIST[T])", "signature": "Pipe[T].partition(\n    predicate: T -> bool pure\n) -> (LIST[T], LIST[T])", "kindLabel": "pure abstract method" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "text": "predicate: T -> bool pure", "signature": "predicate: T -> bool pure", "kindLabel": "local argument" },
+    { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 26, "text": "struct bool", "signature": "struct bool", "kindLabel": "struct" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 12, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 10, "text": "class LIST[T]", "signature": "class LIST[T]", "kindLabel": "class" },
+    { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 21, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 19, "text": "class LIST[T]", "signature": "class LIST[T]", "kindLabel": "class" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 9, "tokenType": "method" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 26, "tokenType": "struct" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 12, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 10, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 21, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 19, "tokenType": "class" }
+  ]
+}

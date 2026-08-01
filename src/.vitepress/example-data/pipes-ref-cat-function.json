@@ -1,0 +1,35 @@
+{
+  "name": "pipes-ref-cat-function",
+  "code": "cat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T] pure;",
+  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\ncat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T] pure;\n\nentry() is si\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 3, "text": "cat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T]", "signature": "cat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T]", "kindLabel": "pure global function" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 13, "text": "source: Iterable[T]", "signature": "source: Iterable[T]", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 33, "text": "right: Iterable[T]", "signature": "right: Iterable[T]", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 23, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
+    { "startLine": 1, "startColumn": 45, "endLine": 1, "endColumn": 45, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 36, "endLine": 1, "endColumn": 43, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
+    { "startLine": 1, "startColumn": 57, "endLine": 1, "endColumn": 57, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 52, "endLine": 1, "endColumn": 55, "text": "trait Pipe[T]", "signature": "trait Pipe[T]", "kindLabel": "trait" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 3, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 33, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 23, "tokenType": "interface" },
+    { "startLine": 1, "startColumn": 45, "endLine": 1, "endColumn": 45, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 36, "endLine": 1, "endColumn": 43, "tokenType": "interface" },
+    { "startLine": 1, "startColumn": 57, "endLine": 1, "endColumn": 57, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 52, "endLine": 1, "endColumn": 55, "tokenType": "interface" }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "pipes-ref-sort-method",
+  "code": "sort() -> Pipe[T] pure;",
+  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    sort() -> Pipe[T] pure;\nsi\n\nentry() is si\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 4, "text": "Pipe[T].sort() -> Pipe[T]", "signature": "Pipe[T].sort() -> Pipe[T]", "kindLabel": "pure abstract method" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 14, "text": "trait Pipe[T]", "signature": "trait Pipe[T]", "kindLabel": "trait" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 4, "tokenType": "method" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 14, "tokenType": "interface" }
+  ]
+}

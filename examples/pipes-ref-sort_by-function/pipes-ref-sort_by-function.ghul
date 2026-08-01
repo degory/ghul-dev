@@ -1,0 +1,15 @@
+use Collections.Iterable;
+use Collections.LIST;
+use Collections.MAP;
+use Collections.SET;
+use Ghul.Pipes.INDEXED_VALUE;
+use Ghul.Pipes.Pipe;
+
+// >>>
+sort_by[T,K: System.IComparable[K]](
+    source: Iterable[T],
+    key_selector: (T) -> K pure
+) -> Pipe[T] pure;
+// <<<
+
+entry() is si
