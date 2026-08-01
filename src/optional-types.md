@@ -25,7 +25,7 @@ The common case: `T?` over a class or other reference type is a plain nullable r
 
 ### unconstrained generic types
 
-The case with no equivalent in most mainstream languages: a generic function or type over `T?`, written before anything is known about whether `T` will turn out to be a reference or a value type. This is where `Ghul.MAYBE[T]` comes in - a struct that can hold "present" or "absent" for *any* `T`, and is what an unconstrained `T?` lowers to. It's also a type you can name and construct directly:
+A generic function or type can be written over `T?` before anything is known about whether `T` will turn out to be a reference or a value type. This is where `Ghul.MAYBE[T]` comes in - a struct that can hold "present" or "absent" for *any* `T`, and is what an unconstrained `T?` lowers to. It's also a type you can name and construct directly:
 
 <GhulExample name="optional-types-2" />
 
