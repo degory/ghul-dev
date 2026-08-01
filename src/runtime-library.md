@@ -4,7 +4,7 @@
 everyday building blocks used throughout this site. The reference below
 covers `Ghul.Pipes`, the sequence-processing library behind
 [filter, map, reduce](/functional-programming#filter-map-reduce) and the
-[thread-first operator](/functional-programming).
+[thread-first operator](/expressions#thread-first-calls).
 
 Each entry is a real, compiled declaration checked against the current
 `ghul.runtime` package - hover over a name for its full signature, exactly as
