@@ -1,7 +1,7 @@
 
 #  ghūl programming language
 
-![ghūl programming language logo](/ghul-logo-draft.png)
+<img class="ghul-logo" src="/ghul-logo-draft.png" alt="ghūl programming language logo" />
 
 > - The ghūl language, compiler, tools, and this website are all very much a **work-in-progress**.
 > - Whatever the [ghūl compiler](https://github.com/degory/ghul) accepts is currently the definitive ghūl language reference.
@@ -12,6 +12,21 @@
 Why not 🤔
 
 ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment with programming language design. Apart from a slightly quirky syntax, ghūl is a fairly conventional programming language. Although ghūl is a hobby project maintained by a single person, its goal is to be sufficiently expressive for general-purpose development: the [ghūl compiler](https://github.com/degory/ghul) itself is written in ghūl.
+
+## examples
+
+::: tip interactive examples
+Hover any identifier in a code example to see its type. An example's output and any compiler diagnostics appear in a panel beneath it. The rotating examples below advance on their own; hover to pause, or step through them with the controls.
+:::
+
+### hello world!
+
+<GhulExample name="hello-world" />
+
+<GhulExampleSwitcher
+  names="functional,expression-oop,expression-functional,fibonacci-generators,generic-calculator,optionals-narrowing"
+  labels="fibonacci: streams + `|>`,expression trees: classes + traits,expression trees: union + pattern matching,fibonacci: generators + pipes,calculator: generics,optionals: `T?` + narrowing"
+/>
 
 ## features
 
@@ -38,21 +53,3 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 - **generators**: functions returning `Pipe[T]` can use `yield` to produce a sequence of values lazily.
 
 - **.NET integration**: ghūl targets .NET, producing and consuming NuGet packages and inter-operating with other .NET languages.
-
-## examples
-
-::: tip interactive examples
-Hover any identifier in a code example to see its type. An example's output and any compiler diagnostics appear in a panel beneath it.
-:::
-
-### hello world!
-
-<GhulExample name="hello-world" />
-
-### functional
-
-<GhulExample name="functional" />
-
-### OOP
-
-<GhulExample name="object-oriented" />

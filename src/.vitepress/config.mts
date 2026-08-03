@@ -101,8 +101,20 @@ function ghulExamplePagePlugin() {
       if (!id.split('?')[0].endsWith('.md')) return null
 
       const names: string[] = []
+      // A single <GhulExample name="x"> and a rotating
+      // <GhulExampleSwitcher names="a,b,..."> both pull in the named JSON
+      // artifacts. A name referenced by either is imported once; the
+      // switcher's comma-separated names are spread so each rides in its
+      // own import. (The single-tag regex needs whitespace after
+      // `GhulExample`, so it can't match `GhulExampleSwitcher`.)
       for (const m of src.matchAll(/<GhulExample\s+name="([^"]+)"/g)) {
         if (!names.includes(m[1])) names.push(m[1])
+      }
+      for (const m of src.matchAll(/<GhulExampleSwitcher\s+names="([^"]+)"/g)) {
+        for (const n of m[1].split(',')) {
+          const t = n.trim()
+          if (t && !names.includes(t)) names.push(t)
+        }
       }
       if (names.length === 0) return null
 
@@ -115,9 +127,20 @@ function ghulExamplePagePlugin() {
       const script = `<script setup>\n${imports}\nconst __ghulExamples = {\n${entries}\n}\n</script>\n\n`
 
       // single-quote the key: the binding sits inside a double-quoted attribute
-      const body = src.replace(
+      let body = src.replace(
         /<GhulExample\s+name="([^"]+)"/g,
         (tag, name) => `${tag} :data="__ghulExamples['${name}']"`,
+      )
+
+      // Inject the switcher's `:examples` array, built from the same
+      // __ghulExamples map. `names` and `labels` stay as plain string
+      // attributes for the component to split.
+      body = body.replace(
+        /<GhulExampleSwitcher\s+names="([^"]+)"/g,
+        (tag, namesStr) => {
+          const arr = '[' + namesStr.split(',').map(n => `{name:'${n.trim()}',data:__ghulExamples['${n.trim()}']}`).join(',') + ']'
+          return `${tag} :examples="${arr}"`
+        },
       )
 
       // a `<script setup>` must follow any frontmatter, not precede it
