@@ -1,0 +1,37 @@
+use IO.Std.write_line;
+
+// T? marks a value that can be absent. a non-optional T
+// never holds null, and the compiler keeps the two apart
+find_user(id: int) -> string? =>
+    if id == 1 then
+        "alice"
+    elif id == 2 then
+        "bob"
+    else
+        null
+    fi;
+
+greet(id: int) is
+    let name = find_user(id);
+
+    // name is string? here; testing it narrows it to
+    // string inside the branch, so no unwrap is needed
+    if name? then
+        write_line("hello, {name}");
+    else
+        write_line("user {id} not found");
+    fi
+si
+
+greet(1);
+greet(2);
+greet(3);
+
+// if let tests and reads the value in one step
+if let name = find_user(1) then
+    write_line("found: {name}");
+fi
+
+// ?? falls back when the value is absent
+let display = find_user(42) ?? "guest";
+write_line("signed in as {display}");

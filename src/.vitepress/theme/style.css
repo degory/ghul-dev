@@ -46,3 +46,22 @@
 .dark .ghul-inline span {
   color: var(--shiki-dark);
 }
+
+/* The landing-page logo. Full-width at 1024px it dominated the first
+   screen; float it beside the intro on wider viewports so the pitch and
+   the first example arrive sooner, and cap it well below natural size
+   everywhere. */
+.vp-doc .ghul-logo {
+  float: right;
+  width: clamp(96px, 18vw, 180px);
+  margin: 0 0 0.75rem 1.25rem;
+}
+
+@media (max-width: 639px) {
+  .vp-doc .ghul-logo {
+    float: none;
+    display: block;
+    width: 128px;
+    margin: 0.5rem auto 0.75rem;
+  }
+}
