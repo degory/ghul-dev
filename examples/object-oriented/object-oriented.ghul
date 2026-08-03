@@ -1,34 +1,86 @@
 use IO.Std.write_line;
+use Ghul.Pipes.Pipe;
 
-class CALCULATOR is
-    init() is
+// a series knows its own name and how to produce its
+// values; behaviour written in terms of those two is
+// inherited by every subclass:
+class Series is
+    _name: string;
+
+    init(name: string) is
+        _name = name;
     si
 
-    add(x: single, y: single) -> single =>
-        x + y;
+    name: string => _name;
 
-    subtract(x: single, y: single) -> single =>
-        x - y;
+    // body-less: Series is implicitly abstract, and
+    // each subclass supplies the values
+    values() -> Pipe[int];
 
-    multiply(x: single, y: single) -> single =>
-        x * y;
-
-    divide(x: single, y: single) -> single =>
-        if y != 0.0 then
-            x / y;
-        else
-            throw System.DivideByZeroException(
-                "oops: division by zero"
-            );
-        fi;
+    summary() -> string =>
+        "first 10 {name} numbers: {values() | .take(10)}";
 si
 
-let calc = CALCULATOR();
+// lazily generates an infinite sequence of
+// fibonacci numbers:
+class FIBONACCI: Series is
+    init() is super.init("fibonacci"); si
 
-let a = 10.0;
-let b = 5.0;
+    values() -> Pipe[int] is
+        let prev mut = 1;
+        let current mut = 1;
+        do
+            yield current;
+            let next = prev + current;
+            prev = current;
+            current = next;
+        od
+    si
+si
 
-write_line("Addition: {calc.add(a, b)}");
-write_line("Subtraction: {calc.subtract(a, b)}");
-write_line("Multiplication: {calc.multiply(a, b)}");
-write_line("Division: {calc.divide(a, b)}");
+// lazily generates an infinite sequence of
+// factorials:
+class FACTORIAL: Series is
+    init() is super.init("factorial"); si
+
+    values() -> Pipe[int] is
+        let n mut = 1;
+        let prev mut = 1;
+        do
+            n = n + 1;
+            prev = prev * n;
+            yield prev;
+        od
+    si
+si
+
+let fibonacci = FIBONACCI();
+let factorial = FACTORIAL();
+
+let sequences: Series[] = [fibonacci, factorial];
+
+// summary is inherited, and the values() it calls
+// dispatches on each object's own type:
+for series in sequences do
+    write_line(series.summary());
+od
+
+let first_10_even =
+    fibonacci.values()
+        | .filter(x => x % 2 == 0)
+        .take(10);
+
+write_line(
+    "first 10 even fibonacci numbers: {first_10_even}"
+);
+
+let indexed =
+    fibonacci.values()
+        | .zip(factorial.values())
+        .take(10)
+        .index();
+
+for (i, (fib, fact)) in indexed do
+    write_line("fibonacci {i} is {fib}");
+    write_line("factorial {i} is {fact}");
+od;

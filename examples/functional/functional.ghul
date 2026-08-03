@@ -1,4 +1,5 @@
 use IO.Std.write_line;
+use Ghul.Pipes.Pipe;
 use Ghul.Pipes.stream;
 
 // lazily generates an infinite sequence of
@@ -21,20 +22,25 @@ let factorial_sequence = stream(
         next || (n = next_n, prev = next)
 );
 
-let first_10_fib = fibonacci_sequence | .take(10);
-let first_10_fact = factorial_sequence | .take(10);
+// a sequence is a value, so behaviour shared by any
+// two of them is a function over one:
+summary(name: string, values: Pipe[int]) -> string =>
+    "first 10 {name} numbers: {values | .take(10)}";
+
+let sequences = [
+    (name = "fibonacci", values = fibonacci_sequence),
+    (name = "factorial", values = factorial_sequence)
+];
+
+for (name, values) in sequences do
+    write_line(summary(name, values));
+od
 
 let first_10_even =
     fibonacci_sequence
         | .filter(x => x % 2 == 0)
         .take(10);
 
-write_line(
-    "first 10 fibonacci numbers: {first_10_fib}"
-);
-write_line(
-    "first 10 factorial numbers: {first_10_fact}"
-);
 write_line(
     "first 10 even fibonacci numbers: {first_10_even}"
 );

@@ -49,10 +49,16 @@ Hover any identifier in a code example to see its type. An example's output and 
 
 <GhulExample name="hello-world" />
 
+The two examples below are the same program written twice, once in each style: the same pair of infinite sequences, the same pipe operations over them, and the same output.
+
 ### functional
+
+A sequence is a value, produced by a pure step function and passed around like any other. Shared behaviour is a function taking a sequence.
 
 <GhulExample name="functional" />
 
 ### OOP
+
+A sequence is an object that generates its own values. Shared behaviour lives in the base class, and the call to `values()` inside it reaches each subclass's own generator.
 
 <GhulExample name="object-oriented" />
