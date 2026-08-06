@@ -14,7 +14,7 @@ The explicit type can be wider than the initializer expression:
 
 <GhulExample name="definitions-3" />
 
-A trailing `mut` makes the variable reassignable, and then the initializer can be dropped for a deferred-init local that starts at its type's default value: `let total mut = 0` reassigns later, and `let result: int mut;` defaults to 0. Either form can also take its value from `_`, which initializes to the default of the type the context expects - `let x = _`, or `_[T]` to pin the type.
+A trailing `mut` makes the variable reassignable, and then the initializer can be dropped for a deferred-init local that starts at its type's default value: `let total mut = 0` reassigns later, and `let result: int mut;` defaults to 0. Either form can also take its value from `_`, which initializes to the default of the type the context expects - `let x = _`, or `_[T]` to pin the type. This is a different `_` from the discard placeholder below - on the right of `=` it means "default value", on the left of a variable name it means "no name needed" - and the two never collide because they only ever appear in different positions.
 
 Multiple variables can be defined in the same `let` statement, with each variable either taking its type from its initializer or given an explicit one:
 
