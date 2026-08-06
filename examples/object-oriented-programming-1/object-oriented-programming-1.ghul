@@ -104,7 +104,7 @@ class CALCULATOR[T] is
         fi;
 
     clear_memory() is
-        memory = default;
+        memory = _;
     si
 si
 

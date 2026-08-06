@@ -9,7 +9,7 @@ struct PERCENTAGE is
 
     init() is
         has_value = false;
-        value = default;
+        value = _;
     si
 
     init(v: double) is

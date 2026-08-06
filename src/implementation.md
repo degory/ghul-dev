@@ -97,7 +97,7 @@ The full pass list, in the order `COMPILER` runs them:
 | `rewrite-syntax-trees`{:text}         | Light syntax-tree rewrites that simplify later passes: expanding dotted namespace names into nested form, synthesising accessor methods for properties, indexers and union variants, and spilling operand-position subexpressions sitting to the left of an `await` so their values survive the suspend. |
 | `declare-symbols`{:text}              | Walks the syntax tree and registers every declaration (type, function, field, parameter, local) in the symbol table, attached to the appropriate scope. |
 | `resolve-uses`{:text}                 | Resolves the `use` declarations in each namespace block against the namespaces or members they name, so short names work in subsequent passes. |
-| `resolve-type-expressions`{:text}     | Turns type annotations in declarations, signatures, and in expression-position uses like `cast`, `isa`, `typeof` and `default` into the semantic `Type` objects later passes use. |
+| `resolve-type-expressions`{:text}     | Turns type annotations in declarations, signatures, and in expression-position uses like `cast`, `isa`, `typeof` and `_` into the semantic `Type` objects later passes use. |
 | `resolve-ancestors`{:text}            | Attaches base classes, trait parents and default ancestors to classes, traits, structs, unions and enums, and validates the inheritance constraints. |
 | `resolve-explicit-types`{:text}       | Registers each variable's, property's and parameter's declared type on its symbol, so the declared type is available to constrain inference later. |
 | `resolve-overrides`{:text}            | Pulls inherited symbols down into each container type's scope; for every method whose signature matches an ancestor's virtual or abstract method, records the override link and checks the override is consistent. Reports duplicate top-level functions. |
@@ -181,7 +181,7 @@ under `type_expressions/`{:text}. This pass turns the type expressions
 that appear in declarations and signatures - return types, parameter
 types, field and property types, generic-parameter bounds, ancestor type
 references - and in expression-position uses like `cast`, `isa`, `typeof`
-and `default` into the `Type` objects (described under [types](#types)
+and `_` into the `Type` objects (described under [types](#types)
 below) that the rest of the compiler manipulates. Type arguments that the
 compiler has to *infer* at a call site are produced later, in
 `compile-expressions`{:text}, when argument types are known.
