@@ -339,7 +339,7 @@ let x = m.get();`,us=`class BOX[T] is
     _value: T;
 
     init() is
-        _value = default;
+        _value = _;
     si
 
     set(value: T) is
