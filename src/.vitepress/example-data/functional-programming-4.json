@@ -1,7 +1,7 @@
 {
   "name": "functional-programming-4",
-  "code": "let is_odd mut = default;\n\nlet is_even = n =>\n    if n == 0 then true else is_odd(n - 1) fi;\n\nis_odd = n =>\n    if n == 0 then false else is_even(n - 1) fi;\n\nwrite_line(\"even(10): {is_even(10)}\");\nwrite_line(\"odd(10): {is_odd(10)}\");",
-  "fullSource": "use IO.Std.write_line;\n\nlet is_odd mut = default;\n\nlet is_even = n =>\n    if n == 0 then true else is_odd(n - 1) fi;\n\nis_odd = n =>\n    if n == 0 then false else is_even(n - 1) fi;\n\nwrite_line(\"even(10): {is_even(10)}\");\nwrite_line(\"odd(10): {is_odd(10)}\");\n",
+  "code": "let is_odd mut = _;\n\nlet is_even = n =>\n    if n == 0 then true else is_odd(n - 1) fi;\n\nis_odd = n =>\n    if n == 0 then false else is_even(n - 1) fi;\n\nwrite_line(\"even(10): {is_even(10)}\");\nwrite_line(\"odd(10): {is_odd(10)}\");",
+  "fullSource": "use IO.Std.write_line;\n\nlet is_odd mut = _;\n\nlet is_even = n =>\n    if n == 0 then true else is_odd(n - 1) fi;\n\nis_odd = n =>\n    if n == 0 then false else is_even(n - 1) fi;\n\nwrite_line(\"even(10): {is_even(10)}\");\nwrite_line(\"odd(10): {is_odd(10)}\");\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

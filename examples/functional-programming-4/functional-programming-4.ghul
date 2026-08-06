@@ -1,7 +1,7 @@
 use IO.Std.write_line;
 
 // >>>
-let is_odd mut = default;
+let is_odd mut = _;
 
 let is_even = n =>
     if n == 0 then true else is_odd(n - 1) fi;

@@ -1,7 +1,7 @@
 {
   "name": "expressions-24",
-  "code": "let a = default[int];   // 0\nlet b: string? = default;   // null\nzero[T]() -> T => default;",
-  "fullSource": "let a = default[int];   // 0\nlet b: string? = default;   // null\n\nzero[T]() -> T => default;\n",
+  "code": "let a = _[int];   // 0\nlet b: string? = _;   // null\nzero[T]() -> T => _;",
+  "fullSource": "let a = _[int];   // 0\nlet b: string? = _;   // null\n\nzero[T]() -> T => _;\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [2],
@@ -12,7 +12,7 @@
     { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "a: int", "signature": "a: int", "kindLabel": "local value" },
-    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 19, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 13, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "b: string?", "signature": "b: string?", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 13, "text": "class string", "signature": "class string", "kindLabel": "class" }
   ],
@@ -22,7 +22,7 @@
     { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "tokenType": "typeParameter" },
     { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 19, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 13, "tokenType": "struct" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 13, "tokenType": "class" }
   ]

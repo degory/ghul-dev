@@ -1,8 +1,8 @@
 // >>>
-let a = default[int];   // 0
-let b: string? = default;   // null
+let a = _[int];   // 0
+let b: string? = _;   // null
 // <<<
 
 // >>>
-zero[T]() -> T => default;
+zero[T]() -> T => _;
 // <<<
