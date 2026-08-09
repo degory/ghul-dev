@@ -325,6 +325,21 @@ const runState = ref(null)
 const liveOutput = ref('')
 const liveDiagnostics = ref([])
 
+// filling the window rather than the article column. The site's content is a
+// narrow centre strip with sidebars either side, which is far less room than a
+// reader editing code actually has. Distinct from `expanded`, which shows an
+// example's hidden scaffolding.
+const filling = ref(false)
+
+function toggleFilling() {
+  filling.value = !filling.value
+  document.body.classList.toggle('ghul-example-expanded-open', filling.value)
+}
+
+function onKey(event) {
+  if (event.key === 'Escape' && filling.value) toggleFilling()
+}
+
 // true once this example has been edited, so the copy button offers the
 // reader's version rather than the original and the pencil says as much.
 const edited = ref(retainedEdit(props.name) !== null)
@@ -376,6 +391,13 @@ function onFrameMessage(event) {
 
   if (message.type === 'ready') { frameReady.value = true; return }
 
+  // Escape pressed with the editor focused: the key never reaches this page,
+  // so the frame forwards it.
+  if (message.type === 'escape') {
+    if (filling.value) toggleFilling()
+    return
+  }
+
   if (message.type === 'source') {
     retainEdit(props.name, message.source)
     edited.value = true
@@ -406,6 +428,8 @@ function onFrameMessage(event) {
 let stopWatchingTheme = null
 
 function startEditing() {
+  window.addEventListener('keydown', onKey)
+
   // Claiming the page-wide slot closes whichever example held it.
   editingExample.value = props.name
 
@@ -422,6 +446,10 @@ function startEditing() {
 }
 
 function stopEditing() {
+  window.removeEventListener('keydown', onKey)
+
+  if (filling.value) toggleFilling()
+
   if (editingExample.value === props.name) editingExample.value = null
 
   editing.value = false
@@ -452,12 +480,14 @@ onBeforeUnmount(() => {
   if (editing.value) stopEditing()
 
   window.removeEventListener('message', onFrameMessage)
+  window.removeEventListener('keydown', onKey)
+  document.body.classList.remove('ghul-example-expanded-open')
   stopWatchingTheme?.()
 })
 </script>
 
 <template>
-  <div v-if="example" class="ghul-example">
+  <div v-if="example" class="ghul-example" :class="{ 'is-filling': filling }">
     <span class="ghul-example-lang">ghul</span>
 
     <div class="ghul-example-tools">
@@ -472,6 +502,28 @@ onBeforeUnmount(() => {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 20h9" />
         <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+      </svg>
+    </button>
+    <button
+      v-if="editing"
+      type="button"
+      class="ghul-example-tool ghul-example-fill"
+      :class="{ 'is-active': filling }"
+      :title="filling ? 'back to the page (Esc)' : 'fill the window'"
+      :aria-pressed="filling"
+      @click="toggleFilling"
+    >
+      <svg v-if="!filling" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 3 21 3 21 9" />
+        <polyline points="9 21 3 21 3 15" />
+        <line x1="21" y1="3" x2="14" y2="10" />
+        <line x1="3" y1="21" x2="10" y2="14" />
+      </svg>
+      <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="4 14 10 14 10 20" />
+        <polyline points="20 10 14 10 14 4" />
+        <line x1="14" y1="10" x2="21" y2="3" />
+        <line x1="3" y1="21" x2="10" y2="14" />
       </svg>
     </button>
     <button
@@ -535,7 +587,7 @@ onBeforeUnmount(() => {
         ref="frame"
         class="ghul-example-frame"
         :src="embedUrl"
-        :style="{ height: Math.max(frameHeight, 120) + 'px' }"
+        :style="filling ? {} : { height: Math.max(frameHeight, 120) + 'px' }"
         title="ghūl playground"
         sandbox="allow-scripts allow-same-origin allow-forms"
       ></iframe>
@@ -862,6 +914,45 @@ onBeforeUnmount(() => {
 
 .ghul-example-frame-wrap {
   background: var(--vp-code-block-bg);
+}
+
+/* Filling the window. The article column is a narrow strip between two
+   sidebars, which is much less room than someone editing code wants, so this
+   lifts the card out of the page entirely rather than trying to widen it in
+   place. */
+.ghul-example.is-filling {
+  position: fixed;
+  inset: 1rem;
+  z-index: 200;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--vp-c-bg);
+  box-shadow: var(--vp-shadow-4, 0 8px 32px rgba(0, 0, 0, 0.3));
+}
+
+/* The editor takes what is left after the output pane, rather than the height
+   its content happens to need. */
+.ghul-example.is-filling .ghul-example-frame-wrap {
+  flex: 1;
+  min-height: 0;
+}
+
+.ghul-example.is-filling .ghul-example-frame {
+  height: 100%;
+}
+
+.ghul-example.is-filling .ghul-example-output {
+  display: flex;
+  flex-direction: column;
+  max-height: 45%;
+  min-height: 2.2rem;
+}
+
+.ghul-example.is-filling .ghul-example-output-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
 }
 
 /* The rendered example stays put until the editor has loaded, so the card does
