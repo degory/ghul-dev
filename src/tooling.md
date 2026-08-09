@@ -43,6 +43,10 @@ Behind the scenes the extension runs the ghūl compiler in its analysis mode: th
 
 On large projects the extension updates this analysis in two stages: a quick partial pass over the file you are editing, followed by a full pass once you pause. This is usually invisible, though it does mean a diagnostic can occasionally appear or disappear a moment after an edit.
 
+## other editors
+
+The extension's language support lives in a standalone [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) server with no dependency on the VS Code API. It ships as the `ghul-language-server`{:text} archive attached to every [ghul-vsce release](https://github.com/degory/ghul-vsce/releases), and it speaks stdio by default, so any editor with an LSP client can drive it - it has been tested with [Micro](https://micro-editor.github.io/), for example. Download the `.tgz`{:text} from the latest release, install it with `npm install`{:sh}, and point your editor's LSP client at the `ghul-language-server`{:text} launcher it provides.
+
 ## dev containers
 
 The ghūl repository template and the examples repo both ship a `.devcontainer` configured to use a standard .NET 10 dev container image - for example [`mcr.microsoft.com/devcontainers/dotnet:10.0`](https://hub.docker.com/r/microsoft/devcontainers-dotnet). Open the project in VS Code with the Dev Containers extension, or in a GitHub Codespace, and `dotnet tool restore`{:sh} will install the compiler from the local tool manifest. Any image with the .NET 10 SDK and `dotnet`{:text} on the PATH will work.

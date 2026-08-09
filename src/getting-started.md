@@ -6,7 +6,7 @@ Three things get you writing ghūl: an editor, the .NET SDK, and some ghūl code
 
 [Visual Studio Code](https://code.visualstudio.com) with the [ghūl language extension](https://marketplace.visualstudio.com/items?itemName=degory.ghul) gives you errors and warnings as you type, completion, hover, go to definition, rename and formatting.
 
-The [extension's implementation](https://github.com/degory/ghul-vsce) is currently tightly coupled to the Visual Studio Code extension API, but under the hood it uses the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/), so it could be extended to support other clients. Feel free to submit a PR.
+The extension is an ordinary Visual Studio Code extension, so any editor that can install VS Code extensions gets ghūl support out of the box. Other editors can drive the underlying language server directly - see [other editors](/tooling.html#other-editors) on the tooling page.
 
 ## the .NET SDK
 
