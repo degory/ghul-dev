@@ -3,7 +3,7 @@ import { computed, ref, watch, onBeforeUnmount } from 'vue'
 import DiagnosticIcon from './DiagnosticIcon.vue'
 import {
   PLAYGROUND_ORIGIN, CHANNEL, playgroundAvailable, currentTheme, watchTheme,
-  editingExample
+  editingExample, retainedEdit, retainEdit
 } from '../playground'
 
 // Renders a verified ghūl example from its generated artifact: the visible
@@ -238,7 +238,8 @@ function copy() {
   // `fullSource` is the original example file with the `// >>>` / `// <<<`
   // region markers stripped — what the user actually wants to paste into
   // their own project. `code` is the slice displayed on the page.
-  navigator.clipboard?.writeText(example.value.fullSource ?? example.value.code)
+  navigator.clipboard?.writeText(
+    retainedEdit(props.name) ?? example.value.fullSource ?? example.value.code)
   copied.value = true
   setTimeout(() => { copied.value = false }, 2000)
 }
@@ -324,6 +325,10 @@ const runState = ref(null)
 const liveOutput = ref('')
 const liveDiagnostics = ref([])
 
+// true once this example has been edited, so the copy button offers the
+// reader's version rather than the original and the pencil says as much.
+const edited = ref(retainedEdit(props.name) !== null)
+
 // A signature card is a declaration stub with no runnable body, so there is
 // nothing to edit or run.
 if (!props.signature) {
@@ -362,13 +367,20 @@ function onFrameMessage(event) {
   // says it is listening.
   if (message.type === 'loaded') {
     post('init', {
-      source: example.value?.fullSource ?? example.value?.code ?? '',
+      source: retainedEdit(props.name)
+        ?? example.value?.fullSource ?? example.value?.code ?? '',
       theme: currentTheme()
     })
     return
   }
 
   if (message.type === 'ready') { frameReady.value = true; return }
+
+  if (message.type === 'source') {
+    retainEdit(props.name, message.source)
+    edited.value = true
+    return
+  }
   if (message.type === 'height') { frameHeight.value = message.height; return }
   if (message.type === 'analyser') { analyser.value = message.state; return }
   if (message.type === 'output') { liveOutput.value = message.text ?? ''; return }
@@ -453,7 +465,8 @@ onBeforeUnmount(() => {
       v-if="canEdit && !editing"
       type="button"
       class="ghul-example-tool ghul-example-edit"
-      title="edit and run this example"
+      :class="{ 'has-edit': edited }"
+      :title="edited ? 'resume editing this example' : 'edit and run this example'"
       @click="startEditing"
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -514,7 +527,10 @@ onBeforeUnmount(() => {
 
     <!-- Editing replaces the rendered code with the playground, framed from
          its own origin so the reader's program never runs on this one. -->
-    <div v-if="editing" class="ghul-example-frame-wrap">
+    <!-- v-if, not v-show: the frame must be created when the reader asks for
+         it. Rendered up front it would load a playground for every example on
+         the page, and would announce itself before anything was listening. -->
+    <div v-if="editing" class="ghul-example-frame-wrap" :class="{ 'is-ready': frameReady }">
       <iframe
         ref="frame"
         class="ghul-example-frame"
@@ -525,7 +541,7 @@ onBeforeUnmount(() => {
       ></iframe>
     </div>
 
-    <div v-else class="ghul-example-code">
+    <div v-show="!editing || !frameReady" class="ghul-example-code">
       <pre v-if="expanded" class="ghul-example-full-source">{{ example.fullSource }}</pre>
       <template v-else>
         <template v-for="item in displayItems" :key="item.key">
@@ -846,6 +862,32 @@ onBeforeUnmount(() => {
 
 .ghul-example-frame-wrap {
   background: var(--vp-code-block-bg);
+}
+
+/* The rendered example stays put until the editor has loaded, so the card does
+   not collapse to nothing while the frame boots. Once it is ready the frame
+   takes over and the rendered copy is hidden rather than removed, so returning
+   to it costs nothing. */
+.ghul-example-frame-wrap:not(.is-ready) {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+}
+
+/* A dot on the pencil: this example has edits waiting behind it. */
+.ghul-example-edit.has-edit::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--vp-c-brand-1);
+}
+
+.ghul-example-edit {
+  position: relative;
 }
 
 .ghul-example-frame {
