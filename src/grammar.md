@@ -408,7 +408,7 @@ The `let … in …` form is a [let-in expression](#primary-expressions) used as
 statement. The `assert … in …` tail behaves the same way: a passing assert yields
 the trailing expression, a failing one throws.
 
-`yield` is permitted only inside a [generator function](/control-flow.html#generators),
+`yield` is permitted only inside a [generator function](/async-and-generators.html#generators),
 one whose return type is `Ghul.Pipes.Pipe[T]`.
 
 ### if
@@ -499,7 +499,7 @@ UnaryExpression ::= Operator UnaryExpression      /* prefix operator */
 ```
 
 An `await E` expression is permitted only inside an
-[asynchronous function](/control-flow.html#asynchronous-code), one whose
+[asynchronous function](/async-and-generators.html#asynchronous-code), one whose
 return type is `Tasks.TASK[T]` (or `Tasks.TASK`), and evaluates to the result
 of the awaited task once it completes. Used as the right-hand side of `let`, as
 a bare statement (`await E;`), or in any operand position.

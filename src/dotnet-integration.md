@@ -98,7 +98,7 @@ A type holding something that has to be released implements `Ghul.Disposable`, w
 
 ### iteration
 
-A type implementing `Collections.Iterable[T]` is a .NET `IEnumerable<T>`, so it works with `for`, with the pipe combinators, and with any .NET API taking a sequence. The requirement is an `iterator` property, and a [generator](/control-flow.html#generators) is usually the shortest way to supply one:
+A type implementing `Collections.Iterable[T]` is a .NET `IEnumerable<T>`, so it works with `for`, with the pipe combinators, and with any .NET API taking a sequence. The requirement is an `iterator` property, and a [generator](/async-and-generators.html#generators) is usually the shortest way to supply one:
 
 <GhulExample name="dotnet-integration-7" />
 
