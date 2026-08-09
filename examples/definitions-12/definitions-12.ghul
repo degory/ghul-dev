@@ -1,10 +1,12 @@
-struct POINT(x: double, y: double);
+struct POINT(x: double, y: double) is
+    =~(other: POINT) -> bool => x == other.x /\ y == other.y;
+
+    get_hash_code() -> int => System.HashCode.combine(x, y);
+si
 
 let origin = POINT(0.0D, 0.0D);
 let right = POINT(1.0D, 0.0D);
-// >>>
 let zero_zero = POINT(0.0D, 0.0D);
 
-assert origin == zero_zero;
-assert origin != right;
-// <<<
+assert origin =~ zero_zero;
+assert origin !~ right;

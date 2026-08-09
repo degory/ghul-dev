@@ -71,7 +71,7 @@ Structs consist of a name, then the types of any traits implemented, and then th
 Structs are constructed the same way as classes, with a constructor expression:
 <GhulExample name="definitions-11" />
 
-A struct defines a new value type, which means any values that the struct encapsulates are collected together as a new kind of value: copying the struct involves copying all the encapsulated values and the built in equality operator `==` performs a memberwise equality check:
+A struct defines a new value type, which means any values that the struct encapsulates are collected together as a new kind of value: copying the struct copies all the encapsulated values. A struct gets no equality of its own, so define `=~` to say what equal means for it, with a matching `get_hash_code` so that .NET collections agree; `!~` follows as the negation of `=~`. `==` is reserved for the primitive scalars and for reference identity, and applying it to a struct is a compile error rather than a silently wrong answer:
 <GhulExample name="definitions-12" />
 
 Structs can only be defined at global scope. Structs can be generic, which will be covered later. Struct names should be in `MACRO_CASE`.
@@ -171,7 +171,7 @@ Written as a global function or a `static` member instead, an operator takes bot
 
 Every operator has a precedence taken from its first character, so an operator starting with `*` binds tighter than one starting with `+`, with no declaration needed. The `@precedence` pragma places an operator in a specific band when the default doesn't suit it.
 
-The comparison operators come from two backing operators. Define `<>`, a three-way ordering that returns a negative, zero, or positive `int`, and `<`, `<=`, `>`, and `>=` follow from it; define `==` and `!=` follows as its negation:
+The comparison operators come from two backing operators. Define `<>`, a three-way ordering that returns a negative, zero, or positive `int`, and `<`, `<=`, `>`, and `>=` follow from it; define `=~`, an equality returning `bool`, and `!~` follows as its negation:
 
 <GhulExample name="definitions-47" />
 
