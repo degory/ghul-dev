@@ -31,10 +31,10 @@ so it is where a pipe ends.
 Elements travel through a pipe one at a time, and the terminal is what pulls
 them through. It asks the pipe it was called on for an element, that pipe asks
 the one it was built from, and so on back to the iterable at the start; the
-element then makes its way down the pipe, each stage doing its own work to it
-before passing the transformed element on to the next stage. No stage buffers
-the whole sequence - typical stages hold only one element at a time - so a `map`
-over a million elements doesn't construct a million-element list.
+element then makes its way down the pipe, each stage working on it before
+passing it on to the next stage. No stage buffers the whole sequence - typical
+stages hold only one element at a time - so a `map` over a million elements
+doesn't construct a million-element list.
 
 Pipes are lazy: until something - a terminal - asks a pipe for elements, no
 stage runs. An inert pipe can be held or passed around until it's needed. And if
