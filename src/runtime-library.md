@@ -23,29 +23,31 @@ or, fluently:
 
 ## how a pipe runs
 
-The combinators come in two kinds.
+The combinators come in two kinds. A **stage** returns a new `Pipe[T]`, which is
+what lets stages chain: `map` returns a pipe that maps, `filter` returns a pipe
+that filters. A **terminal** returns something else - a value, a list, a count -
+and so ends the chain.
 
-A **stage** returns a new `Pipe[T]`, and does none of the work it
-describes. `map(f)` does not call `f` on anything. It returns a pipe that will
-call `f` on each element, if and when something asks that pipe for elements.
+Elements travel through a chain one at a time, and the terminal is what pulls
+them through. It asks the pipe it was called on for an element, that pipe asks
+the one it was built from, and so on back to the array or list the chain started
+with; the element then makes its way back out, each stage doing its own work to
+it on the way past. Nothing accumulates in between, so a long chain costs no
+more memory than a short one.
 
-A **terminal** returns something else: a value, a list, a count. Producing it
-means asking for elements, and that is what sets everything going. The terminal asks the pipe it was called on, which asks the pipe *it*
-was built from, and so on back to the array or list the chain started with.
-
-So a chain of stages does nothing at all, however long it is, until a terminal
-asks it for something:
+One consequence is worth knowing: until something asks a chain for elements,
+none of it has run, however long it is.
 
 <GhulExample name="pipes-lazy-chain" />
 
-This is also what makes an endless sequence useful. A
-[generator](/async-and-generators.html#generators) that yields forever can be
-the start of a chain that ends in `take(10)`: ten elements are asked for, so
-ten are produced, and the generator is never run any further.
+It also means a source with no end is usable. A
+[generator](/async-and-generators.html#generators) that yields forever can start
+a chain ending in `take(10)`, because ten elements are all that is ever asked
+for.
 
-A few stages are exceptions, listed separately below. `reverse` and the `sort`
-family cannot produce their first element until they have seen the last one, so
-they read the whole source the moment they are called.
+`reverse` and the `sort` family are the exceptions, listed separately below.
+Neither can produce a first element without having seen the last, so both read
+the whole source as soon as they are called.
 
 ## reading the signatures
 
@@ -70,8 +72,7 @@ operator calls to wrap its left operand.
 
 ## stages
 
-A stage returns a new pipe. Nothing it describes happens until a terminal asks
-for elements.
+A stage returns a new pipe, so stages chain onto one another.
 
 ### filter
 
@@ -177,7 +178,7 @@ or, as a method:
 
 ### peek
 
-Calls `action` on each element and yields it unchanged. `peek` is a stage, so the action runs as each element goes past, not when the chain is built. It is a way to see what a chain is doing.
+Calls `action` on each element and passes it through unchanged.
 
 <GhulExample name="pipes-ref-peek-function" signature />
 
@@ -243,7 +244,7 @@ or, as a method:
 
 These return a pipe, like any other stage, but they cannot work out their first
 element without having seen the last one. So they read the whole source
-the moment they are called, rather than as a terminal asks for elements.
+the moment they are called, rather than element by element.
 
 ### reverse
 
@@ -291,9 +292,8 @@ or, as a method:
 
 ## terminals
 
-A terminal returns something other than a pipe, and asking it for that value is
-what runs the stages the chain is built from. They fall into three loose
-groups:
+A terminal returns something other than a pipe, and so ends a chain. They fall
+into three loose groups:
 finding a single element, collecting the elements into a container, and folding
 or consuming the sequence as a whole.
 

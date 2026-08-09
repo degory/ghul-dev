@@ -3,8 +3,8 @@ use IO.Std.write_line;
 // >>>
 let numbers = [1, 2, 3, 4, 5, 6];
 
-// building a chain of stages runs nothing: peek's action is
-// called only when something asks for elements
+// nothing has asked this chain for elements yet, so peek's
+// action has not run
 let stages = numbers
     | .peek(x => write_line("  pulled {x}"))
     | .filter(x => x % 2 == 0)
@@ -12,8 +12,7 @@ let stages = numbers
 
 write_line("chain built - nothing has run yet");
 
-// collect_list is a terminal: asking it for the list is what
-// runs the chain
+// collect_list is a terminal, so it asks for the elements
 let result = stages | .collect_list();
 
 write_line("result: {result | .join(", ")}");

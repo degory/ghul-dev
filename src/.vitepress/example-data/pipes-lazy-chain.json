@@ -1,7 +1,7 @@
 {
   "name": "pipes-lazy-chain",
-  "code": "let numbers = [1, 2, 3, 4, 5, 6];\n\n// building a chain of stages runs nothing: peek's action is\n// called only when something asks for elements\nlet stages = numbers\n    | .peek(x => write_line(\"  pulled {x}\"))\n    | .filter(x => x % 2 == 0)\n    | .map(x => x * 10);\n\nwrite_line(\"chain built - nothing has run yet\");\n\n// collect_list is a terminal: asking it for the list is what\n// runs the chain\nlet result = stages | .collect_list();\n\nwrite_line(\"result: {result | .join(\", \")}\");",
-  "fullSource": "use IO.Std.write_line;\n\nlet numbers = [1, 2, 3, 4, 5, 6];\n\n// building a chain of stages runs nothing: peek's action is\n// called only when something asks for elements\nlet stages = numbers\n    | .peek(x => write_line(\"  pulled {x}\"))\n    | .filter(x => x % 2 == 0)\n    | .map(x => x * 10);\n\nwrite_line(\"chain built - nothing has run yet\");\n\n// collect_list is a terminal: asking it for the list is what\n// runs the chain\nlet result = stages | .collect_list();\n\nwrite_line(\"result: {result | .join(\", \")}\");\n",
+  "code": "let numbers = [1, 2, 3, 4, 5, 6];\n\n// nothing has asked this chain for elements yet, so peek's\n// action has not run\nlet stages = numbers\n    | .peek(x => write_line(\"  pulled {x}\"))\n    | .filter(x => x % 2 == 0)\n    | .map(x => x * 10);\n\nwrite_line(\"chain built - nothing has run yet\");\n\n// collect_list is a terminal, so it asks for the elements\nlet result = stages | .collect_list();\n\nwrite_line(\"result: {result | .join(\", \")}\");",
+  "fullSource": "use IO.Std.write_line;\n\nlet numbers = [1, 2, 3, 4, 5, 6];\n\n// nothing has asked this chain for elements yet, so peek's\n// action has not run\nlet stages = numbers\n    | .peek(x => write_line(\"  pulled {x}\"))\n    | .filter(x => x % 2 == 0)\n    | .map(x => x * 10);\n\nwrite_line(\"chain built - nothing has run yet\");\n\n// collect_list is a terminal, so it asks for the elements\nlet result = stages | .collect_list();\n\nwrite_line(\"result: {result | .join(\", \")}\");\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
@@ -27,15 +27,15 @@
     { "startLine": 6, "startColumn": 40, "endLine": 6, "endColumn": 40, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 10, "text": "stages: Ghul.Pipes.Pipe[int]", "signature": "stages: Ghul.Pipes.Pipe[int]", "kindLabel": "local value" },
     { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 20, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "local value" },
-    { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 10, "text": "result: Collections.LIST[int]", "signature": "result: Collections.LIST[int]", "kindLabel": "local value" },
-    { "startLine": 14, "startColumn": 21, "endLine": 14, "endColumn": 21, "text": "Ghul.Pipes.pipe[T](\n    source: Collections.Iterable[T]\n) -> Ghul.Pipes.Pipe[T]", "signature": "Ghul.Pipes.pipe[T](\n    source: Collections.Iterable[T]\n) -> Ghul.Pipes.Pipe[T]", "kindLabel": "pure global function" },
-    { "startLine": 14, "startColumn": 14, "endLine": 14, "endColumn": 19, "text": "stages: Ghul.Pipes.Pipe[int]", "signature": "stages: Ghul.Pipes.Pipe[int]", "kindLabel": "local value" },
-    { "startLine": 14, "startColumn": 24, "endLine": 14, "endColumn": 35, "text": "Ghul.Pipes.Pipe[int].collect_list() -> Collections.LIST[int]", "signature": "Ghul.Pipes.Pipe[int].collect_list() -> Collections.LIST[int]", "kindLabel": "pure default trait method" },
+    { "startLine": 13, "startColumn": 5, "endLine": 13, "endColumn": 10, "text": "result: Collections.LIST[int]", "signature": "result: Collections.LIST[int]", "kindLabel": "local value" },
+    { "startLine": 13, "startColumn": 21, "endLine": 13, "endColumn": 21, "text": "Ghul.Pipes.pipe[T](\n    source: Collections.Iterable[T]\n) -> Ghul.Pipes.Pipe[T]", "signature": "Ghul.Pipes.pipe[T](\n    source: Collections.Iterable[T]\n) -> Ghul.Pipes.Pipe[T]", "kindLabel": "pure global function" },
+    { "startLine": 13, "startColumn": 14, "endLine": 13, "endColumn": 19, "text": "stages: Ghul.Pipes.Pipe[int]", "signature": "stages: Ghul.Pipes.Pipe[int]", "kindLabel": "local value" },
+    { "startLine": 13, "startColumn": 24, "endLine": 13, "endColumn": 35, "text": "Ghul.Pipes.Pipe[int].collect_list() -> Collections.LIST[int]", "signature": "Ghul.Pipes.Pipe[int].collect_list() -> Collections.LIST[int]", "kindLabel": "pure default trait method" },
     { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 16, "startColumn": 1, "endLine": 16, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 16, "startColumn": 29, "endLine": 16, "endColumn": 29, "text": "Ghul.Pipes.pipe[int](\n    source: Collections.Iterable[int]\n) -> Ghul.Pipes.Pipe[int]", "signature": "Ghul.Pipes.pipe[int](\n    source: Collections.Iterable[int]\n) -> Ghul.Pipes.Pipe[int]", "kindLabel": "pure global function" },
-    { "startLine": 16, "startColumn": 22, "endLine": 16, "endColumn": 27, "text": "result: Collections.LIST[int]", "signature": "result: Collections.LIST[int]", "kindLabel": "local value" },
-    { "startLine": 16, "startColumn": 32, "endLine": 16, "endColumn": 35, "text": "Ghul.Pipes.Pipe[int].join(separator: string) -> string", "signature": "Ghul.Pipes.Pipe[int].join(separator: string) -> string", "kindLabel": "pure default trait method" }
+    { "startLine": 15, "startColumn": 1, "endLine": 15, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 15, "startColumn": 29, "endLine": 15, "endColumn": 29, "text": "Ghul.Pipes.pipe[int](\n    source: Collections.Iterable[int]\n) -> Ghul.Pipes.Pipe[int]", "signature": "Ghul.Pipes.pipe[int](\n    source: Collections.Iterable[int]\n) -> Ghul.Pipes.Pipe[int]", "kindLabel": "pure global function" },
+    { "startLine": 15, "startColumn": 22, "endLine": 15, "endColumn": 27, "text": "result: Collections.LIST[int]", "signature": "result: Collections.LIST[int]", "kindLabel": "local value" },
+    { "startLine": 15, "startColumn": 32, "endLine": 15, "endColumn": 35, "text": "Ghul.Pipes.Pipe[int].join(separator: string) -> string", "signature": "Ghul.Pipes.Pipe[int].join(separator: string) -> string", "kindLabel": "pure default trait method" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -58,14 +58,14 @@
     { "startLine": 6, "startColumn": 40, "endLine": 6, "endColumn": 40, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 20, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 14, "startColumn": 21, "endLine": 14, "endColumn": 21, "tokenType": "function" },
-    { "startLine": 14, "startColumn": 14, "endLine": 14, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 14, "startColumn": 24, "endLine": 14, "endColumn": 35, "tokenType": "method" },
+    { "startLine": 13, "startColumn": 5, "endLine": 13, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 13, "startColumn": 21, "endLine": 13, "endColumn": 21, "tokenType": "function" },
+    { "startLine": 13, "startColumn": 14, "endLine": 13, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 13, "startColumn": 24, "endLine": 13, "endColumn": 35, "tokenType": "method" },
     { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 16, "startColumn": 1, "endLine": 16, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 16, "startColumn": 29, "endLine": 16, "endColumn": 29, "tokenType": "function" },
-    { "startLine": 16, "startColumn": 22, "endLine": 16, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 16, "startColumn": 32, "endLine": 16, "endColumn": 35, "tokenType": "method" }
+    { "startLine": 15, "startColumn": 1, "endLine": 15, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 15, "startColumn": 29, "endLine": 15, "endColumn": 29, "tokenType": "function" },
+    { "startLine": 15, "startColumn": 22, "endLine": 15, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 15, "startColumn": 32, "endLine": 15, "endColumn": 35, "tokenType": "method" }
   ]
 }
