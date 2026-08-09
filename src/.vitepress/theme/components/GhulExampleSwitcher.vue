@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import GhulExample from './GhulExample.vue'
+import { editingExample } from '../playground'
 
 // A rotating carousel of <GhulExample> cards. The page-split plugin injects
 // `:examples` (an array of {name, data}); `labels` is a comma-separated list
@@ -48,9 +49,15 @@ function go(i) {
 const next = () => go(index.value + 1)
 const prev = () => go(index.value - 1)
 
+// true while one of this deck's own examples is open in the editor. Rotating
+// then would swap the card out from under someone who is typing in it.
+const editingHere = computed(() =>
+  editingExample.value !== null
+  && items.value.some(item => item.name === editingExample.value))
+
 // Auto-rotation state. A single interval ticks; it advances only when
 // nothing is asking it to hold still (reduced motion, hidden tab, pointer
-// over the card, or a recent manual selection).
+// over the card, a recent manual selection, or an open editor).
 const reduced = ref(false)
 const hovering = ref(false)
 const holding = ref(false)
@@ -96,6 +103,7 @@ onMounted(() => {
 
   timer = setInterval(() => {
     if (reduced.value || hovering.value || holding.value) return
+    if (editingHere.value) return
     if (!anchored.value) return
     // no point rotating a tab nobody is looking at
     if (document.hidden) return
