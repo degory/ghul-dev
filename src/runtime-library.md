@@ -31,24 +31,35 @@ so it is where a pipe ends.
 Elements travel through a pipe one at a time, and the terminal is what pulls
 them through. It asks the pipe it was called on for an element, that pipe asks
 the one it was built from, and so on back to the iterable at the start; the
-element then makes its way back out, each stage doing its own work to it on the
-way past. No stage buffers the sequence - each holds only the element it has in
-hand - so a `map` over a million elements builds no million-element list on the
-way.
+element then makes its way down the pipe, each stage doing its own work to it
+before passing the transformed element on to the next stage. No stage buffers
+the whole sequence - typical stages hold only one element at a time - so a `map`
+over a million elements doesn't construct a million-element list.
 
-Until something asks a pipe for elements, none of it has run, however many
-stages it has.
+Pipes are lazy: until something - a terminal - asks a pipe for elements, no
+stage runs. An inert pipe can be held or passed around until it's needed. And if
+the consumer stops pulling elements from the pipe, the pipe will stop pulling
+elements from its source iterator. If and when the consumer starts up again, the
+pipe will begin producing elements again, pulling them through its chain of
+stages from the source.
 
 <GhulExample name="pipes-lazy-chain" />
 
-An endless source is usable for the same reason. A
-[generator](/async-and-generators.html#generators) that yields forever can sit at
-the start of a pipe ending in `take(10)`, because ten elements are all that is
-ever asked for.
+Because pipes are lazy, they can consume a source with an infinite number of
+elements. The consumer can simply stop pulling, and discard the pipe. When the
+pipe is disposed, that disposal flows back up the pipe to the source iterator,
+which is then also disposed.
 
-`reverse` and the `sort` family are the exceptions, listed separately below.
-Neither can produce a first element without having seen the last, so both buffer
-the whole source as soon as they are called.
+One way to bound consumption is to use a stage like `take(...)`, which stops
+pulling after a given number of elements have passed through it.
+
+This combines neatly with infinite generators - a
+[generator](/async-and-generators.html#generators) can yield indefinitely,
+leaving it to the pipe downstream to decide when to stop consuming.
+
+`reverse` and the `sort` family are the exceptions, listed separately below:
+they need to see the whole sequence of elements before they can start producing
+results, and so they buffer the whole source as soon as they are called.
 
 ## reading the signatures
 
