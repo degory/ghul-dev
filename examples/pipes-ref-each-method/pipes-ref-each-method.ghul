@@ -6,7 +6,7 @@ use Ghul.Pipes.INDEXED_VALUE;
 
 trait Pipe[T] is
 // >>>
-    for_each(action: T -> void) -> void;
+    each(action: T -> void) -> void;
 // <<<
 si
 
