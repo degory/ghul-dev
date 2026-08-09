@@ -1,7 +1,7 @@
 # functional programming
 
 ::: tip runnable examples
-The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/functional) has fuller, runnable functional-programming examples. Open it in a GitHub Codespace or a dev container to build and run them.
+The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/functional) has fuller, runnable functional-programming examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul`{:text} and run with `dotnet run`{:sh}.
 :::
 
 ghūl has some support for basic functional programming
@@ -99,37 +99,9 @@ Expression bodies and value-producing `if`, `case`, and `val ... lav` blocks hel
 
 Anonymous functions take a single concrete type from context; there is no generic equivalent to the two preceding forms. For polymorphic behaviour, declare a generic global function or method.
 
-## union types
+## union types and pattern matching
 
-A union holds a value of one of several variants, each with its own set of fields: one type that represents several kinds of data. The [definitions page](/definitions.html#unions) covers the full surface - unit variants, the `default` variant, primary-constructor headers, and traits; here they appear in the functional idiom.
-
-<GhulExample name="functional-programming-14" />
-
-Accessing the data held by a union's variant requires first checking which variant the union currently holds. An `isa Variant(value)` test checks the variant and, in the then-branch, narrows the value to it so the variant's fields are reachable:
-
-<GhulExample name="functional-programming-15" />
-
-Unions shaped like `Option` types - a single field-carrying variant, or one variant marked `default` - support the `?` and `!` operators, for testing whether they hold a value and for unwrapping it:
-
-<GhulExample name="functional-programming-16" />
-
-<GhulExample name="functional-programming-17" />
-
-`Option` here is a union built from scratch to show how the shape works, but everyday code rarely needs to: ghūl's own optional types (`T?`) give you this for free, over reference types, value types, and unconstrained generic types alike - see [optional types](/optional-types) for the full picture, including how a user-defined union like this one fits alongside the built-in representations.
-
-## pattern matching
-
-Discovering which variant a union holds, and branching on the result, is done with `if let`: a `let` definition in an `if` / `elif` condition, where the branch runs only on a match, with the variable narrowed and in scope:
-
-<GhulExample name="functional-programming-18" />
-
-`isa` variant tests and `else`-branch narrowing cover the same ground; see [type narrowing and `if let`](/control-flow.html#type-narrowing) in the control flow page for the full picture.
-
-A `case` expression matches one scrutinee against several `when` arms, which reads better than a chain of `if let`/`elif let` once there are more than a couple of variants to cover. Over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - the compiler checks the arms for exhaustiveness, so `area` needs no fallback return for a variant the `when` arms forgot:
-
-<GhulExample name="functional-programming-23" />
-
-`when` arms accept the same patterns as `if let` - a type test that binds and narrows (`c: CIRCLE`), destructuring, and literal leaves - so `case` is the exhaustive counterpart to `if let` rather than a different matching mechanism. See [the case statement](/control-flow.html#case-statement) for the full picture.
+Unions - one type holding one of several variants - and the `if let` and `case` patterns that take them apart are the functional idiom's data backbone. They have their own page: [unions and pattern matching](/unions-and-pattern-matching.html).
 
 ## currying
 <GhulExample name="functional-programming-19" />

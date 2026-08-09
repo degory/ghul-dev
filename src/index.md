@@ -19,6 +19,10 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 Hover any identifier in a code example to see its type. An example's output and any compiler diagnostics appear in a panel beneath it. The rotating examples below advance on their own; hover to pause, or step through them with the controls.
 :::
 
+::: tip run the examples
+Every example on this site is runnable. The [ghūl playground](https://github.com/degory/ghul-playground) is a one-file project set up for exactly that: open it in a GitHub Codespace, or clone it on your own machine, paste an example into `main.ghul`{:text}, and `dotnet run`{:sh}.
+:::
+
 ### hello world!
 
 <GhulExample name="hello-world" />

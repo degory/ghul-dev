@@ -1,11 +1,7 @@
 # control flow in ghūl
 
 ::: tip runnable examples
-The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples. Open it in a GitHub Codespace or a dev container to build and run them.
-:::
-
-::: tip narrowing inlays
-Open ghūl in an editor with the [ghūl language extension](/tooling.html) and small triangle hints mark where [type narrowing](#type-narrowing) changes: `►` where a variable is narrowed to a more specific type, `◄` where a narrowing ends and the variable widens back to its declared type, and `◄►` where an assignment does both at once. Hovering a hint shows the types and the reason; on an `if` it shows the narrowing for both the taken and the not-taken branch.
+The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul`{:text} and run with `dotnet run`{:sh}.
 :::
 
 ## block scope
@@ -54,37 +50,7 @@ This form is used for multiple conditions. If the initial condition is false, th
 
 ### type narrowing
 
-An `isa` test in an `if` condition narrows the variable to the tested type inside the then-branch. This holds for a union variant or a class:
-
-<GhulExample name="control-flow-8" />
-
-An [optional type](/language-basics.html#optional-types) narrows the same way. A `?` test in the predicate narrows the optional to its non-optional form in the then-branch, so the value can be used directly:
-
-<GhulExample name="control-flow-9" />
-
-For a two-variant union, the `else` branch is narrowed to the complementary variant:
-
-<GhulExample name="control-flow-10" />
-
-Narrowing is flow-sensitive: it follows the control flow rather than being confined to a branch body. If a guard rejects the narrower type and then leaves the enclosing block, by `return`, `throw`, `break` or `continue`, the code after the guard is narrowed:
-
-<GhulExample name="control-flow-11" />
-
-The `else` narrowing extends to a class hierarchy declared in the current assembly without `open`: ruling out one subclass on the `else` edge narrows to the rest, and when the root is `abstract` the chain can collapse to a single remaining subclass.
-
-Narrowing applies to local variables, including a function's own parameters, and to a member-access path. After `if isa CAT(x.pet) then`, or a presence test `if x.field? then`, uses of `x.pet` or `x.field` inside the branch see the narrower type.
-
-A path narrow is less durable than one on a local variable. A local holds its value, which no other call can change, so its narrowing lasts until the variable is reassigned. A path reads a fresh value each time, so its narrowing lasts only while nothing can change what it reads: a call to a method or property that can write to the heap drops it, as does an assignment that can change the path. To keep the narrower type across such a call, copy the path into a local variable, or use `if let` to introduce one.
-
-Reassigning the local narrows it: when the new value's static type is more specific than the declared type, the local narrows to that type from the assignment on, so a following call resolves on the assigned type without an `isa`:
-
-<GhulExample name="control-flow-57" />
-
-If the local is already narrowed, assigning a value of a different type cancels that narrowing and introduces one for the new type, so the following call resolves on the assigned type:
-
-<GhulExample name="control-flow-56" />
-
-ghūl decides which calls are safe by inferring purity. A method or property that only reads, never writing to the heap, is pure, and a call to a pure one preserves a path narrow - so a plain accessor that reads a field leaves it in place. The inference is automatic; a function the compiler can't prove pure can assert it with a postfix [`pure` modifier](/definitions.html#methods).
+An `if` condition that proves something stronger about a value - an `isa` test on a class or union variant, a `?` presence test on an optional - narrows the value to the stronger type inside the branch, and a guard that leaves the block narrows the code after it. [Type narrowing](/type-narrowing.html) covers this in full: locals, parameters, member-access paths, how long each narrow lasts, and the purity inference behind it.
 
 ### if let
 
@@ -328,34 +294,6 @@ If execution reaches the end of a non-void function without encountering a retur
 
 <GhulExample name="control-flow-45" />
 
-## asynchronous code
+## asynchronous code and generators
 
-A function is asynchronous when its declared return type is `Tasks.TASK[T]` (or `Tasks.TASK`, for one that produces no value).
-
-Inside such a function, `await e` evaluates to the result of the task `e` once it completes. `let x = await e;` assigns the result to a local and the rest of the function continues:
-
-<GhulExample name="control-flow-46" />
-
-`await e;` as a bare statement is the value-less form: it waits for `e` to complete and discards any result. Use it when you only care that the work has finished:
-
-<GhulExample name="control-flow-47" />
-
-`await` can also appear inside the body of a `for` or `while` loop: the loop iterates, awaiting and resuming once per iteration. A `return` from inside an awaiting loop body propagates out through the loop as usual:
-
-<GhulExample name="control-flow-48" />
-
-### limitations
-
-A `try` / `catch` block cannot surround code that contains an `await`. To handle a faulted task, wrap the call at the *call site* instead: reading `.result` on a returned task surfaces a faulted task as a `System.AggregateException`.
-
-## generators
-
-A function is a generator when its declared return type is `Pipe[T]` (`Ghul.Pipes.Pipe[T]`) and its body contains `yield E;`. Each `yield` produces the next value in the sequence; execution suspends until the caller asks for another value, then resumes from the statement after the `yield`:
-
-<GhulExample name="control-flow-49" />
-
-A generator *is* a [pipe](/functional-programming.html#lazy-sequences), so it can be looped over directly and composed with `map` / `filter` / `take` and the other pipe operators:
-
-<GhulExample name="control-flow-50" />
-
-`return;` ends the sequence early; falling off the end of the body has the same effect.
+`await` suspends a function until a task completes, and `yield` suspends a generator until the next element is asked for. Both are covered on [async and generators](/async-and-generators.html).

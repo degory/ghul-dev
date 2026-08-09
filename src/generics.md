@@ -1,7 +1,7 @@
 # generics
 
 ::: tip runnable examples
-The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/generics) has fuller, runnable generics examples. Open it in a GitHub Codespace or a dev container to build and run them.
+The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/generics) has fuller, runnable generics examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul`{:text} and run with `dotnet run`{:sh}.
 :::
 
 ghūl supports generic type arguments on
