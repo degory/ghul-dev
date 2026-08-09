@@ -10,6 +10,12 @@ trait Pipe[T] is
         seed: TRunning,
         accumulator: (TRunning,T) -> TRunning pure
     ) -> TRunning pure;
+
+    reduce[TRunning,TOut](
+        seed: TRunning,
+        accumulator: (TRunning,T) -> TRunning pure,
+        mapper: (TRunning) -> TOut pure
+    ) -> TOut pure;
 // <<<
 si
 

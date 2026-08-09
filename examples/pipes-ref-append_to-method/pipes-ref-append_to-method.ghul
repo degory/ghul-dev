@@ -7,6 +7,11 @@ use Ghul.Pipes.INDEXED_VALUE;
 trait Pipe[T] is
 // >>>
     append_to(
+        into: System.Text.StringBuilder,
+        separator: string
+    ) -> System.Text.StringBuilder;
+
+    append_to(
         into: System.Text.StringBuilder
     ) -> System.Text.StringBuilder;
 // <<<

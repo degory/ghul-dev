@@ -1,7 +1,7 @@
 {
   "name": "pipes-ref-zip-method",
-  "code": "zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure;\nsi\n\nentry() is si\n",
+  "code": "zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure;\n\nzip[U,TOut](\n    other: Iterable[U],\n    mapper: (T,U) -> TOut pure\n) -> Pipe[TOut] pure;",
+  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure;\n\n    zip[U,TOut](\n        other: Iterable[U],\n        mapper: (T,U) -> TOut pure\n    ) -> Pipe[TOut] pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],
@@ -15,7 +15,19 @@
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 22, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
     { "startLine": 1, "startColumn": 37, "endLine": 1, "endColumn": 37, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 39, "text": "U", "signature": "U", "kindLabel": "type variable" },
-    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 34, "text": "trait Pipe[T]", "signature": "trait Pipe[T]", "kindLabel": "trait" }
+    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 34, "text": "trait Pipe[T]", "signature": "trait Pipe[T]", "kindLabel": "trait" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 3, "text": "Pipe[T].zip[U,TOut](\n    other: Iterable[U],\n    mapper: (T, U) -> TOut pure\n) -> Pipe[TOut]", "signature": "Pipe[T].zip[U,TOut](\n    other: Iterable[U],\n    mapper: (T, U) -> TOut pure\n) -> Pipe[TOut]", "kindLabel": "pure abstract method" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "U", "signature": "U", "kindLabel": "type variable" },
+    { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 10, "text": "TOut", "signature": "TOut", "kindLabel": "type variable" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 9, "text": "other: Iterable[U]", "signature": "other: Iterable[U]", "kindLabel": "local argument" },
+    { "startLine": 4, "startColumn": 21, "endLine": 4, "endColumn": 21, "text": "U", "signature": "U", "kindLabel": "type variable" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 19, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 10, "text": "mapper: (T, U) -> TOut pure", "signature": "mapper: (T, U) -> TOut pure", "kindLabel": "local argument" },
+    { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 25, "text": "TOut", "signature": "TOut", "kindLabel": "type variable" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 14, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 16, "text": "U", "signature": "U", "kindLabel": "type variable" },
+    { "startLine": 6, "startColumn": 11, "endLine": 6, "endColumn": 14, "text": "TOut", "signature": "TOut", "kindLabel": "type variable" },
+    { "startLine": 6, "startColumn": 6, "endLine": 6, "endColumn": 9, "text": "trait Pipe[T]", "signature": "trait Pipe[T]", "kindLabel": "trait" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -26,6 +38,18 @@
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 22, "tokenType": "interface" },
     { "startLine": 1, "startColumn": 37, "endLine": 1, "endColumn": 37, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 39, "tokenType": "typeParameter" },
-    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 34, "tokenType": "interface" }
+    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 34, "tokenType": "interface" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 3, "tokenType": "method" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 10, "tokenType": "typeParameter" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 21, "endLine": 4, "endColumn": 21, "tokenType": "typeParameter" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 19, "tokenType": "interface" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 25, "tokenType": "typeParameter" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 14, "tokenType": "typeParameter" },
+    { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 16, "tokenType": "typeParameter" },
+    { "startLine": 6, "startColumn": 11, "endLine": 6, "endColumn": 14, "tokenType": "typeParameter" },
+    { "startLine": 6, "startColumn": 6, "endLine": 6, "endColumn": 9, "tokenType": "interface" }
   ]
 }
