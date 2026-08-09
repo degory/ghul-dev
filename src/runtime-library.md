@@ -26,24 +26,24 @@ or, fluently:
 The combinators come in two kinds. A **stage** returns a new `Pipe[T]`, which is
 what lets stages chain: `map` returns a pipe that maps, `filter` returns a pipe
 that filters. A **terminal** returns something else - a value, a list, a count -
-and so ends the chain.
+so it is where a pipe ends.
 
-Elements travel through a chain one at a time, and the terminal is what pulls
+Elements travel through a pipe one at a time, and the terminal is what pulls
 them through. It asks the pipe it was called on for an element, that pipe asks
-the one it was built from, and so on back to the iterable the chain started
-with; the element then makes its way back out, each stage doing its own work to
-it on the way past. Nothing accumulates in between, so a long chain costs no
-more memory than a short one.
+the one it was built from, and so on back to the iterable at the start; the
+element then makes its way back out, each stage doing its own work to it on the
+way past. Nothing accumulates in between, so a pipe with many stages costs no
+more memory than one with few.
 
-Until something asks a chain for elements, none of it has run, however long it
-is.
+Until something asks a pipe for elements, none of it has run, however many
+stages it has.
 
 <GhulExample name="pipes-lazy-chain" />
 
-A source with no end is usable for the same reason. A
-[generator](/async-and-generators.html#generators) that yields forever can start
-a chain ending in `take(10)`, because ten elements are all that is ever asked
-for.
+An endless source is usable for the same reason. A
+[generator](/async-and-generators.html#generators) that yields forever can sit at
+the start of a pipe ending in `take(10)`, because ten elements are all that is
+ever asked for.
 
 `reverse` and the `sort` family are the exceptions, listed separately below.
 Neither can produce a first element without having seen the last, so both read
@@ -292,8 +292,8 @@ or, as a method:
 
 ## terminals
 
-A terminal returns something other than a pipe, and so ends a chain. They fall
-into three loose groups:
+A terminal returns something other than a pipe, so it is where a pipe ends. They
+fall into three loose groups:
 finding a single element, collecting the elements into a container, and folding
 or consuming the sequence as a whole.
 
