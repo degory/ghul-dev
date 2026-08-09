@@ -49,7 +49,7 @@ function go(i) {
 const next = () => go(index.value + 1)
 const prev = () => go(index.value - 1)
 
-// True while one of this deck's own examples is open in the editor. Rotating
+// true while one of this deck's own examples is open in the editor. Rotating
 // then would swap the card out from under someone who is typing in it.
 const editingHere = computed(() =>
   editingExample.value !== null
