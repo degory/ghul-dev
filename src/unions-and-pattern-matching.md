@@ -1,7 +1,7 @@
 # unions and pattern matching
 
 ::: tip runnable examples
-The ghul-examples repository has fuller, runnable [unions](https://github.com/degory/ghul-examples/tree/main/examples/unions) and [pattern-matching](https://github.com/degory/ghul-examples/tree/main/examples/pattern-matching) examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul`{:text} and run with `dotnet run`{:sh}.
+The ghul-examples repository has fuller, runnable [unions](https://github.com/degory/ghul-examples/tree/main/examples/unions) and [pattern-matching](https://github.com/degory/ghul-examples/tree/main/examples/pattern-matching) examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul`{:text} and run with `dotnet run`{:sh}.
 :::
 
 A union holds a value of one of several variants, each with its own set of fields: one type that represents several kinds of data. Pattern matching is how that data comes back out - test which variant a value holds, and read its fields at the narrowed type. The [definitions page](/definitions.html#unions) covers the full declaration surface - unit variants, the `default` variant, primary-constructor headers, and traits; this page is about using them.

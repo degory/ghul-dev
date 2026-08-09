@@ -20,7 +20,7 @@ Hover any identifier in a code example to see its type. An example's output and 
 :::
 
 ::: tip run the examples
-Every example on this site is runnable. The [ghūl playground](https://github.com/degory/ghul-playground) is a one-file project set up for exactly that: open it in a GitHub Codespace, or clone it on your own machine, paste an example into `main.ghul`{:text}, and `dotnet run`{:sh}.
+Every example on this site is runnable. The [ghūl scratchpad](https://github.com/degory/ghul-scratchpad) is a one-file project set up for exactly that: open it in a GitHub Codespace, or clone it on your own machine, paste an example into `main.ghul`{:text}, and `dotnet run`{:sh}.
 :::
 
 ### hello world!
