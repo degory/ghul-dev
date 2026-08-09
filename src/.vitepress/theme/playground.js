@@ -23,7 +23,7 @@ export const CHANNEL = 'ghul-playground';
 const PROBE_TIMEOUT_MS = 4000;
 
 // Probed once per page load and shared by every example on it, rather than once
-// per example: a reference page carries dozens.
+// per example: a reference page has dozens.
 let probe = null;
 
 export function playgroundAvailable() {

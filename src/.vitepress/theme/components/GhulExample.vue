@@ -302,7 +302,7 @@ function toggleOutput() {
 const panelLabel = computed(() =>
   diagnostics.value.length > 0 && !example.value?.output ? 'diagnostics' : 'output')
 
-// --- editing in the playground ---------------------------------------------
+// Editing in the playground.
 //
 // The static example above is rendered from a build-time artifact and is
 // complete on its own: code, colouring, hovers, diagnostics and output. Editing
@@ -577,8 +577,9 @@ onBeforeUnmount(() => {
           <!-- The analyser is what serves diagnostics and hover while typing.
                Compiling and running work without it, so its absence is worth
                saying quietly rather than presenting as a failure. -->
-          <!-- Only once it has actually failed. While it is still connecting
-               this said "no analyser available", which is alarming and wrong. -->
+          <!-- `disconnected` before `connecting`: a session still being
+               established has not failed, and must not be reported as one that
+               has. -->
           <span
             v-if="frameReady && analyser === 'disconnected'"
             class="ghul-example-analyser-note"
