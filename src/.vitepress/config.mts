@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
 import { createHighlighter } from 'shiki'
 import { FALLBACK_VERSIONS, fetchLatestStable } from './nuget-versions'
-import { PAGES } from './pages'
+import { SECTIONS } from './pages'
 import { renderText } from './render-text'
 
 const ghulInlineHighlighter = await createHighlighter({
@@ -260,7 +260,7 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/degory/ghul' },
     ],
 
-    sidebar: PAGES,
+    sidebar: SECTIONS,
   },
 
   // The plain-text rendering under /text is written straight into the built
