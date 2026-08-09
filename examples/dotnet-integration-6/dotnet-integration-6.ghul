@@ -1,0 +1,13 @@
+use IO.Std.write_line;
+
+// >>>
+class SCOPE(name: string): Ghul.Disposable is
+    dispose() is
+        write_line("closing {name}");
+    si
+si
+
+let use s = SCOPE("file");
+
+write_line("inside the scope");
+// <<<

@@ -1,12 +1,20 @@
-struct POINT(x: double, y: double) is
-    =~(other: POINT) -> bool => x == other.x /\ y == other.y;
+use IO.Std.write_line;
 
-    get_hash_code() -> int => System.HashCode.combine(x, y);
+// >>>
+struct COUNTER is
+    _n: int field;
+
+    init(n: int) is _n = n; si
+
+    bump() is _n = _n + 1; si
+
+    value: int => _n;
 si
 
-let origin = POINT(0.0D, 0.0D);
-let right = POINT(1.0D, 0.0D);
-let zero_zero = POINT(0.0D, 0.0D);
+let original = COUNTER(0);
+let copy mut = original;
 
-assert origin =~ zero_zero;
-assert origin !~ right;
+copy.bump();
+
+write_line("original {original.value}, copy {copy.value}");
+// <<<
