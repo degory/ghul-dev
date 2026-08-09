@@ -2,13 +2,17 @@
 
 Three things get you writing ghūl: an editor, the .NET SDK, and some ghūl code to start from. The compiler is not on the list - a ghūl repository pins it as a local .NET tool, so it arrives with the code.
 
-## an editor
+## prerequisites
+
+Two things to have in place before the code: an editor, and the .NET SDK.
+
+### an editor
 
 [Visual Studio Code](https://code.visualstudio.com) with the [ghūl language extension](https://marketplace.visualstudio.com/items?itemName=degory.ghul) gives you errors and warnings as you type, completion, hover, go to definition, rename and formatting.
 
 The extension is an ordinary Visual Studio Code extension, so any editor that can install VS Code extensions gets ghūl support out of the box. Other editors can drive the underlying language server directly - see [other editors](/tooling.html#other-editors) on the tooling page.
 
-## the .NET SDK
+### the .NET SDK
 
 ghūl is hosted on .NET: the compiler runs on the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0), and the assemblies it produces target .NET 10.
 
