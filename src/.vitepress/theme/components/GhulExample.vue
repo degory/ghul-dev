@@ -302,7 +302,7 @@ function toggleOutput() {
 const panelLabel = computed(() =>
   diagnostics.value.length > 0 && !example.value?.output ? 'diagnostics' : 'output')
 
-// Editing in the playground.
+// --- editing in the playground ---------------------------------------------
 //
 // The static example above is rendered from a build-time artifact and is
 // complete on its own: code, colouring, hovers, diagnostics and output. Editing
