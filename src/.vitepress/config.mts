@@ -3,6 +3,8 @@ import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
 import { createHighlighter } from 'shiki'
 import { FALLBACK_VERSIONS, fetchLatestStable } from './nuget-versions'
+import { PAGES } from './pages'
+import { renderText } from './render-text'
 
 const ghulInlineHighlighter = await createHighlighter({
   themes: ['light-plus', 'dark-plus'],
@@ -258,28 +260,13 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/degory/ghul' },
     ],
 
-    sidebar: [
-      { text: 'overview', link: '/' },
-      { text: 'getting started', link: '/getting-started' },
-      { text: 'language basics', link: '/language-basics' },
-      { text: 'syntax', link: '/syntax' },
-      { text: 'definitions', link: '/definitions' },
-      { text: 'expressions', link: '/expressions' },
-      { text: 'control flow', link: '/control-flow' },
-      { text: 'optional types', link: '/optional-types' },
-      { text: 'expression oriented programming', link: '/expression-oriented-programming' },
-      { text: 'functional programming', link: '/functional-programming' },
-      { text: 'object oriented programming', link: '/object-oriented-programming' },
-      { text: 'generics', link: '/generics' },
-      { text: 'type inference', link: '/type-inference' },
-      { text: 'runtime library', link: '/runtime-library' },
-      { text: '.NET integration', link: '/dotnet-integration' },
-      { text: 'tooling', link: '/tooling' },
-      { text: 'grammar', link: '/grammar' },
-      { text: 'implementation', link: '/implementation' },
-      { text: 'known issues', link: '/known-issues' },
-      { text: 'resources', link: '/resources' },
-      { text: 'history', link: '/history' },
-    ],
+    sidebar: PAGES,
+  },
+
+  // The plain-text rendering under /text is written straight into the built
+  // site, so it ships and stays current with the pages it is rendered from.
+  buildEnd(siteConfig) {
+    const count = renderText(siteConfig.srcDir, siteConfig.outDir)
+    siteConfig.logger.info(`rendered ${count} pages to text/`)
   },
 })
