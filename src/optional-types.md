@@ -1,8 +1,8 @@
 # optional types
 
-A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and the same type without the `?` is non-optional. The [language basics](/language-basics.html#optional-types) page introduces the core operators - `?`, `!`, `if let`, `??`, `?.` - and they read the same regardless of what `T` is. That uniformity isn't an accident: ghūl backs `T?` with whichever of three different representations fits `T`, and picks silently.
+A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and the same type without the `?` is non-optional. The [language basics](/language-basics.html#optional-types) page introduces the presence test `?` and the assignability rule; the operators read the same regardless of what `T` is. That uniformity isn't an accident: ghūl backs `T?` with whichever of three different representations fits `T`, and picks silently.
 
-There's a second axis to this, independent of `T?` itself: any type - not just the built-in optional forms - can opt in to the same `?`/`!` treatment, either structurally (by shape) or nominally (by declaring which variant means "absent"). This page covers both axes: the three backings behind `T?`, and the two ways a type can be optional-shaped without ever spelling `T?`.
+There's a second axis to this, independent of `T?` itself: any type - not just the built-in optional forms - can opt in to the same `?`/`!` treatment, either structurally (by shape) or nominally (by declaring which variant means "absent"). This page covers the three backings behind `T?`, the full operator set - `?`, `!`, `??`, `?.` - and the warnings around them, and the two ways a type can be optional-shaped without ever spelling `T?`.
 
 <GhulExample name="optional-types-1" />
 
@@ -36,8 +36,20 @@ A generic function or type can be written over `T?` before anything is known abo
 Because all three are the same feature, they behave alike: `??` chains across them, `if x?` and `if let` narrow them the same way, and a non-optional `T` widens to any of them without ceremony. Which one is in play for a given `T?` is an implementation detail you don't need to track.
 
 <GhulExample name="language-basics-19" />
+
+## the operators
+
+The `??` operator supplies a fallback: `a ?? b` is `a` when it is present, otherwise `b`, and `b` is evaluated only when needed. It is right-associative, so `a ?? b ?? c` tries each in turn, and the result stays optional until a non-optional value closes the chain:
+
 <GhulExample name="language-basics-28" />
+
+The `?.` operator reads a member only when the receiver is present: `a?.b` is `b` when `a` is present, otherwise the absent case. The result is always optional, and `?.` chains, so a whole access path folds down to one optional. Method calls compose the same way: `a?.foo(args)` calls `foo` on a present receiver and yields the absent case otherwise, with the argument expressions included in the short-circuit, so they are not evaluated when `a` is absent.
+
 <GhulExample name="language-basics-29" />
+
+## the warnings
+
+Reading a member through an optional not known to be present draws a `null-deref` warning; `x?.y`, `x.has_value`, `x!`, and `if let` are the warning-free routes. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
 
 ## beyond `T?`: types that are optional-shaped
 
