@@ -18,6 +18,20 @@ export const editingExample = ref(null);
 
 export const CHANNEL = 'ghul-playground';
 
+// what a reader has typed, by example name. Held here rather than in the
+// component because a deck unmounts its card when it rotates or when the
+// reader uses its controls, and losing someone's work to that would be worse
+// than any of the reasons for unmounting.
+const edits = new Map();
+
+export function retainedEdit(name) {
+    return edits.get(name) ?? null;
+}
+
+export function retainEdit(name, source) {
+    if (typeof source === 'string') edits.set(name, source);
+}
+
 // Long enough for a cold service behind a proxy, short enough that a reader on
 // a page full of examples is not waiting on it.
 const PROBE_TIMEOUT_MS = 4000;
