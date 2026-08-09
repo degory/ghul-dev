@@ -1,6 +1,10 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch, onBeforeUnmount } from 'vue'
 import DiagnosticIcon from './DiagnosticIcon.vue'
+import {
+  PLAYGROUND_ORIGIN, CHANNEL, playgroundAvailable, currentTheme, watchTheme,
+  editingExample
+} from '../playground'
 
 // Renders a verified ghūl example from its generated artifact: the visible
 // (sliced, de-indented) code, syntax-coloured and with VSCE-style hover
@@ -297,15 +301,176 @@ function toggleOutput() {
 
 const panelLabel = computed(() =>
   diagnostics.value.length > 0 && !example.value?.output ? 'diagnostics' : 'output')
+
+// --- editing in the playground ---------------------------------------------
+//
+// The static example above is rendered from a build-time artifact and is
+// complete on its own: code, colouring, hovers, diagnostics and output. Editing
+// is strictly additional, so none of what follows may affect the page when the
+// back end is absent - in that case no pencil appears and this is all inert.
+//
+// Editing swaps the code block for an iframe served from the playground's own
+// origin. The frame owns only the editor; its output and diagnostics are posted
+// back and shown in the panel this component already has, rather than the frame
+// growing a second one that would have to be styled to match.
+
+const canEdit = ref(false)
+const editing = ref(false)
+const frame = ref(null)
+const frameHeight = ref(0)
+const frameReady = ref(false)
+const analyser = ref('connecting')
+const runState = ref(null)
+const liveOutput = ref('')
+const liveDiagnostics = ref([])
+
+// A signature card is a declaration stub with no runnable body, so there is
+// nothing to edit or run.
+if (!props.signature) {
+  playgroundAvailable().then(available => { canEdit.value = available })
+}
+
+const embedUrl = `${PLAYGROUND_ORIGIN}/embed.html`
+
+// What the panel shows: the recorded output of the verified example, or what
+// the reader's own edit produced.
+const shownDiagnostics = computed(() => editing.value ? liveDiagnostics.value : diagnostics.value)
+const shownOutput = computed(() => editing.value ? liveOutput.value : example.value?.output)
+
+const runLabel = computed(() => {
+  if (!editing.value) return null
+
+  return runState.value === 'compiling' ? 'compiling ...'
+    : runState.value === 'starting runtime' ? 'starting the runtime ...'
+      : runState.value === 'running' ? 'running ...'
+        : null
+})
+
+function post(type, payload = {}) {
+  frame.value?.contentWindow?.postMessage(
+    { channel: CHANNEL, type, ...payload }, PLAYGROUND_ORIGIN)
+}
+
+function onFrameMessage(event) {
+  if (event.origin !== PLAYGROUND_ORIGIN) return
+  if (event.data?.channel !== CHANNEL) return
+  if (event.source !== frame.value?.contentWindow) return
+
+  const message = event.data
+
+  // postMessage is not queued, so the source cannot be sent until the frame
+  // says it is listening.
+  if (message.type === 'loaded') {
+    post('init', {
+      source: example.value?.fullSource ?? example.value?.code ?? '',
+      theme: currentTheme()
+    })
+    return
+  }
+
+  if (message.type === 'ready') { frameReady.value = true; return }
+  if (message.type === 'height') { frameHeight.value = message.height; return }
+  if (message.type === 'analyser') { analyser.value = message.state; return }
+  if (message.type === 'output') { liveOutput.value = message.text ?? ''; return }
+  if (message.type === 'diagnostics') {
+    // The compiler says `warn`; the artifact and the icon component both say
+    // `warning`. Normalise here rather than teaching the icon a second spelling.
+    liveDiagnostics.value = (message.diagnostics ?? []).map(d => ({
+      ...d,
+      severity: d.severity === 'warn' ? 'warning' : d.severity
+    }))
+    return
+  }
+
+  if (message.type === 'status') {
+    runState.value = message.state
+    if (message.state === 'done' || message.state === 'failed' || message.state === 'error') {
+      // Leave the last state visible only while it is interesting.
+      setTimeout(() => { if (runState.value === message.state) runState.value = null }, 1500)
+    }
+  }
+}
+
+let stopWatchingTheme = null
+
+function startEditing() {
+  // Claiming the page-wide slot closes whichever example held it.
+  editingExample.value = props.name
+
+  editing.value = true
+  outputExpanded.value = true
+
+  // Start from the recorded output, so the panel is not empty before the
+  // reader has run anything.
+  liveOutput.value = example.value?.output ?? ''
+  liveDiagnostics.value = diagnostics.value
+
+  window.addEventListener('message', onFrameMessage)
+  stopWatchingTheme = watchTheme(theme => post('theme', { theme }))
+}
+
+function stopEditing() {
+  if (editingExample.value === props.name) editingExample.value = null
+
+  editing.value = false
+  frameReady.value = false
+  frameHeight.value = 0
+  runState.value = null
+
+  window.removeEventListener('message', onFrameMessage)
+  stopWatchingTheme?.()
+  stopWatchingTheme = null
+}
+
+function run() {
+  post('run')
+}
+
+// Another example taking the slot closes this one, which also releases its
+// analyser session rather than leaving it held by a hidden editor.
+watch(editingExample, name => {
+  if (editing.value && name !== props.name) stopEditing()
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('message', onFrameMessage)
+  stopWatchingTheme?.()
+})
 </script>
 
 <template>
   <div v-if="example" class="ghul-example">
     <span class="ghul-example-lang">ghul</span>
+
+    <div class="ghul-example-tools">
     <button
-      v-if="canExpand"
+      v-if="canEdit && !editing"
       type="button"
-      class="ghul-example-expand"
+      class="ghul-example-tool ghul-example-edit"
+      title="edit and run this example"
+      @click="startEditing"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h9" />
+        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+      </svg>
+    </button>
+    <button
+      v-if="editing"
+      type="button"
+      class="ghul-example-tool ghul-example-edit is-active"
+      title="stop editing and show the original"
+      @click="stopEditing"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+    <button
+      v-if="canExpand && !editing"
+      type="button"
+      class="ghul-example-tool ghul-example-expand"
       :title="expanded ? 'show only the example' : 'show the full source'"
       :aria-pressed="expanded"
       @click="toggleExpanded"
@@ -326,7 +491,7 @@ const panelLabel = computed(() =>
     <button
       v-if="!signature"
       type="button"
-      class="ghul-example-copy"
+      class="ghul-example-tool ghul-example-copy"
       :class="{ copied }"
       :title="copied ? 'copied' : 'copy code'"
       @click="copy"
@@ -339,8 +504,22 @@ const panelLabel = computed(() =>
         <polyline points="20 6 9 17 4 12" />
       </svg>
     </button>
+    </div>
 
-    <div class="ghul-example-code">
+    <!-- Editing replaces the rendered code with the playground, framed from
+         its own origin so the reader's program never runs on this one. -->
+    <div v-if="editing" class="ghul-example-frame-wrap">
+      <iframe
+        ref="frame"
+        class="ghul-example-frame"
+        :src="embedUrl"
+        :style="{ height: Math.max(frameHeight, 120) + 'px' }"
+        title="ghūl playground"
+        sandbox="allow-scripts allow-same-origin allow-forms"
+      ></iframe>
+    </div>
+
+    <div v-else class="ghul-example-code">
       <pre v-if="expanded" class="ghul-example-full-source">{{ example.fullSource }}</pre>
       <template v-else>
         <template v-for="item in displayItems" :key="item.key">
@@ -375,7 +554,7 @@ const panelLabel = computed(() =>
         </template>
       </template>
     </div>
-    <div v-if="example.output || diagnostics.length" class="ghul-example-output">
+    <div v-if="example.output || diagnostics.length || editing" class="ghul-example-output">
       <button
         type="button"
         class="ghul-example-output-toggle"
@@ -391,17 +570,51 @@ const panelLabel = computed(() =>
           <polyline points="9 6 15 12 9 18" />
         </svg>
         <span>{{ panelLabel }}</span>
+
+        <template v-if="editing">
+          <span class="ghul-example-run-state">{{ runLabel }}</span>
+
+          <!-- The analyser is what serves diagnostics and hover while typing.
+               Compiling and running work without it, so its absence is worth
+               saying quietly rather than presenting as a failure. -->
+          <!-- Only once it has actually failed. While it is still connecting
+               this said "no analyser available", which is alarming and wrong. -->
+          <span
+            v-if="frameReady && analyser === 'disconnected'"
+            class="ghul-example-analyser-note"
+            title="the editor still compiles and runs; only live diagnostics and hover are unavailable"
+          >no analyser available</span>
+          <span
+            v-else-if="frameReady && analyser === 'connecting'"
+            class="ghul-example-analyser-note"
+          >connecting ...</span>
+
+          <span
+            class="ghul-example-run"
+            role="button"
+            tabindex="0"
+            :aria-disabled="!frameReady"
+            title="compile and run (Ctrl+Enter)"
+            @click.stop="frameReady && run()"
+            @keydown.enter.stop="frameReady && run()"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+            <span>run</span>
+          </span>
+        </template>
       </button>
       <div v-show="outputExpanded" class="ghul-example-output-body">
         <div
-          v-for="(d, k) in diagnostics"
+          v-for="(d, k) in shownDiagnostics"
           :key="k"
           class="ghul-example-diag"
         >
           <DiagnosticIcon :severity="d.severity" />
           <span class="ghul-example-diag-text">{{ d.message }}</span>
         </div>
-        <pre v-if="example.output">{{ example.output }}</pre>
+        <pre v-if="shownOutput">{{ shownOutput }}</pre>
       </div>
     </div>
   </div>
@@ -569,11 +782,18 @@ const panelLabel = computed(() =>
   transition: opacity 0.2s;
 }
 
-.ghul-example-copy,
-.ghul-example-expand {
+/* One row rather than per-button offsets, so buttons appearing and
+   disappearing cannot collide or leave gaps. */
+.ghul-example-tools {
   position: absolute;
   top: 8px;
+  right: 8px;
   z-index: 2;
+  display: flex;
+  gap: 4px;
+}
+
+.ghul-example-tool {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -588,42 +808,84 @@ const panelLabel = computed(() =>
   transition: opacity 0.2s, color 0.2s;
 }
 
-.ghul-example-copy {
-  right: 8px;
-}
-
-.ghul-example-expand {
-  right: 40px;
-}
-
 .ghul-example:hover .ghul-example-lang {
   opacity: 0;
 }
 
-.ghul-example:hover .ghul-example-copy,
-.ghul-example:hover .ghul-example-expand {
+.ghul-example:hover .ghul-example-tool {
   opacity: 1;
 }
 
-.ghul-example-copy:hover,
-.ghul-example-expand:hover {
+.ghul-example-tool:hover {
   color: var(--vp-c-text-1);
 }
 
-.ghul-example-copy.copied {
+.ghul-example-copy.copied,
+.ghul-example-expand[aria-pressed="true"],
+.ghul-example-tool.is-active {
   color: var(--vp-c-brand-1);
   opacity: 1;
 }
 
-.ghul-example-expand[aria-pressed="true"] {
-  color: var(--vp-c-brand-1);
+/* While editing, the way back out must not depend on hovering to find it. */
+.ghul-example-edit.is-active {
   opacity: 1;
 }
 
-.ghul-example-copy svg,
-.ghul-example-expand svg {
+.ghul-example-tool svg {
   width: 16px;
   height: 16px;
+}
+
+.ghul-example-frame-wrap {
+  background: var(--vp-code-block-bg);
+}
+
+.ghul-example-frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  /* The frame reports what its content needs and the height follows, so the
+     editor never gets its own scrollbar inside the page's. */
+  transition: height 0.15s ease-out;
+}
+
+.ghul-example-run {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: auto;
+  padding: 0.15rem 0.7rem 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: var(--vp-c-brand-1);
+  color: var(--vp-c-white, #fff);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s, opacity 0.15s;
+}
+
+.ghul-example-run:hover {
+  background: var(--vp-c-brand-2, var(--vp-c-brand-1));
+}
+
+.ghul-example-run svg {
+  width: 14px;
+  height: 14px;
+}
+
+.ghul-example-run[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.ghul-example-run-state,
+.ghul-example-analyser-note {
+  color: var(--vp-c-text-3);
+  font-style: italic;
+}
+
+.ghul-example-analyser-note {
+  margin-left: auto;
 }
 
 .ghul-example-ellipsis {
