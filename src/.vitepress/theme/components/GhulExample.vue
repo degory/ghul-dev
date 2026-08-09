@@ -433,6 +433,12 @@ watch(editingExample, name => {
 })
 
 onBeforeUnmount(() => {
+  // Releases the page-wide slot as well as the listeners. A deck rekeys and
+  // unmounts this card when the reader uses its prev/next controls, which can
+  // happen while the editor is open; leaving the slot claimed would name a
+  // card that no longer exists and pause that deck for good.
+  if (editing.value) stopEditing()
+
   window.removeEventListener('message', onFrameMessage)
   stopWatchingTheme?.()
 })
