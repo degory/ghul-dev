@@ -30,17 +30,17 @@ and so ends the chain.
 
 Elements travel through a chain one at a time, and the terminal is what pulls
 them through. It asks the pipe it was called on for an element, that pipe asks
-the one it was built from, and so on back to the array or list the chain started
+the one it was built from, and so on back to the iterable the chain started
 with; the element then makes its way back out, each stage doing its own work to
 it on the way past. Nothing accumulates in between, so a long chain costs no
 more memory than a short one.
 
-One consequence is worth knowing: until something asks a chain for elements,
-none of it has run, however long it is.
+Until something asks a chain for elements, none of it has run, however long it
+is.
 
 <GhulExample name="pipes-lazy-chain" />
 
-It also means a source with no end is usable. A
+A source with no end is usable for the same reason. A
 [generator](/async-and-generators.html#generators) that yields forever can start
 a chain ending in `take(10)`, because ten elements are all that is ever asked
 for.
