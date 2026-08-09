@@ -56,7 +56,7 @@ export const SECTIONS = [
   },
 ]
 
-// Every page in sidebar order, ignoring the grouping — the reading order the
+// Every page in sidebar order, ignoring the grouping - the reading order the
 // /text rendering follows.
 export const PAGES = SECTIONS.flatMap(section => section.items)
 
