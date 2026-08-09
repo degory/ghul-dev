@@ -749,7 +749,7 @@ In ghūl, the visibility of symbols outside their defining scope is managed by a
 
 ### global symbols
 
-Classes, structs, traits, unions, global functions and global properties are accessible from any namespace. Prefixing their names with `_` indicates they are intended to be private, but this is not enforced by the compiler:
+Classes, structs, traits, unions, global functions and global properties are accessible from any namespace. Prefixing their names with `_` makes them private to the assembly they are declared in: within the assembly they stay reachable from any namespace, but another assembly cannot see them, and a reference from one is a compile error:
 ```ghul
 class PUBLIC is
 si
@@ -768,31 +768,29 @@ _private_property: int;
 
 ### methods
 
-Methods are public by default. To make a method protected, prefix its name with an underscore `_`:
+Methods are public unless their name starts with `_`, which makes the method private: it is visible only within its declaring class, and the compiler enforces that:
 ```ghul
 class THING is
     do_something_public() is
     si
 
-    _do_something_protected() is
+    _do_something_private() is
     si
 si
 ```
-Protected access to methods _is_ enforced by the compiler
-
 
 ### properties
-Properties are public read, protected write, unless they start with `_`, in which case they are protected read and write:
+Properties are public to read but private to assign - a property is assignable only within its defining type. A property whose name starts with `_` is private to read as well:
 ```ghul
 …
 struct VALUE is
     public_property: int;
 
-    _protected_property: string;
+    _private_property: string;
 
     init(value: int) is
         public_property = value;
-        _protected_property = "value is {value}";
+        _private_property = "value is {value}";
     si
 si
 …
@@ -801,15 +799,16 @@ let v = VALUE(1234);
 // OK: public_property is publicly readable
 write_line(v.public_property);
 
-write_line(v._protected_property);
+write_line(v._private_property);
 
 v.public_property = 5678;
 ```
 
 diagnostics:
 
-- error: _protected_property: string is not accessible here
+- error: _private_property: string is not accessible here
 - error: VALUE.public_property: int is not publicly assignable
 
-### planned changes
-Protected access will become private in a future release: derived types should not rely on reading or writing members with `_` prefixed names
+### protected access
+
+The rules above describe the default, `--underscore-access private`. Compiling with `--underscore-access protected` instead widens an underscore member's reach to the declaring class and its subclasses within the same assembly, for a codebase that relies on subclasses reading `_` members. Underscore types, global functions and global variables are unaffected - they are private to their assembly under either setting.

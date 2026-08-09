@@ -21,7 +21,7 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 
 > **run the examples**
 >
-> Every example on this site is runnable. The [ghūl playground](https://github.com/degory/ghul-playground) is a one-file project set up for exactly that: open it in a GitHub Codespace, or clone it on your own machine, paste an example into `main.ghul`, and `dotnet run`.
+> Every example on this site is runnable. The [ghūl scratchpad](https://github.com/degory/ghul-scratchpad) is a one-file project set up for exactly that: open it in a GitHub Codespace, or clone it on your own machine, paste an example into `main.ghul`, and `dotnet run`.
 
 ### hello world!
 
@@ -414,26 +414,26 @@ signed in as guest
 
 ## features
 
-- **type safety**: ghūl enforces type safety at compile-time.
+- **functional programming**: first-class anonymous functions with closures, higher order functions, and non-mutating pipe operations over lists. Arrays, tuples, and list literals are immutable.
+
+- **expression-oriented**: `if`, `case`, and block forms are expressions.
+
+- **pattern matching**: `if let` and `case`/`when` arms with type tests, destructuring with literal leaves, and value lists. `case` arms over a union, enum, `bool`, or closed class hierarchy are checked for exhaustiveness; open-domain scrutinees need `else`.
+
+- **OOP**: classes, structs, traits, inheritance, polymorphism, properties, and indexers.
 
 - **type inference**: local variables, loop variables, destructured variables, anonymous function parameter and return types, and generic type arguments at call sites are inferred from initializers and use sites. Inference is bidirectional and iterative within a function body.
 
 - **type narrowing**: union variant tests, `isa` checks, null checks, and `if let` narrow a local variable's type within the code the check covers.
 
-- **functional programming**: first-class anonymous functions with closures, higher order functions, and non-mutating pipe operations over lists. Arrays, tuples, and list literals are immutable.
-
-- **pattern matching**: `if let` and `case`/`when` arms with type tests, destructuring with literal leaves, and value lists. `case` arms over a union, enum, `bool`, or closed class hierarchy are checked for exhaustiveness; open-domain scrutinees need `else`.
-
-- **expression-oriented**: `if`, `case`, and block forms are expressions.
-
-- **OOP**: classes, structs, traits, inheritance, polymorphism, properties, and indexers.
-
-- **error handling**: `try`/`catch`/`finally` over .NET exceptions.
-
 - **generics**: types, methods, and functions can have generic type parameters. Traits can be declared covariant or contravariant with `[T: out]` / `[T: in]`; variance on imported .NET generics is read from metadata.
-
-- **async/await**: functions returning `Tasks.TASK[T]` can use `await` to wait on a task and resume with its result.
 
 - **generators**: functions returning `Pipe[T]` can use `yield` to produce a sequence of values lazily.
 
+- **async/await**: functions returning `Tasks.TASK[T]` can use `await` to wait on a task and resume with its result.
+
 - **.NET integration**: ghūl targets .NET, producing and consuming NuGet packages and inter-operating with other .NET languages.
+
+- **error handling**: `try`/`catch`/`finally` over .NET exceptions.
+
+- **type safety**: ghūl enforces type safety at compile-time.

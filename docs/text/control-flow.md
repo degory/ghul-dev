@@ -2,7 +2,7 @@
 
 > **runnable examples**
 >
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul` and run with `dotnet run`.
 
 ## block scope
 
@@ -390,9 +390,7 @@ output:
 
 This loop skips the call to `write_line` when counter is 3.
 
-### scope
-
-The block statement body of the while statement, delimited by `do` and `od` forms a scope for local variable definitions.
+`break` and `continue` behave the same way in `for` and `do` loops, so they are not shown again below.
 
 ### while let
 
@@ -520,57 +518,9 @@ output:
 9
 ```
 
-### break and continue in for loops
-
-The `break` statement immediately exits the loop, while `continue` skips the remaining code in the current iteration and proceeds to the next iteration immediately before attempting to read the next element from the iterator
-
-```ghul
-…
-for counter in 0..10 do
-    if counter == 5 then
-        break;
-    fi
-    write_line(counter);
-od
-```
-
-output:
-
-```
-0
-1
-2
-3
-4
-```
-
-This loop exits when counter reaches 5, without proceeding to execute `write_line(5)`
-
-
-```ghul
-…
-for counter in 0..5 do
-    if counter == 3 then
-        continue;
-    fi
-    write_line(counter);
-od
-```
-
-output:
-
-```
-0
-1
-2
-4
-```
-
-This loop skips the call to `write_line` when counter is 3.
-
 ### scope
 
-The block statement body of the for statement, delimited by `do` and `od` forms a scope for local variable definitions. The loop variable is in scope within this block scope but not within the expression that provides the iterable object.
+The loop variable is in scope within the loop body but not within the expression that provides the iterable object. `continue` in a `for` loop proceeds to the next iteration immediately before attempting to read the next element from the iterator.
 
 
 ## do statement
@@ -609,40 +559,6 @@ output:
 ```
 
 This loop will run indefinitely until counter reaches 5, at which point the break statement terminates the loop.
-
-### break and continue in do-od loops
-
-The break and continue statements work similarly in do / od loops as they do in while loops.
-
-```ghul
-…
-let counter mut = 0;
-do
-    counter = counter + 1;
-    if counter == 3 then
-        continue;
-    fi
-    write_line(counter);
-    if counter == 5 then
-        break;
-    fi
-od
-```
-
-output:
-
-```
-1
-2
-4
-5
-```
-
-This loop skips the write_line statement when counter is 3 and breaks out of the loop when counter reaches 5.
-
-### scope
-
-The block statement body of the do statement, delimited by `do` and `od` forms a scope for local variable definitions.
 
 
 ## case statement

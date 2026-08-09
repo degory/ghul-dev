@@ -2,7 +2,7 @@
 
 > **runnable examples**
 >
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller, runnable type-inference examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller, runnable type-inference examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul` and run with `dotnet run`.
 
 ghūl infers types pervasively inside a method or function body: most local variables, loop variables, destructured variables and anonymous function parameters can be left unannotated, and the compiler works their types out from how they are initialized and used.
 

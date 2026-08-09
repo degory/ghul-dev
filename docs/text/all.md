@@ -64,7 +64,7 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 
 > **run the examples**
 >
-> Every example on this site is runnable. The [ghūl playground](https://github.com/degory/ghul-playground) is a one-file project set up for exactly that: open it in a GitHub Codespace, or clone it on your own machine, paste an example into `main.ghul`, and `dotnet run`.
+> Every example on this site is runnable. The [ghūl scratchpad](https://github.com/degory/ghul-scratchpad) is a one-file project set up for exactly that: open it in a GitHub Codespace, or clone it on your own machine, paste an example into `main.ghul`, and `dotnet run`.
 
 ### hello world!
 
@@ -457,29 +457,29 @@ signed in as guest
 
 ## features
 
-- **type safety**: ghūl enforces type safety at compile-time.
+- **functional programming**: first-class anonymous functions with closures, higher order functions, and non-mutating pipe operations over lists. Arrays, tuples, and list literals are immutable.
+
+- **expression-oriented**: `if`, `case`, and block forms are expressions.
+
+- **pattern matching**: `if let` and `case`/`when` arms with type tests, destructuring with literal leaves, and value lists. `case` arms over a union, enum, `bool`, or closed class hierarchy are checked for exhaustiveness; open-domain scrutinees need `else`.
+
+- **OOP**: classes, structs, traits, inheritance, polymorphism, properties, and indexers.
 
 - **type inference**: local variables, loop variables, destructured variables, anonymous function parameter and return types, and generic type arguments at call sites are inferred from initializers and use sites. Inference is bidirectional and iterative within a function body.
 
 - **type narrowing**: union variant tests, `isa` checks, null checks, and `if let` narrow a local variable's type within the code the check covers.
 
-- **functional programming**: first-class anonymous functions with closures, higher order functions, and non-mutating pipe operations over lists. Arrays, tuples, and list literals are immutable.
-
-- **pattern matching**: `if let` and `case`/`when` arms with type tests, destructuring with literal leaves, and value lists. `case` arms over a union, enum, `bool`, or closed class hierarchy are checked for exhaustiveness; open-domain scrutinees need `else`.
-
-- **expression-oriented**: `if`, `case`, and block forms are expressions.
-
-- **OOP**: classes, structs, traits, inheritance, polymorphism, properties, and indexers.
-
-- **error handling**: `try`/`catch`/`finally` over .NET exceptions.
-
 - **generics**: types, methods, and functions can have generic type parameters. Traits can be declared covariant or contravariant with `[T: out]` / `[T: in]`; variance on imported .NET generics is read from metadata.
-
-- **async/await**: functions returning `Tasks.TASK[T]` can use `await` to wait on a task and resume with its result.
 
 - **generators**: functions returning `Pipe[T]` can use `yield` to produce a sequence of values lazily.
 
+- **async/await**: functions returning `Tasks.TASK[T]` can use `await` to wait on a task and resume with its result.
+
 - **.NET integration**: ghūl targets .NET, producing and consuming NuGet packages and inter-operating with other .NET languages.
+
+- **error handling**: `try`/`catch`/`finally` over .NET exceptions.
+
+- **type safety**: ghūl enforces type safety at compile-time.
 
 
 ---
@@ -488,122 +488,45 @@ signed in as guest
 
 # getting started
 
-> **Examples**: if you just want to see some ghūl code examples and maybe experiment with writing some ghūl, then start with the **[ghūl examples repository](https://github.com/degory/ghul-examples)**. The examples project is ready to open in a devcontainer, or a GitHub Codespace.
+Three things get you writing ghūl: an editor, the .NET SDK, and some ghūl code to start from. The compiler is not on the list - a ghūl repository pins it as a local .NET tool, so it arrives with the code.
 
 ## prerequisites
 
-The ghūl programming language compiler requires the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0). The SDK includes the .NET 10 runtime that the compiler tool itself runs on, and will fetch reference packs for any target framework you build against on demand.
+Two things to have in place before the code: an editor, and the .NET SDK.
 
-## target
+### an editor
 
-The compiler produces standard .NET assemblies and packages targeting .NET 10.
+[Visual Studio Code](https://code.visualstudio.com) with the [ghūl language extension](https://marketplace.visualstudio.com/items?itemName=degory.ghul) gives you errors and warnings as you type, completion, hover, go to definition, rename and formatting.
 
-## getting the ghūl compiler
+The extension is an ordinary Visual Studio Code extension, so any editor that can install VS Code extensions gets ghūl support out of the box. Other editors can drive the underlying language server directly - see [other editors](https://ghul.dev/tooling.html#other-editors) on the tooling page.
 
-There are a few different ways to get the compiler
+### the .NET SDK
 
-### use a ghūl .NET project template
+ghūl is hosted on .NET: the compiler runs on the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0), and the assemblies it produces target .NET 10.
 
-If you initialize your project using one of the [ghūl .NET project templates](https://www.nuget.org/packages/ghul.templates/), the template will add the compiler to your project folder as a local .NET tool - just run `dotnet tool restore` to restore it. 
+You can skip installing anything locally: the repositories below ship a dev container, so opening one in a GitHub Codespace, or in VS Code with the Dev Containers extension, gives you the SDK, the compiler and the language extension ready to go.
 
-### clone the ghūl GitHub repository template
+## some ghūl code
 
-If you create a new GitHub repo from the [ghūl repository template](https://github.com/degory/ghul-repository-template), then the compiler will be pre-configured as a local .NET tool in your project folder - run `dotnet tool restore` to restore it.
+- The [ghūl scratchpad](https://github.com/degory/ghul-scratchpad) is a minimal one-file project: open it in a Codespace or clone it, paste any example from this site into `main.ghul`, and `dotnet run`.
+- The [examples repository](https://github.com/degory/ghul-examples) has fuller, runnable examples organised by topic.
 
-### use a dev container
+Both pin the ghūl compiler as a local .NET tool, so there is nothing separate to install: `dotnet tool restore` fetches it, and the dev containers run that for you.
 
-The [examples repository](https://github.com/degory/ghul-examples) and the [ghūl repository template](https://github.com/degory/ghul-repository-template) both ship a `.devcontainer` configured to use a standard .NET 10 dev container image - for example [`mcr.microsoft.com/devcontainers/dotnet:10.0`](https://hub.docker.com/r/microsoft/devcontainers-dotnet). Open the project in VS Code with the Dev Containers extension, or in a GitHub Codespace, and run `dotnet tool restore` to install the compiler from the local tool manifest.
+## it's all ordinary .NET
 
-### install the compiler as a local or global .NET tool
-
-You can manually install the compiler from the [ghūl compiler .NET tool package](https://www.nuget.org/packages/ghul.compiler/). To pin it as a local tool in your project folder, so everyone building the project gets the same compiler:
-
-```sh
-dotnet new tool-manifest
-dotnet tool install --local ghul.compiler --version 0.0.0-latest.ghul.compiler
-```
-
-To install it globally instead:
-
-```sh
-dotnet tool install --global ghul.compiler
-```
-
-## using the compiler
-
-### project file
-
-The compiler expects to be driven by MSBuild using a `.ghulproj` project file.
-See the [ghūl test](https://github.com/degory/ghul-test) project for
-a real-world example, or use one of the project templates to get started.
-
-`Directory.Build.props`
-```xml
-<Project>
-  <PropertyGroup>
-    <Version>0.1.0-alpha.1</Version>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <!--
-      ghul.runtime provides MSBuild targets required to drive the 
-      ghul compiler
-     -->
-    <PackageReference Include="ghul.runtime" Version="0.0.0-latest.ghul.runtime" />
-  </ItemGroup>
-</Project>
-```
-
-`example.ghulproj`
-```xml
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net10.0</TargetFramework>
-
-    <GhulCompiler>dotnet ghul-compiler</GhulCompiler>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <GhulSources Include="src/**/*.ghul" />
-  </ItemGroup>
-</Project>
-```
-
-### source files
-
-You'll need some ghūl source files. By convention ghūl source files have the extension `.ghul`, and the `ghul.runtime` provided MSBuild targets will include `**/*.ghul` when building.
-
-### building and running
-
-Once you have a project file and some ghūl source files, you can use the normal
-.NET SDK commands to build, pack, and run your project:
+A ghūl project is a normal .NET SDK project. In either repository you'll find a `.ghulproj` - an MSBuild project file with the usual things in it - and the normal `dotnet` commands work as you'd expect:
 
 ```bash
 dotnet build
-```
-
-```bash
+dotnet run
+dotnet test
 dotnet pack
 ```
 
-```bash
-dotnet run
-```
+A ghūl project can reference NuGet packages, produce libraries or executables, and be packed and published exactly like a C# project.
 
-### runtime dependencies for ghūl applications
-
-Applications written in ghūl require the [.NET 10 runtime](https://dotnet.microsoft.com/download/dotnet/10.0).
-
-## development environment
-
-### Visual Studio Code
-
-[Visual Studio Code](https://code.visualstudio.com) will give you rich language support via the [ghūl VSCode language extension](https://marketplace.visualstudio.com/items?itemName=degory.ghul).
-
-### other editors
-
-The [ghūl language extension implementation](https://github.com/degory/ghul-vsce) is currently tightly coupled to the Visual Studio Code extension API. However under the hood it is using the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) so could be extended to support other clients. Feel free to submit a PR.
+To start a project of your own - from a template, from the repository template, or from scratch - see [creating a project](https://ghul.dev/tooling.html#creating-a-project) on the tooling page.
 
 
 ---
@@ -1231,7 +1154,7 @@ output:
 
 > **runnable examples**
 >
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller, runnable examples that include narrowing. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller, runnable examples that include narrowing. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul` and run with `dotnet run`.
 
 When a check guarantees a value has a more specific type, ghūl narrows that value to it for the code the check covers: inside the branch the value reads at the narrower type, with no cast and no unwrap. Union variant tests, `isa` class checks, presence tests on optionals, and `if let` all narrow, and the narrowing is flow-sensitive - it follows the control flow rather than being confined to a branch body.
 
@@ -1516,7 +1439,7 @@ ghūl decides which calls are safe by inferring purity. A method or property tha
 
 > **runnable examples**
 >
-> The ghul-examples repository has fuller, runnable [unions](https://github.com/degory/ghul-examples/tree/main/examples/unions) and [pattern-matching](https://github.com/degory/ghul-examples/tree/main/examples/pattern-matching) examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
+> The ghul-examples repository has fuller, runnable [unions](https://github.com/degory/ghul-examples/tree/main/examples/unions) and [pattern-matching](https://github.com/degory/ghul-examples/tree/main/examples/pattern-matching) examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul` and run with `dotnet run`.
 
 A union holds a value of one of several variants, each with its own set of fields: one type that represents several kinds of data. Pattern matching is how that data comes back out - test which variant a value holds, and read its fields at the narrowed type. The [definitions page](https://ghul.dev/definitions.html#unions) covers the full declaration surface - unit variants, the `default` variant, primary-constructor headers, and traits; this page is about using them.
 
@@ -1926,7 +1849,7 @@ fail
 
 > **runnable examples**
 >
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/functional) has fuller, runnable functional-programming examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/functional) has fuller, runnable functional-programming examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul` and run with `dotnet run`.
 
 ghūl has some support for basic functional programming
 
@@ -2385,7 +2308,7 @@ value. State shape never appears in the type a consumer sees of a
 
 > **runnable examples**
 >
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/object-oriented) has fuller, runnable object-oriented examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/object-oriented) has fuller, runnable object-oriented examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul` and run with `dotnet run`.
 
 ghūl is a class-based object-oriented language. Classes and structs hold state and behaviour, traits describe shared behaviour, and a value can be used at the type of any ancestor class or trait it satisfies. This page ties those pieces together; [definitions](https://ghul.dev/definitions.html#types) has the syntax for each in isolation.
 
@@ -2624,7 +2547,7 @@ memory is cleared
 
 > **runnable examples**
 >
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/generics) has fuller, runnable generics examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/generics) has fuller, runnable generics examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul` and run with `dotnet run`.
 
 ghūl supports generic type arguments on
 - classes
@@ -2831,7 +2754,7 @@ Variance is also automatic in two places: a function type is contravariant in it
 
 > **runnable examples**
 >
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller, runnable type-inference examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller, runnable type-inference examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul` and run with `dotnet run`.
 
 ghūl infers types pervasively inside a method or function body: most local variables, loop variables, destructured variables and anonymous function parameters can be left unannotated, and the compiler works their types out from how they are initialized and used.
 
@@ -3141,7 +3064,7 @@ let a = merge(CAT(), DOG());
 
 > **runnable examples**
 >
-> The ghul-examples repository has fuller, runnable [async-await](https://github.com/degory/ghul-examples/tree/main/examples/async-await) and [generators](https://github.com/degory/ghul-examples/tree/main/examples/generators) examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
+> The ghul-examples repository has fuller, runnable [async-await](https://github.com/degory/ghul-examples/tree/main/examples/async-await) and [generators](https://github.com/degory/ghul-examples/tree/main/examples/generators) examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul` and run with `dotnet run`.
 
 Two kinds of ghūl function suspend and resume instead of running straight through: an asynchronous function waits for tasks without blocking, and a generator produces a sequence lazily, one element per request. Both are declared by their return type alone - `Tasks.TASK[T]` for asynchronous functions, `Pipe[T]` for generators - and the body reads top to bottom either way.
 
@@ -4345,7 +4268,7 @@ The ghūl compiler is a .NET tool, and ghūl projects are ordinary .NET SDK proj
 
 The compiler is published as the [`ghul.compiler`](https://www.nuget.org/packages/ghul.compiler) .NET tool. Once installed it is invoked as `dotnet ghul-compiler`.
 
-You don't usually run the compiler by hand. ghūl projects are built with MSBuild through a `.ghulproj` project file, and the `ghul.runtime` package supplies the MSBuild targets that drive the compiler for you. See [getting started](https://ghul.dev/getting-started.html) for installing the compiler and setting up a project.
+You don't usually run the compiler by hand. ghūl projects are built with MSBuild through a `.ghulproj` project file, and the `ghul.runtime` package supplies the MSBuild targets that drive the compiler for you. See [creating a project](#creating-a-project) below for setting one up.
 
 The compiler is normally installed as a *local* .NET tool, pinned per project in `.config/dotnet-tools.json`, so everyone building the project uses the same compiler version. `dotnet tool restore` restores it.
 
@@ -4382,11 +4305,17 @@ Behind the scenes the extension runs the ghūl compiler in its analysis mode: th
 
 On large projects the extension updates this analysis in two stages: a quick partial pass over the file you are editing, followed by a full pass once you pause. This is usually invisible, though it does mean a diagnostic can occasionally appear or disappear a moment after an edit.
 
+## other editors
+
+The extension's language support lives in a standalone [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) server with no dependency on the VS Code API. It ships as the `ghul-language-server` archive attached to every [ghul-vsce release](https://github.com/degory/ghul-vsce/releases), and it speaks stdio by default, so any editor with an LSP client can drive it - it has been tested with [Micro](https://micro-editor.github.io/), for example. Download the `.tgz` from the latest release, install it with `npm install`, and point your editor's LSP client at the `ghul-language-server` launcher it provides.
+
 ## dev containers
 
 The ghūl repository template and the examples repo both ship a `.devcontainer` configured to use a standard .NET 10 dev container image - for example [`mcr.microsoft.com/devcontainers/dotnet:10.0`](https://hub.docker.com/r/microsoft/devcontainers-dotnet). Open the project in VS Code with the Dev Containers extension, or in a GitHub Codespace, and `dotnet tool restore` will install the compiler from the local tool manifest. Any image with the .NET 10 SDK and `dotnet` on the PATH will work.
 
-## project templates
+## creating a project
+
+### from a project template
 
 The [`ghul.templates`](https://www.nuget.org/packages/ghul.templates) package adds ghūl project templates to the .NET SDK:
 
@@ -4394,7 +4323,67 @@ The [`ghul.templates`](https://www.nuget.org/packages/ghul.templates) package ad
 dotnet new install ghul.templates
 ```
 
-Once installed, `dotnet new` can scaffold a ghūl project pre-configured with a `.ghulproj`, the compiler pinned as a local tool, and a starting source file. See [getting started](https://ghul.dev/getting-started.html) for the other ways to get a project off the ground.
+Once installed, `dotnet new` can scaffold a ghūl project pre-configured with a `.ghulproj`, the compiler pinned as a local tool, and a starting source file.
+
+### from the repository template
+
+If you create a new GitHub repo from the [ghūl repository template](https://github.com/degory/ghul-repository-template), the compiler comes pre-configured as a local .NET tool in your project folder - run `dotnet tool restore` to restore it.
+
+### from scratch
+
+The compiler expects to be driven by MSBuild using a `.ghulproj` project file. See the [ghūl test](https://github.com/degory/ghul-test) project for a real-world example.
+
+`Directory.Build.props`
+```xml
+<Project>
+  <PropertyGroup>
+    <Version>0.1.0-alpha.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      ghul.runtime provides MSBuild targets required to drive the 
+      ghul compiler
+     -->
+    <PackageReference Include="ghul.runtime" Version="0.0.0-latest.ghul.runtime" />
+  </ItemGroup>
+</Project>
+```
+
+`example.ghulproj`
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+
+    <GhulCompiler>dotnet ghul-compiler</GhulCompiler>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <GhulSources Include="src/**/*.ghul" />
+  </ItemGroup>
+</Project>
+```
+
+By convention ghūl source files have the extension `.ghul`, and the `ghul.runtime` provided MSBuild targets will include `**/*.ghul` when building.
+
+To pin the compiler as a local tool in the project folder, so everyone building the project gets the same compiler:
+
+```sh
+dotnet new tool-manifest
+dotnet tool install --local ghul.compiler --version 0.0.0-latest.ghul.compiler
+```
+
+The compiler can also be installed globally instead, from the [ghūl compiler .NET tool package](https://www.nuget.org/packages/ghul.compiler/):
+
+```sh
+dotnet tool install --global ghul.compiler
+```
+
+### runtime dependencies for ghūl applications
+
+Applications written in ghūl require the [.NET 10 runtime](https://dotnet.microsoft.com/download/dotnet/10.0).
 
 
 ---
@@ -5271,7 +5260,7 @@ In ghūl, the visibility of symbols outside their defining scope is managed by a
 
 ### global symbols
 
-Classes, structs, traits, unions, global functions and global properties are accessible from any namespace. Prefixing their names with `_` indicates they are intended to be private, but this is not enforced by the compiler:
+Classes, structs, traits, unions, global functions and global properties are accessible from any namespace. Prefixing their names with `_` makes them private to the assembly they are declared in: within the assembly they stay reachable from any namespace, but another assembly cannot see them, and a reference from one is a compile error:
 ```ghul
 class PUBLIC is
 si
@@ -5290,31 +5279,29 @@ _private_property: int;
 
 ### methods
 
-Methods are public by default. To make a method protected, prefix its name with an underscore `_`:
+Methods are public unless their name starts with `_`, which makes the method private: it is visible only within its declaring class, and the compiler enforces that:
 ```ghul
 class THING is
     do_something_public() is
     si
 
-    _do_something_protected() is
+    _do_something_private() is
     si
 si
 ```
-Protected access to methods _is_ enforced by the compiler
-
 
 ### properties
-Properties are public read, protected write, unless they start with `_`, in which case they are protected read and write:
+Properties are public to read but private to assign - a property is assignable only within its defining type. A property whose name starts with `_` is private to read as well:
 ```ghul
 …
 struct VALUE is
     public_property: int;
 
-    _protected_property: string;
+    _private_property: string;
 
     init(value: int) is
         public_property = value;
-        _protected_property = "value is {value}";
+        _private_property = "value is {value}";
     si
 si
 …
@@ -5323,18 +5310,19 @@ let v = VALUE(1234);
 // OK: public_property is publicly readable
 write_line(v.public_property);
 
-write_line(v._protected_property);
+write_line(v._private_property);
 
 v.public_property = 5678;
 ```
 
 diagnostics:
 
-- error: _protected_property: string is not accessible here
+- error: _private_property: string is not accessible here
 - error: VALUE.public_property: int is not publicly assignable
 
-### planned changes
-Protected access will become private in a future release: derived types should not rely on reading or writing members with `_` prefixed names
+### protected access
+
+The rules above describe the default, `--underscore-access private`. Compiling with `--underscore-access protected` instead widens an underscore member's reach to the declaring class and its subclasses within the same assembly, for a codebase that relies on subclasses reading `_` members. Underscore types, global functions and global variables are unaffected - they are private to their assembly under either setting.
 
 
 ---
@@ -5748,7 +5736,7 @@ The first number is: 1
 
 > **runnable examples**
 >
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul` and run with `dotnet run`.
 
 ## block scope
 
@@ -6136,9 +6124,7 @@ output:
 
 This loop skips the call to `write_line` when counter is 3.
 
-### scope
-
-The block statement body of the while statement, delimited by `do` and `od` forms a scope for local variable definitions.
+`break` and `continue` behave the same way in `for` and `do` loops, so they are not shown again below.
 
 ### while let
 
@@ -6266,57 +6252,9 @@ output:
 9
 ```
 
-### break and continue in for loops
-
-The `break` statement immediately exits the loop, while `continue` skips the remaining code in the current iteration and proceeds to the next iteration immediately before attempting to read the next element from the iterator
-
-```ghul
-…
-for counter in 0..10 do
-    if counter == 5 then
-        break;
-    fi
-    write_line(counter);
-od
-```
-
-output:
-
-```
-0
-1
-2
-3
-4
-```
-
-This loop exits when counter reaches 5, without proceeding to execute `write_line(5)`
-
-
-```ghul
-…
-for counter in 0..5 do
-    if counter == 3 then
-        continue;
-    fi
-    write_line(counter);
-od
-```
-
-output:
-
-```
-0
-1
-2
-4
-```
-
-This loop skips the call to `write_line` when counter is 3.
-
 ### scope
 
-The block statement body of the for statement, delimited by `do` and `od` forms a scope for local variable definitions. The loop variable is in scope within this block scope but not within the expression that provides the iterable object.
+The loop variable is in scope within the loop body but not within the expression that provides the iterable object. `continue` in a `for` loop proceeds to the next iteration immediately before attempting to read the next element from the iterator.
 
 
 ## do statement
@@ -6355,40 +6293,6 @@ output:
 ```
 
 This loop will run indefinitely until counter reaches 5, at which point the break statement terminates the loop.
-
-### break and continue in do-od loops
-
-The break and continue statements work similarly in do / od loops as they do in while loops.
-
-```ghul
-…
-let counter mut = 0;
-do
-    counter = counter + 1;
-    if counter == 3 then
-        continue;
-    fi
-    write_line(counter);
-    if counter == 5 then
-        break;
-    fi
-od
-```
-
-output:
-
-```
-1
-2
-4
-5
-```
-
-This loop skips the write_line statement when counter is 3 and breaks out of the loop when counter reaches 5.
-
-### scope
-
-The block statement body of the do statement, delimited by `do` and `od` forms a scope for local variable definitions.
 
 
 ## case statement
