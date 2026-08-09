@@ -32,8 +32,9 @@ Elements travel through a pipe one at a time, and the terminal is what pulls
 them through. It asks the pipe it was called on for an element, that pipe asks
 the one it was built from, and so on back to the iterable at the start; the
 element then makes its way back out, each stage doing its own work to it on the
-way past. Nothing accumulates in between, so a pipe with many stages costs no
-more memory than one with few.
+way past. No stage buffers the sequence - each holds only the element it has in
+hand - so a `map` over a million elements builds no million-element list on the
+way.
 
 Until something asks a pipe for elements, none of it has run, however many
 stages it has.
@@ -46,7 +47,7 @@ the start of a pipe ending in `take(10)`, because ten elements are all that is
 ever asked for.
 
 `reverse` and the `sort` family are the exceptions, listed separately below.
-Neither can produce a first element without having seen the last, so both read
+Neither can produce a first element without having seen the last, so both buffer
 the whole source as soon as they are called.
 
 ## reading the signatures
@@ -243,8 +244,8 @@ or, as a method:
 ## stages that buffer
 
 These return a pipe, like any other stage, but they cannot work out their first
-element without having seen the last one. So they read the whole source
-the moment they are called, rather than element by element.
+element without having seen the last one. So they buffer the whole source the
+moment they are called, rather than passing elements along one at a time.
 
 ### reverse
 
