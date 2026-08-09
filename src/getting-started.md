@@ -1,118 +1,37 @@
 # getting started
 
-> **Examples**: if you just want to see some ghūl code examples and maybe experiment with writing some ghūl, then start with the **[ghūl examples repository](https://github.com/degory/ghul-examples)**. The examples project is ready to open in a devcontainer, or a GitHub Codespace.
+Three things get you writing ghūl: an editor, the .NET SDK, and some ghūl code to start from. The compiler is not on the list - a ghūl repository pins it as a local .NET tool, so it arrives with the code.
 
-## prerequisites
+## an editor
 
-The ghūl programming language compiler requires the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0). The SDK includes the .NET 10 runtime that the compiler tool itself runs on, and will fetch reference packs for any target framework you build against on demand.
+[Visual Studio Code](https://code.visualstudio.com) with the [ghūl language extension](https://marketplace.visualstudio.com/items?itemName=degory.ghul) gives you errors and warnings as you type, completion, hover, go to definition, rename and formatting.
 
-## target
+The [extension's implementation](https://github.com/degory/ghul-vsce) is currently tightly coupled to the Visual Studio Code extension API, but under the hood it uses the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/), so it could be extended to support other clients. Feel free to submit a PR.
 
-The compiler produces standard .NET assemblies and packages targeting .NET 10.
+## the .NET SDK
 
-## getting the ghūl compiler
+ghūl is hosted on .NET: the compiler runs on the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0), and the assemblies it produces target .NET 10.
 
-There are a few different ways to get the compiler
+You can skip installing anything locally: the repositories below ship a dev container, so opening one in a GitHub Codespace, or in VS Code with the Dev Containers extension, gives you the SDK, the compiler and the language extension ready to go.
 
-### use a ghūl .NET project template
+## some ghūl code
 
-If you initialize your project using one of the [ghūl .NET project templates](https://www.nuget.org/packages/ghul.templates/), the template will add the compiler to your project folder as a local .NET tool - just run `dotnet tool restore`{:sh} to restore it. 
+- The [ghūl playground](https://github.com/degory/ghul-playground) is a minimal one-file project: open it in a Codespace or clone it, paste any example from this site into `main.ghul`{:text}, and `dotnet run`{:sh}.
+- The [examples repository](https://github.com/degory/ghul-examples) has fuller, runnable examples organised by topic.
 
-### clone the ghūl GitHub repository template
+Both pin the ghūl compiler as a local .NET tool, so there is nothing separate to install: `dotnet tool restore`{:sh} fetches it, and the dev containers run that for you.
 
-If you create a new GitHub repo from the [ghūl repository template](https://github.com/degory/ghul-repository-template), then the compiler will be pre-configured as a local .NET tool in your project folder - run `dotnet tool restore`{:sh} to restore it.
+## it's all ordinary .NET
 
-### use a dev container
-
-The [examples repository](https://github.com/degory/ghul-examples) and the [ghūl repository template](https://github.com/degory/ghul-repository-template) both ship a `.devcontainer` configured to use a standard .NET 10 dev container image - for example [`mcr.microsoft.com/devcontainers/dotnet:10.0`](https://hub.docker.com/r/microsoft/devcontainers-dotnet). Open the project in VS Code with the Dev Containers extension, or in a GitHub Codespace, and run `dotnet tool restore`{:sh} to install the compiler from the local tool manifest.
-
-### install the compiler as a local or global .NET tool
-
-You can manually install the compiler from the [ghūl compiler .NET tool package](https://www.nuget.org/packages/ghul.compiler/). To pin it as a local tool in your project folder, so everyone building the project gets the same compiler:
-
-```sh
-dotnet new tool-manifest
-dotnet tool install --local ghul.compiler --version 0.0.0-latest.ghul.compiler
-```
-
-To install it globally instead:
-
-```sh
-dotnet tool install --global ghul.compiler
-```
-
-## using the compiler
-
-### project file
-
-The compiler expects to be driven by MSBuild using a `.ghulproj`{:text} project file.
-See the [ghūl test](https://github.com/degory/ghul-test) project for
-a real-world example, or use one of the project templates to get started.
-
-`Directory.Build.props`{:text}
-```xml
-<Project>
-  <PropertyGroup>
-    <Version>0.1.0-alpha.1</Version>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <!--
-      ghul.runtime provides MSBuild targets required to drive the 
-      ghul compiler
-     -->
-    <PackageReference Include="ghul.runtime" Version="0.0.0-latest.ghul.runtime" />
-  </ItemGroup>
-</Project>
-```
-
-`example.ghulproj`{:text}
-```xml
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net10.0</TargetFramework>
-
-    <GhulCompiler>dotnet ghul-compiler</GhulCompiler>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <GhulSources Include="src/**/*.ghul" />
-  </ItemGroup>
-</Project>
-```
-
-### source files
-
-You'll need some ghūl source files. By convention ghūl source files have the extension `.ghul`{:text}, and the `ghul.runtime`{:text} provided MSBuild targets will include `**/*.ghul`{:text} when building.
-
-### building and running
-
-Once you have a project file and some ghūl source files, you can use the normal
-.NET SDK commands to build, pack, and run your project:
+A ghūl project is a normal .NET SDK project. In either repository you'll find a `.ghulproj`{:text} - an MSBuild project file with the usual things in it - and the normal `dotnet`{:text} commands work as you'd expect:
 
 ```bash
 dotnet build
-```
-
-```bash
+dotnet run
+dotnet test
 dotnet pack
 ```
 
-```bash
-dotnet run
-```
+A ghūl project can reference NuGet packages, produce libraries or executables, and be packed and published exactly like a C# project.
 
-### runtime dependencies for ghūl applications
-
-Applications written in ghūl require the [.NET 10 runtime](https://dotnet.microsoft.com/download/dotnet/10.0).
-
-## development environment
-
-### Visual Studio Code
-
-[Visual Studio Code](https://code.visualstudio.com) will give you rich language support via the [ghūl VSCode language extension](https://marketplace.visualstudio.com/items?itemName=degory.ghul).
-
-### other editors
-
-The [ghūl language extension implementation](https://github.com/degory/ghul-vsce) is currently tightly coupled to the Visual Studio Code extension API. However under the hood it is using the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) so could be extended to support other clients. Feel free to submit a PR. 
+To start a project of your own - from a template, from the repository template, or from scratch - see [creating a project](/tooling.html#creating-a-project) on the tooling page.
