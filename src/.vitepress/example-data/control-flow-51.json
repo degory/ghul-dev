@@ -1,9 +1,9 @@
 {
   "name": "control-flow-51",
-  "code": "length_of(key: string?) -> int =>\n    assert key? else \"key is null\" in\n    key.length;",
+  "code": "length_of(key: string?) -> int =>\n    assert key? else \"key is null\" in\n    key.length;\n\nwrite_line(length_of(\"hello\"));",
   "fullSource": "use IO.Std.write_line;\n\nlength_of(key: string?) -> int =>\n    assert key? else \"key is null\" in\n    key.length;\n\nwrite_line(length_of(\"hello\"));\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "5\n",
   "diagnostics": [],
@@ -14,7 +14,9 @@
     { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 30, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "key: string?", "signature": "key: string?", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 7, "text": "key: string?\n    ► string", "signature": "key: string?\n    ► string", "kindLabel": "local argument" },
-    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 14, "text": "string.length: int", "signature": "string.length: int", "kindLabel": "pure instance property" }
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 14, "text": "string.length: int", "signature": "string.length: int", "kindLabel": "pure instance property" },
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 10, "text": "IO.Std.write_line(value: int) -> void", "signature": "IO.Std.write_line(value: int) -> void", "kindLabel": "pure class method" },
+    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 20, "text": "length_of(key: string?) -> int", "signature": "length_of(key: string?) -> int", "kindLabel": "pure global function" }
   ],
   "inlayHints": [
     { "line": 2, "column": 12, "label": "►", "detail": "► string", "code": "narrowing-presence" }
@@ -26,6 +28,8 @@
     { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 30, "tokenType": "struct" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 14, "tokenType": "property" }
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 14, "tokenType": "property" },
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 20, "tokenType": "function" }
   ]
 }

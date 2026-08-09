@@ -27,6 +27,6 @@ describe(carrier: CARRIER) is
         write_line(occupant.purr());
     fi
 si
-// <<<
 
 describe(CARRIER(CAT()));
+// <<<

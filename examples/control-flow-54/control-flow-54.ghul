@@ -20,6 +20,6 @@ describe(a: Animal) -> string =>
     when c: CAT then c.meow()
     when d: DOG then d.bark()
     esac;
-// <<<
 
 write_line(describe(CAT()));
+// <<<

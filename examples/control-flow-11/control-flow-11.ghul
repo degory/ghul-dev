@@ -19,7 +19,7 @@ classify(a: Animal) is
     // narrowed to CAT from here on
     write_line(a.purr());
 si
-// <<<
 
 classify(CAT("whiskers"));
 classify(DOG());
+// <<<

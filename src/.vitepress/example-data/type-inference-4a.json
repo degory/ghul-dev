@@ -1,9 +1,9 @@
 {
   "name": "type-inference-4a",
-  "code": "describe(order: ORDER) is\n    if order.customer? then\n        // a presence test narrows the path itself:\n        // within this branch order.customer is the\n        // non-optional string, so .length is\n        // reachable directly\n        write_line(\"customer name has {order.customer.length} chars\");\n    fi\nsi",
+  "code": "describe(order: ORDER) is\n    if order.customer? then\n        // a presence test narrows the path itself:\n        // within this branch order.customer is the\n        // non-optional string, so .length is\n        // reachable directly\n        write_line(\"customer name has {order.customer.length} chars\");\n    fi\nsi\n\ndescribe(ORDER(\"alice\"));",
   "fullSource": "use IO.Std.write_line;\n\nclass ORDER(customer: string?);\n\ndescribe(order: ORDER) is\n    if order.customer? then\n        // a presence test narrows the path itself:\n        // within this branch order.customer is the\n        // non-optional string, so .length is\n        // reachable directly\n        write_line(\"customer name has {order.customer.length} chars\");\n    fi\nsi\n\ndescribe(ORDER(\"alice\"));\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "customer name has 5 chars\n",
   "diagnostics": [],
@@ -16,7 +16,9 @@
     { "startLine": 7, "startColumn": 9, "endLine": 7, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 7, "startColumn": 40, "endLine": 7, "endColumn": 44, "text": "order: ORDER", "signature": "order: ORDER", "kindLabel": "local argument" },
     { "startLine": 7, "startColumn": 46, "endLine": 7, "endColumn": 53, "text": "ORDER.customer: string?\n    ► string", "signature": "ORDER.customer: string?\n    ► string", "kindLabel": "pure instance property" },
-    { "startLine": 7, "startColumn": 55, "endLine": 7, "endColumn": 60, "text": "string.length: int", "signature": "string.length: int", "kindLabel": "pure instance property" }
+    { "startLine": 7, "startColumn": 55, "endLine": 7, "endColumn": 60, "text": "string.length: int", "signature": "string.length: int", "kindLabel": "pure instance property" },
+    { "startLine": 11, "startColumn": 1, "endLine": 11, "endColumn": 8, "text": "describe(order: ORDER) -> void", "signature": "describe(order: ORDER) -> void", "kindLabel": "pure global function" },
+    { "startLine": 11, "startColumn": 10, "endLine": 11, "endColumn": 14, "text": "ORDER.init(customer: string?)", "signature": "ORDER.init(customer: string?)", "kindLabel": "constructor" }
   ],
   "inlayHints": [
     { "line": 2, "column": 8, "label": "►", "detail": "► string", "code": "narrowing-presence" }
@@ -30,6 +32,8 @@
     { "startLine": 7, "startColumn": 9, "endLine": 7, "endColumn": 18, "tokenType": "method", "modifiers": "static" },
     { "startLine": 7, "startColumn": 40, "endLine": 7, "endColumn": 44, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 7, "startColumn": 46, "endLine": 7, "endColumn": 53, "tokenType": "property" },
-    { "startLine": 7, "startColumn": 55, "endLine": 7, "endColumn": 60, "tokenType": "property" }
+    { "startLine": 7, "startColumn": 55, "endLine": 7, "endColumn": 60, "tokenType": "property" },
+    { "startLine": 11, "startColumn": 1, "endLine": 11, "endColumn": 8, "tokenType": "function" },
+    { "startLine": 11, "startColumn": 10, "endLine": 11, "endColumn": 14, "tokenType": "method" }
   ]
 }

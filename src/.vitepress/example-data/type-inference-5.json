@@ -1,9 +1,9 @@
 {
   "name": "type-inference-5",
-  "code": "describe(carrier: CARRIER) is\n    // handle() can write to the heap, so it would drop\n    // a narrow on carrier.occupant - copy the value into\n    // a local, whose type no other call can change\n    let occupant = carrier.occupant;\n\n    if isa CAT(occupant) then\n        carrier.handle();\n        // occupant is still a CAT after the call\n        write_line(occupant.purr());\n    fi\nsi",
+  "code": "describe(carrier: CARRIER) is\n    // handle() can write to the heap, so it would drop\n    // a narrow on carrier.occupant - copy the value into\n    // a local, whose type no other call can change\n    let occupant = carrier.occupant;\n\n    if isa CAT(occupant) then\n        carrier.handle();\n        // occupant is still a CAT after the call\n        write_line(occupant.purr());\n    fi\nsi\n\ndescribe(CARRIER(CAT()));",
   "fullSource": "use IO.Std.write_line;\n\nclass Animal abstract is si\n\nclass CAT(): Animal is\n    purr() -> string => \"purr\";\nsi\n\nclass CARRIER(occupant: Animal) is\n    handled: int;\n\n    handle() is\n        handled = handled + 1;\n    si\nsi\n\ndescribe(carrier: CARRIER) is\n    // handle() can write to the heap, so it would drop\n    // a narrow on carrier.occupant - copy the value into\n    // a local, whose type no other call can change\n    let occupant = carrier.occupant;\n\n    if isa CAT(occupant) then\n        carrier.handle();\n        // occupant is still a CAT after the call\n        write_line(occupant.purr());\n    fi\nsi\n\ndescribe(CARRIER(CAT()));\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "purr\n",
   "diagnostics": [],
@@ -20,7 +20,10 @@
     { "startLine": 8, "startColumn": 17, "endLine": 8, "endColumn": 22, "text": "CARRIER.handle() -> void", "signature": "CARRIER.handle() -> void", "kindLabel": "method" },
     { "startLine": 10, "startColumn": 9, "endLine": 10, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 10, "startColumn": 20, "endLine": 10, "endColumn": 27, "text": "occupant: Animal\n    ► CAT", "signature": "occupant: Animal\n    ► CAT", "kindLabel": "local value" },
-    { "startLine": 10, "startColumn": 29, "endLine": 10, "endColumn": 32, "text": "CAT.purr() -> string", "signature": "CAT.purr() -> string", "kindLabel": "pure method" }
+    { "startLine": 10, "startColumn": 29, "endLine": 10, "endColumn": 32, "text": "CAT.purr() -> string", "signature": "CAT.purr() -> string", "kindLabel": "pure method" },
+    { "startLine": 14, "startColumn": 1, "endLine": 14, "endColumn": 8, "text": "describe(carrier: CARRIER) -> void", "signature": "describe(carrier: CARRIER) -> void", "kindLabel": "global function" },
+    { "startLine": 14, "startColumn": 10, "endLine": 14, "endColumn": 16, "text": "CARRIER.init(occupant: Animal)", "signature": "CARRIER.init(occupant: Animal)", "kindLabel": "constructor" },
+    { "startLine": 14, "startColumn": 18, "endLine": 14, "endColumn": 20, "text": "CAT.init()", "signature": "CAT.init()", "kindLabel": "constructor" }
   ],
   "inlayHints": [
     { "line": 7, "column": 16, "label": "►", "detail": "► CAT", "code": "narrowing-isa" }
@@ -38,6 +41,9 @@
     { "startLine": 8, "startColumn": 17, "endLine": 8, "endColumn": 22, "tokenType": "method" },
     { "startLine": 10, "startColumn": 9, "endLine": 10, "endColumn": 18, "tokenType": "method", "modifiers": "static" },
     { "startLine": 10, "startColumn": 20, "endLine": 10, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 10, "startColumn": 29, "endLine": 10, "endColumn": 32, "tokenType": "method" }
+    { "startLine": 10, "startColumn": 29, "endLine": 10, "endColumn": 32, "tokenType": "method" },
+    { "startLine": 14, "startColumn": 1, "endLine": 14, "endColumn": 8, "tokenType": "function" },
+    { "startLine": 14, "startColumn": 10, "endLine": 14, "endColumn": 16, "tokenType": "method" },
+    { "startLine": 14, "startColumn": 18, "endLine": 14, "endColumn": 20, "tokenType": "method" }
   ]
 }

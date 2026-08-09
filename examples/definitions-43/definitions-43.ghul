@@ -13,7 +13,7 @@ partial Shape is
         when s: SQUARE then "square s={s.side}"
         esac;
 si
-// <<<
 
 let s: Shape = Shape.SQUARE(4);
 write_line(s.describe());
+// <<<

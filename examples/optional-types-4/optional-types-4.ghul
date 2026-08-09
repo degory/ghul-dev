@@ -1,11 +1,11 @@
 use IO.Std.write_line;
 
+// >>>
 union Result[T, E] is
     OK(value: T) default;
     ERROR(error: E);
 si
 
-// >>>
 divide(a: int, b: int) -> Result[int, string] =>
     if b == 0 then
         Result.ERROR("division by zero")

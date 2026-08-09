@@ -12,6 +12,6 @@ describe(order: ORDER) is
         write_line("customer name has {order.customer.length} chars");
     fi
 si
-// <<<
 
 describe(ORDER("alice"));
+// <<<

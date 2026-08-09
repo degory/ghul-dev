@@ -35,7 +35,6 @@ when 13 then
 else
     return "less than -1 or more than nine";
 esac
-// <<<
 si
 
 write_line(classify(0));
@@ -43,3 +42,4 @@ write_line(classify(3));
 write_line(classify(7));
 write_line(classify(13));
 write_line(classify(-5));
+// <<<

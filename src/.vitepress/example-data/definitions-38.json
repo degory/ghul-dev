@@ -1,9 +1,9 @@
 {
   "name": "definitions-38",
-  "code": "class POINT(x: int, y: int) is\n    // capture the primary parameters as renamed private fields\n    _x;\n    _y;\n\n    show() is\n        write_line(\"({_x}, {_y})\");\n    si\nsi\n\nclass BOX(width: int public, height: int field, _depth: int) is\n    // width is a public read-write property\n    // height is a plain field\n    // _depth is a private field\nsi",
+  "code": "class POINT(x: int, y: int) is\n    // capture the primary parameters as renamed private fields\n    _x;\n    _y;\n\n    show() is\n        write_line(\"({_x}, {_y})\");\n    si\nsi\n\nclass BOX(width: int public, height: int field, _depth: int) is\n    // width is a public read-write property\n    // height is a plain field\n    // _depth is a private field\nsi\n\nPOINT(10, 20).show();",
   "fullSource": "use IO.Std.write_line;\n\nclass POINT(x: int, y: int) is\n    // capture the primary parameters as renamed private fields\n    _x;\n    _y;\n\n    show() is\n        write_line(\"({_x}, {_y})\");\n    si\nsi\n\nclass BOX(width: int public, height: int field, _depth: int) is\n    // width is a public read-write property\n    // height is a plain field\n    // _depth is a private field\nsi\n\nPOINT(10, 20).show();\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "(10, 20)\n",
   "diagnostics": [],
@@ -27,7 +27,9 @@
     { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 8, "text": "POINT.show() -> void", "signature": "POINT.show() -> void", "kindLabel": "pure method" },
     { "startLine": 7, "startColumn": 9, "endLine": 7, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 7, "startColumn": 23, "endLine": 7, "endColumn": 24, "text": "_x: int", "signature": "_x: int", "kindLabel": "private field" },
-    { "startLine": 7, "startColumn": 29, "endLine": 7, "endColumn": 30, "text": "_y: int", "signature": "_y: int", "kindLabel": "private field" }
+    { "startLine": 7, "startColumn": 29, "endLine": 7, "endColumn": 30, "text": "_y: int", "signature": "_y: int", "kindLabel": "private field" },
+    { "startLine": 17, "startColumn": 1, "endLine": 17, "endColumn": 5, "text": "POINT.init(x: int, y: int)", "signature": "POINT.init(x: int, y: int)", "kindLabel": "constructor" },
+    { "startLine": 17, "startColumn": 15, "endLine": 17, "endColumn": 18, "text": "POINT.show() -> void", "signature": "POINT.show() -> void", "kindLabel": "pure method" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -53,6 +55,8 @@
     { "startLine": 7, "startColumn": 23, "endLine": 7, "endColumn": 23, "tokenType": "modifier" },
     { "startLine": 7, "startColumn": 24, "endLine": 7, "endColumn": 24, "tokenType": "property" },
     { "startLine": 7, "startColumn": 29, "endLine": 7, "endColumn": 29, "tokenType": "modifier" },
-    { "startLine": 7, "startColumn": 30, "endLine": 7, "endColumn": 30, "tokenType": "property" }
+    { "startLine": 7, "startColumn": 30, "endLine": 7, "endColumn": 30, "tokenType": "property" },
+    { "startLine": 17, "startColumn": 1, "endLine": 17, "endColumn": 5, "tokenType": "method" },
+    { "startLine": 17, "startColumn": 15, "endLine": 17, "endColumn": 18, "tokenType": "method" }
   ]
 }

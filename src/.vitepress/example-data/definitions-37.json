@@ -1,9 +1,9 @@
 {
   "name": "definitions-37",
-  "code": "class PERSON(name: string, age: int) is\n    describe() is\n        write_line(\"{name} is {age} years old\");\n    si\nsi",
+  "code": "class PERSON(name: string, age: int) is\n    describe() is\n        write_line(\"{name} is {age} years old\");\n    si\nsi\n\nPERSON(\"alice\", 30).describe();",
   "fullSource": "use IO.Std.write_line;\n\nclass PERSON(name: string, age: int) is\n    describe() is\n        write_line(\"{name} is {age} years old\");\n    si\nsi\n\nPERSON(\"alice\", 30).describe();\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "alice is 30 years old\n",
   "diagnostics": [],
@@ -17,7 +17,9 @@
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "PERSON.describe() -> void", "signature": "PERSON.describe() -> void", "kindLabel": "pure method" },
     { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 25, "text": "name: string", "signature": "name: string", "kindLabel": "pure instance property" },
-    { "startLine": 3, "startColumn": 32, "endLine": 3, "endColumn": 34, "text": "age: int", "signature": "age: int", "kindLabel": "pure instance property" }
+    { "startLine": 3, "startColumn": 32, "endLine": 3, "endColumn": 34, "text": "age: int", "signature": "age: int", "kindLabel": "pure instance property" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 6, "text": "PERSON.init(name: string, age: int)", "signature": "PERSON.init(name: string, age: int)", "kindLabel": "constructor" },
+    { "startLine": 7, "startColumn": 21, "endLine": 7, "endColumn": 28, "text": "PERSON.describe() -> void", "signature": "PERSON.describe() -> void", "kindLabel": "pure method" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -29,6 +31,8 @@
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "tokenType": "method" },
     { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 18, "tokenType": "method", "modifiers": "static" },
     { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 25, "tokenType": "property" },
-    { "startLine": 3, "startColumn": 32, "endLine": 3, "endColumn": 34, "tokenType": "property" }
+    { "startLine": 3, "startColumn": 32, "endLine": 3, "endColumn": 34, "tokenType": "property" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 6, "tokenType": "method" },
+    { "startLine": 7, "startColumn": 21, "endLine": 7, "endColumn": 28, "tokenType": "method" }
   ]
 }

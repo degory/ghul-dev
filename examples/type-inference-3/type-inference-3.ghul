@@ -14,6 +14,6 @@ greet(a: Animal) is
         write_line(a.purr());
     fi
 si
-// <<<
 
 greet(CAT());
+// <<<

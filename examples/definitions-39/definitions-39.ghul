@@ -12,6 +12,6 @@ class DOG(name: string, breed: string): ANIMAL is
         write_line("{name} the {breed} can {trick}");
     si
 si
-// <<<
 
 DOG("rex", "labrador", "sit");
+// <<<

@@ -1,9 +1,9 @@
 {
   "name": "expression-oriented-programming-5",
-  "code": "grade(score: int) -> string is\n    // a val block as a let initializer, composing a case and an if:\n    let label = val\n        let band =\n            case score / 10\n            when 10, 9 then \"A\"\n            when 8 then \"B\"\n            when 7 then \"C\"\n            else \"F\"\n            esac;\n\n        if band == \"F\" then \"fail\" else \"pass ({band})\" fi\n    lav;\n\n    return label;\nsi",
+  "code": "grade(score: int) -> string is\n    // a val block as a let initializer, composing a case and an if:\n    let label = val\n        let band =\n            case score / 10\n            when 10, 9 then \"A\"\n            when 8 then \"B\"\n            when 7 then \"C\"\n            else \"F\"\n            esac;\n\n        if band == \"F\" then \"fail\" else \"pass ({band})\" fi\n    lav;\n\n    return label;\nsi\n\nwrite_line(grade(95));\nwrite_line(grade(82));\nwrite_line(grade(60));",
   "fullSource": "use IO.Std.write_line;\n\ngrade(score: int) -> string is\n    // a val block as a let initializer, composing a case and an if:\n    let label = val\n        let band =\n            case score / 10\n            when 10, 9 then \"A\"\n            when 8 then \"B\"\n            when 7 then \"C\"\n            else \"F\"\n            esac;\n\n        if band == \"F\" then \"fail\" else \"pass ({band})\" fi\n    lav;\n\n    return label;\nsi\n\nwrite_line(grade(95));\nwrite_line(grade(82));\nwrite_line(grade(60));\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "pass (A)\npass (B)\nfail\n",
   "diagnostics": [],
@@ -19,7 +19,13 @@
     { "startLine": 12, "startColumn": 12, "endLine": 12, "endColumn": 15, "text": "band: string", "signature": "band: string", "kindLabel": "local value" },
     { "startLine": 12, "startColumn": 17, "endLine": 12, "endColumn": 18, "text": "Ghul.==[string](a: string, b: string) -> bool", "signature": "Ghul.==[string](a: string, b: string) -> bool", "kindLabel": "innate function compare.value" },
     { "startLine": 12, "startColumn": 49, "endLine": 12, "endColumn": 52, "text": "band: string", "signature": "band: string", "kindLabel": "local value" },
-    { "startLine": 15, "startColumn": 12, "endLine": 15, "endColumn": 16, "text": "label: string", "signature": "label: string", "kindLabel": "local value" }
+    { "startLine": 15, "startColumn": 12, "endLine": 15, "endColumn": 16, "text": "label: string", "signature": "label: string", "kindLabel": "local value" },
+    { "startLine": 18, "startColumn": 1, "endLine": 18, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 18, "startColumn": 12, "endLine": 18, "endColumn": 16, "text": "grade(score: int) -> string", "signature": "grade(score: int) -> string", "kindLabel": "global function" },
+    { "startLine": 19, "startColumn": 1, "endLine": 19, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 19, "startColumn": 12, "endLine": 19, "endColumn": 16, "text": "grade(score: int) -> string", "signature": "grade(score: int) -> string", "kindLabel": "global function" },
+    { "startLine": 20, "startColumn": 1, "endLine": 20, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 20, "startColumn": 12, "endLine": 20, "endColumn": 16, "text": "grade(score: int) -> string", "signature": "grade(score: int) -> string", "kindLabel": "global function" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -34,6 +40,12 @@
     { "startLine": 12, "startColumn": 12, "endLine": 12, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 12, "startColumn": 17, "endLine": 12, "endColumn": 18, "tokenType": "operator" },
     { "startLine": 12, "startColumn": 49, "endLine": 12, "endColumn": 52, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 15, "startColumn": 12, "endLine": 15, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 15, "startColumn": 12, "endLine": 15, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 18, "startColumn": 1, "endLine": 18, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 18, "startColumn": 12, "endLine": 18, "endColumn": 16, "tokenType": "function" },
+    { "startLine": 19, "startColumn": 1, "endLine": 19, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 19, "startColumn": 12, "endLine": 19, "endColumn": 16, "tokenType": "function" },
+    { "startLine": 20, "startColumn": 1, "endLine": 20, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 20, "startColumn": 12, "endLine": 20, "endColumn": 16, "tokenType": "function" }
   ]
 }

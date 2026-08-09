@@ -16,6 +16,6 @@ class BOX(width: int public, height: int field, _depth: int) is
     // height is a plain field
     // _depth is a private field
 si
-// <<<
 
 POINT(10, 20).show();
+// <<<
