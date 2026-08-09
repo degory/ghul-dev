@@ -6,7 +6,7 @@ use Ghul.Pipes.INDEXED_VALUE;
 use Ghul.Pipes.Pipe;
 
 // >>>
-min[T: System.IComparable[T]](
+min[T: Ghul.Comparable[T]](
     values: Iterable[T]
 ) -> Ghul.MAYBE[T] pure;
 // <<<

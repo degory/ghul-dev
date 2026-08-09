@@ -6,7 +6,7 @@ use Ghul.Pipes.INDEXED_VALUE;
 
 trait Pipe[T] is
 // >>>
-    sort_by_descending[K: System.IComparable[K]](
+    sort_by_descending[K: Ghul.Comparable[K]](
         key_selector: (T) -> K pure
     ) -> Pipe[T] pure;
 // <<<
