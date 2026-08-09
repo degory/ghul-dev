@@ -46,7 +46,7 @@ stages from the source.
 <GhulExample name="pipes-lazy-chain" />
 
 Because pipes are lazy, they can consume a source with an infinite number of
-elements. The consumer can simply stop pulling, and discard the pipe. When the
+elements. The consumer can stop pulling, and discard the pipe. When the
 pipe is disposed, that disposal flows back up the pipe to the source iterator,
 which is then also disposed.
 
@@ -64,8 +64,8 @@ results, and so they buffer the whole source as soon as they are called.
 ## reading the signatures
 
 The `pure` on a function type - `predicate: (T) -> bool pure` - asks that the
-function you pass only reads, and writes nothing to the heap. Most lambdas
-satisfy it without any thought; see [type narrowing](/type-narrowing.html#purity)
+function you pass only reads, and writes nothing to the heap. Most anonymous
+functions satisfy it without any thought; see [type narrowing](/type-narrowing.html#purity)
 for what the compiler does with the guarantee.
 
 `Ghul.MAYBE[T]` is an [optional type](/optional-types.html): it holds a `T` or
@@ -234,7 +234,7 @@ or, as a method:
 
 ### index
 
-Pairs each element with its index. `INDEXED_VALUE[T]` carries `index` and `value`, and destructures positionally, so `for (i, x) in xs | .index() do` reads the pair apart. The second form starts the index at a given number rather than at 0.
+Pairs each element with its index. `INDEXED_VALUE[T]` has `index` and `value`, and destructures positionally, so `for (i, x) in xs | .index() do` reads the pair apart. The second form starts the index at a given number rather than at 0.
 
 <GhulExample name="pipes-ref-index-function" signature />
 
