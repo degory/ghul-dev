@@ -1,0 +1,17 @@
+use IO.Std.write_line;
+
+// >>>
+let numbers = [1, 2, 3, 4, 5, 6, 7];
+
+// chunk: consecutive groups that don't overlap. the last group
+// is short when the source doesn't divide evenly
+for group in numbers | .chunk(3) do
+    write_line("chunk:  {group | .join(", ")}");
+od
+
+// windows: a view sliding one element at a time, so successive
+// windows overlap. only full-size windows are produced
+for window in numbers | .windows(3) do
+    write_line("window: {window | .join(", ")}");
+od
+// <<<

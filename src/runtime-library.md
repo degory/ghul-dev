@@ -21,10 +21,40 @@ or, fluently:
 
 <GhulExample name="pipes-intro-fluent" />
 
-## Ghul.Pipes
+## how a pipe runs
 
-Most combinators below exist in both forms; the free function comes first
-and the equivalent method beneath it as the alternative.
+The combinators come in two kinds. A **stage** answers with a new `Pipe[T]` and
+does no work: it describes something to do to each element as it goes past. A
+**terminal** answers with something other than a pipe, and getting that answer
+is what pulls elements through every stage in front of it. So a chain of stages
+on its own runs nothing, however long it is, until a terminal draws on it:
+
+<GhulExample name="pipes-lazy-chain" />
+
+Laziness is what lets a pipe stand in front of an unbounded source: a
+[generator](/async-and-generators.html#generators) that never finishes is
+perfectly usable behind a `take`, because only the elements actually asked for
+are ever produced.
+
+Two groups of stages are exceptions worth knowing, listed separately below:
+`reverse` and the `sort` family have to read the whole source before they can
+answer at all, so they do that as soon as they are called, and hand back a pipe
+over the result.
+
+## reading the signatures
+
+Two things in these signatures are worth a word.
+
+The `pure` on a function type - `predicate: (T) -> bool pure` - asks that the
+function you pass only reads, and writes nothing to the heap. Most lambdas
+satisfy it without any thought; see [type narrowing](/type-narrowing.html#purity)
+for what the compiler does with the guarantee.
+
+`Ghul.MAYBE[T]` is an [optional type](/optional-types.html): it holds a `T` or
+holds nothing. Combinators that might not find an answer say so in their return
+type, and `??`, `!` and `if let` read the value out.
+
+## lifting a source into a pipe
 
 ### pipe
 
@@ -33,6 +63,10 @@ anything with an `.iterator` - into a `Pipe[T]`. This is what the `|`
 operator calls to wrap its left operand.
 
 <GhulExample name="pipes-ref-pipe-function" signature />
+
+## stages
+
+A stage answers with a new pipe and runs nothing until a terminal pulls on it.
 
 ### filter
 
@@ -51,6 +85,8 @@ or, as a method:
 <GhulExample name="pipes-ref-map-method" signature />
 
 ### flat_map
+
+Maps each element to an iterable and runs the results together into one sequence.
 
 <GhulExample name="pipes-ref-flat_map-function" signature />
 
@@ -90,7 +126,13 @@ or, as a method:
 
 <GhulExample name="pipes-ref-take_while-method" signature />
 
+The four set operations that follow all discard duplicates. This is what they do to the same pair of sources:
+
+<GhulExample name="pipes-set-operations" />
+
 ### distinct
+
+Drops elements already seen. The four set operations here - `distinct`, `union_with`, `intersect_with` and `except` - all keep the first occurrence of an element and discard later duplicates, so each yields a sequence with no repeats in first-seen order. Elements are compared with `=~` and `get_hash_code`, so a type used with these needs [both](/dotnet-integration.html#equality).
 
 <GhulExample name="pipes-ref-distinct-function" signature />
 
@@ -98,39 +140,9 @@ or, as a method:
 
 <GhulExample name="pipes-ref-distinct-method" signature />
 
-### peek
-
-<GhulExample name="pipes-ref-peek-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-peek-method" signature />
-
-### chunk
-
-<GhulExample name="pipes-ref-chunk-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-chunk-method" signature />
-
-### windows
-
-<GhulExample name="pipes-ref-windows-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-windows-method" signature />
-
-### cat
-
-<GhulExample name="pipes-ref-cat-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-cat-method" signature />
-
 ### union_with
+
+Elements of the source followed by elements of `right` that the source didn't already have.
 
 <GhulExample name="pipes-ref-union_with-function" signature />
 
@@ -140,6 +152,8 @@ or, as a method:
 
 ### intersect_with
 
+Elements the source and `right` have in common, in the order the source produced them.
+
 <GhulExample name="pipes-ref-intersect_with-function" signature />
 
 or, as a method:
@@ -148,13 +162,61 @@ or, as a method:
 
 ### except
 
+Elements of the source that `right` doesn't have.
+
 <GhulExample name="pipes-ref-except-function" signature />
 
 or, as a method:
 
 <GhulExample name="pipes-ref-except-method" signature />
 
+### peek
+
+Calls `action` on each element and yields it unchanged. `peek` is a stage, so the action runs as elements are pulled through it, not when the chain is built - which makes it a way to see what a chain is doing.
+
+<GhulExample name="pipes-ref-peek-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-peek-method" signature />
+
+`chunk` and `windows` both answer with groups of elements, and differ in whether the groups overlap:
+
+<GhulExample name="pipes-chunk-windows" />
+
+### chunk
+
+Consecutive groups of `size` elements that don't overlap. When the source doesn't divide evenly the final group is short. Compare `windows`, below.
+
+<GhulExample name="pipes-ref-chunk-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-chunk-method" signature />
+
+### windows
+
+A view of `size` elements sliding one element at a time, so successive windows overlap. Only full-size windows are produced: a source shorter than `size` yields nothing.
+
+<GhulExample name="pipes-ref-windows-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-windows-method" signature />
+
+### cat
+
+Concatenation: every element of the source, then every element of `right`.
+
+<GhulExample name="pipes-ref-cat-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-cat-method" signature />
+
 ### index
+
+Pairs each element with its position. `INDEXED_VALUE[T]` carries `index` and `value`, and destructures positionally, so `for (i, x) in xs | .index() do` reads the pair apart. The second form starts counting from a given index rather than from 0.
 
 <GhulExample name="pipes-ref-index-function" signature />
 
@@ -164,21 +226,224 @@ or, as a method:
 
 ### zip
 
+Pairs elements of the source with elements of `other`, stopping when either side runs out. The second form combines each pair with a mapper instead of yielding a tuple.
+
 <GhulExample name="pipes-ref-zip-function" signature />
 
 or, as a method:
 
 <GhulExample name="pipes-ref-zip-method" signature />
 
-### reduce
+## stages that buffer
 
-<GhulExample name="pipes-ref-reduce-function" signature />
+These answer with a pipe, like any other stage, but they cannot produce their
+first element without having seen the last one. So they read the whole source
+as soon as they are called rather than as elements are pulled.
+
+### reverse
+
+Yields the source's elements last to first.
+
+<GhulExample name="pipes-ref-reverse-function" signature />
 
 or, as a method:
 
-<GhulExample name="pipes-ref-reduce-method" signature />
+<GhulExample name="pipes-ref-reverse-method" signature />
+
+### sort
+
+Yields the source's elements in order. The first form uses the element type's own ordering; the other two take an `IComparer[T]` or a comparison function returning negative, zero or positive.
+
+<GhulExample name="pipes-ref-sort-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-sort-method" signature />
+
+### sort_descending
+
+<GhulExample name="pipes-ref-sort_descending-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-sort_descending-method" signature />
+
+### sort_by
+
+<GhulExample name="pipes-ref-sort_by-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-sort_by-method" signature />
+
+### sort_by_descending
+
+<GhulExample name="pipes-ref-sort_by_descending-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-sort_by_descending-method" signature />
+
+## terminals
+
+A terminal answers with something other than a pipe, and asking for that answer
+is what runs the stages in front of it. They fall into three loose groups:
+finding a single element, collecting the elements into a container, and folding
+or consuming the sequence as a whole.
+
+The searching combinators come in pairs. `find`-style ones take a predicate or
+a mapper and scan; `first`-style ones look only at the leading element. Each has
+a variant answering `MAYBE[T]` and one throwing instead:
+
+<GhulExample name="pipes-searching" />
+
+### find
+
+The first element matching the predicate, absent if none does. `first` is the same question with no predicate.
+
+<GhulExample name="pipes-ref-find-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-find-method" signature />
+
+### find_map
+
+Calls `mapper` on each element in turn and answers with the first present result. `first_map` differs: it calls the mapper on the *first* element only, and gives up if that one declines.
+
+<GhulExample name="pipes-ref-find_map-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-find_map-method" signature />
+
+### find_or_throw
+
+As `find`, throwing instead of answering absent when nothing matches.
+
+<GhulExample name="pipes-ref-find_or_throw-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-find_or_throw-method" signature />
+
+### find_map_or_throw
+
+As `find_map`, throwing instead of answering absent when nothing maps.
+
+<GhulExample name="pipes-ref-find_map_or_throw-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-find_map_or_throw-method" signature />
+
+### first
+
+The leading element, absent when the source is empty.
+
+<GhulExample name="pipes-ref-first-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-first-method" signature />
+
+### first_map
+
+Calls `mapper` on the leading element only. Compare `find_map`, above, which keeps going.
+
+<GhulExample name="pipes-ref-first_map-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-first_map-method" signature />
+
+### first_or_throw
+
+As `first`, throwing instead of answering absent when the source is empty.
+
+<GhulExample name="pipes-ref-first_or_throw-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-first_or_throw-method" signature />
+
+### first_map_or_throw
+
+As `first_map`, throwing instead of answering absent.
+
+<GhulExample name="pipes-ref-first_map_or_throw-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-first_map_or_throw-method" signature />
+
+### only
+
+The single element the source holds, throwing when it holds none or more than one.
+
+<GhulExample name="pipes-ref-only-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-only-method" signature />
+
+### any
+
+<GhulExample name="pipes-ref-any-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-any-method" signature />
+
+### all
+
+<GhulExample name="pipes-ref-all-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-all-method" signature />
+
+### count
+
+<GhulExample name="pipes-ref-count-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-count-method" signature />
+
+### min
+
+The smallest element, absent when the source is empty. `min` and `max` have no method form.
+
+<GhulExample name="pipes-ref-min-function" signature />
+
+### max
+
+<GhulExample name="pipes-ref-max-function" signature />
+
+### min_by
+
+<GhulExample name="pipes-ref-min_by-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-min_by-method" signature />
+
+### max_by
+
+<GhulExample name="pipes-ref-max_by-function" signature />
+
+or, as a method:
+
+<GhulExample name="pipes-ref-max_by-method" signature />
+
+The collecting combinators differ in what they hand back:
+
+<GhulExample name="pipes-collecting" />
 
 ### collect
+
+Collects into the read-only `Collections.List[T]`. `collect_list` gives back the mutable `LIST[T]` instead, and the others collect into an array, a set, or a map.
 
 <GhulExample name="pipes-ref-collect-function" signature />
 
@@ -220,6 +485,8 @@ or, as a method:
 
 ### partition
 
+Splits the source in two on a predicate. The elements matching the predicate come first, then the elements not matching.
+
 <GhulExample name="pipes-ref-partition-function" signature />
 
 or, as a method:
@@ -228,125 +495,27 @@ or, as a method:
 
 ### group_by
 
+Collects the elements into a map, keyed by what `key_selector` returns for each.
+
 <GhulExample name="pipes-ref-group_by-function" signature />
 
 or, as a method:
 
 <GhulExample name="pipes-ref-group_by-method" signature />
 
-### min_by
+### reduce
 
-<GhulExample name="pipes-ref-min_by-function" signature />
+Folds the source into a single value, starting at `seed` and calling `accumulator` with the running value and each element in turn. The second form passes the final running value through a mapper before returning it.
 
-or, as a method:
-
-<GhulExample name="pipes-ref-min_by-method" signature />
-
-### max_by
-
-<GhulExample name="pipes-ref-max_by-function" signature />
+<GhulExample name="pipes-ref-reduce-function" signature />
 
 or, as a method:
 
-<GhulExample name="pipes-ref-max_by-method" signature />
-
-### count
-
-<GhulExample name="pipes-ref-count-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-count-method" signature />
-
-### find
-
-<GhulExample name="pipes-ref-find-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-find-method" signature />
-
-### find_map
-
-<GhulExample name="pipes-ref-find_map-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-find_map-method" signature />
-
-### find_or_throw
-
-<GhulExample name="pipes-ref-find_or_throw-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-find_or_throw-method" signature />
-
-### find_map_or_throw
-
-<GhulExample name="pipes-ref-find_map_or_throw-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-find_map_or_throw-method" signature />
-
-### first
-
-<GhulExample name="pipes-ref-first-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-first-method" signature />
-
-### first_map
-
-<GhulExample name="pipes-ref-first_map-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-first_map-method" signature />
-
-### first_or_throw
-
-<GhulExample name="pipes-ref-first_or_throw-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-first_or_throw-method" signature />
-
-### first_map_or_throw
-
-<GhulExample name="pipes-ref-first_map_or_throw-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-first_map_or_throw-method" signature />
-
-### only
-
-<GhulExample name="pipes-ref-only-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-only-method" signature />
-
-### any
-
-<GhulExample name="pipes-ref-any-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-any-method" signature />
-
-### all
-
-<GhulExample name="pipes-ref-all-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-all-method" signature />
+<GhulExample name="pipes-ref-reduce-method" signature />
 
 ### each
+
+Calls `action` on every element. It answers nothing and, alone among these, is not `pure` - it exists for its side effects.
 
 <GhulExample name="pipes-ref-each-function" signature />
 
@@ -354,47 +523,9 @@ or, as a method:
 
 <GhulExample name="pipes-ref-each-method" signature />
 
-### reverse
-
-<GhulExample name="pipes-ref-reverse-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-reverse-method" signature />
-
-### sort
-
-<GhulExample name="pipes-ref-sort-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-sort-method" signature />
-
-### sort_descending
-
-<GhulExample name="pipes-ref-sort_descending-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-sort_descending-method" signature />
-
-### sort_by
-
-<GhulExample name="pipes-ref-sort_by-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-sort_by-method" signature />
-
-### sort_by_descending
-
-<GhulExample name="pipes-ref-sort_by_descending-function" signature />
-
-or, as a method:
-
-<GhulExample name="pipes-ref-sort_by_descending-method" signature />
-
 ### append_to
+
+Appends each element to a `StringBuilder`, separated by `separator`, or by `", "` when that is left off. `join` is the same thing answering a fresh string.
 
 <GhulExample name="pipes-ref-append_to-function" signature />
 
@@ -404,17 +535,10 @@ or, as a method:
 
 ### join
 
+Renders the elements into one string, separated by `separator`, or by `", "` when left off.
+
 <GhulExample name="pipes-ref-join-function" signature />
 
 or, as a method:
 
 <GhulExample name="pipes-ref-join-method" signature />
-
-### min
-
-<GhulExample name="pipes-ref-min-function" signature />
-
-### max
-
-<GhulExample name="pipes-ref-max-function" signature />
-

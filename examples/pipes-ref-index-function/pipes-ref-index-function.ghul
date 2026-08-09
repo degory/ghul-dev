@@ -7,6 +7,11 @@ use Ghul.Pipes.Pipe;
 
 // >>>
 index[T](source: Iterable[T]) -> Pipe[INDEXED_VALUE[T]] pure;
+
+index[T](
+    source: Iterable[T],
+    index: int
+) -> Pipe[INDEXED_VALUE[T]] pure;
 // <<<
 
 entry() is si

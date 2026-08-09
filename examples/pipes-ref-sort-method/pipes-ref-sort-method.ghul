@@ -7,6 +7,10 @@ use Ghul.Pipes.INDEXED_VALUE;
 trait Pipe[T] is
 // >>>
     sort() -> Pipe[T] pure;
+
+    sort(comparer: Collections.IComparer[T]) -> Pipe[T] pure;
+
+    sort(compare: (T, T) -> int pure) -> Pipe[T] pure;
 // <<<
 si
 

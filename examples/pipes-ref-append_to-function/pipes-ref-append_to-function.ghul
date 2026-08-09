@@ -8,6 +8,12 @@ use Ghul.Pipes.Pipe;
 // >>>
 append_to[T](
     source: Iterable[T],
+    into: System.Text.StringBuilder,
+    separator: string
+) -> System.Text.StringBuilder;
+
+append_to[T](
+    source: Iterable[T],
     into: System.Text.StringBuilder
 ) -> System.Text.StringBuilder;
 // <<<

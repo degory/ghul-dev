@@ -7,6 +7,11 @@ use Ghul.Pipes.INDEXED_VALUE;
 trait Pipe[T] is
 // >>>
     zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure;
+
+    zip[U,TOut](
+        other: Iterable[U],
+        mapper: (T,U) -> TOut pure
+    ) -> Pipe[TOut] pure;
 // <<<
 si
 

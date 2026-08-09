@@ -7,6 +7,16 @@ use Ghul.Pipes.Pipe;
 
 // >>>
 sort[T](source: Iterable[T]) -> Pipe[T] pure;
+
+sort[T](
+    source: Iterable[T],
+    comparer: Collections.IComparer[T]
+) -> Pipe[T] pure;
+
+sort[T](
+    source: Iterable[T],
+    compare: (T, T) -> int pure
+) -> Pipe[T] pure;
 // <<<
 
 entry() is si
