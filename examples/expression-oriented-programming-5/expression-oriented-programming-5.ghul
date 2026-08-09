@@ -17,8 +17,8 @@ grade(score: int) -> string is
 
     return label;
 si
-// <<<
 
 write_line(grade(95));
 write_line(grade(82));
 write_line(grade(60));
+// <<<

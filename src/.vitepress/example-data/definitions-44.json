@@ -1,9 +1,9 @@
 {
   "name": "definitions-44",
-  "code": "union List is\n    NIL;\n    CONS(head: int, tail: List);\nsi\n\nimpl Printer for List is\n    print() -> string =>\n        if let (head, tail): CONS = self then \"{head} {tail.print()}\"\n        else \"nil\"\n        fi;\nsi",
+  "code": "union List is\n    NIL;\n    CONS(head: int, tail: List);\nsi\n\nimpl Printer for List is\n    print() -> string =>\n        if let (head, tail): CONS = self then \"{head} {tail.print()}\"\n        else \"nil\"\n        fi;\nsi\n\nlet xs: Printer = List.CONS(1, List.CONS(2, List.NIL));\nwrite_line(xs.print());",
   "fullSource": "use IO.Std.write_line;\n\ntrait Printer is\n    print() -> string;\nsi\n\nunion List is\n    NIL;\n    CONS(head: int, tail: List);\nsi\n\nimpl Printer for List is\n    print() -> string =>\n        if let (head, tail): CONS = self then \"{head} {tail.print()}\"\n        else \"nil\"\n        fi;\nsi\n\nlet xs: Printer = List.CONS(1, List.CONS(2, List.NIL));\nwrite_line(xs.print());\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "1 2 nil\n",
   "diagnostics": [],
@@ -27,7 +27,18 @@
     { "startLine": 8, "startColumn": 30, "endLine": 8, "endColumn": 33, "text": "CONS(head: int, tail: List)", "signature": "CONS(head: int, tail: List)", "kindLabel": "variant" },
     { "startLine": 8, "startColumn": 49, "endLine": 8, "endColumn": 52, "text": "head: int", "signature": "head: int", "kindLabel": "local value" },
     { "startLine": 8, "startColumn": 56, "endLine": 8, "endColumn": 59, "text": "tail: List", "signature": "tail: List", "kindLabel": "local value" },
-    { "startLine": 8, "startColumn": 61, "endLine": 8, "endColumn": 65, "text": "List.print() -> string", "signature": "List.print() -> string", "kindLabel": "method" }
+    { "startLine": 8, "startColumn": 61, "endLine": 8, "endColumn": 65, "text": "List.print() -> string", "signature": "List.print() -> string", "kindLabel": "method" },
+    { "startLine": 13, "startColumn": 5, "endLine": 13, "endColumn": 6, "text": "xs: Printer", "signature": "xs: Printer", "kindLabel": "local value" },
+    { "startLine": 13, "startColumn": 9, "endLine": 13, "endColumn": 15, "text": "trait Printer", "signature": "trait Printer", "kindLabel": "trait" },
+    { "startLine": 13, "startColumn": 19, "endLine": 13, "endColumn": 22, "text": "union List: Printer", "signature": "union List: Printer", "kindLabel": "union" },
+    { "startLine": 13, "startColumn": 24, "endLine": 13, "endColumn": 27, "text": "List.CONS.init(head: int, tail: List)", "signature": "List.CONS.init(head: int, tail: List)", "kindLabel": "constructor" },
+    { "startLine": 13, "startColumn": 32, "endLine": 13, "endColumn": 35, "text": "union List: Printer", "signature": "union List: Printer", "kindLabel": "union" },
+    { "startLine": 13, "startColumn": 37, "endLine": 13, "endColumn": 40, "text": "List.CONS.init(head: int, tail: List)", "signature": "List.CONS.init(head: int, tail: List)", "kindLabel": "constructor" },
+    { "startLine": 13, "startColumn": 45, "endLine": 13, "endColumn": 48, "text": "union List: Printer", "signature": "union List: Printer", "kindLabel": "union" },
+    { "startLine": 13, "startColumn": 50, "endLine": 13, "endColumn": 52, "text": "List.NIL.init()", "signature": "List.NIL.init()", "kindLabel": "constructor" },
+    { "startLine": 14, "startColumn": 1, "endLine": 14, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 14, "startColumn": 12, "endLine": 14, "endColumn": 13, "text": "xs: Printer", "signature": "xs: Printer", "kindLabel": "local value" },
+    { "startLine": 14, "startColumn": 15, "endLine": 14, "endColumn": 19, "text": "Printer.print() -> string", "signature": "Printer.print() -> string", "kindLabel": "abstract method" }
   ],
   "inlayHints": [
     { "line": 8, "column": 37, "label": "►", "detail": "► CONS\n> NIL", "code": "narrowing-if-let" }
@@ -49,6 +60,17 @@
     { "startLine": 8, "startColumn": 30, "endLine": 8, "endColumn": 33, "tokenType": "class" },
     { "startLine": 8, "startColumn": 49, "endLine": 8, "endColumn": 52, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 8, "startColumn": 56, "endLine": 8, "endColumn": 59, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 8, "startColumn": 61, "endLine": 8, "endColumn": 65, "tokenType": "method" }
+    { "startLine": 8, "startColumn": 61, "endLine": 8, "endColumn": 65, "tokenType": "method" },
+    { "startLine": 13, "startColumn": 5, "endLine": 13, "endColumn": 6, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 13, "startColumn": 9, "endLine": 13, "endColumn": 15, "tokenType": "interface" },
+    { "startLine": 13, "startColumn": 19, "endLine": 13, "endColumn": 22, "tokenType": "class" },
+    { "startLine": 13, "startColumn": 24, "endLine": 13, "endColumn": 27, "tokenType": "method" },
+    { "startLine": 13, "startColumn": 32, "endLine": 13, "endColumn": 35, "tokenType": "class" },
+    { "startLine": 13, "startColumn": 37, "endLine": 13, "endColumn": 40, "tokenType": "method" },
+    { "startLine": 13, "startColumn": 45, "endLine": 13, "endColumn": 48, "tokenType": "class" },
+    { "startLine": 13, "startColumn": 50, "endLine": 13, "endColumn": 52, "tokenType": "method" },
+    { "startLine": 14, "startColumn": 1, "endLine": 14, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 14, "startColumn": 12, "endLine": 14, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 14, "startColumn": 15, "endLine": 14, "endColumn": 19, "tokenType": "method" }
   ]
 }

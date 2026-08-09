@@ -4,6 +4,6 @@ use IO.Std.write_line;
 length_of(key: string?) -> int =>
     assert key? else "key is null" in
     key.length;
-// <<<
 
 write_line(length_of("hello"));
+// <<<

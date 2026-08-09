@@ -1,9 +1,9 @@
 {
   "name": "type-inference-3",
-  "code": "greet(a: Animal) is\n    if isa CAT(a) then\n        // a is a parameter of greet, narrowed to CAT\n        // in this branch\n        write_line(a.purr());\n    fi\nsi",
+  "code": "greet(a: Animal) is\n    if isa CAT(a) then\n        // a is a parameter of greet, narrowed to CAT\n        // in this branch\n        write_line(a.purr());\n    fi\nsi\n\ngreet(CAT());",
   "fullSource": "use IO.Std.write_line;\n\nclass Animal abstract is si\n\nclass CAT(): Animal is\n    purr() -> string => \"purr\";\nsi\n\ngreet(a: Animal) is\n    if isa CAT(a) then\n        // a is a parameter of greet, narrowed to CAT\n        // in this branch\n        write_line(a.purr());\n    fi\nsi\n\ngreet(CAT());\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "purr\n",
   "diagnostics": [],
@@ -15,7 +15,9 @@
     { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 16, "text": "a: Animal", "signature": "a: Animal", "kindLabel": "local argument" },
     { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 5, "startColumn": 20, "endLine": 5, "endColumn": 20, "text": "a: Animal\n    ► CAT", "signature": "a: Animal\n    ► CAT", "kindLabel": "local argument" },
-    { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 25, "text": "CAT.purr() -> string", "signature": "CAT.purr() -> string", "kindLabel": "pure method" }
+    { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 25, "text": "CAT.purr() -> string", "signature": "CAT.purr() -> string", "kindLabel": "pure method" },
+    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 5, "text": "greet(a: Animal) -> void", "signature": "greet(a: Animal) -> void", "kindLabel": "global function" },
+    { "startLine": 9, "startColumn": 7, "endLine": 9, "endColumn": 9, "text": "CAT.init()", "signature": "CAT.init()", "kindLabel": "constructor" }
   ],
   "inlayHints": [
     { "line": 2, "column": 16, "label": "►", "detail": "► CAT", "code": "narrowing-isa" }
@@ -28,6 +30,8 @@
     { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 18, "tokenType": "method", "modifiers": "static" },
     { "startLine": 5, "startColumn": 20, "endLine": 5, "endColumn": 20, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 25, "tokenType": "method" }
+    { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 25, "tokenType": "method" },
+    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 5, "tokenType": "function" },
+    { "startLine": 9, "startColumn": 7, "endLine": 9, "endColumn": 9, "tokenType": "method" }
   ]
 }

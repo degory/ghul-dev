@@ -14,6 +14,6 @@ describe(carrier: CARRIER) is
         write_line(cat.purr());
     fi
 si
-// <<<
 
 describe(CARRIER(CAT()));
+// <<<

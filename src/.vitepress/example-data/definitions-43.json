@@ -1,9 +1,9 @@
 {
   "name": "definitions-43",
-  "code": "union Shape is\n    CIRCLE(radius: int);\n    SQUARE(side: int);\nsi\n\npartial Shape is\n    describe() -> string =>\n        case self\n        when c: CIRCLE then \"circle r={c.radius}\"\n        when s: SQUARE then \"square s={s.side}\"\n        esac;\nsi",
+  "code": "union Shape is\n    CIRCLE(radius: int);\n    SQUARE(side: int);\nsi\n\npartial Shape is\n    describe() -> string =>\n        case self\n        when c: CIRCLE then \"circle r={c.radius}\"\n        when s: SQUARE then \"square s={s.side}\"\n        esac;\nsi\n\nlet s: Shape = Shape.SQUARE(4);\nwrite_line(s.describe());",
   "fullSource": "use IO.Std.write_line;\n\nunion Shape is\n    CIRCLE(radius: int);\n    SQUARE(side: int);\nsi\n\npartial Shape is\n    describe() -> string =>\n        case self\n        when c: CIRCLE then \"circle r={c.radius}\"\n        when s: SQUARE then \"square s={s.side}\"\n        esac;\nsi\n\nlet s: Shape = Shape.SQUARE(4);\nwrite_line(s.describe());\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "square s=4\n",
   "diagnostics": [],
@@ -28,7 +28,14 @@
     { "startLine": 10, "startColumn": 14, "endLine": 10, "endColumn": 14, "text": "s: Shape.SQUARE", "signature": "s: Shape.SQUARE", "kindLabel": "local value" },
     { "startLine": 10, "startColumn": 17, "endLine": 10, "endColumn": 22, "text": "SQUARE(side: int)", "signature": "SQUARE(side: int)", "kindLabel": "variant" },
     { "startLine": 10, "startColumn": 40, "endLine": 10, "endColumn": 40, "text": "s: SQUARE", "signature": "s: SQUARE", "kindLabel": "local value" },
-    { "startLine": 10, "startColumn": 42, "endLine": 10, "endColumn": 45, "text": "SQUARE.side: int", "signature": "SQUARE.side: int", "kindLabel": "variant field" }
+    { "startLine": 10, "startColumn": 42, "endLine": 10, "endColumn": 45, "text": "SQUARE.side: int", "signature": "SQUARE.side: int", "kindLabel": "variant field" },
+    { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 5, "text": "s: Shape", "signature": "s: Shape", "kindLabel": "local value" },
+    { "startLine": 14, "startColumn": 8, "endLine": 14, "endColumn": 12, "text": "union Shape", "signature": "union Shape", "kindLabel": "union" },
+    { "startLine": 14, "startColumn": 16, "endLine": 14, "endColumn": 20, "text": "union Shape", "signature": "union Shape", "kindLabel": "union" },
+    { "startLine": 14, "startColumn": 22, "endLine": 14, "endColumn": 27, "text": "Shape.SQUARE.init(side: int)", "signature": "Shape.SQUARE.init(side: int)", "kindLabel": "constructor" },
+    { "startLine": 15, "startColumn": 1, "endLine": 15, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 15, "startColumn": 12, "endLine": 15, "endColumn": 12, "text": "s: Shape", "signature": "s: Shape", "kindLabel": "local value" },
+    { "startLine": 15, "startColumn": 14, "endLine": 15, "endColumn": 21, "text": "Shape.describe() -> string", "signature": "Shape.describe() -> string", "kindLabel": "method" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -49,6 +56,13 @@
     { "startLine": 10, "startColumn": 14, "endLine": 10, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 10, "startColumn": 17, "endLine": 10, "endColumn": 22, "tokenType": "class" },
     { "startLine": 10, "startColumn": 40, "endLine": 10, "endColumn": 40, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 10, "startColumn": 42, "endLine": 10, "endColumn": 45, "tokenType": "property" }
+    { "startLine": 10, "startColumn": 42, "endLine": 10, "endColumn": 45, "tokenType": "property" },
+    { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 14, "startColumn": 8, "endLine": 14, "endColumn": 12, "tokenType": "class" },
+    { "startLine": 14, "startColumn": 16, "endLine": 14, "endColumn": 20, "tokenType": "class" },
+    { "startLine": 14, "startColumn": 22, "endLine": 14, "endColumn": 27, "tokenType": "method" },
+    { "startLine": 15, "startColumn": 1, "endLine": 15, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 15, "startColumn": 12, "endLine": 15, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 15, "startColumn": 14, "endLine": 15, "endColumn": 21, "tokenType": "method" }
   ]
 }

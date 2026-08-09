@@ -7,9 +7,9 @@ squares(limit: int) -> Ghul.Pipes.Pipe[int] is
         yield i * i;
         i = i + 1;
     od
-// <<<
 si
 
 for s in squares(4) do
     write_line(s);
 od
+// <<<

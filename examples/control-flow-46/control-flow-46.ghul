@@ -11,7 +11,7 @@ compute() -> Tasks.TASK[int] is
     let c = await add_async(a, b);    // c = 60
 
     return c;
-// <<<
 si
 
 write_line("{compute().result}");
+// <<<

@@ -6,6 +6,6 @@ class PERSON(name: string, age: int) is
         write_line("{name} is {age} years old");
     si
 si
-// <<<
 
 PERSON("alice", 30).describe();
+// <<<

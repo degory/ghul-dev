@@ -1,9 +1,9 @@
 {
   "name": "type-inference-6",
-  "code": "describe(carrier: CARRIER) is\n    if let cat: CAT = carrier.occupant then\n        write_line(cat.purr());\n    fi\nsi",
+  "code": "describe(carrier: CARRIER) is\n    if let cat: CAT = carrier.occupant then\n        write_line(cat.purr());\n    fi\nsi\n\ndescribe(CARRIER(CAT()));",
   "fullSource": "use IO.Std.write_line;\n\nclass Animal abstract is si\n\nclass CAT(): Animal is\n    purr() -> string => \"purr\";\nsi\n\nclass CARRIER(occupant: Animal);\n\ndescribe(carrier: CARRIER) is\n    if let cat: CAT = carrier.occupant then\n        write_line(cat.purr());\n    fi\nsi\n\ndescribe(CARRIER(CAT()));\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "purr\n",
   "diagnostics": [],
@@ -17,7 +17,10 @@
     { "startLine": 2, "startColumn": 31, "endLine": 2, "endColumn": 38, "text": "CARRIER.occupant: Animal", "signature": "CARRIER.occupant: Animal", "kindLabel": "pure instance property" },
     { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 22, "text": "cat: CAT", "signature": "cat: CAT", "kindLabel": "local value" },
-    { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 27, "text": "CAT.purr() -> string", "signature": "CAT.purr() -> string", "kindLabel": "pure method" }
+    { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 27, "text": "CAT.purr() -> string", "signature": "CAT.purr() -> string", "kindLabel": "pure method" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 8, "text": "describe(carrier: CARRIER) -> void", "signature": "describe(carrier: CARRIER) -> void", "kindLabel": "global function" },
+    { "startLine": 7, "startColumn": 10, "endLine": 7, "endColumn": 16, "text": "CARRIER.init(occupant: Animal)", "signature": "CARRIER.init(occupant: Animal)", "kindLabel": "constructor" },
+    { "startLine": 7, "startColumn": 18, "endLine": 7, "endColumn": 20, "text": "CAT.init()", "signature": "CAT.init()", "kindLabel": "constructor" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -30,6 +33,9 @@
     { "startLine": 2, "startColumn": 31, "endLine": 2, "endColumn": 38, "tokenType": "property" },
     { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 18, "tokenType": "method", "modifiers": "static" },
     { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 27, "tokenType": "method" }
+    { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 27, "tokenType": "method" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 8, "tokenType": "function" },
+    { "startLine": 7, "startColumn": 10, "endLine": 7, "endColumn": 16, "tokenType": "method" },
+    { "startLine": 7, "startColumn": 18, "endLine": 7, "endColumn": 20, "tokenType": "method" }
   ]
 }

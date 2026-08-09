@@ -10,12 +10,10 @@ class CAT: Animal is
     purr() -> string => "purr";
 si
 
-// >>>
 // T is bounded by Animal, so a T value narrows through Animal with isa
 describe[T: Animal](x: T) -> string =>
     if isa CAT(x) then x.purr()
     else x.name()
     fi;
-// <<<
 
 write_line(describe(CAT()));

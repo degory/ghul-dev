@@ -12,9 +12,9 @@ sum_of_squares(xs: Collections.List[int]) -> Tasks.TASK[int] is
     od
 
     return total;
-// <<<
 si
 
 let result = sum_of_squares([1, 2, 3, 4]).result;
 
 write_line("sum_of_squares = {result}");
+// <<<

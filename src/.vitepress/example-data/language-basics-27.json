@@ -1,9 +1,9 @@
 {
   "name": "language-basics-27",
-  "code": "let i mut = 0;\nlet j = 10;\nlet s mut = \"Hello\";\n\ni = i + j;\ns = \"{s} World!\";\n\nthing.property = i + j;",
-  "fullSource": "use IO.Std.write_line;\n\nclass BOX is\n    property: int public;\n\n    init() is si\nsi\n\nlet thing = BOX();\nlet i mut = 0;\nlet j = 10;\nlet s mut = \"Hello\";\n\ni = i + j;\ns = \"{s} World!\";\n\nthing.property = i + j;\nwrite_line(\"i = {i}, s = {s}, thing.property = {thing.property}\");\n",
+  "code": "let i mut = 0;\nlet j = 10;\nlet s mut = \"Hello\";\n\ni = i + j;\ns = \"{s} World!\";\n\nthing.property = i + j;\n\nwrite_line(\"i = {i}, s = {s}, thing.property = {thing.property}\");",
+  "fullSource": "use IO.Std.write_line;\n\nclass BOX is\n    property: int public;\n\n    init() is si\nsi\n\nlet thing = BOX();\nlet i mut = 0;\nlet j = 10;\nlet s mut = \"Hello\";\n\ni = i + j;\ns = \"{s} World!\";\n\nthing.property = i + j;\n\nwrite_line(\"i = {i}, s = {s}, thing.property = {thing.property}\");\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "i = 10, s = Hello World!, thing.property = 20\n",
   "diagnostics": [],
@@ -21,7 +21,12 @@
     { "startLine": 8, "startColumn": 22, "endLine": 8, "endColumn": 22, "text": "j: int", "signature": "j: int", "kindLabel": "local value" },
     { "startLine": 8, "startColumn": 20, "endLine": 8, "endColumn": 20, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
     { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 5, "text": "thing: BOX", "signature": "thing: BOX", "kindLabel": "local value" },
-    { "startLine": 8, "startColumn": 7, "endLine": 8, "endColumn": 14, "text": "BOX.property: int", "signature": "BOX.property: int", "kindLabel": "pure instance property" }
+    { "startLine": 8, "startColumn": 7, "endLine": 8, "endColumn": 14, "text": "BOX.property: int", "signature": "BOX.property: int", "kindLabel": "pure instance property" },
+    { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 10, "startColumn": 18, "endLine": 10, "endColumn": 18, "text": "i: int", "signature": "i: int", "kindLabel": "local variable" },
+    { "startLine": 10, "startColumn": 27, "endLine": 10, "endColumn": 27, "text": "s: string", "signature": "s: string", "kindLabel": "local variable" },
+    { "startLine": 10, "startColumn": 49, "endLine": 10, "endColumn": 53, "text": "thing: BOX", "signature": "thing: BOX", "kindLabel": "local value" },
+    { "startLine": 10, "startColumn": 55, "endLine": 10, "endColumn": 62, "text": "BOX.property: int", "signature": "BOX.property: int", "kindLabel": "pure instance property" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -38,6 +43,11 @@
     { "startLine": 8, "startColumn": 22, "endLine": 8, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 8, "startColumn": 20, "endLine": 8, "endColumn": 20, "tokenType": "operator" },
     { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 8, "startColumn": 7, "endLine": 8, "endColumn": 14, "tokenType": "property" }
+    { "startLine": 8, "startColumn": 7, "endLine": 8, "endColumn": 14, "tokenType": "property" },
+    { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 10, "startColumn": 18, "endLine": 10, "endColumn": 18, "tokenType": "variable" },
+    { "startLine": 10, "startColumn": 27, "endLine": 10, "endColumn": 27, "tokenType": "variable" },
+    { "startLine": 10, "startColumn": 49, "endLine": 10, "endColumn": 53, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 10, "startColumn": 55, "endLine": 10, "endColumn": 62, "tokenType": "property" }
   ]
 }

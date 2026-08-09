@@ -1,8 +1,8 @@
+// >>>
 class BASE();
 
 class DERIVED(): BASE;
 
-// >>>
 let derived =
     if true then
         DERIVED()

@@ -1,9 +1,9 @@
 {
   "name": "definitions-39",
-  "code": "class DOG(name: string, breed: string): ANIMAL is\n    // forward name to the superclass; the local DOG keeps breed as a field\n    super(name);\n\n    init(.., trick: string) is\n        // .. expands to (name, breed); the primary init has already run\n        write_line(\"{name} the {breed} can {trick}\");\n    si\nsi",
+  "code": "class DOG(name: string, breed: string): ANIMAL is\n    // forward name to the superclass; the local DOG keeps breed as a field\n    super(name);\n\n    init(.., trick: string) is\n        // .. expands to (name, breed); the primary init has already run\n        write_line(\"{name} the {breed} can {trick}\");\n    si\nsi\n\nDOG(\"rex\", \"labrador\", \"sit\");",
   "fullSource": "use IO.Std.write_line;\n\nclass ANIMAL(name: string);\n\nclass DOG(name: string, breed: string): ANIMAL is\n    // forward name to the superclass; the local DOG keeps breed as a field\n    super(name);\n\n    init(.., trick: string) is\n        // .. expands to (name, breed); the primary init has already run\n        write_line(\"{name} the {breed} can {trick}\");\n    si\nsi\n\nDOG(\"rex\", \"labrador\", \"sit\");\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "rex the labrador can sit\n",
   "diagnostics": [],
@@ -24,7 +24,8 @@
     { "startLine": 7, "startColumn": 9, "endLine": 7, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 7, "startColumn": 22, "endLine": 7, "endColumn": 25, "text": "name: string", "signature": "name: string", "kindLabel": "local argument" },
     { "startLine": 7, "startColumn": 33, "endLine": 7, "endColumn": 37, "text": "breed: string", "signature": "breed: string", "kindLabel": "local argument" },
-    { "startLine": 7, "startColumn": 45, "endLine": 7, "endColumn": 49, "text": "trick: string", "signature": "trick: string", "kindLabel": "local argument" }
+    { "startLine": 7, "startColumn": 45, "endLine": 7, "endColumn": 49, "text": "trick: string", "signature": "trick: string", "kindLabel": "local argument" },
+    { "startLine": 11, "startColumn": 1, "endLine": 11, "endColumn": 3, "text": "DOG.init(name: string, breed: string, trick: string)", "signature": "DOG.init(name: string, breed: string, trick: string)", "kindLabel": "constructor" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -41,6 +42,7 @@
     { "startLine": 7, "startColumn": 9, "endLine": 7, "endColumn": 18, "tokenType": "method", "modifiers": "static" },
     { "startLine": 7, "startColumn": 22, "endLine": 7, "endColumn": 25, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 7, "startColumn": 33, "endLine": 7, "endColumn": 37, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 7, "startColumn": 45, "endLine": 7, "endColumn": 49, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 7, "startColumn": 45, "endLine": 7, "endColumn": 49, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 11, "startColumn": 1, "endLine": 11, "endColumn": 3, "tokenType": "method" }
   ]
 }

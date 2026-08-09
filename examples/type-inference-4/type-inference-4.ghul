@@ -8,9 +8,6 @@ si
 
 // >>>
 class CARRIER(occupant: Animal);
-// <<<
-
-// >>>
 describe(carrier: CARRIER) is
     if isa CAT(carrier.occupant) then
         // carrier.occupant is a CAT within this branch,
@@ -18,6 +15,6 @@ describe(carrier: CARRIER) is
         write_line(carrier.occupant.purr());
     fi
 si
-// <<<
 
 describe(CARRIER(CAT()));
+// <<<

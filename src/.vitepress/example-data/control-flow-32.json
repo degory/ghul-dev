@@ -1,9 +1,9 @@
 {
   "name": "control-flow-32",
-  "code": "case value\nwhen -1 then\n    return \"minus one\";\n\nwhen 0 then\n    let result = \"zero\";\n    return result;\n\nwhen 1 then\n    return \"one\";\n\nwhen 2 then\n    return \"two\";\n\nwhen 3 then\n    return \"three\";\n\nwhen 4 then\n    return \"four\";\n\nwhen 5 then\n    let result = \"five\";\n    return result;\n\nwhen 6, 7, 8, 9 then\n    return \"more than five and less than ten\";\n\nwhen 13 then\n    return \"unlucky\";\n\nelse\n    return \"less than -1 or more than nine\";\nesac",
+  "code": "case value\nwhen -1 then\n    return \"minus one\";\n\nwhen 0 then\n    let result = \"zero\";\n    return result;\n\nwhen 1 then\n    return \"one\";\n\nwhen 2 then\n    return \"two\";\n\nwhen 3 then\n    return \"three\";\n\nwhen 4 then\n    return \"four\";\n\nwhen 5 then\n    let result = \"five\";\n    return result;\n\nwhen 6, 7, 8, 9 then\n    return \"more than five and less than ten\";\n\nwhen 13 then\n    return \"unlucky\";\n\nelse\n    return \"less than -1 or more than nine\";\nesac\nsi\n\nwrite_line(classify(0));\nwrite_line(classify(3));\nwrite_line(classify(7));\nwrite_line(classify(13));\nwrite_line(classify(-5));",
   "fullSource": "use IO.Std.write_line;\n\nclassify(value: int) -> string is\ncase value\nwhen -1 then\n    return \"minus one\";\n\nwhen 0 then\n    let result = \"zero\";\n    return result;\n\nwhen 1 then\n    return \"one\";\n\nwhen 2 then\n    return \"two\";\n\nwhen 3 then\n    return \"three\";\n\nwhen 4 then\n    return \"four\";\n\nwhen 5 then\n    let result = \"five\";\n    return result;\n\nwhen 6, 7, 8, 9 then\n    return \"more than five and less than ten\";\n\nwhen 13 then\n    return \"unlucky\";\n\nelse\n    return \"less than -1 or more than nine\";\nesac\nsi\n\nwrite_line(classify(0));\nwrite_line(classify(3));\nwrite_line(classify(7));\nwrite_line(classify(13));\nwrite_line(classify(-5));\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "zero\nthree\nmore than five and less than ten\nunlucky\nless than -1 or more than nine\n",
   "diagnostics": [],
@@ -13,7 +13,18 @@
     { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 10, "text": "value: int", "signature": "value: int", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 6, "text": "Ghul.-(a: int) -> int", "signature": "Ghul.-(a: int) -> int", "kindLabel": "innate function arithmetic.neg" },
     { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 17, "text": "result: string", "signature": "result: string", "kindLabel": "local value" },
-    { "startLine": 23, "startColumn": 12, "endLine": 23, "endColumn": 17, "text": "result: string", "signature": "result: string", "kindLabel": "local value" }
+    { "startLine": 23, "startColumn": 12, "endLine": 23, "endColumn": 17, "text": "result: string", "signature": "result: string", "kindLabel": "local value" },
+    { "startLine": 36, "startColumn": 1, "endLine": 36, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 36, "startColumn": 12, "endLine": 36, "endColumn": 19, "text": "classify(value: int) -> string", "signature": "classify(value: int) -> string", "kindLabel": "pure global function" },
+    { "startLine": 37, "startColumn": 1, "endLine": 37, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 37, "startColumn": 12, "endLine": 37, "endColumn": 19, "text": "classify(value: int) -> string", "signature": "classify(value: int) -> string", "kindLabel": "pure global function" },
+    { "startLine": 38, "startColumn": 1, "endLine": 38, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 38, "startColumn": 12, "endLine": 38, "endColumn": 19, "text": "classify(value: int) -> string", "signature": "classify(value: int) -> string", "kindLabel": "pure global function" },
+    { "startLine": 39, "startColumn": 1, "endLine": 39, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 39, "startColumn": 12, "endLine": 39, "endColumn": 19, "text": "classify(value: int) -> string", "signature": "classify(value: int) -> string", "kindLabel": "pure global function" },
+    { "startLine": 40, "startColumn": 1, "endLine": 40, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 40, "startColumn": 12, "endLine": 40, "endColumn": 19, "text": "classify(value: int) -> string", "signature": "classify(value: int) -> string", "kindLabel": "pure global function" },
+    { "startLine": 40, "startColumn": 21, "endLine": 40, "endColumn": 21, "text": "Ghul.-(a: int) -> int", "signature": "Ghul.-(a: int) -> int", "kindLabel": "innate function arithmetic.neg" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -22,6 +33,17 @@
     { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 6, "tokenType": "operator" },
     { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 23, "startColumn": 12, "endLine": 23, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 23, "startColumn": 12, "endLine": 23, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 36, "startColumn": 1, "endLine": 36, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 36, "startColumn": 12, "endLine": 36, "endColumn": 19, "tokenType": "function" },
+    { "startLine": 37, "startColumn": 1, "endLine": 37, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 37, "startColumn": 12, "endLine": 37, "endColumn": 19, "tokenType": "function" },
+    { "startLine": 38, "startColumn": 1, "endLine": 38, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 38, "startColumn": 12, "endLine": 38, "endColumn": 19, "tokenType": "function" },
+    { "startLine": 39, "startColumn": 1, "endLine": 39, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 39, "startColumn": 12, "endLine": 39, "endColumn": 19, "tokenType": "function" },
+    { "startLine": 40, "startColumn": 1, "endLine": 40, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 40, "startColumn": 12, "endLine": 40, "endColumn": 19, "tokenType": "function" },
+    { "startLine": 40, "startColumn": 21, "endLine": 40, "endColumn": 21, "tokenType": "operator" }
   ]
 }

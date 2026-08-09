@@ -1,9 +1,9 @@
 {
   "name": "definitions-46",
-  "code": "class VECTOR is\n    x: int;\n    y: int;\n\n    init(x: int, y: int) is\n        self.x = x;\n        self.y = y;\n    si\n\n    // a binary operator as an instance method takes one parameter, the right operand:\n    +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y);\nsi\n\nlet sum = VECTOR(1, 2) + VECTOR(3, 4);",
+  "code": "class VECTOR is\n    x: int;\n    y: int;\n\n    init(x: int, y: int) is\n        self.x = x;\n        self.y = y;\n    si\n\n    // a binary operator as an instance method takes one parameter, the right operand:\n    +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y);\nsi\n\nlet sum = VECTOR(1, 2) + VECTOR(3, 4);\nwrite_line(\"({sum.x}, {sum.y})\");",
   "fullSource": "use IO.Std.write_line;\nclass VECTOR is\n    x: int;\n    y: int;\n\n    init(x: int, y: int) is\n        self.x = x;\n        self.y = y;\n    si\n\n    // a binary operator as an instance method takes one parameter, the right operand:\n    +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y);\nsi\n\nlet sum = VECTOR(1, 2) + VECTOR(3, 4);\nwrite_line(\"({sum.x}, {sum.y})\");\n",
   "hiddenBefore": true,
-  "hiddenAfter": true,
+  "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "(4, 6)\n",
   "diagnostics": [],
@@ -31,14 +31,19 @@
     { "startLine": 11, "startColumn": 59, "endLine": 11, "endColumn": 63, "text": "other: VECTOR", "signature": "other: VECTOR", "kindLabel": "local argument" },
     { "startLine": 11, "startColumn": 65, "endLine": 11, "endColumn": 65, "text": "y: int", "signature": "y: int", "kindLabel": "pure instance property" },
     { "startLine": 11, "startColumn": 57, "endLine": 11, "endColumn": 57, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
+    { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 7, "text": "sum: VECTOR", "signature": "sum: VECTOR", "kindLabel": "local value" },
+    { "startLine": 14, "startColumn": 11, "endLine": 14, "endColumn": 16, "text": "VECTOR.init(x: int, y: int)", "signature": "VECTOR.init(x: int, y: int)", "kindLabel": "constructor" },
+    { "startLine": 14, "startColumn": 26, "endLine": 14, "endColumn": 31, "text": "VECTOR.init(x: int, y: int)", "signature": "VECTOR.init(x: int, y: int)", "kindLabel": "constructor" },
+    { "startLine": 14, "startColumn": 24, "endLine": 14, "endColumn": 24, "text": "VECTOR.+(other: VECTOR) -> VECTOR", "signature": "VECTOR.+(other: VECTOR) -> VECTOR", "kindLabel": "method" },
     { "startLine": 6, "startColumn": 18, "endLine": 6, "endColumn": 18, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
     { "startLine": 6, "startColumn": 14, "endLine": 6, "endColumn": 14, "text": "VECTOR.x: int", "signature": "VECTOR.x: int", "kindLabel": "pure instance property" },
     { "startLine": 7, "startColumn": 18, "endLine": 7, "endColumn": 18, "text": "y: int", "signature": "y: int", "kindLabel": "local argument" },
     { "startLine": 7, "startColumn": 14, "endLine": 7, "endColumn": 14, "text": "VECTOR.y: int", "signature": "VECTOR.y: int", "kindLabel": "pure instance property" },
-    { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 7, "text": "sum: VECTOR", "signature": "sum: VECTOR", "kindLabel": "local value" },
-    { "startLine": 14, "startColumn": 11, "endLine": 14, "endColumn": 16, "text": "VECTOR.init(x: int, y: int)", "signature": "VECTOR.init(x: int, y: int)", "kindLabel": "constructor" },
-    { "startLine": 14, "startColumn": 26, "endLine": 14, "endColumn": 31, "text": "VECTOR.init(x: int, y: int)", "signature": "VECTOR.init(x: int, y: int)", "kindLabel": "constructor" },
-    { "startLine": 14, "startColumn": 24, "endLine": 14, "endColumn": 24, "text": "VECTOR.+(other: VECTOR) -> VECTOR", "signature": "VECTOR.+(other: VECTOR) -> VECTOR", "kindLabel": "method" }
+    { "startLine": 15, "startColumn": 1, "endLine": 15, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 15, "startColumn": 15, "endLine": 15, "endColumn": 17, "text": "sum: VECTOR", "signature": "sum: VECTOR", "kindLabel": "local value" },
+    { "startLine": 15, "startColumn": 19, "endLine": 15, "endColumn": 19, "text": "VECTOR.x: int", "signature": "VECTOR.x: int", "kindLabel": "pure instance property" },
+    { "startLine": 15, "startColumn": 24, "endLine": 15, "endColumn": 26, "text": "sum: VECTOR", "signature": "sum: VECTOR", "kindLabel": "local value" },
+    { "startLine": 15, "startColumn": 28, "endLine": 15, "endColumn": 28, "text": "VECTOR.y: int", "signature": "VECTOR.y: int", "kindLabel": "pure instance property" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -65,13 +70,18 @@
     { "startLine": 11, "startColumn": 59, "endLine": 11, "endColumn": 63, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 11, "startColumn": 65, "endLine": 11, "endColumn": 65, "tokenType": "property" },
     { "startLine": 11, "startColumn": 57, "endLine": 11, "endColumn": 57, "tokenType": "operator" },
+    { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 14, "startColumn": 11, "endLine": 14, "endColumn": 16, "tokenType": "method" },
+    { "startLine": 14, "startColumn": 26, "endLine": 14, "endColumn": 31, "tokenType": "method" },
+    { "startLine": 14, "startColumn": 24, "endLine": 14, "endColumn": 24, "tokenType": "method" },
     { "startLine": 6, "startColumn": 18, "endLine": 6, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 6, "startColumn": 14, "endLine": 6, "endColumn": 14, "tokenType": "property" },
     { "startLine": 7, "startColumn": 18, "endLine": 7, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 7, "startColumn": 14, "endLine": 7, "endColumn": 14, "tokenType": "property" },
-    { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 14, "startColumn": 11, "endLine": 14, "endColumn": 16, "tokenType": "method" },
-    { "startLine": 14, "startColumn": 26, "endLine": 14, "endColumn": 31, "tokenType": "method" },
-    { "startLine": 14, "startColumn": 24, "endLine": 14, "endColumn": 24, "tokenType": "method" }
+    { "startLine": 15, "startColumn": 1, "endLine": 15, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 15, "startColumn": 15, "endLine": 15, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 15, "startColumn": 19, "endLine": 15, "endColumn": 19, "tokenType": "property" },
+    { "startLine": 15, "startColumn": 24, "endLine": 15, "endColumn": 26, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 15, "startColumn": 28, "endLine": 15, "endColumn": 28, "tokenType": "property" }
   ]
 }
