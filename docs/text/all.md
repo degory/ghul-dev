@@ -15,9 +15,6 @@ only things dropped.
 - [overview](#index) - https://ghul.dev/
 - [getting started](#getting-started) - https://ghul.dev/getting-started
 - [language basics](#language-basics) - https://ghul.dev/language-basics
-- [syntax](#syntax) - https://ghul.dev/syntax
-- [definitions](#definitions) - https://ghul.dev/definitions
-- [expressions](#expressions) - https://ghul.dev/expressions
 - [control flow](#control-flow) - https://ghul.dev/control-flow
 - [optional types](#optional-types) - https://ghul.dev/optional-types
 - [expression oriented programming](#expression-oriented-programming) - https://ghul.dev/expression-oriented-programming
@@ -25,14 +22,17 @@ only things dropped.
 - [object oriented programming](#object-oriented-programming) - https://ghul.dev/object-oriented-programming
 - [generics](#generics) - https://ghul.dev/generics
 - [type inference](#type-inference) - https://ghul.dev/type-inference
-- [runtime library](#runtime-library) - https://ghul.dev/runtime-library
 - [.NET integration](#dotnet-integration) - https://ghul.dev/dotnet-integration
+- [runtime library](#runtime-library) - https://ghul.dev/runtime-library
 - [tooling](#tooling) - https://ghul.dev/tooling
+- [syntax](#syntax) - https://ghul.dev/syntax
+- [definitions](#definitions) - https://ghul.dev/definitions
+- [expressions](#expressions) - https://ghul.dev/expressions
 - [grammar](#grammar) - https://ghul.dev/grammar
-- [implementation](#implementation) - https://ghul.dev/implementation
 - [known issues](#known-issues) - https://ghul.dev/known-issues
-- [resources](#resources) - https://ghul.dev/resources
+- [implementation](#implementation) - https://ghul.dev/implementation
 - [history](#history) - https://ghul.dev/history
+- [resources](#resources) - https://ghul.dev/resources
 
 ---
 
@@ -1011,1349 +1011,6 @@ output:
 
 ```
 i = 10, s = Hello World!, thing.property = 20
-```
-
-
----
-
-<a id="syntax"></a>
-
-# syntax in ghūl
-
-## projects and files
-
-A ghūl project is composed of a set of ghūl source files. Source files should have a `.ghul` file extension, and must be UTF-8 text.
-
-Each source file can contain zero, one or more global definitions. Definitions can be in any order and in any file. Source files can have any name, provided they have a `.ghul` extension, and can be in any folder under the project root (subject to any source file glob pattern given in the `.ghulproj`)
-
-A file with no `namespace` can mix definitions with statements at the top level, so a whole program can read as a script with no explicit `entry` function. These are called [top-level statements](#top-level-statements).
-
-## tokens and trees
-
-Source files are translated into various kinds of tokens. Some tokens are a fixed sequence of characters (like the keyword `while`). Others are composed of characters according to various rules (identifiers, strings, numbers etc.)
-
-With a couple of exceptions, ghūl tokens are similar to most common programming languages. The exceptions are:
-
-### operators
-
-Operators are any contiguous string of operator characters. This is only significant in the rare case where running together the characters that comprise two different operators might not have the result you expect
-
-### escaped identifiers
-
-A leading backtick escapes a keyword or operator so it can be used as an ordinary identifier: `` `while`` is the identifier `while`, and `` `+`` is the identifier `+`. The backtick is not part of the escaped name, so escaping a name that is not a keyword, like `` `count``, means the same as plain `count`. A backtick is only meaningful immediately before an identifier, operator, or opening bracket; anywhere else it is a dangling-backtick error.
-
-
-## block structure
-
-ghūl is a [block structured programming language](https://en.wikipedia.org/wiki/Block_(programming)). Source code in ghūl is composed of blocks, typically many of them, with blocks nested inside other blocks.
-
-Blocks are delimited by keywords. The keywords that begin and end a block are specific to each different kind of block. This way of delimited blocks is descended from the ALGOL family of languages, most specifically from [ALGOL 68](https://en.wikipedia.org/wiki/ALGOL_68). It has the advantage of making the block structure clearer, both to someone reading the code and to the compiler.
-
-```ghul
-…
-if x > y then
-    write_line("x > y")
-else
-    write_line("x <= y")
-fi
-```
-
-output:
-
-```
-x <= y
-```
-
-In this example `then`, `else` and `fi` all delimit blocks. The blocks they delimit contain statement lists. 
-
-## semicolons
-
-Semicolons are required: to separate statements and definitions. 
-
-While the compiler _could_ still unambiguously parse correct programs without requiring semicolons anywhere, having them at the end expression statements makes it clearer to the parser if the expression is incomplete or not well formed.
-
-## definitions and statements
-
-Blocks in ghūl can contain definitions, statements, or a mix of both. Which is permitted in a given block depends on the type of block.
-
-## file structure
-
-At its top level a ghūl source file contains [definitions](https://ghul.dev/definitions.html) and `use` directives; a file with no `namespace` can also contain statements. There is no required ordering and no file header.
-
-```ghul
-use IO.Std.write_line;
-
-greet(name: string) is
-    write_line("hello, {name}");
-si
-
-greet("world");
-```
-
-output:
-
-```
-hello, world
-```
-
-The definitions in a file can be global functions, properties, classes, structs, traits, unions and enums, or `namespace` blocks that group definitions under a name. A definition is visible to the rest of the project regardless of which file it appears in, so how source is split across files is purely a matter of organisation.
-
-A file that declares any `namespace` must place all of its definitions inside namespaces. A file with no namespace at all has its definitions placed in a private namespace of their own, which is convenient for small programs and tests. Namespaces, `use` and symbol visibility are covered in full under [definitions](https://ghul.dev/definitions.html#namespaces).
-
-## top-level statements
-
-A file with no `namespace` can also have statements at its top level. They run in source order as the program's entry point, so a short program needs no `entry` function:
-
-```ghul
-use IO.Std.write_line;
-
-// in a file with no namespace, statements at the top level run in
-// order as the program's entry point
-write_line("first");
-write_line("second");
-
-// definitions in the same file are still visible, wherever they sit
-greet(name: string) is
-    write_line("hello, {name}");
-si
-
-greet("ghūl");
-```
-
-output:
-
-```
-first
-second
-hello, ghūl
-```
-
-Definitions in the same file are still hoisted, so a top-level statement can use a function or type declared anywhere in the file. Top-level statements and a `namespace` cannot appear in the same file.
-
-Otherwise, execution of a program begins at a function named `entry`.
-
-
----
-
-<a id="definitions"></a>
-
-# definitions
-
-## variables
-
-In ghūl local variables are introduced with the `let` keyword. A bare `let` is immutable: it takes an initializer, and reassigning the variable afterwards is rejected. The compiler infers the type from the initializer:
-
-```ghul
-let x = 10;
-```
-
-An explicit type can be given alongside the initializer. The initializer must be assignment compatible with the type:
-
-```ghul
-let x: int = 42;
-```
-
-The explicit type can be wider than the initializer expression:
-
-```ghul
-let o: object = "a string";
-```
-
-A trailing `mut` makes the variable reassignable, and then the initializer can be dropped for a deferred-init local that starts at its type's default value: `let total mut = 0` reassigns later, and `let result: int mut;` defaults to 0. Either form can also take its value from `_`, which initializes to the default of the type the context expects - `let x = _`, or `_[T]` to pin the type.
-
-Multiple variables can be defined in the same `let` statement, with each variable either taking its type from its initializer or given an explicit one:
-
-```ghul
-let
-    an_inferred_int = 123,
-    an_explicit_int: int = 456,
-    a_string = "hello";
-```
-
-The name `_` is a discard placeholder. It can stand in for any variable name, but the value that would be assigned to it is discarded. `_` is accepted in `let` definitions, tuple destructuring, anonymous function parameters, and `for` loop variables:
-
-```ghul
-…
-let _ = side_effect();
-let (_, _, third) = (1, 2, 3);
-let only_first = (x: int, _: int) => x;
-for _ in 1..10 do
-    counter = counter + 1;
-od
-```
-
-Variables can only be defined within functions, methods or property bodies. Variable names should be in `snake_case`
-
-## functions
-
-In ghūl functions consist of a name and a parenthesized formal arguments list, followed by an optional return type after `->` (omitting it makes the function `void`), and then either a return expression or a function body:
-
-```ghul
-sum_two_ints(i: int, j: int) -> int => i + j;
-
-sum_three_ints(i: int, j: int, k: int) -> int is
-    return i + j + k;
-si
-```
-
-`=>` introduces a single-expression body, while the `is` and `si` keywords are used to delimit block bodies. 
-
-Functions can only be defined at global scope. Functions can be generic, which will be covered later. Function names should be in `snake_case`
-
-## arguments
-
-Arguments consist of a name followed by a type. The type is mandatory as the compiler cannot infer types here.
-
-```ghul
-do_something(what: string, why: string, to: int);
-```
-
-## types
-
-### classes
-
-Classes consist of a name optionally followed by a superclass name and the types of any traits implemented, and then the class body. The class body is delimited by keywords `is` and `si`:
-```ghul
-class THING is
-    // class body
-si
-```
-
-A class defines a new reference type, instances of which are assignment compatible with its superclass type and any traits it implements.
-
-Instances of classes are created via a constructor expression, which consists of a type expression followed by a parenthesis delimited list of actual constructor arguments. For a class, the type expression is the class name, qualified with any namespaces if needed:
-```ghul
-…
-let a_thing = THING();
-```
-
-A class can also declare its constructor parameters directly in the header. Each parameter becomes a parameter of the synthesised constructor, and an auto-generated same-named field or property holds the supplied value:
-```ghul
-class POINT(x: int, y: int) is
-si
-```
-
-The two forms are equivalent. The primary form is the shorter shape when every field is initialized from a constructor argument; the classic form is the better fit when the body owns extra fields or properties beyond what the constructor takes. See [constructors](#constructors) for the rest of the primary-constructor surface area.
-
-Two postfix modifiers shape the hierarchy. Without `open`, a class can be subclassed only within the assembly that declares it; `open` opts in to cross-assembly subclassing. `abstract` bars direct construction, so only subclasses exist at runtime, and a class is implicitly abstract when it declares a body-less instance method, since that method is a contract for subclasses to satisfy. The closure feeds [type narrowing](https://ghul.dev/control-flow.html#type-narrowing): on the `else` edge of an `isa` test the compiler can rule the tested subclass out, and an `abstract` root can leave a single remaining subclass.
-
-Classes can only be defined at global scope. Classes can be generic, which will be covered later. Concrete class names should be in `MACRO_CASE`. Abstract class names should be in `PascalCase`.
-
-### structs
-
-Structs consist of a name, then the types of any traits implemented, and then the struct body again enclosed in `is` / `si`. A struct can also use the primary-constructor header form:
-```ghul
-struct POINT(x: double, y: double) is
-si
-```
-
-Structs are constructed the same way as classes, with a constructor expression:
-```ghul
-…
-let origin = POINT(0.0D, 0.0D);
-
-// or up, or down, or even left, depending on
-// your co-ordinate system!
-let right = POINT(1.0D, 0.0D);
-```
-
-A struct defines a new value type, which means any values that the struct encapsulates are collected together as a new kind of value: assigning a struct copies all the encapsulated values, so the copy and the original then go their separate ways:
-```ghul
-…
-struct COUNTER is
-    _n: int field;
-
-    init(n: int) is _n = n; si
-
-    bump() is _n = _n + 1; si
-
-    value: int => _n;
-si
-
-let original = COUNTER(0);
-let copy mut = original;
-
-copy.bump();
-
-write_line("original {original.value}, copy {copy.value}");
-```
-
-output:
-
-```
-original 0, copy 1
-```
-
-A struct has no equality of its own, so `==` does not apply to one; giving a struct an equality means defining `=~`, described under [defining operators](#operators) and, for the .NET side of it, under [making your own types work with .NET](https://ghul.dev/dotnet-integration.html#equality).
-
-Structs can only be defined at global scope. Structs can be generic, which will be covered later. Struct names should be in `MACRO_CASE`.
-
-### traits
-
-A trait consists of a name, the types of any parent traits that must also be implemented, and then the trait body:
-
-```ghul
-trait Printable is
-    print();
-si
-```
-
-Traits are similar to interfaces in other languages. Trait methods and properties without a default implementation must be implemented by any class, struct, or union that declares the trait:
-```ghul
-…
-class BOOK(title: string, author: string): Printable is
-    print() is
-        write_line("Title: {title}, Author: {author}");
-    si
-si
-```
-
-A trait method or property can provide a default body. Implementing classes inherit the default and only need to override it to change the behaviour:
-
-```ghul
-…
-trait Logged is
-    log(message: string) is
-        // the default body writes the message with a [log] prefix
-        write_line("[log] {message}");
-    si
-si
-
-class PLAIN(): Logged is
-    // no override - uses the trait default
-si
-
-class LOUD(): Logged is
-    // override the default, while still calling through to it with super
-    log(message: string) is
-        super.log(message.to_upper());
-    si
-si
-
-PLAIN().log("hello");
-LOUD().log("hello");
-```
-
-output:
-
-```
-[log] hello
-[log] HELLO
-```
-
-A class override can call the trait's default with `super.method()`.
-
-Traits can only be defined at global scope. Trait methods and properties can be abstract or have a default implementation. Trait names should be in `PascalCase`.
-
-### unions
-
-A union consists of a name and then a union body, which contains one or more variants. Each variant has a name, and then an optional list of fields:
-```ghul
-union Tree is
-    NODE(left: Tree, right: Tree);
-    LEAF(value: int);
-si
-```
-Unions are a reference type. A reference of union type can point to only one variant at a time. To discover which variant a union currently holds, test it with `isa Variant(value)`:
-
-```ghul
-…
-let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));
-let leaf = Tree.LEAF(123);
-
-if isa Tree.NODE( ► tree) then
-    write_line("have tree node");
-elif isa Tree.LEAF( ► tree) then
-    write_line("have tree leaf");
-fi
-```
-
-output:
-
-```
-have tree node
-```
-
-`isa Variant(value)` does two things at once: it tests the variant, and within the then-branch it narrows the value to that variant, so the variant's own fields are accessible directly:
-
-```ghul
-if isa Tree.NODE(tree) then
-    write_line(
-        "left {tree.left}, right {tree.right}"
-    );
-elif isa Tree.LEAF(tree) then
-    write_line("leaf value {tree.value}");
-fi
-```
-
-Unions support structural equality through the `=~` operator. Two union references compare equal when they hold the same variant with member-wise equal fields:
-
-```ghul
-…
-let leaf1 = Tree.LEAF(123);
-let leaf2 = Tree.LEAF(123);
-let leaf3 = Tree.LEAF(456);
-
-assert leaf1 =~ leaf2;
-assert !(leaf1 =~ leaf3);
-```
-
-A variant with no fields is a *unit variant*: it is referenced by name without parentheses, and interned to one shared value per generic instantiation. A union with a single field-carrying variant, or one variant marked `default`, is option-shaped, so `u?` tests whether that variant is present and `u!` unwraps its value:
-
-```ghul
-…
-let c = Color.RED;                   // unit variant, referenced without parentheses
-write_line("red: {c =~ Color.RED}"); // true
-
-let r = lookup();
-write_line("present: {r?}");         // true - r holds the default OK variant
-write_line("value: {r!}");           // 42 - unwraps the OK payload
-```
-
-output:
-
-```
-red: True
-present: True
-value: 42
-```
-
-A union can declare a primary-constructor header for state shared across every variant. Each variant splices the shared parameters into its field list with `..`, and a variant with no extra fields drops the list entirely. A union can also implement traits after its header, with each trait member satisfied by a default or by a property the union supplies:
-
-```ghul
-…
-let t = Token.IDENTIFIER("count", "identifier");
-write_line(t.name);    // identifier - shared primary-header field
-write_line(t.label()); // [identifier] - inherited trait default
-```
-
-output:
-
-```
-identifier
-[identifier]
-```
-
-Unions can only be defined at global scope. Union names should be in `PascalCase` and variant names should be in `MACRO_CASE`
-
-### enums
-
-An enum consists of a name and then an enum body, which contains one or more elements. Each element has a name and an optional constant integer value
-
-```ghul
-enum Suits is
-    SPADES,
-    HEARTS,
-    DIAMONDS,
-    CLUBS
-si
-```
-
-Enums can only be defined at global scope. An enum type name should be in `PascalCase`, and its members in `MACRO_CASE`
-
-### partial and impl blocks
-
-Members can be added to a class, struct, or union already declared in the same assembly from a separate block, even in another file. The added members are ordinary members of the target, with the same private access and virtual dispatch as members written in its own body. A `partial` block names the type and adds to it; for a union, whose body holds only variants, it is the only way to give the type methods:
-
-```ghul
-…
-union Shape is
-    CIRCLE(radius: int);
-    SQUARE(side: int);
-si
-
-partial Shape is
-    describe() -> string =>
-        case self
-        when c: CIRCLE then "circle r={c.radius}"
-        when s: SQUARE then "square s={s.side}"
-        esac;
-si
-
-let s: Shape = Shape.SQUARE(4);
-write_line(s.describe());
-```
-
-output:
-
-```
-square s=4
-```
-
-An `impl Trait for Type` block additionally makes the target implement a trait, so a type can satisfy a trait without naming it in its header. The trait's type arguments are written on the target after `for`, and inside the body `self` has the concrete target type, so a union's variants can be matched directly:
-
-```ghul
-…
-union List is
-    NIL;
-    CONS(head: int, tail: List);
-si
-
-impl Printer for List is
-    print() -> string =>
-        if let (head, tail): CONS = ► self then "{head} {tail.print()}"
-        else "nil"
-        fi;
-si
-
-let xs: Printer = List.CONS(1, List.CONS(2, List.NIL));
-write_line(xs.print());
-```
-
-output:
-
-```
-1 2 nil
-```
-
-The target can be a qualified name, including a single union variant (`impl Printer for List.NIL`). The interface must be a trait, and the target a type declared in the same assembly; an imported type cannot be reopened.
-
-## properties
-
-A property consists of the property name followed by the property's type and, optionally, bodies for getter and setter methods.
-
-```ghul
-class COUNTER is
-    count: int;
-si
-
-class SIZED is
-    _size: int;
-
-    size: int => _size,
-        = new_size is
-            assert new_size > 0;
-
-            _size = new_size;
-        si
-si
-```
-
-Public properties with no getter or setter are automatically backed by a hidden field. Private properties with no getter or setter are implemented as a plain field.
-
-Properties can be defined globally and within classes, structs and traits. Property names should be in `snake_case`.
-
-## methods
-
-Methods are syntactically the same as functions, except they are defined within classes, structs or traits.
-
-```ghul
-class SCALER is
-    _scale: double;
-
-    scale(value: double) -> double => value * _scale;
-si
-```
-
-A method or function can take a postfix `pure` modifier, which asserts that it only reads and never writes to the heap. The compiler already infers this for many functions; the modifier states it for one the compiler can't prove, and then callers keep [type narrowing](https://ghul.dev/control-flow.html#type-narrowing) facts across a call to it. Every override of a pure member must itself be pure:
-
-```ghul
-…
-// a pure method only reads: callers keep narrowing facts across a call to it
-doubled() -> int pure => _count * 2;
-…
-```
-
-output:
-
-```
-42
-```
-
-As with functions, methods should be named in `snake_case`
-
-## operators
-
-An operator is a function or method whose name is an operator symbol rather than a word; there is no `operator` keyword. As an instance method the receiver is the left operand, so a binary operator takes a single parameter for the right operand:
-
-```ghul
-…
-class VECTOR is
-    x: int;
-    y: int;
-
-    init(x: int, y: int) is
-        self.x = x;
-        self.y = y;
-    si
-
-    // a binary operator as an instance method takes one parameter, the right operand:
-    +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y);
-si
-
-let sum = VECTOR(1, 2) + VECTOR(3, 4);
-write_line("({sum.x}, {sum.y})");
-```
-
-output:
-
-```
-(4, 6)
-```
-
-Written as a global function or a `static` member instead, an operator takes both operands as parameters: `+(a: VECTOR, b: VECTOR) -> VECTOR`. A prefix operator is always a one-parameter function, defined globally or in the operand's type.
-
-Every operator has a precedence taken from its first character, so an operator starting with `*` binds tighter than one starting with `+`, with no declaration needed. The `@precedence` pragma places an operator in a specific band when the default doesn't suit it.
-
-The comparison operators come from two backing operators. Define `<>`, a three-way ordering that returns a negative, zero, or positive `int`, and `<`, `<=`, `>`, and `>=` follow from it; define `=~`, an equality returning `bool`, and `!~` follows as its negation:
-
-```ghul
-…
-// three-way ordering returning int; '<', '<=', '>', '>=' all derive from it:
-<>(other: BOX) -> int => value - other.value;
-…
-```
-
-Operators can be defined globally, or as members of classes, structs and traits. An operator name is any run of symbol characters, such as `+`, `**`, `##`, or `∩`.
-
-## constructors
-
-In ghūl methods named `init` are constructors. When an object is constructed using a constructor expression, the corresponding `init` method overload will be called based on the actual argument types:
-
-```ghul
-class COUNTER is
-    count: int;
-
-    init() is
-        count = 0;
-    si
-
-    init(initial_count: int) is
-        count = initial_count;
-    si
-si
-…
-// calls the parameterless overload of init()
-let c = COUNTER();
-
-// calls init(initial_count: int)
-let d = COUNTER(50);
-```
-
-Constructors can be defined in classes and structs.
-
-### primary constructors
-
-When the constructor only assigns its arguments to same-named fields, the class or struct header can declare those parameters directly. The compiler synthesises the matching `init` and a same-named field or property for each parameter:
-
-```ghul
-…
-class PERSON(name: string, age: int) is
-    describe() is
-        write_line("{name} is {age} years old");
-    si
-si
-
-PERSON("alice", 30).describe();
-```
-
-output:
-
-```
-alice is 30 years old
-```
-
-A trailing modifier on a primary parameter overrides the default visibility:
-
-- `x: int public` - public read and write.
-- `x: int field` - plain field rather than the default auto-property.
-- `_x: int` - private field, named `_x`.
-- `x: int init` - no field is generated; `x` is in scope only inside `init`.
-
-A body field or property declaration with a name matching the parameter (under the same `_x`/`x` rule) overrides auto-generation and receives the auto-init copy. This is also how to rename the underlying storage without using the modifier suffix:
-
-```ghul
-…
-class POINT(x: int, y: int) is
-    // capture the primary parameters as renamed private fields
-    _x;
-    _y;
-
-    show() is
-        write_line("({_x}, {_y})");
-    si
-si
-
-class BOX(width: int public, height: int field, _depth: int) is
-    // width is a public read-write property
-    // height is a plain field
-    // _depth is a private field
-si
-
-POINT(10, 20).show();
-```
-
-output:
-
-```
-(10, 20)
-```
-
-A class with a primary header can also include a `super(...)` body declaration that forwards expressions to its superclass `init`, and secondary `init(.., extras)` overloads. The `..` splice expands to the primary parameters; an implicit chain to the primary `init` runs before the secondary's body:
-
-```ghul
-…
-class DOG(name: string, breed: string): ANIMAL is
-    // forward name to the superclass; the local DOG keeps breed as a field
-    super(name);
-
-    init(.., trick: string) is
-        // .. expands to (name, breed); the primary init has already run
-        write_line("{name} the {breed} can {trick}");
-    si
-si
-
-DOG("rex", "labrador", "sit");
-```
-
-output:
-
-```
-rex the labrador can sit
-```
-
-A primary-constructor class or struct also gets a synthesised `deconstruct` built from its public-readable parameters, so `let (x, y) = POINT(3, 4)` destructures without writing one out.
-
-A class or struct with a primary header and no body declarations can end with a terminating `;` instead of `is ... si`:
-
-```ghul
-// a primary header with no body declarations:
-class POINT(x: int, y: int);
-
-// is equivalent to an explicit empty 'is' / 'si' body:
-class VECTOR(dx: int, dy: int) is
-si
-```
-
-The classic form is the better fit when the body owns extra fields or properties beyond what the primary parameters cover.
-
-## namespaces
-
-Namespaces are introduced with the `namespace` keyword followed by the namespace name and then the namespace body.
-
-```ghul
-namespace Example is
-    ...
-si
-```
-
-Namespaces can be nested inside other namespaces
-```ghul
-namespace Outer is
-    namespace Inner is
-        do_something() is
-            IO.Std.write_line("did something");
-        si
-    si
-si
-…
-Outer.Inner.do_something();
-…
-```
-
-output:
-
-```
-did something
-```
-
-A dotted namespace name is shorthand for nesting namespaces
-
-```ghul
-namespace Outer.Inner is
-    do_something() is
-        IO.Std.write_line("did something");
-    si
-si
-…
-Outer.Inner.do_something();
-…
-```
-
-output:
-
-```
-did something
-```
-
-### namespace aggregation
-
-A namespace definition is an instance of that namespace. Namespace instances are aggregated across all source files to form a single namespace scope. This means that all definitions within a namespace instance are visible unqualified within all other instances of that namespace in all source files:
-
-`source-file-1.ghul`:
-```ghul
-namespace Example is
-    // this definition of Test is visible unqualified
-    // throughout the Example namespace:
-    trait Test is
-        run();
-    si
-si
-…
-```
-
-`source-file-2.ghul`:
-```ghul
-…
-// class TEST can implement the Test trait without having
-// to qualify the name Test:
-class TEST: Test is
-    run() is si
-si
-…
-```
-
-### definitions outside any namespace
-
-If a source file contains no namespaces, then all definitions in the file are placed in a compiler generated namespace that is private to that source file, and the file can have [top-level statements](https://ghul.dev/syntax.html#top-level-statements) that run as the program's entry point. This is useful for examples and tests:
-
-```ghul
-// the compiler places this in an auto-generated
-// namespace private to this source file
-IO.Std.write_line("Hello, world!");
-```
-
-output:
-
-```
-Hello, world!
-```
-For definitions to be visible from other files, they must be placed in an explicitly declared namespace.
-
-### namespace usage consistency
-
-If a source file contains any explicitly declared namespaces, then all definitions in that file must be within a namespace. Bare definitions outside of namespaces are not allowed in files with namespace declarations:
-
-```ghul
-…
-namespace Example is
-    entry() is
-        IO.Std.write_line("hello from a namespace");
-    si
-si
-…
-greet() is
-    IO.Std.write_line("not in a namespace");
-si
-```
-
-diagnostics:
-
-- error: cannot mix global definitions and namespaces in the same file
-
-## importing symbols with `use`
-Symbols can be brought into the current namespace instance's scope using the use keyword. Imported symbols can then be used without qualification:
-
-```ghul
-use Example.TEST;
-
-...
-
-let t = TEST();
-```
-
-`use` applied to a namespace imports all symbols from that namespace:
-```ghul
-use Example; // imports Example.TEST and Example.Test
-
-...
-
-let t: Test;
-```
-
-Note that `use` only applies within the current `namespace` definition. It does not import a symbol into all instances of the current namespace:
-
-```ghul
-…
-namespace UseExample is
-    use Example;
-
-    class ANOTHER_TEST: Test is
-        run() is si
-    si
-si
-
-namespace UseExample is
-    // Test still needs qualification here
-    class YET_ANOTHER_TEST: Example.Test is
-        run() is si
-    si
-si
-…
-```
-
-## visibility of symbols
-
-In ghūl, the visibility of symbols outside their defining scope is managed by a naming convention which is partially enforced by the compiler. The compiler also warns when a declaration's name doesn't match the convention for its kind - `non-snake-case-name`, `non-pascal-case-name`, or `non-upper-snake-case-name` - each suppressible per declaration, per file, or project-wide. A class with only `static` members is a utility container that is never constructed, and accepts either `PascalCase` or `MACRO_CASE`.
-
-### global symbols
-
-Classes, structs, traits, unions, global functions and global properties are accessible from any namespace. Prefixing their names with `_` indicates they are intended to be private, but this is not enforced by the compiler:
-```ghul
-class PUBLIC is
-si
-
-public_function() -> int => 0;
-
-public_property: int;
-
-class _PRIVATE is
-si
-
-_private_function() -> int => 0;
-
-_private_property: int;
-```
-
-### methods
-
-Methods are public by default. To make a method protected, prefix its name with an underscore `_`:
-```ghul
-class THING is
-    do_something_public() is
-    si
-
-    _do_something_protected() is
-    si
-si
-```
-Protected access to methods _is_ enforced by the compiler
-
-
-### properties
-Properties are public read, protected write, unless they start with `_`, in which case they are protected read and write:
-```ghul
-…
-struct VALUE is
-    public_property: int;
-
-    _protected_property: string;
-
-    init(value: int) is
-        public_property = value;
-        _protected_property = "value is {value}";
-    si
-si
-…
-let v = VALUE(1234);
-
-// OK: public_property is publicly readable
-write_line(v.public_property);
-
-write_line(v._protected_property);
-
-v.public_property = 5678;
-```
-
-diagnostics:
-
-- error: _protected_property: string is not accessible here
-- error: VALUE.public_property: int is not publicly assignable
-
-### planned changes
-Protected access will become private in a future release: derived types should not rely on reading or writing members with `_` prefixed names
-
-
----
-
-<a id="expressions"></a>
-
-# expressions
-
-Expressions in ghūl are constructs that evaluate to a value. They can be used to perform calculations, make comparisons, and combine values in various ways.
-
-## literals
-
-### integers
-
-Integer literals consist of an optional radix (base), followed by a sequence of digits with optional underscores for readability, followed by a dot and a decimal fraction and/or exponent (for floating point numbers) and finally a type suffix.
-
-```ghul
-let i = 12_345_678; // int
-let hex = 0x1234_ABCD; // int
-let long = 1_000_000_000_000_000L; // long
-
-let hex_unsigned_long = 0x1234_5678__9ABC_DEF0_UL; // ulong
-
-let b = 99b; // byte
-```
-
-### char
-```ghul
-let c = 'c';
-let u_macron = 'ū'
-```
-
-### floating point
-```ghul
-let s = 123.456; // single
-let t = 123.456E5; // single
-
-let d = 123.456D; // double
-let e = 123_456_789_000.0D // double
-```
-
-### string
-```ghul
-let hello_world = "Hello World!";
-let unicode = "ghūl programming language"
-```
-
-### array
-Array literals are constructed from a comma separated list of element values enclosed in `[` and `]`. The array element type is inferred as the most specific type compatible with all elements (which may be `object` if no more specific ancestor type exists). The resulting array type is `E[]` where `E` is the inferred element type. 
-
-```ghul
-let animals = ["frog", "bat", "elephant"]; // string[]
-let things = ["frog", 1234, 12.5]; // object[]
-let lists = [[1, 2], [3, 4], [5, 6], [7, 7]]; // int[][]
-```
-
-### tuple
-
-Tuple literals are constructed from a comma separated list of elements enclosed in `(` and `)`. Each element can be a bare value or a named value, and each element can optionally specify a type. Where explicit types are omitted, element types will be inferred.
-
-```ghul
-let path_with_id = (path = "/tmp/my-file.txt", id = 1234);
-
-let path = path_with_id.path;
-let id = path_with_id.id;
-```
-
-If tuple elements are not explicitly named, they are assigned names consisting of a back-tick followed by an index
-
-```ghul
-let things = ("thing", 12.34);
-
-let name = things.`0;
-let weight = things.`1;
-```
-
-### function
-
-Function literals are constructed from an parenthesized argument list, a return type, and a return expression or a function body. If there is only one argument, no parentheses are needed.
-
-#### expression body function literal
-
-```ghul
-let simple_add = (x: int, y: int) -> int => x + y;
-```
-
-#### block body function literal
-
-```ghul
-let complex_add = (x: int, y: int) -> int is
-    let result = x + y;
-    return result;
-si;
-```
-
-#### type inference
-
-Return type can usually be omitted provided it can be inferred from the type of the expression body or any values returned from the block body
-
-```ghul
-let simple_add = (x: int, y: int) => x + y;
-
-let complex_add = (x: int, y: int) is
-    let result = x + y;
-    return result;
-si;
-```
-
-Argument types usually can be inferred if the function literal is being passed into a function.
-
-```ghul
-let list = [1, 2, 3, 4, 5];
-
-list | .filter(element => element < 3);
-```
-
-#### capturing and closure
-
-A function literal can refer to identifiers from its surrounding lexical scope; those references form its closure:
-
-```ghul
-…
-// Define a list to hold the closures:
-let closure_list = LIST();
-
-// Iterate over an integer range:
-for i in 1::10 do
-    // Create a closure capturing i's current value
-    let closure = () => i;
-
-    // Add the closure to the list:
-    closure_list.add(closure);
-od
-
-// Each closure captured the value of i at the
-// time of its creation:
-for closure in closure_list do
-    write_line("Closure captured value: {closure()}");
-od
-```
-
-output:
-
-```
-Closure captured value: 1
-Closure captured value: 2
-Closure captured value: 3
-Closure captured value: 4
-Closure captured value: 5
-Closure captured value: 6
-Closure captured value: 7
-Closure captured value: 8
-Closure captured value: 9
-Closure captured value: 10
-```
-
-An immutable `let` is captured by value, a snapshot taken when the function literal is constructed. A `let mut` is captured by reference instead, so the function literal and the surrounding scope share one live variable that either can read or reassign:
-
-```ghul
-…
-let counter mut = 0;
-
-let bump = (n: int) is
-    counter = counter + n;
-si;
-
-let peek = () -> int => counter;
-
-bump(10);
-bump(5);
-
-write_line("counter = {counter}, peek() = {peek()}");
-```
-
-output:
-
-```
-counter = 15, peek() = 15
-```
-
-## arithmetic
-
-Arithmetic expressions allow you to perform mathematical calculations using operators such as `+`, `-`, `*`, `/`, and `%`.
-
-```ghul
-let sum = 10 + 5;           // Addition
-let difference = 10 - 5;    // Subtraction
-let product = 10 * 5;       // Multiplication
-let quotient = 10 / 5;      // Division
-let remainder = 10 % 3;     // Modulo (remainder)
-```
-
-## comparison
-
-Comparison expressions allow you to compare values using operators such as `==`, `!=`, `<`, `>`, `<=`, and `>=`.
-
-```ghul
-let equal = 5 == 5; // Equality
-let not_equal = 5 != 10; // Inequality
-let less_than = 5 < 10; // Less than
-let greater_than = 10 > 5; // Greater than
-let less_than_or_equal = 5 <= 5; // Less or equal
-let greater_than_or_equal = 10 >= 10; // Greater or equal
-```
-
-## short circuit logical
-
-Logical expressions allow you to combine or negate boolean values using the `/\` (logical AND), `\/` (logical OR), and `!` (logical NOT) operators.
-
-```ghul
-let logical_and = true /\ false;    // Logical AND
-let logical_or = true \/ false;     // Logical OR
-let logical_not = !true;            // Logical NOT
-```
-
-Evaluation stops as soon as the result is known
-
-## conditional
-
-Conditional expressions allow you to evaluate different expressions based on a condition using the `if`-`then`-`else` construct.
-
-```ghul
-…
-let max = if a > b then a else b fi;
-```
-
-## case expression
-
-A `case` expression yields the value of the matched arm. It needs an `else` arm so that every value is covered; the arm values and the `else` agree on a type:
-
-```ghul
-…
-let n = 2;
-
-let size =
-    case n
-    when 0 then "none"
-    when 1, 2, 3 then "small"
-    else "large"
-    esac;
-
-write_line("size = {size}");
-```
-
-output:
-
-```
-size = small
-```
-
-## function call
-
-Function call expressions allow you to invoke functions and methods by providing the necessary arguments.
-
-```ghul
-…
-let result = sum(10, 5);
-```
-
-## thread-first calls
-
-The `|>` operator threads its left side into the call on its right as that call's first argument, so `x |> f(a)` means `f(x, a)`. Chaining is left-to-right, which turns a nest of calls inside-out into a readable pipeline:
-
-```ghul
-use IO.Std.write_line;
-
-class BOX(value: int);
-
-twice(x: int) -> int => x * 2;
-describe(b: BOX) -> string => "box of {b.value}";
-
-// '|>' threads its left side in as the first argument of the call on
-// its right, so a chain reads left-to-right instead of nesting
-// inside-out. This line means write_line(describe(BOX(twice(21)))).
-21 |> twice() |> BOX() |> describe() |> write_line();
-```
-
-output:
-
-```
-box of 42
-```
-
-The right side must be call-shaped: a free function, a constructor, or a method call on a receiver. The left side always becomes the first argument; the call is otherwise resolved exactly as if it had been written without the `|>`. This is separate from the `|` [pipe](https://ghul.dev/functional-programming.html) operator, which wraps a sequence for lazy `map` and `filter`; `|>` performs an ordinary call.
-
-## property access
-
-Property access expressions allow you to access the properties of an object using the dot notation.
-
-```ghul
-let length = "Hello".length;
-```
-
-## indexer
-
-Indexer expressions allow you to access elements of an array or collection using square brackets.
-
-```ghul
-let first_element = [1, 2, 3][0];
-```
-
-## constructor
-
-Constructor expressions allow you to create new instances of classes or structs by invoking their constructors.
-
-```ghul
-…
-let point = POINT(10, 20);
-```
-
-## type cast
-
-Type cast expressions allow you to explicitly convert a value from one type to another using the `cast` keyword.
-
-```ghul
-let integer_value = cast int(3.14);
-```
-
-## default value (`_`)
-
-The `_` expression evaluates to the default value of a type: `null` for reference types, the zero value for numeric and other value types.
-
-`_[T]` pins the type explicitly. A bare `_` takes its type from the surrounding context: a typed `let`, an assignment, or a return:
-
-```ghul
-let a = _[int];   // 0
-let b: string? = _;   // null
-…
-zero[T]() -> T => _;
-```
-
-`let a = _` initialises a local to its type's default value, where the type is inferred from how the local is later used.
-
-## let in
-
-A `let ... in ...` expression introduces one or more local variables that are in scope only within the trailing expression.
-
-```ghul
-…
-let area = let r = 5 in r * r;
-
-write_line("area = {area}");
-```
-
-output:
-
-```
-area = 25
-```
-
-## block
-
-A `val ... lav` block is a sequence of statements that produces a value. The value is the block's tail expression, or any `return E` whose target is the block. A block gives an expression room for intermediate local variables, loops, and early exits:
-
-```ghul
-…
-let area = val
-    let width = 4;
-    let height = 5;
-    width * height
-lav;
-
-write_line("area = {area}");
-```
-
-output:
-
-```
-area = 20
-```
-
-A `return E` inside a `val ... lav` block yields from the block, not from the enclosing function.
-
-These are the main types of expressions in ghūl. They can be combined and nested to form more complex expressions and statements:
-
-
-```ghul
-let x = 10;
-let y = 5;
-let sum = x + y;
-let product = x * y;
-let is_greater = x > y;
-
-if is_greater then
-    IO.Std.write_line("x is greater than y");
-else
-    IO.Std.write_line("x is not greater than y");
-fi
-
-let numbers = [1, 2, 3, 4, 5];
-let first_number = numbers[0];
-
-IO.Std.write_line(
-    "The first number is: {first_number}"
-);
-```
-
-output:
-
-```
-x is greater than y
-The first number is: 1
 ```
 
 
@@ -5610,6 +4267,302 @@ let a = merge(CAT(), DOG());
 
 ---
 
+<a id="dotnet-integration"></a>
+
+# .NET integration
+
+ghūl is hosted on and targets .NET 10 and can consume most types in .NET assemblies built with C#.
+
+## projects
+
+The ghūl compiler is driven by MSBuild and uses the .NET SDK targets for most of the build process. Provided you reference the ghūl runtime library package, things should work as you'd expect for any other .NET SDK project. You can add package references, build assemblies and pack NuGet packages etc. all using the normal `dotnet` command line tools.
+
+## name mangling
+When consuming C# code the ghūl compiler transforms symbol names to better match ghūl conventions:
+
+- Class, struct and trait (=interface) names are left unchanged
+- Any generic type argument count suffix is left as-is (for example ``KeyValuePair`2``)
+- Enum names and enum member names are transformed to `MACRO_CASE`
+- Method, property and field names are transformed to `snake_case`
+- Names that conflict with ghūl keywords are prefixed with `` ` ``
+
+## namespace and type name re-mapping
+Some commonly used namespace and type names are re-mapped in line with ghūl conventions
+
+### namespaces
+- `System.Collections.Generic` is mapped to `Collections`
+- `System.IO` is mapped to `IO`
+
+### framework and collection types
+
+| Original Type                                        | Mapped Type                         |
+|------------------------------------------------------|-------------------------------------|
+| `System.IDisposable`                                 | `Ghul.Disposable`                   |
+| `System.Console`                                     | `IO.Std`                            |
+| `System.Collections.IEnumerable`                     | `Collections.NonGenericIterable`    |
+| `System.Collections.Generic.IReadOnlyCollection`     | `Collections.Bag`                   |
+| `System.Collections.Generic.ICollection`             | `Collections.MutableBag`            |
+| `System.Collections.IEnumerator`                     | `Collections.MoveNext`              |
+| `System.Collections.Generic.IEnumerable`             | `Collections.Iterable`              |
+| `System.Collections.Generic.IEnumerator`             | `Collections.Iterator`              |
+| `System.Collections.Generic.IReadOnlyList`           | `Collections.List`                  |
+| `System.Collections.Generic.IList`                   | `Collections.MutableList`           |
+| `System.Collections.Generic.List`                    | `Collections.LIST`                  |
+| `System.Collections.Generic.IReadOnlyDictionary`     | `Collections.Map`                   |
+| `System.Collections.Generic.IDictionary`             | `Collections.MutableMap`            |
+| `System.Collections.Generic.Dictionary`              | `Collections.MAP`                   |
+| `System.Collections.Generic.HashSet`                 | `Collections.SET`                   |
+| `System.Collections.Generic.Stack`                   | `Collections.STACK`                 |
+| `System.Threading.Tasks.Task`                        | `Tasks.TASK`                        |
+| `System.Threading.Tasks.Task<T>`                     | `Tasks.TASK[T]`                     |
+
+### primitive types
+
+| Original Type     | Mapped Type          |
+|-------------------|----------------------|
+| `System.Void`     | `Ghul.void`          |
+| `System.Boolean`  | `Ghul.bool`          |
+| `System.Char`     | `Ghul.char`          |
+| `System.Byte`     | `Ghul.ubyte`         |
+| `System.SByte`    | `Ghul.byte`          |
+| `System.UInt16`   | `Ghul.ushort`        |
+| `System.Int16`    | `Ghul.short`         |
+| `System.UInt32`   | `Ghul.uint`          |
+| `System.Int32`    | `Ghul.int`           |
+| `System.UInt64`   | `Ghul.ulong`         |
+| `System.Int64`    | `Ghul.long`          |
+| `System.UIntPtr`  | `Ghul.uword`         |
+| `System.IntPtr`   | `Ghul.word`          |
+| `System.Single`   | `Ghul.single`        |
+| `System.Double`   | `Ghul.double`        |
+| `System.Decimal`  | `Ghul.decimal`       |
+| `System.Object`   | `Ghul.object`        |
+| `System.String`   | `Ghul.string`        |
+
+## making your own types work with .NET
+
+The mappings above are about reaching into .NET. This section is the other direction: what a ghūl type has to provide before .NET libraries treat it as a first-class value rather than as an opaque object. In each case the language already has the operator or member; the point is which one .NET is looking for.
+
+### equality
+
+.NET consults a type's equality when it goes looking for a value: a dictionary key, a set member, `contains` on a list. A type defines that with `=~`, which is emitted as .NET's `Equals`. But defining `=~` alone is not enough, because a hash-based collection consults the hash first and never reaches the comparison. Define `get_hash_code` alongside it, and the two together produce the `Object.Equals` override that .NET actually uses:
+
+```ghul
+…
+class WITH_HASH(x: int) is
+    =~(other: WITH_HASH) -> bool => x == other.x;
+
+    get_hash_code() -> int => x.get_hash_code();
+si
+
+// only =~, so .NET keeps comparing by identity:
+class NO_HASH(x: int) is
+    =~(other: NO_HASH) -> bool => x == other.x;
+si
+
+let with_hash = SET[WITH_HASH]();
+with_hash.add(WITH_HASH(1));
+write_line("with get_hash_code: {with_hash.contains(WITH_HASH(1))}");
+
+let no_hash = SET[NO_HASH]();
+no_hash.add(NO_HASH(1));
+write_line("without get_hash_code: {no_hash.contains(NO_HASH(1))}");
+```
+
+diagnostics:
+
+- warning: [equality-without-hash] NO_HASH defines =~ but no get_hash_code, so .NET comparisons will not use the operator
+
+output:
+
+```
+with get_hash_code: True
+without get_hash_code: False
+```
+
+`System.HashCode.combine` is the usual way to build the hash from the same members `=~` reads.
+
+The hash is not generated for you, because an operator is free to ignore members it does not care about, and a member-wise hash would then disagree with it. A type that defines neither is consistent as it stands, comparing and hashing by identity, so a type that defines only `=~` is reported as `equality-without-hash` and left alone rather than half-converted.
+
+A value type hides this for a while: .NET's default equality for a struct is member-wise, so a struct that skips `get_hash_code` often behaves correctly by coincidence and then diverges the moment its `=~` stops agreeing with a member-wise comparison. The warning fires either way, and is worth heeding either way.
+
+### ordering
+
+Sorting, `Ghul.Comparable[T]`, and the relational operators all come from `<>`, a three-way ordering returning a negative, zero, or positive `int`. Defining it gives a type `<`, `<=`, `>` and `>=` and makes it sortable by .NET at the same time:
+
+```ghul
+…
+class VERSION(major: int, minor: int): Ghul.Comparable[VERSION] is
+    <>(other: VERSION) -> int =>
+        if major != other.major then major - other.major else minor - other.minor fi;
+
+    to_string() -> string => "{major}.{minor}";
+si
+
+let versions = LIST[VERSION]();
+versions.add(VERSION(2, 1));
+versions.add(VERSION(1, 9));
+versions.sort();
+
+write_line("sorted: {versions | .map(v => v.to_string()) | .join(", ")}");
+write_line("1.0 < 1.1: {VERSION(1, 0) < VERSION(1, 1)}");
+```
+
+output:
+
+```
+sorted: 1.9, 2.1
+1.0 < 1.1: True
+```
+
+### disposal
+
+A type holding something that has to be released implements `Ghul.Disposable`, which is .NET's `IDisposable`, by defining `dispose`. `let use` then releases it at the end of the enclosing block, however the block is left:
+
+```ghul
+…
+class SCOPE(name: string): Ghul.Disposable is
+    dispose() is
+        write_line("closing {name}");
+    si
+si
+
+let use s = SCOPE("file");
+
+write_line("inside the scope");
+```
+
+output:
+
+```
+inside the scope
+closing file
+```
+
+### iteration
+
+A type implementing `Collections.Iterable[T]` is a .NET `IEnumerable<T>`, so it works with `for`, with the pipe combinators, and with any .NET API taking a sequence. The requirement is an `iterator` property, and a [generator](https://ghul.dev/control-flow.html#generators) is usually the shortest way to supply one:
+
+```ghul
+…
+class COUNTDOWN(from: int): Iterable[int] is
+    iterator: Iterator[int] => _counting().iterator;
+
+    _counting() -> Pipe[int] is
+        let i mut = from;
+        while i > 0 do
+            yield i;
+            i = i - 1;
+        od
+    si
+si
+
+for i in COUNTDOWN(3) do
+    write_line("tick {i}");
+od
+```
+
+output:
+
+```
+tick 3
+tick 2
+tick 1
+```
+
+### a gotcha when reflecting over your types
+
+An auto-property's backing field is named `$` followed by the property name, and reflection sees it alongside the property itself. A reflection-based serializer told to include fields will therefore emit everything twice. With `System.Text.Json`, leave `include_fields` alone unless the type genuinely has fields to serialize.
+
+## ASP.NET Core
+
+ASP.NET Core minimal APIs work from ghūl. Extension methods aren't exposed as members, so the fluent builder calls go through the `|>` thread-first operator, which passes the left-hand side as the called method's first argument:
+
+```ghul
+…
+entry(args: string[]) is
+    let builder = WebApplication.create_builder(args);
+
+    let app = builder.build();
+
+    // '|>' threads app in as map_get's first argument:
+    app |> map_get("/hello", () => Results.ok("hello, world"));
+
+    app.run(null);
+si
+```
+
+`app |> map_get(...)` calls the `MapGet` extension on `app`; the route handler is an anonymous function returning an `IResult`.
+
+Controller-style APIs rely on attributes, which apply to classes and methods: `[ApiController]`, `[Route(...)]`, `[HttpGet(...)]` and so on. ghūl doesn't yet place attributes on method parameters, so parameter-binding attributes like `[FromBody]` aren't expressible; minimal APIs bind by position and need none of them.
+
+## Entity Framework Core
+
+Entity Framework Core works from ghūl. A context extends `DbContext` and exposes each table as a `DbSet`; EF Core's conventions expect PascalCase names, so `@IL.name` maps the ghūl members onto them:
+
+```ghul
+…
+// @IL.name maps these onto the PascalCase names EF Core's conventions expect.
+@IL.name("Product")
+class PRODUCT is
+    @IL.name("Id")
+    id: int public;
+
+    @IL.name("Name")
+    name: string public;
+
+    init() is si
+si
+
+class STORE_CONTEXT: DbContext is
+    @IL.name("Products")
+    products: DbSet[PRODUCT];
+
+    init(options: DbContextOptions) is
+        super.init(options);
+    si
+si
+
+add_product(context: STORE_CONTEXT, product: PRODUCT) -> Tasks.TASK is
+    context.products.add(product);
+
+    await context.save_changes_async(System.Threading.CancellationToken.none);
+
+    return;
+si
+…
+```
+
+The `Products` set and the entity's `Id` and `Name` are the names EF Core's model builder and SQL generation look for. Reads and writes call the async methods directly, with `await` - `save_changes_async` here.
+
+## mocking with NSubstitute
+
+The .NET base libraries include no mocking framework; [NSubstitute](https://nsubstitute.github.io/) is the lowest-friction third-party option from ghūl, and the compiler's own test suite uses it. `Substitute.for` builds a stand-in for a trait, and the `Returns` extension stubs a call through `|>`:
+
+```ghul
+…
+trait Clock is
+    now() -> System.DateTime;
+si
+
+test_uses_a_stubbed_clock() static is
+    // Substitute.for takes the constructor arguments as an object[]; a
+    // trait has none, so pass an empty array.
+    let clock = Substitute.`for[Clock]([]);
+
+    // stub a return value for a call:
+    clock.now() |> returns(System.DateTime(2020, 1, 1, 9, 0, 0), null);
+
+    IO.Std.write_line("stubbed hour is {clock.now().hour}");
+si
+…
+```
+
+`for` is a reserved word, so the example escapes it with a backtick. Its argument is the substitute's constructor arguments as an `object[]`; a trait has none, so the argument is an empty array. Where a full framework isn't warranted, a hand-written trait implementation is the zero-dependency alternative.
+
+
+---
+
 <a id="runtime-library"></a>
 
 # runtime library
@@ -6376,302 +5329,6 @@ max[T: Ghul.Comparable[T]](
 
 ---
 
-<a id="dotnet-integration"></a>
-
-# .NET integration
-
-ghūl is hosted on and targets .NET 10 and can consume most types in .NET assemblies built with C#.
-
-## projects
-
-The ghūl compiler is driven by MSBuild and uses the .NET SDK targets for most of the build process. Provided you reference the ghūl runtime library package, things should work as you'd expect for any other .NET SDK project. You can add package references, build assemblies and pack NuGet packages etc. all using the normal `dotnet` command line tools.
-
-## name mangling
-When consuming C# code the ghūl compiler transforms symbol names to better match ghūl conventions:
-
-- Class, struct and trait (=interface) names are left unchanged
-- Any generic type argument count suffix is left as-is (for example ``KeyValuePair`2``)
-- Enum names and enum member names are transformed to `MACRO_CASE`
-- Method, property and field names are transformed to `snake_case`
-- Names that conflict with ghūl keywords are prefixed with `` ` ``
-
-## namespace and type name re-mapping
-Some commonly used namespace and type names are re-mapped in line with ghūl conventions
-
-### namespaces
-- `System.Collections.Generic` is mapped to `Collections`
-- `System.IO` is mapped to `IO`
-
-### framework and collection types
-
-| Original Type                                        | Mapped Type                         |
-|------------------------------------------------------|-------------------------------------|
-| `System.IDisposable`                                 | `Ghul.Disposable`                   |
-| `System.Console`                                     | `IO.Std`                            |
-| `System.Collections.IEnumerable`                     | `Collections.NonGenericIterable`    |
-| `System.Collections.Generic.IReadOnlyCollection`     | `Collections.Bag`                   |
-| `System.Collections.Generic.ICollection`             | `Collections.MutableBag`            |
-| `System.Collections.IEnumerator`                     | `Collections.MoveNext`              |
-| `System.Collections.Generic.IEnumerable`             | `Collections.Iterable`              |
-| `System.Collections.Generic.IEnumerator`             | `Collections.Iterator`              |
-| `System.Collections.Generic.IReadOnlyList`           | `Collections.List`                  |
-| `System.Collections.Generic.IList`                   | `Collections.MutableList`           |
-| `System.Collections.Generic.List`                    | `Collections.LIST`                  |
-| `System.Collections.Generic.IReadOnlyDictionary`     | `Collections.Map`                   |
-| `System.Collections.Generic.IDictionary`             | `Collections.MutableMap`            |
-| `System.Collections.Generic.Dictionary`              | `Collections.MAP`                   |
-| `System.Collections.Generic.HashSet`                 | `Collections.SET`                   |
-| `System.Collections.Generic.Stack`                   | `Collections.STACK`                 |
-| `System.Threading.Tasks.Task`                        | `Tasks.TASK`                        |
-| `System.Threading.Tasks.Task<T>`                     | `Tasks.TASK[T]`                     |
-
-### primitive types
-
-| Original Type     | Mapped Type          |
-|-------------------|----------------------|
-| `System.Void`     | `Ghul.void`          |
-| `System.Boolean`  | `Ghul.bool`          |
-| `System.Char`     | `Ghul.char`          |
-| `System.Byte`     | `Ghul.ubyte`         |
-| `System.SByte`    | `Ghul.byte`          |
-| `System.UInt16`   | `Ghul.ushort`        |
-| `System.Int16`    | `Ghul.short`         |
-| `System.UInt32`   | `Ghul.uint`          |
-| `System.Int32`    | `Ghul.int`           |
-| `System.UInt64`   | `Ghul.ulong`         |
-| `System.Int64`    | `Ghul.long`          |
-| `System.UIntPtr`  | `Ghul.uword`         |
-| `System.IntPtr`   | `Ghul.word`          |
-| `System.Single`   | `Ghul.single`        |
-| `System.Double`   | `Ghul.double`        |
-| `System.Decimal`  | `Ghul.decimal`       |
-| `System.Object`   | `Ghul.object`        |
-| `System.String`   | `Ghul.string`        |
-
-## making your own types work with .NET
-
-The mappings above are about reaching into .NET. This section is the other direction: what a ghūl type has to provide before .NET libraries treat it as a first-class value rather than as an opaque object. In each case the language already has the operator or member; the point is which one .NET is looking for.
-
-### equality
-
-.NET consults a type's equality when it goes looking for a value: a dictionary key, a set member, `contains` on a list. A type defines that with `=~`, which is emitted as .NET's `Equals`. But defining `=~` alone is not enough, because a hash-based collection consults the hash first and never reaches the comparison. Define `get_hash_code` alongside it, and the two together produce the `Object.Equals` override that .NET actually uses:
-
-```ghul
-…
-class WITH_HASH(x: int) is
-    =~(other: WITH_HASH) -> bool => x == other.x;
-
-    get_hash_code() -> int => x.get_hash_code();
-si
-
-// only =~, so .NET keeps comparing by identity:
-class NO_HASH(x: int) is
-    =~(other: NO_HASH) -> bool => x == other.x;
-si
-
-let with_hash = SET[WITH_HASH]();
-with_hash.add(WITH_HASH(1));
-write_line("with get_hash_code: {with_hash.contains(WITH_HASH(1))}");
-
-let no_hash = SET[NO_HASH]();
-no_hash.add(NO_HASH(1));
-write_line("without get_hash_code: {no_hash.contains(NO_HASH(1))}");
-```
-
-diagnostics:
-
-- warning: [equality-without-hash] NO_HASH defines =~ but no get_hash_code, so .NET comparisons will not use the operator
-
-output:
-
-```
-with get_hash_code: True
-without get_hash_code: False
-```
-
-`System.HashCode.combine` is the usual way to build the hash from the same members `=~` reads.
-
-The hash is not generated for you, because an operator is free to ignore members it does not care about, and a member-wise hash would then disagree with it. A type that defines neither is consistent as it stands, comparing and hashing by identity, so a type that defines only `=~` is reported as `equality-without-hash` and left alone rather than half-converted.
-
-A value type hides this for a while: .NET's default equality for a struct is member-wise, so a struct that skips `get_hash_code` often behaves correctly by coincidence and then diverges the moment its `=~` stops agreeing with a member-wise comparison. The warning fires either way, and is worth heeding either way.
-
-### ordering
-
-Sorting, `Ghul.Comparable[T]`, and the relational operators all come from `<>`, a three-way ordering returning a negative, zero, or positive `int`. Defining it gives a type `<`, `<=`, `>` and `>=` and makes it sortable by .NET at the same time:
-
-```ghul
-…
-class VERSION(major: int, minor: int): Ghul.Comparable[VERSION] is
-    <>(other: VERSION) -> int =>
-        if major != other.major then major - other.major else minor - other.minor fi;
-
-    to_string() -> string => "{major}.{minor}";
-si
-
-let versions = LIST[VERSION]();
-versions.add(VERSION(2, 1));
-versions.add(VERSION(1, 9));
-versions.sort();
-
-write_line("sorted: {versions | .map(v => v.to_string()) | .join(", ")}");
-write_line("1.0 < 1.1: {VERSION(1, 0) < VERSION(1, 1)}");
-```
-
-output:
-
-```
-sorted: 1.9, 2.1
-1.0 < 1.1: True
-```
-
-### disposal
-
-A type holding something that has to be released implements `Ghul.Disposable`, which is .NET's `IDisposable`, by defining `dispose`. `let use` then releases it at the end of the enclosing block, however the block is left:
-
-```ghul
-…
-class SCOPE(name: string): Ghul.Disposable is
-    dispose() is
-        write_line("closing {name}");
-    si
-si
-
-let use s = SCOPE("file");
-
-write_line("inside the scope");
-```
-
-output:
-
-```
-inside the scope
-closing file
-```
-
-### iteration
-
-A type implementing `Collections.Iterable[T]` is a .NET `IEnumerable<T>`, so it works with `for`, with the pipe combinators, and with any .NET API taking a sequence. The requirement is an `iterator` property, and a [generator](https://ghul.dev/control-flow.html#generators) is usually the shortest way to supply one:
-
-```ghul
-…
-class COUNTDOWN(from: int): Iterable[int] is
-    iterator: Iterator[int] => _counting().iterator;
-
-    _counting() -> Pipe[int] is
-        let i mut = from;
-        while i > 0 do
-            yield i;
-            i = i - 1;
-        od
-    si
-si
-
-for i in COUNTDOWN(3) do
-    write_line("tick {i}");
-od
-```
-
-output:
-
-```
-tick 3
-tick 2
-tick 1
-```
-
-### a gotcha when reflecting over your types
-
-An auto-property's backing field is named `$` followed by the property name, and reflection sees it alongside the property itself. A reflection-based serializer told to include fields will therefore emit everything twice. With `System.Text.Json`, leave `include_fields` alone unless the type genuinely has fields to serialize.
-
-## ASP.NET Core
-
-ASP.NET Core minimal APIs work from ghūl. Extension methods aren't exposed as members, so the fluent builder calls go through the `|>` thread-first operator, which passes the left-hand side as the called method's first argument:
-
-```ghul
-…
-entry(args: string[]) is
-    let builder = WebApplication.create_builder(args);
-
-    let app = builder.build();
-
-    // '|>' threads app in as map_get's first argument:
-    app |> map_get("/hello", () => Results.ok("hello, world"));
-
-    app.run(null);
-si
-```
-
-`app |> map_get(...)` calls the `MapGet` extension on `app`; the route handler is an anonymous function returning an `IResult`.
-
-Controller-style APIs rely on attributes, which apply to classes and methods: `[ApiController]`, `[Route(...)]`, `[HttpGet(...)]` and so on. ghūl doesn't yet place attributes on method parameters, so parameter-binding attributes like `[FromBody]` aren't expressible; minimal APIs bind by position and need none of them.
-
-## Entity Framework Core
-
-Entity Framework Core works from ghūl. A context extends `DbContext` and exposes each table as a `DbSet`; EF Core's conventions expect PascalCase names, so `@IL.name` maps the ghūl members onto them:
-
-```ghul
-…
-// @IL.name maps these onto the PascalCase names EF Core's conventions expect.
-@IL.name("Product")
-class PRODUCT is
-    @IL.name("Id")
-    id: int public;
-
-    @IL.name("Name")
-    name: string public;
-
-    init() is si
-si
-
-class STORE_CONTEXT: DbContext is
-    @IL.name("Products")
-    products: DbSet[PRODUCT];
-
-    init(options: DbContextOptions) is
-        super.init(options);
-    si
-si
-
-add_product(context: STORE_CONTEXT, product: PRODUCT) -> Tasks.TASK is
-    context.products.add(product);
-
-    await context.save_changes_async(System.Threading.CancellationToken.none);
-
-    return;
-si
-…
-```
-
-The `Products` set and the entity's `Id` and `Name` are the names EF Core's model builder and SQL generation look for. Reads and writes call the async methods directly, with `await` - `save_changes_async` here.
-
-## mocking with NSubstitute
-
-The .NET base libraries include no mocking framework; [NSubstitute](https://nsubstitute.github.io/) is the lowest-friction third-party option from ghūl, and the compiler's own test suite uses it. `Substitute.for` builds a stand-in for a trait, and the `Returns` extension stubs a call through `|>`:
-
-```ghul
-…
-trait Clock is
-    now() -> System.DateTime;
-si
-
-test_uses_a_stubbed_clock() static is
-    // Substitute.for takes the constructor arguments as an object[]; a
-    // trait has none, so pass an empty array.
-    let clock = Substitute.`for[Clock]([]);
-
-    // stub a return value for a call:
-    clock.now() |> returns(System.DateTime(2020, 1, 1, 9, 0, 0), null);
-
-    IO.Std.write_line("stubbed hour is {clock.now().hour}");
-si
-…
-```
-
-`for` is a reserved word, so the example escapes it with a backtick. Its argument is the substitute's constructor arguments as an `object[]`; a trait has none, so the argument is an empty array. Where a full framework isn't warranted, a hand-written trait implementation is the zero-dependency alternative.
-
-
----
-
 <a id="tooling"></a>
 
 # tooling
@@ -6732,6 +5389,1349 @@ dotnet new install ghul.templates
 ```
 
 Once installed, `dotnet new` can scaffold a ghūl project pre-configured with a `.ghulproj`, the compiler pinned as a local tool, and a starting source file. See [getting started](https://ghul.dev/getting-started.html) for the other ways to get a project off the ground.
+
+
+---
+
+<a id="syntax"></a>
+
+# syntax in ghūl
+
+## projects and files
+
+A ghūl project is composed of a set of ghūl source files. Source files should have a `.ghul` file extension, and must be UTF-8 text.
+
+Each source file can contain zero, one or more global definitions. Definitions can be in any order and in any file. Source files can have any name, provided they have a `.ghul` extension, and can be in any folder under the project root (subject to any source file glob pattern given in the `.ghulproj`)
+
+A file with no `namespace` can mix definitions with statements at the top level, so a whole program can read as a script with no explicit `entry` function. These are called [top-level statements](#top-level-statements).
+
+## tokens and trees
+
+Source files are translated into various kinds of tokens. Some tokens are a fixed sequence of characters (like the keyword `while`). Others are composed of characters according to various rules (identifiers, strings, numbers etc.)
+
+With a couple of exceptions, ghūl tokens are similar to most common programming languages. The exceptions are:
+
+### operators
+
+Operators are any contiguous string of operator characters. This is only significant in the rare case where running together the characters that comprise two different operators might not have the result you expect
+
+### escaped identifiers
+
+A leading backtick escapes a keyword or operator so it can be used as an ordinary identifier: `` `while`` is the identifier `while`, and `` `+`` is the identifier `+`. The backtick is not part of the escaped name, so escaping a name that is not a keyword, like `` `count``, means the same as plain `count`. A backtick is only meaningful immediately before an identifier, operator, or opening bracket; anywhere else it is a dangling-backtick error.
+
+
+## block structure
+
+ghūl is a [block structured programming language](https://en.wikipedia.org/wiki/Block_(programming)). Source code in ghūl is composed of blocks, typically many of them, with blocks nested inside other blocks.
+
+Blocks are delimited by keywords. The keywords that begin and end a block are specific to each different kind of block. This way of delimited blocks is descended from the ALGOL family of languages, most specifically from [ALGOL 68](https://en.wikipedia.org/wiki/ALGOL_68). It has the advantage of making the block structure clearer, both to someone reading the code and to the compiler.
+
+```ghul
+…
+if x > y then
+    write_line("x > y")
+else
+    write_line("x <= y")
+fi
+```
+
+output:
+
+```
+x <= y
+```
+
+In this example `then`, `else` and `fi` all delimit blocks. The blocks they delimit contain statement lists. 
+
+## semicolons
+
+Semicolons are required: to separate statements and definitions. 
+
+While the compiler _could_ still unambiguously parse correct programs without requiring semicolons anywhere, having them at the end expression statements makes it clearer to the parser if the expression is incomplete or not well formed.
+
+## definitions and statements
+
+Blocks in ghūl can contain definitions, statements, or a mix of both. Which is permitted in a given block depends on the type of block.
+
+## file structure
+
+At its top level a ghūl source file contains [definitions](https://ghul.dev/definitions.html) and `use` directives; a file with no `namespace` can also contain statements. There is no required ordering and no file header.
+
+```ghul
+use IO.Std.write_line;
+
+greet(name: string) is
+    write_line("hello, {name}");
+si
+
+greet("world");
+```
+
+output:
+
+```
+hello, world
+```
+
+The definitions in a file can be global functions, properties, classes, structs, traits, unions and enums, or `namespace` blocks that group definitions under a name. A definition is visible to the rest of the project regardless of which file it appears in, so how source is split across files is purely a matter of organisation.
+
+A file that declares any `namespace` must place all of its definitions inside namespaces. A file with no namespace at all has its definitions placed in a private namespace of their own, which is convenient for small programs and tests. Namespaces, `use` and symbol visibility are covered in full under [definitions](https://ghul.dev/definitions.html#namespaces).
+
+## top-level statements
+
+A file with no `namespace` can also have statements at its top level. They run in source order as the program's entry point, so a short program needs no `entry` function:
+
+```ghul
+use IO.Std.write_line;
+
+// in a file with no namespace, statements at the top level run in
+// order as the program's entry point
+write_line("first");
+write_line("second");
+
+// definitions in the same file are still visible, wherever they sit
+greet(name: string) is
+    write_line("hello, {name}");
+si
+
+greet("ghūl");
+```
+
+output:
+
+```
+first
+second
+hello, ghūl
+```
+
+Definitions in the same file are still hoisted, so a top-level statement can use a function or type declared anywhere in the file. Top-level statements and a `namespace` cannot appear in the same file.
+
+Otherwise, execution of a program begins at a function named `entry`.
+
+
+---
+
+<a id="definitions"></a>
+
+# definitions
+
+## variables
+
+In ghūl local variables are introduced with the `let` keyword. A bare `let` is immutable: it takes an initializer, and reassigning the variable afterwards is rejected. The compiler infers the type from the initializer:
+
+```ghul
+let x = 10;
+```
+
+An explicit type can be given alongside the initializer. The initializer must be assignment compatible with the type:
+
+```ghul
+let x: int = 42;
+```
+
+The explicit type can be wider than the initializer expression:
+
+```ghul
+let o: object = "a string";
+```
+
+A trailing `mut` makes the variable reassignable, and then the initializer can be dropped for a deferred-init local that starts at its type's default value: `let total mut = 0` reassigns later, and `let result: int mut;` defaults to 0. Either form can also take its value from `_`, which initializes to the default of the type the context expects - `let x = _`, or `_[T]` to pin the type.
+
+Multiple variables can be defined in the same `let` statement, with each variable either taking its type from its initializer or given an explicit one:
+
+```ghul
+let
+    an_inferred_int = 123,
+    an_explicit_int: int = 456,
+    a_string = "hello";
+```
+
+The name `_` is a discard placeholder. It can stand in for any variable name, but the value that would be assigned to it is discarded. `_` is accepted in `let` definitions, tuple destructuring, anonymous function parameters, and `for` loop variables:
+
+```ghul
+…
+let _ = side_effect();
+let (_, _, third) = (1, 2, 3);
+let only_first = (x: int, _: int) => x;
+for _ in 1..10 do
+    counter = counter + 1;
+od
+```
+
+Variables can only be defined within functions, methods or property bodies. Variable names should be in `snake_case`
+
+## functions
+
+In ghūl functions consist of a name and a parenthesized formal arguments list, followed by an optional return type after `->` (omitting it makes the function `void`), and then either a return expression or a function body:
+
+```ghul
+sum_two_ints(i: int, j: int) -> int => i + j;
+
+sum_three_ints(i: int, j: int, k: int) -> int is
+    return i + j + k;
+si
+```
+
+`=>` introduces a single-expression body, while the `is` and `si` keywords are used to delimit block bodies. 
+
+Functions can only be defined at global scope. Functions can be generic, which will be covered later. Function names should be in `snake_case`
+
+## arguments
+
+Arguments consist of a name followed by a type. The type is mandatory as the compiler cannot infer types here.
+
+```ghul
+do_something(what: string, why: string, to: int);
+```
+
+## types
+
+### classes
+
+Classes consist of a name optionally followed by a superclass name and the types of any traits implemented, and then the class body. The class body is delimited by keywords `is` and `si`:
+```ghul
+class THING is
+    // class body
+si
+```
+
+A class defines a new reference type, instances of which are assignment compatible with its superclass type and any traits it implements.
+
+Instances of classes are created via a constructor expression, which consists of a type expression followed by a parenthesis delimited list of actual constructor arguments. For a class, the type expression is the class name, qualified with any namespaces if needed:
+```ghul
+…
+let a_thing = THING();
+```
+
+A class can also declare its constructor parameters directly in the header. Each parameter becomes a parameter of the synthesised constructor, and an auto-generated same-named field or property holds the supplied value:
+```ghul
+class POINT(x: int, y: int) is
+si
+```
+
+The two forms are equivalent. The primary form is the shorter shape when every field is initialized from a constructor argument; the classic form is the better fit when the body owns extra fields or properties beyond what the constructor takes. See [constructors](#constructors) for the rest of the primary-constructor surface area.
+
+Two postfix modifiers shape the hierarchy. Without `open`, a class can be subclassed only within the assembly that declares it; `open` opts in to cross-assembly subclassing. `abstract` bars direct construction, so only subclasses exist at runtime, and a class is implicitly abstract when it declares a body-less instance method, since that method is a contract for subclasses to satisfy. The closure feeds [type narrowing](https://ghul.dev/control-flow.html#type-narrowing): on the `else` edge of an `isa` test the compiler can rule the tested subclass out, and an `abstract` root can leave a single remaining subclass.
+
+Classes can only be defined at global scope. Classes can be generic, which will be covered later. Concrete class names should be in `MACRO_CASE`. Abstract class names should be in `PascalCase`.
+
+### structs
+
+Structs consist of a name, then the types of any traits implemented, and then the struct body again enclosed in `is` / `si`. A struct can also use the primary-constructor header form:
+```ghul
+struct POINT(x: double, y: double) is
+si
+```
+
+Structs are constructed the same way as classes, with a constructor expression:
+```ghul
+…
+let origin = POINT(0.0D, 0.0D);
+
+// or up, or down, or even left, depending on
+// your co-ordinate system!
+let right = POINT(1.0D, 0.0D);
+```
+
+A struct defines a new value type, which means any values that the struct encapsulates are collected together as a new kind of value: assigning a struct copies all the encapsulated values, so the copy and the original then go their separate ways:
+```ghul
+…
+struct COUNTER is
+    _n: int field;
+
+    init(n: int) is _n = n; si
+
+    bump() is _n = _n + 1; si
+
+    value: int => _n;
+si
+
+let original = COUNTER(0);
+let copy mut = original;
+
+copy.bump();
+
+write_line("original {original.value}, copy {copy.value}");
+```
+
+output:
+
+```
+original 0, copy 1
+```
+
+A struct has no equality of its own, so `==` does not apply to one; giving a struct an equality means defining `=~`, described under [defining operators](#operators) and, for the .NET side of it, under [making your own types work with .NET](https://ghul.dev/dotnet-integration.html#equality).
+
+Structs can only be defined at global scope. Structs can be generic, which will be covered later. Struct names should be in `MACRO_CASE`.
+
+### traits
+
+A trait consists of a name, the types of any parent traits that must also be implemented, and then the trait body:
+
+```ghul
+trait Printable is
+    print();
+si
+```
+
+Traits are similar to interfaces in other languages. Trait methods and properties without a default implementation must be implemented by any class, struct, or union that declares the trait:
+```ghul
+…
+class BOOK(title: string, author: string): Printable is
+    print() is
+        write_line("Title: {title}, Author: {author}");
+    si
+si
+```
+
+A trait method or property can provide a default body. Implementing classes inherit the default and only need to override it to change the behaviour:
+
+```ghul
+…
+trait Logged is
+    log(message: string) is
+        // the default body writes the message with a [log] prefix
+        write_line("[log] {message}");
+    si
+si
+
+class PLAIN(): Logged is
+    // no override - uses the trait default
+si
+
+class LOUD(): Logged is
+    // override the default, while still calling through to it with super
+    log(message: string) is
+        super.log(message.to_upper());
+    si
+si
+
+PLAIN().log("hello");
+LOUD().log("hello");
+```
+
+output:
+
+```
+[log] hello
+[log] HELLO
+```
+
+A class override can call the trait's default with `super.method()`.
+
+Traits can only be defined at global scope. Trait methods and properties can be abstract or have a default implementation. Trait names should be in `PascalCase`.
+
+### unions
+
+A union consists of a name and then a union body, which contains one or more variants. Each variant has a name, and then an optional list of fields:
+```ghul
+union Tree is
+    NODE(left: Tree, right: Tree);
+    LEAF(value: int);
+si
+```
+Unions are a reference type. A reference of union type can point to only one variant at a time. To discover which variant a union currently holds, test it with `isa Variant(value)`:
+
+```ghul
+…
+let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));
+let leaf = Tree.LEAF(123);
+
+if isa Tree.NODE( ► tree) then
+    write_line("have tree node");
+elif isa Tree.LEAF( ► tree) then
+    write_line("have tree leaf");
+fi
+```
+
+output:
+
+```
+have tree node
+```
+
+`isa Variant(value)` does two things at once: it tests the variant, and within the then-branch it narrows the value to that variant, so the variant's own fields are accessible directly:
+
+```ghul
+if isa Tree.NODE(tree) then
+    write_line(
+        "left {tree.left}, right {tree.right}"
+    );
+elif isa Tree.LEAF(tree) then
+    write_line("leaf value {tree.value}");
+fi
+```
+
+Unions support structural equality through the `=~` operator. Two union references compare equal when they hold the same variant with member-wise equal fields:
+
+```ghul
+…
+let leaf1 = Tree.LEAF(123);
+let leaf2 = Tree.LEAF(123);
+let leaf3 = Tree.LEAF(456);
+
+assert leaf1 =~ leaf2;
+assert !(leaf1 =~ leaf3);
+```
+
+A variant with no fields is a *unit variant*: it is referenced by name without parentheses, and interned to one shared value per generic instantiation. A union with a single field-carrying variant, or one variant marked `default`, is option-shaped, so `u?` tests whether that variant is present and `u!` unwraps its value:
+
+```ghul
+…
+let c = Color.RED;                   // unit variant, referenced without parentheses
+write_line("red: {c =~ Color.RED}"); // true
+
+let r = lookup();
+write_line("present: {r?}");         // true - r holds the default OK variant
+write_line("value: {r!}");           // 42 - unwraps the OK payload
+```
+
+output:
+
+```
+red: True
+present: True
+value: 42
+```
+
+A union can declare a primary-constructor header for state shared across every variant. Each variant splices the shared parameters into its field list with `..`, and a variant with no extra fields drops the list entirely. A union can also implement traits after its header, with each trait member satisfied by a default or by a property the union supplies:
+
+```ghul
+…
+let t = Token.IDENTIFIER("count", "identifier");
+write_line(t.name);    // identifier - shared primary-header field
+write_line(t.label()); // [identifier] - inherited trait default
+```
+
+output:
+
+```
+identifier
+[identifier]
+```
+
+Unions can only be defined at global scope. Union names should be in `PascalCase` and variant names should be in `MACRO_CASE`
+
+### enums
+
+An enum consists of a name and then an enum body, which contains one or more elements. Each element has a name and an optional constant integer value
+
+```ghul
+enum Suits is
+    SPADES,
+    HEARTS,
+    DIAMONDS,
+    CLUBS
+si
+```
+
+Enums can only be defined at global scope. An enum type name should be in `PascalCase`, and its members in `MACRO_CASE`
+
+### partial and impl blocks
+
+Members can be added to a class, struct, or union already declared in the same assembly from a separate block, even in another file. The added members are ordinary members of the target, with the same private access and virtual dispatch as members written in its own body. A `partial` block names the type and adds to it; for a union, whose body holds only variants, it is the only way to give the type methods:
+
+```ghul
+…
+union Shape is
+    CIRCLE(radius: int);
+    SQUARE(side: int);
+si
+
+partial Shape is
+    describe() -> string =>
+        case self
+        when c: CIRCLE then "circle r={c.radius}"
+        when s: SQUARE then "square s={s.side}"
+        esac;
+si
+
+let s: Shape = Shape.SQUARE(4);
+write_line(s.describe());
+```
+
+output:
+
+```
+square s=4
+```
+
+An `impl Trait for Type` block additionally makes the target implement a trait, so a type can satisfy a trait without naming it in its header. The trait's type arguments are written on the target after `for`, and inside the body `self` has the concrete target type, so a union's variants can be matched directly:
+
+```ghul
+…
+union List is
+    NIL;
+    CONS(head: int, tail: List);
+si
+
+impl Printer for List is
+    print() -> string =>
+        if let (head, tail): CONS = ► self then "{head} {tail.print()}"
+        else "nil"
+        fi;
+si
+
+let xs: Printer = List.CONS(1, List.CONS(2, List.NIL));
+write_line(xs.print());
+```
+
+output:
+
+```
+1 2 nil
+```
+
+The target can be a qualified name, including a single union variant (`impl Printer for List.NIL`). The interface must be a trait, and the target a type declared in the same assembly; an imported type cannot be reopened.
+
+## properties
+
+A property consists of the property name followed by the property's type and, optionally, bodies for getter and setter methods.
+
+```ghul
+class COUNTER is
+    count: int;
+si
+
+class SIZED is
+    _size: int;
+
+    size: int => _size,
+        = new_size is
+            assert new_size > 0;
+
+            _size = new_size;
+        si
+si
+```
+
+Public properties with no getter or setter are automatically backed by a hidden field. Private properties with no getter or setter are implemented as a plain field.
+
+Properties can be defined globally and within classes, structs and traits. Property names should be in `snake_case`.
+
+## methods
+
+Methods are syntactically the same as functions, except they are defined within classes, structs or traits.
+
+```ghul
+class SCALER is
+    _scale: double;
+
+    scale(value: double) -> double => value * _scale;
+si
+```
+
+A method or function can take a postfix `pure` modifier, which asserts that it only reads and never writes to the heap. The compiler already infers this for many functions; the modifier states it for one the compiler can't prove, and then callers keep [type narrowing](https://ghul.dev/control-flow.html#type-narrowing) facts across a call to it. Every override of a pure member must itself be pure:
+
+```ghul
+…
+// a pure method only reads: callers keep narrowing facts across a call to it
+doubled() -> int pure => _count * 2;
+…
+```
+
+output:
+
+```
+42
+```
+
+As with functions, methods should be named in `snake_case`
+
+## operators
+
+An operator is a function or method whose name is an operator symbol rather than a word; there is no `operator` keyword. As an instance method the receiver is the left operand, so a binary operator takes a single parameter for the right operand:
+
+```ghul
+…
+class VECTOR is
+    x: int;
+    y: int;
+
+    init(x: int, y: int) is
+        self.x = x;
+        self.y = y;
+    si
+
+    // a binary operator as an instance method takes one parameter, the right operand:
+    +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y);
+si
+
+let sum = VECTOR(1, 2) + VECTOR(3, 4);
+write_line("({sum.x}, {sum.y})");
+```
+
+output:
+
+```
+(4, 6)
+```
+
+Written as a global function or a `static` member instead, an operator takes both operands as parameters: `+(a: VECTOR, b: VECTOR) -> VECTOR`. A prefix operator is always a one-parameter function, defined globally or in the operand's type.
+
+Every operator has a precedence taken from its first character, so an operator starting with `*` binds tighter than one starting with `+`, with no declaration needed. The `@precedence` pragma places an operator in a specific band when the default doesn't suit it.
+
+The comparison operators come from two backing operators. Define `<>`, a three-way ordering that returns a negative, zero, or positive `int`, and `<`, `<=`, `>`, and `>=` follow from it; define `=~`, an equality returning `bool`, and `!~` follows as its negation:
+
+```ghul
+…
+// three-way ordering returning int; '<', '<=', '>', '>=' all derive from it:
+<>(other: BOX) -> int => value - other.value;
+…
+```
+
+Operators can be defined globally, or as members of classes, structs and traits. An operator name is any run of symbol characters, such as `+`, `**`, `##`, or `∩`.
+
+## constructors
+
+In ghūl methods named `init` are constructors. When an object is constructed using a constructor expression, the corresponding `init` method overload will be called based on the actual argument types:
+
+```ghul
+class COUNTER is
+    count: int;
+
+    init() is
+        count = 0;
+    si
+
+    init(initial_count: int) is
+        count = initial_count;
+    si
+si
+…
+// calls the parameterless overload of init()
+let c = COUNTER();
+
+// calls init(initial_count: int)
+let d = COUNTER(50);
+```
+
+Constructors can be defined in classes and structs.
+
+### primary constructors
+
+When the constructor only assigns its arguments to same-named fields, the class or struct header can declare those parameters directly. The compiler synthesises the matching `init` and a same-named field or property for each parameter:
+
+```ghul
+…
+class PERSON(name: string, age: int) is
+    describe() is
+        write_line("{name} is {age} years old");
+    si
+si
+
+PERSON("alice", 30).describe();
+```
+
+output:
+
+```
+alice is 30 years old
+```
+
+A trailing modifier on a primary parameter overrides the default visibility:
+
+- `x: int public` - public read and write.
+- `x: int field` - plain field rather than the default auto-property.
+- `_x: int` - private field, named `_x`.
+- `x: int init` - no field is generated; `x` is in scope only inside `init`.
+
+A body field or property declaration with a name matching the parameter (under the same `_x`/`x` rule) overrides auto-generation and receives the auto-init copy. This is also how to rename the underlying storage without using the modifier suffix:
+
+```ghul
+…
+class POINT(x: int, y: int) is
+    // capture the primary parameters as renamed private fields
+    _x;
+    _y;
+
+    show() is
+        write_line("({_x}, {_y})");
+    si
+si
+
+class BOX(width: int public, height: int field, _depth: int) is
+    // width is a public read-write property
+    // height is a plain field
+    // _depth is a private field
+si
+
+POINT(10, 20).show();
+```
+
+output:
+
+```
+(10, 20)
+```
+
+A class with a primary header can also include a `super(...)` body declaration that forwards expressions to its superclass `init`, and secondary `init(.., extras)` overloads. The `..` splice expands to the primary parameters; an implicit chain to the primary `init` runs before the secondary's body:
+
+```ghul
+…
+class DOG(name: string, breed: string): ANIMAL is
+    // forward name to the superclass; the local DOG keeps breed as a field
+    super(name);
+
+    init(.., trick: string) is
+        // .. expands to (name, breed); the primary init has already run
+        write_line("{name} the {breed} can {trick}");
+    si
+si
+
+DOG("rex", "labrador", "sit");
+```
+
+output:
+
+```
+rex the labrador can sit
+```
+
+A primary-constructor class or struct also gets a synthesised `deconstruct` built from its public-readable parameters, so `let (x, y) = POINT(3, 4)` destructures without writing one out.
+
+A class or struct with a primary header and no body declarations can end with a terminating `;` instead of `is ... si`:
+
+```ghul
+// a primary header with no body declarations:
+class POINT(x: int, y: int);
+
+// is equivalent to an explicit empty 'is' / 'si' body:
+class VECTOR(dx: int, dy: int) is
+si
+```
+
+The classic form is the better fit when the body owns extra fields or properties beyond what the primary parameters cover.
+
+## namespaces
+
+Namespaces are introduced with the `namespace` keyword followed by the namespace name and then the namespace body.
+
+```ghul
+namespace Example is
+    ...
+si
+```
+
+Namespaces can be nested inside other namespaces
+```ghul
+namespace Outer is
+    namespace Inner is
+        do_something() is
+            IO.Std.write_line("did something");
+        si
+    si
+si
+…
+Outer.Inner.do_something();
+…
+```
+
+output:
+
+```
+did something
+```
+
+A dotted namespace name is shorthand for nesting namespaces
+
+```ghul
+namespace Outer.Inner is
+    do_something() is
+        IO.Std.write_line("did something");
+    si
+si
+…
+Outer.Inner.do_something();
+…
+```
+
+output:
+
+```
+did something
+```
+
+### namespace aggregation
+
+A namespace definition is an instance of that namespace. Namespace instances are aggregated across all source files to form a single namespace scope. This means that all definitions within a namespace instance are visible unqualified within all other instances of that namespace in all source files:
+
+`source-file-1.ghul`:
+```ghul
+namespace Example is
+    // this definition of Test is visible unqualified
+    // throughout the Example namespace:
+    trait Test is
+        run();
+    si
+si
+…
+```
+
+`source-file-2.ghul`:
+```ghul
+…
+// class TEST can implement the Test trait without having
+// to qualify the name Test:
+class TEST: Test is
+    run() is si
+si
+…
+```
+
+### definitions outside any namespace
+
+If a source file contains no namespaces, then all definitions in the file are placed in a compiler generated namespace that is private to that source file, and the file can have [top-level statements](https://ghul.dev/syntax.html#top-level-statements) that run as the program's entry point. This is useful for examples and tests:
+
+```ghul
+// the compiler places this in an auto-generated
+// namespace private to this source file
+IO.Std.write_line("Hello, world!");
+```
+
+output:
+
+```
+Hello, world!
+```
+For definitions to be visible from other files, they must be placed in an explicitly declared namespace.
+
+### namespace usage consistency
+
+If a source file contains any explicitly declared namespaces, then all definitions in that file must be within a namespace. Bare definitions outside of namespaces are not allowed in files with namespace declarations:
+
+```ghul
+…
+namespace Example is
+    entry() is
+        IO.Std.write_line("hello from a namespace");
+    si
+si
+…
+greet() is
+    IO.Std.write_line("not in a namespace");
+si
+```
+
+diagnostics:
+
+- error: cannot mix global definitions and namespaces in the same file
+
+## importing symbols with `use`
+Symbols can be brought into the current namespace instance's scope using the use keyword. Imported symbols can then be used without qualification:
+
+```ghul
+use Example.TEST;
+
+...
+
+let t = TEST();
+```
+
+`use` applied to a namespace imports all symbols from that namespace:
+```ghul
+use Example; // imports Example.TEST and Example.Test
+
+...
+
+let t: Test;
+```
+
+Note that `use` only applies within the current `namespace` definition. It does not import a symbol into all instances of the current namespace:
+
+```ghul
+…
+namespace UseExample is
+    use Example;
+
+    class ANOTHER_TEST: Test is
+        run() is si
+    si
+si
+
+namespace UseExample is
+    // Test still needs qualification here
+    class YET_ANOTHER_TEST: Example.Test is
+        run() is si
+    si
+si
+…
+```
+
+## visibility of symbols
+
+In ghūl, the visibility of symbols outside their defining scope is managed by a naming convention which is partially enforced by the compiler. The compiler also warns when a declaration's name doesn't match the convention for its kind - `non-snake-case-name`, `non-pascal-case-name`, or `non-upper-snake-case-name` - each suppressible per declaration, per file, or project-wide. A class with only `static` members is a utility container that is never constructed, and accepts either `PascalCase` or `MACRO_CASE`.
+
+### global symbols
+
+Classes, structs, traits, unions, global functions and global properties are accessible from any namespace. Prefixing their names with `_` indicates they are intended to be private, but this is not enforced by the compiler:
+```ghul
+class PUBLIC is
+si
+
+public_function() -> int => 0;
+
+public_property: int;
+
+class _PRIVATE is
+si
+
+_private_function() -> int => 0;
+
+_private_property: int;
+```
+
+### methods
+
+Methods are public by default. To make a method protected, prefix its name with an underscore `_`:
+```ghul
+class THING is
+    do_something_public() is
+    si
+
+    _do_something_protected() is
+    si
+si
+```
+Protected access to methods _is_ enforced by the compiler
+
+
+### properties
+Properties are public read, protected write, unless they start with `_`, in which case they are protected read and write:
+```ghul
+…
+struct VALUE is
+    public_property: int;
+
+    _protected_property: string;
+
+    init(value: int) is
+        public_property = value;
+        _protected_property = "value is {value}";
+    si
+si
+…
+let v = VALUE(1234);
+
+// OK: public_property is publicly readable
+write_line(v.public_property);
+
+write_line(v._protected_property);
+
+v.public_property = 5678;
+```
+
+diagnostics:
+
+- error: _protected_property: string is not accessible here
+- error: VALUE.public_property: int is not publicly assignable
+
+### planned changes
+Protected access will become private in a future release: derived types should not rely on reading or writing members with `_` prefixed names
+
+
+---
+
+<a id="expressions"></a>
+
+# expressions
+
+Expressions in ghūl are constructs that evaluate to a value. They can be used to perform calculations, make comparisons, and combine values in various ways.
+
+## literals
+
+### integers
+
+Integer literals consist of an optional radix (base), followed by a sequence of digits with optional underscores for readability, followed by a dot and a decimal fraction and/or exponent (for floating point numbers) and finally a type suffix.
+
+```ghul
+let i = 12_345_678; // int
+let hex = 0x1234_ABCD; // int
+let long = 1_000_000_000_000_000L; // long
+
+let hex_unsigned_long = 0x1234_5678__9ABC_DEF0_UL; // ulong
+
+let b = 99b; // byte
+```
+
+### char
+```ghul
+let c = 'c';
+let u_macron = 'ū'
+```
+
+### floating point
+```ghul
+let s = 123.456; // single
+let t = 123.456E5; // single
+
+let d = 123.456D; // double
+let e = 123_456_789_000.0D // double
+```
+
+### string
+```ghul
+let hello_world = "Hello World!";
+let unicode = "ghūl programming language"
+```
+
+### array
+Array literals are constructed from a comma separated list of element values enclosed in `[` and `]`. The array element type is inferred as the most specific type compatible with all elements (which may be `object` if no more specific ancestor type exists). The resulting array type is `E[]` where `E` is the inferred element type. 
+
+```ghul
+let animals = ["frog", "bat", "elephant"]; // string[]
+let things = ["frog", 1234, 12.5]; // object[]
+let lists = [[1, 2], [3, 4], [5, 6], [7, 7]]; // int[][]
+```
+
+### tuple
+
+Tuple literals are constructed from a comma separated list of elements enclosed in `(` and `)`. Each element can be a bare value or a named value, and each element can optionally specify a type. Where explicit types are omitted, element types will be inferred.
+
+```ghul
+let path_with_id = (path = "/tmp/my-file.txt", id = 1234);
+
+let path = path_with_id.path;
+let id = path_with_id.id;
+```
+
+If tuple elements are not explicitly named, they are assigned names consisting of a back-tick followed by an index
+
+```ghul
+let things = ("thing", 12.34);
+
+let name = things.`0;
+let weight = things.`1;
+```
+
+### function
+
+Function literals are constructed from an parenthesized argument list, a return type, and a return expression or a function body. If there is only one argument, no parentheses are needed.
+
+#### expression body function literal
+
+```ghul
+let simple_add = (x: int, y: int) -> int => x + y;
+```
+
+#### block body function literal
+
+```ghul
+let complex_add = (x: int, y: int) -> int is
+    let result = x + y;
+    return result;
+si;
+```
+
+#### type inference
+
+Return type can usually be omitted provided it can be inferred from the type of the expression body or any values returned from the block body
+
+```ghul
+let simple_add = (x: int, y: int) => x + y;
+
+let complex_add = (x: int, y: int) is
+    let result = x + y;
+    return result;
+si;
+```
+
+Argument types usually can be inferred if the function literal is being passed into a function.
+
+```ghul
+let list = [1, 2, 3, 4, 5];
+
+list | .filter(element => element < 3);
+```
+
+#### capturing and closure
+
+A function literal can refer to identifiers from its surrounding lexical scope; those references form its closure:
+
+```ghul
+…
+// Define a list to hold the closures:
+let closure_list = LIST();
+
+// Iterate over an integer range:
+for i in 1::10 do
+    // Create a closure capturing i's current value
+    let closure = () => i;
+
+    // Add the closure to the list:
+    closure_list.add(closure);
+od
+
+// Each closure captured the value of i at the
+// time of its creation:
+for closure in closure_list do
+    write_line("Closure captured value: {closure()}");
+od
+```
+
+output:
+
+```
+Closure captured value: 1
+Closure captured value: 2
+Closure captured value: 3
+Closure captured value: 4
+Closure captured value: 5
+Closure captured value: 6
+Closure captured value: 7
+Closure captured value: 8
+Closure captured value: 9
+Closure captured value: 10
+```
+
+An immutable `let` is captured by value, a snapshot taken when the function literal is constructed. A `let mut` is captured by reference instead, so the function literal and the surrounding scope share one live variable that either can read or reassign:
+
+```ghul
+…
+let counter mut = 0;
+
+let bump = (n: int) is
+    counter = counter + n;
+si;
+
+let peek = () -> int => counter;
+
+bump(10);
+bump(5);
+
+write_line("counter = {counter}, peek() = {peek()}");
+```
+
+output:
+
+```
+counter = 15, peek() = 15
+```
+
+## arithmetic
+
+Arithmetic expressions allow you to perform mathematical calculations using operators such as `+`, `-`, `*`, `/`, and `%`.
+
+```ghul
+let sum = 10 + 5;           // Addition
+let difference = 10 - 5;    // Subtraction
+let product = 10 * 5;       // Multiplication
+let quotient = 10 / 5;      // Division
+let remainder = 10 % 3;     // Modulo (remainder)
+```
+
+## comparison
+
+Comparison expressions allow you to compare values using operators such as `==`, `!=`, `<`, `>`, `<=`, and `>=`.
+
+```ghul
+let equal = 5 == 5; // Equality
+let not_equal = 5 != 10; // Inequality
+let less_than = 5 < 10; // Less than
+let greater_than = 10 > 5; // Greater than
+let less_than_or_equal = 5 <= 5; // Less or equal
+let greater_than_or_equal = 10 >= 10; // Greater or equal
+```
+
+## short circuit logical
+
+Logical expressions allow you to combine or negate boolean values using the `/\` (logical AND), `\/` (logical OR), and `!` (logical NOT) operators.
+
+```ghul
+let logical_and = true /\ false;    // Logical AND
+let logical_or = true \/ false;     // Logical OR
+let logical_not = !true;            // Logical NOT
+```
+
+Evaluation stops as soon as the result is known
+
+## conditional
+
+Conditional expressions allow you to evaluate different expressions based on a condition using the `if`-`then`-`else` construct.
+
+```ghul
+…
+let max = if a > b then a else b fi;
+```
+
+## case expression
+
+A `case` expression yields the value of the matched arm. It needs an `else` arm so that every value is covered; the arm values and the `else` agree on a type:
+
+```ghul
+…
+let n = 2;
+
+let size =
+    case n
+    when 0 then "none"
+    when 1, 2, 3 then "small"
+    else "large"
+    esac;
+
+write_line("size = {size}");
+```
+
+output:
+
+```
+size = small
+```
+
+## function call
+
+Function call expressions allow you to invoke functions and methods by providing the necessary arguments.
+
+```ghul
+…
+let result = sum(10, 5);
+```
+
+## thread-first calls
+
+The `|>` operator threads its left side into the call on its right as that call's first argument, so `x |> f(a)` means `f(x, a)`. Chaining is left-to-right, which turns a nest of calls inside-out into a readable pipeline:
+
+```ghul
+use IO.Std.write_line;
+
+class BOX(value: int);
+
+twice(x: int) -> int => x * 2;
+describe(b: BOX) -> string => "box of {b.value}";
+
+// '|>' threads its left side in as the first argument of the call on
+// its right, so a chain reads left-to-right instead of nesting
+// inside-out. This line means write_line(describe(BOX(twice(21)))).
+21 |> twice() |> BOX() |> describe() |> write_line();
+```
+
+output:
+
+```
+box of 42
+```
+
+The right side must be call-shaped: a free function, a constructor, or a method call on a receiver. The left side always becomes the first argument; the call is otherwise resolved exactly as if it had been written without the `|>`. This is separate from the `|` [pipe](https://ghul.dev/functional-programming.html) operator, which wraps a sequence for lazy `map` and `filter`; `|>` performs an ordinary call.
+
+## property access
+
+Property access expressions allow you to access the properties of an object using the dot notation.
+
+```ghul
+let length = "Hello".length;
+```
+
+## indexer
+
+Indexer expressions allow you to access elements of an array or collection using square brackets.
+
+```ghul
+let first_element = [1, 2, 3][0];
+```
+
+## constructor
+
+Constructor expressions allow you to create new instances of classes or structs by invoking their constructors.
+
+```ghul
+…
+let point = POINT(10, 20);
+```
+
+## type cast
+
+Type cast expressions allow you to explicitly convert a value from one type to another using the `cast` keyword.
+
+```ghul
+let integer_value = cast int(3.14);
+```
+
+## default value (`_`)
+
+The `_` expression evaluates to the default value of a type: `null` for reference types, the zero value for numeric and other value types.
+
+`_[T]` pins the type explicitly. A bare `_` takes its type from the surrounding context: a typed `let`, an assignment, or a return:
+
+```ghul
+let a = _[int];   // 0
+let b: string? = _;   // null
+…
+zero[T]() -> T => _;
+```
+
+`let a = _` initialises a local to its type's default value, where the type is inferred from how the local is later used.
+
+## let in
+
+A `let ... in ...` expression introduces one or more local variables that are in scope only within the trailing expression.
+
+```ghul
+…
+let area = let r = 5 in r * r;
+
+write_line("area = {area}");
+```
+
+output:
+
+```
+area = 25
+```
+
+## block
+
+A `val ... lav` block is a sequence of statements that produces a value. The value is the block's tail expression, or any `return E` whose target is the block. A block gives an expression room for intermediate local variables, loops, and early exits:
+
+```ghul
+…
+let area = val
+    let width = 4;
+    let height = 5;
+    width * height
+lav;
+
+write_line("area = {area}");
+```
+
+output:
+
+```
+area = 20
+```
+
+A `return E` inside a `val ... lav` block yields from the block, not from the enclosing function.
+
+These are the main types of expressions in ghūl. They can be combined and nested to form more complex expressions and statements:
+
+
+```ghul
+let x = 10;
+let y = 5;
+let sum = x + y;
+let product = x * y;
+let is_greater = x > y;
+
+if is_greater then
+    IO.Std.write_line("x is greater than y");
+else
+    IO.Std.write_line("x is not greater than y");
+fi
+
+let numbers = [1, 2, 3, 4, 5];
+let first_number = numbers[0];
+
+IO.Std.write_line(
+    "The first number is: {first_number}"
+);
+```
+
+output:
+
+```
+x is greater than y
+The first number is: 1
+```
 
 
 ---
@@ -7366,6 +7366,50 @@ level names `boolean`, `relational`, `range`, `shift`, `bitwise`, `addition` and
 
 ---
 
+<a id="known-issues"></a>
+
+# known issues
+
+There are numerous known issues, particularly in [the compiler](https://github.com/degory/ghul/issues) and in the [Visual Studio Code language extension](https://github.com/degory/ghul-vsce/issues). If you encounter a problem not already recorded in a GitHub issue, please raise a new issue. If an existing issue is blocking you, please add a comment on the issue, and I'll investigate, or feel free to raise a PR.
+
+Areas where you might particularly notice problems include:
+
+## spurious errors reported by the language extension
+
+There are several scenarios where you might receive spurious errors from the language extension when working in Visual Studio Code.
+
+### opening files unrelated to the project
+If you have a ghūl project open, and you open additional ghūl source files that are not related to that project, the language extension may incorrectly assume those files are part of the project. This can result in misleading errors. This issue is particularly prevalent in unit test projects, where the tests folder is nested within the project folder, causing the test source files to appear in the VSCode project explorer view. The workaround is to close the unrelated files and reload the project in Visual Studio with `<ctrl>` + `P` then select `Developer: Reload Window`. Then open a new separate VSCode window on the project folder containing the other source files you want to edit.
+
+### opening individual files without a project
+Similarly, opening individual ghūl source files in Visual Studio Code without opening the project root folder as a workspace can result in misleading error messages. The workaround is to close these files and then reopen VSCode, ensuring you open the project folder rather than individual files.
+
+### cascade of follow-on errors after an initial serious error
+Occasionally one error in your ghūl source code can trigger a whole series of subsequent errors. This could be due to the parser failing to resynchronize with valid code following a syntax error, or, more rarely, an unrecoverable internal error in the compiler due to corrupted compiler state. The extension will recover from these issues if you address the error causing the cascade, but identifying the root cause is not always straightforward. Using `<ctrl>` + `Z` / `Undo` can help revert to a state before the problem arose. Alternatively, the first error in the error cascade in the file you're editing is often the culprit. If you cannot isolate the cause, feel free to raise an issue, preferably with example code that reproduces it.
+
+### errors appear whilst editing and subsequently disappear
+This is a result of how the language extension and compiler operate. As you edit, the language extension buffers your changes, waiting for a pause in typing. Once you stop, the extension sends the latest version of the edited source files to the compiler, which compiles them and sends updated diagnostics back to the extension. To minimize latency for functions like code completion, the first recompilation after an edit is partial: the edited files are fully compiled, but the rest of the project is only compiled up to the global definitions. The bodies of functions, methods, and properties in unedited files are not compiled during this phase. The extension then waits longer, and if no further edits occur, it requests a full compilation of the entire project. This strategy boosts responsiveness for large projects, but can lead to spurious errors between the partial and full compilations, especially if further edits are made before the full compilation. The workaround is to wait a few seconds for the full compilation to complete.
+
+### valid errors not cleared after edits to correct them
+Very occasionally, if you have an error in your code and you make an edit that corrects it, you may find the error doesn't disappear. This can be caused by the state machine in the extension failing to queue a compile or by the extension's copy of the diagnostic state getting out of step with the compiler. Recent changes to the compiler and language extension have greatly reduced incidences of this problem but not completely eliminated it. The workaround for the first scenario is to make another change to the source to force a recompile (adding and immediately removing a space character for example). The workaround for the second scenario is to reload your project with `<ctrl>` + `P` then `Developer: Reload Window`.
+
+## limitations of generics
+
+ghūl supports generics on classes, structs, traits, methods, unions and global functions, with type-parameter constraints (type bound, kind, `new`) and declared variance on traits. A few limitations remain.
+
+### only a single type bound per parameter
+
+The parser accepts `[T: A]` (a single type bound) and `[T: A class new]` (a bound combined with kind and constructor constraints). Multiple type bounds (`[T: A /\ B]`) are not yet supported and are rejected with a clear diagnostic.
+
+### variance is declared only on traits
+
+The CLR permits variance only on interfaces, so `out` / `in` modifiers can be declared only on a trait's type parameters. Declaring variance on a class or struct is rejected at parse time.
+
+Type variance for built-in types is fixed and is not user-declarable. Function types are contravariant in their parameters and covariant in their return; arrays of reference types are covariant; everything else (including `List[T]`, `Map[K, V]`, `Iterable[T]`) is invariant.
+
+
+---
+
 <a id="implementation"></a>
 
 # implementation
@@ -7854,99 +7898,6 @@ exist, back when no ghūl compiler existed to compile it, is on the
 
 ---
 
-<a id="known-issues"></a>
-
-# known issues
-
-There are numerous known issues, particularly in [the compiler](https://github.com/degory/ghul/issues) and in the [Visual Studio Code language extension](https://github.com/degory/ghul-vsce/issues). If you encounter a problem not already recorded in a GitHub issue, please raise a new issue. If an existing issue is blocking you, please add a comment on the issue, and I'll investigate, or feel free to raise a PR.
-
-Areas where you might particularly notice problems include:
-
-## spurious errors reported by the language extension
-
-There are several scenarios where you might receive spurious errors from the language extension when working in Visual Studio Code.
-
-### opening files unrelated to the project
-If you have a ghūl project open, and you open additional ghūl source files that are not related to that project, the language extension may incorrectly assume those files are part of the project. This can result in misleading errors. This issue is particularly prevalent in unit test projects, where the tests folder is nested within the project folder, causing the test source files to appear in the VSCode project explorer view. The workaround is to close the unrelated files and reload the project in Visual Studio with `<ctrl>` + `P` then select `Developer: Reload Window`. Then open a new separate VSCode window on the project folder containing the other source files you want to edit.
-
-### opening individual files without a project
-Similarly, opening individual ghūl source files in Visual Studio Code without opening the project root folder as a workspace can result in misleading error messages. The workaround is to close these files and then reopen VSCode, ensuring you open the project folder rather than individual files.
-
-### cascade of follow-on errors after an initial serious error
-Occasionally one error in your ghūl source code can trigger a whole series of subsequent errors. This could be due to the parser failing to resynchronize with valid code following a syntax error, or, more rarely, an unrecoverable internal error in the compiler due to corrupted compiler state. The extension will recover from these issues if you address the error causing the cascade, but identifying the root cause is not always straightforward. Using `<ctrl>` + `Z` / `Undo` can help revert to a state before the problem arose. Alternatively, the first error in the error cascade in the file you're editing is often the culprit. If you cannot isolate the cause, feel free to raise an issue, preferably with example code that reproduces it.
-
-### errors appear whilst editing and subsequently disappear
-This is a result of how the language extension and compiler operate. As you edit, the language extension buffers your changes, waiting for a pause in typing. Once you stop, the extension sends the latest version of the edited source files to the compiler, which compiles them and sends updated diagnostics back to the extension. To minimize latency for functions like code completion, the first recompilation after an edit is partial: the edited files are fully compiled, but the rest of the project is only compiled up to the global definitions. The bodies of functions, methods, and properties in unedited files are not compiled during this phase. The extension then waits longer, and if no further edits occur, it requests a full compilation of the entire project. This strategy boosts responsiveness for large projects, but can lead to spurious errors between the partial and full compilations, especially if further edits are made before the full compilation. The workaround is to wait a few seconds for the full compilation to complete.
-
-### valid errors not cleared after edits to correct them
-Very occasionally, if you have an error in your code and you make an edit that corrects it, you may find the error doesn't disappear. This can be caused by the state machine in the extension failing to queue a compile or by the extension's copy of the diagnostic state getting out of step with the compiler. Recent changes to the compiler and language extension have greatly reduced incidences of this problem but not completely eliminated it. The workaround for the first scenario is to make another change to the source to force a recompile (adding and immediately removing a space character for example). The workaround for the second scenario is to reload your project with `<ctrl>` + `P` then `Developer: Reload Window`.
-
-## limitations of generics
-
-ghūl supports generics on classes, structs, traits, methods, unions and global functions, with type-parameter constraints (type bound, kind, `new`) and declared variance on traits. A few limitations remain.
-
-### only a single type bound per parameter
-
-The parser accepts `[T: A]` (a single type bound) and `[T: A class new]` (a bound combined with kind and constructor constraints). Multiple type bounds (`[T: A /\ B]`) are not yet supported and are rejected with a clear diagnostic.
-
-### variance is declared only on traits
-
-The CLR permits variance only on interfaces, so `out` / `in` modifiers can be declared only on a trait's type parameters. Declaring variance on a class or struct is rejected at parse time.
-
-Type variance for built-in types is fixed and is not user-declarable. Function types are contravariant in their parameters and covariant in their return; arrays of reference types are covariant; everything else (including `List[T]`, `Map[K, V]`, `Iterable[T]`) is invariant.
-
-
----
-
-<a id="resources"></a>
-
-# resources
-
-## compiler, runtime, and tools
-
-Official source repositories are [hosted on GitHub.com](https://github.com/degory)
-
-Official release packages are [hosted on NuGet.org](https://www.nuget.org/packages?q=degory+ghul). Copies of the release versions and beta versions are available on GitHub under Packages for each repository, and as workflow assets on successful PR builds.
-
-The Visual Studio Code language extension is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=degory.ghul).
-
-
-### compiler
-The ghūl compiler
-- **Repository:** [ghul](https://github.com/degory/ghul)
-- **Package:** [ghul.compiler](https://www.nuget.org/packages/ghul.compiler) (Packaged as a [.NET tool](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install))
-
-### runtime
-The ghūl runtime library.
-- **Repository:** [ghul-runtime](https://github.com/degory/ghul-runtime)
-- **Package:** [ghul.runtime](https://www.nuget.org/packages/ghul.runtime)
-
-### test
-Integration test runner for the ghūl compiler. (A build time dependency of the compiler itself. Not required for other ghūl projects)
-- **Repository:** [ghul-test](https://github.com/degory/ghul-test) 
-- **Package:** [ghul.test](https://www.nuget.org/packages/ghul.test)
-
-### Visual Studio Code Extension
-Provides ghūl language support within VSCode.
-- **Repository:** [ghul-vsce](https://github.com/degory/ghul-vsce)
-- **Package:** [degory.ghul](https://marketplace.visualstudio.com/items?itemName=degory.ghul)
-
-### templates
-.NET New Templates
-- **Repository:** [ghul-templates](https://github.com/degory/ghul-templates)
-- **Package** [ghul.templates](https://www.nuget.org/packages/ghul.templates) (install with `dotnet new install ghul.templates`)
-
-## contributing
-
-### issues
-If you encounter any problems, please feel free to open an issue on GitHub. If it's not clear which repo to open the issue in, open it in the [compiler repo](https://github.com/degory/ghul) and I can move it if needed.
-
-### PRs
-If you want to fix a bug or make an improvement, particularly if it's something small, go ahead and raise a PR. If it's something complex, please raise an issue first. Note that the CI/CD pipelines are not generally set up to handle PRs from forks, so unless you want to hack my workflow YAML, I might need to pull your feature branch and create a PR on your behalf before I can merge your changes.
-
-
----
-
 <a id="history"></a>
 
 # history
@@ -8015,3 +7966,52 @@ This phase was complicated by L's LLVM backend and by its standard library, with
 Finally, with the compiler reliably self-hosting on .NET, I removed the L transpilation backend and the .NET library subset, and the compiler was successfully bootstrapped onto .NET.
 
 You can see this process in the Git history in the [ghūl compiler repo](https://github.com/degory/ghul), going all the way back to the initial commit.
+
+
+---
+
+<a id="resources"></a>
+
+# resources
+
+## compiler, runtime, and tools
+
+Official source repositories are [hosted on GitHub.com](https://github.com/degory)
+
+Official release packages are [hosted on NuGet.org](https://www.nuget.org/packages?q=degory+ghul). Copies of the release versions and beta versions are available on GitHub under Packages for each repository, and as workflow assets on successful PR builds.
+
+The Visual Studio Code language extension is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=degory.ghul).
+
+
+### compiler
+The ghūl compiler
+- **Repository:** [ghul](https://github.com/degory/ghul)
+- **Package:** [ghul.compiler](https://www.nuget.org/packages/ghul.compiler) (Packaged as a [.NET tool](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install))
+
+### runtime
+The ghūl runtime library.
+- **Repository:** [ghul-runtime](https://github.com/degory/ghul-runtime)
+- **Package:** [ghul.runtime](https://www.nuget.org/packages/ghul.runtime)
+
+### test
+Integration test runner for the ghūl compiler. (A build time dependency of the compiler itself. Not required for other ghūl projects)
+- **Repository:** [ghul-test](https://github.com/degory/ghul-test) 
+- **Package:** [ghul.test](https://www.nuget.org/packages/ghul.test)
+
+### Visual Studio Code Extension
+Provides ghūl language support within VSCode.
+- **Repository:** [ghul-vsce](https://github.com/degory/ghul-vsce)
+- **Package:** [degory.ghul](https://marketplace.visualstudio.com/items?itemName=degory.ghul)
+
+### templates
+.NET New Templates
+- **Repository:** [ghul-templates](https://github.com/degory/ghul-templates)
+- **Package** [ghul.templates](https://www.nuget.org/packages/ghul.templates) (install with `dotnet new install ghul.templates`)
+
+## contributing
+
+### issues
+If you encounter any problems, please feel free to open an issue on GitHub. If it's not clear which repo to open the issue in, open it in the [compiler repo](https://github.com/degory/ghul) and I can move it if needed.
+
+### PRs
+If you want to fix a bug or make an improvement, particularly if it's something small, go ahead and raise a PR. If it's something complex, please raise an issue first. Note that the CI/CD pipelines are not generally set up to handle PRs from forks, so unless you want to hack my workflow YAML, I might need to pull your feature branch and create a PR on your behalf before I can merge your changes.
