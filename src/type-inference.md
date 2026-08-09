@@ -21,7 +21,7 @@ Within a function, types are inferred for:
 
 In each case the inferred type is concrete. The compiler does not introduce new type parameters during inference, so an anonymous function literal takes a single concrete function type from its context - it cannot itself be generic. For polymorphic behaviour, declare a generic global function or method and pass it where the function value is needed.
 
-ghūl also performs **type narrowing** - within parts of a function a value can be observed at a more specific type than the one it was declared with. Narrowing applies to local variables (function parameters, `let` variables, loop variables, destructured variables and anonymous function parameters), and to a member-access path like `x.field` or `x.property`, for `isa`, variant and presence tests alike. A narrow on a path holds only while nothing can change what the path reads; a narrow on a local holds until the local is reassigned.
+ghūl also performs [type narrowing](/type-narrowing.html) - within parts of a function a value can be observed at a more specific type than the one it was declared with. Inference and narrowing work together: the inferred type is the ceiling, and the control flow sharpens it region by region.
 
 The examples below leave inferred types unannotated; hover over any variable to see the type the compiler worked out for it.
 
@@ -36,32 +36,6 @@ Inference does not read types out of a body into the function's signature, and d
 Fields and properties belong to a type rather than to a function body, so their types are written out too - for private members as well as public ones.
 
 <GhulExample name="type-inference-2" />
-
-## type narrowing
-
-When a check guarantees a value has a more specific type, ghūl narrows that value to it for the code the check covers. Narrowing applies to local variables, including a function's own parameters.
-
-<GhulExample name="type-inference-3" />
-
-A presence test (`?`) also narrows a member-access path: after `if x.field? then`, uses of `x.field` inside the branch are non-optional.
-
-<GhulExample name="type-inference-4a" />
-
-An `isa` check or variant test narrows a path the same way:
-
-<GhulExample name="type-inference-4" />
-
-A narrow on a path is less durable than one on a local variable. The path reads a fresh value each time, so the narrowing lasts only while nothing can change what it reads: a call to a method or property that can write to the heap drops it, and so does an assignment that can change the path. A local variable holds its value, which no other call can change, so its narrowing lasts until the variable is reassigned. Copying the path into a local keeps the narrower type across a call that would otherwise drop it.
-
-<GhulExample name="type-inference-5" />
-
-`if let` copies the value into a fresh local in one step, and works for any expression - the result of a call, not only a variable or path. The local narrows and stays narrowed within the branch.
-
-<GhulExample name="type-inference-6" />
-
-The [type narrowing](/control-flow.html#type-narrowing) section of the control flow page covers which calls preserve a path narrow.
-
-Narrowing covers union variant tags, `isa` class checks, null checks (`x?`) and `if let`, and it is flow-sensitive - an early-return guard narrows the code that follows it. See [type narrowing and `if let`](/control-flow.html#type-narrowing) in the control flow page for the full picture.
 
 ## what gets inferred
 

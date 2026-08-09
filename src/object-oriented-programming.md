@@ -26,7 +26,7 @@ Calling `describe` through the `Animal[]` is polymorphism: the static type is `A
 
 `speak` above has no body. A class with a body-less instance method is implicitly abstract: it names a method the class can't perform on its own, so constructing the class directly is rejected and only subclasses that supply the method can exist. Marking a class `abstract` has the same effect without a body-less method.
 
-By default a class is closed to subclassing outside its own assembly; the postfix `open` modifier opts in to cross-assembly subclassing. Closing the hierarchy lets the compiler narrow on the `else` edge of an `isa` test, and an `abstract` root can narrow to a single remaining subclass (see [type narrowing](/control-flow.html#type-narrowing)).
+By default a class is closed to subclassing outside its own assembly; the postfix `open` modifier opts in to cross-assembly subclassing. Closing the hierarchy lets the compiler narrow on the `else` edge of an `isa` test, and an `abstract` root can narrow to a single remaining subclass (see [type narrowing](/type-narrowing.html)).
 
 ## traits
 
@@ -36,7 +36,7 @@ A trait member can provide a default body, which an implementing type inherits a
 
 ## narrowing
 
-Discovering an object's concrete type at runtime uses `isa` or `if let`, which test the type and narrow the value to it inside the matching branch, and a `case` over a closed hierarchy is checked for exhaustiveness. The [control flow](/control-flow.html#type-narrowing) page covers narrowing in full.
+Discovering an object's concrete type at runtime uses `isa` or `if let`, which test the type and narrow the value to it inside the matching branch, and a `case` over a closed hierarchy is checked for exhaustiveness. The [control flow](/type-narrowing.html) page covers narrowing in full.
 
 ## a worked example
 

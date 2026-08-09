@@ -123,7 +123,7 @@ Discovering which variant a union holds, and branching on the result, is done wi
 
 <GhulExample name="functional-programming-18" />
 
-`isa` variant tests and `else`-branch narrowing cover the same ground; see [type narrowing and `if let`](/control-flow.html#type-narrowing) in the control flow page for the full picture.
+`isa` variant tests and `else`-branch narrowing cover the same ground; see [type narrowing and `if let`](/type-narrowing.html) in the control flow page for the full picture.
 
 A `case` expression matches one scrutinee against several `when` arms, which reads better than a chain of `if let`/`elif let` once there are more than a couple of variants to cover. Over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - the compiler checks the arms for exhaustiveness, so `area` needs no fallback return for a variant the `when` arms forgot:
 
