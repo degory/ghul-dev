@@ -71,8 +71,10 @@ Structs consist of a name, then the types of any traits implemented, and then th
 Structs are constructed the same way as classes, with a constructor expression:
 <GhulExample name="definitions-11" />
 
-A struct defines a new value type, which means any values that the struct encapsulates are collected together as a new kind of value: copying the struct copies all the encapsulated values. A struct gets no equality of its own, so define `=~` to say what equal means for it, with a matching `get_hash_code` so that .NET collections agree; `!~` follows as the negation of `=~`. `==` is reserved for the primitive scalars and for reference identity, and applying it to a struct is a compile error rather than a silently wrong answer:
+A struct defines a new value type, which means any values that the struct encapsulates are collected together as a new kind of value: assigning a struct copies all the encapsulated values, so the copy and the original then go their separate ways:
 <GhulExample name="definitions-12" />
+
+A struct has no equality of its own, so `==` does not apply to one; giving a struct an equality means defining `=~`, described under [defining operators](#operators) and, for the .NET side of it, under [making your own types work with .NET](/dotnet-integration.html#equality).
 
 Structs can only be defined at global scope. Structs can be generic, which will be covered later. Struct names should be in `MACRO_CASE`.
 
