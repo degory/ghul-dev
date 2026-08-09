@@ -13,7 +13,8 @@ write_line("first:     {words | .first() ?? "none"}");
 // holds none or more than one
 write_line("only:      {["solo"] | .only()}");
 
-// a mapper that answers only for words longer than four characters
+// a mapper that gives a result only for words longer than four
+// characters
 shout(w: string) -> MAYBE[string] pure =>
     if w.length > 4 then MAYBE[string](w.to_upper()) else MAYBE[string]() fi;
 

@@ -4,8 +4,8 @@ use IO.Std.write_line;
 let left = [1, 2, 2, 3, 4];
 let right = [3, 4, 5];
 
-// all four keep the first occurrence of each element and
-// discard later duplicates, in the order first seen
+// all four remove duplicates, keeping the first occurrence
+// of each element
 write_line("distinct:       {left | .distinct()}");
 write_line("union_with:     {left | .union_with(right)}");
 write_line("intersect_with: {left | .intersect_with(right)}");

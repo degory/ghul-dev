@@ -25,14 +25,12 @@ or, fluently:
 
 The combinators come in two kinds.
 
-A **stage** answers with a new `Pipe[T]`, and does none of the work it
-describes. `map(f)` does not call `f` on anything. It answers with a pipe that
-will call `f` on each element, if and when something asks that pipe for
-elements.
+A **stage** returns a new `Pipe[T]`, and does none of the work it
+describes. `map(f)` does not call `f` on anything. It returns a pipe that will
+call `f` on each element, if and when something asks that pipe for elements.
 
-A **terminal** answers with something else: a value, a list, a count. Working
-that answer out means asking for elements, and that is what sets everything
-going. The terminal asks the pipe it was called on, which asks the pipe *it*
+A **terminal** returns something else: a value, a list, a count. Producing it
+means asking for elements, and that is what sets everything going. The terminal asks the pipe it was called on, which asks the pipe *it*
 was built from, and so on back to the array or list the chain started with.
 
 So a chain of stages does nothing at all, however long it is, until a terminal
@@ -46,12 +44,10 @@ the start of a chain that ends in `take(10)`: ten elements are asked for, so
 ten are produced, and the generator is never run any further.
 
 A few stages are exceptions, listed separately below. `reverse` and the `sort`
-family cannot answer with a first element until they have seen the last one, so
+family cannot produce their first element until they have seen the last one, so
 they read the whole source the moment they are called.
 
 ## reading the signatures
-
-Two things in these signatures are worth a word.
 
 The `pure` on a function type - `predicate: (T) -> bool pure` - asks that the
 function you pass only reads, and writes nothing to the heap. Most lambdas
@@ -59,14 +55,14 @@ satisfy it without any thought; see [type narrowing](/type-narrowing.html#purity
 for what the compiler does with the guarantee.
 
 `Ghul.MAYBE[T]` is an [optional type](/optional-types.html): it holds a `T` or
-holds nothing. Combinators that might not find an answer say so in their return
-type, and `??`, `!` and `if let` read the value out.
+holds nothing. Combinators that might not find anything say so in their return type, and `??`,
+`!` and `if let` read the value out.
 
-## lifting a source into a pipe
+## making a pipe
 
 ### pipe
 
-Lifts any `Iterable[T]` - an array, a `LIST[T]`, a `MAP[T]`'s values,
+Turns any `Iterable[T]` - an array, a `LIST[T]`, a `MAP[T]`'s values,
 anything with an `.iterator` - into a `Pipe[T]`. This is what the `|`
 operator calls to wrap its left operand.
 
@@ -74,8 +70,8 @@ operator calls to wrap its left operand.
 
 ## stages
 
-A stage answers with a new pipe. Nothing it describes happens until a terminal
-asks for elements.
+A stage returns a new pipe. Nothing it describes happens until a terminal asks
+for elements.
 
 ### filter
 
@@ -141,7 +137,7 @@ The four set operations that follow all discard duplicates. This is what they do
 
 ### distinct
 
-Drops elements already seen. The four set operations here - `distinct`, `union_with`, `intersect_with` and `except` - all keep the first occurrence of an element and discard later duplicates, so each yields a sequence with no repeats in first-seen order. Elements are compared with `=~` and `get_hash_code`, so a type used with these needs [both](/dotnet-integration.html#equality).
+Removes duplicates, keeping the first occurrence of each element. `distinct`, `union_with`, `intersect_with` and `except` all do this, so each produces a sequence with no repeats, in the order first seen. Elements are compared with `=~` and `get_hash_code`, so a type used with these needs [both](/dotnet-integration.html#equality).
 
 <GhulExample name="pipes-ref-distinct-function" signature />
 
@@ -151,7 +147,7 @@ or, as a method:
 
 ### union_with
 
-Elements of the source followed by elements of `right` that the source didn't already have.
+Every element of both sources with duplicates removed, taking the left source's elements first.
 
 <GhulExample name="pipes-ref-union_with-function" signature />
 
@@ -161,7 +157,7 @@ or, as a method:
 
 ### intersect_with
 
-Elements the source and `right` have in common, in the order the source produced them.
+Elements the left and right sources have in common, in the order the left source has them.
 
 <GhulExample name="pipes-ref-intersect_with-function" signature />
 
@@ -171,7 +167,7 @@ or, as a method:
 
 ### except
 
-Elements of the source that `right` doesn't have.
+Elements of the left source that the right source doesn't have.
 
 <GhulExample name="pipes-ref-except-function" signature />
 
@@ -181,7 +177,7 @@ or, as a method:
 
 ### peek
 
-Calls `action` on each element and yields it unchanged. `peek` is a stage, so the action runs as elements are pulled through it, not when the chain is built - which makes it a way to see what a chain is doing.
+Calls `action` on each element and yields it unchanged. `peek` is a stage, so the action runs as each element goes past, not when the chain is built. It is a way to see what a chain is doing.
 
 <GhulExample name="pipes-ref-peek-function" signature />
 
@@ -189,13 +185,13 @@ or, as a method:
 
 <GhulExample name="pipes-ref-peek-method" signature />
 
-`chunk` and `windows` both answer with groups of elements, and differ in whether the groups overlap:
+`chunk` and `windows` both produce groups of elements, and differ in how the groups are cut:
 
 <GhulExample name="pipes-chunk-windows" />
 
 ### chunk
 
-Consecutive groups of `size` elements that don't overlap. When the source doesn't divide evenly the final group is short. Compare `windows`, below.
+The first `size` elements, then the next `size`, and so on, each element appearing in one group only. The last group is short when the source doesn't divide evenly. Compare `windows`, below.
 
 <GhulExample name="pipes-ref-chunk-function" signature />
 
@@ -205,7 +201,7 @@ or, as a method:
 
 ### windows
 
-A view of `size` elements sliding one element at a time, so successive windows overlap. Only full-size windows are produced: a source shorter than `size` yields nothing.
+Every run of `size` neighbouring elements: the first `size`, then the same run moved along by one, and so on. Each window therefore shares all but one of its elements with the window before it. A window is always `size` long, so a source with fewer than `size` elements produces none.
 
 <GhulExample name="pipes-ref-windows-function" signature />
 
@@ -215,7 +211,7 @@ or, as a method:
 
 ### cat
 
-Concatenation: every element of the source, then every element of `right`.
+Concatenation: every element of the left source, then every element of the right.
 
 <GhulExample name="pipes-ref-cat-function" signature />
 
@@ -225,7 +221,7 @@ or, as a method:
 
 ### index
 
-Pairs each element with its position. `INDEXED_VALUE[T]` carries `index` and `value`, and destructures positionally, so `for (i, x) in xs | .index() do` reads the pair apart. The second form starts counting from a given index rather than from 0.
+Pairs each element with its index. `INDEXED_VALUE[T]` carries `index` and `value`, and destructures positionally, so `for (i, x) in xs | .index() do` reads the pair apart. The second form starts the index at a given number rather than at 0.
 
 <GhulExample name="pipes-ref-index-function" signature />
 
@@ -245,8 +241,8 @@ or, as a method:
 
 ## stages that buffer
 
-These answer with a pipe, like any other stage, but they cannot work out their
-first element without having seen the last one. So they read the whole source
+These return a pipe, like any other stage, but they cannot work out their first
+element without having seen the last one. So they read the whole source
 the moment they are called, rather than as a terminal asks for elements.
 
 ### reverse
@@ -295,15 +291,15 @@ or, as a method:
 
 ## terminals
 
-A terminal answers with something other than a pipe, and asking for that answer
-is what runs the stages the chain is built from. They fall into three loose
+A terminal returns something other than a pipe, and asking it for that value is
+what runs the stages the chain is built from. They fall into three loose
 groups:
 finding a single element, collecting the elements into a container, and folding
 or consuming the sequence as a whole.
 
 The searching combinators come in pairs. `find`-style ones take a predicate or
-a mapper and scan; `first`-style ones look only at the leading element. Each has
-a variant answering `MAYBE[T]` and one throwing instead:
+a mapper and scan; `first`-style ones look only at the leading element. Each has a
+variant returning `MAYBE[T]` and one that throws instead:
 
 <GhulExample name="pipes-searching" />
 
@@ -319,7 +315,7 @@ or, as a method:
 
 ### find_map
 
-Calls `mapper` on each element in turn and answers with the first present result. `first_map` differs: it calls the mapper on the *first* element only, and gives up if that one declines.
+Calls `mapper` on each element in turn and returns the first present result. `first_map` differs: it calls the mapper on the *first* element only, and gives up if that one declines.
 
 <GhulExample name="pipes-ref-find_map-function" signature />
 
@@ -329,7 +325,7 @@ or, as a method:
 
 ### find_or_throw
 
-As `find`, throwing instead of answering absent when nothing matches.
+As `find`, throwing instead of returning absent when nothing matches.
 
 <GhulExample name="pipes-ref-find_or_throw-function" signature />
 
@@ -339,7 +335,7 @@ or, as a method:
 
 ### find_map_or_throw
 
-As `find_map`, throwing instead of answering absent when nothing maps.
+As `find_map`, throwing instead of returning absent when nothing maps.
 
 <GhulExample name="pipes-ref-find_map_or_throw-function" signature />
 
@@ -369,7 +365,7 @@ or, as a method:
 
 ### first_or_throw
 
-As `first`, throwing instead of answering absent when the source is empty.
+As `first`, throwing instead of returning absent when the source is empty.
 
 <GhulExample name="pipes-ref-first_or_throw-function" signature />
 
@@ -379,7 +375,7 @@ or, as a method:
 
 ### first_map_or_throw
 
-As `first_map`, throwing instead of answering absent.
+As `first_map`, throwing instead of returning absent.
 
 <GhulExample name="pipes-ref-first_map_or_throw-function" signature />
 
@@ -525,7 +521,7 @@ or, as a method:
 
 ### each
 
-Calls `action` on every element. It answers nothing and, alone among these, is not `pure` - it exists for its side effects.
+Calls `action` on every element. It returns nothing and, alone among these, is not `pure` - it exists for its side effects.
 
 <GhulExample name="pipes-ref-each-function" signature />
 
