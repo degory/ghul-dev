@@ -23,23 +23,31 @@ or, fluently:
 
 ## how a pipe runs
 
-The combinators come in two kinds. A **stage** answers with a new `Pipe[T]` and
-does no work: it describes something to do to each element as it goes past. A
-**terminal** answers with something other than a pipe, and getting that answer
-is what pulls elements through every stage in front of it. So a chain of stages
-on its own runs nothing, however long it is, until a terminal draws on it:
+The combinators come in two kinds.
+
+A **stage** answers with a new `Pipe[T]`, and does none of the work it
+describes. `map(f)` does not call `f` on anything. It answers with a pipe that
+will call `f` on each element, if and when something asks that pipe for
+elements.
+
+A **terminal** answers with something else: a value, a list, a count. Working
+that answer out means asking for elements, and that is what sets everything
+going. The terminal asks the pipe it was called on, which asks the pipe *it*
+was built from, and so on back to the array or list the chain started with.
+
+So a chain of stages does nothing at all, however long it is, until a terminal
+asks it for something:
 
 <GhulExample name="pipes-lazy-chain" />
 
-Laziness is what lets a pipe stand in front of an unbounded source: a
-[generator](/async-and-generators.html#generators) that never finishes is
-perfectly usable behind a `take`, because only the elements actually asked for
-are ever produced.
+This is also what makes an endless sequence useful. A
+[generator](/async-and-generators.html#generators) that yields forever can be
+the start of a chain that ends in `take(10)`: ten elements are asked for, so
+ten are produced, and the generator is never run any further.
 
-Two groups of stages are exceptions worth knowing, listed separately below:
-`reverse` and the `sort` family have to read the whole source before they can
-answer at all, so they do that as soon as they are called, and hand back a pipe
-over the result.
+A few stages are exceptions, listed separately below. `reverse` and the `sort`
+family cannot answer with a first element until they have seen the last one, so
+they read the whole source the moment they are called.
 
 ## reading the signatures
 
@@ -66,7 +74,8 @@ operator calls to wrap its left operand.
 
 ## stages
 
-A stage answers with a new pipe and runs nothing until a terminal pulls on it.
+A stage answers with a new pipe. Nothing it describes happens until a terminal
+asks for elements.
 
 ### filter
 
@@ -236,9 +245,9 @@ or, as a method:
 
 ## stages that buffer
 
-These answer with a pipe, like any other stage, but they cannot produce their
+These answer with a pipe, like any other stage, but they cannot work out their
 first element without having seen the last one. So they read the whole source
-as soon as they are called rather than as elements are pulled.
+the moment they are called, rather than as a terminal asks for elements.
 
 ### reverse
 
@@ -287,7 +296,8 @@ or, as a method:
 ## terminals
 
 A terminal answers with something other than a pipe, and asking for that answer
-is what runs the stages in front of it. They fall into three loose groups:
+is what runs the stages the chain is built from. They fall into three loose
+groups:
 finding a single element, collecting the elements into a container, and folding
 or consuming the sequence as a whole.
 

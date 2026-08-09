@@ -4,7 +4,7 @@ use IO.Std.write_line;
 let numbers = [1, 2, 3, 4, 5, 6];
 
 // building a chain of stages runs nothing: peek's action is
-// called only as elements are pulled through it
+// called only when something asks for elements
 let stages = numbers
     | .peek(x => write_line("  pulled {x}"))
     | .filter(x => x % 2 == 0)
@@ -12,7 +12,8 @@ let stages = numbers
 
 write_line("chain built - nothing has run yet");
 
-// collect_list is a terminal, so this is what pulls
+// collect_list is a terminal: asking it for the list is what
+// runs the chain
 let result = stages | .collect_list();
 
 write_line("result: {result | .join(", ")}");
