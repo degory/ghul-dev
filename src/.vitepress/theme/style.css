@@ -65,3 +65,10 @@
     margin: 0.5rem auto 0.75rem;
   }
 }
+
+/* The page must not scroll behind an example that has been expanded to fill
+   the window: scrolling inside the editor would otherwise move the article
+   underneath it. */
+body.ghul-example-expanded-open {
+  overflow: hidden;
+}
