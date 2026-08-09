@@ -3,7 +3,8 @@
 // rendering under /text from the flattened PAGES, so the two can't drift
 // apart.
 //
-// The groups separate the site's registers: "tour" is the narrative
+// The groups separate the site's registers: "ghūl" is the front door
+// (the overview and how to install), "tour" is the narrative
 // teach-by-example path a newcomer reads in order, "guides" are practical
 // how-tos, "reference" is for looking things up, and "about" is the story
 // of the project itself.
