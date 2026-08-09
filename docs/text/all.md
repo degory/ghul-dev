@@ -15,19 +15,22 @@ only things dropped.
 - [overview](#index) - https://ghul.dev/
 - [getting started](#getting-started) - https://ghul.dev/getting-started
 - [language basics](#language-basics) - https://ghul.dev/language-basics
-- [control flow](#control-flow) - https://ghul.dev/control-flow
 - [optional types](#optional-types) - https://ghul.dev/optional-types
+- [type narrowing](#type-narrowing) - https://ghul.dev/type-narrowing
+- [unions and pattern matching](#unions-and-pattern-matching) - https://ghul.dev/unions-and-pattern-matching
 - [expression oriented programming](#expression-oriented-programming) - https://ghul.dev/expression-oriented-programming
 - [functional programming](#functional-programming) - https://ghul.dev/functional-programming
 - [object oriented programming](#object-oriented-programming) - https://ghul.dev/object-oriented-programming
 - [generics](#generics) - https://ghul.dev/generics
 - [type inference](#type-inference) - https://ghul.dev/type-inference
+- [async and generators](#async-and-generators) - https://ghul.dev/async-and-generators
 - [.NET integration](#dotnet-integration) - https://ghul.dev/dotnet-integration
 - [runtime library](#runtime-library) - https://ghul.dev/runtime-library
 - [tooling](#tooling) - https://ghul.dev/tooling
 - [syntax](#syntax) - https://ghul.dev/syntax
 - [definitions](#definitions) - https://ghul.dev/definitions
 - [expressions](#expressions) - https://ghul.dev/expressions
+- [control flow](#control-flow) - https://ghul.dev/control-flow
 - [grammar](#grammar) - https://ghul.dev/grammar
 - [known issues](#known-issues) - https://ghul.dev/known-issues
 - [implementation](#implementation) - https://ghul.dev/implementation
@@ -58,6 +61,10 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 > **interactive examples**
 >
 > Hover any identifier in a code example to see its type. An example's output and any compiler diagnostics appear in a panel beneath it. The rotating examples below advance on their own; hover to pause, or step through them with the controls.
+
+> **run the examples**
+>
+> Every example on this site is runnable. The [ghūl playground](https://github.com/degory/ghul-playground) is a one-file project set up for exactly that: open it in a GitHub Codespace, or clone it on your own machine, paste an example into `main.ghul`, and `dotnet run`.
 
 ### hello world!
 
@@ -816,15 +823,6 @@ output:
 name is Alice
 ```
 
-`!` reads the value out where narrowing hasn't already done it, but is rarely needed: `if let` tests an optional and reads its value into a local variable in one step (see [control flow](https://ghul.dev/control-flow.html#if-let)).
-
-Optional types work for reference and value types alike - and beyond those two, for generic code that doesn't know which one it has, and for user-defined types that never mention `T?` at all. The [optional types](https://ghul.dev/optional-types) page covers all of that; here's the common case, a value-type optional like `int?`. You don't construct one explicitly: a plain value where an optional is expected widens automatically, and `null` marks the absent case:
-
-```ghul
-let ► here: int? = 42;   // present
-let gone: int? = null; // absent
-```
-
 A non-optional type never holds the absent case, so a `T?` is not assignable to a `T`. The compiler rejects it rather than warning:
 
 ```ghul
@@ -838,58 +836,7 @@ diagnostics:
 - error: string? is not assignable to string
 - warning: [non-optional] string expected but maybe may not hold a value
 
-To pass a `T?` where a `T` is wanted, make the value present first: narrow it with `if x?` or `if let`, assert it with `x!` (which throws when absent), or supply a fallback with `x ?? other`:
-
-```ghul
-…
-if ► maybe? then
-    let narrowed: string = maybe; // narrowed to string here
-    write_line(narrowed);
-fi
-
-let forced: string = ► maybe!;            // asserts present, throws if absent
-let safe: string = maybe ?? "fallback"; // falls back when absent
-```
-
-output:
-
-```
-found
-```
-
-Reading a member through an optional not known to be present draws a `null-deref` warning; `x?.y`, `x.has_value`, `x!`, and `if let` are the warning-free routes. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
-
-The `??` operator supplies a fallback: `a ?? b` is `a` when it is present, otherwise `b`, and `b` is evaluated only when needed. It is right-associative, so `a ?? b ?? c` tries each in turn, and the result stays optional until a non-optional value closes the chain:
-
-```ghul
-…
-let name = lookup();
-let greeting = "hello, {name ?? "stranger"}";
-write_line(greeting);
-```
-
-output:
-
-```
-hello, stranger
-```
-
-The `?.` operator reads a member only when the receiver is present: `a?.b` is `b` when `a` is present, otherwise the absent case. The result is always optional, and `?.` chains, so a whole access path folds down to one optional. Only field and property access compose with `?.`; a method call needs an `if a?` guard first.
-
-```ghul
-…
-let p = find();
-let name = p?.name; // string? - absent when p is absent
-write_line("name: {name ?? "unknown"}");
-```
-
-output:
-
-```
-name: unknown
-```
-
-These are the basic data types available in ghūl. The language also supports more advanced types such as classes, structs, traits, enums, and unions, which will be covered in later sections of the documentation.
+To pass a `T?` where a `T` is wanted, make the value present first: narrow it with `if x?` or `if let` (see [control flow](https://ghul.dev/control-flow.html#if-let)), assert it with `x!` (which throws when absent), or supply a fallback with `x ?? other`. Optional types work for reference and value types alike - and beyond those two, for generic code that doesn't know which one it has, and for user-defined types that never mention `T?` at all. The [optional types](https://ghul.dev/optional-types) page covers all of that, along with the `??` and `?.` operators and the warnings that keep optional handling honest.
 
 ### type conversions
 
@@ -1016,1291 +963,13 @@ i = 10, s = Hello World!, thing.property = 20
 
 ---
 
-<a id="control-flow"></a>
-
-# control flow in ghūl
-
-> **runnable examples**
->
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples. Open it in a GitHub Codespace or a dev container to build and run them.
-
-> **narrowing inlays**
->
-> Open ghūl in an editor with the [ghūl language extension](https://ghul.dev/tooling.html) and small triangle hints mark where [type narrowing](#type-narrowing) changes: `►` where a variable is narrowed to a more specific type, `◄` where a narrowing ends and the variable widens back to its declared type, and `◄►` where an assignment does both at once. Hovering a hint shows the types and the reason; on an `if` it shows the narrowing for both the taken and the not-taken branch.
-
-## block scope
-
-In ghūl, most control flow statements incorporate one or more blocks. A block is a list of one or more statements that forms a scope for local variable definitions. The scope of a variable is the region of code where that variable is visible and can be accessed.
-Blocks are delimited by keywords that are specific to their control flow statement. For example, if-then statements use `then` and `else`, `elif` or `fi` to delimit their blocks, while loops use `do` and `od`, and so on.
-Variables defined within a block are only accessible within that block and any nested blocks. Once execution exits the block, those variables go out of scope and cannot be accessed anymore.
-
-## assert statement
-
-In ghūl the `assert` statement is used to ensure an expected condition holds and to throw an exception if it does not. An assert statement starts with `assert`, followed by an expression that must evaluate to a bool, followed by `else`, and then a value to throw. If the value to throw is a string, it will be wrapped in an `AssertionFailedException`. Otherwise it must be of a throwable type.
-
-```ghul
-…
-assert true else "all bets are off"; // does not throw
-
-let list = [1, 2, 3, 4, 5];
-
-assert 3 < list.count
-    else System.ArgumentOutOfRangeException("list");
-
-write_line("ok: {list.count} elements");
-```
-
-output:
-
-```
-ok: 5 elements
-```
-
-`assert` is also an expression. `assert cond else "msg" in expr` guards a value and chains like `let x in expr`: a failing assert throws, a passing one yields the trailing expression. Any narrowing the condition establishes flows into that expression, so a value checked present reads directly there:
-
-```ghul
-…
-length_of(key: string?) -> int =>
-    assert ► key? else "key is null" in
-    key.length;
-
-write_line(length_of("hello"));
-```
-
-output:
-
-```
-5
-```
-
-## if statement
-
-If statements allow the execution of different code blocks based on specific conditions. An `if` is also an expression that yields the value of its chosen branch; see [if as an expression](https://ghul.dev/expressions#conditional).
-
-### if-then-fi
-
-This is the simplest form of a conditional statement. It checks a condition and executes the subsequent block of code if the condition is true.
-
-```ghul
-if condition then
-    // code to execute if condition is true
-fi
-```
-
-```ghul
-…
-let list = [1, 2, 3, 4];
-
-if list.count > 0 then
-    write_line("list has {list.count} elements");
-fi
-```
-
-output:
-
-```
-list has 4 elements
-```
-
-### if-then-else-fi
-
-This form allows for an alternative block of code to be executed if the condition is false.
-
-```ghul
-if condition then
-    // code to execute if condition is true
-else
-    // code to execute if condition is false
-fi
-```
-
-```ghul
-…
-if list.count > 0 then
-    write_line("list is not empty");
-else
-    write_line("list is empty");
-fi
-```
-
-output:
-
-```
-list is not empty
-```
-
-### if-then-elif-fi
-
-This form is used for multiple conditions. If the initial condition is false, the `elif` conditions are checked in order. The corresponding block for the first true condition is executed.
-
-```ghul
-if first_condition then
-    // code for first condition
-elif second_condition then
-    // code for second condition
-// ... (more elif conditions if needed) ...
-else
-    // code if all conditions are false
-fi
-```
-
-```ghul
-…
-let list = [1, 2, 3, 4];
-
-if list.count == 0 then
-    write_line("list is empty");
-fi
-
-if list.count > 0 then
-    write_line("list is not empty");
-else
-    write_line("list is empty");
-fi
-
-if list.count > 10 then
-    write_line("list has lots of elements");
-elif list.count > 5 then
-    write_line("list has some elements");
-elif list.count > 0 then
-    write_line("list has a few elements");
-else
-    write_line("list is empty");
-fi
-```
-
-output:
-
-```
-list is not empty
-list has a few elements
-```
-
-### type narrowing
-
-An `isa` test in an `if` condition narrows the variable to the tested type inside the then-branch. This holds for a union variant or a class:
-
-```ghul
-…
-union Maybe[T] is
-    YES(value: T);
-    NO;
-si
-…
-let m: Maybe[int] = Maybe.YES(42);
-
-if isa Maybe.YES( ► m) then
-    // m is narrowed to Maybe.YES inside the branch,
-    // so m.value is in scope
-    write_line("got value {m.value}");
-fi
-
-let a: Animal = CAT("whiskers");
-if isa CAT( ► a) then
-    // a is narrowed to CAT inside the branch
-    write_line(a.purr());
-fi
-```
-
-output:
-
-```
-got value 42
-whiskers purrs
-```
-
-An [optional type](https://ghul.dev/language-basics.html#optional-types) narrows the same way. A `?` test in the predicate narrows the optional to its non-optional form in the then-branch, so the value can be used directly:
-
-```ghul
-…
-let name: string? = lookup();
-
-if ► name? then
-    // name is narrowed to non-optional string
-    // here, no ! needed
-    write_line("hello, {name}");
-fi
-```
-
-output:
-
-```
-hello, world
-```
-
-For a two-variant union, the `else` branch is narrowed to the complementary variant:
-
-```ghul
-…
-union Result[T, E] is
-    OK(value: T);
-    ERR(error: E);
-si
-…
-let r: Result[int, string] = some_call();
-
-if isa Result.OK( ► r) then
-    write_line("ok: {r.value}");
-else
-    // r is narrowed to Result.ERR here
-    write_line("err: {r.error}");
-fi
-```
-
-output:
-
-```
-ok: 42
-```
-
-Narrowing is flow-sensitive: it follows the control flow rather than being confined to a branch body. If a guard rejects the narrower type and then leaves the enclosing block, by `return`, `throw`, `break` or `continue`, the code after the guard is narrowed:
-
-```ghul
-…
-classify(a: Animal) is
-    if !isa CAT( ► a) then
-        write_line("not a cat");
-        return;
-    fi
-
-    // every non-CAT has returned, so a is
-    // narrowed to CAT from here on
-    write_line(a.purr());
-si
-
-classify(CAT("whiskers"));
-classify(DOG());
-```
-
-output:
-
-```
-whiskers purrs
-not a cat
-```
-
-The `else` narrowing extends to a class hierarchy declared in the current assembly without `open`: ruling out one subclass on the `else` edge narrows to the rest, and when the root is `abstract` the chain can collapse to a single remaining subclass.
-
-Narrowing applies to local variables, including a function's own parameters, and to a member-access path. After `if isa CAT(x.pet) then`, or a presence test `if x.field? then`, uses of `x.pet` or `x.field` inside the branch see the narrower type.
-
-A path narrow is less durable than one on a local variable. A local holds its value, which no other call can change, so its narrowing lasts until the variable is reassigned. A path reads a fresh value each time, so its narrowing lasts only while nothing can change what it reads: a call to a method or property that can write to the heap drops it, as does an assignment that can change the path. To keep the narrower type across such a call, copy the path into a local variable, or use `if let` to introduce one.
-
-Reassigning the local narrows it: when the new value's static type is more specific than the declared type, the local narrows to that type from the assignment on, so a following call resolves on the assigned type without an `isa`:
-
-```ghul
-…
-► pet = CAT();
-// assigning a CAT narrows pet to CAT, so purr() is in reach
-write_line(pet.purr());
-```
-
-output:
-
-```
-purr
-```
-
-If the local is already narrowed, assigning a value of a different type cancels that narrowing and introduces one for the new type, so the following call resolves on the assigned type:
-
-```ghul
-…
-if isa CAT( ► pet) then
-    write_line(pet.purr());
-
-    ◄► pet = DOG();
-    // reassigning cancels the CAT narrowing and
-    // introduces a DOG one: pet is DOG here
-    write_line(pet.name());
-fi
-```
-
-output:
-
-```
-purr
-dog
-```
-
-ghūl decides which calls are safe by inferring purity. A method or property that only reads, never writing to the heap, is pure, and a call to a pure one preserves a path narrow - so a plain accessor that reads a field leaves it in place. The inference is automatic; a function the compiler can't prove pure can assert it with a postfix [`pure` modifier](https://ghul.dev/definitions.html#methods).
-
-### if let
-
-`cast T?(x)` views `x` as type `T`, and yields null (rather than throwing) when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test:
-
-```ghul
-…
-let c = cast CAT?(a);
-
-if ► c? then
-    write_line(c.purr());
-fi
-```
-
-output:
-
-```
-whiskers purrs
-```
-
-`if let` folds that into the `if` itself: it puts a `let` definition in the condition of an `if` or `elif`. The then-branch runs only when the value is present, with the variable in scope (and narrowed) just within that branch:
-
-```ghul
-…
-if let c: CAT = ► a then
-    // c has type CAT here; it is not in scope in
-    // the else branch, or after the fi
-    write_line(c.purr());
-else
-    write_line("not a cat");
-fi
-```
-
-output:
-
-```
-whiskers purrs
-```
-
-A type on the variable (`c: CAT`) makes it a type test. `elif let` chains these, so a sequence of type tests reads as one construct:
-
-```ghul
-…
-if let c: CAT = ► a then
-    write_line(c.purr());
-elif let d: DOG = ► a then
-    write_line(d.bark());
-else
-    write_line("some other animal");
-fi
-```
-
-output:
-
-```
-rover barks
-```
-
-With no type given for the local variable, `if let` tests that the value is present. This is the natural way to consume an [optional type](https://ghul.dev/language-basics.html#optional-types): the local variable has the non-optional type within the then-branch, so there is no need for an explicit `!`.
-
-```ghul
-…
-if let line = reader.read_line() then
-    // reader.read_line() yields string?;
-    // line is string here
-    write_line("read: {line}");
-else
-    write_line("end of input");
-fi
-```
-
-output:
-
-```
-read: the only line
-```
-
-An `if let` can also destructure, exactly like a plain `let`, including `_` to discard a field that is not needed:
-
-```ghul
-…
-if let (name, _) = lookup(id) then
-    write_line("found {name}");
-fi
-```
-
-output:
-
-```
-found ada
-```
-
-A trailing `/\` guard gates the branch on a further condition, evaluated with the new variable already in scope:
-
-```ghul
-…
-if let c: CAT = find() /\ c.is_friendly then
-    write_line("friendly cat: {c.name}");
-fi
-```
-
-output:
-
-```
-friendly cat: Tom
-```
-
-Several comma-separated clauses can appear in one `if let`; every clause's test and any guard must pass, and later clauses see the variables the earlier ones introduced, as in `if let outer = holder, inner = outer.value then`. A destructure leaf can also be a literal - an integer, string, character, boolean, `null`, or a qualified enum member - which adds an equality test at that position rather than introducing a variable, so `if let (1, name) = pair then` matches only when the first element is 1. Literal leaves are allowed only in refutable positions like `if let` and `case`.
-
-When the tested value is a member path and the local should take the path's last name, the `name =` can be dropped: `if let order.customer` introduces `customer` holding `order.customer` and enters the branch when it is present, and `if let zoo.pet: CAT` does the same with a type test. A trailing `?` on the presence form (`if let order.customer?`) is accepted but not required.
-
-```ghul
-…
-if let order.customer then
-    write_line(customer.name);
-fi
-```
-
-output:
-
-```
-mimi
-```
-
-### scope
-Each branch of an if statement constitutes a separate scope
-
-```ghul
-…
-let a = 5;
-
-if a > 0 then
-    // new scope - neither y nor z are in scope here
-    let x = 10;
-    write_line("x is {x}");
-elif a < 0 then
-    // new scope - neither x nor z are in scope here
-    let y = 20;
-    write_line("y is {y}");
-else
-    // new scope - neither x nor y are in scope here
-    let z = 30;
-    write_line("z is {z}");
-fi
-```
-
-output:
-
-```
-x is 10
-```
-
-## while statement
-
-### while-do-od
-The while loop in ghūl executes a block of code repeatedly as long as a specified condition remains true. The condition is evaluated before each iteration of the loop's body.
-
-```ghul
-while condition do
-    // code to execute while the condition is true
-od
-```
-
-```ghul
-…
-let counter mut = 0;
-while counter < 5 do
-    write_line(counter);
-    counter = counter + 1;
-od
-```
-
-output:
-
-```
-0
-1
-2
-3
-4
-```
-
-This loop prints numbers from 0 to 4. It terminates when counter becomes 5, as the condition counter < 5 then evaluates to false.
-
-### break and continue in while loops
-The `break` statement immediately exits the loop, while `continue` skips the remaining code in the current iteration and proceeds to the next iteration immediately before the condition is reevaluated.
-
-```ghul
-…
-let counter mut = 0;
-while counter < 10 do
-    if counter == 5 then
-        break;
-    fi
-    write_line(counter);
-    counter = counter + 1;
-od
-```
-
-output:
-
-```
-0
-1
-2
-3
-4
-```
-
-This loop exits when counter reaches 5 without proceeding to execute `write_line(counter)`
-
-
-```ghul
-…
-let counter mut = 0;
-while counter < 5 do
-    counter = counter + 1;
-    if counter == 3 then
-        continue;
-    fi
-    write_line(counter);
-od
-```
-
-output:
-
-```
-1
-2
-4
-5
-```
-
-This loop skips the call to `write_line` when counter is 3.
-
-### scope
-
-The block statement body of the while statement, delimited by `do` and `od` forms a scope for local variable definitions.
-
-### while let
-
-`while let` is the loop form of `if let`: the loop runs while the refutable pattern matches, with the bound names fresh on each iteration. It takes the same shapes as `if let` - bare presence, type ascription, destructure, `/\` guards, and comma-separated clauses:
-
-```ghul
-…
-while let n = c.next() do
-    write_line(n);
-od
-```
-
-output:
-
-```
-3
-2
-1
-```
-
-A `while` condition also narrows its body the same way an `if` condition narrows its then-branch, so `while isa CAT(a) do a.purr() od` reaches a `CAT`-only member without an inner cast.
-
-## for statement
-
-### for-in-do-od
-The for loop in ghūl steps through an iterable object executing the loop body once for every value the iterator produces. An iterable object is something that implements either `Collections.Iterable[T]` or `Collections.Iterator[T]`, and the loop variable's type is inferred to be `T`.
-
-```ghul
-for variable in iterable do
-    // variable is set to each element of iterator in turn
-od
-```
-
-The variable is defined by the for loop and its scope is the for loop body from the `do` up to the `od`
-
-
-```ghul
-…
-// i not in scope here
-// i defined here
-for i in [1, 2, 3, 4, 5] do
-    // i in scope here:
-    write_line(i);
-od
-```
-
-output:
-
-```
-1
-2
-3
-4
-5
-```
-
-### range operators
-
-The `..` and `::` operators construct integer ranges that can be iterated over by for statements. `..` constructs ranges that are inclusive of its left operand and exclusive of its right operand:
-
-```ghul
-…
-for i in 0..5 do
-    // i will take values 0, 1, 2, 3, 4 in sequence
-    write_line(i);
-od
-```
-
-output:
-
-```
-0
-1
-2
-3
-4
-```
-
-`::` constructs a range that is inclusive of its left and right operands:
-
-```ghul
-…
-for i in 1::5 do
-    // i will take values 1, 2, 3, 4, 5 in sequence
-    write_line(i);
-od
-```
-
-output:
-
-```
-1
-2
-3
-4
-5
-```
-
-These operators are not for loop specific and can be used in any expression context
-
-```ghul
-…
-let zero_to_four = 0..5;
-let five_to_nine = 5..10;
-
-let zero_to_nine = zero_to_four | .cat(five_to_nine);
-
-while zero_to_nine.move_next() do
-    write_line(zero_to_nine.current);
-od
-```
-
-output:
-
-```
-0
-1
-2
-3
-4
-5
-6
-7
-8
-9
-```
-
-### break and continue in for loops
-
-The `break` statement immediately exits the loop, while `continue` skips the remaining code in the current iteration and proceeds to the next iteration immediately before attempting to read the next element from the iterator
-
-```ghul
-…
-for counter in 0..10 do
-    if counter == 5 then
-        break;
-    fi
-    write_line(counter);
-od
-```
-
-output:
-
-```
-0
-1
-2
-3
-4
-```
-
-This loop exits when counter reaches 5, without proceeding to execute `write_line(5)`
-
-
-```ghul
-…
-for counter in 0..5 do
-    if counter == 3 then
-        continue;
-    fi
-    write_line(counter);
-od
-```
-
-output:
-
-```
-0
-1
-2
-4
-```
-
-This loop skips the call to `write_line` when counter is 3.
-
-### scope
-
-The block statement body of the for statement, delimited by `do` and `od` forms a scope for local variable definitions. The loop variable is in scope within this block scope but not within the expression that provides the iterable object.
-
-
-## do statement
-
-### do-od
-
-The do / od loop in ghūl is used to create an indefinite loop which will continue to execute until explicitly broken with a break statement.
-
-```ghul
-do
-    // code to execute indefinitely
-    // break statement to exit loop
-od
-```
-
-```ghul
-…
-let counter mut = 0;
-do
-    write_line(counter);
-    counter = counter + 1;
-    if counter == 5 then
-        break;
-    fi
-od
-```
-
-output:
-
-```
-0
-1
-2
-3
-4
-```
-
-This loop will run indefinitely until counter reaches 5, at which point the break statement terminates the loop.
-
-### break and continue in do-od loops
-
-The break and continue statements work similarly in do / od loops as they do in while loops.
-
-```ghul
-…
-let counter mut = 0;
-do
-    counter = counter + 1;
-    if counter == 3 then
-        continue;
-    fi
-    write_line(counter);
-    if counter == 5 then
-        break;
-    fi
-od
-```
-
-output:
-
-```
-1
-2
-4
-5
-```
-
-This loop skips the write_line statement when counter is 3 and breaks out of the loop when counter reaches 5.
-
-### scope
-
-The block statement body of the do statement, delimited by `do` and `od` forms a scope for local variable definitions.
-
-
-## case statement
-
-`case` branches on a scrutinee value. Each `when` arm is introduced by `then`, an optional `else` catches the rest, and the construct closes with `esac`. There is no fall-through, and a `when` can list several values matched by equality:
-
-```ghul
-…
-case value
-when -1 then
-    return "minus one";
-
-when 0 then
-    let result = "zero";
-    return result;
-
-when 1 then
-    return "one";
-
-when 2 then
-    return "two";
-
-when 3 then
-    return "three";
-
-when 4 then
-    return "four";
-
-when 5 then
-    let result = "five";
-    return result;
-
-when 6, 7, 8, 9 then
-    return "more than five and less than ten";
-
-when 13 then
-    return "unlucky";
-
-else
-    return "less than -1 or more than nine";
-esac
-si
-
-write_line(classify(0));
-write_line(classify(3));
-write_line(classify(7));
-write_line(classify(13));
-write_line(classify(-5));
-```
-
-output:
-
-```
-zero
-three
-more than five and less than ten
-unlucky
-less than -1 or more than nine
-```
-
-`case` is also an expression: each arm's last expression is the arm's value, and the `case` evaluates to whichever arm matched:
-
-```ghul
-…
-let label = case status
-when 200 then "ok"
-when 500, 501, 502 then "server error"
-else "other"
-esac;
-
-write_line(label);
-```
-
-output:
-
-```
-server error
-```
-
-### pattern arms
-
-A `when` arm can take a pattern instead of an equality list, mirroring [`if let`](#if-let): `when v: T then` type-tests and introduces the variable, `when (a, b) then` destructures, and `when _: T then` type-tests without introducing one. A bare identifier stays an equality test - `when v then` compares against the value of `v` in scope and introduces no new local:
-
-```ghul
-…
-    case a
-    when c: CAT then c.meow()
-    when d: DOG then d.bark()
-    esac;
-
-write_line(describe(CAT()));
-```
-
-output:
-
-```
-meow
-```
-
-### exhaustiveness
-
-A `case` over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - is checked for exhaustiveness. A missing case warns (`non-exhaustive-case`), an arm that matches nothing the earlier arms left warns (`redundant-case-arm`), and an `else` that can never run warns (`dead-case-else`). An expression-position `case` over an open domain needs an `else`, unless the expected type has a default value to fall back on.
-
-### scope
-
-Each arm of the case statement, delimited by either a `when` clause or `else`, forms a separate scope for local variable definitions.
-
-
-## throw statement
-
-The `throw` statement raises an exception. Control leaves the current block immediately and passes to the nearest enclosing `catch` that handles the exception's type. If there is no such `catch`, the exception propagates out through the calling functions, and out of the program if it is never caught.
-
-```ghul
-withdraw(balance: int, amount: int) -> int is
-    if amount > balance then
-        throw System.InvalidOperationException(
-            "insufficient funds"
-        );
-    fi
-
-    return balance - amount;
-si
-```
-
-The thrown value must be an exception: `System.Exception`, or a type derived from it.
-
-### exception types
-
-An exception is any class that derives from `System.Exception`, or from a more specific exception type:
-
-```ghul
-class INSUFFICIENT_FUNDS_EXCEPTION(message: string): System.Exception is
-    super(message);
-si
-```
-
-```ghul
-…
-try
-    withdraw(account, 100);
-catch e: INSUFFICIENT_FUNDS_EXCEPTION
-    write_line("declined: {e.message}");
-yrt
-```
-
-output:
-
-```
-declined: only 50 available
-```
-
-
-## try statement
-
-### try-catch-finally-yrt
-
-The try-catch-finally-yrt block in ghūl consists of four parts:
-
-* try block: the block where code that might throw an exception is placed.
-* exception to catch: exceptions that are assignment compatible with this class will be caught and control will enter the catch block
-* catch block: this code block catches and handles exceptions. It takes an exception variable and a type.
-* finally block: this code block is executed after the try and catch blocks, regardless of whether an exception was thrown or not. It is typically used for clean-up code.
-
-```ghul
-try
-    // Code that might throw an exception
-catch e: SomeExceptionType
-    // Exception handling code
-finally
-    // Clean-up code, always executed
-yrt
-```
-
-If different types of exception should be caught, then there can be multiple exception clauses and catch blocks
-
-```ghul
-let reader mut: StreamReader;
-
-try
-    reader = StreamReader("file.txt");
-    let content = reader.read_to_end();
-
-    write_line(content);
-
-catch e: FileNotFoundException
-    // Handle the case where the file is not found
-    write_line("Error: file not found: {e.message}");
-catch e: IOException
-    // Handle errors during file reading
-    write_line("Error: reading file: {e.message}");
-finally
-    // Close the file and clean up resources
-    if reader? then
-        reader.close();
-    fi
-
-    write_line("File processing completed, file closed.");
-yrt
-```
-
-### try-catch-yrt
-
-The finally clause can be omitted if no clean-up is required
-
-```ghul
-try
-    // Code that might throw an exception
-catch e: SomeExceptionType
-    // Exception handling code
-yrt
-```
-
-```ghul
-try
-    let content = File.read_all_text("file.txt");
-    write_line(content);
-
-    write_line("File processing completed.");
-catch e: FileNotFoundException
-    // Handle the case where the file is not found
-    write_line("Error: file not found: {e.message}");
-catch e: IOException
-    // Handle errors during file reading
-    write_line("Error: reading file: {e.message}");
-yrt
-```
-
-### try-finally-yrt
-
-The catch clause can be omitted if no exceptions need to be caught but clean-up is still required
-
-```ghul
-try
-    // Code that might throw an exception
-finally
-    // Clean-up code, always executed
-yrt
-```
-
-```ghul
-let reader mut: StreamReader;
-
-try
-    reader = StreamReader("file.txt");
-
-    let content = reader.read_to_end();
-    write_line(content);
-
-    write_line("File processing completed.");
-
-finally
-    if reader? then
-        reader.close();
-    fi
-
-    // Any exceptions will be thrown to the calling code
-yrt
-```
-
-### finally and return
-
-A `finally` block runs whenever control leaves the `try` block, including when the `try` block, or a `catch` block, executes a `return`. The `finally` block runs first, then control returns to the caller:
-
-```ghul
-read_file(path: string) -> string is
-    let reader = StreamReader(path);
-
-    try
-        return reader.read_to_end();
-    finally
-        reader.close(); // runs before the function returns
-    yrt
-si
-```
-
-## return statement
-
-### return without value
-
-In functions of void return type, a bare `return` statement with no value returns control flow directly to the caller  
-
-```ghul
-tries: int;
-…
-try_something(limit: int) is
-    if tries > limit then
-        return; // give up
-    fi
-
-    tries = tries + 1;
-
-    // do stuff
-si
-```
-
-### return value
-
-In functions of non-void return type, `return` statements must return a value of a type that's assignment compatible with the function's return type
-
-```ghul
-…
-fib(n: int) -> int is
-    if n < 0 then
-        return 0;
-    elif n == 1 then
-        return 1;
-    else
-        return fib(n - 1) + fib(n - 2);
-    fi
-si
-
-for i in 0::10 do
-    write_line("fib({i}) = {fib(i)}");
-od
-```
-
-output:
-
-```
-fib(0) = 0
-fib(1) = 1
-fib(2) = 1
-fib(3) = 2
-fib(4) = 3
-fib(5) = 5
-fib(6) = 8
-fib(7) = 13
-fib(8) = 21
-fib(9) = 34
-fib(10) = 55
-```
-
-### default return
-
-If execution reaches the end of a non-void function without encountering a return statement, then the default value of the function's return type is returned to the caller.
-
-```ghul
-…
-default_return() -> int is
-    // do nothing, return 0
-si
-let i = default_return();
-assert i == 0;
-write_line("default return value is {i}");
-```
-
-diagnostics:
-
-- warning: [definite-return] function may not return a value on all paths
-
-output:
-
-```
-default return value is 0
-```
-
-## asynchronous code
-
-A function is asynchronous when its declared return type is `Tasks.TASK[T]` (or `Tasks.TASK`, for one that produces no value).
-
-Inside such a function, `await e` evaluates to the result of the task `e` once it completes. `let x = await e;` assigns the result to a local and the rest of the function continues:
-
-```ghul
-…
-    let a = await double_async(10);   // a = 20
-    let b = await double_async(a);    // b = 40
-    let c = await add_async(a, b);    // c = 60
-
-    return c;
-si
-
-write_line("{compute().result}");
-```
-
-output:
-
-```
-60
-```
-
-`await e;` as a bare statement is the value-less form: it waits for `e` to complete and discards any result. Use it when you only care that the work has finished:
-
-```ghul
-…
-    await side_effect("first");
-    await side_effect("second");
-
-    return;
-si
-
-run_side_effects().wait();
-```
-
-output:
-
-```
-side effect: first
-side effect: second
-```
-
-`await` can also appear inside the body of a `for` or `while` loop: the loop iterates, awaiting and resuming once per iteration. A `return` from inside an awaiting loop body propagates out through the loop as usual:
-
-```ghul
-…
-    let total mut = 0;
-
-    for x in xs do
-        let y = await fetch_async(x);
-        total = total + y;
-    od
-
-    return total;
-si
-
-let result = sum_of_squares([1, 2, 3, 4]).result;
-
-write_line("sum_of_squares = {result}");
-```
-
-output:
-
-```
-sum_of_squares = 30
-```
-
-### limitations
-
-A `try` / `catch` block cannot surround code that contains an `await`. To handle a faulted task, wrap the call at the *call site* instead: reading `.result` on a returned task surfaces a faulted task as a `System.AggregateException`.
-
-## generators
-
-A function is a generator when its declared return type is `Pipe[T]` (`Ghul.Pipes.Pipe[T]`) and its body contains `yield E;`. Each `yield` produces the next value in the sequence; execution suspends until the caller asks for another value, then resumes from the statement after the `yield`:
-
-```ghul
-…
-    let i mut = 1;
-    while i <= limit do
-        yield i * i;
-        i = i + 1;
-    od
-si
-
-for s in squares(4) do
-    write_line(s);
-od
-```
-
-output:
-
-```
-1
-4
-9
-16
-```
-
-A generator *is* a [pipe](https://ghul.dev/functional-programming.html#lazy-sequences), so it can be looped over directly and composed with `map` / `filter` / `take` and the other pipe operators:
-
-```ghul
-…
-// fibs() is an infinite generator; take(8) bounds it
-for f in fibs() | .take(8) do
-    write_line(f);
-od
-```
-
-output:
-
-```
-0
-1
-1
-2
-3
-5
-8
-13
-```
-
-`return;` ends the sequence early; falling off the end of the body has the same effect.
-
-
----
-
 <a id="optional-types"></a>
 
 # optional types
 
-A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and the same type without the `?` is non-optional. The [language basics](https://ghul.dev/language-basics.html#optional-types) page introduces the core operators - `?`, `!`, `if let`, `??`, `?.` - and they read the same regardless of what `T` is. That uniformity isn't an accident: ghūl backs `T?` with whichever of three different representations fits `T`, and picks silently.
+A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and the same type without the `?` is non-optional. The [language basics](https://ghul.dev/language-basics.html#optional-types) page introduces the presence test `?` and the assignability rule; the operators read the same regardless of what `T` is. That uniformity isn't an accident: ghūl backs `T?` with whichever of three different representations fits `T`, and picks silently.
 
-There's a second axis to this, independent of `T?` itself: any type - not just the built-in optional forms - can opt in to the same `?`/`!` treatment, either structurally (by shape) or nominally (by declaring which variant means "absent"). This page covers both axes: the three backings behind `T?`, and the two ways a type can be optional-shaped without ever spelling `T?`.
+There's a second axis to this, independent of `T?` itself: any type - not just the built-in optional forms - can opt in to the same `?`/`!` treatment, either structurally (by shape) or nominally (by declaring which variant means "absent"). This page covers the three backings behind `T?`, the full operator set - `?`, `!`, `??`, `?.` - and the warnings around them, and the two ways a type can be optional-shaped without ever spelling `T?`.
 
 ```ghul
 …
@@ -2410,6 +1079,11 @@ output:
 ```
 found
 ```
+
+## the operators
+
+The `??` operator supplies a fallback: `a ?? b` is `a` when it is present, otherwise `b`, and `b` is evaluated only when needed. It is right-associative, so `a ?? b ?? c` tries each in turn, and the result stays optional until a non-optional value closes the chain:
+
 ```ghul
 …
 let name = lookup();
@@ -2422,6 +1096,9 @@ output:
 ```
 hello, stranger
 ```
+
+The `?.` operator reads a member only when the receiver is present: `a?.b` is `b` when `a` is present, otherwise the absent case. The result is always optional, and `?.` chains, so a whole access path folds down to one optional. Method calls compose the same way: `a?.foo(args)` calls `foo` on a present receiver and yields the absent case otherwise, with the argument expressions included in the short-circuit, so they are not evaluated when `a` is absent.
+
 ```ghul
 …
 let p = find();
@@ -2434,6 +1111,10 @@ output:
 ```
 name: unknown
 ```
+
+## the warnings
+
+Reading a member through an optional not known to be present draws a `null-deref` warning; `x?.y`, `x.has_value`, `x!`, and `if let` are the warning-free routes. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
 
 ## beyond `T?`: types that are optional-shaped
 
@@ -2483,7 +1164,7 @@ empty has no reading
 
 ### nominal: option-shaped unions
 
-A union with a single field-carrying variant, or with one variant marked `default`, supports `?` and `!` too: `?` tests whether the union holds that variant, and `!` unwraps its payload (or the whole variant, if it has more than one field). The [functional programming](https://ghul.dev/functional-programming.html#union-types) page builds an `Option[T]` union from scratch to show the mechanics; this is what makes it behave like an option once built, not a special case for a built-in type:
+A union with a single field-carrying variant, or with one variant marked `default`, supports `?` and `!` too: `?` tests whether the union holds that variant, and `!` unwraps its payload (or the whole variant, if it has more than one field). The [unions and pattern matching](https://ghul.dev/unions-and-pattern-matching.html) page builds an `Option[T]` union from scratch to show the mechanics; this is what makes it behave like an option once built, not a special case for a built-in type:
 
 ```ghul
 …
@@ -2540,6 +1221,500 @@ output:
 - Writing a generic function or type that needs to hold "maybe a `T`" for an unconstrained `T`: `T?` still works, backed by `MAYBE[T]`; if you need to construct or return one directly - a `MAYBE[T]` field on a struct, say - you can name `Ghul.MAYBE[T]` explicitly.
 - Adding presence/absence to a type you're already designing: give it `has_value` and `value` and it just works, no interface to declare.
 - Modelling something with more shape than "present or absent" - success-with-a-value versus failure-with-a-reason, for instance - reach for a union with a `default` variant instead. It gets the same `?`/`!` operators, plus exhaustive `case` matching over every outcome.
+
+
+---
+
+<a id="type-narrowing"></a>
+
+# type narrowing
+
+> **runnable examples**
+>
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller, runnable examples that include narrowing. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
+
+When a check guarantees a value has a more specific type, ghūl narrows that value to it for the code the check covers: inside the branch the value reads at the narrower type, with no cast and no unwrap. Union variant tests, `isa` class checks, presence tests on optionals, and `if let` all narrow, and the narrowing is flow-sensitive - it follows the control flow rather than being confined to a branch body.
+
+> **narrowing inlays**
+>
+> Open ghūl in an editor with the [ghūl language extension](https://ghul.dev/tooling.html) and small triangle hints mark where type narrowing changes: `►` where a variable is narrowed to a more specific type, `◄` where a narrowing ends and the variable widens back to its declared type, and `◄►` where an assignment does both at once. Hovering a hint shows the types and the reason; on an `if` it shows the narrowing for both the taken and the not-taken branch. The same sigils appear in the code examples on this site.
+
+## narrowing in a condition
+
+An `isa` test in an `if` condition narrows the variable to the tested type inside the then-branch. This holds for a union variant or a class:
+
+```ghul
+…
+union Maybe[T] is
+    YES(value: T);
+    NO;
+si
+…
+let m: Maybe[int] = Maybe.YES(42);
+
+if isa Maybe.YES( ► m) then
+    // m is narrowed to Maybe.YES inside the branch,
+    // so m.value is in scope
+    write_line("got value {m.value}");
+fi
+
+let a: Animal = CAT("whiskers");
+if isa CAT( ► a) then
+    // a is narrowed to CAT inside the branch
+    write_line(a.purr());
+fi
+```
+
+output:
+
+```
+got value 42
+whiskers purrs
+```
+
+An [optional type](https://ghul.dev/optional-types) narrows the same way. A `?` test in the predicate narrows the optional to its non-optional form in the then-branch, so the value can be used directly:
+
+```ghul
+…
+let name: string? = lookup();
+
+if ► name? then
+    // name is narrowed to non-optional string
+    // here, no ! needed
+    write_line("hello, {name}");
+fi
+```
+
+output:
+
+```
+hello, world
+```
+
+For a two-variant union, the `else` branch is narrowed to the complementary variant:
+
+```ghul
+…
+union Result[T, E] is
+    OK(value: T);
+    ERR(error: E);
+si
+…
+let r: Result[int, string] = some_call();
+
+if isa Result.OK( ► r) then
+    write_line("ok: {r.value}");
+else
+    // r is narrowed to Result.ERR here
+    write_line("err: {r.error}");
+fi
+```
+
+output:
+
+```
+ok: 42
+```
+
+The `else` narrowing extends to a class hierarchy declared in the current assembly without `open`: ruling out one subclass on the `else` edge narrows to the rest, and when the root is `abstract` the chain can collapse to a single remaining subclass.
+
+A `while` condition narrows its body the same way an `if` condition narrows its then-branch, so `while isa CAT(a) do a.purr() od` reaches a `CAT`-only member without an inner cast.
+
+## flow-sensitive narrowing
+
+Narrowing follows the control flow rather than being confined to a branch body. If a guard rejects the narrower type and then leaves the enclosing block, by `return`, `throw`, `break` or `continue`, the code after the guard is narrowed:
+
+```ghul
+…
+classify(a: Animal) is
+    if !isa CAT( ► a) then
+        write_line("not a cat");
+        return;
+    fi
+
+    // every non-CAT has returned, so a is
+    // narrowed to CAT from here on
+    write_line(a.purr());
+si
+
+classify(CAT("whiskers"));
+classify(DOG());
+```
+
+output:
+
+```
+whiskers purrs
+not a cat
+```
+
+## locals and parameters
+
+Narrowing applies to local variables, including a function's own parameters.
+
+```ghul
+…
+greet(a: Animal) is
+    if isa CAT( ► a) then
+        // a is a parameter of greet, narrowed to CAT
+        // in this branch
+        write_line(a.purr());
+    fi
+si
+
+greet(CAT());
+```
+
+output:
+
+```
+purr
+```
+
+## member-access paths
+
+Narrowing also applies to a member-access path like `x.field` or `x.property`. A presence test (`?`) narrows the path: after `if x.field? then`, uses of `x.field` inside the branch are non-optional.
+
+```ghul
+…
+describe(order: ORDER) is
+    if ► order.customer? then
+        // a presence test narrows the path itself:
+        // within this branch order.customer is the
+        // non-optional string, so .length is
+        // reachable directly
+        write_line("customer name has {order.customer.length} chars");
+    fi
+si
+
+describe(ORDER("alice"));
+```
+
+output:
+
+```
+customer name has 5 chars
+```
+
+An `isa` check or variant test narrows a path the same way:
+
+```ghul
+…
+class CARRIER(occupant: Animal);
+describe(carrier: CARRIER) is
+    if isa CAT( ► carrier.occupant) then
+        // carrier.occupant is a CAT within this branch,
+        // so its purr() is reachable directly
+        write_line(carrier.occupant.purr());
+    fi
+si
+
+describe(CARRIER(CAT()));
+```
+
+output:
+
+```
+purr
+```
+
+## how long a narrow lasts
+
+A narrow on a path is less durable than one on a local variable. A local holds its value, which no other call can change, so its narrowing lasts until the variable is reassigned. A path reads a fresh value each time, so its narrowing lasts only while nothing can change what it reads: a call to a method or property that can write to the heap drops it, as does an assignment that can change the path. Copying the path into a local keeps the narrower type across a call that would otherwise drop it.
+
+```ghul
+…
+describe(carrier: CARRIER) is
+    // handle() can write to the heap, so it would drop
+    // a narrow on carrier.occupant - copy the value into
+    // a local, whose type no other call can change
+    let occupant = carrier.occupant;
+
+    if isa CAT( ► occupant) then
+        carrier.handle();
+        // occupant is still a CAT after the call
+        write_line(occupant.purr());
+    fi
+si
+
+describe(CARRIER(CAT()));
+```
+
+output:
+
+```
+purr
+```
+
+`if let` copies the value into a fresh local in one step, and works for any expression - the result of a call, not only a variable or path. The local narrows and stays narrowed within the branch. See [if let](https://ghul.dev/control-flow.html#if-let) for the full construct.
+
+```ghul
+…
+describe(carrier: CARRIER) is
+    if let cat: CAT = carrier.occupant then
+        write_line(cat.purr());
+    fi
+si
+
+describe(CARRIER(CAT()));
+```
+
+output:
+
+```
+purr
+```
+
+## narrowing on assignment
+
+Reassigning a local narrows it: when the new value's static type is more specific than the declared type, the local narrows to that type from the assignment on, so a following call resolves on the assigned type without an `isa`:
+
+```ghul
+…
+► pet = CAT();
+// assigning a CAT narrows pet to CAT, so purr() is in reach
+write_line(pet.purr());
+```
+
+output:
+
+```
+purr
+```
+
+If the local is already narrowed, assigning a value of a different type cancels that narrowing and introduces one for the new type, so the following call resolves on the assigned type:
+
+```ghul
+…
+if isa CAT( ► pet) then
+    write_line(pet.purr());
+
+    ◄► pet = DOG();
+    // reassigning cancels the CAT narrowing and
+    // introduces a DOG one: pet is DOG here
+    write_line(pet.name());
+fi
+```
+
+output:
+
+```
+purr
+dog
+```
+
+## purity
+
+ghūl decides which calls are safe by inferring purity. A method or property that only reads, never writing to the heap, is pure, and a call to a pure one preserves a path narrow - so a plain accessor that reads a field leaves it in place. The inference is automatic; a function the compiler can't prove pure can assert it with a postfix [`pure` modifier](https://ghul.dev/definitions.html#methods).
+
+
+---
+
+<a id="unions-and-pattern-matching"></a>
+
+# unions and pattern matching
+
+> **runnable examples**
+>
+> The ghul-examples repository has fuller, runnable [unions](https://github.com/degory/ghul-examples/tree/main/examples/unions) and [pattern-matching](https://github.com/degory/ghul-examples/tree/main/examples/pattern-matching) examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
+
+A union holds a value of one of several variants, each with its own set of fields: one type that represents several kinds of data. Pattern matching is how that data comes back out - test which variant a value holds, and read its fields at the narrowed type. The [definitions page](https://ghul.dev/definitions.html#unions) covers the full declaration surface - unit variants, the `default` variant, primary-constructor headers, and traits; this page is about using them.
+
+```ghul
+union Shape is
+    CIRCLE(radius: double);
+    SQUARE(side: double);
+si
+
+union Option[T] is
+    SOME(value: T);
+    NONE;
+si
+
+union Result[T, E] is
+    OK(value: T);
+    ERROR(error: E);
+si
+```
+
+## testing and narrowing a variant
+
+Accessing the data held by a union's variant requires first checking which variant the union currently holds. An `isa Variant(value)` test checks the variant and, in the then-branch, narrows the value to it so the variant's fields are reachable:
+
+```ghul
+…
+if isa Option.SOME( ► an_option) then
+    let value = an_option.value;
+    write_line("the option holds {value}");
+fi
+```
+
+output:
+
+```
+the option holds 42
+```
+
+## option-shaped unions
+
+Unions shaped like `Option` types - a single field-carrying variant, or one variant marked `default` - support the `?` and `!` operators, for testing whether they hold a value and for unwrapping it:
+
+```ghul
+…
+if ► an_option? then
+    let value = an_option!;
+    write_line("the option holds {value}");
+fi
+```
+
+output:
+
+```
+the option holds 42
+```
+
+```ghul
+use IO.Std.write_line;
+
+union Option[T] is
+    SOME(value: T);
+    NONE;
+si
+
+union List[T] is
+    NIL;
+    CONS(head: T, tail: List[T]);
+si
+
+union Tree[T] is
+    LEAF(value: T);
+    NODE(left: Tree[T], right: Tree[T]);
+si
+
+use Option.SOME;
+use Option.NONE;
+use List.NIL;
+use List.CONS;
+use Tree.LEAF;
+use Tree.NODE;
+
+test_option();
+test_list();
+test_tree();
+
+test_option() is
+    let some_int = SOME(42);
+    let none_int = NONE();
+
+    let stringify_option = o rec =>
+        if isa SOME( ► o) then
+            "{o.value}"
+        else
+            "none"
+        fi;
+
+    write_line(stringify_option(some_int));
+    write_line(stringify_option(none_int));
+si
+
+test_list() is
+    let list = CONS(1, CONS(2, CONS(3, NIL())));
+
+    let stringify_list = l rec =>
+        if isa CONS( ► l) then
+            let (head, tail) = l in
+            "{head}, {rec(tail)}"
+        else
+            "nil"
+        fi;
+
+    write_line(stringify_list(list));
+si
+
+test_tree() is
+    let tree = NODE(
+        NODE(
+            LEAF(1),
+            LEAF(2)
+        ),
+        NODE(
+            LEAF(3),
+            LEAF(4)
+        )
+    );
+
+    let stringify_tree = t rec =>
+        if isa NODE( ► t) then
+            let (left, right) = t in
+            "({rec(left)}, {rec(right)})"
+        else
+            "{t.value}"
+        fi;
+
+    write_line(stringify_tree(tree));
+si
+```
+
+output:
+
+```
+42
+none
+1, 2, 3, nil
+((1, 2), (3, 4))
+```
+
+`Option` here is a union built from scratch to show how the shape works, but everyday code rarely needs to: ghūl's own optional types (`T?`) give you this for free, over reference types, value types, and unconstrained generic types alike - see [optional types](https://ghul.dev/optional-types) for the full picture, including how a user-defined union like this one fits alongside the built-in representations.
+
+## matching with if let
+
+Discovering which variant a union holds, and branching on the result, is done with `if let`: a `let` definition in an `if` / `elif` condition, where the branch runs only on a match, with the variable narrowed and in scope:
+
+```ghul
+union Shape is
+    CIRCLE(radius: double);
+    SQUARE(side: double);
+si
+…
+area(s: Shape) -> double is
+    if let c: CIRCLE = ► s then
+        return 3.14159d * c.radius * c.radius;
+    elif let q: SQUARE = ► s then
+        return q.side * q.side;
+    fi
+
+    return 0.0d;
+si
+```
+
+`isa` variant tests and `else`-branch narrowing cover the same ground; see [type narrowing](https://ghul.dev/type-narrowing.html) for the full picture.
+
+## matching with case
+
+A `case` expression matches one scrutinee against several `when` arms, which reads better than a chain of `if let`/`elif let` once there are more than a couple of variants to cover. Over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - the compiler checks the arms for exhaustiveness, so `area` needs no fallback return for a variant the `when` arms forgot:
+
+```ghul
+…
+area(s: Shape) -> double =>
+    // case over a union is checked for exhaustiveness: every variant
+    // is covered here, so no else arm is needed
+    case s
+    when c: CIRCLE then 3.14159d * c.radius * c.radius
+    when q: SQUARE then q.side * q.side
+    esac;
+
+write_line("{area(CIRCLE(2.0d))}");
+write_line("{area(SQUARE(3.0d))}");
+```
+
+output:
+
+```
+12.56636
+9
+```
+
+`when` arms accept the same patterns as `if let` - a type test that binds and narrows (`c: CIRCLE`), destructuring, and literal leaves - so `case` is the exhaustive counterpart to `if let` rather than a different matching mechanism. See [the case statement](https://ghul.dev/control-flow.html#case-statement) for the full picture.
 
 
 ---
@@ -2751,7 +1926,7 @@ fail
 
 > **runnable examples**
 >
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/functional) has fuller, runnable functional-programming examples. Open it in a GitHub Codespace or a dev container to build and run them.
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/functional) has fuller, runnable functional-programming examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
 
 ghūl has some support for basic functional programming
 
@@ -3012,199 +2187,9 @@ apply_twice_times_2(5): 20
 
 Anonymous functions take a single concrete type from context; there is no generic equivalent to the two preceding forms. For polymorphic behaviour, declare a generic global function or method.
 
-## union types
+## union types and pattern matching
 
-A union holds a value of one of several variants, each with its own set of fields: one type that represents several kinds of data. The [definitions page](https://ghul.dev/definitions.html#unions) covers the full surface - unit variants, the `default` variant, primary-constructor headers, and traits; here they appear in the functional idiom.
-
-```ghul
-union Shape is
-    CIRCLE(radius: double);
-    SQUARE(side: double);
-si
-
-union Option[T] is
-    SOME(value: T);
-    NONE;
-si
-
-union Result[T, E] is
-    OK(value: T);
-    ERROR(error: E);
-si
-```
-
-Accessing the data held by a union's variant requires first checking which variant the union currently holds. An `isa Variant(value)` test checks the variant and, in the then-branch, narrows the value to it so the variant's fields are reachable:
-
-```ghul
-…
-if isa Option.SOME( ► an_option) then
-    let value = an_option.value;
-    write_line("the option holds {value}");
-fi
-```
-
-output:
-
-```
-the option holds 42
-```
-
-Unions shaped like `Option` types - a single field-carrying variant, or one variant marked `default` - support the `?` and `!` operators, for testing whether they hold a value and for unwrapping it:
-
-```ghul
-…
-if ► an_option? then
-    let value = an_option!;
-    write_line("the option holds {value}");
-fi
-```
-
-output:
-
-```
-the option holds 42
-```
-
-```ghul
-use IO.Std.write_line;
-
-union Option[T] is
-    SOME(value: T);
-    NONE;
-si
-
-union List[T] is
-    NIL;
-    CONS(head: T, tail: List[T]);
-si
-
-union Tree[T] is
-    LEAF(value: T);
-    NODE(left: Tree[T], right: Tree[T]);
-si
-
-use Option.SOME;
-use Option.NONE;
-use List.NIL;
-use List.CONS;
-use Tree.LEAF;
-use Tree.NODE;
-
-test_option();
-test_list();
-test_tree();
-
-test_option() is
-    let some_int = SOME(42);
-    let none_int = NONE();
-
-    let stringify_option = o rec =>
-        if isa SOME( ► o) then
-            "{o.value}"
-        else
-            "none"
-        fi;
-
-    write_line(stringify_option(some_int));
-    write_line(stringify_option(none_int));
-si
-
-test_list() is
-    let list = CONS(1, CONS(2, CONS(3, NIL())));
-
-    let stringify_list = l rec =>
-        if isa CONS( ► l) then
-            let (head, tail) = l in
-            "{head}, {rec(tail)}"
-        else
-            "nil"
-        fi;
-
-    write_line(stringify_list(list));
-si
-
-test_tree() is
-    let tree = NODE(
-        NODE(
-            LEAF(1),
-            LEAF(2)
-        ),
-        NODE(
-            LEAF(3),
-            LEAF(4)
-        )
-    );
-
-    let stringify_tree = t rec =>
-        if isa NODE( ► t) then
-            let (left, right) = t in
-            "({rec(left)}, {rec(right)})"
-        else
-            "{t.value}"
-        fi;
-
-    write_line(stringify_tree(tree));
-si
-```
-
-output:
-
-```
-42
-none
-1, 2, 3, nil
-((1, 2), (3, 4))
-```
-
-`Option` here is a union built from scratch to show how the shape works, but everyday code rarely needs to: ghūl's own optional types (`T?`) give you this for free, over reference types, value types, and unconstrained generic types alike - see [optional types](https://ghul.dev/optional-types) for the full picture, including how a user-defined union like this one fits alongside the built-in representations.
-
-## pattern matching
-
-Discovering which variant a union holds, and branching on the result, is done with `if let`: a `let` definition in an `if` / `elif` condition, where the branch runs only on a match, with the variable narrowed and in scope:
-
-```ghul
-union Shape is
-    CIRCLE(radius: double);
-    SQUARE(side: double);
-si
-…
-area(s: Shape) -> double is
-    if let c: CIRCLE = ► s then
-        return 3.14159d * c.radius * c.radius;
-    elif let q: SQUARE = ► s then
-        return q.side * q.side;
-    fi
-
-    return 0.0d;
-si
-```
-
-`isa` variant tests and `else`-branch narrowing cover the same ground; see [type narrowing and `if let`](https://ghul.dev/control-flow.html#type-narrowing) in the control flow page for the full picture.
-
-A `case` expression matches one scrutinee against several `when` arms, which reads better than a chain of `if let`/`elif let` once there are more than a couple of variants to cover. Over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - the compiler checks the arms for exhaustiveness, so `area` needs no fallback return for a variant the `when` arms forgot:
-
-```ghul
-…
-area(s: Shape) -> double =>
-    // case over a union is checked for exhaustiveness: every variant
-    // is covered here, so no else arm is needed
-    case s
-    when c: CIRCLE then 3.14159d * c.radius * c.radius
-    when q: SQUARE then q.side * q.side
-    esac;
-
-write_line("{area(CIRCLE(2.0d))}");
-write_line("{area(SQUARE(3.0d))}");
-```
-
-output:
-
-```
-12.56636
-9
-```
-
-`when` arms accept the same patterns as `if let` - a type test that binds and narrows (`c: CIRCLE`), destructuring, and literal leaves - so `case` is the exhaustive counterpart to `if let` rather than a different matching mechanism. See [the case statement](https://ghul.dev/control-flow.html#case-statement) for the full picture.
+Unions - one type holding one of several variants - and the `if let` and `case` patterns that take them apart are the functional idiom's data backbone. They have their own page: [unions and pattern matching](https://ghul.dev/unions-and-pattern-matching.html).
 
 ## currying
 ```ghul
@@ -3400,7 +2385,7 @@ value. State shape never appears in the type a consumer sees of a
 
 > **runnable examples**
 >
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/object-oriented) has fuller, runnable object-oriented examples. Open it in a GitHub Codespace or a dev container to build and run them.
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/object-oriented) has fuller, runnable object-oriented examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
 
 ghūl is a class-based object-oriented language. Classes and structs hold state and behaviour, traits describe shared behaviour, and a value can be used at the type of any ancestor class or trait it satisfies. This page ties those pieces together; [definitions](https://ghul.dev/definitions.html#types) has the syntax for each in isolation.
 
@@ -3458,7 +2443,7 @@ Calling `describe` through the `Animal[]` is polymorphism: the static type is `A
 
 `speak` above has no body. A class with a body-less instance method is implicitly abstract: it names a method the class can't perform on its own, so constructing the class directly is rejected and only subclasses that supply the method can exist. Marking a class `abstract` has the same effect without a body-less method.
 
-By default a class is closed to subclassing outside its own assembly; the postfix `open` modifier opts in to cross-assembly subclassing. Closing the hierarchy lets the compiler narrow on the `else` edge of an `isa` test, and an `abstract` root can narrow to a single remaining subclass (see [type narrowing](https://ghul.dev/control-flow.html#type-narrowing)).
+By default a class is closed to subclassing outside its own assembly; the postfix `open` modifier opts in to cross-assembly subclassing. Closing the hierarchy lets the compiler narrow on the `else` edge of an `isa` test, and an `abstract` root can narrow to a single remaining subclass (see [type narrowing](https://ghul.dev/type-narrowing.html)).
 
 ## traits
 
@@ -3468,7 +2453,7 @@ A trait member can provide a default body, which an implementing type inherits a
 
 ## narrowing
 
-Discovering an object's concrete type at runtime uses `isa` or `if let`, which test the type and narrow the value to it inside the matching branch, and a `case` over a closed hierarchy is checked for exhaustiveness. The [control flow](https://ghul.dev/control-flow.html#type-narrowing) page covers narrowing in full.
+Discovering an object's concrete type at runtime uses `isa` or `if let`, which test the type and narrow the value to it inside the matching branch, and a `case` over a closed hierarchy is checked for exhaustiveness. The [type narrowing](https://ghul.dev/type-narrowing.html) page covers it in full.
 
 ## a worked example
 
@@ -3639,7 +2624,7 @@ memory is cleared
 
 > **runnable examples**
 >
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/generics) has fuller, runnable generics examples. Open it in a GitHub Codespace or a dev container to build and run them.
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/generics) has fuller, runnable generics examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
 
 ghūl supports generic type arguments on
 - classes
@@ -3846,7 +2831,7 @@ Variance is also automatic in two places: a function type is contravariant in it
 
 > **runnable examples**
 >
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller, runnable type-inference examples. Open it in a GitHub Codespace or a dev container to build and run them.
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller, runnable type-inference examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
 
 ghūl infers types pervasively inside a method or function body: most local variables, loop variables, destructured variables and anonymous function parameters can be left unannotated, and the compiler works their types out from how they are initialized and used.
 
@@ -3865,7 +2850,7 @@ Within a function, types are inferred for:
 
 In each case the inferred type is concrete. The compiler does not introduce new type parameters during inference, so an anonymous function literal takes a single concrete function type from its context - it cannot itself be generic. For polymorphic behaviour, declare a generic global function or method and pass it where the function value is needed.
 
-ghūl also performs **type narrowing** - within parts of a function a value can be observed at a more specific type than the one it was declared with. Narrowing applies to local variables (function parameters, `let` variables, loop variables, destructured variables and anonymous function parameters), and to a member-access path like `x.field` or `x.property`, for `isa`, variant and presence tests alike. A narrow on a path holds only while nothing can change what the path reads; a narrow on a local holds until the local is reassigned.
+ghūl also performs [type narrowing](https://ghul.dev/type-narrowing.html) - within parts of a function a value can be observed at a more specific type than the one it was declared with. Inference and narrowing work together: the inferred type is the ceiling, and the control flow sharpens it region by region.
 
 The examples below leave inferred types unannotated; hover over any variable to see the type the compiler worked out for it.
 
@@ -3913,123 +2898,6 @@ class COUNTER is
 si
 …
 ```
-
-## type narrowing
-
-When a check guarantees a value has a more specific type, ghūl narrows that value to it for the code the check covers. Narrowing applies to local variables, including a function's own parameters.
-
-```ghul
-…
-greet(a: Animal) is
-    if isa CAT( ► a) then
-        // a is a parameter of greet, narrowed to CAT
-        // in this branch
-        write_line(a.purr());
-    fi
-si
-
-greet(CAT());
-```
-
-output:
-
-```
-purr
-```
-
-A presence test (`?`) also narrows a member-access path: after `if x.field? then`, uses of `x.field` inside the branch are non-optional.
-
-```ghul
-…
-describe(order: ORDER) is
-    if ► order.customer? then
-        // a presence test narrows the path itself:
-        // within this branch order.customer is the
-        // non-optional string, so .length is
-        // reachable directly
-        write_line("customer name has {order.customer.length} chars");
-    fi
-si
-
-describe(ORDER("alice"));
-```
-
-output:
-
-```
-customer name has 5 chars
-```
-
-An `isa` check or variant test narrows a path the same way:
-
-```ghul
-…
-class CARRIER(occupant: Animal);
-describe(carrier: CARRIER) is
-    if isa CAT( ► carrier.occupant) then
-        // carrier.occupant is a CAT within this branch,
-        // so its purr() is reachable directly
-        write_line(carrier.occupant.purr());
-    fi
-si
-
-describe(CARRIER(CAT()));
-```
-
-output:
-
-```
-purr
-```
-
-A narrow on a path is less durable than one on a local variable. The path reads a fresh value each time, so the narrowing lasts only while nothing can change what it reads: a call to a method or property that can write to the heap drops it, and so does an assignment that can change the path. A local variable holds its value, which no other call can change, so its narrowing lasts until the variable is reassigned. Copying the path into a local keeps the narrower type across a call that would otherwise drop it.
-
-```ghul
-…
-describe(carrier: CARRIER) is
-    // handle() can write to the heap, so it would drop
-    // a narrow on carrier.occupant - copy the value into
-    // a local, whose type no other call can change
-    let occupant = carrier.occupant;
-
-    if isa CAT( ► occupant) then
-        carrier.handle();
-        // occupant is still a CAT after the call
-        write_line(occupant.purr());
-    fi
-si
-
-describe(CARRIER(CAT()));
-```
-
-output:
-
-```
-purr
-```
-
-`if let` copies the value into a fresh local in one step, and works for any expression - the result of a call, not only a variable or path. The local narrows and stays narrowed within the branch.
-
-```ghul
-…
-describe(carrier: CARRIER) is
-    if let cat: CAT = carrier.occupant then
-        write_line(cat.purr());
-    fi
-si
-
-describe(CARRIER(CAT()));
-```
-
-output:
-
-```
-purr
-```
-
-The [type narrowing](https://ghul.dev/control-flow.html#type-narrowing) section of the control flow page covers which calls preserve a path narrow.
-
-Narrowing covers union variant tags, `isa` class checks, null checks (`x?`) and `if let`, and it is flow-sensitive - an early-return guard narrows the code that follows it. See [type narrowing and `if let`](https://ghul.dev/control-flow.html#type-narrowing) in the control flow page for the full picture.
 
 ## what gets inferred
 
@@ -4267,6 +3135,144 @@ let a = merge(CAT(), DOG());
 
 ---
 
+<a id="async-and-generators"></a>
+
+# async and generators
+
+> **runnable examples**
+>
+> The ghul-examples repository has fuller, runnable [async-await](https://github.com/degory/ghul-examples/tree/main/examples/async-await) and [generators](https://github.com/degory/ghul-examples/tree/main/examples/generators) examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
+
+Two kinds of ghūl function suspend and resume instead of running straight through: an asynchronous function waits for tasks without blocking, and a generator produces a sequence lazily, one element per request. Both are declared by their return type alone - `Tasks.TASK[T]` for asynchronous functions, `Pipe[T]` for generators - and the body reads top to bottom either way.
+
+## asynchronous code
+
+A function is asynchronous when its declared return type is `Tasks.TASK[T]` (or `Tasks.TASK`, for one that produces no value).
+
+Inside such a function, `await e` evaluates to the result of the task `e` once it completes. `let x = await e;` assigns the result to a local and the rest of the function continues:
+
+```ghul
+…
+    let a = await double_async(10);   // a = 20
+    let b = await double_async(a);    // b = 40
+    let c = await add_async(a, b);    // c = 60
+
+    return c;
+si
+
+write_line("{compute().result}");
+```
+
+output:
+
+```
+60
+```
+
+`await e;` as a bare statement is the value-less form: it waits for `e` to complete and discards any result. Use it when you only care that the work has finished:
+
+```ghul
+…
+    await side_effect("first");
+    await side_effect("second");
+
+    return;
+si
+
+run_side_effects().wait();
+```
+
+output:
+
+```
+side effect: first
+side effect: second
+```
+
+`await` can also appear inside the body of a `for` or `while` loop: the loop iterates, awaiting and resuming once per iteration. A `return` from inside an awaiting loop body propagates out through the loop as usual:
+
+```ghul
+…
+    let total mut = 0;
+
+    for x in xs do
+        let y = await fetch_async(x);
+        total = total + y;
+    od
+
+    return total;
+si
+
+let result = sum_of_squares([1, 2, 3, 4]).result;
+
+write_line("sum_of_squares = {result}");
+```
+
+output:
+
+```
+sum_of_squares = 30
+```
+
+A `try` / `catch` / `finally` around awaiting code works as expected, including a `return` from inside the `try`. What is not yet supported is an `await` inside a `catch` or `finally` handler itself. A faulted task can also be handled at the call site: reading `.result` on a returned task throws the fault as a `System.AggregateException`.
+
+## generators
+
+A function is a generator when its declared return type is `Pipe[T]` (`Ghul.Pipes.Pipe[T]`) and its body contains `yield E;`. Each `yield` produces the next value in the sequence; execution suspends until the caller asks for another value, then resumes from the statement after the `yield`:
+
+```ghul
+…
+    let i mut = 1;
+    while i <= limit do
+        yield i * i;
+        i = i + 1;
+    od
+si
+
+for s in squares(4) do
+    write_line(s);
+od
+```
+
+output:
+
+```
+1
+4
+9
+16
+```
+
+A generator *is* a [pipe](https://ghul.dev/functional-programming.html#lazy-sequences), so it can be looped over directly and composed with `map` / `filter` / `take` and the other pipe operators:
+
+```ghul
+…
+// fibs() is an infinite generator; take(8) bounds it
+for f in fibs() | .take(8) do
+    write_line(f);
+od
+```
+
+output:
+
+```
+0
+1
+1
+2
+3
+5
+8
+13
+```
+
+`return;` ends the sequence early; falling off the end of the body has the same effect.
+
+As with `await`, a `yield` inside a `catch` or `finally` handler is not yet supported, and a function cannot be both a generator and asynchronous.
+
+
+---
+
 <a id="dotnet-integration"></a>
 
 # .NET integration
@@ -4441,7 +3447,7 @@ closing file
 
 ### iteration
 
-A type implementing `Collections.Iterable[T]` is a .NET `IEnumerable<T>`, so it works with `for`, with the pipe combinators, and with any .NET API taking a sequence. The requirement is an `iterator` property, and a [generator](https://ghul.dev/control-flow.html#generators) is usually the shortest way to supply one:
+A type implementing `Collections.Iterable[T]` is a .NET `IEnumerable<T>`, so it works with `for`, with the pipe combinators, and with any .NET API taking a sequence. The requirement is an `iterator` property, and a [generator](https://ghul.dev/async-and-generators.html#generators) is usually the shortest way to supply one:
 
 ```ghul
 …
@@ -5612,7 +4618,7 @@ si
 
 The two forms are equivalent. The primary form is the shorter shape when every field is initialized from a constructor argument; the classic form is the better fit when the body owns extra fields or properties beyond what the constructor takes. See [constructors](#constructors) for the rest of the primary-constructor surface area.
 
-Two postfix modifiers shape the hierarchy. Without `open`, a class can be subclassed only within the assembly that declares it; `open` opts in to cross-assembly subclassing. `abstract` bars direct construction, so only subclasses exist at runtime, and a class is implicitly abstract when it declares a body-less instance method, since that method is a contract for subclasses to satisfy. The closure feeds [type narrowing](https://ghul.dev/control-flow.html#type-narrowing): on the `else` edge of an `isa` test the compiler can rule the tested subclass out, and an `abstract` root can leave a single remaining subclass.
+Two postfix modifiers shape the hierarchy. Without `open`, a class can be subclassed only within the assembly that declares it; `open` opts in to cross-assembly subclassing. `abstract` bars direct construction, so only subclasses exist at runtime, and a class is implicitly abstract when it declares a body-less instance method, since that method is a contract for subclasses to satisfy. The closure feeds [type narrowing](https://ghul.dev/type-narrowing.html): on the `else` edge of an `isa` test the compiler can rule the tested subclass out, and an `abstract` root can leave a single remaining subclass.
 
 Classes can only be defined at global scope. Classes can be generic, which will be covered later. Concrete class names should be in `MACRO_CASE`. Abstract class names should be in `PascalCase`.
 
@@ -5922,7 +4928,7 @@ class SCALER is
 si
 ```
 
-A method or function can take a postfix `pure` modifier, which asserts that it only reads and never writes to the heap. The compiler already infers this for many functions; the modifier states it for one the compiler can't prove, and then callers keep [type narrowing](https://ghul.dev/control-flow.html#type-narrowing) facts across a call to it. Every override of a pure member must itself be pure:
+A method or function can take a postfix `pure` modifier, which asserts that it only reads and never writes to the heap. The compiler already infers this for many functions; the modifier states it for one the compiler can't prove, and then callers keep [type narrowing](https://ghul.dev/type-narrowing.html) facts across a call to it. Every override of a pure member must itself be pure:
 
 ```ghul
 …
@@ -6736,6 +5742,1016 @@ The first number is: 1
 
 ---
 
+<a id="control-flow"></a>
+
+# control flow in ghūl
+
+> **runnable examples**
+>
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
+
+## block scope
+
+In ghūl, most control flow statements incorporate one or more blocks. A block is a list of one or more statements that forms a scope for local variable definitions. The scope of a variable is the region of code where that variable is visible and can be accessed.
+Blocks are delimited by keywords that are specific to their control flow statement. For example, if-then statements use `then` and `else`, `elif` or `fi` to delimit their blocks, while loops use `do` and `od`, and so on.
+Variables defined within a block are only accessible within that block and any nested blocks. Once execution exits the block, those variables go out of scope and cannot be accessed anymore.
+
+## assert statement
+
+In ghūl the `assert` statement is used to ensure an expected condition holds and to throw an exception if it does not. An assert statement starts with `assert`, followed by an expression that must evaluate to a bool, followed by `else`, and then a value to throw. If the value to throw is a string, it will be wrapped in an `AssertionFailedException`. Otherwise it must be of a throwable type.
+
+```ghul
+…
+assert true else "all bets are off"; // does not throw
+
+let list = [1, 2, 3, 4, 5];
+
+assert 3 < list.count
+    else System.ArgumentOutOfRangeException("list");
+
+write_line("ok: {list.count} elements");
+```
+
+output:
+
+```
+ok: 5 elements
+```
+
+`assert` is also an expression. `assert cond else "msg" in expr` guards a value and chains like `let x in expr`: a failing assert throws, a passing one yields the trailing expression. Any narrowing the condition establishes flows into that expression, so a value checked present reads directly there:
+
+```ghul
+…
+length_of(key: string?) -> int =>
+    assert ► key? else "key is null" in
+    key.length;
+
+write_line(length_of("hello"));
+```
+
+output:
+
+```
+5
+```
+
+## if statement
+
+If statements allow the execution of different code blocks based on specific conditions. An `if` is also an expression that yields the value of its chosen branch; see [if as an expression](https://ghul.dev/expressions#conditional).
+
+### if-then-fi
+
+This is the simplest form of a conditional statement. It checks a condition and executes the subsequent block of code if the condition is true.
+
+```ghul
+if condition then
+    // code to execute if condition is true
+fi
+```
+
+```ghul
+…
+let list = [1, 2, 3, 4];
+
+if list.count > 0 then
+    write_line("list has {list.count} elements");
+fi
+```
+
+output:
+
+```
+list has 4 elements
+```
+
+### if-then-else-fi
+
+This form allows for an alternative block of code to be executed if the condition is false.
+
+```ghul
+if condition then
+    // code to execute if condition is true
+else
+    // code to execute if condition is false
+fi
+```
+
+```ghul
+…
+if list.count > 0 then
+    write_line("list is not empty");
+else
+    write_line("list is empty");
+fi
+```
+
+output:
+
+```
+list is not empty
+```
+
+### if-then-elif-fi
+
+This form is used for multiple conditions. If the initial condition is false, the `elif` conditions are checked in order. The corresponding block for the first true condition is executed.
+
+```ghul
+if first_condition then
+    // code for first condition
+elif second_condition then
+    // code for second condition
+// ... (more elif conditions if needed) ...
+else
+    // code if all conditions are false
+fi
+```
+
+```ghul
+…
+let list = [1, 2, 3, 4];
+
+if list.count == 0 then
+    write_line("list is empty");
+fi
+
+if list.count > 0 then
+    write_line("list is not empty");
+else
+    write_line("list is empty");
+fi
+
+if list.count > 10 then
+    write_line("list has lots of elements");
+elif list.count > 5 then
+    write_line("list has some elements");
+elif list.count > 0 then
+    write_line("list has a few elements");
+else
+    write_line("list is empty");
+fi
+```
+
+output:
+
+```
+list is not empty
+list has a few elements
+```
+
+### type narrowing
+
+An `if` condition that proves something stronger about a value - an `isa` test on a class or union variant, a `?` presence test on an optional - narrows the value to the stronger type inside the branch, and a guard that leaves the block narrows the code after it. [Type narrowing](https://ghul.dev/type-narrowing.html) covers this in full: locals, parameters, member-access paths, how long each narrow lasts, and the purity inference behind it.
+
+### if let
+
+`cast T?(x)` views `x` as type `T`, and yields null (rather than throwing) when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test:
+
+```ghul
+…
+let c = cast CAT?(a);
+
+if ► c? then
+    write_line(c.purr());
+fi
+```
+
+output:
+
+```
+whiskers purrs
+```
+
+`if let` folds that into the `if` itself: it puts a `let` definition in the condition of an `if` or `elif`. The then-branch runs only when the value is present, with the variable in scope (and narrowed) just within that branch:
+
+```ghul
+…
+if let c: CAT = ► a then
+    // c has type CAT here; it is not in scope in
+    // the else branch, or after the fi
+    write_line(c.purr());
+else
+    write_line("not a cat");
+fi
+```
+
+output:
+
+```
+whiskers purrs
+```
+
+A type on the variable (`c: CAT`) makes it a type test. `elif let` chains these, so a sequence of type tests reads as one construct:
+
+```ghul
+…
+if let c: CAT = ► a then
+    write_line(c.purr());
+elif let d: DOG = ► a then
+    write_line(d.bark());
+else
+    write_line("some other animal");
+fi
+```
+
+output:
+
+```
+rover barks
+```
+
+With no type given for the local variable, `if let` tests that the value is present. This is the natural way to consume an [optional type](https://ghul.dev/language-basics.html#optional-types): the local variable has the non-optional type within the then-branch, so there is no need for an explicit `!`.
+
+```ghul
+…
+if let line = reader.read_line() then
+    // reader.read_line() yields string?;
+    // line is string here
+    write_line("read: {line}");
+else
+    write_line("end of input");
+fi
+```
+
+output:
+
+```
+read: the only line
+```
+
+An `if let` can also destructure, exactly like a plain `let`, including `_` to discard a field that is not needed:
+
+```ghul
+…
+if let (name, _) = lookup(id) then
+    write_line("found {name}");
+fi
+```
+
+output:
+
+```
+found ada
+```
+
+A trailing `/\` guard gates the branch on a further condition, evaluated with the new variable already in scope:
+
+```ghul
+…
+if let c: CAT = find() /\ c.is_friendly then
+    write_line("friendly cat: {c.name}");
+fi
+```
+
+output:
+
+```
+friendly cat: Tom
+```
+
+Several comma-separated clauses can appear in one `if let`; every clause's test and any guard must pass, and later clauses see the variables the earlier ones introduced, as in `if let outer = holder, inner = outer.value then`. A destructure leaf can also be a literal - an integer, string, character, boolean, `null`, or a qualified enum member - which adds an equality test at that position rather than introducing a variable, so `if let (1, name) = pair then` matches only when the first element is 1. Literal leaves are allowed only in refutable positions like `if let` and `case`.
+
+When the tested value is a member path and the local should take the path's last name, the `name =` can be dropped: `if let order.customer` introduces `customer` holding `order.customer` and enters the branch when it is present, and `if let zoo.pet: CAT` does the same with a type test. A trailing `?` on the presence form (`if let order.customer?`) is accepted but not required.
+
+```ghul
+…
+if let order.customer then
+    write_line(customer.name);
+fi
+```
+
+output:
+
+```
+mimi
+```
+
+### scope
+Each branch of an if statement constitutes a separate scope
+
+```ghul
+…
+let a = 5;
+
+if a > 0 then
+    // new scope - neither y nor z are in scope here
+    let x = 10;
+    write_line("x is {x}");
+elif a < 0 then
+    // new scope - neither x nor z are in scope here
+    let y = 20;
+    write_line("y is {y}");
+else
+    // new scope - neither x nor y are in scope here
+    let z = 30;
+    write_line("z is {z}");
+fi
+```
+
+output:
+
+```
+x is 10
+```
+
+## while statement
+
+### while-do-od
+The while loop in ghūl executes a block of code repeatedly as long as a specified condition remains true. The condition is evaluated before each iteration of the loop's body.
+
+```ghul
+while condition do
+    // code to execute while the condition is true
+od
+```
+
+```ghul
+…
+let counter mut = 0;
+while counter < 5 do
+    write_line(counter);
+    counter = counter + 1;
+od
+```
+
+output:
+
+```
+0
+1
+2
+3
+4
+```
+
+This loop prints numbers from 0 to 4. It terminates when counter becomes 5, as the condition counter < 5 then evaluates to false.
+
+### break and continue in while loops
+The `break` statement immediately exits the loop, while `continue` skips the remaining code in the current iteration and proceeds to the next iteration immediately before the condition is reevaluated.
+
+```ghul
+…
+let counter mut = 0;
+while counter < 10 do
+    if counter == 5 then
+        break;
+    fi
+    write_line(counter);
+    counter = counter + 1;
+od
+```
+
+output:
+
+```
+0
+1
+2
+3
+4
+```
+
+This loop exits when counter reaches 5 without proceeding to execute `write_line(counter)`
+
+
+```ghul
+…
+let counter mut = 0;
+while counter < 5 do
+    counter = counter + 1;
+    if counter == 3 then
+        continue;
+    fi
+    write_line(counter);
+od
+```
+
+output:
+
+```
+1
+2
+4
+5
+```
+
+This loop skips the call to `write_line` when counter is 3.
+
+### scope
+
+The block statement body of the while statement, delimited by `do` and `od` forms a scope for local variable definitions.
+
+### while let
+
+`while let` is the loop form of `if let`: the loop runs while the refutable pattern matches, with the bound names fresh on each iteration. It takes the same shapes as `if let` - bare presence, type ascription, destructure, `/\` guards, and comma-separated clauses:
+
+```ghul
+…
+while let n = c.next() do
+    write_line(n);
+od
+```
+
+output:
+
+```
+3
+2
+1
+```
+
+A `while` condition also narrows its body the same way an `if` condition narrows its then-branch, so `while isa CAT(a) do a.purr() od` reaches a `CAT`-only member without an inner cast.
+
+## for statement
+
+### for-in-do-od
+The for loop in ghūl steps through an iterable object executing the loop body once for every value the iterator produces. An iterable object is something that implements either `Collections.Iterable[T]` or `Collections.Iterator[T]`, and the loop variable's type is inferred to be `T`.
+
+```ghul
+for variable in iterable do
+    // variable is set to each element of iterator in turn
+od
+```
+
+The variable is defined by the for loop and its scope is the for loop body from the `do` up to the `od`
+
+
+```ghul
+…
+// i not in scope here
+// i defined here
+for i in [1, 2, 3, 4, 5] do
+    // i in scope here:
+    write_line(i);
+od
+```
+
+output:
+
+```
+1
+2
+3
+4
+5
+```
+
+### range operators
+
+The `..` and `::` operators construct integer ranges that can be iterated over by for statements. `..` constructs ranges that are inclusive of its left operand and exclusive of its right operand:
+
+```ghul
+…
+for i in 0..5 do
+    // i will take values 0, 1, 2, 3, 4 in sequence
+    write_line(i);
+od
+```
+
+output:
+
+```
+0
+1
+2
+3
+4
+```
+
+`::` constructs a range that is inclusive of its left and right operands:
+
+```ghul
+…
+for i in 1::5 do
+    // i will take values 1, 2, 3, 4, 5 in sequence
+    write_line(i);
+od
+```
+
+output:
+
+```
+1
+2
+3
+4
+5
+```
+
+These operators are not for loop specific and can be used in any expression context
+
+```ghul
+…
+let zero_to_four = 0..5;
+let five_to_nine = 5..10;
+
+let zero_to_nine = zero_to_four | .cat(five_to_nine);
+
+while zero_to_nine.move_next() do
+    write_line(zero_to_nine.current);
+od
+```
+
+output:
+
+```
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
+### break and continue in for loops
+
+The `break` statement immediately exits the loop, while `continue` skips the remaining code in the current iteration and proceeds to the next iteration immediately before attempting to read the next element from the iterator
+
+```ghul
+…
+for counter in 0..10 do
+    if counter == 5 then
+        break;
+    fi
+    write_line(counter);
+od
+```
+
+output:
+
+```
+0
+1
+2
+3
+4
+```
+
+This loop exits when counter reaches 5, without proceeding to execute `write_line(5)`
+
+
+```ghul
+…
+for counter in 0..5 do
+    if counter == 3 then
+        continue;
+    fi
+    write_line(counter);
+od
+```
+
+output:
+
+```
+0
+1
+2
+4
+```
+
+This loop skips the call to `write_line` when counter is 3.
+
+### scope
+
+The block statement body of the for statement, delimited by `do` and `od` forms a scope for local variable definitions. The loop variable is in scope within this block scope but not within the expression that provides the iterable object.
+
+
+## do statement
+
+### do-od
+
+The do / od loop in ghūl is used to create an indefinite loop which will continue to execute until explicitly broken with a break statement.
+
+```ghul
+do
+    // code to execute indefinitely
+    // break statement to exit loop
+od
+```
+
+```ghul
+…
+let counter mut = 0;
+do
+    write_line(counter);
+    counter = counter + 1;
+    if counter == 5 then
+        break;
+    fi
+od
+```
+
+output:
+
+```
+0
+1
+2
+3
+4
+```
+
+This loop will run indefinitely until counter reaches 5, at which point the break statement terminates the loop.
+
+### break and continue in do-od loops
+
+The break and continue statements work similarly in do / od loops as they do in while loops.
+
+```ghul
+…
+let counter mut = 0;
+do
+    counter = counter + 1;
+    if counter == 3 then
+        continue;
+    fi
+    write_line(counter);
+    if counter == 5 then
+        break;
+    fi
+od
+```
+
+output:
+
+```
+1
+2
+4
+5
+```
+
+This loop skips the write_line statement when counter is 3 and breaks out of the loop when counter reaches 5.
+
+### scope
+
+The block statement body of the do statement, delimited by `do` and `od` forms a scope for local variable definitions.
+
+
+## case statement
+
+`case` branches on a scrutinee value. Each `when` arm is introduced by `then`, an optional `else` catches the rest, and the construct closes with `esac`. There is no fall-through, and a `when` can list several values matched by equality:
+
+```ghul
+…
+case value
+when -1 then
+    return "minus one";
+
+when 0 then
+    let result = "zero";
+    return result;
+
+when 1 then
+    return "one";
+
+when 2 then
+    return "two";
+
+when 3 then
+    return "three";
+
+when 4 then
+    return "four";
+
+when 5 then
+    let result = "five";
+    return result;
+
+when 6, 7, 8, 9 then
+    return "more than five and less than ten";
+
+when 13 then
+    return "unlucky";
+
+else
+    return "less than -1 or more than nine";
+esac
+si
+
+write_line(classify(0));
+write_line(classify(3));
+write_line(classify(7));
+write_line(classify(13));
+write_line(classify(-5));
+```
+
+output:
+
+```
+zero
+three
+more than five and less than ten
+unlucky
+less than -1 or more than nine
+```
+
+`case` is also an expression: each arm's last expression is the arm's value, and the `case` evaluates to whichever arm matched:
+
+```ghul
+…
+let label = case status
+when 200 then "ok"
+when 500, 501, 502 then "server error"
+else "other"
+esac;
+
+write_line(label);
+```
+
+output:
+
+```
+server error
+```
+
+### pattern arms
+
+A `when` arm can take a pattern instead of an equality list, mirroring [`if let`](#if-let): `when v: T then` type-tests and introduces the variable, `when (a, b) then` destructures, and `when _: T then` type-tests without introducing one. A bare identifier stays an equality test - `when v then` compares against the value of `v` in scope and introduces no new local:
+
+```ghul
+…
+    case a
+    when c: CAT then c.meow()
+    when d: DOG then d.bark()
+    esac;
+
+write_line(describe(CAT()));
+```
+
+output:
+
+```
+meow
+```
+
+### exhaustiveness
+
+A `case` over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - is checked for exhaustiveness. A missing case warns (`non-exhaustive-case`), an arm that matches nothing the earlier arms left warns (`redundant-case-arm`), and an `else` that can never run warns (`dead-case-else`). An expression-position `case` over an open domain needs an `else`, unless the expected type has a default value to fall back on.
+
+### scope
+
+Each arm of the case statement, delimited by either a `when` clause or `else`, forms a separate scope for local variable definitions.
+
+
+## throw statement
+
+The `throw` statement raises an exception. Control leaves the current block immediately and passes to the nearest enclosing `catch` that handles the exception's type. If there is no such `catch`, the exception propagates out through the calling functions, and out of the program if it is never caught.
+
+```ghul
+withdraw(balance: int, amount: int) -> int is
+    if amount > balance then
+        throw System.InvalidOperationException(
+            "insufficient funds"
+        );
+    fi
+
+    return balance - amount;
+si
+```
+
+The thrown value must be an exception: `System.Exception`, or a type derived from it.
+
+### exception types
+
+An exception is any class that derives from `System.Exception`, or from a more specific exception type:
+
+```ghul
+class INSUFFICIENT_FUNDS_EXCEPTION(message: string): System.Exception is
+    super(message);
+si
+```
+
+```ghul
+…
+try
+    withdraw(account, 100);
+catch e: INSUFFICIENT_FUNDS_EXCEPTION
+    write_line("declined: {e.message}");
+yrt
+```
+
+output:
+
+```
+declined: only 50 available
+```
+
+
+## try statement
+
+### try-catch-finally-yrt
+
+The try-catch-finally-yrt block in ghūl consists of four parts:
+
+* try block: the block where code that might throw an exception is placed.
+* exception to catch: exceptions that are assignment compatible with this class will be caught and control will enter the catch block
+* catch block: this code block catches and handles exceptions. It takes an exception variable and a type.
+* finally block: this code block is executed after the try and catch blocks, regardless of whether an exception was thrown or not. It is typically used for clean-up code.
+
+```ghul
+try
+    // Code that might throw an exception
+catch e: SomeExceptionType
+    // Exception handling code
+finally
+    // Clean-up code, always executed
+yrt
+```
+
+If different types of exception should be caught, then there can be multiple exception clauses and catch blocks
+
+```ghul
+let reader mut: StreamReader;
+
+try
+    reader = StreamReader("file.txt");
+    let content = reader.read_to_end();
+
+    write_line(content);
+
+catch e: FileNotFoundException
+    // Handle the case where the file is not found
+    write_line("Error: file not found: {e.message}");
+catch e: IOException
+    // Handle errors during file reading
+    write_line("Error: reading file: {e.message}");
+finally
+    // Close the file and clean up resources
+    if reader? then
+        reader.close();
+    fi
+
+    write_line("File processing completed, file closed.");
+yrt
+```
+
+### try-catch-yrt
+
+The finally clause can be omitted if no clean-up is required
+
+```ghul
+try
+    // Code that might throw an exception
+catch e: SomeExceptionType
+    // Exception handling code
+yrt
+```
+
+```ghul
+try
+    let content = File.read_all_text("file.txt");
+    write_line(content);
+
+    write_line("File processing completed.");
+catch e: FileNotFoundException
+    // Handle the case where the file is not found
+    write_line("Error: file not found: {e.message}");
+catch e: IOException
+    // Handle errors during file reading
+    write_line("Error: reading file: {e.message}");
+yrt
+```
+
+### try-finally-yrt
+
+The catch clause can be omitted if no exceptions need to be caught but clean-up is still required
+
+```ghul
+try
+    // Code that might throw an exception
+finally
+    // Clean-up code, always executed
+yrt
+```
+
+```ghul
+let reader mut: StreamReader;
+
+try
+    reader = StreamReader("file.txt");
+
+    let content = reader.read_to_end();
+    write_line(content);
+
+    write_line("File processing completed.");
+
+finally
+    if reader? then
+        reader.close();
+    fi
+
+    // Any exceptions will be thrown to the calling code
+yrt
+```
+
+### finally and return
+
+A `finally` block runs whenever control leaves the `try` block, including when the `try` block, or a `catch` block, executes a `return`. The `finally` block runs first, then control returns to the caller:
+
+```ghul
+read_file(path: string) -> string is
+    let reader = StreamReader(path);
+
+    try
+        return reader.read_to_end();
+    finally
+        reader.close(); // runs before the function returns
+    yrt
+si
+```
+
+## return statement
+
+### return without value
+
+In functions of void return type, a bare `return` statement with no value returns control flow directly to the caller  
+
+```ghul
+tries: int;
+…
+try_something(limit: int) is
+    if tries > limit then
+        return; // give up
+    fi
+
+    tries = tries + 1;
+
+    // do stuff
+si
+```
+
+### return value
+
+In functions of non-void return type, `return` statements must return a value of a type that's assignment compatible with the function's return type
+
+```ghul
+…
+fib(n: int) -> int is
+    if n < 0 then
+        return 0;
+    elif n == 1 then
+        return 1;
+    else
+        return fib(n - 1) + fib(n - 2);
+    fi
+si
+
+for i in 0::10 do
+    write_line("fib({i}) = {fib(i)}");
+od
+```
+
+output:
+
+```
+fib(0) = 0
+fib(1) = 1
+fib(2) = 1
+fib(3) = 2
+fib(4) = 3
+fib(5) = 5
+fib(6) = 8
+fib(7) = 13
+fib(8) = 21
+fib(9) = 34
+fib(10) = 55
+```
+
+### default return
+
+If execution reaches the end of a non-void function without encountering a return statement, then the default value of the function's return type is returned to the caller.
+
+```ghul
+…
+default_return() -> int is
+    // do nothing, return 0
+si
+let i = default_return();
+assert i == 0;
+write_line("default return value is {i}");
+```
+
+diagnostics:
+
+- warning: [definite-return] function may not return a value on all paths
+
+output:
+
+```
+default return value is 0
+```
+
+## asynchronous code and generators
+
+`await` suspends a function until a task completes, and `yield` suspends a generator until the next element is asked for. Both are covered on [async and generators](https://ghul.dev/async-and-generators.html).
+
+
+---
+
 <a id="grammar"></a>
 
 # grammar
@@ -7148,7 +7164,7 @@ The `let … in …` form is a [let-in expression](#primary-expressions) used as
 statement. The `assert … in …` tail behaves the same way: a passing assert yields
 the trailing expression, a failing one throws.
 
-`yield` is permitted only inside a [generator function](https://ghul.dev/control-flow.html#generators),
+`yield` is permitted only inside a [generator function](https://ghul.dev/async-and-generators.html#generators),
 one whose return type is `Ghul.Pipes.Pipe[T]`.
 
 ### if
@@ -7239,7 +7255,7 @@ UnaryExpression ::= Operator UnaryExpression      /* prefix operator */
 ```
 
 An `await E` expression is permitted only inside an
-[asynchronous function](https://ghul.dev/control-flow.html#asynchronous-code), one whose
+[asynchronous function](https://ghul.dev/async-and-generators.html#asynchronous-code), one whose
 return type is `Tasks.TASK[T]` (or `Tasks.TASK`), and evaluates to the result
 of the awaited task once it completes. Used as the right-hand side of `let`, as
 a bare statement (`await E;`), or in any operand position.

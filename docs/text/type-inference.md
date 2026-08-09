@@ -2,7 +2,7 @@
 
 > **runnable examples**
 >
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller, runnable type-inference examples. Open it in a GitHub Codespace or a dev container to build and run them.
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller, runnable type-inference examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul` and run with `dotnet run`.
 
 ghūl infers types pervasively inside a method or function body: most local variables, loop variables, destructured variables and anonymous function parameters can be left unannotated, and the compiler works their types out from how they are initialized and used.
 
@@ -21,7 +21,7 @@ Within a function, types are inferred for:
 
 In each case the inferred type is concrete. The compiler does not introduce new type parameters during inference, so an anonymous function literal takes a single concrete function type from its context - it cannot itself be generic. For polymorphic behaviour, declare a generic global function or method and pass it where the function value is needed.
 
-ghūl also performs **type narrowing** - within parts of a function a value can be observed at a more specific type than the one it was declared with. Narrowing applies to local variables (function parameters, `let` variables, loop variables, destructured variables and anonymous function parameters), and to a member-access path like `x.field` or `x.property`, for `isa`, variant and presence tests alike. A narrow on a path holds only while nothing can change what the path reads; a narrow on a local holds until the local is reassigned.
+ghūl also performs [type narrowing](https://ghul.dev/type-narrowing.html) - within parts of a function a value can be observed at a more specific type than the one it was declared with. Inference and narrowing work together: the inferred type is the ceiling, and the control flow sharpens it region by region.
 
 The examples below leave inferred types unannotated; hover over any variable to see the type the compiler worked out for it.
 
@@ -69,123 +69,6 @@ class COUNTER is
 si
 …
 ```
-
-## type narrowing
-
-When a check guarantees a value has a more specific type, ghūl narrows that value to it for the code the check covers. Narrowing applies to local variables, including a function's own parameters.
-
-```ghul
-…
-greet(a: Animal) is
-    if isa CAT( ► a) then
-        // a is a parameter of greet, narrowed to CAT
-        // in this branch
-        write_line(a.purr());
-    fi
-si
-
-greet(CAT());
-```
-
-output:
-
-```
-purr
-```
-
-A presence test (`?`) also narrows a member-access path: after `if x.field? then`, uses of `x.field` inside the branch are non-optional.
-
-```ghul
-…
-describe(order: ORDER) is
-    if ► order.customer? then
-        // a presence test narrows the path itself:
-        // within this branch order.customer is the
-        // non-optional string, so .length is
-        // reachable directly
-        write_line("customer name has {order.customer.length} chars");
-    fi
-si
-
-describe(ORDER("alice"));
-```
-
-output:
-
-```
-customer name has 5 chars
-```
-
-An `isa` check or variant test narrows a path the same way:
-
-```ghul
-…
-class CARRIER(occupant: Animal);
-describe(carrier: CARRIER) is
-    if isa CAT( ► carrier.occupant) then
-        // carrier.occupant is a CAT within this branch,
-        // so its purr() is reachable directly
-        write_line(carrier.occupant.purr());
-    fi
-si
-
-describe(CARRIER(CAT()));
-```
-
-output:
-
-```
-purr
-```
-
-A narrow on a path is less durable than one on a local variable. The path reads a fresh value each time, so the narrowing lasts only while nothing can change what it reads: a call to a method or property that can write to the heap drops it, and so does an assignment that can change the path. A local variable holds its value, which no other call can change, so its narrowing lasts until the variable is reassigned. Copying the path into a local keeps the narrower type across a call that would otherwise drop it.
-
-```ghul
-…
-describe(carrier: CARRIER) is
-    // handle() can write to the heap, so it would drop
-    // a narrow on carrier.occupant - copy the value into
-    // a local, whose type no other call can change
-    let occupant = carrier.occupant;
-
-    if isa CAT( ► occupant) then
-        carrier.handle();
-        // occupant is still a CAT after the call
-        write_line(occupant.purr());
-    fi
-si
-
-describe(CARRIER(CAT()));
-```
-
-output:
-
-```
-purr
-```
-
-`if let` copies the value into a fresh local in one step, and works for any expression - the result of a call, not only a variable or path. The local narrows and stays narrowed within the branch.
-
-```ghul
-…
-describe(carrier: CARRIER) is
-    if let cat: CAT = carrier.occupant then
-        write_line(cat.purr());
-    fi
-si
-
-describe(CARRIER(CAT()));
-```
-
-output:
-
-```
-purr
-```
-
-The [type narrowing](https://ghul.dev/control-flow.html#type-narrowing) section of the control flow page covers which calls preserve a path narrow.
-
-Narrowing covers union variant tags, `isa` class checks, null checks (`x?`) and `if let`, and it is flow-sensitive - an early-return guard narrows the code that follows it. See [type narrowing and `if let`](https://ghul.dev/control-flow.html#type-narrowing) in the control flow page for the full picture.
 
 ## what gets inferred
 

@@ -170,7 +170,7 @@ closing file
 
 ### iteration
 
-A type implementing `Collections.Iterable[T]` is a .NET `IEnumerable<T>`, so it works with `for`, with the pipe combinators, and with any .NET API taking a sequence. The requirement is an `iterator` property, and a [generator](https://ghul.dev/control-flow.html#generators) is usually the shortest way to supply one:
+A type implementing `Collections.Iterable[T]` is a .NET `IEnumerable<T>`, so it works with `for`, with the pipe combinators, and with any .NET API taking a sequence. The requirement is an `iterator` property, and a [generator](https://ghul.dev/async-and-generators.html#generators) is usually the shortest way to supply one:
 
 ```ghul
 …

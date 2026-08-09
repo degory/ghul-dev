@@ -96,7 +96,7 @@ si
 
 The two forms are equivalent. The primary form is the shorter shape when every field is initialized from a constructor argument; the classic form is the better fit when the body owns extra fields or properties beyond what the constructor takes. See [constructors](#constructors) for the rest of the primary-constructor surface area.
 
-Two postfix modifiers shape the hierarchy. Without `open`, a class can be subclassed only within the assembly that declares it; `open` opts in to cross-assembly subclassing. `abstract` bars direct construction, so only subclasses exist at runtime, and a class is implicitly abstract when it declares a body-less instance method, since that method is a contract for subclasses to satisfy. The closure feeds [type narrowing](https://ghul.dev/control-flow.html#type-narrowing): on the `else` edge of an `isa` test the compiler can rule the tested subclass out, and an `abstract` root can leave a single remaining subclass.
+Two postfix modifiers shape the hierarchy. Without `open`, a class can be subclassed only within the assembly that declares it; `open` opts in to cross-assembly subclassing. `abstract` bars direct construction, so only subclasses exist at runtime, and a class is implicitly abstract when it declares a body-less instance method, since that method is a contract for subclasses to satisfy. The closure feeds [type narrowing](https://ghul.dev/type-narrowing.html): on the `else` edge of an `isa` test the compiler can rule the tested subclass out, and an `abstract` root can leave a single remaining subclass.
 
 Classes can only be defined at global scope. Classes can be generic, which will be covered later. Concrete class names should be in `MACRO_CASE`. Abstract class names should be in `PascalCase`.
 
@@ -406,7 +406,7 @@ class SCALER is
 si
 ```
 
-A method or function can take a postfix `pure` modifier, which asserts that it only reads and never writes to the heap. The compiler already infers this for many functions; the modifier states it for one the compiler can't prove, and then callers keep [type narrowing](https://ghul.dev/control-flow.html#type-narrowing) facts across a call to it. Every override of a pure member must itself be pure:
+A method or function can take a postfix `pure` modifier, which asserts that it only reads and never writes to the heap. The compiler already infers this for many functions; the modifier states it for one the compiler can't prove, and then callers keep [type narrowing](https://ghul.dev/type-narrowing.html) facts across a call to it. Every override of a pure member must itself be pure:
 
 ```ghul
 …
