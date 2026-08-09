@@ -346,13 +346,13 @@ or, as a method:
 
 <GhulExample name="pipes-ref-all-method" signature />
 
-### for_each
+### each
 
-<GhulExample name="pipes-ref-for_each-function" signature />
+<GhulExample name="pipes-ref-each-function" signature />
 
 or, as a method:
 
-<GhulExample name="pipes-ref-for_each-method" signature />
+<GhulExample name="pipes-ref-each-method" signature />
 
 ### reverse
 

@@ -1,7 +1,7 @@
 {
   "name": "pipes-ref-sort_by-method",
-  "code": "sort_by[K: System.IComparable[K]](\n    key_selector: (T) -> K pure\n) -> Pipe[T] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    sort_by[K: System.IComparable[K]](\n        key_selector: (T) -> K pure\n    ) -> Pipe[T] pure;\nsi\n\nentry() is si\n",
+  "code": "sort_by[K: Ghul.Comparable[K]](\n    key_selector: (T) -> K pure\n) -> Pipe[T] pure;",
+  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    sort_by[K: Ghul.Comparable[K]](\n        key_selector: (T) -> K pure\n    ) -> Pipe[T] pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],
@@ -10,8 +10,8 @@
   "hovers": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 7, "text": "Pipe[T].sort_by[K](key_selector: T -> K pure) -> Pipe[T]", "signature": "Pipe[T].sort_by[K](key_selector: T -> K pure) -> Pipe[T]", "kindLabel": "pure abstract method" },
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "text": "K", "signature": "K", "kindLabel": "type variable" },
-    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 31, "text": "K", "signature": "K", "kindLabel": "type variable" },
-    { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 29, "text": "trait System.IComparable[T]", "signature": "trait System.IComparable[T]", "kindLabel": "trait" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 28, "text": "K", "signature": "K", "kindLabel": "type variable" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 26, "text": "trait Ghul.Comparable[T]", "signature": "trait Ghul.Comparable[T]", "kindLabel": "trait" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 16, "text": "key_selector: T -> K pure", "signature": "key_selector: T -> K pure", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 26, "text": "K", "signature": "K", "kindLabel": "type variable" },
     { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 20, "text": "T", "signature": "T", "kindLabel": "type variable" },
@@ -22,8 +22,8 @@
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 7, "tokenType": "method" },
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "tokenType": "typeParameter" },
-    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 31, "tokenType": "typeParameter" },
-    { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 29, "tokenType": "interface" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 28, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 26, "tokenType": "interface" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 26, "tokenType": "typeParameter" },
     { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 20, "tokenType": "typeParameter" },

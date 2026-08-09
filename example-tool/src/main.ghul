@@ -244,23 +244,44 @@ namespace ExampleTool is
             // DLLs have to be spelled out here too.
             let reference_flags = _sdk_and_runtime_reference_flags(sdk_ref_path);
 
-            let compile = run_process(
+            let compile mut = run_process(
                 "dotnet",
                 "ghul-compiler --v3 --test-run --dotnet --sdk-ref-path \"{sdk_ref_path}\" {reference_flags} {source_file} -o binary.exe",
                 example_dir
             );
 
+            // An example that is only declarations has nothing to run, which
+            // the compiler reports as a missing entry point. The declarations
+            // are the example, so build it as a library and capture no output.
+            let library =
+                !File.exists(Path.combine(example_dir, "binary.exe")) /\
+                "{compile.standard_error}\n{compile.standard_output}"
+                    .contains("no entry point declared");
+
+            if library then
+                compile = run_process(
+                    "dotnet",
+                    "ghul-compiler --v3 --test-run --dotnet --library --sdk-ref-path \"{sdk_ref_path}\" {reference_flags} {source_file} -o binary.dll",
+                    example_dir
+                );
+            fi
+
             raw_diagnostics = _parse_diagnostics(
                 "{compile.standard_error}\n{compile.standard_output}", source_file
             );
-            compiled = File.exists(Path.combine(example_dir, "binary.exe"));
+            compiled =
+                if library then
+                    File.exists(Path.combine(example_dir, "binary.dll"))
+                else
+                    File.exists(Path.combine(example_dir, "binary.exe"))
+                fi;
             reference_arguments = "--sdk-ref-path \"{sdk_ref_path}\" {reference_flags}";
             error_output = compile.standard_error;
 
             // No binary for a deliberate-error example — only diagnostics. The
             // analyser still resolves what it can, so hover survives the failure.
             output =
-                if compiled then
+                if compiled /\ !library then
                     run_process("dotnet", "binary.exe", example_dir).standard_output
                 else
                     ""

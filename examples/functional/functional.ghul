@@ -42,7 +42,7 @@ fibonacci_sequence
     |> zip(factorial_sequence)
     |> take(10)
     |> index()
-    |> for_each(
+    |> each(
         ((i, (fib, fact))) =>
             write_line(
                 // adjacent string literals concatenate

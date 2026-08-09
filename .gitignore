@@ -6,4 +6,4 @@ all.md
 # project-backed example build artifacts
 examples/*/bin/
 examples/*/obj/
-examples/*/.assemblies.json
+**/.assemblies.json
