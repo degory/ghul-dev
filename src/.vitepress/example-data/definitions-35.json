@@ -1,7 +1,7 @@
 {
   "name": "definitions-35",
-  "code": "class THING is\n    do_something_public() is\n    si\n\n    _do_something_protected() is\n    si\nsi",
-  "fullSource": "class THING is\n    do_something_public() is\n    si\n\n    _do_something_protected() is\n    si\nsi\n\n",
+  "code": "class THING is\n    do_something_public() is\n    si\n\n    _do_something_private() is\n    si\nsi",
+  "fullSource": "class THING is\n    do_something_public() is\n    si\n\n    _do_something_private() is\n    si\nsi\n\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
@@ -10,13 +10,13 @@
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "text": "class THING", "signature": "class THING", "kindLabel": "class" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 23, "text": "THING.do_something_public() -> void", "signature": "THING.do_something_public() -> void", "kindLabel": "pure method" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 27, "text": "THING._do_something_protected() -> void", "signature": "THING._do_something_protected() -> void", "kindLabel": "pure private method" }
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 25, "text": "THING._do_something_private() -> void", "signature": "THING._do_something_private() -> void", "kindLabel": "pure private method" }
   ],
   "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "tokenType": "class" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 23, "tokenType": "method" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 5, "tokenType": "modifier" },
-    { "startLine": 5, "startColumn": 6, "endLine": 5, "endColumn": 27, "tokenType": "method" }
+    { "startLine": 5, "startColumn": 6, "endLine": 5, "endColumn": 25, "tokenType": "method" }
   ]
 }

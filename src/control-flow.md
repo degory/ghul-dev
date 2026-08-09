@@ -1,7 +1,7 @@
 # control flow in ghūl
 
 ::: tip runnable examples
-The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl playground](https://github.com/degory/ghul-playground)'s `main.ghul`{:text} and run with `dotnet run`{:sh}.
+The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/control-flow) has fuller, runnable control-flow examples. Open it in a GitHub Codespace or a dev container to build and run them. Any example on this page can also be pasted into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul`{:text} and run with `dotnet run`{:sh}.
 :::
 
 ## block scope
@@ -112,9 +112,7 @@ This loop exits when counter reaches 5 without proceeding to execute `write_line
 
 This loop skips the call to `write_line` when counter is 3.
 
-### scope
-
-The block statement body of the while statement, delimited by `do` and `od` forms a scope for local variable definitions.
+`break` and `continue` behave the same way in `for` and `do` loops, so they are not shown again below.
 
 ### while let
 
@@ -150,22 +148,9 @@ These operators are not for loop specific and can be used in any expression cont
 
 <GhulExample name="control-flow-26" />
 
-### break and continue in for loops
-
-The `break` statement immediately exits the loop, while `continue` skips the remaining code in the current iteration and proceeds to the next iteration immediately before attempting to read the next element from the iterator
-
-<GhulExample name="control-flow-27" />
-
-This loop exits when counter reaches 5, without proceeding to execute `write_line(5)`
-
-
-<GhulExample name="control-flow-28" />
-
-This loop skips the call to `write_line` when counter is 3.
-
 ### scope
 
-The block statement body of the for statement, delimited by `do` and `od` forms a scope for local variable definitions. The loop variable is in scope within this block scope but not within the expression that provides the iterable object.
+The loop variable is in scope within the loop body but not within the expression that provides the iterable object. `continue` in a `for` loop proceeds to the next iteration immediately before attempting to read the next element from the iterator.
 
 
 ## do statement
@@ -179,18 +164,6 @@ The do / od loop in ghūl is used to create an indefinite loop which will contin
 <GhulExample name="control-flow-30" />
 
 This loop will run indefinitely until counter reaches 5, at which point the break statement terminates the loop.
-
-### break and continue in do-od loops
-
-The break and continue statements work similarly in do / od loops as they do in while loops.
-
-<GhulExample name="control-flow-31" />
-
-This loop skips the write_line statement when counter is 3 and breaks out of the loop when counter reaches 5.
-
-### scope
-
-The block statement body of the do statement, delimited by `do` and `od` forms a scope for local variable definitions.
 
 
 ## case statement

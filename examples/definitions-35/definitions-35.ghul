@@ -3,7 +3,7 @@ class THING is
     do_something_public() is
     si
 
-    _do_something_protected() is
+    _do_something_private() is
     si
 si
 // <<<
