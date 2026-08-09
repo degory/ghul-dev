@@ -22,7 +22,7 @@ Inside such a function, `await e` evaluates to the result of the task `e` once i
 
 <GhulExample name="control-flow-48" />
 
-A `try` / `catch` / `finally` around awaiting code works as expected, including a `return` from inside the `try`. What is not yet supported is an `await` inside a `catch` or `finally` handler itself. A faulted task can also be handled at the call site: reading `.result` on a returned task surfaces the fault as a `System.AggregateException`.
+A `try` / `catch` / `finally` around awaiting code works as expected, including a `return` from inside the `try`. What is not yet supported is an `await` inside a `catch` or `finally` handler itself. A faulted task can also be handled at the call site: reading `.result` on a returned task throws the fault as a `System.AggregateException`.
 
 ## generators
 
