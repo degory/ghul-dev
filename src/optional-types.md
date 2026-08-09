@@ -51,7 +51,7 @@ A type that exposes `has_value: bool` and `value: T` properties is treated as op
 
 ### nominal: option-shaped unions
 
-A union with a single field-carrying variant, or with one variant marked `default`, supports `?` and `!` too: `?` tests whether the union holds that variant, and `!` unwraps its payload (or the whole variant, if it has more than one field). The [functional programming](/functional-programming.html#union-types) page builds an `Option[T]` union from scratch to show the mechanics; this is what makes it behave like an option once built, not a special case for a built-in type:
+A union with a single field-carrying variant, or with one variant marked `default`, supports `?` and `!` too: `?` tests whether the union holds that variant, and `!` unwraps its payload (or the whole variant, if it has more than one field). The [unions and pattern matching](/unions-and-pattern-matching.html) page builds an `Option[T]` union from scratch to show the mechanics; this is what makes it behave like an option once built, not a special case for a built-in type:
 
 <GhulExample name="functional-programming-16" />
 
