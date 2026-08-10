@@ -2129,7 +2129,7 @@ Anonymous functions take a single concrete type from context; there is no generi
 
 ## union types and pattern matching
 
-Unions - one type holding one of several variants - and the `if let` and `case` patterns that take them apart are the functional idiom's data backbone. They have their own page: [unions and pattern matching](https://ghul.dev/unions-and-pattern-matching.html).
+A union holds one of several variants, and the `if let` and `case` patterns take one apart. They are how functional ghūl code models data, and they have their own page: [unions and pattern matching](https://ghul.dev/unions-and-pattern-matching.html).
 
 ## currying
 ```ghul
