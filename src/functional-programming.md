@@ -23,7 +23,10 @@ pretty much anything else you can do with any other ghūl value
 ## filter, map, reduce
 
 ghūl pipes provide filter, map and reduce as well as other ways to
-work with sequences of values
+work with sequences of values. Each is a global function in
+`Ghul.Pipes` taking the sequence as its first argument, so the
+[thread-first operator](/expressions#thread-first-calls) `|>` feeds one
+into the next:
 
 <GhulExample name="functional-programming-2" />
 
@@ -145,14 +148,9 @@ step body usually reads `value || next_state`.
 <GhulExample name="functional-programming-22" />
 
 Type arguments to `stream` are inferred from the initial-state value
-and the anonymous function's yield expression. Multi-component state reads more
-clearly as a named tuple (`(n = 1, prev = 1)` with `s.n` and `s.prev`
-field access) than as a positional tuple needing destructuring. The
-no-argument `DONE[T, S]()` constructor in terminating sequences keeps
-its explicit type arguments because the surrounding `if/else` widens to
-`object` before the outer anonymous function's return type can constrain it.
+and the anonymous function's yield expression.
 
-The factory returns `Pipe[T]` directly so combinators like `.take`,
-`.filter`, `.map`, `.zip`, and `.index` chain straight onto a stream
+The factory returns `Pipe[T]` directly so combinators like `take`,
+`filter`, `map`, `zip`, and `index` chain straight onto a stream
 value. State shape never appears in the type a consumer sees of a
 `stream(...)`-produced pipe.

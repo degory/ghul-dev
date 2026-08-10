@@ -78,7 +78,8 @@ namespace ExampleTool is
             name, region.code, strip_markers(source),
             region.hidden_before, region.hidden_after, region.hidden_gaps_after_line,
             Collections.LIST[HOVER](), "", Collections.LIST[DIAGNOSTIC](),
-            Collections.LIST[SEMANTIC_TOKEN](), Collections.LIST[INLAY_HINT]()
+            Collections.LIST[SEMANTIC_TOKEN](), Collections.LIST[INLAY_HINT](),
+            true
         );
         File.write_all_text(Path.combine(output_dir, "{name}.json"), json);
 
@@ -328,7 +329,7 @@ namespace ExampleTool is
             collected.region.hidden_before, collected.region.hidden_after,
             collected.region.hidden_gaps_after_line,
             collected.hovers, output, diagnostics, collected.semantic_tokens,
-            collected.inlay_hints
+            collected.inlay_hints, false
         );
         File.write_all_text(Path.combine(output_dir, "{name}.json"), json);
 

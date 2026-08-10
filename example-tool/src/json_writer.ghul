@@ -44,12 +44,14 @@ namespace ExampleTool is
         output: string,
         diagnostics: Iterable[DIAGNOSTIC],
         semantic_tokens: Iterable[SEMANTIC_TOKEN],
-        inlay_hints: Iterable[INLAY_HINT]
+        inlay_hints: Iterable[INLAY_HINT],
+        snippet: bool
     ) -> string is
         let b = StringBuilder();
 
         b.append("{{\n");
         b.append("  \"name\": "); b.append(_json_string(name)); b.append(",\n");
+        b.append("  \"snippet\": "); b.append(if snippet then "true" else "false" fi); b.append(",\n");
         b.append("  \"code\": "); b.append(_json_string(code)); b.append(",\n");
         b.append("  \"fullSource\": "); b.append(_json_string(full_source)); b.append(",\n");
         b.append("  \"hiddenBefore\": "); b.append(if hidden_before then "true" else "false" fi); b.append(",\n");

@@ -1,7 +1,6 @@
 use IO.Std.write_line;
 // >>>
-use Ghul.Pipes.STREAM;
-use Ghul.Pipes.stream;
+use Ghul.Pipes;
 use STREAM.DONE;
 use STREAM.YIELD;
 // <<<
@@ -25,18 +24,18 @@ let counting = (n: int) =>
 // output types differ.
 let fibonacci = stream(
     (prev = 1, current = 1),
-    s =>
-        s.current || (
-            prev = s.current,
-            current = s.prev + s.current
+    ((prev, current)) =>
+        current || (
+            prev = current,
+            current = prev + current
         )
 );
 
 // factorial. State is (n, prev); output is int.
 let factorial = stream(
     (n = 1, prev = 1),
-    s =>
-        let next_n = s.n + 1, next = s.prev * next_n in
+    ((n, prev)) =>
+        let next_n = n + 1, next = prev * next_n in
         next || (n = next_n, prev = next)
 );
 
@@ -60,15 +59,15 @@ write_line(
     "counting down from 5: {counting(5)}"
 );
 write_line(
-    "first 10 fibonacci numbers: {fibonacci | .take(10)}"
+    "first 10 fibonacci numbers: {fibonacci |> take(10)}"
 );
 write_line(
-    "first 10 factorial numbers: {factorial | .take(10)}"
+    "first 10 factorial numbers: {factorial |> take(10)}"
 );
 write_line("chars of hello: {chars_of("hello")}");
 
 let indexed =
-    fibonacci | .zip(factorial) .take(10) .index();
+    fibonacci |> zip(factorial) |> take(10) |> index();
 
 for (i, (fib, fact)) in indexed do
     write_line("fibonacci {i} is {fib}");

@@ -1,24 +1,22 @@
 {
   "name": "type-inference-16",
-  "code": "[1, 2, 2, 4, 5] | .filter(i => i > 3);",
-  "fullSource": "[1, 2, 2, 4, 5] | .filter(i => i > 3);\n",
-  "hiddenBefore": false,
+  "code": "[1, 2, 2, 4, 5] |> filter(i => i > 3);",
+  "fullSource": "use Ghul.Pipes;\n\n[1, 2, 2, 4, 5] |> filter(i => i > 3);",
+  "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "text": "i: int", "signature": "i: int", "kindLabel": "local argument" },
-    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "text": "Ghul.Pipes.pipe[int](\n    source: Collections.Iterable[int]\n) -> Ghul.Pipes.Pipe[int]", "signature": "Ghul.Pipes.pipe[int](\n    source: Collections.Iterable[int]\n) -> Ghul.Pipes.Pipe[int]", "kindLabel": "global function" },
-    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "text": "Ghul.Pipes.Pipe[int].filter(\n    predicate: int -> bool\n) -> Ghul.Pipes.Pipe[int]", "signature": "Ghul.Pipes.Pipe[int].filter(\n    predicate: int -> bool\n) -> Ghul.Pipes.Pipe[int]", "kindLabel": "default trait method" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "text": "Ghul.Pipes.filter[int](\n    source: Collections.Iterable[int],\n    predicate: int -> bool pure\n) -> Pipe[int]", "signature": "Ghul.Pipes.filter[int](\n    source: Collections.Iterable[int],\n    predicate: int -> bool pure\n) -> Pipe[int]", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 32, "endLine": 1, "endColumn": 32, "text": "i: int", "signature": "i: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 34, "endLine": 1, "endColumn": 34, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" }
   ],
   "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "tokenType": "function" },
-    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "tokenType": "method" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "tokenType": "function" },
     { "startLine": 1, "startColumn": 32, "endLine": 1, "endColumn": 32, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 34, "endLine": 1, "endColumn": 34, "tokenType": "operator" }
   ]

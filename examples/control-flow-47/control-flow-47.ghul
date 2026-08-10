@@ -6,8 +6,8 @@ side_effect(label: string) -> Tasks.TASK is
     return Tasks.TASK.completed_task;
 si
 
-run_side_effects() -> Tasks.TASK is
 // >>>
+run_side_effects() -> Tasks.TASK is
     await side_effect("first");
     await side_effect("second");
 

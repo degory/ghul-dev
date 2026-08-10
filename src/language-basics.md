@@ -61,7 +61,7 @@ ghūl supports arrays, which are fixed-size, **read-only** collections of elemen
 
 <GhulExample name="language-basics-8" />
 
-Arrays can be constructed with an [array literal]()
+Arrays can be constructed with an [array literal](/expressions.html#array)
 <GhulExample name="language-basics-9" />
 
 Array elements can be read with indexer syntax

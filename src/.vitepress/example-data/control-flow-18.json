@@ -1,5 +1,6 @@
 {
   "name": "control-flow-18",
+  "snippet": true,
   "code": "while condition do\n    // code to execute while the condition is true\nod",
   "fullSource": "while condition do\n    // code to execute while the condition is true\nod\n",
   "hiddenBefore": false,
