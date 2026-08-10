@@ -1,17 +1,18 @@
 use IO.Std.write_line;
 use Ghul.MAYBE;
+use Ghul.Pipes;
 
 // >>>
 let words = ["alpha", "beta", "gamma"];
 
 // find scans for the first element matching a predicate;
 // first takes no predicate and yields the leading element
-write_line("find:      {words | .find(w => w.length == 4) ?? "none"}");
-write_line("first:     {words | .first() ?? "none"}");
+write_line("find:      {words |> find(w => w.length == 4) ?? "none"}");
+write_line("first:     {words |> first() ?? "none"}");
 
 // only yields the single element, and throws if the source
 // holds none or more than one
-write_line("only:      {["solo"] | .only()}");
+write_line("only:      {["solo"] |> only()}");
 
 // a mapper that gives a result only for words longer than four
 // characters
@@ -20,13 +21,13 @@ shout(w: string) -> MAYBE[string] pure =>
 
 // find_map keeps mapping until one answers; first_map maps the
 // first element and gives up when that one declines
-write_line("find_map:  {words | .find_map(shout) ?? "none"}");
-write_line("first_map: {words | .first_map(shout) ?? "none"}");
+write_line("find_map:  {words |> find_map(shout) ?? "none"}");
+write_line("first_map: {words |> first_map(shout) ?? "none"}");
 
 // beta is the only word the mapper declines, so leading with it
 // is what separates the two
 let beta_first = ["beta", "alpha", "gamma"];
 
-write_line("find_map:  {beta_first | .find_map(shout) ?? "none"}");
-write_line("first_map: {beta_first | .first_map(shout) ?? "none"}");
+write_line("find_map:  {beta_first |> find_map(shout) ?? "none"}");
+write_line("first_map: {beta_first |> first_map(shout) ?? "none"}");
 // <<<

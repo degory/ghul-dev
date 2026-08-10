@@ -1,9 +1,10 @@
 use IO.Std.write_line;
+use Ghul.Pipes;
 
 // >>>
 let list = [1, 2, 3, 4, 5];
 
-let doubled = list | .map(x => x * 2);
+let doubled = list |> map(x => x * 2);
 
 // original list is still the same:
 write_line("list: {list}");

@@ -1,5 +1,6 @@
 {
   "name": "definitions-24",
+  "snippet": true,
   "code": "namespace Example is\n    ...\nsi",
   "fullSource": "namespace Example is\n    ...\nsi\n",
   "hiddenBefore": false,

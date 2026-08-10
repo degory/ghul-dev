@@ -1,7 +1,6 @@
 use IO.Std.write_line;
 // >>>
-use Ghul.Pipes.STREAM;
-use Ghul.Pipes.stream;
+use Ghul.Pipes;
 use STREAM.DONE;
 use STREAM.YIELD;
 // <<<
@@ -60,15 +59,15 @@ write_line(
     "counting down from 5: {counting(5)}"
 );
 write_line(
-    "first 10 fibonacci numbers: {fibonacci | .take(10)}"
+    "first 10 fibonacci numbers: {fibonacci |> take(10)}"
 );
 write_line(
-    "first 10 factorial numbers: {factorial | .take(10)}"
+    "first 10 factorial numbers: {factorial |> take(10)}"
 );
 write_line("chars of hello: {chars_of("hello")}");
 
 let indexed =
-    fibonacci | .zip(factorial) .take(10) .index();
+    fibonacci |> zip(factorial) |> take(10) |> index();
 
 for (i, (fib, fact)) in indexed do
     write_line("fibonacci {i} is {fib}");

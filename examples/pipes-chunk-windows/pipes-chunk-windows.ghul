@@ -1,4 +1,5 @@
 use IO.Std.write_line;
+use Ghul.Pipes;
 
 // >>>
 let numbers = [1, 2, 3, 4, 5, 6, 7];
@@ -6,14 +7,14 @@ let numbers = [1, 2, 3, 4, 5, 6, 7];
 // chunk: the first three elements, then the next three, and so
 // on. the last group is short when the source doesn't divide
 // evenly
-for group in numbers | .chunk(3) do
-    write_line("chunk:  {group | .join(", ")}");
+for group in numbers |> chunk(3) do
+    write_line("chunk:  {group |> join(", ")}");
 od
 
 // windows: every run of three neighbouring elements, so each
 // group shares two elements with the one before it. a group is
 // always three long
-for window in numbers | .windows(3) do
-    write_line("window: {window | .join(", ")}");
+for window in numbers |> windows(3) do
+    write_line("window: {window |> join(", ")}");
 od
 // <<<

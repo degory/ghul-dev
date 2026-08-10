@@ -1,5 +1,6 @@
 {
   "name": "functional-programming-21",
+  "snippet": true,
   "code": "union STREAM[T, S] is\n    DONE;\n    YIELD(value: T, state: S);\nsi\n\nstream[T, S](\n    initial: S,\n    advance: S -> STREAM[T, S]\n) -> Pipe[T]",
   "fullSource": "union STREAM[T, S] is\n    DONE;\n    YIELD(value: T, state: S);\nsi\n\nstream[T, S](\n    initial: S,\n    advance: S -> STREAM[T, S]\n) -> Pipe[T]\n",
   "hiddenBefore": false,

@@ -68,13 +68,15 @@ A type on the variable (`c: CAT`) makes it a type test. `elif let` chains these,
 
 <GhulExample name="control-flow-14" />
 
-With no type given for the local variable, `if let` tests that the value is present. This is the natural way to consume an [optional type](/language-basics.html#optional-types): the local variable has the non-optional type within the then-branch, so there is no need for an explicit `!`.
+With no type given for the local variable, `if let` tests that the value is present. This is the natural way to consume an [optional type](/optional-types): the local variable has the non-optional type within the then-branch, so there is no need for an explicit `!`.
 
 <GhulExample name="control-flow-15" />
 
 An `if let` can also destructure, exactly like a plain `let`, including `_` to discard a field that is not needed:
 
 <GhulExample name="control-flow-16" />
+
+Destructuring comes in two forms. The positional form above, `(a, b)`, matches elements by position. The by-name form, `(local = field, ...)`, pulls each element from the named field instead: the left of each `=` is the local variable being introduced, the right names the member it is read from, so `(x = x, y = y) = point` introduces `x` and `y` from the fields of the same name, and `(new_x = x, new_y = y) = point` renames them. Each group of parentheses is either entirely positional or entirely by-name, and nested groups choose independently.
 
 A trailing `/\` guard gates the branch on a further condition, evaluated with the new variable already in scope:
 

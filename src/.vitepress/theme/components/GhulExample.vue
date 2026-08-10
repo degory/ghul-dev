@@ -32,6 +32,10 @@ const props = defineProps({
 
 const example = computed(() => props.data)
 
+// Set by the example tool on artifacts built from `snippets/` rather than
+// `examples/`: illustrative ghūl that was never compiled and cannot be.
+const isSnippet = computed(() => example.value?.snippet === true)
+
 const diagnostics = computed(() => example.value?.diagnostics ?? [])
 const semanticTokens = computed(() => example.value?.semanticTokens ?? [])
 const inlayHints = computed(() => example.value?.inlayHints ?? [])
@@ -345,8 +349,11 @@ function onKey(event) {
 const edited = ref(retainedEdit(props.name) !== null)
 
 // A signature card is a declaration stub with no runnable body, so there is
-// nothing to edit or run.
-if (!props.signature) {
+// nothing to edit or run. A snippet is a syntax skeleton written with
+// placeholders (`if condition then`, `catch e: SomeExceptionType`) rather
+// than a program, so opening one in the editor would only produce a wall of
+// errors about the placeholders.
+if (!props.signature && !isSnippet.value) {
   playgroundAvailable().then(available => { canEdit.value = available })
 }
 

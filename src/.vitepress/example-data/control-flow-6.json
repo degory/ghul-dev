@@ -1,5 +1,6 @@
 {
   "name": "control-flow-6",
+  "snippet": true,
   "code": "if first_condition then\n    // code for first condition\nelif second_condition then\n    // code for second condition\n// ... (more elif conditions if needed) ...\nelse\n    // code if all conditions are false\nfi",
   "fullSource": "if first_condition then\n    // code for first condition\nelif second_condition then\n    // code for second condition\n// ... (more elif conditions if needed) ...\nelse\n    // code if all conditions are false\nfi\n",
   "hiddenBefore": false,
