@@ -117,12 +117,12 @@ is_odd(n: int) -> bool =>
 ## read-only by default
 
 While ghūl supports imperative code, it also aims to make pure functions and
-predictable shared data the path of least resistance: the types and traits
-below expose no way to change a value after it is constructed. The guarantee
-is what .NET allows it to be. It is shallow, so a read-only structure can
-still hold references to objects that are themselves mutable, and it binds
-ghūl code, so code written in another .NET language is not required to honour
-it. Stick to these types and shared data behaves predictably.
+predictable shared data low friction: the types and traits below expose no way
+to change a value after it is constructed. The guarantee is what .NET allows it
+to be. It is shallow, so a read-only structure can still hold references to
+objects that are themselves mutable, and it binds ghūl code, so code written in
+another .NET language is not required to honour it. Stick to these types and
+shared data behaves predictably.
 
 ### lists and maps are read-only views
 
