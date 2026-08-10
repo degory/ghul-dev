@@ -15,13 +15,11 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 
 ## examples
 
-> **interactive examples**
+> **editable examples**
 >
-> Hover any identifier in a code example to see its type. An example's output and any compiler diagnostics appear in a panel beneath it. The rotating examples below advance on their own; hover to pause, or step through them with the controls.
-
-> **run the examples**
+> Every example on this site is editable: click the pencil to open it in an editor, change it, and run it in your browser. Output and any compiler errors appear in the panel beneath.
 >
-> Every example on this site is runnable. The [ghūl scratchpad](https://github.com/degory/ghul-scratchpad) is a one-file project set up for exactly that: open it in a GitHub Codespace, or clone it on your own machine, paste an example into `main.ghul`, and `dotnet run`.
+> Nothing you edit is saved. To keep something, paste it into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul`: a one-file project that opens in a GitHub Codespace with the compiler ready, or that you can clone on your own machine. For a project of your own, start from the [repository template](https://github.com/degory/ghul-repository-template).
 
 ### hello world!
 
