@@ -2,7 +2,7 @@
 
 A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and the same type without the `?` is non-optional. The [language basics](https://ghul.dev/language-basics.html#optional-types) page introduces the presence test `?` and the assignability rule; the operators read the same regardless of what `T` is. That uniformity isn't an accident: ghūl backs `T?` with whichever of three different representations fits `T`, and picks silently.
 
-There's a second axis to this, independent of `T?` itself: any type - not just the built-in optional forms - can opt in to the same `?`/`!` treatment, either structurally (by shape) or nominally (by declaring which variant means "absent"). This page covers the three backings behind `T?`, the full operator set - `?`, `!`, `??`, `?.` - and the warnings around them, and the two ways a type can be optional-shaped without ever spelling `T?`.
+This page covers the three backings behind `T?`, the full operator set - `?`, `!`, `??`, `?.` - and the warnings around them. At the end: the two ways a named type of your own can be optional-shaped without ever spelling `T?`.
 
 ```ghul
 …
@@ -90,7 +90,7 @@ got 42
 nothing
 ```
 
-`MAYBE[T]` implements `Ghul.Maybe[T]`, a trait with just `has_value` and `value` - which is also exactly the shape the next section is about. See [generics](https://ghul.dev/generics) for how the type parameters themselves work.
+`MAYBE[T]` implements `Ghul.Maybe[T]`, a trait with just `has_value` and `value` - the same shape a type of your own can expose, covered at the end of this page. See [generics](https://ghul.dev/generics) for how the type parameters themselves work.
 
 ### they interconvert
 
@@ -149,13 +149,52 @@ name: unknown
 
 Reading a member through an optional not known to be present draws a `null-deref` warning; `x?.y`, `x.has_value`, `x!`, and `if let` are the warning-free routes. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
 
-## beyond `T?`: types that are optional-shaped
+## which one to reach for
 
-The two representations above are all spelled `T?`. The two below are ordinary named types that support `?` and `!` anyway, without ever being a `T?` - a different, complementary mechanism, not a fourth backing for the same feature. They don't interconvert with `T?`; they just answer the same two operators.
+- Reaching for optional data in your own code: write `T?`. Don't think about which of the three backings you're getting - that's the point of the unification.
+- Writing a generic function or type that needs to hold "maybe a `T`" for an unconstrained `T`: `T?` still works, backed by `MAYBE[T]`; if you need to construct or return one directly - a `MAYBE[T]` field on a struct, say - you can name `Ghul.MAYBE[T]` explicitly.
+- Modelling something with more shape than "present or absent" - success-with-a-value versus failure-with-a-reason, for instance - reach for a union with a `default` variant: the same `?` and `!`, plus exhaustive `case` matching over every outcome. That, and the other way a named type can be optional-shaped, is next.
 
-### structural: `has_value` and `value`
+## optional-shaped types
 
-A type that exposes `has_value: bool` and `value: T` properties is treated as optional-shaped automatically, with no declaration required. `Ghul.MAYBE[T]` above satisfies this by construction, but so does any type you write yourself:
+A named type of your own can support `?` and `!` without being a `T?`. It keeps its own name and doesn't interconvert with `T?` - what it opts in to is the operators, not the spelling. There are two routes.
+
+A union with a single field-carrying variant, or with one variant marked `default`, is option-shaped: `?` tests whether the union holds that variant, and `!` unwraps its payload (or the whole variant, if it has more than one field). The [unions and pattern matching](https://ghul.dev/unions-and-pattern-matching.html) page builds an `Option[T]` from scratch; the same rule covers the two-variant shape most languages call `Result` - `OK` marked `default`, `ERROR` holding the failure:
+
+```ghul
+…
+union Result[T, E] is
+    OK(value: T) default;
+    ERROR(error: E);
+si
+
+divide(a: int, b: int) -> Result[int, string] =>
+    if b == 0 then
+        Result.ERROR("division by zero")
+    else
+        Result.OK(a / b)
+    fi;
+
+let good = divide(10, 2);
+let bad = divide(10, 0);
+
+if ► good? then
+    write_line("10 / 2 = {good!}");
+fi
+
+if ! ► bad? then
+    write_line("10 / 0 failed");
+fi
+```
+
+output:
+
+```
+10 / 2 = 5
+10 / 0 failed
+```
+
+And a type that exposes `has_value: bool` and `value: T` properties is treated as optional-shaped structurally, with no declaration required: `?` consults `has_value`, and on a struct `!` reads out `value`. `Ghul.MAYBE[T]` satisfies this by construction; so does a type you write yourself:
 
 ```ghul
 …
@@ -194,63 +233,3 @@ output:
 full: 87.5%
 empty has no reading
 ```
-
-### nominal: option-shaped unions
-
-A union with a single field-carrying variant, or with one variant marked `default`, supports `?` and `!` too: `?` tests whether the union holds that variant, and `!` unwraps its payload (or the whole variant, if it has more than one field). The [unions and pattern matching](https://ghul.dev/unions-and-pattern-matching.html) page builds an `Option[T]` union from scratch to show the mechanics; this is what makes it behave like an option once built, not a special case for a built-in type:
-
-```ghul
-…
-if ► an_option? then
-    let value = an_option!;
-    write_line("the option holds {value}");
-fi
-```
-
-output:
-
-```
-the option holds 42
-```
-
-The same rule extends past a single-variant "does it have a value" union to a two-variant "did it succeed" one - `OK` marked `default`, `ERROR` holding the failure - the shape most languages call `Result`:
-
-```ghul
-…
-union Result[T, E] is
-    OK(value: T) default;
-    ERROR(error: E);
-si
-
-divide(a: int, b: int) -> Result[int, string] =>
-    if b == 0 then
-        Result.ERROR("division by zero")
-    else
-        Result.OK(a / b)
-    fi;
-
-let good = divide(10, 2);
-let bad = divide(10, 0);
-
-if ► good? then
-    write_line("10 / 2 = {good!}");
-fi
-
-if ! ► bad? then
-    write_line("10 / 0 failed");
-fi
-```
-
-output:
-
-```
-10 / 2 = 5
-10 / 0 failed
-```
-
-## which one to reach for
-
-- Reaching for optional data in your own code: write `T?`. Don't think about which of the three backings you're getting - that's the point of the unification.
-- Writing a generic function or type that needs to hold "maybe a `T`" for an unconstrained `T`: `T?` still works, backed by `MAYBE[T]`; if you need to construct or return one directly - a `MAYBE[T]` field on a struct, say - you can name `Ghul.MAYBE[T]` explicitly.
-- Adding presence/absence to a type you're already designing: give it `has_value` and `value` and it just works, no interface to declare.
-- Modelling something with more shape than "present or absent" - success-with-a-value versus failure-with-a-reason, for instance - reach for a union with a `default` variant instead. It gets the same `?`/`!` operators, plus exhaustive `case` matching over every outcome.
