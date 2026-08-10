@@ -76,10 +76,10 @@ tuple passed to other code is a copy: nothing can change a tuple you hold.
 
 ### primary constructors define read-only members
 
-A class or struct declared with only a primary constructor has members that
-are set at construction and, by default, not assignable afterwards: a
-parameter opts in to a writable property with the `public` modifier. Fields
-declared on a union's variants are read-only in the same way.
+The members a primary constructor generates are set at construction and, by
+default, not publicly assignable afterwards: a parameter opts in to a
+writable property with the `public` modifier. Fields declared on a union's
+variants are read-only in the same way.
 
 ### properties are not publicly assignable by default
 When defining properties in classes and structs, they are not
