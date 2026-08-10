@@ -57,7 +57,7 @@ These types are used to represent basic values in ghūl programs.
 
 ### arrays
 
-ghūl supports arrays, which are fixed-size, **immutable** collections of elements of the same type. Array types are denoted using square brackets [] after the element type.
+ghūl supports arrays, which are fixed-size, **read-only** collections of elements of the same type. Array types are denoted using square brackets [] after the element type.
 
 <GhulExample name="language-basics-8" />
 
