@@ -667,7 +667,7 @@ These types are used to represent basic values in ghūl programs.
 
 ### arrays
 
-ghūl supports arrays, which are fixed-size, **immutable** collections of elements of the same type. Array types are denoted using square brackets [] after the element type.
+ghūl supports arrays, which are fixed-size, **read-only** collections of elements of the same type. Array types are denoted using square brackets [] after the element type.
 
 ```ghul
 let numbers: int[] = [1, 2, 3];
@@ -1964,29 +1964,35 @@ is_even(n: int) -> bool =>
 is_odd(n: int) -> bool =>
     if n == 0 then false else is_even(n - 1) fi;
 ```
-## immutable data structures and pure functions
-While ghūl supports imperative code it also aims to support
-writing pure functions with appropriate constructs and defaults
+## read-only by default
 
-### lists are immutable by default
-The standard trait for lists `Collections.List[T]` is immutable
+While ghūl supports imperative code, it also aims to make pure functions and
+predictable shared data the path of least resistance: the types and traits
+below expose no way to change a value after it is constructed. The guarantee
+is what .NET allows it to be. It is shallow, so a read-only structure can
+still hold references to objects that are themselves mutable, and it binds
+ghūl code, so code written in another .NET language is not required to honour
+it. Stick to these types and shared data behaves predictably.
 
-### maps are immutable by default
-The standard trait for maps `Collections.Map[K, V]` is immutable
+### lists and maps are read-only views
 
-### arrays are immutable
-The ghūl array type `T[]` does not expose an assign indexer
+The standard traits `Collections.List[T]` and `Collections.Map[K, V]` expose
+no mutating members. The mutable `LIST` and `MAP` implement them, so a
+function that accepts `List[T]` can read the list it is given but cannot
+change it.
 
-### array literals are immutable
-The values constructed by array literals are immutable
+### arrays are read-only
+
+The ghūl array type `T[]` has no assign indexer: elements can be read but not
+replaced. An array literal constructs a plain array, so the same applies to it.
 
 ```ghul
 …
-let list = [1, 2, 3, 4, 5];
+let numbers = [1, 2, 3, 4, 5];
 
-let element = list[3]; // elements can be read
+let element = numbers[3]; // elements can be read
 
-list[3] = 6;
+numbers[3] = 6;
 ```
 
 diagnostics:
@@ -1994,10 +2000,9 @@ diagnostics:
 - error: indexer is read-only in int[]
 
 ### tuples are immutable
-Values of ghūl tuple types `(T1, T2, T3, ...)` are immutable (the elements `` `0 ``, `` `1 ``, `` `2 ``, ... do not have assign accessors)
 
-### tuple literals are immutable
-The values constructed by tuple literals are immutable
+Tuple elements have no assign accessors, and tuples are value types, so a
+tuple passed to other code is a copy: nothing can change a tuple you hold.
 
 ```ghul
 …
@@ -2011,6 +2016,13 @@ tuple.`3 = 6;
 diagnostics:
 
 - error: 3: int is not publicly assignable
+
+### primary constructors define read-only members
+
+The members a primary constructor generates are set at construction and, by
+default, not publicly assignable afterwards: a parameter opts in to a
+writable property with the `public` modifier. Fields declared on a union's
+variants are read-only in the same way.
 
 ### properties are not publicly assignable by default
 When defining properties in classes and structs, they are not
