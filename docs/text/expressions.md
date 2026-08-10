@@ -103,9 +103,10 @@ si;
 Argument types usually can be inferred if the function literal is being passed into a function.
 
 ```ghul
+…
 let list = [1, 2, 3, 4, 5];
 
-list | .filter(element => element < 3);
+list |> filter(element => element < 3);
 ```
 
 #### capturing and closure

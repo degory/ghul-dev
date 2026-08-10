@@ -16,6 +16,7 @@ Inside such a function, `await e` evaluates to the result of the task `e` once i
 
 ```ghul
 …
+compute() -> Tasks.TASK[int] is
     let a = await double_async(10);   // a = 20
     let b = await double_async(a);    // b = 40
     let c = await add_async(a, b);    // c = 60
@@ -36,6 +37,7 @@ output:
 
 ```ghul
 …
+run_side_effects() -> Tasks.TASK is
     await side_effect("first");
     await side_effect("second");
 
@@ -56,6 +58,7 @@ side effect: second
 
 ```ghul
 …
+sum_of_squares(xs: Collections.List[int]) -> Tasks.TASK[int] is
     let total mut = 0;
 
     for x in xs do
@@ -85,6 +88,7 @@ A function is a generator when its declared return type is `Pipe[T]` (`Ghul.Pipe
 
 ```ghul
 …
+squares(limit: int) -> Ghul.Pipes.Pipe[int] is
     let i mut = 1;
     while i <= limit do
         yield i * i;
@@ -106,12 +110,12 @@ output:
 16
 ```
 
-A generator *is* a [pipe](https://ghul.dev/functional-programming.html#lazy-sequences), so it can be looped over directly and composed with `map` / `filter` / `take` and the other pipe operators:
+A generator *is* a [pipe](https://ghul.dev/runtime-library.html#stages), so it can be looped over directly and composed with `map` / `filter` / `take` and the other pipe operators:
 
 ```ghul
 …
 // fibs() is an infinite generator; take(8) bounds it
-for f in fibs() | .take(8) do
+for f in fibs() |> take(8) do
     write_line(f);
 od
 ```

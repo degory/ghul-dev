@@ -139,7 +139,7 @@ ghūl supports arrays, which are fixed-size, **read-only** collections of elemen
 let numbers: int[] = [1, 2, 3];
 ```
 
-Arrays can be constructed with an [array literal]()
+Arrays can be constructed with an [array literal](https://ghul.dev/expressions.html#array)
 ```ghul
 let primes = [2, 3, 5, 7, 11];
 ```

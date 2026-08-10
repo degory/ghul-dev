@@ -264,7 +264,7 @@ output:
 
 ```ghul
 use IO.Std.write_line;
-use Ghul.Pipes.Pipe;
+use Ghul.Pipes;
 
 // a generator: a function returning Pipe[T] that yields.
 // each yield produces the next value and pauses until the
@@ -292,22 +292,22 @@ si
 
 // a generator is a Pipe, so the pipe operations compose
 // onto it directly
-write_line("first 10 fibonacci numbers: {fibonacci() | .take(10)}");
-write_line("first 10 factorial numbers: {factorial() | .take(10)}");
+write_line("first 10 fibonacci numbers: {fibonacci() |> take(10)}");
+write_line("first 10 factorial numbers: {factorial() |> take(10)}");
 
 let first_10_even =
-    fibonacci() |
-        .filter(x => x % 2 == 0)
-        .take(10);
+    fibonacci()
+        |> filter(x => x % 2 == 0)
+        |> take(10);
 
 write_line("first 10 even fibonacci numbers: {first_10_even}");
 
 // take(10) bounds the infinite generators so the loop ends
 let indexed =
-    fibonacci() |
-        .zip(factorial())
-        .take(10)
-        .index();
+    fibonacci()
+        |> zip(factorial())
+        |> take(10)
+        |> index();
 
 for (i, (fib, fact)) in indexed do
     write_line("fibonacci {i} is {fib}");
@@ -673,7 +673,7 @@ ghūl supports arrays, which are fixed-size, **read-only** collections of elemen
 let numbers: int[] = [1, 2, 3];
 ```
 
-Arrays can be constructed with an [array literal]()
+Arrays can be constructed with an [array literal](https://ghul.dev/expressions.html#array)
 ```ghul
 let primes = [2, 3, 5, 7, 11];
 ```
@@ -1880,20 +1880,23 @@ let ff = (f: int -> int, i) => f(f(i));
 ## filter, map, reduce
 
 ghūl pipes provide filter, map and reduce as well as other ways to
-work with sequences of values
+work with sequences of values. Each is a global function in
+`Ghul.Pipes` taking the sequence as its first argument, so the
+[thread-first operator](https://ghul.dev/expressions#thread-first-calls) `|>` feeds one
+into the next:
 
 ```ghul
 …
 // map
-let doubled = [1, 2, 3, 4, 5] | .map(x => x * 2);
+let doubled = [1, 2, 3, 4, 5] |> map(x => x * 2);
 write_line("doubled: {doubled}");
 
 // filter
-let evens = [1, 2, 3, 4, 5] | .filter(x => x % 2 == 0);
+let evens = [1, 2, 3, 4, 5] |> filter(x => x % 2 == 0);
 write_line("evens: {evens}");
 
 // reduce
-let sum = [1, 2, 3, 4, 5] | .reduce(0, (acc, x) => acc + x);
+let sum = [1, 2, 3, 4, 5] |> reduce(0, (acc, x) => acc + x);
 write_line("sum: {sum}");
 ```
 
@@ -2053,7 +2056,7 @@ transformed output without mutating the source data
 …
 let list = [1, 2, 3, 4, 5];
 
-let doubled = list | .map(x => x * 2);
+let doubled = list |> map(x => x * 2);
 
 // original list is still the same:
 write_line("list: {list}");
@@ -2203,8 +2206,7 @@ step body usually reads `value || next_state`.
 
 ```ghul
 …
-use Ghul.Pipes.STREAM;
-use Ghul.Pipes.stream;
+use Ghul.Pipes;
 use STREAM.DONE;
 use STREAM.YIELD;
 …
@@ -2226,18 +2228,18 @@ let counting = (n: int) =>
 // output types differ.
 let fibonacci = stream(
     (prev = 1, current = 1),
-    s =>
-        s.current || (
-            prev = s.current,
-            current = s.prev + s.current
+    ((prev, current)) =>
+        current || (
+            prev = current,
+            current = prev + current
         )
 );
 
 // factorial. State is (n, prev); output is int.
 let factorial = stream(
     (n = 1, prev = 1),
-    s =>
-        let next_n = s.n + 1, next = s.prev * next_n in
+    ((n, prev)) =>
+        let next_n = n + 1, next = prev * next_n in
         next || (n = next_n, prev = next)
 );
 
@@ -2261,15 +2263,15 @@ write_line(
     "counting down from 5: {counting(5)}"
 );
 write_line(
-    "first 10 fibonacci numbers: {fibonacci | .take(10)}"
+    "first 10 fibonacci numbers: {fibonacci |> take(10)}"
 );
 write_line(
-    "first 10 factorial numbers: {factorial | .take(10)}"
+    "first 10 factorial numbers: {factorial |> take(10)}"
 );
 write_line("chars of hello: {chars_of("hello")}");
 
 let indexed =
-    fibonacci | .zip(factorial) .take(10) .index();
+    fibonacci |> zip(factorial) |> take(10) |> index();
 
 for (i, (fib, fact)) in indexed do
     write_line("fibonacci {i} is {fib}");
@@ -2307,15 +2309,10 @@ factorial 9 is 39916800
 ```
 
 Type arguments to `stream` are inferred from the initial-state value
-and the anonymous function's yield expression. Multi-component state reads more
-clearly as a named tuple (`(n = 1, prev = 1)` with `s.n` and `s.prev`
-field access) than as a positional tuple needing destructuring. The
-no-argument `DONE[T, S]()` constructor in terminating sequences keeps
-its explicit type arguments because the surrounding `if/else` widens to
-`object` before the outer anonymous function's return type can constrain it.
+and the anonymous function's yield expression.
 
-The factory returns `Pipe[T]` directly so combinators like `.take`,
-`.filter`, `.map`, `.zip`, and `.index` chain straight onto a stream
+The factory returns `Pipe[T]` directly so combinators like `take`,
+`filter`, `map`, `zip`, and `index` chain straight onto a stream
 value. State shape never appears in the type a consumer sees of a
 `stream(...)`-produced pipe.
 
@@ -2993,7 +2990,8 @@ let returns_string = (s: string) => "{s}{s}";
 When an anonymous function literal is passed as an argument and an unambiguous overload match can be made without knowing the exact function type, the compiler infers the argument types from the matching overload.
 
 ```ghul
-[1, 2, 2, 4, 5] | .filter(i => i > 3);
+…
+[1, 2, 2, 4, 5] |> filter(i => i > 3);
 ```
 
 Here `self` is already known to be `Pipe[int]`, so `Pipe[int].filter(predicate: int -> bool) -> Pipe[int]` is the only overload that could match. The `predicate` argument must therefore be `int -> bool`, and the type of `i` must be `int`.
@@ -3104,6 +3102,7 @@ Inside such a function, `await e` evaluates to the result of the task `e` once i
 
 ```ghul
 …
+compute() -> Tasks.TASK[int] is
     let a = await double_async(10);   // a = 20
     let b = await double_async(a);    // b = 40
     let c = await add_async(a, b);    // c = 60
@@ -3124,6 +3123,7 @@ output:
 
 ```ghul
 …
+run_side_effects() -> Tasks.TASK is
     await side_effect("first");
     await side_effect("second");
 
@@ -3144,6 +3144,7 @@ side effect: second
 
 ```ghul
 …
+sum_of_squares(xs: Collections.List[int]) -> Tasks.TASK[int] is
     let total mut = 0;
 
     for x in xs do
@@ -3173,6 +3174,7 @@ A function is a generator when its declared return type is `Pipe[T]` (`Ghul.Pipe
 
 ```ghul
 …
+squares(limit: int) -> Ghul.Pipes.Pipe[int] is
     let i mut = 1;
     while i <= limit do
         yield i * i;
@@ -3194,12 +3196,12 @@ output:
 16
 ```
 
-A generator *is* a [pipe](https://ghul.dev/functional-programming.html#lazy-sequences), so it can be looped over directly and composed with `map` / `filter` / `take` and the other pipe operators:
+A generator *is* a [pipe](https://ghul.dev/runtime-library.html#stages), so it can be looped over directly and composed with `map` / `filter` / `take` and the other pipe operators:
 
 ```ghul
 …
 // fibs() is an infinite generator; take(8) bounds it
-for f in fibs() | .take(8) do
+for f in fibs() |> take(8) do
     write_line(f);
 od
 ```
@@ -3361,7 +3363,7 @@ versions.add(VERSION(2, 1));
 versions.add(VERSION(1, 9));
 versions.sort();
 
-write_line("sorted: {versions | .map(v => v.to_string()) | .join(", ")}");
+write_line("sorted: {versions |> map(v => v.to_string()) |> join(", ")}");
 write_line("1.0 < 1.1: {VERSION(1, 0) < VERSION(1, 1)}");
 ```
 
@@ -3606,16 +3608,16 @@ let numbers = [1, 2, 3, 4, 5, 6];
 // nothing has asked this pipe for elements yet, so peek's
 // action has not run
 let stages = numbers
-    | .peek(x => write_line("  pulled {x}"))
-    | .filter(x => x % 2 == 0)
-    | .map(x => x * 10);
+    |> peek(x => write_line("  pulled {x}"))
+    |> filter(x => x % 2 == 0)
+    |> map(x => x * 10);
 
 write_line("pipe built - nothing has run yet");
 
 // collect_list is a terminal, so it asks for the elements
-let result = stages | .collect_list();
+let result = stages |> collect_list();
 
-write_line("result: {result | .join(", ")}");
+write_line("result: {result |> join(", ")}");
 ```
 
 output:
@@ -3784,10 +3786,10 @@ let right = [3, 4, 5];
 
 // all four remove duplicates, keeping the first occurrence
 // of each element
-write_line("distinct:       {left | .distinct()}");
-write_line("union_with:     {left | .union_with(right)}");
-write_line("intersect_with: {left | .intersect_with(right)}");
-write_line("except:         {left | .except(right)}");
+write_line("distinct:       {left |> distinct()}");
+write_line("union_with:     {left |> union_with(right)}");
+write_line("intersect_with: {left |> intersect_with(right)}");
+write_line("except:         {left |> except(right)}");
 ```
 
 output:
@@ -3887,15 +3889,15 @@ let numbers = [1, 2, 3, 4, 5, 6, 7];
 // chunk: the first three elements, then the next three, and so
 // on. the last group is short when the source doesn't divide
 // evenly
-for group in numbers | .chunk(3) do
-    write_line("chunk:  {group | .join(", ")}");
+for group in numbers |> chunk(3) do
+    write_line("chunk:  {group |> join(", ")}");
 od
 
 // windows: every run of three neighbouring elements, so each
 // group shares two elements with the one before it. a group is
 // always three long
-for window in numbers | .windows(3) do
-    write_line("window: {window | .join(", ")}");
+for window in numbers |> windows(3) do
+    write_line("window: {window |> join(", ")}");
 od
 ```
 
@@ -4117,12 +4119,12 @@ let words = ["alpha", "beta", "gamma"];
 
 // find scans for the first element matching a predicate;
 // first takes no predicate and yields the leading element
-write_line("find:      {words | .find(w => w.length == 4) ?? "none"}");
-write_line("first:     {words | .first() ?? "none"}");
+write_line("find:      {words |> find(w => w.length == 4) ?? "none"}");
+write_line("first:     {words |> first() ?? "none"}");
 
 // only yields the single element, and throws if the source
 // holds none or more than one
-write_line("only:      {["solo"] | .only()}");
+write_line("only:      {["solo"] |> only()}");
 
 // a mapper that gives a result only for words longer than four
 // characters
@@ -4131,15 +4133,15 @@ shout(w: string) -> MAYBE[string] pure =>
 
 // find_map keeps mapping until one answers; first_map maps the
 // first element and gives up when that one declines
-write_line("find_map:  {words | .find_map(shout) ?? "none"}");
-write_line("first_map: {words | .first_map(shout) ?? "none"}");
+write_line("find_map:  {words |> find_map(shout) ?? "none"}");
+write_line("first_map: {words |> first_map(shout) ?? "none"}");
 
 // beta is the only word the mapper declines, so leading with it
 // is what separates the two
 let beta_first = ["beta", "alpha", "gamma"];
 
-write_line("find_map:  {beta_first | .find_map(shout) ?? "none"}");
-write_line("first_map: {beta_first | .first_map(shout) ?? "none"}");
+write_line("find_map:  {beta_first |> find_map(shout) ?? "none"}");
+write_line("first_map: {beta_first |> first_map(shout) ?? "none"}");
 ```
 
 output:
@@ -4408,20 +4410,20 @@ let numbers = [3, 1, 4, 1, 5, 9, 2, 6];
 
 // collect gives back the read-only List[T] trait, collect_list
 // the mutable LIST[T], and collect_set drops duplicates
-write_line("collect:      {numbers | .collect() | .join(", ")}");
-write_line("collect_list: {numbers | .collect_list() | .join(", ")}");
-write_line("collect_set:  {numbers | .collect_set() | .join(", ")}");
+write_line("collect:      {numbers |> collect() |> join(", ")}");
+write_line("collect_list: {numbers |> collect_list() |> join(", ")}");
+write_line("collect_set:  {numbers |> collect_set() |> join(", ")}");
 
 // partition splits on a predicate: the matching elements first
-let (even, odd) = numbers | .partition(x => x % 2 == 0);
+let (even, odd) = numbers |> partition(x => x % 2 == 0);
 
-write_line("partition:    even {even | .join(", ")}, odd {odd | .join(", ")}");
+write_line("partition:    even {even |> join(", ")}, odd {odd |> join(", ")}");
 
 // group_by keys each element, collecting the elements per key
-let by_size = numbers | .group_by(x => if x < 5 then "small" else "large" fi);
+let by_size = numbers |> group_by(x => if x < 5 then "small" else "large" fi);
 
-write_line("group_by:     small {by_size["small"] | .join(", ")}");
-write_line("group_by:     large {by_size["large"] | .join(", ")}");
+write_line("group_by:     small {by_size["small"] |> join(", ")}");
+write_line("group_by:     large {by_size["large"] |> join(", ")}");
 ```
 
 output:
@@ -5817,9 +5819,10 @@ si;
 Argument types usually can be inferred if the function literal is being passed into a function.
 
 ```ghul
+…
 let list = [1, 2, 3, 4, 5];
 
-list | .filter(element => element < 3);
+list |> filter(element => element < 3);
 ```
 
 #### capturing and closure
@@ -6332,7 +6335,7 @@ output:
 rover barks
 ```
 
-With no type given for the local variable, `if let` tests that the value is present. This is the natural way to consume an [optional type](https://ghul.dev/language-basics.html#optional-types): the local variable has the non-optional type within the then-branch, so there is no need for an explicit `!`.
+With no type given for the local variable, `if let` tests that the value is present. This is the natural way to consume an [optional type](https://ghul.dev/optional-types): the local variable has the non-optional type within the then-branch, so there is no need for an explicit `!`.
 
 ```ghul
 …
@@ -6365,6 +6368,8 @@ output:
 ```
 found ada
 ```
+
+Destructuring comes in two forms. The positional form above, `(a, b)`, matches elements by position. The by-name form, `(local = field, ...)`, pulls each element from the named field instead: the left of each `=` is the local variable being introduced, the right names the member it is read from, so `(x = x, y = y) = point` introduces `x` and `y` from the fields of the same name, and `(new_x = x, new_y = y) = point` renames them. Each group of parentheses is either entirely positional or entirely by-name, and nested groups choose independently.
 
 A trailing `/\` guard gates the branch on a further condition, evaluated with the new variable already in scope:
 
@@ -6615,7 +6620,7 @@ These operators are not for loop specific and can be used in any expression cont
 let zero_to_four = 0..5;
 let five_to_nine = 5..10;
 
-let zero_to_nine = zero_to_four | .cat(five_to_nine);
+let zero_to_nine = zero_to_four |> cat(five_to_nine);
 
 while zero_to_nine.move_next() do
     write_line(zero_to_nine.current);
@@ -6686,39 +6691,40 @@ This loop will run indefinitely until counter reaches 5, at which point the brea
 
 ```ghul
 …
-case value
-when -1 then
-    return "minus one";
+classify(value: int) -> string is
+    case value
+    when -1 then
+        return "minus one";
 
-when 0 then
-    let result = "zero";
-    return result;
+    when 0 then
+        let result = "zero";
+        return result;
 
-when 1 then
-    return "one";
+    when 1 then
+        return "one";
 
-when 2 then
-    return "two";
+    when 2 then
+        return "two";
 
-when 3 then
-    return "three";
+    when 3 then
+        return "three";
 
-when 4 then
-    return "four";
+    when 4 then
+        return "four";
 
-when 5 then
-    let result = "five";
-    return result;
+    when 5 then
+        let result = "five";
+        return result;
 
-when 6, 7, 8, 9 then
-    return "more than five and less than ten";
+    when 6, 7, 8, 9 then
+        return "more than five and less than ten";
 
-when 13 then
-    return "unlucky";
+    when 13 then
+        return "unlucky";
 
-else
-    return "less than -1 or more than nine";
-esac
+    else
+        return "less than -1 or more than nine";
+    esac
 si
 
 write_line(classify(0));

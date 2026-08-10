@@ -82,16 +82,16 @@ let numbers = [1, 2, 3, 4, 5, 6];
 // nothing has asked this pipe for elements yet, so peek's
 // action has not run
 let stages = numbers
-    | .peek(x => write_line("  pulled {x}"))
-    | .filter(x => x % 2 == 0)
-    | .map(x => x * 10);
+    |> peek(x => write_line("  pulled {x}"))
+    |> filter(x => x % 2 == 0)
+    |> map(x => x * 10);
 
 write_line("pipe built - nothing has run yet");
 
 // collect_list is a terminal, so it asks for the elements
-let result = stages | .collect_list();
+let result = stages |> collect_list();
 
-write_line("result: {result | .join(", ")}");
+write_line("result: {result |> join(", ")}");
 ```
 
 output:
@@ -260,10 +260,10 @@ let right = [3, 4, 5];
 
 // all four remove duplicates, keeping the first occurrence
 // of each element
-write_line("distinct:       {left | .distinct()}");
-write_line("union_with:     {left | .union_with(right)}");
-write_line("intersect_with: {left | .intersect_with(right)}");
-write_line("except:         {left | .except(right)}");
+write_line("distinct:       {left |> distinct()}");
+write_line("union_with:     {left |> union_with(right)}");
+write_line("intersect_with: {left |> intersect_with(right)}");
+write_line("except:         {left |> except(right)}");
 ```
 
 output:
@@ -363,15 +363,15 @@ let numbers = [1, 2, 3, 4, 5, 6, 7];
 // chunk: the first three elements, then the next three, and so
 // on. the last group is short when the source doesn't divide
 // evenly
-for group in numbers | .chunk(3) do
-    write_line("chunk:  {group | .join(", ")}");
+for group in numbers |> chunk(3) do
+    write_line("chunk:  {group |> join(", ")}");
 od
 
 // windows: every run of three neighbouring elements, so each
 // group shares two elements with the one before it. a group is
 // always three long
-for window in numbers | .windows(3) do
-    write_line("window: {window | .join(", ")}");
+for window in numbers |> windows(3) do
+    write_line("window: {window |> join(", ")}");
 od
 ```
 
@@ -593,12 +593,12 @@ let words = ["alpha", "beta", "gamma"];
 
 // find scans for the first element matching a predicate;
 // first takes no predicate and yields the leading element
-write_line("find:      {words | .find(w => w.length == 4) ?? "none"}");
-write_line("first:     {words | .first() ?? "none"}");
+write_line("find:      {words |> find(w => w.length == 4) ?? "none"}");
+write_line("first:     {words |> first() ?? "none"}");
 
 // only yields the single element, and throws if the source
 // holds none or more than one
-write_line("only:      {["solo"] | .only()}");
+write_line("only:      {["solo"] |> only()}");
 
 // a mapper that gives a result only for words longer than four
 // characters
@@ -607,15 +607,15 @@ shout(w: string) -> MAYBE[string] pure =>
 
 // find_map keeps mapping until one answers; first_map maps the
 // first element and gives up when that one declines
-write_line("find_map:  {words | .find_map(shout) ?? "none"}");
-write_line("first_map: {words | .first_map(shout) ?? "none"}");
+write_line("find_map:  {words |> find_map(shout) ?? "none"}");
+write_line("first_map: {words |> first_map(shout) ?? "none"}");
 
 // beta is the only word the mapper declines, so leading with it
 // is what separates the two
 let beta_first = ["beta", "alpha", "gamma"];
 
-write_line("find_map:  {beta_first | .find_map(shout) ?? "none"}");
-write_line("first_map: {beta_first | .first_map(shout) ?? "none"}");
+write_line("find_map:  {beta_first |> find_map(shout) ?? "none"}");
+write_line("first_map: {beta_first |> first_map(shout) ?? "none"}");
 ```
 
 output:
@@ -884,20 +884,20 @@ let numbers = [3, 1, 4, 1, 5, 9, 2, 6];
 
 // collect gives back the read-only List[T] trait, collect_list
 // the mutable LIST[T], and collect_set drops duplicates
-write_line("collect:      {numbers | .collect() | .join(", ")}");
-write_line("collect_list: {numbers | .collect_list() | .join(", ")}");
-write_line("collect_set:  {numbers | .collect_set() | .join(", ")}");
+write_line("collect:      {numbers |> collect() |> join(", ")}");
+write_line("collect_list: {numbers |> collect_list() |> join(", ")}");
+write_line("collect_set:  {numbers |> collect_set() |> join(", ")}");
 
 // partition splits on a predicate: the matching elements first
-let (even, odd) = numbers | .partition(x => x % 2 == 0);
+let (even, odd) = numbers |> partition(x => x % 2 == 0);
 
-write_line("partition:    even {even | .join(", ")}, odd {odd | .join(", ")}");
+write_line("partition:    even {even |> join(", ")}, odd {odd |> join(", ")}");
 
 // group_by keys each element, collecting the elements per key
-let by_size = numbers | .group_by(x => if x < 5 then "small" else "large" fi);
+let by_size = numbers |> group_by(x => if x < 5 then "small" else "large" fi);
 
-write_line("group_by:     small {by_size["small"] | .join(", ")}");
-write_line("group_by:     large {by_size["large"] | .join(", ")}");
+write_line("group_by:     small {by_size["small"] |> join(", ")}");
+write_line("group_by:     large {by_size["large"] |> join(", ")}");
 ```
 
 output:

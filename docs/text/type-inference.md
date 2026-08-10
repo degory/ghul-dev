@@ -217,7 +217,8 @@ let returns_string = (s: string) => "{s}{s}";
 When an anonymous function literal is passed as an argument and an unambiguous overload match can be made without knowing the exact function type, the compiler infers the argument types from the matching overload.
 
 ```ghul
-[1, 2, 2, 4, 5] | .filter(i => i > 3);
+…
+[1, 2, 2, 4, 5] |> filter(i => i > 3);
 ```
 
 Here `self` is already known to be `Pipe[int]`, so `Pipe[int].filter(predicate: int -> bool) -> Pipe[int]` is the only overload that could match. The `predicate` argument must therefore be `int -> bool`, and the type of `i` must be `int`.

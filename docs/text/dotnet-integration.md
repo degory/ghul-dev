@@ -133,7 +133,7 @@ versions.add(VERSION(2, 1));
 versions.add(VERSION(1, 9));
 versions.sort();
 
-write_line("sorted: {versions | .map(v => v.to_string()) | .join(", ")}");
+write_line("sorted: {versions |> map(v => v.to_string()) |> join(", ")}");
 write_line("1.0 < 1.1: {VERSION(1, 0) < VERSION(1, 1)}");
 ```
 

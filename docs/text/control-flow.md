@@ -215,7 +215,7 @@ output:
 rover barks
 ```
 
-With no type given for the local variable, `if let` tests that the value is present. This is the natural way to consume an [optional type](https://ghul.dev/language-basics.html#optional-types): the local variable has the non-optional type within the then-branch, so there is no need for an explicit `!`.
+With no type given for the local variable, `if let` tests that the value is present. This is the natural way to consume an [optional type](https://ghul.dev/optional-types): the local variable has the non-optional type within the then-branch, so there is no need for an explicit `!`.
 
 ```ghul
 …
@@ -248,6 +248,8 @@ output:
 ```
 found ada
 ```
+
+Destructuring comes in two forms. The positional form above, `(a, b)`, matches elements by position. The by-name form, `(local = field, ...)`, pulls each element from the named field instead: the left of each `=` is the local variable being introduced, the right names the member it is read from, so `(x = x, y = y) = point` introduces `x` and `y` from the fields of the same name, and `(new_x = x, new_y = y) = point` renames them. Each group of parentheses is either entirely positional or entirely by-name, and nested groups choose independently.
 
 A trailing `/\` guard gates the branch on a further condition, evaluated with the new variable already in scope:
 
@@ -498,7 +500,7 @@ These operators are not for loop specific and can be used in any expression cont
 let zero_to_four = 0..5;
 let five_to_nine = 5..10;
 
-let zero_to_nine = zero_to_four | .cat(five_to_nine);
+let zero_to_nine = zero_to_four |> cat(five_to_nine);
 
 while zero_to_nine.move_next() do
     write_line(zero_to_nine.current);
@@ -569,39 +571,40 @@ This loop will run indefinitely until counter reaches 5, at which point the brea
 
 ```ghul
 …
-case value
-when -1 then
-    return "minus one";
+classify(value: int) -> string is
+    case value
+    when -1 then
+        return "minus one";
 
-when 0 then
-    let result = "zero";
-    return result;
+    when 0 then
+        let result = "zero";
+        return result;
 
-when 1 then
-    return "one";
+    when 1 then
+        return "one";
 
-when 2 then
-    return "two";
+    when 2 then
+        return "two";
 
-when 3 then
-    return "three";
+    when 3 then
+        return "three";
 
-when 4 then
-    return "four";
+    when 4 then
+        return "four";
 
-when 5 then
-    let result = "five";
-    return result;
+    when 5 then
+        let result = "five";
+        return result;
 
-when 6, 7, 8, 9 then
-    return "more than five and less than ten";
+    when 6, 7, 8, 9 then
+        return "more than five and less than ten";
 
-when 13 then
-    return "unlucky";
+    when 13 then
+        return "unlucky";
 
-else
-    return "less than -1 or more than nine";
-esac
+    else
+        return "less than -1 or more than nine";
+    esac
 si
 
 write_line(classify(0));

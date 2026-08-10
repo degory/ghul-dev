@@ -30,20 +30,23 @@ let ff = (f: int -> int, i) => f(f(i));
 ## filter, map, reduce
 
 ghūl pipes provide filter, map and reduce as well as other ways to
-work with sequences of values
+work with sequences of values. Each is a global function in
+`Ghul.Pipes` taking the sequence as its first argument, so the
+[thread-first operator](https://ghul.dev/expressions#thread-first-calls) `|>` feeds one
+into the next:
 
 ```ghul
 …
 // map
-let doubled = [1, 2, 3, 4, 5] | .map(x => x * 2);
+let doubled = [1, 2, 3, 4, 5] |> map(x => x * 2);
 write_line("doubled: {doubled}");
 
 // filter
-let evens = [1, 2, 3, 4, 5] | .filter(x => x % 2 == 0);
+let evens = [1, 2, 3, 4, 5] |> filter(x => x % 2 == 0);
 write_line("evens: {evens}");
 
 // reduce
-let sum = [1, 2, 3, 4, 5] | .reduce(0, (acc, x) => acc + x);
+let sum = [1, 2, 3, 4, 5] |> reduce(0, (acc, x) => acc + x);
 write_line("sum: {sum}");
 ```
 
@@ -203,7 +206,7 @@ transformed output without mutating the source data
 …
 let list = [1, 2, 3, 4, 5];
 
-let doubled = list | .map(x => x * 2);
+let doubled = list |> map(x => x * 2);
 
 // original list is still the same:
 write_line("list: {list}");
@@ -353,8 +356,7 @@ step body usually reads `value || next_state`.
 
 ```ghul
 …
-use Ghul.Pipes.STREAM;
-use Ghul.Pipes.stream;
+use Ghul.Pipes;
 use STREAM.DONE;
 use STREAM.YIELD;
 …
@@ -376,18 +378,18 @@ let counting = (n: int) =>
 // output types differ.
 let fibonacci = stream(
     (prev = 1, current = 1),
-    s =>
-        s.current || (
-            prev = s.current,
-            current = s.prev + s.current
+    ((prev, current)) =>
+        current || (
+            prev = current,
+            current = prev + current
         )
 );
 
 // factorial. State is (n, prev); output is int.
 let factorial = stream(
     (n = 1, prev = 1),
-    s =>
-        let next_n = s.n + 1, next = s.prev * next_n in
+    ((n, prev)) =>
+        let next_n = n + 1, next = prev * next_n in
         next || (n = next_n, prev = next)
 );
 
@@ -411,15 +413,15 @@ write_line(
     "counting down from 5: {counting(5)}"
 );
 write_line(
-    "first 10 fibonacci numbers: {fibonacci | .take(10)}"
+    "first 10 fibonacci numbers: {fibonacci |> take(10)}"
 );
 write_line(
-    "first 10 factorial numbers: {factorial | .take(10)}"
+    "first 10 factorial numbers: {factorial |> take(10)}"
 );
 write_line("chars of hello: {chars_of("hello")}");
 
 let indexed =
-    fibonacci | .zip(factorial) .take(10) .index();
+    fibonacci |> zip(factorial) |> take(10) |> index();
 
 for (i, (fib, fact)) in indexed do
     write_line("fibonacci {i} is {fib}");
@@ -457,14 +459,9 @@ factorial 9 is 39916800
 ```
 
 Type arguments to `stream` are inferred from the initial-state value
-and the anonymous function's yield expression. Multi-component state reads more
-clearly as a named tuple (`(n = 1, prev = 1)` with `s.n` and `s.prev`
-field access) than as a positional tuple needing destructuring. The
-no-argument `DONE[T, S]()` constructor in terminating sequences keeps
-its explicit type arguments because the surrounding `if/else` widens to
-`object` before the outer anonymous function's return type can constrain it.
+and the anonymous function's yield expression.
 
-The factory returns `Pipe[T]` directly so combinators like `.take`,
-`.filter`, `.map`, `.zip`, and `.index` chain straight onto a stream
+The factory returns `Pipe[T]` directly so combinators like `take`,
+`filter`, `map`, `zip`, and `index` chain straight onto a stream
 value. State shape never appears in the type a consumer sees of a
 `stream(...)`-produced pipe.
