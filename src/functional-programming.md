@@ -6,7 +6,10 @@ Every example on this page can be edited and run here: click the pencil to open 
 The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/functional) has fuller functional-programming examples to build and run locally, in a GitHub Codespace or a dev container.
 :::
 
-ghūl has some support for basic functional programming
+ghūl supports a functional style of programming: functions are first-class
+values, the common data types are read-only by default, unions and pattern
+matching model data by cases, and pipes transform sequences without mutating
+them
 
 ## first class functions
 
