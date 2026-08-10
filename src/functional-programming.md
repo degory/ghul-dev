@@ -148,10 +148,7 @@ step body usually reads `value || next_state`.
 <GhulExample name="functional-programming-22" />
 
 Type arguments to `stream` are inferred from the initial-state value
-and the anonymous function's yield expression. Multi-component state reads
-best as a named tuple (`(n = 1, prev = 1)`) taken apart by a destructuring
-parameter (`((n, prev)) => ...`), so the step body names each component
-directly rather than reaching through a state variable. The
+and the anonymous function's yield expression. The
 no-argument `DONE[T, S]()` constructor in terminating sequences keeps
 its explicit type arguments because the surrounding `if/else` widens to
 `object` before the outer anonymous function's return type can constrain it.
