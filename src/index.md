@@ -16,7 +16,7 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 ## examples
 
 ::: tip editable examples
-Every example on this site is editable: click the pencil to open it in an editor, change it, and run it in your browser. Output and any compiler errors appear in the panel beneath. The rotating examples below advance on their own; hover to pause, or step through them with the controls.
+Every example on this site is editable: click the pencil to open it in an editor, change it, and run it in your browser. Output and any compiler errors appear in the panel beneath.
 
 Nothing you edit is saved. To keep something, paste it into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul`{:text}: a one-file project that opens in a GitHub Codespace with the compiler ready, or that you can clone on your own machine. For a project of your own, start from the [repository template](https://github.com/degory/ghul-repository-template).
 :::
