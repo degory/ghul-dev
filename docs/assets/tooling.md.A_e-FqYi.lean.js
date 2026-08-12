@@ -1,1 +1,0 @@
-import{_ as i,I as a,g as e,j as t}from"./chunks/framework.DnGoLYRz.js";const g=JSON.parse('{"title":"tooling","description":"","frontmatter":{},"headers":[],"relativePath":"tooling.md","filePath":"tooling.md"}'),l={name:"tooling.md"};function n(h,s,p,r,o,k){return a(),e("div",null,[...s[0]||(s[0]=[t("",41)])])}const c=i(l,[["render",n]]);export{g as __pageData,c as default};
