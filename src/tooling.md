@@ -45,7 +45,15 @@ On large projects the extension updates this analysis in two stages: a quick par
 
 ## other editors
 
-The extension's language support lives in a standalone [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) server with no dependency on the VS Code API. It ships as the `ghul-language-server`{:text} archive attached to every [ghul-vsce release](https://github.com/degory/ghul-vsce/releases), and it speaks stdio by default, so any editor with an LSP client can drive it - it has been tested with [Micro](https://micro-editor.github.io/), for example. Download the `.tgz`{:text} from the latest release, install it with `npm install`{:sh}, and point your editor's LSP client at the `ghul-language-server`{:text} launcher it provides.
+The extension's language support lives in a standalone [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) server with no dependency on the VS Code API. It speaks stdio by default, so any editor with an LSP client can drive it - it has been tested with [Micro](https://micro-editor.github.io/), for example.
+
+Install it from npm:
+
+```sh
+npm install -g @ghul/language-server
+```
+
+The command it installs is `ghul-language-server`{:text}, so point your editor's LSP client at that. The same package is attached as a `.tgz`{:text} to every [ghul-vsce release](https://github.com/degory/ghul-vsce/releases) if you would rather not install from npm.
 
 ## dev containers
 
