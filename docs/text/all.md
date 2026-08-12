@@ -7726,9 +7726,9 @@ A ghūl build moves through three broad stages:
 2. **Make sense of the source.** A series of passes walks the syntax tree,
    working out what every name refers to, what type every expression has,
    and reporting any errors.
-3. **Emit IL.** A final pass walks the syntax tree and produces .NET
-   intermediate language, which is assembled into a `.dll` or
-   `.exe` on disk.
+3. **Emit the assembly.** A final pass walks the syntax tree and writes a
+   `.dll` or `.exe` to disk, encoding .NET metadata and
+   method bodies directly.
 
 When the compiler runs as the back end of the VS Code extension it follows
 the same first two stages but stops short of emitting IL, and runs many
@@ -7817,7 +7817,7 @@ The full pass list, in the order `COMPILER` runs them:
 | `mark-boxed-locals`            | Marks `let mut` locals (and parameters) that are both captured by an anonymous function and reassigned, so the IL pass wraps them in a `Ghul.BOX[T]` cell shared between the enclosing scope and every capturer. |
 | `compile-expressions`          | The largest pass. Walks every expression in every function body, working out its type, resolving operator and method overloads, running type inference, applying flow-sensitive narrowing, and producing IR values that describe what the IL should look like. |
 | `warn-implicit-mutable-let`    | Emits warnings for `let` variables that are mutated but were not declared `mut`, when the corresponding compiler flag is set. |
-| `generate-il`                  | Walks the syntax tree one last time and emits .NET IL, using the IR values produced by `compile-expressions`. |
+| `generate-il`                  | Walks the syntax tree one last time and writes the assembly, encoding the IR values produced by `compile-expressions`. |
 
 Whether each pass actually runs depends on the build flags. A plain syntax
 check stops after the early passes; a full build runs all of them.
@@ -8010,9 +8010,28 @@ and explicit `let mut` declarations are skipped.
 ### `generate-il`
 
 The final pass writes the IR values produced by `compile-expressions`
-out as .NET IL. The compiler does not link to a managed-code generator;
-it writes textual IL to a file and then invokes the `ilasm` tool
-from the .NET SDK to assemble it into a `.dll` or `.exe`.
+out as a .NET assembly, using `System.Reflection.Metadata` to encode
+the metadata tables, the method bodies and a portable PDB, and writing the
+`.dll` or `.exe` itself. Nothing outside the compiler is
+involved, so a build needs no platform-specific tool beyond the .NET
+runtime the compiler is already running on.
+
+Names, signatures and attribute blobs are all encoded from the resolved
+symbols and types, so nothing about the emitted assembly depends on how
+the compiler would display those things to a reader.
+
+Some metadata tables are stored as runs: a type points at the first of its
+members, and the run ends where the next type's begins. Those runs are not
+validated when an assembly loads, so a type written with more members than
+it was counted for still loads, with the surplus attached to the following
+type. The emitter therefore numbers every row in one pass and writes the
+rows in a second, both replaying a single recorded sequence rather than
+each working the order out for itself.
+
+Emission is deterministic: the module version id is a hash of the content
+rather than a fresh value, and nothing records the time of the build. Two
+builds of the same source produce the same bytes, which is what lets the
+bootstrap compare assemblies directly.
 
 ## the main data structures
 
@@ -8080,7 +8099,8 @@ branches, what overload best matches these argument types.
 Most map one-for-one to a single IL instruction; a few (`tuple`, `isa`,
 generic boxing helpers) expand into a small sequence.
 `compile-expressions` builds an IR value tree for each expression;
-`generate-il` walks those trees and prints IL.
+`generate-il` walks those trees and encodes their instructions into
+the method body being built.
 
 ### diagnostics
 
@@ -8185,9 +8205,9 @@ much cheaper than starting a fresh compiler for every request.
 The ghūl compiler is *self-hosting*: it is written in ghūl and is
 compiled by an earlier version of itself. Every CI build re-bootstraps
 the compiler by compiling the source under the published version and
-then comparing the IL produced by two further passes; the compiler that
-the publish produced should compile itself byte-for-byte identically. A
-divergence between the two is treated as a build failure.
+then comparing the assemblies two further passes produce; the compiler
+that the publish produced should compile itself byte-for-byte
+identically. A divergence between the two is treated as a build failure.
 
 The historical story of how the first version of the compiler came to
 exist, back when no ghūl compiler existed to compile it, is on the
