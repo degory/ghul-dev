@@ -1,0 +1,23 @@
+first 10 fibonacci numbers: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34
+first 10 factorial numbers: 1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880
+first 10 even fibonacci numbers: 0, 2, 8, 34, 144, 610, 2584, 10946, 46368, 196418
+fibonacci 0 is 0
+factorial 0 is 1
+fibonacci 1 is 1
+factorial 1 is 1
+fibonacci 2 is 1
+factorial 2 is 2
+fibonacci 3 is 2
+factorial 3 is 6
+fibonacci 4 is 3
+factorial 4 is 24
+fibonacci 5 is 5
+factorial 5 is 120
+fibonacci 6 is 8
+factorial 6 is 720
+fibonacci 7 is 13
+factorial 7 is 5040
+fibonacci 8 is 21
+factorial 8 is 40320
+fibonacci 9 is 34
+factorial 9 is 362880

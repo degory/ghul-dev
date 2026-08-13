@@ -1,0 +1,4 @@
+apply(times_2, 5): 10
+apply(square, 5): 25
+apply_twice(times_2, 5): 20
+apply_twice_times_2(5): 20
