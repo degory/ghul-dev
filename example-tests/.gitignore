@@ -1,0 +1,19 @@
+# Artifacts ghul-test produces while running a case. Only the test definition
+# is committed: the symlink to the example source, ghulflags, and the captured
+# *.expected snapshots.
+#
+# A `failed` marker left behind by a failing run is what capture.sh looks for,
+# so it has to survive the run that produced it and must not be committed.
+**/binary.exe
+**/binary.dll
+**/binary.runtimeconfig.json
+**/binary.pdb
+**/ghul-runtime.dll
+**/compiler.out
+**/failed
+**/*.out
+**/*.err
+**/*.grep
+**/*.sort
+**/*.diff
+**/*.il

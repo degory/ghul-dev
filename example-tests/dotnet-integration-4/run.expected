@@ -1,0 +1,2 @@
+with get_hash_code: True
+without get_hash_code: False

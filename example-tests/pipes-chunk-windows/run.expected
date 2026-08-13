@@ -1,0 +1,8 @@
+chunk:  1, 2, 3
+chunk:  4, 5, 6
+chunk:  7
+window: 1, 2, 3
+window: 2, 3, 4
+window: 3, 4, 5
+window: 4, 5, 6
+window: 5, 6, 7

@@ -8,6 +8,13 @@
         "ghul-compiler"
       ],
       "rollForward": false
+    },
+    "ghul.test": {
+      "version": "1.8.1",
+      "commands": [
+        "ghul-test"
+      ],
+      "rollForward": false
     }
   }
 }
