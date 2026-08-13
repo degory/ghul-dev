@@ -1,4 +1,4 @@
-# Example tests
+# example tests
 
 Every example under `examples/` is compiled and run here, and what it prints is
 compared against a snapshot. The examples are the language documentation, so an
@@ -21,7 +21,7 @@ meant to fail) and `err.expected` (the diagnostic, which is the thing the page
 is illustrating). One documenting a warning carries `warn.expected` and, if it
 still runs, `run.expected` as well.
 
-## Running them
+## running them
 
 ```sh
 dotnet tool restore
@@ -41,7 +41,7 @@ runtime it compiles against itself. An example compiled against one runtime and
 run on an older one is therefore not something these tests report, which is
 worth knowing when a runtime update is the thing under test.
 
-## Adding an example
+## adding an example
 
 Create the case, then let a failing run write the snapshot:
 
@@ -62,7 +62,7 @@ an unordered collection - cannot be snapshotted. Make the example deterministic
 rather than adding a `disabled` file, unless what it is demonstrating is the
 variation itself.
 
-## What is not covered
+## what is not covered
 
 The three `dotnet-integration-*` examples build against ASP.NET through a
 `.ghulproj` and are never run, so they are left out. `snippets/` is illustrative
