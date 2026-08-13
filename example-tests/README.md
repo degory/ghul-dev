@@ -35,6 +35,12 @@ inside the ghul.test package instead, which is a different version and is not
 the one the examples are documented against. CI resolves the path from the pin
 rather than spelling it out.
 
+It settles what the examples *run* on rather than what they compile against:
+the flag is what gets linked beside the binary, and the compiler resolves the
+runtime it compiles against itself. An example compiled against one runtime and
+run on an older one is therefore not something these tests report, which is
+worth knowing when a runtime update is the thing under test.
+
 ## Adding an example
 
 Create the case, then let a failing run write the snapshot:

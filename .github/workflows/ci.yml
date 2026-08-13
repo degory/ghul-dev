@@ -50,6 +50,12 @@ jobs:
     # pins, not the copy that ships inside the ghul.test package. Left to
     # itself ghul-test uses the latter, which would leave a ghul.runtime
     # update tested against a runtime it did not update.
+    #
+    # This covers running, not compiling: --runtime-dll is what gets linked
+    # beside the binary, and the compiler resolves the runtime it compiles
+    # against itself. So an example that compiles against a newer runtime than
+    # it runs on is not something this catches - what it catches is an
+    # example that no longer runs on the runtime we ship.
     - name: Resolve the pinned toolchain
       id: toolchain
       run: |
