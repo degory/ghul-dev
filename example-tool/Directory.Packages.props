@@ -1,5 +1,5 @@
 <Project>
   <ItemGroup>
-    <PackageVersion Include="ghul.runtime" Version="10.2.0" />
+    <PackageVersion Include="ghul.runtime" Version="10.3.0" />
   </ItemGroup>
 </Project>
