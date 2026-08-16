@@ -235,6 +235,26 @@ function onInlayLeave() {
   tip.value = { ...tip.value, show: false }
 }
 
+// record that a reader did something with this particular example.
+//
+// examples are not pages - a reference page carries over a hundred of them - so
+// a pageview says only which page was open, and nothing about which example was
+// worth using. These are recorded as GoatCounter events instead, keyed on the
+// example's name, so the question "which examples do people actually run?" has
+// an answer.
+//
+// only acts the reader chose: running, editing, copying. Scrolling an example
+// into view is not one of them, and counting that would mostly measure how long
+// the page is. Silent and optional by design - `count` is absent whenever the
+// analytics script did not load, which includes every local build.
+function record(action) {
+  window.goatcounter?.count?.({
+    path: `example-${action}/${props.name}`,
+    title: `example ${action}`,
+    event: true,
+  })
+}
+
 const copied = ref(false)
 
 function copy() {
@@ -245,6 +265,7 @@ function copy() {
   navigator.clipboard?.writeText(
     retainedEdit(props.name) ?? example.value.fullSource ?? example.value.code)
   copied.value = true
+  record('copy')
   setTimeout(() => { copied.value = false }, 2000)
 }
 
@@ -435,6 +456,8 @@ function onFrameMessage(event) {
 let stopWatchingTheme = null
 
 function startEditing() {
+  record('edit')
+
   window.addEventListener('keydown', onKey)
 
   // Claiming the page-wide slot closes whichever example held it.
@@ -470,6 +493,7 @@ function stopEditing() {
 }
 
 function run() {
+  record('run')
   post('run')
 }
 
