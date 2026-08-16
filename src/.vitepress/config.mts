@@ -196,6 +196,20 @@ export default defineConfig({
     // have to be the same origin as each other: count.js reads the endpoint
     // out of the data attribute, and pointing one at a host that is not
     // serving the other silently records nothing.
+    //
+    // Every recorded path carries its host, so a row names the page it came
+    // from rather than a path that either site could have produced. This site
+    // and the playground report to one GoatCounter site - sites are keyed on
+    // the host serving the endpoint, and separate sites cannot be viewed
+    // together - so bare paths would put this site's home page and the
+    // playground's entry page in one row.
+    //
+    // A function rather than a string, so it applies to every page. It has to
+    // run before count.js, which keeps any window.goatcounter already set, and
+    // it cannot go in data-goatcounter-settings because that is parsed as JSON.
+    // Events pass their path explicitly and so keep their own naming, which is
+    // what we want: they are not URLs.
+    ['script', {}, 'window.goatcounter = { path: function (p) { return location.host + p } }'],
     ['script', { 'data-goatcounter': 'https://playground.ghul.dev/stats/count', async: '', src: 'https://playground.ghul.dev/stats/count.js' }],
   ],
 
