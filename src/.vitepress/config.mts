@@ -192,7 +192,7 @@ export default defineConfig({
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
     ['meta', { name: 'keywords', content: 'ghul, ghul programming language, ghoul, ghoul programming language, ghūl, ghūl programming language' }],
     ['link', { rel: 'icon', href: '/favicon.ico' }],
-    // Self-hosted GoatCounter, served from the playground host. Both halves
+    // self-hosted GoatCounter, served from the playground host. Both halves
     // have to be the same origin as each other: count.js reads the endpoint
     // out of the data attribute, and pointing one at a host that is not
     // serving the other silently records nothing.

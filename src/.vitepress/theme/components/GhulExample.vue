@@ -235,15 +235,15 @@ function onInlayLeave() {
   tip.value = { ...tip.value, show: false }
 }
 
-// Record that a reader did something with this particular example.
+// record that a reader did something with this particular example.
 //
-// Examples are not pages - a reference page carries over a hundred of them - so
+// examples are not pages - a reference page carries over a hundred of them - so
 // a pageview says only which page was open, and nothing about which example was
 // worth using. These are recorded as GoatCounter events instead, keyed on the
 // example's name, so the question "which examples do people actually run?" has
 // an answer.
 //
-// Only acts the reader chose: running, editing, copying. Scrolling an example
+// only acts the reader chose: running, editing, copying. Scrolling an example
 // into view is not one of them, and counting that would mostly measure how long
 // the page is. Silent and optional by design - `count` is absent whenever the
 // analytics script did not load, which includes every local build.
