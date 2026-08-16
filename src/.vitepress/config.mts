@@ -192,7 +192,11 @@ export default defineConfig({
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
     ['meta', { name: 'keywords', content: 'ghul, ghul programming language, ghoul, ghoul programming language, ghūl, ghūl programming language' }],
     ['link', { rel: 'icon', href: '/favicon.ico' }],
-    ['script', { 'data-goatcounter': 'https://ghul.goatcounter.com/count', async: '', src: '//gc.zgo.at/count.js' }],
+    // Self-hosted GoatCounter, served from the playground host. Both halves
+    // have to be the same origin as each other: count.js reads the endpoint
+    // out of the data attribute, and pointing one at a host that is not
+    // serving the other silently records nothing.
+    ['script', { 'data-goatcounter': 'https://playground.ghul.dev/stats/count', async: '', src: 'https://playground.ghul.dev/stats/count.js' }],
   ],
 
   markdown: {
