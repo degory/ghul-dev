@@ -19,7 +19,7 @@ class CRATE: Named, Sized is
     si
 si
 
-// several bounds joined with /\
+// several bounds joined with '/\'
 label[T: Named /\ Sized](x: T) -> string =>
     "{x.name} holds {x.size}";
 

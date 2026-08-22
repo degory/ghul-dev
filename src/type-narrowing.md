@@ -54,7 +54,7 @@ An `isa` check or variant test narrows a path the same way:
 
 ## how long a narrow lasts
 
-A narrow on a local variable lasts until the variable is reassigned: a local holds one value, which no other function can reach, so nothing a call does can stale it.
+A narrow on a local variable lasts until the variable is reassigned: a local holds one value, which no other function can reach, so no call can make it stale.
 
 A narrow on a member-access path is held to more. A direct store ends it - assigning the field the fact describes through any receiver, storing through any field or property when the last hop is a property getter, or reassigning the path's root. Any other call that might write to the heap is recorded against the fact rather than dropping it, and what gets checked is each later use of the value - and only a use that leans on the narrow. Passing the value where its declared type already fits leans on nothing; reading a member only the narrower view exposes does. When every recorded call is proven harmless the use passes silently, and when one cannot be proven, the report says so at the use site and names the call:
 
@@ -84,6 +84,6 @@ If the local is already narrowed, assigning a value of a different type cancels 
 
 ## calls, purity, and stable
 
-What makes a call harmless is what it can write. The compiler infers this from bodies: a function proven store-free writes nothing already on the heap, and a call to one leaves every narrowing alone. Inference carries most functions without help; where proof falls short, a postfix [`pure` modifier](/definitions.html#methods) declares store-freedom instead, trusted as stated and required of every override. A handful of imported .NET collection mutators (`LIST.add` and friends) are known to store only in their own receiver, so they count as harmless unless the narrow reads through them.
+What makes a call harmless is what it can write. The compiler infers this from bodies: a function proven store-free writes nothing already on the heap, and a call to one leaves every narrowing alone. Most functions are proven outright; where proof falls short, a postfix [`pure` modifier](/definitions.html#methods) declares store-freedom instead, trusted as stated and required of every override. A handful of imported .NET collection mutators (`LIST.add` and friends) are known to store only in their own receiver, so they count as harmless unless the narrow reads through them.
 
 A narrow read through a property also leans on the getter answering the same way twice. When the compiler can't prove that of a getter - a memoiser stores into its cache on first read, say - uses leaning on the narrow draw a warning naming the getter. Declaring the property [`stable`](/definitions.html#properties) presents the narrow anyway: it asserts two adjacent reads agree on presence and runtime type.
