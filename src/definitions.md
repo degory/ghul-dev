@@ -135,7 +135,7 @@ An enum consists of a name and then an enum body, which contains one or more ele
 
 Enums can only be defined at global scope. An enum type name should be in `PascalCase`, and its members in `MACRO_CASE`
 
-Enum values compare with the relational operators as well as for equality: `=~` and `==` compare by the underlying integer, and `<` and friends order by it. `=~` on an optional enum is not supported; narrow the value first. An individual member can be imported by name - `use Some.Namespace.Suit.HEARTS;` - as well as reached through the type.
+Enum values compare for equality and order: `=~` and `==` compare by the underlying integer, and `<`, `<=`, `>` and `>=` order by it. `=~` on an optional enum is not supported; narrow the value first. An individual member can be imported by name - `use Some.Namespace.Suit.HEARTS;` - as well as reached through the type.
 
 ### partial and impl blocks
 
