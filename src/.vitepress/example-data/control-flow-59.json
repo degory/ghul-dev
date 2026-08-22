@@ -1,0 +1,37 @@
+{
+  "name": "control-flow-59",
+  "snippet": false,
+  "code": "let rows = [(\"apples\", 3), (\"pears\", 1), (\"plums\", 0)];\nlet wanted = \"pears\";\n\nfor row in rows do\n    // ~wanted matches where the first element equals the\n    // value wanted already holds; count binds as usual\n    if let (~wanted, count) = row then\n        write_line(\"found {count} {wanted}\");\n    fi\nod",
+  "fullSource": "use IO.Std.write_line;\n\nlet rows = [(\"apples\", 3), (\"pears\", 1), (\"plums\", 0)];\nlet wanted = \"pears\";\n\nfor row in rows do\n    // ~wanted matches where the first element equals the\n    // value wanted already holds; count binds as usual\n    if let (~wanted, count) = row then\n        write_line(\"found {count} {wanted}\");\n    fi\nod\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "found 1 pears\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "rows: (string, int)[]", "signature": "rows: (string, int)[]", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "wanted: string", "signature": "wanted: string", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 7, "text": "row: (string, int)", "signature": "row: (string, int)", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 15, "text": "rows: (string, int)[]", "signature": "rows: (string, int)[]", "kindLabel": "local value" },
+    { "startLine": 7, "startColumn": 22, "endLine": 7, "endColumn": 26, "text": "count: int", "signature": "count: int", "kindLabel": "local value" },
+    { "startLine": 7, "startColumn": 31, "endLine": 7, "endColumn": 33, "text": "row: (string, int)", "signature": "row: (string, int)", "kindLabel": "local value" },
+    { "startLine": 7, "startColumn": 14, "endLine": 7, "endColumn": 19, "text": "wanted: string", "signature": "wanted: string", "kindLabel": "local value" },
+    { "startLine": 7, "startColumn": 13, "endLine": 7, "endColumn": 19, "text": "string.=~(value: string?) -> bool", "signature": "string.=~(value: string?) -> bool", "kindLabel": "method" },
+    { "startLine": 8, "startColumn": 9, "endLine": 8, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 8, "startColumn": 28, "endLine": 8, "endColumn": 32, "text": "count: int", "signature": "count: int", "kindLabel": "local value" },
+    { "startLine": 8, "startColumn": 36, "endLine": 8, "endColumn": 41, "text": "wanted: string", "signature": "wanted: string", "kindLabel": "local value" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 7, "startColumn": 14, "endLine": 7, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 7, "startColumn": 22, "endLine": 7, "endColumn": 26, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 7, "startColumn": 31, "endLine": 7, "endColumn": 33, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 9, "endLine": 8, "endColumn": 18, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 8, "startColumn": 28, "endLine": 8, "endColumn": 32, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 36, "endLine": 8, "endColumn": 41, "tokenType": "variable", "modifiers": "readonly" }
+  ]
+}

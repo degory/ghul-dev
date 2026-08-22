@@ -13,7 +13,7 @@ ghūl relies on keywords for block structure where other languages use braces or
 <GhulExample name="language-basics-1" />
 
 ### expressions and statements
-Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, but only if statements can be used as expressions.
+Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, but only some statements can be used as expressions: `if`, `if let`, `case`, and the `val ... lav` block.
 
 <GhulExample name="language-basics-2" />
 
@@ -145,6 +145,14 @@ Literal expressions represent fixed values of a specific type.
 <GhulExample name="language-basics-25" />
 
 <GhulExample name="language-basics-26" />
+
+### bitwise and shift operators
+
+The integer types have the usual bitwise operators - `&`, `|`, `^` - and the shift operators `<<` and `>>`. A shift count is an `int`; the result keeps the left operand's type, so a shift wider than the operand's width shifts it out entirely. `>>>` is the unsigned right shift: it shifts zeros into the leftmost bits where `>>` keeps the sign:
+
+<GhulExample name="language-basics-30" />
+
+There is no bitwise complement operator.
 
 ## assignment
 

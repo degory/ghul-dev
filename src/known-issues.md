@@ -25,11 +25,7 @@ Very occasionally, if you have an error in your code and you make an edit that c
 
 ## limitations of generics
 
-ghūl supports generics on classes, structs, traits, methods, unions and global functions, with type-parameter constraints (type bound, kind, `new`) and declared variance on traits. A few limitations remain.
-
-### only a single type bound per parameter
-
-The parser accepts `[T: A]` (a single type bound) and `[T: A class new]` (a bound combined with kind and constructor constraints). Multiple type bounds (`[T: A /\ B]`) are not yet supported and are rejected with a clear diagnostic.
+ghūl supports generics on classes, structs, traits, methods, unions and global functions, with type-parameter constraints (type bounds joined with `/\`, kinds including `init`) and declared variance on traits. A few limitations remain.
 
 ### variance is declared only on traits
 

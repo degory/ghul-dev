@@ -52,11 +52,11 @@ This form is used for multiple conditions. If the initial condition is false, th
 
 ### type narrowing
 
-An `if` condition that proves something stronger about a value - an `isa` test on a class or union variant, a `?` presence test on an optional - narrows the value to the stronger type inside the branch, and a guard that leaves the block narrows the code after it. [Type narrowing](/type-narrowing.html) covers this in full: locals, parameters, member-access paths, how long each narrow lasts, and the purity inference behind it.
+An `if` condition that proves something stronger about a value - an `isa` test on a class or union variant, a `?` presence test on an optional - narrows the value to the stronger type inside the branch, and a guard that leaves the block narrows the code after it. [Type narrowing](/type-narrowing.html) covers this in full: locals, parameters, member-access paths, and what happens to a narrow across assignments and calls.
 
 ### if let
 
-`cast T?(x)` views `x` as type `T`, and yields null (rather than throwing) when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test:
+`cast T?(x)` views `x` as type `T`, and yields the absent value (rather than throwing) when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test. Written without the `?`, the cast is checked instead: a value that is not a `T` raises `System.InvalidCastException` there, and a `cast-may-throw` warning says so at the site. See [type cast](/expressions.html#type-cast) for the rest of the cast surface.
 
 <GhulExample name="control-flow-12" />
 
@@ -83,6 +83,12 @@ A trailing `/\` guard gates the branch on a further condition, evaluated with th
 <GhulExample name="control-flow-55" />
 
 Several comma-separated clauses can appear in one `if let`; every clause's test and any guard must pass, and later clauses see the variables the earlier ones introduced, as in `if let outer = holder, inner = outer.value then`. A destructure leaf can also be a literal - an integer, string, character, boolean, `null`, or a qualified enum member - which adds an equality test at that position rather than introducing a variable, so `if let (1, name) = pair then` matches only when the first element is 1. Literal leaves are allowed only in refutable positions like `if let` and `case`.
+
+A leaf can instead match against a value that already exists: prefixing a name with `~` tests the source position for equality with that value rather than declaring a new variable. The marked value is read where the pattern is, so it can be anything equality can compare - a parameter, a local variable, a field:
+
+<GhulExample name="control-flow-59" />
+
+As with literal leaves, the comparison is the one `=~` would make, so strings match by content. A leading `~` is rejected where a leaf can only bind - a formal argument or an anonymous function's parameter list.
 
 When the tested value is a member path and the local should take the path's last name, the `name =` can be dropped: `if let order.customer` introduces `customer` holding `order.customer` and enters the branch when it is present, and `if let zoo.pet: CAT` does the same with a type test. A trailing `?` on the presence form (`if let order.customer?`) is accepted but not required.
 
@@ -176,15 +182,23 @@ This loop will run indefinitely until counter reaches 5, at which point the brea
 
 <GhulExample name="control-flow-32" />
 
+Equality labels match by value, the way `=~` compares: a string scrutinee matches its labels by content rather than by identity, as does any type that defines the operator:
+
+<GhulExample name="functional-programming-24" />
+
+A `when null` label matches absence - for reference types, value types, and unconstrained generics alike.
+
 `case` is also an expression: each arm's last expression is the arm's value, and the `case` evaluates to whichever arm matched:
 
 <GhulExample name="control-flow-53" />
 
 ### pattern arms
 
-A `when` arm can take a pattern instead of an equality list, mirroring [`if let`](#if-let): `when v: T then` type-tests and introduces the variable, `when (a, b) then` destructures, and `when _: T then` type-tests without introducing one. A bare identifier stays an equality test - `when v then` compares against the value of `v` in scope and introduces no new local:
+A `when` arm can take a pattern instead of an equality list, mirroring [`if let`](#if-let): `when v: T then` type-tests and introduces the variable, `when (a, b) then` destructures, and `when _: T then` type-tests without introducing one. A bare identifier stays an equality test - `when v then` compares against the value of `v` in scope and introduces no new local. A pattern arm can carry a trailing `/\` guard; the bound names are in scope in the guard and the arm body, and a failing guard falls through to the next arm as though the pattern hadn't matched:
 
 <GhulExample name="control-flow-54" />
+
+Narrowing works like `if let`'s: an arm's type test narrows the scrutinee within its body, and so does a test made by the arm's own guard. Arm narrowing is local - nothing an arm proves reaches a sibling arm or the code after the `case`.
 
 ### exhaustiveness
 

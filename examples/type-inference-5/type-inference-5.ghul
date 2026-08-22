@@ -1,8 +1,11 @@
 use IO.Std.write_line;
 
-class Animal abstract is si
+class Animal abstract is
+    init() is si
+si
 
-class CAT(): Animal is
+class CAT: Animal is
+    init() is super.init(); si
     purr() -> string => "purr";
 si
 
@@ -16,15 +19,11 @@ si
 
 // >>>
 describe(carrier: CARRIER) is
-    // handle() can write to the heap, so it would drop
-    // a narrow on carrier.occupant - copy the value into
-    // a local, whose type no other call can change
-    let occupant = carrier.occupant;
-
-    if isa CAT(occupant) then
+    if isa CAT(carrier.occupant) then
         carrier.handle();
-        // occupant is still a CAT after the call
-        write_line(occupant.purr());
+        // handle() writes only 'handled', so the compiler can
+        // see it leaves the narrow on occupant alone
+        write_line(carrier.occupant.purr());
     fi
 si
 

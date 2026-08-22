@@ -42,6 +42,10 @@ Arguments consist of a name followed by a type. The type is mandatory as the com
 
 <GhulExample name="definitions-7" />
 
+A formal argument can also be a tuple-destructure pattern in its own parentheses: still one parameter, at the written tuple type, unpacked into its names on entry. Named functions, anonymous functions, asynchronous functions and generators all take them; the aggregate type can be any positionally-destructurable type:
+
+<GhulExample name="definitions-51" />
+
 ## types
 
 ### classes
@@ -95,6 +99,8 @@ A class override can call the trait's default with `super.method()`.
 
 Traits can only be defined at global scope. Trait methods and properties can be abstract or have a default implementation. Trait names should be in `PascalCase`.
 
+Like a class, a trait is closed to other assemblies unless it has the postfix `open` modifier. A closed trait can be implemented and derived from only within the assembly that declares it; `open` opts in to cross-assembly extension. Inside the declaring assembly nothing changes.
+
 ### unions
 
 A union consists of a name and then a union body, which contains one or more variants. Each variant has a name, and then an optional list of fields:
@@ -129,6 +135,8 @@ An enum consists of a name and then an enum body, which contains one or more ele
 
 Enums can only be defined at global scope. An enum type name should be in `PascalCase`, and its members in `MACRO_CASE`
 
+Enum values compare for equality and order: `=~` and `==` compare by the underlying integer, and `<`, `<=`, `>` and `>=` order by it. `=~` on an optional enum is not supported; narrow the value first. An individual member can be imported by name - `use Some.Namespace.Suit.HEARTS;` - as well as reached through the type.
+
 ### partial and impl blocks
 
 Members can be added to a class, struct, or union already declared in the same assembly from a separate block, even in another file. The added members are ordinary members of the target, with the same private access and virtual dispatch as members written in its own body. A `partial` block names the type and adds to it; for a union, whose body holds only variants, it is the only way to give the type methods:
@@ -141,6 +149,8 @@ An `impl Trait for Type` block additionally makes the target implement a trait, 
 
 The target can be a qualified name, including a single union variant (`impl Printer for List.NIL`). The interface must be a trait, and the target a type declared in the same assembly; an imported type cannot be reopened.
 
+Every method or property accessor supplied to a union through a `partial` or `impl` block must be pure - proven store-free from its body, or declared so. One that stores draws an `impure-union-method` warning.
+
 ## properties
 
 A property consists of the property name followed by the property's type and, optionally, bodies for getter and setter methods.
@@ -148,6 +158,12 @@ A property consists of the property name followed by the property's type and, op
 <GhulExample name="definitions-21" />
 
 Public properties with no getter or setter are automatically backed by a hidden field. Private properties with no getter or setter are implemented as a plain field.
+
+A property can take a postfix `stable` modifier: an assertion that two adjacent reads agree on presence and runtime type. [Type narrowing](/type-narrowing.html) leans on that when it narrows through a property getter, so a getter whose consistency the compiler cannot prove from its body - a memoiser filling its cache, say - needs the declaration for its narrowings to be presented:
+
+<GhulExample name="definitions-48" />
+
+`stable` is a contract like `pure`: every override must itself be stable, declared or proven from its body.
 
 Properties can be defined globally and within classes, structs and traits. Property names should be in `snake_case`.
 
@@ -157,9 +173,28 @@ Methods are syntactically the same as functions, except they are defined within 
 
 <GhulExample name="definitions-22" />
 
-A method or function can take a postfix `pure` modifier, which asserts that it only reads and never writes to the heap. The compiler already infers this for many functions; the modifier states it for one the compiler can't prove, and then callers keep [type narrowing](/type-narrowing.html) facts across a call to it. Every override of a pure member must itself be pure:
+A method or function can take a postfix `pure` modifier, which asserts that it only reads and never writes to the heap. The compiler proves this for most functions directly from their bodies, and a call whose callee is proven - or declared - store-free leaves every [type narrowing](/type-narrowing.html) fact alone. The modifier is the escape hatch for a body the proof cannot see through; it is trusted as stated, and every override of a pure member must itself be pure:
 
 <GhulExample name="definitions-45" />
+
+`pure` can also be written on a class, struct, or trait header. Every instance member of a pure type must then be proven store-free or declared pure, and a bodiless member carries an implicit declaration that binds implementors - a trait declared pure holds everyone implementing it to the same rule. Constructors, static members, and assign accessors are exempt; `pure` is rejected on a union, whose members are held to purity through `partial` and `impl` blocks regardless:
+
+```ghul
+trait NAMED pure is
+    name: string;
+    label() -> string;
+si
+
+class USER: NAMED is
+    name: string;
+
+    init(name: string) is
+        self.name = name;
+    si
+
+    label() -> string => "<{name}>";
+si
+```
 
 As with functions, methods should be named in `snake_case`
 
@@ -187,6 +222,12 @@ In ghūl methods named `init` are constructors. When an object is constructed us
 
 Constructors can be defined in classes and structs.
 
+A member whose type says it always holds a value has to be given one. A constructor that leaves such members unassigned on some path out draws one `field-definite-assignment` warning naming every member it missed, since the object it produces holds a value its type rules out:
+
+<GhulExample name="definitions-49" />
+
+A constructor is credited with what it assigns itself, and with what the methods it calls on `self` assign in turn - though not a call reached on only one branch, or one a subclass could override. Members of optional and of value type are not checked: neither has an impossible absence to be caught holding. Suppress with `@suppress("field-definite-assignment")` per constructor or file, or project-wide.
+
 ### primary constructors
 
 When the constructor only assigns its arguments to same-named fields, the class or struct header can declare those parameters directly. The compiler synthesises the matching `init` and a same-named field or property for each parameter:
@@ -196,6 +237,7 @@ When the constructor only assigns its arguments to same-named fields, the class 
 A trailing modifier on a primary parameter overrides the default visibility:
 
 - `x: int public` - public read and write.
+- `x: int protected` - readable from the declaring class and its subclasses.
 - `x: int field` - plain field rather than the default auto-property.
 - `_x: int` - private field, named `_x`.
 - `x: int init` - no field is generated; `x` is in scope only inside `init`.
