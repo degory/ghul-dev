@@ -148,7 +148,7 @@ Literal expressions represent fixed values of a specific type.
 
 ### bitwise and shift operators
 
-The integer types carry the usual bitwise operators - `&`, `|`, `^` - and the shift operators `<<` and `>>`. A shift count is an `int`; the result keeps the left operand's type, so a shift wider than the operand's width shifts it out entirely. `>>>` is the unsigned right shift: it shifts zeros into the leftmost bits where `>>` keeps the sign:
+The integer types have the usual bitwise operators - `&`, `|`, `^` - and the shift operators `<<` and `>>`. A shift count is an `int`; the result keeps the left operand's type, so a shift wider than the operand's width shifts it out entirely. `>>>` is the unsigned right shift: it shifts zeros into the leftmost bits where `>>` keeps the sign:
 
 <GhulExample name="language-basics-30" />
 

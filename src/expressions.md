@@ -132,7 +132,7 @@ Constructor expressions allow you to create new instances of classes or structs 
 
 ## type cast
 
-Type cast expressions allow you to explicitly convert a value from one type to another using the `cast` keyword. Scalar conversions, casts between unrelated reference types, and .NET user-defined conversion operators all go through it:
+A type cast converts a value from one type to another explicitly, using the `cast` keyword. Scalar conversions, casts between unrelated reference types, and .NET user-defined conversion operators all go through it:
 
 <GhulExample name="expressions-23" />
 
