@@ -13,7 +13,7 @@ ghūl relies on keywords for block structure where other languages use braces or
 <GhulExample name="language-basics-1" />
 
 ### expressions and statements
-Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, but only if statements can be used as expressions.
+Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, but only some statements can be used as expressions: `if`, `if let`, `case`, and the `val ... lav` block.
 
 <GhulExample name="language-basics-2" />
 
