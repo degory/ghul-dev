@@ -1,0 +1,27 @@
+use IO.Std.write_line;
+
+// >>>
+trait Named is
+    name: string;
+si
+
+trait Sized is
+    size: int;
+si
+
+class CRATE: Named, Sized is
+    name: string;
+    size: int;
+
+    init(name: string, size: int) is
+        self.name = name;
+        self.size = size;
+    si
+si
+
+// several bounds joined with /\
+label[T: Named /\ Sized](x: T) -> string =>
+    "{x.name} holds {x.size}";
+
+write_line(label(CRATE("bolts", 500)));
+// <<<

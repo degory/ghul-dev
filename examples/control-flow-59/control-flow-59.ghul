@@ -1,0 +1,14 @@
+use IO.Std.write_line;
+
+// >>>
+let rows = [("apples", 3), ("pears", 1), ("plums", 0)];
+let wanted = "pears";
+
+for row in rows do
+    // ~wanted matches where the first element equals the
+    // value wanted already holds; count binds as usual
+    if let (~wanted, count) = row then
+        write_line("found {count} {wanted}");
+    fi
+od
+// <<<

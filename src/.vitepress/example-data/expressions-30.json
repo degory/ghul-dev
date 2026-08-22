@@ -1,0 +1,40 @@
+{
+  "name": "expressions-30",
+  "snippet": false,
+  "code": "average(count: int, total: single) -> single =>\n    total / cast(count);   // cast(v) takes its type from the formal\n\nwrite_line(\"{average(4, 10.0)}\");",
+  "fullSource": "use IO.Std.write_line;\n\naverage(count: int, total: single) -> single =>\n    total / cast(count);   // cast(v) takes its type from the formal\n\nwrite_line(\"{average(4, 10.0)}\");\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "2.5\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 7, "text": "average(count: int, total: single) -> single", "signature": "average(count: int, total: single) -> single", "kindLabel": "pure global function" },
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 13, "text": "count: int", "signature": "count: int", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 25, "text": "total: single", "signature": "total: single", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 18, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 33, "text": "struct single", "signature": "struct single", "kindLabel": "struct" },
+    { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 44, "text": "struct single", "signature": "struct single", "kindLabel": "struct" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "total: single", "signature": "total: single", "kindLabel": "local argument" },
+    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 22, "text": "count: int", "signature": "count: int", "kindLabel": "local argument" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 16, "text": "struct single", "signature": "struct single", "kindLabel": "struct" },
+    { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 11, "text": "Ghul./(a: single, b: single) -> single", "signature": "Ghul./(a: single, b: single) -> single", "kindLabel": "innate function arithmetic.div" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 20, "text": "average(count: int, total: single) -> single", "signature": "average(count: int, total: single) -> single", "kindLabel": "pure global function" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 7, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 18, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 25, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 33, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 44, "tokenType": "struct" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 11, "tokenType": "operator" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 16, "tokenType": "struct" },
+    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 20, "tokenType": "function" }
+  ]
+}

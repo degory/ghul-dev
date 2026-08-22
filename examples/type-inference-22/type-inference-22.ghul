@@ -1,3 +1,4 @@
+// expect: error
 use IO.Std.write_line;
 
 class Animal abstract is
@@ -10,22 +11,20 @@ class CAT: Animal is
 si
 
 class CARRIER(occupant: Animal) is
-    handled: int;
-
-    handle() is
-        handled = handled + 1;
+    swap(a: Animal) is
+        occupant = a;
     si
 si
 
 // >>>
-describe(carrier: CARRIER) is
+describe(carrier: CARRIER, other: Animal) is
     if isa CAT(carrier.occupant) then
-        carrier.handle();
-        // handle() writes only 'handled', so the compiler can
-        // see it leaves the narrow on occupant alone
+        carrier.swap(other);
+        // swap() can change occupant, and the use below leans on
+        // the narrow - so it is reported here, naming the call
         write_line(carrier.occupant.purr());
     fi
 si
 
-describe(CARRIER(CAT()));
+describe(CARRIER(CAT()), CAT());
 // <<<

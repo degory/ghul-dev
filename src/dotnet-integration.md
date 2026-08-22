@@ -90,6 +90,17 @@ Sorting, `Ghul.Comparable[T]`, and the relational operators all come from `<>`, 
 
 <GhulExample name="dotnet-integration-5" />
 
+### conversions
+
+A .NET user-defined conversion operator (`op_Implicit` / `op_Explicit`) declared on either the source or the target type is reachable through `cast`:
+
+```ghul
+let h = cast System.Half(1.5);      // Half declares an explicit conversion from single
+let f = cast single(h);             // and an implicit conversion to single
+```
+
+`cast T(v)` calls the operator and lets it throw on failure. `cast T?(v)` never throws: a failed conversion becomes the absent value, and any other exception still propagates.
+
 ### disposal
 
 A type holding something that has to be released implements `Ghul.Disposable`, which is .NET's `IDisposable`, by defining `dispose`. `let use` then releases it at the end of the enclosing block, however the block is left:

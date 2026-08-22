@@ -40,4 +40,4 @@ A `case` expression matches one scrutinee against several `when` arms, which rea
 
 <GhulExample name="functional-programming-23" />
 
-`when` arms accept the same patterns as `if let` - a type test that binds and narrows (`c: CIRCLE`), destructuring, and literal leaves - so `case` is the exhaustive counterpart to `if let` rather than a different matching mechanism. See [the case statement](/control-flow.html#case-statement) for the full picture.
+`when` arms accept the same patterns as `if let` - a type test that binds and narrows (`c: CIRCLE`), destructuring (with literal leaves and `~`-marked values matching rather than binding), and a trailing `/\` guard that falls through to the next arm on failure. Equality labels compare by value, the way `=~` compares: over a string scrutinee or any type defining the operator, matching is by content; `when null` matches absence. So `case` is the exhaustive counterpart to `if let` rather than a different matching mechanism. See [the case statement](/control-flow.html#case-statement) for the full picture.
