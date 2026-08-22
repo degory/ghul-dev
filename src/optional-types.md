@@ -45,6 +45,8 @@ The `??` operator supplies a fallback: `a ?? b` is `a` when it is present, other
 
 The `?.` operator reads a member only when the receiver is present: `a?.b` is `b` when `a` is present, otherwise the absent case. The result is always optional, and `?.` chains, so a whole access path folds down to one optional. Method calls compose the same way: `a?.foo(args)` calls `foo` on a present receiver and yields the absent case otherwise, with the argument expressions included in the short-circuit, so they are not evaluated when `a` is absent.
 
+The postfix `!` asserts presence and reads the value out; applied to an absent optional it throws. Inside a branch where flow analysis has proven presence it draws a redundancy warning instead.
+
 <GhulExample name="language-basics-29" />
 
 ## the warnings

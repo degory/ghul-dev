@@ -1,0 +1,27 @@
+use IO.Std.write_line;
+
+class REPORT is
+    _summary: string?;
+
+    // >>>
+    // a memoising getter stores, so it is not provably
+    // stable - declare it with postfix stable instead
+    summary: string? stable is
+        if _summary? then
+            return _summary;
+        fi
+        _summary = "nothing to report";
+        return _summary;
+    si
+
+    init() is si
+
+    describe() is
+        if summary? then
+            write_line(summary);
+        fi
+    si
+    // <<<
+si
+
+REPORT().describe();

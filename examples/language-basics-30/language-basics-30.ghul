@@ -1,0 +1,12 @@
+use IO.Std.write_line;
+
+// >>>
+bitwise(a: int, b: int) is
+    write_line("{a & b} {a | b} {a ^ b}");
+
+    // shift counts are int, and >>> shifts zeros in
+    write_line("{1 << 4} {256 >> 3} {-16 >>> 2}");
+si
+
+bitwise(240, 60);
+// <<<
