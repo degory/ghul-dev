@@ -1,8 +1,0 @@
-test.ghul: 5,12..5,13: error: in primary expression: expected (, [, [], assert, case, cast, char literal, false, float literal, identifier, if, int literal, isa, let, new, null, rec, self, string literal, super, true, typeof, val or { but found ]
-test.ghul: 5,17..5,18: error: symbol not found: T
-test.ghul: 5,23..5,24: error: symbol not found: T
-test.ghul: 5,9..5,12: error: in type expression: expected ( or identifier but found new
-test.ghul: 5,9..5,12: error: in variable: expected ( or identifier but found new
-test.ghul: 5,9..5,12: error: new is not supported: construct by calling the type, as in TYPE(arguments)
-test.ghul: 5,9..5,12: error: syntax error: expected ( but found new
-test.ghul: 5,9..5,12: error: syntax error: expected ] but found new

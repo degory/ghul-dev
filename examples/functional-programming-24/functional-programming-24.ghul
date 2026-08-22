@@ -8,7 +8,7 @@ respond(line: string) -> string =>
     esac;
 
 // >>>
-// labels match by content, the way =~ compares
+// labels match by content, the way '=~' compares
 write_line(respond("help"));
 write_line(respond("run"));
 // <<<
