@@ -1,0 +1,4 @@
+add_base(5): 15
+next(): 1
+next(): 2
+count: 2

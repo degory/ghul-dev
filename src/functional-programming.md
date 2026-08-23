@@ -9,16 +9,25 @@ The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main
 ghūl supports a functional style of programming: functions are first-class
 values, the common data types are read-only by default, unions and pattern
 matching model data by cases, and pipes transform sequences without mutating
-them
+them.
 
-## first class functions
+## first-class functions
 
-ghūl has first class functions. There is a function literal syntax that
-constructs functions, which can then be called, but also assigned to
-variables, passed to other functions, stored in data structures, or
-pretty much anything else you can do with any other ghūl value
+Functions are values. A function literal constructs one, and the result can
+be called, assigned to a variable, passed to another function, or stored in
+a data structure, like any other value:
 
 <GhulExample name="functional-programming-1" />
+
+## closures
+
+A function literal captures the variables of its enclosing scope. An
+immutable `let` is captured by value - a snapshot taken when the literal is
+constructed - and a `let mut` is captured by reference, so the function and
+the enclosing scope share one live variable that either side can read or
+reassign:
+
+<GhulExample name="functional-programming-25" />
 
 ## filter, map, reduce
 
@@ -32,32 +41,30 @@ into the next:
 
 ## recursion
 
-ghūl methods, global functions and anonymous functions
-can all call themselves or each other recursively
-
-### self recursion in anonymous functions
+Methods, global functions and anonymous functions can all call themselves
+recursively. A named function calls itself by name; an anonymous function
+has no name, so the `rec` keyword refers to
+the function itself:
 
 <GhulExample name="functional-programming-3" />
 
-### mutual recursion in anonymous functions
-
-Mutual recursion for anonymous functions is slightly awkward because of the forward reference. One way is to declare one as a mutable variable, define the other, then assign to it: the `let mut` is captured by reference, so the first function sees the second once it is assigned:
-
-<GhulExample name="functional-programming-4" />
-
-### mutual recursion in named functions
-Mutual recursion with named functions doesn't require any workarounds
+An anonymous function cannot refer to a variable that is not yet defined, so
+there is no direct way to write two anonymous functions that call each
+other. Write mutually recursive functions as named functions, which can
+refer to each other whatever order they are defined in:
 
 <GhulExample name="functional-programming-5" />
+
 ## read-only by default
 
 While ghūl supports imperative code, it also aims to make pure functions and
-predictable shared data low friction: the types and traits below expose no way
-to change a value after it is constructed. The guarantee is what .NET allows it
-to be. It is shallow, so a read-only structure can still hold references to
-objects that are themselves mutable, and it binds ghūl code, so code written in
-another .NET language is not required to honour it. Stick to these types and
-shared data behaves predictably.
+predictable shared data low friction: the types and traits below expose no
+way to change a value after it is constructed. The guarantee has two limits.
+It is shallow: a read-only structure can still hold references to objects
+that are themselves mutable. And it binds only ghūl code: code written in
+another .NET language is not required to honour it. Within those limits,
+data shared through these types cannot be changed by the code you pass it
+to.
 
 ### lists and maps are read-only views
 
@@ -80,54 +87,119 @@ tuple passed to other code is a copy: nothing can change a tuple you hold.
 
 <GhulExample name="functional-programming-7" />
 
-### primary constructors define read-only members
+### unions are read-only
 
-The members a primary constructor generates are set at construction and, by
-default, not publicly assignable afterwards: a parameter opts in to a
-writable property with the `public` modifier. Fields declared on a union's
-variants are read-only in the same way.
+A union value is fixed at construction: variant fields cannot be assigned,
+and nothing can change which variant a value holds. Methods can be added to
+a union with [`partial` and `impl`
+blocks](/definitions.html#partial-and-impl-blocks), but each must be pure: a
+union method that assigns a field of any object is reported.
 
 ### properties are not publicly assignable by default
-When defining properties in classes and structs, they are not
-publicly assignable by default
+
+A property is readable from anywhere but assignable only within its defining
+type, unless it is declared `public`:
 
 <GhulExample name="functional-programming-8" />
 
-### pipes support non mutating operations over lists
+The members a primary constructor generates are ordinary properties, so the
+same applies to them: they are set at construction and cannot be publicly
+assigned afterwards unless the parameter carries the `public` modifier.
 
-pipes make it easy to iterate over lists and generators producing
-transformed output without mutating the source data
+### pipe operations build new sequences
+
+Pipe operations do not mutate their source: `map`, `filter` and the rest
+produce a new sequence and leave the input as it was:
 
 <GhulExample name="functional-programming-9" />
 
-### expression oriented programming
+## pure functions
 
-Expression bodies and value-producing `if`, `case`, and `val ... lav` blocks help in writing pure functions; see [expression oriented programming](/expression-oriented-programming).
+A function or method can carry a postfix `pure` modifier, declaring that it
+assigns no field, property, or array element of any object. Most function
+bodies are proven pure with no modifier needed; the declaration covers the
+rest, and every override of a pure member must itself be pure. A function
+*type* can be pure too, so a signature can require that only pure functions
+are passed to it:
 
-## higher order functions
+<GhulExample name="functional-programming-27" />
 
-### higher order generically typed global functions
+A class or struct can opt in to the same discipline for the whole type:
+declared `pure` on its header, every member must be proven or declared not
+to assign any field, property, or array element after construction. The
+details, including what purity means to [type
+narrowing](/type-narrowing.html), are under
+[methods](/definitions.html#methods).
+
+Expression bodies and value-producing `if`, `case`, and `val ... lav` blocks
+help in writing pure functions; see
+[expression-oriented programming](/expression-oriented-programming).
+
+## higher-order functions
+
+A higher-order function takes another function as an argument, or returns
+one. Global functions and methods can do this generically:
+
+### higher-order generic global functions
 
 <GhulExample name="functional-programming-11" />
 
-### higher order generically typed methods:
+### higher-order generic methods
+
 <GhulExample name="functional-programming-12" />
 
-### higher order anonymous functions:
+### higher-order anonymous functions
 
 <GhulExample name="functional-programming-13" />
 
 Anonymous functions take a single concrete type from context; there is no generic equivalent to the two preceding forms. For polymorphic behaviour, declare a generic global function or method.
 
-## union types and pattern matching
+## function composition
 
-A union holds one of several variants, and the `if let` and `case` patterns take one apart. They are how functional ghūl code models data, and they have their own page: [unions and pattern matching](/unions-and-pattern-matching.html).
+There is no built-in composition operator, but
+[operators are ordinary functions](/definitions.html#operators), so a
+generic `>>` takes two lines to define:
+
+<GhulExample name="functional-programming-26" />
 
 ## currying
+
+A curried function takes its arguments one at a time: each call takes one
+argument and returns a function that takes the next. In ghūl that is an
+anonymous function that returns another:
+
 <GhulExample name="functional-programming-19" />
 
 ## partial application
+
+Partial application fixes some of a function's arguments and leaves the rest
+open. No special syntax is needed: an anonymous function supplies the fixed
+arguments:
+
 <GhulExample name="functional-programming-20" />
+
+## union types and pattern matching
+
+A union holds one of several variants, and the `if let` and `case` patterns
+take one apart; they are how functional ghūl code models data. A `case` over
+a union is checked for exhaustiveness, so covering every variant needs no
+`else` arm:
+
+<GhulExample name="functional-programming-23" />
+
+The full construct - guards, destructuring, nesting - has its own page:
+[unions and pattern matching](/unions-and-pattern-matching.html).
+
+## optional types
+
+An optional type `T?` holds a value that may be absent - the role `Option`
+and `Maybe` types play in other languages, built into the type system. `??`
+supplies a fallback value, `?.` reads a member only when the receiver is
+present, and `if let` tests and unwraps in one step:
+
+<GhulExample name="optional-types-1" />
+
+Optional types have [their own page](/optional-types.html).
 
 ## lazy sequences
 
@@ -137,20 +209,33 @@ factory. State type `S` and output type `T` are independent, so the
 state of a stream is hidden from its consumers; `stream()` returns a
 plain `Pipe[T]`.
 
-<GhulExample name="functional-programming-21" />
+```ghul
+union STREAM[T, S] is
+    DONE;
+    YIELD(value: T, state: S);
+si
 
-`advance` is a pure step function: it receives the current state and
-returns either `DONE` (sequence is over) or `YIELD(value, next_state)`,
-the yielded element and the state to feed back in on the next step.
-The `||` infix is parser sugar for `YIELD(value, next_state)`, so a
-step body usually reads `value || next_state`.
+stream[T, S](
+    initial: S,
+    advance: S -> STREAM[T, S]
+) -> Pipe[T]
+```
+
+`advance` is a step function: it receives the current state and returns
+either `DONE` (the sequence is over) or `YIELD(value, next_state)`, the
+yielded element and the state to feed back in on the next step. The `||`
+infix constructs `YIELD(value, next_state)`, so a step body usually reads
+`value || next_state`.
 
 <GhulExample name="functional-programming-22" />
 
 Type arguments to `stream` are inferred from the initial-state value
 and the anonymous function's yield expression.
 
-The factory returns `Pipe[T]` directly so combinators like `take`,
-`filter`, `map`, `zip`, and `index` chain straight onto a stream
-value. State shape never appears in the type a consumer sees of a
-`stream(...)`-produced pipe.
+The factory returns `Pipe[T]`, so combinators like `take`, `filter`,
+`map`, `zip`, and `index` chain straight onto it. The state type does not
+appear in that result, so consumers never see how a stream is stepped.
+
+[Generators](/async-and-generators.html) are the other way to a lazy
+sequence: a function containing `yield` produces its elements on demand,
+and its result is a `Pipe[T]` too.

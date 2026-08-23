@@ -1,1 +1,2 @@
-list: System.Int32[]
+doubled: 2, 4, 6, 8, 10
+list: 1, 2, 3, 4, 5
