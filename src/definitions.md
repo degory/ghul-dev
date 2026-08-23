@@ -34,7 +34,7 @@ In ghūl functions consist of a name and a parenthesized formal arguments list, 
 
 `=>` introduces a single-expression body, while the `is` and `si` keywords are used to delimit block bodies.
 
-A block body's last statement, written without a terminating `;`, is the function's return value on the fall-through path. Terminate it and its value is discarded instead, as any other statement's is. See [block bodies return their tail](/expression-oriented-programming.html#block-bodies-return-their-tail) for the rule in full.
+Where a block body ends in a statement that produces a value - an expression, an `if`, a `case`, a `val ... lav` block - and it is written without a terminating `;`, that value is the function's return value on the fall-through path. Terminate it and the value is discarded instead, as any other statement's is. See [block bodies return their tail](/expression-oriented-programming.html#block-bodies-return-their-tail) for the rule in full.
 
 <GhulExample name="definitions-53" />
 
