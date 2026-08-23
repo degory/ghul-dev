@@ -1,14 +1,23 @@
 use IO.Std.write_line;
 
 // >>>
-// MAYBE[T] is what an unconstrained T? lowers to; it's also an
-// ordinary, directly usable type in its own right
-describe(m: Ghul.Maybe[int]) -> string =>
-    if m.has_value then "got {m.value}" else "nothing" fi;
+// a generic type can hold a T? field before T is known
+class SLOT[T] is
+    _stored: T?;
 
-let some = Ghul.MAYBE[int](42);
-let none = Ghul.MAYBE[int]();
+    init() is si
 
-write_line(describe(some));
-write_line(describe(none));
+    put(value: T) is _stored = value; si
+
+    take() -> T? is
+        let result = _stored;
+        _stored = null;
+        return result;
+    si
+si
+
+let s = SLOT[int]();
+s.put(42);
+write_line("{s.take() ?? -1}");
+write_line("{s.take() ?? -1}");
 // <<<
