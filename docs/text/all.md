@@ -914,9 +914,7 @@ i = 10, s = Hello World!, thing.property = 20
 
 # optional types
 
-A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and the same type without the `?` is non-optional. The [language basics](https://ghul.dev/language-basics.html#optional-types) page introduces the presence test `?` and the assignability rule; the operators read the same regardless of what `T` is. That uniformity isn't an accident: ghūl backs `T?` with whichever of three different representations fits `T`, and picks silently.
-
-This page covers the three backings behind `T?`, the full operator set - `?`, `!`, `??`, `?.` - and the warnings around them. At the end: the two ways a named type of your own can be optional-shaped without ever spelling `T?`.
+A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and the same type without the `?` is non-optional. The [language basics](https://ghul.dev/language-basics.html#optional-types) page introduces the presence test `?` and the assignability rule; the operators work the same whatever `T` is. ghūl backs `T?` with whichever of three representations fits `T`, and picks it silently; all three behave alike.
 
 ```ghul
 …
@@ -947,7 +945,7 @@ first long: ccc
 
 `find_first` doesn't know or care whether `T` is `int` or `string`; the same `T?`, the same `??` fallback, work either way.
 
-## `T?`: one feature, three backings
+## `T?`: one feature, three representations
 
 ### reference types
 
@@ -972,7 +970,7 @@ name is Alice
 
 ### value types
 
-`T?` over a value type - `int?`, or a struct - is backed by .NET's `Nullable<T>` at the IL level. You can name `System.Nullable[T]` directly too, since it's an ordinary .NET generic type - but the compiler treats it as just another struct, not as `T?`: it gets none of the automatic widening from `T` or the `??`/`?.` sugar (it does still get `?`/`!`, since `Nullable<T>` happens to expose `HasValue`/`Value`, which is the structural case covered later on this page). For the actual optional-type behaviour, write `T?`, the same way you would for a reference type:
+`T?` over a value type - `int?`, or a struct - is backed by .NET's `Nullable<T>` at the IL level. That is nothing you need to work with directly: write `T?`, the same way you would for a reference type. A ghūl `int?` already is a `Nullable<int>` as far as the runtime is concerned, so it passes to and from non-ghūl .NET code as it is, and there is no reason to name `System.Nullable[T]` in ghūl source:
 
 ```ghul
 let ► here: int? = 42;   // present
@@ -981,30 +979,39 @@ let gone: int? = null; // absent
 
 ### unconstrained generic types
 
-A generic function or type can be written over `T?` before anything is known about whether `T` will turn out to be a reference or a value type. This is where `Ghul.MAYBE[T]` comes in - a struct that can hold "present" or "absent" for *any* `T`, and is what an unconstrained `T?` lowers to. It's also a type you can name and construct directly:
+A generic function or type can use `T?` before anything is known about whether `T` will turn out to be a reference or a value type:
 
 ```ghul
 …
-// MAYBE[T] is what an unconstrained T? lowers to; it's also an
-// ordinary, directly usable type in its own right
-describe(m: Ghul.Maybe[int]) -> string =>
-    if m.has_value then "got {m.value}" else "nothing" fi;
+// a generic type can hold a T? field before T is known
+class SLOT[T] is
+    _stored: T?;
 
-let some = Ghul.MAYBE[int](42);
-let none = Ghul.MAYBE[int]();
+    init() is si
 
-write_line(describe(some));
-write_line(describe(none));
+    put(value: T) is ► _stored = value; si
+
+    take() -> T? is
+        let result = _stored;
+        _stored = null;
+        return result;
+    si
+si
+
+let s = SLOT[int]();
+s.put(42);
+write_line("{s.take() ?? -1}");
+write_line("{s.take() ?? -1}");
 ```
 
 output:
 
 ```
-got 42
-nothing
+42
+-1
 ```
 
-`MAYBE[T]` implements `Ghul.Maybe[T]`, a trait with just `has_value` and `value` - the same shape a type of your own can expose, covered at the end of this page. See [generics](https://ghul.dev/generics) for how the type parameters themselves work.
+Behind the scenes an unconstrained `T?` lowers to `Ghul.MAYBE[T]`, a struct that can hold present or absent for any `T`. Like the other two representations it is an implementation detail: there is no reason to name `MAYBE[T]` in your own code. See [generics](https://ghul.dev/generics) for how the type parameters themselves work.
 
 ### they interconvert
 
@@ -1044,9 +1051,9 @@ output:
 hello, stranger
 ```
 
-The `?.` operator reads a member only when the receiver is present: `a?.b` is `b` when `a` is present, otherwise the absent case. The result is always optional, and `?.` chains, so a whole access path folds down to one optional. Method calls compose the same way: `a?.foo(args)` calls `foo` on a present receiver and yields the absent case otherwise, with the argument expressions included in the short-circuit, so they are not evaluated when `a` is absent.
+The `?.` operator reads a member only when the receiver is present: `a?.b` is `b` when `a` is present; otherwise the result is absent. The result is always optional, and `?.` chains, so a whole access path folds down to one optional. Method calls compose the same way: `a?.foo(args)` calls `foo` on a present receiver; otherwise the result is absent, with the argument expressions included in the short-circuit, so they are not evaluated when `a` is absent.
 
-The postfix `!` asserts presence and reads the value out; applied to an absent optional it throws. Inside a branch where flow analysis has proven presence, it draws a redundancy warning instead.
+The postfix `!` asserts presence and reads the value out; applied to an absent optional it throws. Inside a branch where flow analysis has proven presence, the compiler reports a redundancy warning instead.
 
 ```ghul
 …
@@ -1063,19 +1070,19 @@ name: unknown
 
 ## the warnings
 
-Reading a member through an optional not known to be present draws a `null-deref` warning; `x?.y`, `x.has_value`, `x!`, and `if let` are the warning-free routes. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
+Reading a member through an optional not known to be present is reported with a `null-deref` warning; `x?.y`, `x.has_value`, `x!`, and `if let` are the warning-free routes. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
 
 ## which one to use
 
-- Holding optional data in your own code: write `T?`. Don't think about which of the three backings you're getting - that's the point of the unification.
-- Writing a generic function or type that needs to hold "maybe a `T`" for an unconstrained `T`: `T?` still works, backed by `MAYBE[T]`; if you need to construct or return one directly - a `MAYBE[T]` field on a struct, say - you can name `Ghul.MAYBE[T]` explicitly.
-- Modelling something with more shape than "present or absent" - success-with-a-value versus failure-with-a-reason, for instance - use a union with a `default` variant: the same `?` and `!`, plus exhaustive `case` matching over every outcome. That, and the other way a named type can be optional-shaped, is next.
+- Holding optional data in your own code: write `T?`. Don't think about which of the three representations you're getting - that's the point of the unification.
+- Writing a generic function or type that needs to hold "maybe a `T`" for an unconstrained `T`: `T?` works there too, and nothing more is needed.
+- Modelling something with more shape than "present or absent" - success-with-a-value versus failure-with-a-reason, for instance - use a union with a `default` variant: the same `?` and `!`, plus exhaustive `case` matching over every outcome; see [optional-shaped types](#optional-shaped-types) below.
 
 ## optional-shaped types
 
 A named type of your own can support `?` and `!` without being a `T?`. It keeps its own name and doesn't interconvert with `T?` - what it opts in to is the operators, not the spelling. There are two routes.
 
-A union with a single field-carrying variant, or with one variant marked `default`, is option-shaped: `?` tests whether the union holds that variant, and `!` unwraps its payload (or the whole variant, if it has more than one field). The [unions and pattern matching](https://ghul.dev/unions-and-pattern-matching.html) page builds an `Option[T]` from scratch; the same rule covers the two-variant shape most languages call `Result` - `OK` marked `default`, `ERROR` holding the failure:
+A union where exactly one variant has fields, or with one variant marked `default`, is option-shaped: `?` tests whether the union holds that variant, and `!` unwraps its payload (or the whole variant, if it has more than one field). The [unions and pattern matching](https://ghul.dev/unions-and-pattern-matching.html) page builds an `Option[T]` from scratch; the same rule covers the two-variant shape most languages call `Result` - `OK` marked `default`, `ERROR` holding the failure:
 
 ```ghul
 …
@@ -1163,7 +1170,7 @@ empty has no reading
 >
 > The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller examples that include narrowing, to build and run locally, in a GitHub Codespace or a dev container.
 
-When a check guarantees a value has a more specific type, ghūl narrows that value to it for the code the check covers: inside the branch the value reads at the narrower type, with no cast and no unwrap. Union variant tests, `isa` class checks, presence tests on optionals, and `if let` all narrow, and the narrowing is flow-sensitive - it follows the control flow rather than being confined to a branch body.
+When a check proves a value has a more specific type, ghūl narrows the value for the code the check covers: inside the branch, the value has the narrower type, with no cast and no unwrap needed. Union variant tests, `isa` class checks, presence tests on optionals, and `if let` all narrow, and narrowing follows the control flow, [covered below](#flow-sensitive-narrowing).
 
 > **narrowing inlays**
 >
@@ -1246,13 +1253,13 @@ output:
 ok: 42
 ```
 
-The `else` narrowing extends to a class hierarchy declared in the current assembly without `open`: ruling out one subclass on the `else` edge narrows to the rest, and when the root is `abstract` the chain can collapse to a single remaining subclass.
+The `else` narrowing extends to a class hierarchy declared in the current assembly without `open`: the compiler knows every subclass, so ruling out the tested one narrows the `else` branch to the others, and when an `abstract` root has exactly two subclasses, ruling out one leaves the other.
 
 A `while` condition narrows its body the same way an `if` condition narrows its then-branch, so `while isa CAT(a) do a.purr() od` reaches a `CAT`-only member without an inner cast.
 
 ## flow-sensitive narrowing
 
-Narrowing follows the control flow rather than being confined to a branch body. If a guard rejects the narrower type and then leaves the enclosing block, by `return`, `throw`, `break` or `continue`, the code after the guard is narrowed:
+Narrowing follows the control flow, not just the branch structure. A common shape is a guard: when the test fails, the guard leaves the block with `return`, `throw`, `break` or `continue`, so the code after the guard runs only when the test passed, and the value is narrowed there:
 
 ```ghul
 …
@@ -1348,13 +1355,13 @@ output:
 purr
 ```
 
-## how long a narrow lasts
+## how long a narrowing lasts
 
-A narrow on a local variable lasts until the variable is reassigned: a local holds one value, which no other function can reach, so no call can make it stale.
+Narrowing is optimistic: the compiler narrows whenever a test proves something, and checks afterwards whether the narrowing still holds where it is used. It has to check, because values change, and their types change with them: a value that was present can be reassigned to null.
 
-A narrow on a member-access path is harder to keep, because the path reads a fresh value every time it is mentioned. A direct store ends it outright: assigning the field the fact describes through any receiver, storing through any field or property when the last hop is a property getter, or reassigning the path's root.
+A narrowing lasts at most to the end of the code block associated with the test - the then or else arm of the `if`, or the loop body. It can end earlier, because the value can change before the block ends: by an explicit reassignment, or because a call to a function or method changes it, directly or indirectly.
 
-Any other call that might write to the heap is recorded against the narrow rather than ending it. What gets checked is each later use of the value, and only a use that depends on the narrow. Passing the value where its declared type already fits depends on nothing; reading a member only the narrower view exposes does. When every recorded call is proven harmless the use passes silently. When one cannot be proven, the compiler reports it at the use site, names the call that could have changed the value, and points back at the test that narrowed it:
+The compiler tracks the calls that might do that, conservatively: it builds a call graph and works out which fields each call might write. When you use a narrowed value in a way that depends on the narrowing - you read a member through it, or pass it where only the non-optional or narrower type is accepted - and the compiler cannot prove the value is still what the test saw, it reports the use as potentially unsafe, naming the call it could not prove and pointing back at the test:
 
 ```ghul
 …
@@ -1374,7 +1381,29 @@ diagnostics:
 
 - error: cannot rely on the narrowing of 'carrier.occupant' here: the call to 'swap()' can change it [this call can change carrier.occupant: type-inference-22.ghul: 22,9..22,28] [help: test 'carrier.occupant' again, or copy it into a local variable before the call]
 
-There are two ways out. Test the value again: `?`, `!`, `?.`, `isa`, and `if let` all check at run time and re-establish what they test, whatever calls came before. Or copy the value into a local variable before the call, where no other function can reach it:
+When the compiler can prove that the calls in between could not have changed the value, there is nothing to report:
+
+```ghul
+…
+describe(carrier: CARRIER) is
+    if isa CAT( ► carrier.occupant) then
+        carrier.handle();
+        // handle() writes only 'handled', so the compiler can
+        // see it leaves the narrow on occupant alone
+        write_line(carrier.occupant.purr())
+    fi
+si
+
+describe(CARRIER(CAT()))
+```
+
+output:
+
+```
+purr
+```
+
+Where it cannot, there are two ways out. Test the value again: `?`, `!`, `?.`, `isa`, and `if let` all check at run time and re-establish what they test, whatever calls came before. Or copy the value into a local variable:
 
 ```ghul
 …
@@ -1398,29 +1427,7 @@ output:
 purr
 ```
 
-Where proof succeeds there is nothing to report. This call only writes a field the narrow doesn't read through, so the compiler sees it leaves the narrow alone:
-
-```ghul
-…
-describe(carrier: CARRIER) is
-    if isa CAT( ► carrier.occupant) then
-        carrier.handle();
-        // handle() writes only 'handled', so the compiler can
-        // see it leaves the narrow on occupant alone
-        write_line(carrier.occupant.purr())
-    fi
-si
-
-describe(CARRIER(CAT()))
-```
-
-output:
-
-```
-purr
-```
-
-`if let` copies the value into a fresh local in one step, and works for any expression - the result of a call, not only a variable or path. The local narrows and stays narrowed within the branch. See [if let](https://ghul.dev/control-flow.html#if-let) for the full construct.
+Narrowings of local variables are more stable than narrowings of fields and properties, because there are fewer ways a local variable can change: explicit reassignment, capture by a closure, or being passed by reference to another function. A local variable that is not `mut` cannot change at all, so its narrowing always lasts to the end of the block. That is why `if let` is the best way to get a narrowing that lasts: it copies the value into a fresh immutable local variable in one step, and works for any expression - the result of a call, not only a variable or path. See [if let](https://ghul.dev/control-flow.html#if-let) for the full construct.
 
 ```ghul
 …
@@ -1479,9 +1486,9 @@ dog
 
 ## calls, purity, and stable
 
-What makes a call harmless is what it can write. The compiler infers this from bodies: a function proven store-free writes nothing already on the heap, and a call to one leaves every narrowing alone. Most functions are proven outright; where proof falls short, a postfix [`pure` modifier](https://ghul.dev/definitions.html#methods) declares store-freedom instead, trusted as stated and required of every override. Some imported .NET collection mutators, such as `LIST.add` and `STACK.push`, are trusted to store only in their own receiver, so they count as harmless unless the narrow reads through them.
+Whether a call can invalidate a narrowing depends on what the call can write. The compiler works this out from function bodies: a function that writes nothing that existed before the call cannot invalidate any narrowing, and most functions are proven that way with no annotation. Where the proof falls short, the postfix [`pure` modifier](https://ghul.dev/definitions.html#methods) declares it instead, trusted as declared and required of every override. Some imported .NET collection mutators, such as `LIST.add` and `STACK.push`, are known to write only their own receiver's internal state, so they invalidate only a narrowing that reads through that state.
 
-A narrow read through a property also depends on the getter answering the same way twice. When the compiler can't prove that of a getter - a memoiser stores into its cache on first read, say - any use that depends on the narrow draws a warning naming the getter. Declaring the property [`stable`](https://ghul.dev/definitions.html#properties) keeps the narrow: it asserts that two adjacent reads agree on presence and runtime type.
+A narrowing through a property has one more dependency: the property is read once at the test and again at each use, and every read calls the getter. The narrowing is only sound if the getter's later answers agree with the answer the test saw. The compiler proves that from the getter's body where it can. Where it cannot - a getter that fills a cache on first read, for example - the test does not narrow at all, and a use that relies on the narrowing is an error naming the getter. Declaring the property [`stable`](https://ghul.dev/definitions.html#properties) restores the narrowing: it promises that two reads with nothing between them agree on whether the value is present, and on its runtime type.
 
 
 ---

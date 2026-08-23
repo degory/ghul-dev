@@ -1,8 +1,6 @@
 # optional types
 
-A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and the same type without the `?` is non-optional. The [language basics](https://ghul.dev/language-basics.html#optional-types) page introduces the presence test `?` and the assignability rule; the operators read the same regardless of what `T` is. That uniformity isn't an accident: ghūl backs `T?` with whichever of three different representations fits `T`, and picks silently.
-
-This page covers the three backings behind `T?`, the full operator set - `?`, `!`, `??`, `?.` - and the warnings around them. At the end: the two ways a named type of your own can be optional-shaped without ever spelling `T?`.
+A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and the same type without the `?` is non-optional. The [language basics](https://ghul.dev/language-basics.html#optional-types) page introduces the presence test `?` and the assignability rule; the operators work the same whatever `T` is. ghūl backs `T?` with whichever of three representations fits `T`, and picks it silently; all three behave alike.
 
 ```ghul
 …
@@ -33,7 +31,7 @@ first long: ccc
 
 `find_first` doesn't know or care whether `T` is `int` or `string`; the same `T?`, the same `??` fallback, work either way.
 
-## `T?`: one feature, three backings
+## `T?`: one feature, three representations
 
 ### reference types
 
@@ -58,7 +56,7 @@ name is Alice
 
 ### value types
 
-`T?` over a value type - `int?`, or a struct - is backed by .NET's `Nullable<T>` at the IL level. You can name `System.Nullable[T]` directly too, since it's an ordinary .NET generic type - but the compiler treats it as just another struct, not as `T?`: it gets none of the automatic widening from `T` or the `??`/`?.` sugar (it does still get `?`/`!`, since `Nullable<T>` happens to expose `HasValue`/`Value`, which is the structural case covered later on this page). For the actual optional-type behaviour, write `T?`, the same way you would for a reference type:
+`T?` over a value type - `int?`, or a struct - is backed by .NET's `Nullable<T>` at the IL level. That is nothing you need to work with directly: write `T?`, the same way you would for a reference type. A ghūl `int?` already is a `Nullable<int>` as far as the runtime is concerned, so it passes to and from non-ghūl .NET code as it is, and there is no reason to name `System.Nullable[T]` in ghūl source:
 
 ```ghul
 let ► here: int? = 42;   // present
@@ -67,30 +65,39 @@ let gone: int? = null; // absent
 
 ### unconstrained generic types
 
-A generic function or type can be written over `T?` before anything is known about whether `T` will turn out to be a reference or a value type. This is where `Ghul.MAYBE[T]` comes in - a struct that can hold "present" or "absent" for *any* `T`, and is what an unconstrained `T?` lowers to. It's also a type you can name and construct directly:
+A generic function or type can use `T?` before anything is known about whether `T` will turn out to be a reference or a value type:
 
 ```ghul
 …
-// MAYBE[T] is what an unconstrained T? lowers to; it's also an
-// ordinary, directly usable type in its own right
-describe(m: Ghul.Maybe[int]) -> string =>
-    if m.has_value then "got {m.value}" else "nothing" fi;
+// a generic type can hold a T? field before T is known
+class SLOT[T] is
+    _stored: T?;
 
-let some = Ghul.MAYBE[int](42);
-let none = Ghul.MAYBE[int]();
+    init() is si
 
-write_line(describe(some));
-write_line(describe(none));
+    put(value: T) is ► _stored = value; si
+
+    take() -> T? is
+        let result = _stored;
+        _stored = null;
+        return result;
+    si
+si
+
+let s = SLOT[int]();
+s.put(42);
+write_line("{s.take() ?? -1}");
+write_line("{s.take() ?? -1}");
 ```
 
 output:
 
 ```
-got 42
-nothing
+42
+-1
 ```
 
-`MAYBE[T]` implements `Ghul.Maybe[T]`, a trait with just `has_value` and `value` - the same shape a type of your own can expose, covered at the end of this page. See [generics](https://ghul.dev/generics) for how the type parameters themselves work.
+Behind the scenes an unconstrained `T?` lowers to `Ghul.MAYBE[T]`, a struct that can hold present or absent for any `T`. Like the other two representations it is an implementation detail: there is no reason to name `MAYBE[T]` in your own code. See [generics](https://ghul.dev/generics) for how the type parameters themselves work.
 
 ### they interconvert
 
@@ -130,9 +137,9 @@ output:
 hello, stranger
 ```
 
-The `?.` operator reads a member only when the receiver is present: `a?.b` is `b` when `a` is present, otherwise the absent case. The result is always optional, and `?.` chains, so a whole access path folds down to one optional. Method calls compose the same way: `a?.foo(args)` calls `foo` on a present receiver and yields the absent case otherwise, with the argument expressions included in the short-circuit, so they are not evaluated when `a` is absent.
+The `?.` operator reads a member only when the receiver is present: `a?.b` is `b` when `a` is present; otherwise the result is absent. The result is always optional, and `?.` chains, so a whole access path folds down to one optional. Method calls compose the same way: `a?.foo(args)` calls `foo` on a present receiver; otherwise the result is absent, with the argument expressions included in the short-circuit, so they are not evaluated when `a` is absent.
 
-The postfix `!` asserts presence and reads the value out; applied to an absent optional it throws. Inside a branch where flow analysis has proven presence, it draws a redundancy warning instead.
+The postfix `!` asserts presence and reads the value out; applied to an absent optional it throws. Inside a branch where flow analysis has proven presence, the compiler reports a redundancy warning instead.
 
 ```ghul
 …
@@ -149,19 +156,19 @@ name: unknown
 
 ## the warnings
 
-Reading a member through an optional not known to be present draws a `null-deref` warning; `x?.y`, `x.has_value`, `x!`, and `if let` are the warning-free routes. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
+Reading a member through an optional not known to be present is reported with a `null-deref` warning; `x?.y`, `x.has_value`, `x!`, and `if let` are the warning-free routes. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
 
 ## which one to use
 
-- Holding optional data in your own code: write `T?`. Don't think about which of the three backings you're getting - that's the point of the unification.
-- Writing a generic function or type that needs to hold "maybe a `T`" for an unconstrained `T`: `T?` still works, backed by `MAYBE[T]`; if you need to construct or return one directly - a `MAYBE[T]` field on a struct, say - you can name `Ghul.MAYBE[T]` explicitly.
-- Modelling something with more shape than "present or absent" - success-with-a-value versus failure-with-a-reason, for instance - use a union with a `default` variant: the same `?` and `!`, plus exhaustive `case` matching over every outcome. That, and the other way a named type can be optional-shaped, is next.
+- Holding optional data in your own code: write `T?`. Don't think about which of the three representations you're getting - that's the point of the unification.
+- Writing a generic function or type that needs to hold "maybe a `T`" for an unconstrained `T`: `T?` works there too, and nothing more is needed.
+- Modelling something with more shape than "present or absent" - success-with-a-value versus failure-with-a-reason, for instance - use a union with a `default` variant: the same `?` and `!`, plus exhaustive `case` matching over every outcome; see [optional-shaped types](#optional-shaped-types) below.
 
 ## optional-shaped types
 
 A named type of your own can support `?` and `!` without being a `T?`. It keeps its own name and doesn't interconvert with `T?` - what it opts in to is the operators, not the spelling. There are two routes.
 
-A union with a single field-carrying variant, or with one variant marked `default`, is option-shaped: `?` tests whether the union holds that variant, and `!` unwraps its payload (or the whole variant, if it has more than one field). The [unions and pattern matching](https://ghul.dev/unions-and-pattern-matching.html) page builds an `Option[T]` from scratch; the same rule covers the two-variant shape most languages call `Result` - `OK` marked `default`, `ERROR` holding the failure:
+A union where exactly one variant has fields, or with one variant marked `default`, is option-shaped: `?` tests whether the union holds that variant, and `!` unwraps its payload (or the whole variant, if it has more than one field). The [unions and pattern matching](https://ghul.dev/unions-and-pattern-matching.html) page builds an `Option[T]` from scratch; the same rule covers the two-variant shape most languages call `Result` - `OK` marked `default`, `ERROR` holding the failure:
 
 ```ghul
 …
