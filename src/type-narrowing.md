@@ -64,6 +64,6 @@ If the local is already narrowed, assigning a value of a different type cancels 
 
 ## when a narrowing ends
 
-A narrowing lasts until the end of the code block associated with the test - the then or else arm of the `if`, or the loop body - unless it is invalidated sooner, for example if a call to another function could cause its type to change.
+A narrowing lasts until the end of the code block associated with the test, unless it is invalidated sooner, for example by call to another function that could cause its type to change.
 
-The full model - how the compiler decides whether a call invalidated a narrowing, the `pure` modifier, and `stable` properties - is in [narrowing in depth](/narrowing-in-depth).
+See [narrowing in depth](/narrowing-in-depth) for full details.
