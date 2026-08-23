@@ -167,7 +167,7 @@ A property consists of the property name followed by the property's type and, op
 
 Public properties with no getter or setter are automatically backed by a hidden field. Private properties with no getter or setter are implemented as a plain field.
 
-A property can take a postfix `stable` modifier. It addresses a problem specific to narrowing through a property: every read of the property calls the getter, so a narrowing like `if p.value? then ... p.value ...` is only sound if the getter answers the same on the second read as it did on the first. The compiler proves that from the getter's body where it can. Where it cannot - a getter that fills a cache, for example - declaring the property `stable` states it instead: repeated calls to the getter agree, in presence and in runtime type. Calls to other code between the reads are a separate question, judged the same way as for any other narrowing fact:
+A property can take a postfix `stable` modifier. It addresses a problem specific to narrowing through a property: every read of the property calls the getter, so a narrowing like `if p.value? then ... p.value ...` is only sound if the second read agrees with the first. The compiler proves that from the getter's body where it can. Where it cannot - a getter that fills a cache, for example - declaring the property `stable` states the promise instead. The promise is narrow: two reads with nothing between them agree on whether the value is present, and on its runtime type. It does not say the value never changes - other code can still write to what the getter reads, and a call between two reads is judged the same way as for any other narrowing fact:
 
 <GhulExample name="definitions-48" />
 
@@ -185,7 +185,7 @@ A method or function can take a postfix `pure` modifier. It declares that the fu
 
 <GhulExample name="definitions-45" />
 
-`pure` can also be written on a class, struct, or trait header. Every instance member of the type must then be pure: either the compiler must be able to prove from the member's own body that it assigns no field, property, or array element, or the member must be declared `pure`. A member that writes and is not declared pure is reported as an error. Writes that are part of a type's normal operation are exempt: constructors assign fields, and static members can keep their own state.
+`pure` can also be written on a class, struct, or trait header. Every instance member of the type must then be pure: either the compiler must be able to prove from the member's own body that it assigns no field, property, or array element of any object - its own included - or the member must be declared `pure`. A member that writes and is not declared pure is reported as an error. Writes that are part of a type's normal operation are exempt: constructors assign fields, and static members can keep their own state.
 
 A pure type also cannot expose a write to its callers. Declaring a property `public` would make its assign accessor callable from outside, so it is rejected; a getter that writes through an assign accessor is rejected too, because a caller sees a getter as a read. A member declared with no body in a pure type is implicitly `pure`, so a pure trait holds every implementing type to the same rule.
 
