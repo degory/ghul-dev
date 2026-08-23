@@ -21,7 +21,7 @@ The common case: `T?` over a class or other reference type is a plain nullable r
 
 ## unconstrained generic types
 
-A generic function or type can use `T?` before anything is known about whether `T` will turn out to be a reference or a value type:
+A generic function or type can use `T?` even though `T` can stand for a reference type or a value type:
 
 <GhulExample name="optional-types-2" />
 
