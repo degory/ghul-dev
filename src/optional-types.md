@@ -1,27 +1,25 @@
 # optional types
 
-A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and the same type without the `?` is non-optional. The [language basics](/language-basics.html#optional-types) page introduces the presence test `?` and the assignability rule. `T?` works the same whatever `T` is: a class, a struct, a scalar, or a generic type parameter.
+A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and the same type without the `?` is non-optional. The [language basics](/language-basics.html#optional-types) page introduces the presence test `?` and the assignability rule.
 
 <GhulExample name="optional-types-1" />
 
-`find_first` doesn't know or care whether `T` is `int` or `string`; the same `T?`, the same `??` fallback, work either way.
+`find_first` returns the first element the predicate accepts, or absent when there is none; `??` supplies a value for the absent case.
 
-## `T?` for any `T`
-
-`T?` is spelled and used the same way whether `T` is a reference type:
+An optional over a reference type:
 
 <GhulExample name="language-basics-15" />
 
-a value type:
+over a value type:
 
 <GhulExample name="language-basics-17" />
 
-or an unconstrained generic type parameter:
+and over an unconstrained generic type parameter:
 
 <GhulExample name="optional-types-2" />
 
-::: tip under the hood
-How a `T?` is stored does depend on `T`, but every form behaves alike, and nothing in ordinary ghūl code needs to know which one it has. The details, and what they mean when interoperating with other .NET languages, are in [optional types in depth](/optional-types-in-depth).
+::: tip representation
+How a `T?` value is stored depends on `T`. The details are in [optional types in depth](/optional-types-in-depth); they matter mainly when interoperating with other .NET languages.
 :::
 
 ## the operators
@@ -42,8 +40,7 @@ Reading a member through an optional not known to be present is reported with a 
 
 ## which one to use
 
-- Holding optional data in your own code: write `T?`, whatever `T` is.
-- Writing a generic function or type that needs to hold "maybe a `T`" for an unconstrained `T`: `T?` works there too, and nothing more is needed.
+- Holding optional data in your own code, generic or not: write `T?`.
 - Modelling something with more shape than "present or absent" - success-with-a-value versus failure-with-a-reason, for instance - use a union with a `default` variant: the same `?` and `!`, plus exhaustive `case` matching over every outcome; see [optional-shaped types](#optional-shaped-types) below.
 
 ## optional-shaped types
