@@ -64,10 +64,6 @@ If the local is already narrowed, assigning a value of a different type cancels 
 
 ## when a narrowing ends
 
-A narrowing lasts at most to the end of the code block associated with the test - the then or else arm of the `if`, or the loop body. It can end earlier, because the value can change before the block ends: an explicit reassignment ends it, and so can a call, because the callee might assign the field the narrowing depends on. When the compiler cannot prove a call left the value alone, it reports the use that depends on the narrowing.
-
-Two idioms always work, whatever calls came before. Test the value again: `?`, `!`, `?.`, `isa`, and `if let` all check at run time and re-establish what they test. Or copy the value into an immutable local variable: a local that is not `mut` cannot change, so its narrowing always lasts to the end of the block. `if let` does the copy and the test in one step, and works for any expression - the result of a call, not only a variable or path - which is why it is the best way to get a narrowing that lasts:
-
-<GhulExample name="type-inference-6" />
+A narrowing lasts until the end of the code block associated with the test - the then or else arm of the `if`, or the loop body - unless it is invalidated sooner, for example if a call to another function could cause its type to change.
 
 The full model - how the compiler decides whether a call invalidated a narrowing, the `pure` modifier, and `stable` properties - is in [narrowing in depth](/narrowing-in-depth).
