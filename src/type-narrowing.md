@@ -54,7 +54,19 @@ An `isa` check or variant test narrows a path the same way:
 
 ## how long a narrow lasts
 
-A narrow on a path is less durable than one on a local variable. A local holds its value, which no other call can change, so its narrowing lasts until the variable is reassigned. A path reads a fresh value each time, so its narrowing lasts only while nothing can change what it reads: a call to a method or property that can write to the heap drops it, as does an assignment that can change the path. Copying the path into a local keeps the narrower type across a call that would otherwise drop it.
+A narrow on a local variable lasts until the variable is reassigned: a local holds one value, which no other function can reach, so no call can make it stale.
+
+A narrow on a member-access path is harder to keep, because the path reads a fresh value every time it is mentioned. A direct store ends it outright: assigning the field the fact describes through any receiver, storing through any field or property when the last hop is a property getter, or reassigning the path's root.
+
+Any other call that might write to the heap is recorded against the narrow rather than ending it. What gets checked is each later use of the value, and only a use that depends on the narrow. Passing the value where its declared type already fits depends on nothing; reading a member only the narrower view exposes does. When every recorded call is proven harmless the use passes silently. When one cannot be proven, the compiler reports it at the use site, names the call that could have changed the value, and points back at the test that narrowed it:
+
+<GhulExample name="type-inference-22" />
+
+There are two ways out. Test the value again: `?`, `!`, `?.`, `isa`, and `if let` all check at run time and re-establish what they test, whatever calls came before. Or copy the value into a local variable before the call, where no other function can reach it:
+
+<GhulExample name="type-inference-23" />
+
+Where proof succeeds there is nothing to report. This call only writes a field the narrow doesn't read through, so the compiler sees it leaves the narrow alone:
 
 <GhulExample name="type-inference-5" />
 
@@ -72,6 +84,8 @@ If the local is already narrowed, assigning a value of a different type cancels 
 
 <GhulExample name="control-flow-56" />
 
-## purity
+## calls, purity, and stable
 
-ghūl decides which calls are safe by inferring purity. A method or property that only reads, never writing to the heap, is pure, and a call to a pure one preserves a path narrow - so a plain accessor that reads a field leaves it in place. The inference is automatic; a function the compiler can't prove pure can assert it with a postfix [`pure` modifier](/definitions.html#methods).
+What makes a call harmless is what it can write. The compiler infers this from bodies: a function proven store-free writes nothing already on the heap, and a call to one leaves every narrowing alone. Most functions are proven outright; where proof falls short, a postfix [`pure` modifier](/definitions.html#methods) declares store-freedom instead, trusted as stated and required of every override. Some imported .NET collection mutators, such as `LIST.add` and `STACK.push`, are trusted to store only in their own receiver, so they count as harmless unless the narrow reads through them.
+
+A narrow read through a property also depends on the getter answering the same way twice. When the compiler can't prove that of a getter - a memoiser stores into its cache on first read, say - any use that depends on the narrow draws a warning naming the getter. Declaring the property [`stable`](/definitions.html#properties) keeps the narrow: it asserts that two adjacent reads agree on presence and runtime type.

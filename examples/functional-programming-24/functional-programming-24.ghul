@@ -1,0 +1,14 @@
+use IO.Std.write_line;
+
+respond(line: string) -> string =>
+    case line
+    when "help" then "commands: help, quit"
+    when "quit" then "bye"
+    else "unknown command"
+    esac;
+
+// >>>
+// labels match by content, the way '=~' compares
+write_line(respond("help"));
+write_line(respond("run"))
+// <<<

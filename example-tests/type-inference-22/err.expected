@@ -1,0 +1,1 @@
+test.ghul: 25,20..25,36: error: cannot rely on the narrowing of 'carrier.occupant' here: the call to 'swap()' can change it [this call can change carrier.occupant: test.ghul: 22,9..22,28] [help: test 'carrier.occupant' again, or copy it into a local variable before the call]

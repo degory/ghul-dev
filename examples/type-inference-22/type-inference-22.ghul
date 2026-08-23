@@ -1,0 +1,30 @@
+// expect: error
+use IO.Std.write_line;
+
+class Animal abstract is
+    init() is si
+si
+
+class CAT: Animal is
+    init() is super.init(); si
+    purr() -> string => "purr";
+si
+
+class CARRIER(occupant: Animal) is
+    swap(a: Animal) is
+        occupant = a;
+    si
+si
+
+// >>>
+describe(carrier: CARRIER, other: Animal) is
+    if isa CAT(carrier.occupant) then
+        carrier.swap(other);
+        // swap() can change occupant, and the use below leans on
+        // the narrow - so it is reported here, naming the call
+        write_line(carrier.occupant.purr())
+    fi
+si
+
+describe(CARRIER(CAT()), CAT())
+// <<<

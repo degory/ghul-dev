@@ -314,7 +314,7 @@ StorageClass   ::= "static" | "field"
 TypeModifier   ::= "abstract" | "open"
 ```
 
-`abstract` and `open` are postfix modifiers on a class (`abstract` bars direct construction, `open` allows cross-assembly subclassing). `pure` is a postfix modifier on a function or method asserting that it only reads and never writes to the heap.
+`abstract` and `open` are postfix modifiers on a class (`abstract` bars direct construction, `open` allows cross-assembly subclassing). `pure` is a postfix modifier asserting store-freedom - only reads, never writes to the heap - accepted on a function or method, on a function type, and on a class, struct or trait header (requiring every instance member to be pure). `stable` is a postfix modifier on a property asserting that two adjacent reads agree on presence and runtime type.
 
 ### pragmas
 
@@ -600,7 +600,7 @@ the following levels, **tightest first**:
 | user&#8209;6     | *(user-defined)*                            |
 | bitwise          | `&` `\|` `¦` `^` `∩` `∪`                     |
 | user&#8209;5     | *(user-defined, default)*                   |
-| shift            | `<<`  `>>`                                  |
+| shift            | `<<`  `>>`  `>>>`                            |
 | user&#8209;4     | *(user-defined)*                            |
 | range            | `..`  `::`                                  |
 | user&#8209;3     | *(user-defined)*                            |

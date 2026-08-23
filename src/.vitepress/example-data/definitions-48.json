@@ -1,0 +1,46 @@
+{
+  "name": "definitions-48",
+  "snippet": false,
+  "code": "// a memoising getter stores, so it is not provably\n// stable - declare it with postfix stable instead\nsummary: string? stable is\n    if _summary? then\n        return _summary;\n    fi\n    _summary = \"nothing to report\";\n    return _summary;\nsi\n\ninit() is si\n\ndescribe() is\n    if summary? then\n        write_line(summary)\n    fi\nsi",
+  "fullSource": "use IO.Std.write_line;\n\nclass REPORT is\n    _summary: string?;\n\n    // a memoising getter stores, so it is not provably\n    // stable - declare it with postfix stable instead\n    summary: string? stable is\n        if _summary? then\n            return _summary;\n        fi\n        _summary = \"nothing to report\";\n        return _summary;\n    si\n\n    init() is si\n\n    describe() is\n        if summary? then\n            write_line(summary)\n        fi\n    si\nsi\n\nREPORT().describe()\n",
+  "hiddenBefore": true,
+  "hiddenAfter": true,
+  "hiddenGapsAfterLine": [],
+  "output": "nothing to report\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 7, "text": "REPORT.summary: string?", "signature": "REPORT.summary: string?", "kindLabel": "instance property" },
+    { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 15, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 11, "startColumn": 1, "endLine": 11, "endColumn": 4, "text": "REPORT.init()", "signature": "REPORT.init()", "kindLabel": "constructor" },
+    { "startLine": 13, "startColumn": 1, "endLine": 13, "endColumn": 8, "text": "REPORT.describe() -> void", "signature": "REPORT.describe() -> void", "kindLabel": "method" },
+    { "startLine": 14, "startColumn": 8, "endLine": 14, "endColumn": 14, "text": "summary: string?", "signature": "summary: string?", "kindLabel": "instance property" },
+    { "startLine": 15, "startColumn": 9, "endLine": 15, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 15, "startColumn": 20, "endLine": 15, "endColumn": 26, "text": "summary: string?\n    ► string", "signature": "summary: string?\n    ► string", "kindLabel": "instance property" },
+    { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 15, "text": "_summary: string?", "signature": "_summary: string?", "kindLabel": "private field" },
+    { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 23, "text": "_summary: string?\n    ► string", "signature": "_summary: string?\n    ► string", "kindLabel": "private field" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 12, "text": "_summary: string?\n    ► string", "signature": "_summary: string?\n    ► string", "kindLabel": "private field" },
+    { "startLine": 8, "startColumn": 12, "endLine": 8, "endColumn": 19, "text": "_summary: string?\n    ► string", "signature": "_summary: string?\n    ► string", "kindLabel": "private field" }
+  ],
+  "inlayHints": [
+    { "line": 14, "column": 8, "label": "►", "detail": "► string", "code": "narrowing-presence" },
+    { "line": 4, "column": 8, "label": "►", "detail": "► string", "code": "narrowing-presence" },
+    { "line": 7, "column": 5, "label": "►", "detail": "► string", "code": "narrowing-assign" }
+  ],
+  "semanticTokens": [
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 7, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 15, "tokenType": "class" },
+    { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 8, "tokenType": "modifier" },
+    { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 15, "tokenType": "property" },
+    { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 16, "tokenType": "modifier" },
+    { "startLine": 5, "startColumn": 17, "endLine": 5, "endColumn": 23, "tokenType": "property" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 5, "tokenType": "modifier" },
+    { "startLine": 7, "startColumn": 6, "endLine": 7, "endColumn": 12, "tokenType": "property" },
+    { "startLine": 8, "startColumn": 12, "endLine": 8, "endColumn": 12, "tokenType": "modifier" },
+    { "startLine": 8, "startColumn": 13, "endLine": 8, "endColumn": 19, "tokenType": "property" },
+    { "startLine": 11, "startColumn": 1, "endLine": 11, "endColumn": 4, "tokenType": "method" },
+    { "startLine": 13, "startColumn": 1, "endLine": 13, "endColumn": 8, "tokenType": "method" },
+    { "startLine": 14, "startColumn": 8, "endLine": 14, "endColumn": 14, "tokenType": "property" },
+    { "startLine": 15, "startColumn": 9, "endLine": 15, "endColumn": 18, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 15, "startColumn": 20, "endLine": 15, "endColumn": 26, "tokenType": "property" }
+  ]
+}

@@ -1,0 +1,11 @@
+// expect: warning
+// >>>
+class LABEL is
+    text: string;
+    size: int;
+
+    init(size: int) is
+        self.size = size    // text is never assigned
+    si
+si
+// <<<

@@ -16,6 +16,14 @@ A `case` yields the value of the matched arm. As an expression it needs an `else
 
 <GhulExample name="expression-oriented-programming-2" />
 
+## loops as expressions
+
+Every loop form yields too, at type `T?`: a `break` with a value produces it, and falling off the end - a false condition, an exhausted iterator - produces the absent value. A search over a sequence is then one expression, and a valued break can carry its result out of nested loops to the outermost one that consumes it:
+
+<GhulExample name="control-flow-61" />
+
+See [loops as expressions](/control-flow.html#loops-as-expressions) for the full rules.
+
 ## val blocks
 
 A `val ... lav` block runs a sequence of statements and yields a value: its tail expression, or any `return` that targets the block. It gives an expression room for intermediate local variables, loops, and early exits:

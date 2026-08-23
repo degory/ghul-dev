@@ -132,9 +132,17 @@ Constructor expressions allow you to create new instances of classes or structs 
 
 ## type cast
 
-Type cast expressions allow you to explicitly convert a value from one type to another using the `cast` keyword.
+A type cast converts a value from one type to another explicitly, using the `cast` keyword. Scalar conversions, casts between unrelated reference types, and .NET user-defined conversion operators all go through it:
 
 <GhulExample name="expressions-23" />
+
+The target type can be left out when the surrounding expression already determines it. `cast(v)` converts `v` to whatever type the position it sits in calls for - a typed `let` initializer, an assignment, a `return` or `=>` body, a call argument's formal, an operator's other operand, an index:
+
+<GhulExample name="expressions-30" />
+
+`cast(v)` is rejected where the position supplies no type at all, or where more than one overload or operator would accept it.
+
+A cast written with an optional target yields rather than throwing: `cast T?(x)` is the absent value when `x` is not a `T`, which is the form [`if let`](/control-flow.html#if-let) builds on. Without the `?` the cast is checked: a failed one raises `System.InvalidCastException` at the point of the cast, and a `cast-may-throw` warning says so at the site.
 
 ## default value (`_`)
 

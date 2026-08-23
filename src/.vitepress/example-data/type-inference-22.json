@@ -1,0 +1,59 @@
+{
+  "name": "type-inference-22",
+  "snippet": false,
+  "code": "describe(carrier: CARRIER, other: Animal) is\n    if isa CAT(carrier.occupant) then\n        carrier.swap(other);\n        // swap() can change occupant, and the use below leans on\n        // the narrow - so it is reported here, naming the call\n        write_line(carrier.occupant.purr())\n    fi\nsi\n\ndescribe(CARRIER(CAT()), CAT())",
+  "fullSource": "// expect: error\nuse IO.Std.write_line;\n\nclass Animal abstract is\n    init() is si\nsi\n\nclass CAT: Animal is\n    init() is super.init(); si\n    purr() -> string => \"purr\";\nsi\n\nclass CARRIER(occupant: Animal) is\n    swap(a: Animal) is\n        occupant = a;\n    si\nsi\n\ndescribe(carrier: CARRIER, other: Animal) is\n    if isa CAT(carrier.occupant) then\n        carrier.swap(other);\n        // swap() can change occupant, and the use below leans on\n        // the narrow - so it is reported here, naming the call\n        write_line(carrier.occupant.purr())\n    fi\nsi\n\ndescribe(CARRIER(CAT()), CAT())\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [
+    { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 36, "severity": "error", "message": "cannot rely on the narrowing of 'carrier.occupant' here: the call to 'swap()' can change it [this call can change carrier.occupant: type-inference-22.ghul: 22,9..22,28] [help: test 'carrier.occupant' again, or copy it into a local variable before the call]" }
+  ],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 8, "text": "describe(carrier: CARRIER, other: Animal) -> void", "signature": "describe(carrier: CARRIER, other: Animal) -> void", "kindLabel": "global function" },
+    { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 16, "text": "carrier: CARRIER", "signature": "carrier: CARRIER", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 32, "text": "other: Animal", "signature": "other: Animal", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 25, "text": "class CARRIER(occupant: Animal)", "signature": "class CARRIER(occupant: Animal)", "kindLabel": "class" },
+    { "startLine": 1, "startColumn": 35, "endLine": 1, "endColumn": 40, "text": "class Animal", "signature": "class Animal", "kindLabel": "class" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "class CAT", "signature": "class CAT", "kindLabel": "class" },
+    { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 22, "text": "carrier: CARRIER", "signature": "carrier: CARRIER", "kindLabel": "local argument" },
+    { "startLine": 2, "startColumn": 24, "endLine": 2, "endColumn": 31, "text": "CARRIER.occupant: Animal", "signature": "CARRIER.occupant: Animal", "kindLabel": "pure instance property" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 15, "text": "carrier: CARRIER", "signature": "carrier: CARRIER", "kindLabel": "local argument" },
+    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 20, "text": "CARRIER.swap(a: Animal) -> void", "signature": "CARRIER.swap(a: Animal) -> void", "kindLabel": "method" },
+    { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 26, "text": "other: Animal", "signature": "other: Animal", "kindLabel": "local argument" },
+    { "startLine": 6, "startColumn": 9, "endLine": 6, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 26, "text": "carrier: CARRIER", "signature": "carrier: CARRIER", "kindLabel": "local argument" },
+    { "startLine": 6, "startColumn": 28, "endLine": 6, "endColumn": 35, "text": "CARRIER.occupant: Animal", "signature": "CARRIER.occupant: Animal", "kindLabel": "pure instance property" },
+    { "startLine": 6, "startColumn": 37, "endLine": 6, "endColumn": 40, "text": "CAT.purr() -> string", "signature": "CAT.purr() -> string", "kindLabel": "pure method" },
+    { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 8, "text": "describe(carrier: CARRIER, other: Animal) -> void", "signature": "describe(carrier: CARRIER, other: Animal) -> void", "kindLabel": "global function" },
+    { "startLine": 10, "startColumn": 10, "endLine": 10, "endColumn": 16, "text": "CARRIER.init(occupant: Animal)", "signature": "CARRIER.init(occupant: Animal)", "kindLabel": "constructor" },
+    { "startLine": 10, "startColumn": 18, "endLine": 10, "endColumn": 20, "text": "CAT.init()", "signature": "CAT.init()", "kindLabel": "constructor" },
+    { "startLine": 10, "startColumn": 26, "endLine": 10, "endColumn": 28, "text": "CAT.init()", "signature": "CAT.init()", "kindLabel": "constructor" }
+  ],
+  "inlayHints": [
+    { "line": 2, "column": 16, "label": "►", "detail": "► CAT", "code": "narrowing-isa" },
+    { "line": 3, "column": 9, "label": "◄", "detail": "carrier.occupant\n\na call here may change it", "code": "narrowing-killed" }
+  ],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 8, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 25, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 32, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 35, "endLine": 1, "endColumn": 40, "tokenType": "class" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "tokenType": "class" },
+    { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 24, "endLine": 2, "endColumn": 31, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 20, "tokenType": "method" },
+    { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 26, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 9, "endLine": 6, "endColumn": 18, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 26, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 28, "endLine": 6, "endColumn": 35, "tokenType": "property" },
+    { "startLine": 6, "startColumn": 37, "endLine": 6, "endColumn": 40, "tokenType": "method" },
+    { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 8, "tokenType": "function" },
+    { "startLine": 10, "startColumn": 10, "endLine": 10, "endColumn": 16, "tokenType": "method" },
+    { "startLine": 10, "startColumn": 18, "endLine": 10, "endColumn": 20, "tokenType": "method" },
+    { "startLine": 10, "startColumn": 26, "endLine": 10, "endColumn": 28, "tokenType": "method" }
+  ]
+}
