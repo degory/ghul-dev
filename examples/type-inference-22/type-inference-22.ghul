@@ -22,9 +22,9 @@ describe(carrier: CARRIER, other: Animal) is
         carrier.swap(other);
         // swap() can change occupant, and the use below leans on
         // the narrow - so it is reported here, naming the call
-        write_line(carrier.occupant.purr());
+        write_line(carrier.occupant.purr())
     fi
 si
 
-describe(CARRIER(CAT()), CAT());
+describe(CARRIER(CAT()), CAT())
 // <<<

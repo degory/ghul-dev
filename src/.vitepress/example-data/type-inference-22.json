@@ -1,8 +1,8 @@
 {
   "name": "type-inference-22",
   "snippet": false,
-  "code": "describe(carrier: CARRIER, other: Animal) is\n    if isa CAT(carrier.occupant) then\n        carrier.swap(other);\n        // swap() can change occupant, and the use below leans on\n        // the narrow - so it is reported here, naming the call\n        write_line(carrier.occupant.purr());\n    fi\nsi\n\ndescribe(CARRIER(CAT()), CAT());",
-  "fullSource": "// expect: error\nuse IO.Std.write_line;\n\nclass Animal abstract is\n    init() is si\nsi\n\nclass CAT: Animal is\n    init() is super.init(); si\n    purr() -> string => \"purr\";\nsi\n\nclass CARRIER(occupant: Animal) is\n    swap(a: Animal) is\n        occupant = a;\n    si\nsi\n\ndescribe(carrier: CARRIER, other: Animal) is\n    if isa CAT(carrier.occupant) then\n        carrier.swap(other);\n        // swap() can change occupant, and the use below leans on\n        // the narrow - so it is reported here, naming the call\n        write_line(carrier.occupant.purr());\n    fi\nsi\n\ndescribe(CARRIER(CAT()), CAT());\n",
+  "code": "describe(carrier: CARRIER, other: Animal) is\n    if isa CAT(carrier.occupant) then\n        carrier.swap(other);\n        // swap() can change occupant, and the use below leans on\n        // the narrow - so it is reported here, naming the call\n        write_line(carrier.occupant.purr())\n    fi\nsi\n\ndescribe(CARRIER(CAT()), CAT())",
+  "fullSource": "// expect: error\nuse IO.Std.write_line;\n\nclass Animal abstract is\n    init() is si\nsi\n\nclass CAT: Animal is\n    init() is super.init(); si\n    purr() -> string => \"purr\";\nsi\n\nclass CARRIER(occupant: Animal) is\n    swap(a: Animal) is\n        occupant = a;\n    si\nsi\n\ndescribe(carrier: CARRIER, other: Animal) is\n    if isa CAT(carrier.occupant) then\n        carrier.swap(other);\n        // swap() can change occupant, and the use below leans on\n        // the narrow - so it is reported here, naming the call\n        write_line(carrier.occupant.purr())\n    fi\nsi\n\ndescribe(CARRIER(CAT()), CAT())\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

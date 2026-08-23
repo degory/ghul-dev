@@ -18,10 +18,10 @@ class REPORT is
 
     describe() is
         if summary? then
-            write_line(summary);
+            write_line(summary)
         fi
     si
     // <<<
 si
 
-REPORT().describe();
+REPORT().describe()

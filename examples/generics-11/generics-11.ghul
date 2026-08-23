@@ -23,5 +23,5 @@ si
 label[T: Named /\ Sized](x: T) -> string =>
     "{x.name} holds {x.size}";
 
-write_line(label(CRATE("bolts", 500)));
+write_line(label(CRATE("bolts", 500)))
 // <<<

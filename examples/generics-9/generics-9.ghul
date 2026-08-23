@@ -10,5 +10,5 @@ si
 
 let w = echo(WIDGET());   // OK: WIDGET has init()
 
-write_line(w.describe());
+write_line(w.describe())
 // <<<

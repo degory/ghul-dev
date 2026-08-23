@@ -1,8 +1,8 @@
 {
   "name": "expressions-30",
   "snippet": false,
-  "code": "average(count: int, total: single) -> single =>\n    total / cast(count);   // cast(v) takes its type from the formal\n\nwrite_line(\"{average(4, 10.0)}\");",
-  "fullSource": "use IO.Std.write_line;\n\naverage(count: int, total: single) -> single =>\n    total / cast(count);   // cast(v) takes its type from the formal\n\nwrite_line(\"{average(4, 10.0)}\");\n",
+  "code": "average(count: int, total: single) -> single =>\n    total / cast(count);   // cast(v) takes its type from the formal\n\nwrite_line(\"{average(4, 10.0)}\")",
+  "fullSource": "use IO.Std.write_line;\n\naverage(count: int, total: single) -> single =>\n    total / cast(count);   // cast(v) takes its type from the formal\n\nwrite_line(\"{average(4, 10.0)}\")\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

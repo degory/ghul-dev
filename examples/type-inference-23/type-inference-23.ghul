@@ -23,9 +23,9 @@ describe(carrier: CARRIER, other: Animal) is
 
     if isa CAT(cat) then
         carrier.swap(other);
-        write_line(cat.purr());
+        write_line(cat.purr())
     fi
 si
 
-describe(CARRIER(CAT()), CAT());
+describe(CARRIER(CAT()), CAT())
 // <<<

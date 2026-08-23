@@ -5,7 +5,7 @@ class LABEL is
     size: int;
 
     init(size: int) is
-        self.size = size;   // text is never assigned
+        self.size = size    // text is never assigned
     si
 si
 // <<<

@@ -10,5 +10,5 @@ respond(line: string) -> string =>
 // >>>
 // labels match by content, the way '=~' compares
 write_line(respond("help"));
-write_line(respond("run"));
+write_line(respond("run"))
 // <<<

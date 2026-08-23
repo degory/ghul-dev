@@ -4,5 +4,5 @@ use IO.Std.write_line;
 average(count: int, total: single) -> single =>
     total / cast(count);   // cast(v) takes its type from the formal
 
-write_line("{average(4, 10.0)}");
+write_line("{average(4, 10.0)}")
 // <<<

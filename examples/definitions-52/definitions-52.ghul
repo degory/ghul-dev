@@ -12,11 +12,11 @@ class USER: NAMED is
     name: string;
 
     init(name: string) is
-        self.name = name;
+        self.name = name
     si
 
     label() -> string => "<{name}>";
 si
 
-write_line(USER("ada").label());
+write_line(USER("ada").label())
 // <<<
