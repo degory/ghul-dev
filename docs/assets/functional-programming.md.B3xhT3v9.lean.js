@@ -1,4 +1,4 @@
-import{_ as n}from"./chunks/functional-programming-23.DxfzCmX4.js";import{_ as a}from"./chunks/optional-types-1.CReRaQWv.js";import{P as r,I as d,g as D,j as k,l as h,d as t,k as l}from"./chunks/framework.DnGoLYRz.js";const g="functional-programming-1",y=!1,x=`let f = i => i * 2;
+import{_ as n}from"./chunks/functional-programming-23.DxfzCmX4.js";import{_ as a}from"./chunks/optional-types-1.ldjSU9Ce.js";import{P as r,I as d,g as D,j as k,l as h,d as t,k as l}from"./chunks/framework.DnGoLYRz.js";const g="functional-programming-1",y=!1,x=`let f = i => i * 2;
 write_line("f(123): {f(123)}");
 
 // assigned to another variable

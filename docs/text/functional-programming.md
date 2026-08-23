@@ -474,7 +474,6 @@ present, and `if let` tests and unwraps in one step:
 
 ```ghul
 …
-// one feature, T?, however T turns out to be represented
 find_first[T](xs: T[], predicate: T -> bool) -> T? is
     for x in xs do
         if predicate(x) then
