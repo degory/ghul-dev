@@ -16,7 +16,7 @@ a value type:
 
 <GhulExample name="language-basics-17" />
 
-or a generic type parameter, which can stand for either:
+or an unconstrained generic type parameter:
 
 <GhulExample name="optional-types-2" />
 
