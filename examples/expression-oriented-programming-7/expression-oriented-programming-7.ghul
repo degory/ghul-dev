@@ -1,0 +1,13 @@
+use IO.Std.write_line;
+
+// >>>
+// the last statement is not terminated, so it is the return value
+area(width: int, height: int) -> int is
+    let doubled = width * 2;
+    let trimmed = height - 1;
+
+    doubled * trimmed
+si
+
+write_line("{area(3, 5)}")
+// <<<

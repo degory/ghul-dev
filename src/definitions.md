@@ -32,7 +32,11 @@ In ghūl functions consist of a name and a parenthesized formal arguments list, 
 
 <GhulExample name="definitions-6" />
 
-`=>` introduces a single-expression body, while the `is` and `si` keywords are used to delimit block bodies. 
+`=>` introduces a single-expression body, while the `is` and `si` keywords are used to delimit block bodies.
+
+Where a block body ends in a statement that produces a value - an expression, an `if`, a `case`, a `val ... lav` block - and it is written without a terminating `;`, that value is the function's return value on the fall-through path. Terminate it and the value is discarded instead, as any other statement's is. See [block bodies return their tail](/expression-oriented-programming.html#block-bodies-return-their-tail) for the rule in full.
+
+<GhulExample name="definitions-53" />
 
 Functions can only be defined at global scope. Functions can be generic, which will be covered later. Function names should be in `snake_case`
 

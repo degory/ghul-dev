@@ -34,7 +34,7 @@ Nothing you edit is saved. To keep something, paste it into the [ghūl scratchpa
 
 - **functional programming**: first-class anonymous functions with closures, higher order functions, and non-mutating pipe operations over lists. Arrays, tuples, and list literals are immutable.
 
-- **expression-oriented**: `if`, `if let`, `case`, loops, and block forms are expressions.
+- **expression-oriented**: `if`, `if let`, `case`, loops, and block forms are expressions, and a block body's unterminated last value-producing statement is its value.
 
 - **pattern matching**: `if let` and `case`/`when` arms with type tests, destructuring with literal leaves, and value lists. `case` arms over a union, enum, `bool`, or closed class hierarchy are checked for exhaustiveness; open-domain scrutinees need `else`.
 
