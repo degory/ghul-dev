@@ -26,7 +26,7 @@ For a two-variant union, the `else` branch is narrowed to the complementary vari
 
 <GhulExample name="control-flow-10" />
 
-The `else` narrowing extends to a class hierarchy declared in the current assembly without `open`: the compiler knows every subclass, so ruling out the tested one narrows the `else` branch to the others, and when an `abstract` root has exactly two subclasses, ruling out one leaves the other.
+The `else` narrowing extends to a class hierarchy declared in the current assembly without `open`: the compiler knows every subclass, so ruling out the tested one narrows the `else` branch to the others, and when an `abstract` root has exactly two subclasses, ruling out one leaves the other. The [object oriented programming](/object-oriented-programming) page covers open, closed, and abstract classes.
 
 A `while` condition narrows its body the same way an `if` condition narrows its then-branch, so `while isa CAT(a) do a.purr() od` reaches a `CAT`-only member without an inner cast.
 
@@ -42,7 +42,7 @@ Narrowing applies to local variables, including a function's own parameters.
 
 <GhulExample name="type-inference-3" />
 
-## member-access paths
+## fields and properties
 
 Narrowing also applies to a member-access path like `x.field` or `x.property`. A presence test (`?`) narrows the path: after `if x.field? then`, uses of `x.field` inside the branch are non-optional.
 
@@ -51,28 +51,6 @@ Narrowing also applies to a member-access path like `x.field` or `x.property`. A
 An `isa` check or variant test narrows a path the same way:
 
 <GhulExample name="type-inference-4" />
-
-## how long a narrowing lasts
-
-Narrowing is optimistic: the compiler narrows whenever a test proves something, and checks afterwards whether the narrowing still holds where it is used. It has to check, because values change, and their types change with them: a value that was present can be reassigned to null.
-
-A narrowing lasts at most to the end of the code block associated with the test - the then or else arm of the `if`, or the loop body. It can end earlier, because the value can change before the block ends: by an explicit reassignment, or because a call to a function or method changes it, directly or indirectly.
-
-The compiler tracks the calls that might do that, conservatively: it builds a call graph and works out which fields each call might write. When you use a narrowed value in a way that depends on the narrowing - you read a member through it, or pass it where only the non-optional or narrower type is accepted - and the compiler cannot prove the value is still what the test saw, it reports the use as potentially unsafe, naming the call it could not prove and pointing back at the test:
-
-<GhulExample name="type-inference-22" />
-
-When the compiler can prove that the calls in between could not have changed the value, there is nothing to report:
-
-<GhulExample name="type-inference-5" />
-
-Where it cannot, there are two ways out. Test the value again: `?`, `!`, `?.`, `isa`, and `if let` all check at run time and re-establish what they test, whatever calls came before. Or copy the value into a local variable:
-
-<GhulExample name="type-inference-23" />
-
-Narrowings of local variables are more stable than narrowings of fields and properties, because there are fewer ways a local variable can change: explicit reassignment, capture by a closure, or being passed by reference to another function. A local variable that is not `mut` cannot change at all, so its narrowing always lasts to the end of the block. That is why `if let` is the best way to get a narrowing that lasts: it copies the value into a fresh immutable local variable in one step, and works for any expression - the result of a call, not only a variable or path. See [if let](/control-flow.html#if-let) for the full construct.
-
-<GhulExample name="type-inference-6" />
 
 ## narrowing on assignment
 
@@ -84,8 +62,12 @@ If the local is already narrowed, assigning a value of a different type cancels 
 
 <GhulExample name="control-flow-56" />
 
-## calls, purity, and stable
+## when a narrowing ends
 
-Whether a call can invalidate a narrowing depends on what the call can write. The compiler works this out from function bodies: a function that writes nothing that existed before the call cannot invalidate any narrowing, and most functions are proven that way with no annotation. Where the proof falls short, the postfix [`pure` modifier](/definitions.html#methods) declares it instead, trusted as declared and required of every override. Some imported .NET collection mutators, such as `LIST.add` and `STACK.push`, are known to write only their own receiver's internal state, so they invalidate only a narrowing that reads through that state.
+A narrowing lasts at most to the end of the code block associated with the test - the then or else arm of the `if`, or the loop body. It can end earlier, because the value can change before the block ends: an explicit reassignment ends it, and so can a call, because the callee might assign the field the narrowing depends on. When the compiler cannot prove a call left the value alone, it reports the use that depends on the narrowing.
 
-A narrowing through a property has one more dependency: the property is read once at the test and again at each use, and every read calls the getter. The narrowing is only sound if the getter's later answers agree with the answer the test saw. The compiler proves that from the getter's body where it can. Where it cannot - a getter that fills a cache on first read, for example - the test does not narrow at all, and a use that relies on the narrowing is an error naming the getter. Declaring the property [`stable`](/definitions.html#properties) restores the narrowing: it promises that two reads with nothing between them agree on whether the value is present, and on its runtime type.
+Two idioms always work, whatever calls came before. Test the value again: `?`, `!`, `?.`, `isa`, and `if let` all check at run time and re-establish what they test. Or copy the value into an immutable local variable: a local that is not `mut` cannot change, so its narrowing always lasts to the end of the block. `if let` does the copy and the test in one step, and works for any expression - the result of a call, not only a variable or path - which is why it is the best way to get a narrowing that lasts:
+
+<GhulExample name="type-inference-6" />
+
+The full model - how the compiler decides whether a call invalidated a narrowing, the `pure` modifier, and `stable` properties - is in [narrowing in depth](/narrowing-in-depth).
