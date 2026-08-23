@@ -44,7 +44,7 @@ output:
 x <= y
 ```
 
-In this example `then`, `else` and `fi` all delimit blocks. The blocks they delimit contain statement lists. 
+In this example `then`, `else` and `fi` all delimit blocks. The blocks they delimit contain statement lists, and they do so whether the `if` is used as a statement or as an expression - see [every arm is a statement block](https://ghul.dev/expression-oriented-programming.html#every-arm-is-a-statement-block).
 
 ## semicolons
 

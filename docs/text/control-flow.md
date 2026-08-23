@@ -996,7 +996,7 @@ fib(10) = 55
 
 ### default return
 
-If execution reaches the end of a non-void function without encountering a return statement, then the default value of the function's return type is returned to the caller.
+If execution reaches the end of a non-void function without encountering a return statement, and the body has no [tail](https://ghul.dev/expression-oriented-programming.html#block-bodies-return-their-tail) to take a value from, then the default value of the function's return type is returned to the caller.
 
 ```ghul
 …

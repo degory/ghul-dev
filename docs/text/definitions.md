@@ -57,7 +57,33 @@ sum_three_ints(i: int, j: int, k: int) -> int is
 si
 ```
 
-`=>` introduces a single-expression body, while the `is` and `si` keywords are used to delimit block bodies. 
+`=>` introduces a single-expression body, while the `is` and `si` keywords are used to delimit block bodies.
+
+Where a block body ends in a statement that produces a value - an expression, an `if`, a `case`, a `val ... lav` block - and it is written without a terminating `;`, that value is the function's return value on the fall-through path. Terminate it and the value is discarded instead, as any other statement's is. See [block bodies return their tail](https://ghul.dev/expression-oriented-programming.html#block-bodies-return-their-tail) for the rule in full.
+
+```ghul
+…
+class RECTANGLE(width: int, height: int) is
+    // a method body ends the same way a function body does
+    area() -> int is
+        width * height
+    si
+
+    // a terminated last statement is discarded, so this one returns explicitly
+    describe() -> string is
+        let label = "{width}x{height}";
+
+        return "{label} = {area()}";
+    si
+si
+…
+```
+
+output:
+
+```
+3x4 = 12
+```
 
 Functions can only be defined at global scope. Functions can be generic, which will be covered later. Function names should be in `snake_case`
 
