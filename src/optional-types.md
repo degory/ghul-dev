@@ -6,17 +6,7 @@ A type followed by `?` is an *optional* type: a value of `T?` can be present or 
 
 `find_first` returns the first element the predicate accepts, or absent when there is none; `??` supplies a value for the absent case.
 
-Optionals work with reference types:
-
-<GhulExample name="language-basics-15" />
-
-with value types:
-
-<GhulExample name="language-basics-17" />
-
-and with generic types:
-
-<GhulExample name="optional-types-2" />
+Optionals work with reference types, value types, and generic types alike; the [representation](#representation) section below shows each.
 
 ## the operators
 
