@@ -127,7 +127,7 @@ results, and so they buffer the whole source as soon as they are called.
 
 The `pure` on a function type - `predicate: (T) -> bool pure` - asks that the
 function you pass only reads, and writes nothing to the heap. Most anonymous
-functions satisfy it without any thought; see [type narrowing](https://ghul.dev/type-narrowing.html#purity)
+functions satisfy it without any thought; see [narrowing in depth](https://ghul.dev/narrowing-in-depth.html#calls-purity-and-stable)
 for what the compiler does with the guarantee.
 
 `Ghul.MAYBE[T]` is an [optional type](https://ghul.dev/optional-types.html): it holds a `T` or
