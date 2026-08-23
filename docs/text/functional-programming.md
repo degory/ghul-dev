@@ -9,22 +9,68 @@
 ghūl supports a functional style of programming: functions are first-class
 values, the common data types are read-only by default, unions and pattern
 matching model data by cases, and pipes transform sequences without mutating
-them
+them.
 
-## first class functions
+## first-class functions
 
-ghūl has first class functions. There is a function literal syntax that
-constructs functions, which can then be called, but also assigned to
-variables, passed to other functions, stored in data structures, or
-pretty much anything else you can do with any other ghūl value
+Functions are values. A function literal constructs one, and the result can
+be called, assigned to a variable, passed to another function, or stored in
+a data structure, like any other value:
 
 ```ghul
+…
 let f = i => i * 2;
-f(123);
-let g = f;
-g(456);
+write_line("f(123): {f(123)}");
 
-let ff = (f: int -> int, i) => f(f(i));
+// assigned to another variable
+let g = f;
+write_line("g(456): {g(456)}");
+
+// passed to another function
+let apply_twice = (f: int -> int, i) => f(f(i));
+write_line("apply_twice(f, 7): {apply_twice(f, 7)}");
+```
+
+output:
+
+```
+f(123): 246
+g(456): 912
+apply_twice(f, 7): 28
+```
+
+## closures
+
+A function literal captures the variables of its enclosing scope. An
+immutable `let` is captured by value - a snapshot taken when the literal is
+constructed - and a `let mut` is captured by reference, so the function and
+the enclosing scope share one live variable that either side can read or
+reassign:
+
+```ghul
+…
+// an immutable let is captured by value
+let base = 10;
+let add_base = (n: int) => n + base;
+write_line("add_base(5): {add_base(5)}");
+
+// a mut variable is captured by reference: the function and
+// the enclosing scope share it
+let count mut = 0;
+let next = () => val count = count + 1; count lav;
+
+write_line("next(): {next()}");
+write_line("next(): {next()}");
+write_line("count: {count}");
+```
+
+output:
+
+```
+add_base(5): 15
+next(): 1
+next(): 2
+count: 2
 ```
 
 ## filter, map, reduce
@@ -60,10 +106,10 @@ sum: 15
 
 ## recursion
 
-ghūl methods, global functions and anonymous functions
-can all call themselves or each other recursively
-
-### self recursion in anonymous functions
+Methods, global functions and anonymous functions can all call themselves
+recursively. A named function calls itself by name; an anonymous function
+has no name, so the `rec` keyword refers to
+the function itself:
 
 ```ghul
 …
@@ -85,33 +131,10 @@ factorial(5): 120
 fibonacci(10): 55
 ```
 
-### mutual recursion in anonymous functions
-
-Mutual recursion for anonymous functions is slightly awkward because of the forward reference. One way is to declare one as a mutable variable, define the other, then assign to it: the `let mut` is captured by reference, so the first function sees the second once it is assigned:
-
-```ghul
-…
-let is_odd mut = _;
-
-let is_even = n =>
-    if n == 0 then true else is_odd(n - 1) fi;
-
-is_odd = n =>
-    if n == 0 then false else is_even(n - 1) fi;
-
-write_line("even(10): {is_even(10)}");
-write_line("odd(10): {is_odd(10)}");
-```
-
-output:
-
-```
-even(10): True
-odd(10): False
-```
-
-### mutual recursion in named functions
-Mutual recursion with named functions doesn't require any workarounds
+An anonymous function cannot refer to a variable that is not yet defined, so
+there is no direct way to write two anonymous functions that call each
+other. Write mutually recursive functions as named functions, which can
+refer to each other whatever order they are defined in:
 
 ```ghul
 is_even(n: int) -> bool =>
@@ -120,15 +143,17 @@ is_even(n: int) -> bool =>
 is_odd(n: int) -> bool =>
     if n == 0 then false else is_even(n - 1) fi;
 ```
+
 ## read-only by default
 
 While ghūl supports imperative code, it also aims to make pure functions and
-predictable shared data low friction: the types and traits below expose no way
-to change a value after it is constructed. The guarantee is what .NET allows it
-to be. It is shallow, so a read-only structure can still hold references to
-objects that are themselves mutable, and it binds ghūl code, so code written in
-another .NET language is not required to honour it. Stick to these types and
-shared data behaves predictably.
+predictable shared data low friction: the types and traits below expose no
+way to change a value after it is constructed. The guarantee has two limits.
+It is shallow: a read-only structure can still hold references to objects
+that are themselves mutable. And it binds only ghūl code: code written in
+another .NET language is not required to honour it. Within those limits,
+data shared through these types cannot be changed by the code you pass it
+to.
 
 ### lists and maps are read-only views
 
@@ -173,16 +198,18 @@ diagnostics:
 
 - error: 3: int is not publicly assignable
 
-### primary constructors define read-only members
+### unions are read-only
 
-The members a primary constructor generates are set at construction and, by
-default, not publicly assignable afterwards: a parameter opts in to a
-writable property with the `public` modifier. Fields declared on a union's
-variants are read-only in the same way.
+A union value is fixed at construction: variant fields cannot be assigned,
+and nothing can change which variant a value holds. Methods can be added to
+a union with [`partial` and `impl`
+blocks](https://ghul.dev/definitions.html#partial-and-impl-blocks), but each must be pure: a
+union method that assigns a field of any object is reported.
 
 ### properties are not publicly assignable by default
-When defining properties in classes and structs, they are not
-publicly assignable by default
+
+A property is readable from anywhere but assignable only within its defining
+type, unless it is declared `public`:
 
 ```ghul
 …
@@ -197,34 +224,78 @@ diagnostics:
 
 - error: THING.name: string is not publicly assignable
 
-### pipes support non mutating operations over lists
+The members a primary constructor generates are ordinary properties, so the
+same applies to them: they are set at construction and cannot be publicly
+assigned afterwards unless the parameter carries the `public` modifier.
 
-pipes make it easy to iterate over lists and generators producing
-transformed output without mutating the source data
+### pipe operations build new sequences
+
+Pipe operations do not mutate their source: `map`, `filter` and the rest
+produce a new sequence and leave the input as it was:
 
 ```ghul
 …
 let list = [1, 2, 3, 4, 5];
 
 let doubled = list |> map(x => x * 2);
+write_line("doubled: {doubled}");
 
-// original list is still the same:
-write_line("list: {list}");
+// the original list is unchanged:
+write_line("list: {list |> join(", ")}");
 ```
 
 output:
 
 ```
-list: System.Int32[]
+doubled: 2, 4, 6, 8, 10
+list: 1, 2, 3, 4, 5
 ```
 
-### expression oriented programming
+## pure functions
 
-Expression bodies and value-producing `if`, `case`, and `val ... lav` blocks help in writing pure functions; see [expression oriented programming](https://ghul.dev/expression-oriented-programming).
+A function or method can carry a postfix `pure` modifier, declaring that it
+assigns no field, property, or array element of any object. Most function
+bodies are proven pure with no modifier needed; the declaration covers the
+rest, and every override of a pure member must itself be pure. A function
+*type* can be pure too, so a signature can require that only pure functions
+are passed to it:
 
-## higher order functions
+```ghul
+…
+// pure: square assigns no field, property, or array element
+square(x: int) -> int pure => x * x;
 
-### higher order generically typed global functions
+// a pure function type: this slot accepts only pure functions
+apply(f: (int) -> int pure, x: int) -> int => f(x);
+
+write_line("apply(square, 5): {apply(square, 5)}");
+write_line("apply(anonymous, 5): {apply(x => x + 1, 5)}");
+```
+
+output:
+
+```
+apply(square, 5): 25
+apply(anonymous, 5): 6
+```
+
+A class or struct can opt in to the same discipline for the whole type:
+declared `pure` on its header, every member must be proven or declared not
+to assign any field, property, or array element after construction. The
+details, including what purity means to [type
+narrowing](https://ghul.dev/type-narrowing.html), are under
+[methods](https://ghul.dev/definitions.html#methods).
+
+Expression bodies and value-producing `if`, `case`, and `val ... lav` blocks
+help in writing pure functions; see
+[expression-oriented programming](https://ghul.dev/expression-oriented-programming).
+
+## higher-order functions
+
+A higher-order function takes another function as an argument, or returns
+one. Global functions and methods can do this generically:
+
+### higher-order generic global functions
 
 ```ghul
 apply[T](f: T -> T, x: T) -> T =>
@@ -234,7 +305,8 @@ apply_if[T](f: T -> T, x: T, predicate: T -> bool) -> T =>
     if predicate(x) then f(x) else x fi;
 ```
 
-### higher order generically typed methods:
+### higher-order generic methods
+
 ```ghul
 class HIGHER_ORDER_FUNCTIONS[T] is
     apply(f: T -> T, x: T) -> T static =>
@@ -247,7 +319,7 @@ class HIGHER_ORDER_FUNCTIONS[T] is
 si
 ```
 
-### higher order anonymous functions:
+### higher-order anonymous functions
 
 ```ghul
 …
@@ -283,11 +355,40 @@ apply_twice_times_2(5): 20
 
 Anonymous functions take a single concrete type from context; there is no generic equivalent to the two preceding forms. For polymorphic behaviour, declare a generic global function or method.
 
-## union types and pattern matching
+## function composition
 
-A union holds one of several variants, and the `if let` and `case` patterns take one apart. They are how functional ghūl code models data, and they have their own page: [unions and pattern matching](https://ghul.dev/unions-and-pattern-matching.html).
+There is no built-in composition operator, but
+[operators are ordinary functions](https://ghul.dev/definitions.html#operators), so a
+generic `>>` takes two lines to define:
+
+```ghul
+…
+>>[A, B, C](f: A -> B, g: B -> C) -> A -> C =>
+    x => g(f(x));
+
+let times_2 = x => x * 2;
+let add_1 = x => x + 1;
+
+let times_2_then_add_1 = times_2 >> add_1;
+write_line("times_2_then_add_1(5): {times_2_then_add_1(5)}");
+
+let pipeline = times_2 >> add_1 >> x => "[{x}]";
+write_line("pipeline(5): {pipeline(5)}");
+```
+
+output:
+
+```
+times_2_then_add_1(5): 11
+pipeline(5): [11]
+```
 
 ## currying
+
+A curried function takes its arguments one at a time: each call takes one
+argument and returns a function that takes the next. In ghūl that is an
+anonymous function that returns another:
+
 ```ghul
 …
 let curried_add = x => y => x + y;
@@ -310,6 +411,11 @@ add_10(3): 13
 ```
 
 ## partial application
+
+Partial application fixes some of a function's arguments and leaves the rest
+open. No special syntax is needed: an anonymous function supplies the fixed
+arguments:
+
 ```ghul
 …
 let add = (x, y) => x + y;
@@ -327,6 +433,73 @@ output:
 add_5(3): 8
 add_10(3): 13
 ```
+
+## union types and pattern matching
+
+A union holds one of several variants, and the `if let` and `case` patterns
+take one apart; they are how functional ghūl code models data. A `case` over
+a union is checked for exhaustiveness, so covering every variant needs no
+`else` arm:
+
+```ghul
+…
+area(s: Shape) -> double =>
+    // case over a union is checked for exhaustiveness: every variant
+    // is covered here, so no else arm is needed
+    case s
+    when c: CIRCLE then 3.14159d * c.radius * c.radius
+    when q: SQUARE then q.side * q.side
+    esac;
+
+write_line("{area(CIRCLE(2.0d))}");
+write_line("{area(SQUARE(3.0d))}");
+```
+
+output:
+
+```
+12.56636
+9
+```
+
+The full construct - guards, destructuring, nesting - has its own page:
+[unions and pattern matching](https://ghul.dev/unions-and-pattern-matching.html).
+
+## optional types
+
+An optional type `T?` holds a value that may be absent - the role `Option`
+and `Maybe` types play in other languages, built into the type system. `??`
+supplies a fallback value, `?.` reads a member only when the receiver is
+present, and `if let` tests and unwraps in one step:
+
+```ghul
+…
+// one feature, T?, however T turns out to be represented
+find_first[T](xs: T[], predicate: T -> bool) -> T? is
+    for x in xs do
+        if predicate(x) then
+            return x;
+        fi
+    od
+
+    return null;
+si
+
+let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0);    // T = int, a value type
+let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2); // T = string, a reference type
+
+write_line("first even: {first_even ?? -1}");
+write_line("first long: {first_long ?? "none"}");
+```
+
+output:
+
+```
+first even: 4
+first long: ccc
+```
+
+Optional types have [their own page](https://ghul.dev/optional-types.html).
 
 ## lazy sequences
 
@@ -348,11 +521,11 @@ stream[T, S](
 ) -> Pipe[T]
 ```
 
-`advance` is a pure step function: it receives the current state and
-returns either `DONE` (sequence is over) or `YIELD(value, next_state)`,
-the yielded element and the state to feed back in on the next step.
-The `||` infix is parser sugar for `YIELD(value, next_state)`, so a
-step body usually reads `value || next_state`.
+`advance` is a step function: it receives the current state and returns
+either `DONE` (the sequence is over) or `YIELD(value, next_state)`, the
+yielded element and the state to feed back in on the next step. The `||`
+infix constructs `YIELD(value, next_state)`, so a step body usually reads
+`value || next_state`.
 
 ```ghul
 …
@@ -461,7 +634,10 @@ factorial 9 is 39916800
 Type arguments to `stream` are inferred from the initial-state value
 and the anonymous function's yield expression.
 
-The factory returns `Pipe[T]` directly so combinators like `take`,
-`filter`, `map`, `zip`, and `index` chain straight onto a stream
-value. State shape never appears in the type a consumer sees of a
-`stream(...)`-produced pipe.
+The factory returns `Pipe[T]`, so combinators like `take`, `filter`,
+`map`, `zip`, and `index` chain straight onto it. The state type does not
+appear in that result, so consumers never see how a stream is stepped.
+
+[Generators](https://ghul.dev/async-and-generators.html) are the other way to a lazy
+sequence: a function containing `yield` produces its elements on demand,
+and its result is a `Pipe[T]` too.
