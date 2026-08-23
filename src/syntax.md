@@ -31,7 +31,7 @@ Blocks are delimited by keywords. The keywords that begin and end a block are sp
 
 <GhulExample name="syntax-1" />
 
-In this example `then`, `else` and `fi` all delimit blocks. The blocks they delimit contain statement lists. 
+In this example `then`, `else` and `fi` all delimit blocks. The blocks they delimit contain statement lists, and they do so whether the `if` is used as a statement or as an expression - see [every arm is a statement block](/expression-oriented-programming.html#every-arm-is-a-statement-block).
 
 ## semicolons
 

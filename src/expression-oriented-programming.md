@@ -38,13 +38,25 @@ A `let ... in ...` expression introduces one or more local variables scoped to a
 
 <GhulExample name="expression-oriented-programming-6" />
 
+## every arm is a statement block
+
+Whether a construct is being used as a statement or as an expression changes what happens to the value it produces. It does not change what is written inside it. A loop body, each arm of an `if` / `elif` / `else`, and each arm of a `case` are statement blocks in both uses: they hold a statement list, so an arm can define local variables and run several statements before arriving at its value.
+
+The value an arm produces is its last statement's, on the same rule as a `val ... lav` block:
+
+<GhulExample name="expression-oriented-programming-9" />
+
+Where the value then goes is what the two uses differ on. An `if` used as an expression takes the value of the arm it chose; the same `if` used as a statement discards it. A loop body is the case where it always goes nowhere, since a loop yields through `break` rather than through its body's last statement.
+
+Inside these blocks a terminating `;` on the last statement is optional, and writing one does not discard the value: the arm still produces it, because a closing `else`, `fi`, `esac` or `lav` ends the statement list either way. The one place the semicolon decides the reading is a function or method body, covered next.
+
 ## block bodies return their tail
 
 A block body follows the same rule as a `val ... lav` block: where its last statement is one that produces a value, and it is written without a terminating `;`, that value is the block's. In a function or method it is the return value on the fall-through path, checked against the declared return type exactly as an explicit `return` would be:
 
 <GhulExample name="expression-oriented-programming-7" />
 
-The semicolon is what separates the two readings. Written `doubled * trimmed;` the statement is evaluated and its value discarded, which leaves the function with no value on that path.
+Unlike an arm, a body is where the semicolon decides the reading. Written `doubled * trimmed;` the statement is evaluated and its value discarded, which leaves the function with no value on that path.
 
 Because the tail is an ordinary statement position, an `if` or a `case` sitting there is the return value too, and no branch needs its own `return`:
 
