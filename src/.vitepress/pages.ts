@@ -46,6 +46,7 @@ export const SECTIONS = [
       { text: 'definitions', link: '/definitions' },
       { text: 'expressions', link: '/expressions' },
       { text: 'control flow', link: '/control-flow' },
+      { text: 'optional types in depth', link: '/optional-types-in-depth' },
       { text: 'narrowing in depth', link: '/narrowing-in-depth' },
       { text: 'grammar', link: '/grammar' },
       { text: 'known issues', link: '/known-issues' },
