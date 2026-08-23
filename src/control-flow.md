@@ -208,7 +208,7 @@ A `when null` label matches absence - for reference types, value types, and unco
 
 ### pattern arms
 
-A `when` arm can take a pattern instead of an equality list, mirroring [`if let`](#if-let): `when v: T then` type-tests and introduces the variable, `when (a, b) then` destructures, and `when _: T then` type-tests without introducing one. A bare identifier stays an equality test - `when v then` compares against the value of `v` in scope and introduces no new local. A pattern arm can carry a trailing `/\` guard; the bound names are in scope in the guard and the arm body, and a failing guard falls through to the next arm as though the pattern hadn't matched:
+A `when` arm can take a pattern instead of an equality list, mirroring [`if let`](#if-let): `when v: T then` type-tests and introduces the variable, `when (a, b) then` destructures, and `when _: T then` type-tests without introducing one. A bare identifier stays an equality test - `when v then` compares against the value of `v` in scope and introduces no new local. A pattern arm can take a trailing `/\` guard; the names the pattern introduces are in scope in the guard and the arm body, and a failing guard falls through to the next arm as though the pattern hadn't matched:
 
 <GhulExample name="control-flow-54" />
 

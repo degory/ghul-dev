@@ -159,7 +159,7 @@ A property consists of the property name followed by the property's type and, op
 
 Public properties with no getter or setter are automatically backed by a hidden field. Private properties with no getter or setter are implemented as a plain field.
 
-A property can take a postfix `stable` modifier: an assertion that two adjacent reads agree on presence and runtime type. [Type narrowing](/type-narrowing.html) leans on that when it narrows through a property getter, so a getter whose consistency the compiler cannot prove from its body - a memoiser filling its cache, say - needs the declaration for its narrowings to be presented:
+A property can take a postfix `stable` modifier: an assertion that two adjacent reads agree on presence and runtime type. [Type narrowing](/type-narrowing.html) depends on that when it narrows through a property getter, so a getter whose consistency the compiler cannot prove from its body - a memoiser filling its cache, say - has to declare it before code can narrow through the property:
 
 <GhulExample name="definitions-48" />
 
@@ -177,7 +177,11 @@ A method or function can take a postfix `pure` modifier, which asserts that it o
 
 <GhulExample name="definitions-45" />
 
-`pure` can also be written on a class, struct, or trait header. Every instance member of a pure type must then be proven store-free or declared pure - declaring the member remains the escape hatch - and one that stores draws an error naming it. The writes that have to exist are exempt: constructors assign fields by definition, and static members keep their own state. What a pure type does not allow is publishing a write: a public property's assign accessor is rejected, and a getter storing through an assign accessor draws the error, since from the outside it reads as a read. A bodiless member carries an implicit declaration that binds implementors, so a trait declared pure holds everyone implementing it to the same rule. `pure` on a union is an error - its members are held to purity through `partial` and `impl` blocks regardless:
+`pure` can also be written on a class, struct, or trait header. Every instance member of a pure type must then be proven store-free or declared pure, and one that stores draws an error naming it. The writes that have to exist are exempt: constructors assign fields by definition, and static members keep their own state.
+
+What a pure type does not allow is publishing a write. A public property's assign accessor is rejected, and so is a getter that stores through one, since from the outside that reads as a read. A bodiless member has an implicit `pure` declaration, so a trait declared pure holds everyone implementing it to the same rule.
+
+`pure` on a union is an error. Union members are held to purity through their `partial` and `impl` blocks regardless:
 
 <GhulExample name="definitions-52" />
 
@@ -211,7 +215,7 @@ A member whose type says it always holds a value has to be given one. A construc
 
 <GhulExample name="definitions-49" />
 
-A constructor is credited with what it assigns itself, and with what the methods it calls on `self` assign in turn - though not a call reached on only one branch, or one a subclass could override. Members of optional and of value type are not checked: neither has an impossible absence to be caught holding. Suppress with `@suppress("field-definite-assignment")` per constructor or file, or project-wide.
+A constructor counts what it assigns directly, and what the methods it calls on `self` assign in turn - though not a call reached on only one branch, or one a subclass could override. Members of optional and of value type are not checked: neither has an absence its type rules out. Suppress with `@suppress("field-definite-assignment")` per constructor or file, or project-wide.
 
 ### primary constructors
 

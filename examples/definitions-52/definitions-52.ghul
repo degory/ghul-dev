@@ -2,7 +2,7 @@ use IO.Std.write_line;
 
 // >>>
 // every instance member of a pure type must read and never
-// write; a bodiless member binds implementors to the same rule
+// write; a bodiless member holds implementors to the same rule
 trait NAMED pure is
     name: string;
     label() -> string;
