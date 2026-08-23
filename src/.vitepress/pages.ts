@@ -4,10 +4,10 @@
 // apart.
 //
 // The groups separate the site's registers: "ghūl" is the front door
-// (the overview and how to install), "tour" is the narrative
-// teach-by-example path a newcomer reads in order, "guides" are practical
-// how-tos, "reference" is for looking things up, and "about" is the story
-// of the project itself.
+// (the overview and how to install), "tour" shows what the language can
+// express - one page per paradigm, read in order or dipped into - "guides"
+// are practical how-tos, "reference" is for looking things up, and "about"
+// is the story of the project itself.
 export const SECTIONS = [
   {
     text: 'ghūl',
@@ -19,22 +19,19 @@ export const SECTIONS = [
   {
     text: 'tour',
     items: [
-      { text: 'language basics', link: '/language-basics' },
-      { text: 'optional types', link: '/optional-types' },
-      { text: 'unions and pattern matching', link: '/unions-and-pattern-matching' },
-      { text: 'type narrowing', link: '/type-narrowing' },
       { text: 'expression oriented programming', link: '/expression-oriented-programming' },
       { text: 'functional programming', link: '/functional-programming' },
       { text: 'object oriented programming', link: '/object-oriented-programming' },
+      { text: 'unions and pattern matching', link: '/unions-and-pattern-matching' },
       { text: 'generics', link: '/generics' },
-      { text: 'type inference', link: '/type-inference' },
+      { text: 'optional types and narrowing', link: '/optionals-and-narrowing' },
       { text: 'async and generators', link: '/async-and-generators' },
+      { text: '.NET integration', link: '/dotnet-integration' },
     ],
   },
   {
     text: 'guides',
     items: [
-      { text: '.NET integration', link: '/dotnet-integration' },
       { text: 'runtime library', link: '/runtime-library' },
       { text: 'tooling', link: '/tooling' },
     ],
@@ -42,12 +39,14 @@ export const SECTIONS = [
   {
     text: 'reference',
     items: [
+      { text: 'language basics', link: '/language-basics' },
       { text: 'syntax', link: '/syntax' },
       { text: 'definitions', link: '/definitions' },
       { text: 'expressions', link: '/expressions' },
       { text: 'control flow', link: '/control-flow' },
-      { text: 'optional types in depth', link: '/optional-types-in-depth' },
-      { text: 'narrowing in depth', link: '/narrowing-in-depth' },
+      { text: 'optional types', link: '/optional-types' },
+      { text: 'type narrowing', link: '/type-narrowing' },
+      { text: 'type inference', link: '/type-inference' },
       { text: 'grammar', link: '/grammar' },
       { text: 'known issues', link: '/known-issues' },
     ],

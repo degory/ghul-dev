@@ -52,7 +52,7 @@ This form is used for multiple conditions. If the initial condition is false, th
 
 ### type narrowing
 
-An `if` condition that proves something stronger about a value - an `isa` test on a class or union variant, a `?` presence test on an optional - narrows the value to the stronger type inside the branch, and a guard that leaves the block narrows the code after it. [Type narrowing](/type-narrowing.html) covers this in full: locals, parameters, fields and properties, and narrowing on assignment; [narrowing in depth](/narrowing-in-depth.html) covers what happens to a narrowing across calls.
+An `if` condition that proves something stronger about a value - an `isa` test on a class or union variant, a `?` presence test on an optional - narrows the value to the stronger type inside the branch, and a guard that leaves the block narrows the code after it. [Type narrowing](/type-narrowing.html) covers this in full: locals, parameters, fields and properties, narrowing on assignment, and what happens to a narrowing across calls.
 
 ### if let
 

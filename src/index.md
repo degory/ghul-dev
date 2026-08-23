@@ -3,15 +3,7 @@
 
 <img class="ghul-logo" src="/ghul-logo-draft.png" alt="ghūl programming language logo" />
 
-> - The ghūl language, compiler, tools, and this website are all very much a **work-in-progress**.
-> - Whatever the [ghūl compiler](https://github.com/degory/ghul) accepts is currently the definitive ghūl language reference.
-> - ghūl is pronounced 'ghoul'.
-
-## why ghūl?
-
-Why not 🤔
-
-ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment with programming language design. Apart from a slightly quirky syntax, ghūl is a fairly conventional programming language. Although ghūl is a hobby project maintained by a single person, its goal is to be sufficiently expressive for general-purpose development: the [ghūl compiler](https://github.com/degory/ghul) itself is written in ghūl.
+ghūl (pronounced 'ghoul') is a statically typed, general-purpose programming language that compiles to .NET 10. It produces ordinary .NET assemblies and NuGet packages, and ghūl code can call any .NET library. The [ghūl compiler](https://github.com/degory/ghul) is written in ghūl - about 120,000 lines of it - and compiles itself.
 
 ## examples
 
@@ -21,14 +13,18 @@ Every example on this site is editable: click the pencil to open it in an editor
 Nothing you edit is saved. To keep something, paste it into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul`{:text}: a one-file project that opens in a GitHub Codespace with the compiler ready, or that you can clone on your own machine. For a project of your own, start from the [repository template](https://github.com/degory/ghul-repository-template).
 :::
 
-### hello world!
-
-<GhulExample name="hello-world" />
+Each of these is a complete program:
 
 <GhulExampleSwitcher
   names="functional,expression-oop,expression-functional,fibonacci-generators,generic-calculator,optionals-narrowing"
   labels="fibonacci: streams + `|>`,expression trees: classes + traits,expression trees: union + pattern matching,fibonacci: generators + pipes,calculator: generics,optionals: `T?` + narrowing"
 />
+
+So is this one:
+
+<GhulExample name="hello-world" />
+
+A file with no namespace runs its top-level statements as the program's entry point, so a program needs no other ceremony until it grows enough to want some.
 
 ## features
 
@@ -55,3 +51,11 @@ Nothing you edit is saved. To keep something, paste it into the [ghūl scratchpa
 - **error handling**: `try`/`catch`/`finally` over .NET exceptions.
 
 - **type safety**: ghūl enforces type safety at compile-time.
+
+## why ghūl?
+
+Why not 🤔
+
+ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment with programming language design. Apart from a slightly quirky syntax, ghūl is a fairly conventional programming language. It is a hobby project maintained by a single person, but its goal is to be sufficiently expressive for general-purpose development, and the self-hosting compiler is the working test of that goal.
+
+The language, compiler, tools, and this website are all a **work-in-progress**: whatever the [ghūl compiler](https://github.com/degory/ghul) accepts is currently the definitive ghūl language reference.
