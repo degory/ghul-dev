@@ -21,8 +21,8 @@ export const SECTIONS = [
     items: [
       { text: 'language basics', link: '/language-basics' },
       { text: 'optional types', link: '/optional-types' },
-      { text: 'type narrowing', link: '/type-narrowing' },
       { text: 'unions and pattern matching', link: '/unions-and-pattern-matching' },
+      { text: 'type narrowing', link: '/type-narrowing' },
       { text: 'expression oriented programming', link: '/expression-oriented-programming' },
       { text: 'functional programming', link: '/functional-programming' },
       { text: 'object oriented programming', link: '/object-oriented-programming' },
@@ -46,6 +46,7 @@ export const SECTIONS = [
       { text: 'definitions', link: '/definitions' },
       { text: 'expressions', link: '/expressions' },
       { text: 'control flow', link: '/control-flow' },
+      { text: 'narrowing in depth', link: '/narrowing-in-depth' },
       { text: 'grammar', link: '/grammar' },
       { text: 'known issues', link: '/known-issues' },
     ],
