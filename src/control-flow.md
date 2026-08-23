@@ -295,7 +295,7 @@ In functions of non-void return type, `return` statements must return a value of
 
 ### default return
 
-If execution reaches the end of a non-void function without encountering a return statement, then the default value of the function's return type is returned to the caller.
+If execution reaches the end of a non-void function without encountering a return statement, and the body has no [tail](/expression-oriented-programming.html#block-bodies-return-their-tail) to take a value from, then the default value of the function's return type is returned to the caller.
 
 <GhulExample name="control-flow-45" />
 

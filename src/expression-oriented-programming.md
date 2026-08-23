@@ -38,6 +38,22 @@ A `let ... in ...` expression introduces one or more local variables scoped to a
 
 <GhulExample name="expression-oriented-programming-6" />
 
+## block bodies return their tail
+
+A block body follows the same rule as a `val ... lav` block: its last statement, written without a terminating `;`, is the value it produces. In a function or method that value is the return value on the fall-through path, checked against the declared return type exactly as an explicit `return` would be:
+
+<GhulExample name="expression-oriented-programming-7" />
+
+The semicolon is what separates the two readings. Written `doubled * trimmed;` the statement is evaluated and its value discarded, which leaves the function with no value on that path.
+
+Because the tail is an ordinary statement position, an `if` or a `case` sitting there is the return value too, and no branch needs its own `return`:
+
+<GhulExample name="expression-oriented-programming-8" />
+
+Some bodies have no tail to take. A void body discards a trailing statement whether or not it ends in a semicolon, so a method ending in a bare `if` or loop is unaffected. In a generator, falling off the end means the end of the stream rather than a value. A `try` block is not an expression, so a body ending in one is not a tail either.
+
+A guard `if` with no `else` is rejected in tail position in a function that returns a value, because the branch it does not take produces nothing. Terminate it with `;` to keep it as a plain statement.
+
 ## expression bodies
 
 A function, method, property, or anonymous function can replace its block body with `=>` and a single expression. That expression can be an `if`, a `case`, or a `val ... lav` block:

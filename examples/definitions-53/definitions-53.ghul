@@ -1,0 +1,19 @@
+use IO.Std.write_line;
+
+// >>>
+class RECTANGLE(width: int, height: int) is
+    // a method body ends the same way a function body does
+    area() -> int is
+        width * height
+    si
+
+    // a terminated last statement is discarded, so this one returns explicitly
+    describe() -> string is
+        let label = "{width}x{height}";
+
+        return "{label} = {area()}";
+    si
+si
+// <<<
+
+write_line(RECTANGLE(3, 4).describe())

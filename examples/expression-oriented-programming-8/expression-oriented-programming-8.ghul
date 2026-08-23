@@ -1,0 +1,25 @@
+use IO.Std.write_line;
+
+// >>>
+// an if in tail position is the return value, so no branch needs its own return
+classify(n: int) -> string is
+    if n < 0 then
+        "negative"
+    elif n == 0 then
+        "zero"
+    else
+        "positive"
+    fi
+si
+
+// so is a case
+sign_word(n: int) -> string is
+    case n
+    when 0 then "none"
+    when 1 then "one"
+    else "many"
+    esac
+si
+
+write_line("{classify(-4)} {classify(0)} {sign_word(1)}")
+// <<<
