@@ -176,6 +176,20 @@ The do / od loop in ghūl is used to create an indefinite loop which will contin
 This loop will run indefinitely until counter reaches 5, at which point the break statement terminates the loop.
 
 
+## loops as expressions
+
+Every loop form is also an expression of optional type `T?`: a `break` with a value exits the loop producing that value, and falling off the end - a false condition, an exhausted iterator - produces the absent value. The loop's type is the least upper bound of its valued breaks, wrapped in `?`; a bare `break` and `break null` yield absence exactly as falling off the end does:
+
+<GhulExample name="control-flow-60" />
+
+When the context already expects an optional - a typed `let`, a call argument, a return - the loop's element type comes from it.
+
+A valued break delivers to the nearest enclosing loop *that consumes a value*, so it can carry a result out of several nested loops at once: the inner loop below is an ordinary statement, and the break crosses it on the way out:
+
+<GhulExample name="control-flow-61" />
+
+A valued break with no consuming loop anywhere around it is a compile error, the same as returning a value from a void function.
+
 ## case statement
 
 `case` branches on a scrutinee value. Each `when` arm is introduced by `then`, an optional `else` catches the rest, and the construct closes with `esac`. There is no fall-through, and a `when` can list several values matched by equality:

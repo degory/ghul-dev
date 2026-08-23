@@ -177,24 +177,9 @@ A method or function can take a postfix `pure` modifier, which asserts that it o
 
 <GhulExample name="definitions-45" />
 
-`pure` can also be written on a class, struct, or trait header. Every instance member of a pure type must then be proven store-free or declared pure, and a bodiless member carries an implicit declaration that binds implementors - a trait declared pure holds everyone implementing it to the same rule. Constructors, static members, and assign accessors are exempt; `pure` is rejected on a union, whose members are held to purity through `partial` and `impl` blocks regardless:
+`pure` can also be written on a class, struct, or trait header. Every instance member of a pure type must then be proven store-free or declared pure - declaring the member remains the escape hatch - and one that stores draws an error naming it. The writes that have to exist are exempt: constructors assign fields by definition, and static members keep their own state. What a pure type does not allow is publishing a write: a public property's assign accessor is rejected, and a getter storing through an assign accessor draws the error, since from the outside it reads as a read. A bodiless member carries an implicit declaration that binds implementors, so a trait declared pure holds everyone implementing it to the same rule. `pure` on a union is an error - its members are held to purity through `partial` and `impl` blocks regardless:
 
-```ghul
-trait NAMED pure is
-    name: string;
-    label() -> string;
-si
-
-class USER: NAMED is
-    name: string;
-
-    init(name: string) is
-        self.name = name;
-    si
-
-    label() -> string => "<{name}>";
-si
-```
+<GhulExample name="definitions-52" />
 
 As with functions, methods should be named in `snake_case`
 

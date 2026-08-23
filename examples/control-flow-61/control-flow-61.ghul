@@ -1,0 +1,17 @@
+use IO.Std.write_line;
+
+// >>>
+// a valued break delivers to the nearest enclosing loop
+// that consumes a value, so it can cross the inner,
+// statement-form loop on its way out
+let rows = [[1, 2, 3], [4, 5, 6]];
+
+let first_even: int? =
+    for row in rows do
+        for cell in row do
+            if cell % 2 == 0 then break cell fi;
+        od;
+    od;
+
+write_line("{first_even ?? -1}");
+// <<<
