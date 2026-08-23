@@ -2,9 +2,11 @@
 
 ## variables
 
-In ghūl local variables are defined with the `let` keyword. A variable defined with a bare `let` is immutable: an initializer is required, and the compiler reports an error if the variable is assigned again. The type is inferred from the initializer:
+In ghūl local variables are defined with the `let` keyword. A variable defined with a bare `let` cannot be reassigned: an initializer is required, and the compiler reports an error if the variable is assigned again. The type is inferred from the initializer:
 
 <GhulExample name="definitions-1" />
+
+A bare `let` fixes the variable, not the value: after `let xs = LIST[int]();`, `xs` always refers to the same list, but the list itself can still be mutated. Whether the value can change is a property of its type: a tuple or an array cannot be modified, a `LIST` can.
 
 An explicit type can be given alongside the initializer. The initializer must be assignment compatible with the type:
 
