@@ -2,9 +2,11 @@
 
 ## variables
 
-In ghūl local variables are introduced with the `let` keyword. A bare `let` is immutable: it takes an initializer, and reassigning the variable afterwards is rejected. The compiler infers the type from the initializer:
+In ghūl local variables are defined with the `let` keyword. A variable defined with a bare `let` cannot be reassigned: an initializer is required, and the compiler reports an error if the variable is assigned again. The type is inferred from the initializer:
 
 <GhulExample name="definitions-1" />
+
+A bare `let` fixes the variable, not the value: after `let xs = LIST[int]();`, `xs` always refers to the same list, but the list itself can still be mutated. Whether the value can change is a property of its type: a tuple or an array cannot be modified, a `LIST` can.
 
 An explicit type can be given alongside the initializer. The initializer must be assignment compatible with the type:
 
@@ -14,7 +16,9 @@ The explicit type can be wider than the initializer expression:
 
 <GhulExample name="definitions-3" />
 
-A trailing `mut` makes the variable reassignable, and then the initializer can be dropped for a deferred-init local that starts at its type's default value: `let total mut = 0` reassigns later, and `let result: int mut;` defaults to 0. Either form can also take its value from `_`, which initializes to the default of the type the context expects - `let x = _`, or `_[T]` to pin the type.
+A trailing `mut` makes the variable reassignable: `let total mut = 0;` defines `total` with initial value 0, and `total` can be assigned again later. A `mut` variable can also be defined with no initializer, as in `let result: int mut;`. It then starts at the default value of its type: zero, `false`, or `null`.
+
+Either form can take its value from `_`, the default-value expression: `let x = _;` initializes `x` to the default value of whatever type the context expects, and `_[T]` names the type explicitly.
 
 Multiple variables can be defined in the same `let` statement, with each variable either taking its type from its initializer or given an explicit one:
 
@@ -24,7 +28,7 @@ The name `_` is a discard placeholder. It can stand in for any variable name, bu
 
 <GhulExample name="definitions-5" />
 
-Variables can only be defined within functions, methods or property bodies. Variable names should be in `snake_case`
+Variables can only be defined within functions, methods or property bodies. Variable names should be in `snake_case`.
 
 ## functions
 
@@ -34,11 +38,11 @@ In ghūl functions consist of a name and a parenthesized formal arguments list, 
 
 `=>` introduces a single-expression body, while the `is` and `si` keywords are used to delimit block bodies.
 
-Where a block body ends in a statement that produces a value - an expression, an `if`, a `case`, a `val ... lav` block - and it is written without a terminating `;`, that value is the function's return value on the fall-through path. Terminate it and the value is discarded instead, as any other statement's is. See [block bodies return their tail](/expression-oriented-programming.html#block-bodies-return-their-tail) for the rule in full.
+To return a value from a block body, you can write it as the last statement with no terminating `;`, instead of writing `return`. Any statement that produces a value works: an expression, an `if`, a `case`, a `val ... lav` block. With the `;`, the value is discarded, like the value of any other expression statement. See [block bodies return their tail](/expression-oriented-programming.html#block-bodies-return-their-tail) for the rule in full.
 
 <GhulExample name="definitions-53" />
 
-Functions can only be defined at global scope. Functions can be generic, which will be covered later. Function names should be in `snake_case`
+Functions can only be defined at global scope. Functions can be generic, which will be covered later. Function names should be in `snake_case`.
 
 ## arguments
 
@@ -46,7 +50,7 @@ Arguments consist of a name followed by a type. The type is mandatory as the com
 
 <GhulExample name="definitions-7" />
 
-A formal argument can also be a tuple-destructure pattern in its own parentheses: still one parameter, at the written tuple type, unpacked into its names on entry. Named functions, anonymous functions, asynchronous functions and generators all take them; the aggregate type can be any positionally-destructurable type:
+A formal argument can also be a tuple-destructure pattern, written in its own parentheses. It is still one argument, with the written tuple type; when the function is called, the value is unpacked into the names the pattern gives. Named functions, anonymous functions, asynchronous functions and generators all accept them, and the type can be any type that destructures positionally:
 
 <GhulExample name="definitions-51" />
 
@@ -67,7 +71,9 @@ A class can also declare its constructor parameters directly in the header. Each
 
 The two forms are equivalent. The primary form is the shorter shape when every field is initialized from a constructor argument; the classic form is the better fit when the body owns extra fields or properties beyond what the constructor takes. See [constructors](#constructors) for the rest of the primary-constructor surface area.
 
-Two postfix modifiers shape the hierarchy. Without `open`, a class can be subclassed only within the assembly that declares it; `open` opts in to cross-assembly subclassing. `abstract` bars direct construction, so only subclasses exist at runtime, and a class is implicitly abstract when it declares a body-less instance method, since that method is a contract for subclasses to satisfy. The closure feeds [type narrowing](/type-narrowing.html): on the `else` edge of an `isa` test the compiler can rule the tested subclass out, and an `abstract` root can leave a single remaining subclass.
+Two postfix modifiers control the class hierarchy. Without `open`, a class can be subclassed only within the assembly that declares it; `open` allows subclassing from other assemblies. `abstract` means the class itself cannot be constructed: only its subclasses can. A class is also implicitly abstract when it declares an instance method with no body, because that method is a contract for subclasses to satisfy.
+
+Because the compiler knows every subclass of a closed class, an `isa` test can narrow in the else branch too: ruling out the tested subclass leaves the others, and when an `abstract` root has exactly two subclasses, ruling out one leaves the other. See [type narrowing](/type-narrowing.html).
 
 Classes can only be defined at global scope. Classes can be generic, which will be covered later. Concrete class names should be in `MACRO_CASE`. Abstract class names should be in `PascalCase`.
 
@@ -79,10 +85,10 @@ Structs consist of a name, then the types of any traits implemented, and then th
 Structs are constructed the same way as classes, with a constructor expression:
 <GhulExample name="definitions-11" />
 
-A struct defines a new value type, which means any values that the struct encapsulates are collected together as a new kind of value: assigning a struct copies all the encapsulated values, so the copy and the original then go their separate ways:
+A struct defines a new value type. Assigning a struct copies all of its fields, so the copy and the original are independent afterwards:
 <GhulExample name="definitions-12" />
 
-A struct has no equality of its own, so `==` does not apply to one; giving a struct an equality means defining `=~`, described under [defining operators](#operators) and, for the .NET side of it, under [making your own types work with .NET](/dotnet-integration.html#equality).
+`==` is not defined for structs. To give a struct an equality operator, define `=~`, described under [defining operators](#operators) and, for the .NET side, under [making your own types work with .NET](/dotnet-integration.html#equality).
 
 Structs can only be defined at global scope. Structs can be generic, which will be covered later. Struct names should be in `MACRO_CASE`.
 
@@ -121,7 +127,7 @@ Unions support structural equality through the `=~` operator. Two union referenc
 
 <GhulExample name="definitions-19" />
 
-A variant with no fields is a *unit variant*: it is referenced by name without parentheses, and interned to one shared value per generic instantiation. A union with a single field-carrying variant, or one variant marked `default`, is option-shaped, so `u?` tests whether that variant is present and `u!` unwraps its value:
+A variant with no fields is a *unit variant*. It is referenced by name, without parentheses, and all uses of a unit variant share one value. When exactly one variant of a union has fields, the union behaves as an option type: `u?` tests whether `u` holds that variant, and `u!` unwraps its value. A union where several variants have fields can mark one of them `default` to get the same behaviour:
 
 <GhulExample name="definitions-41" />
 
@@ -129,21 +135,21 @@ A union can declare a primary-constructor header for state shared across every v
 
 <GhulExample name="definitions-42" />
 
-Unions can only be defined at global scope. Union names should be in `PascalCase` and variant names should be in `MACRO_CASE`
+Unions can only be defined at global scope. Union names should be in `PascalCase` and variant names should be in `MACRO_CASE`.
 
 ### enums
 
-An enum consists of a name and then an enum body, which contains one or more elements. Each element has a name and an optional constant integer value
+An enum consists of a name and then an enum body, which contains one or more elements. Each element has a name and an optional constant integer value.
 
 <GhulExample name="definitions-20" />
 
-Enums can only be defined at global scope. An enum type name should be in `PascalCase`, and its members in `MACRO_CASE`
+Enums can only be defined at global scope. An enum type name should be in `PascalCase`, and its members in `MACRO_CASE`.
 
 Enum values compare for equality and order: `=~` and `==` compare by the underlying integer, and `<`, `<=`, `>` and `>=` order by it. `=~` on an optional enum is not supported; narrow the value first. An individual member can be imported by name - `use Some.Namespace.Suit.HEARTS;` - as well as reached through the type.
 
 ### partial and impl blocks
 
-Members can be added to a class, struct, or union already declared in the same assembly from a separate block, even in another file. The added members are ordinary members of the target, with the same private access and virtual dispatch as members written in its own body. A `partial` block names the type and adds to it; for a union, whose body holds only variants, it is the only way to give the type methods:
+A `partial` block adds members to a class, struct, or union declared elsewhere in the same assembly, even in another file. The added members are ordinary members of the target, exactly as if they were written in the type's own body: public or private according to their names, virtual as usual, and with access to the type's private members. For a union, whose body holds only variants, a `partial` block is the only way to give the type methods:
 
 <GhulExample name="definitions-43" />
 
@@ -153,7 +159,7 @@ An `impl Trait for Type` block additionally makes the target implement a trait, 
 
 The target can be a qualified name, including a single union variant (`impl Printer for List.NIL`). The interface must be a trait, and the target a type declared in the same assembly; an imported type cannot be reopened.
 
-Every method or property accessor supplied to a union through a `partial` or `impl` block must be pure - proven store-free from its body, or declared so. One that stores draws an `impure-union-method` warning.
+Every method or property accessor that a `partial` or `impl` block adds to a union must be pure. Either the compiler must be able to prove from the body that the member does not write to the heap, or the member must be declared `pure`; one that writes and is not declared is reported with an `impure-union-method` warning.
 
 ## properties
 
@@ -163,7 +169,7 @@ A property consists of the property name followed by the property's type and, op
 
 Public properties with no getter or setter are automatically backed by a hidden field. Private properties with no getter or setter are implemented as a plain field.
 
-A property can take a postfix `stable` modifier: an assertion that two adjacent reads agree on presence and runtime type. [Type narrowing](/type-narrowing.html) depends on that when it narrows through a property getter, so a getter whose consistency the compiler cannot prove from its body - a memoiser filling its cache, say - has to declare it before code can narrow through the property:
+A property can take a postfix `stable` modifier. It addresses a problem specific to narrowing through a property: every read of the property calls the getter, so a narrowing like `if p.value? then ... p.value ...` is only sound if the second read agrees with the first. The compiler proves that from the getter's body where it can. Where it cannot - a getter that fills a cache, for example - declaring the property `stable` states the promise instead. The promise is narrow: two reads with nothing between them agree on whether the value is present, and on its runtime type. It does not say the value never changes - other code can still write to what the getter reads, and a call between two reads is judged the same way as for any other narrowing fact:
 
 <GhulExample name="definitions-48" />
 
@@ -177,19 +183,21 @@ Methods are syntactically the same as functions, except they are defined within 
 
 <GhulExample name="definitions-22" />
 
-A method or function can take a postfix `pure` modifier, which asserts that it only reads and never writes to the heap. The compiler proves this for most functions directly from their bodies, and a call whose callee is proven - or declared - store-free leaves every [type narrowing](/type-narrowing.html) fact alone. The modifier is the escape hatch for a body the proof cannot see through; it is trusted as stated, and every override of a pure member must itself be pure:
+A method or function can take a postfix `pure` modifier. It declares that the function does not write to the heap: it assigns no field, property, or array element of any object. The compiler proves this from the body for most functions without needing the modifier. The declaration matters to [type narrowing](/type-narrowing.html): a call can invalidate a narrowing, because the callee might assign the member the narrowing depends on, but a call to a pure function cannot, so narrowings survive it. The modifier exists for bodies the compiler cannot prove; it is trusted as declared, and every override of a pure member must itself be pure:
 
 <GhulExample name="definitions-45" />
 
-`pure` can also be written on a class, struct, or trait header. Every instance member of a pure type must then be proven store-free or declared pure, and one that stores draws an error naming it. The writes that have to exist are exempt: constructors assign fields by definition, and static members keep their own state.
+A `pure` declaration is trusted, not checked, and that is deliberate: a function can write to the heap and still reasonably declare itself `pure` when its writes are not observable to callers - filling a cache, or interning a value. The compiler does not track what a declared-pure function writes. If a write does turn out to be observable, narrowings are unsound across calls to the function: code can rely on a value being present, or having a type, that the write no longer supports, and no error or warning reports it. A property getter that fills a cache is not this case - its write is to the state its own answer comes from - so declare it `stable`, described under [properties](#properties), rather than `pure`.
 
-What a pure type does not allow is publishing a write. A public property's assign accessor is rejected, and so is a getter that stores through one, since from the outside that reads as a read. A bodiless member has an implicit `pure` declaration, so a trait declared pure holds everyone implementing it to the same rule.
+`pure` can also be written on a class, struct, or trait header. Every instance member of the type must then be pure: either the compiler must be able to prove from the member's own body that it assigns no field, property, or array element of any object - its own included - or the member must be declared `pure`. A member that writes and is not declared pure is reported as an error. Writes that are part of a type's normal operation are exempt: constructors assign fields, and static members can keep their own state.
+
+A pure type also cannot expose a write to its callers. Declaring a property `public` would make its assign accessor callable from outside, so it is rejected; a getter that writes through an assign accessor is rejected too, because a caller sees a getter as a read. A member declared with no body in a pure type is implicitly `pure`, so a pure trait holds every implementing type to the same rule.
 
 `pure` on a union is an error. Union members are held to purity through their `partial` and `impl` blocks regardless:
 
 <GhulExample name="definitions-52" />
 
-As with functions, methods should be named in `snake_case`
+As with functions, methods should be named in `snake_case`.
 
 ## operators
 
@@ -215,11 +223,11 @@ In ghūl methods named `init` are constructors. When an object is constructed us
 
 Constructors can be defined in classes and structs.
 
-A member whose type says it always holds a value has to be given one. A constructor that leaves such members unassigned on some path out draws one `field-definite-assignment` warning naming every member it missed, since the object it produces holds a value its type rules out:
+A member whose type is not optional has to be assigned before the constructor finishes. The compiler tracks which members each constructor definitely assigns, and reports a `field-definite-assignment` warning on a constructor that can finish with one or more of them unassigned, naming each one: the object it produces would hold null in a member whose type does not allow it:
 
 <GhulExample name="definitions-49" />
 
-A constructor counts what it assigns directly, and what the methods it calls on `self` assign in turn - though not a call reached on only one branch, or one a subclass could override. Members of optional and of value type are not checked: neither has an absence its type rules out. Suppress with `@suppress("field-definite-assignment")` per constructor or file, or project-wide.
+An assignment counts if it happens on every path through the constructor: either the constructor assigns the member itself, or it calls a method on `self` that does, and that call itself happens on every path. A method call that might not happen, or that a subclass could override, does not count, and neither does an assignment to another object's members. Optional members are allowed to be absent, and value-type members cannot hold null, so neither is checked. Suppress with `@suppress("field-definite-assignment")` on the constructor or the file, or project-wide.
 
 ### primary constructors
 
@@ -235,11 +243,11 @@ A trailing modifier on a primary parameter overrides the default visibility:
 - `_x: int` - private field, named `_x`.
 - `x: int init` - no field is generated; `x` is in scope only inside `init`.
 
-A body field or property declaration with a name matching the parameter (under the same `_x`/`x` rule) overrides auto-generation and receives the auto-init copy. This is also how to rename the underlying storage without using the modifier suffix:
+An explicit field or property declaration whose name matches a primary parameter, either exactly or as `_x` matching parameter `x`, replaces the auto-generated member; the constructor assigns the parameter's value to it. Declaring `_x;` for a parameter `x` is also how to give the underlying storage a different name without a modifier suffix:
 
 <GhulExample name="definitions-38" />
 
-A class with a primary header can also include a `super(...)` body declaration that forwards expressions to its superclass `init`, and secondary `init(.., extras)` overloads. The `..` splice expands to the primary parameters; an implicit chain to the primary `init` runs before the secondary's body:
+A class with a primary header can also include a `super(...)` body declaration that forwards expressions to its superclass `init`, and secondary `init(.., extras)` overloads. The `..` expands to the primary parameters, and a secondary constructor calls the primary `init` before running its own body:
 
 <GhulExample name="definitions-39" />
 
@@ -257,10 +265,10 @@ Namespaces are introduced with the `namespace` keyword followed by the namespace
 
 <GhulExample name="definitions-24" />
 
-Namespaces can be nested inside other namespaces
+Namespaces can be nested inside other namespaces:
 <GhulExample name="definitions-25" />
 
-A dotted namespace name is shorthand for nesting namespaces
+A dotted namespace name is shorthand for nesting namespaces:
 
 <GhulExample name="definitions-26" />
 
