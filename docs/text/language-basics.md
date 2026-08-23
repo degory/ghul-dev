@@ -33,7 +33,7 @@ The thing is: a hello
 ```
 
 ### expressions and statements
-Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, but only if statements can be used as expressions.
+Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, and most statements can be used as expressions - see [expression oriented programming](https://ghul.dev/expression-oriented-programming.html) for the forms working together.
 
 ```ghul
 …
@@ -323,6 +323,31 @@ let and_then =
 let or_else =
     index >= list.count \/ list[index] != search_value;
 ```
+
+### bitwise and shift operators
+
+The integer types have the usual bitwise operators - `&`, `|`, `^` - and the shift operators `<<` and `>>`. A shift count is an `int`, and the result keeps the left operand's type. The count is taken modulo the operand's width, following .NET: shifting an `int` by 32 is the same as shifting it by 0. `>>>` is the unsigned right shift: it shifts zeros into the leftmost bits where `>>` keeps the sign:
+
+```ghul
+…
+bitwise(a: int, b: int) is
+    write_line("{a & b} {a | b} {a ^ b}");
+
+    // shift counts are int, and '>>>' shifts zeros in
+    write_line("{1 << 4} {256 >> 3} {-16 >>> 2}")
+si
+
+bitwise(240, 60)
+```
+
+output:
+
+```
+48 252 204
+16 32 1073741820
+```
+
+There is no bitwise complement operator.
 
 ## assignment
 

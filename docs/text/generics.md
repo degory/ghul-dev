@@ -131,15 +131,69 @@ output:
 purr
 ```
 
-Only a single type bound per parameter is currently supported; `[T: A /\ B]` is rejected with a clear diagnostic.
+Several bounds can be joined with `/\`. The value then behaves as every one of them - a member of any bound is reachable - and the actual type argument has to satisfy each. The comma spelling declares separate type parameters and is not a way to write two bounds:
+
+```ghul
+…
+trait ▼ Named is
+    ◆▼ name: string;
+si
+
+trait ▼ Sized is
+    ◆▼ size: int;
+si
+
+class CRATE: Named, Sized is
+    ▲ name: string;
+    ▲ size: int;
+
+    init(name: string, size: int) is
+        self.name = name;
+        self.size = size;
+    si
+si
+
+// several bounds joined with '/\'
+label[T: Named /\ Sized](x: T) -> string =>
+    "{x.name} holds {x.size}";
+
+write_line(label(CRATE("bolts", 500)))
+```
+
+output:
+
+```
+bolts holds 500
+```
+
+### members of the bound itself
+
+The *static* members of a bound are reachable through the type parameter itself, written `T.member(...)`. This is how .NET's generic-math interfaces are used, and an operator declared as one of their static virtual members resolves as an ordinary operator once it has been imported by name with `use`:
+
+```ghul
+…
+// '+' resolves through the bound once it has been imported
+total[T: INumber[T]](a: T, b: T) -> T => a + b;
+
+write_line("{total(2, 3)} {total(1.5, 2.5)}")
+```
+
+output:
+
+```
+5 4
+```
+
+Without that `use` the operator is not in scope, so nothing changes for code that doesn't ask for it - and importing one does not displace the built-in operators either. Each operator imports from the interface that declares it, so the addition operator comes from `IAdditionOperators` and the unsigned right shift from `IShiftOperators`. Comparison and equality cannot be imported this way - a type says how it orders and compares by defining `<>` and `=~`.
 
 ### kind constraint
 
-A kind constraint requires the type argument to be a particular kind of type. Three keywords are recognised:
+A kind constraint requires the type argument to be a particular kind of type. Four keywords are recognised:
 
 - `class`: a reference type
 - `struct`: a value type
 - `optional`: an optional (nullable) type
+- `init`: a type exposing an accessible parameterless constructor
 
 ```ghul
 class CELL[T: struct] is
@@ -148,16 +202,16 @@ class CELL[T: struct] is
 si
 ```
 
-A kind constraint may combine with a type bound and/or a constructor constraint, in that order: `[T: A class new]`.
+Kinds combine with each other and with type bounds, space-separated: `[T: Named /\ Sized class init]`.
 
 ### constructor constraint
 
-The `new` constraint requires the type argument to expose an accessible parameterless constructor.
+The `init` constraint requires the type argument to expose an accessible parameterless constructor:
 
 ```ghul
 …
-// T: new requires the caller to pass a type with a parameterless constructor
-echo[T: new](x: T) -> T => x;
+// T: init requires the caller to pass a type with a parameterless constructor
+echo[T: init](x: T) -> T => x;
 
 class WIDGET() is
     describe() -> string => "a widget";
@@ -165,7 +219,7 @@ si
 
 let w = echo(WIDGET());   // OK: WIDGET has init()
 
-write_line(w.describe());
+write_line(w.describe())
 ```
 
 output:

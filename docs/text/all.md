@@ -457,7 +457,7 @@ signed in as guest
 
 - **functional programming**: first-class anonymous functions with closures, higher order functions, and non-mutating pipe operations over lists. Arrays, tuples, and list literals are immutable.
 
-- **expression-oriented**: `if`, `case`, and block forms are expressions.
+- **expression-oriented**: `if`, `if let`, `case`, loops, and block forms are expressions.
 
 - **pattern matching**: `if let` and `case`/`when` arms with type tests, destructuring with literal leaves, and value lists. `case` arms over a union, enum, `bool`, or closed class hierarchy are checked for exhaustiveness; open-domain scrutinees need `else`.
 
@@ -567,7 +567,7 @@ The thing is: a hello
 ```
 
 ### expressions and statements
-Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, but only if statements can be used as expressions.
+Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, and most statements can be used as expressions - see [expression oriented programming](https://ghul.dev/expression-oriented-programming.html) for the forms working together.
 
 ```ghul
 …
@@ -858,6 +858,31 @@ let or_else =
     index >= list.count \/ list[index] != search_value;
 ```
 
+### bitwise and shift operators
+
+The integer types have the usual bitwise operators - `&`, `|`, `^` - and the shift operators `<<` and `>>`. A shift count is an `int`, and the result keeps the left operand's type. The count is taken modulo the operand's width, following .NET: shifting an `int` by 32 is the same as shifting it by 0. `>>>` is the unsigned right shift: it shifts zeros into the leftmost bits where `>>` keeps the sign:
+
+```ghul
+…
+bitwise(a: int, b: int) is
+    write_line("{a & b} {a | b} {a ^ b}");
+
+    // shift counts are int, and '>>>' shifts zeros in
+    write_line("{1 << 4} {256 >> 3} {-16 >>> 2}")
+si
+
+bitwise(240, 60)
+```
+
+output:
+
+```
+48 252 204
+16 32 1073741820
+```
+
+There is no bitwise complement operator.
+
 ## assignment
 
 variables and properties can be updated via assignment statements
@@ -1020,6 +1045,8 @@ hello, stranger
 ```
 
 The `?.` operator reads a member only when the receiver is present: `a?.b` is `b` when `a` is present, otherwise the absent case. The result is always optional, and `?.` chains, so a whole access path folds down to one optional. Method calls compose the same way: `a?.foo(args)` calls `foo` on a present receiver and yields the absent case otherwise, with the argument expressions included in the short-circuit, so they are not evaluated when `a` is absent.
+
+The postfix `!` asserts presence and reads the value out; applied to an absent optional it throws. Inside a branch where flow analysis has proven presence, it draws a redundancy warning instead.
 
 ```ghul
 …
@@ -1323,24 +1350,68 @@ purr
 
 ## how long a narrow lasts
 
-A narrow on a path is less durable than one on a local variable. A local holds its value, which no other call can change, so its narrowing lasts until the variable is reassigned. A path reads a fresh value each time, so its narrowing lasts only while nothing can change what it reads: a call to a method or property that can write to the heap drops it, as does an assignment that can change the path. Copying the path into a local keeps the narrower type across a call that would otherwise drop it.
+A narrow on a local variable lasts until the variable is reassigned: a local holds one value, which no other function can reach, so no call can make it stale.
+
+A narrow on a member-access path is harder to keep, because the path reads a fresh value every time it is mentioned. A direct store ends it outright: assigning the field the fact describes through any receiver, storing through any field or property when the last hop is a property getter, or reassigning the path's root.
+
+Any other call that might write to the heap is recorded against the narrow rather than ending it. What gets checked is each later use of the value, and only a use that depends on the narrow. Passing the value where its declared type already fits depends on nothing; reading a member only the narrower view exposes does. When every recorded call is proven harmless the use passes silently. When one cannot be proven, the compiler reports it at the use site, names the call that could have changed the value, and points back at the test that narrowed it:
+
+```ghul
+…
+describe(carrier: CARRIER, other: Animal) is
+    if isa CAT( ► carrier.occupant) then
+        ◄ carrier.swap(other);
+        // swap() can change occupant, and the use below leans on
+        // the narrow - so it is reported here, naming the call
+        write_line(carrier.occupant.purr())
+    fi
+si
+
+describe(CARRIER(CAT()), CAT())
+```
+
+diagnostics:
+
+- error: cannot rely on the narrowing of 'carrier.occupant' here: the call to 'swap()' can change it [this call can change carrier.occupant: type-inference-22.ghul: 22,9..22,28] [help: test 'carrier.occupant' again, or copy it into a local variable before the call]
+
+There are two ways out. Test the value again: `?`, `!`, `?.`, `isa`, and `if let` all check at run time and re-establish what they test, whatever calls came before. Or copy the value into a local variable before the call, where no other function can reach it:
+
+```ghul
+…
+describe(carrier: CARRIER, other: Animal) is
+    // a local holds one value, which no other function can
+    // reach - its narrowing survives any call
+    let cat = carrier.occupant;
+
+    if isa CAT( ► cat) then
+        carrier.swap(other);
+        write_line(cat.purr())
+    fi
+si
+
+describe(CARRIER(CAT()), CAT())
+```
+
+output:
+
+```
+purr
+```
+
+Where proof succeeds there is nothing to report. This call only writes a field the narrow doesn't read through, so the compiler sees it leaves the narrow alone:
 
 ```ghul
 …
 describe(carrier: CARRIER) is
-    // handle() can write to the heap, so it would drop
-    // a narrow on carrier.occupant - copy the value into
-    // a local, whose type no other call can change
-    let occupant = carrier.occupant;
-
-    if isa CAT( ► occupant) then
+    if isa CAT( ► carrier.occupant) then
         carrier.handle();
-        // occupant is still a CAT after the call
-        write_line(occupant.purr());
+        // handle() writes only 'handled', so the compiler can
+        // see it leaves the narrow on occupant alone
+        write_line(carrier.occupant.purr())
     fi
 si
 
-describe(CARRIER(CAT()));
+describe(CARRIER(CAT()))
 ```
 
 output:
@@ -1406,9 +1477,11 @@ purr
 dog
 ```
 
-## purity
+## calls, purity, and stable
 
-ghūl decides which calls are safe by inferring purity. A method or property that only reads, never writing to the heap, is pure, and a call to a pure one preserves a path narrow - so a plain accessor that reads a field leaves it in place. The inference is automatic; a function the compiler can't prove pure can assert it with a postfix [`pure` modifier](https://ghul.dev/definitions.html#methods).
+What makes a call harmless is what it can write. The compiler infers this from bodies: a function proven store-free writes nothing already on the heap, and a call to one leaves every narrowing alone. Most functions are proven outright; where proof falls short, a postfix [`pure` modifier](https://ghul.dev/definitions.html#methods) declares store-freedom instead, trusted as stated and required of every override. Some imported .NET collection mutators, such as `LIST.add` and `STACK.push`, are trusted to store only in their own receiver, so they count as harmless unless the narrow reads through them.
+
+A narrow read through a property also depends on the getter answering the same way twice. When the compiler can't prove that of a getter - a memoiser stores into its cache on first read, say - any use that depends on the narrow draws a warning naming the getter. Declaring the property [`stable`](https://ghul.dev/definitions.html#properties) keeps the narrow: it asserts that two adjacent reads agree on presence and runtime type.
 
 
 ---
@@ -1619,7 +1692,11 @@ output:
 9
 ```
 
-`when` arms accept the same patterns as `if let` - a type test that binds and narrows (`c: CIRCLE`), destructuring, and literal leaves - so `case` is the exhaustive counterpart to `if let` rather than a different matching mechanism. See [the case statement](https://ghul.dev/control-flow.html#case-statement) for the full picture.
+`when` arms accept the same patterns as `if let`: a type test that binds and narrows (`c: CIRCLE`), destructuring with literal leaves and `~`-marked values that match rather than bind, and a trailing `/\` guard that falls through to the next arm on failure.
+
+Equality labels compare by value, the way `=~` compares: over a string scrutinee or any type defining the operator, matching is by content, and `when null` matches absence.
+
+So `case` is the exhaustive counterpart to `if let` rather than a different matching mechanism. See [the case statement](https://ghul.dev/control-flow.html#case-statement) for the full picture.
 
 
 ---
@@ -1682,6 +1759,35 @@ weekend
 weekday
 weekend
 ```
+
+## loops as expressions
+
+Every loop form yields too, at type `T?`: a `break` with a value produces it, and falling off the end - a false condition, an exhausted iterator - produces the absent value. A search over a sequence is then one expression, and a valued break can carry its result out of nested loops to the outermost one that consumes it:
+
+```ghul
+…
+// a valued break delivers to the nearest enclosing loop
+// that consumes a value, so it can cross the inner,
+// statement-form loop on its way out
+let rows = [[1, 2, 3], [4, 5, 6]];
+
+let first_even: int? =
+    for row in rows do
+        for cell in row do
+            if cell % 2 == 0 then break cell fi
+        od
+    od;
+
+write_line("{first_even ?? -1}")
+```
+
+output:
+
+```
+2
+```
+
+See [loops as expressions](https://ghul.dev/control-flow.html#loops-as-expressions) for the full rules.
 
 ## val blocks
 
@@ -2674,15 +2780,69 @@ output:
 purr
 ```
 
-Only a single type bound per parameter is currently supported; `[T: A /\ B]` is rejected with a clear diagnostic.
+Several bounds can be joined with `/\`. The value then behaves as every one of them - a member of any bound is reachable - and the actual type argument has to satisfy each. The comma spelling declares separate type parameters and is not a way to write two bounds:
+
+```ghul
+…
+trait ▼ Named is
+    ◆▼ name: string;
+si
+
+trait ▼ Sized is
+    ◆▼ size: int;
+si
+
+class CRATE: Named, Sized is
+    ▲ name: string;
+    ▲ size: int;
+
+    init(name: string, size: int) is
+        self.name = name;
+        self.size = size;
+    si
+si
+
+// several bounds joined with '/\'
+label[T: Named /\ Sized](x: T) -> string =>
+    "{x.name} holds {x.size}";
+
+write_line(label(CRATE("bolts", 500)))
+```
+
+output:
+
+```
+bolts holds 500
+```
+
+### members of the bound itself
+
+The *static* members of a bound are reachable through the type parameter itself, written `T.member(...)`. This is how .NET's generic-math interfaces are used, and an operator declared as one of their static virtual members resolves as an ordinary operator once it has been imported by name with `use`:
+
+```ghul
+…
+// '+' resolves through the bound once it has been imported
+total[T: INumber[T]](a: T, b: T) -> T => a + b;
+
+write_line("{total(2, 3)} {total(1.5, 2.5)}")
+```
+
+output:
+
+```
+5 4
+```
+
+Without that `use` the operator is not in scope, so nothing changes for code that doesn't ask for it - and importing one does not displace the built-in operators either. Each operator imports from the interface that declares it, so the addition operator comes from `IAdditionOperators` and the unsigned right shift from `IShiftOperators`. Comparison and equality cannot be imported this way - a type says how it orders and compares by defining `<>` and `=~`.
 
 ### kind constraint
 
-A kind constraint requires the type argument to be a particular kind of type. Three keywords are recognised:
+A kind constraint requires the type argument to be a particular kind of type. Four keywords are recognised:
 
 - `class`: a reference type
 - `struct`: a value type
 - `optional`: an optional (nullable) type
+- `init`: a type exposing an accessible parameterless constructor
 
 ```ghul
 class CELL[T: struct] is
@@ -2691,16 +2851,16 @@ class CELL[T: struct] is
 si
 ```
 
-A kind constraint may combine with a type bound and/or a constructor constraint, in that order: `[T: A class new]`.
+Kinds combine with each other and with type bounds, space-separated: `[T: Named /\ Sized class init]`.
 
 ### constructor constraint
 
-The `new` constraint requires the type argument to expose an accessible parameterless constructor.
+The `init` constraint requires the type argument to expose an accessible parameterless constructor:
 
 ```ghul
 …
-// T: new requires the caller to pass a type with a parameterless constructor
-echo[T: new](x: T) -> T => x;
+// T: init requires the caller to pass a type with a parameterless constructor
+echo[T: init](x: T) -> T => x;
 
 class WIDGET() is
     describe() -> string => "a widget";
@@ -2708,7 +2868,7 @@ si
 
 let w = echo(WIDGET());   // OK: WIDGET has init()
 
-write_line(w.describe());
+write_line(w.describe())
 ```
 
 output:
@@ -3352,6 +3512,30 @@ output:
 sorted: 1.9, 2.1
 1.0 < 1.1: True
 ```
+
+### conversions
+
+A .NET user-defined conversion operator (`op_Implicit` / `op_Explicit`) declared on either the source or the target type is reachable through `cast`:
+
+```ghul
+…
+// System.Half declares an explicit conversion from single, and an implicit one back
+conversions() is
+    let h = cast System.Half(1.5);
+    let f = cast single(h);
+
+    write_line("{h} {f}")
+si
+…
+```
+
+output:
+
+```
+1.5 1.5
+```
+
+`cast T(v)` calls the operator and lets it throw on failure. `cast T?(v)` never throws: a failed conversion becomes the absent value, and any other exception still propagates.
 
 ### disposal
 
@@ -4009,7 +4193,7 @@ reverse() -> Pipe[T] pure;
 
 ### sort
 
-Yields the source's elements in order. The first form uses the element type's own ordering; the other two take an `IComparer[T]` or a comparison function returning negative, zero or positive.
+Yields the source's elements in order. The first form uses the element type's own ordering: sorting without a comparer needs an element type that defines `<>`, or is comparable on the .NET side. The other two forms take an `IComparer[T]` or a comparison function returning negative, zero or positive.
 
 ```ghul
 sort[T](source: Iterable[T]) -> Pipe[T] pure;
@@ -4952,6 +5136,30 @@ Arguments consist of a name followed by a type. The type is mandatory as the com
 do_something(what: string, why: string, to: int);
 ```
 
+A formal argument can also be a tuple-destructure pattern in its own parentheses: still one parameter, at the written tuple type, unpacked into its names on entry. Named functions, anonymous functions, asynchronous functions and generators all take them; the aggregate type can be any positionally-destructurable type:
+
+```ghul
+…
+// one parameter at the tuple type, unpacked into a and b
+add_pair((a: int, b: int): (int, int)) -> int => a + b;
+
+write_line(add_pair((3, 4)));
+
+// anonymous functions take the same form, element types
+// inferred from the sequence
+let pairs = [(1, 2), (3, 4)];
+let total = pairs | .map(((a, b)) => a + b) | .reduce(0, (acc, x) => acc + x);
+
+write_line("{total}")
+```
+
+output:
+
+```
+7
+10
+```
+
 ## types
 
 ### classes
@@ -5089,6 +5297,8 @@ A class override can call the trait's default with `super.method()`.
 
 Traits can only be defined at global scope. Trait methods and properties can be abstract or have a default implementation. Trait names should be in `PascalCase`.
 
+Like a class, a trait is closed to other assemblies unless it has the postfix `open` modifier. A closed trait can be implemented and derived from only within the assembly that declares it; `open` opts in to cross-assembly extension. Inside the declaring assembly nothing changes.
+
 ### unions
 
 A union consists of a name and then a union body, which contains one or more variants. Each variant has a name, and then an optional list of fields:
@@ -5195,6 +5405,8 @@ si
 
 Enums can only be defined at global scope. An enum type name should be in `PascalCase`, and its members in `MACRO_CASE`
 
+Enum values compare for equality and order: `=~` and `==` compare by the underlying integer, and `<`, `<=`, `>` and `>=` order by it. `=~` on an optional enum is not supported; narrow the value first. An individual member can be imported by name - `use Some.Namespace.Suit.HEARTS;` - as well as reached through the type.
+
 ### partial and impl blocks
 
 Members can be added to a class, struct, or union already declared in the same assembly from a separate block, even in another file. The added members are ordinary members of the target, with the same private access and virtual dispatch as members written in its own body. A `partial` block names the type and adds to it; for a union, whose body holds only variants, it is the only way to give the type methods:
@@ -5252,6 +5464,8 @@ output:
 
 The target can be a qualified name, including a single union variant (`impl Printer for List.NIL`). The interface must be a trait, and the target a type declared in the same assembly; an imported type cannot be reopened.
 
+Every method or property accessor supplied to a union through a `partial` or `impl` block must be pure - proven store-free from its body, or declared so. One that stores draws an `impure-union-method` warning.
+
 ## properties
 
 A property consists of the property name followed by the property's type and, optionally, bodies for getter and setter methods.
@@ -5275,6 +5489,38 @@ si
 
 Public properties with no getter or setter are automatically backed by a hidden field. Private properties with no getter or setter are implemented as a plain field.
 
+A property can take a postfix `stable` modifier: an assertion that two adjacent reads agree on presence and runtime type. [Type narrowing](https://ghul.dev/type-narrowing.html) depends on that when it narrows through a property getter, so a getter whose consistency the compiler cannot prove from its body - a memoiser filling its cache, say - has to declare it before code can narrow through the property:
+
+```ghul
+…
+// a memoising getter stores, so it is not provably
+// stable - declare it with postfix stable instead
+summary: string? stable is
+    if ► _summary? then
+        return _summary;
+    fi
+    ► _summary = "nothing to report";
+    return _summary;
+si
+
+init() is si
+
+describe() is
+    if ► summary? then
+        write_line(summary)
+    fi
+si
+…
+```
+
+output:
+
+```
+nothing to report
+```
+
+`stable` is a contract like `pure`: every override must itself be stable, declared or proven from its body.
+
 Properties can be defined globally and within classes, structs and traits. Property names should be in `snake_case`.
 
 ## methods
@@ -5289,7 +5535,7 @@ class SCALER is
 si
 ```
 
-A method or function can take a postfix `pure` modifier, which asserts that it only reads and never writes to the heap. The compiler already infers this for many functions; the modifier states it for one the compiler can't prove, and then callers keep [type narrowing](https://ghul.dev/type-narrowing.html) facts across a call to it. Every override of a pure member must itself be pure:
+A method or function can take a postfix `pure` modifier, which asserts that it only reads and never writes to the heap. The compiler proves this for most functions directly from their bodies, and a call whose callee is proven - or declared - store-free leaves every [type narrowing](https://ghul.dev/type-narrowing.html) fact alone. The modifier is the escape hatch for a body the proof cannot see through; it is trusted as stated, and every override of a pure member must itself be pure:
 
 ```ghul
 …
@@ -5302,6 +5548,40 @@ output:
 
 ```
 42
+```
+
+`pure` can also be written on a class, struct, or trait header. Every instance member of a pure type must then be proven store-free or declared pure, and one that stores draws an error naming it. The writes that have to exist are exempt: constructors assign fields by definition, and static members keep their own state.
+
+What a pure type does not allow is publishing a write. A public property's assign accessor is rejected, and so is a getter that stores through one, since from the outside that reads as a read. A bodiless member has an implicit `pure` declaration, so a trait declared pure holds everyone implementing it to the same rule.
+
+`pure` on a union is an error. Union members are held to purity through their `partial` and `impl` blocks regardless:
+
+```ghul
+…
+// every instance member of a pure type must read and never
+// write; a bodiless member holds implementors to the same rule
+trait ▼ NAMED pure is
+    ◆▼ name: string;
+    ◆▼ label() -> string;
+si
+
+class USER: NAMED is
+    ▲ name: string;
+
+    init(name: string) is
+        self.name = name
+    si
+
+    ▲ label() -> string => "<{name}>";
+si
+
+write_line(USER("ada").label())
+```
+
+output:
+
+```
+<ada>
 ```
 
 As with functions, methods should be named in `snake_case`
@@ -5376,6 +5656,26 @@ let d = COUNTER(50);
 
 Constructors can be defined in classes and structs.
 
+A member whose type says it always holds a value has to be given one. A constructor that leaves such members unassigned on some path out draws one `field-definite-assignment` warning naming every member it missed, since the object it produces holds a value its type rules out:
+
+```ghul
+…
+class LABEL is
+    text: string;
+    size: int;
+
+    init(size: int) is
+        self.size = size    // text is never assigned
+    si
+si
+```
+
+diagnostics:
+
+- warning: [field-definite-assignment] text is not assigned on every path out of this constructor [text declared here: definitions-49.ghul: 4,5..4,9]
+
+A constructor counts what it assigns directly, and what the methods it calls on `self` assign in turn - though not a call reached on only one branch, or one a subclass could override. Members of optional and of value type are not checked: neither has an absence its type rules out. Suppress with `@suppress("field-definite-assignment")` per constructor or file, or project-wide.
+
 ### primary constructors
 
 When the constructor only assigns its arguments to same-named fields, the class or struct header can declare those parameters directly. The compiler synthesises the matching `init` and a same-named field or property for each parameter:
@@ -5400,6 +5700,7 @@ alice is 30 years old
 A trailing modifier on a primary parameter overrides the default visibility:
 
 - `x: int public` - public read and write.
+- `x: int protected` - readable from the declaring class and its subclasses.
 - `x: int field` - plain field rather than the default auto-property.
 - `_x: int` - private field, named `_x`.
 - `x: int init` - no field is generated; `x` is in scope only inside `init`.
@@ -6008,11 +6309,31 @@ let point = POINT(10, 20);
 
 ## type cast
 
-Type cast expressions allow you to explicitly convert a value from one type to another using the `cast` keyword.
+A type cast converts a value from one type to another explicitly, using the `cast` keyword. Scalar conversions, casts between unrelated reference types, and .NET user-defined conversion operators all go through it:
 
 ```ghul
 let integer_value = cast int(3.14);
 ```
+
+The target type can be left out when the surrounding expression already determines it. `cast(v)` converts `v` to whatever type the position it sits in calls for - a typed `let` initializer, an assignment, a `return` or `=>` body, a call argument's formal, an operator's other operand, an index:
+
+```ghul
+…
+average(count: int, total: single) -> single =>
+    total / cast(count);   // cast(v) takes its type from the formal
+
+write_line("{average(4, 10.0)}")
+```
+
+output:
+
+```
+2.5
+```
+
+`cast(v)` is rejected where the position supplies no type at all, or where more than one overload or operator would accept it.
+
+A cast written with an optional target yields rather than throwing: `cast T?(x)` is the absent value when `x` is not a `T`, which is the form [`if let`](https://ghul.dev/control-flow.html#if-let) builds on. Without the `?` the cast is checked: a failed one raises `System.InvalidCastException` at the point of the cast, and a `cast-may-throw` warning says so at the site.
 
 ## default value (`_`)
 
@@ -6263,11 +6584,11 @@ list has a few elements
 
 ### type narrowing
 
-An `if` condition that proves something stronger about a value - an `isa` test on a class or union variant, a `?` presence test on an optional - narrows the value to the stronger type inside the branch, and a guard that leaves the block narrows the code after it. [Type narrowing](https://ghul.dev/type-narrowing.html) covers this in full: locals, parameters, member-access paths, how long each narrow lasts, and the purity inference behind it.
+An `if` condition that proves something stronger about a value - an `isa` test on a class or union variant, a `?` presence test on an optional - narrows the value to the stronger type inside the branch, and a guard that leaves the block narrows the code after it. [Type narrowing](https://ghul.dev/type-narrowing.html) covers this in full: locals, parameters, member-access paths, and what happens to a narrow across assignments and calls.
 
 ### if let
 
-`cast T?(x)` views `x` as type `T`, and yields null (rather than throwing) when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test:
+`cast T?(x)` views `x` as type `T`, and yields the absent value (rather than throwing) when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test. Written without the `?`, the cast is checked instead: a value that is not a `T` raises `System.InvalidCastException` there, and a `cast-may-throw` warning says so at the site. See [type cast](https://ghul.dev/expressions.html#type-cast) for the rest of the cast surface.
 
 ```ghul
 …
@@ -6374,6 +6695,30 @@ friendly cat: Tom
 ```
 
 Several comma-separated clauses can appear in one `if let`; every clause's test and any guard must pass, and later clauses see the variables the earlier ones introduced, as in `if let outer = holder, inner = outer.value then`. A destructure leaf can also be a literal - an integer, string, character, boolean, `null`, or a qualified enum member - which adds an equality test at that position rather than introducing a variable, so `if let (1, name) = pair then` matches only when the first element is 1. Literal leaves are allowed only in refutable positions like `if let` and `case`.
+
+A leaf can instead match against a value that already exists: prefixing a name with `~` tests the source position for equality with that value rather than declaring a new variable. The marked value is read where the pattern is, so it can be anything equality can compare - a parameter, a local variable, a field:
+
+```ghul
+…
+let rows = [("apples", 3), ("pears", 1), ("plums", 0)];
+let wanted = "pears";
+
+for row in rows do
+    // ~wanted matches where the first element equals the
+    // value wanted already holds; count binds as usual
+    if let (~wanted, count) = row then
+        write_line("found {count} {wanted}")
+    fi
+od
+```
+
+output:
+
+```
+found 1 pears
+```
+
+As with literal leaves, the comparison is the one `=~` would make, so strings match by content. A leading `~` is rejected where a leaf can only bind - a formal argument or an anonymous function's parameter list.
 
 When the tested value is a member path and the local should take the path's last name, the `name =` can be dropped: `if let order.customer` introduces `customer` holding `order.customer` and enters the branch when it is present, and `if let zoo.pet: CAT` does the same with a type test. A trailing `?` on the presence form (`if let order.customer?`) is accepted but not required.
 
@@ -6672,6 +7017,60 @@ output:
 This loop will run indefinitely until counter reaches 5, at which point the break statement terminates the loop.
 
 
+## loops as expressions
+
+Every loop form is also an expression of optional type `T?`: a `break` with a value exits the loop producing that value, and falling off the end - a false condition, an exhausted iterator - produces the absent value. The loop's type is the least upper bound of its valued breaks, wrapped in `?`; a bare `break` and `break null` yield absence exactly as falling off the end does:
+
+```ghul
+…
+// every loop form is an expression of optional type T?:
+// a valued break yields, falling off the end yields absence
+let hit: int? = for x in [4, 9, 2, 7] do
+    if x > 5 then break x fi
+od;
+
+let miss: int? = for x in [1, 3] do
+    if x > 50 then break x fi
+od;
+
+write_line("{hit ?? -1} {miss ?? -1}")
+```
+
+output:
+
+```
+9 -1
+```
+
+When the context already expects an optional - a typed `let`, a call argument, a return - the loop's element type comes from it.
+
+A valued break delivers to the nearest enclosing loop *that consumes a value*, so it can carry a result out of several nested loops at once: the inner loop below is an ordinary statement, and the break crosses it on the way out:
+
+```ghul
+…
+// a valued break delivers to the nearest enclosing loop
+// that consumes a value, so it can cross the inner,
+// statement-form loop on its way out
+let rows = [[1, 2, 3], [4, 5, 6]];
+
+let first_even: int? =
+    for row in rows do
+        for cell in row do
+            if cell % 2 == 0 then break cell fi
+        od
+    od;
+
+write_line("{first_even ?? -1}")
+```
+
+output:
+
+```
+2
+```
+
+A valued break with no consuming loop anywhere around it is a compile error, the same as returning a value from a void function.
+
 ## case statement
 
 `case` branches on a scrutinee value. Each `when` arm is introduced by `then`, an optional `else` catches the rest, and the construct closes with `esac`. There is no fall-through, and a `when` can list several values matched by equality:
@@ -6731,6 +7130,24 @@ unlucky
 less than -1 or more than nine
 ```
 
+Equality labels match by value, the way `=~` compares: a string scrutinee matches its labels by content rather than by identity, as does any type that defines the operator:
+
+```ghul
+…
+// labels match by content, the way '=~' compares
+write_line(respond("help"));
+write_line(respond("run"))
+```
+
+output:
+
+```
+commands: help, quit
+unknown command
+```
+
+A `when null` label matches absence - for reference types, value types, and unconstrained generics alike.
+
 `case` is also an expression: each arm's last expression is the arm's value, and the `case` evaluates to whichever arm matched:
 
 ```ghul
@@ -6752,7 +7169,7 @@ server error
 
 ### pattern arms
 
-A `when` arm can take a pattern instead of an equality list, mirroring [`if let`](#if-let): `when v: T then` type-tests and introduces the variable, `when (a, b) then` destructures, and `when _: T then` type-tests without introducing one. A bare identifier stays an equality test - `when v then` compares against the value of `v` in scope and introduces no new local:
+A `when` arm can take a pattern instead of an equality list, mirroring [`if let`](#if-let): `when v: T then` type-tests and introduces the variable, `when (a, b) then` destructures, and `when _: T then` type-tests without introducing one. A bare identifier stays an equality test - `when v then` compares against the value of `v` in scope and introduces no new local. A pattern arm can take a trailing `/\` guard; the names the pattern introduces are in scope in the guard and the arm body, and a failing guard falls through to the next arm as though the pattern hadn't matched:
 
 ```ghul
 …
@@ -6769,6 +7186,8 @@ output:
 ```
 meow
 ```
+
+Narrowing works like `if let`'s: an arm's type test narrows the scrutinee within its body, and so does a test made by the arm's own guard. Arm narrowing is local - nothing an arm proves reaches a sibling arm or the code after the `case`.
 
 ### exhaustiveness
 
@@ -7352,7 +7771,7 @@ StorageClass   ::= "static" | "field"
 TypeModifier   ::= "abstract" | "open"
 ```
 
-`abstract` and `open` are postfix modifiers on a class (`abstract` bars direct construction, `open` allows cross-assembly subclassing). `pure` is a postfix modifier on a function or method asserting that it only reads and never writes to the heap.
+`abstract` and `open` are postfix modifiers on a class (`abstract` bars direct construction, `open` allows cross-assembly subclassing). `pure` is a postfix modifier asserting store-freedom - only reads, never writes to the heap - accepted on a function or method, on a function type, and on a class, struct or trait header (requiring every instance member to be pure). `stable` is a postfix modifier on a property asserting that two adjacent reads agree on presence and runtime type.
 
 ### pragmas
 
@@ -7638,7 +8057,7 @@ the following levels, **tightest first**:
 | user&#8209;6     | *(user-defined)*                            |
 | bitwise          | `&` `\|` `¦` `^` `∩` `∪`                     |
 | user&#8209;5     | *(user-defined, default)*                   |
-| shift            | `<<`  `>>`                                  |
+| shift            | `<<`  `>>`  `>>>`                            |
 | user&#8209;4     | *(user-defined)*                            |
 | range            | `..`  `::`                                  |
 | user&#8209;3     | *(user-defined)*                            |
@@ -7693,11 +8112,7 @@ Very occasionally, if you have an error in your code and you make an edit that c
 
 ## limitations of generics
 
-ghūl supports generics on classes, structs, traits, methods, unions and global functions, with type-parameter constraints (type bound, kind, `new`) and declared variance on traits. A few limitations remain.
-
-### only a single type bound per parameter
-
-The parser accepts `[T: A]` (a single type bound) and `[T: A class new]` (a bound combined with kind and constructor constraints). Multiple type bounds (`[T: A /\ B]`) are not yet supported and are rejected with a clear diagnostic.
+ghūl supports generics on classes, structs, traits, methods, unions and global functions, with type-parameter constraints (type bounds joined with `/\`, kinds including `init`) and declared variance on traits. A few limitations remain.
 
 ### variance is declared only on traits
 

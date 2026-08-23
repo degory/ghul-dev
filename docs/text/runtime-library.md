@@ -504,7 +504,7 @@ reverse() -> Pipe[T] pure;
 
 ### sort
 
-Yields the source's elements in order. The first form uses the element type's own ordering; the other two take an `IComparer[T]` or a comparison function returning negative, zero or positive.
+Yields the source's elements in order. The first form uses the element type's own ordering: sorting without a comparer needs an element type that defines `<>`, or is comparable on the .NET side. The other two forms take an `IComparer[T]` or a comparison function returning negative, zero or positive.
 
 ```ghul
 sort[T](source: Iterable[T]) -> Pipe[T] pure;

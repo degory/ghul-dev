@@ -55,6 +55,35 @@ weekday
 weekend
 ```
 
+## loops as expressions
+
+Every loop form yields too, at type `T?`: a `break` with a value produces it, and falling off the end - a false condition, an exhausted iterator - produces the absent value. A search over a sequence is then one expression, and a valued break can carry its result out of nested loops to the outermost one that consumes it:
+
+```ghul
+…
+// a valued break delivers to the nearest enclosing loop
+// that consumes a value, so it can cross the inner,
+// statement-form loop on its way out
+let rows = [[1, 2, 3], [4, 5, 6]];
+
+let first_even: int? =
+    for row in rows do
+        for cell in row do
+            if cell % 2 == 0 then break cell fi
+        od
+    od;
+
+write_line("{first_even ?? -1}")
+```
+
+output:
+
+```
+2
+```
+
+See [loops as expressions](https://ghul.dev/control-flow.html#loops-as-expressions) for the full rules.
+
 ## val blocks
 
 A `val ... lav` block runs a sequence of statements and yields a value: its tail expression, or any `return` that targets the block. It gives an expression room for intermediate local variables, loops, and early exits:

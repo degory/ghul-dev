@@ -144,6 +144,30 @@ sorted: 1.9, 2.1
 1.0 < 1.1: True
 ```
 
+### conversions
+
+A .NET user-defined conversion operator (`op_Implicit` / `op_Explicit`) declared on either the source or the target type is reachable through `cast`:
+
+```ghul
+…
+// System.Half declares an explicit conversion from single, and an implicit one back
+conversions() is
+    let h = cast System.Half(1.5);
+    let f = cast single(h);
+
+    write_line("{h} {f}")
+si
+…
+```
+
+output:
+
+```
+1.5 1.5
+```
+
+`cast T(v)` calls the operator and lets it throw on failure. `cast T?(v)` never throws: a failed conversion becomes the absent value, and any other exception still propagates.
+
 ### disposal
 
 A type holding something that has to be released implements `Ghul.Disposable`, which is .NET's `IDisposable`, by defining `dispose`. `let use` then releases it at the end of the enclosing block, however the block is left:

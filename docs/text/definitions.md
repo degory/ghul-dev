@@ -69,6 +69,30 @@ Arguments consist of a name followed by a type. The type is mandatory as the com
 do_something(what: string, why: string, to: int);
 ```
 
+A formal argument can also be a tuple-destructure pattern in its own parentheses: still one parameter, at the written tuple type, unpacked into its names on entry. Named functions, anonymous functions, asynchronous functions and generators all take them; the aggregate type can be any positionally-destructurable type:
+
+```ghul
+…
+// one parameter at the tuple type, unpacked into a and b
+add_pair((a: int, b: int): (int, int)) -> int => a + b;
+
+write_line(add_pair((3, 4)));
+
+// anonymous functions take the same form, element types
+// inferred from the sequence
+let pairs = [(1, 2), (3, 4)];
+let total = pairs | .map(((a, b)) => a + b) | .reduce(0, (acc, x) => acc + x);
+
+write_line("{total}")
+```
+
+output:
+
+```
+7
+10
+```
+
 ## types
 
 ### classes
@@ -206,6 +230,8 @@ A class override can call the trait's default with `super.method()`.
 
 Traits can only be defined at global scope. Trait methods and properties can be abstract or have a default implementation. Trait names should be in `PascalCase`.
 
+Like a class, a trait is closed to other assemblies unless it has the postfix `open` modifier. A closed trait can be implemented and derived from only within the assembly that declares it; `open` opts in to cross-assembly extension. Inside the declaring assembly nothing changes.
+
 ### unions
 
 A union consists of a name and then a union body, which contains one or more variants. Each variant has a name, and then an optional list of fields:
@@ -312,6 +338,8 @@ si
 
 Enums can only be defined at global scope. An enum type name should be in `PascalCase`, and its members in `MACRO_CASE`
 
+Enum values compare for equality and order: `=~` and `==` compare by the underlying integer, and `<`, `<=`, `>` and `>=` order by it. `=~` on an optional enum is not supported; narrow the value first. An individual member can be imported by name - `use Some.Namespace.Suit.HEARTS;` - as well as reached through the type.
+
 ### partial and impl blocks
 
 Members can be added to a class, struct, or union already declared in the same assembly from a separate block, even in another file. The added members are ordinary members of the target, with the same private access and virtual dispatch as members written in its own body. A `partial` block names the type and adds to it; for a union, whose body holds only variants, it is the only way to give the type methods:
@@ -369,6 +397,8 @@ output:
 
 The target can be a qualified name, including a single union variant (`impl Printer for List.NIL`). The interface must be a trait, and the target a type declared in the same assembly; an imported type cannot be reopened.
 
+Every method or property accessor supplied to a union through a `partial` or `impl` block must be pure - proven store-free from its body, or declared so. One that stores draws an `impure-union-method` warning.
+
 ## properties
 
 A property consists of the property name followed by the property's type and, optionally, bodies for getter and setter methods.
@@ -392,6 +422,38 @@ si
 
 Public properties with no getter or setter are automatically backed by a hidden field. Private properties with no getter or setter are implemented as a plain field.
 
+A property can take a postfix `stable` modifier: an assertion that two adjacent reads agree on presence and runtime type. [Type narrowing](https://ghul.dev/type-narrowing.html) depends on that when it narrows through a property getter, so a getter whose consistency the compiler cannot prove from its body - a memoiser filling its cache, say - has to declare it before code can narrow through the property:
+
+```ghul
+…
+// a memoising getter stores, so it is not provably
+// stable - declare it with postfix stable instead
+summary: string? stable is
+    if ► _summary? then
+        return _summary;
+    fi
+    ► _summary = "nothing to report";
+    return _summary;
+si
+
+init() is si
+
+describe() is
+    if ► summary? then
+        write_line(summary)
+    fi
+si
+…
+```
+
+output:
+
+```
+nothing to report
+```
+
+`stable` is a contract like `pure`: every override must itself be stable, declared or proven from its body.
+
 Properties can be defined globally and within classes, structs and traits. Property names should be in `snake_case`.
 
 ## methods
@@ -406,7 +468,7 @@ class SCALER is
 si
 ```
 
-A method or function can take a postfix `pure` modifier, which asserts that it only reads and never writes to the heap. The compiler already infers this for many functions; the modifier states it for one the compiler can't prove, and then callers keep [type narrowing](https://ghul.dev/type-narrowing.html) facts across a call to it. Every override of a pure member must itself be pure:
+A method or function can take a postfix `pure` modifier, which asserts that it only reads and never writes to the heap. The compiler proves this for most functions directly from their bodies, and a call whose callee is proven - or declared - store-free leaves every [type narrowing](https://ghul.dev/type-narrowing.html) fact alone. The modifier is the escape hatch for a body the proof cannot see through; it is trusted as stated, and every override of a pure member must itself be pure:
 
 ```ghul
 …
@@ -419,6 +481,40 @@ output:
 
 ```
 42
+```
+
+`pure` can also be written on a class, struct, or trait header. Every instance member of a pure type must then be proven store-free or declared pure, and one that stores draws an error naming it. The writes that have to exist are exempt: constructors assign fields by definition, and static members keep their own state.
+
+What a pure type does not allow is publishing a write. A public property's assign accessor is rejected, and so is a getter that stores through one, since from the outside that reads as a read. A bodiless member has an implicit `pure` declaration, so a trait declared pure holds everyone implementing it to the same rule.
+
+`pure` on a union is an error. Union members are held to purity through their `partial` and `impl` blocks regardless:
+
+```ghul
+…
+// every instance member of a pure type must read and never
+// write; a bodiless member holds implementors to the same rule
+trait ▼ NAMED pure is
+    ◆▼ name: string;
+    ◆▼ label() -> string;
+si
+
+class USER: NAMED is
+    ▲ name: string;
+
+    init(name: string) is
+        self.name = name
+    si
+
+    ▲ label() -> string => "<{name}>";
+si
+
+write_line(USER("ada").label())
+```
+
+output:
+
+```
+<ada>
 ```
 
 As with functions, methods should be named in `snake_case`
@@ -493,6 +589,26 @@ let d = COUNTER(50);
 
 Constructors can be defined in classes and structs.
 
+A member whose type says it always holds a value has to be given one. A constructor that leaves such members unassigned on some path out draws one `field-definite-assignment` warning naming every member it missed, since the object it produces holds a value its type rules out:
+
+```ghul
+…
+class LABEL is
+    text: string;
+    size: int;
+
+    init(size: int) is
+        self.size = size    // text is never assigned
+    si
+si
+```
+
+diagnostics:
+
+- warning: [field-definite-assignment] text is not assigned on every path out of this constructor [text declared here: definitions-49.ghul: 4,5..4,9]
+
+A constructor counts what it assigns directly, and what the methods it calls on `self` assign in turn - though not a call reached on only one branch, or one a subclass could override. Members of optional and of value type are not checked: neither has an absence its type rules out. Suppress with `@suppress("field-definite-assignment")` per constructor or file, or project-wide.
+
 ### primary constructors
 
 When the constructor only assigns its arguments to same-named fields, the class or struct header can declare those parameters directly. The compiler synthesises the matching `init` and a same-named field or property for each parameter:
@@ -517,6 +633,7 @@ alice is 30 years old
 A trailing modifier on a primary parameter overrides the default visibility:
 
 - `x: int public` - public read and write.
+- `x: int protected` - readable from the declaring class and its subclasses.
 - `x: int field` - plain field rather than the default auto-property.
 - `_x: int` - private field, named `_x`.
 - `x: int init` - no field is generated; `x` is in scope only inside `init`.
