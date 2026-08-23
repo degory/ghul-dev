@@ -1,7 +1,6 @@
 use IO.Std.write_line;
 
 // >>>
-// a generic type can hold a T? field before T is known
 class SLOT[T] is
     _stored: T?;
 
