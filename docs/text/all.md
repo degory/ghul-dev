@@ -14,25 +14,24 @@ only things dropped.
 
 - [overview](#index) - https://ghul.dev/
 - [getting started](#getting-started) - https://ghul.dev/getting-started
-- [language basics](#language-basics) - https://ghul.dev/language-basics
-- [optional types](#optional-types) - https://ghul.dev/optional-types
-- [unions and pattern matching](#unions-and-pattern-matching) - https://ghul.dev/unions-and-pattern-matching
-- [type narrowing](#type-narrowing) - https://ghul.dev/type-narrowing
 - [expression oriented programming](#expression-oriented-programming) - https://ghul.dev/expression-oriented-programming
 - [functional programming](#functional-programming) - https://ghul.dev/functional-programming
 - [object oriented programming](#object-oriented-programming) - https://ghul.dev/object-oriented-programming
+- [unions and pattern matching](#unions-and-pattern-matching) - https://ghul.dev/unions-and-pattern-matching
 - [generics](#generics) - https://ghul.dev/generics
-- [type inference](#type-inference) - https://ghul.dev/type-inference
+- [optional types and narrowing](#optionals-and-narrowing) - https://ghul.dev/optionals-and-narrowing
 - [async and generators](#async-and-generators) - https://ghul.dev/async-and-generators
 - [.NET integration](#dotnet-integration) - https://ghul.dev/dotnet-integration
 - [runtime library](#runtime-library) - https://ghul.dev/runtime-library
 - [tooling](#tooling) - https://ghul.dev/tooling
+- [language basics](#language-basics) - https://ghul.dev/language-basics
 - [syntax](#syntax) - https://ghul.dev/syntax
 - [definitions](#definitions) - https://ghul.dev/definitions
 - [expressions](#expressions) - https://ghul.dev/expressions
 - [control flow](#control-flow) - https://ghul.dev/control-flow
-- [optional types in depth](#optional-types-in-depth) - https://ghul.dev/optional-types-in-depth
-- [narrowing in depth](#narrowing-in-depth) - https://ghul.dev/narrowing-in-depth
+- [optional types](#optional-types) - https://ghul.dev/optional-types
+- [type narrowing](#type-narrowing) - https://ghul.dev/type-narrowing
+- [type inference](#type-inference) - https://ghul.dev/type-inference
 - [grammar](#grammar) - https://ghul.dev/grammar
 - [known issues](#known-issues) - https://ghul.dev/known-issues
 - [implementation](#implementation) - https://ghul.dev/implementation
@@ -48,15 +47,7 @@ only things dropped.
 
 <img class="ghul-logo" src="/ghul-logo-draft.png" alt="ghūl programming language logo" />
 
-> - The ghūl language, compiler, tools, and this website are all very much a **work-in-progress**.
-> - Whatever the [ghūl compiler](https://github.com/degory/ghul) accepts is currently the definitive ghūl language reference.
-> - ghūl is pronounced 'ghoul'.
-
-## why ghūl?
-
-Why not 🤔
-
-ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment with programming language design. Apart from a slightly quirky syntax, ghūl is a fairly conventional programming language. Although ghūl is a hobby project maintained by a single person, its goal is to be sufficiently expressive for general-purpose development: the [ghūl compiler](https://github.com/degory/ghul) itself is written in ghūl.
+ghūl (pronounced 'ghoul') is a statically typed, general-purpose programming language that compiles to .NET 10. It produces ordinary .NET assemblies and NuGet packages, and ghūl code can call any .NET library. The [ghūl compiler](https://github.com/degory/ghul) is written in ghūl - about 120,000 lines of it - and compiles itself.
 
 ## examples
 
@@ -66,17 +57,7 @@ ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment
 >
 > Nothing you edit is saved. To keep something, paste it into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul`: a one-file project that opens in a GitHub Codespace with the compiler ready, or that you can clone on your own machine. For a project of your own, start from the [repository template](https://github.com/degory/ghul-repository-template).
 
-### hello world!
-
-```ghul
-IO.Std.write_line("hello, world");
-```
-
-output:
-
-```
-hello, world
-```
+Each of these is a complete program:
 
 **fibonacci: streams + `|>`**
 
@@ -455,6 +436,20 @@ found: alice
 signed in as guest
 ```
 
+So is this one:
+
+```ghul
+IO.Std.write_line("hello, world");
+```
+
+output:
+
+```
+hello, world
+```
+
+A file with no namespace runs its top-level statements as the program's entry point, so a program needs no other ceremony until it grows enough to want some.
+
 ## features
 
 - **functional programming**: first-class anonymous functions with closures, higher order functions, and non-mutating pipe operations over lists. Arrays, tuples, and list literals are immutable.
@@ -480,6 +475,14 @@ signed in as guest
 - **error handling**: `try`/`catch`/`finally` over .NET exceptions.
 
 - **type safety**: ghūl enforces type safety at compile-time.
+
+## why ghūl?
+
+Why not 🤔
+
+ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment with programming language design. Apart from a slightly quirky syntax, ghūl is a fairly conventional programming language. It is a hobby project maintained by a single person, but its goal is to be sufficiently expressive for general-purpose development, and the self-hosting compiler is the working test of that goal.
+
+The language, compiler, tools, and this website are all a **work-in-progress**: whatever the [ghūl compiler](https://github.com/degory/ghul) accepts is currently the definitive ghūl language reference.
 
 
 ---
@@ -528,1046 +531,6 @@ dotnet pack
 A ghūl project can reference NuGet packages, produce libraries or executables, and be packed and published exactly like a C# project.
 
 To start a project of your own - from a template, from the repository template, or from scratch - see [creating a project](https://ghul.dev/tooling.html#creating-a-project) on the tooling page.
-
-
----
-
-<a id="language-basics"></a>
-
-# language basics
-
-## syntax
-
-ghūl syntax is inspired by a number of non-brace languages, including ALGOL 68 and Pascal
-
-### identifiers and keywords
-
-Identifiers in ghūl follow the convention of `snake_case` for variables, functions, methods, and properties, `PascalCase` for namespaces, traits, abstract classes, unions, and enums, and `MACRO_CASE` for concrete classes, structs, variants, and enum members. ghūl keywords are lowercase.
-
-ghūl relies on keywords for block structure where other languages use braces or indentation. Keywords are context specific and generally come in pairs where the closing keyword is the reverse or mirror image of the opening keyword. In the examples below `is` introduces a method or class body and its block is closed by the reverse keyword `si`
-
-```ghul
-…
-let my_variable = 42;
-
-print_something(thing: string) is
-    write_line("The thing is: {thing}");
-si
-
-print_something("a hello");
-
-class PERSON is
-    name: string;
-    age: int;
-si
-```
-
-output:
-
-```
-The thing is: a hello
-```
-
-### expressions and statements
-Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, and most statements can be used as expressions. In a function or method body a trailing `;` on the last statement marks its value as discarded, so a body without one returns that statement's value - see [expression oriented programming](https://ghul.dev/expression-oriented-programming.html) for the forms working together.
-
-```ghul
-…
-// variable declaration statement
-let x = 10;
-
-// expression used as part of a declaration statement
-let y = x * 2;
-
-// 'if' is a statement, 'x > 5' is an expression
-if x > 5 then
-    write_line("x is greater than 5");
-fi
-
-// 'if' can also be used as an expression
-let z = if x > 5 then x else y fi;
-```
-
-output:
-
-```
-x is greater than 5
-```
-
-### function declarations
-Functions in ghūl are declared with an optional return type, a name, a list of parameters in parentheses, and a body enclosed in `is` and `si` keywords
-
-```ghul
-…
-greet(name: string) -> void is
-    write_line("Hello, {name}!");
-si
-```
-
-Functions can also have an expression body using `=>` instead of `is` / `si`:
-```ghul
-square(x: int) -> int => x * x;
-```
-
-### control flow
-ghūl supports various [control flow constructs](https://ghul.dev/control-flow.html) like `if`, `else`, `while`, `for`, and `case` expressions.
-
-```ghul
-…
-if x > 0 then
-    write_line("Positive");
-elif x < 0 then
-    write_line("Negative");
-else
-    write_line("Zero");
-fi
-
-for item in my_list do
-    process(item);
-od
-```
-
-output:
-
-```
-Positive
-```
-
-### types
-
-ghūl is statically typed, with some support for [type inference](https://ghul.dev/type-inference.html). Types can be explicitly specified using a colon `:` plus a type expression
-
-```ghul
-let x: int = 42;
-let y = "Hello";
-```
-[User types](https://ghul.dev/definitions.html#types) are defined using `class`, `struct`, `trait`, `enum`, and `union` keywords.
-
-## built-in data types
-
-ghūl's built-in data types are primitive types, arrays, tuples, and optionals.
-
-### primitive types
-
-ghūl provides the following primitive data types:
-
-* integer types: `byte`, `ubyte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `word`, `uword`
-* floating-point types: `single`, `double`
-* fixed-point type: `decimal`
-* boolean type: `bool`
-* character type: `char`
-* void type: `void`
-
-```ghul
-let my_int: int = 42;
-let my_float: double = 3.14d;
-let my_decimal: decimal = 19.99m;
-let my_bool: bool = true;
-let my_char: char = 'A';
-```
-These types are used to represent basic values in ghūl programs.
-
-### arrays
-
-ghūl supports arrays, which are fixed-size, **read-only** collections of elements of the same type. Array types are denoted using square brackets [] after the element type.
-
-```ghul
-let numbers: int[] = [1, 2, 3];
-```
-
-Arrays can be constructed with an [array literal](https://ghul.dev/expressions.html#array)
-```ghul
-let primes = [2, 3, 5, 7, 11];
-```
-
-Array elements can be read with indexer syntax
-```ghul
-…
-let p = primes[i];
-```
-
-### tuples
-Tuples in ghūl are lightweight, immutable data structures that can hold a fixed number of elements of different types. Tuple types use parentheses `(` `)`, with elements separated by commas. Tuple literals are similarly constructed with `(` `)` and comma delimited elements. Tuples compare by structural equality: two tuples are equal when their corresponding elements are.
-
-```ghul
-let point: (int, int) = (10, 20);
-let person: (string, int) = ("Alice", 30);
-```
-
-Tuple elements can be accessed using the dot `.` notation followed by the element name:
-
-```ghul
-…
-let x = point.`0;
-let y = point.`1;
-let name = person.`0;
-let age = person.`1;
-```
-
-Tuple elements can be given more descriptive names, either in the type or in the tuple literal:
-```ghul
-let point: (x: int, y: int) = (10, 20);
-let person = (name = "Alice", age = 30);
-let x = point.x;
-let y = point.y;
-let name = person.name;
-let age = person.age;
-```
-
-ghūl also supports tuple destructuring:
-```ghul
-…
-let (a, b) = point;
-let (name, age) = person;
-```
-
-Destructuring also has a by-name form, `(local = field, ...)`, that pulls each element from a named field rather than by position; the positional and by-name forms are covered with [pattern matching](https://ghul.dev/control-flow.html#if-let).
-
-### optional types
-
-A type followed by `?` is an **optional** type: a value of `T?` can be present or absent. The same type written without the `?` is non-optional, and a non-optional value is always there.
-
-```ghul
-let ► name: string? = "Alice"; // present
-let nickname: string? = null; // absent
-```
-
-The postfix `?` operator tests whether an optional has a value. A plain `if x?` narrows `x` to its non-optional form inside the branch, so the value reads directly:
-
-```ghul
-…
-if ► name? then
-    write_line("name is {name}"); // name is non-optional here
-fi
-```
-
-output:
-
-```
-name is Alice
-```
-
-A non-optional type never holds the absent case, so a `T?` is not assignable to a `T`. The compiler rejects it rather than warning:
-
-```ghul
-…
-// rejected: a string? is not assignable to a string
-let title: string = maybe;
-```
-
-diagnostics:
-
-- error: string? is not assignable to string
-- warning: [non-optional] string expected but maybe may not hold a value
-
-To pass a `T?` where a `T` is wanted, make the value present first: narrow it with `if x?` or `if let` (see [control flow](https://ghul.dev/control-flow.html#if-let)), assert it with `x!` (which throws when absent), or supply a fallback with `x ?? other`. Optional types work for reference and value types alike - and beyond those two, for generic code that doesn't know which one it has, and for user-defined types that never mention `T?` at all. The [optional types](https://ghul.dev/optional-types) page covers all of that, along with the `??` and `?.` operators and the warnings that keep optional handling honest.
-
-### type conversions
-
-ghūl does not perform implicit type conversion (coercion) between scalar types; all scalar type conversions must be explicitly cast. However, ghūl supports polymorphic behavior by allowing upcasting, where instances of derived classes or interfaces can be automatically coerced to compatible ancestor types in the class/interface hierarchy.
-
-```ghul
-// OK: both addends are type double
-let d = 1.0d + 1.0d;
-
-// compile time error: addends are mixed types
-// (double vs int)
-let e = 1.0d + 1;
-
-// OK with explicit cast
-let e = 1.0d + cast double(1);
-
-// OK: "hello" is a string, and string derives
-// from object
-let o: object = "hello";
-```
-
-## variables
-
-ghūl has three kinds of variables: locals declared within the body of a function or method, function or method arguments and variables captured by a function literal.
-
-### locals
-
-Local variables are declared with `let` followed by the variable name, an optional explicit type, and an initializer:
-
-```ghul
-let i = 1234;
-let j: int = 0;
-let k: int = 5678;
-```
-
-### arguments
-
-Arguments will be covered in detail with functions and methods, but the basic form is the argument name followed by its type.
-
-```ghul
-some_function(argument: type)
-```
-
-### captured variables
-Variables captured by a function literal will be covered with [function literals](https://ghul.dev/expressions.html#capturing-and-closure). They are not explicitly declared but inferred from each function literal's body.
-
-### scope
-
-The scope of all variable definitions is from the point of declaration to the end of the innermost block that contains the declaration. Blocks will be covered later, but generally a block is a control flow statement or a function or method body.
-
-### type inference and explicit types
-ghūl infers the type of a local variable from its initializer. An explicit type can be given alongside; it's a compile time error if the initializer is not assignment compatible with it.
-
-## literals
-Literal expressions represent fixed values of a specific type.
-
-```ghul
-let integer_literal = 42;
-let floating_point_literal = 3.14;
-let string_literal = "Hello, world!";
-let boolean_literal_true = true;
-let boolean_literal_false = false;
-```
-
-## operators and expressions
-### arithmetic operators
-```ghul
-let add = 1 + 2;
-let sub = 3 - 1;
-let mul = 3 * 3;
-let div = 12 / 3;
-let mod = 13 % 4;
-```
-
-### comparison and logical operators
-```ghul
-let gt = 3 > 1; // true
-let gte = 4 >= 4; // true
-let lt = 3 < 1; // false
-let lte = 4 <= 4; // true
-let eq = 1 == 2; // false
-let neq = 1 != 2; // true
-```
-
-```ghul
-let list = [1, 2, 3];
-
-let index = 4;
-let search_value = 3;
-
-// false
-let and_then =
-    index < list.count /\ list[index] == search_value;
-
-// true
-let or_else =
-    index >= list.count \/ list[index] != search_value;
-```
-
-### bitwise and shift operators
-
-The integer types have the usual bitwise operators - `&`, `|`, `^` - and the shift operators `<<` and `>>`. A shift count is an `int`, and the result keeps the left operand's type. The count is taken modulo the operand's width, following .NET: shifting an `int` by 32 is the same as shifting it by 0. `>>>` is the unsigned right shift: it shifts zeros into the leftmost bits where `>>` keeps the sign:
-
-```ghul
-…
-bitwise(a: int, b: int) is
-    write_line("{a & b} {a | b} {a ^ b}");
-
-    // shift counts are int, and '>>>' shifts zeros in
-    write_line("{1 << 4} {256 >> 3} {-16 >>> 2}")
-si
-
-bitwise(240, 60)
-```
-
-output:
-
-```
-48 252 204
-16 32 1073741820
-```
-
-There is no bitwise complement operator.
-
-## assignment
-
-variables and properties can be updated via assignment statements
-
-```ghul
-…
-let i mut = 0;
-let j = 10;
-let s mut = "Hello";
-
-i = i + j;
-s = "{s} World!";
-
-thing.property = i + j;
-
-write_line("i = {i}, s = {s}, thing.property = {thing.property}");
-```
-
-output:
-
-```
-i = 10, s = Hello World!, thing.property = 20
-```
-
-
----
-
-<a id="optional-types"></a>
-
-# optional types
-
-A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and the same type without the `?` is non-optional. The [language basics](https://ghul.dev/language-basics.html#optional-types) page introduces the presence test `?` and the assignability rule.
-
-```ghul
-…
-find_first[T](xs: T[], predicate: T -> bool) -> T? is
-    for x in xs do
-        if predicate(x) then
-            return x;
-        fi
-    od
-
-    return null;
-si
-
-let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0);    // T = int, a value type
-let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2); // T = string, a reference type
-
-write_line("first even: {first_even ?? -1}");
-write_line("first long: {first_long ?? "none"}");
-```
-
-output:
-
-```
-first even: 4
-first long: ccc
-```
-
-`find_first` returns the first element the predicate accepts, or absent when there is none; `??` supplies a value for the absent case.
-
-Optionals work with reference types:
-
-```ghul
-let ► name: string? = "Alice"; // present
-let nickname: string? = null; // absent
-```
-
-with value types:
-
-```ghul
-let ► here: int? = 42;   // present
-let gone: int? = null; // absent
-```
-
-and with generic types:
-
-```ghul
-…
-class SLOT[T] is
-    _stored: T?;
-
-    init() is si
-
-    put(value: T) is ► _stored = value; si
-
-    take() -> T? is
-        let result = _stored;
-        _stored = null;
-        return result;
-    si
-si
-
-let s = SLOT[int]();
-s.put(42);
-write_line("{s.take() ?? -1}");
-write_line("{s.take() ?? -1}");
-```
-
-output:
-
-```
-42
--1
-```
-
-> **representation**
->
-> How a `T?` value is stored depends on `T`. The details are in [optional types in depth](https://ghul.dev/optional-types-in-depth); they matter mainly when interoperating with other .NET languages.
-
-## the operators
-
-The `??` operator supplies a fallback: `a ?? b` is `a` when it is present, otherwise `b`, and `b` is evaluated only when needed. It is right-associative, so `a ?? b ?? c` tries each in turn, and the result stays optional until a non-optional value closes the chain:
-
-```ghul
-…
-let name = lookup();
-let greeting = "hello, {name ?? "stranger"}";
-write_line(greeting);
-```
-
-output:
-
-```
-hello, stranger
-```
-
-The `?.` operator reads a member only when the receiver is present: `a?.b` is `b` when `a` is present; otherwise the result is absent. The result is always optional, and `?.` chains, so a whole access path folds down to one optional. Method calls compose the same way: `a?.foo(args)` calls `foo` on a present receiver; otherwise the result is absent, with the argument expressions included in the short-circuit, so they are not evaluated when `a` is absent.
-
-The postfix `!` asserts presence and reads the value out; applied to an absent optional it throws. Inside a branch where flow analysis has proven presence, the compiler reports a redundancy warning instead.
-
-```ghul
-…
-let p = find();
-let name = p?.name; // string? - absent when p is absent
-write_line("name: {name ?? "unknown"}");
-```
-
-output:
-
-```
-name: unknown
-```
-
-## the warnings
-
-Reading a member through an optional not known to be present is reported with a `null-deref` warning; `x?.y`, `x.has_value`, `x!`, and `if let` are the warning-free routes. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
-
-## optional-shaped types
-
-A named type of your own can support `?` and `!` without being a `T?`. It keeps its own name and doesn't interconvert with `T?` - what it opts in to is the operators, not the spelling. There are two routes.
-
-A union where exactly one variant has fields, or with one variant marked `default`, is option-shaped: `?` tests whether the union holds that variant, and `!` unwraps its payload (or the whole variant, if it has more than one field). This is what to reach for when a value has more shape than present-or-absent - success-with-a-value versus failure-with-a-reason, for instance - since a `case` over the union matches every outcome exhaustively. The [unions and pattern matching](https://ghul.dev/unions-and-pattern-matching.html) page builds an `Option[T]` from scratch; the same rule covers the two-variant shape most languages call `Result` - `OK` marked `default`, `ERROR` holding the failure:
-
-```ghul
-…
-union Result[T, E] is
-    OK(value: T) default;
-    ERROR(error: E);
-si
-
-divide(a: int, b: int) -> Result[int, string] =>
-    if b == 0 then
-        Result.ERROR("division by zero")
-    else
-        Result.OK(a / b)
-    fi;
-
-let good = divide(10, 2);
-let bad = divide(10, 0);
-
-if ► good? then
-    write_line("10 / 2 = {good!}");
-fi
-
-if ! ► bad? then
-    write_line("10 / 0 failed");
-fi
-```
-
-output:
-
-```
-10 / 2 = 5
-10 / 0 failed
-```
-
-And a type that exposes `has_value: bool` and `value: T` properties is treated as optional-shaped structurally, with no declaration required: `?` consults `has_value`, and on a struct `!` reads out `value`:
-
-```ghul
-…
-// no declared relationship to T? or Ghul.Maybe[T] - ghūl looks for
-// has_value and value structurally
-struct PERCENTAGE is
-    has_value: bool;
-    value: double;
-
-    init() is
-        has_value = false;
-        value = _;
-    si
-
-    init(v: double) is
-        has_value = true;
-        value = v;
-    si
-si
-
-let full = PERCENTAGE(87.5d);
-let empty = PERCENTAGE();
-
-if full? then
-    write_line("full: {full!}%");
-fi
-
-if !empty? then
-    write_line("empty has no reading");
-fi
-```
-
-output:
-
-```
-full: 87.5%
-empty has no reading
-```
-
-
----
-
-<a id="unions-and-pattern-matching"></a>
-
-# unions and pattern matching
-
-> **editable examples**
->
-> Every example on this page can be edited and run here: click the pencil to open it in an editor, change it, and run it in your browser. Errors, hovers and completions come from the ghūl compiler as you type.
->
-> The ghul-examples repository has fuller [unions](https://github.com/degory/ghul-examples/tree/main/examples/unions) and [pattern-matching](https://github.com/degory/ghul-examples/tree/main/examples/pattern-matching) examples to build and run locally, in a GitHub Codespace or a dev container.
-
-A union holds a value of one of several variants, each with its own set of fields: one type that represents several kinds of data. Pattern matching is how that data comes back out - test which variant a value holds, and read its fields at the narrowed type. The [definitions page](https://ghul.dev/definitions.html#unions) covers the full declaration surface - unit variants, the `default` variant, primary-constructor headers, and traits; this page is about using them.
-
-```ghul
-union Shape is
-    CIRCLE(radius: double);
-    SQUARE(side: double);
-si
-
-union Option[T] is
-    SOME(value: T);
-    NONE;
-si
-
-union Result[T, E] is
-    OK(value: T);
-    ERROR(error: E);
-si
-```
-
-## testing and narrowing a variant
-
-Accessing the data held by a union's variant requires first checking which variant the union currently holds. An `isa Variant(value)` test checks the variant and, in the then-branch, narrows the value to it so the variant's fields are reachable:
-
-```ghul
-…
-if isa Option.SOME( ► an_option) then
-    let value = an_option.value;
-    write_line("the option holds {value}");
-fi
-```
-
-output:
-
-```
-the option holds 42
-```
-
-## option-shaped unions
-
-Unions shaped like `Option` types - a single field-carrying variant, or one variant marked `default` - support the `?` and `!` operators, for testing whether they hold a value and for unwrapping it:
-
-```ghul
-…
-if ► an_option? then
-    let value = an_option!;
-    write_line("the option holds {value}");
-fi
-```
-
-output:
-
-```
-the option holds 42
-```
-
-```ghul
-use IO.Std.write_line;
-
-union Option[T] is
-    SOME(value: T);
-    NONE;
-si
-
-union List[T] is
-    NIL;
-    CONS(head: T, tail: List[T]);
-si
-
-union Tree[T] is
-    LEAF(value: T);
-    NODE(left: Tree[T], right: Tree[T]);
-si
-
-use Option.SOME;
-use Option.NONE;
-use List.NIL;
-use List.CONS;
-use Tree.LEAF;
-use Tree.NODE;
-
-test_option();
-test_list();
-test_tree();
-
-test_option() is
-    let some_int = SOME(42);
-    let none_int = NONE();
-
-    let stringify_option = o rec =>
-        if isa SOME( ► o) then
-            "{o.value}"
-        else
-            "none"
-        fi;
-
-    write_line(stringify_option(some_int));
-    write_line(stringify_option(none_int));
-si
-
-test_list() is
-    let list = CONS(1, CONS(2, CONS(3, NIL())));
-
-    let stringify_list = l rec =>
-        if isa CONS( ► l) then
-            let (head, tail) = l in
-            "{head}, {rec(tail)}"
-        else
-            "nil"
-        fi;
-
-    write_line(stringify_list(list));
-si
-
-test_tree() is
-    let tree = NODE(
-        NODE(
-            LEAF(1),
-            LEAF(2)
-        ),
-        NODE(
-            LEAF(3),
-            LEAF(4)
-        )
-    );
-
-    let stringify_tree = t rec =>
-        if isa NODE( ► t) then
-            let (left, right) = t in
-            "({rec(left)}, {rec(right)})"
-        else
-            "{t.value}"
-        fi;
-
-    write_line(stringify_tree(tree));
-si
-```
-
-output:
-
-```
-42
-none
-1, 2, 3, nil
-((1, 2), (3, 4))
-```
-
-`Option` here is a union built from scratch to show how the shape works, but everyday code rarely needs to: ghūl's own optional types (`T?`) give you this for free, over reference types, value types, and unconstrained generic types alike - see [optional types](https://ghul.dev/optional-types) for the full picture, including how a user-defined union like this one fits alongside `T?`.
-
-## matching with if let
-
-Discovering which variant a union holds, and branching on the result, is done with `if let`: a `let` definition in an `if` / `elif` condition, where the branch runs only on a match, with the variable narrowed and in scope:
-
-```ghul
-union Shape is
-    CIRCLE(radius: double);
-    SQUARE(side: double);
-si
-…
-area(s: Shape) -> double is
-    if let c: CIRCLE = ► s then
-        return 3.14159d * c.radius * c.radius;
-    elif let q: SQUARE = ► s then
-        return q.side * q.side;
-    fi
-
-    return 0.0d;
-si
-```
-
-`isa` variant tests and `else`-branch narrowing cover the same ground; see [type narrowing](https://ghul.dev/type-narrowing.html) for the full picture.
-
-## matching with case
-
-A `case` expression matches one scrutinee against several `when` arms, which reads better than a chain of `if let`/`elif let` once there are more than a couple of variants to cover. Over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - the compiler checks the arms for exhaustiveness, so `area` needs no fallback return for a variant the `when` arms forgot:
-
-```ghul
-…
-area(s: Shape) -> double =>
-    // case over a union is checked for exhaustiveness: every variant
-    // is covered here, so no else arm is needed
-    case s
-    when c: CIRCLE then 3.14159d * c.radius * c.radius
-    when q: SQUARE then q.side * q.side
-    esac;
-
-write_line("{area(CIRCLE(2.0d))}");
-write_line("{area(SQUARE(3.0d))}");
-```
-
-output:
-
-```
-12.56636
-9
-```
-
-`when` arms accept the same patterns as `if let`: a type test that binds and narrows (`c: CIRCLE`), destructuring with literal leaves and `~`-marked values that match rather than bind, and a trailing `/\` guard that falls through to the next arm on failure.
-
-Equality labels compare by value, the way `=~` compares: over a string scrutinee or any type defining the operator, matching is by content, and `when null` matches absence.
-
-So `case` is the exhaustive counterpart to `if let` rather than a different matching mechanism. See [the case statement](https://ghul.dev/control-flow.html#case-statement) for the full picture.
-
-
----
-
-<a id="type-narrowing"></a>
-
-# type narrowing
-
-> **editable examples**
->
-> Every example on this page can be edited and run here: click the pencil to open it in an editor, change it, and run it in your browser. Errors, hovers and completions come from the ghūl compiler as you type.
->
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller examples that include narrowing, to build and run locally, in a GitHub Codespace or a dev container.
-
-When a check proves a value has a more specific type, ghūl narrows the value for the code the check covers: inside the branch, the value has the narrower type, with no cast and no unwrap needed. Union variant tests, `isa` class checks, presence tests on optionals, and `if let` all narrow, and narrowing follows the control flow, [covered below](#flow-sensitive-narrowing).
-
-> **narrowing inlays**
->
-> Open ghūl in an editor with the [ghūl language extension](https://ghul.dev/tooling.html) and small triangle hints mark where type narrowing changes: `►` where a variable is narrowed to a more specific type, `◄` where a narrowing ends and the variable widens back to its declared type, and `◄►` where an assignment does both at once. Hovering a hint shows the types and the reason; on an `if` it shows the narrowing for both the taken and the not-taken branch. The same sigils appear in the code examples on this site.
-
-## narrowing in a condition
-
-An `isa` test in an `if` condition narrows the variable to the tested type inside the then-branch. This holds for a union variant or a class:
-
-```ghul
-…
-union Maybe[T] is
-    YES(value: T);
-    NO;
-si
-…
-let m: Maybe[int] = Maybe.YES(42);
-
-if isa Maybe.YES( ► m) then
-    // m is narrowed to Maybe.YES inside the branch,
-    // so m.value is in scope
-    write_line("got value {m.value}");
-fi
-
-let a: Animal = CAT("whiskers");
-if isa CAT( ► a) then
-    // a is narrowed to CAT inside the branch
-    write_line(a.purr());
-fi
-```
-
-output:
-
-```
-got value 42
-whiskers purrs
-```
-
-An [optional type](https://ghul.dev/optional-types) narrows the same way. A `?` test in the predicate narrows the optional to its non-optional form in the then-branch, so the value can be used directly:
-
-```ghul
-…
-let name: string? = lookup();
-
-if ► name? then
-    // name is narrowed to non-optional string
-    // here, no ! needed
-    write_line("hello, {name}");
-fi
-```
-
-output:
-
-```
-hello, world
-```
-
-For a two-variant union, the `else` branch is narrowed to the complementary variant:
-
-```ghul
-…
-union Result[T, E] is
-    OK(value: T);
-    ERR(error: E);
-si
-…
-let r: Result[int, string] = some_call();
-
-if isa Result.OK( ► r) then
-    write_line("ok: {r.value}");
-else
-    // r is narrowed to Result.ERR here
-    write_line("err: {r.error}");
-fi
-```
-
-output:
-
-```
-ok: 42
-```
-
-The `else` narrowing extends to a class hierarchy declared in the current assembly without `open`: the compiler knows every subclass, so ruling out the tested one narrows the `else` branch to the others, and when an `abstract` root has exactly two subclasses, ruling out one leaves the other. The [object oriented programming](https://ghul.dev/object-oriented-programming) page covers open, closed, and abstract classes.
-
-A `while` condition narrows its body the same way an `if` condition narrows its then-branch, so `while isa CAT(a) do a.purr() od` reaches a `CAT`-only member without an inner cast.
-
-## flow-sensitive narrowing
-
-Narrowing follows the control flow, not just the branch structure. A common shape is a guard: when the test fails, the guard leaves the block with `return`, `throw`, `break` or `continue`, so the code after the guard runs only when the test passed, and the value is narrowed there:
-
-```ghul
-…
-classify(a: Animal) is
-    if !isa CAT( ► a) then
-        write_line("not a cat");
-        return;
-    fi
-
-    // every non-CAT has returned, so a is
-    // narrowed to CAT from here on
-    write_line(a.purr());
-si
-
-classify(CAT("whiskers"));
-classify(DOG());
-```
-
-output:
-
-```
-whiskers purrs
-not a cat
-```
-
-## locals and parameters
-
-Narrowing applies to local variables, including a function's own parameters.
-
-```ghul
-…
-greet(a: Animal) is
-    if isa CAT( ► a) then
-        // a is a parameter of greet, narrowed to CAT
-        // in this branch
-        write_line(a.purr());
-    fi
-si
-
-greet(CAT());
-```
-
-output:
-
-```
-purr
-```
-
-## fields and properties
-
-Narrowing also applies to a member-access path like `x.field` or `x.property`. A presence test (`?`) narrows the path: after `if x.field? then`, uses of `x.field` inside the branch are non-optional.
-
-```ghul
-…
-describe(order: ORDER) is
-    if ► order.customer? then
-        // a presence test narrows the path itself:
-        // within this branch order.customer is the
-        // non-optional string, so .length is
-        // reachable directly
-        write_line("customer name has {order.customer.length} chars");
-    fi
-si
-
-describe(ORDER("alice"));
-```
-
-output:
-
-```
-customer name has 5 chars
-```
-
-An `isa` check or variant test narrows a path the same way:
-
-```ghul
-…
-class CARRIER(occupant: Animal);
-describe(carrier: CARRIER) is
-    if isa CAT( ► carrier.occupant) then
-        // carrier.occupant is a CAT within this branch,
-        // so its purr() is reachable directly
-        write_line(carrier.occupant.purr());
-    fi
-si
-
-describe(CARRIER(CAT()));
-```
-
-output:
-
-```
-purr
-```
-
-## narrowing on assignment
-
-Reassigning a local narrows it: when the new value's static type is more specific than the declared type, the local narrows to that type from the assignment on, so a following call resolves on the assigned type without an `isa`:
-
-```ghul
-…
-► pet = CAT();
-// assigning a CAT narrows pet to CAT, so purr() is in reach
-write_line(pet.purr());
-```
-
-output:
-
-```
-purr
-```
-
-If the local is already narrowed, assigning a value of a different type cancels that narrowing and introduces one for the new type, so the following call resolves on the assigned type:
-
-```ghul
-…
-if isa CAT( ► pet) then
-    write_line(pet.purr());
-
-    ◄► pet = DOG();
-    // reassigning cancels the CAT narrowing and
-    // introduces a DOG one: pet is DOG here
-    write_line(pet.name());
-fi
-```
-
-output:
-
-```
-purr
-dog
-```
-
-## when a narrowing ends
-
-A narrowing lasts until the end of the code block associated with the test, unless it is invalidated sooner, for example by call to another function that could cause its type to change.
-
-See [narrowing in depth](https://ghul.dev/narrowing-in-depth) for full details.
 
 
 ---
@@ -2819,6 +1782,221 @@ memory is cleared
 
 ---
 
+<a id="unions-and-pattern-matching"></a>
+
+# unions and pattern matching
+
+> **editable examples**
+>
+> Every example on this page can be edited and run here: click the pencil to open it in an editor, change it, and run it in your browser. Errors, hovers and completions come from the ghūl compiler as you type.
+>
+> The ghul-examples repository has fuller [unions](https://github.com/degory/ghul-examples/tree/main/examples/unions) and [pattern-matching](https://github.com/degory/ghul-examples/tree/main/examples/pattern-matching) examples to build and run locally, in a GitHub Codespace or a dev container.
+
+A union holds a value of one of several variants, each with its own set of fields: one type that represents several kinds of data. Pattern matching is how that data comes back out - test which variant a value holds, and read its fields at the narrowed type. The [definitions page](https://ghul.dev/definitions.html#unions) covers the full declaration surface - unit variants, the `default` variant, primary-constructor headers, and traits; this page is about using them.
+
+```ghul
+union Shape is
+    CIRCLE(radius: double);
+    SQUARE(side: double);
+si
+
+union Option[T] is
+    SOME(value: T);
+    NONE;
+si
+
+union Result[T, E] is
+    OK(value: T);
+    ERROR(error: E);
+si
+```
+
+## testing and narrowing a variant
+
+Accessing the data held by a union's variant requires first checking which variant the union currently holds. An `isa Variant(value)` test checks the variant and, in the then-branch, narrows the value to it so the variant's fields are reachable:
+
+```ghul
+…
+if isa Option.SOME( ► an_option) then
+    let value = an_option.value;
+    write_line("the option holds {value}");
+fi
+```
+
+output:
+
+```
+the option holds 42
+```
+
+## option-shaped unions
+
+Unions shaped like `Option` types - a single field-carrying variant, or one variant marked `default` - support the `?` and `!` operators, for testing whether they hold a value and for unwrapping it:
+
+```ghul
+…
+if ► an_option? then
+    let value = an_option!;
+    write_line("the option holds {value}");
+fi
+```
+
+output:
+
+```
+the option holds 42
+```
+
+```ghul
+use IO.Std.write_line;
+
+union Option[T] is
+    SOME(value: T);
+    NONE;
+si
+
+union List[T] is
+    NIL;
+    CONS(head: T, tail: List[T]);
+si
+
+union Tree[T] is
+    LEAF(value: T);
+    NODE(left: Tree[T], right: Tree[T]);
+si
+
+use Option.SOME;
+use Option.NONE;
+use List.NIL;
+use List.CONS;
+use Tree.LEAF;
+use Tree.NODE;
+
+test_option();
+test_list();
+test_tree();
+
+test_option() is
+    let some_int = SOME(42);
+    let none_int = NONE();
+
+    let stringify_option = o rec =>
+        if isa SOME( ► o) then
+            "{o.value}"
+        else
+            "none"
+        fi;
+
+    write_line(stringify_option(some_int));
+    write_line(stringify_option(none_int));
+si
+
+test_list() is
+    let list = CONS(1, CONS(2, CONS(3, NIL())));
+
+    let stringify_list = l rec =>
+        if isa CONS( ► l) then
+            let (head, tail) = l in
+            "{head}, {rec(tail)}"
+        else
+            "nil"
+        fi;
+
+    write_line(stringify_list(list));
+si
+
+test_tree() is
+    let tree = NODE(
+        NODE(
+            LEAF(1),
+            LEAF(2)
+        ),
+        NODE(
+            LEAF(3),
+            LEAF(4)
+        )
+    );
+
+    let stringify_tree = t rec =>
+        if isa NODE( ► t) then
+            let (left, right) = t in
+            "({rec(left)}, {rec(right)})"
+        else
+            "{t.value}"
+        fi;
+
+    write_line(stringify_tree(tree));
+si
+```
+
+output:
+
+```
+42
+none
+1, 2, 3, nil
+((1, 2), (3, 4))
+```
+
+`Option` here is a union built from scratch to show how the shape works, but everyday code rarely needs to: ghūl's own optional types (`T?`) give you this for free, over reference types, value types, and unconstrained generic types alike - see [optional types](https://ghul.dev/optional-types) for the full picture, including how a user-defined union like this one fits alongside `T?`.
+
+## matching with if let
+
+Discovering which variant a union holds, and branching on the result, is done with `if let`: a `let` definition in an `if` / `elif` condition, where the branch runs only on a match, with the variable narrowed and in scope:
+
+```ghul
+union Shape is
+    CIRCLE(radius: double);
+    SQUARE(side: double);
+si
+…
+area(s: Shape) -> double is
+    if let c: CIRCLE = ► s then
+        return 3.14159d * c.radius * c.radius;
+    elif let q: SQUARE = ► s then
+        return q.side * q.side;
+    fi
+
+    return 0.0d;
+si
+```
+
+`isa` variant tests and `else`-branch narrowing cover the same ground; see [type narrowing](https://ghul.dev/type-narrowing.html) for the full picture.
+
+## matching with case
+
+A `case` expression matches one scrutinee against several `when` arms, which reads better than a chain of `if let`/`elif let` once there are more than a couple of variants to cover. Over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - the compiler checks the arms for exhaustiveness, so `area` needs no fallback return for a variant the `when` arms forgot:
+
+```ghul
+…
+area(s: Shape) -> double =>
+    // case over a union is checked for exhaustiveness: every variant
+    // is covered here, so no else arm is needed
+    case s
+    when c: CIRCLE then 3.14159d * c.radius * c.radius
+    when q: SQUARE then q.side * q.side
+    esac;
+
+write_line("{area(CIRCLE(2.0d))}");
+write_line("{area(SQUARE(3.0d))}");
+```
+
+output:
+
+```
+12.56636
+9
+```
+
+`when` arms accept the same patterns as `if let`: a type test that binds and narrows (`c: CIRCLE`), destructuring with literal leaves and `~`-marked values that match rather than bind, and a trailing `/\` guard that falls through to the next arm on failure.
+
+Equality labels compare by value, the way `=~` compares: over a string scrutinee or any type defining the operator, matching is by content, and `when null` matches absence.
+
+So `case` is the exhaustive counterpart to `if let` rather than a different matching mechanism. See [the case statement](https://ghul.dev/control-flow.html#case-statement) for the full picture.
+
+
+---
+
 <a id="generics"></a>
 
 # generics
@@ -3082,315 +2260,148 @@ Variance is also automatic in two places: a function type is contravariant in it
 
 ---
 
-<a id="type-inference"></a>
+<a id="optionals-and-narrowing"></a>
 
-# type inference
+# optional types and narrowing
 
 > **editable examples**
 >
 > Every example on this page can be edited and run here: click the pencil to open it in an editor, change it, and run it in your browser. Errors, hovers and completions come from the ghūl compiler as you type.
->
-> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller type-inference examples to build and run locally, in a GitHub Codespace or a dev container.
 
-ghūl infers types pervasively inside a method or function body: most local variables, loop variables, destructured variables and anonymous function parameters can be left unannotated, and the compiler works their types out from how they are initialized and used.
-
-Mechanically it is bidirectional, constraint-based inference: types flow up from expressions and down from the contexts that use them, and the compiler re-walks each function body until the unknowns settle. The [implementation page](https://ghul.dev/implementation#type-inference) describes how.
-
-Type inference is **function-local**: types inferred within one function are not visible outside it. Outside function bodies all types are explicit, including the signatures of methods and global functions, whose parameter and return types are always written out.
-
-Within a function, types are inferred for:
-
-- local variables
-- loop variables
-- destructured variables
-- anonymous function parameters
-- anonymous function return types
-- generic type arguments on calls to constructors, methods, static methods and global functions
-
-In each case the inferred type is concrete. The compiler does not introduce new type parameters during inference, so an anonymous function literal takes a single concrete function type from its context - it cannot itself be generic. For polymorphic behaviour, declare a generic global function or method and pass it where the function value is needed.
-
-ghūl also performs [type narrowing](https://ghul.dev/type-narrowing.html) - within parts of a function a value can be observed at a more specific type than the one it was declared with. Inference and narrowing work together: the inferred type is the ceiling, and the control flow sharpens it region by region.
-
-The examples below leave inferred types unannotated; hover over any variable to see the type the compiler worked out for it.
-
-## what stays explicit
-
-A function's signature is written out explicitly; inference works within the body.
+A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and a plain `T` always holds a value. The compiler rejects a `T?` where a `T` is needed, so absence is handled where it can arise, not discovered as a crash somewhere later.
 
 ```ghul
-// the signature is explicit: the parameter type
-// and the return type are written out
-totals(
-    values: Collections.Iterable[int]
-) -> (sum: int, count: int) is
-    let sum mut = 0;
-    let count mut = 0;
-
-    for v in values do
-        sum = sum + v;
-        count = count + 1;
+…
+find_first[T](xs: T[], predicate: T -> bool) -> T? is
+    for x in xs do
+        if predicate(x) then
+            return x;
+        fi
     od
 
-    return (sum, count);
-si
-…
-```
-
-Inference does not read types out of a body into the function's signature, and does not flow from one function into another: each body is checked on its own, against the explicit signatures of everything it calls.
-
-Fields and properties belong to a type rather than to a function body, so their types are written out too - for private members as well as public ones.
-
-```ghul
-class COUNTER is
-    count: int; // a property - its type is declared
-
-    init() is
-        count = 0;
-    si
-
-    tick() is
-        // a local - its type is inferred from the
-        // initializer
-        let step = 1;
-        count = count + step;
-    si
-si
-…
-```
-
-## what gets inferred
-
-### let statements and expressions
-
-When no explicit type is given for a variable in a let statement or expression, its type is inferred from the initializer, provided one is present.
-
-```ghul
-let a_string = "12345";
-let an_int = 12345;
-let an_int_array = [1, 2, 3, 4, 5];
-```
-
-### destructuring variables
-
-A destructuring `let` declares several variables at once from a tuple. Each variable takes its type from the corresponding element of the right-hand side, and the pattern can nest.
-
-```ghul
-let person = ("alice", 30);
-let (name, age) = person;
-
-let ((first, second), third) = (("a", "b"), "c");
-```
-
-### for loop variables
-
-A `for` loop variable takes its type from the element type of the iterable being looped over. Destructuring composes with this: when the element type is a tuple, its element types flow into the destructured names.
-
-```ghul
-…
-for i in 1::10 do
-    write_line("{i}");
-od
-
-let pairs = [("a", 1), ("b", 2)];
-
-for (name, count) in pairs do
-    write_line("{name}: {count}");
-od
-```
-
-output:
-
-```
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-a: 1
-b: 2
-```
-
-### list literal element types
-
-The element type of a list literal is inferred from the types of the elements: the compiler finds a type compatible with all of them.
-
-```ghul
-class BASE();
-
-class DERIVED(): BASE;
-…
-let array_of_base = [BASE(), DERIVED()];
-let array_of_object = [BASE(), DERIVED(), object()];
-let array_of_int = [1, 2, 3, 4, 5];
-```
-
-If a list contains tuple literals, the compiler finds a compatible common type for each tuple element across all elements of the list.
-
-```ghul
-let int_string = [(123, "hello"), (456, "goodbye")];
-
-let int_object = [(123, 456), (798, "wibble")];
-```
-
-### if expression result types
-
-The result type of an if expression is inferred from the types of all the branch results: the compiler finds a type compatible with all of them.
-
-```ghul
-class BASE();
-
-class DERIVED(): BASE;
-
-let derived =
-    if true then
-        DERIVED()
-    else
-        DERIVED()
-    fi;
-
-let base =
-    if true then
-        DERIVED()
-    else
-        BASE()
-    fi;
-```
-
-### generic class, struct and variant constructors
-
-When constructing a generic class, struct or variant, the generic type arguments are inferred from the constructor method arguments where possible.
-
-```ghul
-class THING[T](value: T);
-…
-let int_thing = THING(1234);
-let string_thing = THING("hello");
-```
-
-Inference from the constructor arguments works when every type argument appears among those arguments and the constructor overload is unambiguous. A type argument left unpinned - by a no-argument constructor, say - can still be resolved from later use of the value (see [inference from later use sites](#inference-from-later-use-sites)).
-
-### generic function and method calls
-
-When calling a generic global function, a generic method, or a static method on a generic class or struct, the compiler infers the generic type arguments from the types of the actual arguments passed.
-
-```ghul
-class BASE();
-
-class DERIVED(): BASE;
-
-do_something[T](a: T, b: T) -> T => a;
-let base = do_something(BASE(), DERIVED());
-let derived = do_something(DERIVED(), DERIVED());
-let obj = do_something(object(), DERIVED());
-```
-
-### anonymous function return types
-
-The return type of an anonymous function literal is inferred from the type of its expression body, or from the types of return expressions in its block body.
-
-```ghul
-let returns_int = (i: int) => i * 2;
-let returns_string = (s: string) => "{s}{s}";
-```
-
-### anonymous function argument types
-
-When an anonymous function literal is passed as an argument and an unambiguous overload match can be made without knowing the exact function type, the compiler infers the argument types from the matching overload.
-
-```ghul
-…
-[1, 2, 2, 4, 5] |> filter(i => i > 3);
-```
-
-Here `self` is already known to be `Pipe[int]`, so `Pipe[int].filter(predicate: int -> bool) -> Pipe[int]` is the only overload that could match. The `predicate` argument must therefore be `int -> bool`, and the type of `i` must be `int`.
-
-## inference from later use sites
-
-The sections above infer a type from a declaration's initializer or from a call argument. Because inference spans the whole function body, the compiler can also work the other way: when a declaration gives no type on its own, a later use of the variable in the same body can supply one.
-
-```ghul
-…
-// m is BOX[?] here; the type argument is not
-// yet known
-let m = BOX();
-
-// the set call takes an int, so m is BOX[int]
-m.set(42);
-
-let x = m.get();
-```
-
-The same applies to anonymous functions whose argument types are not explicit: if a later call supplies a concrete type, that flows back to the function literal.
-
-```ghul
-…
-let f = x => x + 1;
-write_line("{f(42)}");
-```
-
-output:
-
-```
-43
-```
-
-### recursive anonymous functions
-
-In a recursive anonymous function, the argument type can be inferred from how the function is called, including from its own recursive calls.
-
-```ghul
-…
-let factorial = n rec =>
-    if n == 0 then 1 else n * rec(n - 1) fi;
-write_line("{factorial(5)}");
-```
-
-output:
-
-```
-120
-```
-
-### operations on a not-yet-inferred value
-
-When an anonymous function's parameter has no annotation, every operation the body performs on it - a member access, a method call, an index, an iteration, a destructuring - is recorded as a constraint on the parameter's type. Whatever type is eventually inferred for the parameter must satisfy all of them.
-
-```ghul
-…
-let length_of = x => x.length;
-write_line("{length_of("hello")}");
-```
-
-output:
-
-```
-5
-```
-
-The call passes a `string`, and `string` has a `length` member, so `x` resolves to `string`. When a call site leaves room for more than one type, a candidate that does not support every recorded operation is discarded.
-
-### generic argument inference from sibling actuals
-
-When a generic function or method is called with two arguments that share only a common ancestor, the generic argument is inferred from their nearest shared type rather than failing the overload match.
-
-```ghul
-class Animal abstract is
-    speak() -> string => "animal";
+    return null;
 si
 
-class CAT(): Animal;
+let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0);    // T = int, a value type
+let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2); // T = string, a reference type
 
-class DOG(): Animal;
-
-merge[T](a: T, b: T) -> T => a;
-…
-let a = merge(CAT(), DOG());
+write_line("first even: {first_even ?? -1}");
+write_line("first long: {first_long ?? "none"}");
 ```
+
+output:
+
+```
+first even: 4
+first long: ccc
+```
+
+`find_first` returns the first element the predicate accepts, or absent when there is none; `??` supplies a value for the absent case. `?.` reads a member only when the receiver is present, and `!` asserts presence, throwing when the value is absent. For everything else a plain test is enough, because a test narrows.
+
+## a test is enough
+
+`if x?` narrows `x` to its non-optional form inside the branch, so the value reads directly, with no unwrap and no cast:
+
+```ghul
+…
+let name: string? = lookup();
+
+if ► name? then
+    // name is narrowed to non-optional string
+    // here, no ! needed
+    write_line("hello, {name}");
+fi
+```
+
+output:
+
+```
+hello, world
+```
+
+The same applies to types. An `isa` test narrows a value to the tested class or union variant, and over a closed set of possibilities the `else` branch narrows to what remains:
+
+```ghul
+…
+union Result[T, E] is
+    OK(value: T);
+    ERR(error: E);
+si
+…
+let r: Result[int, string] = some_call();
+
+if isa Result.OK( ► r) then
+    write_line("ok: {r.value}");
+else
+    // r is narrowed to Result.ERR here
+    write_line("err: {r.error}");
+fi
+```
+
+output:
+
+```
+ok: 42
+```
+
+Narrowing follows the control flow, not just the branch structure. A guard that returns leaves the code after it narrowed:
+
+```ghul
+…
+classify(a: Animal) is
+    if !isa CAT( ► a) then
+        write_line("not a cat");
+        return;
+    fi
+
+    // every non-CAT has returned, so a is
+    // narrowed to CAT from here on
+    write_line(a.purr());
+si
+
+classify(CAT("whiskers"));
+classify(DOG());
+```
+
+output:
+
+```
+whiskers purrs
+not a cat
+```
+
+And it applies to fields and properties as well as local variables:
+
+```ghul
+…
+describe(order: ORDER) is
+    if ► order.customer? then
+        // a presence test narrows the path itself:
+        // within this branch order.customer is the
+        // non-optional string, so .length is
+        // reachable directly
+        write_line("customer name has {order.customer.length} chars");
+    fi
+si
+
+describe(ORDER("alice"));
+```
+
+output:
+
+```
+customer name has 5 chars
+```
+
+> **narrowing inlays**
+>
+> Open ghūl in an editor with the [ghūl language extension](https://ghul.dev/tooling.html) and small triangle hints mark where narrowing changes: `►` where a value narrows, `◄` where it widens back. The same sigils appear in the code examples on this site.
+
+## the narrowing is checked
+
+A narrowed value can change before it is used: a reassignment, or a call to a function that writes the member the narrowing depends on. The compiler tracks the calls in between and reports a use it cannot prove safe, naming the call; testing the value again, or copying it into a local variable, resolves it. So a narrowing is never a guess that the value is probably still there - it either holds, or the compiler says why not.
+
+[Type narrowing](https://ghul.dev/type-narrowing) covers the machinery: what invalidates a narrowing, what the `pure` modifier declares, and what a `stable` property promises. [Optional types](https://ghul.dev/optional-types) covers the operators, the warnings, and the three run-time representations behind `T?`.
 
 
 ---
@@ -3990,10 +3001,10 @@ results, and so they buffer the whole source as soon as they are called.
 
 The `pure` on a function type - `predicate: (T) -> bool pure` - asks that the
 function you pass only reads, and writes nothing to the heap. Most anonymous
-functions satisfy it without any thought; see [narrowing in depth](https://ghul.dev/narrowing-in-depth.html#calls-purity-and-stable)
+functions satisfy it without any thought; see [type narrowing](https://ghul.dev/type-narrowing.html#calls-purity-and-stable)
 for what the compiler does with the guarantee.
 
-`Ghul.MAYBE[T]` is an [optional type](https://ghul.dev/optional-types-in-depth.html#unconstrained-generic-types): it holds a `T` or
+`Ghul.MAYBE[T]` is an [optional type](https://ghul.dev/optional-types.html#unconstrained-generic-types): it holds a `T` or
 holds nothing. Combinators that might not find anything say so in their return type, and `??`,
 `!` and `if let` read the value out.
 
@@ -5118,6 +4129,386 @@ Applications written in ghūl require the [.NET 10 runtime](https://dotnet.micro
 
 ---
 
+<a id="language-basics"></a>
+
+# language basics
+
+## syntax
+
+ghūl syntax is inspired by a number of non-brace languages, including ALGOL 68 and Pascal
+
+### identifiers and keywords
+
+Identifiers in ghūl follow the convention of `snake_case` for variables, functions, methods, and properties, `PascalCase` for namespaces, traits, abstract classes, unions, and enums, and `MACRO_CASE` for concrete classes, structs, variants, and enum members. ghūl keywords are lowercase.
+
+ghūl relies on keywords for block structure where other languages use braces or indentation. Keywords are context specific and generally come in pairs where the closing keyword is the reverse or mirror image of the opening keyword. In the examples below `is` introduces a method or class body and its block is closed by the reverse keyword `si`
+
+```ghul
+…
+let my_variable = 42;
+
+print_something(thing: string) is
+    write_line("The thing is: {thing}");
+si
+
+print_something("a hello");
+
+class PERSON is
+    name: string;
+    age: int;
+si
+```
+
+output:
+
+```
+The thing is: a hello
+```
+
+### expressions and statements
+Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, and most statements can be used as expressions. In a function or method body a trailing `;` on the last statement marks its value as discarded, so a body without one returns that statement's value - see [expression oriented programming](https://ghul.dev/expression-oriented-programming.html) for the forms working together.
+
+```ghul
+…
+// variable declaration statement
+let x = 10;
+
+// expression used as part of a declaration statement
+let y = x * 2;
+
+// 'if' is a statement, 'x > 5' is an expression
+if x > 5 then
+    write_line("x is greater than 5");
+fi
+
+// 'if' can also be used as an expression
+let z = if x > 5 then x else y fi;
+```
+
+output:
+
+```
+x is greater than 5
+```
+
+### function declarations
+Functions in ghūl are declared with an optional return type, a name, a list of parameters in parentheses, and a body enclosed in `is` and `si` keywords
+
+```ghul
+…
+greet(name: string) -> void is
+    write_line("Hello, {name}!");
+si
+```
+
+Functions can also have an expression body using `=>` instead of `is` / `si`:
+```ghul
+square(x: int) -> int => x * x;
+```
+
+### control flow
+ghūl supports various [control flow constructs](https://ghul.dev/control-flow.html) like `if`, `else`, `while`, `for`, and `case` expressions.
+
+```ghul
+…
+if x > 0 then
+    write_line("Positive");
+elif x < 0 then
+    write_line("Negative");
+else
+    write_line("Zero");
+fi
+
+for item in my_list do
+    process(item);
+od
+```
+
+output:
+
+```
+Positive
+```
+
+### types
+
+ghūl is statically typed, with some support for [type inference](https://ghul.dev/type-inference.html). Types can be explicitly specified using a colon `:` plus a type expression
+
+```ghul
+let x: int = 42;
+let y = "Hello";
+```
+[User types](https://ghul.dev/definitions.html#types) are defined using `class`, `struct`, `trait`, `enum`, and `union` keywords.
+
+## built-in data types
+
+ghūl's built-in data types are primitive types, arrays, tuples, and optionals.
+
+### primitive types
+
+ghūl provides the following primitive data types:
+
+* integer types: `byte`, `ubyte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `word`, `uword`
+* floating-point types: `single`, `double`
+* fixed-point type: `decimal`
+* boolean type: `bool`
+* character type: `char`
+* void type: `void`
+
+```ghul
+let my_int: int = 42;
+let my_float: double = 3.14d;
+let my_decimal: decimal = 19.99m;
+let my_bool: bool = true;
+let my_char: char = 'A';
+```
+These types are used to represent basic values in ghūl programs.
+
+### arrays
+
+ghūl supports arrays, which are fixed-size, **read-only** collections of elements of the same type. Array types are denoted using square brackets [] after the element type.
+
+```ghul
+let numbers: int[] = [1, 2, 3];
+```
+
+Arrays can be constructed with an [array literal](https://ghul.dev/expressions.html#array)
+```ghul
+let primes = [2, 3, 5, 7, 11];
+```
+
+Array elements can be read with indexer syntax
+```ghul
+…
+let p = primes[i];
+```
+
+### tuples
+Tuples in ghūl are lightweight, immutable data structures that can hold a fixed number of elements of different types. Tuple types use parentheses `(` `)`, with elements separated by commas. Tuple literals are similarly constructed with `(` `)` and comma delimited elements. Tuples compare by structural equality: two tuples are equal when their corresponding elements are.
+
+```ghul
+let point: (int, int) = (10, 20);
+let person: (string, int) = ("Alice", 30);
+```
+
+Tuple elements can be accessed using the dot `.` notation followed by the element name:
+
+```ghul
+…
+let x = point.`0;
+let y = point.`1;
+let name = person.`0;
+let age = person.`1;
+```
+
+Tuple elements can be given more descriptive names, either in the type or in the tuple literal:
+```ghul
+let point: (x: int, y: int) = (10, 20);
+let person = (name = "Alice", age = 30);
+let x = point.x;
+let y = point.y;
+let name = person.name;
+let age = person.age;
+```
+
+ghūl also supports tuple destructuring:
+```ghul
+…
+let (a, b) = point;
+let (name, age) = person;
+```
+
+Destructuring also has a by-name form, `(local = field, ...)`, that pulls each element from a named field rather than by position; the positional and by-name forms are covered with [pattern matching](https://ghul.dev/control-flow.html#if-let).
+
+### optional types
+
+A type followed by `?` is an **optional** type: a value of `T?` can be present or absent. The same type written without the `?` is non-optional, and a non-optional value is always there.
+
+```ghul
+let ► name: string? = "Alice"; // present
+let nickname: string? = null; // absent
+```
+
+The postfix `?` operator tests whether an optional has a value. A plain `if x?` narrows `x` to its non-optional form inside the branch, so the value reads directly:
+
+```ghul
+…
+if ► name? then
+    write_line("name is {name}"); // name is non-optional here
+fi
+```
+
+output:
+
+```
+name is Alice
+```
+
+A non-optional type never holds the absent case, so a `T?` is not assignable to a `T`. The compiler rejects it rather than warning:
+
+```ghul
+…
+// rejected: a string? is not assignable to a string
+let title: string = maybe;
+```
+
+diagnostics:
+
+- error: string? is not assignable to string
+- warning: [non-optional] string expected but maybe may not hold a value
+
+To pass a `T?` where a `T` is wanted, make the value present first: narrow it with `if x?` or `if let` (see [control flow](https://ghul.dev/control-flow.html#if-let)), assert it with `x!` (which throws when absent), or supply a fallback with `x ?? other`. Optional types work for reference and value types alike - and beyond those two, for generic code that doesn't know which one it has, and for user-defined types that never mention `T?` at all. The [optional types](https://ghul.dev/optional-types) page covers all of that, along with the `??` and `?.` operators and the warnings that keep optional handling honest.
+
+### type conversions
+
+ghūl does not perform implicit type conversion (coercion) between scalar types; all scalar type conversions must be explicitly cast. However, ghūl supports polymorphic behavior by allowing upcasting, where instances of derived classes or interfaces can be automatically coerced to compatible ancestor types in the class/interface hierarchy.
+
+```ghul
+// OK: both addends are type double
+let d = 1.0d + 1.0d;
+
+// compile time error: addends are mixed types
+// (double vs int)
+let e = 1.0d + 1;
+
+// OK with explicit cast
+let e = 1.0d + cast double(1);
+
+// OK: "hello" is a string, and string derives
+// from object
+let o: object = "hello";
+```
+
+## variables
+
+ghūl has three kinds of variables: locals declared within the body of a function or method, function or method arguments and variables captured by a function literal.
+
+### locals
+
+Local variables are declared with `let` followed by the variable name, an optional explicit type, and an initializer:
+
+```ghul
+let i = 1234;
+let j: int = 0;
+let k: int = 5678;
+```
+
+### arguments
+
+Arguments will be covered in detail with functions and methods, but the basic form is the argument name followed by its type.
+
+```ghul
+some_function(argument: type)
+```
+
+### captured variables
+Variables captured by a function literal will be covered with [function literals](https://ghul.dev/expressions.html#capturing-and-closure). They are not explicitly declared but inferred from each function literal's body.
+
+### scope
+
+The scope of all variable definitions is from the point of declaration to the end of the innermost block that contains the declaration. Blocks will be covered later, but generally a block is a control flow statement or a function or method body.
+
+### type inference and explicit types
+ghūl infers the type of a local variable from its initializer. An explicit type can be given alongside; it's a compile time error if the initializer is not assignment compatible with it.
+
+## literals
+Literal expressions represent fixed values of a specific type.
+
+```ghul
+let integer_literal = 42;
+let floating_point_literal = 3.14;
+let string_literal = "Hello, world!";
+let boolean_literal_true = true;
+let boolean_literal_false = false;
+```
+
+## operators and expressions
+### arithmetic operators
+```ghul
+let add = 1 + 2;
+let sub = 3 - 1;
+let mul = 3 * 3;
+let div = 12 / 3;
+let mod = 13 % 4;
+```
+
+### comparison and logical operators
+```ghul
+let gt = 3 > 1; // true
+let gte = 4 >= 4; // true
+let lt = 3 < 1; // false
+let lte = 4 <= 4; // true
+let eq = 1 == 2; // false
+let neq = 1 != 2; // true
+```
+
+```ghul
+let list = [1, 2, 3];
+
+let index = 4;
+let search_value = 3;
+
+// false
+let and_then =
+    index < list.count /\ list[index] == search_value;
+
+// true
+let or_else =
+    index >= list.count \/ list[index] != search_value;
+```
+
+### bitwise and shift operators
+
+The integer types have the usual bitwise operators - `&`, `|`, `^` - and the shift operators `<<` and `>>`. A shift count is an `int`, and the result keeps the left operand's type. The count is taken modulo the operand's width, following .NET: shifting an `int` by 32 is the same as shifting it by 0. `>>>` is the unsigned right shift: it shifts zeros into the leftmost bits where `>>` keeps the sign:
+
+```ghul
+…
+bitwise(a: int, b: int) is
+    write_line("{a & b} {a | b} {a ^ b}");
+
+    // shift counts are int, and '>>>' shifts zeros in
+    write_line("{1 << 4} {256 >> 3} {-16 >>> 2}")
+si
+
+bitwise(240, 60)
+```
+
+output:
+
+```
+48 252 204
+16 32 1073741820
+```
+
+There is no bitwise complement operator.
+
+## assignment
+
+variables and properties can be updated via assignment statements
+
+```ghul
+…
+let i mut = 0;
+let j = 10;
+let s mut = "Hello";
+
+i = i + j;
+s = "{s} World!";
+
+thing.property = i + j;
+
+write_line("i = {i}, s = {s}, thing.property = {thing.property}");
+```
+
+output:
+
+```
+i = 10, s = Hello World!, thing.property = 20
+```
+
+
+---
+
 <a id="syntax"></a>
 
 # syntax in ghūl
@@ -5741,7 +5132,7 @@ class SCALER is
 si
 ```
 
-A method or function can take a postfix `pure` modifier. It declares that the function does not write to the heap: it assigns no field, property, or array element of any object. The compiler proves this from the body for most functions without needing the modifier. The declaration matters to [type narrowing](https://ghul.dev/narrowing-in-depth.html): a call can invalidate a narrowing, because the callee might assign the member the narrowing depends on, but a call to a pure function cannot, so narrowings survive it. The modifier exists for bodies the compiler cannot prove; it is trusted as declared, and every override of a pure member must itself be pure:
+A method or function can take a postfix `pure` modifier. It declares that the function does not write to the heap: it assigns no field, property, or array element of any object. The compiler proves this from the body for most functions without needing the modifier. The declaration matters to [type narrowing](https://ghul.dev/type-narrowing.html#calls-purity-and-stable): a call can invalidate a narrowing, because the callee might assign the member the narrowing depends on, but a call to a pure function cannot, so narrowings survive it. The modifier exists for bodies the compiler cannot prove; it is trusted as declared, and every override of a pure member must itself be pure:
 
 ```ghul
 …
@@ -6792,7 +6183,7 @@ list has a few elements
 
 ### type narrowing
 
-An `if` condition that proves something stronger about a value - an `isa` test on a class or union variant, a `?` presence test on an optional - narrows the value to the stronger type inside the branch, and a guard that leaves the block narrows the code after it. [Type narrowing](https://ghul.dev/type-narrowing.html) covers this in full: locals, parameters, fields and properties, and narrowing on assignment; [narrowing in depth](https://ghul.dev/narrowing-in-depth.html) covers what happens to a narrowing across calls.
+An `if` condition that proves something stronger about a value - an `isa` test on a class or union variant, a `?` presence test on an optional - narrows the value to the stronger type inside the branch, and a guard that leaves the block narrows the code after it. [Type narrowing](https://ghul.dev/type-narrowing.html) covers this in full: locals, parameters, fields and properties, narrowing on assignment, and what happens to a narrowing across calls.
 
 ### if let
 
@@ -7661,17 +7052,164 @@ default return value is 0
 
 ---
 
-<a id="optional-types-in-depth"></a>
+<a id="optional-types"></a>
 
-# optional types in depth
+# optional types
 
-> **editable examples**
->
-> Every example on this page can be edited and run here: click the pencil to open it in an editor, change it, and run it in your browser. Errors, hovers and completions come from the ghūl compiler as you type.
+A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and the same type without the `?` is non-optional. The [language basics](https://ghul.dev/language-basics.html#optional-types) page introduces the presence test `?` and the assignability rule.
 
-The [optional types](https://ghul.dev/optional-types) page covers using `T?`: the operators, the warnings, and optional-shaped types of your own. This page covers how a `T?` is represented at run time - which matters only when interoperating with other .NET languages, or when reading the IL the compiler produces. ghūl backs `T?` with whichever of three representations fits `T`, and picks it silently; all three behave alike.
+```ghul
+…
+find_first[T](xs: T[], predicate: T -> bool) -> T? is
+    for x in xs do
+        if predicate(x) then
+            return x;
+        fi
+    od
 
-## reference types
+    return null;
+si
+
+let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0);    // T = int, a value type
+let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2); // T = string, a reference type
+
+write_line("first even: {first_even ?? -1}");
+write_line("first long: {first_long ?? "none"}");
+```
+
+output:
+
+```
+first even: 4
+first long: ccc
+```
+
+`find_first` returns the first element the predicate accepts, or absent when there is none; `??` supplies a value for the absent case.
+
+Optionals work with reference types, value types, and generic types alike; the [representation](#representation) section below shows each.
+
+## the operators
+
+The `??` operator supplies a fallback: `a ?? b` is `a` when it is present, otherwise `b`, and `b` is evaluated only when needed. It is right-associative, so `a ?? b ?? c` tries each in turn, and the result stays optional until a non-optional value closes the chain:
+
+```ghul
+…
+let name = lookup();
+let greeting = "hello, {name ?? "stranger"}";
+write_line(greeting);
+```
+
+output:
+
+```
+hello, stranger
+```
+
+The `?.` operator reads a member only when the receiver is present: `a?.b` is `b` when `a` is present; otherwise the result is absent. The result is always optional, and `?.` chains, so a whole access path folds down to one optional. Method calls compose the same way: `a?.foo(args)` calls `foo` on a present receiver; otherwise the result is absent, with the argument expressions included in the short-circuit, so they are not evaluated when `a` is absent.
+
+The postfix `!` asserts presence and reads the value out; applied to an absent optional it throws. Inside a branch where flow analysis has proven presence, the compiler reports a redundancy warning instead.
+
+```ghul
+…
+let p = find();
+let name = p?.name; // string? - absent when p is absent
+write_line("name: {name ?? "unknown"}");
+```
+
+output:
+
+```
+name: unknown
+```
+
+## the warnings
+
+Reading a member through an optional not known to be present is reported with a `null-deref` warning; `x?.y`, `x.has_value`, `x!`, and `if let` are the warning-free routes. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
+
+## optional-shaped types
+
+A named type of your own can support `?` and `!` without being a `T?`. It keeps its own name and doesn't interconvert with `T?` - what it opts in to is the operators, not the spelling. There are two routes.
+
+A union where exactly one variant has fields, or with one variant marked `default`, is option-shaped: `?` tests whether the union holds that variant, and `!` unwraps its payload (or the whole variant, if it has more than one field). This is what to reach for when a value has more shape than present-or-absent - success-with-a-value versus failure-with-a-reason, for instance - since a `case` over the union matches every outcome exhaustively. The [unions and pattern matching](https://ghul.dev/unions-and-pattern-matching.html) page builds an `Option[T]` from scratch; the same rule covers the two-variant shape most languages call `Result` - `OK` marked `default`, `ERROR` holding the failure:
+
+```ghul
+…
+union Result[T, E] is
+    OK(value: T) default;
+    ERROR(error: E);
+si
+
+divide(a: int, b: int) -> Result[int, string] =>
+    if b == 0 then
+        Result.ERROR("division by zero")
+    else
+        Result.OK(a / b)
+    fi;
+
+let good = divide(10, 2);
+let bad = divide(10, 0);
+
+if ► good? then
+    write_line("10 / 2 = {good!}");
+fi
+
+if ! ► bad? then
+    write_line("10 / 0 failed");
+fi
+```
+
+output:
+
+```
+10 / 2 = 5
+10 / 0 failed
+```
+
+And a type that exposes `has_value: bool` and `value: T` properties is treated as optional-shaped structurally, with no declaration required: `?` consults `has_value`, and on a struct `!` reads out `value`:
+
+```ghul
+…
+// no declared relationship to T? or Ghul.Maybe[T] - ghūl looks for
+// has_value and value structurally
+struct PERCENTAGE is
+    has_value: bool;
+    value: double;
+
+    init() is
+        has_value = false;
+        value = _;
+    si
+
+    init(v: double) is
+        has_value = true;
+        value = v;
+    si
+si
+
+let full = PERCENTAGE(87.5d);
+let empty = PERCENTAGE();
+
+if full? then
+    write_line("full: {full!}%");
+fi
+
+if !empty? then
+    write_line("empty has no reading");
+fi
+```
+
+output:
+
+```
+full: 87.5%
+empty has no reading
+```
+
+## representation
+
+How a `T?` value is stored depends on `T`. ghūl backs it with whichever of three representations fits, and picks silently; all three behave alike, and the choice matters only when interoperating with other .NET languages or reading the IL the compiler produces.
+
+### reference types
 
 The common case: `T?` over a class or other reference type is a plain nullable reference, and absence is `null`.
 
@@ -7692,7 +7230,7 @@ output:
 name is Alice
 ```
 
-## value types
+### value types
 
 `T?` over a value type - a scalar such as `int`, or a struct - is backed by .NET's `Nullable<T>` at the IL level. That is nothing you need to work with directly: write `T?`, the same way you would for a reference type. A ghūl `int?` already is a `Nullable<int>` as far as the runtime is concerned, so it passes to and from non-ghūl .NET code as it is, and there is no reason to name `System.Nullable[T]` in ghūl source:
 
@@ -7701,7 +7239,7 @@ let ► here: int? = 42;   // present
 let gone: int? = null; // absent
 ```
 
-## unconstrained generic types
+### unconstrained generic types
 
 A generic function or type can use `T?` even though `T` can stand for a reference type or a value type:
 
@@ -7736,7 +7274,7 @@ output:
 
 Behind the scenes an unconstrained `T?` lowers to `Ghul.MAYBE[T]`, a struct that can hold present or absent for any `T`. Like the other two representations it is an implementation detail: there is no reason to name `MAYBE[T]` in your own code. `MAYBE[T]` exposes `has_value: bool` and `value: T` properties, so it is [optional-shaped](https://ghul.dev/optional-types#optional-shaped-types) by construction. See [generics](https://ghul.dev/generics) for how the type parameters themselves work.
 
-## they interconvert
+### they interconvert
 
 Because all three are the same feature, they behave alike: `??` chains across them, `if x?` and `if let` narrow them the same way, and a non-optional `T` widens to any of them without ceremony. Which one backs a given `T?` is an implementation detail you don't need to track.
 
@@ -7760,9 +7298,9 @@ found
 
 ---
 
-<a id="narrowing-in-depth"></a>
+<a id="type-narrowing"></a>
 
-# narrowing in depth
+# type narrowing
 
 > **editable examples**
 >
@@ -7770,7 +7308,228 @@ found
 >
 > The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller examples that include narrowing, to build and run locally, in a GitHub Codespace or a dev container.
 
-The [type narrowing](https://ghul.dev/type-narrowing) page covers where narrowing happens: conditions, guards, locals, fields and properties, and assignment. This page covers how long a narrowing lasts - how the compiler decides whether a call invalidated one, what the `pure` modifier declares, and what a `stable` property promises.
+When a check proves a value has a more specific type, ghūl narrows the value for the code the check covers: inside the branch, the value has the narrower type, with no cast and no unwrap needed. Union variant tests, `isa` class checks, presence tests on optionals, and `if let` all narrow, and narrowing follows the control flow, [covered below](#flow-sensitive-narrowing).
+
+> **narrowing inlays**
+>
+> Open ghūl in an editor with the [ghūl language extension](https://ghul.dev/tooling.html) and small triangle hints mark where type narrowing changes: `►` where a variable is narrowed to a more specific type, `◄` where a narrowing ends and the variable widens back to its declared type, and `◄►` where an assignment does both at once. Hovering a hint shows the types and the reason; on an `if` it shows the narrowing for both the taken and the not-taken branch. The same sigils appear in the code examples on this site.
+
+## narrowing in a condition
+
+An `isa` test in an `if` condition narrows the variable to the tested type inside the then-branch. This holds for a union variant or a class:
+
+```ghul
+…
+union Maybe[T] is
+    YES(value: T);
+    NO;
+si
+…
+let m: Maybe[int] = Maybe.YES(42);
+
+if isa Maybe.YES( ► m) then
+    // m is narrowed to Maybe.YES inside the branch,
+    // so m.value is in scope
+    write_line("got value {m.value}");
+fi
+
+let a: Animal = CAT("whiskers");
+if isa CAT( ► a) then
+    // a is narrowed to CAT inside the branch
+    write_line(a.purr());
+fi
+```
+
+output:
+
+```
+got value 42
+whiskers purrs
+```
+
+An [optional type](https://ghul.dev/optional-types) narrows the same way. A `?` test in the predicate narrows the optional to its non-optional form in the then-branch, so the value can be used directly:
+
+```ghul
+…
+let name: string? = lookup();
+
+if ► name? then
+    // name is narrowed to non-optional string
+    // here, no ! needed
+    write_line("hello, {name}");
+fi
+```
+
+output:
+
+```
+hello, world
+```
+
+For a two-variant union, the `else` branch is narrowed to the complementary variant:
+
+```ghul
+…
+union Result[T, E] is
+    OK(value: T);
+    ERR(error: E);
+si
+…
+let r: Result[int, string] = some_call();
+
+if isa Result.OK( ► r) then
+    write_line("ok: {r.value}");
+else
+    // r is narrowed to Result.ERR here
+    write_line("err: {r.error}");
+fi
+```
+
+output:
+
+```
+ok: 42
+```
+
+The `else` narrowing extends to a class hierarchy declared in the current assembly without `open`: the compiler knows every subclass, so ruling out the tested one narrows the `else` branch to the others, and when an `abstract` root has exactly two subclasses, ruling out one leaves the other. The [object oriented programming](https://ghul.dev/object-oriented-programming) page covers open, closed, and abstract classes.
+
+A `while` condition narrows its body the same way an `if` condition narrows its then-branch, so `while isa CAT(a) do a.purr() od` reaches a `CAT`-only member without an inner cast.
+
+## flow-sensitive narrowing
+
+Narrowing follows the control flow, not just the branch structure. A common shape is a guard: when the test fails, the guard leaves the block with `return`, `throw`, `break` or `continue`, so the code after the guard runs only when the test passed, and the value is narrowed there:
+
+```ghul
+…
+classify(a: Animal) is
+    if !isa CAT( ► a) then
+        write_line("not a cat");
+        return;
+    fi
+
+    // every non-CAT has returned, so a is
+    // narrowed to CAT from here on
+    write_line(a.purr());
+si
+
+classify(CAT("whiskers"));
+classify(DOG());
+```
+
+output:
+
+```
+whiskers purrs
+not a cat
+```
+
+## locals and parameters
+
+Narrowing applies to local variables, including a function's own parameters.
+
+```ghul
+…
+greet(a: Animal) is
+    if isa CAT( ► a) then
+        // a is a parameter of greet, narrowed to CAT
+        // in this branch
+        write_line(a.purr());
+    fi
+si
+
+greet(CAT());
+```
+
+output:
+
+```
+purr
+```
+
+## fields and properties
+
+Narrowing also applies to a member-access path like `x.field` or `x.property`. A presence test (`?`) narrows the path: after `if x.field? then`, uses of `x.field` inside the branch are non-optional.
+
+```ghul
+…
+describe(order: ORDER) is
+    if ► order.customer? then
+        // a presence test narrows the path itself:
+        // within this branch order.customer is the
+        // non-optional string, so .length is
+        // reachable directly
+        write_line("customer name has {order.customer.length} chars");
+    fi
+si
+
+describe(ORDER("alice"));
+```
+
+output:
+
+```
+customer name has 5 chars
+```
+
+An `isa` check or variant test narrows a path the same way:
+
+```ghul
+…
+class CARRIER(occupant: Animal);
+describe(carrier: CARRIER) is
+    if isa CAT( ► carrier.occupant) then
+        // carrier.occupant is a CAT within this branch,
+        // so its purr() is reachable directly
+        write_line(carrier.occupant.purr());
+    fi
+si
+
+describe(CARRIER(CAT()));
+```
+
+output:
+
+```
+purr
+```
+
+## narrowing on assignment
+
+Reassigning a local narrows it: when the new value's static type is more specific than the declared type, the local narrows to that type from the assignment on, so a following call resolves on the assigned type without an `isa`:
+
+```ghul
+…
+► pet = CAT();
+// assigning a CAT narrows pet to CAT, so purr() is in reach
+write_line(pet.purr());
+```
+
+output:
+
+```
+purr
+```
+
+If the local is already narrowed, assigning a value of a different type cancels that narrowing and introduces one for the new type, so the following call resolves on the assigned type:
+
+```ghul
+…
+if isa CAT( ► pet) then
+    write_line(pet.purr());
+
+    ◄► pet = DOG();
+    // reassigning cancels the CAT narrowing and
+    // introduces a DOG one: pet is DOG here
+    write_line(pet.name());
+fi
+```
+
+output:
+
+```
+purr
+dog
+```
 
 ## how long a narrowing lasts
 
@@ -7851,6 +7610,319 @@ Narrowings of local variables are more stable than narrowings of fields and prop
 Whether a call can invalidate a narrowing depends on what the call can write. The compiler works this out from function bodies: a function that writes nothing that existed before the call cannot invalidate any narrowing, and most functions are proven that way with no annotation. Where the proof falls short, the postfix [`pure` modifier](https://ghul.dev/definitions.html#methods) declares it instead, trusted as declared and required of every override. Some imported .NET collection mutators, such as `LIST.add` and `STACK.push`, are known to write only their own receiver's internal state, so they invalidate only a narrowing that reads through that state.
 
 A narrowing through a property has one more dependency: the property is read once at the test and again at each use, and every read calls the getter. The narrowing is only sound if the getter's later answers agree with the answer the test saw. The compiler proves that from the getter's body where it can. Where it cannot - a getter that fills a cache on first read, for example - the test does not narrow at all, and a use that relies on the narrowing is an error naming the getter. Declaring the property [`stable`](https://ghul.dev/definitions.html#properties) restores the narrowing: it promises that two reads with nothing between them agree on whether the value is present, and on its runtime type.
+
+
+---
+
+<a id="type-inference"></a>
+
+# type inference
+
+> **editable examples**
+>
+> Every example on this page can be edited and run here: click the pencil to open it in an editor, change it, and run it in your browser. Errors, hovers and completions come from the ghūl compiler as you type.
+>
+> The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller type-inference examples to build and run locally, in a GitHub Codespace or a dev container.
+
+ghūl infers types pervasively inside a method or function body: most local variables, loop variables, destructured variables and anonymous function parameters can be left unannotated, and the compiler works their types out from how they are initialized and used.
+
+Mechanically it is bidirectional, constraint-based inference: types flow up from expressions and down from the contexts that use them, and the compiler re-walks each function body until the unknowns settle. The [implementation page](https://ghul.dev/implementation#type-inference) describes how.
+
+Type inference is **function-local**: types inferred within one function are not visible outside it. Outside function bodies all types are explicit, including the signatures of methods and global functions, whose parameter and return types are always written out.
+
+Within a function, types are inferred for:
+
+- local variables
+- loop variables
+- destructured variables
+- anonymous function parameters
+- anonymous function return types
+- generic type arguments on calls to constructors, methods, static methods and global functions
+
+In each case the inferred type is concrete. The compiler does not introduce new type parameters during inference, so an anonymous function literal takes a single concrete function type from its context - it cannot itself be generic. For polymorphic behaviour, declare a generic global function or method and pass it where the function value is needed.
+
+ghūl also performs [type narrowing](https://ghul.dev/type-narrowing.html) - within parts of a function a value can be observed at a more specific type than the one it was declared with. Inference and narrowing work together: the inferred type is the ceiling, and the control flow sharpens it region by region.
+
+The examples below leave inferred types unannotated; hover over any variable to see the type the compiler worked out for it.
+
+## what stays explicit
+
+A function's signature is written out explicitly; inference works within the body.
+
+```ghul
+// the signature is explicit: the parameter type
+// and the return type are written out
+totals(
+    values: Collections.Iterable[int]
+) -> (sum: int, count: int) is
+    let sum mut = 0;
+    let count mut = 0;
+
+    for v in values do
+        sum = sum + v;
+        count = count + 1;
+    od
+
+    return (sum, count);
+si
+…
+```
+
+Inference does not read types out of a body into the function's signature, and does not flow from one function into another: each body is checked on its own, against the explicit signatures of everything it calls.
+
+Fields and properties belong to a type rather than to a function body, so their types are written out too - for private members as well as public ones.
+
+```ghul
+class COUNTER is
+    count: int; // a property - its type is declared
+
+    init() is
+        count = 0;
+    si
+
+    tick() is
+        // a local - its type is inferred from the
+        // initializer
+        let step = 1;
+        count = count + step;
+    si
+si
+…
+```
+
+## what gets inferred
+
+### let statements and expressions
+
+When no explicit type is given for a variable in a let statement or expression, its type is inferred from the initializer, provided one is present.
+
+```ghul
+let a_string = "12345";
+let an_int = 12345;
+let an_int_array = [1, 2, 3, 4, 5];
+```
+
+### destructuring variables
+
+A destructuring `let` declares several variables at once from a tuple. Each variable takes its type from the corresponding element of the right-hand side, and the pattern can nest.
+
+```ghul
+let person = ("alice", 30);
+let (name, age) = person;
+
+let ((first, second), third) = (("a", "b"), "c");
+```
+
+### for loop variables
+
+A `for` loop variable takes its type from the element type of the iterable being looped over. Destructuring composes with this: when the element type is a tuple, its element types flow into the destructured names.
+
+```ghul
+…
+for i in 1::10 do
+    write_line("{i}");
+od
+
+let pairs = [("a", 1), ("b", 2)];
+
+for (name, count) in pairs do
+    write_line("{name}: {count}");
+od
+```
+
+output:
+
+```
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+a: 1
+b: 2
+```
+
+### list literal element types
+
+The element type of a list literal is inferred from the types of the elements: the compiler finds a type compatible with all of them.
+
+```ghul
+class BASE();
+
+class DERIVED(): BASE;
+…
+let array_of_base = [BASE(), DERIVED()];
+let array_of_object = [BASE(), DERIVED(), object()];
+let array_of_int = [1, 2, 3, 4, 5];
+```
+
+If a list contains tuple literals, the compiler finds a compatible common type for each tuple element across all elements of the list.
+
+```ghul
+let int_string = [(123, "hello"), (456, "goodbye")];
+
+let int_object = [(123, 456), (798, "wibble")];
+```
+
+### if expression result types
+
+The result type of an if expression is inferred from the types of all the branch results: the compiler finds a type compatible with all of them.
+
+```ghul
+class BASE();
+
+class DERIVED(): BASE;
+
+let derived =
+    if true then
+        DERIVED()
+    else
+        DERIVED()
+    fi;
+
+let base =
+    if true then
+        DERIVED()
+    else
+        BASE()
+    fi;
+```
+
+### generic class, struct and variant constructors
+
+When constructing a generic class, struct or variant, the generic type arguments are inferred from the constructor method arguments where possible.
+
+```ghul
+class THING[T](value: T);
+…
+let int_thing = THING(1234);
+let string_thing = THING("hello");
+```
+
+Inference from the constructor arguments works when every type argument appears among those arguments and the constructor overload is unambiguous. A type argument left unpinned - by a no-argument constructor, say - can still be resolved from later use of the value (see [inference from later use sites](#inference-from-later-use-sites)).
+
+### generic function and method calls
+
+When calling a generic global function, a generic method, or a static method on a generic class or struct, the compiler infers the generic type arguments from the types of the actual arguments passed.
+
+```ghul
+class BASE();
+
+class DERIVED(): BASE;
+
+do_something[T](a: T, b: T) -> T => a;
+let base = do_something(BASE(), DERIVED());
+let derived = do_something(DERIVED(), DERIVED());
+let obj = do_something(object(), DERIVED());
+```
+
+### anonymous function return types
+
+The return type of an anonymous function literal is inferred from the type of its expression body, or from the types of return expressions in its block body.
+
+```ghul
+let returns_int = (i: int) => i * 2;
+let returns_string = (s: string) => "{s}{s}";
+```
+
+### anonymous function argument types
+
+When an anonymous function literal is passed as an argument and an unambiguous overload match can be made without knowing the exact function type, the compiler infers the argument types from the matching overload.
+
+```ghul
+…
+[1, 2, 2, 4, 5] |> filter(i => i > 3);
+```
+
+Here `self` is already known to be `Pipe[int]`, so `Pipe[int].filter(predicate: int -> bool) -> Pipe[int]` is the only overload that could match. The `predicate` argument must therefore be `int -> bool`, and the type of `i` must be `int`.
+
+## inference from later use sites
+
+The sections above infer a type from a declaration's initializer or from a call argument. Because inference spans the whole function body, the compiler can also work the other way: when a declaration gives no type on its own, a later use of the variable in the same body can supply one.
+
+```ghul
+…
+// m is BOX[?] here; the type argument is not
+// yet known
+let m = BOX();
+
+// the set call takes an int, so m is BOX[int]
+m.set(42);
+
+let x = m.get();
+```
+
+The same applies to anonymous functions whose argument types are not explicit: if a later call supplies a concrete type, that flows back to the function literal.
+
+```ghul
+…
+let f = x => x + 1;
+write_line("{f(42)}");
+```
+
+output:
+
+```
+43
+```
+
+### recursive anonymous functions
+
+In a recursive anonymous function, the argument type can be inferred from how the function is called, including from its own recursive calls.
+
+```ghul
+…
+let factorial = n rec =>
+    if n == 0 then 1 else n * rec(n - 1) fi;
+write_line("{factorial(5)}");
+```
+
+output:
+
+```
+120
+```
+
+### operations on a not-yet-inferred value
+
+When an anonymous function's parameter has no annotation, every operation the body performs on it - a member access, a method call, an index, an iteration, a destructuring - is recorded as a constraint on the parameter's type. Whatever type is eventually inferred for the parameter must satisfy all of them.
+
+```ghul
+…
+let length_of = x => x.length;
+write_line("{length_of("hello")}");
+```
+
+output:
+
+```
+5
+```
+
+The call passes a `string`, and `string` has a `length` member, so `x` resolves to `string`. When a call site leaves room for more than one type, a candidate that does not support every recorded operation is discarded.
+
+### generic argument inference from sibling actuals
+
+When a generic function or method is called with two arguments that share only a common ancestor, the generic argument is inferred from their nearest shared type rather than failing the overload match.
+
+```ghul
+class Animal abstract is
+    speak() -> string => "animal";
+si
+
+class CAT(): Animal;
+
+class DOG(): Animal;
+
+merge[T](a: T, b: T) -> T => a;
+…
+let a = merge(CAT(), DOG());
+```
 
 
 ---
