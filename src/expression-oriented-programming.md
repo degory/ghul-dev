@@ -52,11 +52,11 @@ Inside these blocks a terminating `;` on the last statement is optional, and wri
 
 ## block bodies return their tail
 
-A block body follows the same rule as a `val ... lav` block: where its last statement is one that produces a value, and it is written without a terminating `;`, that value is the block's. In a function or method it is the return value on the fall-through path, checked against the declared return type exactly as an explicit `return` would be:
+A function or method body takes its last statement's value the way an arm does, with one difference: here the terminating `;` is not inert. Where the last statement produces a value and carries no `;`, that value is the return value on the fall-through path, checked against the declared return type exactly as an explicit `return` would be:
 
 <GhulExample name="expression-oriented-programming-7" />
 
-Unlike an arm, a body is where the semicolon decides the reading. Written `doubled * trimmed;` the statement is evaluated and its value discarded, which leaves the function with no value on that path.
+Written `doubled * trimmed;` the statement is evaluated and its value discarded, which leaves the function with no value on that path.
 
 Because the tail is an ordinary statement position, an `if` or a `case` sitting there is the return value too, and no branch needs its own `return`:
 

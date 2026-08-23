@@ -370,9 +370,11 @@ A statement list is a sequence of statements. A `;` separates statements; it is
 required after a statement whose syntax would otherwise run on into the next, and
 optional elsewhere.
 
-On the **last** statement of a list, where that statement produces a value, the `;` is significant rather than optional:
-without one that statement is the list's tail, and the list produces its value. In
-a function or method body the tail is the return value on the fall-through path.
+In a **function or method body** the `;` on the last statement is significant rather
+than optional: without one, a value-producing last statement is the body's tail and
+its value is the return value on the fall-through path; with one the value is
+discarded. At any other closing keyword - `fi`, `esac`, `od`, `lav` - the trailing
+`;` stays optional and does not affect the value the block produces.
 
 ```ebnf
 StatementList ::= ( Statement ";"? )*
