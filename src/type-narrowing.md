@@ -52,25 +52,25 @@ An `isa` check or variant test narrows a path the same way:
 
 <GhulExample name="type-inference-4" />
 
-## how long a narrow lasts
+## how long a narrowing lasts
 
-A narrow on a local variable lasts until the variable is reassigned: a local holds one value, which no other function can reach, so no call can make it stale.
+Narrowing is optimistic: the compiler narrows whenever a test proves something, and checks afterwards whether the narrowing still holds where it is used. It has to check, because values change, and their types change with them: a value that was present can be reassigned to null.
 
-A narrow on a member-access path can end sooner, because each mention of the path reads the value again, and code that runs between the test and the use can change what it reads. An assignment can invalidate the narrow directly. For a narrow on a field, assigning that field through any receiver invalidates it: the written receiver could be the same object. For a narrow read through a property, any assignment to any field, property or element invalidates it, because the getter could read whatever was assigned. Reassigning the path's root invalidates either.
+A narrowing lasts at most to the end of the code block associated with the test - the then or else arm of the `if`, or the loop body. It can end earlier, because the value can change before the block ends: by an explicit reassignment, or because a call to a function or method changes it, directly or indirectly.
 
-Calls are the other way a narrow can stop holding: a call between the test and the use might change the value the narrow describes. The compiler does not assume the worst of every call. It checks each use of the narrowed value that actually relies on the narrow - passing it where only the non-optional or narrower type is accepted, or reading a member only that type has - and tries to prove that no call in between could have changed the value. A use the declared type already satisfies relies on nothing, and is never checked. Where the proof succeeds, the use is allowed. Where it fails, the compiler reports the use, because it could be unsafe at run time: passing the value where only the narrower type is accepted is an error, and reading a member through it is a `null-deref` warning, the same warning as reading through any un-narrowed optional. Either way the message names the call it could not prove and points back at the test that narrowed the value:
+The compiler tracks the calls that might do that, conservatively: it builds a call graph and works out which fields each call might write. When you use a narrowed value in a way that depends on the narrowing - you read a member through it, or pass it where only the non-optional or narrower type is accepted - and the compiler cannot prove the value is still what the test saw, it reports the use as potentially unsafe, naming the call it could not prove and pointing back at the test:
 
 <GhulExample name="type-inference-22" />
 
-There are two ways out. Test the value again: `?`, `!`, `?.`, `isa`, and `if let` all check at run time and re-establish what they test, whatever calls came before. Or copy the value into a local variable before the call, where no other function can reach it:
-
-<GhulExample name="type-inference-23" />
-
-Where the compiler can prove that a call does not invalidate the narrow, there is nothing to report. This call writes only a field the narrow does not read, so the narrow still holds:
+When the compiler can prove that the calls in between could not have changed the value, there is nothing to report:
 
 <GhulExample name="type-inference-5" />
 
-`if let` copies the value into a fresh local in one step, and works for any expression - the result of a call, not only a variable or path. The local narrows and stays narrowed within the branch. See [if let](/control-flow.html#if-let) for the full construct.
+Where it cannot, there are two ways out. Test the value again: `?`, `!`, `?.`, `isa`, and `if let` all check at run time and re-establish what they test, whatever calls came before. Or copy the value into a local variable:
+
+<GhulExample name="type-inference-23" />
+
+Narrowings of local variables are more stable than narrowings of fields and properties, because there are fewer ways a local variable can change: explicit reassignment, capture by a closure, or being passed by reference to another function. A local variable that is not `mut` cannot change at all, so its narrowing always lasts to the end of the block. That is why `if let` is the best way to get a narrowing that lasts: it copies the value into a fresh immutable local variable in one step, and works for any expression - the result of a call, not only a variable or path. See [if let](/control-flow.html#if-let) for the full construct.
 
 <GhulExample name="type-inference-6" />
 
@@ -86,6 +86,6 @@ If the local is already narrowed, assigning a value of a different type cancels 
 
 ## calls, purity, and stable
 
-Whether a call can invalidate a narrow depends on what the call can write. The compiler works this out from function bodies: a function that writes nothing that existed before the call cannot invalidate any narrow, and most functions are proven that way with no annotation. Where the proof falls short, the postfix [`pure` modifier](/definitions.html#methods) declares it instead, trusted as declared and required of every override. Some imported .NET collection mutators, such as `LIST.add` and `STACK.push`, are known to write only their own receiver's internal state, so they invalidate only a narrow that reads through that state.
+Whether a call can invalidate a narrowing depends on what the call can write. The compiler works this out from function bodies: a function that writes nothing that existed before the call cannot invalidate any narrowing, and most functions are proven that way with no annotation. Where the proof falls short, the postfix [`pure` modifier](/definitions.html#methods) declares it instead, trusted as declared and required of every override. Some imported .NET collection mutators, such as `LIST.add` and `STACK.push`, are known to write only their own receiver's internal state, so they invalidate only a narrowing that reads through that state.
 
-A narrow read through a property has one more dependency: the property is read once at the test and again at each use, and every read calls the getter. The narrow is only sound if the getter's later answers agree with the answer the test saw. The compiler proves that from the getter's body where it can. Where it cannot - a getter that fills a cache on first read, for example - the test does not narrow at all, and a use that relies on the narrow is an error naming the getter. Declaring the property [`stable`](/definitions.html#properties) restores the narrow: it promises that two reads with nothing between them agree on whether the value is present, and on its runtime type.
+A narrowing through a property has one more dependency: the property is read once at the test and again at each use, and every read calls the getter. The narrowing is only sound if the getter's later answers agree with the answer the test saw. The compiler proves that from the getter's body where it can. Where it cannot - a getter that fills a cache on first read, for example - the test does not narrow at all, and a use that relies on the narrowing is an error naming the getter. Declaring the property [`stable`](/definitions.html#properties) restores the narrowing: it promises that two reads with nothing between them agree on whether the value is present, and on its runtime type.
