@@ -1,0 +1,26 @@
+{
+  "name": "range-not-iterable",
+  "snippet": false,
+  "code": "for i in 1..<1 do\n    write_line(\"{i}\");\nod",
+  "fullSource": "use IO.Std.write_line;\n\n// expect: error\nfor i in 1..<1 do\n    write_line(\"{i}\");\nod\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [
+    { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 15, "severity": "error", "message": "not iterable" }
+  ],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: !!!", "signature": "i: !!!", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 13, "text": "Ghul...<(from: int, to: int) -> System.Range", "signature": "Ghul...<(from: int, to: int) -> System.Range", "kindLabel": "pure global function" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 18, "text": "i: !!!", "signature": "i: !!!", "kindLabel": "local value" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 13, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" }
+  ]
+}

@@ -236,6 +236,11 @@ The factory returns `Pipe[T]`, so combinators like `take`, `filter`,
 `map`, `zip`, and `index` chain straight onto it. The state type does not
 appear in that result, so consumers never see how a stream is stepped.
 
+`take` is what bounds a sequence that has no end. A
+[slice](/language-basics.html#indexing-with-a-range) reads its source by index,
+which a lazy sequence cannot do, so slices are for arrays, lists and strings,
+and `take` is for streams and generators.
+
 [Generators](/async-and-generators.html) are the other way to a lazy
 sequence: a function containing `yield` produces its elements on demand,
 and its result is a `Pipe[T]` too.

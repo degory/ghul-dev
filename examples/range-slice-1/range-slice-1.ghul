@@ -1,0 +1,10 @@
+use IO.Std.write_line;
+use Ghul.Pipes;
+
+// >>>
+let xs = [10, 20, 30, 40, 50];
+
+// '..' excludes its end, '::' includes it:
+write_line("{xs[1..3] |> join(", ")}");
+write_line("{xs[1::3] |> join(", ")}");
+// <<<

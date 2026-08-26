@@ -158,6 +158,12 @@ These operators are not for loop specific and can be used in any expression cont
 
 <GhulExample name="control-flow-26" />
 
+Four further range operators - `..<`, `::<`, `..<<` and `::<<` - count an endpoint back from the end of a source rather than forward from its start. Their endpoints are resolved against that source's length, which is known where the source is indexed, so they build a `System.Range` rather than an integer range and a `for` loop cannot step over one:
+
+<GhulExample name="range-not-iterable" />
+
+Indexing with them is covered under [indexing with a range](/language-basics.html#indexing-with-a-range).
+
 ### scope
 
 The loop variable is in scope within the loop body but not within the expression that provides the iterable object. `continue` in a `for` loop proceeds to the next iteration immediately before attempting to read the next element from the iterator.

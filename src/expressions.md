@@ -120,9 +120,11 @@ Property access expressions allow you to access the properties of an object usin
 
 ## indexer
 
-Indexer expressions allow you to access elements of an array or collection using square brackets.
+Indexer expressions read an element of an array or collection using square brackets.
 
 <GhulExample name="expressions-21" />
+
+An index can also be a [range](/language-basics.html#indexing-with-a-range), which takes a slice of the source rather than reading a single element.
 
 ## constructor
 

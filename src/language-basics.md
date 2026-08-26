@@ -67,6 +67,30 @@ Arrays can be constructed with an [array literal](/expressions.html#array)
 Array elements can be read with indexer syntax
 <GhulExample name="language-basics-10" />
 
+### indexing with a range
+
+An index can be a range rather than a single position. The result is a slice of the source, holding the elements from the range's start up to its end.
+
+<GhulExample name="range-slice-1" />
+
+`..` excludes its end and `::` includes it, exactly as they do when a range is looped over.
+
+Four further range operators count an endpoint back from the end of the source rather than forward from its start. The number of `<` says how many endpoints are counted back, filling from the right: `..<` and `::<` count the end back, and `..<<` and `::<<` count both. `<0` is the length, so `a..<0` runs from `a` to the end of the source.
+
+<GhulExample name="range-slice-2" />
+
+A slice is a `Collections.List[E]` reading through to the source rather than a copy of it. Taking one costs the same whatever the size of the source, and a later change to a mutable source shows through the slice.
+
+<GhulExample name="range-slice-3" />
+
+Arrays, strings, and anything that satisfies `Collections.List[E]` can be indexed this way. A string gives back a string, because .NET has no non-copying substring to hand out.
+
+<GhulExample name="range-slice-4" />
+
+A range index is a read. The slice has a read-only indexer, so there is nothing to assign through: assign to the source instead.
+
+A type can supply its own slice by declaring a `[r: System.Range]` indexer, which is used in preference to the one described here. Otherwise the index calls [`slice`](/runtime-library.html#slice), which can also be called directly.
+
 ### tuples
 Tuples in ghūl are lightweight, immutable data structures that can hold a fixed number of elements of different types. Tuple types use parentheses `(` `)`, with elements separated by commas. Tuple literals are similarly constructed with `(` `)` and comma delimited elements. Tuples compare by structural equality: two tuples are equal when their corresponding elements are.
 

@@ -1,0 +1,32 @@
+{
+  "name": "range-slice-4",
+  "snippet": false,
+  "code": "let greeting = \"hello world\";\n\nwrite_line(greeting[0..5]);\nwrite_line(greeting[6..<0]);",
+  "fullSource": "use IO.Std.write_line;\n\nlet greeting = \"hello world\";\n\nwrite_line(greeting[0..5]);\nwrite_line(greeting[6..<0]);\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "hello\nworld\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 12, "text": "greeting", "signature": "greeting", "kindLabel": "top-level variable" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 19, "text": "greeting", "signature": "greeting", "kindLabel": "top-level variable" },
+    { "startLine": 3, "startColumn": 23, "endLine": 3, "endColumn": 23, "text": "Ghul...(from: int, to: int) -> INT_RANGE", "signature": "Ghul...(from: int, to: int) -> INT_RANGE", "kindLabel": "innate function range.exclusive" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 25, "text": "Ghul.Pipes.slice(source: string, r: INT_RANGE) -> string", "signature": "Ghul.Pipes.slice(source: string, r: INT_RANGE) -> string", "kindLabel": "pure global function" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 19, "text": "greeting", "signature": "greeting", "kindLabel": "top-level variable" },
+    { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 24, "text": "Ghul...<(from: int, to: int) -> System.Range", "signature": "Ghul...<(from: int, to: int) -> System.Range", "kindLabel": "pure global function" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 26, "text": "Ghul.Pipes.slice(source: string, r: System.Range) -> string", "signature": "Ghul.Pipes.slice(source: string, r: System.Range) -> string", "kindLabel": "pure global function" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 12, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 19, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 23, "endLine": 3, "endColumn": 23, "tokenType": "operator" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 19, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 24, "tokenType": "function" }
+  ]
+}

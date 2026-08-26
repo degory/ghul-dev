@@ -1,0 +1,8 @@
+use IO.Std.write_line;
+
+// >>>
+let greeting = "hello world";
+
+write_line(greeting[0..5]);
+write_line(greeting[6..<0]);
+// <<<

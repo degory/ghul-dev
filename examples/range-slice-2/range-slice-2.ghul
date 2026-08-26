@@ -1,0 +1,11 @@
+use IO.Std.write_line;
+use Ghul.Pipes;
+
+// >>>
+let xs = [10, 20, 30, 40, 50];
+
+// one endpoint counted back, then both:
+write_line("{xs[1..<1] |> join(", ")}");
+write_line("{xs[1..<0] |> join(", ")}");
+write_line("{xs[3..<<0] |> join(", ")}");
+// <<<

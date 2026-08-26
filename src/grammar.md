@@ -147,6 +147,10 @@ operator, with one exception: a `.` immediately after a leading `!` or `?` ends
 the operator, so that `x!.foo` and `x?.foo` parse as a member access on an
 unwrap/has-value, not as the operators `!.` or `?.`.
 
+Greedy tokenization reaches the range operators too: `0..-count` is the single
+operator `..-` rather than `..` followed by a negated `count`. Write `0.. -count`
+for a range whose end is a negative expression.
+
 A handful of operator spellings are recognised as dedicated tokens rather than
 general operators: `=`, `:`, `.`, `->`, `=>`, `?` and `@`.
 
@@ -608,7 +612,7 @@ the following levels, **tightest first**:
 | user&#8209;5     | *(user-defined, default)*                   |
 | shift            | `<<`  `>>`  `>>>`                            |
 | user&#8209;4     | *(user-defined)*                            |
-| range            | `..`  `::`                                  |
+| range            | `..`  `::`  `..<`  `::<`  `..<<`  `::<<`     |
 | user&#8209;3     | *(user-defined)*                            |
 | relational       | `==` `!=` `=~` `!~` `<` `>` `>=` `<=` `≈` `≡` |
 | user&#8209;2     | *(user-defined)*                            |
@@ -622,7 +626,10 @@ calls and indexing bind more tightly than any binary operator.
 A user-defined operator (any operator not in the table above) is assigned a
 precedence from its **first character**, modelled on OCaml and F#: operators
 starting with `*` `/` `%` bind as multiplication, `+` `-` as addition, and so on;
-an operator with no recognised first character defaults to user&#8209;5. The
+an operator with no recognised first character defaults to user&#8209;5. An
+operator whose name starts with `..` or `::` is the exception: it takes range
+precedence whatever follows, which is what puts `..<` and `::<<` on the same
+level as `..` and `::`. The
 `@precedence("op", "level")` pragma overrides the precedence of a named operator.
 Both arguments must be string literals (a numeric `level` is not accepted),
 and `level` names a precedence level: `user-1` … `user-8`, or one of the built-in

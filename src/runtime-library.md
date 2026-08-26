@@ -82,6 +82,12 @@ operator calls to wrap its left operand.
 
 <GhulExample name="pipes-ref-pipe-function" signature />
 
+### slice
+
+Reads part of an indexable source without copying it. See [indexing with a range](/language-basics.html#indexing-with-a-range).
+
+<GhulExample name="pipes-ref-slice-function" signature />
+
 ## stages
 
 A stage returns a new pipe, so stages chain onto one another.

@@ -1,0 +1,63 @@
+use Collections.Iterable;
+use Collections.List;
+use Collections.LIST;
+use Collections.MAP;
+use Collections.SET;
+use Ghul.Pipes.INDEXED_VALUE;
+use Ghul.Pipes.Pipe;
+
+// >>>
+slice[T](source: T[], r: Ghul.INT_RANGE) -> List[T] pure is
+// <<<
+        throw System.Exception("reference stub");
+    si
+
+// >>>
+slice[T](source: T[], r: Ghul.INT_RANGE_INCLUSIVE) -> List[T] pure is
+// <<<
+        throw System.Exception("reference stub");
+    si
+
+// >>>
+slice[T](source: T[], r: System.Range) -> List[T] pure is
+// <<<
+        throw System.Exception("reference stub");
+    si
+
+// >>>
+slice[T](source: List[T], r: Ghul.INT_RANGE) -> List[T] pure is
+// <<<
+        throw System.Exception("reference stub");
+    si
+
+// >>>
+slice[T](source: List[T], r: Ghul.INT_RANGE_INCLUSIVE) -> List[T] pure is
+// <<<
+        throw System.Exception("reference stub");
+    si
+
+// >>>
+slice[T](source: List[T], r: System.Range) -> List[T] pure is
+// <<<
+        throw System.Exception("reference stub");
+    si
+
+// >>>
+slice(source: string, r: Ghul.INT_RANGE) -> string pure is
+// <<<
+        throw System.Exception("reference stub");
+    si
+
+// >>>
+slice(source: string, r: Ghul.INT_RANGE_INCLUSIVE) -> string pure is
+// <<<
+        throw System.Exception("reference stub");
+    si
+
+// >>>
+slice(source: string, r: System.Range) -> string pure is
+// <<<
+        throw System.Exception("reference stub");
+    si
+
+entry() is si
