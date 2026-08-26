@@ -21,9 +21,9 @@ import {
 // chunk of the one page that uses it rather than a folder-wide glob.
 // `signature` marks a reference-entry card: a declaration-only stub with no
 // runnable body (see the runtime-library page), rather than code the reader
-// would copy and run. It suppresses the copy button, the expand-to-full-source
-// button, and the hidden-scaffold ellipsis rows - none of them make sense
-// when there's no full source worth expanding to or copying.
+// would copy and run. It suppresses the copy button and the hidden-scaffold
+// ellipsis rows - neither makes sense when there's no full source worth
+// copying.
 const props = defineProps({
   name: { type: String, required: true },
   data: { type: Object, default: null },
@@ -272,10 +272,10 @@ function copy() {
 // `hiddenBefore` / `hiddenAfter` come from the example artifact and flag
 // whether non-blank scaffold exists outside the displayed slice. A faint
 // ellipsis row marks the corresponding edge so the reader can tell the
-// code is part of a larger source. The expand button (visible only when
-// at least one edge is hidden) swaps the displayed slice for `fullSource`
-// in plain text - useful for seeing the surrounding scaffold, at the cost
-// of the rich hover and diagnostic markup the displayed slice carries.
+// code is part of a larger source. Seeing what is behind the ellipsis means
+// opening the example in the editor, which shows the whole source and can
+// run it - there was once a button that swapped the slice for `fullSource`
+// as plain text, and the editor does the same job and more.
 const hiddenBefore = computed(() => !props.signature && example.value?.hiddenBefore === true)
 const hiddenAfter = computed(() => !props.signature && example.value?.hiddenAfter === true)
 const hiddenGaps = computed(() => {
@@ -283,9 +283,6 @@ const hiddenGaps = computed(() => {
   const raw = example.value?.hiddenGapsAfterLine
   return Array.isArray(raw) ? new Set(raw) : new Set()
 })
-const canExpand = computed(() =>
-  !props.signature && (hiddenBefore.value || hiddenAfter.value || hiddenGaps.value.size > 0))
-
 // Interleave the visible-code lines with faint ellipsis rows wherever
 // the artifact says scaffold is hidden. Edges follow the
 // hiddenBefore/hiddenAfter content-based rule; gaps between visible
@@ -302,12 +299,6 @@ const displayItems = computed(() => {
   if (hiddenAfter.value) items.push({ type: 'ellipsis', key: 'bot' })
   return items
 })
-
-const expanded = ref(false)
-
-function toggleExpanded() {
-  expanded.value = !expanded.value
-}
 
 // The panel below the code can be toggled fully collapsed or expanded. It
 // defaults to expanded for a diagnostic example (the diagnostics are the
@@ -352,7 +343,7 @@ const liveDiagnostics = ref([])
 
 // filling the window rather than the article column. The site's content is a
 // narrow centre strip with sidebars either side, which is far less room than a
-// reader editing code actually has. Distinct from `expanded`, which shows an
+// reader editing code actually has. Distinct from `filling`, which gives an
 // example's hidden scaffolding.
 const filling = ref(false)
 
@@ -538,28 +529,6 @@ onBeforeUnmount(() => {
     <button
       v-if="editing"
       type="button"
-      class="ghul-example-tool ghul-example-fill"
-      :class="{ 'is-active': filling }"
-      :title="filling ? 'back to the page (Esc)' : 'fill the window'"
-      :aria-pressed="filling"
-      @click="toggleFilling"
-    >
-      <svg v-if="!filling" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="15 3 21 3 21 9" />
-        <polyline points="9 21 3 21 3 15" />
-        <line x1="21" y1="3" x2="14" y2="10" />
-        <line x1="3" y1="21" x2="10" y2="14" />
-      </svg>
-      <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="4 14 10 14 10 20" />
-        <polyline points="20 10 14 10 14 4" />
-        <line x1="14" y1="10" x2="21" y2="3" />
-        <line x1="3" y1="21" x2="10" y2="14" />
-      </svg>
-    </button>
-    <button
-      v-if="editing"
-      type="button"
       class="ghul-example-tool ghul-example-edit is-active"
       title="stop editing and show the original"
       @click="stopEditing"
@@ -570,14 +539,15 @@ onBeforeUnmount(() => {
       </svg>
     </button>
     <button
-      v-if="canExpand && !editing"
+      v-if="editing"
       type="button"
-      class="ghul-example-tool ghul-example-expand"
-      :title="expanded ? 'show only the example' : 'show the full source'"
-      :aria-pressed="expanded"
-      @click="toggleExpanded"
+      class="ghul-example-tool ghul-example-fill"
+      :class="{ 'is-active': filling }"
+      :title="filling ? 'back to the page (Esc)' : 'fill the window'"
+      :aria-pressed="filling"
+      @click="toggleFilling"
     >
-      <svg v-if="!expanded" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg v-if="!filling" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="15 3 21 3 21 9" />
         <polyline points="9 21 3 21 3 15" />
         <line x1="21" y1="3" x2="14" y2="10" />
@@ -625,38 +595,35 @@ onBeforeUnmount(() => {
     </div>
 
     <div v-show="!editing || !frameReady" class="ghul-example-code">
-      <pre v-if="expanded" class="ghul-example-full-source">{{ example.fullSource }}</pre>
-      <template v-else>
-        <template v-for="item in displayItems" :key="item.key">
-          <div v-if="item.type === 'ellipsis'" class="ghul-example-ellipsis" aria-hidden="true">&hellip;</div>
-          <div v-else class="ghul-example-line">
-            <template v-for="(segment, j) in item.segments" :key="j">
-              <span
-                v-if="segment.inlay"
-                class="ghul-example-inlay"
-                :class="{ 'ghul-example-inlay-killed': segment.inlay.code === 'narrowing-killed' }"
-                @mouseenter="onInlayEnter($event, segment.inlay)"
-                @mouseleave="onInlayLeave()"
-              >{{ segment.inlay.label }}</span>
-              <span
-                v-else
-                :style="segment.style"
-                :class="[
-                  'ghul-example-tok',
-                  segment.semantic ? 'ghul-sem-' + segment.semantic.tokenType : null,
-                  segment.semantic && segment.semantic.modifiers && segment.semantic.modifiers.includes('static') ? 'ghul-sem-mod-static' : null,
-                  {
-                    'ghul-example-hover': segment.hover,
-                    'ghul-example-squiggle-error': segment.diagnostic && segment.diagnostic.severity === 'error',
-                    'ghul-example-squiggle-warning': segment.diagnostic && segment.diagnostic.severity === 'warning',
-                  }
-                ]"
-                @mouseenter="onEnter($event, segment)"
-                @mouseleave="onLeave(segment)"
-              >{{ segment.text }}</span>
-            </template>
-          </div>
-        </template>
+      <template v-for="item in displayItems" :key="item.key">
+        <div v-if="item.type === 'ellipsis'" class="ghul-example-ellipsis" aria-hidden="true">&hellip;</div>
+        <div v-else class="ghul-example-line">
+          <template v-for="(segment, j) in item.segments" :key="j">
+            <span
+              v-if="segment.inlay"
+              class="ghul-example-inlay"
+              :class="{ 'ghul-example-inlay-killed': segment.inlay.code === 'narrowing-killed' }"
+              @mouseenter="onInlayEnter($event, segment.inlay)"
+              @mouseleave="onInlayLeave()"
+            >{{ segment.inlay.label }}</span>
+            <span
+              v-else
+              :style="segment.style"
+              :class="[
+                'ghul-example-tok',
+                segment.semantic ? 'ghul-sem-' + segment.semantic.tokenType : null,
+                segment.semantic && segment.semantic.modifiers && segment.semantic.modifiers.includes('static') ? 'ghul-sem-mod-static' : null,
+                {
+                  'ghul-example-hover': segment.hover,
+                  'ghul-example-squiggle-error': segment.diagnostic && segment.diagnostic.severity === 'error',
+                  'ghul-example-squiggle-warning': segment.diagnostic && segment.diagnostic.severity === 'warning',
+                }
+              ]"
+              @mouseenter="onEnter($event, segment)"
+              @mouseleave="onLeave(segment)"
+            >{{ segment.text }}</span>
+          </template>
+        </div>
       </template>
     </div>
     <div v-if="example.output || diagnostics.length || editing" class="ghul-example-output">
@@ -765,6 +732,27 @@ onBeforeUnmount(() => {
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   overflow: hidden;
+}
+
+/* The prose column is sized for reading prose, and code wants a wider measure than that: a line
+   that would fit whole otherwise wraps or scrolls, and rendered output suffers worst because a
+   table of numbers has nowhere sensible to wrap. Where the viewport is wide enough to have room
+   either side of the column, an example takes some of it and the prose keeps its own width. The
+   amount is deliberately modest - it has to stay clear of the outline on the right. */
+@media (min-width: 1280px) {
+  .ghul-example {
+    width: calc(100% + 3rem);
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .ghul-example {
+    width: calc(100% + 7rem);
+    margin-left: -3.5rem;
+    margin-right: -3.5rem;
+  }
 }
 
 .ghul-example-code {
@@ -927,7 +915,6 @@ onBeforeUnmount(() => {
 }
 
 .ghul-example-copy.copied,
-.ghul-example-expand[aria-pressed="true"],
 .ghul-example-tool.is-active {
   color: var(--vp-c-brand-1);
   opacity: 1;
@@ -1065,17 +1052,6 @@ onBeforeUnmount(() => {
   letter-spacing: 0.15em;
   user-select: none;
   min-height: 1.6em;
-}
-
-.ghul-example-full-source {
-  margin: 0;
-  padding: 0;
-  font-family: inherit;
-  font-feature-settings: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  color: var(--vp-c-text-1);
-  white-space: pre;
 }
 
 .ghul-example-output {
