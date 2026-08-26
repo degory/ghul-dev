@@ -12,8 +12,7 @@ defineProps({
     <p class="custom-block-title">editable example</p>
     <p>
       Click the pencil to open this in an editor, change it, and run it in your browser.
-      The same solution is posted on <a :href="url" target="_blank" rel="noreferrer">Rosetta Code</a>,
-      where it is plain text.
+      The same solution is posted on <a :href="url" target="_blank" rel="noreferrer">Rosetta Code</a>.
     </p>
   </div>
 </template>
