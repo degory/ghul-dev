@@ -52,6 +52,12 @@ export const SECTIONS = [
     ],
   },
   {
+    text: 'rosetta code',
+    items: [
+      { text: 'tasks', link: '/rosetta/' },
+    ],
+  },
+  {
     text: 'about',
     items: [
       { text: 'implementation', link: '/implementation' },
@@ -65,7 +71,14 @@ export const SECTIONS = [
 // /text rendering follows.
 export const PAGES = SECTIONS.flatMap(section => section.items)
 
-// The markdown file backing a page, without its extension.
+// The markdown file backing a page, without its extension. A link ending in a
+// slash is a directory's index, so `/rosetta/` is backed by `rosetta/index.md`.
 export function pageSlug(link: string) {
-  return link === '/' ? 'index' : link.replace(/^\//, '')
+  if (link === '/') {
+    return 'index'
+  }
+
+  const path = link.replace(/^\//, '')
+
+  return path.endsWith('/') ? `${path}index` : path
 }

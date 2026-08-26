@@ -158,17 +158,63 @@ export function renderText(srcDir: string, outDir: string) {
   const textDir = join(outDir, 'text')
   mkdirSync(textDir, { recursive: true })
 
+  // Read rather than imported: this module is loaded through the VitePress config, and the
+  // manifest is generated, so reading it keeps the two independent.
+  const ROSETTA_TASKS: {
+    title: string
+    blurb: string
+    tasks: { slug: string, title: string, url: string, parts: string[] }[]
+  }[] = JSON.parse(readFileSync(join(srcDir, '.vitepress', 'rosetta-tasks.json'), 'utf-8'))
+
+  // The Rosetta pages carry two components of their own. `RosettaTask` is a link to the wiki
+  // entry, which is worth keeping in the text rendering; `RosettaIndex` is the contents, which
+  // has to be written out here because it is data rather than markup.
+  const contentsList = ROSETTA_TASKS
+    .map(group => [
+      `### ${group.title}`,
+      '',
+      group.blurb,
+      '',
+      ...group.tasks.map(task => `- [${task.title}](${SITE}/rosetta/${task.slug})`),
+    ].join('\n'))
+    .join('\n\n')
+
+  const expandRosetta = (body: string) =>
+    body
+      .replace(
+        /<RosettaTask\s+url="([^"]*)"\s*\/>/g,
+        (_match, url) => `The same solution is posted on Rosetta Code: ${url}`
+      )
+      .replace(/<RosettaIndex\s*\/>/g, contentsList)
+
   const rendered = PAGES.map(page => {
     const slug = pageSlug(page.link)
     const source = readFileSync(join(srcDir, `${slug}.md`), 'utf-8')
-    return { ...page, slug, body: renderPage(source, dataDir) }
+    return { ...page, slug, body: expandRosetta(renderPage(source, dataDir)) }
   })
 
-  for (const page of rendered) {
+  // Every task has a page but only the section's contents is in the sidebar, so these are
+  // rendered from the manifest rather than from PAGES. Without this the text rendering would
+  // quietly omit the whole section.
+  const rosetta = ROSETTA_TASKS.flatMap(group => group.tasks).map(task => {
+    const slug = `rosetta/${task.slug}`
+    const source = readFileSync(join(srcDir, `${slug}.md`), 'utf-8')
+
+    return {
+      text: task.title,
+      link: `/${slug}`,
+      slug,
+      body: expandRosetta(renderPage(source, dataDir)),
+    }
+  })
+
+  mkdirSync(join(textDir, 'rosetta'), { recursive: true })
+
+  for (const page of [...rendered, ...rosetta]) {
     writeFileSync(join(textDir, `${page.slug}.md`), page.body)
   }
 
-  const contents = rendered
+  const contents = [...rendered, ...rosetta]
     .map(page => `- [${page.text}](#${page.slug}) - ${SITE}${page.link}`)
     .join('\n')
 
@@ -190,10 +236,10 @@ export function renderText(srcDir: string, outDir: string) {
     contents,
   ].join('\n')
 
-  const all = [preamble, ...rendered.map(page =>
+  const all = [preamble, ...[...rendered, ...rosetta].map(page =>
     `<a id="${page.slug}"></a>\n\n${page.body}`)].join('\n\n---\n\n')
 
   writeFileSync(join(textDir, 'all.md'), all)
 
-  return rendered.length
+  return rendered.length + rosetta.length
 }

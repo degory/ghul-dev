@@ -1,13 +1,15 @@
 {
   "name": "ghul-dev",
   "version": "0.0.1",
-  "description": "ghūl programming language",
+  "description": "gh\u016bl programming language",
   "repository": "github.com/degory/ghul-dev",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "dev": "vitepress dev src",
     "build": "vitepress build src",
-    "preview": "vitepress preview src"
+    "preview": "vitepress preview src",
+    "pull-rosetta": "node tools/pull-rosetta.mjs"
   },
   "devDependencies": {
     "vitepress": "^1.6.4"

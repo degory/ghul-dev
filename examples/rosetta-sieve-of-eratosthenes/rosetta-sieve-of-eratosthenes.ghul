@@ -1,0 +1,33 @@
+use IO.Std.write_line;
+use Collections;
+use Ghul.Pipes;
+
+sieve(limit: int) -> List[int] is
+    let composite = LIST();
+
+    (0::limit) |> each(_ => composite.add(false));
+
+    let p mut = 2;
+
+    while p * p <= limit do
+        if !composite[p] then
+            let multiple mut = p * p;
+
+            while multiple <= limit do
+                composite[multiple] = true;
+                multiple = multiple + p;
+            od
+        fi
+
+        p = p + 1;
+    od
+
+    return 
+        (2::limit) 
+            |> filter(i => !composite[i]) 
+            |> collect();
+si
+
+for p in sieve(100) do
+    write_line("{p}");
+od

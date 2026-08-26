@@ -1,0 +1,53 @@
+use IO.Std.write_line;
+
+union NUMBER is
+    WHOLE(value: int);
+    FRACTIONAL(value: double);
+si
+
+use NUMBER.WHOLE;
+use NUMBER.FRACTIONAL;
+
+widen(n: NUMBER) -> double =>
+    case n
+    when (value): WHOLE then cast(value)
+    when (value): FRACTIONAL then value
+    esac;
+
+add(left: NUMBER, right: NUMBER) -> NUMBER =>
+    if let l: WHOLE = left, r: WHOLE = right then
+        WHOLE(l.value + r.value)
+    else
+        FRACTIONAL(widen(left) + widen(right))
+    fi;
+
+show(n: NUMBER) -> string =>
+    case n
+    when (value): WHOLE then "{value}"
+    when (value): FRACTIONAL then "{value}"
+    esac;
+
+accumulator(initial: NUMBER) -> NUMBER -> NUMBER is
+    let sum mut = initial;
+
+    return i =>
+        val
+            sum = add(sum, i);
+            sum
+        lav;
+si
+
+let x = accumulator(WHOLE(1));
+
+x(WHOLE(5));
+
+accumulator(WHOLE(3));
+
+write_line(show(x(FRACTIONAL(2.3D))));
+
+// y has only ever been given whole numbers, so its total prints as 20 rather than 20.0.
+let y = accumulator(WHOLE(10));
+
+y(WHOLE(5));
+
+write_line(show(y(WHOLE(5))));

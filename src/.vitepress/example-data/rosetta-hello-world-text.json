@@ -1,0 +1,22 @@
+{
+  "name": "rosetta-hello-world-text",
+  "snippet": false,
+  "code": "IO.Std.write_line(\"Hello world!\");",
+  "fullSource": "IO.Std.write_line(\"Hello world!\");\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "Hello world!\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 2, "text": "namespace IO", "signature": "namespace IO", "kindLabel": "" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 6, "text": "class IO.Std", "signature": "class IO.Std", "kindLabel": "class" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 17, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 2, "tokenType": "namespace" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 6, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 17, "tokenType": "method", "modifiers": "static" }
+  ]
+}
