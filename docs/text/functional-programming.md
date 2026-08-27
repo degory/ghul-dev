@@ -27,7 +27,7 @@ let g = f;
 write_line("g(456): {g(456)}");
 
 // passed to another function
-let apply_twice = (f: int -> int, i) => f(f(i));
+let apply_twice = (f, i) => f(f(i));
 write_line("apply_twice(f, 7): {apply_twice(f, 7)}");
 ```
 
@@ -51,7 +51,7 @@ reassign:
 …
 // an immutable let is captured by value
 let base = 10;
-let add_base = (n: int) => n + base;
+let add_base = n => n + base;
 write_line("add_base(5): {add_base(5)}");
 
 // a mut variable is captured by reference: the function and
