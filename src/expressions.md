@@ -168,8 +168,6 @@ A parenthesised block is a sequence of statements in `(` and `)` that produces a
 
 A `return E` inside a block yields from the block, not from the enclosing function.
 
-Until its first top-level `;`, a parenthesised group reads as an ordinary expression, so a block whose first statement is a loop, an `if` or a `case` needs the `;` written after it - without one, something like `(for x in xs do ... od - 1)` is the loop expression with `- 1` applied to it, not a two-statement block.
-
 These are the main types of expressions in ghūl. They can be combined and nested to form more complex expressions and statements:
 
 
