@@ -1,5 +1,6 @@
 {
   "name": "definitions-41",
+  "snippet": false,
   "code": "let c = Color.RED;                   // unit variant, referenced without parentheses\nwrite_line(\"red: {c =~ Color.RED}\"); // true\n\nlet r = lookup();\nwrite_line(\"present: {r?}\");         // true - r holds the default OK variant\nwrite_line(\"value: {r!}\");           // 42 - unwraps the OK payload",
   "fullSource": "use IO.Std.write_line;\n\nunion Color is\n    RED;\n    GREEN;\n    BLUE;\nsi\n\nunion Result[T, E] is\n    OK(value: T) default;\n    ERROR(error: E);\nsi\n\nlookup() -> Result[int, string] => Result.OK(42);\n\nlet c = Color.RED;                   // unit variant, referenced without parentheses\nwrite_line(\"red: {c =~ Color.RED}\"); // true\n\nlet r = lookup();\nwrite_line(\"present: {r?}\");         // true - r holds the default OK variant\nwrite_line(\"value: {r!}\");           // 42 - unwraps the OK payload\n",
   "hiddenBefore": true,
@@ -8,36 +9,36 @@
   "output": "red: True\npresent: True\nvalue: 42\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "c: Color.RED", "signature": "c: Color.RED", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "c: Color.RED", "signature": "c: Color.RED", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 13, "text": "union Color", "signature": "union Color", "kindLabel": "union" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 17, "text": "Color.RED.init()", "signature": "Color.RED.init()", "kindLabel": "constructor" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "text": "r: Result[int,string]", "signature": "r: Result[int,string]", "kindLabel": "local value" },
-    { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 14, "text": "lookup() -> Result[int,string]", "signature": "lookup() -> Result[int,string]", "kindLabel": "global function" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "text": "r: Result[int,string]", "signature": "r: Result[int,string]", "kindLabel": "top-level variable" },
+    { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 14, "text": "lookup() -> Result[int,string]", "signature": "lookup() -> Result[int,string]", "kindLabel": "pure global function" },
     { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 19, "text": "c: Color.RED", "signature": "c: Color.RED", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 19, "text": "c: Color.RED", "signature": "c: Color.RED", "kindLabel": "top-level variable" },
     { "startLine": 2, "startColumn": 24, "endLine": 2, "endColumn": 28, "text": "union Color", "signature": "union Color", "kindLabel": "union" },
     { "startLine": 2, "startColumn": 30, "endLine": 2, "endColumn": 32, "text": "Color.RED.init()", "signature": "Color.RED.init()", "kindLabel": "constructor" },
-    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 22, "text": "Color.RED.=~(other: Color) -> bool", "signature": "Color.RED.=~(other: Color) -> bool", "kindLabel": "method" },
+    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 22, "text": "Color.RED.=~(other: Color) -> bool", "signature": "Color.RED.=~(other: Color) -> bool", "kindLabel": "pure method" },
     { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 5, "startColumn": 23, "endLine": 5, "endColumn": 23, "text": "r: Result[int,string]", "signature": "r: Result[int,string]", "kindLabel": "local value" },
+    { "startLine": 5, "startColumn": 23, "endLine": 5, "endColumn": 23, "text": "r: Result[int,string]", "signature": "r: Result[int,string]", "kindLabel": "top-level variable" },
     { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 6, "startColumn": 21, "endLine": 6, "endColumn": 21, "text": "r: Result[int,string]", "signature": "r: Result[int,string]", "kindLabel": "local value" }
+    { "startLine": 6, "startColumn": 21, "endLine": 6, "endColumn": 21, "text": "r: Result[int,string]", "signature": "r: Result[int,string]", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "property" },
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 13, "tokenType": "class" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 17, "tokenType": "method" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 14, "tokenType": "function" },
     { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 19, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 22, "tokenType": "method" },
     { "startLine": 2, "startColumn": 24, "endLine": 2, "endColumn": 28, "tokenType": "class" },
     { "startLine": 2, "startColumn": 30, "endLine": 2, "endColumn": 32, "tokenType": "method" },
-    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 22, "tokenType": "method" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 14, "tokenType": "function" },
     { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 5, "startColumn": 23, "endLine": 5, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 23, "endLine": 5, "endColumn": 23, "tokenType": "property" },
     { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 6, "startColumn": 21, "endLine": 6, "endColumn": 21, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 6, "startColumn": 21, "endLine": 6, "endColumn": 21, "tokenType": "property" }
   ]
 }

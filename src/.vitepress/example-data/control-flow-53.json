@@ -1,5 +1,6 @@
 {
   "name": "control-flow-53",
+  "snippet": false,
   "code": "let label = case status\nwhen 200 then \"ok\"\nwhen 500, 501, 502 then \"server error\"\nelse \"other\"\nesac;\n\nwrite_line(label);",
   "fullSource": "use IO.Std.write_line;\n\nlet status = 500;\nlet label = case status\nwhen 200 then \"ok\"\nwhen 500, 501, 502 then \"server error\"\nelse \"other\"\nesac;\n\nwrite_line(label);\n",
   "hiddenBefore": true,
@@ -8,16 +9,20 @@
   "output": "server error\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "label: string", "signature": "label: string", "kindLabel": "local value" },
-    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 23, "text": "status: int", "signature": "status: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "label: string", "signature": "label: string", "kindLabel": "top-level variable" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 23, "text": "status: int", "signature": "status: int", "kindLabel": "top-level variable" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 18, "text": "int.=~(obj: int) -> bool", "signature": "int.=~(obj: int) -> bool", "kindLabel": "method" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 38, "text": "int.=~(obj: int) -> bool", "signature": "int.=~(obj: int) -> bool", "kindLabel": "method" },
     { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 16, "text": "label: string", "signature": "label: string", "kindLabel": "local value" }
+    { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 16, "text": "label: string", "signature": "label: string", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "tokenType": "property" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 23, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 18, "tokenType": "method" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 38, "tokenType": "method" },
     { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 16, "tokenType": "property" }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "pipes-intro-thread-first",
+  "snippet": false,
   "code": "let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\n\nlet sum_of_even_squares = numbers\n    |> filter(x => x % 2 == 0)\n    |> map(x => x * x)\n    |> reduce(0, (total, x) => total + x);\n\nwrite_line(\"sum of even squares: {sum_of_even_squares}\");",
   "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nlet numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\n\nlet sum_of_even_squares = numbers\n    |> filter(x => x % 2 == 0)\n    |> map(x => x * x)\n    |> reduce(0, (total, x) => total + x);\n\nwrite_line(\"sum of even squares: {sum_of_even_squares}\");\n",
   "hiddenBefore": true,
@@ -8,7 +9,7 @@
   "output": "sum of even squares: 220\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "top-level variable" },
     { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 15, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
     { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 13, "text": "Ghul.Pipes.filter[int](\n    source: Collections.Iterable[int],\n    predicate: int -> bool pure\n) -> Pipe[int]", "signature": "Ghul.Pipes.filter[int](\n    source: Collections.Iterable[int],\n    predicate: int -> bool pure\n) -> Pipe[int]", "kindLabel": "pure global function" },
     { "startLine": 4, "startColumn": 20, "endLine": 4, "endColumn": 20, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
@@ -25,33 +26,33 @@
     { "startLine": 6, "startColumn": 32, "endLine": 6, "endColumn": 36, "text": "total: int", "signature": "total: int", "kindLabel": "local argument" },
     { "startLine": 6, "startColumn": 40, "endLine": 6, "endColumn": 40, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
     { "startLine": 6, "startColumn": 38, "endLine": 6, "endColumn": 38, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 23, "text": "sum_of_even_squares: int", "signature": "sum_of_even_squares: int", "kindLabel": "local value" },
-    { "startLine": 3, "startColumn": 27, "endLine": 3, "endColumn": 33, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 23, "text": "sum_of_even_squares: int", "signature": "sum_of_even_squares: int", "kindLabel": "top-level variable" },
+    { "startLine": 3, "startColumn": 27, "endLine": 3, "endColumn": 33, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "top-level variable" },
     { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 8, "startColumn": 35, "endLine": 8, "endColumn": 53, "text": "sum_of_even_squares: int", "signature": "sum_of_even_squares: int", "kindLabel": "local value" }
+    { "startLine": 8, "startColumn": 35, "endLine": 8, "endColumn": 53, "text": "sum_of_even_squares: int", "signature": "sum_of_even_squares: int", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 23, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 27, "endLine": 3, "endColumn": 33, "tokenType": "property" },
     { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 13, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 4, "startColumn": 20, "endLine": 4, "endColumn": 20, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 4, "startColumn": 22, "endLine": 4, "endColumn": 22, "tokenType": "operator" },
     { "startLine": 4, "startColumn": 26, "endLine": 4, "endColumn": 27, "tokenType": "operator" },
-    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 10, "tokenType": "function" },
+    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 5, "startColumn": 17, "endLine": 5, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 5, "startColumn": 21, "endLine": 5, "endColumn": 21, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 5, "startColumn": 19, "endLine": 5, "endColumn": 19, "tokenType": "operator" },
+    { "startLine": 5, "startColumn": 21, "endLine": 5, "endColumn": 21, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 8, "endLine": 6, "endColumn": 13, "tokenType": "function" },
     { "startLine": 6, "startColumn": 19, "endLine": 6, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 6, "startColumn": 26, "endLine": 6, "endColumn": 26, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 6, "startColumn": 8, "endLine": 6, "endColumn": 13, "tokenType": "function" },
     { "startLine": 6, "startColumn": 32, "endLine": 6, "endColumn": 36, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 6, "startColumn": 40, "endLine": 6, "endColumn": 40, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 6, "startColumn": 38, "endLine": 6, "endColumn": 38, "tokenType": "operator" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 27, "endLine": 3, "endColumn": 33, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 40, "endLine": 6, "endColumn": 40, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 8, "startColumn": 35, "endLine": 8, "endColumn": 53, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 8, "startColumn": 35, "endLine": 8, "endColumn": 53, "tokenType": "property" }
   ]
 }

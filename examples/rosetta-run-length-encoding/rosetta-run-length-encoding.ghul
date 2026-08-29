@@ -1,8 +1,6 @@
 use IO.Std.write_line;
 use Ghul.Pipes;
 
-// Each run becomes its length followed by the character, so the runs of the input are the pairs
-// of the output and nothing else has to be remembered.
 encode(text: string) -> string is
     let runs = System.Text.StringBuilder();
     let at mut = 0;
@@ -32,7 +30,9 @@ decode(encoded: string) -> string is
             at = at + 1;
         od
 
-        text.append(encoded[at], int.parse(encoded.substring(start, at - start)));
+        let count = int.parse(encoded.substring(start, at - start));
+
+        text.append(encoded[at], count);
 
         at = at + 1;
     od
@@ -40,7 +40,9 @@ decode(encoded: string) -> string is
     return text.to_string();
 si
 
-let input = "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWBWWWWWWWWWWWWWW";
+let input =
+    "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWW"
+    "WWWWWWWWWWWWBWWWWWWWWWWWWWW";
 let encoded = encode(input);
 
 write_line("input:   {input}");

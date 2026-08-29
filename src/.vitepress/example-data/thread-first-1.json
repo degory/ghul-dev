@@ -1,5 +1,6 @@
 {
   "name": "thread-first-1",
+  "snippet": false,
   "code": "use IO.Std.write_line;\n\nclass BOX(value: int);\n\ntwice(x: int) -> int => x * 2;\ndescribe(b: BOX) -> string => \"box of {b.value}\";\n\n// '|>' threads its left side in as the first argument of the call on\n// its right, so a chain reads left-to-right instead of nesting\n// inside-out. This line means write_line(describe(BOX(twice(21)))).\n21 |> twice() |> BOX() |> describe() |> write_line();",
   "fullSource": "use IO.Std.write_line;\n\nclass BOX(value: int);\n\ntwice(x: int) -> int => x * 2;\ndescribe(b: BOX) -> string => \"box of {b.value}\";\n\n// '|>' threads its left side in as the first argument of the call on\n// its right, so a chain reads left-to-right instead of nesting\n// inside-out. This line means write_line(describe(BOX(twice(21)))).\n21 |> twice() |> BOX() |> describe() |> write_line();\n",
   "hiddenBefore": false,
@@ -11,6 +12,7 @@
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 9, "text": "class BOX(value: int)", "signature": "class BOX(value: int)", "kindLabel": "class" },
     { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 15, "text": "BOX.value: int", "signature": "BOX.value: int", "kindLabel": "pure instance property" },
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 20, "text": "BOX.init(value: int)", "signature": "BOX.init(value: int)", "kindLabel": "constructor" },
+    { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 20, "text": "$$value: int", "signature": "$$value: int", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 20, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
     { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 5, "text": "twice(x: int) -> int", "signature": "twice(x: int) -> int", "kindLabel": "pure global function" },
@@ -32,10 +34,10 @@
   ],
   "inlayHints": [],
   "semanticTokens": [
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "tokenType": "function" },
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 9, "tokenType": "class" },
     { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 15, "tokenType": "property" },
     { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 20, "tokenType": "struct" },
-    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "tokenType": "function" },
     { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 5, "tokenType": "function" },
     { "startLine": 5, "startColumn": 7, "endLine": 5, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 12, "tokenType": "struct" },
@@ -48,9 +50,9 @@
     { "startLine": 6, "startColumn": 21, "endLine": 6, "endColumn": 26, "tokenType": "class" },
     { "startLine": 6, "startColumn": 40, "endLine": 6, "endColumn": 40, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 6, "startColumn": 42, "endLine": 6, "endColumn": 46, "tokenType": "property" },
-    { "startLine": 11, "startColumn": 41, "endLine": 11, "endColumn": 50, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 11, "startColumn": 27, "endLine": 11, "endColumn": 34, "tokenType": "function" },
+    { "startLine": 11, "startColumn": 7, "endLine": 11, "endColumn": 11, "tokenType": "function" },
     { "startLine": 11, "startColumn": 18, "endLine": 11, "endColumn": 20, "tokenType": "method" },
-    { "startLine": 11, "startColumn": 7, "endLine": 11, "endColumn": 11, "tokenType": "function" }
+    { "startLine": 11, "startColumn": 27, "endLine": 11, "endColumn": 34, "tokenType": "function" },
+    { "startLine": 11, "startColumn": 41, "endLine": 11, "endColumn": 50, "tokenType": "method", "modifiers": "static" }
   ]
 }

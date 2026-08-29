@@ -1,5 +1,6 @@
 {
   "name": "expressions-23",
+  "snippet": false,
   "code": "let integer_value = cast int(3.14);",
   "fullSource": "let integer_value = cast int(3.14);\n",
   "hiddenBefore": false,
@@ -8,12 +9,12 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 17, "text": "integer_value: int", "signature": "integer_value: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 17, "text": "integer_value: int", "signature": "integer_value: int", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 28, "text": "struct int", "signature": "struct int", "kindLabel": "struct" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 17, "tokenType": "property" },
     { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 28, "tokenType": "struct" }
   ]
 }

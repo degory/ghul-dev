@@ -1,5 +1,6 @@
 {
   "name": "type-inference-2",
+  "snippet": false,
   "code": "class COUNTER is\n    count: int; // a property - its type is declared\n\n    init() is\n        count = 0;\n    si\n\n    tick() is\n        // a local - its type is inferred from the\n        // initializer\n        let step = 1;\n        count = count + step;\n    si\nsi",
   "fullSource": "class COUNTER is\n    count: int; // a property - its type is declared\n\n    init() is\n        count = 0;\n    si\n\n    tick() is\n        // a local - its type is inferred from the\n        // initializer\n        let step = 1;\n        count = count + step;\n    si\nsi\n\nCOUNTER().tick();\n",
   "hiddenBefore": false,
@@ -10,6 +11,7 @@
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "text": "class COUNTER", "signature": "class COUNTER", "kindLabel": "class" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "COUNTER.count: int", "signature": "COUNTER.count: int", "kindLabel": "pure instance property" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 15, "text": "$$value: int", "signature": "$$value: int", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 8, "text": "COUNTER.init()", "signature": "COUNTER.init()", "kindLabel": "constructor" },
     { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "text": "COUNTER.tick() -> void", "signature": "COUNTER.tick() -> void", "kindLabel": "method" },
@@ -26,12 +28,12 @@
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "tokenType": "property" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "tokenType": "struct" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 8, "tokenType": "method" },
+    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "tokenType": "property" },
     { "startLine": 8, "startColumn": 5, "endLine": 8, "endColumn": 8, "tokenType": "method" },
     { "startLine": 11, "startColumn": 13, "endLine": 11, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "tokenType": "property" },
+    { "startLine": 12, "startColumn": 9, "endLine": 12, "endColumn": 13, "tokenType": "property" },
     { "startLine": 12, "startColumn": 17, "endLine": 12, "endColumn": 21, "tokenType": "property" },
-    { "startLine": 12, "startColumn": 25, "endLine": 12, "endColumn": 28, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 12, "startColumn": 23, "endLine": 12, "endColumn": 23, "tokenType": "operator" },
-    { "startLine": 12, "startColumn": 9, "endLine": 12, "endColumn": 13, "tokenType": "property" }
+    { "startLine": 12, "startColumn": 25, "endLine": 12, "endColumn": 28, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

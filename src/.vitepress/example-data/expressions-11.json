@@ -1,5 +1,6 @@
 {
   "name": "expressions-11",
+  "snippet": false,
   "code": "let list = [1, 2, 3, 4, 5];\n\nlist |> filter(element => element < 3);",
   "fullSource": "use Ghul.Pipes;\n\nlet list = [1, 2, 3, 4, 5];\n\nlist |> filter(element => element < 3);",
   "hiddenBefore": true,
@@ -8,19 +9,19 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "list: int[]", "signature": "list: int[]", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "list: int[]", "signature": "list: int[]", "kindLabel": "top-level variable" },
     { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "text": "element: int", "signature": "element: int", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 14, "text": "Ghul.Pipes.filter[int](\n    source: Collections.Iterable[int],\n    predicate: int -> bool pure\n) -> Pipe[int]", "signature": "Ghul.Pipes.filter[int](\n    source: Collections.Iterable[int],\n    predicate: int -> bool pure\n) -> Pipe[int]", "kindLabel": "pure global function" },
-    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 4, "text": "list: int[]", "signature": "list: int[]", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 4, "text": "list: int[]", "signature": "list: int[]", "kindLabel": "top-level variable" },
     { "startLine": 3, "startColumn": 27, "endLine": 3, "endColumn": 33, "text": "element: int", "signature": "element: int", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 4, "tokenType": "property" },
     { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 14, "tokenType": "function" },
-    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 4, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 27, "endLine": 3, "endColumn": 33, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "tokenType": "operator" }
   ]

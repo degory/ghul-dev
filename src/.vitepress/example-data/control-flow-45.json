@@ -1,5 +1,6 @@
 {
   "name": "control-flow-45",
+  "snippet": false,
   "code": "default_return() -> int is\n    // do nothing, return 0\nsi\nlet i = default_return();\nassert i == 0;\nwrite_line(\"default return value is {i}\");",
   "fullSource": "// expect: warning\nuse IO.Std.write_line;\n\ndefault_return() -> int is\n    // do nothing, return 0\nsi\nlet i = default_return();\nassert i == 0;\nwrite_line(\"default return value is {i}\");\n",
   "hiddenBefore": true,
@@ -10,24 +11,24 @@
     { "startLine": 1, "startColumn": 1, "endLine": 3, "endColumn": 3, "severity": "warning", "message": "[definite-return] function may not return a value on all paths" }
   ],
   "hovers": [
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "text": "i: int", "signature": "i: int", "kindLabel": "top-level variable" },
+    { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 22, "text": "default_return() -> int", "signature": "default_return() -> int", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 14, "text": "default_return() -> int", "signature": "default_return() -> int", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 23, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "text": "i: int", "signature": "i: int", "kindLabel": "local value" },
-    { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 22, "text": "default_return() -> int", "signature": "default_return() -> int", "kindLabel": "pure global function" },
-    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 8, "text": "i: int", "signature": "i: int", "kindLabel": "local value" },
+    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 8, "text": "i: int", "signature": "i: int", "kindLabel": "top-level variable" },
     { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 11, "text": "Ghul.==[int](a: int, b: int) -> bool", "signature": "Ghul.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
     { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 6, "startColumn": 38, "endLine": 6, "endColumn": 38, "text": "i: int", "signature": "i: int", "kindLabel": "local value" }
+    { "startLine": 6, "startColumn": 38, "endLine": 6, "endColumn": 38, "text": "i: int", "signature": "i: int", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 14, "tokenType": "function" },
     { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 23, "tokenType": "struct" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "tokenType": "property" },
     { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 22, "tokenType": "function" },
-    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 8, "tokenType": "property" },
     { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 11, "tokenType": "operator" },
     { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 6, "startColumn": 38, "endLine": 6, "endColumn": 38, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 6, "startColumn": 38, "endLine": 6, "endColumn": 38, "tokenType": "property" }
   ]
 }

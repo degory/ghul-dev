@@ -1,5 +1,6 @@
 {
   "name": "language-basics-15",
+  "snippet": false,
   "code": "let name: string? = \"Alice\"; // present\nlet nickname: string? = null; // absent",
   "fullSource": "let name: string? = \"Alice\"; // present\nlet nickname: string? = null; // absent\n",
   "hiddenBefore": false,
@@ -8,18 +9,18 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "name: string?", "signature": "name: string?", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "name: string?", "signature": "name: string?", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 16, "text": "class string", "signature": "class string", "kindLabel": "class" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "nickname: string?", "signature": "nickname: string?", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "nickname: string?", "signature": "nickname: string?", "kindLabel": "top-level variable" },
     { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 20, "text": "class string", "signature": "class string", "kindLabel": "class" }
   ],
   "inlayHints": [
     { "line": 1, "column": 5, "label": "►", "detail": "► string", "code": "narrowing-assign" }
   ],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "property" },
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 16, "tokenType": "class" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "tokenType": "property" },
     { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 20, "tokenType": "class" }
   ]
 }

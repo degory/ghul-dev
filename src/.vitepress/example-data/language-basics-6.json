@@ -1,5 +1,6 @@
 {
   "name": "language-basics-6",
+  "snippet": false,
   "code": "let x: int = 42;\nlet y = \"Hello\";",
   "fullSource": "let x: int = 42;\nlet y = \"Hello\";\n",
   "hiddenBefore": false,
@@ -8,14 +9,14 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "x: int", "signature": "x: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "x: int", "signature": "x: int", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 10, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "y: string", "signature": "y: string", "kindLabel": "local value" }
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "y: string", "signature": "y: string", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "property" },
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 10, "tokenType": "struct" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "tokenType": "property" }
   ]
 }

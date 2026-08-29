@@ -1,5 +1,6 @@
 {
   "name": "expressions-20",
+  "snippet": false,
   "code": "let length = \"Hello\".length;",
   "fullSource": "let length = \"Hello\".length;\n",
   "hiddenBefore": false,
@@ -8,12 +9,12 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "length: int", "signature": "length: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "length: int", "signature": "length: int", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 27, "text": "string.length: int", "signature": "string.length: int", "kindLabel": "pure instance property" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "tokenType": "property" },
     { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 27, "tokenType": "property" }
   ]
 }

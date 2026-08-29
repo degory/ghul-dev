@@ -21,11 +21,19 @@ export type RosettaGroup = {
 // does not compile - and would not run in a reader's browser if it did. Being listed here is a
 // statement about this site, not about the solution: each one is posted on Rosetta Code and
 // tested in ghul-rosetta-code like any other.
+const BIG_INTEGER =
+  'uses System.Numerics.BigInteger, which is outside the reference set'
+
 export const NOT_CARRIED: Record<string, string> = {
   'call-a-foreign-language-function':
     'calls a native function through System.Reflection.Emit, which is outside the reference set',
   multiton:
     'uses Tasks.Parallel, which is outside the reference set',
+  'arbitrary-precision-integers': BIG_INTEGER,
+  'bell-numbers': BIG_INTEGER,
+  'isqrt-integer-square-root-of-x': BIG_INTEGER,
+  'left-factorials': BIG_INTEGER,
+  'prime-decomposition': BIG_INTEGER,
 }
 
 export const ROSETTA_GROUPS: RosettaGroup[] = [
@@ -57,18 +65,29 @@ export const ROSETTA_GROUPS: RosettaGroup[] = [
       'mutual-recursion',
       'man-or-boy-test',
       'y-combinator',
+      'catamorphism',
+      'church-numerals',
+      'nested-function',
+      'jensens-device',
+      'cumulative-standard-deviation',
     ],
   },
   {
     title: 'types and pattern matching',
     blurb:
-      'Unions, traits and `case`: modelling data by its cases and taking it apart again.',
+      'Unions, traits, generics and operators: modelling data and taking it apart again.',
     slugs: [
       'algebraic-data-types',
       'abstract-type',
       'ternary-logic',
       'arithmetic-evaluation',
       'multiple-distinct-objects',
+      'quaternion',
+      's-expressions',
+      'null-object',
+      'flatten-a-list',
+      'queue-definition',
+      'generic-swap',
     ],
   },
   {
@@ -82,6 +101,11 @@ export const ROSETTA_GROUPS: RosettaGroup[] = [
       'hailstone-sequence',
       'fibonacci-sequence',
       'van-eck-sequence',
+      'tree-traversal',
+      'intersecting-number-wheels',
+      'kolakoski-sequence',
+      'van-der-corput-sequence',
+      'ordered-partitions',
     ],
   },
   {
@@ -98,6 +122,16 @@ export const ROSETTA_GROUPS: RosettaGroup[] = [
       'ackermann-function',
       'zeckendorf-number-representation',
       'roman-numerals-encode',
+      'descending-primes',
+      'semiprime',
+      'sphenic-numbers',
+      'taxicab-numbers',
+      'negative-base-numbers',
+      'gray-code',
+      'haversine-formula',
+      'map-range',
+      'population-count',
+      'numbers-with-equal-rises-and-falls',
     ],
   },
   {
@@ -111,6 +145,8 @@ export const ROSETTA_GROUPS: RosettaGroup[] = [
       'run-length-encoding',
       'levenshtein-distance',
       'abc-problem',
+      'entropy',
+      'jaro-similarity',
     ],
   },
   {
@@ -121,6 +157,11 @@ export const ROSETTA_GROUPS: RosettaGroup[] = [
       'power-set',
       'josephus-problem',
       'smith-waterman-algorithm',
+      'huffman-coding',
+      'forward-difference',
+      'dinesmans-multiple-dwelling-problem',
+      'water-collected-between-towers',
+      'topswops',
     ],
   },
 ]

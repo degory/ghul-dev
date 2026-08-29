@@ -1,5 +1,6 @@
 {
   "name": "type-inference-20",
+  "snippet": false,
   "code": "let length_of = x => x.length;\nwrite_line(\"{length_of(\"hello\")}\");",
   "fullSource": "use IO.Std.write_line;\n\nlet length_of = x => x.length;\nwrite_line(\"{length_of(\"hello\")}\");\n",
   "hiddenBefore": true,
@@ -9,19 +10,19 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "text": "x: string", "signature": "x: string", "kindLabel": "local argument" },
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 13, "text": "length_of: string -> int", "signature": "length_of: string -> int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 13, "text": "length_of: string -> int pure", "signature": "length_of: string -> int pure", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 22, "text": "x: string", "signature": "x: string", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 29, "text": "string.length: int", "signature": "string.length: int", "kindLabel": "pure instance property" },
     { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 22, "text": "length_of: string -> int", "signature": "length_of: string -> int", "kindLabel": "local value" }
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 22, "text": "length_of: string -> int pure", "signature": "length_of: string -> int pure", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 13, "tokenType": "property" },
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 29, "tokenType": "property" },
     { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 22, "tokenType": "property" }
   ]
 }

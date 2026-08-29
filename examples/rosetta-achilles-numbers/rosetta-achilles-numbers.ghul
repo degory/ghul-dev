@@ -39,17 +39,18 @@ gcd(a: int, b: int) -> int =>
 power(base: int, exponent: int) -> int =>
     if exponent == 0 then 1 else base * power(base, exponent - 1) fi;
 
-// Powerful means every exponent is at least two. A number is some m raised to the power k exactly
-// when k divides every one of its exponents, so an imperfect one is a number whose exponents have
-// no common divisor above one.
 is_achilles(n: int) -> bool =>
     let factors = factorize(n) in
         factors.count > 0 /\
-        (factors |> all(f => f.exponent >= 2)) /\
-        (factors |> map(f => f.exponent) |> reduce(0, gcd)) == 1;
+        (factors |> all(factor => factor.exponent >= 2)) /\
+        (factors |> map(factor => factor.exponent) |> reduce(0, gcd)) == 1;
 
 totient(n: int) -> int =>
-    factorize(n) |> reduce(1, (t, f) => t * power(f.prime, f.exponent - 1) * (f.prime - 1));
+    factorize(n)
+    |> reduce(1, (total, factor) =>
+        total
+        * power(factor.prime, factor.exponent - 1)
+        * (factor.prime - 1));
 
 achilles_numbers() -> Pipe[int] is
     let n mut = 1;
@@ -81,7 +82,10 @@ show(
 );
 
 for digits in 2::5 do
-    let total = (power(10, digits - 1)..power(10, digits)) |> filter(is_achilles) |> count();
+    let total =
+        (power(10, digits - 1)..power(10, digits))
+        |> filter(is_achilles)
+        |> count();
 
     write_line("Achilles numbers with {digits} digits: {total}");
 od

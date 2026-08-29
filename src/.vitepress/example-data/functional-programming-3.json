@@ -1,5 +1,6 @@
 {
   "name": "functional-programming-3",
+  "snippet": false,
   "code": "// factorial\nlet factorial = n rec =>\n    if n == 0 then 1 else n * rec(n - 1) fi;\nwrite_line(\"factorial(5): {factorial(5)}\");\n\n// fibonacci\nlet fibonacci = n rec =>\n    if n <= 1 then n else rec(n - 1) + rec(n - 2) fi;\nwrite_line(\"fibonacci(10): {fibonacci(10)}\");",
   "fullSource": "use IO.Std.write_line;\n\n// factorial\nlet factorial = n rec =>\n    if n == 0 then 1 else n * rec(n - 1) fi;\nwrite_line(\"factorial(5): {factorial(5)}\");\n\n// fibonacci\nlet fibonacci = n rec =>\n    if n <= 1 then n else rec(n - 1) + rec(n - 2) fi;\nwrite_line(\"fibonacci(10): {fibonacci(10)}\");\n",
   "hiddenBefore": true,
@@ -9,9 +10,9 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "text": "factorial: int -> int", "signature": "factorial: int -> int", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "text": "factorial: int -> int", "signature": "factorial: int -> int", "kindLabel": "top-level variable" },
     { "startLine": 7, "startColumn": 17, "endLine": 7, "endColumn": 17, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
-    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 13, "text": "fibonacci: int -> int", "signature": "fibonacci: int -> int", "kindLabel": "local value" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 13, "text": "fibonacci: int -> int", "signature": "fibonacci: int -> int", "kindLabel": "top-level variable" },
     { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 8, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 11, "text": "Ghul.==[int](a: int, b: int) -> bool", "signature": "Ghul.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
     { "startLine": 3, "startColumn": 27, "endLine": 3, "endColumn": 27, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
@@ -19,7 +20,7 @@
     { "startLine": 3, "startColumn": 37, "endLine": 3, "endColumn": 37, "text": "Ghul.-(a: int, b: int) -> int", "signature": "Ghul.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },
     { "startLine": 3, "startColumn": 29, "endLine": 3, "endColumn": 29, "text": "Ghul.*(a: int, b: int) -> int", "signature": "Ghul.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" },
     { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 4, "startColumn": 28, "endLine": 4, "endColumn": 36, "text": "factorial: int -> int", "signature": "factorial: int -> int", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 28, "endLine": 4, "endColumn": 36, "text": "factorial: int -> int", "signature": "factorial: int -> int", "kindLabel": "top-level variable" },
     { "startLine": 8, "startColumn": 8, "endLine": 8, "endColumn": 8, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
     { "startLine": 8, "startColumn": 10, "endLine": 8, "endColumn": 11, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
     { "startLine": 8, "startColumn": 20, "endLine": 8, "endColumn": 20, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
@@ -29,31 +30,31 @@
     { "startLine": 8, "startColumn": 46, "endLine": 8, "endColumn": 46, "text": "Ghul.-(a: int, b: int) -> int", "signature": "Ghul.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },
     { "startLine": 8, "startColumn": 38, "endLine": 8, "endColumn": 38, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
     { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 9, "startColumn": 29, "endLine": 9, "endColumn": 37, "text": "fibonacci: int -> int", "signature": "fibonacci: int -> int", "kindLabel": "local value" }
+    { "startLine": 9, "startColumn": 29, "endLine": 9, "endColumn": 37, "text": "fibonacci: int -> int", "signature": "fibonacci: int -> int", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "tokenType": "property" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 7, "startColumn": 17, "endLine": 7, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 11, "tokenType": "operator" },
     { "startLine": 3, "startColumn": 27, "endLine": 3, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 29, "endLine": 3, "endColumn": 29, "tokenType": "operator" },
     { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 37, "endLine": 3, "endColumn": 37, "tokenType": "operator" },
-    { "startLine": 3, "startColumn": 29, "endLine": 3, "endColumn": 29, "tokenType": "operator" },
     { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 4, "startColumn": 28, "endLine": 4, "endColumn": 36, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 28, "endLine": 4, "endColumn": 36, "tokenType": "property" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 13, "tokenType": "property" },
+    { "startLine": 7, "startColumn": 17, "endLine": 7, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 8, "startColumn": 8, "endLine": 8, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 8, "startColumn": 10, "endLine": 8, "endColumn": 11, "tokenType": "operator" },
     { "startLine": 8, "startColumn": 20, "endLine": 8, "endColumn": 20, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 8, "startColumn": 31, "endLine": 8, "endColumn": 31, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 8, "startColumn": 33, "endLine": 8, "endColumn": 33, "tokenType": "operator" },
+    { "startLine": 8, "startColumn": 38, "endLine": 8, "endColumn": 38, "tokenType": "operator" },
     { "startLine": 8, "startColumn": 44, "endLine": 8, "endColumn": 44, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 8, "startColumn": 46, "endLine": 8, "endColumn": 46, "tokenType": "operator" },
-    { "startLine": 8, "startColumn": 38, "endLine": 8, "endColumn": 38, "tokenType": "operator" },
     { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 9, "startColumn": 29, "endLine": 9, "endColumn": 37, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 9, "startColumn": 29, "endLine": 9, "endColumn": 37, "tokenType": "property" }
   ]
 }

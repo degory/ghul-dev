@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-collect_array-function",
+  "snippet": false,
   "code": "collect_array[T](source: Iterable[T]) -> T[] pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\ncollect_array[T](source: Iterable[T]) -> T[] pure;\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -15,13 +16,15 @@
     { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 33, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
     { "startLine": 1, "startColumn": 42, "endLine": 1, "endColumn": 42, "text": "T", "signature": "T", "kindLabel": "type variable" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "collect_array\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 13, "tokenType": "function" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 15, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 35, "endLine": 1, "endColumn": 35, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 33, "tokenType": "interface" },
+    { "startLine": 1, "startColumn": 35, "endLine": 1, "endColumn": 35, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 42, "endLine": 1, "endColumn": 42, "tokenType": "typeParameter" }
   ]
 }

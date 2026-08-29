@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-count-method",
+  "snippet": false,
   "code": "count() -> int pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    count() -> int pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -11,7 +12,9 @@
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 5, "text": "Pipe[T].count() -> int", "signature": "Pipe[T].count() -> int", "kindLabel": "pure abstract method" },
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 14, "text": "struct int", "signature": "struct int", "kindLabel": "struct" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "count\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 5, "tokenType": "method" },
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 14, "tokenType": "struct" }

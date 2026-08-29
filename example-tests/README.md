@@ -1,9 +1,10 @@
 # example tests
 
-Every example under `examples/` is compiled and run here, and what it prints is
-compared against a snapshot. The examples are the language documentation, so an
-example that no longer compiles, or that prints something other than what the
-page shows beside it, is a documentation bug.
+Almost every example under `examples/` is compiled and run here, and what it
+prints is compared against a snapshot - see "what is not covered" for the ones
+that are not. The examples are the language documentation, so an example that
+no longer compiles, or that prints something other than what the page shows
+beside it, is a documentation bug.
 
 One directory per example. The source is a symlink to the example itself, so
 editing an example is editing what runs - there is no copy to fall out of step:
@@ -67,3 +68,10 @@ variation itself.
 The three `dotnet-integration-*` examples build against ASP.NET through a
 `.ghulproj` and are never run, so they are left out. `snippets/` is illustrative
 and is not compiled at all.
+
+The `rosetta-*` examples are copied in from
+[ghul-rosetta-code](https://github.com/degory/ghul-rosetta-code), where each one's output is
+already pinned by a test. Snapshotting them again here would mean this repository holding an
+output it does not own, and a solution improved upstream would then arrive as a failing test
+rather than as a better example. They are still compiled and run on every pull, by
+`example-tool`, which is what produces the output the pages display.

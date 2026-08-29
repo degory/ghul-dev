@@ -1,5 +1,6 @@
 {
   "name": "definitions-14",
+  "snippet": false,
   "code": "class BOOK(title: string, author: string): Printable is\n    print() is\n        write_line(\"Title: {title}, Author: {author}\");\n    si\nsi",
   "fullSource": "use IO.Std.write_line;\n\ntrait Printable is\n    print();\nsi\n\nclass BOOK(title: string, author: string): Printable is\n    print() is\n        write_line(\"Title: {title}, Author: {author}\");\n    si\nsi\n\n",
   "hiddenBefore": true,
@@ -12,6 +13,8 @@
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 16, "text": "BOOK.title: string", "signature": "BOOK.title: string", "kindLabel": "pure instance property" },
     { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 32, "text": "BOOK.author: string", "signature": "BOOK.author: string", "kindLabel": "pure instance property" },
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 40, "text": "BOOK.init(title: string, author: string)", "signature": "BOOK.init(title: string, author: string)", "kindLabel": "constructor" },
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 24, "text": "$$value: string", "signature": "$$value: string", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 40, "text": "$$value: string", "signature": "$$value: string", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 44, "endLine": 1, "endColumn": 52, "text": "trait Printable", "signature": "trait Printable", "kindLabel": "trait" },
     { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 24, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 35, "endLine": 1, "endColumn": 40, "text": "class string", "signature": "class string", "kindLabel": "class" },
@@ -20,14 +23,16 @@
     { "startLine": 3, "startColumn": 29, "endLine": 3, "endColumn": 33, "text": "title: string", "signature": "title: string", "kindLabel": "pure instance property" },
     { "startLine": 3, "startColumn": 46, "endLine": 3, "endColumn": 51, "text": "author: string", "signature": "author: string", "kindLabel": "pure instance property" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 2, "column": 5, "label": "▲", "detail": "print\n\n- ▲ overrides `Printable.print() -> void`", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 10, "tokenType": "class" },
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 16, "tokenType": "property" },
-    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 32, "tokenType": "property" },
-    { "startLine": 1, "startColumn": 44, "endLine": 1, "endColumn": 52, "tokenType": "interface" },
     { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 24, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 32, "tokenType": "property" },
     { "startLine": 1, "startColumn": 35, "endLine": 1, "endColumn": 40, "tokenType": "class" },
+    { "startLine": 1, "startColumn": 44, "endLine": 1, "endColumn": 52, "tokenType": "interface" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "tokenType": "method" },
     { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 18, "tokenType": "method", "modifiers": "static" },
     { "startLine": 3, "startColumn": 29, "endLine": 3, "endColumn": 33, "tokenType": "property" },

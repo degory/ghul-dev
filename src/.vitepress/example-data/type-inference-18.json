@@ -1,5 +1,6 @@
 {
   "name": "type-inference-18",
+  "snippet": false,
   "code": "let f = x => x + 1;\nwrite_line(\"{f(42)}\");",
   "fullSource": "use IO.Std.write_line;\n\nlet f = x => x + 1;\nwrite_line(\"{f(42)}\");\n",
   "hiddenBefore": true,
@@ -9,19 +10,19 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "f: int -> int", "signature": "f: int -> int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "f: int -> int pure", "signature": "f: int -> int pure", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
     { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 14, "text": "f: int -> int", "signature": "f: int -> int", "kindLabel": "local value" }
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 14, "text": "f: int -> int pure", "signature": "f: int -> int pure", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "property" },
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "tokenType": "operator" },
     { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 14, "tokenType": "property" }
   ]
 }

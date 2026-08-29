@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-windows-method",
+  "snippet": false,
   "code": "windows(size: int) -> Pipe[LIST[T]] pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    windows(size: int) -> Pipe[LIST[T]] pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -15,13 +16,15 @@
     { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 31, "text": "class LIST[T]", "signature": "class LIST[T]", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 26, "text": "trait Pipe[T]", "signature": "trait Pipe[T]", "kindLabel": "trait" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "windows\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 7, "tokenType": "method" },
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 17, "tokenType": "struct" },
-    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 33, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 26, "tokenType": "interface" },
     { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 31, "tokenType": "class" },
-    { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 26, "tokenType": "interface" }
+    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 33, "tokenType": "typeParameter" }
   ]
 }

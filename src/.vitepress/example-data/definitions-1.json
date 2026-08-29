@@ -1,5 +1,6 @@
 {
   "name": "definitions-1",
+  "snippet": false,
   "code": "let x = 10;",
   "fullSource": "let x = 10;\n",
   "hiddenBefore": false,
@@ -8,10 +9,10 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "x: int", "signature": "x: int", "kindLabel": "local value" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "x: int", "signature": "x: int", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "property" }
   ]
 }

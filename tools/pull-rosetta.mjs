@@ -86,6 +86,12 @@ readdirSync(join(ROOT, 'examples'), { withFileTypes: true })
   .filter(e => e.isDirectory() && e.name.startsWith('rosetta-'))
   .forEach(e => rmSync(join(ROOT, 'examples', e.name), { recursive: true, force: true }))
 
+// example-tool only writes, so the data for an example that has gone - a task withdrawn, or one
+// split into parts under new names - would otherwise sit in the site's data directory for ever.
+readdirSync(join(ROOT, 'src/.vitepress/example-data'), { withFileTypes: true })
+  .filter(e => e.isFile() && e.name.startsWith('rosetta-') && e.name.endsWith('.json'))
+  .forEach(e => rmSync(join(ROOT, 'src/.vitepress/example-data', e.name), { force: true }))
+
 // example-tool treats any diagnostic as a failure unless the example says to expect one, so a
 // solution the compiler warns about carries the marker. Which ones those are is recorded in the
 // source repository, by its test's captured warnings - a fact about the solution rather than

@@ -79,15 +79,42 @@
         ]
       },
       {
+        "slug": "catamorphism",
+        "title": "Catamorphism",
+        "url": "https://rosettacode.org/wiki/Catamorphism",
+        "parts": [
+          "Using reduce",
+          "Writing fold"
+        ]
+      },
+      {
+        "slug": "church-numerals",
+        "title": "Church numerals",
+        "url": "https://rosettacode.org/wiki/Church_numerals",
+        "parts": []
+      },
+      {
         "slug": "closures-value-capture",
         "title": "Closures/Value capture",
         "url": "https://rosettacode.org/wiki/Closures/Value_capture",
         "parts": []
       },
       {
+        "slug": "cumulative-standard-deviation",
+        "title": "Cumulative standard deviation",
+        "url": "https://rosettacode.org/wiki/Cumulative_standard_deviation",
+        "parts": []
+      },
+      {
         "slug": "first-class-functions",
         "title": "First-class functions",
         "url": "https://rosettacode.org/wiki/First-class_functions",
+        "parts": []
+      },
+      {
+        "slug": "jensens-device",
+        "title": "Jensen's Device",
+        "url": "https://rosettacode.org/wiki/Jensen's_Device",
         "parts": []
       },
       {
@@ -100,6 +127,12 @@
         "slug": "mutual-recursion",
         "title": "Mutual recursion",
         "url": "https://rosettacode.org/wiki/Mutual_recursion",
+        "parts": []
+      },
+      {
+        "slug": "nested-function",
+        "title": "Nested function",
+        "url": "https://rosettacode.org/wiki/Nested_function",
         "parts": []
       },
       {
@@ -118,7 +151,7 @@
   },
   {
     "title": "types and pattern matching",
-    "blurb": "Unions, traits and `case`: modelling data by its cases and taking it apart again.",
+    "blurb": "Unions, traits, generics and operators: modelling data and taking it apart again.",
     "tasks": [
       {
         "slug": "abstract-type",
@@ -139,9 +172,45 @@
         "parts": []
       },
       {
+        "slug": "flatten-a-list",
+        "title": "Flatten a list",
+        "url": "https://rosettacode.org/wiki/Flatten_a_list",
+        "parts": []
+      },
+      {
+        "slug": "generic-swap",
+        "title": "Generic swap",
+        "url": "https://rosettacode.org/wiki/Generic_swap",
+        "parts": []
+      },
+      {
         "slug": "multiple-distinct-objects",
         "title": "Multiple distinct objects",
         "url": "https://rosettacode.org/wiki/Multiple_distinct_objects",
+        "parts": []
+      },
+      {
+        "slug": "null-object",
+        "title": "Null object",
+        "url": "https://rosettacode.org/wiki/Null_object",
+        "parts": []
+      },
+      {
+        "slug": "quaternion",
+        "title": "Quaternion",
+        "url": "https://rosettacode.org/wiki/Quaternion",
+        "parts": []
+      },
+      {
+        "slug": "queue-definition",
+        "title": "Queue/Definition",
+        "url": "https://rosettacode.org/wiki/Queue/Definition",
+        "parts": []
+      },
+      {
+        "slug": "s-expressions",
+        "title": "S-expressions",
+        "url": "https://rosettacode.org/wiki/S-expressions",
         "parts": []
       },
       {
@@ -166,12 +235,27 @@
         "slug": "fibonacci-sequence",
         "title": "Fibonacci sequence",
         "url": "https://rosettacode.org/wiki/Fibonacci_sequence",
-        "parts": []
+        "parts": [
+          "Functional",
+          "Imperative"
+        ]
       },
       {
         "slug": "hailstone-sequence",
         "title": "Hailstone sequence",
         "url": "https://rosettacode.org/wiki/Hailstone_sequence",
+        "parts": []
+      },
+      {
+        "slug": "intersecting-number-wheels",
+        "title": "Intersecting number wheels",
+        "url": "https://rosettacode.org/wiki/Intersecting_number_wheels",
+        "parts": []
+      },
+      {
+        "slug": "kolakoski-sequence",
+        "title": "Kolakoski sequence",
+        "url": "https://rosettacode.org/wiki/Kolakoski_sequence",
         "parts": []
       },
       {
@@ -181,9 +265,27 @@
         "parts": []
       },
       {
+        "slug": "ordered-partitions",
+        "title": "Ordered partitions",
+        "url": "https://rosettacode.org/wiki/Ordered_partitions",
+        "parts": []
+      },
+      {
         "slug": "same-fringe",
         "title": "Same fringe",
         "url": "https://rosettacode.org/wiki/Same_fringe",
+        "parts": []
+      },
+      {
+        "slug": "tree-traversal",
+        "title": "Tree traversal",
+        "url": "https://rosettacode.org/wiki/Tree_traversal",
+        "parts": []
+      },
+      {
+        "slug": "van-der-corput-sequence",
+        "title": "Van der Corput sequence",
+        "url": "https://rosettacode.org/wiki/Van_der_Corput_sequence",
         "parts": []
       },
       {
@@ -235,9 +337,51 @@
         "parts": []
       },
       {
+        "slug": "descending-primes",
+        "title": "Descending primes",
+        "url": "https://rosettacode.org/wiki/Descending_primes",
+        "parts": []
+      },
+      {
+        "slug": "gray-code",
+        "title": "Gray code",
+        "url": "https://rosettacode.org/wiki/Gray_code",
+        "parts": []
+      },
+      {
         "slug": "greatest-common-divisor",
         "title": "Greatest common divisor",
         "url": "https://rosettacode.org/wiki/Greatest_common_divisor",
+        "parts": []
+      },
+      {
+        "slug": "haversine-formula",
+        "title": "Haversine formula",
+        "url": "https://rosettacode.org/wiki/Haversine_formula",
+        "parts": []
+      },
+      {
+        "slug": "map-range",
+        "title": "Map range",
+        "url": "https://rosettacode.org/wiki/Map_range",
+        "parts": []
+      },
+      {
+        "slug": "negative-base-numbers",
+        "title": "Negative base numbers",
+        "url": "https://rosettacode.org/wiki/Negative_base_numbers",
+        "parts": []
+      },
+      {
+        "slug": "numbers-with-equal-rises-and-falls",
+        "title": "Numbers with equal rises and falls",
+        "url": "https://rosettacode.org/wiki/Numbers_with_equal_rises_and_falls",
+        "parts": []
+      },
+      {
+        "slug": "population-count",
+        "title": "Population count",
+        "url": "https://rosettacode.org/wiki/Population_count",
         "parts": []
       },
       {
@@ -247,9 +391,27 @@
         "parts": []
       },
       {
+        "slug": "semiprime",
+        "title": "Semiprime",
+        "url": "https://rosettacode.org/wiki/Semiprime",
+        "parts": []
+      },
+      {
         "slug": "sieve-of-eratosthenes",
         "title": "Sieve of Eratosthenes",
         "url": "https://rosettacode.org/wiki/Sieve_of_Eratosthenes",
+        "parts": []
+      },
+      {
+        "slug": "sphenic-numbers",
+        "title": "Sphenic numbers",
+        "url": "https://rosettacode.org/wiki/Sphenic_numbers",
+        "parts": []
+      },
+      {
+        "slug": "taxicab-numbers",
+        "title": "Taxicab numbers",
+        "url": "https://rosettacode.org/wiki/Taxicab_numbers",
         "parts": []
       },
       {
@@ -283,6 +445,18 @@
         "parts": []
       },
       {
+        "slug": "entropy",
+        "title": "Entropy",
+        "url": "https://rosettacode.org/wiki/Entropy",
+        "parts": []
+      },
+      {
+        "slug": "jaro-similarity",
+        "title": "Jaro similarity",
+        "url": "https://rosettacode.org/wiki/Jaro_similarity",
+        "parts": []
+      },
+      {
         "slug": "levenshtein-distance",
         "title": "Levenshtein distance",
         "url": "https://rosettacode.org/wiki/Levenshtein_distance",
@@ -313,6 +487,24 @@
     "blurb": "Sorting, searching, and working over whole collections.",
     "tasks": [
       {
+        "slug": "dinesmans-multiple-dwelling-problem",
+        "title": "Dinesman's multiple-dwelling problem",
+        "url": "https://rosettacode.org/wiki/Dinesman's_multiple-dwelling_problem",
+        "parts": []
+      },
+      {
+        "slug": "forward-difference",
+        "title": "Forward difference",
+        "url": "https://rosettacode.org/wiki/Forward_difference",
+        "parts": []
+      },
+      {
+        "slug": "huffman-coding",
+        "title": "Huffman coding",
+        "url": "https://rosettacode.org/wiki/Huffman_coding",
+        "parts": []
+      },
+      {
         "slug": "josephus-problem",
         "title": "Josephus problem",
         "url": "https://rosettacode.org/wiki/Josephus_problem",
@@ -337,6 +529,18 @@
         "slug": "sorting-algorithms-quicksort",
         "title": "Sorting algorithms/Quicksort",
         "url": "https://rosettacode.org/wiki/Sorting_algorithms/Quicksort",
+        "parts": []
+      },
+      {
+        "slug": "topswops",
+        "title": "Topswops",
+        "url": "https://rosettacode.org/wiki/Topswops",
+        "parts": []
+      },
+      {
+        "slug": "water-collected-between-towers",
+        "title": "Water collected between towers",
+        "url": "https://rosettacode.org/wiki/Water_collected_between_towers",
         "parts": []
       }
     ]

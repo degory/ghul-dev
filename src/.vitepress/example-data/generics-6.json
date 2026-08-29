@@ -1,5 +1,6 @@
 {
   "name": "generics-6",
+  "snippet": false,
   "code": "print_something(1234);\nprint_something(\"hello\");",
   "fullSource": "use IO.Std.write_line;\n\nprint_something[T](t: T) => write_line(\"something is {t}\");\n\nprint_something(1234);\nprint_something(\"hello\");\n",
   "hiddenBefore": true,
@@ -8,8 +9,8 @@
   "output": "something is 1234\nsomething is hello\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "text": "print_something[int](t: int) -> void", "signature": "print_something[int](t: int) -> void", "kindLabel": "global function" },
-    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "text": "print_something[string](t: string) -> void", "signature": "print_something[string](t: string) -> void", "kindLabel": "global function" }
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "text": "print_something[int](t: int) -> void", "signature": "print_something[int](t: int) -> void", "kindLabel": "pure global function" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "text": "print_something[string](t: string) -> void", "signature": "print_something[string](t: string) -> void", "kindLabel": "pure global function" }
   ],
   "inlayHints": [],
   "semanticTokens": [

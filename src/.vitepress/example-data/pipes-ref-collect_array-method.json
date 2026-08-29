@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-collect_array-method",
+  "snippet": false,
   "code": "collect_array() -> T[] pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    collect_array() -> T[] pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -11,7 +12,9 @@
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 13, "text": "Pipe[T].collect_array() -> T[]", "signature": "Pipe[T].collect_array() -> T[]", "kindLabel": "pure abstract method" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "text": "T", "signature": "T", "kindLabel": "type variable" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "collect_array\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 13, "tokenType": "method" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "tokenType": "typeParameter" }

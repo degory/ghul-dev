@@ -12,9 +12,10 @@ dotnet run --project example-tool -- examples src/.vitepress/example-data
 ```
 
 The first step writes `examples/rosetta-*`, `src/rosetta/*.md` and
-`src/.vitepress/rosetta-tasks.json`. The second compiles and runs every example, which is what
-produces the code and output the pages display - the puller never writes a program's output, so a
-page cannot show output the code does not produce.
+`src/.vitepress/rosetta-tasks.json`, and clears the example data for the tasks it is about to
+write, so a task that has gone leaves nothing behind. The second compiles and runs every example,
+which is what produces the code and output the pages display - the puller never writes a program's
+output, so a page cannot show output the code does not produce.
 
 Everything it writes is generated. To change a solution, change it in `ghul-rosetta-code` and pull
 again; an edit made here is lost at the next pull and leaves this site disagreeing with both the

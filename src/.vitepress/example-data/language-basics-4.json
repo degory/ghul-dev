@@ -1,5 +1,6 @@
 {
   "name": "language-basics-4",
+  "snippet": false,
   "code": "square(x: int) -> int => x * x;",
   "fullSource": "square(x: int) -> int => x * x;\n\n",
   "hiddenBefore": false,
@@ -23,7 +24,7 @@
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 13, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 21, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 26, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 30, "endLine": 1, "endColumn": 30, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 28, "tokenType": "operator" }
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 28, "tokenType": "operator" },
+    { "startLine": 1, "startColumn": 30, "endLine": 1, "endColumn": 30, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

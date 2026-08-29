@@ -1,5 +1,6 @@
 {
   "name": "control-flow-30",
+  "snippet": false,
   "code": "let counter mut = 0;\ndo\n    write_line(counter);\n    counter = counter + 1;\n    if counter == 5 then\n        break;\n    fi\nod",
   "fullSource": "use IO.Std.write_line;\n\nlet counter mut = 0;\ndo\n    write_line(counter);\n    counter = counter + 1;\n    if counter == 5 then\n        break;\n    fi\nod\n",
   "hiddenBefore": true,
@@ -8,24 +9,24 @@
   "output": "0\n1\n2\n3\n4\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "counter: int", "signature": "counter: int", "kindLabel": "local variable" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "counter: int", "signature": "counter: int", "kindLabel": "top-level variable" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: int) -> void", "signature": "IO.Std.write_line(value: int) -> void", "kindLabel": "pure class method" },
-    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "text": "counter: int", "signature": "counter: int", "kindLabel": "local variable" },
-    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 21, "text": "counter: int", "signature": "counter: int", "kindLabel": "local variable" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "text": "counter: int", "signature": "counter: int", "kindLabel": "top-level variable" },
+    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 21, "text": "counter: int", "signature": "counter: int", "kindLabel": "top-level variable" },
     { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 23, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "text": "counter: int", "signature": "counter: int", "kindLabel": "local variable" },
-    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 14, "text": "counter: int", "signature": "counter: int", "kindLabel": "local variable" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "text": "counter: int", "signature": "counter: int", "kindLabel": "top-level variable" },
+    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 14, "text": "counter: int", "signature": "counter: int", "kindLabel": "top-level variable" },
     { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 17, "text": "Ghul.==[int](a: int, b: int) -> bool", "signature": "Ghul.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "variable" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "property" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "tokenType": "variable" },
-    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 21, "tokenType": "variable" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 21, "tokenType": "property" },
     { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 23, "tokenType": "operator" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "tokenType": "variable" },
-    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 14, "tokenType": "variable" },
+    { "startLine": 5, "startColumn": 8, "endLine": 5, "endColumn": 14, "tokenType": "property" },
     { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 17, "tokenType": "operator" }
   ]
 }

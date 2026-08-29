@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-intersect_with-method",
+  "snippet": false,
   "code": "intersect_with(right: Iterable[T]) -> Pipe[T] pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    intersect_with(right: Iterable[T]) -> Pipe[T] pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -15,13 +16,15 @@
     { "startLine": 1, "startColumn": 44, "endLine": 1, "endColumn": 44, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 42, "text": "trait Pipe[T]", "signature": "trait Pipe[T]", "kindLabel": "trait" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "intersect_with\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 14, "tokenType": "method" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 20, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 32, "endLine": 1, "endColumn": 32, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 30, "tokenType": "interface" },
-    { "startLine": 1, "startColumn": 44, "endLine": 1, "endColumn": 44, "tokenType": "typeParameter" },
-    { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 42, "tokenType": "interface" }
+    { "startLine": 1, "startColumn": 32, "endLine": 1, "endColumn": 32, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 42, "tokenType": "interface" },
+    { "startLine": 1, "startColumn": 44, "endLine": 1, "endColumn": 44, "tokenType": "typeParameter" }
   ]
 }

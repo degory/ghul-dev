@@ -1,5 +1,6 @@
 {
   "name": "definitions-2",
+  "snippet": false,
   "code": "let x: int = 42;",
   "fullSource": "let x: int = 42;\n",
   "hiddenBefore": false,
@@ -8,12 +9,12 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "x: int", "signature": "x: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "x: int", "signature": "x: int", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 10, "text": "struct int", "signature": "struct int", "kindLabel": "struct" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "property" },
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 10, "tokenType": "struct" }
   ]
 }

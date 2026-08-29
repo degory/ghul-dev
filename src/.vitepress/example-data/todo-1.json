@@ -1,5 +1,6 @@
 {
   "name": "todo-1",
+  "snippet": false,
   "code": "swallow(i: int) -> int is\n    try\n        return do_something_risky(i);\n    catch e: Exception\n        return 1234; // I'm sure it was fine\n    yrt\nsi",
   "fullSource": "use System.Exception;\n\ndo_something_risky(i: int) -> int => i;\n\nswallow(1);\n\nswallow(i: int) -> int is\n    try\n        return do_something_risky(i);\n    catch e: Exception\n        return 1234; // I'm sure it was fine\n    yrt\nsi\n",
   "hiddenBefore": true,
@@ -23,9 +24,9 @@
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 14, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 22, "tokenType": "struct" },
-    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 22, "tokenType": "class" },
     { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 33, "tokenType": "function" },
-    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 3, "startColumn": 35, "endLine": 3, "endColumn": 35, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 22, "tokenType": "class" }
   ]
 }

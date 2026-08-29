@@ -1,5 +1,6 @@
 {
   "name": "definitions-4",
+  "snippet": false,
   "code": "let\n    an_inferred_int = 123,\n    an_explicit_int: int = 456,\n    a_string = \"hello\";",
   "fullSource": "let\n    an_inferred_int = 123,\n    an_explicit_int: int = 456,\n    a_string = \"hello\";\n",
   "hiddenBefore": false,
@@ -8,16 +9,16 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 19, "text": "an_inferred_int: int", "signature": "an_inferred_int: int", "kindLabel": "local value" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 19, "text": "an_explicit_int: int", "signature": "an_explicit_int: int", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 19, "text": "an_inferred_int: int", "signature": "an_inferred_int: int", "kindLabel": "top-level variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 19, "text": "an_explicit_int: int", "signature": "an_explicit_int: int", "kindLabel": "top-level variable" },
     { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 24, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 12, "text": "a_string: string", "signature": "a_string: string", "kindLabel": "local value" }
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 12, "text": "a_string: string", "signature": "a_string: string", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 19, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 19, "tokenType": "property" },
     { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 24, "tokenType": "struct" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 12, "tokenType": "property" }
   ]
 }

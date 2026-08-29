@@ -1,5 +1,6 @@
 {
   "name": "type-inference-8",
+  "snippet": false,
   "code": "let person = (\"alice\", 30);\nlet (name, age) = person;\n\nlet ((first, second), third) = ((\"a\", \"b\"), \"c\");",
   "fullSource": "let person = (\"alice\", 30);\nlet (name, age) = person;\n\nlet ((first, second), third) = ((\"a\", \"b\"), \"c\");\n",
   "hiddenBefore": false,
@@ -8,22 +9,22 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "person: (string, int)", "signature": "person: (string, int)", "kindLabel": "local value" },
-    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 9, "text": "name: string", "signature": "name: string", "kindLabel": "local value" },
-    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "age: int", "signature": "age: int", "kindLabel": "local value" },
-    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "text": "person: (string, int)", "signature": "person: (string, int)", "kindLabel": "local value" },
-    { "startLine": 4, "startColumn": 7, "endLine": 4, "endColumn": 11, "text": "first: string", "signature": "first: string", "kindLabel": "local value" },
-    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 19, "text": "second: string", "signature": "second: string", "kindLabel": "local value" },
-    { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 27, "text": "third: string", "signature": "third: string", "kindLabel": "local value" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "person: (string, int)", "signature": "person: (string, int)", "kindLabel": "top-level variable" },
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 9, "text": "name: string", "signature": "name: string", "kindLabel": "top-level variable" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "age: int", "signature": "age: int", "kindLabel": "top-level variable" },
+    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "text": "person: (string, int)", "signature": "person: (string, int)", "kindLabel": "top-level variable" },
+    { "startLine": 4, "startColumn": 7, "endLine": 4, "endColumn": 11, "text": "first: string", "signature": "first: string", "kindLabel": "top-level variable" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 19, "text": "second: string", "signature": "second: string", "kindLabel": "top-level variable" },
+    { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 27, "text": "third: string", "signature": "third: string", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 7, "endLine": 4, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 9, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 7, "endLine": 4, "endColumn": 11, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 19, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 27, "tokenType": "property" }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "definitions-8",
+  "snippet": false,
   "code": "class THING is\n    // class body\nsi",
   "fullSource": "class THING is\n    // class body\nsi\n\n",
   "hiddenBefore": false,

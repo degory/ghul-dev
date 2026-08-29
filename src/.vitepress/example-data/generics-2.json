@@ -1,5 +1,6 @@
 {
   "name": "generics-2",
+  "snippet": false,
   "code": "print_something[int](1234);\nprint_something[string](\"hello\");",
   "fullSource": "use IO.Std.write_line;\n\nprint_something[T](t: T) => write_line(\"something is {t}\");\n\nprint_something[int](1234);\nprint_something[string](\"hello\");\n",
   "hiddenBefore": true,
@@ -9,15 +10,15 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 19, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "text": "print_something[int](t: int) -> void", "signature": "print_something[int](t: int) -> void", "kindLabel": "global function" },
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "text": "print_something[int](t: int) -> void", "signature": "print_something[int](t: int) -> void", "kindLabel": "pure global function" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 22, "text": "class string", "signature": "class string", "kindLabel": "class" },
-    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "text": "print_something[string](t: string) -> void", "signature": "print_something[string](t: string) -> void", "kindLabel": "global function" }
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "text": "print_something[string](t: string) -> void", "signature": "print_something[string](t: string) -> void", "kindLabel": "pure global function" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 19, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 15, "tokenType": "function" },
-    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 22, "tokenType": "class" },
-    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "tokenType": "function" }
+    { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 19, "tokenType": "struct" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 15, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 22, "tokenType": "class" }
   ]
 }

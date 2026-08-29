@@ -1,5 +1,6 @@
 {
   "name": "definitions-22",
+  "snippet": false,
   "code": "class SCALER is\n    _scale: double;\n\n    scale(value: double) -> double => value * _scale;\nsi",
   "fullSource": "class SCALER is\n    _scale: double;\n\n    scale(value: double) -> double => value * _scale;\nsi\n\n",
   "hiddenBefore": false,
@@ -30,8 +31,8 @@
     { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 23, "tokenType": "struct" },
     { "startLine": 4, "startColumn": 29, "endLine": 4, "endColumn": 34, "tokenType": "struct" },
     { "startLine": 4, "startColumn": 39, "endLine": 4, "endColumn": 43, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 45, "endLine": 4, "endColumn": 45, "tokenType": "operator" },
     { "startLine": 4, "startColumn": 47, "endLine": 4, "endColumn": 47, "tokenType": "modifier" },
-    { "startLine": 4, "startColumn": 48, "endLine": 4, "endColumn": 52, "tokenType": "property" },
-    { "startLine": 4, "startColumn": 45, "endLine": 4, "endColumn": 45, "tokenType": "operator" }
+    { "startLine": 4, "startColumn": 48, "endLine": 4, "endColumn": 52, "tokenType": "property" }
   ]
 }

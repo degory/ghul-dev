@@ -1,5 +1,6 @@
 {
   "name": "functional-programming-6",
+  "snippet": false,
   "code": "let numbers = [1, 2, 3, 4, 5];\n\nlet element = numbers[3]; // elements can be read\n\nnumbers[3] = 6;",
   "fullSource": "// expect: error\nlet numbers = [1, 2, 3, 4, 5];\n\nlet element = numbers[3]; // elements can be read\n\nnumbers[3] = 6;\n",
   "hiddenBefore": true,
@@ -10,18 +11,18 @@
     { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 11, "severity": "error", "message": "indexer is read-only in int[]" }
   ],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "local value" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "text": "element: int", "signature": "element: int", "kindLabel": "local value" },
-    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 21, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "top-level variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "text": "element: int", "signature": "element: int", "kindLabel": "top-level variable" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 21, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "top-level variable" },
     { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 24, "text": "Collections.List[int].get_Item(index: int) -> int", "signature": "Collections.List[int].get_Item(index: int) -> int", "kindLabel": "pure abstract method" },
-    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 7, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "local value" }
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 7, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 21, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 21, "tokenType": "property" },
     { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 24, "tokenType": "method" },
-    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 7, "tokenType": "property" }
   ]
 }

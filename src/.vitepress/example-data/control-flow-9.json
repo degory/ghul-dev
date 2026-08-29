@@ -1,5 +1,6 @@
 {
   "name": "control-flow-9",
+  "snippet": false,
   "code": "let name: string? = lookup();\n\nif name? then\n    // name is narrowed to non-optional string\n    // here, no ! needed\n    write_line(\"hello, {name}\");\nfi",
   "fullSource": "use IO.Std.write_line;\n\nlookup() -> string? => \"world\";\n\nlet name: string? = lookup();\n\nif name? then\n    // name is narrowed to non-optional string\n    // here, no ! needed\n    write_line(\"hello, {name}\");\nfi\n",
   "hiddenBefore": true,
@@ -8,22 +9,22 @@
   "output": "hello, world\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "name: string?", "signature": "name: string?", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "name: string?", "signature": "name: string?", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 16, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 26, "text": "lookup() -> string?", "signature": "lookup() -> string?", "kindLabel": "pure global function" },
-    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 7, "text": "name: string?", "signature": "name: string?", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 7, "text": "name: string?", "signature": "name: string?", "kindLabel": "top-level variable" },
     { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 6, "startColumn": 25, "endLine": 6, "endColumn": 28, "text": "name: string?\n    ► string", "signature": "name: string?\n    ► string", "kindLabel": "local value" }
+    { "startLine": 6, "startColumn": 25, "endLine": 6, "endColumn": 28, "text": "name: string?\n    ► string", "signature": "name: string?\n    ► string", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [
     { "line": 3, "column": 4, "label": "►", "detail": "► string", "code": "narrowing-presence" }
   ],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "property" },
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 16, "tokenType": "class" },
     { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 26, "tokenType": "function" },
-    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 7, "tokenType": "property" },
     { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 6, "startColumn": 25, "endLine": 6, "endColumn": 28, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 6, "startColumn": 25, "endLine": 6, "endColumn": 28, "tokenType": "property" }
   ]
 }

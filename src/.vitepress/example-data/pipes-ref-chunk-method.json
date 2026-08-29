@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-chunk-method",
+  "snippet": false,
   "code": "chunk(size: int) -> Pipe[LIST[T]] pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    chunk(size: int) -> Pipe[LIST[T]] pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -15,13 +16,15 @@
     { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 29, "text": "class LIST[T]", "signature": "class LIST[T]", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 24, "text": "trait Pipe[T]", "signature": "trait Pipe[T]", "kindLabel": "trait" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "chunk\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 5, "tokenType": "method" },
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "tokenType": "struct" },
-    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 31, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 24, "tokenType": "interface" },
     { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 29, "tokenType": "class" },
-    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 24, "tokenType": "interface" }
+    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 31, "tokenType": "typeParameter" }
   ]
 }
