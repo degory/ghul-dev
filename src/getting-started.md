@@ -20,7 +20,7 @@ You can skip installing anything locally: the repositories below ship a dev cont
 
 ## some ghūl code
 
-- Every example on this site can be edited and run directly in your browser.
+- The [ghūl playground](https://playground.ghul.dev) compiles and runs ghūl in your browser, with live errors, completion and hover as you type - and every example on this site opens in it.
 - The [ghūl scratchpad](https://github.com/degory/ghul-scratchpad) is a minimal one-file project: open it in a Codespace or clone it, paste any example from this site into `main.ghul`{:text}, and `dotnet run`{:sh}.
 - The [examples repository](https://github.com/degory/ghul-examples) has fuller, runnable examples organised by topic.
 
