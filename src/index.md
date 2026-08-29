@@ -42,7 +42,7 @@ To write ghūl on your own machine, see [getting started](/getting-started): a g
 
 - **functional and object-oriented** - first-class functions with closures and non-mutating pipe operations sit alongside classes, structs, traits, and inheritance. Neither style is second-class.
 
-- **lazy sequences and asynchrony** - generator functions `yield` sequences on demand, and `async`/`await` works over .NET tasks in the conventional way.
+- **lazy sequences and asynchrony** - generator functions `yield` sequences on demand, and asynchronous functions `await` .NET tasks in the conventional way.
 
 - **.NET integration** - ghūl produces and consumes NuGet packages and inter-operates with other .NET languages, so the whole .NET ecosystem is available from day one.
 
