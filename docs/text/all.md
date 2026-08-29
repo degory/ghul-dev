@@ -7624,11 +7624,11 @@ A narrowing through a property has one more dependency: the property is read onc
 >
 > The [ghul-examples repository](https://github.com/degory/ghul-examples/tree/main/examples/type-inference) has fuller type-inference examples to build and run locally, in a GitHub Codespace or a dev container.
 
-ghūl infers types pervasively inside a method or function body: most local variables, loop variables, destructured variables and anonymous function parameters can be left unannotated, and the compiler works their types out from how they are initialized and used.
+Inside a function body, you rarely need to write a type. Local variables, loop variables, destructured variables, anonymous function parameters and generic type arguments are all inferred - from initializers, from the context an expression sits in, and from how a value is used later in the same body. You get the checking of static types without typing most of them: in the compiler's own source, over 90% of local variables carry no type annotation, and most of the annotations that remain are deliberate - declaring a variable at a wider type than its initializer, or as reassignable before it has a value - rather than places inference needed help.
+
+The types that do get written are the ones worth writing. A function's parameter and return types are always explicit, and so are fields, properties and global variables: those are the contracts a reader wants written down. Keeping them explicit is also what keeps inference **function-local** - types inferred within one function are not visible outside it, and a type error always points into the body being edited rather than into another function entirely.
 
 Mechanically it is bidirectional, constraint-based inference: types flow up from expressions and down from the contexts that use them, and the compiler re-walks each function body until the unknowns settle. The [implementation page](https://ghul.dev/implementation#type-inference) describes how.
-
-Type inference is **function-local**: types inferred within one function are not visible outside it. Outside function bodies all types are explicit, including the signatures of methods and global functions, whose parameter and return types are always written out.
 
 Within a function, types are inferred for:
 
