@@ -131,7 +131,7 @@ details, including what purity means to [type
 narrowing](/type-narrowing.html), are under
 [methods](/definitions.html#methods).
 
-Expression bodies and value-producing `if`, `case`, and `val ... lav` blocks
+Expression bodies and value-producing `if`, `case`, and parenthesised blocks
 help in writing pure functions; see
 [expression-oriented programming](/expression-oriented-programming).
 

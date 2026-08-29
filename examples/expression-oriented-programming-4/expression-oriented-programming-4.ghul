@@ -9,11 +9,11 @@ class COUNTER is
 
     init() is si
 
-    // an expression body can be a val ... lav block:
-    bump() -> int => val
+    // an expression body can be a ( ... ) block:
+    bump() -> int => (
         _count = _count + 1;
         _count
-    lav;
+    );
 si
 
 write_line("square(6) = {square(6)}");
