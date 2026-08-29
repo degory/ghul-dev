@@ -2,8 +2,8 @@ use IO.Std.write_line;
 
 // >>>
 grade(score: int) -> string is
-    // a val block as a let initializer, composing a case and an if:
-    let label = val
+    // a block as a let initializer, composing a case and an if:
+    let label = (
         let band =
             case score / 10
             when 10, 9 then "A"
@@ -13,7 +13,7 @@ grade(score: int) -> string is
             esac;
 
         if band == "F" then "fail" else "pass ({band})" fi
-    lav;
+    );
 
     return label;
 si

@@ -24,9 +24,9 @@ Every loop form yields too, at type `T?`: a `break` with a value produces it, an
 
 See [loops as expressions](/control-flow.html#loops-as-expressions) for the full rules.
 
-## val blocks
+## blocks
 
-A `val ... lav` block runs a sequence of statements and yields a value: its tail expression, or any `return` that targets the block. It gives an expression room for intermediate local variables, loops, and early exits:
+A parenthesised block `(statement; ...; value)` runs a sequence of statements and yields a value: its tail expression, or any `return` that targets the block. It gives an expression room for intermediate local variables, loops, and early exits:
 
 <GhulExample name="expression-oriented-programming-3" />
 
@@ -34,7 +34,7 @@ A `return` inside the block yields from the block, not from the enclosing functi
 
 ## let in
 
-A `let ... in ...` expression introduces one or more local variables scoped to a single trailing expression. It is lighter than a `val ... lav` block when a value needs only a local or two:
+A `let ... in ...` expression introduces one or more local variables scoped to a single trailing expression. It is lighter than a block when a value needs only a local or two:
 
 <GhulExample name="expression-oriented-programming-6" />
 
@@ -42,13 +42,13 @@ A `let ... in ...` expression introduces one or more local variables scoped to a
 
 Whether a construct is being used as a statement or as an expression changes what happens to the value it produces. It does not change what is written inside it. A loop body, each arm of an `if` / `elif` / `else`, and each arm of a `case` are statement blocks in both uses: they hold a statement list, so an arm can define local variables and run several statements before arriving at its value.
 
-The value an arm produces is its last statement's, on the same rule as a `val ... lav` block:
+The value an arm produces is its last statement's, on the same rule as a parenthesised block:
 
 <GhulExample name="expression-oriented-programming-9" />
 
 Where the value then goes is what the two uses differ on. An `if` used as an expression takes the value of the arm it chose; the same `if` used as a statement discards it. A loop body is the case where it always goes nowhere, since a loop yields through `break` rather than through its body's last statement.
 
-Inside these blocks a terminating `;` on the last statement is optional, and writing one does not discard the value: the arm still produces it, because a closing `else`, `fi`, `esac` or `lav` ends the statement list either way. The one place the semicolon decides the reading is a function or method body, covered next.
+Inside these blocks a terminating `;` on the last statement is optional, and writing one does not discard the value: the arm still produces it, because a closing `else`, `fi`, `esac` or `)` ends the statement list either way. The one place the semicolon decides the reading is a function or method body, covered next.
 
 ## block bodies return their tail
 
@@ -62,7 +62,7 @@ Because the tail is an ordinary statement position, an `if` or a `case` sitting 
 
 <GhulExample name="expression-oriented-programming-8" />
 
-Only a statement that produces a value can be a tail. An expression statement, an `if`, a `case` and a `val ... lav` block all do. A `let`, an assignment, an `assert` and a loop do not, so a body whose last statement is one of those has no value on the fall-through path and returns [the default for its return type](/control-flow.html#default-return) instead. A loop is not an exception to [loops as expressions](#loops-as-expressions): it yields to a context that consumes a value, and a function tail is not one, so a `break` with a value there is rejected outright.
+Only a statement that produces a value can be a tail. An expression statement, an `if`, a `case` and a parenthesised block all do. A `let`, an assignment, an `assert` and a loop do not, so a body whose last statement is one of those has no value on the fall-through path and returns [the default for its return type](/control-flow.html#default-return) instead. A loop is not an exception to [loops as expressions](#loops-as-expressions): it yields to a context that consumes a value, and a function tail is not one, so a `break` with a value there is rejected outright.
 
 Whole bodies can have no tail to take either. A void body discards a trailing statement whether or not it ends in a semicolon, so a method ending in a bare `if` or loop is unaffected. In a generator, falling off the end means the end of the stream rather than a value. A `try` block is not an expression, so a body ending in one is not a tail either.
 
@@ -70,12 +70,12 @@ A guard `if` with no `else` is rejected in tail position in a function that retu
 
 ## expression bodies
 
-A function, method, property, or anonymous function can replace its block body with `=>` and a single expression. That expression can be an `if`, a `case`, or a `val ... lav` block:
+A function, method, property, or anonymous function can replace its block body with `=>` and a single expression. That expression can be an `if`, a `case`, or a parenthesised block:
 
 <GhulExample name="expression-oriented-programming-4" />
 
 ## composing them
 
-These forms nest, so a `val` block can hold a `case` and an `if`:
+These forms nest, so a block can hold a `case` and an `if`:
 
 <GhulExample name="expression-oriented-programming-5" />

@@ -373,8 +373,9 @@ optional elsewhere.
 In a **function or method body** the `;` on the last statement is significant rather
 than optional: without one, a value-producing last statement is the body's tail and
 its value is the return value on the fall-through path; with one the value is
-discarded. At any other closing keyword - `fi`, `esac`, `od`, `lav` - the trailing
-`;` stays optional and does not affect the value the block produces.
+discarded. At any other block close - `fi`, `esac`, `od`, the `)` of a block
+expression - the trailing `;` stays optional and does not affect the value the
+block produces.
 
 ```ebnf
 StatementList ::= ( Statement ";"? )*
@@ -565,7 +566,8 @@ PrimaryExpression ::= Identifier
                     | "rec"
                     | If                                     /* if-expression */
                     | Case                                   /* case-expression */
-                    | "val" StatementList "lav"              /* block expression */
+                    | "(" StatementList ")"                  /* block expression */
+                    | "val" StatementList "lav"              /* block expression, historical spelling */
                     | "let" "use"? VariableList "in" Expression   /* let-in */
                     | "assert" Expression ( "else" Expression )? "in" Expression  /* assert-in */
 
