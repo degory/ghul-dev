@@ -365,15 +365,15 @@ area = 25
 
 ## block
 
-A `val ... lav` block is a sequence of statements that produces a value. The value is the block's tail expression, or any `return E` whose target is the block. A block gives an expression room for intermediate local variables, loops, and early exits:
+A parenthesised block is a sequence of statements in `(` and `)` that produces a value. The value is the block's tail expression, or any `return E` whose target is the block. A block gives an expression room for intermediate local variables, loops, and early exits:
 
 ```ghul
 …
-let area = val
+let area = (
     let width = 4;
     let height = 5;
     width * height
-lav;
+);
 
 write_line("area = {area}");
 ```
@@ -384,7 +384,7 @@ output:
 area = 20
 ```
 
-A `return E` inside a `val ... lav` block yields from the block, not from the enclosing function.
+A `return E` inside a block yields from the block, not from the enclosing function.
 
 These are the main types of expressions in ghūl. They can be combined and nested to form more complex expressions and statements:
 

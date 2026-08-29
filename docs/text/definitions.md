@@ -63,7 +63,7 @@ si
 
 `=>` introduces a single-expression body, while the `is` and `si` keywords are used to delimit block bodies.
 
-To return a value from a block body, you can write it as the last statement with no terminating `;`, instead of writing `return`. Any statement that produces a value works: an expression, an `if`, a `case`, a `val ... lav` block. With the `;`, the value is discarded, like the value of any other expression statement. See [block bodies return their tail](https://ghul.dev/expression-oriented-programming.html#block-bodies-return-their-tail) for the rule in full.
+To return a value from a block body, you can write it as the last statement with no terminating `;`, instead of writing `return`. Any statement that produces a value works: an expression, an `if`, a `case`, a parenthesised block. With the `;`, the value is discarded, like the value of any other expression statement. See [block bodies return their tail](https://ghul.dev/expression-oriented-programming.html#block-bodies-return-their-tail) for the rule in full.
 
 ```ghul
 …

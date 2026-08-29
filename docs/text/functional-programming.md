@@ -57,7 +57,7 @@ write_line("add_base(5): {add_base(5)}");
 // a mut variable is captured by reference: the function and
 // the enclosing scope share it
 let count mut = 0;
-let next = () => val count = count + 1; count lav;
+let next = () => ( count = count + 1; count );
 
 write_line("next(): {next()}");
 write_line("next(): {next()}");
@@ -286,7 +286,7 @@ details, including what purity means to [type
 narrowing](https://ghul.dev/type-narrowing.html), are under
 [methods](https://ghul.dev/definitions.html#methods).
 
-Expression bodies and value-producing `if`, `case`, and `val ... lav` blocks
+Expression bodies and value-producing `if`, `case`, and parenthesised blocks
 help in writing pure functions; see
 [expression-oriented programming](https://ghul.dev/expression-oriented-programming).
 
