@@ -53,11 +53,9 @@ ghūl (pronounced 'ghoul') is a statically typed, general-purpose programming la
 
 > **editable examples**
 >
-> Every example on this site is editable: click the pencil to open it in an editor, change it, and run it in your browser. Output and any compiler errors appear in the panel beneath.
+> Every example on this site is a complete program you can change and run in place: click the pencil, edit, and run. Output and any compiler errors appear in the panel beneath.
 >
-> Nothing you edit is saved. To keep something, paste it into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul`: a one-file project that opens in a GitHub Codespace with the compiler ready, or that you can clone on your own machine. For a project of your own, start from the [repository template](https://github.com/degory/ghul-repository-template).
-
-Each of these is a complete program:
+> Nothing you edit is saved. To keep something, paste it into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul`: a one-file project that opens in a GitHub Codespace with the compiler ready, or that you can clone on your own machine.
 
 **fibonacci: streams + `|>`**
 
@@ -450,39 +448,33 @@ hello, world
 
 A file with no namespace runs its top-level statements as the program's entry point, so a program needs no other ceremony until it grows enough to want some.
 
-## features
+To write ghūl on your own machine, see [getting started](https://ghul.dev/getting-started): a ghūl repository pins the compiler as a local .NET tool, so the compiler arrives with the code. The [tour](https://ghul.dev/expression-oriented-programming) walks through the language a topic at a time.
 
-- **functional programming**: first-class anonymous functions with closures, higher order functions, and non-mutating pipe operations over lists. Arrays, tuples, and list literals are immutable.
+## features
 
 - **expression-oriented**: `if`, `if let`, `case`, loops, and block forms are expressions, and a block body's unterminated last value-producing statement is its value.
 
 - **pattern matching**: `if let` and `case`/`when` arms with type tests, destructuring with literal leaves, and value lists. `case` arms over a union, enum, `bool`, or closed class hierarchy are checked for exhaustiveness; open-domain scrutinees need `else`.
 
-- **OOP**: classes, structs, traits, inheritance, polymorphism, properties, and indexers.
-
-- **type inference**: local variables, loop variables, destructured variables, anonymous function parameter and return types, and generic type arguments at call sites are inferred from initializers and use sites. Inference is bidirectional and iterative within a function body.
-
 - **type narrowing**: union variant tests, `isa` checks, null checks, and `if let` narrow a local variable's type within the code the check covers.
 
-- **generics**: types, methods, and functions can have generic type parameters. Traits can be declared covariant or contravariant with `[T: out]` / `[T: in]`; variance on imported .NET generics is read from metadata.
+- **type inference**: local variables, loop variables, destructured variables, anonymous function parameter and return types, and generic type arguments at call sites are inferred from initializers and use sites, bidirectionally, within a function body.
+
+- **functional programming**: first-class anonymous functions with closures, higher order functions, and non-mutating pipe operations over lists. Arrays, tuples, and list literals are immutable.
 
 - **generators**: functions returning `Pipe[T]` can use `yield` to produce a sequence of values lazily.
 
-- **async/await**: functions returning `Tasks.TASK[T]` can use `await` to wait on a task and resume with its result.
+- **.NET integration**: ghūl produces and consumes NuGet packages and inter-operates with other .NET languages, so the whole .NET ecosystem is available from day one.
 
-- **.NET integration**: ghūl targets .NET, producing and consuming NuGet packages and inter-operating with other .NET languages.
-
-- **error handling**: `try`/`catch`/`finally` over .NET exceptions.
-
-- **type safety**: ghūl enforces type safety at compile-time.
+And the things a general-purpose language is expected to have: classes, structs, traits, and inheritance; generics with declaration-site variance; optional types; async/await; `try`/`catch`/`finally` over .NET exceptions - all covered in the [tour](https://ghul.dev/expression-oriented-programming) and the reference pages.
 
 ## why ghūl?
 
 Why not 🤔
 
-ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment with programming language design. Apart from a slightly quirky syntax, ghūl is a fairly conventional programming language. It is a hobby project maintained by a single person, but its goal is to be sufficiently expressive for general-purpose development, and the self-hosting compiler is the working test of that goal.
+ghūl is mainly an opportunity for [me](https://github.com/degory) to experiment with programming language design. Apart from a slightly quirky syntax, ghūl is a fairly conventional programming language. Its goal is to be expressive enough for general-purpose development, and the self-hosting compiler - the largest ghūl program there is - is the working test of that goal.
 
-The language, compiler, tools, and this website are all a **work-in-progress**: whatever the [ghūl compiler](https://github.com/degory/ghul) accepts is currently the definitive ghūl language reference.
+It is maintained by one person, so expectations should be set accordingly: the language, compiler, tools, and this website are all a **work-in-progress**, whatever the [ghūl compiler](https://github.com/degory/ghul) accepts is currently the definitive language reference, and bug reports and questions are answered as time allows. If you build something with ghūl, however small, I'd be delighted to hear about it.
 
 
 ---
