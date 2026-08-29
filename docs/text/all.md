@@ -57,7 +57,7 @@ The language is under active development: whatever the compiler accepts is curre
 >
 > Every example on this site is a complete program you can change and run in place: click the pencil, edit, and run. Output and any compiler errors appear in the panel beneath.
 >
-> Nothing you edit is saved. To keep something, paste it into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul`: a one-file project that opens in a GitHub Codespace with the compiler ready, or that you can clone on your own machine.
+> Edits live only in the page - to keep something, paste it into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul`: a one-file project that opens in a GitHub Codespace with the compiler ready, or that you can clone on your own machine.
 
 **fibonacci: streams + `|>`**
 
@@ -499,7 +499,7 @@ You can skip installing anything locally: the repositories below ship a dev cont
 
 ## some ghūl code
 
-- Every example on this site can be edited and run directly in your browser.
+- The [ghūl playground](https://playground.ghul.dev) compiles and runs ghūl in your browser, with live errors, completion and hover as you type - and every example on this site opens in it.
 - The [ghūl scratchpad](https://github.com/degory/ghul-scratchpad) is a minimal one-file project: open it in a Codespace or clone it, paste any example from this site into `main.ghul`, and `dotnet run`.
 - The [examples repository](https://github.com/degory/ghul-examples) has fuller, runnable examples organised by topic.
 
