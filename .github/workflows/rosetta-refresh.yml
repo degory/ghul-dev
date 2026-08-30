@@ -48,7 +48,7 @@ jobs:
         dotnet run --project example-tool -- examples src/.vitepress/example-data
 
     - name: Raise a pull request if anything changed
-      uses: peter-evans/create-pull-request@v7
+      uses: peter-evans/create-pull-request@v8
       with:
         branch: rosetta-refresh
         title: Refresh the Rosetta Code solutions
