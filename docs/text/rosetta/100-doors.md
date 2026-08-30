@@ -20,7 +20,7 @@ od
 
 let open_doors = (1::100) |> filter(door => doors[door - 1])
 
-write_line("open doors: {$open_doors}");
+write_line("open doors: {$open_doors}")
 ```
 
 output:

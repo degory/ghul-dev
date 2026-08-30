@@ -74,7 +74,7 @@ let tree =
 show("preorder:", preorder(tree))
 show("inorder:", inorder(tree))
 show("postorder:", postorder(tree))
-show("level-order:", levelorder(tree));
+show("level-order:", levelorder(tree))
 ```
 
 output:

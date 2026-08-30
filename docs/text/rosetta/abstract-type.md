@@ -64,7 +64,7 @@ shapes |> each(shape => write_line(shape.name()))
 
 let described: Described[] = [SQUARE(2.0D), TRIANGLE(6.0D, 1.0D)]
 
-described |> each(shape => write_line(shape.describe()));
+described |> each(shape => write_line(shape.describe()))
 ```
 
 output:

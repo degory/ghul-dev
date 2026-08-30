@@ -21,13 +21,13 @@ When a particular specialization of `print_something[T](T)` is called, `T` will 
 
 ```ghul
 …
-print_something[T](t: T) => write_line("something is {t}");
+print_something[T](t: T) => write_line("something is {t}")
 ```
 
 ```ghul
 …
-print_something[int](1234);
-print_something[string]("hello");
+print_something[int](1234)
+print_something[string]("hello")
 ```
 
 output:
@@ -38,30 +38,30 @@ something is hello
 ```
 
 ```ghul
-struct HOLD_SOMETHING[T](value: T);
+struct HOLD_SOMETHING[T](value: T)
 ```
 
 ```ghul
 …
-let holds_int = HOLD_SOMETHING(1234);
-let holds_string = HOLD_SOMETHING("hello");
+let holds_int = HOLD_SOMETHING(1234)
+let holds_string = HOLD_SOMETHING("hello")
 ```
 
 ```ghul
 union Option[T] is
-    SOME(value: T);
-    NONE;
+    SOME(value: T)
+    NONE
 si
 …
-let some_int = Option.SOME(1234);
+let some_int = Option.SOME(1234)
 ```
 
 Generic argument types can be inferred from context for generic constructor invocations as well as generic function and method calls
 
 ```ghul
 …
-print_something(1234);
-print_something("hello");
+print_something(1234)
+print_something("hello")
 ```
 
 output:
@@ -82,17 +82,17 @@ A type bound `[T: SomeType]` requires the type argument to derive from `SomeType
 ```ghul
 …
 trait ▼ Greetable is
-    ◆▼ name: string;
+    ◆▼ name: string
 si
 
 // T must derive from Greetable, so .name is available on T
 greet[T: Greetable](x: T) is
-    write_line("hello, {x.name}");
+    write_line("hello, {x.name}")
 si
 
-class CAT( ▲ name: string): Greetable;
+class CAT( ▲ name: string): Greetable
 …
-greet(CAT("whiskers"));
+greet(CAT("whiskers"))
 ```
 
 output:
@@ -104,25 +104,25 @@ hello, whiskers
 A value whose static type is a bounded type parameter also narrows and destructures through the bound, so `isa`, `if let`, and destructuring reach the bound's subtypes and variants directly, with no manual widen to the bound first:
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 class ▼ Animal abstract is
-    ◆▼ name() -> string;
+    ◆▼ name() -> string
 si
 
 class CAT: Animal is
     init() is si
-    ▲ name() -> string => "cat";
-    purr() -> string => "purr";
+    ▲ name() -> string => "cat"
+    purr() -> string => "purr"
 si
 
 // T is bounded by Animal, so a T value narrows through Animal with isa
 describe[T: Animal](x: T) -> string =>
     if isa CAT( ► x) then x.purr()
     else x.name()
-    fi;
+    fi
 
-write_line(describe(CAT()));
+write_line(describe(CAT()))
 ```
 
 output:
@@ -136,26 +136,26 @@ Several bounds can be joined with `/\`. The value then behaves as every one of t
 ```ghul
 …
 trait ▼ Named is
-    ◆▼ name: string;
+    ◆▼ name: string
 si
 
 trait ▼ Sized is
-    ◆▼ size: int;
+    ◆▼ size: int
 si
 
 class CRATE: Named, Sized is
-    ▲ name: string;
-    ▲ size: int;
+    ▲ name: string
+    ▲ size: int
 
     init(name: string, size: int) is
-        self.name = name;
-        self.size = size;
+        self.name = name
+        self.size = size
     si
 si
 
 // several bounds joined with '/\'
 label[T: Named /\ Sized](x: T) -> string =>
-    "{x.name} holds {x.size}";
+    "{x.name} holds {x.size}"
 
 write_line(label(CRATE("bolts", 500)))
 ```
@@ -173,7 +173,7 @@ The *static* members of a bound are reachable through the type parameter itself,
 ```ghul
 …
 // '+' resolves through the bound once it has been imported
-total[T: INumber[T]](a: T, b: T) -> T => a + b;
+total[T: INumber[T]](a: T, b: T) -> T => a + b
 
 write_line("{total(2, 3)} {total(1.5, 2.5)}")
 ```
@@ -197,8 +197,8 @@ A kind constraint requires the type argument to be a particular kind of type. Fo
 
 ```ghul
 class CELL[T: struct] is
-    value: T;
-    init(value: T) is self.value = value; si
+    value: T
+    init(value: T) is self.value = value si
 si
 ```
 
@@ -211,13 +211,13 @@ The `init` constraint requires the type argument to expose an accessible paramet
 ```ghul
 …
 // T: init requires the caller to pass a type with a parameterless constructor
-echo[T: init](x: T) -> T => x;
+echo[T: init](x: T) -> T => x
 
 class WIDGET() is
-    describe() -> string => "a widget";
+    describe() -> string => "a widget"
 si
 
-let w = echo(WIDGET());   // OK: WIDGET has init()
+let w = echo(WIDGET())   // OK: WIDGET has init()
 
 write_line(w.describe())
 ```
@@ -239,13 +239,13 @@ Type variance is declared on a *trait*'s type parameters (the CLR permits varian
 …
 // T: out marks Box[T] as covariant in T - a Box[CAT] is also a Box[Animal]
 trait ▼ Box[T: out] is
-    ◆▼ contents() -> T;
+    ◆▼ contents() -> T
 si
 …
-let cats: Box[CAT] = CAT_BOX();
-let animals: Box[Animal] = cats;   // covariance
+let cats: Box[CAT] = CAT_BOX()
+let animals: Box[Animal] = cats   // covariance
 
-write_line(animals.contents().speak());
+write_line(animals.contents().speak())
 ```
 
 output:

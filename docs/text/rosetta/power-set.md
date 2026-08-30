@@ -42,7 +42,7 @@ show[T](sets: LIST[LIST[T]]) -> string =>
 
 write_line(show(power_set(LIST[int]())))
 write_line(show(power_set([1, 2, 3] |> collect())))
-write_line(show(power_set(["a", "b"] |> collect())));
+write_line(show(power_set(["a", "b"] |> collect())))
 ```
 
 output:

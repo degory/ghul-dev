@@ -48,7 +48,7 @@ for row in 0::(primes.count - 1) / 6 do
     )
 od
 
-write_line("{primes.count} primes with strictly descending digits");
+write_line("{primes.count} primes with strictly descending digits")
 ```
 
 output:

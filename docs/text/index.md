@@ -18,8 +18,8 @@ The language is under active development: whatever the compiler accepts is curre
 **fibonacci: streams + `|>`**
 
 ```ghul
-use IO.Std.write_line;
-use Ghul.Pipes;
+use IO.Std.write_line
+use Ghul.Pipes
 
 // lazily generates an infinite sequence of
 // fibonacci numbers. the state is a (prev, current)
@@ -28,7 +28,7 @@ let fibonacci_sequence = stream(
     (0, 1),
     ((prev, current)) =>
         prev || (current, prev + current)
-);
+)
 
 // lazily generates an infinite sequence of
 // factorials. the state is an (n, factorial of n) tuple:
@@ -36,25 +36,25 @@ let factorial_sequence = stream(
     (0, 1),
     ((n, current)) =>
         current || (n + 1, current * (n + 1))
-);
+)
 
-let first_10_fib = fibonacci_sequence |> take(10);
-let first_10_fact = factorial_sequence |> take(10);
+let first_10_fib = fibonacci_sequence |> take(10)
+let first_10_fact = factorial_sequence |> take(10)
 
 let first_10_even =
     fibonacci_sequence
         |> filter(x => x % 2 == 0)
-        |> take(10);
+        |> take(10)
 
 write_line(
     "first 10 fibonacci numbers: {first_10_fib}"
-);
+)
 write_line(
     "first 10 factorial numbers: {first_10_fact}"
-);
+)
 write_line(
     "first 10 even fibonacci numbers: {first_10_even}"
-);
+)
 
 // the whole thing stays one expression: pair the two
 // sequences up, number them, and consume the result
@@ -69,7 +69,7 @@ fibonacci_sequence
                 "fibonacci {i} is {fib}\n"
                 "factorial {i} is {fact}"
             )
-    );
+    )
 ```
 
 output:
@@ -103,47 +103,47 @@ factorial 9 is 362880
 **expression trees: classes + traits**
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // a trait for rendering an expression as a string
 trait ▼ Renderable is
-    ◆▼ render() -> string;
+    ◆▼ render() -> string
 si
 
 // an abstract expression: body-less eval and render
 // make the class abstract, so only the subclasses below
 // can be constructed
 class ◆▼ Expr: Renderable is
-    ◆▼ eval() -> int;
-    ◆▲▼ render() -> string;
+    ◆▼ eval() -> int
+    ◆▲▼ render() -> string
 si
 
 class NUM(value: int): Expr is
-    ▲ eval() -> int => value;
-    ▲ render() -> string => "{value}";
+    ▲ eval() -> int => value
+    ▲ render() -> string => "{value}"
 si
 
 class ADD(left: Expr, right: Expr): Expr is
-    ▲ eval() -> int => left.eval() + right.eval();
-    ▲ render() -> string => "({left.render()} + {right.render()})";
+    ▲ eval() -> int => left.eval() + right.eval()
+    ▲ render() -> string => "({left.render()} + {right.render()})"
 si
 
 class MUL(left: Expr, right: Expr): Expr is
-    ▲ eval() -> int => left.eval() * right.eval();
-    ▲ render() -> string => "({left.render()} * {right.render()})";
+    ▲ eval() -> int => left.eval() * right.eval()
+    ▲ render() -> string => "({left.render()} * {right.render()})"
 si
 
 // (2 * (3 + 4)) = 14
-let expression = MUL(NUM(2), ADD(NUM(3), NUM(4)));
+let expression = MUL(NUM(2), ADD(NUM(3), NUM(4)))
 
-write_line("{expression.render()} = {expression.eval()}");
+write_line("{expression.render()} = {expression.eval()}")
 
 // any of the classes above satisfies Renderable, so a
 // value held at the trait renders whatever it really is
-let renderables: Renderable[] = [NUM(7), expression];
+let renderables: Renderable[] = [NUM(7), expression]
 
 for r in renderables do
-    write_line(r.render());
+    write_line(r.render())
 od
 ```
 
@@ -158,18 +158,18 @@ output:
 **expression trees: union + pattern matching**
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // an expression is one of three variants
 union Expr is
-    NUM(value: int);
-    ADD(left: Expr, right: Expr);
-    MUL(left: Expr, right: Expr);
+    NUM(value: int)
+    ADD(left: Expr, right: Expr)
+    MUL(left: Expr, right: Expr)
 si
 
-use Expr.NUM;
-use Expr.ADD;
-use Expr.MUL;
+use Expr.NUM
+use Expr.ADD
+use Expr.MUL
 
 // evaluate an expression, recursing into the children
 eval(e: Expr) -> int =>
@@ -177,7 +177,7 @@ eval(e: Expr) -> int =>
     when n: NUM then n.value
     when a: ADD then eval(a.left) + eval(a.right)
     when m: MUL then eval(m.left) * eval(m.right)
-    esac;
+    esac
 
 // render an expression, recursing into the children
 render(e: Expr) -> string =>
@@ -185,12 +185,12 @@ render(e: Expr) -> string =>
     when n: NUM then "{n.value}"
     when a: ADD then "({render(a.left)} + {render(a.right)})"
     when m: MUL then "({render(m.left)} * {render(m.right)})"
-    esac;
+    esac
 
 // (2 * (3 + 4)) = 14
-let expression = MUL(NUM(2), ADD(NUM(3), NUM(4)));
+let expression = MUL(NUM(2), ADD(NUM(3), NUM(4)))
 
-write_line("{render(expression)} = {eval(expression)}");
+write_line("{render(expression)} = {eval(expression)}")
 ```
 
 output:
@@ -202,55 +202,55 @@ output:
 **fibonacci: generators + pipes**
 
 ```ghul
-use IO.Std.write_line;
-use Ghul.Pipes;
+use IO.Std.write_line
+use Ghul.Pipes
 
 // a generator: a function returning Pipe[T] that yields.
 // each yield produces the next value and pauses until the
 // caller asks for another, so this sequence is infinite
 // but only ever computed as far as it is consumed
 fibonacci() -> Pipe[int] is
-    let prev mut = 0;
-    let current mut = 1;
+    let prev mut = 0
+    let current mut = 1
     do
-        yield prev;
+        yield prev
         // the right hand side is evaluated before either
         // variable is assigned, so no temporary is needed
-        (prev, current) = (current, prev + current);
+        (prev, current) = (current, prev + current)
     od
 si
 
 factorial() -> Pipe[int] is
-    let n mut = 0;
-    let current mut = 1;
+    let n mut = 0
+    let current mut = 1
     do
-        yield current;
-        (n, current) = (n + 1, current * (n + 1));
+        yield current
+        (n, current) = (n + 1, current * (n + 1))
     od
 si
 
 // a generator is a Pipe, so the pipe operations compose
 // onto it directly
-write_line("first 10 fibonacci numbers: {fibonacci() |> take(10)}");
-write_line("first 10 factorial numbers: {factorial() |> take(10)}");
+write_line("first 10 fibonacci numbers: {fibonacci() |> take(10)}")
+write_line("first 10 factorial numbers: {factorial() |> take(10)}")
 
 let first_10_even =
     fibonacci()
         |> filter(x => x % 2 == 0)
-        |> take(10);
+        |> take(10)
 
-write_line("first 10 even fibonacci numbers: {first_10_even}");
+write_line("first 10 even fibonacci numbers: {first_10_even}")
 
 // take(10) bounds the infinite generators so the loop ends
 let indexed =
     fibonacci()
         |> zip(factorial())
         |> take(10)
-        |> index();
+        |> index()
 
 for (i, (fib, fact)) in indexed do
-    write_line("fibonacci {i} is {fib}");
-    write_line("factorial {i} is {fact}");
+    write_line("fibonacci {i} is {fib}")
+    write_line("factorial {i} is {fact}")
 od
 ```
 
@@ -285,51 +285,51 @@ factorial 9 is 362880
 **calculator: generics**
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
-use Collections.MAP;
+use Collections.MAP
 
 // operations on values of some type T
 trait ▼ Operation[T] is
-    ◆▼ execute(left: T, right: T) -> T;
+    ◆▼ execute(left: T, right: T) -> T
 si
 
 // a calculator over any T, given named operations on T
 class CALCULATOR[T] is
-    _operations: MAP[string, Operation[T]];
+    _operations: MAP[string, Operation[T]]
 
     init(operations: Collections.Iterable[(name: string, operation: Operation[T])]) is
-        _operations = MAP[string, Operation[T]]();
+        _operations = MAP[string, Operation[T]]()
         for (name, operation) in operations do
-            _operations.add(name, operation);
+            _operations.add(name, operation)
         od
     si
 
     calculate(name: string, left: T, right: T) -> T =>
-        _operations[name].execute(left, right);
+        _operations[name].execute(left, right)
 si
 
 class INT_ADD(): Operation[int] is
-    ▲ execute(left: int, right: int) -> int => left + right;
+    ▲ execute(left: int, right: int) -> int => left + right
 si
 
 class INT_MULTIPLY(): Operation[int] is
-    ▲ execute(left: int, right: int) -> int => left * right;
+    ▲ execute(left: int, right: int) -> int => left * right
 si
 
 class STRING_APPEND(): Operation[string] is
-    ▲ execute(left: string, right: string) -> string => "{left}{right}";
+    ▲ execute(left: string, right: string) -> string => "{left}{right}"
 si
 
 // the same generic calculator, instantiated at two types
-let ints = CALCULATOR([("+", INT_ADD()), ("*", INT_MULTIPLY())]);
+let ints = CALCULATOR([("+", INT_ADD()), ("*", INT_MULTIPLY())])
 
-write_line("3 + 4 = {ints.calculate("+", 3, 4)}");
-write_line("3 * 4 = {ints.calculate("*", 3, 4)}");
+write_line("3 + 4 = {ints.calculate("+", 3, 4)}")
+write_line("3 * 4 = {ints.calculate("*", 3, 4)}")
 
-let strings = CALCULATOR([("+", STRING_APPEND())]);
+let strings = CALCULATOR([("+", STRING_APPEND())])
 
-write_line("ghūl + lang = {strings.calculate("+", "ghūl", "lang")}");
+write_line("ghūl + lang = {strings.calculate("+", "ghūl", "lang")}")
 ```
 
 output:
@@ -343,7 +343,7 @@ ghūl + lang = ghūllang
 **optionals: `T?` + narrowing**
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // T? marks a value that can be absent. a non-optional T
 // never holds null, and the compiler keeps the two apart
@@ -354,32 +354,32 @@ find_user(id: int) -> string? =>
         "bob"
     else
         null
-    fi;
+    fi
 
 greet(id: int) is
-    let name = find_user(id);
+    let name = find_user(id)
 
     // name is string? here; testing it narrows it to
     // string inside the branch, so no unwrap is needed
     if ► name? then
-        write_line("hello, {name}");
+        write_line("hello, {name}")
     else
-        write_line("user {id} not found");
+        write_line("user {id} not found")
     fi
 si
 
-greet(1);
-greet(2);
-greet(3);
+greet(1)
+greet(2)
+greet(3)
 
 // if let tests and reads the value in one step
 if let name = find_user(1) then
-    write_line("found: {name}");
+    write_line("found: {name}")
 fi
 
 // ?? falls back when the value is absent
-let display = find_user(42) ?? "guest";
-write_line("signed in as {display}");
+let display = find_user(42) ?? "guest"
+write_line("signed in as {display}")
 ```
 
 output:
@@ -395,7 +395,7 @@ signed in as guest
 So is this one:
 
 ```ghul
-IO.Std.write_line("hello, world");
+IO.Std.write_line("hello, world")
 ```
 
 output:

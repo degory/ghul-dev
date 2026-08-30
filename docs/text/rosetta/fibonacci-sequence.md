@@ -23,7 +23,7 @@ fibonacci_sequence
     |> each(((position, value)) =>
         write_line("fib({position}) = {value}"))
 
-write_line("fib(30) = {fib(30)}");
+write_line("fib(30) = {fib(30)}")
 ```
 
 output:
@@ -64,7 +64,7 @@ for (position, value) in fibonacci() |> take(10) |> index() do
     write_line("fib({position}) = {value}")
 od
 
-write_line("fib(30) = {fib(30)}");
+write_line("fib(30) = {fib(30)}")
 ```
 
 output:

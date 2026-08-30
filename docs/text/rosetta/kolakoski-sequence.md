@@ -73,7 +73,7 @@ si
 report([1, 2], 20)
 report([2, 1], 20)
 report([1, 3, 1, 2], 30)
-report([1, 3, 2, 1], 30);
+report([1, 3, 2, 1], 30)
 ```
 
 output:

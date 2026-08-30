@@ -10,18 +10,18 @@ A union holds a value of one of several variants, each with its own set of field
 
 ```ghul
 union Shape is
-    CIRCLE(radius: double);
-    SQUARE(side: double);
+    CIRCLE(radius: double)
+    SQUARE(side: double)
 si
 
 union Option[T] is
-    SOME(value: T);
-    NONE;
+    SOME(value: T)
+    NONE
 si
 
 union Result[T, E] is
-    OK(value: T);
-    ERROR(error: E);
+    OK(value: T)
+    ERROR(error: E)
 si
 ```
 
@@ -31,18 +31,18 @@ si
 
 ```ghul
 union Shape is
-    CIRCLE(radius: double);
-    SQUARE(side: double);
+    CIRCLE(radius: double)
+    SQUARE(side: double)
 si
 …
 area(s: Shape) -> double is
     if let c: CIRCLE = ► s then
-        return 3.14159d * c.radius * c.radius;
+        return 3.14159d * c.radius * c.radius
     elif let q: SQUARE = ► s then
-        return q.side * q.side;
+        return q.side * q.side
     fi
 
-    return 0.0d;
+    return 0.0d
 si
 ```
 
@@ -60,10 +60,10 @@ area(s: Shape) -> double =>
     case ► s
     when c: CIRCLE then 3.14159d * c.radius * c.radius
     when q: SQUARE then q.side * q.side
-    esac;
+    esac
 
-write_line("{area(CIRCLE(2.0d))}");
-write_line("{area(SQUARE(3.0d))}");
+write_line("{area(CIRCLE(2.0d))}")
+write_line("{area(SQUARE(3.0d))}")
 ```
 
 output:
@@ -86,8 +86,8 @@ A union with a single field-carrying variant, or with one variant marked `defaul
 ```ghul
 …
 if ► an_option? then
-    let value = an_option!;
-    write_line("the option holds {value}");
+    let value = an_option!
+    write_line("the option holds {value}")
 fi
 ```
 
@@ -98,51 +98,51 @@ the option holds 42
 ```
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 union Option[T] is
-    SOME(value: T);
-    NONE;
+    SOME(value: T)
+    NONE
 si
 
 union List[T] is
-    NIL;
-    CONS(head: T, tail: List[T]);
+    NIL
+    CONS(head: T, tail: List[T])
 si
 
 union Tree[T] is
-    LEAF(value: T);
-    NODE(left: Tree[T], right: Tree[T]);
+    LEAF(value: T)
+    NODE(left: Tree[T], right: Tree[T])
 si
 
-use Option.SOME;
-use Option.NONE;
-use List.NIL;
-use List.CONS;
-use Tree.LEAF;
-use Tree.NODE;
+use Option.SOME
+use Option.NONE
+use List.NIL
+use List.CONS
+use Tree.LEAF
+use Tree.NODE
 
-test_option();
-test_list();
-test_tree();
+test_option()
+test_list()
+test_tree()
 
 test_option() is
-    let some_int = SOME(42);
-    let none_int = NONE();
+    let some_int = SOME(42)
+    let none_int = NONE()
 
     let stringify_option = o rec =>
         if isa SOME( ► o) then
             "{o.value}"
         else
             "none"
-        fi;
+        fi
 
-    write_line(stringify_option(some_int));
-    write_line(stringify_option(none_int));
+    write_line(stringify_option(some_int))
+    write_line(stringify_option(none_int))
 si
 
 test_list() is
-    let list = CONS(1, CONS(2, CONS(3, NIL())));
+    let list = CONS(1, CONS(2, CONS(3, NIL())))
 
     let stringify_list = l rec =>
         if isa CONS( ► l) then
@@ -150,9 +150,9 @@ test_list() is
             "{head}, {rec(tail)}"
         else
             "nil"
-        fi;
+        fi
 
-    write_line(stringify_list(list));
+    write_line(stringify_list(list))
 si
 
 test_tree() is
@@ -165,7 +165,7 @@ test_tree() is
             LEAF(3),
             LEAF(4)
         )
-    );
+    )
 
     let stringify_tree = t rec =>
         if isa NODE( ► t) then
@@ -173,9 +173,9 @@ test_tree() is
             "({rec(left)}, {rec(right)})"
         else
             "{t.value}"
-        fi;
+        fi
 
-    write_line(stringify_tree(tree));
+    write_line(stringify_tree(tree))
 si
 ```
 
@@ -197,8 +197,8 @@ none
 ```ghul
 …
 if isa Option.SOME( ► an_option) then
-    let value = an_option.value;
-    write_line("the option holds {value}");
+    let value = an_option.value
+    write_line("the option holds {value}")
 fi
 ```
 

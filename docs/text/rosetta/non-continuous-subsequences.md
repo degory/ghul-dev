@@ -23,7 +23,7 @@ continuous(chosen: LIST[int]) -> bool =>
     |> map(selected)
     |> filter(chosen => chosen.count > 1 /\ !continuous(chosen))
     |> map(chosen => chosen |> join(", "))
-    |> each(line => write_line(line));
+    |> each(line => write_line(line))
 ```
 
 output:

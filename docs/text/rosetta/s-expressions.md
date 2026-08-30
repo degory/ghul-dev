@@ -105,7 +105,7 @@ let (parsed, _) = read(source, 0)
 
 write_line(source)
 write_line("")
-write_line(render(parsed));
+write_line(render(parsed))
 ```
 
 output:

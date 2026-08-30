@@ -25,7 +25,7 @@ make_list(separator: string) -> string is
     return items |> join("\n")
 si
 
-write_line(make_list(". "));
+write_line(make_list(". "))
 ```
 
 output:

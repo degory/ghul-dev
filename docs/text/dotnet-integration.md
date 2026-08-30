@@ -79,23 +79,23 @@ The mappings above are about reaching into .NET. This section is the other direc
 ```ghul
 …
 class WITH_HASH(x: int) is
-    =~(other: WITH_HASH) -> bool => x == other.x;
+    =~(other: WITH_HASH) -> bool => x == other.x
 
-    ▲ get_hash_code() -> int => x.get_hash_code();
+    ▲ get_hash_code() -> int => x.get_hash_code()
 si
 
 // only =~, so .NET keeps comparing by identity:
 class NO_HASH(x: int) is
-    =~(other: NO_HASH) -> bool => x == other.x;
+    =~(other: NO_HASH) -> bool => x == other.x
 si
 
-let with_hash = SET[WITH_HASH]();
-with_hash.add(WITH_HASH(1));
-write_line("with get_hash_code: {with_hash.contains(WITH_HASH(1))}");
+let with_hash = SET[WITH_HASH]()
+with_hash.add(WITH_HASH(1))
+write_line("with get_hash_code: {with_hash.contains(WITH_HASH(1))}")
 
-let no_hash = SET[NO_HASH]();
-no_hash.add(NO_HASH(1));
-write_line("without get_hash_code: {no_hash.contains(NO_HASH(1))}");
+let no_hash = SET[NO_HASH]()
+no_hash.add(NO_HASH(1))
+write_line("without get_hash_code: {no_hash.contains(NO_HASH(1))}")
 ```
 
 diagnostics:
@@ -123,18 +123,18 @@ Sorting, `Ghul.Comparable[T]`, and the relational operators all come from `<>`, 
 …
 class VERSION(major: int, minor: int): Ghul.Comparable[VERSION] is
     ▲ <>(other: VERSION) -> int =>
-        if major != other.major then major - other.major else minor - other.minor fi;
+        if major != other.major then major - other.major else minor - other.minor fi
 
-    ▲ to_string() -> string => "{major}.{minor}";
+    ▲ to_string() -> string => "{major}.{minor}"
 si
 
-let versions = LIST[VERSION]();
-versions.add(VERSION(2, 1));
-versions.add(VERSION(1, 9));
-versions.sort();
+let versions = LIST[VERSION]()
+versions.add(VERSION(2, 1))
+versions.add(VERSION(1, 9))
+versions.sort()
 
-write_line("sorted: {versions |> map(v => v.to_string()) |> join(", ")}");
-write_line("1.0 < 1.1: {VERSION(1, 0) < VERSION(1, 1)}");
+write_line("sorted: {versions |> map(v => v.to_string()) |> join(", ")}")
+write_line("1.0 < 1.1: {VERSION(1, 0) < VERSION(1, 1)}")
 ```
 
 output:
@@ -152,8 +152,8 @@ A .NET user-defined conversion operator (`op_Implicit` / `op_Explicit`) declared
 …
 // System.Half declares an explicit conversion from single, and an implicit one back
 conversions() is
-    let h = cast System.Half(1.5);
-    let f = cast single(h);
+    let h = cast System.Half(1.5)
+    let f = cast single(h)
 
     write_line("{h} {f}")
 si
@@ -176,13 +176,13 @@ A type holding something that has to be released implements `Ghul.Disposable`, w
 …
 class SCOPE(name: string): Ghul.Disposable is
     ▲ dispose() is
-        write_line("closing {name}");
+        write_line("closing {name}")
     si
 si
 
-let use s = SCOPE("file");
+let use s = SCOPE("file")
 
-write_line("inside the scope");
+write_line("inside the scope")
 ```
 
 output:
@@ -199,19 +199,19 @@ A type implementing `Collections.Iterable[T]` is a .NET `IEnumerable<T>`, so it 
 ```ghul
 …
 class COUNTDOWN(from: int): Iterable[int] is
-    ▲ iterator: Iterator[int] => _counting().iterator;
+    ▲ iterator: Iterator[int] => _counting().iterator
 
     _counting() -> Pipe[int] is
-        let i mut = from;
+        let i mut = from
         while i > 0 do
-            yield i;
-            i = i - 1;
+            yield i
+            i = i - 1
         od
     si
 si
 
 for i in COUNTDOWN(3) do
-    write_line("tick {i}");
+    write_line("tick {i}")
 od
 ```
 
@@ -234,14 +234,14 @@ ASP.NET Core minimal APIs work from ghūl. Extension methods aren't exposed as m
 ```ghul
 …
 entry(args: string[]) is
-    let builder = WebApplication.create_builder(args);
+    let builder = WebApplication.create_builder(args)
 
-    let app = builder.build();
+    let app = builder.build()
 
     // '|>' threads app in as map_get's first argument:
-    app |> map_get("/hello", () => Results.ok("hello, world"));
+    app |> map_get("/hello", () => Results.ok("hello, world"))
 
-    app.run(null);
+    app.run(null)
 si
 ```
 
@@ -259,29 +259,29 @@ Entity Framework Core works from ghūl. A context extends `DbContext` and expose
 @IL.name("Product")
 class PRODUCT is
     @IL.name("Id")
-    id: int public;
+    id: int public
 
     @IL.name("Name")
-    name: string public;
+    name: string public
 
     init() is si
 si
 
 class STORE_CONTEXT: DbContext is
     @IL.name("Products")
-    products: DbSet[PRODUCT];
+    products: DbSet[PRODUCT]
 
     init(options: DbContextOptions) is
-        super.init(options);
+        super.init(options)
     si
 si
 
 add_product(context: STORE_CONTEXT, product: PRODUCT) -> Tasks.TASK is
-    context.products.add(product);
+    context.products.add(product)
 
-    await context.save_changes_async(System.Threading.CancellationToken.none);
+    await context.save_changes_async(System.Threading.CancellationToken.none)
 
-    return;
+    return
 si
 …
 ```
@@ -295,18 +295,18 @@ The .NET base libraries include no mocking framework; [NSubstitute](https://nsub
 ```ghul
 …
 trait Clock is
-    ◆ now() -> System.DateTime;
+    ◆ now() -> System.DateTime
 si
 
 test_uses_a_stubbed_clock() static is
     // Substitute.for takes the constructor arguments as an object[]; a
     // trait has none, so pass an empty array.
-    let clock = Substitute.`for[Clock]([]);
+    let clock = Substitute.`for[Clock]([])
 
     // stub a return value for a call:
-    clock.now() |> returns(System.DateTime(2020, 1, 1, 9, 0, 0), null);
+    clock.now() |> returns(System.DateTime(2020, 1, 1, 9, 0, 0), null)
 
-    IO.Std.write_line("stubbed hour is {clock.now().hour}");
+    IO.Std.write_line("stubbed hour is {clock.now().hour}")
 si
 …
 ```

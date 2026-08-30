@@ -81,7 +81,7 @@ od
 write_line("largest left-truncatable prime below 1000000: {largest_left}")
 write_line(
     "largest right-truncatable prime below 1000000: "
-    "{largest_right}");
+    "{largest_right}")
 ```
 
 output:

@@ -163,8 +163,8 @@ The language is under active development: whatever the compiler accepts is curre
 **fibonacci: streams + `|>`**
 
 ```ghul
-use IO.Std.write_line;
-use Ghul.Pipes;
+use IO.Std.write_line
+use Ghul.Pipes
 
 // lazily generates an infinite sequence of
 // fibonacci numbers. the state is a (prev, current)
@@ -173,7 +173,7 @@ let fibonacci_sequence = stream(
     (0, 1),
     ((prev, current)) =>
         prev || (current, prev + current)
-);
+)
 
 // lazily generates an infinite sequence of
 // factorials. the state is an (n, factorial of n) tuple:
@@ -181,25 +181,25 @@ let factorial_sequence = stream(
     (0, 1),
     ((n, current)) =>
         current || (n + 1, current * (n + 1))
-);
+)
 
-let first_10_fib = fibonacci_sequence |> take(10);
-let first_10_fact = factorial_sequence |> take(10);
+let first_10_fib = fibonacci_sequence |> take(10)
+let first_10_fact = factorial_sequence |> take(10)
 
 let first_10_even =
     fibonacci_sequence
         |> filter(x => x % 2 == 0)
-        |> take(10);
+        |> take(10)
 
 write_line(
     "first 10 fibonacci numbers: {first_10_fib}"
-);
+)
 write_line(
     "first 10 factorial numbers: {first_10_fact}"
-);
+)
 write_line(
     "first 10 even fibonacci numbers: {first_10_even}"
-);
+)
 
 // the whole thing stays one expression: pair the two
 // sequences up, number them, and consume the result
@@ -214,7 +214,7 @@ fibonacci_sequence
                 "fibonacci {i} is {fib}\n"
                 "factorial {i} is {fact}"
             )
-    );
+    )
 ```
 
 output:
@@ -248,47 +248,47 @@ factorial 9 is 362880
 **expression trees: classes + traits**
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // a trait for rendering an expression as a string
 trait ▼ Renderable is
-    ◆▼ render() -> string;
+    ◆▼ render() -> string
 si
 
 // an abstract expression: body-less eval and render
 // make the class abstract, so only the subclasses below
 // can be constructed
 class ◆▼ Expr: Renderable is
-    ◆▼ eval() -> int;
-    ◆▲▼ render() -> string;
+    ◆▼ eval() -> int
+    ◆▲▼ render() -> string
 si
 
 class NUM(value: int): Expr is
-    ▲ eval() -> int => value;
-    ▲ render() -> string => "{value}";
+    ▲ eval() -> int => value
+    ▲ render() -> string => "{value}"
 si
 
 class ADD(left: Expr, right: Expr): Expr is
-    ▲ eval() -> int => left.eval() + right.eval();
-    ▲ render() -> string => "({left.render()} + {right.render()})";
+    ▲ eval() -> int => left.eval() + right.eval()
+    ▲ render() -> string => "({left.render()} + {right.render()})"
 si
 
 class MUL(left: Expr, right: Expr): Expr is
-    ▲ eval() -> int => left.eval() * right.eval();
-    ▲ render() -> string => "({left.render()} * {right.render()})";
+    ▲ eval() -> int => left.eval() * right.eval()
+    ▲ render() -> string => "({left.render()} * {right.render()})"
 si
 
 // (2 * (3 + 4)) = 14
-let expression = MUL(NUM(2), ADD(NUM(3), NUM(4)));
+let expression = MUL(NUM(2), ADD(NUM(3), NUM(4)))
 
-write_line("{expression.render()} = {expression.eval()}");
+write_line("{expression.render()} = {expression.eval()}")
 
 // any of the classes above satisfies Renderable, so a
 // value held at the trait renders whatever it really is
-let renderables: Renderable[] = [NUM(7), expression];
+let renderables: Renderable[] = [NUM(7), expression]
 
 for r in renderables do
-    write_line(r.render());
+    write_line(r.render())
 od
 ```
 
@@ -303,18 +303,18 @@ output:
 **expression trees: union + pattern matching**
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // an expression is one of three variants
 union Expr is
-    NUM(value: int);
-    ADD(left: Expr, right: Expr);
-    MUL(left: Expr, right: Expr);
+    NUM(value: int)
+    ADD(left: Expr, right: Expr)
+    MUL(left: Expr, right: Expr)
 si
 
-use Expr.NUM;
-use Expr.ADD;
-use Expr.MUL;
+use Expr.NUM
+use Expr.ADD
+use Expr.MUL
 
 // evaluate an expression, recursing into the children
 eval(e: Expr) -> int =>
@@ -322,7 +322,7 @@ eval(e: Expr) -> int =>
     when n: NUM then n.value
     when a: ADD then eval(a.left) + eval(a.right)
     when m: MUL then eval(m.left) * eval(m.right)
-    esac;
+    esac
 
 // render an expression, recursing into the children
 render(e: Expr) -> string =>
@@ -330,12 +330,12 @@ render(e: Expr) -> string =>
     when n: NUM then "{n.value}"
     when a: ADD then "({render(a.left)} + {render(a.right)})"
     when m: MUL then "({render(m.left)} * {render(m.right)})"
-    esac;
+    esac
 
 // (2 * (3 + 4)) = 14
-let expression = MUL(NUM(2), ADD(NUM(3), NUM(4)));
+let expression = MUL(NUM(2), ADD(NUM(3), NUM(4)))
 
-write_line("{render(expression)} = {eval(expression)}");
+write_line("{render(expression)} = {eval(expression)}")
 ```
 
 output:
@@ -347,55 +347,55 @@ output:
 **fibonacci: generators + pipes**
 
 ```ghul
-use IO.Std.write_line;
-use Ghul.Pipes;
+use IO.Std.write_line
+use Ghul.Pipes
 
 // a generator: a function returning Pipe[T] that yields.
 // each yield produces the next value and pauses until the
 // caller asks for another, so this sequence is infinite
 // but only ever computed as far as it is consumed
 fibonacci() -> Pipe[int] is
-    let prev mut = 0;
-    let current mut = 1;
+    let prev mut = 0
+    let current mut = 1
     do
-        yield prev;
+        yield prev
         // the right hand side is evaluated before either
         // variable is assigned, so no temporary is needed
-        (prev, current) = (current, prev + current);
+        (prev, current) = (current, prev + current)
     od
 si
 
 factorial() -> Pipe[int] is
-    let n mut = 0;
-    let current mut = 1;
+    let n mut = 0
+    let current mut = 1
     do
-        yield current;
-        (n, current) = (n + 1, current * (n + 1));
+        yield current
+        (n, current) = (n + 1, current * (n + 1))
     od
 si
 
 // a generator is a Pipe, so the pipe operations compose
 // onto it directly
-write_line("first 10 fibonacci numbers: {fibonacci() |> take(10)}");
-write_line("first 10 factorial numbers: {factorial() |> take(10)}");
+write_line("first 10 fibonacci numbers: {fibonacci() |> take(10)}")
+write_line("first 10 factorial numbers: {factorial() |> take(10)}")
 
 let first_10_even =
     fibonacci()
         |> filter(x => x % 2 == 0)
-        |> take(10);
+        |> take(10)
 
-write_line("first 10 even fibonacci numbers: {first_10_even}");
+write_line("first 10 even fibonacci numbers: {first_10_even}")
 
 // take(10) bounds the infinite generators so the loop ends
 let indexed =
     fibonacci()
         |> zip(factorial())
         |> take(10)
-        |> index();
+        |> index()
 
 for (i, (fib, fact)) in indexed do
-    write_line("fibonacci {i} is {fib}");
-    write_line("factorial {i} is {fact}");
+    write_line("fibonacci {i} is {fib}")
+    write_line("factorial {i} is {fact}")
 od
 ```
 
@@ -430,51 +430,51 @@ factorial 9 is 362880
 **calculator: generics**
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
-use Collections.MAP;
+use Collections.MAP
 
 // operations on values of some type T
 trait ▼ Operation[T] is
-    ◆▼ execute(left: T, right: T) -> T;
+    ◆▼ execute(left: T, right: T) -> T
 si
 
 // a calculator over any T, given named operations on T
 class CALCULATOR[T] is
-    _operations: MAP[string, Operation[T]];
+    _operations: MAP[string, Operation[T]]
 
     init(operations: Collections.Iterable[(name: string, operation: Operation[T])]) is
-        _operations = MAP[string, Operation[T]]();
+        _operations = MAP[string, Operation[T]]()
         for (name, operation) in operations do
-            _operations.add(name, operation);
+            _operations.add(name, operation)
         od
     si
 
     calculate(name: string, left: T, right: T) -> T =>
-        _operations[name].execute(left, right);
+        _operations[name].execute(left, right)
 si
 
 class INT_ADD(): Operation[int] is
-    ▲ execute(left: int, right: int) -> int => left + right;
+    ▲ execute(left: int, right: int) -> int => left + right
 si
 
 class INT_MULTIPLY(): Operation[int] is
-    ▲ execute(left: int, right: int) -> int => left * right;
+    ▲ execute(left: int, right: int) -> int => left * right
 si
 
 class STRING_APPEND(): Operation[string] is
-    ▲ execute(left: string, right: string) -> string => "{left}{right}";
+    ▲ execute(left: string, right: string) -> string => "{left}{right}"
 si
 
 // the same generic calculator, instantiated at two types
-let ints = CALCULATOR([("+", INT_ADD()), ("*", INT_MULTIPLY())]);
+let ints = CALCULATOR([("+", INT_ADD()), ("*", INT_MULTIPLY())])
 
-write_line("3 + 4 = {ints.calculate("+", 3, 4)}");
-write_line("3 * 4 = {ints.calculate("*", 3, 4)}");
+write_line("3 + 4 = {ints.calculate("+", 3, 4)}")
+write_line("3 * 4 = {ints.calculate("*", 3, 4)}")
 
-let strings = CALCULATOR([("+", STRING_APPEND())]);
+let strings = CALCULATOR([("+", STRING_APPEND())])
 
-write_line("ghūl + lang = {strings.calculate("+", "ghūl", "lang")}");
+write_line("ghūl + lang = {strings.calculate("+", "ghūl", "lang")}")
 ```
 
 output:
@@ -488,7 +488,7 @@ ghūl + lang = ghūllang
 **optionals: `T?` + narrowing**
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // T? marks a value that can be absent. a non-optional T
 // never holds null, and the compiler keeps the two apart
@@ -499,32 +499,32 @@ find_user(id: int) -> string? =>
         "bob"
     else
         null
-    fi;
+    fi
 
 greet(id: int) is
-    let name = find_user(id);
+    let name = find_user(id)
 
     // name is string? here; testing it narrows it to
     // string inside the branch, so no unwrap is needed
     if ► name? then
-        write_line("hello, {name}");
+        write_line("hello, {name}")
     else
-        write_line("user {id} not found");
+        write_line("user {id} not found")
     fi
 si
 
-greet(1);
-greet(2);
-greet(3);
+greet(1)
+greet(2)
+greet(3)
 
 // if let tests and reads the value in one step
 if let name = find_user(1) then
-    write_line("found: {name}");
+    write_line("found: {name}")
 fi
 
 // ?? falls back when the value is absent
-let display = find_user(42) ?? "guest";
-write_line("signed in as {display}");
+let display = find_user(42) ?? "guest"
+write_line("signed in as {display}")
 ```
 
 output:
@@ -540,7 +540,7 @@ signed in as guest
 So is this one:
 
 ```ghul
-IO.Std.write_line("hello, world");
+IO.Std.write_line("hello, world")
 ```
 
 output:
@@ -636,11 +636,11 @@ sign(n: int) -> string =>
     if n < 0 then "negative"
     elif n == 0 then "zero"
     else "positive"
-    fi;
+    fi
 
-write_line(sign(-4));
-write_line(sign(0));
-write_line(sign(7));
+write_line(sign(-4))
+write_line(sign(0))
+write_line(sign(7))
 ```
 
 output:
@@ -662,11 +662,11 @@ day_kind(day: int) -> string =>
     case day
     when 5, 6 then "weekend"
     else "weekday"
-    esac;
+    esac
 
-write_line(day_kind(5));
-write_line(day_kind(3));
-write_line(day_kind(6));
+write_line(day_kind(5))
+write_line(day_kind(3))
+write_line(day_kind(6))
 ```
 
 output:
@@ -686,14 +686,14 @@ Every loop form yields too, at type `T?`: a `break` with a value produces it, an
 // a valued break delivers to the nearest enclosing loop
 // that consumes a value, so it can cross the inner,
 // statement-form loop on its way out
-let rows = [[1, 2, 3], [4, 5, 6]];
+let rows = [[1, 2, 3], [4, 5, 6]]
 
 let first_even: int? =
     for row in rows do
         for cell in row do
             if cell % 2 == 0 then break cell fi
         od
-    od;
+    od
 
 write_line("{first_even ?? -1}")
 ```
@@ -714,30 +714,30 @@ A parenthesised block `(statement; ...; value)` runs a sequence of statements an
 …
 // a block as a let initializer, with room for intermediate locals:
 let midpoint = (
-    let lo = 10;
-    let hi = 20;
+    let lo = 10
+    let hi = 20
     lo + (hi - lo) / 2
-);
-write_line("midpoint = {midpoint}");
+)
+write_line("midpoint = {midpoint}")
 
 // a block folding a loop, with a return that yields from the block:
 let first_even = (
     for x in [1, 3, 4, 7] do
         if x % 2 == 0 then
-            return x;
+            return x
         fi
-    od;
+    od
     -1
-);
-write_line("first_even = {first_even}");
+)
+write_line("first_even = {first_even}")
 
 // a block passed straight as a function argument:
 write_line(
     (
-        let doubled = midpoint * 2;
+        let doubled = midpoint * 2
         "doubled = {doubled}"
     )
-);
+)
 ```
 
 output:
@@ -757,9 +757,9 @@ A `let ... in ...` expression introduces one or more local variables scoped to a
 ```ghul
 …
 hypotenuse_squared(a: int, b: int) -> int =>
-    let a2 = a * a, b2 = b * b in a2 + b2;
+    let a2 = a * a, b2 = b * b in a2 + b2
 
-write_line("h2 = {hypotenuse_squared(3, 4)}");
+write_line("h2 = {hypotenuse_squared(3, 4)}")
 ```
 
 output:
@@ -780,13 +780,13 @@ The value an arm produces is its last statement's, on the same rule as a parenth
 // statements; its last statement is the arm's value
 grade(mark: int) -> string is
     if mark >= 90 then
-        let band = "top";
+        let band = "top band"
 
-        "{band} band"
+        band
     elif mark >= 50 then
-        let band = "middle";
+        let band = "middle band"
 
-        "{band} band"
+        band
     else
         "low band"
     fi
@@ -795,7 +795,7 @@ si
 // the same construct used as a statement: the arms are blocks there too
 announce(mark: int) is
     if mark >= 50 then
-        let verdict = grade(mark);
+        let verdict = grade(mark)
 
         write_line("pass: {verdict}")
     else
@@ -806,17 +806,17 @@ si
 // a loop body is a statement block whose last value goes nowhere:
 // a loop yields through break, not through its body's last statement
 total(marks: int[]) -> int is
-    let running mut = 0;
+    let running mut = 0
 
     for mark in marks do
         running = running + mark
-    od;
+    od
 
     running
 si
 
-write_line(grade(95));
-announce(60);
+write_line(grade(95))
+announce(60)
 write_line("{total([10, 20, 30])}")
 ```
 
@@ -830,18 +830,18 @@ pass: middle band
 
 Where the value then goes is what the two uses differ on. An `if` used as an expression takes the value of the arm it chose; the same `if` used as a statement discards it. A loop body is the case where it always goes nowhere, since a loop yields through `break` rather than through its body's last statement.
 
-Inside these blocks a terminating `;` on the last statement is optional, and writing one does not discard the value: the arm still produces it, because a closing `else`, `fi`, `esac` or `)` ends the statement list either way. The one place the semicolon decides the reading is a function or method body, covered next.
+A terminating `;` on the last statement changes nothing here, or anywhere else: it separates two statements written on one line, and that is all it does.
 
 ## block bodies return their tail
 
-A function or method body takes its last statement's value the way an arm does, with one difference: here the terminating `;` is not inert. Where the last statement produces a value and carries no `;`, that value is the return value on the fall-through path, checked against the declared return type exactly as an explicit `return` would be:
+A function or method body takes its last statement's value the way an arm does. Where that value's type is assignable to the declared return type, it is the return value on the fall-through path, checked exactly as an explicit `return` would be:
 
 ```ghul
 …
 // the last statement is not terminated, so it is the return value
 area(width: int, height: int) -> int is
-    let doubled = width * 2;
-    let trimmed = height - 1;
+    let doubled = width * 2
+    let trimmed = height - 1
 
     doubled * trimmed
 si
@@ -855,7 +855,7 @@ output:
 24
 ```
 
-Written `doubled * trimmed;` the statement is evaluated and its value discarded, which leaves the function with no value on that path.
+A tail of some other non-void type is an error at the tail rather than a silent discard. To evaluate a statement for its effect and throw its value away, write `let _ = doubled * trimmed`.
 
 Because the tail is an ordinary statement position, an `if` or a `case` sitting there is the return value too, and no branch needs its own `return`:
 
@@ -892,9 +892,7 @@ negative zero one
 
 Only a statement that produces a value can be a tail. An expression statement, an `if`, a `case` and a parenthesised block all do. A `let`, an assignment, an `assert` and a loop do not, so a body whose last statement is one of those has no value on the fall-through path and returns [the default for its return type](https://ghul.dev/control-flow.html#default-return) instead. A loop is not an exception to [loops as expressions](#loops-as-expressions): it yields to a context that consumes a value, and a function tail is not one, so a `break` with a value there is rejected outright.
 
-Whole bodies can have no tail to take either. A void body discards a trailing statement whether or not it ends in a semicolon, so a method ending in a bare `if` or loop is unaffected. In a generator, falling off the end means the end of the stream rather than a value. A `try` block is not an expression, so a body ending in one is not a tail either.
-
-A guard `if` with no `else` is rejected in tail position in a function that returns a value, because the branch it does not take produces nothing. Terminate it with `;` to keep it as a plain statement.
+Whole bodies can have no tail to take either. A void body discards whatever is left standing at its end, so a method ending in a bare `if` or loop is unaffected. In a generator, falling off the end means the end of the stream rather than a value, and a bare `return` ends it early. A `try` block is not an expression, so a body ending in one is not a tail either.
 
 ## expression bodies
 
@@ -903,29 +901,29 @@ A function, method, property, or anonymous function can replace its block body w
 ```ghul
 …
 // expression-bodied free function:
-square(n: int) -> int => n * n;
+square(n: int) -> int => n * n
 
 class COUNTER is
-    _count: int;
+    _count: int
 
     init() is si
 
     // an expression body can be a ( ... ) block:
     bump() -> int => (
-        _count = _count + 1;
+        _count = _count + 1
         _count
-    );
+    )
 si
 
-write_line("square(6) = {square(6)}");
+write_line("square(6) = {square(6)}")
 
-let c = COUNTER();
-write_line("bump = {c.bump()}");
-write_line("bump = {c.bump()}");
+let c = COUNTER()
+write_line("bump = {c.bump()}")
+write_line("bump = {c.bump()}")
 
 // expression-bodied anonymous function:
-let twice = (n: int) => n * 2;
-write_line("twice(21) = {twice(21)}");
+let twice = (n: int) => n * 2
+write_line("twice(21) = {twice(21)}")
 ```
 
 output:
@@ -952,17 +950,17 @@ grade(score: int) -> string is
             when 8 then "B"
             when 7 then "C"
             else "F"
-            esac;
+            esac
 
         if band == "F" then "fail" else "pass ({band})" fi
-    );
+    )
 
-    return label;
+    return label
 si
 
-write_line(grade(95));
-write_line(grade(82));
-write_line(grade(60));
+write_line(grade(95))
+write_line(grade(82))
+write_line(grade(60))
 ```
 
 output:
@@ -999,16 +997,16 @@ a data structure, like any other value:
 
 ```ghul
 …
-let f = i => i * 2;
-write_line("f(123): {f(123)}");
+let f = i => i * 2
+write_line("f(123): {f(123)}")
 
 // assigned to another variable
-let g = f;
-write_line("g(456): {g(456)}");
+let g = f
+write_line("g(456): {g(456)}")
 
 // passed to another function
-let apply_twice = (f, i) => f(f(i));
-write_line("apply_twice(f, 7): {apply_twice(f, 7)}");
+let apply_twice = (f, i) => f(f(i))
+write_line("apply_twice(f, 7): {apply_twice(f, 7)}")
 ```
 
 output:
@@ -1030,18 +1028,18 @@ reassign:
 ```ghul
 …
 // an immutable let is captured by value
-let base = 10;
-let add_base = n => n + base;
-write_line("add_base(5): {add_base(5)}");
+let base = 10
+let add_base = n => n + base
+write_line("add_base(5): {add_base(5)}")
 
 // a mut variable is captured by reference: the function and
 // the enclosing scope share it
-let count mut = 0;
-let next = () => ( count = count + 1; count );
+let count mut = 0
+let next = () => ( count = count + 1; count )
 
-write_line("next(): {next()}");
-write_line("next(): {next()}");
-write_line("count: {count}");
+write_line("next(): {next()}")
+write_line("next(): {next()}")
+write_line("count: {count}")
 ```
 
 output:
@@ -1064,16 +1062,16 @@ into the next:
 ```ghul
 …
 // map
-let doubled = [1, 2, 3, 4, 5] |> map(x => x * 2);
-write_line("doubled: {doubled}");
+let doubled = [1, 2, 3, 4, 5] |> map(x => x * 2)
+write_line("doubled: {doubled}")
 
 // filter
-let evens = [1, 2, 3, 4, 5] |> filter(x => x % 2 == 0);
-write_line("evens: {evens}");
+let evens = [1, 2, 3, 4, 5] |> filter(x => x % 2 == 0)
+write_line("evens: {evens}")
 
 // reduce
-let sum = [1, 2, 3, 4, 5] |> reduce(0, (acc, x) => acc + x);
-write_line("sum: {sum}");
+let sum = [1, 2, 3, 4, 5] |> reduce(0, (acc, x) => acc + x)
+write_line("sum: {sum}")
 ```
 
 output:
@@ -1095,13 +1093,13 @@ the function itself:
 …
 // factorial
 let factorial = n rec =>
-    if n == 0 then 1 else n * rec(n - 1) fi;
-write_line("factorial(5): {factorial(5)}");
+    if n == 0 then 1 else n * rec(n - 1) fi
+write_line("factorial(5): {factorial(5)}")
 
 // fibonacci
 let fibonacci = n rec =>
-    if n <= 1 then n else rec(n - 1) + rec(n - 2) fi;
-write_line("fibonacci(10): {fibonacci(10)}");
+    if n <= 1 then n else rec(n - 1) + rec(n - 2) fi
+write_line("fibonacci(10): {fibonacci(10)}")
 ```
 
 output:
@@ -1118,10 +1116,10 @@ refer to each other whatever order they are defined in:
 
 ```ghul
 is_even(n: int) -> bool =>
-    if n == 0 then true else is_odd(n - 1) fi;
+    if n == 0 then true else is_odd(n - 1) fi
 
 is_odd(n: int) -> bool =>
-    if n == 0 then false else is_even(n - 1) fi;
+    if n == 0 then false else is_even(n - 1) fi
 ```
 
 ## read-only by default
@@ -1149,11 +1147,11 @@ replaced. An array literal constructs a plain array, so the same applies to it.
 
 ```ghul
 …
-let numbers = [1, 2, 3, 4, 5];
+let numbers = [1, 2, 3, 4, 5]
 
-let element = numbers[3]; // elements can be read
+let element = numbers[3] // elements can be read
 
-numbers[3] = 6;
+numbers[3] = 6
 ```
 
 diagnostics:
@@ -1167,11 +1165,11 @@ tuple passed to other code is a copy: nothing can change a tuple you hold.
 
 ```ghul
 …
-let tuple = (1, 2, 3, 4, 5);
+let tuple = (1, 2, 3, 4, 5)
 
-let element = tuple.`3; // elements can be read
+let element = tuple.`3 // elements can be read
 
-tuple.`3 = 6;
+tuple.`3 = 6
 ```
 
 diagnostics:
@@ -1193,11 +1191,11 @@ type, unless it is declared `public`:
 
 ```ghul
 …
-struct THING(name: string);
+struct THING(name: string)
 …
-let thing = THING("a thing");
+let thing = THING("a thing")
 
-thing.name = "change it";
+thing.name = "change it"
 ```
 
 diagnostics:
@@ -1215,13 +1213,13 @@ produce a new sequence and leave the input as it was:
 
 ```ghul
 …
-let list = [1, 2, 3, 4, 5];
+let list = [1, 2, 3, 4, 5]
 
-let doubled = list |> map(x => x * 2);
-write_line("doubled: {doubled}");
+let doubled = list |> map(x => x * 2)
+write_line("doubled: {doubled}")
 
 // the original list is unchanged:
-write_line("list: {list |> join(", ")}");
+write_line("list: {list |> join(", ")}")
 ```
 
 output:
@@ -1243,13 +1241,13 @@ are passed to it:
 ```ghul
 …
 // pure: square assigns no field, property, or array element
-square(x: int) -> int pure => x * x;
+square(x: int) -> int pure => x * x
 
 // a pure function type: this slot accepts only pure functions
-apply(f: (int) -> int pure, x: int) -> int => f(x);
+apply(f: (int) -> int pure, x: int) -> int => f(x)
 
-write_line("apply(square, 5): {apply(square, 5)}");
-write_line("apply(anonymous, 5): {apply(x => x + 1, 5)}");
+write_line("apply(square, 5): {apply(square, 5)}")
+write_line("apply(anonymous, 5): {apply(x => x + 1, 5)}")
 ```
 
 output:
@@ -1279,10 +1277,10 @@ one. Global functions and methods can do this generically:
 
 ```ghul
 apply[T](f: T -> T, x: T) -> T =>
-    f(x);
+    f(x)
 
 apply_if[T](f: T -> T, x: T, predicate: T -> bool) -> T =>
-    if predicate(x) then f(x) else x fi;
+    if predicate(x) then f(x) else x fi
 ```
 
 ### higher-order generic methods
@@ -1290,12 +1288,12 @@ apply_if[T](f: T -> T, x: T, predicate: T -> bool) -> T =>
 ```ghul
 class HIGHER_ORDER_FUNCTIONS[T] is
     apply(f: T -> T, x: T) -> T static =>
-        f(x);
+        f(x)
 
     apply_if(
         f: T -> T, x: T, predicate: T -> bool
     ) -> T static =>
-        if predicate(x) then f(x) else x fi;
+        if predicate(x) then f(x) else x fi
 si
 ```
 
@@ -1303,25 +1301,25 @@ si
 
 ```ghul
 …
-let times_2 = x => x * 2;
-write_line("apply(times_2, 5): {apply(times_2, 5)}");
+let times_2 = x => x * 2
+write_line("apply(times_2, 5): {apply(times_2, 5)}")
 
-let square = x => x * x;
-write_line("apply(square, 5): {apply(square, 5)}");
+let square = x => x * x
+write_line("apply(square, 5): {apply(square, 5)}")
 
 // higher order function consumes another function:
-let apply_twice = (f: int -> int, x) => f(f(x));
+let apply_twice = (f: int -> int, x) => f(f(x))
 write_line(
     "apply_twice(times_2, 5): {apply_twice(times_2, 5)}"
-);
+)
 
 // higher order function returns another function:
-let create_apply_twice = (f: int -> int) => x => f(f(x));
-let apply_twice_times_2 = create_apply_twice(times_2);
+let create_apply_twice = (f: int -> int) => x => f(f(x))
+let apply_twice_times_2 = create_apply_twice(times_2)
 
 write_line(
     "apply_twice_times_2(5): {apply_twice_times_2(5)}"
-);
+)
 ```
 
 output:
@@ -1344,16 +1342,16 @@ generic `>>` takes two lines to define:
 ```ghul
 …
 >>[A, B, C](f: A -> B, g: B -> C) -> A -> C =>
-    x => g(f(x));
+    x => g(f(x))
 
-let times_2 = x => x * 2;
-let add_1 = x => x + 1;
+let times_2 = x => x * 2
+let add_1 = x => x + 1
 
-let times_2_then_add_1 = times_2 >> add_1;
-write_line("times_2_then_add_1(5): {times_2_then_add_1(5)}");
+let times_2_then_add_1 = times_2 >> add_1
+write_line("times_2_then_add_1(5): {times_2_then_add_1(5)}")
 
-let pipeline = times_2 >> add_1 >> x => "[{x}]";
-write_line("pipeline(5): {pipeline(5)}");
+let pipeline = times_2 >> add_1 >> x => "[{x}]"
+write_line("pipeline(5): {pipeline(5)}")
 ```
 
 output:
@@ -1371,15 +1369,15 @@ anonymous function that returns another:
 
 ```ghul
 …
-let curried_add = x => y => x + y;
+let curried_add = x => y => x + y
 
-write_line("curried_add(5)(3): {curried_add(5)(3)}");
+write_line("curried_add(5)(3): {curried_add(5)(3)}")
 
-let add_5 = curried_add(5);
-write_line("add_5(3): {add_5(3)}");
+let add_5 = curried_add(5)
+write_line("add_5(3): {add_5(3)}")
 
-let add_10 = curried_add(10);
-write_line("add_10(3): {add_10(3)}");
+let add_10 = curried_add(10)
+write_line("add_10(3): {add_10(3)}")
 ```
 
 output:
@@ -1398,13 +1396,13 @@ arguments:
 
 ```ghul
 …
-let add = (x, y) => x + y;
+let add = (x, y) => x + y
 
-let add_5 = y => add(5, y);
-write_line("add_5(3): {add_5(3)}");
+let add_5 = y => add(5, y)
+write_line("add_5(3): {add_5(3)}")
 
-let add_10 = y => add(10, y);
-write_line("add_10(3): {add_10(3)}");
+let add_10 = y => add(10, y)
+write_line("add_10(3): {add_10(3)}")
 ```
 
 output:
@@ -1429,10 +1427,10 @@ area(s: Shape) -> double =>
     case ► s
     when c: CIRCLE then 3.14159d * c.radius * c.radius
     when q: SQUARE then q.side * q.side
-    esac;
+    esac
 
-write_line("{area(CIRCLE(2.0d))}");
-write_line("{area(SQUARE(3.0d))}");
+write_line("{area(CIRCLE(2.0d))}")
+write_line("{area(SQUARE(3.0d))}")
 ```
 
 output:
@@ -1457,18 +1455,18 @@ present, and `if let` tests and unwraps in one step:
 find_first[T](xs: T[], predicate: T -> bool) -> T? is
     for x in xs do
         if predicate(x) then
-            return x;
+            return x
         fi
     od
 
-    return null;
+    return null
 si
 
-let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0);    // T = int, a value type
-let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2); // T = string, a reference type
+let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0)    // T = int, a value type
+let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2) // T = string, a reference type
 
-write_line("first even: {first_even ?? -1}");
-write_line("first long: {first_long ?? "none"}");
+write_line("first even: {first_even ?? -1}")
+write_line("first long: {first_long ?? "none"}")
 ```
 
 output:
@@ -1490,8 +1488,8 @@ plain `Pipe[T]`.
 
 ```ghul
 union STREAM[T, S] is
-    DONE;
-    YIELD(value: T, state: S);
+    DONE
+    YIELD(value: T, state: S)
 si
 
 stream[T, S](
@@ -1508,11 +1506,11 @@ infix constructs `YIELD(value, next_state)`, so a step body usually reads
 
 ```ghul
 …
-use Ghul.Pipes;
-use STREAM.DONE;
-use STREAM.YIELD;
+use Ghul.Pipes
+use STREAM.DONE
+use STREAM.YIELD
 …
-// counting down. State and output are both int;
+// counting down. State and output are both int
 // the sequence ends when the state reaches zero.
 let counting = (n: int) =>
     stream(
@@ -1523,7 +1521,7 @@ let counting = (n: int) =>
             else
                 i || (i - 1)
             fi
-    );
+    )
 
 // fibonacci. State is the named tuple
 // (prev, current); output is int. The state and
@@ -1535,7 +1533,7 @@ let fibonacci = stream(
             prev = current,
             current = prev + current
         )
-);
+)
 
 // factorial. State is (n, prev); output is int.
 let factorial = stream(
@@ -1543,7 +1541,7 @@ let factorial = stream(
     ((n, prev)) =>
         let next_n = n + 1, next = prev * next_n in
         next || (n = next_n, prev = next)
-);
+)
 
 // chars of a string: state is an int cursor,
 // output is char. The input string is captured by
@@ -1559,26 +1557,26 @@ let chars_of = (s: string) =>
             else
                 xs[i] || (i + 1)
             fi
-    );
+    )
 
 write_line(
     "counting down from 5: {counting(5)}"
-);
+)
 write_line(
     "first 10 fibonacci numbers: {fibonacci |> take(10)}"
-);
+)
 write_line(
     "first 10 factorial numbers: {factorial |> take(10)}"
-);
-write_line("chars of hello: {chars_of("hello")}");
+)
+write_line("chars of hello: {chars_of("hello")}")
 
 let indexed =
-    fibonacci |> zip(factorial) |> take(10) |> index();
+    fibonacci |> zip(factorial) |> take(10) |> index()
 
 for (i, (fib, fact)) in indexed do
-    write_line("fibonacci {i} is {fib}");
-    write_line("factorial {i} is {fact}");
-od;
+    write_line("fibonacci {i} is {fib}")
+    write_line("factorial {i} is {fact}")
+od
 ```
 
 output:
@@ -1649,31 +1647,31 @@ There are no `public` or `private` keywords. A leading underscore on a name mark
 A class extends at most one superclass, named after a colon in the header, and inherits its members. A constructor runs the superclass constructor with `super.init(...)`, and a method replaces an inherited one by declaring it again. A call to that method dispatches on the object's runtime type, so a method inherited from the superclass reaches the override:
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 class ◆▼ Animal is
-    _name: string;
+    _name: string
     init(name: string) is _name = name; si
 
-    name: string => _name;
-    ◆▼ speak() -> string;                     // body-less: Animal is implicitly abstract
-    describe() -> string => "{_name} says {speak()}";
+    name: string => _name
+    ◆▼ speak() -> string                     // body-less: Animal is implicitly abstract
+    describe() -> string => "{_name} says {speak()}"
 si
 
 class DOG: Animal is
     init(name: string) is super.init(name); si
-    ▲ speak() -> string => "woof";
+    ▲ speak() -> string => "woof"
 si
 
 class CAT: Animal is
     init(name: string) is super.init(name); si
-    ▲ speak() -> string => "meow";
+    ▲ speak() -> string => "meow"
 si
 
-let animals: Animal[] = [DOG("Rex"), CAT("Tom")];
+let animals: Animal[] = [DOG("Rex"), CAT("Tom")]
 
 for a in animals do
-    write_line(a.describe()); // describe calls the overriding speak
+    write_line(a.describe()) // describe calls the overriding speak
 od
 ```
 
@@ -1705,7 +1703,7 @@ Discovering an object's concrete type at runtime uses `isa` or `if let`, which t
 ## a worked example
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 let int_calculator = CALCULATOR(
     [
@@ -1714,54 +1712,54 @@ let int_calculator = CALCULATOR(
         ("*", INTEGER_MULTIPLICATION()),
         ("/", INTEGER_DIVISION())
     ]
-);
+)
 
 write_line(
     "1 + 2 = {int_calculator.calculate("+", 1, 2)}"
-);
+)
 write_line(
     "1 - 2 = {int_calculator.calculate("-", 1, 2)}"
-);
+)
 write_line(
     "1 * 2 = {int_calculator.calculate("*", 1, 2)}"
-);
+)
 write_line(
     "1 / 2 = {int_calculator.calculate("/", 1, 2)}"
-);
+)
 
 let from_memory =
-    int_calculator.calculate_from_memory("-", 3);
-write_line("1 + 2 - 3 = {from_memory}");
+    int_calculator.calculate_from_memory("-", 3)
+write_line("1 + 2 - 3 = {from_memory}")
 
 let string_calculator = CALCULATOR(
     [
         ("+", STRING_CONCATENATION()),
         ("-", STRING_SUBTRACTION())
     ]
-);
+)
 
 let concatenated =
-    string_calculator.calculate("+", "hello", "world");
-write_line("hello + world = {concatenated}");
+    string_calculator.calculate("+", "hello", "world")
+write_line("hello + world = {concatenated}")
 
 let subtracted =
     string_calculator.calculate(
         "-", "helloworld", "world"
-    );
-write_line("helloworld - world = {subtracted}");
+    )
+write_line("helloworld - world = {subtracted}")
 
-string_calculator.clear_memory();
+string_calculator.clear_memory()
 
-write_line("memory is cleared");
+write_line("memory is cleared")
 
 trait ▼ Operation[T] is
-    ◆▼ execute(left: T, right: T) -> T;
+    ◆▼ execute(left: T, right: T) -> T
 si
 
 class CALCULATOR[T] is
-    _operations: Collections.MAP[string, Operation[T]];
+    _operations: Collections.MAP[string, Operation[T]]
 
-    memory: T;
+    memory: T
 
     init(
         operations: Collections.Iterable[
@@ -1778,53 +1776,53 @@ class CALCULATOR[T] is
                                 name, operation
                             )
                     )
-            );
+            )
     si
 
     calculate(
         operation_name: string, left: T, right: T
     ) -> T =>
         if _operations.contains_key(operation_name) then
-            let operation = _operations[operation_name];
-            memory = operation.execute(left, right);
+            let operation = _operations[operation_name]
+            memory = operation.execute(left, right)
 
             memory
         else
             throw System.InvalidOperationException(
                 "invalid operation {operation_name}"
             )
-        fi;
+        fi
 
 
     calculate_from_memory(
         operation_name: string, right: T
     ) -> T =>
         if _operations.contains_key(operation_name) then
-            let operation = _operations[operation_name];
-            memory = operation.execute(memory, right);
+            let operation = _operations[operation_name]
+            memory = operation.execute(memory, right)
 
             memory
         else
             throw System.InvalidOperationException(
                 "invalid operation {operation_name}"
             )
-        fi;
+        fi
 
     clear_memory() is
-        memory = _;
+        memory = _
     si
 si
 
 class INTEGER_ADDITION(): Operation[int] is
-    ▲ execute(left: int, right: int) -> int => left + right;
+    ▲ execute(left: int, right: int) -> int => left + right
 si
 
 class INTEGER_SUBTRACTION(): Operation[int] is
-    ▲ execute(left: int, right: int) -> int => left - right;
+    ▲ execute(left: int, right: int) -> int => left - right
 si
 
 class INTEGER_MULTIPLICATION(): Operation[int] is
-    ▲ execute(left: int, right: int) -> int => left * right;
+    ▲ execute(left: int, right: int) -> int => left * right
 si
 
 class INTEGER_DIVISION(): Operation[int] is
@@ -1832,20 +1830,20 @@ class INTEGER_DIVISION(): Operation[int] is
         if right == 0 then
             throw System.InvalidOperationException(
                 "division by zero"
-            );
+            )
         else
             left / right
-        fi;
+        fi
 si
 
 class STRING_CONCATENATION(): Operation[string] is
     ▲ execute(left: string, right: string) -> string =>
-        "{left}{right}";
+        "{left}{right}"
 si
 
 class STRING_SUBTRACTION(): Operation[string] is
     ▲ execute(left: string, right: string) -> string =>
-        left.replace(right, "");
+        left.replace(right, "")
 si
 ```
 
@@ -1879,18 +1877,18 @@ A union holds a value of one of several variants, each with its own set of field
 
 ```ghul
 union Shape is
-    CIRCLE(radius: double);
-    SQUARE(side: double);
+    CIRCLE(radius: double)
+    SQUARE(side: double)
 si
 
 union Option[T] is
-    SOME(value: T);
-    NONE;
+    SOME(value: T)
+    NONE
 si
 
 union Result[T, E] is
-    OK(value: T);
-    ERROR(error: E);
+    OK(value: T)
+    ERROR(error: E)
 si
 ```
 
@@ -1900,18 +1898,18 @@ si
 
 ```ghul
 union Shape is
-    CIRCLE(radius: double);
-    SQUARE(side: double);
+    CIRCLE(radius: double)
+    SQUARE(side: double)
 si
 …
 area(s: Shape) -> double is
     if let c: CIRCLE = ► s then
-        return 3.14159d * c.radius * c.radius;
+        return 3.14159d * c.radius * c.radius
     elif let q: SQUARE = ► s then
-        return q.side * q.side;
+        return q.side * q.side
     fi
 
-    return 0.0d;
+    return 0.0d
 si
 ```
 
@@ -1929,10 +1927,10 @@ area(s: Shape) -> double =>
     case ► s
     when c: CIRCLE then 3.14159d * c.radius * c.radius
     when q: SQUARE then q.side * q.side
-    esac;
+    esac
 
-write_line("{area(CIRCLE(2.0d))}");
-write_line("{area(SQUARE(3.0d))}");
+write_line("{area(CIRCLE(2.0d))}")
+write_line("{area(SQUARE(3.0d))}")
 ```
 
 output:
@@ -1955,8 +1953,8 @@ A union with a single field-carrying variant, or with one variant marked `defaul
 ```ghul
 …
 if ► an_option? then
-    let value = an_option!;
-    write_line("the option holds {value}");
+    let value = an_option!
+    write_line("the option holds {value}")
 fi
 ```
 
@@ -1967,51 +1965,51 @@ the option holds 42
 ```
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 union Option[T] is
-    SOME(value: T);
-    NONE;
+    SOME(value: T)
+    NONE
 si
 
 union List[T] is
-    NIL;
-    CONS(head: T, tail: List[T]);
+    NIL
+    CONS(head: T, tail: List[T])
 si
 
 union Tree[T] is
-    LEAF(value: T);
-    NODE(left: Tree[T], right: Tree[T]);
+    LEAF(value: T)
+    NODE(left: Tree[T], right: Tree[T])
 si
 
-use Option.SOME;
-use Option.NONE;
-use List.NIL;
-use List.CONS;
-use Tree.LEAF;
-use Tree.NODE;
+use Option.SOME
+use Option.NONE
+use List.NIL
+use List.CONS
+use Tree.LEAF
+use Tree.NODE
 
-test_option();
-test_list();
-test_tree();
+test_option()
+test_list()
+test_tree()
 
 test_option() is
-    let some_int = SOME(42);
-    let none_int = NONE();
+    let some_int = SOME(42)
+    let none_int = NONE()
 
     let stringify_option = o rec =>
         if isa SOME( ► o) then
             "{o.value}"
         else
             "none"
-        fi;
+        fi
 
-    write_line(stringify_option(some_int));
-    write_line(stringify_option(none_int));
+    write_line(stringify_option(some_int))
+    write_line(stringify_option(none_int))
 si
 
 test_list() is
-    let list = CONS(1, CONS(2, CONS(3, NIL())));
+    let list = CONS(1, CONS(2, CONS(3, NIL())))
 
     let stringify_list = l rec =>
         if isa CONS( ► l) then
@@ -2019,9 +2017,9 @@ test_list() is
             "{head}, {rec(tail)}"
         else
             "nil"
-        fi;
+        fi
 
-    write_line(stringify_list(list));
+    write_line(stringify_list(list))
 si
 
 test_tree() is
@@ -2034,7 +2032,7 @@ test_tree() is
             LEAF(3),
             LEAF(4)
         )
-    );
+    )
 
     let stringify_tree = t rec =>
         if isa NODE( ► t) then
@@ -2042,9 +2040,9 @@ test_tree() is
             "({rec(left)}, {rec(right)})"
         else
             "{t.value}"
-        fi;
+        fi
 
-    write_line(stringify_tree(tree));
+    write_line(stringify_tree(tree))
 si
 ```
 
@@ -2066,8 +2064,8 @@ none
 ```ghul
 …
 if isa Option.SOME( ► an_option) then
-    let value = an_option.value;
-    write_line("the option holds {value}");
+    let value = an_option.value
+    write_line("the option holds {value}")
 fi
 ```
 
@@ -2107,13 +2105,13 @@ When a particular specialization of `print_something[T](T)` is called, `T` will 
 
 ```ghul
 …
-print_something[T](t: T) => write_line("something is {t}");
+print_something[T](t: T) => write_line("something is {t}")
 ```
 
 ```ghul
 …
-print_something[int](1234);
-print_something[string]("hello");
+print_something[int](1234)
+print_something[string]("hello")
 ```
 
 output:
@@ -2124,30 +2122,30 @@ something is hello
 ```
 
 ```ghul
-struct HOLD_SOMETHING[T](value: T);
+struct HOLD_SOMETHING[T](value: T)
 ```
 
 ```ghul
 …
-let holds_int = HOLD_SOMETHING(1234);
-let holds_string = HOLD_SOMETHING("hello");
+let holds_int = HOLD_SOMETHING(1234)
+let holds_string = HOLD_SOMETHING("hello")
 ```
 
 ```ghul
 union Option[T] is
-    SOME(value: T);
-    NONE;
+    SOME(value: T)
+    NONE
 si
 …
-let some_int = Option.SOME(1234);
+let some_int = Option.SOME(1234)
 ```
 
 Generic argument types can be inferred from context for generic constructor invocations as well as generic function and method calls
 
 ```ghul
 …
-print_something(1234);
-print_something("hello");
+print_something(1234)
+print_something("hello")
 ```
 
 output:
@@ -2168,17 +2166,17 @@ A type bound `[T: SomeType]` requires the type argument to derive from `SomeType
 ```ghul
 …
 trait ▼ Greetable is
-    ◆▼ name: string;
+    ◆▼ name: string
 si
 
 // T must derive from Greetable, so .name is available on T
 greet[T: Greetable](x: T) is
-    write_line("hello, {x.name}");
+    write_line("hello, {x.name}")
 si
 
-class CAT( ▲ name: string): Greetable;
+class CAT( ▲ name: string): Greetable
 …
-greet(CAT("whiskers"));
+greet(CAT("whiskers"))
 ```
 
 output:
@@ -2190,25 +2188,25 @@ hello, whiskers
 A value whose static type is a bounded type parameter also narrows and destructures through the bound, so `isa`, `if let`, and destructuring reach the bound's subtypes and variants directly, with no manual widen to the bound first:
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 class ▼ Animal abstract is
-    ◆▼ name() -> string;
+    ◆▼ name() -> string
 si
 
 class CAT: Animal is
     init() is si
-    ▲ name() -> string => "cat";
-    purr() -> string => "purr";
+    ▲ name() -> string => "cat"
+    purr() -> string => "purr"
 si
 
 // T is bounded by Animal, so a T value narrows through Animal with isa
 describe[T: Animal](x: T) -> string =>
     if isa CAT( ► x) then x.purr()
     else x.name()
-    fi;
+    fi
 
-write_line(describe(CAT()));
+write_line(describe(CAT()))
 ```
 
 output:
@@ -2222,26 +2220,26 @@ Several bounds can be joined with `/\`. The value then behaves as every one of t
 ```ghul
 …
 trait ▼ Named is
-    ◆▼ name: string;
+    ◆▼ name: string
 si
 
 trait ▼ Sized is
-    ◆▼ size: int;
+    ◆▼ size: int
 si
 
 class CRATE: Named, Sized is
-    ▲ name: string;
-    ▲ size: int;
+    ▲ name: string
+    ▲ size: int
 
     init(name: string, size: int) is
-        self.name = name;
-        self.size = size;
+        self.name = name
+        self.size = size
     si
 si
 
 // several bounds joined with '/\'
 label[T: Named /\ Sized](x: T) -> string =>
-    "{x.name} holds {x.size}";
+    "{x.name} holds {x.size}"
 
 write_line(label(CRATE("bolts", 500)))
 ```
@@ -2259,7 +2257,7 @@ The *static* members of a bound are reachable through the type parameter itself,
 ```ghul
 …
 // '+' resolves through the bound once it has been imported
-total[T: INumber[T]](a: T, b: T) -> T => a + b;
+total[T: INumber[T]](a: T, b: T) -> T => a + b
 
 write_line("{total(2, 3)} {total(1.5, 2.5)}")
 ```
@@ -2283,8 +2281,8 @@ A kind constraint requires the type argument to be a particular kind of type. Fo
 
 ```ghul
 class CELL[T: struct] is
-    value: T;
-    init(value: T) is self.value = value; si
+    value: T
+    init(value: T) is self.value = value si
 si
 ```
 
@@ -2297,13 +2295,13 @@ The `init` constraint requires the type argument to expose an accessible paramet
 ```ghul
 …
 // T: init requires the caller to pass a type with a parameterless constructor
-echo[T: init](x: T) -> T => x;
+echo[T: init](x: T) -> T => x
 
 class WIDGET() is
-    describe() -> string => "a widget";
+    describe() -> string => "a widget"
 si
 
-let w = echo(WIDGET());   // OK: WIDGET has init()
+let w = echo(WIDGET())   // OK: WIDGET has init()
 
 write_line(w.describe())
 ```
@@ -2325,13 +2323,13 @@ Type variance is declared on a *trait*'s type parameters (the CLR permits varian
 …
 // T: out marks Box[T] as covariant in T - a Box[CAT] is also a Box[Animal]
 trait ▼ Box[T: out] is
-    ◆▼ contents() -> T;
+    ◆▼ contents() -> T
 si
 …
-let cats: Box[CAT] = CAT_BOX();
-let animals: Box[Animal] = cats;   // covariance
+let cats: Box[CAT] = CAT_BOX()
+let animals: Box[Animal] = cats   // covariance
 
-write_line(animals.contents().speak());
+write_line(animals.contents().speak())
 ```
 
 output:
@@ -2360,18 +2358,18 @@ A type followed by `?` is an *optional* type: a value of `T?` can be present or 
 find_first[T](xs: T[], predicate: T -> bool) -> T? is
     for x in xs do
         if predicate(x) then
-            return x;
+            return x
         fi
     od
 
-    return null;
+    return null
 si
 
-let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0);    // T = int, a value type
-let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2); // T = string, a reference type
+let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0)    // T = int, a value type
+let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2) // T = string, a reference type
 
-write_line("first even: {first_even ?? -1}");
-write_line("first long: {first_long ?? "none"}");
+write_line("first even: {first_even ?? -1}")
+write_line("first long: {first_long ?? "none"}")
 ```
 
 output:
@@ -2389,12 +2387,12 @@ first long: ccc
 
 ```ghul
 …
-let name: string? = lookup();
+let name: string? = lookup()
 
 if ► name? then
     // name is narrowed to non-optional string
     // here, no ! needed
-    write_line("hello, {name}");
+    write_line("hello, {name}")
 fi
 ```
 
@@ -2409,17 +2407,17 @@ The same applies to types. An `isa` test narrows a value to the tested class or 
 ```ghul
 …
 union Result[T, E] is
-    OK(value: T);
-    ERR(error: E);
+    OK(value: T)
+    ERR(error: E)
 si
 …
-let r: Result[int, string] = some_call();
+let r: Result[int, string] = some_call()
 
 if isa Result.OK( ► r) then
-    write_line("ok: {r.value}");
+    write_line("ok: {r.value}")
 else
     // r is narrowed to Result.ERR here
-    write_line("err: {r.error}");
+    write_line("err: {r.error}")
 fi
 ```
 
@@ -2435,17 +2433,17 @@ Narrowing follows the control flow, not just the branch structure. A guard that 
 …
 classify(a: Animal) is
     if !isa CAT( ► a) then
-        write_line("not a cat");
-        return;
+        write_line("not a cat")
+        return
     fi
 
     // every non-CAT has returned, so a is
     // narrowed to CAT from here on
-    write_line(a.purr());
+    write_line(a.purr())
 si
 
-classify(CAT("whiskers"));
-classify(DOG());
+classify(CAT("whiskers"))
+classify(DOG())
 ```
 
 output:
@@ -2465,11 +2463,11 @@ describe(order: ORDER) is
         // within this branch order.customer is the
         // non-optional string, so .length is
         // reachable directly
-        write_line("customer name has {order.customer.length} chars");
+        write_line("customer name has {order.customer.length} chars")
     fi
 si
 
-describe(ORDER("alice"));
+describe(ORDER("alice"))
 ```
 
 output:
@@ -2512,14 +2510,14 @@ Inside such a function, `await e` evaluates to the result of the task `e` once i
 ```ghul
 …
 compute() -> Tasks.TASK[int] is
-    let a = await double_async(10);   // a = 20
-    let b = await double_async(a);    // b = 40
-    let c = await add_async(a, b);    // c = 60
+    let a = await double_async(10)   // a = 20
+    let b = await double_async(a)    // b = 40
+    let c = await add_async(a, b)    // c = 60
 
-    return c;
+    return c
 si
 
-write_line("{compute().result}");
+write_line("{compute().result}")
 ```
 
 output:
@@ -2533,13 +2531,13 @@ output:
 ```ghul
 …
 run_side_effects() -> Tasks.TASK is
-    await side_effect("first");
-    await side_effect("second");
+    await side_effect("first")
+    await side_effect("second")
 
-    return;
+    return
 si
 
-run_side_effects().wait();
+run_side_effects().wait()
 ```
 
 output:
@@ -2554,19 +2552,19 @@ side effect: second
 ```ghul
 …
 sum_of_squares(xs: Collections.List[int]) -> Tasks.TASK[int] is
-    let total mut = 0;
+    let total mut = 0
 
     for x in xs do
-        let y = await fetch_async(x);
-        total = total + y;
+        let y = await fetch_async(x)
+        total = total + y
     od
 
-    return total;
+    return total
 si
 
-let result = sum_of_squares([1, 2, 3, 4]).result;
+let result = sum_of_squares([1, 2, 3, 4]).result
 
-write_line("sum_of_squares = {result}");
+write_line("sum_of_squares = {result}")
 ```
 
 output:
@@ -2584,15 +2582,15 @@ A function is a generator when its declared return type is `Pipe[T]` (`Ghul.Pipe
 ```ghul
 …
 squares(limit: int) -> Ghul.Pipes.Pipe[int] is
-    let i mut = 1;
+    let i mut = 1
     while i <= limit do
-        yield i * i;
-        i = i + 1;
+        yield i * i
+        i = i + 1
     od
 si
 
 for s in squares(4) do
-    write_line(s);
+    write_line(s)
 od
 ```
 
@@ -2611,7 +2609,7 @@ A generator *is* a [pipe](https://ghul.dev/runtime-library.html#stages), so it c
 …
 // fibs() is an infinite generator; take(8) bounds it
 for f in fibs() |> take(8) do
-    write_line(f);
+    write_line(f)
 od
 ```
 
@@ -2718,23 +2716,23 @@ The mappings above are about reaching into .NET. This section is the other direc
 ```ghul
 …
 class WITH_HASH(x: int) is
-    =~(other: WITH_HASH) -> bool => x == other.x;
+    =~(other: WITH_HASH) -> bool => x == other.x
 
-    ▲ get_hash_code() -> int => x.get_hash_code();
+    ▲ get_hash_code() -> int => x.get_hash_code()
 si
 
 // only =~, so .NET keeps comparing by identity:
 class NO_HASH(x: int) is
-    =~(other: NO_HASH) -> bool => x == other.x;
+    =~(other: NO_HASH) -> bool => x == other.x
 si
 
-let with_hash = SET[WITH_HASH]();
-with_hash.add(WITH_HASH(1));
-write_line("with get_hash_code: {with_hash.contains(WITH_HASH(1))}");
+let with_hash = SET[WITH_HASH]()
+with_hash.add(WITH_HASH(1))
+write_line("with get_hash_code: {with_hash.contains(WITH_HASH(1))}")
 
-let no_hash = SET[NO_HASH]();
-no_hash.add(NO_HASH(1));
-write_line("without get_hash_code: {no_hash.contains(NO_HASH(1))}");
+let no_hash = SET[NO_HASH]()
+no_hash.add(NO_HASH(1))
+write_line("without get_hash_code: {no_hash.contains(NO_HASH(1))}")
 ```
 
 diagnostics:
@@ -2762,18 +2760,18 @@ Sorting, `Ghul.Comparable[T]`, and the relational operators all come from `<>`, 
 …
 class VERSION(major: int, minor: int): Ghul.Comparable[VERSION] is
     ▲ <>(other: VERSION) -> int =>
-        if major != other.major then major - other.major else minor - other.minor fi;
+        if major != other.major then major - other.major else minor - other.minor fi
 
-    ▲ to_string() -> string => "{major}.{minor}";
+    ▲ to_string() -> string => "{major}.{minor}"
 si
 
-let versions = LIST[VERSION]();
-versions.add(VERSION(2, 1));
-versions.add(VERSION(1, 9));
-versions.sort();
+let versions = LIST[VERSION]()
+versions.add(VERSION(2, 1))
+versions.add(VERSION(1, 9))
+versions.sort()
 
-write_line("sorted: {versions |> map(v => v.to_string()) |> join(", ")}");
-write_line("1.0 < 1.1: {VERSION(1, 0) < VERSION(1, 1)}");
+write_line("sorted: {versions |> map(v => v.to_string()) |> join(", ")}")
+write_line("1.0 < 1.1: {VERSION(1, 0) < VERSION(1, 1)}")
 ```
 
 output:
@@ -2791,8 +2789,8 @@ A .NET user-defined conversion operator (`op_Implicit` / `op_Explicit`) declared
 …
 // System.Half declares an explicit conversion from single, and an implicit one back
 conversions() is
-    let h = cast System.Half(1.5);
-    let f = cast single(h);
+    let h = cast System.Half(1.5)
+    let f = cast single(h)
 
     write_line("{h} {f}")
 si
@@ -2815,13 +2813,13 @@ A type holding something that has to be released implements `Ghul.Disposable`, w
 …
 class SCOPE(name: string): Ghul.Disposable is
     ▲ dispose() is
-        write_line("closing {name}");
+        write_line("closing {name}")
     si
 si
 
-let use s = SCOPE("file");
+let use s = SCOPE("file")
 
-write_line("inside the scope");
+write_line("inside the scope")
 ```
 
 output:
@@ -2838,19 +2836,19 @@ A type implementing `Collections.Iterable[T]` is a .NET `IEnumerable<T>`, so it 
 ```ghul
 …
 class COUNTDOWN(from: int): Iterable[int] is
-    ▲ iterator: Iterator[int] => _counting().iterator;
+    ▲ iterator: Iterator[int] => _counting().iterator
 
     _counting() -> Pipe[int] is
-        let i mut = from;
+        let i mut = from
         while i > 0 do
-            yield i;
-            i = i - 1;
+            yield i
+            i = i - 1
         od
     si
 si
 
 for i in COUNTDOWN(3) do
-    write_line("tick {i}");
+    write_line("tick {i}")
 od
 ```
 
@@ -2873,14 +2871,14 @@ ASP.NET Core minimal APIs work from ghūl. Extension methods aren't exposed as m
 ```ghul
 …
 entry(args: string[]) is
-    let builder = WebApplication.create_builder(args);
+    let builder = WebApplication.create_builder(args)
 
-    let app = builder.build();
+    let app = builder.build()
 
     // '|>' threads app in as map_get's first argument:
-    app |> map_get("/hello", () => Results.ok("hello, world"));
+    app |> map_get("/hello", () => Results.ok("hello, world"))
 
-    app.run(null);
+    app.run(null)
 si
 ```
 
@@ -2898,29 +2896,29 @@ Entity Framework Core works from ghūl. A context extends `DbContext` and expose
 @IL.name("Product")
 class PRODUCT is
     @IL.name("Id")
-    id: int public;
+    id: int public
 
     @IL.name("Name")
-    name: string public;
+    name: string public
 
     init() is si
 si
 
 class STORE_CONTEXT: DbContext is
     @IL.name("Products")
-    products: DbSet[PRODUCT];
+    products: DbSet[PRODUCT]
 
     init(options: DbContextOptions) is
-        super.init(options);
+        super.init(options)
     si
 si
 
 add_product(context: STORE_CONTEXT, product: PRODUCT) -> Tasks.TASK is
-    context.products.add(product);
+    context.products.add(product)
 
-    await context.save_changes_async(System.Threading.CancellationToken.none);
+    await context.save_changes_async(System.Threading.CancellationToken.none)
 
-    return;
+    return
 si
 …
 ```
@@ -2934,18 +2932,18 @@ The .NET base libraries include no mocking framework; [NSubstitute](https://nsub
 ```ghul
 …
 trait Clock is
-    ◆ now() -> System.DateTime;
+    ◆ now() -> System.DateTime
 si
 
 test_uses_a_stubbed_clock() static is
     // Substitute.for takes the constructor arguments as an object[]; a
     // trait has none, so pass an empty array.
-    let clock = Substitute.`for[Clock]([]);
+    let clock = Substitute.`for[Clock]([])
 
     // stub a return value for a call:
-    clock.now() |> returns(System.DateTime(2020, 1, 1, 9, 0, 0), null);
+    clock.now() |> returns(System.DateTime(2020, 1, 1, 9, 0, 0), null)
 
-    IO.Std.write_line("stubbed hour is {clock.now().hour}");
+    IO.Std.write_line("stubbed hour is {clock.now().hour}")
 si
 …
 ```
@@ -2976,14 +2974,14 @@ call the same underlying code:
 
 ```ghul
 …
-let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 let sum_of_even_squares = numbers
     |> filter(x => x % 2 == 0)
     |> map(x => x * x)
-    |> reduce(0, (total, x) => total + x);
+    |> reduce(0, (total, x) => total + x)
 
-write_line("sum of even squares: {sum_of_even_squares}");
+write_line("sum of even squares: {sum_of_even_squares}")
 ```
 
 output:
@@ -2996,14 +2994,14 @@ or, fluently:
 
 ```ghul
 …
-let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 let sum_of_even_squares = numbers
     | .filter(x => x % 2 == 0)
     | .map(x => x * x)
-    | .reduce(0, (total, x) => total + x);
+    | .reduce(0, (total, x) => total + x)
 
-write_line("sum of even squares: {sum_of_even_squares}");
+write_line("sum of even squares: {sum_of_even_squares}")
 ```
 
 output:
@@ -3036,21 +3034,21 @@ stages from the source.
 
 ```ghul
 …
-let numbers = [1, 2, 3, 4, 5, 6];
+let numbers = [1, 2, 3, 4, 5, 6]
 
 // nothing has asked this pipe for elements yet, so peek's
 // action has not run
 let stages = numbers
     |> peek(x => write_line("  pulled {x}"))
     |> filter(x => x % 2 == 0)
-    |> map(x => x * 10);
+    |> map(x => x * 10)
 
-write_line("pipe built - nothing has run yet");
+write_line("pipe built - nothing has run yet")
 
 // collect_list is a terminal, so it asks for the elements
-let result = stages |> collect_list();
+let result = stages |> collect_list()
 
-write_line("result: {result |> join(", ")}");
+write_line("result: {result |> join(", ")}")
 ```
 
 output:
@@ -3102,7 +3100,7 @@ anything with an `.iterator` - into a `Pipe[T]`. This is what the `|`
 operator calls to wrap its left operand.
 
 ```ghul
-◆ pipe[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ pipe[T](source: Iterable[T]) -> Pipe[T] pure
 ```
 
 ## stages
@@ -3115,13 +3113,13 @@ A stage returns a new pipe, so stages chain onto one another.
 ◆ filter[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
-) -> Pipe[T] pure;
+) -> Pipe[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ filter(predicate: (T) -> bool pure) -> Pipe[T] pure;
+◆ filter(predicate: (T) -> bool pure) -> Pipe[T] pure
 ```
 
 ### map
@@ -3130,13 +3128,13 @@ or, as a method:
 ◆ map[T,U](
     source: Iterable[T],
     mapper: (T) -> U pure
-) -> Pipe[U] pure;
+) -> Pipe[U] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ map[U](mapper: (T) -> U pure) -> Pipe[U] pure;
+◆ map[U](mapper: (T) -> U pure) -> Pipe[U] pure
 ```
 
 ### flat_map
@@ -3147,37 +3145,37 @@ Maps each element to an iterable and runs the results together into one sequence
 ◆ flat_map[T,U](
     source: Iterable[T],
     mapper: (T) -> Iterable[U] pure
-) -> Pipe[U] pure;
+) -> Pipe[U] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ flat_map[U](mapper: (T) -> Iterable[U] pure) -> Pipe[U] pure;
+◆ flat_map[U](mapper: (T) -> Iterable[U] pure) -> Pipe[U] pure
 ```
 
 ### skip
 
 ```ghul
-◆ skip[T](source: Iterable[T], count: int) -> Pipe[T] pure;
+◆ skip[T](source: Iterable[T], count: int) -> Pipe[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ skip(count: int) -> Pipe[T] pure;
+◆ skip(count: int) -> Pipe[T] pure
 ```
 
 ### take
 
 ```ghul
-◆ take[T](source: Iterable[T], count: int) -> Pipe[T] pure;
+◆ take[T](source: Iterable[T], count: int) -> Pipe[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ take(count: int) -> Pipe[T] pure;
+◆ take(count: int) -> Pipe[T] pure
 ```
 
 ### skip_while
@@ -3186,13 +3184,13 @@ or, as a method:
 ◆ skip_while[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
-) -> Pipe[T] pure;
+) -> Pipe[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ skip_while(predicate: (T) -> bool pure) -> Pipe[T] pure;
+◆ skip_while(predicate: (T) -> bool pure) -> Pipe[T] pure
 ```
 
 ### take_while
@@ -3201,28 +3199,28 @@ or, as a method:
 ◆ take_while[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
-) -> Pipe[T] pure;
+) -> Pipe[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ take_while(predicate: (T) -> bool pure) -> Pipe[T] pure;
+◆ take_while(predicate: (T) -> bool pure) -> Pipe[T] pure
 ```
 
 The four set operations that follow all discard duplicates. This is what they do to the same pair of sources:
 
 ```ghul
 …
-let left = [1, 2, 2, 3, 4];
-let right = [3, 4, 5];
+let left = [1, 2, 2, 3, 4]
+let right = [3, 4, 5]
 
 // all four remove duplicates, keeping the first occurrence
 // of each element
-write_line("distinct:       {left |> distinct()}");
-write_line("union_with:     {left |> union_with(right)}");
-write_line("intersect_with: {left |> intersect_with(right)}");
-write_line("except:         {left |> except(right)}");
+write_line("distinct:       {left |> distinct()}")
+write_line("union_with:     {left |> union_with(right)}")
+write_line("intersect_with: {left |> intersect_with(right)}")
+write_line("except:         {left |> except(right)}")
 ```
 
 output:
@@ -3239,13 +3237,13 @@ except:         1, 2
 Removes duplicates, keeping the first occurrence of each element. `distinct`, `union_with`, `intersect_with` and `except` all do this, so each produces a sequence with no repeats, in the order first seen. Elements are compared with `=~` and `get_hash_code`, so a type used with these needs [both](https://ghul.dev/dotnet-integration.html#equality).
 
 ```ghul
-◆ distinct[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ distinct[T](source: Iterable[T]) -> Pipe[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ distinct() -> Pipe[T] pure;
+◆ distinct() -> Pipe[T] pure
 ```
 
 ### union_with
@@ -3256,13 +3254,13 @@ Every element of both sources with duplicates removed, taking the left source's 
 ◆ union_with[T](
     source: Iterable[T],
     right: Iterable[T]
-) -> Pipe[T] pure;
+) -> Pipe[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ union_with(right: Iterable[T]) -> Pipe[T] pure;
+◆ union_with(right: Iterable[T]) -> Pipe[T] pure
 ```
 
 ### intersect_with
@@ -3273,13 +3271,13 @@ Elements the left and right sources have in common, in the order the left source
 ◆ intersect_with[T](
     source: Iterable[T],
     right: Iterable[T]
-) -> Pipe[T] pure;
+) -> Pipe[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ intersect_with(right: Iterable[T]) -> Pipe[T] pure;
+◆ intersect_with(right: Iterable[T]) -> Pipe[T] pure
 ```
 
 ### except
@@ -3290,13 +3288,13 @@ Elements of the left source that the right source doesn't have.
 ◆ except[T](
     source: Iterable[T],
     right: Iterable[T]
-) -> Pipe[T] pure;
+) -> Pipe[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ except(right: Iterable[T]) -> Pipe[T] pure;
+◆ except(right: Iterable[T]) -> Pipe[T] pure
 ```
 
 ### peek
@@ -3304,33 +3302,33 @@ or, as a method:
 Calls `action` on each element and passes it through unchanged.
 
 ```ghul
-◆ peek[T](source: Iterable[T], action: T -> void) -> Pipe[T] pure;
+◆ peek[T](source: Iterable[T], action: T -> void) -> Pipe[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ peek(action: T -> void) -> Pipe[T] pure;
+◆ peek(action: T -> void) -> Pipe[T] pure
 ```
 
 `chunk` and `windows` both produce groups of elements, and differ in how the groups are cut:
 
 ```ghul
 …
-let numbers = [1, 2, 3, 4, 5, 6, 7];
+let numbers = [1, 2, 3, 4, 5, 6, 7]
 
 // chunk: the first three elements, then the next three, and so
 // on. the last group is short when the source doesn't divide
 // evenly
 for group in numbers |> chunk(3) do
-    write_line("chunk:  {group |> join(", ")}");
+    write_line("chunk:  {group |> join(", ")}")
 od
 
 // windows: every run of three neighbouring elements, so each
 // group shares two elements with the one before it. a group is
 // always three long
 for window in numbers |> windows(3) do
-    write_line("window: {window |> join(", ")}");
+    write_line("window: {window |> join(", ")}")
 od
 ```
 
@@ -3352,13 +3350,13 @@ window: 5, 6, 7
 The first `size` elements, then the next `size`, and so on, each element appearing in one group only. The last group is short when the source doesn't divide evenly. Compare `windows`, below.
 
 ```ghul
-◆ chunk[T](source: Iterable[T], size: int) -> Pipe[LIST[T]] pure;
+◆ chunk[T](source: Iterable[T], size: int) -> Pipe[LIST[T]] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ chunk(size: int) -> Pipe[LIST[T]] pure;
+◆ chunk(size: int) -> Pipe[LIST[T]] pure
 ```
 
 ### windows
@@ -3369,13 +3367,13 @@ Every run of `size` neighbouring elements: the first `size`, then the same run m
 ◆ windows[T](
     source: Iterable[T],
     size: int
-) -> Pipe[LIST[T]] pure;
+) -> Pipe[LIST[T]] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ windows(size: int) -> Pipe[LIST[T]] pure;
+◆ windows(size: int) -> Pipe[LIST[T]] pure
 ```
 
 ### cat
@@ -3383,13 +3381,13 @@ or, as a method:
 Concatenation: every element of the left source, then every element of the right.
 
 ```ghul
-◆ cat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T] pure;
+◆ cat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ cat(right: Iterable[T]) -> Pipe[T] pure;
+◆ cat(right: Iterable[T]) -> Pipe[T] pure
 ```
 
 ### index
@@ -3397,20 +3395,20 @@ or, as a method:
 Pairs each element with its index. `INDEXED_VALUE[T]` has `index` and `value`, and destructures positionally, so `for (i, x) in xs | .index() do` reads the pair apart. The second form starts the index at a given number rather than at 0.
 
 ```ghul
-◆ index[T](source: Iterable[T]) -> Pipe[INDEXED_VALUE[T]] pure;
+◆ index[T](source: Iterable[T]) -> Pipe[INDEXED_VALUE[T]] pure
 
 ◆ index[T](
     source: Iterable[T],
     index: int
-) -> Pipe[INDEXED_VALUE[T]] pure;
+) -> Pipe[INDEXED_VALUE[T]] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ index() -> Pipe[INDEXED_VALUE[T]] pure;
+◆ index() -> Pipe[INDEXED_VALUE[T]] pure
 
-◆ index(index: int) -> Pipe[INDEXED_VALUE[T]] pure;
+◆ index(index: int) -> Pipe[INDEXED_VALUE[T]] pure
 ```
 
 ### zip
@@ -3421,24 +3419,24 @@ Pairs elements of the source with elements of `other`, stopping when either side
 ◆ zip[T,U](
     source: Iterable[T],
     other: Iterable[U]
-) -> Pipe[(T,U)] pure;
+) -> Pipe[(T,U)] pure
 
 ◆ zip[T,U,TOut](
     source: Iterable[T],
     other: Iterable[U],
     mapper: (T,U) -> TOut pure
-) -> Pipe[TOut] pure;
+) -> Pipe[TOut] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure;
+◆ zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure
 
 ◆ zip[U,TOut](
     other: Iterable[U],
     mapper: (T,U) -> TOut pure
-) -> Pipe[TOut] pure;
+) -> Pipe[TOut] pure
 ```
 
 ## stages that buffer
@@ -3452,13 +3450,13 @@ moment they are called, rather than passing elements along one at a time.
 Yields the source's elements last to first.
 
 ```ghul
-◆ reverse[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ reverse[T](source: Iterable[T]) -> Pipe[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ reverse() -> Pipe[T] pure;
+◆ reverse() -> Pipe[T] pure
 ```
 
 ### sort
@@ -3466,39 +3464,39 @@ or, as a method:
 Yields the source's elements in order. The first form uses the element type's own ordering: sorting without a comparer needs an element type that defines `<>`, or is comparable on the .NET side. The other two forms take an `IComparer[T]` or a comparison function returning negative, zero or positive.
 
 ```ghul
-◆ sort[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ sort[T](source: Iterable[T]) -> Pipe[T] pure
 
 ◆ sort[T](
     source: Iterable[T],
     comparer: Collections.IComparer[T]
-) -> Pipe[T] pure;
+) -> Pipe[T] pure
 
 ◆ sort[T](
     source: Iterable[T],
     compare: (T, T) -> int pure
-) -> Pipe[T] pure;
+) -> Pipe[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ sort() -> Pipe[T] pure;
+◆ sort() -> Pipe[T] pure
 
-◆ sort(comparer: Collections.IComparer[T]) -> Pipe[T] pure;
+◆ sort(comparer: Collections.IComparer[T]) -> Pipe[T] pure
 
-◆ sort(compare: (T, T) -> int pure) -> Pipe[T] pure;
+◆ sort(compare: (T, T) -> int pure) -> Pipe[T] pure
 ```
 
 ### sort_descending
 
 ```ghul
-◆ sort_descending[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ sort_descending[T](source: Iterable[T]) -> Pipe[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ sort_descending() -> Pipe[T] pure;
+◆ sort_descending() -> Pipe[T] pure
 ```
 
 ### sort_by
@@ -3507,7 +3505,7 @@ or, as a method:
 ◆ sort_by[T,K: Ghul.Comparable[K]](
     source: Iterable[T],
     key_selector: (T) -> K pure
-) -> Pipe[T] pure;
+) -> Pipe[T] pure
 ```
 
 or, as a method:
@@ -3515,7 +3513,7 @@ or, as a method:
 ```ghul
 ◆ sort_by[K: Ghul.Comparable[K]](
     key_selector: (T) -> K pure
-) -> Pipe[T] pure;
+) -> Pipe[T] pure
 ```
 
 ### sort_by_descending
@@ -3524,7 +3522,7 @@ or, as a method:
 ◆ sort_by_descending[T,K: Ghul.Comparable[K]](
     source: Iterable[T],
     key_selector: (T) -> K pure
-) -> Pipe[T] pure;
+) -> Pipe[T] pure
 ```
 
 or, as a method:
@@ -3532,7 +3530,7 @@ or, as a method:
 ```ghul
 ◆ sort_by_descending[K: Ghul.Comparable[K]](
     key_selector: (T) -> K pure
-) -> Pipe[T] pure;
+) -> Pipe[T] pure
 ```
 
 ## terminals
@@ -3548,33 +3546,33 @@ variant returning `MAYBE[T]` and one that throws instead:
 
 ```ghul
 …
-let words = ["alpha", "beta", "gamma"];
+let words = ["alpha", "beta", "gamma"]
 
-// find scans for the first element matching a predicate;
+// find scans for the first element matching a predicate
 // first takes no predicate and yields the leading element
-write_line("find:      {words |> find(w => w.length == 4) ?? "none"}");
-write_line("first:     {words |> first() ?? "none"}");
+write_line("find:      {words |> find(w => w.length == 4) ?? "none"}")
+write_line("first:     {words |> first() ?? "none"}")
 
 // only yields the single element, and throws if the source
 // holds none or more than one
-write_line("only:      {["solo"] |> only()}");
+write_line("only:      {["solo"] |> only()}")
 
 // a mapper that gives a result only for words longer than four
 // characters
 shout(w: string) -> MAYBE[string] pure =>
-    if w.length > 4 then MAYBE[string](w.to_upper()) else MAYBE[string]() fi;
+    if w.length > 4 then MAYBE[string](w.to_upper()) else MAYBE[string]() fi
 
 // find_map keeps mapping until one answers; first_map maps the
 // first element and gives up when that one declines
-write_line("find_map:  {words |> find_map(shout) ?? "none"}");
-write_line("first_map: {words |> first_map(shout) ?? "none"}");
+write_line("find_map:  {words |> find_map(shout) ?? "none"}")
+write_line("first_map: {words |> first_map(shout) ?? "none"}")
 
 // beta is the only word the mapper declines, so leading with it
 // is what separates the two
-let beta_first = ["beta", "alpha", "gamma"];
+let beta_first = ["beta", "alpha", "gamma"]
 
-write_line("find_map:  {beta_first |> find_map(shout) ?? "none"}");
-write_line("first_map: {beta_first |> first_map(shout) ?? "none"}");
+write_line("find_map:  {beta_first |> find_map(shout) ?? "none"}")
+write_line("first_map: {beta_first |> first_map(shout) ?? "none"}")
 ```
 
 output:
@@ -3597,13 +3595,13 @@ The first element matching the predicate, absent if none does. `first` is the sa
 ◆ find[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
-) -> Ghul.MAYBE[T] pure;
+) -> Ghul.MAYBE[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ find(predicate: (T) -> bool pure) -> Ghul.MAYBE[T] pure;
+◆ find(predicate: (T) -> bool pure) -> Ghul.MAYBE[T] pure
 ```
 
 ### find_map
@@ -3614,7 +3612,7 @@ Calls `mapper` on each element in turn and returns the first present result. `fi
 ◆ find_map[T,U](
     source: Iterable[T],
     mapper: (T) -> Ghul.MAYBE[U] pure
-) -> Ghul.MAYBE[U] pure;
+) -> Ghul.MAYBE[U] pure
 ```
 
 or, as a method:
@@ -3622,7 +3620,7 @@ or, as a method:
 ```ghul
 ◆ find_map[U](
     mapper: (T) -> Ghul.MAYBE[U] pure
-) -> Ghul.MAYBE[U] pure;
+) -> Ghul.MAYBE[U] pure
 ```
 
 ### find_or_throw
@@ -3633,13 +3631,13 @@ As `find`, throwing instead of returning absent when nothing matches.
 ◆ find_or_throw[T](
     source: Iterable[T],
     predicate: T -> bool pure
-) -> T pure;
+) -> T pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ find_or_throw(predicate: T -> bool pure) -> T pure;
+◆ find_or_throw(predicate: T -> bool pure) -> T pure
 ```
 
 ### find_map_or_throw
@@ -3650,7 +3648,7 @@ As `find_map`, throwing instead of returning absent when nothing maps.
 ◆ find_map_or_throw[T,U](
     source: Iterable[T],
     mapper: (T) -> Ghul.MAYBE[U] pure
-) -> U pure;
+) -> U pure
 ```
 
 or, as a method:
@@ -3658,7 +3656,7 @@ or, as a method:
 ```ghul
 ◆ find_map_or_throw[U](
     mapper: (T) -> Ghul.MAYBE[U] pure
-) -> U pure;
+) -> U pure
 ```
 
 ### first
@@ -3666,13 +3664,13 @@ or, as a method:
 The leading element, absent when the source is empty.
 
 ```ghul
-◆ first[T](source: Iterable[T]) -> Ghul.MAYBE[T] pure;
+◆ first[T](source: Iterable[T]) -> Ghul.MAYBE[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ first() -> Ghul.MAYBE[T] pure;
+◆ first() -> Ghul.MAYBE[T] pure
 ```
 
 ### first_map
@@ -3683,7 +3681,7 @@ Calls `mapper` on the leading element only. Compare `find_map`, above, which kee
 ◆ first_map[T,U](
     source: Iterable[T],
     mapper: (T) -> Ghul.MAYBE[U] pure
-) -> Ghul.MAYBE[U] pure;
+) -> Ghul.MAYBE[U] pure
 ```
 
 or, as a method:
@@ -3691,7 +3689,7 @@ or, as a method:
 ```ghul
 ◆ first_map[U](
     mapper: (T) -> Ghul.MAYBE[U] pure
-) -> Ghul.MAYBE[U] pure;
+) -> Ghul.MAYBE[U] pure
 ```
 
 ### first_or_throw
@@ -3699,13 +3697,13 @@ or, as a method:
 As `first`, throwing instead of returning absent when the source is empty.
 
 ```ghul
-◆ first_or_throw[T](source: Iterable[T]) -> T pure;
+◆ first_or_throw[T](source: Iterable[T]) -> T pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ first_or_throw() -> T pure;
+◆ first_or_throw() -> T pure
 ```
 
 ### first_map_or_throw
@@ -3716,7 +3714,7 @@ As `first_map`, throwing instead of returning absent.
 ◆ first_map_or_throw[T,U](
     source: Iterable[T],
     mapper: (T) -> Ghul.MAYBE[U] pure
-) -> U pure;
+) -> U pure
 ```
 
 or, as a method:
@@ -3724,7 +3722,7 @@ or, as a method:
 ```ghul
 ◆ first_map_or_throw[U](
     mapper: (T) -> Ghul.MAYBE[U] pure
-) -> U pure;
+) -> U pure
 ```
 
 ### only
@@ -3732,13 +3730,13 @@ or, as a method:
 The single element the source holds, throwing when it holds none or more than one.
 
 ```ghul
-◆ only[T](source: Iterable[T]) -> T pure;
+◆ only[T](source: Iterable[T]) -> T pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ only() -> T pure;
+◆ only() -> T pure
 ```
 
 ### any
@@ -3747,13 +3745,13 @@ or, as a method:
 ◆ any[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
-) -> bool pure;
+) -> bool pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ any(predicate: (T) -> bool pure) -> bool pure;
+◆ any(predicate: (T) -> bool pure) -> bool pure
 ```
 
 ### all
@@ -3762,25 +3760,25 @@ or, as a method:
 ◆ all[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
-) -> bool pure;
+) -> bool pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ all(predicate: (T) -> bool pure) -> bool pure;
+◆ all(predicate: (T) -> bool pure) -> bool pure
 ```
 
 ### count
 
 ```ghul
-◆ count[T](source: Iterable[T]) -> int pure;
+◆ count[T](source: Iterable[T]) -> int pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ count() -> int pure;
+◆ count() -> int pure
 ```
 
 ### min
@@ -3790,7 +3788,7 @@ The smallest element, absent when the source is empty. `min` and `max` have no m
 ```ghul
 ◆ min[T: Ghul.Comparable[T]](
     values: Iterable[T]
-) -> Ghul.MAYBE[T] pure;
+) -> Ghul.MAYBE[T] pure
 ```
 
 ### max
@@ -3798,7 +3796,7 @@ The smallest element, absent when the source is empty. `min` and `max` have no m
 ```ghul
 ◆ max[T: Ghul.Comparable[T]](
     values: Iterable[T]
-) -> Ghul.MAYBE[T] pure;
+) -> Ghul.MAYBE[T] pure
 ```
 
 ### min_by
@@ -3807,7 +3805,7 @@ The smallest element, absent when the source is empty. `min` and `max` have no m
 ◆ min_by[T,K: Ghul.Comparable[K]](
     source: Iterable[T],
     key_selector: (T) -> K pure
-) -> Ghul.MAYBE[T] pure;
+) -> Ghul.MAYBE[T] pure
 ```
 
 or, as a method:
@@ -3815,7 +3813,7 @@ or, as a method:
 ```ghul
 ◆ min_by[K: Ghul.Comparable[K]](
     key_selector: (T) -> K pure
-) -> Ghul.MAYBE[T] pure;
+) -> Ghul.MAYBE[T] pure
 ```
 
 ### max_by
@@ -3824,7 +3822,7 @@ or, as a method:
 ◆ max_by[T,K: Ghul.Comparable[K]](
     source: Iterable[T],
     key_selector: (T) -> K pure
-) -> Ghul.MAYBE[T] pure;
+) -> Ghul.MAYBE[T] pure
 ```
 
 or, as a method:
@@ -3832,31 +3830,31 @@ or, as a method:
 ```ghul
 ◆ max_by[K: Ghul.Comparable[K]](
     key_selector: (T) -> K pure
-) -> Ghul.MAYBE[T] pure;
+) -> Ghul.MAYBE[T] pure
 ```
 
 The collecting combinators differ in what they hand back:
 
 ```ghul
 …
-let numbers = [3, 1, 4, 1, 5, 9, 2, 6];
+let numbers = [3, 1, 4, 1, 5, 9, 2, 6]
 
 // collect gives back the read-only List[T] trait, collect_list
 // the mutable LIST[T], and collect_set drops duplicates
-write_line("collect:      {numbers |> collect() |> join(", ")}");
-write_line("collect_list: {numbers |> collect_list() |> join(", ")}");
-write_line("collect_set:  {numbers |> collect_set() |> join(", ")}");
+write_line("collect:      {numbers |> collect() |> join(", ")}")
+write_line("collect_list: {numbers |> collect_list() |> join(", ")}")
+write_line("collect_set:  {numbers |> collect_set() |> join(", ")}")
 
 // partition splits on a predicate: the matching elements first
-let (even, odd) = numbers |> partition(x => x % 2 == 0);
+let (even, odd) = numbers |> partition(x => x % 2 == 0)
 
-write_line("partition:    even {even |> join(", ")}, odd {odd |> join(", ")}");
+write_line("partition:    even {even |> join(", ")}, odd {odd |> join(", ")}")
 
 // group_by keys each element, collecting the elements per key
-let by_size = numbers |> group_by(x => if x < 5 then "small" else "large" fi);
+let by_size = numbers |> group_by(x => if x < 5 then "small" else "large" fi)
 
-write_line("group_by:     small {by_size["small"] |> join(", ")}");
-write_line("group_by:     large {by_size["large"] |> join(", ")}");
+write_line("group_by:     small {by_size["small"] |> join(", ")}")
+write_line("group_by:     large {by_size["large"] |> join(", ")}")
 ```
 
 output:
@@ -3875,49 +3873,49 @@ group_by:     large 5, 9, 6
 Collects into the read-only `Collections.List[T]`. `collect_list` gives back the mutable `LIST[T]` instead, and the others collect into an array, a set, or a map.
 
 ```ghul
-◆ collect[T](source: Iterable[T]) -> Collections.List[T] pure;
+◆ collect[T](source: Iterable[T]) -> Collections.List[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ collect() -> Collections.List[T] pure;
+◆ collect() -> Collections.List[T] pure
 ```
 
 ### collect_array
 
 ```ghul
-◆ collect_array[T](source: Iterable[T]) -> T[] pure;
+◆ collect_array[T](source: Iterable[T]) -> T[] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ collect_array() -> T[] pure;
+◆ collect_array() -> T[] pure
 ```
 
 ### collect_list
 
 ```ghul
-◆ collect_list[T](source: Iterable[T]) -> LIST[T] pure;
+◆ collect_list[T](source: Iterable[T]) -> LIST[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ collect_list() -> LIST[T] pure;
+◆ collect_list() -> LIST[T] pure
 ```
 
 ### collect_set
 
 ```ghul
-◆ collect_set[T](source: Iterable[T]) -> SET[T] pure;
+◆ collect_set[T](source: Iterable[T]) -> SET[T] pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ collect_set() -> SET[T] pure;
+◆ collect_set() -> SET[T] pure
 ```
 
 ### collect_map
@@ -3927,7 +3925,7 @@ or, as a method:
     source: Iterable[T],
     key_selector: (T) -> K pure,
     value_selector: (T) -> V pure
-) -> MAP[K,V] pure;
+) -> MAP[K,V] pure
 ```
 
 or, as a method:
@@ -3936,7 +3934,7 @@ or, as a method:
 ◆ collect_map[K,V](
     key_selector: (T) -> K pure,
     value_selector: (T) -> V pure
-) -> MAP[K,V] pure;
+) -> MAP[K,V] pure
 ```
 
 ### partition
@@ -3947,7 +3945,7 @@ Splits the source in two on a predicate. The elements matching the predicate com
 ◆ partition[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
-) -> (LIST[T], LIST[T]) pure;
+) -> (LIST[T], LIST[T]) pure
 ```
 
 or, as a method:
@@ -3955,7 +3953,7 @@ or, as a method:
 ```ghul
 ◆ partition(
     predicate: (T) -> bool pure
-) -> (LIST[T], LIST[T]) pure;
+) -> (LIST[T], LIST[T]) pure
 ```
 
 ### group_by
@@ -3966,7 +3964,7 @@ Collects the elements into a map, keyed by what `key_selector` returns for each.
 ◆ group_by[T,K](
     source: Iterable[T],
     key_selector: (T) -> K pure
-) -> MAP[K, LIST[T]] pure;
+) -> MAP[K, LIST[T]] pure
 ```
 
 or, as a method:
@@ -3974,7 +3972,7 @@ or, as a method:
 ```ghul
 ◆ group_by[K](
     key_selector: (T) -> K pure
-) -> MAP[K, LIST[T]] pure;
+) -> MAP[K, LIST[T]] pure
 ```
 
 ### reduce
@@ -3986,14 +3984,14 @@ Folds the source into a single value, starting at `seed` and calling `accumulato
     source: Iterable[T],
     seed: TRunning,
     accumulator: (TRunning,T) -> TRunning pure
-) -> TRunning pure;
+) -> TRunning pure
 
 ◆ reduce[T,TRunning,TOut](
     source: Iterable[T],
     seed: TRunning,
     accumulator: (TRunning,T) -> TRunning pure,
     mapper: (TRunning) -> TOut pure
-) -> TOut pure;
+) -> TOut pure
 ```
 
 or, as a method:
@@ -4002,13 +4000,13 @@ or, as a method:
 ◆ reduce[TRunning](
     seed: TRunning,
     accumulator: (TRunning,T) -> TRunning pure
-) -> TRunning pure;
+) -> TRunning pure
 
 ◆ reduce[TRunning,TOut](
     seed: TRunning,
     accumulator: (TRunning,T) -> TRunning pure,
     mapper: (TRunning) -> TOut pure
-) -> TOut pure;
+) -> TOut pure
 ```
 
 ### each
@@ -4016,13 +4014,13 @@ or, as a method:
 Calls `action` on every element. It returns nothing and, alone among these, is not `pure` - it exists for its side effects.
 
 ```ghul
-◆ each[T](source: Iterable[T], action: T -> void) -> void;
+◆ each[T](source: Iterable[T], action: T -> void) -> void
 ```
 
 or, as a method:
 
 ```ghul
-◆ each(action: T -> void) -> void;
+◆ each(action: T -> void) -> void
 ```
 
 ### append_to
@@ -4034,12 +4032,12 @@ Appends each element to a `StringBuilder`, separated by `separator`, or by `", "
     source: Iterable[T],
     into: System.Text.StringBuilder,
     separator: string
-) -> System.Text.StringBuilder;
+) -> System.Text.StringBuilder
 
 ◆ append_to[T](
     source: Iterable[T],
     into: System.Text.StringBuilder
-) -> System.Text.StringBuilder;
+) -> System.Text.StringBuilder
 ```
 
 or, as a method:
@@ -4048,11 +4046,11 @@ or, as a method:
 ◆ append_to(
     into: System.Text.StringBuilder,
     separator: string
-) -> System.Text.StringBuilder;
+) -> System.Text.StringBuilder
 
 ◆ append_to(
     into: System.Text.StringBuilder
-) -> System.Text.StringBuilder;
+) -> System.Text.StringBuilder
 ```
 
 ### join
@@ -4060,17 +4058,17 @@ or, as a method:
 Renders the elements into one string, separated by `separator`, or by `", "` when left off.
 
 ```ghul
-◆ join[T](source: Iterable[T], separator: string) -> string pure;
+◆ join[T](source: Iterable[T], separator: string) -> string pure
 
-◆ join[T](source: Iterable[T]) -> string pure;
+◆ join[T](source: Iterable[T]) -> string pure
 ```
 
 or, as a method:
 
 ```ghul
-◆ join(separator: string) -> string pure;
+◆ join(separator: string) -> string pure
 
-◆ join() -> string pure;
+◆ join() -> string pure
 ```
 
 
@@ -4230,17 +4228,17 @@ ghūl relies on keywords for block structure where other languages use braces or
 
 ```ghul
 …
-let my_variable = 42;
+let my_variable = 42
 
 print_something(thing: string) is
-    write_line("The thing is: {thing}");
+    write_line("The thing is: {thing}")
 si
 
-print_something("a hello");
+print_something("a hello")
 
 class PERSON is
-    name: string;
-    age: int;
+    name: string
+    age: int
 si
 ```
 
@@ -4256,18 +4254,18 @@ Expressions in ghūl are constructs that return a value, while statements perfor
 ```ghul
 …
 // variable declaration statement
-let x = 10;
+let x = 10
 
 // expression used as part of a declaration statement
-let y = x * 2;
+let y = x * 2
 
 // 'if' is a statement, 'x > 5' is an expression
 if x > 5 then
-    write_line("x is greater than 5");
+    write_line("x is greater than 5")
 fi
 
 // 'if' can also be used as an expression
-let z = if x > 5 then x else y fi;
+let z = if x > 5 then x else y fi
 ```
 
 output:
@@ -4282,13 +4280,13 @@ Functions in ghūl are declared with an optional return type, a name, a list of 
 ```ghul
 …
 greet(name: string) -> void is
-    write_line("Hello, {name}!");
+    write_line("Hello, {name}!")
 si
 ```
 
 Functions can also have an expression body using `=>` instead of `is` / `si`:
 ```ghul
-square(x: int) -> int => x * x;
+square(x: int) -> int => x * x
 ```
 
 ### control flow
@@ -4297,15 +4295,15 @@ ghūl supports various [control flow constructs](https://ghul.dev/control-flow.h
 ```ghul
 …
 if x > 0 then
-    write_line("Positive");
+    write_line("Positive")
 elif x < 0 then
-    write_line("Negative");
+    write_line("Negative")
 else
-    write_line("Zero");
+    write_line("Zero")
 fi
 
 for item in my_list do
-    process(item);
+    process(item)
 od
 ```
 
@@ -4320,8 +4318,8 @@ Positive
 ghūl is statically typed, with some support for [type inference](https://ghul.dev/type-inference.html). Types can be explicitly specified using a colon `:` plus a type expression
 
 ```ghul
-let x: int = 42;
-let y = "Hello";
+let x: int = 42
+let y = "Hello"
 ```
 [User types](https://ghul.dev/definitions.html#types) are defined using `class`, `struct`, `trait`, `enum`, and `union` keywords.
 
@@ -4341,11 +4339,11 @@ ghūl provides the following primitive data types:
 * void type: `void`
 
 ```ghul
-let my_int: int = 42;
-let my_float: double = 3.14d;
-let my_decimal: decimal = 19.99m;
-let my_bool: bool = true;
-let my_char: char = 'A';
+let my_int: int = 42
+let my_float: double = 3.14d
+let my_decimal: decimal = 19.99m
+let my_bool: bool = true
+let my_char: char = 'A'
 ```
 These types are used to represent basic values in ghūl programs.
 
@@ -4354,53 +4352,53 @@ These types are used to represent basic values in ghūl programs.
 ghūl supports arrays, which are fixed-size, **read-only** collections of elements of the same type. Array types are denoted using square brackets [] after the element type.
 
 ```ghul
-let numbers: int[] = [1, 2, 3];
+let numbers: int[] = [1, 2, 3]
 ```
 
 Arrays can be constructed with an [array literal](https://ghul.dev/expressions.html#array)
 ```ghul
-let primes = [2, 3, 5, 7, 11];
+let primes = [2, 3, 5, 7, 11]
 ```
 
 Array elements can be read with indexer syntax
 ```ghul
 …
-let p = primes[i];
+let p = primes[i]
 ```
 
 ### tuples
 Tuples in ghūl are lightweight, immutable data structures that can hold a fixed number of elements of different types. Tuple types use parentheses `(` `)`, with elements separated by commas. Tuple literals are similarly constructed with `(` `)` and comma delimited elements. Tuples compare by structural equality: two tuples are equal when their corresponding elements are.
 
 ```ghul
-let point: (int, int) = (10, 20);
-let person: (string, int) = ("Alice", 30);
+let point: (int, int) = (10, 20)
+let person: (string, int) = ("Alice", 30)
 ```
 
 Tuple elements can be accessed using the dot `.` notation followed by the element name:
 
 ```ghul
 …
-let x = point.`0;
-let y = point.`1;
-let name = person.`0;
-let age = person.`1;
+let x = point.`0
+let y = point.`1
+let name = person.`0
+let age = person.`1
 ```
 
 Tuple elements can be given more descriptive names, either in the type or in the tuple literal:
 ```ghul
-let point: (x: int, y: int) = (10, 20);
-let person = (name = "Alice", age = 30);
-let x = point.x;
-let y = point.y;
-let name = person.name;
-let age = person.age;
+let point: (x: int, y: int) = (10, 20)
+let person = (name = "Alice", age = 30)
+let x = point.x
+let y = point.y
+let name = person.name
+let age = person.age
 ```
 
 ghūl also supports tuple destructuring:
 ```ghul
 …
-let (a, b) = point;
-let (name, age) = person;
+let (a, b) = point
+let (name, age) = person
 ```
 
 Destructuring also has a by-name form, `(local = field, ...)`, that pulls each element from a named field rather than by position; the positional and by-name forms are covered with [pattern matching](https://ghul.dev/control-flow.html#if-let).
@@ -4410,8 +4408,8 @@ Destructuring also has a by-name form, `(local = field, ...)`, that pulls each e
 A type followed by `?` is an **optional** type: a value of `T?` can be present or absent. The same type written without the `?` is non-optional, and a non-optional value is always there.
 
 ```ghul
-let ► name: string? = "Alice"; // present
-let nickname: string? = null; // absent
+let ► name: string? = "Alice" // present
+let nickname: string? = null // absent
 ```
 
 The postfix `?` operator tests whether an optional has a value. A plain `if x?` narrows `x` to its non-optional form inside the branch, so the value reads directly:
@@ -4419,7 +4417,7 @@ The postfix `?` operator tests whether an optional has a value. A plain `if x?` 
 ```ghul
 …
 if ► name? then
-    write_line("name is {name}"); // name is non-optional here
+    write_line("name is {name}") // name is non-optional here
 fi
 ```
 
@@ -4434,7 +4432,7 @@ A non-optional type never holds the absent case, so a `T?` is not assignable to 
 ```ghul
 …
 // rejected: a string? is not assignable to a string
-let title: string = maybe;
+let title: string = maybe
 ```
 
 diagnostics:
@@ -4450,18 +4448,18 @@ ghūl does not perform implicit type conversion (coercion) between scalar types;
 
 ```ghul
 // OK: both addends are type double
-let d = 1.0d + 1.0d;
+let d = 1.0d + 1.0d
 
 // compile time error: addends are mixed types
 // (double vs int)
-let e = 1.0d + 1;
+let e = 1.0d + 1
 
 // OK with explicit cast
-let e = 1.0d + cast double(1);
+let e = 1.0d + cast double(1)
 
 // OK: "hello" is a string, and string derives
 // from object
-let o: object = "hello";
+let o: object = "hello"
 ```
 
 ## variables
@@ -4473,9 +4471,9 @@ ghūl has three kinds of variables: locals declared within the body of a functio
 Local variables are declared with `let` followed by the variable name, an optional explicit type, and an initializer:
 
 ```ghul
-let i = 1234;
-let j: int = 0;
-let k: int = 5678;
+let i = 1234
+let j: int = 0
+let k: int = 5678
 ```
 
 ### arguments
@@ -4500,46 +4498,46 @@ ghūl infers the type of a local variable from its initializer. An explicit type
 Literal expressions represent fixed values of a specific type.
 
 ```ghul
-let integer_literal = 42;
-let floating_point_literal = 3.14;
-let string_literal = "Hello, world!";
-let boolean_literal_true = true;
-let boolean_literal_false = false;
+let integer_literal = 42
+let floating_point_literal = 3.14
+let string_literal = "Hello, world!"
+let boolean_literal_true = true
+let boolean_literal_false = false
 ```
 
 ## operators and expressions
 ### arithmetic operators
 ```ghul
-let add = 1 + 2;
-let sub = 3 - 1;
-let mul = 3 * 3;
-let div = 12 / 3;
-let mod = 13 % 4;
+let add = 1 + 2
+let sub = 3 - 1
+let mul = 3 * 3
+let div = 12 / 3
+let mod = 13 % 4
 ```
 
 ### comparison and logical operators
 ```ghul
-let gt = 3 > 1; // true
-let gte = 4 >= 4; // true
-let lt = 3 < 1; // false
-let lte = 4 <= 4; // true
-let eq = 1 == 2; // false
-let neq = 1 != 2; // true
+let gt = 3 > 1 // true
+let gte = 4 >= 4 // true
+let lt = 3 < 1 // false
+let lte = 4 <= 4 // true
+let eq = 1 == 2 // false
+let neq = 1 != 2 // true
 ```
 
 ```ghul
-let list = [1, 2, 3];
+let list = [1, 2, 3]
 
-let index = 4;
-let search_value = 3;
+let index = 4
+let search_value = 3
 
 // false
 let and_then =
-    index < list.count /\ list[index] == search_value;
+    index < list.count /\ list[index] == search_value
 
 // true
 let or_else =
-    index >= list.count \/ list[index] != search_value;
+    index >= list.count \/ list[index] != search_value
 ```
 
 ### bitwise and shift operators
@@ -4549,7 +4547,7 @@ The integer types have the usual bitwise operators - `&`, `|`, `^` - and the shi
 ```ghul
 …
 bitwise(a: int, b: int) is
-    write_line("{a & b} {a | b} {a ^ b}");
+    write_line("{a & b} {a | b} {a ^ b}")
 
     // shift counts are int, and '>>>' shifts zeros in
     write_line("{1 << 4} {256 >> 3} {-16 >>> 2}")
@@ -4573,16 +4571,16 @@ variables and properties can be updated via assignment statements
 
 ```ghul
 …
-let i mut = 0;
-let j = 10;
-let s mut = "Hello";
+let i mut = 0
+let j = 10
+let s mut = "Hello"
 
-i = i + j;
-s = "{s} World!";
+i = i + j
+s = "{s} World!"
 
-thing.property = i + j;
+thing.property = i + j
 
-write_line("i = {i}, s = {s}, thing.property = {thing.property}");
+write_line("i = {i}, s = {s}, thing.property = {thing.property}")
 ```
 
 output:
@@ -4646,9 +4644,13 @@ In this example `then`, `else` and `fi` all delimit blocks. The blocks they deli
 
 ## semicolons
 
-Semicolons are required: to separate statements and definitions. 
+A semicolon separates two statements or definitions written on one line. At the end of a line it is not needed: wherever the grammar could accept one, a line break stands in for it.
 
-While the compiler _could_ still unambiguously parse correct programs without requiring semicolons anywhere, having them at the end expression statements makes it clearer to the parser if the expression is incomplete or not well formed.
+That is the whole of what a `;` does. Nothing reads it for meaning - a body's tail value is judged by its type, not by whether the statement carrying it was terminated - so the style throughout this site leaves it off.
+
+A few line-start tokens keep a wrapped expression unambiguous. A line opening with `.`, `|` or `|>` carries the expression above it on, which is how member chains and pipes wrap. A line opening with `(`, `[`, an operator or `rec` starts something new, so a wrapped operator expression puts the operator at the end of the line rather than the start of the next.
+
+Two warnings police the choice, and both are off unless asked for: `--warn missing-semicolon` reports every inferred boundary, for a project that writes its terminators out, and `--warn redundant-semicolon` reports a written one a line break would infer anyway.
 
 ## definitions and statements
 
@@ -4659,13 +4661,13 @@ Blocks in ghūl can contain definitions, statements, or a mix of both. Which is 
 At its top level a ghūl source file contains [definitions](https://ghul.dev/definitions.html) and `use` directives; a file with no `namespace` can also contain statements. There is no required ordering and no file header.
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 greet(name: string) is
-    write_line("hello, {name}");
+    write_line("hello, {name}")
 si
 
-greet("world");
+greet("world")
 ```
 
 output:
@@ -4683,19 +4685,19 @@ A file that declares any `namespace` must place all of its definitions inside na
 A file with no `namespace` can also have statements at its top level. They run in source order as the program's entry point, so a short program needs no `entry` function:
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // in a file with no namespace, statements at the top level run in
 // order as the program's entry point
-write_line("first");
-write_line("second");
+write_line("first")
+write_line("second")
 
 // definitions in the same file are still visible, wherever they sit
 greet(name: string) is
-    write_line("hello, {name}");
+    write_line("hello, {name}")
 si
 
-greet("ghūl");
+greet("ghūl")
 ```
 
 output:
@@ -4722,7 +4724,7 @@ Otherwise, execution of a program begins at a function named `entry`.
 In ghūl local variables are defined with the `let` keyword. A variable defined with a bare `let` cannot be reassigned: an initializer is required, and the compiler reports an error if the variable is assigned again. The type is inferred from the initializer:
 
 ```ghul
-let x = 10;
+let x = 10
 ```
 
 A bare `let` fixes the variable, not the value: after `let xs = LIST[int]();`, `xs` always refers to the same list, but the list itself can still be mutated. Whether the value can change is a property of its type: a tuple or an array cannot be modified, a `LIST` can.
@@ -4730,13 +4732,13 @@ A bare `let` fixes the variable, not the value: after `let xs = LIST[int]();`, `
 An explicit type can be given alongside the initializer. The initializer must be assignment compatible with the type:
 
 ```ghul
-let x: int = 42;
+let x: int = 42
 ```
 
 The explicit type can be wider than the initializer expression:
 
 ```ghul
-let o: object = "a string";
+let o: object = "a string"
 ```
 
 A trailing `mut` makes the variable reassignable: `let total mut = 0;` defines `total` with initial value 0, and `total` can be assigned again later. A `mut` variable can also be defined with no initializer, as in `let result: int mut;`. It then starts at the default value of its type: zero, `false`, or `null`.
@@ -4749,18 +4751,18 @@ Multiple variables can be defined in the same `let` statement, with each variabl
 let
     an_inferred_int = 123,
     an_explicit_int: int = 456,
-    a_string = "hello";
+    a_string = "hello"
 ```
 
 The name `_` is a discard placeholder. It can stand in for any variable name, but the value that would be assigned to it is discarded. `_` is accepted in `let` definitions, tuple destructuring, anonymous function parameters, and `for` loop variables:
 
 ```ghul
 …
-let _ = side_effect();
-let (_, _, third) = (1, 2, 3);
-let only_first = (x: int, _: int) => x;
+let _ = side_effect()
+let (_, _, third) = (1, 2, 3)
+let only_first = (x: int, _: int) => x
 for _ in 1..10 do
-    counter = counter + 1;
+    counter = counter + 1
 od
 ```
 
@@ -4771,10 +4773,10 @@ Variables can only be defined within functions, methods or property bodies. Vari
 In ghūl functions consist of a name and a parenthesized formal arguments list, followed by an optional return type after `->` (omitting it makes the function `void`), and then either a return expression or a function body:
 
 ```ghul
-sum_two_ints(i: int, j: int) -> int => i + j;
+sum_two_ints(i: int, j: int) -> int => i + j
 
 sum_three_ints(i: int, j: int, k: int) -> int is
-    return i + j + k;
+    return i + j + k
 si
 ```
 
@@ -4792,9 +4794,9 @@ class RECTANGLE(width: int, height: int) is
 
     // a terminated last statement is discarded, so this one returns explicitly
     describe() -> string is
-        let label = "{width}x{height}";
+        let label = "{width}x{height}"
 
-        return "{label} = {area()}";
+        return "{label} = {area()}"
     si
 si
 …
@@ -4813,7 +4815,7 @@ Functions can only be defined at global scope. Functions can be generic, which w
 Arguments consist of a name followed by a type. The type is mandatory as the compiler cannot infer types here.
 
 ```ghul
-do_something(what: string, why: string, to: int);
+do_something(what: string, why: string, to: int)
 ```
 
 A formal argument can also be a tuple-destructure pattern, written in its own parentheses. It is still one argument, with the written tuple type; when the function is called, the value is unpacked into the names the pattern gives. Named functions, anonymous functions, asynchronous functions and generators all accept them, and the type can be any type that destructures positionally:
@@ -4821,14 +4823,14 @@ A formal argument can also be a tuple-destructure pattern, written in its own pa
 ```ghul
 …
 // one parameter at the tuple type, unpacked into a and b
-add_pair((a: int, b: int): (int, int)) -> int => a + b;
+add_pair((a: int, b: int): (int, int)) -> int => a + b
 
-write_line(add_pair((3, 4)));
+write_line(add_pair((3, 4)))
 
 // anonymous functions take the same form, element types
 // inferred from the sequence
-let pairs = [(1, 2), (3, 4)];
-let total = pairs | .map(((a, b)) => a + b) | .reduce(0, (acc, x) => acc + x);
+let pairs = [(1, 2), (3, 4)]
+let total = pairs | .map(((a, b)) => a + b) | .reduce(0, (acc, x) => acc + x)
 
 write_line("{total}")
 ```
@@ -4856,7 +4858,7 @@ A class defines a new reference type, instances of which are assignment compatib
 Instances of classes are created via a constructor expression, which consists of a type expression followed by a parenthesis delimited list of actual constructor arguments. For a class, the type expression is the class name, qualified with any namespaces if needed:
 ```ghul
 …
-let a_thing = THING();
+let a_thing = THING()
 ```
 
 A class can also declare its constructor parameters directly in the header. Each parameter becomes a parameter of the synthesised constructor, and an auto-generated same-named field or property holds the supplied value:
@@ -4884,32 +4886,32 @@ si
 Structs are constructed the same way as classes, with a constructor expression:
 ```ghul
 …
-let origin = POINT(0.0D, 0.0D);
+let origin = POINT(0.0D, 0.0D)
 
 // or up, or down, or even left, depending on
 // your co-ordinate system!
-let right = POINT(1.0D, 0.0D);
+let right = POINT(1.0D, 0.0D)
 ```
 
 A struct defines a new value type. Assigning a struct copies all of its fields, so the copy and the original are independent afterwards:
 ```ghul
 …
 struct COUNTER is
-    _n: int field;
+    _n: int field
 
     init(n: int) is _n = n; si
 
     bump() is _n = _n + 1; si
 
-    value: int => _n;
+    value: int => _n
 si
 
-let original = COUNTER(0);
-let copy mut = original;
+let original = COUNTER(0)
+let copy mut = original
 
-copy.bump();
+copy.bump()
 
-write_line("original {original.value}, copy {copy.value}");
+write_line("original {original.value}, copy {copy.value}")
 ```
 
 output:
@@ -4928,7 +4930,7 @@ A trait consists of a name, the types of any parent traits that must also be imp
 
 ```ghul
 trait Printable is
-    ◆ print();
+    ◆ print()
 si
 ```
 
@@ -4937,7 +4939,7 @@ Traits are similar to interfaces in other languages. Trait methods and propertie
 …
 class BOOK(title: string, author: string): Printable is
     ▲ print() is
-        write_line("Title: {title}, Author: {author}");
+        write_line("Title: {title}, Author: {author}")
     si
 si
 ```
@@ -4949,7 +4951,7 @@ A trait method or property can provide a default body. Implementing classes inhe
 trait ▼ Logged is
     ▼ log(message: string) is
         // the default body writes the message with a [log] prefix
-        write_line("[log] {message}");
+        write_line("[log] {message}")
     si
 si
 
@@ -4960,12 +4962,12 @@ si
 class LOUD(): Logged is
     // override the default, while still calling through to it with super
     ▲ log(message: string) is
-        super.log(message.to_upper());
+        super.log(message.to_upper())
     si
 si
 
-PLAIN().log("hello");
-LOUD().log("hello");
+PLAIN().log("hello")
+LOUD().log("hello")
 ```
 
 output:
@@ -4986,21 +4988,21 @@ Like a class, a trait is closed to other assemblies unless it has the postfix `o
 A union consists of a name and then a union body, which contains one or more variants. Each variant has a name, and then an optional list of fields:
 ```ghul
 union Tree is
-    NODE(left: Tree, right: Tree);
-    LEAF(value: int);
+    NODE(left: Tree, right: Tree)
+    LEAF(value: int)
 si
 ```
 Unions are a reference type. A reference of union type can point to only one variant at a time. To discover which variant a union currently holds, test it with `isa Variant(value)`:
 
 ```ghul
 …
-let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));
-let leaf = Tree.LEAF(123);
+let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456))
+let leaf = Tree.LEAF(123)
 
 if isa Tree.NODE( ► tree) then
-    write_line("have tree node");
+    write_line("have tree node")
 elif isa Tree.LEAF( ► tree) then
-    write_line("have tree leaf");
+    write_line("have tree leaf")
 fi
 ```
 
@@ -5016,9 +5018,9 @@ have tree node
 if isa Tree.NODE(tree) then
     write_line(
         "left {tree.left}, right {tree.right}"
-    );
+    )
 elif isa Tree.LEAF(tree) then
-    write_line("leaf value {tree.value}");
+    write_line("leaf value {tree.value}")
 fi
 ```
 
@@ -5026,24 +5028,24 @@ Unions support structural equality through the `=~` operator. Two union referenc
 
 ```ghul
 …
-let leaf1 = Tree.LEAF(123);
-let leaf2 = Tree.LEAF(123);
-let leaf3 = Tree.LEAF(456);
+let leaf1 = Tree.LEAF(123)
+let leaf2 = Tree.LEAF(123)
+let leaf3 = Tree.LEAF(456)
 
-assert leaf1 =~ leaf2;
-assert !(leaf1 =~ leaf3);
+assert leaf1 =~ leaf2
+assert !(leaf1 =~ leaf3)
 ```
 
 A variant with no fields is a *unit variant*. It is referenced by name, without parentheses, and all uses of a unit variant share one value. When exactly one variant of a union has fields, the union behaves as an option type: `u?` tests whether `u` holds that variant, and `u!` unwraps its value. A union where several variants have fields can mark one of them `default` to get the same behaviour:
 
 ```ghul
 …
-let c = Color.RED;                   // unit variant, referenced without parentheses
-write_line("red: {c =~ Color.RED}"); // true
+let c = Color.RED                   // unit variant, referenced without parentheses
+write_line("red: {c =~ Color.RED}") // true
 
-let r = lookup();
-write_line("present: {r?}");         // true - r holds the default OK variant
-write_line("value: {r!}");           // 42 - unwraps the OK payload
+let r = lookup()
+write_line("present: {r?}")         // true - r holds the default OK variant
+write_line("value: {r!}")           // 42 - unwraps the OK payload
 ```
 
 output:
@@ -5058,9 +5060,9 @@ A union can declare a primary-constructor header for state shared across every v
 
 ```ghul
 …
-let t = Token.IDENTIFIER("count", "identifier");
-write_line(t.name);    // identifier - shared primary-header field
-write_line(t.label()); // [identifier] - inherited trait default
+let t = Token.IDENTIFIER("count", "identifier")
+write_line(t.name)    // identifier - shared primary-header field
+write_line(t.label()) // [identifier] - inherited trait default
 ```
 
 output:
@@ -5096,8 +5098,8 @@ A `partial` block adds members to a class, struct, or union declared elsewhere i
 ```ghul
 …
 union Shape is
-    CIRCLE(radius: int);
-    SQUARE(side: int);
+    CIRCLE(radius: int)
+    SQUARE(side: int)
 si
 
 partial Shape is
@@ -5105,11 +5107,11 @@ partial Shape is
         case ► self
         when c: CIRCLE then "circle r={c.radius}"
         when s: SQUARE then "square s={s.side}"
-        esac;
+        esac
 si
 
-let s: Shape = Shape.SQUARE(4);
-write_line(s.describe());
+let s: Shape = Shape.SQUARE(4)
+write_line(s.describe())
 ```
 
 output:
@@ -5123,19 +5125,19 @@ An `impl Trait for Type` block additionally makes the target implement a trait, 
 ```ghul
 …
 union List is
-    NIL;
-    CONS(head: int, tail: List);
+    NIL
+    CONS(head: int, tail: List)
 si
 
 impl Printer for List is
     ▲ print() -> string =>
         if let (head, tail): CONS = ► self then "{head} {tail.print()}"
         else "nil"
-        fi;
+        fi
 si
 
-let xs: Printer = List.CONS(1, List.CONS(2, List.NIL));
-write_line(xs.print());
+let xs: Printer = List.CONS(1, List.CONS(2, List.NIL))
+write_line(xs.print())
 ```
 
 output:
@@ -5154,17 +5156,17 @@ A property consists of the property name followed by the property's type and, op
 
 ```ghul
 class COUNTER is
-    count: int;
+    count: int
 si
 
 class SIZED is
-    _size: int;
+    _size: int
 
     size: int => _size,
         = new_size is
-            assert new_size > 0;
+            assert new_size > 0
 
-            _size = new_size;
+            _size = new_size
         si
 si
 ```
@@ -5179,10 +5181,10 @@ A property can take a postfix `stable` modifier. It addresses a problem specific
 // stable - declare it with postfix stable instead
 summary: string? stable is
     if ► _summary? then
-        return _summary;
+        return _summary
     fi
-    ► _summary = "nothing to report";
-    return _summary;
+    ► _summary = "nothing to report"
+    return _summary
 si
 
 init() is si
@@ -5211,9 +5213,9 @@ Methods are syntactically the same as functions, except they are defined within 
 
 ```ghul
 class SCALER is
-    _scale: double;
+    _scale: double
 
-    scale(value: double) -> double => value * _scale;
+    scale(value: double) -> double => value * _scale
 si
 ```
 
@@ -5222,7 +5224,7 @@ A method or function can take a postfix `pure` modifier. It declares that the fu
 ```ghul
 …
 // a pure method only reads: callers keep narrowing facts across a call to it
-doubled() -> int pure => _count * 2;
+doubled() -> int pure => _count * 2
 …
 ```
 
@@ -5245,18 +5247,18 @@ A pure type also cannot expose a write to its callers. Declaring a property `pub
 // every instance member of a pure type must read and never
 // write; a bodiless member holds implementors to the same rule
 trait ▼ NAMED pure is
-    ◆▼ name: string;
-    ◆▼ label() -> string;
+    ◆▼ name: string
+    ◆▼ label() -> string
 si
 
 class USER: NAMED is
-    ▲ name: string;
+    ▲ name: string
 
     init(name: string) is
         self.name = name
     si
 
-    ▲ label() -> string => "<{name}>";
+    ▲ label() -> string => "<{name}>"
 si
 
 write_line(USER("ada").label())
@@ -5277,20 +5279,20 @@ An operator is a function or method whose name is an operator symbol rather than
 ```ghul
 …
 class VECTOR is
-    x: int;
-    y: int;
+    x: int
+    y: int
 
     init(x: int, y: int) is
-        self.x = x;
-        self.y = y;
+        self.x = x
+        self.y = y
     si
 
     // a binary operator as an instance method takes one parameter, the right operand:
-    +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y);
+    +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y)
 si
 
-let sum = VECTOR(1, 2) + VECTOR(3, 4);
-write_line("({sum.x}, {sum.y})");
+let sum = VECTOR(1, 2) + VECTOR(3, 4)
+write_line("({sum.x}, {sum.y})")
 ```
 
 output:
@@ -5308,7 +5310,7 @@ The comparison operators come from two backing operators. Define `<>`, a three-w
 ```ghul
 …
 // three-way ordering returning int; '<', '<=', '>', '>=' all derive from it:
-<>(other: BOX) -> int => value - other.value;
+<>(other: BOX) -> int => value - other.value
 …
 ```
 
@@ -5320,22 +5322,22 @@ In ghūl methods named `init` are constructors. When an object is constructed us
 
 ```ghul
 class COUNTER is
-    count: int;
+    count: int
 
     init() is
-        count = 0;
+        count = 0
     si
 
     init(initial_count: int) is
-        count = initial_count;
+        count = initial_count
     si
 si
 …
 // calls the parameterless overload of init()
-let c = COUNTER();
+let c = COUNTER()
 
 // calls init(initial_count: int)
-let d = COUNTER(50);
+let d = COUNTER(50)
 ```
 
 Constructors can be defined in classes and structs.
@@ -5345,8 +5347,8 @@ A member whose type is not optional has to be assigned before the constructor fi
 ```ghul
 …
 class LABEL is
-    text: string;
-    size: int;
+    text: string
+    size: int
 
     init(size: int) is
         self.size = size    // text is never assigned
@@ -5368,11 +5370,11 @@ When the constructor only assigns its arguments to same-named fields, the class 
 …
 class PERSON(name: string, age: int) is
     describe() is
-        write_line("{name} is {age} years old");
+        write_line("{name} is {age} years old")
     si
 si
 
-PERSON("alice", 30).describe();
+PERSON("alice", 30).describe()
 ```
 
 output:
@@ -5395,11 +5397,11 @@ An explicit field or property declaration whose name matches a primary parameter
 …
 class POINT(x: int, y: int) is
     // capture the primary parameters as renamed private fields
-    _x;
-    _y;
+    _x
+    _y
 
     show() is
-        write_line("({_x}, {_y})");
+        write_line("({_x}, {_y})")
     si
 si
 
@@ -5409,7 +5411,7 @@ class BOX(width: int public, height: int field, _depth: int) is
     // _depth is a private field
 si
 
-POINT(10, 20).show();
+POINT(10, 20).show()
 ```
 
 output:
@@ -5424,15 +5426,15 @@ A class with a primary header can also include a `super(...)` body declaration t
 …
 class DOG(name: string, breed: string): ANIMAL is
     // forward name to the superclass; the local DOG keeps breed as a field
-    super(name);
+    super(name)
 
     init(.., trick: string) is
         // .. expands to (name, breed); the primary init has already run
-        write_line("{name} the {breed} can {trick}");
+        write_line("{name} the {breed} can {trick}")
     si
 si
 
-DOG("rex", "labrador", "sit");
+DOG("rex", "labrador", "sit")
 ```
 
 output:
@@ -5447,7 +5449,7 @@ A class or struct with a primary header and no body declarations can end with a 
 
 ```ghul
 // a primary header with no body declarations:
-class POINT(x: int, y: int);
+class POINT(x: int, y: int)
 
 // is equivalent to an explicit empty 'is' / 'si' body:
 class VECTOR(dx: int, dy: int) is
@@ -5471,12 +5473,12 @@ Namespaces can be nested inside other namespaces:
 namespace Outer is
     namespace Inner is
         do_something() is
-            IO.Std.write_line("did something");
+            IO.Std.write_line("did something")
         si
     si
 si
 …
-Outer.Inner.do_something();
+Outer.Inner.do_something()
 …
 ```
 
@@ -5491,11 +5493,11 @@ A dotted namespace name is shorthand for nesting namespaces:
 ```ghul
 namespace Outer.Inner is
     do_something() is
-        IO.Std.write_line("did something");
+        IO.Std.write_line("did something")
     si
 si
 …
-Outer.Inner.do_something();
+Outer.Inner.do_something()
 …
 ```
 
@@ -5515,7 +5517,7 @@ namespace Example is
     // this definition of Test is visible unqualified
     // throughout the Example namespace:
     trait Test is
-        ◆ run();
+        ◆ run()
     si
 si
 …
@@ -5539,7 +5541,7 @@ If a source file contains no namespaces, then all definitions in the file are pl
 ```ghul
 // the compiler places this in an auto-generated
 // namespace private to this source file
-IO.Std.write_line("Hello, world!");
+IO.Std.write_line("Hello, world!")
 ```
 
 output:
@@ -5557,12 +5559,12 @@ If a source file contains any explicitly declared namespaces, then all definitio
 …
 namespace Example is
     entry() is
-        IO.Std.write_line("hello from a namespace");
+        IO.Std.write_line("hello from a namespace")
     si
 si
 …
 greet() is
-    IO.Std.write_line("not in a namespace");
+    IO.Std.write_line("not in a namespace")
 si
 ```
 
@@ -5574,20 +5576,20 @@ diagnostics:
 Symbols can be brought into the current namespace instance's scope using the use keyword. Imported symbols can then be used without qualification:
 
 ```ghul
-use Example.TEST;
+use Example.TEST
 
 ...
 
-let t = TEST();
+let t = TEST()
 ```
 
 `use` applied to a namespace imports all symbols from that namespace:
 ```ghul
-use Example; // imports Example.TEST and Example.Test
+use Example // imports Example.TEST and Example.Test
 
 ...
 
-let t: Test;
+let t: Test
 ```
 
 Note that `use` only applies within the current `namespace` definition. It does not import a symbol into all instances of the current namespace:
@@ -5595,7 +5597,7 @@ Note that `use` only applies within the current `namespace` definition. It does 
 ```ghul
 …
 namespace UseExample is
-    use Example;
+    use Example
 
     class ANOTHER_TEST: Test is
         ▲ run() is si
@@ -5622,16 +5624,16 @@ Classes, structs, traits, unions, global functions and global properties are acc
 class PUBLIC is
 si
 
-public_function() -> int => 0;
+public_function() -> int => 0
 
-public_property: int;
+public_property: int
 
 class _PRIVATE is
 si
 
-_private_function() -> int => 0;
+_private_function() -> int => 0
 
-_private_property: int;
+_private_property: int
 ```
 
 ### methods
@@ -5652,24 +5654,24 @@ Properties are public to read but private to assign - a property is assignable o
 ```ghul
 …
 struct VALUE is
-    public_property: int;
+    public_property: int
 
-    _private_property: string;
+    _private_property: string
 
     init(value: int) is
-        public_property = value;
-        _private_property = "value is {value}";
+        public_property = value
+        _private_property = "value is {value}"
     si
 si
 …
-let v = VALUE(1234);
+let v = VALUE(1234)
 
 // OK: public_property is publicly readable
-write_line(v.public_property);
+write_line(v.public_property)
 
-write_line(v._private_property);
+write_line(v._private_property)
 
-v.public_property = 5678;
+v.public_property = 5678
 ```
 
 diagnostics:
@@ -5697,33 +5699,33 @@ Expressions in ghūl are constructs that evaluate to a value. They can be used t
 Integer literals consist of an optional radix (base), followed by a sequence of digits with optional underscores for readability, followed by a dot and a decimal fraction and/or exponent (for floating point numbers) and finally a type suffix.
 
 ```ghul
-let i = 12_345_678; // int
-let hex = 0x1234_ABCD; // int
-let long = 1_000_000_000_000_000L; // long
+let i = 12_345_678 // int
+let hex = 0x1234_ABCD // int
+let long = 1_000_000_000_000_000L // long
 
-let hex_unsigned_long = 0x1234_5678__9ABC_DEF0_UL; // ulong
+let hex_unsigned_long = 0x1234_5678__9ABC_DEF0_UL // ulong
 
-let b = 99b; // byte
+let b = 99b // byte
 ```
 
 ### char
 ```ghul
-let c = 'c';
+let c = 'c'
 let u_macron = 'ū'
 ```
 
 ### floating point
 ```ghul
-let s = 123.456; // single
-let t = 123.456E5; // single
+let s = 123.456 // single
+let t = 123.456E5 // single
 
-let d = 123.456D; // double
+let d = 123.456D // double
 let e = 123_456_789_000.0D // double
 ```
 
 ### string
 ```ghul
-let hello_world = "Hello World!";
+let hello_world = "Hello World!"
 let unicode = "ghūl programming language"
 ```
 
@@ -5731,9 +5733,9 @@ let unicode = "ghūl programming language"
 Array literals are constructed from a comma separated list of element values enclosed in `[` and `]`. The array element type is inferred as the most specific type compatible with all elements (which may be `object` if no more specific ancestor type exists). The resulting array type is `E[]` where `E` is the inferred element type. 
 
 ```ghul
-let animals = ["frog", "bat", "elephant"]; // string[]
-let things = ["frog", 1234, 12.5]; // object[]
-let lists = [[1, 2], [3, 4], [5, 6], [7, 7]]; // int[][]
+let animals = ["frog", "bat", "elephant"] // string[]
+let things = ["frog", 1234, 12.5] // object[]
+let lists = [[1, 2], [3, 4], [5, 6], [7, 7]] // int[][]
 ```
 
 ### tuple
@@ -5741,19 +5743,19 @@ let lists = [[1, 2], [3, 4], [5, 6], [7, 7]]; // int[][]
 Tuple literals are constructed from a comma separated list of elements enclosed in `(` and `)`. Each element can be a bare value or a named value, and each element can optionally specify a type. Where explicit types are omitted, element types will be inferred.
 
 ```ghul
-let path_with_id = (path = "/tmp/my-file.txt", id = 1234);
+let path_with_id = (path = "/tmp/my-file.txt", id = 1234)
 
-let path = path_with_id.path;
-let id = path_with_id.id;
+let path = path_with_id.path
+let id = path_with_id.id
 ```
 
 If tuple elements are not explicitly named, they are assigned names consisting of a back-tick followed by an index
 
 ```ghul
-let things = ("thing", 12.34);
+let things = ("thing", 12.34)
 
-let name = things.`0;
-let weight = things.`1;
+let name = things.`0
+let weight = things.`1
 ```
 
 ### function
@@ -5763,16 +5765,16 @@ Function literals are constructed from an parenthesized argument list, a return 
 #### expression body function literal
 
 ```ghul
-let simple_add = (x: int, y: int) -> int => x + y;
+let simple_add = (x: int, y: int) -> int => x + y
 ```
 
 #### block body function literal
 
 ```ghul
 let complex_add = (x: int, y: int) -> int is
-    let result = x + y;
-    return result;
-si;
+    let result = x + y
+    return result
+si
 ```
 
 #### type inference
@@ -5780,21 +5782,21 @@ si;
 Return type can usually be omitted provided it can be inferred from the type of the expression body or any values returned from the block body
 
 ```ghul
-let simple_add = (x: int, y: int) => x + y;
+let simple_add = (x: int, y: int) => x + y
 
 let complex_add = (x: int, y: int) is
-    let result = x + y;
-    return result;
-si;
+    let result = x + y
+    return result
+si
 ```
 
 Argument types usually can be inferred if the function literal is being passed into a function.
 
 ```ghul
 …
-let list = [1, 2, 3, 4, 5];
+let list = [1, 2, 3, 4, 5]
 
-list |> filter(element => element < 3);
+list |> filter(element => element < 3)
 ```
 
 #### capturing and closure
@@ -5804,21 +5806,21 @@ A function literal can refer to identifiers from its surrounding lexical scope; 
 ```ghul
 …
 // Define a list to hold the closures:
-let closure_list = LIST();
+let closure_list = LIST()
 
 // Iterate over an integer range:
 for i in 1::10 do
     // Create a closure capturing i's current value
-    let closure = () => i;
+    let closure = () => i
 
     // Add the closure to the list:
-    closure_list.add(closure);
+    closure_list.add(closure)
 od
 
 // Each closure captured the value of i at the
 // time of its creation:
 for closure in closure_list do
-    write_line("Closure captured value: {closure()}");
+    write_line("Closure captured value: {closure()}")
 od
 ```
 
@@ -5841,18 +5843,18 @@ An immutable `let` is captured by value, a snapshot taken when the function lite
 
 ```ghul
 …
-let counter mut = 0;
+let counter mut = 0
 
 let bump = (n: int) is
-    counter = counter + n;
-si;
+    counter = counter + n
+si
 
-let peek = () -> int => counter;
+let peek = () -> int => counter
 
-bump(10);
-bump(5);
+bump(10)
+bump(5)
 
-write_line("counter = {counter}, peek() = {peek()}");
+write_line("counter = {counter}, peek() = {peek()}")
 ```
 
 output:
@@ -5866,11 +5868,11 @@ counter = 15, peek() = 15
 Arithmetic expressions allow you to perform mathematical calculations using operators such as `+`, `-`, `*`, `/`, and `%`.
 
 ```ghul
-let sum = 10 + 5;           // Addition
-let difference = 10 - 5;    // Subtraction
-let product = 10 * 5;       // Multiplication
-let quotient = 10 / 5;      // Division
-let remainder = 10 % 3;     // Modulo (remainder)
+let sum = 10 + 5           // Addition
+let difference = 10 - 5    // Subtraction
+let product = 10 * 5       // Multiplication
+let quotient = 10 / 5      // Division
+let remainder = 10 % 3     // Modulo (remainder)
 ```
 
 ## comparison
@@ -5878,12 +5880,12 @@ let remainder = 10 % 3;     // Modulo (remainder)
 Comparison expressions allow you to compare values using operators such as `==`, `!=`, `<`, `>`, `<=`, and `>=`.
 
 ```ghul
-let equal = 5 == 5; // Equality
-let not_equal = 5 != 10; // Inequality
-let less_than = 5 < 10; // Less than
-let greater_than = 10 > 5; // Greater than
-let less_than_or_equal = 5 <= 5; // Less or equal
-let greater_than_or_equal = 10 >= 10; // Greater or equal
+let equal = 5 == 5 // Equality
+let not_equal = 5 != 10 // Inequality
+let less_than = 5 < 10 // Less than
+let greater_than = 10 > 5 // Greater than
+let less_than_or_equal = 5 <= 5 // Less or equal
+let greater_than_or_equal = 10 >= 10 // Greater or equal
 ```
 
 ## short circuit logical
@@ -5891,9 +5893,9 @@ let greater_than_or_equal = 10 >= 10; // Greater or equal
 Logical expressions allow you to combine or negate boolean values using the `/\` (logical AND), `\/` (logical OR), and `!` (logical NOT) operators.
 
 ```ghul
-let logical_and = true /\ false;    // Logical AND
-let logical_or = true \/ false;     // Logical OR
-let logical_not = !true;            // Logical NOT
+let logical_and = true /\ false    // Logical AND
+let logical_or = true \/ false     // Logical OR
+let logical_not = !true            // Logical NOT
 ```
 
 Evaluation stops as soon as the result is known
@@ -5904,7 +5906,7 @@ Conditional expressions allow you to evaluate different expressions based on a c
 
 ```ghul
 …
-let max = if a > b then a else b fi;
+let max = if a > b then a else b fi
 ```
 
 ## case expression
@@ -5913,16 +5915,16 @@ A `case` expression yields the value of the matched arm. It needs an `else` arm 
 
 ```ghul
 …
-let n = 2;
+let n = 2
 
 let size =
     case n
     when 0 then "none"
     when 1, 2, 3 then "small"
     else "large"
-    esac;
+    esac
 
-write_line("size = {size}");
+write_line("size = {size}")
 ```
 
 output:
@@ -5937,7 +5939,7 @@ Function call expressions allow you to invoke functions and methods by providing
 
 ```ghul
 …
-let result = sum(10, 5);
+let result = sum(10, 5)
 ```
 
 ## thread-first calls
@@ -5945,17 +5947,17 @@ let result = sum(10, 5);
 The `|>` operator threads its left side into the call on its right as that call's first argument, so `x |> f(a)` means `f(x, a)`. Chaining is left-to-right, which turns a nest of calls inside-out into a readable pipeline:
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
-class BOX(value: int);
+class BOX(value: int)
 
-twice(x: int) -> int => x * 2;
-describe(b: BOX) -> string => "box of {b.value}";
+twice(x: int) -> int => x * 2
+describe(b: BOX) -> string => "box of {b.value}"
 
 // '|>' threads its left side in as the first argument of the call on
 // its right, so a chain reads left-to-right instead of nesting
 // inside-out. This line means write_line(describe(BOX(twice(21)))).
-21 |> twice() |> BOX() |> describe() |> write_line();
+21 |> twice() |> BOX() |> describe() |> write_line()
 ```
 
 output:
@@ -5971,7 +5973,7 @@ The right side must be call-shaped: a free function, a constructor, or a method 
 Property access expressions allow you to access the properties of an object using the dot notation.
 
 ```ghul
-let length = "Hello".length;
+let length = "Hello".length
 ```
 
 ## indexer
@@ -5979,7 +5981,7 @@ let length = "Hello".length;
 Indexer expressions allow you to access elements of an array or collection using square brackets.
 
 ```ghul
-let first_element = [1, 2, 3][0];
+let first_element = [1, 2, 3][0]
 ```
 
 ## constructor
@@ -5988,7 +5990,7 @@ Constructor expressions allow you to create new instances of classes or structs 
 
 ```ghul
 …
-let point = POINT(10, 20);
+let point = POINT(10, 20)
 ```
 
 ## type cast
@@ -5996,7 +5998,7 @@ let point = POINT(10, 20);
 A type cast converts a value from one type to another explicitly, using the `cast` keyword. Scalar conversions, casts between unrelated reference types, and .NET user-defined conversion operators all go through it:
 
 ```ghul
-let integer_value = cast int(3.14);
+let integer_value = cast int(3.14)
 ```
 
 The target type can be left out when the surrounding expression already determines it. `cast(v)` converts `v` to whatever type the position it sits in calls for - a typed `let` initializer, an assignment, a `return` or `=>` body, a call argument's formal, an operator's other operand, an index:
@@ -6004,7 +6006,7 @@ The target type can be left out when the surrounding expression already determin
 ```ghul
 …
 average(count: int, total: single) -> single =>
-    total / cast(count);   // cast(v) takes its type from the formal
+    total / cast(count)   // cast(v) takes its type from the formal
 
 write_line("{average(4, 10.0)}")
 ```
@@ -6026,10 +6028,10 @@ The `_` expression evaluates to the default value of a type: `null` for referenc
 `_[T]` pins the type explicitly. A bare `_` takes its type from the surrounding context: a typed `let`, an assignment, or a return:
 
 ```ghul
-let a = _[int];   // 0
-let b: string? = _;   // null
+let a = _[int]   // 0
+let b: string? = _   // null
 …
-zero[T]() -> T => _;
+zero[T]() -> T => _
 ```
 
 `let a = _` initialises a local to its type's default value, where the type is inferred from how the local is later used.
@@ -6040,9 +6042,9 @@ A `let ... in ...` expression introduces one or more local variables that are in
 
 ```ghul
 …
-let area = let r = 5 in r * r;
+let area = let r = 5 in r * r
 
-write_line("area = {area}");
+write_line("area = {area}")
 ```
 
 output:
@@ -6058,12 +6060,12 @@ A parenthesised block is a sequence of statements in `(` and `)` that produces a
 ```ghul
 …
 let area = (
-    let width = 4;
-    let height = 5;
+    let width = 4
+    let height = 5
     width * height
-);
+)
 
-write_line("area = {area}");
+write_line("area = {area}")
 ```
 
 output:
@@ -6078,24 +6080,24 @@ These are the main types of expressions in ghūl. They can be combined and neste
 
 
 ```ghul
-let x = 10;
-let y = 5;
-let sum = x + y;
-let product = x * y;
-let is_greater = x > y;
+let x = 10
+let y = 5
+let sum = x + y
+let product = x * y
+let is_greater = x > y
 
 if is_greater then
-    IO.Std.write_line("x is greater than y");
+    IO.Std.write_line("x is greater than y")
 else
-    IO.Std.write_line("x is not greater than y");
+    IO.Std.write_line("x is not greater than y")
 fi
 
-let numbers = [1, 2, 3, 4, 5];
-let first_number = numbers[0];
+let numbers = [1, 2, 3, 4, 5]
+let first_number = numbers[0]
 
 IO.Std.write_line(
     "The first number is: {first_number}"
-);
+)
 ```
 
 output:
@@ -6130,14 +6132,14 @@ In ghūl the `assert` statement is used to ensure an expected condition holds an
 
 ```ghul
 …
-assert true else "all bets are off"; // does not throw
+assert true else "all bets are off" // does not throw
 
-let list = [1, 2, 3, 4, 5];
+let list = [1, 2, 3, 4, 5]
 
 assert 3 < list.count
-    else System.ArgumentOutOfRangeException("list");
+    else System.ArgumentOutOfRangeException("list")
 
-write_line("ok: {list.count} elements");
+write_line("ok: {list.count} elements")
 ```
 
 output:
@@ -6152,9 +6154,9 @@ ok: 5 elements
 …
 length_of(key: string?) -> int =>
     assert ► key? else "key is null" in
-    key.length;
+    key.length
 
-write_line(length_of("hello"));
+write_line(length_of("hello"))
 ```
 
 output:
@@ -6179,10 +6181,10 @@ fi
 
 ```ghul
 …
-let list = [1, 2, 3, 4];
+let list = [1, 2, 3, 4]
 
 if list.count > 0 then
-    write_line("list has {list.count} elements");
+    write_line("list has {list.count} elements")
 fi
 ```
 
@@ -6207,9 +6209,9 @@ fi
 ```ghul
 …
 if list.count > 0 then
-    write_line("list is not empty");
+    write_line("list is not empty")
 else
-    write_line("list is empty");
+    write_line("list is empty")
 fi
 ```
 
@@ -6236,26 +6238,26 @@ fi
 
 ```ghul
 …
-let list = [1, 2, 3, 4];
+let list = [1, 2, 3, 4]
 
 if list.count == 0 then
-    write_line("list is empty");
+    write_line("list is empty")
 fi
 
 if list.count > 0 then
-    write_line("list is not empty");
+    write_line("list is not empty")
 else
-    write_line("list is empty");
+    write_line("list is empty")
 fi
 
 if list.count > 10 then
-    write_line("list has lots of elements");
+    write_line("list has lots of elements")
 elif list.count > 5 then
-    write_line("list has some elements");
+    write_line("list has some elements")
 elif list.count > 0 then
-    write_line("list has a few elements");
+    write_line("list has a few elements")
 else
-    write_line("list is empty");
+    write_line("list is empty")
 fi
 ```
 
@@ -6276,10 +6278,10 @@ An `if` condition that proves something stronger about a value - an `isa` test o
 
 ```ghul
 …
-let c = cast CAT?(a);
+let c = cast CAT?(a)
 
 if ► c? then
-    write_line(c.purr());
+    write_line(c.purr())
 fi
 ```
 
@@ -6296,9 +6298,9 @@ whiskers purrs
 if let c: CAT = ► a then
     // c has type CAT here; it is not in scope in
     // the else branch, or after the fi
-    write_line(c.purr());
+    write_line(c.purr())
 else
-    write_line("not a cat");
+    write_line("not a cat")
 fi
 ```
 
@@ -6313,11 +6315,11 @@ A type on the variable (`c: CAT`) makes it a type test. `elif let` chains these,
 ```ghul
 …
 if let c: CAT = ► a then
-    write_line(c.purr());
+    write_line(c.purr())
 elif let d: DOG = ► a then
-    write_line(d.bark());
+    write_line(d.bark())
 else
-    write_line("some other animal");
+    write_line("some other animal")
 fi
 ```
 
@@ -6332,11 +6334,11 @@ With no type given for the local variable, `if let` tests that the value is pres
 ```ghul
 …
 if let line = reader.read_line() then
-    // reader.read_line() yields string?;
+    // reader.read_line() yields string?
     // line is string here
-    write_line("read: {line}");
+    write_line("read: {line}")
 else
-    write_line("end of input");
+    write_line("end of input")
 fi
 ```
 
@@ -6351,7 +6353,7 @@ An `if let` can also destructure, exactly like a plain `let`, including `_` to d
 ```ghul
 …
 if let (name, _) = lookup(id) then
-    write_line("found {name}");
+    write_line("found {name}")
 fi
 ```
 
@@ -6368,7 +6370,7 @@ A trailing `/\` guard gates the branch on a further condition, evaluated with th
 ```ghul
 …
 if let c: CAT = find() /\ c.is_friendly then
-    write_line("friendly cat: {c.name}");
+    write_line("friendly cat: {c.name}")
 fi
 ```
 
@@ -6384,8 +6386,8 @@ A leaf can instead match against a value that already exists: prefixing a name w
 
 ```ghul
 …
-let rows = [("apples", 3), ("pears", 1), ("plums", 0)];
-let wanted = "pears";
+let rows = [("apples", 3), ("pears", 1), ("plums", 0)]
+let wanted = "pears"
 
 for row in rows do
     // ~wanted matches where the first element equals the
@@ -6409,7 +6411,7 @@ When the tested value is a member path and the local should take the path's last
 ```ghul
 …
 if let order.customer then
-    write_line(customer.name);
+    write_line(customer.name)
 fi
 ```
 
@@ -6424,20 +6426,20 @@ Each branch of an if statement constitutes a separate scope
 
 ```ghul
 …
-let a = 5;
+let a = 5
 
 if a > 0 then
     // new scope - neither y nor z are in scope here
-    let x = 10;
-    write_line("x is {x}");
+    let x = 10
+    write_line("x is {x}")
 elif a < 0 then
     // new scope - neither x nor z are in scope here
-    let y = 20;
-    write_line("y is {y}");
+    let y = 20
+    write_line("y is {y}")
 else
     // new scope - neither x nor y are in scope here
-    let z = 30;
-    write_line("z is {z}");
+    let z = 30
+    write_line("z is {z}")
 fi
 ```
 
@@ -6460,10 +6462,10 @@ od
 
 ```ghul
 …
-let counter mut = 0;
+let counter mut = 0
 while counter < 5 do
-    write_line(counter);
-    counter = counter + 1;
+    write_line(counter)
+    counter = counter + 1
 od
 ```
 
@@ -6484,13 +6486,13 @@ The `break` statement immediately exits the loop, while `continue` skips the rem
 
 ```ghul
 …
-let counter mut = 0;
+let counter mut = 0
 while counter < 10 do
     if counter == 5 then
-        break;
+        break
     fi
-    write_line(counter);
-    counter = counter + 1;
+    write_line(counter)
+    counter = counter + 1
 od
 ```
 
@@ -6509,13 +6511,13 @@ This loop exits when counter reaches 5 without proceeding to execute `write_line
 
 ```ghul
 …
-let counter mut = 0;
+let counter mut = 0
 while counter < 5 do
-    counter = counter + 1;
+    counter = counter + 1
     if counter == 3 then
-        continue;
+        continue
     fi
-    write_line(counter);
+    write_line(counter)
 od
 ```
 
@@ -6539,7 +6541,7 @@ This loop skips the call to `write_line` when counter is 3.
 ```ghul
 …
 while let n = c.next() do
-    write_line(n);
+    write_line(n)
 od
 ```
 
@@ -6573,7 +6575,7 @@ The variable is defined by the for loop and its scope is the for loop body from 
 // i defined here
 for i in [1, 2, 3, 4, 5] do
     // i in scope here:
-    write_line(i);
+    write_line(i)
 od
 ```
 
@@ -6595,7 +6597,7 @@ The `..` and `::` operators construct integer ranges that can be iterated over b
 …
 for i in 0..5 do
     // i will take values 0, 1, 2, 3, 4 in sequence
-    write_line(i);
+    write_line(i)
 od
 ```
 
@@ -6615,7 +6617,7 @@ output:
 …
 for i in 1::5 do
     // i will take values 1, 2, 3, 4, 5 in sequence
-    write_line(i);
+    write_line(i)
 od
 ```
 
@@ -6633,13 +6635,13 @@ These operators are not for loop specific and can be used in any expression cont
 
 ```ghul
 …
-let zero_to_four = 0..5;
-let five_to_nine = 5..10;
+let zero_to_four = 0..5
+let five_to_nine = 5..10
 
-let zero_to_nine = zero_to_four |> cat(five_to_nine);
+let zero_to_nine = zero_to_four |> cat(five_to_nine)
 
 while zero_to_nine.move_next() do
-    write_line(zero_to_nine.current);
+    write_line(zero_to_nine.current)
 od
 ```
 
@@ -6678,12 +6680,12 @@ od
 
 ```ghul
 …
-let counter mut = 0;
+let counter mut = 0
 do
-    write_line(counter);
-    counter = counter + 1;
+    write_line(counter)
+    counter = counter + 1
     if counter == 5 then
-        break;
+        break
     fi
 od
 ```
@@ -6711,11 +6713,11 @@ Every loop form is also an expression of optional type `T?`: a `break` with a va
 // a valued break yields, falling off the end yields absence
 let hit: int? = for x in [4, 9, 2, 7] do
     if x > 5 then break x fi
-od;
+od
 
 let miss: int? = for x in [1, 3] do
     if x > 50 then break x fi
-od;
+od
 
 write_line("{hit ?? -1} {miss ?? -1}")
 ```
@@ -6735,14 +6737,14 @@ A valued break delivers to the nearest enclosing loop *that consumes a value*, s
 // a valued break delivers to the nearest enclosing loop
 // that consumes a value, so it can cross the inner,
 // statement-form loop on its way out
-let rows = [[1, 2, 3], [4, 5, 6]];
+let rows = [[1, 2, 3], [4, 5, 6]]
 
 let first_even: int? =
     for row in rows do
         for cell in row do
             if cell % 2 == 0 then break cell fi
         od
-    od;
+    od
 
 write_line("{first_even ?? -1}")
 ```
@@ -6764,44 +6766,44 @@ A valued break with no consuming loop anywhere around it is a compile error, the
 classify(value: int) -> string is
     case value
     when -1 then
-        return "minus one";
+        return "minus one"
 
     when 0 then
-        let result = "zero";
-        return result;
+        let result = "zero"
+        return result
 
     when 1 then
-        return "one";
+        return "one"
 
     when 2 then
-        return "two";
+        return "two"
 
     when 3 then
-        return "three";
+        return "three"
 
     when 4 then
-        return "four";
+        return "four"
 
     when 5 then
-        let result = "five";
-        return result;
+        let result = "five"
+        return result
 
     when 6, 7, 8, 9 then
-        return "more than five and less than ten";
+        return "more than five and less than ten"
 
     when 13 then
-        return "unlucky";
+        return "unlucky"
 
     else
-        return "less than -1 or more than nine";
+        return "less than -1 or more than nine"
     esac
 si
 
-write_line(classify(0));
-write_line(classify(3));
-write_line(classify(7));
-write_line(classify(13));
-write_line(classify(-5));
+write_line(classify(0))
+write_line(classify(3))
+write_line(classify(7))
+write_line(classify(13))
+write_line(classify(-5))
 ```
 
 output:
@@ -6819,7 +6821,7 @@ Equality labels match by value, the way `=~` compares: a string scrutinee matche
 ```ghul
 …
 // labels match by content, the way '=~' compares
-write_line(respond("help"));
+write_line(respond("help"))
 write_line(respond("run"))
 ```
 
@@ -6840,9 +6842,9 @@ let label = case status
 when 200 then "ok"
 when 500, 501, 502 then "server error"
 else "other"
-esac;
+esac
 
-write_line(label);
+write_line(label)
 ```
 
 output:
@@ -6860,9 +6862,9 @@ A `when` arm can take a pattern instead of an equality list, mirroring [`if let`
     case ► a
     when c: CAT then c.meow()
     when d: DOG then d.bark()
-    esac;
+    esac
 
-write_line(describe(CAT()));
+write_line(describe(CAT()))
 ```
 
 output:
@@ -6891,10 +6893,10 @@ withdraw(balance: int, amount: int) -> int is
     if amount > balance then
         throw System.InvalidOperationException(
             "insufficient funds"
-        );
+        )
     fi
 
-    return balance - amount;
+    return balance - amount
 si
 ```
 
@@ -6906,16 +6908,16 @@ An exception is any class that derives from `System.Exception`, or from a more s
 
 ```ghul
 class INSUFFICIENT_FUNDS_EXCEPTION(message: string): System.Exception is
-    super(message);
+    super(message)
 si
 ```
 
 ```ghul
 …
 try
-    withdraw(account, 100);
+    withdraw(account, 100)
 catch e: INSUFFICIENT_FUNDS_EXCEPTION
-    write_line("declined: {e.message}");
+    write_line("declined: {e.message}")
 yrt
 ```
 
@@ -6950,27 +6952,27 @@ yrt
 If different types of exception should be caught, then there can be multiple exception clauses and catch blocks
 
 ```ghul
-let reader mut: StreamReader;
+let reader mut: StreamReader
 
 try
-    reader = StreamReader("file.txt");
-    let content = reader.read_to_end();
+    reader = StreamReader("file.txt")
+    let content = reader.read_to_end()
 
-    write_line(content);
+    write_line(content)
 
 catch e: FileNotFoundException
     // Handle the case where the file is not found
-    write_line("Error: file not found: {e.message}");
+    write_line("Error: file not found: {e.message}")
 catch e: IOException
     // Handle errors during file reading
-    write_line("Error: reading file: {e.message}");
+    write_line("Error: reading file: {e.message}")
 finally
     // Close the file and clean up resources
     if reader? then
-        reader.close();
+        reader.close()
     fi
 
-    write_line("File processing completed, file closed.");
+    write_line("File processing completed, file closed.")
 yrt
 ```
 
@@ -6988,16 +6990,16 @@ yrt
 
 ```ghul
 try
-    let content = File.read_all_text("file.txt");
-    write_line(content);
+    let content = File.read_all_text("file.txt")
+    write_line(content)
 
-    write_line("File processing completed.");
+    write_line("File processing completed.")
 catch e: FileNotFoundException
     // Handle the case where the file is not found
-    write_line("Error: file not found: {e.message}");
+    write_line("Error: file not found: {e.message}")
 catch e: IOException
     // Handle errors during file reading
-    write_line("Error: reading file: {e.message}");
+    write_line("Error: reading file: {e.message}")
 yrt
 ```
 
@@ -7014,19 +7016,19 @@ yrt
 ```
 
 ```ghul
-let reader mut: StreamReader;
+let reader mut: StreamReader
 
 try
-    reader = StreamReader("file.txt");
+    reader = StreamReader("file.txt")
 
-    let content = reader.read_to_end();
-    write_line(content);
+    let content = reader.read_to_end()
+    write_line(content)
 
-    write_line("File processing completed.");
+    write_line("File processing completed.")
 
 finally
     if reader? then
-        reader.close();
+        reader.close()
     fi
 
     // Any exceptions will be thrown to the calling code
@@ -7039,12 +7041,12 @@ A `finally` block runs whenever control leaves the `try` block, including when t
 
 ```ghul
 read_file(path: string) -> string is
-    let reader = StreamReader(path);
+    let reader = StreamReader(path)
 
     try
-        return reader.read_to_end();
+        return reader.read_to_end()
     finally
-        reader.close(); // runs before the function returns
+        reader.close() // runs before the function returns
     yrt
 si
 ```
@@ -7056,14 +7058,14 @@ si
 In functions of void return type, a bare `return` statement with no value returns control flow directly to the caller  
 
 ```ghul
-tries: int;
+tries: int
 …
 try_something(limit: int) is
     if tries > limit then
-        return; // give up
+        return // give up
     fi
 
-    tries = tries + 1;
+    tries = tries + 1
 
     // do stuff
 si
@@ -7077,16 +7079,16 @@ In functions of non-void return type, `return` statements must return a value of
 …
 fib(n: int) -> int is
     if n < 0 then
-        return 0;
+        return 0
     elif n == 1 then
-        return 1;
+        return 1
     else
-        return fib(n - 1) + fib(n - 2);
+        return fib(n - 1) + fib(n - 2)
     fi
 si
 
 for i in 0::10 do
-    write_line("fib({i}) = {fib(i)}");
+    write_line("fib({i}) = {fib(i)}")
 od
 ```
 
@@ -7115,9 +7117,9 @@ If execution reaches the end of a non-void function without encountering a retur
 default_return() -> int is
     // do nothing, return 0
 si
-let i = default_return();
-assert i == 0;
-write_line("default return value is {i}");
+let i = default_return()
+assert i == 0
+write_line("default return value is {i}")
 ```
 
 diagnostics:
@@ -7148,18 +7150,18 @@ A type followed by `?` is an *optional* type: a value of `T?` can be present or 
 find_first[T](xs: T[], predicate: T -> bool) -> T? is
     for x in xs do
         if predicate(x) then
-            return x;
+            return x
         fi
     od
 
-    return null;
+    return null
 si
 
-let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0);    // T = int, a value type
-let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2); // T = string, a reference type
+let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0)    // T = int, a value type
+let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2) // T = string, a reference type
 
-write_line("first even: {first_even ?? -1}");
-write_line("first long: {first_long ?? "none"}");
+write_line("first even: {first_even ?? -1}")
+write_line("first long: {first_long ?? "none"}")
 ```
 
 output:
@@ -7179,9 +7181,9 @@ The `??` operator supplies a fallback: `a ?? b` is `a` when it is present, other
 
 ```ghul
 …
-let name = lookup();
-let greeting = "hello, {name ?? "stranger"}";
-write_line(greeting);
+let name = lookup()
+let greeting = "hello, {name ?? "stranger"}"
+write_line(greeting)
 ```
 
 output:
@@ -7196,9 +7198,9 @@ The postfix `!` asserts presence and reads the value out; applied to an absent o
 
 ```ghul
 …
-let p = find();
-let name = p?.name; // string? - absent when p is absent
-write_line("name: {name ?? "unknown"}");
+let p = find()
+let name = p?.name // string? - absent when p is absent
+write_line("name: {name ?? "unknown"}")
 ```
 
 output:
@@ -7220,8 +7222,8 @@ A union where exactly one variant has fields, or with one variant marked `defaul
 ```ghul
 …
 union Result[T, E] is
-    OK(value: T) default;
-    ERROR(error: E);
+    OK(value: T) default
+    ERROR(error: E)
 si
 
 divide(a: int, b: int) -> Result[int, string] =>
@@ -7229,17 +7231,17 @@ divide(a: int, b: int) -> Result[int, string] =>
         Result.ERROR("division by zero")
     else
         Result.OK(a / b)
-    fi;
+    fi
 
-let good = divide(10, 2);
-let bad = divide(10, 0);
+let good = divide(10, 2)
+let bad = divide(10, 0)
 
 if ► good? then
-    write_line("10 / 2 = {good!}");
+    write_line("10 / 2 = {good!}")
 fi
 
 if ! ► bad? then
-    write_line("10 / 0 failed");
+    write_line("10 / 0 failed")
 fi
 ```
 
@@ -7257,29 +7259,29 @@ And a type that exposes `has_value: bool` and `value: T` properties is treated a
 // no declared relationship to T? or Ghul.Maybe[T] - ghūl looks for
 // has_value and value structurally
 struct PERCENTAGE is
-    has_value: bool;
-    value: double;
+    has_value: bool
+    value: double
 
     init() is
-        has_value = false;
-        value = _;
+        has_value = false
+        value = _
     si
 
     init(v: double) is
-        has_value = true;
-        value = v;
+        has_value = true
+        value = v
     si
 si
 
-let full = PERCENTAGE(87.5d);
-let empty = PERCENTAGE();
+let full = PERCENTAGE(87.5d)
+let empty = PERCENTAGE()
 
 if full? then
-    write_line("full: {full!}%");
+    write_line("full: {full!}%")
 fi
 
 if !empty? then
-    write_line("empty has no reading");
+    write_line("empty has no reading")
 fi
 ```
 
@@ -7299,13 +7301,13 @@ How a `T?` value is stored depends on `T`. ghūl backs it with whichever of thre
 The common case: `T?` over a class or other reference type is a plain nullable reference, and absence is `null`.
 
 ```ghul
-let ► name: string? = "Alice"; // present
-let nickname: string? = null; // absent
+let ► name: string? = "Alice" // present
+let nickname: string? = null // absent
 ```
 ```ghul
 …
 if ► name? then
-    write_line("name is {name}"); // name is non-optional here
+    write_line("name is {name}") // name is non-optional here
 fi
 ```
 
@@ -7320,8 +7322,8 @@ name is Alice
 `T?` over a value type - a scalar such as `int`, or a struct - is backed by .NET's `Nullable<T>` at the IL level. That is nothing you need to work with directly: write `T?`, the same way you would for a reference type. A ghūl `int?` already is a `Nullable<int>` as far as the runtime is concerned, so it passes to and from non-ghūl .NET code as it is, and there is no reason to name `System.Nullable[T]` in ghūl source:
 
 ```ghul
-let ► here: int? = 42;   // present
-let gone: int? = null; // absent
+let ► here: int? = 42   // present
+let gone: int? = null // absent
 ```
 
 ### unconstrained generic types
@@ -7331,23 +7333,23 @@ A generic function or type can use `T?` even though `T` can stand for a referenc
 ```ghul
 …
 class SLOT[T] is
-    _stored: T?;
+    _stored: T?
 
     init() is si
 
     put(value: T) is ► _stored = value; si
 
     take() -> T? is
-        let result = _stored;
-        _stored = null;
-        return result;
+        let result = _stored
+        _stored = null
+        return result
     si
 si
 
-let s = SLOT[int]();
-s.put(42);
-write_line("{s.take() ?? -1}");
-write_line("{s.take() ?? -1}");
+let s = SLOT[int]()
+s.put(42)
+write_line("{s.take() ?? -1}")
+write_line("{s.take() ?? -1}")
 ```
 
 output:
@@ -7366,12 +7368,12 @@ Because all three are the same feature, they behave alike: `??` chains across th
 ```ghul
 …
 if ► maybe? then
-    let narrowed: string = maybe; // narrowed to string here
-    write_line(narrowed);
+    let narrowed: string = maybe // narrowed to string here
+    write_line(narrowed)
 fi
 
-let forced: string = ► maybe!;            // asserts present, throws if absent
-let safe: string = maybe ?? "fallback"; // falls back when absent
+let forced: string = ► maybe!            // asserts present, throws if absent
+let safe: string = maybe ?? "fallback" // falls back when absent
 ```
 
 output:
@@ -7406,22 +7408,22 @@ An `isa` test in an `if` condition narrows the variable to the tested type insid
 ```ghul
 …
 union Maybe[T] is
-    YES(value: T);
-    NO;
+    YES(value: T)
+    NO
 si
 …
-let m: Maybe[int] = Maybe.YES(42);
+let m: Maybe[int] = Maybe.YES(42)
 
 if isa Maybe.YES( ► m) then
     // m is narrowed to Maybe.YES inside the branch,
     // so m.value is in scope
-    write_line("got value {m.value}");
+    write_line("got value {m.value}")
 fi
 
-let a: Animal = CAT("whiskers");
+let a: Animal = CAT("whiskers")
 if isa CAT( ► a) then
     // a is narrowed to CAT inside the branch
-    write_line(a.purr());
+    write_line(a.purr())
 fi
 ```
 
@@ -7436,12 +7438,12 @@ An [optional type](https://ghul.dev/optional-types) narrows the same way. A `?` 
 
 ```ghul
 …
-let name: string? = lookup();
+let name: string? = lookup()
 
 if ► name? then
     // name is narrowed to non-optional string
     // here, no ! needed
-    write_line("hello, {name}");
+    write_line("hello, {name}")
 fi
 ```
 
@@ -7456,17 +7458,17 @@ For a two-variant union, the `else` branch is narrowed to the complementary vari
 ```ghul
 …
 union Result[T, E] is
-    OK(value: T);
-    ERR(error: E);
+    OK(value: T)
+    ERR(error: E)
 si
 …
-let r: Result[int, string] = some_call();
+let r: Result[int, string] = some_call()
 
 if isa Result.OK( ► r) then
-    write_line("ok: {r.value}");
+    write_line("ok: {r.value}")
 else
     // r is narrowed to Result.ERR here
-    write_line("err: {r.error}");
+    write_line("err: {r.error}")
 fi
 ```
 
@@ -7488,17 +7490,17 @@ Narrowing follows the control flow, not just the branch structure. A common shap
 …
 classify(a: Animal) is
     if !isa CAT( ► a) then
-        write_line("not a cat");
-        return;
+        write_line("not a cat")
+        return
     fi
 
     // every non-CAT has returned, so a is
     // narrowed to CAT from here on
-    write_line(a.purr());
+    write_line(a.purr())
 si
 
-classify(CAT("whiskers"));
-classify(DOG());
+classify(CAT("whiskers"))
+classify(DOG())
 ```
 
 output:
@@ -7518,11 +7520,11 @@ greet(a: Animal) is
     if isa CAT( ► a) then
         // a is a parameter of greet, narrowed to CAT
         // in this branch
-        write_line(a.purr());
+        write_line(a.purr())
     fi
 si
 
-greet(CAT());
+greet(CAT())
 ```
 
 output:
@@ -7543,11 +7545,11 @@ describe(order: ORDER) is
         // within this branch order.customer is the
         // non-optional string, so .length is
         // reachable directly
-        write_line("customer name has {order.customer.length} chars");
+        write_line("customer name has {order.customer.length} chars")
     fi
 si
 
-describe(ORDER("alice"));
+describe(ORDER("alice"))
 ```
 
 output:
@@ -7560,16 +7562,16 @@ An `isa` check or variant test narrows a path the same way:
 
 ```ghul
 …
-class CARRIER(occupant: Animal);
+class CARRIER(occupant: Animal)
 describe(carrier: CARRIER) is
     if isa CAT( ► carrier.occupant) then
         // carrier.occupant is a CAT within this branch,
         // so its purr() is reachable directly
-        write_line(carrier.occupant.purr());
+        write_line(carrier.occupant.purr())
     fi
 si
 
-describe(CARRIER(CAT()));
+describe(CARRIER(CAT()))
 ```
 
 output:
@@ -7584,9 +7586,9 @@ Reassigning a local narrows it: when the new value's static type is more specifi
 
 ```ghul
 …
-► pet = CAT();
+► pet = CAT()
 // assigning a CAT narrows pet to CAT, so purr() is in reach
-write_line(pet.purr());
+write_line(pet.purr())
 ```
 
 output:
@@ -7600,12 +7602,12 @@ If the local is already narrowed, assigning a value of a different type cancels 
 ```ghul
 …
 if isa CAT( ► pet) then
-    write_line(pet.purr());
+    write_line(pet.purr())
 
-    ◄► pet = DOG();
+    ◄► pet = DOG()
     // reassigning cancels the CAT narrowing and
     // introduces a DOG one: pet is DOG here
-    write_line(pet.name());
+    write_line(pet.name())
 fi
 ```
 
@@ -7628,7 +7630,7 @@ The compiler tracks the calls that might do that, conservatively: it builds a ca
 …
 describe(carrier: CARRIER, other: Animal) is
     if isa CAT( ► carrier.occupant) then
-        ◄ carrier.swap(other);
+        ◄ carrier.swap(other)
         // swap() can change occupant, and the use below leans on
         // the narrow - so it is reported here, naming the call
         write_line(carrier.occupant.purr())
@@ -7648,7 +7650,7 @@ When the compiler can prove that the calls in between could not have changed the
 …
 describe(carrier: CARRIER) is
     if isa CAT( ► carrier.occupant) then
-        carrier.handle();
+        carrier.handle()
         // handle() writes only 'handled', so the compiler can
         // see it leaves the narrow on occupant alone
         write_line(carrier.occupant.purr())
@@ -7671,10 +7673,10 @@ Where it cannot, there are two ways out. Test the value again: `?`, `!`, `?.`, `
 describe(carrier: CARRIER, other: Animal) is
     // a local holds one value, which no other function can
     // reach - its narrowing survives any call
-    let cat = carrier.occupant;
+    let cat = carrier.occupant
 
     if isa CAT( ► cat) then
-        carrier.swap(other);
+        carrier.swap(other)
         write_line(cat.purr())
     fi
 si
@@ -7740,15 +7742,15 @@ A function's signature is written out explicitly; inference works within the bod
 totals(
     values: Collections.Iterable[int]
 ) -> (sum: int, count: int) is
-    let sum mut = 0;
-    let count mut = 0;
+    let sum mut = 0
+    let count mut = 0
 
     for v in values do
-        sum = sum + v;
-        count = count + 1;
+        sum = sum + v
+        count = count + 1
     od
 
-    return (sum, count);
+    return (sum, count)
 si
 …
 ```
@@ -7759,17 +7761,17 @@ Fields and properties belong to a type rather than to a function body, so their 
 
 ```ghul
 class COUNTER is
-    count: int; // a property - its type is declared
+    count: int // a property - its type is declared
 
     init() is
-        count = 0;
+        count = 0
     si
 
     tick() is
         // a local - its type is inferred from the
         // initializer
-        let step = 1;
-        count = count + step;
+        let step = 1
+        count = count + step
     si
 si
 …
@@ -7782,9 +7784,9 @@ si
 When no explicit type is given for a variable in a let statement or expression, its type is inferred from the initializer, provided one is present.
 
 ```ghul
-let a_string = "12345";
-let an_int = 12345;
-let an_int_array = [1, 2, 3, 4, 5];
+let a_string = "12345"
+let an_int = 12345
+let an_int_array = [1, 2, 3, 4, 5]
 ```
 
 ### destructuring variables
@@ -7792,10 +7794,10 @@ let an_int_array = [1, 2, 3, 4, 5];
 A destructuring `let` declares several variables at once from a tuple. Each variable takes its type from the corresponding element of the right-hand side, and the pattern can nest.
 
 ```ghul
-let person = ("alice", 30);
-let (name, age) = person;
+let person = ("alice", 30)
+let (name, age) = person
 
-let ((first, second), third) = (("a", "b"), "c");
+let ((first, second), third) = (("a", "b"), "c")
 ```
 
 ### for loop variables
@@ -7805,13 +7807,13 @@ A `for` loop variable takes its type from the element type of the iterable being
 ```ghul
 …
 for i in 1::10 do
-    write_line("{i}");
+    write_line("{i}")
 od
 
-let pairs = [("a", 1), ("b", 2)];
+let pairs = [("a", 1), ("b", 2)]
 
 for (name, count) in pairs do
-    write_line("{name}: {count}");
+    write_line("{name}: {count}")
 od
 ```
 
@@ -7837,21 +7839,21 @@ b: 2
 The element type of a list literal is inferred from the types of the elements: the compiler finds a type compatible with all of them.
 
 ```ghul
-class ▼ BASE();
+class ▼ BASE()
 
-class DERIVED(): BASE;
+class DERIVED(): BASE
 …
-let array_of_base = [BASE(), DERIVED()];
-let array_of_object = [BASE(), DERIVED(), object()];
-let array_of_int = [1, 2, 3, 4, 5];
+let array_of_base = [BASE(), DERIVED()]
+let array_of_object = [BASE(), DERIVED(), object()]
+let array_of_int = [1, 2, 3, 4, 5]
 ```
 
 If a list contains tuple literals, the compiler finds a compatible common type for each tuple element across all elements of the list.
 
 ```ghul
-let int_string = [(123, "hello"), (456, "goodbye")];
+let int_string = [(123, "hello"), (456, "goodbye")]
 
-let int_object = [(123, 456), (798, "wibble")];
+let int_object = [(123, 456), (798, "wibble")]
 ```
 
 ### if expression result types
@@ -7859,23 +7861,23 @@ let int_object = [(123, 456), (798, "wibble")];
 The result type of an if expression is inferred from the types of all the branch results: the compiler finds a type compatible with all of them.
 
 ```ghul
-class ▼ BASE();
+class ▼ BASE()
 
-class DERIVED(): BASE;
+class DERIVED(): BASE
 
 let derived =
     if true then
         DERIVED()
     else
         DERIVED()
-    fi;
+    fi
 
 let base =
     if true then
         DERIVED()
     else
         BASE()
-    fi;
+    fi
 ```
 
 ### generic class, struct and variant constructors
@@ -7883,10 +7885,10 @@ let base =
 When constructing a generic class, struct or variant, the generic type arguments are inferred from the constructor method arguments where possible.
 
 ```ghul
-class THING[T](value: T);
+class THING[T](value: T)
 …
-let int_thing = THING(1234);
-let string_thing = THING("hello");
+let int_thing = THING(1234)
+let string_thing = THING("hello")
 ```
 
 Inference from the constructor arguments works when every type argument appears among those arguments and the constructor overload is unambiguous. A type argument left unpinned - by a no-argument constructor, say - can still be resolved from later use of the value (see [inference from later use sites](#inference-from-later-use-sites)).
@@ -7896,14 +7898,14 @@ Inference from the constructor arguments works when every type argument appears 
 When calling a generic global function, a generic method, or a static method on a generic class or struct, the compiler infers the generic type arguments from the types of the actual arguments passed.
 
 ```ghul
-class ▼ BASE();
+class ▼ BASE()
 
-class DERIVED(): BASE;
+class DERIVED(): BASE
 
-do_something[T](a: T, b: T) -> T => a;
-let base = do_something(BASE(), DERIVED());
-let derived = do_something(DERIVED(), DERIVED());
-let obj = do_something(object(), DERIVED());
+do_something[T](a: T, b: T) -> T => a
+let base = do_something(BASE(), DERIVED())
+let derived = do_something(DERIVED(), DERIVED())
+let obj = do_something(object(), DERIVED())
 ```
 
 ### anonymous function return types
@@ -7911,8 +7913,8 @@ let obj = do_something(object(), DERIVED());
 The return type of an anonymous function literal is inferred from the type of its expression body, or from the types of return expressions in its block body.
 
 ```ghul
-let returns_int = (i: int) => i * 2;
-let returns_string = (s: string) => "{s}{s}";
+let returns_int = (i: int) => i * 2
+let returns_string = (s: string) => "{s}{s}"
 ```
 
 ### anonymous function argument types
@@ -7921,7 +7923,7 @@ When an anonymous function literal is passed as an argument and an unambiguous o
 
 ```ghul
 …
-[1, 2, 2, 4, 5] |> filter(i => i > 3);
+[1, 2, 2, 4, 5] |> filter(i => i > 3)
 ```
 
 Here `self` is already known to be `Pipe[int]`, so `Pipe[int].filter(predicate: int -> bool) -> Pipe[int]` is the only overload that could match. The `predicate` argument must therefore be `int -> bool`, and the type of `i` must be `int`.
@@ -7934,20 +7936,20 @@ The sections above infer a type from a declaration's initializer or from a call 
 …
 // m is BOX[?] here; the type argument is not
 // yet known
-let m = BOX();
+let m = BOX()
 
 // the set call takes an int, so m is BOX[int]
-m.set(42);
+m.set(42)
 
-let x = m.get();
+let x = m.get()
 ```
 
 The same applies to anonymous functions whose argument types are not explicit: if a later call supplies a concrete type, that flows back to the function literal.
 
 ```ghul
 …
-let f = x => x + 1;
-write_line("{f(42)}");
+let f = x => x + 1
+write_line("{f(42)}")
 ```
 
 output:
@@ -7963,8 +7965,8 @@ In a recursive anonymous function, the argument type can be inferred from how th
 ```ghul
 …
 let factorial = n rec =>
-    if n == 0 then 1 else n * rec(n - 1) fi;
-write_line("{factorial(5)}");
+    if n == 0 then 1 else n * rec(n - 1) fi
+write_line("{factorial(5)}")
 ```
 
 output:
@@ -7979,8 +7981,8 @@ When an anonymous function's parameter has no annotation, every operation the bo
 
 ```ghul
 …
-let length_of = x => x.length;
-write_line("{length_of("hello")}");
+let length_of = x => x.length
+write_line("{length_of("hello")}")
 ```
 
 output:
@@ -7997,16 +7999,16 @@ When a generic function or method is called with two arguments that share only a
 
 ```ghul
 class ▼ Animal abstract is
-    speak() -> string => "animal";
+    speak() -> string => "animal"
 si
 
-class CAT(): Animal;
+class CAT(): Animal
 
-class DOG(): Animal;
+class DOG(): Animal
 
-merge[T](a: T, b: T) -> T => a;
+merge[T](a: T, b: T) -> T => a
 …
-let a = merge(CAT(), DOG());
+let a = merge(CAT(), DOG())
 ```
 
 
@@ -9489,7 +9491,7 @@ od
 
 let open_doors = (1::100) |> filter(door => doors[door - 1])
 
-write_line("open doors: {$open_doors}");
+write_line("open doors: {$open_doors}")
 ```
 
 output:
@@ -9517,7 +9519,7 @@ mean(values: List[double]) -> double =>
     values |> reduce(0.0D, (total, value) => total + value) /
     cast(values.count)
 
-write_line("mean: {mean([1.0D, 2.0D, 3.0D, 4.0D, 5.0D]):F1}");
+write_line("mean: {mean([1.0D, 2.0D, 3.0D, 4.0D, 5.0D]):F1}")
 ```
 
 output:
@@ -9729,7 +9731,7 @@ Buzz
 The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Hello_world/Text
 
 ```ghul
-IO.Std.write_line("Hello world!");
+IO.Std.write_line("Hello world!")
 ```
 
 output:
@@ -9776,7 +9778,7 @@ reverse(text: string) -> string =>
     text |> reduce("", (reversed, character) => "{character}{reversed}")
 
 write_line(reverse("asdf"))
-write_line(reverse("Hello, World!"));
+write_line(reverse("Hello, World!"))
 ```
 
 output:
@@ -9806,7 +9808,7 @@ move(disks: int, source: int, target: int, spare: int) -> void =>
         move(disks - 1, spare, target, source)
     fi
 
-move(3, 1, 3, 2);
+move(3, 1, 3, 2)
 ```
 
 output:
@@ -9882,7 +9884,7 @@ let y = accumulator(WHOLE(10))
 
 y(WHOLE(5))
 
-write_line(show(y(WHOLE(5))));
+write_line(show(y(WHOLE(5))))
 ```
 
 output:
@@ -9946,7 +9948,7 @@ The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Apply_
 use IO.Std.write_line
 use Ghul.Pipes
 
-write_line("{$([1, 2, 3, 4, 5] |> map(value => value * value))}");
+write_line("{$([1, 2, 3, 4, 5] |> map(value => value * value))}")
 ```
 
 output:
@@ -9975,7 +9977,7 @@ si
 shout(word: string) -> string => "{word.to_upper()}!"
 
 write_line("{$([1, 2, 3, 4, 5] |> apply(value => value * value))}")
-write_line("{$(["frog", "newt", "toad"] |> apply(shout))}");
+write_line("{$(["frog", "newt", "toad"] |> apply(shout))}")
 ```
 
 output:
@@ -10011,7 +10013,7 @@ let product = numbers |> reduce(1, (total, value) => total * value)
 
 write_line("sum:     {sum}")
 write_line("product: {product}")
-write_line("largest: {numbers |> reduce(numbers[0], largest)}");
+write_line("largest: {numbers |> reduce(numbers[0], largest)}")
 ```
 
 output:
@@ -10060,7 +10062,7 @@ let right_sum = fold_right(numbers, 0, (value, total) => value + total)
 write_line("left  sum:  {left_sum}")
 write_line("right sum:  {right_sum}")
 write_line("left  tree: {fold_left(numbers, "nil", bracket_left)}")
-write_line("right tree: {fold_right(numbers, "nil", bracket_right)}");
+write_line("right tree: {fold_right(numbers, "nil", bracket_right)}")
 ```
 
 output:
@@ -10119,7 +10121,7 @@ write_line(
 
 write_line(
     "three to the power four is "
-    "{to_int(exponentiate(three, four_as_exponent))}");
+    "{to_int(exponentiate(three, four_as_exponent))}")
 ```
 
 output:
@@ -10153,7 +10155,7 @@ for i in 0..10 do
     squares.add(() => i * i)
 od
 
-write_line("{squares[3]()}");
+write_line("{squares[3]()}")
 ```
 
 output:
@@ -10285,7 +10287,7 @@ let sum = (low: int, high: int, term: () -> double) -> double => (
     total
 )
 
-write_line("{sum(1, 100, () => 1.0D / cast double(i))}");
+write_line("{sum(1, 100, () => 1.0D / cast double(i))}")
 ```
 
 output:
@@ -10371,7 +10373,7 @@ show(name: string, function: (int) -> int pure) =>
     write_line("{name} {(0..20) |> map(function) |> join(" ")}")
 
 show("F:", female)
-show("M:", male);
+show("M:", male)
 ```
 
 output:
@@ -10413,7 +10415,7 @@ make_list(separator: string) -> string is
     return items |> join("\n")
 si
 
-write_line(make_list(". "));
+write_line(make_list(". "))
 ```
 
 output:
@@ -10477,7 +10479,7 @@ let animals = LIST[Animal]()
 animals.add(CAT("tom"))
 animals.add(DOG("spot"))
 
-herd(animals |> collect_array());
+herd(animals |> collect_array())
 ```
 
 output:
@@ -10540,7 +10542,7 @@ for n in 0::10 do
 od
 
 write_line("countdown(5) = {countdown(5)}")
-write_line("gcd(1071, 462) = {gcd((1071, 462))}");
+write_line("gcd(1071, 462) = {gcd((1071, 462))}")
 ```
 
 output:
@@ -10584,7 +10586,7 @@ for n in 0::10 do
 od
 
 write_line("countdown(5) = {countdown(5)}")
-write_line("gcd(1071, 462) = {gcd((1071, 462))}");
+write_line("gcd(1071, 462) = {gcd((1071, 462))}")
 ```
 
 output:
@@ -10676,7 +10678,7 @@ shapes |> each(shape => write_line(shape.name()))
 
 let described: Described[] = [SQUARE(2.0D), TRIANGLE(6.0D, 1.0D)]
 
-described |> each(shape => write_line(shape.describe()));
+described |> each(shape => write_line(shape.describe()))
 ```
 
 output:
@@ -10784,7 +10786,7 @@ for element in [11, 2, 14, 1, 7, 15, 5, 8, 4] do
 od
 
 write_line("in order: {in_order(tree)}")
-write_line("black height: {black_height(tree)}");
+write_line("black height: {black_height(tree)}")
 ```
 
 output:
@@ -11026,7 +11028,7 @@ let input =
     ])
 
 write_line(show(input))
-write_line("[{flatten(input) |> join(", ")}]");
+write_line("[{flatten(input) |> join(", ")}]")
 ```
 
 output:
@@ -11072,7 +11074,7 @@ let q mut = (2, "two")
 
 swap(p ref, q ref)
 
-write_line("tuples:  {p} {q}");
+write_line("tuples:  {p} {q}")
 ```
 
 output:
@@ -11114,7 +11116,7 @@ let same = (0..n) |> map(_ => shared) |> collect_list()
 same[0].value = 42
 
 write_line(
-    "shared:   {same |> map(box => "{box.value}") |> join(" ")}");
+    "shared:   {same |> map(box => "{box.value}") |> join(" ")}")
 ```
 
 output:
@@ -11162,7 +11164,7 @@ write_line("nothing:   {describe(nothing)}")
 write_line("number:    {describe(number)}")
 write_line("no_number: {describe(no_number)}")
 write_line("")
-write_line("nothing, with a fallback: {nothing ?? "none"}");
+write_line("nothing, with a fallback: {nothing ?? "none"}")
 ```
 
 output:
@@ -11252,7 +11254,7 @@ write_line("q * r       = {q * r}")
 write_line("r * q       = {r * q}")
 write_line("q1 * q2     = {q1 * q2}")
 write_line("q2 * q1     = {q2 * q1}")
-write_line("q1 * q2 =~ q2 * q1: {q1 * q2 =~ q2 * q1}");
+write_line("q1 * q2 =~ q2 * q1: {q1 * q2 =~ q2 * q1}")
 ```
 
 output:
@@ -11463,7 +11465,7 @@ let (parsed, _) = read(source, 0)
 
 write_line(source)
 write_line("")
-write_line(render(parsed));
+write_line(render(parsed))
 ```
 
 output:
@@ -11561,7 +11563,7 @@ od
 table("and", (left, right) => left /\ right)
 table("or", (left, right) => left \/ right)
 table("implies", implies)
-table("equiv", equivalent);
+table("equiv", equivalent)
 ```
 
 output:
@@ -11802,7 +11804,7 @@ for step in 0::(fraction.count - 1) do
     one = !one
 od
 
-write_line("83116/51639 is term {System.Convert.to_int64(bits, 2)}");
+write_line("83116/51639 is term {System.Convert.to_int64(bits, 2)}")
 ```
 
 output:
@@ -11875,7 +11877,7 @@ for index in 0::(two.count - 1) do
 od
 
 write_line(
-    "EKG(2) and EKG(5) converge at term {last_difference + 1}");
+    "EKG(2) and EKG(5) converge at term {last_difference + 1}")
 ```
 
 output:
@@ -11916,7 +11918,7 @@ fibonacci_sequence
     |> each(((position, value)) =>
         write_line("fib({position}) = {value}"))
 
-write_line("fib(30) = {fib(30)}");
+write_line("fib(30) = {fib(30)}")
 ```
 
 output:
@@ -11957,7 +11959,7 @@ for (position, value) in fibonacci() |> take(10) |> index() do
     write_line("fib({position}) = {value}")
 od
 
-write_line("fib(30) = {fib(30)}");
+write_line("fib(30) = {fib(30)}")
 ```
 
 output:
@@ -12041,7 +12043,6 @@ fusc[699,051] = 10,946
 The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Hailstone_sequence
 
 ```ghul
-…
 use IO.Std.write_line
 use Collections.LIST
 use Ghul.Pipes
@@ -12081,12 +12082,8 @@ for n in 1..100_000 do
     fi
 od
 
-write_line("longest under 100,000: {longest} (length {longest_length})");
+write_line("longest under 100,000: {longest} (length {longest_length})")
 ```
-
-diagnostics:
-
-- warning: [return-without-value] return without value from non void function returns default value of type Pipe[int]
 
 output:
 
@@ -12292,7 +12289,7 @@ si
 report([1, 2], 20)
 report([2, 1], 20)
 report([1, 3, 1, 2], 30)
-report([1, 3, 2, 1], 30);
+report([1, 3, 2, 1], 30)
 ```
 
 output:
@@ -12352,7 +12349,7 @@ look_and_say(seed: string) -> Pipe[string] is
     od
 si
 
-look_and_say("1") |> take(10) |> each(term => write_line(term));
+look_and_say("1") |> take(10) |> each(term => write_line(term))
 ```
 
 output:
@@ -12444,7 +12441,7 @@ show(sizes: int[]) is
             write_line("  ({partition |> map(braces) |> join(", ")})"))
 si
 
-show([2, 0, 2]);
+show([2, 0, 2])
 ```
 
 output:
@@ -12611,7 +12608,7 @@ od
 
 write_line(
     "consecutive members up to the 1000th are all coprime: "
-    "{if all_coprime ?? true then "true" else "false" fi}");
+    "{if all_coprime ?? true then "true" else "false" fi}")
 ```
 
 output:
@@ -12715,7 +12712,7 @@ let tree =
 show("preorder:", preorder(tree))
 show("inorder:", inorder(tree))
 show("postorder:", postorder(tree))
-show("level-order:", levelorder(tree));
+show("level-order:", levelorder(tree))
 ```
 
 output:
@@ -12822,7 +12819,7 @@ si
 
 write_line("first ten:      {van_eck() |> take(10) |> join(" ")}")
 write_line(
-    "terms 991-1000: {van_eck() |> skip(990) |> take(10) |> join(" ")}");
+    "terms 991-1000: {van_eck() |> skip(990) |> take(10) |> join(" ")}")
 ```
 
 output:
@@ -13032,7 +13029,7 @@ for row in additive |> chunk(10) do
 od
 
 write_line("")
-write_line("{additive.count} additive primes below 500");
+write_line("{additive.count} additive primes below 500")
 ```
 
 output:
@@ -13122,7 +13119,7 @@ sum_of_proper_divisors(n: int) -> int =>
     |> map(n => (n, partner = sum_of_proper_divisors(n)))
     |> filter(((n, partner)) =>
         partner > n /\ sum_of_proper_divisors(partner) == n)
-    |> each(((n, partner)) => write_line("{n} and {partner}"));
+    |> each(((n, partner)) => write_line("{n} and {partner}"))
 ```
 
 output:
@@ -13172,7 +13169,7 @@ anti_primes() -> Pipe[int] is
     od
 si
 
-write_line(anti_primes() |> take(20) |> join(" "));
+write_line(anti_primes() |> take(20) |> join(" "))
 ```
 
 output:
@@ -13236,7 +13233,7 @@ for row in 0::(primes.count - 1) / 6 do
     )
 od
 
-write_line("{primes.count} primes with strictly descending digits");
+write_line("{primes.count} primes with strictly descending digits")
 ```
 
 output:
@@ -13301,7 +13298,7 @@ write_line("first 15 gapful numbers >= 1,000,000:")
 write_line(gapful_from(1000000, 15) |> join(", "))
 
 write_line("first 10 gapful numbers >= 1,000,000,000:")
-write_line(gapful_from(1000000000, 10) |> join(", "));
+write_line(gapful_from(1000000000, 10) |> join(", "))
 ```
 
 output:
@@ -13407,7 +13404,7 @@ gcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi
 write_line("gcd(48, 18) = {gcd(48, 18)}")
 write_line("gcd(1071, 462) = {gcd(1071, 462)}")
 write_line("gcd(0, 13) = {gcd(0, 13)}")
-write_line("gcd(13, 0) = {gcd(13, 0)}");
+write_line("gcd(13, 0) = {gcd(13, 0)}")
 ```
 
 output:
@@ -13461,7 +13458,7 @@ let los_angeles = (33.94D, -118.40D)
 let distance =
     great_circle_distance(nashville, los_angeles, earth_radius_km)
 
-write_line("BNA to LAX: {distance:F6} km");
+write_line("BNA to LAX: {distance:F6} km")
 ```
 
 output:
@@ -13524,7 +13521,7 @@ for value in 1..limit do
     fi
 od
 
-write_line("{chains:N0} chains starting below {limit:N0} reach 89");
+write_line("{chains:N0} chains starting below {limit:N0} reach 89")
 ```
 
 output:
@@ -13649,7 +13646,7 @@ let below_million = (1..1000000)
     |> filter(n => n == 1 \/ kaprekar(n))
     |> count()
 
-write_line("{below_million} Kaprekar numbers below 1000000");
+write_line("{below_million} Kaprekar numbers below 1000000")
 ```
 
 output:
@@ -13715,7 +13712,7 @@ let triplets = ludic
     |> map(x => "({x}, {x + 2}, {x + 6})")
     |> join("  ")
 
-write_line("triplets: {triplets}");
+write_line("triplets: {triplets}")
 ```
 
 output:
@@ -13751,7 +13748,7 @@ map_range(
 (0::10)
     |> map(s =>
         (s, mapped = map_range((0.0D, 10.0D), (-1.0D, 0.0D), cast(s))))
-    |> each(((s, mapped)) => write_line("{s} maps to {mapped:F1}"));
+    |> each(((s, mapped)) => write_line("{s} maps to {mapped:F1}"))
 ```
 
 output:
@@ -13877,7 +13874,7 @@ od
 
 let ten_millionth = sequence() |> skip(10000000 - 1) |> first()
 
-write_line("the 10000000th is {ten_millionth}");
+write_line("the 10000000th is {ten_millionth}")
 ```
 
 output:
@@ -14001,7 +13998,7 @@ for pair in pairs do
 od
 
 write_line("{up_to_million} pairs up to 1000000")
-write_line("{up_to_ten_million} pairs up to 10000000");
+write_line("{up_to_ten_million} pairs up to 10000000")
 ```
 
 output:
@@ -14085,7 +14082,7 @@ write_line(
 write_line("between 888888877 and 888888888:")
 
 write_line(
-    (888888877::888888888) |> filter(pernicious) |> join(", "));
+    (888888877::888888888) |> filter(pernicious) |> join(", "))
 ```
 
 output:
@@ -14140,7 +14137,7 @@ write_line("the first thirty evil numbers: {evil}")
 let odious =
     naturals |> filter(n => popcount(n) % 2 == 1) |> take(30) |> join(", ")
 
-write_line("the first thirty odious numbers: {odious}");
+write_line("the first thirty odious numbers: {odious}")
 ```
 
 output:
@@ -14244,7 +14241,7 @@ od
 write_line(
     "{primes.count:N0} primes plus {powers} prime powers "
     "= {primes.count + powers:N0}, matching the one-factor "
-    "count {distribution[1]:N0}");
+    "count {distribution[1]:N0}")
 ```
 
 output:
@@ -14590,7 +14587,7 @@ let triplet_5000th = triplets[5000 - 1]
 
 write_line(
     "the 5000th sphenic triplet is "
-    "({triplet_5000th}, {triplet_5000th + 1}, {triplet_5000th + 2})");
+    "({triplet_5000th}, {triplet_5000th + 1}, {triplet_5000th + 2})")
 ```
 
 output:
@@ -14844,7 +14841,7 @@ od
 write_line("largest left-truncatable prime below 1000000: {largest_left}")
 write_line(
     "largest right-truncatable prime below 1000000: "
-    "{largest_right}");
+    "{largest_right}")
 ```
 
 output:
@@ -14948,7 +14945,7 @@ write_line("600th: {values[599]}")
 
 write_line(
     "{values.count} undulating numbers below 2^53, "
-    "the largest is {values[values.count - 1]}");
+    "the largest is {values[values.count - 1]}")
 ```
 
 output:
@@ -15361,7 +15358,7 @@ si
 
 let text = "1223334444"
 
-write_line("{text}: {entropy(text)} bits/symbol");
+write_line("{text}: {entropy(text)} bits/symbol")
 ```
 
 output:
@@ -15438,7 +15435,7 @@ si
  ("DIXON", "DICKSONX"),
  ("JELLYFISH", "SMELLYFISH")]
     |> each(((left, right)) =>
-        write_line("{left} / {right}: {jaro(left, right):F6}"));
+        write_line("{left} / {right}: {jaro(left, right):F6}"))
 ```
 
 output:
@@ -15493,7 +15490,7 @@ levenshtein(source: string, target: string) -> int is
 si
 
 write_line("{levenshtein("kitten", "sitting")}")
-write_line("{levenshtein("rosettacode", "raisethysword")}");
+write_line("{levenshtein("rosettacode", "raisethysword")}")
 ```
 
 output:
@@ -15546,7 +15543,7 @@ write_line(test("rotor", is_palindrome))
 
 write_line(test("A man, a plan, a canal: Panama", is_inexact_palindrome))
 write_line(test("race car", is_inexact_palindrome))
-write_line(test("hello world", is_inexact_palindrome));
+write_line(test("hello world", is_inexact_palindrome))
 ```
 
 output:
@@ -15582,7 +15579,7 @@ is_pangram(sentence: string) -> bool =>
         |> count() == 26
 
 write_line("{is_pangram("The quick brown fox jumps over the lazy dog")}")
-write_line("{is_pangram("Hello, World!")}");
+write_line("{is_pangram("Hello, World!")}")
 ```
 
 output:
@@ -15653,7 +15650,7 @@ let encoded = encode(input)
 write_line("input:   {input}")
 write_line("encoded: {encoded}")
 write_line("decoded: {decode(encoded)}")
-write_line("round trip restores the input: {decode(encoded) =~ input}");
+write_line("round trip restores the input: {decode(encoded) =~ input}")
 ```
 
 output:
@@ -15779,7 +15776,7 @@ permutations(floors)
         write_line("Fletcher lives on floor {floors.fletcher}")
         write_line("Miller lives on floor {floors.miller}")
         write_line("Smith lives on floor {floors.smith}")
-    ));
+    ))
 ```
 
 output:
@@ -15990,7 +15987,7 @@ write_line(
     "41 prisoners, every 3rd killed: prisoner {survivor(41, 3)} survives")
 
 write_line(
-    "5 prisoners, every 2nd killed:  prisoner {survivor(5, 2)} survives");
+    "5 prisoners, every 2nd killed:  prisoner {survivor(5, 2)} survives")
 ```
 
 output:
@@ -16026,7 +16023,7 @@ show(n: int, k: int) is
 si
 
 show(5, 2)
-show(7, 3);
+show(7, 3)
 ```
 
 output:
@@ -16066,7 +16063,7 @@ continuous(chosen: LIST[int]) -> bool =>
     |> map(selected)
     |> filter(chosen => chosen.count > 1 /\ !continuous(chosen))
     |> map(chosen => chosen |> join(", "))
-    |> each(line => write_line(line));
+    |> each(line => write_line(line))
 ```
 
 output:
@@ -16128,7 +16125,7 @@ show[T](sets: LIST[LIST[T]]) -> string =>
 
 write_line(show(power_set(LIST[int]())))
 write_line(show(power_set([1, 2, 3] |> collect())))
-write_line(show(power_set(["a", "b"] |> collect())));
+write_line(show(power_set(["a", "b"] |> collect())))
 ```
 
 output:
@@ -16284,7 +16281,7 @@ show(first: string, second: string) is
     od
 si
 
-show("ACACACTA", "AGCACACA");
+show("ACACACTA", "AGCACACA")
 ```
 
 output:
@@ -16340,7 +16337,7 @@ quicksort[T: Ghul.Comparable[T]](values: List[T]) -> List[T] =>
     fi
 
 write_line("{$quicksort([6, 2, 9, 2, 5, 1, 8, 3] |> collect())}")
-write_line("{$quicksort(["pear", "apple", "fig", "date"] |> collect())}");
+write_line("{$quicksort(["pear", "apple", "fig", "date"] |> collect())}")
 ```
 
 output:
@@ -16495,7 +16492,7 @@ let series: int[][] =
      [6, 7, 10, 7, 6]]
 
 series |> each((towers: int[]) =>
-    write_line("{towers |> join(", ")} -> {water(towers)}"));
+    write_line("{towers |> join(", ")} -> {water(towers)}"))
 ```
 
 output:

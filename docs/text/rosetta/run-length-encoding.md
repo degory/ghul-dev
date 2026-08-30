@@ -54,7 +54,7 @@ let encoded = encode(input)
 write_line("input:   {input}")
 write_line("encoded: {encoded}")
 write_line("decoded: {decode(encoded)}")
-write_line("round trip restores the input: {decode(encoded) =~ input}");
+write_line("round trip restores the input: {decode(encoded) =~ input}")
 ```
 
 output:

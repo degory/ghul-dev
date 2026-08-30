@@ -14,11 +14,11 @@ sign(n: int) -> string =>
     if n < 0 then "negative"
     elif n == 0 then "zero"
     else "positive"
-    fi;
+    fi
 
-write_line(sign(-4));
-write_line(sign(0));
-write_line(sign(7));
+write_line(sign(-4))
+write_line(sign(0))
+write_line(sign(7))
 ```
 
 output:
@@ -40,11 +40,11 @@ day_kind(day: int) -> string =>
     case day
     when 5, 6 then "weekend"
     else "weekday"
-    esac;
+    esac
 
-write_line(day_kind(5));
-write_line(day_kind(3));
-write_line(day_kind(6));
+write_line(day_kind(5))
+write_line(day_kind(3))
+write_line(day_kind(6))
 ```
 
 output:
@@ -64,14 +64,14 @@ Every loop form yields too, at type `T?`: a `break` with a value produces it, an
 // a valued break delivers to the nearest enclosing loop
 // that consumes a value, so it can cross the inner,
 // statement-form loop on its way out
-let rows = [[1, 2, 3], [4, 5, 6]];
+let rows = [[1, 2, 3], [4, 5, 6]]
 
 let first_even: int? =
     for row in rows do
         for cell in row do
             if cell % 2 == 0 then break cell fi
         od
-    od;
+    od
 
 write_line("{first_even ?? -1}")
 ```
@@ -92,30 +92,30 @@ A parenthesised block `(statement; ...; value)` runs a sequence of statements an
 …
 // a block as a let initializer, with room for intermediate locals:
 let midpoint = (
-    let lo = 10;
-    let hi = 20;
+    let lo = 10
+    let hi = 20
     lo + (hi - lo) / 2
-);
-write_line("midpoint = {midpoint}");
+)
+write_line("midpoint = {midpoint}")
 
 // a block folding a loop, with a return that yields from the block:
 let first_even = (
     for x in [1, 3, 4, 7] do
         if x % 2 == 0 then
-            return x;
+            return x
         fi
-    od;
+    od
     -1
-);
-write_line("first_even = {first_even}");
+)
+write_line("first_even = {first_even}")
 
 // a block passed straight as a function argument:
 write_line(
     (
-        let doubled = midpoint * 2;
+        let doubled = midpoint * 2
         "doubled = {doubled}"
     )
-);
+)
 ```
 
 output:
@@ -135,9 +135,9 @@ A `let ... in ...` expression introduces one or more local variables scoped to a
 ```ghul
 …
 hypotenuse_squared(a: int, b: int) -> int =>
-    let a2 = a * a, b2 = b * b in a2 + b2;
+    let a2 = a * a, b2 = b * b in a2 + b2
 
-write_line("h2 = {hypotenuse_squared(3, 4)}");
+write_line("h2 = {hypotenuse_squared(3, 4)}")
 ```
 
 output:
@@ -158,13 +158,13 @@ The value an arm produces is its last statement's, on the same rule as a parenth
 // statements; its last statement is the arm's value
 grade(mark: int) -> string is
     if mark >= 90 then
-        let band = "top";
+        let band = "top band"
 
-        "{band} band"
+        band
     elif mark >= 50 then
-        let band = "middle";
+        let band = "middle band"
 
-        "{band} band"
+        band
     else
         "low band"
     fi
@@ -173,7 +173,7 @@ si
 // the same construct used as a statement: the arms are blocks there too
 announce(mark: int) is
     if mark >= 50 then
-        let verdict = grade(mark);
+        let verdict = grade(mark)
 
         write_line("pass: {verdict}")
     else
@@ -184,17 +184,17 @@ si
 // a loop body is a statement block whose last value goes nowhere:
 // a loop yields through break, not through its body's last statement
 total(marks: int[]) -> int is
-    let running mut = 0;
+    let running mut = 0
 
     for mark in marks do
         running = running + mark
-    od;
+    od
 
     running
 si
 
-write_line(grade(95));
-announce(60);
+write_line(grade(95))
+announce(60)
 write_line("{total([10, 20, 30])}")
 ```
 
@@ -208,18 +208,18 @@ pass: middle band
 
 Where the value then goes is what the two uses differ on. An `if` used as an expression takes the value of the arm it chose; the same `if` used as a statement discards it. A loop body is the case where it always goes nowhere, since a loop yields through `break` rather than through its body's last statement.
 
-Inside these blocks a terminating `;` on the last statement is optional, and writing one does not discard the value: the arm still produces it, because a closing `else`, `fi`, `esac` or `)` ends the statement list either way. The one place the semicolon decides the reading is a function or method body, covered next.
+A terminating `;` on the last statement changes nothing here, or anywhere else: it separates two statements written on one line, and that is all it does.
 
 ## block bodies return their tail
 
-A function or method body takes its last statement's value the way an arm does, with one difference: here the terminating `;` is not inert. Where the last statement produces a value and carries no `;`, that value is the return value on the fall-through path, checked against the declared return type exactly as an explicit `return` would be:
+A function or method body takes its last statement's value the way an arm does. Where that value's type is assignable to the declared return type, it is the return value on the fall-through path, checked exactly as an explicit `return` would be:
 
 ```ghul
 …
 // the last statement is not terminated, so it is the return value
 area(width: int, height: int) -> int is
-    let doubled = width * 2;
-    let trimmed = height - 1;
+    let doubled = width * 2
+    let trimmed = height - 1
 
     doubled * trimmed
 si
@@ -233,7 +233,7 @@ output:
 24
 ```
 
-Written `doubled * trimmed;` the statement is evaluated and its value discarded, which leaves the function with no value on that path.
+A tail of some other non-void type is an error at the tail rather than a silent discard. To evaluate a statement for its effect and throw its value away, write `let _ = doubled * trimmed`.
 
 Because the tail is an ordinary statement position, an `if` or a `case` sitting there is the return value too, and no branch needs its own `return`:
 
@@ -270,9 +270,7 @@ negative zero one
 
 Only a statement that produces a value can be a tail. An expression statement, an `if`, a `case` and a parenthesised block all do. A `let`, an assignment, an `assert` and a loop do not, so a body whose last statement is one of those has no value on the fall-through path and returns [the default for its return type](https://ghul.dev/control-flow.html#default-return) instead. A loop is not an exception to [loops as expressions](#loops-as-expressions): it yields to a context that consumes a value, and a function tail is not one, so a `break` with a value there is rejected outright.
 
-Whole bodies can have no tail to take either. A void body discards a trailing statement whether or not it ends in a semicolon, so a method ending in a bare `if` or loop is unaffected. In a generator, falling off the end means the end of the stream rather than a value. A `try` block is not an expression, so a body ending in one is not a tail either.
-
-A guard `if` with no `else` is rejected in tail position in a function that returns a value, because the branch it does not take produces nothing. Terminate it with `;` to keep it as a plain statement.
+Whole bodies can have no tail to take either. A void body discards whatever is left standing at its end, so a method ending in a bare `if` or loop is unaffected. In a generator, falling off the end means the end of the stream rather than a value, and a bare `return` ends it early. A `try` block is not an expression, so a body ending in one is not a tail either.
 
 ## expression bodies
 
@@ -281,29 +279,29 @@ A function, method, property, or anonymous function can replace its block body w
 ```ghul
 …
 // expression-bodied free function:
-square(n: int) -> int => n * n;
+square(n: int) -> int => n * n
 
 class COUNTER is
-    _count: int;
+    _count: int
 
     init() is si
 
     // an expression body can be a ( ... ) block:
     bump() -> int => (
-        _count = _count + 1;
+        _count = _count + 1
         _count
-    );
+    )
 si
 
-write_line("square(6) = {square(6)}");
+write_line("square(6) = {square(6)}")
 
-let c = COUNTER();
-write_line("bump = {c.bump()}");
-write_line("bump = {c.bump()}");
+let c = COUNTER()
+write_line("bump = {c.bump()}")
+write_line("bump = {c.bump()}")
 
 // expression-bodied anonymous function:
-let twice = (n: int) => n * 2;
-write_line("twice(21) = {twice(21)}");
+let twice = (n: int) => n * 2
+write_line("twice(21) = {twice(21)}")
 ```
 
 output:
@@ -330,17 +328,17 @@ grade(score: int) -> string is
             when 8 then "B"
             when 7 then "C"
             else "F"
-            esac;
+            esac
 
         if band == "F" then "fail" else "pass ({band})" fi
-    );
+    )
 
-    return label;
+    return label
 si
 
-write_line(grade(95));
-write_line(grade(82));
-write_line(grade(60));
+write_line(grade(95))
+write_line(grade(82))
+write_line(grade(60))
 ```
 
 output:

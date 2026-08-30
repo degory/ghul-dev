@@ -17,14 +17,14 @@ Inside such a function, `await e` evaluates to the result of the task `e` once i
 ```ghul
 …
 compute() -> Tasks.TASK[int] is
-    let a = await double_async(10);   // a = 20
-    let b = await double_async(a);    // b = 40
-    let c = await add_async(a, b);    // c = 60
+    let a = await double_async(10)   // a = 20
+    let b = await double_async(a)    // b = 40
+    let c = await add_async(a, b)    // c = 60
 
-    return c;
+    return c
 si
 
-write_line("{compute().result}");
+write_line("{compute().result}")
 ```
 
 output:
@@ -38,13 +38,13 @@ output:
 ```ghul
 …
 run_side_effects() -> Tasks.TASK is
-    await side_effect("first");
-    await side_effect("second");
+    await side_effect("first")
+    await side_effect("second")
 
-    return;
+    return
 si
 
-run_side_effects().wait();
+run_side_effects().wait()
 ```
 
 output:
@@ -59,19 +59,19 @@ side effect: second
 ```ghul
 …
 sum_of_squares(xs: Collections.List[int]) -> Tasks.TASK[int] is
-    let total mut = 0;
+    let total mut = 0
 
     for x in xs do
-        let y = await fetch_async(x);
-        total = total + y;
+        let y = await fetch_async(x)
+        total = total + y
     od
 
-    return total;
+    return total
 si
 
-let result = sum_of_squares([1, 2, 3, 4]).result;
+let result = sum_of_squares([1, 2, 3, 4]).result
 
-write_line("sum_of_squares = {result}");
+write_line("sum_of_squares = {result}")
 ```
 
 output:
@@ -89,15 +89,15 @@ A function is a generator when its declared return type is `Pipe[T]` (`Ghul.Pipe
 ```ghul
 …
 squares(limit: int) -> Ghul.Pipes.Pipe[int] is
-    let i mut = 1;
+    let i mut = 1
     while i <= limit do
-        yield i * i;
-        i = i + 1;
+        yield i * i
+        i = i + 1
     od
 si
 
 for s in squares(4) do
-    write_line(s);
+    write_line(s)
 od
 ```
 
@@ -116,7 +116,7 @@ A generator *is* a [pipe](https://ghul.dev/runtime-library.html#stages), so it c
 …
 // fibs() is an infinite generator; take(8) bounds it
 for f in fibs() |> take(8) do
-    write_line(f);
+    write_line(f)
 od
 ```
 

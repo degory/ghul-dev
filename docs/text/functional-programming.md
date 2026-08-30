@@ -19,16 +19,16 @@ a data structure, like any other value:
 
 ```ghul
 …
-let f = i => i * 2;
-write_line("f(123): {f(123)}");
+let f = i => i * 2
+write_line("f(123): {f(123)}")
 
 // assigned to another variable
-let g = f;
-write_line("g(456): {g(456)}");
+let g = f
+write_line("g(456): {g(456)}")
 
 // passed to another function
-let apply_twice = (f, i) => f(f(i));
-write_line("apply_twice(f, 7): {apply_twice(f, 7)}");
+let apply_twice = (f, i) => f(f(i))
+write_line("apply_twice(f, 7): {apply_twice(f, 7)}")
 ```
 
 output:
@@ -50,18 +50,18 @@ reassign:
 ```ghul
 …
 // an immutable let is captured by value
-let base = 10;
-let add_base = n => n + base;
-write_line("add_base(5): {add_base(5)}");
+let base = 10
+let add_base = n => n + base
+write_line("add_base(5): {add_base(5)}")
 
 // a mut variable is captured by reference: the function and
 // the enclosing scope share it
-let count mut = 0;
-let next = () => ( count = count + 1; count );
+let count mut = 0
+let next = () => ( count = count + 1; count )
 
-write_line("next(): {next()}");
-write_line("next(): {next()}");
-write_line("count: {count}");
+write_line("next(): {next()}")
+write_line("next(): {next()}")
+write_line("count: {count}")
 ```
 
 output:
@@ -84,16 +84,16 @@ into the next:
 ```ghul
 …
 // map
-let doubled = [1, 2, 3, 4, 5] |> map(x => x * 2);
-write_line("doubled: {doubled}");
+let doubled = [1, 2, 3, 4, 5] |> map(x => x * 2)
+write_line("doubled: {doubled}")
 
 // filter
-let evens = [1, 2, 3, 4, 5] |> filter(x => x % 2 == 0);
-write_line("evens: {evens}");
+let evens = [1, 2, 3, 4, 5] |> filter(x => x % 2 == 0)
+write_line("evens: {evens}")
 
 // reduce
-let sum = [1, 2, 3, 4, 5] |> reduce(0, (acc, x) => acc + x);
-write_line("sum: {sum}");
+let sum = [1, 2, 3, 4, 5] |> reduce(0, (acc, x) => acc + x)
+write_line("sum: {sum}")
 ```
 
 output:
@@ -115,13 +115,13 @@ the function itself:
 …
 // factorial
 let factorial = n rec =>
-    if n == 0 then 1 else n * rec(n - 1) fi;
-write_line("factorial(5): {factorial(5)}");
+    if n == 0 then 1 else n * rec(n - 1) fi
+write_line("factorial(5): {factorial(5)}")
 
 // fibonacci
 let fibonacci = n rec =>
-    if n <= 1 then n else rec(n - 1) + rec(n - 2) fi;
-write_line("fibonacci(10): {fibonacci(10)}");
+    if n <= 1 then n else rec(n - 1) + rec(n - 2) fi
+write_line("fibonacci(10): {fibonacci(10)}")
 ```
 
 output:
@@ -138,10 +138,10 @@ refer to each other whatever order they are defined in:
 
 ```ghul
 is_even(n: int) -> bool =>
-    if n == 0 then true else is_odd(n - 1) fi;
+    if n == 0 then true else is_odd(n - 1) fi
 
 is_odd(n: int) -> bool =>
-    if n == 0 then false else is_even(n - 1) fi;
+    if n == 0 then false else is_even(n - 1) fi
 ```
 
 ## read-only by default
@@ -169,11 +169,11 @@ replaced. An array literal constructs a plain array, so the same applies to it.
 
 ```ghul
 …
-let numbers = [1, 2, 3, 4, 5];
+let numbers = [1, 2, 3, 4, 5]
 
-let element = numbers[3]; // elements can be read
+let element = numbers[3] // elements can be read
 
-numbers[3] = 6;
+numbers[3] = 6
 ```
 
 diagnostics:
@@ -187,11 +187,11 @@ tuple passed to other code is a copy: nothing can change a tuple you hold.
 
 ```ghul
 …
-let tuple = (1, 2, 3, 4, 5);
+let tuple = (1, 2, 3, 4, 5)
 
-let element = tuple.`3; // elements can be read
+let element = tuple.`3 // elements can be read
 
-tuple.`3 = 6;
+tuple.`3 = 6
 ```
 
 diagnostics:
@@ -213,11 +213,11 @@ type, unless it is declared `public`:
 
 ```ghul
 …
-struct THING(name: string);
+struct THING(name: string)
 …
-let thing = THING("a thing");
+let thing = THING("a thing")
 
-thing.name = "change it";
+thing.name = "change it"
 ```
 
 diagnostics:
@@ -235,13 +235,13 @@ produce a new sequence and leave the input as it was:
 
 ```ghul
 …
-let list = [1, 2, 3, 4, 5];
+let list = [1, 2, 3, 4, 5]
 
-let doubled = list |> map(x => x * 2);
-write_line("doubled: {doubled}");
+let doubled = list |> map(x => x * 2)
+write_line("doubled: {doubled}")
 
 // the original list is unchanged:
-write_line("list: {list |> join(", ")}");
+write_line("list: {list |> join(", ")}")
 ```
 
 output:
@@ -263,13 +263,13 @@ are passed to it:
 ```ghul
 …
 // pure: square assigns no field, property, or array element
-square(x: int) -> int pure => x * x;
+square(x: int) -> int pure => x * x
 
 // a pure function type: this slot accepts only pure functions
-apply(f: (int) -> int pure, x: int) -> int => f(x);
+apply(f: (int) -> int pure, x: int) -> int => f(x)
 
-write_line("apply(square, 5): {apply(square, 5)}");
-write_line("apply(anonymous, 5): {apply(x => x + 1, 5)}");
+write_line("apply(square, 5): {apply(square, 5)}")
+write_line("apply(anonymous, 5): {apply(x => x + 1, 5)}")
 ```
 
 output:
@@ -299,10 +299,10 @@ one. Global functions and methods can do this generically:
 
 ```ghul
 apply[T](f: T -> T, x: T) -> T =>
-    f(x);
+    f(x)
 
 apply_if[T](f: T -> T, x: T, predicate: T -> bool) -> T =>
-    if predicate(x) then f(x) else x fi;
+    if predicate(x) then f(x) else x fi
 ```
 
 ### higher-order generic methods
@@ -310,12 +310,12 @@ apply_if[T](f: T -> T, x: T, predicate: T -> bool) -> T =>
 ```ghul
 class HIGHER_ORDER_FUNCTIONS[T] is
     apply(f: T -> T, x: T) -> T static =>
-        f(x);
+        f(x)
 
     apply_if(
         f: T -> T, x: T, predicate: T -> bool
     ) -> T static =>
-        if predicate(x) then f(x) else x fi;
+        if predicate(x) then f(x) else x fi
 si
 ```
 
@@ -323,25 +323,25 @@ si
 
 ```ghul
 …
-let times_2 = x => x * 2;
-write_line("apply(times_2, 5): {apply(times_2, 5)}");
+let times_2 = x => x * 2
+write_line("apply(times_2, 5): {apply(times_2, 5)}")
 
-let square = x => x * x;
-write_line("apply(square, 5): {apply(square, 5)}");
+let square = x => x * x
+write_line("apply(square, 5): {apply(square, 5)}")
 
 // higher order function consumes another function:
-let apply_twice = (f: int -> int, x) => f(f(x));
+let apply_twice = (f: int -> int, x) => f(f(x))
 write_line(
     "apply_twice(times_2, 5): {apply_twice(times_2, 5)}"
-);
+)
 
 // higher order function returns another function:
-let create_apply_twice = (f: int -> int) => x => f(f(x));
-let apply_twice_times_2 = create_apply_twice(times_2);
+let create_apply_twice = (f: int -> int) => x => f(f(x))
+let apply_twice_times_2 = create_apply_twice(times_2)
 
 write_line(
     "apply_twice_times_2(5): {apply_twice_times_2(5)}"
-);
+)
 ```
 
 output:
@@ -364,16 +364,16 @@ generic `>>` takes two lines to define:
 ```ghul
 …
 >>[A, B, C](f: A -> B, g: B -> C) -> A -> C =>
-    x => g(f(x));
+    x => g(f(x))
 
-let times_2 = x => x * 2;
-let add_1 = x => x + 1;
+let times_2 = x => x * 2
+let add_1 = x => x + 1
 
-let times_2_then_add_1 = times_2 >> add_1;
-write_line("times_2_then_add_1(5): {times_2_then_add_1(5)}");
+let times_2_then_add_1 = times_2 >> add_1
+write_line("times_2_then_add_1(5): {times_2_then_add_1(5)}")
 
-let pipeline = times_2 >> add_1 >> x => "[{x}]";
-write_line("pipeline(5): {pipeline(5)}");
+let pipeline = times_2 >> add_1 >> x => "[{x}]"
+write_line("pipeline(5): {pipeline(5)}")
 ```
 
 output:
@@ -391,15 +391,15 @@ anonymous function that returns another:
 
 ```ghul
 …
-let curried_add = x => y => x + y;
+let curried_add = x => y => x + y
 
-write_line("curried_add(5)(3): {curried_add(5)(3)}");
+write_line("curried_add(5)(3): {curried_add(5)(3)}")
 
-let add_5 = curried_add(5);
-write_line("add_5(3): {add_5(3)}");
+let add_5 = curried_add(5)
+write_line("add_5(3): {add_5(3)}")
 
-let add_10 = curried_add(10);
-write_line("add_10(3): {add_10(3)}");
+let add_10 = curried_add(10)
+write_line("add_10(3): {add_10(3)}")
 ```
 
 output:
@@ -418,13 +418,13 @@ arguments:
 
 ```ghul
 …
-let add = (x, y) => x + y;
+let add = (x, y) => x + y
 
-let add_5 = y => add(5, y);
-write_line("add_5(3): {add_5(3)}");
+let add_5 = y => add(5, y)
+write_line("add_5(3): {add_5(3)}")
 
-let add_10 = y => add(10, y);
-write_line("add_10(3): {add_10(3)}");
+let add_10 = y => add(10, y)
+write_line("add_10(3): {add_10(3)}")
 ```
 
 output:
@@ -449,10 +449,10 @@ area(s: Shape) -> double =>
     case ► s
     when c: CIRCLE then 3.14159d * c.radius * c.radius
     when q: SQUARE then q.side * q.side
-    esac;
+    esac
 
-write_line("{area(CIRCLE(2.0d))}");
-write_line("{area(SQUARE(3.0d))}");
+write_line("{area(CIRCLE(2.0d))}")
+write_line("{area(SQUARE(3.0d))}")
 ```
 
 output:
@@ -477,18 +477,18 @@ present, and `if let` tests and unwraps in one step:
 find_first[T](xs: T[], predicate: T -> bool) -> T? is
     for x in xs do
         if predicate(x) then
-            return x;
+            return x
         fi
     od
 
-    return null;
+    return null
 si
 
-let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0);    // T = int, a value type
-let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2); // T = string, a reference type
+let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0)    // T = int, a value type
+let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2) // T = string, a reference type
 
-write_line("first even: {first_even ?? -1}");
-write_line("first long: {first_long ?? "none"}");
+write_line("first even: {first_even ?? -1}")
+write_line("first long: {first_long ?? "none"}")
 ```
 
 output:
@@ -510,8 +510,8 @@ plain `Pipe[T]`.
 
 ```ghul
 union STREAM[T, S] is
-    DONE;
-    YIELD(value: T, state: S);
+    DONE
+    YIELD(value: T, state: S)
 si
 
 stream[T, S](
@@ -528,11 +528,11 @@ infix constructs `YIELD(value, next_state)`, so a step body usually reads
 
 ```ghul
 …
-use Ghul.Pipes;
-use STREAM.DONE;
-use STREAM.YIELD;
+use Ghul.Pipes
+use STREAM.DONE
+use STREAM.YIELD
 …
-// counting down. State and output are both int;
+// counting down. State and output are both int
 // the sequence ends when the state reaches zero.
 let counting = (n: int) =>
     stream(
@@ -543,7 +543,7 @@ let counting = (n: int) =>
             else
                 i || (i - 1)
             fi
-    );
+    )
 
 // fibonacci. State is the named tuple
 // (prev, current); output is int. The state and
@@ -555,7 +555,7 @@ let fibonacci = stream(
             prev = current,
             current = prev + current
         )
-);
+)
 
 // factorial. State is (n, prev); output is int.
 let factorial = stream(
@@ -563,7 +563,7 @@ let factorial = stream(
     ((n, prev)) =>
         let next_n = n + 1, next = prev * next_n in
         next || (n = next_n, prev = next)
-);
+)
 
 // chars of a string: state is an int cursor,
 // output is char. The input string is captured by
@@ -579,26 +579,26 @@ let chars_of = (s: string) =>
             else
                 xs[i] || (i + 1)
             fi
-    );
+    )
 
 write_line(
     "counting down from 5: {counting(5)}"
-);
+)
 write_line(
     "first 10 fibonacci numbers: {fibonacci |> take(10)}"
-);
+)
 write_line(
     "first 10 factorial numbers: {factorial |> take(10)}"
-);
-write_line("chars of hello: {chars_of("hello")}");
+)
+write_line("chars of hello: {chars_of("hello")}")
 
 let indexed =
-    fibonacci |> zip(factorial) |> take(10) |> index();
+    fibonacci |> zip(factorial) |> take(10) |> index()
 
 for (i, (fib, fact)) in indexed do
-    write_line("fibonacci {i} is {fib}");
-    write_line("factorial {i} is {fact}");
-od;
+    write_line("fibonacci {i} is {fib}")
+    write_line("factorial {i} is {fact}")
+od
 ```
 
 output:

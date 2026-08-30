@@ -15,7 +15,7 @@ show(name: string, function: (int) -> int pure) =>
     write_line("{name} {(0..20) |> map(function) |> join(" ")}")
 
 show("F:", female)
-show("M:", male);
+show("M:", male)
 ```
 
 output:

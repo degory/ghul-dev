@@ -48,7 +48,7 @@ let triplets = ludic
     |> map(x => "({x}, {x + 2}, {x + 6})")
     |> join("  ")
 
-write_line("triplets: {triplets}");
+write_line("triplets: {triplets}")
 ```
 
 output:

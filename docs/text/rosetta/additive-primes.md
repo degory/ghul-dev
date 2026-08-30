@@ -26,7 +26,7 @@ for row in additive |> chunk(10) do
 od
 
 write_line("")
-write_line("{additive.count} additive primes below 500");
+write_line("{additive.count} additive primes below 500")
 ```
 
 output:

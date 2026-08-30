@@ -30,7 +30,7 @@ si
 
 let text = "1223334444"
 
-write_line("{text}: {entropy(text)} bits/symbol");
+write_line("{text}: {entropy(text)} bits/symbol")
 ```
 
 output:

@@ -9,7 +9,7 @@ The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Apply_
 use IO.Std.write_line
 use Ghul.Pipes
 
-write_line("{$([1, 2, 3, 4, 5] |> map(value => value * value))}");
+write_line("{$([1, 2, 3, 4, 5] |> map(value => value * value))}")
 ```
 
 output:
@@ -38,7 +38,7 @@ si
 shout(word: string) -> string => "{word.to_upper()}!"
 
 write_line("{$([1, 2, 3, 4, 5] |> apply(value => value * value))}")
-write_line("{$(["frog", "newt", "toad"] |> apply(shout))}");
+write_line("{$(["frog", "newt", "toad"] |> apply(shout))}")
 ```
 
 output:

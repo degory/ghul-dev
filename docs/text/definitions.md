@@ -5,7 +5,7 @@
 In ghūl local variables are defined with the `let` keyword. A variable defined with a bare `let` cannot be reassigned: an initializer is required, and the compiler reports an error if the variable is assigned again. The type is inferred from the initializer:
 
 ```ghul
-let x = 10;
+let x = 10
 ```
 
 A bare `let` fixes the variable, not the value: after `let xs = LIST[int]();`, `xs` always refers to the same list, but the list itself can still be mutated. Whether the value can change is a property of its type: a tuple or an array cannot be modified, a `LIST` can.
@@ -13,13 +13,13 @@ A bare `let` fixes the variable, not the value: after `let xs = LIST[int]();`, `
 An explicit type can be given alongside the initializer. The initializer must be assignment compatible with the type:
 
 ```ghul
-let x: int = 42;
+let x: int = 42
 ```
 
 The explicit type can be wider than the initializer expression:
 
 ```ghul
-let o: object = "a string";
+let o: object = "a string"
 ```
 
 A trailing `mut` makes the variable reassignable: `let total mut = 0;` defines `total` with initial value 0, and `total` can be assigned again later. A `mut` variable can also be defined with no initializer, as in `let result: int mut;`. It then starts at the default value of its type: zero, `false`, or `null`.
@@ -32,18 +32,18 @@ Multiple variables can be defined in the same `let` statement, with each variabl
 let
     an_inferred_int = 123,
     an_explicit_int: int = 456,
-    a_string = "hello";
+    a_string = "hello"
 ```
 
 The name `_` is a discard placeholder. It can stand in for any variable name, but the value that would be assigned to it is discarded. `_` is accepted in `let` definitions, tuple destructuring, anonymous function parameters, and `for` loop variables:
 
 ```ghul
 …
-let _ = side_effect();
-let (_, _, third) = (1, 2, 3);
-let only_first = (x: int, _: int) => x;
+let _ = side_effect()
+let (_, _, third) = (1, 2, 3)
+let only_first = (x: int, _: int) => x
 for _ in 1..10 do
-    counter = counter + 1;
+    counter = counter + 1
 od
 ```
 
@@ -54,10 +54,10 @@ Variables can only be defined within functions, methods or property bodies. Vari
 In ghūl functions consist of a name and a parenthesized formal arguments list, followed by an optional return type after `->` (omitting it makes the function `void`), and then either a return expression or a function body:
 
 ```ghul
-sum_two_ints(i: int, j: int) -> int => i + j;
+sum_two_ints(i: int, j: int) -> int => i + j
 
 sum_three_ints(i: int, j: int, k: int) -> int is
-    return i + j + k;
+    return i + j + k
 si
 ```
 
@@ -75,9 +75,9 @@ class RECTANGLE(width: int, height: int) is
 
     // a terminated last statement is discarded, so this one returns explicitly
     describe() -> string is
-        let label = "{width}x{height}";
+        let label = "{width}x{height}"
 
-        return "{label} = {area()}";
+        return "{label} = {area()}"
     si
 si
 …
@@ -96,7 +96,7 @@ Functions can only be defined at global scope. Functions can be generic, which w
 Arguments consist of a name followed by a type. The type is mandatory as the compiler cannot infer types here.
 
 ```ghul
-do_something(what: string, why: string, to: int);
+do_something(what: string, why: string, to: int)
 ```
 
 A formal argument can also be a tuple-destructure pattern, written in its own parentheses. It is still one argument, with the written tuple type; when the function is called, the value is unpacked into the names the pattern gives. Named functions, anonymous functions, asynchronous functions and generators all accept them, and the type can be any type that destructures positionally:
@@ -104,14 +104,14 @@ A formal argument can also be a tuple-destructure pattern, written in its own pa
 ```ghul
 …
 // one parameter at the tuple type, unpacked into a and b
-add_pair((a: int, b: int): (int, int)) -> int => a + b;
+add_pair((a: int, b: int): (int, int)) -> int => a + b
 
-write_line(add_pair((3, 4)));
+write_line(add_pair((3, 4)))
 
 // anonymous functions take the same form, element types
 // inferred from the sequence
-let pairs = [(1, 2), (3, 4)];
-let total = pairs | .map(((a, b)) => a + b) | .reduce(0, (acc, x) => acc + x);
+let pairs = [(1, 2), (3, 4)]
+let total = pairs | .map(((a, b)) => a + b) | .reduce(0, (acc, x) => acc + x)
 
 write_line("{total}")
 ```
@@ -139,7 +139,7 @@ A class defines a new reference type, instances of which are assignment compatib
 Instances of classes are created via a constructor expression, which consists of a type expression followed by a parenthesis delimited list of actual constructor arguments. For a class, the type expression is the class name, qualified with any namespaces if needed:
 ```ghul
 …
-let a_thing = THING();
+let a_thing = THING()
 ```
 
 A class can also declare its constructor parameters directly in the header. Each parameter becomes a parameter of the synthesised constructor, and an auto-generated same-named field or property holds the supplied value:
@@ -167,32 +167,32 @@ si
 Structs are constructed the same way as classes, with a constructor expression:
 ```ghul
 …
-let origin = POINT(0.0D, 0.0D);
+let origin = POINT(0.0D, 0.0D)
 
 // or up, or down, or even left, depending on
 // your co-ordinate system!
-let right = POINT(1.0D, 0.0D);
+let right = POINT(1.0D, 0.0D)
 ```
 
 A struct defines a new value type. Assigning a struct copies all of its fields, so the copy and the original are independent afterwards:
 ```ghul
 …
 struct COUNTER is
-    _n: int field;
+    _n: int field
 
     init(n: int) is _n = n; si
 
     bump() is _n = _n + 1; si
 
-    value: int => _n;
+    value: int => _n
 si
 
-let original = COUNTER(0);
-let copy mut = original;
+let original = COUNTER(0)
+let copy mut = original
 
-copy.bump();
+copy.bump()
 
-write_line("original {original.value}, copy {copy.value}");
+write_line("original {original.value}, copy {copy.value}")
 ```
 
 output:
@@ -211,7 +211,7 @@ A trait consists of a name, the types of any parent traits that must also be imp
 
 ```ghul
 trait Printable is
-    ◆ print();
+    ◆ print()
 si
 ```
 
@@ -220,7 +220,7 @@ Traits are similar to interfaces in other languages. Trait methods and propertie
 …
 class BOOK(title: string, author: string): Printable is
     ▲ print() is
-        write_line("Title: {title}, Author: {author}");
+        write_line("Title: {title}, Author: {author}")
     si
 si
 ```
@@ -232,7 +232,7 @@ A trait method or property can provide a default body. Implementing classes inhe
 trait ▼ Logged is
     ▼ log(message: string) is
         // the default body writes the message with a [log] prefix
-        write_line("[log] {message}");
+        write_line("[log] {message}")
     si
 si
 
@@ -243,12 +243,12 @@ si
 class LOUD(): Logged is
     // override the default, while still calling through to it with super
     ▲ log(message: string) is
-        super.log(message.to_upper());
+        super.log(message.to_upper())
     si
 si
 
-PLAIN().log("hello");
-LOUD().log("hello");
+PLAIN().log("hello")
+LOUD().log("hello")
 ```
 
 output:
@@ -269,21 +269,21 @@ Like a class, a trait is closed to other assemblies unless it has the postfix `o
 A union consists of a name and then a union body, which contains one or more variants. Each variant has a name, and then an optional list of fields:
 ```ghul
 union Tree is
-    NODE(left: Tree, right: Tree);
-    LEAF(value: int);
+    NODE(left: Tree, right: Tree)
+    LEAF(value: int)
 si
 ```
 Unions are a reference type. A reference of union type can point to only one variant at a time. To discover which variant a union currently holds, test it with `isa Variant(value)`:
 
 ```ghul
 …
-let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));
-let leaf = Tree.LEAF(123);
+let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456))
+let leaf = Tree.LEAF(123)
 
 if isa Tree.NODE( ► tree) then
-    write_line("have tree node");
+    write_line("have tree node")
 elif isa Tree.LEAF( ► tree) then
-    write_line("have tree leaf");
+    write_line("have tree leaf")
 fi
 ```
 
@@ -299,9 +299,9 @@ have tree node
 if isa Tree.NODE(tree) then
     write_line(
         "left {tree.left}, right {tree.right}"
-    );
+    )
 elif isa Tree.LEAF(tree) then
-    write_line("leaf value {tree.value}");
+    write_line("leaf value {tree.value}")
 fi
 ```
 
@@ -309,24 +309,24 @@ Unions support structural equality through the `=~` operator. Two union referenc
 
 ```ghul
 …
-let leaf1 = Tree.LEAF(123);
-let leaf2 = Tree.LEAF(123);
-let leaf3 = Tree.LEAF(456);
+let leaf1 = Tree.LEAF(123)
+let leaf2 = Tree.LEAF(123)
+let leaf3 = Tree.LEAF(456)
 
-assert leaf1 =~ leaf2;
-assert !(leaf1 =~ leaf3);
+assert leaf1 =~ leaf2
+assert !(leaf1 =~ leaf3)
 ```
 
 A variant with no fields is a *unit variant*. It is referenced by name, without parentheses, and all uses of a unit variant share one value. When exactly one variant of a union has fields, the union behaves as an option type: `u?` tests whether `u` holds that variant, and `u!` unwraps its value. A union where several variants have fields can mark one of them `default` to get the same behaviour:
 
 ```ghul
 …
-let c = Color.RED;                   // unit variant, referenced without parentheses
-write_line("red: {c =~ Color.RED}"); // true
+let c = Color.RED                   // unit variant, referenced without parentheses
+write_line("red: {c =~ Color.RED}") // true
 
-let r = lookup();
-write_line("present: {r?}");         // true - r holds the default OK variant
-write_line("value: {r!}");           // 42 - unwraps the OK payload
+let r = lookup()
+write_line("present: {r?}")         // true - r holds the default OK variant
+write_line("value: {r!}")           // 42 - unwraps the OK payload
 ```
 
 output:
@@ -341,9 +341,9 @@ A union can declare a primary-constructor header for state shared across every v
 
 ```ghul
 …
-let t = Token.IDENTIFIER("count", "identifier");
-write_line(t.name);    // identifier - shared primary-header field
-write_line(t.label()); // [identifier] - inherited trait default
+let t = Token.IDENTIFIER("count", "identifier")
+write_line(t.name)    // identifier - shared primary-header field
+write_line(t.label()) // [identifier] - inherited trait default
 ```
 
 output:
@@ -379,8 +379,8 @@ A `partial` block adds members to a class, struct, or union declared elsewhere i
 ```ghul
 …
 union Shape is
-    CIRCLE(radius: int);
-    SQUARE(side: int);
+    CIRCLE(radius: int)
+    SQUARE(side: int)
 si
 
 partial Shape is
@@ -388,11 +388,11 @@ partial Shape is
         case ► self
         when c: CIRCLE then "circle r={c.radius}"
         when s: SQUARE then "square s={s.side}"
-        esac;
+        esac
 si
 
-let s: Shape = Shape.SQUARE(4);
-write_line(s.describe());
+let s: Shape = Shape.SQUARE(4)
+write_line(s.describe())
 ```
 
 output:
@@ -406,19 +406,19 @@ An `impl Trait for Type` block additionally makes the target implement a trait, 
 ```ghul
 …
 union List is
-    NIL;
-    CONS(head: int, tail: List);
+    NIL
+    CONS(head: int, tail: List)
 si
 
 impl Printer for List is
     ▲ print() -> string =>
         if let (head, tail): CONS = ► self then "{head} {tail.print()}"
         else "nil"
-        fi;
+        fi
 si
 
-let xs: Printer = List.CONS(1, List.CONS(2, List.NIL));
-write_line(xs.print());
+let xs: Printer = List.CONS(1, List.CONS(2, List.NIL))
+write_line(xs.print())
 ```
 
 output:
@@ -437,17 +437,17 @@ A property consists of the property name followed by the property's type and, op
 
 ```ghul
 class COUNTER is
-    count: int;
+    count: int
 si
 
 class SIZED is
-    _size: int;
+    _size: int
 
     size: int => _size,
         = new_size is
-            assert new_size > 0;
+            assert new_size > 0
 
-            _size = new_size;
+            _size = new_size
         si
 si
 ```
@@ -462,10 +462,10 @@ A property can take a postfix `stable` modifier. It addresses a problem specific
 // stable - declare it with postfix stable instead
 summary: string? stable is
     if ► _summary? then
-        return _summary;
+        return _summary
     fi
-    ► _summary = "nothing to report";
-    return _summary;
+    ► _summary = "nothing to report"
+    return _summary
 si
 
 init() is si
@@ -494,9 +494,9 @@ Methods are syntactically the same as functions, except they are defined within 
 
 ```ghul
 class SCALER is
-    _scale: double;
+    _scale: double
 
-    scale(value: double) -> double => value * _scale;
+    scale(value: double) -> double => value * _scale
 si
 ```
 
@@ -505,7 +505,7 @@ A method or function can take a postfix `pure` modifier. It declares that the fu
 ```ghul
 …
 // a pure method only reads: callers keep narrowing facts across a call to it
-doubled() -> int pure => _count * 2;
+doubled() -> int pure => _count * 2
 …
 ```
 
@@ -528,18 +528,18 @@ A pure type also cannot expose a write to its callers. Declaring a property `pub
 // every instance member of a pure type must read and never
 // write; a bodiless member holds implementors to the same rule
 trait ▼ NAMED pure is
-    ◆▼ name: string;
-    ◆▼ label() -> string;
+    ◆▼ name: string
+    ◆▼ label() -> string
 si
 
 class USER: NAMED is
-    ▲ name: string;
+    ▲ name: string
 
     init(name: string) is
         self.name = name
     si
 
-    ▲ label() -> string => "<{name}>";
+    ▲ label() -> string => "<{name}>"
 si
 
 write_line(USER("ada").label())
@@ -560,20 +560,20 @@ An operator is a function or method whose name is an operator symbol rather than
 ```ghul
 …
 class VECTOR is
-    x: int;
-    y: int;
+    x: int
+    y: int
 
     init(x: int, y: int) is
-        self.x = x;
-        self.y = y;
+        self.x = x
+        self.y = y
     si
 
     // a binary operator as an instance method takes one parameter, the right operand:
-    +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y);
+    +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y)
 si
 
-let sum = VECTOR(1, 2) + VECTOR(3, 4);
-write_line("({sum.x}, {sum.y})");
+let sum = VECTOR(1, 2) + VECTOR(3, 4)
+write_line("({sum.x}, {sum.y})")
 ```
 
 output:
@@ -591,7 +591,7 @@ The comparison operators come from two backing operators. Define `<>`, a three-w
 ```ghul
 …
 // three-way ordering returning int; '<', '<=', '>', '>=' all derive from it:
-<>(other: BOX) -> int => value - other.value;
+<>(other: BOX) -> int => value - other.value
 …
 ```
 
@@ -603,22 +603,22 @@ In ghūl methods named `init` are constructors. When an object is constructed us
 
 ```ghul
 class COUNTER is
-    count: int;
+    count: int
 
     init() is
-        count = 0;
+        count = 0
     si
 
     init(initial_count: int) is
-        count = initial_count;
+        count = initial_count
     si
 si
 …
 // calls the parameterless overload of init()
-let c = COUNTER();
+let c = COUNTER()
 
 // calls init(initial_count: int)
-let d = COUNTER(50);
+let d = COUNTER(50)
 ```
 
 Constructors can be defined in classes and structs.
@@ -628,8 +628,8 @@ A member whose type is not optional has to be assigned before the constructor fi
 ```ghul
 …
 class LABEL is
-    text: string;
-    size: int;
+    text: string
+    size: int
 
     init(size: int) is
         self.size = size    // text is never assigned
@@ -651,11 +651,11 @@ When the constructor only assigns its arguments to same-named fields, the class 
 …
 class PERSON(name: string, age: int) is
     describe() is
-        write_line("{name} is {age} years old");
+        write_line("{name} is {age} years old")
     si
 si
 
-PERSON("alice", 30).describe();
+PERSON("alice", 30).describe()
 ```
 
 output:
@@ -678,11 +678,11 @@ An explicit field or property declaration whose name matches a primary parameter
 …
 class POINT(x: int, y: int) is
     // capture the primary parameters as renamed private fields
-    _x;
-    _y;
+    _x
+    _y
 
     show() is
-        write_line("({_x}, {_y})");
+        write_line("({_x}, {_y})")
     si
 si
 
@@ -692,7 +692,7 @@ class BOX(width: int public, height: int field, _depth: int) is
     // _depth is a private field
 si
 
-POINT(10, 20).show();
+POINT(10, 20).show()
 ```
 
 output:
@@ -707,15 +707,15 @@ A class with a primary header can also include a `super(...)` body declaration t
 …
 class DOG(name: string, breed: string): ANIMAL is
     // forward name to the superclass; the local DOG keeps breed as a field
-    super(name);
+    super(name)
 
     init(.., trick: string) is
         // .. expands to (name, breed); the primary init has already run
-        write_line("{name} the {breed} can {trick}");
+        write_line("{name} the {breed} can {trick}")
     si
 si
 
-DOG("rex", "labrador", "sit");
+DOG("rex", "labrador", "sit")
 ```
 
 output:
@@ -730,7 +730,7 @@ A class or struct with a primary header and no body declarations can end with a 
 
 ```ghul
 // a primary header with no body declarations:
-class POINT(x: int, y: int);
+class POINT(x: int, y: int)
 
 // is equivalent to an explicit empty 'is' / 'si' body:
 class VECTOR(dx: int, dy: int) is
@@ -754,12 +754,12 @@ Namespaces can be nested inside other namespaces:
 namespace Outer is
     namespace Inner is
         do_something() is
-            IO.Std.write_line("did something");
+            IO.Std.write_line("did something")
         si
     si
 si
 …
-Outer.Inner.do_something();
+Outer.Inner.do_something()
 …
 ```
 
@@ -774,11 +774,11 @@ A dotted namespace name is shorthand for nesting namespaces:
 ```ghul
 namespace Outer.Inner is
     do_something() is
-        IO.Std.write_line("did something");
+        IO.Std.write_line("did something")
     si
 si
 …
-Outer.Inner.do_something();
+Outer.Inner.do_something()
 …
 ```
 
@@ -798,7 +798,7 @@ namespace Example is
     // this definition of Test is visible unqualified
     // throughout the Example namespace:
     trait Test is
-        ◆ run();
+        ◆ run()
     si
 si
 …
@@ -822,7 +822,7 @@ If a source file contains no namespaces, then all definitions in the file are pl
 ```ghul
 // the compiler places this in an auto-generated
 // namespace private to this source file
-IO.Std.write_line("Hello, world!");
+IO.Std.write_line("Hello, world!")
 ```
 
 output:
@@ -840,12 +840,12 @@ If a source file contains any explicitly declared namespaces, then all definitio
 …
 namespace Example is
     entry() is
-        IO.Std.write_line("hello from a namespace");
+        IO.Std.write_line("hello from a namespace")
     si
 si
 …
 greet() is
-    IO.Std.write_line("not in a namespace");
+    IO.Std.write_line("not in a namespace")
 si
 ```
 
@@ -857,20 +857,20 @@ diagnostics:
 Symbols can be brought into the current namespace instance's scope using the use keyword. Imported symbols can then be used without qualification:
 
 ```ghul
-use Example.TEST;
+use Example.TEST
 
 ...
 
-let t = TEST();
+let t = TEST()
 ```
 
 `use` applied to a namespace imports all symbols from that namespace:
 ```ghul
-use Example; // imports Example.TEST and Example.Test
+use Example // imports Example.TEST and Example.Test
 
 ...
 
-let t: Test;
+let t: Test
 ```
 
 Note that `use` only applies within the current `namespace` definition. It does not import a symbol into all instances of the current namespace:
@@ -878,7 +878,7 @@ Note that `use` only applies within the current `namespace` definition. It does 
 ```ghul
 …
 namespace UseExample is
-    use Example;
+    use Example
 
     class ANOTHER_TEST: Test is
         ▲ run() is si
@@ -905,16 +905,16 @@ Classes, structs, traits, unions, global functions and global properties are acc
 class PUBLIC is
 si
 
-public_function() -> int => 0;
+public_function() -> int => 0
 
-public_property: int;
+public_property: int
 
 class _PRIVATE is
 si
 
-_private_function() -> int => 0;
+_private_function() -> int => 0
 
-_private_property: int;
+_private_property: int
 ```
 
 ### methods
@@ -935,24 +935,24 @@ Properties are public to read but private to assign - a property is assignable o
 ```ghul
 …
 struct VALUE is
-    public_property: int;
+    public_property: int
 
-    _private_property: string;
+    _private_property: string
 
     init(value: int) is
-        public_property = value;
-        _private_property = "value is {value}";
+        public_property = value
+        _private_property = "value is {value}"
     si
 si
 …
-let v = VALUE(1234);
+let v = VALUE(1234)
 
 // OK: public_property is publicly readable
-write_line(v.public_property);
+write_line(v.public_property)
 
-write_line(v._private_property);
+write_line(v._private_property)
 
-v.public_property = 5678;
+v.public_property = 5678
 ```
 
 diagnostics:

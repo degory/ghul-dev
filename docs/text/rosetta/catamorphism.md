@@ -19,7 +19,7 @@ let product = numbers |> reduce(1, (total, value) => total * value)
 
 write_line("sum:     {sum}")
 write_line("product: {product}")
-write_line("largest: {numbers |> reduce(numbers[0], largest)}");
+write_line("largest: {numbers |> reduce(numbers[0], largest)}")
 ```
 
 output:
@@ -68,7 +68,7 @@ let right_sum = fold_right(numbers, 0, (value, total) => value + total)
 write_line("left  sum:  {left_sum}")
 write_line("right sum:  {right_sum}")
 write_line("left  tree: {fold_left(numbers, "nil", bracket_left)}")
-write_line("right tree: {fold_right(numbers, "nil", bracket_right)}");
+write_line("right tree: {fold_right(numbers, "nil", bracket_right)}")
 ```
 
 output:

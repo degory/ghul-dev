@@ -4,7 +4,6 @@
 The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Hailstone_sequence
 
 ```ghul
-…
 use IO.Std.write_line
 use Collections.LIST
 use Ghul.Pipes
@@ -44,12 +43,8 @@ for n in 1..100_000 do
     fi
 od
 
-write_line("longest under 100,000: {longest} (length {longest_length})");
+write_line("longest under 100,000: {longest} (length {longest_length})")
 ```
-
-diagnostics:
-
-- warning: [return-without-value] return without value from non void function returns default value of type Pipe[int]
 
 output:
 

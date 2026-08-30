@@ -36,7 +36,7 @@ write_line("the first thirty evil numbers: {evil}")
 let odious =
     naturals |> filter(n => popcount(n) % 2 == 1) |> take(30) |> join(", ")
 
-write_line("the first thirty odious numbers: {odious}");
+write_line("the first thirty odious numbers: {odious}")
 ```
 
 output:

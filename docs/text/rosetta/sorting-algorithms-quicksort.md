@@ -25,7 +25,7 @@ quicksort[T: Ghul.Comparable[T]](values: List[T]) -> List[T] =>
     fi
 
 write_line("{$quicksort([6, 2, 9, 2, 5, 1, 8, 3] |> collect())}")
-write_line("{$quicksort(["pear", "apple", "fig", "date"] |> collect())}");
+write_line("{$quicksort(["pear", "apple", "fig", "date"] |> collect())}")
 ```
 
 output:

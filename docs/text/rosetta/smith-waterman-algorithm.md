@@ -138,7 +138,7 @@ show(first: string, second: string) is
     od
 si
 
-show("ACACACTA", "AGCACACA");
+show("ACACACTA", "AGCACACA")
 ```
 
 output:

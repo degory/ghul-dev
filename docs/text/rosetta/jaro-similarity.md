@@ -61,7 +61,7 @@ si
  ("DIXON", "DICKSONX"),
  ("JELLYFISH", "SMELLYFISH")]
     |> each(((left, right)) =>
-        write_line("{left} / {right}: {jaro(left, right):F6}"));
+        write_line("{left} / {right}: {jaro(left, right):F6}"))
 ```
 
 output:

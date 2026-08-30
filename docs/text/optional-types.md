@@ -7,18 +7,18 @@ A type followed by `?` is an *optional* type: a value of `T?` can be present or 
 find_first[T](xs: T[], predicate: T -> bool) -> T? is
     for x in xs do
         if predicate(x) then
-            return x;
+            return x
         fi
     od
 
-    return null;
+    return null
 si
 
-let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0);    // T = int, a value type
-let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2); // T = string, a reference type
+let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0)    // T = int, a value type
+let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2) // T = string, a reference type
 
-write_line("first even: {first_even ?? -1}");
-write_line("first long: {first_long ?? "none"}");
+write_line("first even: {first_even ?? -1}")
+write_line("first long: {first_long ?? "none"}")
 ```
 
 output:
@@ -38,9 +38,9 @@ The `??` operator supplies a fallback: `a ?? b` is `a` when it is present, other
 
 ```ghul
 …
-let name = lookup();
-let greeting = "hello, {name ?? "stranger"}";
-write_line(greeting);
+let name = lookup()
+let greeting = "hello, {name ?? "stranger"}"
+write_line(greeting)
 ```
 
 output:
@@ -55,9 +55,9 @@ The postfix `!` asserts presence and reads the value out; applied to an absent o
 
 ```ghul
 …
-let p = find();
-let name = p?.name; // string? - absent when p is absent
-write_line("name: {name ?? "unknown"}");
+let p = find()
+let name = p?.name // string? - absent when p is absent
+write_line("name: {name ?? "unknown"}")
 ```
 
 output:
@@ -79,8 +79,8 @@ A union where exactly one variant has fields, or with one variant marked `defaul
 ```ghul
 …
 union Result[T, E] is
-    OK(value: T) default;
-    ERROR(error: E);
+    OK(value: T) default
+    ERROR(error: E)
 si
 
 divide(a: int, b: int) -> Result[int, string] =>
@@ -88,17 +88,17 @@ divide(a: int, b: int) -> Result[int, string] =>
         Result.ERROR("division by zero")
     else
         Result.OK(a / b)
-    fi;
+    fi
 
-let good = divide(10, 2);
-let bad = divide(10, 0);
+let good = divide(10, 2)
+let bad = divide(10, 0)
 
 if ► good? then
-    write_line("10 / 2 = {good!}");
+    write_line("10 / 2 = {good!}")
 fi
 
 if ! ► bad? then
-    write_line("10 / 0 failed");
+    write_line("10 / 0 failed")
 fi
 ```
 
@@ -116,29 +116,29 @@ And a type that exposes `has_value: bool` and `value: T` properties is treated a
 // no declared relationship to T? or Ghul.Maybe[T] - ghūl looks for
 // has_value and value structurally
 struct PERCENTAGE is
-    has_value: bool;
-    value: double;
+    has_value: bool
+    value: double
 
     init() is
-        has_value = false;
-        value = _;
+        has_value = false
+        value = _
     si
 
     init(v: double) is
-        has_value = true;
-        value = v;
+        has_value = true
+        value = v
     si
 si
 
-let full = PERCENTAGE(87.5d);
-let empty = PERCENTAGE();
+let full = PERCENTAGE(87.5d)
+let empty = PERCENTAGE()
 
 if full? then
-    write_line("full: {full!}%");
+    write_line("full: {full!}%")
 fi
 
 if !empty? then
-    write_line("empty has no reading");
+    write_line("empty has no reading")
 fi
 ```
 
@@ -158,13 +158,13 @@ How a `T?` value is stored depends on `T`. ghūl backs it with whichever of thre
 The common case: `T?` over a class or other reference type is a plain nullable reference, and absence is `null`.
 
 ```ghul
-let ► name: string? = "Alice"; // present
-let nickname: string? = null; // absent
+let ► name: string? = "Alice" // present
+let nickname: string? = null // absent
 ```
 ```ghul
 …
 if ► name? then
-    write_line("name is {name}"); // name is non-optional here
+    write_line("name is {name}") // name is non-optional here
 fi
 ```
 
@@ -179,8 +179,8 @@ name is Alice
 `T?` over a value type - a scalar such as `int`, or a struct - is backed by .NET's `Nullable<T>` at the IL level. That is nothing you need to work with directly: write `T?`, the same way you would for a reference type. A ghūl `int?` already is a `Nullable<int>` as far as the runtime is concerned, so it passes to and from non-ghūl .NET code as it is, and there is no reason to name `System.Nullable[T]` in ghūl source:
 
 ```ghul
-let ► here: int? = 42;   // present
-let gone: int? = null; // absent
+let ► here: int? = 42   // present
+let gone: int? = null // absent
 ```
 
 ### unconstrained generic types
@@ -190,23 +190,23 @@ A generic function or type can use `T?` even though `T` can stand for a referenc
 ```ghul
 …
 class SLOT[T] is
-    _stored: T?;
+    _stored: T?
 
     init() is si
 
     put(value: T) is ► _stored = value; si
 
     take() -> T? is
-        let result = _stored;
-        _stored = null;
-        return result;
+        let result = _stored
+        _stored = null
+        return result
     si
 si
 
-let s = SLOT[int]();
-s.put(42);
-write_line("{s.take() ?? -1}");
-write_line("{s.take() ?? -1}");
+let s = SLOT[int]()
+s.put(42)
+write_line("{s.take() ?? -1}")
+write_line("{s.take() ?? -1}")
 ```
 
 output:
@@ -225,12 +225,12 @@ Because all three are the same feature, they behave alike: `??` chains across th
 ```ghul
 …
 if ► maybe? then
-    let narrowed: string = maybe; // narrowed to string here
-    write_line(narrowed);
+    let narrowed: string = maybe // narrowed to string here
+    write_line(narrowed)
 fi
 
-let forced: string = ► maybe!;            // asserts present, throws if absent
-let safe: string = maybe ?? "fallback"; // falls back when absent
+let forced: string = ► maybe!            // asserts present, throws if absent
+let safe: string = maybe ?? "fallback" // falls back when absent
 ```
 
 output:

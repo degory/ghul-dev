@@ -11,18 +11,18 @@ A type followed by `?` is an *optional* type: a value of `T?` can be present or 
 find_first[T](xs: T[], predicate: T -> bool) -> T? is
     for x in xs do
         if predicate(x) then
-            return x;
+            return x
         fi
     od
 
-    return null;
+    return null
 si
 
-let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0);    // T = int, a value type
-let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2); // T = string, a reference type
+let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0)    // T = int, a value type
+let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2) // T = string, a reference type
 
-write_line("first even: {first_even ?? -1}");
-write_line("first long: {first_long ?? "none"}");
+write_line("first even: {first_even ?? -1}")
+write_line("first long: {first_long ?? "none"}")
 ```
 
 output:
@@ -40,12 +40,12 @@ first long: ccc
 
 ```ghul
 …
-let name: string? = lookup();
+let name: string? = lookup()
 
 if ► name? then
     // name is narrowed to non-optional string
     // here, no ! needed
-    write_line("hello, {name}");
+    write_line("hello, {name}")
 fi
 ```
 
@@ -60,17 +60,17 @@ The same applies to types. An `isa` test narrows a value to the tested class or 
 ```ghul
 …
 union Result[T, E] is
-    OK(value: T);
-    ERR(error: E);
+    OK(value: T)
+    ERR(error: E)
 si
 …
-let r: Result[int, string] = some_call();
+let r: Result[int, string] = some_call()
 
 if isa Result.OK( ► r) then
-    write_line("ok: {r.value}");
+    write_line("ok: {r.value}")
 else
     // r is narrowed to Result.ERR here
-    write_line("err: {r.error}");
+    write_line("err: {r.error}")
 fi
 ```
 
@@ -86,17 +86,17 @@ Narrowing follows the control flow, not just the branch structure. A guard that 
 …
 classify(a: Animal) is
     if !isa CAT( ► a) then
-        write_line("not a cat");
-        return;
+        write_line("not a cat")
+        return
     fi
 
     // every non-CAT has returned, so a is
     // narrowed to CAT from here on
-    write_line(a.purr());
+    write_line(a.purr())
 si
 
-classify(CAT("whiskers"));
-classify(DOG());
+classify(CAT("whiskers"))
+classify(DOG())
 ```
 
 output:
@@ -116,11 +116,11 @@ describe(order: ORDER) is
         // within this branch order.customer is the
         // non-optional string, so .length is
         // reachable directly
-        write_line("customer name has {order.customer.length} chars");
+        write_line("customer name has {order.customer.length} chars")
     fi
 si
 
-describe(ORDER("alice"));
+describe(ORDER("alice"))
 ```
 
 output:

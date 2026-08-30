@@ -79,7 +79,7 @@ od
 table("and", (left, right) => left /\ right)
 table("or", (left, right) => left \/ right)
 table("implies", implies)
-table("equiv", equivalent);
+table("equiv", equivalent)
 ```
 
 output:

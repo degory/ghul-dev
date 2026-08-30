@@ -18,14 +18,14 @@ In ghūl the `assert` statement is used to ensure an expected condition holds an
 
 ```ghul
 …
-assert true else "all bets are off"; // does not throw
+assert true else "all bets are off" // does not throw
 
-let list = [1, 2, 3, 4, 5];
+let list = [1, 2, 3, 4, 5]
 
 assert 3 < list.count
-    else System.ArgumentOutOfRangeException("list");
+    else System.ArgumentOutOfRangeException("list")
 
-write_line("ok: {list.count} elements");
+write_line("ok: {list.count} elements")
 ```
 
 output:
@@ -40,9 +40,9 @@ ok: 5 elements
 …
 length_of(key: string?) -> int =>
     assert ► key? else "key is null" in
-    key.length;
+    key.length
 
-write_line(length_of("hello"));
+write_line(length_of("hello"))
 ```
 
 output:
@@ -67,10 +67,10 @@ fi
 
 ```ghul
 …
-let list = [1, 2, 3, 4];
+let list = [1, 2, 3, 4]
 
 if list.count > 0 then
-    write_line("list has {list.count} elements");
+    write_line("list has {list.count} elements")
 fi
 ```
 
@@ -95,9 +95,9 @@ fi
 ```ghul
 …
 if list.count > 0 then
-    write_line("list is not empty");
+    write_line("list is not empty")
 else
-    write_line("list is empty");
+    write_line("list is empty")
 fi
 ```
 
@@ -124,26 +124,26 @@ fi
 
 ```ghul
 …
-let list = [1, 2, 3, 4];
+let list = [1, 2, 3, 4]
 
 if list.count == 0 then
-    write_line("list is empty");
+    write_line("list is empty")
 fi
 
 if list.count > 0 then
-    write_line("list is not empty");
+    write_line("list is not empty")
 else
-    write_line("list is empty");
+    write_line("list is empty")
 fi
 
 if list.count > 10 then
-    write_line("list has lots of elements");
+    write_line("list has lots of elements")
 elif list.count > 5 then
-    write_line("list has some elements");
+    write_line("list has some elements")
 elif list.count > 0 then
-    write_line("list has a few elements");
+    write_line("list has a few elements")
 else
-    write_line("list is empty");
+    write_line("list is empty")
 fi
 ```
 
@@ -164,10 +164,10 @@ An `if` condition that proves something stronger about a value - an `isa` test o
 
 ```ghul
 …
-let c = cast CAT?(a);
+let c = cast CAT?(a)
 
 if ► c? then
-    write_line(c.purr());
+    write_line(c.purr())
 fi
 ```
 
@@ -184,9 +184,9 @@ whiskers purrs
 if let c: CAT = ► a then
     // c has type CAT here; it is not in scope in
     // the else branch, or after the fi
-    write_line(c.purr());
+    write_line(c.purr())
 else
-    write_line("not a cat");
+    write_line("not a cat")
 fi
 ```
 
@@ -201,11 +201,11 @@ A type on the variable (`c: CAT`) makes it a type test. `elif let` chains these,
 ```ghul
 …
 if let c: CAT = ► a then
-    write_line(c.purr());
+    write_line(c.purr())
 elif let d: DOG = ► a then
-    write_line(d.bark());
+    write_line(d.bark())
 else
-    write_line("some other animal");
+    write_line("some other animal")
 fi
 ```
 
@@ -220,11 +220,11 @@ With no type given for the local variable, `if let` tests that the value is pres
 ```ghul
 …
 if let line = reader.read_line() then
-    // reader.read_line() yields string?;
+    // reader.read_line() yields string?
     // line is string here
-    write_line("read: {line}");
+    write_line("read: {line}")
 else
-    write_line("end of input");
+    write_line("end of input")
 fi
 ```
 
@@ -239,7 +239,7 @@ An `if let` can also destructure, exactly like a plain `let`, including `_` to d
 ```ghul
 …
 if let (name, _) = lookup(id) then
-    write_line("found {name}");
+    write_line("found {name}")
 fi
 ```
 
@@ -256,7 +256,7 @@ A trailing `/\` guard gates the branch on a further condition, evaluated with th
 ```ghul
 …
 if let c: CAT = find() /\ c.is_friendly then
-    write_line("friendly cat: {c.name}");
+    write_line("friendly cat: {c.name}")
 fi
 ```
 
@@ -272,8 +272,8 @@ A leaf can instead match against a value that already exists: prefixing a name w
 
 ```ghul
 …
-let rows = [("apples", 3), ("pears", 1), ("plums", 0)];
-let wanted = "pears";
+let rows = [("apples", 3), ("pears", 1), ("plums", 0)]
+let wanted = "pears"
 
 for row in rows do
     // ~wanted matches where the first element equals the
@@ -297,7 +297,7 @@ When the tested value is a member path and the local should take the path's last
 ```ghul
 …
 if let order.customer then
-    write_line(customer.name);
+    write_line(customer.name)
 fi
 ```
 
@@ -312,20 +312,20 @@ Each branch of an if statement constitutes a separate scope
 
 ```ghul
 …
-let a = 5;
+let a = 5
 
 if a > 0 then
     // new scope - neither y nor z are in scope here
-    let x = 10;
-    write_line("x is {x}");
+    let x = 10
+    write_line("x is {x}")
 elif a < 0 then
     // new scope - neither x nor z are in scope here
-    let y = 20;
-    write_line("y is {y}");
+    let y = 20
+    write_line("y is {y}")
 else
     // new scope - neither x nor y are in scope here
-    let z = 30;
-    write_line("z is {z}");
+    let z = 30
+    write_line("z is {z}")
 fi
 ```
 
@@ -348,10 +348,10 @@ od
 
 ```ghul
 …
-let counter mut = 0;
+let counter mut = 0
 while counter < 5 do
-    write_line(counter);
-    counter = counter + 1;
+    write_line(counter)
+    counter = counter + 1
 od
 ```
 
@@ -372,13 +372,13 @@ The `break` statement immediately exits the loop, while `continue` skips the rem
 
 ```ghul
 …
-let counter mut = 0;
+let counter mut = 0
 while counter < 10 do
     if counter == 5 then
-        break;
+        break
     fi
-    write_line(counter);
-    counter = counter + 1;
+    write_line(counter)
+    counter = counter + 1
 od
 ```
 
@@ -397,13 +397,13 @@ This loop exits when counter reaches 5 without proceeding to execute `write_line
 
 ```ghul
 …
-let counter mut = 0;
+let counter mut = 0
 while counter < 5 do
-    counter = counter + 1;
+    counter = counter + 1
     if counter == 3 then
-        continue;
+        continue
     fi
-    write_line(counter);
+    write_line(counter)
 od
 ```
 
@@ -427,7 +427,7 @@ This loop skips the call to `write_line` when counter is 3.
 ```ghul
 …
 while let n = c.next() do
-    write_line(n);
+    write_line(n)
 od
 ```
 
@@ -461,7 +461,7 @@ The variable is defined by the for loop and its scope is the for loop body from 
 // i defined here
 for i in [1, 2, 3, 4, 5] do
     // i in scope here:
-    write_line(i);
+    write_line(i)
 od
 ```
 
@@ -483,7 +483,7 @@ The `..` and `::` operators construct integer ranges that can be iterated over b
 …
 for i in 0..5 do
     // i will take values 0, 1, 2, 3, 4 in sequence
-    write_line(i);
+    write_line(i)
 od
 ```
 
@@ -503,7 +503,7 @@ output:
 …
 for i in 1::5 do
     // i will take values 1, 2, 3, 4, 5 in sequence
-    write_line(i);
+    write_line(i)
 od
 ```
 
@@ -521,13 +521,13 @@ These operators are not for loop specific and can be used in any expression cont
 
 ```ghul
 …
-let zero_to_four = 0..5;
-let five_to_nine = 5..10;
+let zero_to_four = 0..5
+let five_to_nine = 5..10
 
-let zero_to_nine = zero_to_four |> cat(five_to_nine);
+let zero_to_nine = zero_to_four |> cat(five_to_nine)
 
 while zero_to_nine.move_next() do
-    write_line(zero_to_nine.current);
+    write_line(zero_to_nine.current)
 od
 ```
 
@@ -566,12 +566,12 @@ od
 
 ```ghul
 …
-let counter mut = 0;
+let counter mut = 0
 do
-    write_line(counter);
-    counter = counter + 1;
+    write_line(counter)
+    counter = counter + 1
     if counter == 5 then
-        break;
+        break
     fi
 od
 ```
@@ -599,11 +599,11 @@ Every loop form is also an expression of optional type `T?`: a `break` with a va
 // a valued break yields, falling off the end yields absence
 let hit: int? = for x in [4, 9, 2, 7] do
     if x > 5 then break x fi
-od;
+od
 
 let miss: int? = for x in [1, 3] do
     if x > 50 then break x fi
-od;
+od
 
 write_line("{hit ?? -1} {miss ?? -1}")
 ```
@@ -623,14 +623,14 @@ A valued break delivers to the nearest enclosing loop *that consumes a value*, s
 // a valued break delivers to the nearest enclosing loop
 // that consumes a value, so it can cross the inner,
 // statement-form loop on its way out
-let rows = [[1, 2, 3], [4, 5, 6]];
+let rows = [[1, 2, 3], [4, 5, 6]]
 
 let first_even: int? =
     for row in rows do
         for cell in row do
             if cell % 2 == 0 then break cell fi
         od
-    od;
+    od
 
 write_line("{first_even ?? -1}")
 ```
@@ -652,44 +652,44 @@ A valued break with no consuming loop anywhere around it is a compile error, the
 classify(value: int) -> string is
     case value
     when -1 then
-        return "minus one";
+        return "minus one"
 
     when 0 then
-        let result = "zero";
-        return result;
+        let result = "zero"
+        return result
 
     when 1 then
-        return "one";
+        return "one"
 
     when 2 then
-        return "two";
+        return "two"
 
     when 3 then
-        return "three";
+        return "three"
 
     when 4 then
-        return "four";
+        return "four"
 
     when 5 then
-        let result = "five";
-        return result;
+        let result = "five"
+        return result
 
     when 6, 7, 8, 9 then
-        return "more than five and less than ten";
+        return "more than five and less than ten"
 
     when 13 then
-        return "unlucky";
+        return "unlucky"
 
     else
-        return "less than -1 or more than nine";
+        return "less than -1 or more than nine"
     esac
 si
 
-write_line(classify(0));
-write_line(classify(3));
-write_line(classify(7));
-write_line(classify(13));
-write_line(classify(-5));
+write_line(classify(0))
+write_line(classify(3))
+write_line(classify(7))
+write_line(classify(13))
+write_line(classify(-5))
 ```
 
 output:
@@ -707,7 +707,7 @@ Equality labels match by value, the way `=~` compares: a string scrutinee matche
 ```ghul
 …
 // labels match by content, the way '=~' compares
-write_line(respond("help"));
+write_line(respond("help"))
 write_line(respond("run"))
 ```
 
@@ -728,9 +728,9 @@ let label = case status
 when 200 then "ok"
 when 500, 501, 502 then "server error"
 else "other"
-esac;
+esac
 
-write_line(label);
+write_line(label)
 ```
 
 output:
@@ -748,9 +748,9 @@ A `when` arm can take a pattern instead of an equality list, mirroring [`if let`
     case ► a
     when c: CAT then c.meow()
     when d: DOG then d.bark()
-    esac;
+    esac
 
-write_line(describe(CAT()));
+write_line(describe(CAT()))
 ```
 
 output:
@@ -779,10 +779,10 @@ withdraw(balance: int, amount: int) -> int is
     if amount > balance then
         throw System.InvalidOperationException(
             "insufficient funds"
-        );
+        )
     fi
 
-    return balance - amount;
+    return balance - amount
 si
 ```
 
@@ -794,16 +794,16 @@ An exception is any class that derives from `System.Exception`, or from a more s
 
 ```ghul
 class INSUFFICIENT_FUNDS_EXCEPTION(message: string): System.Exception is
-    super(message);
+    super(message)
 si
 ```
 
 ```ghul
 …
 try
-    withdraw(account, 100);
+    withdraw(account, 100)
 catch e: INSUFFICIENT_FUNDS_EXCEPTION
-    write_line("declined: {e.message}");
+    write_line("declined: {e.message}")
 yrt
 ```
 
@@ -838,27 +838,27 @@ yrt
 If different types of exception should be caught, then there can be multiple exception clauses and catch blocks
 
 ```ghul
-let reader mut: StreamReader;
+let reader mut: StreamReader
 
 try
-    reader = StreamReader("file.txt");
-    let content = reader.read_to_end();
+    reader = StreamReader("file.txt")
+    let content = reader.read_to_end()
 
-    write_line(content);
+    write_line(content)
 
 catch e: FileNotFoundException
     // Handle the case where the file is not found
-    write_line("Error: file not found: {e.message}");
+    write_line("Error: file not found: {e.message}")
 catch e: IOException
     // Handle errors during file reading
-    write_line("Error: reading file: {e.message}");
+    write_line("Error: reading file: {e.message}")
 finally
     // Close the file and clean up resources
     if reader? then
-        reader.close();
+        reader.close()
     fi
 
-    write_line("File processing completed, file closed.");
+    write_line("File processing completed, file closed.")
 yrt
 ```
 
@@ -876,16 +876,16 @@ yrt
 
 ```ghul
 try
-    let content = File.read_all_text("file.txt");
-    write_line(content);
+    let content = File.read_all_text("file.txt")
+    write_line(content)
 
-    write_line("File processing completed.");
+    write_line("File processing completed.")
 catch e: FileNotFoundException
     // Handle the case where the file is not found
-    write_line("Error: file not found: {e.message}");
+    write_line("Error: file not found: {e.message}")
 catch e: IOException
     // Handle errors during file reading
-    write_line("Error: reading file: {e.message}");
+    write_line("Error: reading file: {e.message}")
 yrt
 ```
 
@@ -902,19 +902,19 @@ yrt
 ```
 
 ```ghul
-let reader mut: StreamReader;
+let reader mut: StreamReader
 
 try
-    reader = StreamReader("file.txt");
+    reader = StreamReader("file.txt")
 
-    let content = reader.read_to_end();
-    write_line(content);
+    let content = reader.read_to_end()
+    write_line(content)
 
-    write_line("File processing completed.");
+    write_line("File processing completed.")
 
 finally
     if reader? then
-        reader.close();
+        reader.close()
     fi
 
     // Any exceptions will be thrown to the calling code
@@ -927,12 +927,12 @@ A `finally` block runs whenever control leaves the `try` block, including when t
 
 ```ghul
 read_file(path: string) -> string is
-    let reader = StreamReader(path);
+    let reader = StreamReader(path)
 
     try
-        return reader.read_to_end();
+        return reader.read_to_end()
     finally
-        reader.close(); // runs before the function returns
+        reader.close() // runs before the function returns
     yrt
 si
 ```
@@ -944,14 +944,14 @@ si
 In functions of void return type, a bare `return` statement with no value returns control flow directly to the caller  
 
 ```ghul
-tries: int;
+tries: int
 …
 try_something(limit: int) is
     if tries > limit then
-        return; // give up
+        return // give up
     fi
 
-    tries = tries + 1;
+    tries = tries + 1
 
     // do stuff
 si
@@ -965,16 +965,16 @@ In functions of non-void return type, `return` statements must return a value of
 …
 fib(n: int) -> int is
     if n < 0 then
-        return 0;
+        return 0
     elif n == 1 then
-        return 1;
+        return 1
     else
-        return fib(n - 1) + fib(n - 2);
+        return fib(n - 1) + fib(n - 2)
     fi
 si
 
 for i in 0::10 do
-    write_line("fib({i}) = {fib(i)}");
+    write_line("fib({i}) = {fib(i)}")
 od
 ```
 
@@ -1003,9 +1003,9 @@ If execution reaches the end of a non-void function without encountering a retur
 default_return() -> int is
     // do nothing, return 0
 si
-let i = default_return();
-assert i == 0;
-write_line("default return value is {i}");
+let i = default_return()
+assert i == 0
+write_line("default return value is {i}")
 ```
 
 diagnostics:

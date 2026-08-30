@@ -13,7 +13,7 @@ for i in 0..10 do
     squares.add(() => i * i)
 od
 
-write_line("{squares[3]()}");
+write_line("{squares[3]()}")
 ```
 
 output:

@@ -11,7 +11,7 @@ reverse(text: string) -> string =>
     text |> reduce("", (reversed, character) => "{character}{reversed}")
 
 write_line(reverse("asdf"))
-write_line(reverse("Hello, World!"));
+write_line(reverse("Hello, World!"))
 ```
 
 output:

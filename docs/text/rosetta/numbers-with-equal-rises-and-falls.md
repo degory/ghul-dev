@@ -42,7 +42,7 @@ od
 
 let ten_millionth = sequence() |> skip(10000000 - 1) |> first()
 
-write_line("the 10000000th is {ten_millionth}");
+write_line("the 10000000th is {ten_millionth}")
 ```
 
 output:

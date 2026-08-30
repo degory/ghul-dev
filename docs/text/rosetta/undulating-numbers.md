@@ -87,7 +87,7 @@ write_line("600th: {values[599]}")
 
 write_line(
     "{values.count} undulating numbers below 2^53, "
-    "the largest is {values[values.count - 1]}");
+    "the largest is {values[values.count - 1]}")
 ```
 
 output:

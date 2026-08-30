@@ -21,31 +21,31 @@ There are no `public` or `private` keywords. A leading underscore on a name mark
 A class extends at most one superclass, named after a colon in the header, and inherits its members. A constructor runs the superclass constructor with `super.init(...)`, and a method replaces an inherited one by declaring it again. A call to that method dispatches on the object's runtime type, so a method inherited from the superclass reaches the override:
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 class ◆▼ Animal is
-    _name: string;
+    _name: string
     init(name: string) is _name = name; si
 
-    name: string => _name;
-    ◆▼ speak() -> string;                     // body-less: Animal is implicitly abstract
-    describe() -> string => "{_name} says {speak()}";
+    name: string => _name
+    ◆▼ speak() -> string                     // body-less: Animal is implicitly abstract
+    describe() -> string => "{_name} says {speak()}"
 si
 
 class DOG: Animal is
     init(name: string) is super.init(name); si
-    ▲ speak() -> string => "woof";
+    ▲ speak() -> string => "woof"
 si
 
 class CAT: Animal is
     init(name: string) is super.init(name); si
-    ▲ speak() -> string => "meow";
+    ▲ speak() -> string => "meow"
 si
 
-let animals: Animal[] = [DOG("Rex"), CAT("Tom")];
+let animals: Animal[] = [DOG("Rex"), CAT("Tom")]
 
 for a in animals do
-    write_line(a.describe()); // describe calls the overriding speak
+    write_line(a.describe()) // describe calls the overriding speak
 od
 ```
 
@@ -77,7 +77,7 @@ Discovering an object's concrete type at runtime uses `isa` or `if let`, which t
 ## a worked example
 
 ```ghul
-use IO.Std.write_line;
+use IO.Std.write_line
 
 let int_calculator = CALCULATOR(
     [
@@ -86,54 +86,54 @@ let int_calculator = CALCULATOR(
         ("*", INTEGER_MULTIPLICATION()),
         ("/", INTEGER_DIVISION())
     ]
-);
+)
 
 write_line(
     "1 + 2 = {int_calculator.calculate("+", 1, 2)}"
-);
+)
 write_line(
     "1 - 2 = {int_calculator.calculate("-", 1, 2)}"
-);
+)
 write_line(
     "1 * 2 = {int_calculator.calculate("*", 1, 2)}"
-);
+)
 write_line(
     "1 / 2 = {int_calculator.calculate("/", 1, 2)}"
-);
+)
 
 let from_memory =
-    int_calculator.calculate_from_memory("-", 3);
-write_line("1 + 2 - 3 = {from_memory}");
+    int_calculator.calculate_from_memory("-", 3)
+write_line("1 + 2 - 3 = {from_memory}")
 
 let string_calculator = CALCULATOR(
     [
         ("+", STRING_CONCATENATION()),
         ("-", STRING_SUBTRACTION())
     ]
-);
+)
 
 let concatenated =
-    string_calculator.calculate("+", "hello", "world");
-write_line("hello + world = {concatenated}");
+    string_calculator.calculate("+", "hello", "world")
+write_line("hello + world = {concatenated}")
 
 let subtracted =
     string_calculator.calculate(
         "-", "helloworld", "world"
-    );
-write_line("helloworld - world = {subtracted}");
+    )
+write_line("helloworld - world = {subtracted}")
 
-string_calculator.clear_memory();
+string_calculator.clear_memory()
 
-write_line("memory is cleared");
+write_line("memory is cleared")
 
 trait ▼ Operation[T] is
-    ◆▼ execute(left: T, right: T) -> T;
+    ◆▼ execute(left: T, right: T) -> T
 si
 
 class CALCULATOR[T] is
-    _operations: Collections.MAP[string, Operation[T]];
+    _operations: Collections.MAP[string, Operation[T]]
 
-    memory: T;
+    memory: T
 
     init(
         operations: Collections.Iterable[
@@ -150,53 +150,53 @@ class CALCULATOR[T] is
                                 name, operation
                             )
                     )
-            );
+            )
     si
 
     calculate(
         operation_name: string, left: T, right: T
     ) -> T =>
         if _operations.contains_key(operation_name) then
-            let operation = _operations[operation_name];
-            memory = operation.execute(left, right);
+            let operation = _operations[operation_name]
+            memory = operation.execute(left, right)
 
             memory
         else
             throw System.InvalidOperationException(
                 "invalid operation {operation_name}"
             )
-        fi;
+        fi
 
 
     calculate_from_memory(
         operation_name: string, right: T
     ) -> T =>
         if _operations.contains_key(operation_name) then
-            let operation = _operations[operation_name];
-            memory = operation.execute(memory, right);
+            let operation = _operations[operation_name]
+            memory = operation.execute(memory, right)
 
             memory
         else
             throw System.InvalidOperationException(
                 "invalid operation {operation_name}"
             )
-        fi;
+        fi
 
     clear_memory() is
-        memory = _;
+        memory = _
     si
 si
 
 class INTEGER_ADDITION(): Operation[int] is
-    ▲ execute(left: int, right: int) -> int => left + right;
+    ▲ execute(left: int, right: int) -> int => left + right
 si
 
 class INTEGER_SUBTRACTION(): Operation[int] is
-    ▲ execute(left: int, right: int) -> int => left - right;
+    ▲ execute(left: int, right: int) -> int => left - right
 si
 
 class INTEGER_MULTIPLICATION(): Operation[int] is
-    ▲ execute(left: int, right: int) -> int => left * right;
+    ▲ execute(left: int, right: int) -> int => left * right
 si
 
 class INTEGER_DIVISION(): Operation[int] is
@@ -204,20 +204,20 @@ class INTEGER_DIVISION(): Operation[int] is
         if right == 0 then
             throw System.InvalidOperationException(
                 "division by zero"
-            );
+            )
         else
             left / right
-        fi;
+        fi
 si
 
 class STRING_CONCATENATION(): Operation[string] is
     ▲ execute(left: string, right: string) -> string =>
-        "{left}{right}";
+        "{left}{right}"
 si
 
 class STRING_SUBTRACTION(): Operation[string] is
     ▲ execute(left: string, right: string) -> string =>
-        left.replace(right, "");
+        left.replace(right, "")
 si
 ```
 

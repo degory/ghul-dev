@@ -50,7 +50,7 @@ od
 
 write_line(
     "consecutive members up to the 1000th are all coprime: "
-    "{if all_coprime ?? true then "true" else "false" fi}");
+    "{if all_coprime ?? true then "true" else "false" fi}")
 ```
 
 output:

@@ -54,7 +54,7 @@ permutations(floors)
         write_line("Fletcher lives on floor {floors.fletcher}")
         write_line("Miller lives on floor {floors.miller}")
         write_line("Smith lives on floor {floors.smith}")
-    ));
+    ))
 ```
 
 output:

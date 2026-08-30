@@ -37,7 +37,7 @@ levenshtein(source: string, target: string) -> int is
 si
 
 write_line("{levenshtein("kitten", "sitting")}")
-write_line("{levenshtein("rosettacode", "raisethysword")}");
+write_line("{levenshtein("rosettacode", "raisethysword")}")
 ```
 
 output:

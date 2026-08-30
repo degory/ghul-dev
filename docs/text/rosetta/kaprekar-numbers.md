@@ -35,7 +35,7 @@ let below_million = (1..1000000)
     |> filter(n => n == 1 \/ kaprekar(n))
     |> count()
 
-write_line("{below_million} Kaprekar numbers below 1000000");
+write_line("{below_million} Kaprekar numbers below 1000000")
 ```
 
 output:

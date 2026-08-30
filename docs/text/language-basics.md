@@ -12,17 +12,17 @@ ghūl relies on keywords for block structure where other languages use braces or
 
 ```ghul
 …
-let my_variable = 42;
+let my_variable = 42
 
 print_something(thing: string) is
-    write_line("The thing is: {thing}");
+    write_line("The thing is: {thing}")
 si
 
-print_something("a hello");
+print_something("a hello")
 
 class PERSON is
-    name: string;
-    age: int;
+    name: string
+    age: int
 si
 ```
 
@@ -38,18 +38,18 @@ Expressions in ghūl are constructs that return a value, while statements perfor
 ```ghul
 …
 // variable declaration statement
-let x = 10;
+let x = 10
 
 // expression used as part of a declaration statement
-let y = x * 2;
+let y = x * 2
 
 // 'if' is a statement, 'x > 5' is an expression
 if x > 5 then
-    write_line("x is greater than 5");
+    write_line("x is greater than 5")
 fi
 
 // 'if' can also be used as an expression
-let z = if x > 5 then x else y fi;
+let z = if x > 5 then x else y fi
 ```
 
 output:
@@ -64,13 +64,13 @@ Functions in ghūl are declared with an optional return type, a name, a list of 
 ```ghul
 …
 greet(name: string) -> void is
-    write_line("Hello, {name}!");
+    write_line("Hello, {name}!")
 si
 ```
 
 Functions can also have an expression body using `=>` instead of `is` / `si`:
 ```ghul
-square(x: int) -> int => x * x;
+square(x: int) -> int => x * x
 ```
 
 ### control flow
@@ -79,15 +79,15 @@ ghūl supports various [control flow constructs](https://ghul.dev/control-flow.h
 ```ghul
 …
 if x > 0 then
-    write_line("Positive");
+    write_line("Positive")
 elif x < 0 then
-    write_line("Negative");
+    write_line("Negative")
 else
-    write_line("Zero");
+    write_line("Zero")
 fi
 
 for item in my_list do
-    process(item);
+    process(item)
 od
 ```
 
@@ -102,8 +102,8 @@ Positive
 ghūl is statically typed, with some support for [type inference](https://ghul.dev/type-inference.html). Types can be explicitly specified using a colon `:` plus a type expression
 
 ```ghul
-let x: int = 42;
-let y = "Hello";
+let x: int = 42
+let y = "Hello"
 ```
 [User types](https://ghul.dev/definitions.html#types) are defined using `class`, `struct`, `trait`, `enum`, and `union` keywords.
 
@@ -123,11 +123,11 @@ ghūl provides the following primitive data types:
 * void type: `void`
 
 ```ghul
-let my_int: int = 42;
-let my_float: double = 3.14d;
-let my_decimal: decimal = 19.99m;
-let my_bool: bool = true;
-let my_char: char = 'A';
+let my_int: int = 42
+let my_float: double = 3.14d
+let my_decimal: decimal = 19.99m
+let my_bool: bool = true
+let my_char: char = 'A'
 ```
 These types are used to represent basic values in ghūl programs.
 
@@ -136,53 +136,53 @@ These types are used to represent basic values in ghūl programs.
 ghūl supports arrays, which are fixed-size, **read-only** collections of elements of the same type. Array types are denoted using square brackets [] after the element type.
 
 ```ghul
-let numbers: int[] = [1, 2, 3];
+let numbers: int[] = [1, 2, 3]
 ```
 
 Arrays can be constructed with an [array literal](https://ghul.dev/expressions.html#array)
 ```ghul
-let primes = [2, 3, 5, 7, 11];
+let primes = [2, 3, 5, 7, 11]
 ```
 
 Array elements can be read with indexer syntax
 ```ghul
 …
-let p = primes[i];
+let p = primes[i]
 ```
 
 ### tuples
 Tuples in ghūl are lightweight, immutable data structures that can hold a fixed number of elements of different types. Tuple types use parentheses `(` `)`, with elements separated by commas. Tuple literals are similarly constructed with `(` `)` and comma delimited elements. Tuples compare by structural equality: two tuples are equal when their corresponding elements are.
 
 ```ghul
-let point: (int, int) = (10, 20);
-let person: (string, int) = ("Alice", 30);
+let point: (int, int) = (10, 20)
+let person: (string, int) = ("Alice", 30)
 ```
 
 Tuple elements can be accessed using the dot `.` notation followed by the element name:
 
 ```ghul
 …
-let x = point.`0;
-let y = point.`1;
-let name = person.`0;
-let age = person.`1;
+let x = point.`0
+let y = point.`1
+let name = person.`0
+let age = person.`1
 ```
 
 Tuple elements can be given more descriptive names, either in the type or in the tuple literal:
 ```ghul
-let point: (x: int, y: int) = (10, 20);
-let person = (name = "Alice", age = 30);
-let x = point.x;
-let y = point.y;
-let name = person.name;
-let age = person.age;
+let point: (x: int, y: int) = (10, 20)
+let person = (name = "Alice", age = 30)
+let x = point.x
+let y = point.y
+let name = person.name
+let age = person.age
 ```
 
 ghūl also supports tuple destructuring:
 ```ghul
 …
-let (a, b) = point;
-let (name, age) = person;
+let (a, b) = point
+let (name, age) = person
 ```
 
 Destructuring also has a by-name form, `(local = field, ...)`, that pulls each element from a named field rather than by position; the positional and by-name forms are covered with [pattern matching](https://ghul.dev/control-flow.html#if-let).
@@ -192,8 +192,8 @@ Destructuring also has a by-name form, `(local = field, ...)`, that pulls each e
 A type followed by `?` is an **optional** type: a value of `T?` can be present or absent. The same type written without the `?` is non-optional, and a non-optional value is always there.
 
 ```ghul
-let ► name: string? = "Alice"; // present
-let nickname: string? = null; // absent
+let ► name: string? = "Alice" // present
+let nickname: string? = null // absent
 ```
 
 The postfix `?` operator tests whether an optional has a value. A plain `if x?` narrows `x` to its non-optional form inside the branch, so the value reads directly:
@@ -201,7 +201,7 @@ The postfix `?` operator tests whether an optional has a value. A plain `if x?` 
 ```ghul
 …
 if ► name? then
-    write_line("name is {name}"); // name is non-optional here
+    write_line("name is {name}") // name is non-optional here
 fi
 ```
 
@@ -216,7 +216,7 @@ A non-optional type never holds the absent case, so a `T?` is not assignable to 
 ```ghul
 …
 // rejected: a string? is not assignable to a string
-let title: string = maybe;
+let title: string = maybe
 ```
 
 diagnostics:
@@ -232,18 +232,18 @@ ghūl does not perform implicit type conversion (coercion) between scalar types;
 
 ```ghul
 // OK: both addends are type double
-let d = 1.0d + 1.0d;
+let d = 1.0d + 1.0d
 
 // compile time error: addends are mixed types
 // (double vs int)
-let e = 1.0d + 1;
+let e = 1.0d + 1
 
 // OK with explicit cast
-let e = 1.0d + cast double(1);
+let e = 1.0d + cast double(1)
 
 // OK: "hello" is a string, and string derives
 // from object
-let o: object = "hello";
+let o: object = "hello"
 ```
 
 ## variables
@@ -255,9 +255,9 @@ ghūl has three kinds of variables: locals declared within the body of a functio
 Local variables are declared with `let` followed by the variable name, an optional explicit type, and an initializer:
 
 ```ghul
-let i = 1234;
-let j: int = 0;
-let k: int = 5678;
+let i = 1234
+let j: int = 0
+let k: int = 5678
 ```
 
 ### arguments
@@ -282,46 +282,46 @@ ghūl infers the type of a local variable from its initializer. An explicit type
 Literal expressions represent fixed values of a specific type.
 
 ```ghul
-let integer_literal = 42;
-let floating_point_literal = 3.14;
-let string_literal = "Hello, world!";
-let boolean_literal_true = true;
-let boolean_literal_false = false;
+let integer_literal = 42
+let floating_point_literal = 3.14
+let string_literal = "Hello, world!"
+let boolean_literal_true = true
+let boolean_literal_false = false
 ```
 
 ## operators and expressions
 ### arithmetic operators
 ```ghul
-let add = 1 + 2;
-let sub = 3 - 1;
-let mul = 3 * 3;
-let div = 12 / 3;
-let mod = 13 % 4;
+let add = 1 + 2
+let sub = 3 - 1
+let mul = 3 * 3
+let div = 12 / 3
+let mod = 13 % 4
 ```
 
 ### comparison and logical operators
 ```ghul
-let gt = 3 > 1; // true
-let gte = 4 >= 4; // true
-let lt = 3 < 1; // false
-let lte = 4 <= 4; // true
-let eq = 1 == 2; // false
-let neq = 1 != 2; // true
+let gt = 3 > 1 // true
+let gte = 4 >= 4 // true
+let lt = 3 < 1 // false
+let lte = 4 <= 4 // true
+let eq = 1 == 2 // false
+let neq = 1 != 2 // true
 ```
 
 ```ghul
-let list = [1, 2, 3];
+let list = [1, 2, 3]
 
-let index = 4;
-let search_value = 3;
+let index = 4
+let search_value = 3
 
 // false
 let and_then =
-    index < list.count /\ list[index] == search_value;
+    index < list.count /\ list[index] == search_value
 
 // true
 let or_else =
-    index >= list.count \/ list[index] != search_value;
+    index >= list.count \/ list[index] != search_value
 ```
 
 ### bitwise and shift operators
@@ -331,7 +331,7 @@ The integer types have the usual bitwise operators - `&`, `|`, `^` - and the shi
 ```ghul
 …
 bitwise(a: int, b: int) is
-    write_line("{a & b} {a | b} {a ^ b}");
+    write_line("{a & b} {a | b} {a ^ b}")
 
     // shift counts are int, and '>>>' shifts zeros in
     write_line("{1 << 4} {256 >> 3} {-16 >>> 2}")
@@ -355,16 +355,16 @@ variables and properties can be updated via assignment statements
 
 ```ghul
 …
-let i mut = 0;
-let j = 10;
-let s mut = "Hello";
+let i mut = 0
+let j = 10
+let s mut = "Hello"
 
-i = i + j;
-s = "{s} World!";
+i = i + j
+s = "{s} World!"
 
-thing.property = i + j;
+thing.property = i + j
 
-write_line("i = {i}, s = {s}, thing.property = {thing.property}");
+write_line("i = {i}, s = {s}, thing.property = {thing.property}")
 ```
 
 output:

@@ -40,7 +40,7 @@ let series: int[][] =
      [6, 7, 10, 7, 6]]
 
 series |> each((towers: int[]) =>
-    write_line("{towers |> join(", ")} -> {water(towers)}"));
+    write_line("{towers |> join(", ")} -> {water(towers)}"))
 ```
 
 output:

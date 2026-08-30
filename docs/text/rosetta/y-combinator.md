@@ -41,7 +41,7 @@ for n in 0::10 do
 od
 
 write_line("countdown(5) = {countdown(5)}")
-write_line("gcd(1071, 462) = {gcd((1071, 462))}");
+write_line("gcd(1071, 462) = {gcd((1071, 462))}")
 ```
 
 output:
@@ -85,7 +85,7 @@ for n in 0::10 do
 od
 
 write_line("countdown(5) = {countdown(5)}")
-write_line("gcd(1071, 462) = {gcd((1071, 462))}");
+write_line("gcd(1071, 462) = {gcd((1071, 462))}")
 ```
 
 output:

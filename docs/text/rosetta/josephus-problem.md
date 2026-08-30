@@ -15,7 +15,7 @@ write_line(
     "41 prisoners, every 3rd killed: prisoner {survivor(41, 3)} survives")
 
 write_line(
-    "5 prisoners, every 2nd killed:  prisoner {survivor(5, 2)} survives");
+    "5 prisoners, every 2nd killed:  prisoner {survivor(5, 2)} survives")
 ```
 
 output:
@@ -51,7 +51,7 @@ show(n: int, k: int) is
 si
 
 show(5, 2)
-show(7, 3);
+show(7, 3)
 ```
 
 output:

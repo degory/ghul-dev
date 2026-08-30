@@ -67,7 +67,7 @@ show(sizes: int[]) is
             write_line("  ({partition |> map(braces) |> join(", ")})"))
 si
 
-show([2, 0, 2]);
+show([2, 0, 2])
 ```
 
 output:

@@ -27,7 +27,7 @@ anti_primes() -> Pipe[int] is
     od
 si
 
-write_line(anti_primes() |> take(20) |> join(" "));
+write_line(anti_primes() |> take(20) |> join(" "))
 ```
 
 output:

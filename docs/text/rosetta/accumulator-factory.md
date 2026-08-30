@@ -54,7 +54,7 @@ let y = accumulator(WHOLE(10))
 
 y(WHOLE(5))
 
-write_line(show(y(WHOLE(5))));
+write_line(show(y(WHOLE(5))))
 ```
 
 output:

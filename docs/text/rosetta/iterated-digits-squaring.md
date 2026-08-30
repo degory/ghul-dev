@@ -47,7 +47,7 @@ for value in 1..limit do
     fi
 od
 
-write_line("{chains:N0} chains starting below {limit:N0} reach 89");
+write_line("{chains:N0} chains starting below {limit:N0} reach 89")
 ```
 
 output:

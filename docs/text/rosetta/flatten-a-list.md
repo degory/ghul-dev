@@ -49,7 +49,7 @@ let input =
     ])
 
 write_line(show(input))
-write_line("[{flatten(input) |> join(", ")}]");
+write_line("[{flatten(input) |> join(", ")}]")
 ```
 
 output:

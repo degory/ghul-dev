@@ -36,7 +36,7 @@ write_line(
 write_line("between 888888877 and 888888888:")
 
 write_line(
-    (888888877::888888888) |> filter(pernicious) |> join(", "));
+    (888888877::888888888) |> filter(pernicious) |> join(", "))
 ```
 
 output:

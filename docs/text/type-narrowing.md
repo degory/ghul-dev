@@ -19,22 +19,22 @@ An `isa` test in an `if` condition narrows the variable to the tested type insid
 ```ghul
 …
 union Maybe[T] is
-    YES(value: T);
-    NO;
+    YES(value: T)
+    NO
 si
 …
-let m: Maybe[int] = Maybe.YES(42);
+let m: Maybe[int] = Maybe.YES(42)
 
 if isa Maybe.YES( ► m) then
     // m is narrowed to Maybe.YES inside the branch,
     // so m.value is in scope
-    write_line("got value {m.value}");
+    write_line("got value {m.value}")
 fi
 
-let a: Animal = CAT("whiskers");
+let a: Animal = CAT("whiskers")
 if isa CAT( ► a) then
     // a is narrowed to CAT inside the branch
-    write_line(a.purr());
+    write_line(a.purr())
 fi
 ```
 
@@ -49,12 +49,12 @@ An [optional type](https://ghul.dev/optional-types) narrows the same way. A `?` 
 
 ```ghul
 …
-let name: string? = lookup();
+let name: string? = lookup()
 
 if ► name? then
     // name is narrowed to non-optional string
     // here, no ! needed
-    write_line("hello, {name}");
+    write_line("hello, {name}")
 fi
 ```
 
@@ -69,17 +69,17 @@ For a two-variant union, the `else` branch is narrowed to the complementary vari
 ```ghul
 …
 union Result[T, E] is
-    OK(value: T);
-    ERR(error: E);
+    OK(value: T)
+    ERR(error: E)
 si
 …
-let r: Result[int, string] = some_call();
+let r: Result[int, string] = some_call()
 
 if isa Result.OK( ► r) then
-    write_line("ok: {r.value}");
+    write_line("ok: {r.value}")
 else
     // r is narrowed to Result.ERR here
-    write_line("err: {r.error}");
+    write_line("err: {r.error}")
 fi
 ```
 
@@ -101,17 +101,17 @@ Narrowing follows the control flow, not just the branch structure. A common shap
 …
 classify(a: Animal) is
     if !isa CAT( ► a) then
-        write_line("not a cat");
-        return;
+        write_line("not a cat")
+        return
     fi
 
     // every non-CAT has returned, so a is
     // narrowed to CAT from here on
-    write_line(a.purr());
+    write_line(a.purr())
 si
 
-classify(CAT("whiskers"));
-classify(DOG());
+classify(CAT("whiskers"))
+classify(DOG())
 ```
 
 output:
@@ -131,11 +131,11 @@ greet(a: Animal) is
     if isa CAT( ► a) then
         // a is a parameter of greet, narrowed to CAT
         // in this branch
-        write_line(a.purr());
+        write_line(a.purr())
     fi
 si
 
-greet(CAT());
+greet(CAT())
 ```
 
 output:
@@ -156,11 +156,11 @@ describe(order: ORDER) is
         // within this branch order.customer is the
         // non-optional string, so .length is
         // reachable directly
-        write_line("customer name has {order.customer.length} chars");
+        write_line("customer name has {order.customer.length} chars")
     fi
 si
 
-describe(ORDER("alice"));
+describe(ORDER("alice"))
 ```
 
 output:
@@ -173,16 +173,16 @@ An `isa` check or variant test narrows a path the same way:
 
 ```ghul
 …
-class CARRIER(occupant: Animal);
+class CARRIER(occupant: Animal)
 describe(carrier: CARRIER) is
     if isa CAT( ► carrier.occupant) then
         // carrier.occupant is a CAT within this branch,
         // so its purr() is reachable directly
-        write_line(carrier.occupant.purr());
+        write_line(carrier.occupant.purr())
     fi
 si
 
-describe(CARRIER(CAT()));
+describe(CARRIER(CAT()))
 ```
 
 output:
@@ -197,9 +197,9 @@ Reassigning a local narrows it: when the new value's static type is more specifi
 
 ```ghul
 …
-► pet = CAT();
+► pet = CAT()
 // assigning a CAT narrows pet to CAT, so purr() is in reach
-write_line(pet.purr());
+write_line(pet.purr())
 ```
 
 output:
@@ -213,12 +213,12 @@ If the local is already narrowed, assigning a value of a different type cancels 
 ```ghul
 …
 if isa CAT( ► pet) then
-    write_line(pet.purr());
+    write_line(pet.purr())
 
-    ◄► pet = DOG();
+    ◄► pet = DOG()
     // reassigning cancels the CAT narrowing and
     // introduces a DOG one: pet is DOG here
-    write_line(pet.name());
+    write_line(pet.name())
 fi
 ```
 
@@ -241,7 +241,7 @@ The compiler tracks the calls that might do that, conservatively: it builds a ca
 …
 describe(carrier: CARRIER, other: Animal) is
     if isa CAT( ► carrier.occupant) then
-        ◄ carrier.swap(other);
+        ◄ carrier.swap(other)
         // swap() can change occupant, and the use below leans on
         // the narrow - so it is reported here, naming the call
         write_line(carrier.occupant.purr())
@@ -261,7 +261,7 @@ When the compiler can prove that the calls in between could not have changed the
 …
 describe(carrier: CARRIER) is
     if isa CAT( ► carrier.occupant) then
-        carrier.handle();
+        carrier.handle()
         // handle() writes only 'handled', so the compiler can
         // see it leaves the narrow on occupant alone
         write_line(carrier.occupant.purr())
@@ -284,10 +284,10 @@ Where it cannot, there are two ways out. Test the value again: `?`, `!`, `?.`, `
 describe(carrier: CARRIER, other: Animal) is
     // a local holds one value, which no other function can
     // reach - its narrowing survives any call
-    let cat = carrier.occupant;
+    let cat = carrier.occupant
 
     if isa CAT( ► cat) then
-        carrier.swap(other);
+        carrier.swap(other)
         write_line(cat.purr())
     fi
 si

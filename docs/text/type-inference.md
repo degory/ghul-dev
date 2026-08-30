@@ -37,15 +37,15 @@ A function's signature is written out explicitly; inference works within the bod
 totals(
     values: Collections.Iterable[int]
 ) -> (sum: int, count: int) is
-    let sum mut = 0;
-    let count mut = 0;
+    let sum mut = 0
+    let count mut = 0
 
     for v in values do
-        sum = sum + v;
-        count = count + 1;
+        sum = sum + v
+        count = count + 1
     od
 
-    return (sum, count);
+    return (sum, count)
 si
 …
 ```
@@ -56,17 +56,17 @@ Fields and properties belong to a type rather than to a function body, so their 
 
 ```ghul
 class COUNTER is
-    count: int; // a property - its type is declared
+    count: int // a property - its type is declared
 
     init() is
-        count = 0;
+        count = 0
     si
 
     tick() is
         // a local - its type is inferred from the
         // initializer
-        let step = 1;
-        count = count + step;
+        let step = 1
+        count = count + step
     si
 si
 …
@@ -79,9 +79,9 @@ si
 When no explicit type is given for a variable in a let statement or expression, its type is inferred from the initializer, provided one is present.
 
 ```ghul
-let a_string = "12345";
-let an_int = 12345;
-let an_int_array = [1, 2, 3, 4, 5];
+let a_string = "12345"
+let an_int = 12345
+let an_int_array = [1, 2, 3, 4, 5]
 ```
 
 ### destructuring variables
@@ -89,10 +89,10 @@ let an_int_array = [1, 2, 3, 4, 5];
 A destructuring `let` declares several variables at once from a tuple. Each variable takes its type from the corresponding element of the right-hand side, and the pattern can nest.
 
 ```ghul
-let person = ("alice", 30);
-let (name, age) = person;
+let person = ("alice", 30)
+let (name, age) = person
 
-let ((first, second), third) = (("a", "b"), "c");
+let ((first, second), third) = (("a", "b"), "c")
 ```
 
 ### for loop variables
@@ -102,13 +102,13 @@ A `for` loop variable takes its type from the element type of the iterable being
 ```ghul
 …
 for i in 1::10 do
-    write_line("{i}");
+    write_line("{i}")
 od
 
-let pairs = [("a", 1), ("b", 2)];
+let pairs = [("a", 1), ("b", 2)]
 
 for (name, count) in pairs do
-    write_line("{name}: {count}");
+    write_line("{name}: {count}")
 od
 ```
 
@@ -134,21 +134,21 @@ b: 2
 The element type of a list literal is inferred from the types of the elements: the compiler finds a type compatible with all of them.
 
 ```ghul
-class ▼ BASE();
+class ▼ BASE()
 
-class DERIVED(): BASE;
+class DERIVED(): BASE
 …
-let array_of_base = [BASE(), DERIVED()];
-let array_of_object = [BASE(), DERIVED(), object()];
-let array_of_int = [1, 2, 3, 4, 5];
+let array_of_base = [BASE(), DERIVED()]
+let array_of_object = [BASE(), DERIVED(), object()]
+let array_of_int = [1, 2, 3, 4, 5]
 ```
 
 If a list contains tuple literals, the compiler finds a compatible common type for each tuple element across all elements of the list.
 
 ```ghul
-let int_string = [(123, "hello"), (456, "goodbye")];
+let int_string = [(123, "hello"), (456, "goodbye")]
 
-let int_object = [(123, 456), (798, "wibble")];
+let int_object = [(123, 456), (798, "wibble")]
 ```
 
 ### if expression result types
@@ -156,23 +156,23 @@ let int_object = [(123, 456), (798, "wibble")];
 The result type of an if expression is inferred from the types of all the branch results: the compiler finds a type compatible with all of them.
 
 ```ghul
-class ▼ BASE();
+class ▼ BASE()
 
-class DERIVED(): BASE;
+class DERIVED(): BASE
 
 let derived =
     if true then
         DERIVED()
     else
         DERIVED()
-    fi;
+    fi
 
 let base =
     if true then
         DERIVED()
     else
         BASE()
-    fi;
+    fi
 ```
 
 ### generic class, struct and variant constructors
@@ -180,10 +180,10 @@ let base =
 When constructing a generic class, struct or variant, the generic type arguments are inferred from the constructor method arguments where possible.
 
 ```ghul
-class THING[T](value: T);
+class THING[T](value: T)
 …
-let int_thing = THING(1234);
-let string_thing = THING("hello");
+let int_thing = THING(1234)
+let string_thing = THING("hello")
 ```
 
 Inference from the constructor arguments works when every type argument appears among those arguments and the constructor overload is unambiguous. A type argument left unpinned - by a no-argument constructor, say - can still be resolved from later use of the value (see [inference from later use sites](#inference-from-later-use-sites)).
@@ -193,14 +193,14 @@ Inference from the constructor arguments works when every type argument appears 
 When calling a generic global function, a generic method, or a static method on a generic class or struct, the compiler infers the generic type arguments from the types of the actual arguments passed.
 
 ```ghul
-class ▼ BASE();
+class ▼ BASE()
 
-class DERIVED(): BASE;
+class DERIVED(): BASE
 
-do_something[T](a: T, b: T) -> T => a;
-let base = do_something(BASE(), DERIVED());
-let derived = do_something(DERIVED(), DERIVED());
-let obj = do_something(object(), DERIVED());
+do_something[T](a: T, b: T) -> T => a
+let base = do_something(BASE(), DERIVED())
+let derived = do_something(DERIVED(), DERIVED())
+let obj = do_something(object(), DERIVED())
 ```
 
 ### anonymous function return types
@@ -208,8 +208,8 @@ let obj = do_something(object(), DERIVED());
 The return type of an anonymous function literal is inferred from the type of its expression body, or from the types of return expressions in its block body.
 
 ```ghul
-let returns_int = (i: int) => i * 2;
-let returns_string = (s: string) => "{s}{s}";
+let returns_int = (i: int) => i * 2
+let returns_string = (s: string) => "{s}{s}"
 ```
 
 ### anonymous function argument types
@@ -218,7 +218,7 @@ When an anonymous function literal is passed as an argument and an unambiguous o
 
 ```ghul
 …
-[1, 2, 2, 4, 5] |> filter(i => i > 3);
+[1, 2, 2, 4, 5] |> filter(i => i > 3)
 ```
 
 Here `self` is already known to be `Pipe[int]`, so `Pipe[int].filter(predicate: int -> bool) -> Pipe[int]` is the only overload that could match. The `predicate` argument must therefore be `int -> bool`, and the type of `i` must be `int`.
@@ -231,20 +231,20 @@ The sections above infer a type from a declaration's initializer or from a call 
 …
 // m is BOX[?] here; the type argument is not
 // yet known
-let m = BOX();
+let m = BOX()
 
 // the set call takes an int, so m is BOX[int]
-m.set(42);
+m.set(42)
 
-let x = m.get();
+let x = m.get()
 ```
 
 The same applies to anonymous functions whose argument types are not explicit: if a later call supplies a concrete type, that flows back to the function literal.
 
 ```ghul
 …
-let f = x => x + 1;
-write_line("{f(42)}");
+let f = x => x + 1
+write_line("{f(42)}")
 ```
 
 output:
@@ -260,8 +260,8 @@ In a recursive anonymous function, the argument type can be inferred from how th
 ```ghul
 …
 let factorial = n rec =>
-    if n == 0 then 1 else n * rec(n - 1) fi;
-write_line("{factorial(5)}");
+    if n == 0 then 1 else n * rec(n - 1) fi
+write_line("{factorial(5)}")
 ```
 
 output:
@@ -276,8 +276,8 @@ When an anonymous function's parameter has no annotation, every operation the bo
 
 ```ghul
 …
-let length_of = x => x.length;
-write_line("{length_of("hello")}");
+let length_of = x => x.length
+write_line("{length_of("hello")}")
 ```
 
 output:
@@ -294,14 +294,14 @@ When a generic function or method is called with two arguments that share only a
 
 ```ghul
 class ▼ Animal abstract is
-    speak() -> string => "animal";
+    speak() -> string => "animal"
 si
 
-class CAT(): Animal;
+class CAT(): Animal
 
-class DOG(): Animal;
+class DOG(): Animal
 
-merge[T](a: T, b: T) -> T => a;
+merge[T](a: T, b: T) -> T => a
 …
-let a = merge(CAT(), DOG());
+let a = merge(CAT(), DOG())
 ```

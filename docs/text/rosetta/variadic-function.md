@@ -46,7 +46,7 @@ let animals = LIST[Animal]()
 animals.add(CAT("tom"))
 animals.add(DOG("spot"))
 
-herd(animals |> collect_array());
+herd(animals |> collect_array())
 ```
 
 output:

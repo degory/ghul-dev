@@ -34,7 +34,7 @@ write_line("first 15 gapful numbers >= 1,000,000:")
 write_line(gapful_from(1000000, 15) |> join(", "))
 
 write_line("first 10 gapful numbers >= 1,000,000,000:")
-write_line(gapful_from(1000000000, 10) |> join(", "));
+write_line(gapful_from(1000000000, 10) |> join(", "))
 ```
 
 output:

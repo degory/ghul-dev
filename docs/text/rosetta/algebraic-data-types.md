@@ -89,7 +89,7 @@ for element in [11, 2, 14, 1, 7, 15, 5, 8, 4] do
 od
 
 write_line("in order: {in_order(tree)}")
-write_line("black height: {black_height(tree)}");
+write_line("black height: {black_height(tree)}")
 ```
 
 output:
