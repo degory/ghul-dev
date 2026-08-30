@@ -1,8 +1,8 @@
 {
   "name": "functional-programming-7",
   "snippet": false,
-  "code": "let tuple = (1, 2, 3, 4, 5)\n\nlet element = tuple.`3 // elements can be read\n\ntuple.`3 = 6;",
-  "fullSource": "// expect: error\nlet tuple = (1, 2, 3, 4, 5)\n\nlet element = tuple.`3 // elements can be read\n\ntuple.`3 = 6;\n",
+  "code": "let tuple = (1, 2, 3, 4, 5)\n\nlet element = tuple.`3 // elements can be read\n\ntuple.`3 = 6",
+  "fullSource": "// expect: error\nlet tuple = (1, 2, 3, 4, 5)\n\nlet element = tuple.`3 // elements can be read\n\ntuple.`3 = 6\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

@@ -1,8 +1,8 @@
 {
   "name": "definitions-2",
   "snippet": false,
-  "code": "let x: int = 42;",
-  "fullSource": "let x: int = 42;\n",
+  "code": "let x: int = 42",
+  "fullSource": "let x: int = 42\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

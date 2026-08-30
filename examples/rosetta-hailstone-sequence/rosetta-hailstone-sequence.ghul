@@ -1,5 +1,3 @@
-// expect: warning
-// >>>
 use IO.Std.write_line
 use Collections.LIST
 use Ghul.Pipes

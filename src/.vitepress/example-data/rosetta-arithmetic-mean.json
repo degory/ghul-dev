@@ -1,8 +1,8 @@
 {
   "name": "rosetta-arithmetic-mean",
   "snippet": false,
-  "code": "use IO.Std.write_line\nuse Collections\nuse Ghul.Pipes\n\nmean(values: List[double]) -> double =>\n    values |> reduce(0.0D, (total, value) => total + value) /\n    cast(values.count)\n\nwrite_line(\"mean: {mean([1.0D, 2.0D, 3.0D, 4.0D, 5.0D]):F1}\");",
-  "fullSource": "use IO.Std.write_line\nuse Collections\nuse Ghul.Pipes\n\nmean(values: List[double]) -> double =>\n    values |> reduce(0.0D, (total, value) => total + value) /\n    cast(values.count)\n\nwrite_line(\"mean: {mean([1.0D, 2.0D, 3.0D, 4.0D, 5.0D]):F1}\");\n",
+  "code": "use IO.Std.write_line\nuse Collections\nuse Ghul.Pipes\n\nmean(values: List[double]) -> double =>\n    values |> reduce(0.0D, (total, value) => total + value) /\n    cast(values.count)\n\nwrite_line(\"mean: {mean([1.0D, 2.0D, 3.0D, 4.0D, 5.0D]):F1}\")",
+  "fullSource": "use IO.Std.write_line\nuse Collections\nuse Ghul.Pipes\n\nmean(values: List[double]) -> double =>\n    values |> reduce(0.0D, (total, value) => total + value) /\n    cast(values.count)\n\nwrite_line(\"mean: {mean([1.0D, 2.0D, 3.0D, 4.0D, 5.0D]):F1}\")\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

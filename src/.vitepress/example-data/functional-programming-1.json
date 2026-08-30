@@ -1,8 +1,8 @@
 {
   "name": "functional-programming-1",
   "snippet": false,
-  "code": "let f = i => i * 2\nwrite_line(\"f(123): {f(123)}\")\n\n// assigned to another variable\nlet g = f\nwrite_line(\"g(456): {g(456)}\")\n\n// passed to another function\nlet apply_twice = (f, i) => f(f(i))\nwrite_line(\"apply_twice(f, 7): {apply_twice(f, 7)}\");",
-  "fullSource": "use IO.Std.write_line\n\nlet f = i => i * 2\nwrite_line(\"f(123): {f(123)}\")\n\n// assigned to another variable\nlet g = f\nwrite_line(\"g(456): {g(456)}\")\n\n// passed to another function\nlet apply_twice = (f, i) => f(f(i))\nwrite_line(\"apply_twice(f, 7): {apply_twice(f, 7)}\");\n",
+  "code": "let f = i => i * 2\nwrite_line(\"f(123): {f(123)}\")\n\n// assigned to another variable\nlet g = f\nwrite_line(\"g(456): {g(456)}\")\n\n// passed to another function\nlet apply_twice = (f, i) => f(f(i))\nwrite_line(\"apply_twice(f, 7): {apply_twice(f, 7)}\")",
+  "fullSource": "use IO.Std.write_line\n\nlet f = i => i * 2\nwrite_line(\"f(123): {f(123)}\")\n\n// assigned to another variable\nlet g = f\nwrite_line(\"g(456): {g(456)}\")\n\n// passed to another function\nlet apply_twice = (f, i) => f(f(i))\nwrite_line(\"apply_twice(f, 7): {apply_twice(f, 7)}\")\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

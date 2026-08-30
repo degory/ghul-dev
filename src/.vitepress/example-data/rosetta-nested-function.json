@@ -1,8 +1,8 @@
 {
   "name": "rosetta-nested-function",
   "snippet": false,
-  "code": "use IO.Std.write_line\nuse Collections.LIST\nuse Ghul.Pipes\n\nmake_list(separator: string) -> string is\n    let counter mut = 0\n\n    let make_item = (item: string) => (\n        counter = counter + 1\n        \"{counter}{separator}{item}\"\n    )\n\n    let items = LIST[string]()\n\n    for item in [\"first\", \"second\", \"third\"] do\n        items.add(make_item(item))\n    od\n\n    return items |> join(\"\\n\")\nsi\n\nwrite_line(make_list(\". \"));",
-  "fullSource": "use IO.Std.write_line\nuse Collections.LIST\nuse Ghul.Pipes\n\nmake_list(separator: string) -> string is\n    let counter mut = 0\n\n    let make_item = (item: string) => (\n        counter = counter + 1\n        \"{counter}{separator}{item}\"\n    )\n\n    let items = LIST[string]()\n\n    for item in [\"first\", \"second\", \"third\"] do\n        items.add(make_item(item))\n    od\n\n    return items |> join(\"\\n\")\nsi\n\nwrite_line(make_list(\". \"));\n",
+  "code": "use IO.Std.write_line\nuse Collections.LIST\nuse Ghul.Pipes\n\nmake_list(separator: string) -> string is\n    let counter mut = 0\n\n    let make_item = (item: string) => (\n        counter = counter + 1\n        \"{counter}{separator}{item}\"\n    )\n\n    let items = LIST[string]()\n\n    for item in [\"first\", \"second\", \"third\"] do\n        items.add(make_item(item))\n    od\n\n    return items |> join(\"\\n\")\nsi\n\nwrite_line(make_list(\". \"))",
+  "fullSource": "use IO.Std.write_line\nuse Collections.LIST\nuse Ghul.Pipes\n\nmake_list(separator: string) -> string is\n    let counter mut = 0\n\n    let make_item = (item: string) => (\n        counter = counter + 1\n        \"{counter}{separator}{item}\"\n    )\n\n    let items = LIST[string]()\n\n    for item in [\"first\", \"second\", \"third\"] do\n        items.add(make_item(item))\n    od\n\n    return items |> join(\"\\n\")\nsi\n\nwrite_line(make_list(\". \"))\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

@@ -1,8 +1,8 @@
 {
   "name": "language-basics-8",
   "snippet": false,
-  "code": "let numbers: int[] = [1, 2, 3];",
-  "fullSource": "let numbers: int[] = [1, 2, 3];\n",
+  "code": "let numbers: int[] = [1, 2, 3]",
+  "fullSource": "let numbers: int[] = [1, 2, 3]\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

@@ -1,8 +1,8 @@
 {
   "name": "expressions-24",
   "snippet": false,
-  "code": "let a = _[int]   // 0\nlet b: string? = _   // null\nzero[T]() -> T => _;",
-  "fullSource": "let a = _[int]   // 0\nlet b: string? = _   // null\n\nzero[T]() -> T => _;\n",
+  "code": "let a = _[int]   // 0\nlet b: string? = _   // null\nzero[T]() -> T => _",
+  "fullSource": "let a = _[int]   // 0\nlet b: string? = _   // null\n\nzero[T]() -> T => _\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [2],
@@ -16,8 +16,7 @@
     { "startLine": 2, "startColumn": 18, "endLine": 3, "endColumn": 4, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 4, "text": "zero[T]() -> T", "signature": "zero[T]() -> T", "kindLabel": "pure global function" },
     { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "text": "T", "signature": "T", "kindLabel": "type variable" },
-    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "text": "T", "signature": "T", "kindLabel": "type variable" },
-    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 20, "text": "T", "signature": "T", "kindLabel": "type variable" }
+    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "text": "T", "signature": "T", "kindLabel": "type variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -27,7 +26,6 @@
     { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 13, "tokenType": "class" },
     { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 4, "tokenType": "function" },
     { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "tokenType": "typeParameter" },
-    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "tokenType": "typeParameter" },
-    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 20, "tokenType": "typeParameter" }
+    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "tokenType": "typeParameter" }
   ]
 }

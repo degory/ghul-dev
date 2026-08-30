@@ -1,6 +1,0 @@
-test.ghul: 7,5..7,7: error: in member: expected :, ;, = or => but found identifier _y
-test.ghul: 9,5..9,9: error: in member: expected :, ;, = or => but found identifier show
-test.ghul: 10,23..10,25: error: symbol not found: _x
-test.ghul: 10,29..10,31: error: symbol not found: _y
-!!! failed !!!
-

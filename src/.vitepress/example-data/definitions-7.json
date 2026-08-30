@@ -1,8 +1,8 @@
 {
   "name": "definitions-7",
   "snippet": true,
-  "code": "do_something(what: string, why: string, to: int);",
-  "fullSource": "do_something(what: string, why: string, to: int);\n",
+  "code": "do_something(what: string, why: string, to: int)",
+  "fullSource": "do_something(what: string, why: string, to: int)\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

@@ -36,13 +36,22 @@ namespace ExampleTool is
 
         let failed mut = false
 
+        let generated mut = 0
+
         for example_dir in Directory.get_directories(examples_root) do
             let name = Path.get_file_name(example_dir)
 
-            if File.exists(Path.combine(example_dir, "{name}.ghul")) then
-                if !generate(example_dir, output_dir, sdk_ref_path) then
-                    failed = true
-                fi
+            // A directory carrying no source of its own produces no
+            // artifact, and the page referring to it then fails the site
+            // build with nothing to say about which example was missing.
+            // Report it here, where the name is known.
+            if !File.exists(Path.combine(example_dir, "{name}.ghul")) then
+                Std.error.write_line("FAILED example '{name}': no {name}.ghul in {example_dir}")
+                failed = true
+            elif generate(example_dir, output_dir, sdk_ref_path) then
+                generated = generated + 1
+            else
+                failed = true
             fi
         od
 
@@ -56,9 +65,15 @@ namespace ExampleTool is
 
                 if File.exists(Path.combine(snippet_dir, "{name}.ghul")) then
                     generate_snippet(snippet_dir, output_dir)
+                    generated = generated + 1
+                else
+                    Std.error.write_line("FAILED snippet '{name}': no {name}.ghul in {snippet_dir}")
+                    failed = true
                 fi
             od
         fi
+
+        Std.out.write_line("{generated} artifact(s) written to {output_dir}")
 
         if failed then
             System.Environment.exit(1)
