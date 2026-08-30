@@ -34,6 +34,8 @@ export const NOT_CARRIED: Record<string, string> = {
   'isqrt-integer-square-root-of-x': BIG_INTEGER,
   'left-factorials': BIG_INTEGER,
   'prime-decomposition': BIG_INTEGER,
+  'benfords-law': BIG_INTEGER,
+  'hamming-numbers': BIG_INTEGER,
 }
 
 export const ROSETTA_GROUPS: RosettaGroup[] = [
@@ -108,7 +110,6 @@ export const ROSETTA_GROUPS: RosettaGroup[] = [
       'van-der-corput-sequence',
       'ordered-partitions',
       'balanced-brackets',
-      'hamming-numbers',
       'calkin-wilf-sequence',
       'stern-brocot-sequence',
       'fusc-sequence',
@@ -139,7 +140,6 @@ export const ROSETTA_GROUPS: RosettaGroup[] = [
       'map-range',
       'population-count',
       'numbers-with-equal-rises-and-falls',
-      'benfords-law',
       'gapful-numbers',
       'iterated-digits-squaring',
       'juggler-sequence',

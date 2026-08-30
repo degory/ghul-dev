@@ -280,12 +280,6 @@
         "parts": []
       },
       {
-        "slug": "hamming-numbers",
-        "title": "Hamming numbers",
-        "url": "https://rosettacode.org/wiki/Hamming_numbers",
-        "parts": []
-      },
-      {
         "slug": "intersecting-number-wheels",
         "title": "Intersecting number wheels",
         "url": "https://rosettacode.org/wiki/Intersecting_number_wheels",
@@ -379,12 +373,6 @@
         "slug": "anti-primes",
         "title": "Anti-primes",
         "url": "https://rosettacode.org/wiki/Anti-primes",
-        "parts": []
-      },
-      {
-        "slug": "benfords-law",
-        "title": "Benford's law",
-        "url": "https://rosettacode.org/wiki/Benford's_law",
         "parts": []
       },
       {
