@@ -134,7 +134,7 @@ b: 2
 The element type of a list literal is inferred from the types of the elements: the compiler finds a type compatible with all of them.
 
 ```ghul
-class BASE();
+class ▼ BASE();
 
 class DERIVED(): BASE;
 …
@@ -156,7 +156,7 @@ let int_object = [(123, 456), (798, "wibble")];
 The result type of an if expression is inferred from the types of all the branch results: the compiler finds a type compatible with all of them.
 
 ```ghul
-class BASE();
+class ▼ BASE();
 
 class DERIVED(): BASE;
 
@@ -193,7 +193,7 @@ Inference from the constructor arguments works when every type argument appears 
 When calling a generic global function, a generic method, or a static method on a generic class or struct, the compiler infers the generic type arguments from the types of the actual arguments passed.
 
 ```ghul
-class BASE();
+class ▼ BASE();
 
 class DERIVED(): BASE;
 
@@ -293,7 +293,7 @@ The call passes a `string`, and `string` has a `length` member, so `x` resolves 
 When a generic function or method is called with two arguments that share only a common ancestor, the generic argument is inferred from their nearest shared type rather than failing the overload match.
 
 ```ghul
-class Animal abstract is
+class ▼ Animal abstract is
     speak() -> string => "animal";
 si
 

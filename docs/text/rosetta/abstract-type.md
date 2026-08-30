@@ -1,0 +1,77 @@
+
+# Abstract type
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Abstract_type
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+trait ▼ Shape is
+    ◆▼ area() -> double
+    ◆▼ name() -> string
+si
+
+trait ▼ Described is
+    ▼ describe() -> string => "a shape"
+si
+
+class ▼ Polygon: Shape, Described abstract is
+    _sides: int
+
+    init(sides: int) is
+        _sides = sides
+    si
+
+    ◆▲▼ area() -> double
+
+    ▲ name() -> string => "{_sides}-sided polygon"
+
+    ▲▼ describe() -> string => "{name()}, area {area():F2}"
+si
+
+class SQUARE: Polygon is
+    _side: double
+
+    init(side: double) is
+        super.init(4)
+
+        _side = side
+    si
+
+    ▲ area() -> double => _side * _side
+si
+
+class TRIANGLE: Polygon is
+    _base: double
+    _height: double
+
+    init(base: double, height: double) is
+        super.init(3)
+
+        _base = base
+        _height = height
+    si
+
+    ▲ area() -> double => _base * _height / 2.0D
+
+    ▲ describe() -> string => "{super.describe()}, and it is a triangle"
+si
+
+let shapes: Shape[] = [SQUARE(3.0D), TRIANGLE(4.0D, 5.0D)]
+
+shapes |> each(shape => write_line(shape.name()))
+
+let described: Described[] = [SQUARE(2.0D), TRIANGLE(6.0D, 1.0D)]
+
+described |> each(shape => write_line(shape.describe()));
+```
+
+output:
+
+```
+4-sided polygon
+3-sided polygon
+4-sided polygon, area 4.00
+3-sided polygon, area 3.00, and it is a triangle
+```

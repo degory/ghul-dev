@@ -106,31 +106,31 @@ factorial 9 is 362880
 use IO.Std.write_line;
 
 // a trait for rendering an expression as a string
-trait Renderable is
-    render() -> string;
+trait ▼ Renderable is
+    ◆▼ render() -> string;
 si
 
 // an abstract expression: body-less eval and render
 // make the class abstract, so only the subclasses below
 // can be constructed
-class Expr: Renderable is
-    eval() -> int;
-    render() -> string;
+class ◆▼ Expr: Renderable is
+    ◆▼ eval() -> int;
+    ◆▲▼ render() -> string;
 si
 
 class NUM(value: int): Expr is
-    eval() -> int => value;
-    render() -> string => "{value}";
+    ▲ eval() -> int => value;
+    ▲ render() -> string => "{value}";
 si
 
 class ADD(left: Expr, right: Expr): Expr is
-    eval() -> int => left.eval() + right.eval();
-    render() -> string => "({left.render()} + {right.render()})";
+    ▲ eval() -> int => left.eval() + right.eval();
+    ▲ render() -> string => "({left.render()} + {right.render()})";
 si
 
 class MUL(left: Expr, right: Expr): Expr is
-    eval() -> int => left.eval() * right.eval();
-    render() -> string => "({left.render()} * {right.render()})";
+    ▲ eval() -> int => left.eval() * right.eval();
+    ▲ render() -> string => "({left.render()} * {right.render()})";
 si
 
 // (2 * (3 + 4)) = 14
@@ -173,7 +173,7 @@ use Expr.MUL;
 
 // evaluate an expression, recursing into the children
 eval(e: Expr) -> int =>
-    case e
+    case ► e
     when n: NUM then n.value
     when a: ADD then eval(a.left) + eval(a.right)
     when m: MUL then eval(m.left) * eval(m.right)
@@ -181,7 +181,7 @@ eval(e: Expr) -> int =>
 
 // render an expression, recursing into the children
 render(e: Expr) -> string =>
-    case e
+    case ► e
     when n: NUM then "{n.value}"
     when a: ADD then "({render(a.left)} + {render(a.right)})"
     when m: MUL then "({render(m.left)} * {render(m.right)})"
@@ -290,8 +290,8 @@ use IO.Std.write_line;
 use Collections.MAP;
 
 // operations on values of some type T
-trait Operation[T] is
-    execute(left: T, right: T) -> T;
+trait ▼ Operation[T] is
+    ◆▼ execute(left: T, right: T) -> T;
 si
 
 // a calculator over any T, given named operations on T
@@ -310,15 +310,15 @@ class CALCULATOR[T] is
 si
 
 class INT_ADD(): Operation[int] is
-    execute(left: int, right: int) -> int => left + right;
+    ▲ execute(left: int, right: int) -> int => left + right;
 si
 
 class INT_MULTIPLY(): Operation[int] is
-    execute(left: int, right: int) -> int => left * right;
+    ▲ execute(left: int, right: int) -> int => left * right;
 si
 
 class STRING_APPEND(): Operation[string] is
-    execute(left: string, right: string) -> string => "{left}{right}";
+    ▲ execute(left: string, right: string) -> string => "{left}{right}";
 si
 
 // the same generic calculator, instantiated at two types

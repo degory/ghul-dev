@@ -211,7 +211,7 @@ A trait consists of a name, the types of any parent traits that must also be imp
 
 ```ghul
 trait Printable is
-    print();
+    ◆ print();
 si
 ```
 
@@ -219,7 +219,7 @@ Traits are similar to interfaces in other languages. Trait methods and propertie
 ```ghul
 …
 class BOOK(title: string, author: string): Printable is
-    print() is
+    ▲ print() is
         write_line("Title: {title}, Author: {author}");
     si
 si
@@ -229,8 +229,8 @@ A trait method or property can provide a default body. Implementing classes inhe
 
 ```ghul
 …
-trait Logged is
-    log(message: string) is
+trait ▼ Logged is
+    ▼ log(message: string) is
         // the default body writes the message with a [log] prefix
         write_line("[log] {message}");
     si
@@ -242,7 +242,7 @@ si
 
 class LOUD(): Logged is
     // override the default, while still calling through to it with super
-    log(message: string) is
+    ▲ log(message: string) is
         super.log(message.to_upper());
     si
 si
@@ -385,7 +385,7 @@ si
 
 partial Shape is
     describe() -> string =>
-        case self
+        case ► self
         when c: CIRCLE then "circle r={c.radius}"
         when s: SQUARE then "square s={s.side}"
         esac;
@@ -411,7 +411,7 @@ union List is
 si
 
 impl Printer for List is
-    print() -> string =>
+    ▲ print() -> string =>
         if let (head, tail): CONS = ► self then "{head} {tail.print()}"
         else "nil"
         fi;
@@ -798,7 +798,7 @@ namespace Example is
     // this definition of Test is visible unqualified
     // throughout the Example namespace:
     trait Test is
-        run();
+        ◆ run();
     si
 si
 …
@@ -810,7 +810,7 @@ si
 // class TEST can implement the Test trait without having
 // to qualify the name Test:
 class TEST: Test is
-    run() is si
+    ▲ run() is si
 si
 …
 ```
@@ -881,14 +881,14 @@ namespace UseExample is
     use Example;
 
     class ANOTHER_TEST: Test is
-        run() is si
+        ▲ run() is si
     si
 si
 
 namespace UseExample is
     // Test still needs qualification here
     class YET_ANOTHER_TEST: Example.Test is
-        run() is si
+        ▲ run() is si
     si
 si
 …

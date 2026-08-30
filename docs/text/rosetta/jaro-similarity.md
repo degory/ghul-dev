@@ -1,0 +1,73 @@
+
+# Jaro similarity
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Jaro_similarity
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Collections.SET
+use Ghul.Pipes
+use System.Math
+
+jaro(left: string, right: string) -> double is
+    if left.length == 0 \/ right.length == 0 then
+        return if left.length == right.length then 1.0D else 0.0D fi
+    fi
+
+    let window = Math.max(left.length, right.length) / 2 - 1
+    let taken = SET[int]()
+    let matched_left = LIST[char]()
+
+    for i in 0..left.length do
+        let first = Math.max(0, i - window)
+        let last = Math.min(i + window + 1, right.length)
+
+        for j in first..last do
+            if !taken.contains(j) /\ left[i] == right[j] then
+                taken.add(j)
+                matched_left.add(left[i])
+                break
+            fi
+        od
+    od
+
+    let match_count = matched_left.count
+
+    if match_count == 0 then
+        return 0.0D
+    fi
+
+    let matched_right =
+        (0..right.length)
+        |> filter(j => taken.contains(j))
+        |> map(j => right[j])
+        |> collect_list()
+
+    let transposed =
+        (0..match_count)
+        |> filter(i => matched_left[i] != matched_right[i])
+        |> count()
+
+    let matches = cast double(match_count)
+    let half_transpositions = cast double(transposed) / 2.0D
+
+    return (matches / cast double(left.length) +
+          matches / cast double(right.length) +
+          (matches - half_transpositions) / matches) / 3.0D
+si
+
+[("MARTHA", "MARHTA"),
+ ("DIXON", "DICKSONX"),
+ ("JELLYFISH", "SMELLYFISH")]
+    |> each(((left, right)) =>
+        write_line("{left} / {right}: {jaro(left, right):F6}"));
+```
+
+output:
+
+```
+MARTHA / MARHTA: 0.944444
+DIXON / DICKSONX: 0.766667
+JELLYFISH / SMELLYFISH: 0.896296
+```

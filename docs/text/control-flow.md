@@ -745,7 +745,7 @@ A `when` arm can take a pattern instead of an equality list, mirroring [`if let`
 
 ```ghul
 …
-    case a
+    case ► a
     when c: CAT then c.meow()
     when d: DOG then d.bark()
     esac;

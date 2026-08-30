@@ -10,10 +10,10 @@ The ghūl compiler is driven by MSBuild and uses the .NET SDK targets for most o
 When consuming C# code the ghūl compiler transforms symbol names to better match ghūl conventions:
 
 - Class, struct and trait (=interface) names are left unchanged
-- Any generic type argument count suffix is left as-is (for example ``KeyValuePair`2``)
+- .NET's generic arity suffix is removed, so `KeyValuePair<K, V>` is `Collections.KeyValuePair[K, V]`
 - Enum names and enum member names are transformed to `MACRO_CASE`
 - Method, property and field names are transformed to `snake_case`
-- Names that conflict with ghūl keywords are prefixed with `` ` ``
+- A name that collides with a ghūl keyword is left unchanged too. The backtick is how you write such a name where the keyword reading would otherwise win, as in ``` `class ```; it is not part of the name, and after a `.` none is needed
 
 ## namespace and type name re-mapping
 Some commonly used namespace and type names are re-mapped in line with ghūl conventions
@@ -81,7 +81,7 @@ The mappings above are about reaching into .NET. This section is the other direc
 class WITH_HASH(x: int) is
     =~(other: WITH_HASH) -> bool => x == other.x;
 
-    get_hash_code() -> int => x.get_hash_code();
+    ▲ get_hash_code() -> int => x.get_hash_code();
 si
 
 // only =~, so .NET keeps comparing by identity:
@@ -122,10 +122,10 @@ Sorting, `Ghul.Comparable[T]`, and the relational operators all come from `<>`, 
 ```ghul
 …
 class VERSION(major: int, minor: int): Ghul.Comparable[VERSION] is
-    <>(other: VERSION) -> int =>
+    ▲ <>(other: VERSION) -> int =>
         if major != other.major then major - other.major else minor - other.minor fi;
 
-    to_string() -> string => "{major}.{minor}";
+    ▲ to_string() -> string => "{major}.{minor}";
 si
 
 let versions = LIST[VERSION]();
@@ -175,7 +175,7 @@ A type holding something that has to be released implements `Ghul.Disposable`, w
 ```ghul
 …
 class SCOPE(name: string): Ghul.Disposable is
-    dispose() is
+    ▲ dispose() is
         write_line("closing {name}");
     si
 si
@@ -199,7 +199,7 @@ A type implementing `Collections.Iterable[T]` is a .NET `IEnumerable<T>`, so it 
 ```ghul
 …
 class COUNTDOWN(from: int): Iterable[int] is
-    iterator: Iterator[int] => _counting().iterator;
+    ▲ iterator: Iterator[int] => _counting().iterator;
 
     _counting() -> Pipe[int] is
         let i mut = from;
@@ -295,7 +295,7 @@ The .NET base libraries include no mocking framework; [NSubstitute](https://nsub
 ```ghul
 …
 trait Clock is
-    now() -> System.DateTime;
+    ◆ now() -> System.DateTime;
 si
 
 test_uses_a_stubbed_clock() static is

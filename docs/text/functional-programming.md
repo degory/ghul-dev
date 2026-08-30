@@ -446,7 +446,7 @@ a union is checked for exhaustiveness, so covering every variant needs no
 area(s: Shape) -> double =>
     // case over a union is checked for exhaustiveness: every variant
     // is covered here, so no else arm is needed
-    case s
+    case ► s
     when c: CIRCLE then 3.14159d * c.radius * c.radius
     when q: SQUARE then q.side * q.side
     esac;

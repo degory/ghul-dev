@@ -1,0 +1,35 @@
+
+# Multiple distinct objects
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Multiple_distinct_objects
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+class BOX(value: int public)
+
+let n = 5
+
+let distinct = (0..n) |> map(_ => BOX(0)) |> collect_list()
+
+distinct[0].value = 42
+
+write_line(
+    "distinct: {distinct |> map(box => "{box.value}") |> join(" ")}")
+
+let shared = BOX(0)
+let same = (0..n) |> map(_ => shared) |> collect_list()
+
+same[0].value = 42
+
+write_line(
+    "shared:   {same |> map(box => "{box.value}") |> join(" ")}");
+```
+
+output:
+
+```
+distinct: 42 0 0 0 0
+shared:   42 42 42 42 42
+```

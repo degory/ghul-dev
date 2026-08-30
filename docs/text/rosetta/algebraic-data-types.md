@@ -1,0 +1,100 @@
+
+# Algebraic data types
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Algebraic_data_types
+
+```ghul
+use IO.Std.write_line
+
+enum Color is RED, BLACK, si
+
+use Color.RED
+use Color.BLACK
+
+union Tree is
+    EMPTY
+    NODE(color: Color, left: Tree, value: int, right: Tree)
+si
+
+use Tree.EMPTY
+use Tree.NODE
+
+balance(c: Color, l: Tree, v: int, r: Tree) -> Tree =>
+    case (c, l, v, r)
+    when (~BLACK, (~RED, (~RED, a, x, b): NODE, y, m): NODE, z, d) then
+        NODE(RED, NODE(BLACK, a, x, b), y, NODE(BLACK, m, z, d))
+    when (~BLACK, (~RED, a, x, (~RED, b, y, m): NODE): NODE, z, d) then
+        NODE(RED, NODE(BLACK, a, x, b), y, NODE(BLACK, m, z, d))
+    when (~BLACK, a, x, (~RED, (~RED, b, y, m): NODE, z, d): NODE) then
+        NODE(RED, NODE(BLACK, a, x, b), y, NODE(BLACK, m, z, d))
+    when (~BLACK, a, x, (~RED, b, y, (~RED, m, z, d): NODE): NODE) then
+        NODE(RED, NODE(BLACK, a, x, b), y, NODE(BLACK, m, z, d))
+    else
+        NODE(c, l, v, r)
+    esac
+
+_insert(tree: Tree, element: int) -> Tree =>
+    case ► tree
+    when _: EMPTY then
+        NODE(RED, EMPTY, element, EMPTY)
+    when (c, l, v, r): NODE then
+        if element < v then
+            balance(c, _insert(l, element), v, r)
+        elif element > v then
+            balance(c, l, v, _insert(r, element))
+        else
+            tree
+        fi
+    esac
+
+insert(tree: Tree, element: int) -> Tree =>
+    case _insert(tree, element)
+    when (c, l, v, r): NODE then NODE(BLACK, l, v, r)
+    else EMPTY
+    esac
+
+in_order(tree: Tree) -> string =>
+    case ► tree
+    when _: EMPTY then ""
+    when (c, l, v, r): NODE then "{in_order(l)}{v} {in_order(r)}"
+    esac
+
+black_height(tree: Tree) -> int =>
+    case ► tree
+    when _: EMPTY then
+        1
+    when (c, l, v, r): NODE then
+        let left = black_height(l)
+        let right = black_height(r)
+
+        if left < 0 \/ right < 0 \/ left != right then
+            -1
+        elif c == RED /\ (is_red(l) \/ is_red(r)) then
+            -1
+        else
+            left + if c == BLACK then 1 else 0 fi
+        fi
+    esac
+
+is_red(tree: Tree) -> bool =>
+    case ► tree
+    when _: EMPTY then false
+    when (c, l, v, r): NODE then c == RED
+    esac
+
+let tree: Tree mut = EMPTY
+
+for element in [11, 2, 14, 1, 7, 15, 5, 8, 4] do
+    tree = insert(tree, element)
+od
+
+write_line("in order: {in_order(tree)}")
+write_line("black height: {black_height(tree)}");
+```
+
+output:
+
+```
+in order: 1 2 4 5 7 8 11 14 15 
+black height: 4
+```

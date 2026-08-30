@@ -1,0 +1,22 @@
+
+# Averages/Arithmetic mean
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Averages/Arithmetic_mean
+
+```ghul
+use IO.Std.write_line
+use Collections
+use Ghul.Pipes
+
+mean(values: List[double]) -> double =>
+    values |> reduce(0.0D, (total, value) => total + value) /
+    cast(values.count)
+
+write_line("mean: {mean([1.0D, 2.0D, 3.0D, 4.0D, 5.0D]):F1}");
+```
+
+output:
+
+```
+mean: 3.0
+```

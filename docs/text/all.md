@@ -34,9 +34,110 @@ only things dropped.
 - [type inference](#type-inference) - https://ghul.dev/type-inference
 - [grammar](#grammar) - https://ghul.dev/grammar
 - [known issues](#known-issues) - https://ghul.dev/known-issues
+- [tasks](#rosetta/index) - https://ghul.dev/rosetta/
 - [implementation](#implementation) - https://ghul.dev/implementation
 - [history](#history) - https://ghul.dev/history
 - [resources](#resources) - https://ghul.dev/resources
+- [100 doors](#rosetta/100-doors) - https://ghul.dev/rosetta/100-doors
+- [Averages/Arithmetic mean](#rosetta/arithmetic-mean) - https://ghul.dev/rosetta/arithmetic-mean
+- [Binary digits](#rosetta/binary-digits) - https://ghul.dev/rosetta/binary-digits
+- [Factorial](#rosetta/factorial) - https://ghul.dev/rosetta/factorial
+- [FizzBuzz](#rosetta/fizzbuzz) - https://ghul.dev/rosetta/fizzbuzz
+- [Hello world/Text](#rosetta/hello-world-text) - https://ghul.dev/rosetta/hello-world-text
+- [Quine](#rosetta/quine) - https://ghul.dev/rosetta/quine
+- [Reverse a string](#rosetta/reverse-a-string) - https://ghul.dev/rosetta/reverse-a-string
+- [Towers of Hanoi](#rosetta/towers-of-hanoi) - https://ghul.dev/rosetta/towers-of-hanoi
+- [Accumulator factory](#rosetta/accumulator-factory) - https://ghul.dev/rosetta/accumulator-factory
+- [Anonymous recursion](#rosetta/anonymous-recursion) - https://ghul.dev/rosetta/anonymous-recursion
+- [Apply a callback to an array](#rosetta/apply-a-callback-to-an-array) - https://ghul.dev/rosetta/apply-a-callback-to-an-array
+- [Catamorphism](#rosetta/catamorphism) - https://ghul.dev/rosetta/catamorphism
+- [Church numerals](#rosetta/church-numerals) - https://ghul.dev/rosetta/church-numerals
+- [Closures/Value capture](#rosetta/closures-value-capture) - https://ghul.dev/rosetta/closures-value-capture
+- [Cumulative standard deviation](#rosetta/cumulative-standard-deviation) - https://ghul.dev/rosetta/cumulative-standard-deviation
+- [First-class functions](#rosetta/first-class-functions) - https://ghul.dev/rosetta/first-class-functions
+- [Jensen's Device](#rosetta/jensens-device) - https://ghul.dev/rosetta/jensens-device
+- [Man or boy test](#rosetta/man-or-boy-test) - https://ghul.dev/rosetta/man-or-boy-test
+- [Mutual recursion](#rosetta/mutual-recursion) - https://ghul.dev/rosetta/mutual-recursion
+- [Nested function](#rosetta/nested-function) - https://ghul.dev/rosetta/nested-function
+- [Variadic function](#rosetta/variadic-function) - https://ghul.dev/rosetta/variadic-function
+- [Y combinator](#rosetta/y-combinator) - https://ghul.dev/rosetta/y-combinator
+- [Abstract type](#rosetta/abstract-type) - https://ghul.dev/rosetta/abstract-type
+- [Algebraic data types](#rosetta/algebraic-data-types) - https://ghul.dev/rosetta/algebraic-data-types
+- [Arithmetic evaluation](#rosetta/arithmetic-evaluation) - https://ghul.dev/rosetta/arithmetic-evaluation
+- [Flatten a list](#rosetta/flatten-a-list) - https://ghul.dev/rosetta/flatten-a-list
+- [Generic swap](#rosetta/generic-swap) - https://ghul.dev/rosetta/generic-swap
+- [Multiple distinct objects](#rosetta/multiple-distinct-objects) - https://ghul.dev/rosetta/multiple-distinct-objects
+- [Null object](#rosetta/null-object) - https://ghul.dev/rosetta/null-object
+- [Quaternion](#rosetta/quaternion) - https://ghul.dev/rosetta/quaternion
+- [Queue/Definition](#rosetta/queue-definition) - https://ghul.dev/rosetta/queue-definition
+- [S-expressions](#rosetta/s-expressions) - https://ghul.dev/rosetta/s-expressions
+- [Ternary logic](#rosetta/ternary-logic) - https://ghul.dev/rosetta/ternary-logic
+- [Amb](#rosetta/amb) - https://ghul.dev/rosetta/amb
+- [Balanced brackets](#rosetta/balanced-brackets) - https://ghul.dev/rosetta/balanced-brackets
+- [Calkin-Wilf sequence](#rosetta/calkin-wilf-sequence) - https://ghul.dev/rosetta/calkin-wilf-sequence
+- [EKG sequence convergence](#rosetta/ekg-sequence-convergence) - https://ghul.dev/rosetta/ekg-sequence-convergence
+- [Fibonacci sequence](#rosetta/fibonacci-sequence) - https://ghul.dev/rosetta/fibonacci-sequence
+- [Fusc sequence](#rosetta/fusc-sequence) - https://ghul.dev/rosetta/fusc-sequence
+- [Hailstone sequence](#rosetta/hailstone-sequence) - https://ghul.dev/rosetta/hailstone-sequence
+- [Intersecting number wheels](#rosetta/intersecting-number-wheels) - https://ghul.dev/rosetta/intersecting-number-wheels
+- [Kolakoski sequence](#rosetta/kolakoski-sequence) - https://ghul.dev/rosetta/kolakoski-sequence
+- [Look-and-say sequence](#rosetta/look-and-say-sequence) - https://ghul.dev/rosetta/look-and-say-sequence
+- [Ordered partitions](#rosetta/ordered-partitions) - https://ghul.dev/rosetta/ordered-partitions
+- [Same fringe](#rosetta/same-fringe) - https://ghul.dev/rosetta/same-fringe
+- [Stern-Brocot sequence](#rosetta/stern-brocot-sequence) - https://ghul.dev/rosetta/stern-brocot-sequence
+- [Tree traversal](#rosetta/tree-traversal) - https://ghul.dev/rosetta/tree-traversal
+- [Van der Corput sequence](#rosetta/van-der-corput-sequence) - https://ghul.dev/rosetta/van-der-corput-sequence
+- [Van Eck sequence](#rosetta/van-eck-sequence) - https://ghul.dev/rosetta/van-eck-sequence
+- [Achilles numbers](#rosetta/achilles-numbers) - https://ghul.dev/rosetta/achilles-numbers
+- [Ackermann function](#rosetta/ackermann-function) - https://ghul.dev/rosetta/ackermann-function
+- [Additive primes](#rosetta/additive-primes) - https://ghul.dev/rosetta/additive-primes
+- [Almost prime](#rosetta/almost-prime) - https://ghul.dev/rosetta/almost-prime
+- [Amicable pairs](#rosetta/amicable-pairs) - https://ghul.dev/rosetta/amicable-pairs
+- [Anti-primes](#rosetta/anti-primes) - https://ghul.dev/rosetta/anti-primes
+- [Descending primes](#rosetta/descending-primes) - https://ghul.dev/rosetta/descending-primes
+- [Gapful numbers](#rosetta/gapful-numbers) - https://ghul.dev/rosetta/gapful-numbers
+- [Gray code](#rosetta/gray-code) - https://ghul.dev/rosetta/gray-code
+- [Greatest common divisor](#rosetta/greatest-common-divisor) - https://ghul.dev/rosetta/greatest-common-divisor
+- [Haversine formula](#rosetta/haversine-formula) - https://ghul.dev/rosetta/haversine-formula
+- [Iterated digits squaring](#rosetta/iterated-digits-squaring) - https://ghul.dev/rosetta/iterated-digits-squaring
+- [Juggler sequence](#rosetta/juggler-sequence) - https://ghul.dev/rosetta/juggler-sequence
+- [Kaprekar numbers](#rosetta/kaprekar-numbers) - https://ghul.dev/rosetta/kaprekar-numbers
+- [Ludic numbers](#rosetta/ludic-numbers) - https://ghul.dev/rosetta/ludic-numbers
+- [Map range](#rosetta/map-range) - https://ghul.dev/rosetta/map-range
+- [Negative base numbers](#rosetta/negative-base-numbers) - https://ghul.dev/rosetta/negative-base-numbers
+- [Numbers with equal rises and falls](#rosetta/numbers-with-equal-rises-and-falls) - https://ghul.dev/rosetta/numbers-with-equal-rises-and-falls
+- [Ormiston pairs](#rosetta/ormiston-pairs) - https://ghul.dev/rosetta/ormiston-pairs
+- [Pernicious numbers](#rosetta/pernicious-numbers) - https://ghul.dev/rosetta/pernicious-numbers
+- [Population count](#rosetta/population-count) - https://ghul.dev/rosetta/population-count
+- [Radical of an integer](#rosetta/radical-of-an-integer) - https://ghul.dev/rosetta/radical-of-an-integer
+- [Roman numerals/Encode](#rosetta/roman-numerals-encode) - https://ghul.dev/rosetta/roman-numerals-encode
+- [Semiprime](#rosetta/semiprime) - https://ghul.dev/rosetta/semiprime
+- [Sieve of Eratosthenes](#rosetta/sieve-of-eratosthenes) - https://ghul.dev/rosetta/sieve-of-eratosthenes
+- [Sphenic numbers](#rosetta/sphenic-numbers) - https://ghul.dev/rosetta/sphenic-numbers
+- [Taxicab numbers](#rosetta/taxicab-numbers) - https://ghul.dev/rosetta/taxicab-numbers
+- [Truncatable primes](#rosetta/truncatable-primes) - https://ghul.dev/rosetta/truncatable-primes
+- [Undulating numbers](#rosetta/undulating-numbers) - https://ghul.dev/rosetta/undulating-numbers
+- [Zeckendorf number representation](#rosetta/zeckendorf-number-representation) - https://ghul.dev/rosetta/zeckendorf-number-representation
+- [ABC problem](#rosetta/abc-problem) - https://ghul.dev/rosetta/abc-problem
+- [Align columns](#rosetta/align-columns) - https://ghul.dev/rosetta/align-columns
+- [Camel case and snake case](#rosetta/camel-case-and-snake-case) - https://ghul.dev/rosetta/camel-case-and-snake-case
+- [Entropy](#rosetta/entropy) - https://ghul.dev/rosetta/entropy
+- [Jaro similarity](#rosetta/jaro-similarity) - https://ghul.dev/rosetta/jaro-similarity
+- [Levenshtein distance](#rosetta/levenshtein-distance) - https://ghul.dev/rosetta/levenshtein-distance
+- [Palindrome detection](#rosetta/palindrome-detection) - https://ghul.dev/rosetta/palindrome-detection
+- [Pangram checker](#rosetta/pangram-checker) - https://ghul.dev/rosetta/pangram-checker
+- [Run-length encoding](#rosetta/run-length-encoding) - https://ghul.dev/rosetta/run-length-encoding
+- [Damm algorithm](#rosetta/damm-algorithm) - https://ghul.dev/rosetta/damm-algorithm
+- [Dinesman's multiple-dwelling problem](#rosetta/dinesmans-multiple-dwelling-problem) - https://ghul.dev/rosetta/dinesmans-multiple-dwelling-problem
+- [Forward difference](#rosetta/forward-difference) - https://ghul.dev/rosetta/forward-difference
+- [Huffman coding](#rosetta/huffman-coding) - https://ghul.dev/rosetta/huffman-coding
+- [Josephus problem](#rosetta/josephus-problem) - https://ghul.dev/rosetta/josephus-problem
+- [Non-continuous subsequences](#rosetta/non-continuous-subsequences) - https://ghul.dev/rosetta/non-continuous-subsequences
+- [Power set](#rosetta/power-set) - https://ghul.dev/rosetta/power-set
+- [Smith–Waterman algorithm](#rosetta/smith-waterman-algorithm) - https://ghul.dev/rosetta/smith-waterman-algorithm
+- [Sorting algorithms/Quicksort](#rosetta/sorting-algorithms-quicksort) - https://ghul.dev/rosetta/sorting-algorithms-quicksort
+- [Topswops](#rosetta/topswops) - https://ghul.dev/rosetta/topswops
+- [Water collected between towers](#rosetta/water-collected-between-towers) - https://ghul.dev/rosetta/water-collected-between-towers
 
 ---
 
@@ -150,31 +251,31 @@ factorial 9 is 362880
 use IO.Std.write_line;
 
 // a trait for rendering an expression as a string
-trait Renderable is
-    render() -> string;
+trait ▼ Renderable is
+    ◆▼ render() -> string;
 si
 
 // an abstract expression: body-less eval and render
 // make the class abstract, so only the subclasses below
 // can be constructed
-class Expr: Renderable is
-    eval() -> int;
-    render() -> string;
+class ◆▼ Expr: Renderable is
+    ◆▼ eval() -> int;
+    ◆▲▼ render() -> string;
 si
 
 class NUM(value: int): Expr is
-    eval() -> int => value;
-    render() -> string => "{value}";
+    ▲ eval() -> int => value;
+    ▲ render() -> string => "{value}";
 si
 
 class ADD(left: Expr, right: Expr): Expr is
-    eval() -> int => left.eval() + right.eval();
-    render() -> string => "({left.render()} + {right.render()})";
+    ▲ eval() -> int => left.eval() + right.eval();
+    ▲ render() -> string => "({left.render()} + {right.render()})";
 si
 
 class MUL(left: Expr, right: Expr): Expr is
-    eval() -> int => left.eval() * right.eval();
-    render() -> string => "({left.render()} * {right.render()})";
+    ▲ eval() -> int => left.eval() * right.eval();
+    ▲ render() -> string => "({left.render()} * {right.render()})";
 si
 
 // (2 * (3 + 4)) = 14
@@ -217,7 +318,7 @@ use Expr.MUL;
 
 // evaluate an expression, recursing into the children
 eval(e: Expr) -> int =>
-    case e
+    case ► e
     when n: NUM then n.value
     when a: ADD then eval(a.left) + eval(a.right)
     when m: MUL then eval(m.left) * eval(m.right)
@@ -225,7 +326,7 @@ eval(e: Expr) -> int =>
 
 // render an expression, recursing into the children
 render(e: Expr) -> string =>
-    case e
+    case ► e
     when n: NUM then "{n.value}"
     when a: ADD then "({render(a.left)} + {render(a.right)})"
     when m: MUL then "({render(m.left)} * {render(m.right)})"
@@ -334,8 +435,8 @@ use IO.Std.write_line;
 use Collections.MAP;
 
 // operations on values of some type T
-trait Operation[T] is
-    execute(left: T, right: T) -> T;
+trait ▼ Operation[T] is
+    ◆▼ execute(left: T, right: T) -> T;
 si
 
 // a calculator over any T, given named operations on T
@@ -354,15 +455,15 @@ class CALCULATOR[T] is
 si
 
 class INT_ADD(): Operation[int] is
-    execute(left: int, right: int) -> int => left + right;
+    ▲ execute(left: int, right: int) -> int => left + right;
 si
 
 class INT_MULTIPLY(): Operation[int] is
-    execute(left: int, right: int) -> int => left * right;
+    ▲ execute(left: int, right: int) -> int => left * right;
 si
 
 class STRING_APPEND(): Operation[string] is
-    execute(left: string, right: string) -> string => "{left}{right}";
+    ▲ execute(left: string, right: string) -> string => "{left}{right}";
 si
 
 // the same generic calculator, instantiated at two types
@@ -1325,7 +1426,7 @@ a union is checked for exhaustiveness, so covering every variant needs no
 area(s: Shape) -> double =>
     // case over a union is checked for exhaustiveness: every variant
     // is covered here, so no else arm is needed
-    case s
+    case ► s
     when c: CIRCLE then 3.14159d * c.radius * c.radius
     when q: SQUARE then q.side * q.side
     esac;
@@ -1550,23 +1651,23 @@ A class extends at most one superclass, named after a colon in the header, and i
 ```ghul
 use IO.Std.write_line;
 
-class Animal is
+class ◆▼ Animal is
     _name: string;
     init(name: string) is _name = name; si
 
     name: string => _name;
-    speak() -> string;                     // body-less: Animal is implicitly abstract
+    ◆▼ speak() -> string;                     // body-less: Animal is implicitly abstract
     describe() -> string => "{_name} says {speak()}";
 si
 
 class DOG: Animal is
     init(name: string) is super.init(name); si
-    speak() -> string => "woof";
+    ▲ speak() -> string => "woof";
 si
 
 class CAT: Animal is
     init(name: string) is super.init(name); si
-    speak() -> string => "meow";
+    ▲ speak() -> string => "meow";
 si
 
 let animals: Animal[] = [DOG("Rex"), CAT("Tom")];
@@ -1653,8 +1754,8 @@ string_calculator.clear_memory();
 
 write_line("memory is cleared");
 
-trait Operation[T] is
-    execute(left: T, right: T) -> T;
+trait ▼ Operation[T] is
+    ◆▼ execute(left: T, right: T) -> T;
 si
 
 class CALCULATOR[T] is
@@ -1715,19 +1816,19 @@ class CALCULATOR[T] is
 si
 
 class INTEGER_ADDITION(): Operation[int] is
-    execute(left: int, right: int) -> int => left + right;
+    ▲ execute(left: int, right: int) -> int => left + right;
 si
 
 class INTEGER_SUBTRACTION(): Operation[int] is
-    execute(left: int, right: int) -> int => left - right;
+    ▲ execute(left: int, right: int) -> int => left - right;
 si
 
 class INTEGER_MULTIPLICATION(): Operation[int] is
-    execute(left: int, right: int) -> int => left * right;
+    ▲ execute(left: int, right: int) -> int => left * right;
 si
 
 class INTEGER_DIVISION(): Operation[int] is
-    execute(left: int, right: int) -> int =>
+    ▲ execute(left: int, right: int) -> int =>
         if right == 0 then
             throw System.InvalidOperationException(
                 "division by zero"
@@ -1738,12 +1839,12 @@ class INTEGER_DIVISION(): Operation[int] is
 si
 
 class STRING_CONCATENATION(): Operation[string] is
-    execute(left: string, right: string) -> string =>
+    ▲ execute(left: string, right: string) -> string =>
         "{left}{right}";
 si
 
 class STRING_SUBTRACTION(): Operation[string] is
-    execute(left: string, right: string) -> string =>
+    ▲ execute(left: string, right: string) -> string =>
         left.replace(right, "");
 si
 ```
@@ -1825,7 +1926,7 @@ A `case` expression matches one scrutinee against several `when` arms, which rea
 area(s: Shape) -> double =>
     // case over a union is checked for exhaustiveness: every variant
     // is covered here, so no else arm is needed
-    case s
+    case ► s
     when c: CIRCLE then 3.14159d * c.radius * c.radius
     when q: SQUARE then q.side * q.side
     esac;
@@ -2066,8 +2167,8 @@ A type bound `[T: SomeType]` requires the type argument to derive from `SomeType
 
 ```ghul
 …
-trait Greetable is
-    name: string;
+trait ▼ Greetable is
+    ◆▼ name: string;
 si
 
 // T must derive from Greetable, so .name is available on T
@@ -2075,7 +2176,7 @@ greet[T: Greetable](x: T) is
     write_line("hello, {x.name}");
 si
 
-class CAT(name: string): Greetable;
+class CAT( ▲ name: string): Greetable;
 …
 greet(CAT("whiskers"));
 ```
@@ -2091,13 +2192,13 @@ A value whose static type is a bounded type parameter also narrows and destructu
 ```ghul
 use IO.Std.write_line;
 
-class Animal abstract is
-    name() -> string;
+class ▼ Animal abstract is
+    ◆▼ name() -> string;
 si
 
 class CAT: Animal is
     init() is si
-    name() -> string => "cat";
+    ▲ name() -> string => "cat";
     purr() -> string => "purr";
 si
 
@@ -2223,8 +2324,8 @@ Type variance is declared on a *trait*'s type parameters (the CLR permits varian
 ```ghul
 …
 // T: out marks Box[T] as covariant in T - a Box[CAT] is also a Box[Animal]
-trait Box[T: out] is
-    contents() -> T;
+trait ▼ Box[T: out] is
+    ◆▼ contents() -> T;
 si
 …
 let cats: Box[CAT] = CAT_BOX();
@@ -2548,10 +2649,10 @@ The ghūl compiler is driven by MSBuild and uses the .NET SDK targets for most o
 When consuming C# code the ghūl compiler transforms symbol names to better match ghūl conventions:
 
 - Class, struct and trait (=interface) names are left unchanged
-- Any generic type argument count suffix is left as-is (for example ``KeyValuePair`2``)
+- .NET's generic arity suffix is removed, so `KeyValuePair<K, V>` is `Collections.KeyValuePair[K, V]`
 - Enum names and enum member names are transformed to `MACRO_CASE`
 - Method, property and field names are transformed to `snake_case`
-- Names that conflict with ghūl keywords are prefixed with `` ` ``
+- A name that collides with a ghūl keyword is left unchanged too. The backtick is how you write such a name where the keyword reading would otherwise win, as in ``` `class ```; it is not part of the name, and after a `.` none is needed
 
 ## namespace and type name re-mapping
 Some commonly used namespace and type names are re-mapped in line with ghūl conventions
@@ -2619,7 +2720,7 @@ The mappings above are about reaching into .NET. This section is the other direc
 class WITH_HASH(x: int) is
     =~(other: WITH_HASH) -> bool => x == other.x;
 
-    get_hash_code() -> int => x.get_hash_code();
+    ▲ get_hash_code() -> int => x.get_hash_code();
 si
 
 // only =~, so .NET keeps comparing by identity:
@@ -2660,10 +2761,10 @@ Sorting, `Ghul.Comparable[T]`, and the relational operators all come from `<>`, 
 ```ghul
 …
 class VERSION(major: int, minor: int): Ghul.Comparable[VERSION] is
-    <>(other: VERSION) -> int =>
+    ▲ <>(other: VERSION) -> int =>
         if major != other.major then major - other.major else minor - other.minor fi;
 
-    to_string() -> string => "{major}.{minor}";
+    ▲ to_string() -> string => "{major}.{minor}";
 si
 
 let versions = LIST[VERSION]();
@@ -2713,7 +2814,7 @@ A type holding something that has to be released implements `Ghul.Disposable`, w
 ```ghul
 …
 class SCOPE(name: string): Ghul.Disposable is
-    dispose() is
+    ▲ dispose() is
         write_line("closing {name}");
     si
 si
@@ -2737,7 +2838,7 @@ A type implementing `Collections.Iterable[T]` is a .NET `IEnumerable<T>`, so it 
 ```ghul
 …
 class COUNTDOWN(from: int): Iterable[int] is
-    iterator: Iterator[int] => _counting().iterator;
+    ▲ iterator: Iterator[int] => _counting().iterator;
 
     _counting() -> Pipe[int] is
         let i mut = from;
@@ -2833,7 +2934,7 @@ The .NET base libraries include no mocking framework; [NSubstitute](https://nsub
 ```ghul
 …
 trait Clock is
-    now() -> System.DateTime;
+    ◆ now() -> System.DateTime;
 si
 
 test_uses_a_stubbed_clock() static is
@@ -3001,7 +3102,7 @@ anything with an `.iterator` - into a `Pipe[T]`. This is what the `|`
 operator calls to wrap its left operand.
 
 ```ghul
-pipe[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ pipe[T](source: Iterable[T]) -> Pipe[T] pure;
 ```
 
 ## stages
@@ -3011,7 +3112,7 @@ A stage returns a new pipe, so stages chain onto one another.
 ### filter
 
 ```ghul
-filter[T](
+◆ filter[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> Pipe[T] pure;
@@ -3020,13 +3121,13 @@ filter[T](
 or, as a method:
 
 ```ghul
-filter(predicate: (T) -> bool pure) -> Pipe[T] pure;
+◆ filter(predicate: (T) -> bool pure) -> Pipe[T] pure;
 ```
 
 ### map
 
 ```ghul
-map[T,U](
+◆ map[T,U](
     source: Iterable[T],
     mapper: (T) -> U pure
 ) -> Pipe[U] pure;
@@ -3035,7 +3136,7 @@ map[T,U](
 or, as a method:
 
 ```ghul
-map[U](mapper: (T) -> U pure) -> Pipe[U] pure;
+◆ map[U](mapper: (T) -> U pure) -> Pipe[U] pure;
 ```
 
 ### flat_map
@@ -3043,7 +3144,7 @@ map[U](mapper: (T) -> U pure) -> Pipe[U] pure;
 Maps each element to an iterable and runs the results together into one sequence.
 
 ```ghul
-flat_map[T,U](
+◆ flat_map[T,U](
     source: Iterable[T],
     mapper: (T) -> Iterable[U] pure
 ) -> Pipe[U] pure;
@@ -3052,37 +3153,37 @@ flat_map[T,U](
 or, as a method:
 
 ```ghul
-flat_map[U](mapper: (T) -> Iterable[U] pure) -> Pipe[U] pure;
+◆ flat_map[U](mapper: (T) -> Iterable[U] pure) -> Pipe[U] pure;
 ```
 
 ### skip
 
 ```ghul
-skip[T](source: Iterable[T], count: int) -> Pipe[T] pure;
+◆ skip[T](source: Iterable[T], count: int) -> Pipe[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-skip(count: int) -> Pipe[T] pure;
+◆ skip(count: int) -> Pipe[T] pure;
 ```
 
 ### take
 
 ```ghul
-take[T](source: Iterable[T], count: int) -> Pipe[T] pure;
+◆ take[T](source: Iterable[T], count: int) -> Pipe[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-take(count: int) -> Pipe[T] pure;
+◆ take(count: int) -> Pipe[T] pure;
 ```
 
 ### skip_while
 
 ```ghul
-skip_while[T](
+◆ skip_while[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> Pipe[T] pure;
@@ -3091,13 +3192,13 @@ skip_while[T](
 or, as a method:
 
 ```ghul
-skip_while(predicate: (T) -> bool pure) -> Pipe[T] pure;
+◆ skip_while(predicate: (T) -> bool pure) -> Pipe[T] pure;
 ```
 
 ### take_while
 
 ```ghul
-take_while[T](
+◆ take_while[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> Pipe[T] pure;
@@ -3106,7 +3207,7 @@ take_while[T](
 or, as a method:
 
 ```ghul
-take_while(predicate: (T) -> bool pure) -> Pipe[T] pure;
+◆ take_while(predicate: (T) -> bool pure) -> Pipe[T] pure;
 ```
 
 The four set operations that follow all discard duplicates. This is what they do to the same pair of sources:
@@ -3138,13 +3239,13 @@ except:         1, 2
 Removes duplicates, keeping the first occurrence of each element. `distinct`, `union_with`, `intersect_with` and `except` all do this, so each produces a sequence with no repeats, in the order first seen. Elements are compared with `=~` and `get_hash_code`, so a type used with these needs [both](https://ghul.dev/dotnet-integration.html#equality).
 
 ```ghul
-distinct[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ distinct[T](source: Iterable[T]) -> Pipe[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-distinct() -> Pipe[T] pure;
+◆ distinct() -> Pipe[T] pure;
 ```
 
 ### union_with
@@ -3152,7 +3253,7 @@ distinct() -> Pipe[T] pure;
 Every element of both sources with duplicates removed, taking the left source's elements first.
 
 ```ghul
-union_with[T](
+◆ union_with[T](
     source: Iterable[T],
     right: Iterable[T]
 ) -> Pipe[T] pure;
@@ -3161,7 +3262,7 @@ union_with[T](
 or, as a method:
 
 ```ghul
-union_with(right: Iterable[T]) -> Pipe[T] pure;
+◆ union_with(right: Iterable[T]) -> Pipe[T] pure;
 ```
 
 ### intersect_with
@@ -3169,7 +3270,7 @@ union_with(right: Iterable[T]) -> Pipe[T] pure;
 Elements the left and right sources have in common, in the order the left source has them.
 
 ```ghul
-intersect_with[T](
+◆ intersect_with[T](
     source: Iterable[T],
     right: Iterable[T]
 ) -> Pipe[T] pure;
@@ -3178,7 +3279,7 @@ intersect_with[T](
 or, as a method:
 
 ```ghul
-intersect_with(right: Iterable[T]) -> Pipe[T] pure;
+◆ intersect_with(right: Iterable[T]) -> Pipe[T] pure;
 ```
 
 ### except
@@ -3186,7 +3287,7 @@ intersect_with(right: Iterable[T]) -> Pipe[T] pure;
 Elements of the left source that the right source doesn't have.
 
 ```ghul
-except[T](
+◆ except[T](
     source: Iterable[T],
     right: Iterable[T]
 ) -> Pipe[T] pure;
@@ -3195,7 +3296,7 @@ except[T](
 or, as a method:
 
 ```ghul
-except(right: Iterable[T]) -> Pipe[T] pure;
+◆ except(right: Iterable[T]) -> Pipe[T] pure;
 ```
 
 ### peek
@@ -3203,13 +3304,13 @@ except(right: Iterable[T]) -> Pipe[T] pure;
 Calls `action` on each element and passes it through unchanged.
 
 ```ghul
-peek[T](source: Iterable[T], action: T -> void) -> Pipe[T] pure;
+◆ peek[T](source: Iterable[T], action: T -> void) -> Pipe[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-peek(action: T -> void) -> Pipe[T] pure;
+◆ peek(action: T -> void) -> Pipe[T] pure;
 ```
 
 `chunk` and `windows` both produce groups of elements, and differ in how the groups are cut:
@@ -3251,13 +3352,13 @@ window: 5, 6, 7
 The first `size` elements, then the next `size`, and so on, each element appearing in one group only. The last group is short when the source doesn't divide evenly. Compare `windows`, below.
 
 ```ghul
-chunk[T](source: Iterable[T], size: int) -> Pipe[LIST[T]] pure;
+◆ chunk[T](source: Iterable[T], size: int) -> Pipe[LIST[T]] pure;
 ```
 
 or, as a method:
 
 ```ghul
-chunk(size: int) -> Pipe[LIST[T]] pure;
+◆ chunk(size: int) -> Pipe[LIST[T]] pure;
 ```
 
 ### windows
@@ -3265,7 +3366,7 @@ chunk(size: int) -> Pipe[LIST[T]] pure;
 Every run of `size` neighbouring elements: the first `size`, then the same run moved along by one, and so on. Each window therefore shares all but one of its elements with the window before it. A window is always `size` long, so a source with fewer than `size` elements produces none.
 
 ```ghul
-windows[T](
+◆ windows[T](
     source: Iterable[T],
     size: int
 ) -> Pipe[LIST[T]] pure;
@@ -3274,7 +3375,7 @@ windows[T](
 or, as a method:
 
 ```ghul
-windows(size: int) -> Pipe[LIST[T]] pure;
+◆ windows(size: int) -> Pipe[LIST[T]] pure;
 ```
 
 ### cat
@@ -3282,13 +3383,13 @@ windows(size: int) -> Pipe[LIST[T]] pure;
 Concatenation: every element of the left source, then every element of the right.
 
 ```ghul
-cat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T] pure;
+◆ cat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-cat(right: Iterable[T]) -> Pipe[T] pure;
+◆ cat(right: Iterable[T]) -> Pipe[T] pure;
 ```
 
 ### index
@@ -3296,9 +3397,9 @@ cat(right: Iterable[T]) -> Pipe[T] pure;
 Pairs each element with its index. `INDEXED_VALUE[T]` has `index` and `value`, and destructures positionally, so `for (i, x) in xs | .index() do` reads the pair apart. The second form starts the index at a given number rather than at 0.
 
 ```ghul
-index[T](source: Iterable[T]) -> Pipe[INDEXED_VALUE[T]] pure;
+◆ index[T](source: Iterable[T]) -> Pipe[INDEXED_VALUE[T]] pure;
 
-index[T](
+◆ index[T](
     source: Iterable[T],
     index: int
 ) -> Pipe[INDEXED_VALUE[T]] pure;
@@ -3307,9 +3408,9 @@ index[T](
 or, as a method:
 
 ```ghul
-index() -> Pipe[INDEXED_VALUE[T]] pure;
+◆ index() -> Pipe[INDEXED_VALUE[T]] pure;
 
-index(index: int) -> Pipe[INDEXED_VALUE[T]] pure;
+◆ index(index: int) -> Pipe[INDEXED_VALUE[T]] pure;
 ```
 
 ### zip
@@ -3317,12 +3418,12 @@ index(index: int) -> Pipe[INDEXED_VALUE[T]] pure;
 Pairs elements of the source with elements of `other`, stopping when either side runs out. The second form combines each pair with a mapper instead of yielding a tuple.
 
 ```ghul
-zip[T,U](
+◆ zip[T,U](
     source: Iterable[T],
     other: Iterable[U]
 ) -> Pipe[(T,U)] pure;
 
-zip[T,U,TOut](
+◆ zip[T,U,TOut](
     source: Iterable[T],
     other: Iterable[U],
     mapper: (T,U) -> TOut pure
@@ -3332,9 +3433,9 @@ zip[T,U,TOut](
 or, as a method:
 
 ```ghul
-zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure;
+◆ zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure;
 
-zip[U,TOut](
+◆ zip[U,TOut](
     other: Iterable[U],
     mapper: (T,U) -> TOut pure
 ) -> Pipe[TOut] pure;
@@ -3351,13 +3452,13 @@ moment they are called, rather than passing elements along one at a time.
 Yields the source's elements last to first.
 
 ```ghul
-reverse[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ reverse[T](source: Iterable[T]) -> Pipe[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-reverse() -> Pipe[T] pure;
+◆ reverse() -> Pipe[T] pure;
 ```
 
 ### sort
@@ -3365,14 +3466,14 @@ reverse() -> Pipe[T] pure;
 Yields the source's elements in order. The first form uses the element type's own ordering: sorting without a comparer needs an element type that defines `<>`, or is comparable on the .NET side. The other two forms take an `IComparer[T]` or a comparison function returning negative, zero or positive.
 
 ```ghul
-sort[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ sort[T](source: Iterable[T]) -> Pipe[T] pure;
 
-sort[T](
+◆ sort[T](
     source: Iterable[T],
     comparer: Collections.IComparer[T]
 ) -> Pipe[T] pure;
 
-sort[T](
+◆ sort[T](
     source: Iterable[T],
     compare: (T, T) -> int pure
 ) -> Pipe[T] pure;
@@ -3381,29 +3482,29 @@ sort[T](
 or, as a method:
 
 ```ghul
-sort() -> Pipe[T] pure;
+◆ sort() -> Pipe[T] pure;
 
-sort(comparer: Collections.IComparer[T]) -> Pipe[T] pure;
+◆ sort(comparer: Collections.IComparer[T]) -> Pipe[T] pure;
 
-sort(compare: (T, T) -> int pure) -> Pipe[T] pure;
+◆ sort(compare: (T, T) -> int pure) -> Pipe[T] pure;
 ```
 
 ### sort_descending
 
 ```ghul
-sort_descending[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ sort_descending[T](source: Iterable[T]) -> Pipe[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-sort_descending() -> Pipe[T] pure;
+◆ sort_descending() -> Pipe[T] pure;
 ```
 
 ### sort_by
 
 ```ghul
-sort_by[T,K: Ghul.Comparable[K]](
+◆ sort_by[T,K: Ghul.Comparable[K]](
     source: Iterable[T],
     key_selector: (T) -> K pure
 ) -> Pipe[T] pure;
@@ -3412,7 +3513,7 @@ sort_by[T,K: Ghul.Comparable[K]](
 or, as a method:
 
 ```ghul
-sort_by[K: Ghul.Comparable[K]](
+◆ sort_by[K: Ghul.Comparable[K]](
     key_selector: (T) -> K pure
 ) -> Pipe[T] pure;
 ```
@@ -3420,7 +3521,7 @@ sort_by[K: Ghul.Comparable[K]](
 ### sort_by_descending
 
 ```ghul
-sort_by_descending[T,K: Ghul.Comparable[K]](
+◆ sort_by_descending[T,K: Ghul.Comparable[K]](
     source: Iterable[T],
     key_selector: (T) -> K pure
 ) -> Pipe[T] pure;
@@ -3429,7 +3530,7 @@ sort_by_descending[T,K: Ghul.Comparable[K]](
 or, as a method:
 
 ```ghul
-sort_by_descending[K: Ghul.Comparable[K]](
+◆ sort_by_descending[K: Ghul.Comparable[K]](
     key_selector: (T) -> K pure
 ) -> Pipe[T] pure;
 ```
@@ -3493,7 +3594,7 @@ first_map: none
 The first element matching the predicate, absent if none does. `first` is the same question with no predicate.
 
 ```ghul
-find[T](
+◆ find[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> Ghul.MAYBE[T] pure;
@@ -3502,7 +3603,7 @@ find[T](
 or, as a method:
 
 ```ghul
-find(predicate: (T) -> bool pure) -> Ghul.MAYBE[T] pure;
+◆ find(predicate: (T) -> bool pure) -> Ghul.MAYBE[T] pure;
 ```
 
 ### find_map
@@ -3510,7 +3611,7 @@ find(predicate: (T) -> bool pure) -> Ghul.MAYBE[T] pure;
 Calls `mapper` on each element in turn and returns the first present result. `first_map` differs: it calls the mapper on the *first* element only, and gives up if that one declines.
 
 ```ghul
-find_map[T,U](
+◆ find_map[T,U](
     source: Iterable[T],
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> Ghul.MAYBE[U] pure;
@@ -3519,7 +3620,7 @@ find_map[T,U](
 or, as a method:
 
 ```ghul
-find_map[U](
+◆ find_map[U](
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> Ghul.MAYBE[U] pure;
 ```
@@ -3529,7 +3630,7 @@ find_map[U](
 As `find`, throwing instead of returning absent when nothing matches.
 
 ```ghul
-find_or_throw[T](
+◆ find_or_throw[T](
     source: Iterable[T],
     predicate: T -> bool pure
 ) -> T pure;
@@ -3538,7 +3639,7 @@ find_or_throw[T](
 or, as a method:
 
 ```ghul
-find_or_throw(predicate: T -> bool pure) -> T pure;
+◆ find_or_throw(predicate: T -> bool pure) -> T pure;
 ```
 
 ### find_map_or_throw
@@ -3546,7 +3647,7 @@ find_or_throw(predicate: T -> bool pure) -> T pure;
 As `find_map`, throwing instead of returning absent when nothing maps.
 
 ```ghul
-find_map_or_throw[T,U](
+◆ find_map_or_throw[T,U](
     source: Iterable[T],
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> U pure;
@@ -3555,7 +3656,7 @@ find_map_or_throw[T,U](
 or, as a method:
 
 ```ghul
-find_map_or_throw[U](
+◆ find_map_or_throw[U](
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> U pure;
 ```
@@ -3565,13 +3666,13 @@ find_map_or_throw[U](
 The leading element, absent when the source is empty.
 
 ```ghul
-first[T](source: Iterable[T]) -> Ghul.MAYBE[T] pure;
+◆ first[T](source: Iterable[T]) -> Ghul.MAYBE[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-first() -> Ghul.MAYBE[T] pure;
+◆ first() -> Ghul.MAYBE[T] pure;
 ```
 
 ### first_map
@@ -3579,7 +3680,7 @@ first() -> Ghul.MAYBE[T] pure;
 Calls `mapper` on the leading element only. Compare `find_map`, above, which keeps going.
 
 ```ghul
-first_map[T,U](
+◆ first_map[T,U](
     source: Iterable[T],
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> Ghul.MAYBE[U] pure;
@@ -3588,7 +3689,7 @@ first_map[T,U](
 or, as a method:
 
 ```ghul
-first_map[U](
+◆ first_map[U](
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> Ghul.MAYBE[U] pure;
 ```
@@ -3598,13 +3699,13 @@ first_map[U](
 As `first`, throwing instead of returning absent when the source is empty.
 
 ```ghul
-first_or_throw[T](source: Iterable[T]) -> T pure;
+◆ first_or_throw[T](source: Iterable[T]) -> T pure;
 ```
 
 or, as a method:
 
 ```ghul
-first_or_throw() -> T pure;
+◆ first_or_throw() -> T pure;
 ```
 
 ### first_map_or_throw
@@ -3612,7 +3713,7 @@ first_or_throw() -> T pure;
 As `first_map`, throwing instead of returning absent.
 
 ```ghul
-first_map_or_throw[T,U](
+◆ first_map_or_throw[T,U](
     source: Iterable[T],
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> U pure;
@@ -3621,7 +3722,7 @@ first_map_or_throw[T,U](
 or, as a method:
 
 ```ghul
-first_map_or_throw[U](
+◆ first_map_or_throw[U](
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> U pure;
 ```
@@ -3631,19 +3732,19 @@ first_map_or_throw[U](
 The single element the source holds, throwing when it holds none or more than one.
 
 ```ghul
-only[T](source: Iterable[T]) -> T pure;
+◆ only[T](source: Iterable[T]) -> T pure;
 ```
 
 or, as a method:
 
 ```ghul
-only() -> T pure;
+◆ only() -> T pure;
 ```
 
 ### any
 
 ```ghul
-any[T](
+◆ any[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> bool pure;
@@ -3652,13 +3753,13 @@ any[T](
 or, as a method:
 
 ```ghul
-any(predicate: (T) -> bool pure) -> bool pure;
+◆ any(predicate: (T) -> bool pure) -> bool pure;
 ```
 
 ### all
 
 ```ghul
-all[T](
+◆ all[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> bool pure;
@@ -3667,19 +3768,19 @@ all[T](
 or, as a method:
 
 ```ghul
-all(predicate: (T) -> bool pure) -> bool pure;
+◆ all(predicate: (T) -> bool pure) -> bool pure;
 ```
 
 ### count
 
 ```ghul
-count[T](source: Iterable[T]) -> int pure;
+◆ count[T](source: Iterable[T]) -> int pure;
 ```
 
 or, as a method:
 
 ```ghul
-count() -> int pure;
+◆ count() -> int pure;
 ```
 
 ### min
@@ -3687,7 +3788,7 @@ count() -> int pure;
 The smallest element, absent when the source is empty. `min` and `max` have no method form.
 
 ```ghul
-min[T: Ghul.Comparable[T]](
+◆ min[T: Ghul.Comparable[T]](
     values: Iterable[T]
 ) -> Ghul.MAYBE[T] pure;
 ```
@@ -3695,7 +3796,7 @@ min[T: Ghul.Comparable[T]](
 ### max
 
 ```ghul
-max[T: Ghul.Comparable[T]](
+◆ max[T: Ghul.Comparable[T]](
     values: Iterable[T]
 ) -> Ghul.MAYBE[T] pure;
 ```
@@ -3703,7 +3804,7 @@ max[T: Ghul.Comparable[T]](
 ### min_by
 
 ```ghul
-min_by[T,K: Ghul.Comparable[K]](
+◆ min_by[T,K: Ghul.Comparable[K]](
     source: Iterable[T],
     key_selector: (T) -> K pure
 ) -> Ghul.MAYBE[T] pure;
@@ -3712,7 +3813,7 @@ min_by[T,K: Ghul.Comparable[K]](
 or, as a method:
 
 ```ghul
-min_by[K: Ghul.Comparable[K]](
+◆ min_by[K: Ghul.Comparable[K]](
     key_selector: (T) -> K pure
 ) -> Ghul.MAYBE[T] pure;
 ```
@@ -3720,7 +3821,7 @@ min_by[K: Ghul.Comparable[K]](
 ### max_by
 
 ```ghul
-max_by[T,K: Ghul.Comparable[K]](
+◆ max_by[T,K: Ghul.Comparable[K]](
     source: Iterable[T],
     key_selector: (T) -> K pure
 ) -> Ghul.MAYBE[T] pure;
@@ -3729,7 +3830,7 @@ max_by[T,K: Ghul.Comparable[K]](
 or, as a method:
 
 ```ghul
-max_by[K: Ghul.Comparable[K]](
+◆ max_by[K: Ghul.Comparable[K]](
     key_selector: (T) -> K pure
 ) -> Ghul.MAYBE[T] pure;
 ```
@@ -3774,55 +3875,55 @@ group_by:     large 5, 9, 6
 Collects into the read-only `Collections.List[T]`. `collect_list` gives back the mutable `LIST[T]` instead, and the others collect into an array, a set, or a map.
 
 ```ghul
-collect[T](source: Iterable[T]) -> Collections.List[T] pure;
+◆ collect[T](source: Iterable[T]) -> Collections.List[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-collect() -> Collections.List[T] pure;
+◆ collect() -> Collections.List[T] pure;
 ```
 
 ### collect_array
 
 ```ghul
-collect_array[T](source: Iterable[T]) -> T[] pure;
+◆ collect_array[T](source: Iterable[T]) -> T[] pure;
 ```
 
 or, as a method:
 
 ```ghul
-collect_array() -> T[] pure;
+◆ collect_array() -> T[] pure;
 ```
 
 ### collect_list
 
 ```ghul
-collect_list[T](source: Iterable[T]) -> LIST[T] pure;
+◆ collect_list[T](source: Iterable[T]) -> LIST[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-collect_list() -> LIST[T] pure;
+◆ collect_list() -> LIST[T] pure;
 ```
 
 ### collect_set
 
 ```ghul
-collect_set[T](source: Iterable[T]) -> SET[T] pure;
+◆ collect_set[T](source: Iterable[T]) -> SET[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-collect_set() -> SET[T] pure;
+◆ collect_set() -> SET[T] pure;
 ```
 
 ### collect_map
 
 ```ghul
-collect_map[T,K,V](
+◆ collect_map[T,K,V](
     source: Iterable[T],
     key_selector: (T) -> K pure,
     value_selector: (T) -> V pure
@@ -3832,7 +3933,7 @@ collect_map[T,K,V](
 or, as a method:
 
 ```ghul
-collect_map[K,V](
+◆ collect_map[K,V](
     key_selector: (T) -> K pure,
     value_selector: (T) -> V pure
 ) -> MAP[K,V] pure;
@@ -3843,7 +3944,7 @@ collect_map[K,V](
 Splits the source in two on a predicate. The elements matching the predicate come first, then the elements not matching.
 
 ```ghul
-partition[T](
+◆ partition[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> (LIST[T], LIST[T]) pure;
@@ -3852,7 +3953,7 @@ partition[T](
 or, as a method:
 
 ```ghul
-partition(
+◆ partition(
     predicate: (T) -> bool pure
 ) -> (LIST[T], LIST[T]) pure;
 ```
@@ -3862,7 +3963,7 @@ partition(
 Collects the elements into a map, keyed by what `key_selector` returns for each.
 
 ```ghul
-group_by[T,K](
+◆ group_by[T,K](
     source: Iterable[T],
     key_selector: (T) -> K pure
 ) -> MAP[K, LIST[T]] pure;
@@ -3871,7 +3972,7 @@ group_by[T,K](
 or, as a method:
 
 ```ghul
-group_by[K](
+◆ group_by[K](
     key_selector: (T) -> K pure
 ) -> MAP[K, LIST[T]] pure;
 ```
@@ -3881,13 +3982,13 @@ group_by[K](
 Folds the source into a single value, starting at `seed` and calling `accumulator` with the running value and each element in turn. The second form passes the final running value through a mapper before returning it.
 
 ```ghul
-reduce[T,TRunning](
+◆ reduce[T,TRunning](
     source: Iterable[T],
     seed: TRunning,
     accumulator: (TRunning,T) -> TRunning pure
 ) -> TRunning pure;
 
-reduce[T,TRunning,TOut](
+◆ reduce[T,TRunning,TOut](
     source: Iterable[T],
     seed: TRunning,
     accumulator: (TRunning,T) -> TRunning pure,
@@ -3898,12 +3999,12 @@ reduce[T,TRunning,TOut](
 or, as a method:
 
 ```ghul
-reduce[TRunning](
+◆ reduce[TRunning](
     seed: TRunning,
     accumulator: (TRunning,T) -> TRunning pure
 ) -> TRunning pure;
 
-reduce[TRunning,TOut](
+◆ reduce[TRunning,TOut](
     seed: TRunning,
     accumulator: (TRunning,T) -> TRunning pure,
     mapper: (TRunning) -> TOut pure
@@ -3915,13 +4016,13 @@ reduce[TRunning,TOut](
 Calls `action` on every element. It returns nothing and, alone among these, is not `pure` - it exists for its side effects.
 
 ```ghul
-each[T](source: Iterable[T], action: T -> void) -> void;
+◆ each[T](source: Iterable[T], action: T -> void) -> void;
 ```
 
 or, as a method:
 
 ```ghul
-each(action: T -> void) -> void;
+◆ each(action: T -> void) -> void;
 ```
 
 ### append_to
@@ -3929,13 +4030,13 @@ each(action: T -> void) -> void;
 Appends each element to a `StringBuilder`, separated by `separator`, or by `", "` when that is left off. `join` is the same thing answering a fresh string.
 
 ```ghul
-append_to[T](
+◆ append_to[T](
     source: Iterable[T],
     into: System.Text.StringBuilder,
     separator: string
 ) -> System.Text.StringBuilder;
 
-append_to[T](
+◆ append_to[T](
     source: Iterable[T],
     into: System.Text.StringBuilder
 ) -> System.Text.StringBuilder;
@@ -3944,12 +4045,12 @@ append_to[T](
 or, as a method:
 
 ```ghul
-append_to(
+◆ append_to(
     into: System.Text.StringBuilder,
     separator: string
 ) -> System.Text.StringBuilder;
 
-append_to(
+◆ append_to(
     into: System.Text.StringBuilder
 ) -> System.Text.StringBuilder;
 ```
@@ -3959,17 +4060,17 @@ append_to(
 Renders the elements into one string, separated by `separator`, or by `", "` when left off.
 
 ```ghul
-join[T](source: Iterable[T], separator: string) -> string pure;
+◆ join[T](source: Iterable[T], separator: string) -> string pure;
 
-join[T](source: Iterable[T]) -> string pure;
+◆ join[T](source: Iterable[T]) -> string pure;
 ```
 
 or, as a method:
 
 ```ghul
-join(separator: string) -> string pure;
+◆ join(separator: string) -> string pure;
 
-join() -> string pure;
+◆ join() -> string pure;
 ```
 
 
@@ -4827,7 +4928,7 @@ A trait consists of a name, the types of any parent traits that must also be imp
 
 ```ghul
 trait Printable is
-    print();
+    ◆ print();
 si
 ```
 
@@ -4835,7 +4936,7 @@ Traits are similar to interfaces in other languages. Trait methods and propertie
 ```ghul
 …
 class BOOK(title: string, author: string): Printable is
-    print() is
+    ▲ print() is
         write_line("Title: {title}, Author: {author}");
     si
 si
@@ -4845,8 +4946,8 @@ A trait method or property can provide a default body. Implementing classes inhe
 
 ```ghul
 …
-trait Logged is
-    log(message: string) is
+trait ▼ Logged is
+    ▼ log(message: string) is
         // the default body writes the message with a [log] prefix
         write_line("[log] {message}");
     si
@@ -4858,7 +4959,7 @@ si
 
 class LOUD(): Logged is
     // override the default, while still calling through to it with super
-    log(message: string) is
+    ▲ log(message: string) is
         super.log(message.to_upper());
     si
 si
@@ -5001,7 +5102,7 @@ si
 
 partial Shape is
     describe() -> string =>
-        case self
+        case ► self
         when c: CIRCLE then "circle r={c.radius}"
         when s: SQUARE then "square s={s.side}"
         esac;
@@ -5027,7 +5128,7 @@ union List is
 si
 
 impl Printer for List is
-    print() -> string =>
+    ▲ print() -> string =>
         if let (head, tail): CONS = ► self then "{head} {tail.print()}"
         else "nil"
         fi;
@@ -5414,7 +5515,7 @@ namespace Example is
     // this definition of Test is visible unqualified
     // throughout the Example namespace:
     trait Test is
-        run();
+        ◆ run();
     si
 si
 …
@@ -5426,7 +5527,7 @@ si
 // class TEST can implement the Test trait without having
 // to qualify the name Test:
 class TEST: Test is
-    run() is si
+    ▲ run() is si
 si
 …
 ```
@@ -5497,14 +5598,14 @@ namespace UseExample is
     use Example;
 
     class ANOTHER_TEST: Test is
-        run() is si
+        ▲ run() is si
     si
 si
 
 namespace UseExample is
     // Test still needs qualification here
     class YET_ANOTHER_TEST: Example.Test is
-        run() is si
+        ▲ run() is si
     si
 si
 …
@@ -6756,7 +6857,7 @@ A `when` arm can take a pattern instead of an equality list, mirroring [`if let`
 
 ```ghul
 …
-    case a
+    case ► a
     when c: CAT then c.meow()
     when d: DOG then d.bark()
     esac;
@@ -7736,7 +7837,7 @@ b: 2
 The element type of a list literal is inferred from the types of the elements: the compiler finds a type compatible with all of them.
 
 ```ghul
-class BASE();
+class ▼ BASE();
 
 class DERIVED(): BASE;
 …
@@ -7758,7 +7859,7 @@ let int_object = [(123, 456), (798, "wibble")];
 The result type of an if expression is inferred from the types of all the branch results: the compiler finds a type compatible with all of them.
 
 ```ghul
-class BASE();
+class ▼ BASE();
 
 class DERIVED(): BASE;
 
@@ -7795,7 +7896,7 @@ Inference from the constructor arguments works when every type argument appears 
 When calling a generic global function, a generic method, or a static method on a generic class or struct, the compiler infers the generic type arguments from the types of the actual arguments passed.
 
 ```ghul
-class BASE();
+class ▼ BASE();
 
 class DERIVED(): BASE;
 
@@ -7895,7 +7996,7 @@ The call passes a `string`, and `string` has a `length` member, so `x` resolves 
 When a generic function or method is called with two arguments that share only a common ancestor, the generic argument is inferred from their nearest shared type rather than failing the overload match.
 
 ```ghul
-class Animal abstract is
+class ▼ Animal abstract is
     speak() -> string => "animal";
 si
 
@@ -8589,6 +8690,152 @@ Type variance for built-in types is fixed and is not user-declarable. Function t
 
 ---
 
+<a id="rosetta/index"></a>
+
+
+# Rosetta Code
+
+ghūl solutions to [Rosetta Code](https://rosettacode.org) tasks. Each can be edited and run here:
+click the pencil, change it, and run it in your browser.
+
+### starting out
+
+Short programs, and the shapes every language has to have.
+
+- [100 doors](https://ghul.dev/rosetta/100-doors)
+- [Averages/Arithmetic mean](https://ghul.dev/rosetta/arithmetic-mean)
+- [Binary digits](https://ghul.dev/rosetta/binary-digits)
+- [Factorial](https://ghul.dev/rosetta/factorial)
+- [FizzBuzz](https://ghul.dev/rosetta/fizzbuzz)
+- [Hello world/Text](https://ghul.dev/rosetta/hello-world-text)
+- [Quine](https://ghul.dev/rosetta/quine)
+- [Reverse a string](https://ghul.dev/rosetta/reverse-a-string)
+- [Towers of Hanoi](https://ghul.dev/rosetta/towers-of-hanoi)
+
+### functions and closures
+
+Functions as values: passed, returned, captured, and calling themselves.
+
+- [Accumulator factory](https://ghul.dev/rosetta/accumulator-factory)
+- [Anonymous recursion](https://ghul.dev/rosetta/anonymous-recursion)
+- [Apply a callback to an array](https://ghul.dev/rosetta/apply-a-callback-to-an-array)
+- [Catamorphism](https://ghul.dev/rosetta/catamorphism)
+- [Church numerals](https://ghul.dev/rosetta/church-numerals)
+- [Closures/Value capture](https://ghul.dev/rosetta/closures-value-capture)
+- [Cumulative standard deviation](https://ghul.dev/rosetta/cumulative-standard-deviation)
+- [First-class functions](https://ghul.dev/rosetta/first-class-functions)
+- [Jensen's Device](https://ghul.dev/rosetta/jensens-device)
+- [Man or boy test](https://ghul.dev/rosetta/man-or-boy-test)
+- [Mutual recursion](https://ghul.dev/rosetta/mutual-recursion)
+- [Nested function](https://ghul.dev/rosetta/nested-function)
+- [Variadic function](https://ghul.dev/rosetta/variadic-function)
+- [Y combinator](https://ghul.dev/rosetta/y-combinator)
+
+### types and pattern matching
+
+Unions, traits, generics and operators: modelling data and taking it apart again.
+
+- [Abstract type](https://ghul.dev/rosetta/abstract-type)
+- [Algebraic data types](https://ghul.dev/rosetta/algebraic-data-types)
+- [Arithmetic evaluation](https://ghul.dev/rosetta/arithmetic-evaluation)
+- [Flatten a list](https://ghul.dev/rosetta/flatten-a-list)
+- [Generic swap](https://ghul.dev/rosetta/generic-swap)
+- [Multiple distinct objects](https://ghul.dev/rosetta/multiple-distinct-objects)
+- [Null object](https://ghul.dev/rosetta/null-object)
+- [Quaternion](https://ghul.dev/rosetta/quaternion)
+- [Queue/Definition](https://ghul.dev/rosetta/queue-definition)
+- [S-expressions](https://ghul.dev/rosetta/s-expressions)
+- [Ternary logic](https://ghul.dev/rosetta/ternary-logic)
+
+### generators and laziness
+
+Sequences produced a value at a time, and consumers that stop when they have enough.
+
+- [Amb](https://ghul.dev/rosetta/amb)
+- [Balanced brackets](https://ghul.dev/rosetta/balanced-brackets)
+- [Calkin-Wilf sequence](https://ghul.dev/rosetta/calkin-wilf-sequence)
+- [EKG sequence convergence](https://ghul.dev/rosetta/ekg-sequence-convergence)
+- [Fibonacci sequence](https://ghul.dev/rosetta/fibonacci-sequence)
+- [Fusc sequence](https://ghul.dev/rosetta/fusc-sequence)
+- [Hailstone sequence](https://ghul.dev/rosetta/hailstone-sequence)
+- [Intersecting number wheels](https://ghul.dev/rosetta/intersecting-number-wheels)
+- [Kolakoski sequence](https://ghul.dev/rosetta/kolakoski-sequence)
+- [Look-and-say sequence](https://ghul.dev/rosetta/look-and-say-sequence)
+- [Ordered partitions](https://ghul.dev/rosetta/ordered-partitions)
+- [Same fringe](https://ghul.dev/rosetta/same-fringe)
+- [Stern-Brocot sequence](https://ghul.dev/rosetta/stern-brocot-sequence)
+- [Tree traversal](https://ghul.dev/rosetta/tree-traversal)
+- [Van der Corput sequence](https://ghul.dev/rosetta/van-der-corput-sequence)
+- [Van Eck sequence](https://ghul.dev/rosetta/van-eck-sequence)
+
+### numbers
+
+Arithmetic, primes, and sequences with something to prove.
+
+- [Achilles numbers](https://ghul.dev/rosetta/achilles-numbers)
+- [Ackermann function](https://ghul.dev/rosetta/ackermann-function)
+- [Additive primes](https://ghul.dev/rosetta/additive-primes)
+- [Almost prime](https://ghul.dev/rosetta/almost-prime)
+- [Amicable pairs](https://ghul.dev/rosetta/amicable-pairs)
+- [Anti-primes](https://ghul.dev/rosetta/anti-primes)
+- [Descending primes](https://ghul.dev/rosetta/descending-primes)
+- [Gapful numbers](https://ghul.dev/rosetta/gapful-numbers)
+- [Gray code](https://ghul.dev/rosetta/gray-code)
+- [Greatest common divisor](https://ghul.dev/rosetta/greatest-common-divisor)
+- [Haversine formula](https://ghul.dev/rosetta/haversine-formula)
+- [Iterated digits squaring](https://ghul.dev/rosetta/iterated-digits-squaring)
+- [Juggler sequence](https://ghul.dev/rosetta/juggler-sequence)
+- [Kaprekar numbers](https://ghul.dev/rosetta/kaprekar-numbers)
+- [Ludic numbers](https://ghul.dev/rosetta/ludic-numbers)
+- [Map range](https://ghul.dev/rosetta/map-range)
+- [Negative base numbers](https://ghul.dev/rosetta/negative-base-numbers)
+- [Numbers with equal rises and falls](https://ghul.dev/rosetta/numbers-with-equal-rises-and-falls)
+- [Ormiston pairs](https://ghul.dev/rosetta/ormiston-pairs)
+- [Pernicious numbers](https://ghul.dev/rosetta/pernicious-numbers)
+- [Population count](https://ghul.dev/rosetta/population-count)
+- [Radical of an integer](https://ghul.dev/rosetta/radical-of-an-integer)
+- [Roman numerals/Encode](https://ghul.dev/rosetta/roman-numerals-encode)
+- [Semiprime](https://ghul.dev/rosetta/semiprime)
+- [Sieve of Eratosthenes](https://ghul.dev/rosetta/sieve-of-eratosthenes)
+- [Sphenic numbers](https://ghul.dev/rosetta/sphenic-numbers)
+- [Taxicab numbers](https://ghul.dev/rosetta/taxicab-numbers)
+- [Truncatable primes](https://ghul.dev/rosetta/truncatable-primes)
+- [Undulating numbers](https://ghul.dev/rosetta/undulating-numbers)
+- [Zeckendorf number representation](https://ghul.dev/rosetta/zeckendorf-number-representation)
+
+### text
+
+Reading, rewriting and comparing strings.
+
+- [ABC problem](https://ghul.dev/rosetta/abc-problem)
+- [Align columns](https://ghul.dev/rosetta/align-columns)
+- [Camel case and snake case](https://ghul.dev/rosetta/camel-case-and-snake-case)
+- [Entropy](https://ghul.dev/rosetta/entropy)
+- [Jaro similarity](https://ghul.dev/rosetta/jaro-similarity)
+- [Levenshtein distance](https://ghul.dev/rosetta/levenshtein-distance)
+- [Palindrome detection](https://ghul.dev/rosetta/palindrome-detection)
+- [Pangram checker](https://ghul.dev/rosetta/pangram-checker)
+- [Run-length encoding](https://ghul.dev/rosetta/run-length-encoding)
+
+### collections and algorithms
+
+Sorting, searching, and working over whole collections.
+
+- [Damm algorithm](https://ghul.dev/rosetta/damm-algorithm)
+- [Dinesman's multiple-dwelling problem](https://ghul.dev/rosetta/dinesmans-multiple-dwelling-problem)
+- [Forward difference](https://ghul.dev/rosetta/forward-difference)
+- [Huffman coding](https://ghul.dev/rosetta/huffman-coding)
+- [Josephus problem](https://ghul.dev/rosetta/josephus-problem)
+- [Non-continuous subsequences](https://ghul.dev/rosetta/non-continuous-subsequences)
+- [Power set](https://ghul.dev/rosetta/power-set)
+- [Smith–Waterman algorithm](https://ghul.dev/rosetta/smith-waterman-algorithm)
+- [Sorting algorithms/Quicksort](https://ghul.dev/rosetta/sorting-algorithms-quicksort)
+- [Topswops](https://ghul.dev/rosetta/topswops)
+- [Water collected between towers](https://ghul.dev/rosetta/water-collected-between-towers)
+
+
+---
+
 <a id="implementation"></a>
 
 # implementation
@@ -9214,3 +9461,7051 @@ If you encounter any problems, please feel free to open an issue on GitHub. If i
 
 ### PRs
 If you want to fix a bug or make an improvement, particularly if it's something small, go ahead and raise a PR. If it's something complex, please raise an issue first. Note that the CI/CD pipelines are not generally set up to handle PRs from forks, so unless you want to hack my workflow YAML, I might need to pull your feature branch and create a PR on your behalf before I can merge your changes.
+
+
+---
+
+<a id="rosetta/100-doors"></a>
+
+
+# 100 doors
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/100_doors
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+let doors = (1::100) |> map(_ => false) |> collect_list()
+
+for pass in 1::100 do
+    let door mut = pass
+
+    while door <= 100 do
+        doors[door - 1] = !doors[door - 1]
+        door = door + pass
+    od
+od
+
+let open_doors = (1::100) |> filter(door => doors[door - 1])
+
+write_line("open doors: {$open_doors}");
+```
+
+output:
+
+```
+open doors: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+```
+
+
+---
+
+<a id="rosetta/arithmetic-mean"></a>
+
+
+# Averages/Arithmetic mean
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Averages/Arithmetic_mean
+
+```ghul
+use IO.Std.write_line
+use Collections
+use Ghul.Pipes
+
+mean(values: List[double]) -> double =>
+    values |> reduce(0.0D, (total, value) => total + value) /
+    cast(values.count)
+
+write_line("mean: {mean([1.0D, 2.0D, 3.0D, 4.0D, 5.0D]):F1}");
+```
+
+output:
+
+```
+mean: 3.0
+```
+
+
+---
+
+<a id="rosetta/binary-digits"></a>
+
+
+# Binary digits
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Binary_digits
+
+```ghul
+use IO.Std.write_line
+
+binary(value: int) -> string =>
+    if value < 2 then "{value}" else "{binary(value / 2)}{value % 2}" fi
+
+for value in [5, 50, 9000] do
+    write_line(binary(value))
+od
+```
+
+output:
+
+```
+101
+110010
+10001100101000
+```
+
+
+---
+
+<a id="rosetta/factorial"></a>
+
+
+# Factorial
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Factorial
+
+```ghul
+use IO.Std.write_line
+
+let factorial = n rec => if n <= 1 then 1L else cast(n) * rec(n - 1) fi
+
+for n in [0, 1, 5, 10, 20] do
+    write_line("{n}! = {factorial(n)}")
+od
+```
+
+output:
+
+```
+0! = 1
+1! = 1
+5! = 120
+10! = 3628800
+20! = 2432902008176640000
+```
+
+
+---
+
+<a id="rosetta/fizzbuzz"></a>
+
+
+# FizzBuzz
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/FizzBuzz
+
+```ghul
+use IO.Std.write_line
+
+for i in 1::100 do
+    write_line(
+        if i % 15 == 0 then
+            "FizzBuzz"
+        elif i % 3 == 0 then
+            "Fizz"
+        elif i % 5 == 0 then
+            "Buzz"
+        else
+            "{i}"
+        fi
+    )
+od
+```
+
+output:
+
+```
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+16
+17
+Fizz
+19
+Buzz
+Fizz
+22
+23
+Fizz
+Buzz
+26
+Fizz
+28
+29
+FizzBuzz
+31
+32
+Fizz
+34
+Buzz
+Fizz
+37
+38
+Fizz
+Buzz
+41
+Fizz
+43
+44
+FizzBuzz
+46
+47
+Fizz
+49
+Buzz
+Fizz
+52
+53
+Fizz
+Buzz
+56
+Fizz
+58
+59
+FizzBuzz
+61
+62
+Fizz
+64
+Buzz
+Fizz
+67
+68
+Fizz
+Buzz
+71
+Fizz
+73
+74
+FizzBuzz
+76
+77
+Fizz
+79
+Buzz
+Fizz
+82
+83
+Fizz
+Buzz
+86
+Fizz
+88
+89
+FizzBuzz
+91
+92
+Fizz
+94
+Buzz
+Fizz
+97
+98
+Fizz
+Buzz
+```
+
+
+---
+
+<a id="rosetta/hello-world-text"></a>
+
+
+# Hello world/Text
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Hello_world/Text
+
+```ghul
+IO.Std.write_line("Hello world!");
+```
+
+output:
+
+```
+Hello world!
+```
+
+
+---
+
+<a id="rosetta/quine"></a>
+
+
+# Quine
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Quine
+
+```ghul
+use IO.Std.write_line; let quote = string(cast char(34), 1); let marker = string(cast char(77), 1); let source = "use IO.Std.write_line; let quote = string(cast char(34), 1); let marker = string(cast char(77), 1); let source = M; write_line(source.replace(marker, string.concat([quote, source, quote])))"; write_line(source.replace(marker, string.concat([quote, source, quote])))
+```
+
+output:
+
+```
+use IO.Std.write_line; let quote = string(cast char(34), 1); let marker = string(cast char(77), 1); let source = "use IO.Std.write_line; let quote = string(cast char(34), 1); let marker = string(cast char(77), 1); let source = M; write_line(source.replace(marker, string.concat([quote, source, quote])))"; write_line(source.replace(marker, string.concat([quote, source, quote])))
+```
+
+
+---
+
+<a id="rosetta/reverse-a-string"></a>
+
+
+# Reverse a string
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Reverse_a_string
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+reverse(text: string) -> string =>
+    text |> reduce("", (reversed, character) => "{character}{reversed}")
+
+write_line(reverse("asdf"))
+write_line(reverse("Hello, World!"));
+```
+
+output:
+
+```
+fdsa
+!dlroW ,olleH
+```
+
+
+---
+
+<a id="rosetta/towers-of-hanoi"></a>
+
+
+# Towers of Hanoi
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Towers_of_Hanoi
+
+```ghul
+use IO.Std.write_line
+
+move(disks: int, source: int, target: int, spare: int) -> void =>
+    if disks > 0 then
+        move(disks - 1, source, spare, target)
+        write_line("move a disk from pole {source} to pole {target}")
+        move(disks - 1, spare, target, source)
+    fi
+
+move(3, 1, 3, 2);
+```
+
+output:
+
+```
+move a disk from pole 1 to pole 3
+move a disk from pole 1 to pole 2
+move a disk from pole 3 to pole 2
+move a disk from pole 1 to pole 3
+move a disk from pole 2 to pole 1
+move a disk from pole 2 to pole 3
+move a disk from pole 1 to pole 3
+```
+
+
+---
+
+<a id="rosetta/accumulator-factory"></a>
+
+
+# Accumulator factory
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Accumulator_factory
+
+```ghul
+use IO.Std.write_line
+
+union Number is
+    WHOLE(value: int)
+    FRACTIONAL(value: double)
+si
+
+use Number.WHOLE
+use Number.FRACTIONAL
+
+widen(n: Number) -> double =>
+    case ► n
+    when (value): WHOLE then cast(value)
+    when (value): FRACTIONAL then value
+    esac
+
+add(left: Number, right: Number) -> Number =>
+    if let whole_left: WHOLE = ► left, whole_right: WHOLE = ► right then
+        WHOLE(whole_left.value + whole_right.value)
+    else
+        FRACTIONAL(widen(left) + widen(right))
+    fi
+
+show(n: Number) -> string =>
+    case ► n
+    when (value): WHOLE then "{value}"
+    when (value): FRACTIONAL then "{value}"
+    esac
+
+accumulator(initial: Number) -> Number -> Number is
+    let sum mut = initial
+
+    return value => (
+        sum = add(sum, value)
+        sum
+    )
+si
+
+let x = accumulator(WHOLE(1))
+
+x(WHOLE(5))
+
+accumulator(WHOLE(3))
+
+write_line(show(x(FRACTIONAL(2.3D))))
+
+let y = accumulator(WHOLE(10))
+
+y(WHOLE(5))
+
+write_line(show(y(WHOLE(5))));
+```
+
+output:
+
+```
+8.3
+20
+```
+
+
+---
+
+<a id="rosetta/anonymous-recursion"></a>
+
+
+# Anonymous recursion
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Anonymous_recursion
+
+```ghul
+use IO.Std.write_line
+
+let fibonacci = n =>
+    assert n >= 0 else "fibonacci is not defined for a negative argument" in
+    (i rec => if i < 2 then i else rec(i - 1) + rec(i - 2) fi)(n)
+
+for n in 0::10 do
+    write_line("fibonacci({n}) = {fibonacci(n)}")
+od
+```
+
+output:
+
+```
+fibonacci(0) = 0
+fibonacci(1) = 1
+fibonacci(2) = 1
+fibonacci(3) = 2
+fibonacci(4) = 3
+fibonacci(5) = 5
+fibonacci(6) = 8
+fibonacci(7) = 13
+fibonacci(8) = 21
+fibonacci(9) = 34
+fibonacci(10) = 55
+```
+
+
+---
+
+<a id="rosetta/apply-a-callback-to-an-array"></a>
+
+
+# Apply a callback to an array
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Apply_a_callback_to_an_array
+
+## Using map
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+write_line("{$([1, 2, 3, 4, 5] |> map(value => value * value))}");
+```
+
+output:
+
+```
+[1, 4, 9, 16, 25]
+```
+
+## Writing apply
+
+```ghul
+use IO.Std.write_line
+use Collections.List
+use Collections.LIST
+
+apply[T, U](values: T[], callback: T -> U pure) -> List[U] is
+    let applied = LIST[U]()
+
+    for value in values do
+        applied.add(callback(value))
+    od
+
+    return applied
+si
+
+shout(word: string) -> string => "{word.to_upper()}!"
+
+write_line("{$([1, 2, 3, 4, 5] |> apply(value => value * value))}")
+write_line("{$(["frog", "newt", "toad"] |> apply(shout))}");
+```
+
+output:
+
+```
+[1, 4, 9, 16, 25]
+[FROG!, NEWT!, TOAD!]
+```
+
+
+---
+
+<a id="rosetta/catamorphism"></a>
+
+
+# Catamorphism
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Catamorphism
+
+## Using reduce
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+let numbers = [1, 2, 3, 4, 5]
+
+let largest =
+    (left: int, right: int) => if left > right then left else right fi
+
+let sum = numbers |> reduce(0, (total, value) => total + value)
+let product = numbers |> reduce(1, (total, value) => total * value)
+
+write_line("sum:     {sum}")
+write_line("product: {product}")
+write_line("largest: {numbers |> reduce(numbers[0], largest)}");
+```
+
+output:
+
+```
+sum:     15
+product: 120
+largest: 5
+```
+
+## Writing fold
+
+```ghul
+use IO.Std.write_line
+use Collections.Iterable
+use Collections.List
+
+fold_left[T, A](values: Iterable[T], seed: A, combine: (A, T) -> A) -> A is
+    let running mut = seed
+
+    for value in values do
+        running = combine(running, value)
+    od
+
+    return running
+si
+
+fold_right[T, A](values: List[T], seed: A, combine: (T, A) -> A) -> A is
+    let running mut = seed
+
+    for i in 0..values.count do
+        running = combine(values[values.count - 1 - i], running)
+    od
+
+    return running
+si
+
+let numbers = [1, 2, 3, 4, 5]
+
+let bracket_left = (running: string, value: int) => "({running} {value})"
+let bracket_right = (value: int, running: string) => "({value} {running})"
+
+let left_sum = fold_left(numbers, 0, (total, value) => total + value)
+let right_sum = fold_right(numbers, 0, (value, total) => value + total)
+
+write_line("left  sum:  {left_sum}")
+write_line("right sum:  {right_sum}")
+write_line("left  tree: {fold_left(numbers, "nil", bracket_left)}")
+write_line("right tree: {fold_right(numbers, "nil", bracket_right)}");
+```
+
+output:
+
+```
+left  sum:  15
+right sum:  15
+left  tree: (((((nil 1) 2) 3) 4) 5)
+right tree: (1 (2 (3 (4 (5 nil)))))
+```
+
+
+---
+
+<a id="rosetta/church-numerals"></a>
+
+
+# Church numerals
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Church_numerals
+
+```ghul
+use IO.Std.write_line
+
+use Church[T] = ((T) -> T) -> (T) -> T
+
+zero[T](f: (T) -> T) -> (T) -> T => x => x
+
+successor[T](n: Church[T]) -> Church[T] => f => x => f(n(f)(x))
+
+add[T](a: Church[T], b: Church[T]) -> Church[T] =>
+    f => x => a(f)(b(f)(x))
+
+multiply[T](a: Church[T], b: Church[T]) -> Church[T] => f => a(b(f))
+
+exponentiate[T](a: Church[T], b: Church[(T) -> T]) -> Church[T] => b(a)
+
+to_church[T](n: int) -> Church[T] =>
+    if n == 0 then zero[T] else successor(to_church[T](n - 1)) fi
+
+to_int(n: Church[int]) -> int => n(x => x + 1)(0)
+
+let three = successor(successor(successor(zero[int])))
+let four = successor(three)
+
+write_line("three is {to_int(three)}")
+write_line("four is {to_int(four)}")
+write_line("three plus four is {to_int(add(three, four))}")
+write_line("three times four is {to_int(multiply(three, four))}")
+let three_as_exponent = to_church[(int) -> int](3)
+let four_as_exponent = to_church[(int) -> int](4)
+
+write_line(
+    "four to the power three is "
+    "{to_int(exponentiate(four, three_as_exponent))}")
+
+write_line(
+    "three to the power four is "
+    "{to_int(exponentiate(three, four_as_exponent))}");
+```
+
+output:
+
+```
+three is 3
+four is 4
+three plus four is 7
+three times four is 12
+four to the power three is 64
+three to the power four is 81
+```
+
+
+---
+
+<a id="rosetta/closures-value-capture"></a>
+
+
+# Closures/Value capture
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Closures/Value_capture
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+
+let squares = LIST[() -> int]()
+
+for i in 0..10 do
+    squares.add(() => i * i)
+od
+
+write_line("{squares[3]()}");
+```
+
+output:
+
+```
+9
+```
+
+
+---
+
+<a id="rosetta/cumulative-standard-deviation"></a>
+
+
+# Cumulative standard deviation
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Cumulative_standard_deviation
+
+```ghul
+use IO.Std.write_line
+use System.Math.sqrt
+
+let standard_deviation =
+    let count mut = 0 in
+    let total mut = 0.0D in
+    let squares mut = 0.0D in
+
+    (sample: double) -> double => (
+        count = count + 1
+        total = total + sample
+        squares = squares + sample * sample
+
+        let mean = total / cast double(count)
+
+        sqrt(squares / cast double(count) - mean * mean)
+    )
+
+for sample in [2.0D, 4.0D, 4.0D, 4.0D, 5.0D, 5.0D, 7.0D, 9.0D] do
+    write_line("after {sample}: {standard_deviation(sample)}")
+od
+```
+
+output:
+
+```
+after 2: 0
+after 4: 1
+after 4: 0.9428090415820626
+after 4: 0.8660254037844386
+after 5: 0.9797958971132716
+after 5: 1
+after 7: 1.3997084244475297
+after 9: 2
+```
+
+
+---
+
+<a id="rosetta/first-class-functions"></a>
+
+
+# First-class functions
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/First-class_functions
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+use Collections.LIST
+use System.Math
+
+>>[A, B, C](f: A -> B, g: B -> C) -> A -> C =>
+    x => g(f(x))
+
+let cube = x => x * x * x
+let cube_root = x => Math.cbrt(x)
+
+let functions = LIST()
+functions.add(Math.sin)
+functions.add(Math.cos)
+functions.add(cube)
+
+let inverses = LIST()
+inverses.add(Math.asin)
+inverses.add(Math.acos)
+inverses.add(cube_root)
+
+for (function, inverse) in functions |> zip(inverses) do
+    let round_trip = function >> inverse
+
+    write_line("{round_trip(0.5D):F6}")
+od
+```
+
+output:
+
+```
+0.500000
+0.500000
+0.500000
+```
+
+
+---
+
+<a id="rosetta/jensens-device"></a>
+
+
+# Jensen's Device
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Jensen's_Device
+
+```ghul
+use IO.Std.write_line
+
+let i mut = 0
+
+let sum = (low: int, high: int, term: () -> double) -> double => (
+    let total mut = 0.0D
+
+    i = low
+
+    while i <= high do
+        total = total + term()
+
+        i = i + 1
+    od
+
+    total
+)
+
+write_line("{sum(1, 100, () => 1.0D / cast double(i))}");
+```
+
+output:
+
+```
+5.187377517639621
+```
+
+
+---
+
+<a id="rosetta/man-or-boy-test"></a>
+
+
+# Man or boy test
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Man_or_boy_test
+
+```ghul
+use IO.Std.write_line
+
+a(
+    k: int,
+    x1: () -> int,
+    x2: () -> int,
+    x3: () -> int,
+    x4: () -> int,
+    x5: () -> int
+) -> int is
+    let counter mut = k
+
+    let b = () rec => (
+        counter = counter - 1
+
+        a(counter, rec, x1, x2, x3, x4)
+    )
+
+    return if counter <= 0 then x4() + x5() else b() fi
+si
+
+for k in 0::10 do
+    let result = a(k, () => 1, () => -1, () => -1, () => 1, () => 0)
+
+    write_line("k = {k,2}: {result}")
+od
+```
+
+output:
+
+```
+k =  0: 1
+k =  1: 0
+k =  2: -2
+k =  3: 0
+k =  4: 1
+k =  5: 0
+k =  6: 1
+k =  7: -1
+k =  8: -10
+k =  9: -30
+k = 10: -67
+```
+
+
+---
+
+<a id="rosetta/mutual-recursion"></a>
+
+
+# Mutual recursion
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Mutual_recursion
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+female(n: int) -> int => if n == 0 then 1 else n - male(female(n - 1)) fi
+
+male(n: int) -> int => if n == 0 then 0 else n - female(male(n - 1)) fi
+
+show(name: string, function: (int) -> int pure) =>
+    write_line("{name} {(0..20) |> map(function) |> join(" ")}")
+
+show("F:", female)
+show("M:", male);
+```
+
+output:
+
+```
+F: 1 1 2 2 3 3 4 5 5 6 6 7 8 8 9 9 10 11 11 12
+M: 0 0 1 2 2 3 4 4 5 6 6 7 7 8 9 9 10 11 11 12
+```
+
+
+---
+
+<a id="rosetta/nested-function"></a>
+
+
+# Nested function
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Nested_function
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Ghul.Pipes
+
+make_list(separator: string) -> string is
+    let counter mut = 0
+
+    let make_item = (item: string) => (
+        counter = counter + 1
+        "{counter}{separator}{item}"
+    )
+
+    let items = LIST[string]()
+
+    for item in ["first", "second", "third"] do
+        items.add(make_item(item))
+    od
+
+    return items |> join("\n")
+si
+
+write_line(make_list(". "));
+```
+
+output:
+
+```
+1. first
+2. second
+3. third
+```
+
+
+---
+
+<a id="rosetta/variadic-function"></a>
+
+
+# Variadic function
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Variadic_function
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Ghul.Pipes
+
+print_all[T](values: T[]) is
+    for value in values do
+        write_line("{value}")
+    od
+si
+
+class ▼ Animal(name: string) abstract is
+    ◆▼ speak() -> string
+
+    ▲ to_string() -> string => "{name} says {speak()}"
+si
+
+class CAT(name: string): Animal is
+    super(name)
+
+    ▲ speak() -> string => "meow"
+si
+
+class DOG(name: string): Animal is
+    super(name)
+
+    ▲ speak() -> string => "woof"
+si
+
+herd(animals: Animal[]) is
+    for animal in animals do
+        write_line("{animal}")
+    od
+si
+
+print_all(["one", 2, 3.5])
+
+herd([CAT("felix"), DOG("rex")])
+
+let animals = LIST[Animal]()
+animals.add(CAT("tom"))
+animals.add(DOG("spot"))
+
+herd(animals |> collect_array());
+```
+
+output:
+
+```
+one
+2
+3.5
+felix says meow
+rex says woof
+tom says meow
+spot says woof
+```
+
+
+---
+
+<a id="rosetta/y-combinator"></a>
+
+
+# Y combinator
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Y_combinator
+
+## The y combinator
+
+```ghul
+use IO.Std.write_line
+
+class SELF_APPLY[A, B](_f: (SELF_APPLY[A, B]) -> (A -> B)) is
+    apply(r: SELF_APPLY[A, B]) -> (A -> B) => _f(r)
+si
+
+y[A, B](f: (A -> B) -> (A -> B)) -> (A -> B) =>
+    let wrap =
+        SELF_APPLY[A, B](
+            (r: SELF_APPLY[A, B]) => (a: A) => f(r.apply(r))(a))
+    in wrap.apply(wrap)
+
+let factorial =
+    y(recurse => n =>
+        if n <= 1 then 1L else cast(n) * recurse(n - 1) fi)
+
+let fibonacci =
+    y(recurse => n =>
+        if n < 2 then n else recurse(n - 1) + recurse(n - 2) fi)
+
+let countdown =
+    y(recurse => n =>
+        if n <= 0 then "liftoff" else "{n}, {recurse(n - 1)}" fi)
+
+let gcd =
+    y(recurse => ((a, b): (int, int)) =>
+        if b == 0 then a else recurse((b, a % b)) fi)
+
+for n in 0::10 do
+    write_line(
+        "factorial({n}) = {factorial(n)}, "
+        "fibonacci({n}) = {fibonacci(n)}")
+od
+
+write_line("countdown(5) = {countdown(5)}")
+write_line("gcd(1071, 462) = {gcd((1071, 462))}");
+```
+
+output:
+
+```
+factorial(0) = 1, fibonacci(0) = 0
+factorial(1) = 1, fibonacci(1) = 1
+factorial(2) = 2, fibonacci(2) = 1
+factorial(3) = 6, fibonacci(3) = 2
+factorial(4) = 24, fibonacci(4) = 3
+factorial(5) = 120, fibonacci(5) = 5
+factorial(6) = 720, fibonacci(6) = 8
+factorial(7) = 5040, fibonacci(7) = 13
+factorial(8) = 40320, fibonacci(8) = 21
+factorial(9) = 362880, fibonacci(9) = 34
+factorial(10) = 3628800, fibonacci(10) = 55
+countdown(5) = 5, 4, 3, 2, 1, liftoff
+gcd(1071, 462) = 21
+```
+
+## Using rec
+
+```ghul
+use IO.Std.write_line
+
+let factorial = n rec => if n <= 1 then 1L else cast(n) * rec(n - 1) fi
+
+let fibonacci = n rec => if n < 2 then n else rec(n - 1) + rec(n - 2) fi
+
+let countdown =
+    n rec => if n <= 0 then "liftoff" else "{n}, {rec(n - 1)}" fi
+
+let gcd =
+    ((a, b): (int, int)) rec =>
+        if b == 0 then a else rec((b, a % b)) fi
+
+for n in 0::10 do
+    write_line(
+        "factorial({n}) = {factorial(n)}, "
+        "fibonacci({n}) = {fibonacci(n)}")
+od
+
+write_line("countdown(5) = {countdown(5)}")
+write_line("gcd(1071, 462) = {gcd((1071, 462))}");
+```
+
+output:
+
+```
+factorial(0) = 1, fibonacci(0) = 0
+factorial(1) = 1, fibonacci(1) = 1
+factorial(2) = 2, fibonacci(2) = 1
+factorial(3) = 6, fibonacci(3) = 2
+factorial(4) = 24, fibonacci(4) = 3
+factorial(5) = 120, fibonacci(5) = 5
+factorial(6) = 720, fibonacci(6) = 8
+factorial(7) = 5040, fibonacci(7) = 13
+factorial(8) = 40320, fibonacci(8) = 21
+factorial(9) = 362880, fibonacci(9) = 34
+factorial(10) = 3628800, fibonacci(10) = 55
+countdown(5) = 5, 4, 3, 2, 1, liftoff
+gcd(1071, 462) = 21
+```
+
+
+---
+
+<a id="rosetta/abstract-type"></a>
+
+
+# Abstract type
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Abstract_type
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+trait ▼ Shape is
+    ◆▼ area() -> double
+    ◆▼ name() -> string
+si
+
+trait ▼ Described is
+    ▼ describe() -> string => "a shape"
+si
+
+class ▼ Polygon: Shape, Described abstract is
+    _sides: int
+
+    init(sides: int) is
+        _sides = sides
+    si
+
+    ◆▲▼ area() -> double
+
+    ▲ name() -> string => "{_sides}-sided polygon"
+
+    ▲▼ describe() -> string => "{name()}, area {area():F2}"
+si
+
+class SQUARE: Polygon is
+    _side: double
+
+    init(side: double) is
+        super.init(4)
+
+        _side = side
+    si
+
+    ▲ area() -> double => _side * _side
+si
+
+class TRIANGLE: Polygon is
+    _base: double
+    _height: double
+
+    init(base: double, height: double) is
+        super.init(3)
+
+        _base = base
+        _height = height
+    si
+
+    ▲ area() -> double => _base * _height / 2.0D
+
+    ▲ describe() -> string => "{super.describe()}, and it is a triangle"
+si
+
+let shapes: Shape[] = [SQUARE(3.0D), TRIANGLE(4.0D, 5.0D)]
+
+shapes |> each(shape => write_line(shape.name()))
+
+let described: Described[] = [SQUARE(2.0D), TRIANGLE(6.0D, 1.0D)]
+
+described |> each(shape => write_line(shape.describe()));
+```
+
+output:
+
+```
+4-sided polygon
+3-sided polygon
+4-sided polygon, area 4.00
+3-sided polygon, area 3.00, and it is a triangle
+```
+
+
+---
+
+<a id="rosetta/algebraic-data-types"></a>
+
+
+# Algebraic data types
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Algebraic_data_types
+
+```ghul
+use IO.Std.write_line
+
+enum Color is RED, BLACK, si
+
+use Color.RED
+use Color.BLACK
+
+union Tree is
+    EMPTY
+    NODE(color: Color, left: Tree, value: int, right: Tree)
+si
+
+use Tree.EMPTY
+use Tree.NODE
+
+balance(c: Color, l: Tree, v: int, r: Tree) -> Tree =>
+    case (c, l, v, r)
+    when (~BLACK, (~RED, (~RED, a, x, b): NODE, y, m): NODE, z, d) then
+        NODE(RED, NODE(BLACK, a, x, b), y, NODE(BLACK, m, z, d))
+    when (~BLACK, (~RED, a, x, (~RED, b, y, m): NODE): NODE, z, d) then
+        NODE(RED, NODE(BLACK, a, x, b), y, NODE(BLACK, m, z, d))
+    when (~BLACK, a, x, (~RED, (~RED, b, y, m): NODE, z, d): NODE) then
+        NODE(RED, NODE(BLACK, a, x, b), y, NODE(BLACK, m, z, d))
+    when (~BLACK, a, x, (~RED, b, y, (~RED, m, z, d): NODE): NODE) then
+        NODE(RED, NODE(BLACK, a, x, b), y, NODE(BLACK, m, z, d))
+    else
+        NODE(c, l, v, r)
+    esac
+
+_insert(tree: Tree, element: int) -> Tree =>
+    case ► tree
+    when _: EMPTY then
+        NODE(RED, EMPTY, element, EMPTY)
+    when (c, l, v, r): NODE then
+        if element < v then
+            balance(c, _insert(l, element), v, r)
+        elif element > v then
+            balance(c, l, v, _insert(r, element))
+        else
+            tree
+        fi
+    esac
+
+insert(tree: Tree, element: int) -> Tree =>
+    case _insert(tree, element)
+    when (c, l, v, r): NODE then NODE(BLACK, l, v, r)
+    else EMPTY
+    esac
+
+in_order(tree: Tree) -> string =>
+    case ► tree
+    when _: EMPTY then ""
+    when (c, l, v, r): NODE then "{in_order(l)}{v} {in_order(r)}"
+    esac
+
+black_height(tree: Tree) -> int =>
+    case ► tree
+    when _: EMPTY then
+        1
+    when (c, l, v, r): NODE then
+        let left = black_height(l)
+        let right = black_height(r)
+
+        if left < 0 \/ right < 0 \/ left != right then
+            -1
+        elif c == RED /\ (is_red(l) \/ is_red(r)) then
+            -1
+        else
+            left + if c == BLACK then 1 else 0 fi
+        fi
+    esac
+
+is_red(tree: Tree) -> bool =>
+    case ► tree
+    when _: EMPTY then false
+    when (c, l, v, r): NODE then c == RED
+    esac
+
+let tree: Tree mut = EMPTY
+
+for element in [11, 2, 14, 1, 7, 15, 5, 8, 4] do
+    tree = insert(tree, element)
+od
+
+write_line("in order: {in_order(tree)}")
+write_line("black height: {black_height(tree)}");
+```
+
+output:
+
+```
+in order: 1 2 4 5 7 8 11 14 15 
+black height: 4
+```
+
+
+---
+
+<a id="rosetta/arithmetic-evaluation"></a>
+
+
+# Arithmetic evaluation
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Arithmetic_evaluation
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+union Expression is
+    NUMBER(value: int)
+    ADD(left: Expression, right: Expression)
+    SUBTRACT(left: Expression, right: Expression)
+    MULTIPLY(left: Expression, right: Expression)
+    DIVIDE(left: Expression, right: Expression)
+si
+
+use Expression.NUMBER
+use Expression.ADD
+use Expression.SUBTRACT
+use Expression.MULTIPLY
+use Expression.DIVIDE
+
+struct PARSED(expression: Expression, next: int)
+
+skip_spaces(text: string, at: int) -> int =>
+    if at < text.length /\ text[at] == ' ' then
+        skip_spaces(text, at + 1)
+    else
+        at
+    fi
+
+parse_term(text: string, at: int) -> PARSED? is
+    let start = skip_spaces(text, at)
+
+    if start == text.length then
+        return null
+    fi
+
+    if text[start] == '(' then
+        if let (expression, next) = parse_expression(text, start + 1) then
+            let close = skip_spaces(text, next)
+
+            if close < text.length /\ text[close] == ')' then
+                return PARSED(expression, close + 1)
+            fi
+        fi
+
+        return null
+    fi
+
+    let end mut = start
+
+    while end < text.length /\ char.is_digit(text[end]) do
+        end = end + 1
+    od
+
+    if end == start then
+        return null
+    fi
+
+    let digits = text[start..end]
+
+    return PARSED(NUMBER(int.parse(digits)), end)
+si
+
+operator_at(text: string, position: int, operators: string) -> int? =>
+    let here = skip_spaces(text, position) in
+    if here < text.length /\ operators.contains(text[here]) then
+        here
+    else
+        null
+    fi
+
+build(operator: char, left: Expression, right: Expression) -> Expression =>
+    case operator
+    when '+' then ADD(left, right)
+    when '-' then SUBTRACT(left, right)
+    when '*' then MULTIPLY(left, right)
+    when '/' then DIVIDE(left, right)
+    else throw System.Exception("not an operator: {operator}")
+    esac
+
+parse_run(
+    text: string,
+    at: int,
+    operators: string,
+    operand: (string, int) -> PARSED?
+) -> PARSED? is
+    if let (left, next) = operand(text, at) then
+        let expression mut = left
+        let position mut = next
+
+        while let here = operator_at(text, position, operators) do
+            if let (right, after) = operand(text, here + 1) then
+                expression = build(text[here], expression, right)
+                position = after
+            else
+                return null
+            fi
+        od
+
+        return PARSED(expression, position)
+    fi
+
+    return null
+si
+
+parse_factor(text: string, at: int) -> PARSED? =>
+    parse_run(text, at, "*/", parse_term)
+
+parse_expression(text: string, at: int) -> PARSED? =>
+    parse_run(text, at, "+-", parse_factor)
+
+parse(text: string) -> Expression? is
+    if let (expression, next) = parse_expression(text, 0) /\
+        skip_spaces(text, next) == text.length
+    then
+        return expression
+    fi
+
+    return null
+si
+
+evaluate(expression: Expression) -> int =>
+    case ► expression
+    when (value): NUMBER then value
+    when (left, right): ADD then evaluate(left) + evaluate(right)
+    when (left, right): SUBTRACT then evaluate(left) - evaluate(right)
+    when (left, right): MULTIPLY then evaluate(left) * evaluate(right)
+    when (left, right): DIVIDE then evaluate(left) / evaluate(right)
+    esac
+
+show(expression: Expression) -> string =>
+    case ► expression
+    when (value): NUMBER then "{value}"
+    when (left, right): ADD then "(+ {show(left)} {show(right)})"
+    when (left, right): SUBTRACT then "(- {show(left)} {show(right)})"
+    when (left, right): MULTIPLY then "(* {show(left)} {show(right)})"
+    when (left, right): DIVIDE then "(/ {show(left)} {show(right)})"
+    esac
+
+for source in [
+    "(1+3)*7",
+    "1+3*7",
+    "2*(3+4)-10/5",
+    "((11+3)*(5-2))/7",
+    "1+*2",
+    "(1+3",
+    "1 2"
+] do
+    if let tree = parse(source) then
+        write_line("{source} => {show(tree)} => {evaluate(tree)}")
+    else
+        write_line("{source} => cannot be parsed")
+    fi
+od
+```
+
+output:
+
+```
+(1+3)*7 => (* (+ 1 3) 7) => 28
+1+3*7 => (+ 1 (* 3 7)) => 22
+2*(3+4)-10/5 => (- (* 2 (+ 3 4)) (/ 10 5)) => 12
+((11+3)*(5-2))/7 => (/ (* (+ 11 3) (- 5 2)) 7) => 6
+1+*2 => cannot be parsed
+(1+3 => cannot be parsed
+1 2 => cannot be parsed
+```
+
+
+---
+
+<a id="rosetta/flatten-a-list"></a>
+
+
+# Flatten a list
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Flatten_a_list
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+union Nested is
+    ATOM(value: int)
+    LIST(items: Nested[])
+si
+
+use Nested.ATOM
+use Nested.LIST
+
+atom(value: int) -> Nested => ATOM(value)
+
+list(items: Nested[]) -> Nested => LIST(items)
+
+flatten(node: Nested) -> Pipe[int] is
+    case ► node
+    when (value): ATOM then
+        yield value
+    when (items): LIST then
+        for item in items do
+            yield in flatten(item)
+        od
+    esac
+si
+
+show(node: Nested) -> string =>
+    case ► node
+    when (value): ATOM then "{value}"
+    when (items): LIST then "[{items |> map(show) |> join(", ")}]"
+    esac
+
+let input =
+    list([
+        list([atom(1)]),
+        atom(2),
+        list([list([atom(3), atom(4)]), atom(5)]),
+        list([list([list([])])]),
+        list([list([list([atom(6)])])]),
+        atom(7),
+        atom(8),
+        list([])
+    ])
+
+write_line(show(input))
+write_line("[{flatten(input) |> join(", ")}]");
+```
+
+output:
+
+```
+[[1], 2, [[3, 4], 5], [[[]]], [[[6]]], 7, 8, []]
+[1, 2, 3, 4, 5, 6, 7, 8]
+```
+
+
+---
+
+<a id="rosetta/generic-swap"></a>
+
+
+# Generic swap
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Generic_swap
+
+```ghul
+use IO.Std.write_line
+
+swap[T](left: T ref, right: T ref) is
+    (left!, right!) = (right!, left!)
+si
+
+let a mut = 1
+let b mut = 2
+
+swap(a ref, b ref)
+
+write_line("ints:    {a} {b}")
+
+let s mut = "first"
+let t mut = "second"
+
+swap(s ref, t ref)
+
+write_line("strings: {s} {t}")
+
+let p mut = (1, "one")
+let q mut = (2, "two")
+
+swap(p ref, q ref)
+
+write_line("tuples:  {p} {q}");
+```
+
+output:
+
+```
+ints:    2 1
+strings: second first
+tuples:  (2, two) (1, one)
+```
+
+
+---
+
+<a id="rosetta/multiple-distinct-objects"></a>
+
+
+# Multiple distinct objects
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Multiple_distinct_objects
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+class BOX(value: int public)
+
+let n = 5
+
+let distinct = (0..n) |> map(_ => BOX(0)) |> collect_list()
+
+distinct[0].value = 42
+
+write_line(
+    "distinct: {distinct |> map(box => "{box.value}") |> join(" ")}")
+
+let shared = BOX(0)
+let same = (0..n) |> map(_ => shared) |> collect_list()
+
+same[0].value = 42
+
+write_line(
+    "shared:   {same |> map(box => "{box.value}") |> join(" ")}");
+```
+
+output:
+
+```
+distinct: 42 0 0 0 0
+shared:   42 42 42 42 42
+```
+
+
+---
+
+<a id="rosetta/null-object"></a>
+
+
+# Null object
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Null_object
+
+```ghul
+use IO.Std.write_line
+
+is_null(text: string?) -> bool => !text?
+
+is_null(number: int?) -> bool => !number?
+
+describe(text: string?) -> string =>
+    if let value = text then "\"{value}\"" else "null" fi
+
+describe(number: int?) -> string =>
+    if let value = number then "{value}" else "null" fi
+
+let ► text: string? = "hello"
+let nothing: string? = null
+let ► number: int? = 42
+let no_number: int? = null
+
+write_line("text is null:      {is_null(text)}")
+write_line("nothing is null:   {is_null(nothing)}")
+write_line("number is null:    {is_null(number)}")
+write_line("no_number is null: {is_null(no_number)}")
+write_line("")
+write_line("text:      {describe(text)}")
+write_line("nothing:   {describe(nothing)}")
+write_line("number:    {describe(number)}")
+write_line("no_number: {describe(no_number)}")
+write_line("")
+write_line("nothing, with a fallback: {nothing ?? "none"}");
+```
+
+output:
+
+```
+text is null:      False
+nothing is null:   True
+number is null:    False
+no_number is null: True
+
+text:      "hello"
+nothing:   null
+number:    42
+no_number: null
+
+nothing, with a fallback: none
+```
+
+
+---
+
+<a id="rosetta/quaternion"></a>
+
+
+# Quaternion
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Quaternion
+
+```ghul
+use IO.Std.write_line
+use System.Math
+
+struct QUATERNION(a: double, b: double, c: double, d: double) is
+    norm: double => Math.sqrt(a * a + b * b + c * c + d * d)
+
+    negative: QUATERNION => QUATERNION(-a, -b, -c, -d)
+
+    conjugate: QUATERNION => QUATERNION(a, -b, -c, -d)
+
+    +(r: double) -> QUATERNION => QUATERNION(a + r, b, c, d)
+
+    +(q: QUATERNION) -> QUATERNION =>
+        QUATERNION(a + q.a, b + q.b, c + q.c, d + q.d)
+
+    *(r: double) -> QUATERNION =>
+        QUATERNION(a * r, b * r, c * r, d * r)
+
+    *(q: QUATERNION) -> QUATERNION =>
+        QUATERNION(
+            a * q.a - b * q.b - c * q.c - d * q.d,
+            a * q.b + b * q.a + c * q.d - d * q.c,
+            a * q.c - b * q.d + c * q.a + d * q.b,
+            a * q.d + b * q.c - c * q.b + d * q.a
+        )
+
+    =~(q: QUATERNION) -> bool =>
+        a == q.a /\ b == q.b /\ c == q.c /\ d == q.d
+
+    ▲ get_hash_code() -> int =>
+        a.get_hash_code() ^ b.get_hash_code() ^
+            c.get_hash_code() ^ d.get_hash_code()
+
+    ▲ to_string() -> string => "({a}, {b}, {c}, {d})"
+si
+
++(r: double, q: QUATERNION) -> QUATERNION => q + r
+
+*(r: double, q: QUATERNION) -> QUATERNION => q * r
+
+let q = QUATERNION(1.0D, 2.0D, 3.0D, 4.0D)
+let q1 = QUATERNION(2.0D, 3.0D, 4.0D, 5.0D)
+let q2 = QUATERNION(3.0D, 4.0D, 5.0D, 6.0D)
+let r = 7.0D
+
+write_line("q  = {q}")
+write_line("q1 = {q1}")
+write_line("q2 = {q2}")
+write_line("r  = {r}")
+write_line("")
+write_line("norm q      = {q.norm}")
+write_line("negative q  = {q.negative}")
+write_line("conjugate q = {q.conjugate}")
+write_line("q + r       = {q + r}")
+write_line("r + q       = {r + q}")
+write_line("q1 + q2     = {q1 + q2}")
+write_line("q * r       = {q * r}")
+write_line("r * q       = {r * q}")
+write_line("q1 * q2     = {q1 * q2}")
+write_line("q2 * q1     = {q2 * q1}")
+write_line("q1 * q2 =~ q2 * q1: {q1 * q2 =~ q2 * q1}");
+```
+
+output:
+
+```
+q  = (1, 2, 3, 4)
+q1 = (2, 3, 4, 5)
+q2 = (3, 4, 5, 6)
+r  = 7
+
+norm q      = 5.477225575051661
+negative q  = (-1, -2, -3, -4)
+conjugate q = (1, -2, -3, -4)
+q + r       = (8, 2, 3, 4)
+r + q       = (8, 2, 3, 4)
+q1 + q2     = (5, 7, 9, 11)
+q * r       = (7, 14, 21, 28)
+r * q       = (7, 14, 21, 28)
+q1 * q2     = (-56, 16, 24, 26)
+q2 * q1     = (-56, 18, 20, 28)
+q1 * q2 =~ q2 * q1: False
+```
+
+
+---
+
+<a id="rosetta/queue-definition"></a>
+
+
+# Queue/Definition
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Queue/Definition
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use System.InvalidOperationException
+
+class QUEUE[T] is
+    _items: LIST[T]
+
+    init() is
+        _items = LIST[T]()
+    si
+
+    is_empty: bool => _items.count == 0
+
+    push(value: T) is
+        _items.add(value)
+    si
+
+    pop() -> T is
+        assert !is_empty else
+            InvalidOperationException("the queue is empty")
+
+        let value = _items[0]
+
+        _items.remove_at(0)
+
+        return value
+    si
+si
+
+let queue = QUEUE[string]()
+
+write_line("empty: {queue.is_empty}")
+
+queue.push("first")
+queue.push("second")
+queue.push("third")
+
+write_line("empty: {queue.is_empty}")
+
+while !queue.is_empty do
+    write_line("pop:   {queue.pop()}")
+od
+
+write_line("empty: {queue.is_empty}")
+
+try
+    queue.pop()
+catch e: InvalidOperationException
+    write_line("pop:   {e.message}")
+yrt
+```
+
+output:
+
+```
+empty: True
+empty: False
+pop:   first
+pop:   second
+pop:   third
+empty: True
+pop:   the queue is empty
+```
+
+
+---
+
+<a id="rosetta/s-expressions"></a>
+
+
+# S-expressions
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/S-expressions
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+union SExpr is
+    LIST(items: SExpr[])
+    SYMBOL(name: string)
+    STRING(text: string)
+    INTEGER(value: int)
+    REAL(value: double)
+si
+
+use SExpr.LIST
+use SExpr.SYMBOL
+use SExpr.STRING
+use SExpr.INTEGER
+use SExpr.REAL
+
+delimits(character: char) -> bool =>
+    character == '(' \/ character == ')' \/
+    character == '"' \/ character <= ' '
+
+skip_space(text: string, at: int) -> int is
+    let i mut = at
+
+    while i < text.length /\ text[i] <= ' ' do
+        i = i + 1
+    od
+
+    return i
+si
+
+atom(token: string) -> SExpr is
+    let whole mut = 0
+
+    if int.try_parse(token, whole ref) then
+        return INTEGER(whole)
+    fi
+
+    let real mut = 0.0D
+
+    if double.try_parse(token, real ref) then
+        return REAL(real)
+    fi
+
+    return SYMBOL(token)
+si
+
+read(text: string, at: int) -> (value: SExpr, next: int) is
+    let start = skip_space(text, at)
+
+    if text[start] == '(' then
+        let items = Collections.LIST[SExpr]()
+        let i mut = skip_space(text, start + 1)
+
+        while text[i] != ')' do
+            let (value, next) = read(text, i)
+
+            items.add(value)
+
+            i = skip_space(text, next)
+        od
+
+        return (value = LIST(items.to_array()), next = i + 1)
+    fi
+
+    if text[start] == '"' then
+        let close mut = start + 1
+
+        while text[close] != '"' do
+            close = close + 1
+        od
+
+        return (value = STRING(text[start + 1..close]), next = close + 1)
+    fi
+
+    let end mut = start
+
+    while end < text.length /\ !delimits(text[end]) do
+        end = end + 1
+    od
+
+    return (value = atom(text[start..end]), next = end)
+si
+
+render(node: SExpr) -> string =>
+    case ► node
+    when (items): LIST then "({items |> map(render) |> join(" ")})"
+    when (name): SYMBOL then name
+    when (text): STRING then "\"{text}\""
+    when (value): INTEGER then "{value}"
+    when (value): REAL then "{value}"
+    esac
+
+let source =
+    "((data \"quoted data\" 123 4.5)\n"
+    " (data (!@# (4.5) \"(more\" \"data)\")))"
+
+let (parsed, _) = read(source, 0)
+
+write_line(source)
+write_line("")
+write_line(render(parsed));
+```
+
+output:
+
+```
+((data "quoted data" 123 4.5)
+ (data (!@# (4.5) "(more" "data)")))
+
+((data "quoted data" 123 4.5) (data (!@# (4.5) "(more" "data)")))
+```
+
+
+---
+
+<a id="rosetta/ternary-logic"></a>
+
+
+# Ternary logic
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Ternary_logic
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+union Trit is
+    TRUE
+    MAYBE
+    FALSE
+si
+
+use Trit.TRUE
+use Trit.MAYBE
+use Trit.FALSE
+
+rank(trit: Trit) -> int =>
+    case ► trit
+    when _: FALSE then 0
+    when _: MAYBE then 1
+    when _: TRUE then 2
+    esac
+
+of_rank(rank_value: int) -> Trit =>
+    case rank_value
+    when 0 then FALSE
+    when 1 then MAYBE
+    else TRUE
+    esac
+
+!(trit: Trit) -> Trit => of_rank(2 - rank(trit))
+
+/\(left: Trit, right: Trit) -> Trit =>
+    if rank(left) < rank(right) then left else right fi
+
+\/(left: Trit, right: Trit) -> Trit =>
+    if rank(left) > rank(right) then left else right fi
+
+implies(left: Trit, right: Trit) -> Trit => !left \/ right
+
+equivalent(left: Trit, right: Trit) -> Trit =>
+    implies(left, right) /\ implies(right, left)
+
+show(trit: Trit) -> string =>
+    case ► trit
+    when _: TRUE then "true"
+    when _: MAYBE then "maybe"
+    when _: FALSE then "false"
+    esac
+
+trits: Trit[] => [TRUE, MAYBE, FALSE]
+
+table(name: string, operator: (Trit, Trit) -> Trit) is
+    write_line("")
+    let heading = trits |> map(trit => "{show(trit),6}") |> join("")
+
+    write_line("{name,-8}|{heading}")
+    write_line("--------+------------------")
+
+    for left in trits do
+        let row =
+            trits
+            |> map(right => "{show(operator(left, right)),6}")
+            |> join("")
+
+        write_line("{show(left),-8}|{row}")
+    od
+si
+
+write_line("not")
+
+for left in trits do
+    write_line("{show(left),-8}|{show(!left),6}")
+od
+
+table("and", (left, right) => left /\ right)
+table("or", (left, right) => left \/ right)
+table("implies", implies)
+table("equiv", equivalent);
+```
+
+output:
+
+```
+not
+true    | false
+maybe   | maybe
+false   |  true
+
+and     |  true maybe false
+--------+------------------
+true    |  true maybe false
+maybe   | maybe maybe false
+false   | false false false
+
+or      |  true maybe false
+--------+------------------
+true    |  true  true  true
+maybe   |  true maybe maybe
+false   |  true maybe false
+
+implies |  true maybe false
+--------+------------------
+true    |  true maybe false
+maybe   |  true maybe maybe
+false   |  true  true  true
+
+equiv   |  true maybe false
+--------+------------------
+true    |  true maybe false
+maybe   | maybe maybe maybe
+false   | false maybe  true
+```
+
+
+---
+
+<a id="rosetta/amb"></a>
+
+
+# Amb
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Amb
+
+```ghul
+use IO.Std.write_line
+use Collections.Iterable
+use Collections.List
+use Collections.LIST
+use Ghul.Pipes
+
+amb[T](
+    sets: List[Iterable[T]],
+    accepts: (T, T) -> bool pure
+) -> Pipe[LIST[T]] is
+    if sets.count == 0 then
+        yield LIST[T]()
+    else
+        for choice in sets[0] do
+            for rest in amb(sets |> skip(1) |> collect(), accepts) do
+                if rest.count == 0 \/ accepts(choice, rest[0]) then
+                    let sequence = LIST[T]()
+
+                    sequence.add(choice)
+                    sequence.add_range(rest)
+
+                    yield sequence
+                fi
+            od
+        od
+    fi
+si
+
+let sets: List[Iterable[string]] = [
+    ["the", "that", "a"],
+    ["frog", "elephant", "thing"],
+    ["walked", "treaded", "grows"],
+    ["slowly", "quickly"]
+]
+
+let joins =
+    (left: string, right: string) => left[left.length - 1] == right[0]
+
+for sentence in amb(sets, joins) do
+    write_line(sentence |> join(" "))
+od
+```
+
+output:
+
+```
+that thing grows slowly
+```
+
+
+---
+
+<a id="rosetta/balanced-brackets"></a>
+
+
+# Balanced brackets
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Balanced_brackets
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+balanced(brackets: string) -> bool => (
+    let level mut = 0
+
+    let matched = for bracket in brackets do
+        if bracket == ']' /\ level == 0 then break false fi
+        level = level + (if bracket == '[' then 1 else -1 fi)
+    od
+
+    matched ?? (level == 0)
+)
+
+arrangements(opens: int, closes: int) -> Pipe[string] is
+    if opens == 0 /\ closes == 0 then
+        yield ""
+    else
+        if opens > 0 then
+            yield in arrangements(opens - 1, closes)
+                |> map(rest => "[{rest}")
+        fi
+        if closes > 0 then
+            yield in arrangements(opens, closes - 1)
+                |> map(rest => "]{rest}")
+        fi
+    fi
+si
+
+for pairs in 0::3 do
+    for brackets in arrangements(pairs, pairs) do
+        let verdict = if balanced(brackets) then "OK" else "NOT OK" fi
+        write_line("{brackets,6}  {verdict}")
+    od
+od
+```
+
+output:
+
+```
+        OK
+    []  OK
+    ][  NOT OK
+  [[]]  OK
+  [][]  OK
+  []][  NOT OK
+  ][[]  NOT OK
+  ][][  NOT OK
+  ]][[  NOT OK
+[[[]]]  OK
+[[][]]  OK
+[[]][]  OK
+[[]]][  NOT OK
+[][[]]  OK
+[][][]  OK
+[][]][  NOT OK
+[]][[]  NOT OK
+[]][][  NOT OK
+[]]][[  NOT OK
+][[[]]  NOT OK
+][[][]  NOT OK
+][[]][  NOT OK
+][][[]  NOT OK
+][][][  NOT OK
+][]][[  NOT OK
+]][[[]  NOT OK
+]][[][  NOT OK
+]][][[  NOT OK
+]]][[[  NOT OK
+```
+
+
+---
+
+<a id="rosetta/calkin-wilf-sequence"></a>
+
+
+# Calkin-Wilf sequence
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Calkin-Wilf_sequence
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Ghul.Pipes
+
+next_term(numerator: int, denominator: int) -> (int, int) =>
+    (denominator,
+     denominator * (2 * (numerator / denominator) + 1) - numerator)
+
+let current mut = (1, 1)
+let terms = LIST[string]()
+
+for _ in 1::20 do
+    terms.add("{current.`0}/{current.`1}")
+    current = next_term(current.`0, current.`1)
+od
+
+write_line(terms |> join(" "))
+
+continued_fraction(numerator: int, denominator: int) -> LIST[int] is
+    let left mut = numerator
+    let right mut = denominator
+    let terms = LIST[int]()
+
+    while right > 0 do
+        terms.add(left / right)
+        let remainder = left % right
+        left = right
+        right = remainder
+    od
+
+    if terms.count % 2 == 0 then
+        terms[terms.count - 1] = terms[terms.count - 1] - 1
+        terms.add(1)
+    fi
+
+    terms
+si
+
+let fraction = continued_fraction(83116, 51639)
+
+let bits mut = ""
+let one mut = true
+
+for step in 0::(fraction.count - 1) do
+    let run = fraction[fraction.count - 1 - step]
+
+    for _ in 1::run do
+        bits = "{bits}{if one then "1" else "0" fi}"
+    od
+    one = !one
+od
+
+write_line("83116/51639 is term {System.Convert.to_int64(bits, 2)}");
+```
+
+output:
+
+```
+1/1 1/2 2/1 1/3 3/2 2/3 3/1 1/4 4/3 3/5 5/2 2/5 5/3 3/4 4/1 1/5 5/4 4/7 7/3 3/8
+83116/51639 is term 123456789
+```
+
+
+---
+
+<a id="rosetta/ekg-sequence-convergence"></a>
+
+
+# EKG sequence convergence
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/EKG_sequence_convergence
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Collections.SET
+use Ghul.Pipes
+
+shares_factor(left_value: int, right_value: int) -> bool => (
+    let left mut = left_value
+    let right mut = right_value
+
+    while right > 0 do
+        let remainder = left % right
+        left = right
+        right = remainder
+    od
+
+    left > 1
+)
+
+ekg(start: int, count: int) -> LIST[int] is
+    let terms = LIST[int]([1, start])
+    let used = SET[int]([1, start])
+
+    while terms.count < count do
+        let candidate mut = 2
+
+        while used.contains(candidate) \/
+                !shares_factor(candidate, terms[terms.count - 1]) do
+            candidate = candidate + 1
+        od
+
+        terms.add(candidate)
+        used.add(candidate)
+    od
+
+    terms
+si
+
+let two = ekg(2, 80)
+let five = ekg(5, 80)
+
+write_line("EKG(2): {two |> take(10) |> join(" ")}")
+write_line("EKG(5): {five |> take(10) |> join(" ")}")
+
+let last_difference mut = 0
+
+for index in 0::(two.count - 1) do
+    if two[index] != five[index] then
+        last_difference = index + 1
+    fi
+od
+
+write_line(
+    "EKG(2) and EKG(5) converge at term {last_difference + 1}");
+```
+
+output:
+
+```
+EKG(2): 1 2 4 6 3 9 12 8 10 5
+EKG(5): 1 5 10 2 4 6 3 9 12 8
+EKG(2) and EKG(5) converge at term 45
+```
+
+
+---
+
+<a id="rosetta/fibonacci-sequence"></a>
+
+
+# Fibonacci sequence
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Fibonacci_sequence
+
+## Functional
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+let fibonacci_sequence = stream(
+    (0, 1),
+    ((previous, current)) =>
+        previous || (current, previous + current)
+)
+
+let fib = n => fibonacci_sequence |> skip(n) |> first()
+
+fibonacci_sequence
+    |> take(10)
+    |> index()
+    |> each(((position, value)) =>
+        write_line("fib({position}) = {value}"))
+
+write_line("fib(30) = {fib(30)}");
+```
+
+output:
+
+```
+fib(0) = 0
+fib(1) = 1
+fib(2) = 1
+fib(3) = 2
+fib(4) = 3
+fib(5) = 5
+fib(6) = 8
+fib(7) = 13
+fib(8) = 21
+fib(9) = 34
+fib(30) = 832040
+```
+
+## Imperative
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+fibonacci() -> Pipe[int] is
+    let previous mut = 0
+    let current mut = 1
+    do
+        yield previous
+
+        (previous, current) = (current, previous + current)
+    od
+si
+
+let fib = n => fibonacci() |> skip(n) |> first()
+
+for (position, value) in fibonacci() |> take(10) |> index() do
+    write_line("fib({position}) = {value}")
+od
+
+write_line("fib(30) = {fib(30)}");
+```
+
+output:
+
+```
+fib(0) = 0
+fib(1) = 1
+fib(2) = 1
+fib(3) = 2
+fib(4) = 3
+fib(5) = 5
+fib(6) = 8
+fib(7) = 13
+fib(8) = 21
+fib(9) = 34
+fib(30) = 832040
+```
+
+
+---
+
+<a id="rosetta/fusc-sequence"></a>
+
+
+# Fusc sequence
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Fusc_sequence
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Ghul.Pipes
+
+let limit = 1000000
+
+let fusc = LIST[int]([0, 1])
+
+while fusc.count <= limit do
+    let n = fusc.count
+
+    if n % 2 == 0 then
+        fusc.add(fusc[n / 2])
+    else
+        fusc.add(fusc[n / 2] + fusc[n / 2 + 1])
+    fi
+od
+
+write_line(fusc |> take(61) |> join(", "))
+
+let longest mut = 0
+
+for index in 0::limit do
+    let digits = fusc[index].to_string().length
+
+    if digits > longest then
+        longest = digits
+        write_line("fusc[{index:N0}] = {fusc[index]:N0}")
+    fi
+od
+```
+
+output:
+
+```
+0, 1, 1, 2, 1, 3, 2, 3, 1, 4, 3, 5, 2, 5, 3, 4, 1, 5, 4, 7, 3, 8, 5, 7, 2, 7, 5, 8, 3, 7, 4, 5, 1, 6, 5, 9, 4, 11, 7, 10, 3, 11, 8, 13, 5, 12, 7, 9, 2, 9, 7, 12, 5, 13, 8, 11, 3, 10, 7, 11, 4
+fusc[0] = 0
+fusc[37] = 11
+fusc[1,173] = 108
+fusc[35,499] = 1,076
+fusc[699,051] = 10,946
+```
+
+
+---
+
+<a id="rosetta/hailstone-sequence"></a>
+
+
+# Hailstone sequence
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Hailstone_sequence
+
+```ghul
+…
+use IO.Std.write_line
+use Collections.LIST
+use Ghul.Pipes
+
+hailstone(n: int) -> Pipe[int] is
+    let current mut = n
+
+    while true do
+        yield current
+
+        if current == 1 then
+            return
+        fi
+
+        current =
+            if current % 2 == 0 then current / 2 else 3 * current + 1 fi
+    od
+si
+
+let sequence = hailstone(27) |> collect_list()
+write_line("length of hailstone(27): {sequence.count}")
+let first = sequence[0..4] |> join(", ")
+let last = sequence[4..<<0] |> join(", ")
+
+write_line("first four: {first}")
+write_line("last four: {last}")
+
+let longest mut = 0
+let longest_length mut = 0
+
+for n in 1..100_000 do
+    let length = hailstone(n) |> count()
+
+    if length > longest_length then
+        longest = n
+        longest_length = length
+    fi
+od
+
+write_line("longest under 100,000: {longest} (length {longest_length})");
+```
+
+diagnostics:
+
+- warning: [return-without-value] return without value from non void function returns default value of type Pipe[int]
+
+output:
+
+```
+length of hailstone(27): 112
+first four: 27, 82, 41, 124
+last four: 8, 4, 2, 1
+longest under 100,000: 77031 (length 351)
+```
+
+
+---
+
+<a id="rosetta/intersecting-number-wheels"></a>
+
+
+# Intersecting number wheels
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Intersecting_number_wheels
+
+```ghul
+use IO.Std.write_line
+use Collections
+use Ghul.Pipes
+
+union Value is
+    NUMBER(digit: int)
+    WHEEL(name: char)
+si
+
+use Value.NUMBER
+use Value.WHEEL
+
+class WHEEL_SET is
+    _values: MAP[char, Value[]]
+    _position: MAP[char, int]
+
+    init(wheels: (name: char, values: Value[])[]) is
+        _values = MAP()
+        _position = MAP()
+
+        for (name, values) in wheels do
+            _values[name] = values
+            _position[name] = 0
+        od
+    si
+
+    next(name: char) -> int is
+        let values = _values[name]
+        let at = _position[name]
+
+        _position[name] = (at + 1) % values.count
+
+        case values[at]
+        when number: NUMBER then
+            return number.digit
+        when wheel: WHEEL then
+            return next(wheel.name)
+        esac
+    si
+si
+
+describe(value: Value) -> string =>
+    case ► value
+    when number: NUMBER then "{number.digit}"
+    when wheel: WHEEL then "{wheel.name}"
+    esac
+
+show(wheels: (name: char, values: Value[])[]) is
+    let wheel_set = WHEEL_SET(wheels)
+
+    for (name, values) in wheels do
+        write_line("{name}: {values |> map(describe) |> join(" ")}")
+    od
+
+    let generated = LIST()
+
+    for _ in 1::20 do
+        generated.add("{wheel_set.next(wheels[0].name)}")
+    od
+
+    write_line("  {generated |> join(" ")}")
+si
+
+let simple: (name: char, values: Value[])[] =
+    [(name = 'A', values = [NUMBER(1), NUMBER(2), NUMBER(3)])]
+
+let two_wheels: (name: char, values: Value[])[] = [
+    (name = 'A', values = [NUMBER(1), WHEEL('B'), NUMBER(2)]),
+    (name = 'B', values = [NUMBER(3), NUMBER(4)])
+]
+
+let shared: (name: char, values: Value[])[] = [
+    (name = 'A', values = [NUMBER(1), WHEEL('D'), WHEEL('D')]),
+    (name = 'D', values = [NUMBER(6), NUMBER(7), NUMBER(8)])
+]
+
+let multiply_connected: (name: char, values: Value[])[] = [
+    (name = 'A', values = [NUMBER(1), WHEEL('B'), WHEEL('C')]),
+    (name = 'B', values = [NUMBER(3), NUMBER(4)]),
+    (name = 'C', values = [NUMBER(5), WHEEL('B')])
+]
+
+for group in [simple, two_wheels, shared, multiply_connected] do
+    show(group)
+od
+```
+
+output:
+
+```
+A: 1 2 3
+  1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2
+A: 1 B 2
+B: 3 4
+  1 3 2 1 4 2 1 3 2 1 4 2 1 3 2 1 4 2 1 3
+A: 1 D D
+D: 6 7 8
+  1 6 7 1 8 6 1 7 8 1 6 7 1 8 6 1 7 8 1 6
+A: 1 B C
+B: 3 4
+C: 5 B
+  1 3 5 1 4 3 1 4 5 1 3 4 1 3 5 1 4 3 1 4
+```
+
+
+---
+
+<a id="rosetta/kolakoski-sequence"></a>
+
+
+# Kolakoski sequence
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Kolakoski_sequence
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Collections.List
+use Ghul.Pipes
+
+cycler(values: int[]) -> () -> int is
+    let at mut = 0
+
+    return () => (
+        let value = values[at]
+        at = (at + 1) % values.count
+        value
+    )
+si
+
+kolakoski(values: int[], length: int) -> List[int] is
+    let next = cycler(values)
+    let sequence = LIST[int]()
+    let at_run mut = 0
+
+    while sequence.count < length do
+        let value = next()
+
+        sequence.add(value)
+
+        for _ in 1..sequence[at_run] do
+            sequence.add(value)
+        od
+
+        at_run = at_run + 1
+    od
+
+    return sequence[0..length]
+si
+
+run_lengths(sequence: List[int]) -> List[int] is
+    let runs = LIST[int]()
+    let run mut = 0
+
+    for i in 0..sequence.count do
+        run = run + 1
+
+        let last = i + 1 == sequence.count
+
+        if last \/ sequence[i + 1] != sequence[i] then
+            runs.add(run)
+            run = 0
+        fi
+    od
+
+    return runs
+si
+
+self_describing(sequence: List[int]) -> bool => (
+    let runs = run_lengths(sequence)
+    (0..runs.count - 1) |> all(i => runs[i] == sequence[i])
+)
+
+report(values: int[], length: int) is
+    let sequence = kolakoski(values, length)
+
+    write_line("from ({values |> join(", ")}), first {length}:")
+    write_line("  {sequence |> join(", ")}")
+    write_line("  self-describing: {self_describing(sequence)}")
+si
+
+report([1, 2], 20)
+report([2, 1], 20)
+report([1, 3, 1, 2], 30)
+report([1, 3, 2, 1], 30);
+```
+
+output:
+
+```
+from (1, 2), first 20:
+  1, 2, 2, 1, 1, 2, 1, 2, 2, 1, 2, 2, 1, 1, 2, 1, 1, 2, 2, 1
+  self-describing: True
+from (2, 1), first 20:
+  2, 2, 1, 1, 2, 1, 2, 2, 1, 2, 2, 1, 1, 2, 1, 1, 2, 2, 1, 2
+  self-describing: True
+from (1, 3, 1, 2), first 30:
+  1, 3, 3, 3, 1, 1, 1, 2, 2, 2, 1, 3, 1, 2, 2, 1, 1, 3, 3, 1, 2, 2, 2, 1, 3, 3, 1, 1, 2, 1
+  self-describing: True
+from (1, 3, 2, 1), first 30:
+  1, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1, 3, 3, 2, 2, 1, 1, 3, 2, 1, 1, 1, 1, 3, 3, 3, 2, 2, 1
+  self-describing: False
+```
+
+
+---
+
+<a id="rosetta/look-and-say-sequence"></a>
+
+
+# Look-and-say sequence
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Look-and-say_sequence
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+look_and_say(seed: string) -> Pipe[string] is
+    let current mut = seed
+
+    do
+        yield current
+
+        let said = System.Text.StringBuilder()
+        let i mut = 0
+
+        while i < current.length do
+            let digit = current[i]
+            let run mut = 0
+
+            while i < current.length /\ current[i] == digit do
+                run = run + 1
+                i = i + 1
+            od
+
+            said.append(run)
+            said.append(digit)
+        od
+
+        current = said.to_string()
+    od
+si
+
+look_and_say("1") |> take(10) |> each(term => write_line(term));
+```
+
+output:
+
+```
+1
+11
+21
+1211
+111221
+312211
+13112221
+1113213211
+31131211131221
+13211311123113112211
+```
+
+
+---
+
+<a id="rosetta/ordered-partitions"></a>
+
+
+# Ordered partitions
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Ordered_partitions
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Collections.List
+use Ghul.Pipes
+
+combinations(items: List[int], k: int) -> Pipe[List[int]] is
+    if k == 0 then
+        yield LIST[int]()
+    elif items.count >= k then
+        let rest = items[1..<0]
+
+        for tail in combinations(rest, k - 1) do
+            let whole = LIST[int]()
+
+            whole.add(items[0])
+
+            for value in tail do
+                whole.add(value)
+            od
+
+            yield whole
+        od
+
+        yield in combinations(rest, k)
+    fi
+si
+
+partitions(items: List[int], sizes: List[int]) -> Pipe[List[List[int]]] is
+    if sizes.count == 0 then
+        yield LIST[List[int]]()
+    else
+        for block in combinations(items, sizes[0]) do
+            let remaining = items |> except(block) |> collect_list()
+
+            for tail in partitions(remaining, sizes[1..<0]) do
+                let whole = LIST[List[int]]()
+
+                whole.add(block)
+
+                for rest in tail do
+                    whole.add(rest)
+                od
+
+                yield whole
+            od
+        od
+    fi
+si
+
+braces(block: List[int]) -> string =>
+    "{{" "{block |> join(", ")}" "}}"
+
+show(sizes: int[]) is
+    let total = sizes |> reduce(0, (running, size) => running + size)
+    let items = (1::total) |> collect_list()
+
+    write_line("partitions({sizes |> join(", ")}):")
+
+    partitions(items, sizes |> collect_list())
+        |> each(partition =>
+            write_line("  ({partition |> map(braces) |> join(", ")})"))
+si
+
+show([2, 0, 2]);
+```
+
+output:
+
+```
+partitions(2, 0, 2):
+  ({1, 2}, {}, {3, 4})
+  ({1, 3}, {}, {2, 4})
+  ({1, 4}, {}, {2, 3})
+  ({2, 3}, {}, {1, 4})
+  ({2, 4}, {}, {1, 3})
+  ({3, 4}, {}, {1, 2})
+```
+
+
+---
+
+<a id="rosetta/same-fringe"></a>
+
+
+# Same fringe
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Same_fringe
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+union Tree is
+    LEAF(value: int)
+    NODE(left: Tree, right: Tree)
+si
+
+use Tree.LEAF
+use Tree.NODE
+
+fringe(tree: Tree) -> Pipe[int] is
+    if isa LEAF( ► tree) then
+        yield tree.value
+    elif isa NODE( ► tree) then
+        yield in fringe(tree.left)
+        yield in fringe(tree.right)
+    fi
+si
+
+compare(first: Tree, second: Tree) -> (same: bool, leaves: int) is
+    let left = fringe(first).iterator
+    let right = fringe(second).iterator
+
+    let leaves mut = 0
+
+    do
+        let more_left = left.move_next()
+        let more_right = right.move_next()
+
+        if more_left != more_right then
+            return (false, leaves)
+        fi
+
+        if !more_left then
+            return (true, leaves)
+        fi
+
+        leaves = leaves + 1
+
+        if left.current != right.current then
+            return (false, leaves)
+        fi
+    od
+si
+
+show(tree: Tree) -> string =>
+    case ► tree
+    when (value): LEAF then "{value}"
+    when (left, right): NODE then "({show(left)} {show(right)})"
+    esac
+
+let leaning_left = NODE(NODE(LEAF(1), LEAF(2)), LEAF(3))
+let leaning_right = NODE(LEAF(1), NODE(LEAF(2), LEAF(3)))
+let differs_last = NODE(LEAF(1), NODE(LEAF(2), LEAF(4)))
+let differs_first = NODE(NODE(LEAF(9), LEAF(2)), LEAF(3))
+let shorter = NODE(LEAF(1), LEAF(2))
+
+for (first, second) in [
+    (leaning_left, leaning_right),
+    (leaning_left, differs_last),
+    (leaning_left, differs_first),
+    (leaning_left, shorter)
+] do
+    let (same, leaves) = compare(first, second)
+
+    let verdict = if same then "same fringe" else "different" fi
+    let counted = if leaves == 1 then "leaf" else "leaves" fi
+
+    write_line(
+        "{show(first)} and {show(second)}: {verdict}, "
+        "{leaves} {counted} compared")
+od
+```
+
+output:
+
+```
+((1 2) 3) and (1 (2 3)): same fringe, 3 leaves compared
+((1 2) 3) and (1 (2 4)): different, 3 leaves compared
+((1 2) 3) and ((9 2) 3): different, 1 leaf compared
+((1 2) 3) and (1 2): different, 2 leaves compared
+```
+
+
+---
+
+<a id="rosetta/stern-brocot-sequence"></a>
+
+
+# Stern-Brocot sequence
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Stern-Brocot_sequence
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Ghul.Pipes
+
+let sequence = LIST[int]([1, 1])
+let considered mut = 1
+
+while sequence.count < 1200 do
+    sequence.add(sequence[considered] + sequence[considered - 1])
+    sequence.add(sequence[considered])
+    considered = considered + 1
+od
+
+write_line("first 15 members:")
+write_line(sequence |> take(15) |> join(", "))
+
+write_line("first appearances:")
+
+for value in 1::10 do
+    write_line("{value} appears at index {sequence.index_of(value) + 1}")
+od
+
+write_line(
+    "100 appears at index {sequence.index_of(100) + 1}")
+
+gcd(left: int, right: int) -> int => (
+    let a mut = left
+    let b mut = right
+
+    while b > 0 do
+        let remainder = a % b
+        a = b
+        b = remainder
+    od
+
+    a
+)
+
+let all_coprime = for index in 0..999 do
+    if gcd(sequence[index], sequence[index + 1]) != 1 then
+        break false
+    fi
+od
+
+write_line(
+    "consecutive members up to the 1000th are all coprime: "
+    "{if all_coprime ?? true then "true" else "false" fi}");
+```
+
+output:
+
+```
+first 15 members:
+1, 1, 2, 1, 3, 2, 3, 1, 4, 3, 5, 2, 5, 3, 4
+first appearances:
+1 appears at index 1
+2 appears at index 3
+3 appears at index 5
+4 appears at index 9
+5 appears at index 11
+6 appears at index 33
+7 appears at index 19
+8 appears at index 21
+9 appears at index 35
+10 appears at index 39
+100 appears at index 1179
+consecutive members up to the 1000th are all coprime: true
+```
+
+
+---
+
+<a id="rosetta/tree-traversal"></a>
+
+
+# Tree traversal
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Tree_traversal
+
+```ghul
+use IO.Std.write_line
+use Collections.Queue
+use Ghul.Pipes
+
+union Tree[T] is
+    EMPTY
+    NODE(value: T, left: Tree[T], right: Tree[T])
+si
+
+use Tree.EMPTY
+use Tree.NODE
+
+preorder[T](tree: Tree[T]) -> Pipe[T] is
+    if let (value, left, right): NODE = ► tree then
+        yield value
+
+        yield in preorder(left)
+        yield in preorder(right)
+    fi
+si
+
+inorder[T](tree: Tree[T]) -> Pipe[T] is
+    if let (value, left, right): NODE = ► tree then
+        yield in inorder(left)
+
+        yield value
+
+        yield in inorder(right)
+    fi
+si
+
+postorder[T](tree: Tree[T]) -> Pipe[T] is
+    if let (value, left, right): NODE = ► tree then
+        yield in postorder(left)
+        yield in postorder(right)
+
+        yield value
+    fi
+si
+
+levelorder[T](tree: Tree[T]) -> Pipe[T] is
+    let pending = Queue[Tree[T]]()
+
+    pending.enqueue(tree)
+
+    while pending.count > 0 do
+        let node = pending.dequeue()
+
+        if let (value, left, right): NODE = ► node then
+            yield value
+
+            pending.enqueue(left)
+            pending.enqueue(right)
+        fi
+    od
+si
+
+leaf[T](value: T) -> Tree[T] => NODE(value, EMPTY, EMPTY)
+
+show[T](label: string, values: Pipe[T]) =>
+    write_line("{label,-12} {values |> join(" ")}")
+
+let tree =
+    NODE(1,
+        NODE(2, NODE(4, leaf(7), EMPTY), leaf(5)),
+        NODE(3, NODE(6, leaf(8), leaf(9)), EMPTY))
+
+show("preorder:", preorder(tree))
+show("inorder:", inorder(tree))
+show("postorder:", postorder(tree))
+show("level-order:", levelorder(tree));
+```
+
+output:
+
+```
+preorder:    1 2 4 7 5 3 6 8 9
+inorder:     7 4 2 5 1 8 6 9 3
+postorder:   7 4 5 2 8 9 6 3 1
+level-order: 1 2 3 4 5 6 7 8 9
+```
+
+
+---
+
+<a id="rosetta/van-der-corput-sequence"></a>
+
+
+# Van der Corput sequence
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Van_der_Corput_sequence
+
+```ghul
+use IO.Std.write_line
+use Collections
+use Ghul.Pipes
+
+van_der_corput(n: int, base: int) -> double pure => (
+    let rest mut = n
+    let weight mut = 1.0D / cast(base)
+    let term mut = 0.0D
+
+    while rest > 0 do
+        term = term + cast(rest % base) * weight
+
+        rest = rest / base
+        weight = weight / cast(base)
+    od
+
+    term
+)
+
+let base_2 = (0::9) |> map(n => "{van_der_corput(n, 2)}") |> join(", ")
+
+write_line("base 2: {base_2}")
+
+for base in 3::5 do
+    let terms = LIST()
+
+    for n in 0::9 do
+        terms.add("{van_der_corput(n, base):F4}")
+    od
+
+    write_line("base {base}: {terms |> join(", ")}")
+od
+```
+
+output:
+
+```
+base 2: 0, 0.5, 0.25, 0.75, 0.125, 0.625, 0.375, 0.875, 0.0625, 0.5625
+base 3: 0.0000, 0.3333, 0.6667, 0.1111, 0.4444, 0.7778, 0.2222, 0.5556, 0.8889, 0.0370
+base 4: 0.0000, 0.2500, 0.5000, 0.7500, 0.0625, 0.3125, 0.5625, 0.8125, 0.1250, 0.3750
+base 5: 0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 0.0400, 0.2400, 0.4400, 0.6400, 0.8400
+```
+
+
+---
+
+<a id="rosetta/van-eck-sequence"></a>
+
+
+# Van Eck sequence
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Van_Eck_sequence
+
+```ghul
+use IO.Std.write_line
+use Collections.MAP
+use Ghul.Pipes
+
+van_eck() -> Pipe[int] is
+    let last_seen = MAP[int, int]()
+
+    let term mut = 0
+    let position mut = 0
+
+    do
+        yield term
+
+        let previous mut = 0
+        let next =
+            if last_seen.try_get_value(term, previous ref) then
+                position - previous
+            else
+                0
+            fi
+
+        last_seen[term] = position
+
+        term = next
+        position = position + 1
+    od
+si
+
+write_line("first ten:      {van_eck() |> take(10) |> join(" ")}")
+write_line(
+    "terms 991-1000: {van_eck() |> skip(990) |> take(10) |> join(" ")}");
+```
+
+output:
+
+```
+first ten:      0 0 1 0 2 0 2 2 1 6
+terms 991-1000: 4 7 30 25 67 225 488 0 10 136
+```
+
+
+---
+
+<a id="rosetta/achilles-numbers"></a>
+
+
+# Achilles numbers
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Achilles_numbers
+
+```ghul
+…
+use IO.Std.write_line
+use Collections.LIST
+use Collections.List
+use Collections.Iterable
+use Ghul.Pipes
+
+factorize(n: int) -> List[(prime: int, exponent: int)] is
+    let factors = LIST[(prime: int, exponent: int)]()
+    let remaining mut = n
+    let prime mut = 2
+
+    while prime * prime <= remaining do
+        let exponent mut = 0
+
+        while remaining % prime == 0 do
+            remaining = remaining / prime
+            exponent = exponent + 1
+        od
+
+        if exponent > 0 then
+            factors.add((prime, exponent))
+        fi
+
+        prime = prime + 1
+    od
+
+    if remaining > 1 then
+        factors.add((remaining, 1))
+    fi
+
+    return factors
+si
+
+gcd(a: int, b: int) -> int =>
+    if b == 0 then a else gcd(b, a % b) fi
+
+power(base: int, exponent: int) -> int =>
+    if exponent == 0 then 1 else base * power(base, exponent - 1) fi
+
+is_achilles(n: int) -> bool =>
+    let factors = factorize(n) in
+        factors.count > 0 /\
+        (factors |> all(factor => factor.exponent >= 2)) /\
+        (factors |> map(factor => factor.exponent) |> reduce(0, gcd)) == 1
+
+totient(n: int) -> int =>
+    factorize(n)
+    |> reduce(1, (total, factor) =>
+        total *
+        power(factor.prime, factor.exponent - 1) *
+        (factor.prime - 1))
+
+achilles_numbers() -> Pipe[int] is
+    let n mut = 1
+
+    do
+        if is_achilles(n) then
+            yield n
+        fi
+
+        n = n + 1
+    od
+si
+
+show(heading: string, numbers: Iterable[int]) is
+    write_line(heading)
+
+    for row in numbers |> chunk(10) do
+        write_line(row |> map(n => "{n,7}") |> join(""))
+    od
+
+    write_line("")
+si
+
+show("first 50 Achilles numbers:", achilles_numbers() |> take(50))
+
+show(
+    "first 20 strong Achilles numbers:",
+    achilles_numbers() |> filter(n => is_achilles(totient(n))) |> take(20)
+)
+
+for digits in 2::5 do
+    let total =
+        (power(10, digits - 1)..power(10, digits))
+        |> filter(is_achilles)
+        |> count()
+
+    write_line("Achilles numbers with {digits} digits: {total}")
+od
+```
+
+diagnostics:
+
+- warning: [impure-function-argument] argument must be a pure function
+- warning: [impure-function-argument] argument must be a pure function
+
+output:
+
+```
+first 50 Achilles numbers:
+     72    108    200    288    392    432    500    648    675    800
+    864    968    972   1125   1152   1323   1352   1372   1568   1800
+   1944   2000   2312   2592   2700   2888   3087   3200   3267   3456
+   3528   3872   3888   4000   4232   4500   4563   4608   5000   5292
+   5324   5400   5408   5488   6075   6125   6272   6728   6912   7200
+
+first 20 strong Achilles numbers:
+    500    864   1944   2000   2592   3456   5000  10125  10368  12348
+  12500  16875  19652  19773  30375  31104  32000  33275  37044  40500
+
+Achilles numbers with 2 digits: 1
+Achilles numbers with 3 digits: 12
+Achilles numbers with 4 digits: 47
+Achilles numbers with 5 digits: 192
+```
+
+
+---
+
+<a id="rosetta/ackermann-function"></a>
+
+
+# Ackermann function
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Ackermann_function
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+ackermann(m: int, n: int) -> int =>
+    if m == 0 then
+        n + 1
+    elif n == 0 then
+        ackermann(m - 1, 1)
+    else
+        ackermann(m - 1, ackermann(m, n - 1))
+    fi
+
+for m in 0::3 do
+    let row = (0::5) |> map(n => "{ackermann(m, n)}") |> join(" ")
+
+    write_line("A({m}, n) = {row}")
+od
+```
+
+output:
+
+```
+A(0, n) = 1 2 3 4 5 6
+A(1, n) = 2 3 4 5 6 7
+A(2, n) = 3 5 7 9 11 13
+A(3, n) = 5 13 29 61 125 253
+```
+
+
+---
+
+<a id="rosetta/additive-primes"></a>
+
+
+# Additive primes
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Additive_primes
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+is_prime(n: int) -> bool =>
+    n > 1 /\
+    ((2..n)
+        |> take_while(divisor => divisor * divisor <= n)
+        |> all(divisor => n % divisor != 0))
+
+digit_sum(n: int) -> int =>
+    if n == 0 then 0 else n % 10 + digit_sum(n / 10) fi
+
+let additive =
+    (2..500)
+    |> filter(n => is_prime(n) /\ is_prime(digit_sum(n)))
+    |> collect_list()
+
+for row in additive |> chunk(10) do
+    write_line(row |> map(n => "{n,4}") |> join(""))
+od
+
+write_line("")
+write_line("{additive.count} additive primes below 500");
+```
+
+output:
+
+```
+   2   3   5   7  11  23  29  41  43  47
+  61  67  83  89 101 113 131 137 139 151
+ 157 173 179 191 193 197 199 223 227 229
+ 241 263 269 281 283 311 313 317 331 337
+ 353 359 373 379 397 401 409 421 443 449
+ 461 463 467 487
+
+54 additive primes below 500
+```
+
+
+---
+
+<a id="rosetta/almost-prime"></a>
+
+
+# Almost prime
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Almost_prime
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+smallest_factor(n: int) -> int =>
+    (2::n) |> find_or_throw(divisor => n % divisor == 0)
+
+prime_factor_count(n: int) -> int =>
+    if n == 1 then 0 else 1 + prime_factor_count(n / smallest_factor(n)) fi
+
+almost_primes(k: int) -> Pipe[int] is
+    let n mut = 2
+
+    do
+        if prime_factor_count(n) == k then
+            yield n
+        fi
+
+        n = n + 1
+    od
+si
+
+for k in 1::5 do
+    let first_ten = almost_primes(k) |> take(10) |> map(n => "{n,5}")
+
+    write_line("k = {k}:{first_ten |> join("")}")
+od
+```
+
+output:
+
+```
+k = 1:    2    3    5    7   11   13   17   19   23   29
+k = 2:    4    6    9   10   14   15   21   22   25   26
+k = 3:    8   12   18   20   27   28   30   42   44   45
+k = 4:   16   24   36   40   54   56   60   81   84   88
+k = 5:   32   48   72   80  108  112  120  162  168  176
+```
+
+
+---
+
+<a id="rosetta/amicable-pairs"></a>
+
+
+# Amicable pairs
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Amicable_pairs
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+let limit = 20000
+
+sum_of_proper_divisors(n: int) -> int =>
+    (1::(n / 2))
+        |> filter(divisor => n % divisor == 0)
+        |> reduce(0, (total, divisor) => total + divisor)
+
+(1::limit)
+    |> map(n => (n, partner = sum_of_proper_divisors(n)))
+    |> filter(((n, partner)) =>
+        partner > n /\ sum_of_proper_divisors(partner) == n)
+    |> each(((n, partner)) => write_line("{n} and {partner}"));
+```
+
+output:
+
+```
+220 and 284
+1184 and 1210
+2620 and 2924
+5020 and 5564
+6232 and 6368
+10744 and 10856
+12285 and 14595
+17296 and 18416
+```
+
+
+---
+
+<a id="rosetta/anti-primes"></a>
+
+
+# Anti-primes
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Anti-primes
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+divisor_count(n: int) -> int =>
+    (1::n) |> filter(divisor => n % divisor == 0) |> count()
+
+anti_primes() -> Pipe[int] is
+    let most mut = 0
+    let n mut = 1
+
+    do
+        let divisors = divisor_count(n)
+
+        if divisors > most then
+            most = divisors
+
+            yield n
+        fi
+
+        n = n + 1
+    od
+si
+
+write_line(anti_primes() |> take(20) |> join(" "));
+```
+
+output:
+
+```
+1 2 4 6 12 24 36 48 60 120 180 240 360 720 840 1260 1680 2520 5040 7560
+```
+
+
+---
+
+<a id="rosetta/descending-primes"></a>
+
+
+# Descending primes
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Descending_primes
+
+```ghul
+use IO.Std.write_line
+use Collections
+use Ghul.Pipes
+
+is_prime(n: int) -> bool =>
+    if n < 2 then false
+    elif n % 2 == 0 then n == 2
+    else
+        let divisor mut = 3
+
+        while divisor * divisor <= n /\ n % divisor != 0 do
+            divisor = divisor + 2
+        od
+
+        divisor * divisor > n
+    fi
+
+descending(so_far: int, next_digit: int, found: LIST[int]) is
+    if so_far > 0 /\ is_prime(so_far) then
+        found.add(so_far)
+    fi
+
+    for digit in 0::next_digit do
+        descending(so_far * 10 + digit, digit - 1, found)
+    od
+si
+
+let found = LIST()
+
+descending(0, 9, found)
+
+let primes = found |> collect_list()
+
+primes.sort()
+
+for row in 0::(primes.count - 1) / 6 do
+    write_line(
+        (0::5)
+        |> filter(column => row * 6 + column < primes.count)
+        |> map(column => "{primes[row * 6 + column],12}")
+        |> join("")
+    )
+od
+
+write_line("{primes.count} primes with strictly descending digits");
+```
+
+output:
+
+```
+           2           3           5           7          31          41
+          43          53          61          71          73          83
+          97         421         431         521         541         631
+         641         643         653         743         751         761
+         821         853         863         941         953         971
+         983        5431        6421        6521        7321        7541
+        7621        7643        8431        8521        8543        8641
+        8731        8741        8753        8761        9421        9431
+        9521        9631        9643        9721        9743        9851
+        9871       75431       76421       76541       76543       86531
+       87421       87541       87631       87641       87643       94321
+       96431       97651       98321       98543       98621       98641
+       98731      764321      865321      876431      975421      986543
+      987541      987631     8764321     8765321     9754321     9875321
+    97654321    98764321    98765431
+87 primes with strictly descending digits
+```
+
+
+---
+
+<a id="rosetta/gapful-numbers"></a>
+
+
+# Gapful numbers
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Gapful_numbers
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Ghul.Pipes
+
+gapful_from(start: int, wanted: int) -> LIST[int] is
+    let found = LIST[int]()
+    let candidate mut = start
+
+    while found.count < wanted do
+        let digits = candidate.to_string()
+        let first_last = int.parse(
+            "{digits[0]}{digits[digits.length - 1]}")
+
+        if candidate % first_last == 0 then
+            found.add(candidate)
+        fi
+
+        candidate = candidate + 1
+    od
+
+    found
+si
+
+write_line("first 30 gapful numbers:")
+write_line(gapful_from(100, 30) |> join(", "))
+
+write_line("first 15 gapful numbers >= 1,000,000:")
+write_line(gapful_from(1000000, 15) |> join(", "))
+
+write_line("first 10 gapful numbers >= 1,000,000,000:")
+write_line(gapful_from(1000000000, 10) |> join(", "));
+```
+
+output:
+
+```
+first 30 gapful numbers:
+100, 105, 108, 110, 120, 121, 130, 132, 135, 140, 143, 150, 154, 160, 165, 170, 176, 180, 187, 190, 192, 195, 198, 200, 220, 225, 231, 240, 242, 253
+first 15 gapful numbers >= 1,000,000:
+1000000, 1000005, 1000008, 1000010, 1000016, 1000020, 1000021, 1000030, 1000032, 1000034, 1000035, 1000040, 1000050, 1000060, 1000065
+first 10 gapful numbers >= 1,000,000,000:
+1000000000, 1000000001, 1000000005, 1000000008, 1000000010, 1000000016, 1000000020, 1000000027, 1000000030, 1000000032
+```
+
+
+---
+
+<a id="rosetta/gray-code"></a>
+
+
+# Gray code
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Gray_code
+
+```ghul
+use IO.Std.write_line
+
+bits(n: int) -> string => System.Convert.to_string(n, 2).pad_left(5, '0')
+
+encode(n: int) -> int => n ^ (n >>> 1)
+
+decode(gray: int) -> int => (
+    let n mut = gray
+
+    for shift in 1..5 do
+        n = n ^ (gray >>> shift)
+    od
+
+    n
+)
+
+write_line("binary  gray   decoded")
+
+for n in 0::31 do
+    let gray = encode(n)
+
+    write_line("{bits(n)}   {bits(gray)}   {decode(gray)}")
+od
+```
+
+output:
+
+```
+binary  gray   decoded
+00000   00000   0
+00001   00001   1
+00010   00011   2
+00011   00010   3
+00100   00110   4
+00101   00111   5
+00110   00101   6
+00111   00100   7
+01000   01100   8
+01001   01101   9
+01010   01111   10
+01011   01110   11
+01100   01010   12
+01101   01011   13
+01110   01001   14
+01111   01000   15
+10000   11000   16
+10001   11001   17
+10010   11011   18
+10011   11010   19
+10100   11110   20
+10101   11111   21
+10110   11101   22
+10111   11100   23
+11000   10100   24
+11001   10101   25
+11010   10111   26
+11011   10110   27
+11100   10010   28
+11101   10011   29
+11110   10001   30
+11111   10000   31
+```
+
+
+---
+
+<a id="rosetta/greatest-common-divisor"></a>
+
+
+# Greatest common divisor
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Greatest_common_divisor
+
+```ghul
+use IO.Std.write_line
+
+gcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi
+
+write_line("gcd(48, 18) = {gcd(48, 18)}")
+write_line("gcd(1071, 462) = {gcd(1071, 462)}")
+write_line("gcd(0, 13) = {gcd(0, 13)}")
+write_line("gcd(13, 0) = {gcd(13, 0)}");
+```
+
+output:
+
+```
+gcd(48, 18) = 6
+gcd(1071, 462) = 21
+gcd(0, 13) = 13
+gcd(13, 0) = 13
+```
+
+
+---
+
+<a id="rosetta/haversine-formula"></a>
+
+
+# Haversine formula
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Haversine_formula
+
+```ghul
+use IO.Std.write_line
+use System.Math.sin
+use System.Math.cos
+use System.Math.asin
+use System.Math.sqrt
+use System.Math.pi
+
+let earth_radius_km = 6372.8D
+
+radians(degrees: double) -> double => degrees * pi / 180.0D
+
+haversine(theta: double) -> double => sin(theta / 2.0D) * sin(theta / 2.0D)
+
+great_circle_distance(
+    (latitude_1, longitude_1): (double, double),
+    (latitude_2, longitude_2): (double, double),
+    radius: double
+) -> double =>
+        let chord =
+            haversine(radians(latitude_2 - latitude_1)) +
+            cos(radians(latitude_1)) * cos(radians(latitude_2)) *
+            haversine(radians(longitude_2 - longitude_1))
+        in
+            2.0D * radius * asin(sqrt(chord))
+
+let nashville = (36.12D, -86.67D)
+let los_angeles = (33.94D, -118.40D)
+
+let distance =
+    great_circle_distance(nashville, los_angeles, earth_radius_km)
+
+write_line("BNA to LAX: {distance:F6} km");
+```
+
+output:
+
+```
+BNA to LAX: 2887.259951 km
+```
+
+
+---
+
+<a id="rosetta/iterated-digits-squaring"></a>
+
+
+# Iterated digits squaring
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Iterated_digits_squaring
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+
+digit_square_sum(value: int) -> int => (
+    let rest mut = value
+    let total mut = 0
+
+    while rest > 0 do
+        let digit = rest % 10
+        total = total + digit * digit
+        rest = rest / 10
+    od
+
+    total
+)
+
+reaches_89(value: int) -> bool => (
+    let current mut = value
+
+    while current != 1 /\ current != 89 do
+        current = digit_square_sum(current)
+    od
+
+    current == 89
+)
+
+let limit = 100000000
+let max_after_one_step = 648
+
+let memo = LIST[bool]([false])
+
+for value in 1::max_after_one_step do
+    memo.add(reaches_89(value))
+od
+
+let chains mut = 0
+
+for value in 1..limit do
+    if memo[digit_square_sum(value)] then
+        chains = chains + 1
+    fi
+od
+
+write_line("{chains:N0} chains starting below {limit:N0} reach 89");
+```
+
+output:
+
+```
+85,744,333 chains starting below 100,000,000 reach 89
+```
+
+
+---
+
+<a id="rosetta/juggler-sequence"></a>
+
+
+# Juggler sequence
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Juggler_sequence
+
+```ghul
+use IO.Std.write_line
+use System.Math.sqrt
+
+step(value: long) -> long =>
+    if (value % 2L) == 0L then
+        cast long(sqrt(cast double(value)))
+    else
+        cast long(cast double(value) * sqrt(cast double(value)))
+    fi
+
+stats(start: long) -> (int, long, int) => (
+    let current mut = start
+    let terms mut = 0
+    let highest mut = start
+    let at mut = 0
+
+    while current != 1L do
+        current = step(current)
+        terms = terms + 1
+
+        if current > highest then
+            highest = current
+            at = terms
+        fi
+    od
+
+    (terms, highest, at)
+)
+
+write_line("  n   l                h  i")
+
+for n in 20::39 do
+    let (terms, highest, at) = stats(cast long(n))
+    write_line("{n,3}  {terms,3}  {highest,17:N0}  {at}")
+od
+```
+
+output:
+
+```
+  n   l                h  i
+ 20    3                 20  0
+ 21    9                140  4
+ 22    3                 22  0
+ 23    9                110  1
+ 24    3                 24  0
+ 25   11             52,214  3
+ 26    6                 36  3
+ 27    6                140  1
+ 28    6                 36  3
+ 29    9                156  1
+ 30    6                 36  3
+ 31    6                172  1
+ 32    6                 36  3
+ 33    8              2,598  2
+ 34    6                 36  3
+ 35    8              2,978  2
+ 36    3                 36  0
+ 37   17  24,906,114,455,136  8
+ 38    3                 38  0
+ 39   14            233,046  3
+```
+
+
+---
+
+<a id="rosetta/kaprekar-numbers"></a>
+
+
+# Kaprekar numbers
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Kaprekar_numbers
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+kaprekar(n: int) -> bool => (
+    let square mut = cast long(n) * cast long(n)
+    let power mut = 10L
+
+    let matched = while power <= square do
+        let right = square % power
+
+        if right > 0L /\ square / power + right == cast long(n) then
+            break true
+        fi
+
+        power = power * 10L
+    od
+
+    matched ?? false
+)
+
+let below_ten_thousand = (1::9999)
+    |> filter(n => n == 1 \/ kaprekar(n))
+    |> collect_list()
+
+write_line("Kaprekar numbers below 10000:")
+write_line(below_ten_thousand |> join(", "))
+
+let below_million = (1..1000000)
+    |> filter(n => n == 1 \/ kaprekar(n))
+    |> count()
+
+write_line("{below_million} Kaprekar numbers below 1000000");
+```
+
+output:
+
+```
+Kaprekar numbers below 10000:
+1, 9, 45, 55, 99, 297, 703, 999, 2223, 2728, 4879, 4950, 5050, 5292, 7272, 7777, 9999
+54 Kaprekar numbers below 1000000
+```
+
+
+---
+
+<a id="rosetta/ludic-numbers"></a>
+
+
+# Ludic numbers
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Ludic_numbers
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Collections.SET
+use Ghul.Pipes
+
+let remaining mut = (2..25000) |> collect_list()
+let ludic = LIST[int]()
+
+while ludic.count < 2005 do
+    let next_ludic = remaining[0]
+    ludic.add(next_ludic)
+    remaining.remove_at(0)
+
+    let position mut = 0
+    let kept = LIST[int]()
+
+    for candidate in remaining do
+        position = position + 1
+
+        if position % next_ludic != 0 then
+            kept.add(candidate)
+        fi
+    od
+
+    remaining = kept
+od
+
+write_line(
+    "first 25: {ludic |> take(25) |> join(" ")}")
+
+let up_to_1000 = ludic |> filter(n => n <= 1000) |> count()
+
+write_line("{up_to_1000} ludic numbers <= 1000")
+write_line(
+    "2000th..2005th: {ludic |> skip(1999) |> take(6) |> join(" ")}")
+
+let set = SET[int](ludic)
+let triplets = ludic
+    |> filter(x => x + 6 < 1000 /\
+            set.contains(x + 2) /\
+            set.contains(x + 6))
+    |> map(x => "({x}, {x + 2}, {x + 6})")
+    |> join("  ")
+
+write_line("triplets: {triplets}");
+```
+
+output:
+
+```
+first 25: 2 3 5 7 11 13 17 23 25 29 37 41 43 47 53 61 67 71 77 83 89 91 97 107 115
+141 ludic numbers <= 1000
+2000th..2005th: 21481 21487 21493 21503 21511 21523
+triplets: (5, 7, 11)  (11, 13, 17)  (23, 25, 29)  (41, 43, 47)  (173, 175, 179)  (221, 223, 227)  (233, 235, 239)  (431, 433, 437)  (851, 853, 857)
+```
+
+
+---
+
+<a id="rosetta/map-range"></a>
+
+
+# Map range
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Map_range
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+map_range(
+    (a1, a2): (double, double),
+    (b1, b2): (double, double),
+    s: double
+) -> double =>
+    b1 + (s - a1) * (b2 - b1) / (a2 - a1)
+
+(0::10)
+    |> map(s =>
+        (s, mapped = map_range((0.0D, 10.0D), (-1.0D, 0.0D), cast(s))))
+    |> each(((s, mapped)) => write_line("{s} maps to {mapped:F1}"));
+```
+
+output:
+
+```
+0 maps to -1.0
+1 maps to -0.9
+2 maps to -0.8
+3 maps to -0.7
+4 maps to -0.6
+5 maps to -0.5
+6 maps to -0.4
+7 maps to -0.3
+8 maps to -0.2
+9 maps to -0.1
+10 maps to 0.0
+```
+
+
+---
+
+<a id="rosetta/negative-base-numbers"></a>
+
+
+# Negative base numbers
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Negative_base_numbers
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+let digit_set = "0123456789abcdefghijklmnopqrstuvwxyz"
+
+encode(n: int, base: int) -> string => (
+    let rest mut = n
+    let digits mut = ""
+
+    while rest != 0 do
+        let remainder mut = rest % base
+
+        rest = rest / base
+
+        if remainder < 0 then
+            remainder = remainder - base
+            rest = rest + 1
+        fi
+
+        digits = "{digit_set[remainder]}{digits}"
+    od
+
+    if digits.length == 0 then "0" else digits fi
+)
+
+decode(encoded: string, base: int) -> int =>
+    encoded
+    |> reduce(0, (value, digit) =>
+        value * base + digit_set.index_of(digit))
+
+for (n, base) in [(10, -2), (146, -3), (15, -10)] do
+    let encoded = encode(n, base)
+
+    write_line(
+        "{n} in base {base} is {encoded}, "
+        "and back again is {decode(encoded, base)}")
+od
+```
+
+output:
+
+```
+10 in base -2 is 11110, and back again is 10
+146 in base -3 is 21102, and back again is 146
+15 in base -10 is 195, and back again is 15
+```
+
+
+---
+
+<a id="rosetta/numbers-with-equal-rises-and-falls"></a>
+
+
+# Numbers with equal rises and falls
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Numbers_with_equal_rises_and_falls
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+balanced(n: int) -> bool => (
+    let rest mut = n
+    let balance mut = 0
+
+    while rest >= 10 do
+        let lower = rest % 10
+        let upper = rest / 10 % 10
+
+        if upper < lower then
+            balance = balance + 1
+        elif upper > lower then
+            balance = balance - 1
+        fi
+
+        rest = rest / 10
+    od
+
+    balance == 0
+)
+
+sequence() -> Pipe[int] => stream(1, n => n || n + 1) |> filter(balanced)
+
+write_line("the first 200 numbers with equal rises and falls:")
+
+let first_200 = sequence() |> take(200) |> collect_list()
+
+for row in 0::19 do
+    write_line(
+        (0::9)
+        |> map(column => "{first_200[row * 10 + column],5}")
+        |> join(""))
+od
+
+let ten_millionth = sequence() |> skip(10000000 - 1) |> first()
+
+write_line("the 10000000th is {ten_millionth}");
+```
+
+output:
+
+```
+the first 200 numbers with equal rises and falls:
+    1    2    3    4    5    6    7    8    9   11
+   22   33   44   55   66   77   88   99  101  102
+  103  104  105  106  107  108  109  111  120  121
+  130  131  132  140  141  142  143  150  151  152
+  153  154  160  161  162  163  164  165  170  171
+  172  173  174  175  176  180  181  182  183  184
+  185  186  187  190  191  192  193  194  195  196
+  197  198  201  202  203  204  205  206  207  208
+  209  212  213  214  215  216  217  218  219  222
+  230  231  232  240  241  242  243  250  251  252
+  253  254  260  261  262  263  264  265  270  271
+  272  273  274  275  276  280  281  282  283  284
+  285  286  287  290  291  292  293  294  295  296
+  297  298  301  302  303  304  305  306  307  308
+  309  312  313  314  315  316  317  318  319  323
+  324  325  326  327  328  329  333  340  341  342
+  343  350  351  352  353  354  360  361  362  363
+  364  365  370  371  372  373  374  375  376  380
+  381  382  383  384  385  386  387  390  391  392
+  393  394  395  396  397  398  401  402  403  404
+the 10000000th is 41909002
+```
+
+
+---
+
+<a id="rosetta/ormiston-pairs"></a>
+
+
+# Ormiston pairs
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Ormiston_pairs
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Ghul.Pipes
+
+let limit = 10000000
+
+let composite = LIST[bool]()
+
+(0::limit) |> each(_ => composite.add(false))
+
+let root mut = 2
+
+while root * root <= limit do
+    if !composite[root] then
+        let multiple mut = root * root
+
+        while multiple <= limit do
+            composite[multiple] = true
+            multiple = multiple + root
+        od
+    fi
+
+    root = root + 1
+od
+
+digit_signature(value: int) -> string => (
+    let counts = LIST[int]()
+
+    for _ in 0..10 do
+        counts.add(0)
+    od
+
+    let rest mut = value
+
+    while rest > 0 do
+        let digit = rest % 10
+        counts[digit] = counts[digit] + 1
+        rest = rest / 10
+    od
+
+    let signature mut = ""
+
+    for count in counts do
+        signature = "{signature}{count}"
+    od
+
+    signature
+)
+
+let pairs = LIST[string]()
+let up_to_million mut = 0
+let up_to_ten_million mut = 0
+let previous mut = 0
+let previous_signature mut = ""
+
+for candidate in 2..(limit + 1) do
+    if !composite[candidate] then
+        let signature = digit_signature(candidate)
+
+        if previous_signature =~ signature then
+            if pairs.count < 30 then
+                pairs.add("({previous}, {candidate})")
+            fi
+
+            if candidate <= 1000000 then
+                up_to_million = up_to_million + 1
+            fi
+
+            up_to_ten_million = up_to_ten_million + 1
+        fi
+
+        previous = candidate
+        previous_signature = signature
+    fi
+od
+
+write_line("first 30 Ormiston pairs:")
+
+for pair in pairs do
+    write_line(pair)
+od
+
+write_line("{up_to_million} pairs up to 1000000")
+write_line("{up_to_ten_million} pairs up to 10000000");
+```
+
+output:
+
+```
+first 30 Ormiston pairs:
+(1913, 1931)
+(18379, 18397)
+(19013, 19031)
+(25013, 25031)
+(34613, 34631)
+(35617, 35671)
+(35879, 35897)
+(36979, 36997)
+(37379, 37397)
+(37813, 37831)
+(40013, 40031)
+(40213, 40231)
+(40639, 40693)
+(45613, 45631)
+(48091, 48109)
+(49279, 49297)
+(51613, 51631)
+(55313, 55331)
+(56179, 56197)
+(56713, 56731)
+(58613, 58631)
+(63079, 63097)
+(63179, 63197)
+(64091, 64109)
+(65479, 65497)
+(66413, 66431)
+(74779, 74797)
+(75913, 75931)
+(76213, 76231)
+(76579, 76597)
+382 pairs up to 1000000
+3722 pairs up to 10000000
+```
+
+
+---
+
+<a id="rosetta/pernicious-numbers"></a>
+
+
+# Pernicious numbers
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Pernicious_numbers
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+prime(value: int) -> bool => (
+    let divisor mut = 2
+
+    let factor_found = while divisor * divisor <= value do
+        if value % divisor == 0 then
+            break true
+        fi
+
+        divisor = divisor + 1
+    od
+
+    value >= 2 /\ !(factor_found ?? false)
+)
+
+population_count(value: int) -> int =>
+    System.Convert.to_string(value, 2)
+        |> filter(bit => bit == '1')
+        |> count()
+
+pernicious(value: int) -> bool => prime(population_count(value))
+
+write_line("first 25:")
+
+write_line(
+    (1..200) |> filter(pernicious) |> take(25) |> join(", "))
+
+write_line("between 888888877 and 888888888:")
+
+write_line(
+    (888888877::888888888) |> filter(pernicious) |> join(", "));
+```
+
+output:
+
+```
+first 25:
+3, 5, 6, 7, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 21, 22, 24, 25, 26, 28, 31, 33, 34, 35, 36
+between 888888877 and 888888888:
+888888877, 888888878, 888888880, 888888883, 888888885, 888888886
+```
+
+
+---
+
+<a id="rosetta/population-count"></a>
+
+
+# Population count
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Population_count
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+popcount(n: long) -> int => (
+    let bits mut = n
+    let count mut = 0
+
+    while bits != 0L do
+        count = count + cast int(bits & 1L)
+        bits = bits >>> 1
+    od
+
+    count
+)
+
+let powers_of_three = stream(1L, power => power || power * 3L)
+
+let counts =
+    powers_of_three |> take(30) |> map(popcount) |> join(", ")
+
+write_line("population counts of the first thirty powers of 3: {counts}")
+
+let naturals = stream(0L, n => n || n + 1L)
+
+let evil =
+    naturals |> filter(n => popcount(n) % 2 == 0) |> take(30) |> join(", ")
+
+write_line("the first thirty evil numbers: {evil}")
+
+let odious =
+    naturals |> filter(n => popcount(n) % 2 == 1) |> take(30) |> join(", ")
+
+write_line("the first thirty odious numbers: {odious}");
+```
+
+output:
+
+```
+population counts of the first thirty powers of 3: 1, 2, 2, 4, 3, 6, 6, 5, 6, 8, 9, 13, 10, 11, 14, 15, 11, 14, 14, 17, 17, 20, 19, 22, 16, 18, 24, 30, 25, 25
+the first thirty evil numbers: 0, 3, 5, 6, 9, 10, 12, 15, 17, 18, 20, 23, 24, 27, 29, 30, 33, 34, 36, 39, 40, 43, 45, 46, 48, 51, 53, 54, 57, 58
+the first thirty odious numbers: 1, 2, 4, 7, 8, 11, 13, 14, 16, 19, 21, 22, 25, 26, 28, 31, 32, 35, 37, 38, 41, 42, 44, 47, 49, 50, 52, 55, 56, 59
+```
+
+
+---
+
+<a id="rosetta/radical-of-an-integer"></a>
+
+
+# Radical of an integer
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Radical_of_an_integer
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Ghul.Pipes
+
+let limit = 1000000
+
+let radical = LIST[int]()
+let factor_counts = LIST[int]()
+let composite = LIST[bool]()
+
+for _ in 0::limit do
+    radical.add(1)
+    factor_counts.add(0)
+    composite.add(false)
+od
+
+for prime in 2..(limit + 1) do
+    if !composite[prime] then
+        let multiple mut = prime
+
+        while multiple <= limit do
+            radical[multiple] = radical[multiple] * prime
+            factor_counts[multiple] = factor_counts[multiple] + 1
+            composite[multiple] = true
+            multiple = multiple + prime
+        od
+    fi
+od
+
+write_line("radicals of the first 50 positive integers:")
+
+for row in 0..5 do
+    write_line(
+        (row * 10 + 1..row * 10 + 11)
+            |> map(n => "{radical[n],3}")
+            |> join(" "))
+od
+
+for n in [99999, 499999, 999999] do
+    write_line("radical[{n}] = {radical[n]}")
+od
+
+let distribution = LIST[int]()
+
+for _ in 0..8 do
+    distribution.add(0)
+od
+
+for n in 1..(limit + 1) do
+    let count = factor_counts[n]
+    distribution[count] = distribution[count] + 1
+od
+
+write_line("first 1000000 integers by distinct prime factors:")
+
+for count in 0..8 do
+    if distribution[count] > 0 then
+        write_line("{count}: {distribution[count]:N0}")
+    fi
+od
+
+prime(n: int, factors: LIST[int], radicals: LIST[int]) -> bool =>
+    n >= 2 /\ factors[n] == 1 /\ radicals[n] == n
+
+let primes = (2..(limit + 1))
+    |> filter(n => prime(n, factor_counts, radical))
+    |> collect_list()
+
+let powers mut = 0
+
+for base in primes do
+    let power mut = cast long(base) * cast long(base)
+
+    while power <= cast long(limit) do
+        powers = powers + 1
+        power = power * cast long(base)
+    od
+od
+
+write_line(
+    "{primes.count:N0} primes plus {powers} prime powers "
+    "= {primes.count + powers:N0}, matching the one-factor "
+    "count {distribution[1]:N0}");
+```
+
+output:
+
+```
+radicals of the first 50 positive integers:
+  1   2   3   2   5   6   7   2   3  10
+ 11   6  13  14  15   2  17   6  19  10
+ 21  22  23   6   5  26   3  14  29  30
+ 31   2  33  34  35   6  37  38  39  10
+ 41  42  43  22  15  46  47   6   7  10
+radical[99999] = 33333
+radical[499999] = 3937
+radical[999999] = 111111
+first 1000000 integers by distinct prime factors:
+0: 1
+1: 78,734
+2: 288,726
+3: 379,720
+4: 208,034
+5: 42,492
+6: 2,285
+7: 8
+78,498 primes plus 236 prime powers = 78,734, matching the one-factor count 78,734
+```
+
+
+---
+
+<a id="rosetta/roman-numerals-encode"></a>
+
+
+# Roman numerals/Encode
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Roman_numerals/Encode
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+roman(n: int) -> string is
+    let values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+    let symbols = [
+        "M", "CM", "D", "CD", "C", "XC",
+        "L", "XL", "X", "IX", "V", "IV", "I"
+    ]
+
+    let numeral = System.Text.StringBuilder()
+    let remaining mut = n
+
+    for i in 0..values.count do
+        while remaining >= values[i] do
+            numeral.append(symbols[i])
+
+            remaining = remaining - values[i]
+        od
+    od
+
+    return numeral.to_string()
+si
+
+for n in [1990, 2008, 1666, 4, 9, 3999] do
+    write_line("{n,4} = {roman(n)}")
+od
+```
+
+output:
+
+```
+1990 = MCMXC
+2008 = MMVIII
+1666 = MDCLXVI
+   4 = IV
+   9 = IX
+3999 = MMMCMXCIX
+```
+
+
+---
+
+<a id="rosetta/semiprime"></a>
+
+
+# Semiprime
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Semiprime
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+is_semiprime(n: int) -> bool => (
+    let rest mut = n
+    let count mut = 0
+    let divisor mut = 2
+
+    while divisor * divisor <= rest /\ count < 3 do
+        while rest % divisor == 0 do
+            rest = rest / divisor
+            count = count + 1
+        od
+
+        divisor = divisor + 1
+    od
+
+    if rest > 1 then
+        count = count + 1
+    fi
+
+    count == 2
+)
+
+let up_to_100 = (2::100) |> filter(is_semiprime) |> join(", ")
+
+write_line("semiprimes up to 100: {up_to_100}")
+
+for n in [1679, 1234, 5, 9, 2093] do
+    write_line(
+        "{n} is {if is_semiprime(n) then "" else "not " fi}semiprime")
+od
+```
+
+output:
+
+```
+semiprimes up to 100: 4, 6, 9, 10, 14, 15, 21, 22, 25, 26, 33, 34, 35, 38, 39, 46, 49, 51, 55, 57, 58, 62, 65, 69, 74, 77, 82, 85, 86, 87, 91, 93, 94, 95
+1679 is semiprime
+1234 is semiprime
+5 is not semiprime
+9 is semiprime
+2093 is not semiprime
+```
+
+
+---
+
+<a id="rosetta/sieve-of-eratosthenes"></a>
+
+
+# Sieve of Eratosthenes
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Sieve_of_Eratosthenes
+
+```ghul
+use IO.Std.write_line
+use Collections
+use Ghul.Pipes
+
+sieve(limit: int) -> List[int] is
+    let composite = LIST()
+
+    (0::limit) |> each(_ => composite.add(false))
+
+    let prime mut = 2
+
+    while prime * prime <= limit do
+        if !composite[prime] then
+            let multiple mut = prime * prime
+
+            while multiple <= limit do
+                composite[multiple] = true
+                multiple = multiple + prime
+            od
+        fi
+
+        prime = prime + 1
+    od
+
+    return
+        (2::limit)
+            |> filter(i => !composite[i])
+            |> collect()
+si
+
+for prime in sieve(100) do
+    write_line("{prime}")
+od
+```
+
+output:
+
+```
+2
+3
+5
+7
+11
+13
+17
+19
+23
+29
+31
+37
+41
+43
+47
+53
+59
+61
+67
+71
+73
+79
+83
+89
+97
+```
+
+
+---
+
+<a id="rosetta/sphenic-numbers"></a>
+
+
+# Sphenic numbers
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Sphenic_numbers
+
+```ghul
+use IO.Std.write_line
+use Collections
+use Ghul.Pipes
+
+let search_limit = 1000000
+
+smallest_prime_factors(limit: int) -> List[int] is
+    let factor = LIST()
+
+    (0..limit) |> each(_ => factor.add(0))
+
+    let prime mut = 2
+
+    while prime * prime < limit do
+        if factor[prime] == 0 then
+            let multiple mut = prime * prime
+
+            while multiple < limit do
+                if factor[multiple] == 0 then
+                    factor[multiple] = prime
+                fi
+
+                multiple = multiple + prime
+            od
+        fi
+
+        prime = prime + 1
+    od
+
+    let n mut = 2
+
+    while n < limit do
+        if factor[n] == 0 then
+            factor[n] = n
+        fi
+
+        n = n + 1
+    od
+
+    return factor
+si
+
+is_sphenic(n: int, factor: List[int]) -> bool => (
+    let rest mut = n
+    let previous mut = 0
+    let total mut = 0
+    let distinct mut = 0
+
+    while rest > 1 do
+        let prime = factor[rest]
+
+        total = total + 1
+
+        if prime != previous then
+            distinct = distinct + 1
+            previous = prime
+        fi
+
+        rest = rest / prime
+    od
+
+    total == 3 /\ distinct == 3
+)
+
+prime_factors(n: int, factor: List[int]) -> List[string] => (
+    let rest mut = n
+    let factors = LIST[string]()
+
+    while rest > 1 do
+        let prime = factor[rest]
+        factors.add("{prime}")
+        rest = rest / prime
+    od
+
+    factors
+)
+
+let factor = smallest_prime_factors(search_limit)
+
+let sphenics =
+    (2..search_limit)
+    |> filter(n => is_sphenic(n, factor))
+    |> collect_list()
+
+let below_1000 = sphenics |> filter(n => n < 1000) |> join(", ")
+
+write_line("sphenic numbers below 1000: {below_1000}")
+
+let triplets = LIST()
+
+let i mut = 0
+
+while i + 2 < sphenics.count do
+    if sphenics[i + 1] == sphenics[i] + 1 /\
+        sphenics[i + 2] == sphenics[i] + 2
+    then
+        triplets.add(sphenics[i])
+    fi
+
+    i = i + 1
+od
+
+write_line("sphenic triplets below 10000:")
+
+for first in triplets do
+    if first + 2 < 10000 then
+        write_line("({first}, {first + 1}, {first + 2})")
+    fi
+od
+
+write_line("sphenic numbers below {search_limit}: {sphenics.count}")
+write_line("sphenic triplets below {search_limit}: {triplets.count}")
+
+let sphenic_200000th = sphenics[200000 - 1]
+
+write_line(
+    "the 200000th sphenic number is {sphenic_200000th} = {
+        prime_factors(sphenic_200000th, factor) |> join(" x ")
+    }"
+)
+
+let triplet_5000th = triplets[5000 - 1]
+
+write_line(
+    "the 5000th sphenic triplet is "
+    "({triplet_5000th}, {triplet_5000th + 1}, {triplet_5000th + 2})");
+```
+
+output:
+
+```
+sphenic numbers below 1000: 30, 42, 66, 70, 78, 102, 105, 110, 114, 130, 138, 154, 165, 170, 174, 182, 186, 190, 195, 222, 230, 231, 238, 246, 255, 258, 266, 273, 282, 285, 286, 290, 310, 318, 322, 345, 354, 357, 366, 370, 374, 385, 399, 402, 406, 410, 418, 426, 429, 430, 434, 435, 438, 442, 455, 465, 470, 474, 483, 494, 498, 506, 518, 530, 534, 555, 561, 574, 582, 590, 595, 598, 602, 606, 609, 610, 615, 618, 627, 638, 642, 645, 646, 651, 654, 658, 663, 665, 670, 678, 682, 705, 710, 715, 730, 741, 742, 754, 759, 762, 777, 782, 786, 790, 795, 805, 806, 814, 822, 826, 830, 834, 854, 861, 874, 885, 890, 894, 897, 902, 903, 906, 915, 935, 938, 942, 946, 957, 962, 969, 970, 978, 986, 987, 994
+sphenic triplets below 10000:
+(1309, 1310, 1311)
+(1885, 1886, 1887)
+(2013, 2014, 2015)
+(2665, 2666, 2667)
+(3729, 3730, 3731)
+(5133, 5134, 5135)
+(6061, 6062, 6063)
+(6213, 6214, 6215)
+(6305, 6306, 6307)
+(6477, 6478, 6479)
+(6853, 6854, 6855)
+(6985, 6986, 6987)
+(7257, 7258, 7259)
+(7953, 7954, 7955)
+(8393, 8394, 8395)
+(8533, 8534, 8535)
+(8785, 8786, 8787)
+(9213, 9214, 9215)
+(9453, 9454, 9455)
+(9821, 9822, 9823)
+(9877, 9878, 9879)
+sphenic numbers below 1000000: 206964
+sphenic triplets below 1000000: 5457
+the 200000th sphenic number is 966467 = 17 x 139 x 409
+the 5000th sphenic triplet is (918005, 918006, 918007)
+```
+
+
+---
+
+<a id="rosetta/taxicab-numbers"></a>
+
+
+# Taxicab numbers
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Taxicab_numbers
+
+```ghul
+use IO.Std.write_line
+use Collections
+use Ghul.Pipes
+
+let pair_bound = 1200
+
+let sums = LIST[long]()
+
+for a in 1..pair_bound do
+    let a_cubed = cast long(a) * cast long(a) * cast long(a)
+
+    for b in (a + 1)..pair_bound do
+        let b_cubed = cast long(b) * cast long(b) * cast long(b)
+
+        sums.add(a_cubed + b_cubed)
+    od
+od
+
+sums.sort()
+
+let taxis = LIST[long]()
+
+let i mut = 0
+
+while i < sums.count - 1 do
+    if sums[i] == sums[i + 1] then
+        let value = sums[i]
+
+        taxis.add(value)
+
+        while i < sums.count /\ sums[i] == value do
+            i = i + 1
+        od
+    else
+        i = i + 1
+    fi
+od
+
+cube_root(value: long) -> long => (
+    let cube_root_of = System.Math.cbrt(cast(value))
+    let root = cast long(System.Math.floor(cube_root_of + 0.5D))
+
+    if root * root * root == value then root else 0L fi
+)
+
+expressions(taxi: long) -> string => (
+    let parts = LIST[string]()
+    let a mut = 1L
+
+    while a * a * a * 2L < taxi do
+        let b = cube_root(taxi - a * a * a)
+
+        if b > 0L then
+            parts.add("{a}^3 + {b}^3")
+        fi
+
+        a = a + 1L
+    od
+
+    parts |> join(" = ")
+)
+
+show(rank: int, taxis: List[long]) is
+    let taxi = taxis[rank - 1]
+
+    write_line("{rank}: {taxi} = {expressions(taxi)}")
+si
+
+write_line("the lowest 25 taxicab numbers:")
+
+for rank in 1::25 do
+    show(rank, taxis)
+od
+
+write_line("the 2000th taxicab number, and half a dozen more:")
+
+for rank in 2000::2006 do
+    show(rank, taxis)
+od
+```
+
+output:
+
+```
+the lowest 25 taxicab numbers:
+1: 1729 = 1^3 + 12^3 = 9^3 + 10^3
+2: 4104 = 2^3 + 16^3 = 9^3 + 15^3
+3: 13832 = 2^3 + 24^3 = 18^3 + 20^3
+4: 20683 = 10^3 + 27^3 = 19^3 + 24^3
+5: 32832 = 4^3 + 32^3 = 18^3 + 30^3
+6: 39312 = 2^3 + 34^3 = 15^3 + 33^3
+7: 40033 = 9^3 + 34^3 = 16^3 + 33^3
+8: 46683 = 3^3 + 36^3 = 27^3 + 30^3
+9: 64232 = 17^3 + 39^3 = 26^3 + 36^3
+10: 65728 = 12^3 + 40^3 = 31^3 + 33^3
+11: 110656 = 4^3 + 48^3 = 36^3 + 40^3
+12: 110808 = 6^3 + 48^3 = 27^3 + 45^3
+13: 134379 = 12^3 + 51^3 = 38^3 + 43^3
+14: 149389 = 8^3 + 53^3 = 29^3 + 50^3
+15: 165464 = 20^3 + 54^3 = 38^3 + 48^3
+16: 171288 = 17^3 + 55^3 = 24^3 + 54^3
+17: 195841 = 9^3 + 58^3 = 22^3 + 57^3
+18: 216027 = 3^3 + 60^3 = 22^3 + 59^3
+19: 216125 = 5^3 + 60^3 = 45^3 + 50^3
+20: 262656 = 8^3 + 64^3 = 36^3 + 60^3
+21: 314496 = 4^3 + 68^3 = 30^3 + 66^3
+22: 320264 = 18^3 + 68^3 = 32^3 + 66^3
+23: 327763 = 30^3 + 67^3 = 51^3 + 58^3
+24: 373464 = 6^3 + 72^3 = 54^3 + 60^3
+25: 402597 = 42^3 + 69^3 = 56^3 + 61^3
+the 2000th taxicab number, and half a dozen more:
+2000: 1671816384 = 428^3 + 1168^3 = 940^3 + 944^3
+2001: 1672470592 = 29^3 + 1187^3 = 632^3 + 1124^3
+2002: 1673170856 = 458^3 + 1164^3 = 828^3 + 1034^3
+2003: 1675045225 = 522^3 + 1153^3 = 744^3 + 1081^3
+2004: 1675958167 = 492^3 + 1159^3 = 711^3 + 1096^3
+2005: 1676926719 = 63^3 + 1188^3 = 714^3 + 1095^3
+2006: 1677646971 = 99^3 + 1188^3 = 891^3 + 990^3
+```
+
+
+---
+
+<a id="rosetta/truncatable-primes"></a>
+
+
+# Truncatable primes
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Truncatable_primes
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Ghul.Pipes
+
+let limit = 1000000
+
+let composite = LIST[bool]()
+
+for _ in 0::limit do
+    composite.add(false)
+od
+
+let root mut = 2
+
+while root * root <= limit do
+    if !composite[root] then
+        let multiple mut = root * root
+
+        while multiple <= limit do
+            composite[multiple] = true
+            multiple = multiple + root
+        od
+    fi
+
+    root = root + 1
+od
+
+prime(text: string) -> bool => (
+    let value = int.parse(text)
+
+    value >= 2 /\ !composite[value]
+)
+
+left_truncatable(text: string) -> bool => (
+    let valid = for start in 0..text.length do
+        if !prime(text[start..<0]) then
+            break false
+        fi
+    od
+
+    valid ?? true
+)
+
+right_truncatable(text: string) -> bool => (
+    let valid = for end in 1::text.length do
+        if !prime(text[0..end]) then
+            break false
+        fi
+    od
+
+    valid ?? true
+)
+
+let primes = (2..(limit + 1))
+    |> filter(n => !composite[n])
+    |> collect_list()
+
+let largest_left mut = 0
+let largest_right mut = 0
+
+for candidate in primes do
+    let text = "{candidate}"
+
+    if !text.contains('0') then
+        if left_truncatable(text) then
+            largest_left = candidate
+        fi
+
+        if right_truncatable(text) then
+            largest_right = candidate
+        fi
+    fi
+od
+
+write_line("largest left-truncatable prime below 1000000: {largest_left}")
+write_line(
+    "largest right-truncatable prime below 1000000: "
+    "{largest_right}");
+```
+
+output:
+
+```
+largest left-truncatable prime below 1000000: 998443
+largest right-truncatable prime below 1000000: 739399
+```
+
+
+---
+
+<a id="rosetta/undulating-numbers"></a>
+
+
+# Undulating numbers
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Undulating_numbers
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Ghul.Pipes
+
+undulating_value(first: int, second: int, length: int) -> long => (
+    let value mut = 0L
+
+    for position in 0..length do
+        let digit = if position % 2 == 0 then first else second fi
+        value = value * 10L + cast long(digit)
+    od
+
+    value
+)
+
+let limit = 9007199254740992L
+
+let values = LIST[long]()
+
+for length in 3..17 do
+    for first in 1..10 do
+        for second in 0..10 do
+            if second != first then
+                let value = undulating_value(first, second, length)
+
+                if value < limit then
+                    values.add(value)
+                fi
+            fi
+        od
+    od
+od
+
+let three_digit = values |> filter(v => v < 1000L) |> collect_list()
+let four_digit = values
+    |> filter(v => v >= 1000L /\ v < 10000L)
+    |> collect_list()
+
+write_line("three digit:")
+
+for row in 0..9 do
+    write_line(
+        three_digit
+            |> skip(row * 9)
+            |> take(9)
+            |> map(v => "{v}")
+            |> join(" "))
+od
+
+write_line("four digit:")
+
+for row in 0..9 do
+    write_line(
+        four_digit
+            |> skip(row * 9)
+            |> take(9)
+            |> map(v => "{v}")
+            |> join(" "))
+od
+
+prime(value: long) -> bool => (
+    let divisor mut = 2L
+
+    let factor_found = while divisor * divisor <= value do
+        if value % divisor == 0L then
+            break true
+        fi
+
+        divisor = divisor + 1L
+    od
+
+    value >= 2L /\ !(factor_found ?? false)
+)
+
+write_line("three digit primes:")
+
+write_line(
+    three_digit |> filter(prime) |> map(v => "{v}") |> join(" "))
+
+write_line("600th: {values[599]}")
+
+write_line(
+    "{values.count} undulating numbers below 2^53, "
+    "the largest is {values[values.count - 1]}");
+```
+
+output:
+
+```
+three digit:
+101 121 131 141 151 161 171 181 191
+202 212 232 242 252 262 272 282 292
+303 313 323 343 353 363 373 383 393
+404 414 424 434 454 464 474 484 494
+505 515 525 535 545 565 575 585 595
+606 616 626 636 646 656 676 686 696
+707 717 727 737 747 757 767 787 797
+808 818 828 838 848 858 868 878 898
+909 919 929 939 949 959 969 979 989
+four digit:
+1010 1212 1313 1414 1515 1616 1717 1818 1919
+2020 2121 2323 2424 2525 2626 2727 2828 2929
+3030 3131 3232 3434 3535 3636 3737 3838 3939
+4040 4141 4242 4343 4545 4646 4747 4848 4949
+5050 5151 5252 5353 5454 5656 5757 5858 5959
+6060 6161 6262 6363 6464 6565 6767 6868 6969
+7070 7171 7272 7373 7474 7575 7676 7878 7979
+8080 8181 8282 8383 8484 8585 8686 8787 8989
+9090 9191 9292 9393 9494 9595 9696 9797 9898
+three digit primes:
+101 131 151 181 191 313 353 373 383 727 757 787 797 919 929
+600th: 4646464646
+1125 undulating numbers below 2^53, the largest is 8989898989898989
+```
+
+
+---
+
+<a id="rosetta/zeckendorf-number-representation"></a>
+
+
+# Zeckendorf number representation
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Zeckendorf_number_representation
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+fibonacci_up_to(limit: int) -> Pipe[int] is
+    let smaller mut = 1
+    let larger mut = 2
+
+    do
+        yield smaller
+
+        if larger > limit then
+            break
+        fi
+
+        let next = smaller + larger
+
+        smaller = larger
+        larger = next
+    od
+si
+
+zeckendorf(n: int) -> string is
+    let digits = System.Text.StringBuilder()
+    let remaining mut = n
+
+    for value in fibonacci_up_to(n) |> reverse() do
+        if value <= remaining then
+            digits.append('1')
+
+            remaining = remaining - value
+        elif digits.length > 0 then
+            digits.append('0')
+        fi
+    od
+
+    return if digits.length == 0 then "0" else digits.to_string() fi
+si
+
+for n in 0::20 do
+    write_line("{n,2}: {zeckendorf(n)}")
+od
+```
+
+output:
+
+```
+ 0: 0
+ 1: 1
+ 2: 10
+ 3: 100
+ 4: 101
+ 5: 1000
+ 6: 1001
+ 7: 1010
+ 8: 10000
+ 9: 10001
+10: 10010
+11: 10100
+12: 10101
+13: 100000
+14: 100001
+15: 100010
+16: 100100
+17: 100101
+18: 101000
+19: 101001
+20: 101010
+```
+
+
+---
+
+<a id="rosetta/abc-problem"></a>
+
+
+# ABC problem
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/ABC_problem
+
+```ghul
+use IO.Std.write_line
+use Collections.List
+use Ghul.Pipes
+
+without(blocks: List[string], at: int) -> List[string] =>
+    blocks
+    |> index()
+    |> filter(block => block.index != at)
+    |> map(block => block.value)
+    |> collect()
+
+can_spell(word: string, blocks: List[string]) -> bool =>
+    word.length == 0 \/
+    (blocks
+        |> index()
+        |> filter(block => block.value.contains(word[0]))
+        |> any(block =>
+            can_spell(word.substring(1), blocks |> without(block.index))))
+
+let blocks = [
+    "BO", "XK", "DQ", "CP", "NA", "GT", "RE", "TG", "QD", "FS",
+    "JW", "HU", "VI", "AN", "OB", "ER", "FS", "LY", "PC", "ZM"
+]
+
+let can_make_word = (word: string) => can_spell(word.to_upper(), blocks)
+
+for word in ["A", "BARK", "BOOK", "TREAT", "COMMON", "SQUAD", "CONFUSE"] do
+    write_line("can_make_word(\"{word}\") = {can_make_word(word)}")
+od
+```
+
+output:
+
+```
+can_make_word("A") = True
+can_make_word("BARK") = True
+can_make_word("BOOK") = False
+can_make_word("TREAT") = True
+can_make_word("COMMON") = False
+can_make_word("SQUAD") = True
+can_make_word("CONFUSE") = True
+```
+
+
+---
+
+<a id="rosetta/align-columns"></a>
+
+
+# Align columns
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Align_columns
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+union Alignment is
+    LEFT
+    RIGHT
+    CENTRE
+si
+
+pad(word: string, width: int, alignment: Alignment) -> string =>
+    case ► alignment
+    when _: Alignment.LEFT then word.pad_right(width)
+    when _: Alignment.RIGHT then word.pad_left(width)
+    when _: Alignment.CENTRE then
+        word
+        .pad_left(word.length + (width - word.length) / 2)
+        .pad_right(width)
+    esac
+
+line(row: string[], widths: int[], alignment: Alignment) -> string =>
+    (row
+     |> index()
+     |> map(((column, word)) => pad(word, widths[column], alignment))
+     |> join(" ")).trim_end()
+
+let text = [
+    "Given$a$text$file$of$many$lines,$where$fields$within$a$line$",
+    "are$delineated$by$a$single$'dollar'$character,$write$a$program",
+    "that$aligns$each$column$of$fields$by$ensuring$that$words$in$each$",
+    "column$are$separated$by$at$least$one$space.",
+    "Further,$allow$for$each$word$in$a$column$to$be$either$left$",
+    "justified,$right$justified,$or$center$justified$within$its$column."
+]
+
+let rows =
+    text
+    |> map(line => line.trim_end('$').split(['$']))
+    |> collect_array()
+
+let columns =
+    rows
+    |> reduce(0, (widest, row) =>
+        if row.count > widest then row.count else widest fi)
+
+let widths =
+    (0..columns)
+    |> map(column =>
+        rows
+        |> filter(row => column < row.count)
+        |> reduce(0, (widest, row) =>
+            if row[column].length > widest then
+                row[column].length
+            else
+                widest
+            fi))
+    |> collect_array()
+
+for alignment in [Alignment.LEFT, Alignment.RIGHT, Alignment.CENTRE] do
+    rows |> each(row => write_line(line(row, widths, alignment)))
+
+    write_line("")
+od
+```
+
+output:
+
+```
+Given      a          text       file   of     many      lines,     where    fields  within  a      line
+are        delineated by         a      single 'dollar'  character, write    a       program
+that       aligns     each       column of     fields    by         ensuring that    words   in     each
+column     are        separated  by     at     least     one        space.
+Further,   allow      for        each   word   in        a          column   to      be      either left
+justified, right      justified, or     center justified within     its      column.
+
+     Given          a       text   file     of      many     lines,    where  fields  within      a line
+       are delineated         by      a single  'dollar' character,    write       a program
+      that     aligns       each column     of    fields         by ensuring    that   words     in each
+    column        are  separated     by     at     least        one   space.
+  Further,      allow        for   each   word        in          a   column      to      be either left
+justified,      right justified,     or center justified     within      its column.
+
+  Given        a         text     file    of     many      lines,    where   fields  within    a    line
+   are     delineated     by       a    single 'dollar'  character,  write      a    program
+   that      aligns      each    column   of    fields       by     ensuring  that    words    in   each
+  column      are     separated    by     at     least      one      space.
+ Further,    allow       for      each   word     in         a       column    to      be    either left
+justified,   right    justified,   or   center justified   within     its    column.
+```
+
+
+---
+
+<a id="rosetta/camel-case-and-snake-case"></a>
+
+
+# Camel case and snake case
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Camel_case_and_snake_case
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Ghul.Pipes
+use System.Text.StringBuilder
+
+class NAME(words: Collections.List[string] private) is
+    to_camel_case() -> string =>
+        _words
+            |> index()
+            |> map(
+                ((index, word)) =>
+                    if index == 0 then
+                        lower_first(word)
+                    else
+                        upper_first(word)
+                    fi)
+            |> join("")
+
+    to_snake_case() -> string =>
+        _words
+            |> map(word => word.to_lower())
+            |> join("_")
+si
+
+parse(text: string) -> NAME is
+    let words = LIST[string]()
+    let word = StringBuilder()
+
+    for character in text.trim() do
+        if character == '_' \/ character == '-' \/ character == ' ' then
+            if word.length > 0 then
+                words.add(word.to_string())
+                word.clear()
+            fi
+        elif char.is_upper(character) /\ word.length > 0 then
+            words.add(word.to_string())
+            word.clear()
+            word.append(character)
+        else
+            word.append(character)
+        fi
+    od
+
+    if word.length > 0 then
+        words.add(word.to_string())
+    fi
+
+    return NAME(words)
+si
+
+lower_first(word: string) -> string =>
+    "{char.to_lower(word[0])}{word[1..<0]}"
+
+upper_first(word: string) -> string =>
+    "{char.to_upper(word[0])}{word[1..<0]}"
+
+quoted(text: string) -> string => "\"{text}\""
+
+let tests = [
+    "snakeCase",
+    "snake_case",
+    "variable_10_case",
+    "variable10Case",
+    "ɛrgo rE tHis",
+    "hurry-up-joe!",
+    "c://my-docs/happy_ghūl-Day/12.doc",
+    "  spaces  "
+]
+
+let column = 37
+
+write_line(
+    "{"input".pad_right(column)} "
+    "{"snake case".pad_right(column)} camel case")
+
+for test in tests do
+    let name = parse(test)
+
+    write_line(
+        "{quoted(test).pad_right(column)} "
+        "{quoted(name.to_snake_case()).pad_right(column)} "
+        "{quoted(name.to_camel_case())}")
+od
+```
+
+output:
+
+```
+input                                 snake case                            camel case
+"snakeCase"                           "snake_case"                          "snakeCase"
+"snake_case"                          "snake_case"                          "snakeCase"
+"variable_10_case"                    "variable_10_case"                    "variable10Case"
+"variable10Case"                      "variable10_case"                     "variable10Case"
+"ɛrgo rE tHis"                        "ɛrgo_r_e_t_his"                      "ɛrgoRETHis"
+"hurry-up-joe!"                       "hurry_up_joe!"                       "hurryUpJoe!"
+"c://my-docs/happy_ghūl-Day/12.doc"   "c://my_docs/happy_ghūl_day/12.doc"   "c://myDocs/happyGhūlDay/12.doc"
+"  spaces  "                          "spaces"                              "spaces"
+```
+
+
+---
+
+<a id="rosetta/entropy"></a>
+
+
+# Entropy
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Entropy
+
+```ghul
+use IO.Std.write_line
+use Collections.MAP
+use Ghul.Pipes
+use System.Math
+
+entropy(text: string) -> double is
+    let counts = MAP[char, int]()
+
+    for character in text do
+        let seen mut = 0
+
+        counts.try_get_value(character, seen ref)
+
+        counts[character] = seen + 1
+    od
+
+    let total = cast double(text.length)
+
+    return counts.values
+        |> map(count => cast double(count) / total)
+        |> reduce(0.0D, (bits, probability) =>
+            bits - probability * Math.log2(probability))
+si
+
+let text = "1223334444"
+
+write_line("{text}: {entropy(text)} bits/symbol");
+```
+
+output:
+
+```
+1223334444: 1.8464393446710154 bits/symbol
+```
+
+
+---
+
+<a id="rosetta/jaro-similarity"></a>
+
+
+# Jaro similarity
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Jaro_similarity
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Collections.SET
+use Ghul.Pipes
+use System.Math
+
+jaro(left: string, right: string) -> double is
+    if left.length == 0 \/ right.length == 0 then
+        return if left.length == right.length then 1.0D else 0.0D fi
+    fi
+
+    let window = Math.max(left.length, right.length) / 2 - 1
+    let taken = SET[int]()
+    let matched_left = LIST[char]()
+
+    for i in 0..left.length do
+        let first = Math.max(0, i - window)
+        let last = Math.min(i + window + 1, right.length)
+
+        for j in first..last do
+            if !taken.contains(j) /\ left[i] == right[j] then
+                taken.add(j)
+                matched_left.add(left[i])
+                break
+            fi
+        od
+    od
+
+    let match_count = matched_left.count
+
+    if match_count == 0 then
+        return 0.0D
+    fi
+
+    let matched_right =
+        (0..right.length)
+        |> filter(j => taken.contains(j))
+        |> map(j => right[j])
+        |> collect_list()
+
+    let transposed =
+        (0..match_count)
+        |> filter(i => matched_left[i] != matched_right[i])
+        |> count()
+
+    let matches = cast double(match_count)
+    let half_transpositions = cast double(transposed) / 2.0D
+
+    return (matches / cast double(left.length) +
+          matches / cast double(right.length) +
+          (matches - half_transpositions) / matches) / 3.0D
+si
+
+[("MARTHA", "MARHTA"),
+ ("DIXON", "DICKSONX"),
+ ("JELLYFISH", "SMELLYFISH")]
+    |> each(((left, right)) =>
+        write_line("{left} / {right}: {jaro(left, right):F6}"));
+```
+
+output:
+
+```
+MARTHA / MARHTA: 0.944444
+DIXON / DICKSONX: 0.766667
+JELLYFISH / SMELLYFISH: 0.896296
+```
+
+
+---
+
+<a id="rosetta/levenshtein-distance"></a>
+
+
+# Levenshtein distance
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Levenshtein_distance
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use System.Math.min
+
+levenshtein(source: string, target: string) -> int is
+    let previous mut = LIST()
+
+    for j in 0::target.length do
+        previous.add(j)
+    od
+
+    for i in 1::source.length do
+        let current = LIST()
+
+        current.add(i)
+
+        for j in 1::target.length do
+            let same = source[i - 1] == target[j - 1]
+            let substitution = previous[j - 1] + if same then 0 else 1 fi
+
+            let insertion = previous[j] + 1
+            let deletion = current[j - 1] + 1
+
+            current.add(min(substitution, min(insertion, deletion)))
+        od
+
+        previous = current
+    od
+
+    return previous[target.length]
+si
+
+write_line("{levenshtein("kitten", "sitting")}")
+write_line("{levenshtein("rosettacode", "raisethysword")}");
+```
+
+output:
+
+```
+3
+8
+```
+
+
+---
+
+<a id="rosetta/palindrome-detection"></a>
+
+
+# Palindrome detection
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Palindrome_detection
+
+```ghul
+use IO.Std.write_line
+use Ghul.Collections
+use Ghul.Pipes
+
+reverse(text: string) -> string =>
+    text |> reduce("", (reversed, character) => "{character}{reversed}")
+
+is_palindrome(text: string) -> bool => text =~ reverse(text)
+
+is_inexact_palindrome(text: string) -> bool =>
+    text
+        |> filter(char.is_letter)
+        |> map(char.to_lower)
+        |> reduce("", (letters, character) => "{letters}{character}")
+        |> is_palindrome()
+
+test(
+    maybe_palindrome: string,
+    palindrome_check: string -> bool
+) -> string =>
+    if palindrome_check(maybe_palindrome) then
+        "\"{maybe_palindrome}\" is a palindrome"
+    else
+        "\"{maybe_palindrome}\" is not a palindrome"
+    fi
+
+write_line(test("racecar", is_palindrome))
+write_line(test("hello", is_palindrome))
+write_line(test("rotor", is_palindrome))
+
+write_line(test("A man, a plan, a canal: Panama", is_inexact_palindrome))
+write_line(test("race car", is_inexact_palindrome))
+write_line(test("hello world", is_inexact_palindrome));
+```
+
+output:
+
+```
+"racecar" is a palindrome
+"hello" is not a palindrome
+"rotor" is a palindrome
+"A man, a plan, a canal: Panama" is a palindrome
+"race car" is a palindrome
+"hello world" is not a palindrome
+```
+
+
+---
+
+<a id="rosetta/pangram-checker"></a>
+
+
+# Pangram checker
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Pangram_checker
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+is_pangram(sentence: string) -> bool =>
+    sentence
+        |> map(char.to_lower)
+        |> filter(char.is_letter)
+        |> distinct()
+        |> count() == 26
+
+write_line("{is_pangram("The quick brown fox jumps over the lazy dog")}")
+write_line("{is_pangram("Hello, World!")}");
+```
+
+output:
+
+```
+True
+False
+```
+
+
+---
+
+<a id="rosetta/run-length-encoding"></a>
+
+
+# Run-length encoding
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Run-length_encoding
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+encode(text: string) -> string is
+    let runs = System.Text.StringBuilder()
+    let at mut = 0
+
+    while at < text.length do
+        let start = at
+
+        while at < text.length /\ text[at] == text[start] do
+            at = at + 1
+        od
+
+        runs.append(at - start)
+        runs.append(text[start])
+    od
+
+    return runs.to_string()
+si
+
+decode(encoded: string) -> string is
+    let text = System.Text.StringBuilder()
+    let at mut = 0
+
+    while at < encoded.length do
+        let start = at
+
+        while char.is_digit(encoded[at]) do
+            at = at + 1
+        od
+
+        let count = int.parse(encoded.substring(start, at - start))
+
+        text.append(encoded[at], count)
+
+        at = at + 1
+    od
+
+    return text.to_string()
+si
+
+let input =
+    "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWW"
+    "WWWWWWWWWWWWBWWWWWWWWWWWWWW"
+let encoded = encode(input)
+
+write_line("input:   {input}")
+write_line("encoded: {encoded}")
+write_line("decoded: {decode(encoded)}")
+write_line("round trip restores the input: {decode(encoded) =~ input}");
+```
+
+output:
+
+```
+input:   WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWBWWWWWWWWWWWWWW
+encoded: 12W1B12W3B24W1B14W
+decoded: WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWBWWWWWWWWWWWWWW
+round trip restores the input: True
+```
+
+
+---
+
+<a id="rosetta/damm-algorithm"></a>
+
+
+# Damm algorithm
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Damm_algorithm
+
+```ghul
+use IO.Std.write_line
+
+let table = [
+    "0317598642",
+    "7092154863",
+    "4206871359",
+    "1750983426",
+    "6123045978",
+    "3674209581",
+    "5869720134",
+    "8945362017",
+    "9438617205",
+    "2581436790"
+]
+
+digit_value(digit: char) -> int => cast int(digit) - cast int('0')
+
+valid(number: string) -> bool => (
+    let interim mut = 0
+
+    for digit in number do
+        let row = table[interim]
+        interim = digit_value(row[digit_value(digit)])
+    od
+
+    interim == 0
+)
+
+for sample in ["5724", "5727", "5857"] do
+    let verdict = if valid(sample) then "valid" else "invalid" fi
+    write_line("{sample} checksum {verdict}")
+od
+```
+
+output:
+
+```
+5724 checksum valid
+5727 checksum invalid
+5857 checksum invalid
+```
+
+
+---
+
+<a id="rosetta/dinesmans-multiple-dwelling-problem"></a>
+
+
+# Dinesman's multiple-dwelling problem
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Dinesman's_multiple-dwelling_problem
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Collections.List
+use Ghul.Pipes
+
+permutations(items: List[int]) -> Pipe[List[int]] is
+    if items.count == 0 then
+        yield LIST[int]()
+    else
+        for i in 0..items.count do
+            let rest = LIST[int](items)
+
+            rest.remove_at(i)
+
+            for tail in permutations(rest) do
+                let whole = LIST[int]()
+
+                whole.add(items[i])
+
+                for value in tail do
+                    whole.add(value)
+                od
+
+                yield whole
+            od
+        od
+    fi
+si
+
+adjacent(left: int, right: int) -> bool =>
+    if left > right then left - right else right - left fi == 1
+
+let floors = LIST[int]([1, 2, 3, 4, 5])
+
+permutations(floors)
+    |> map(order =>
+        (baker = order[0], cooper = order[1], fletcher = order[2],
+         miller = order[3], smith = order[4]))
+    |> filter(floors => floors.baker != 5)
+    |> filter(floors => floors.cooper != 1)
+    |> filter(floors => floors.fletcher != 1 /\ floors.fletcher != 5)
+    |> filter(floors => floors.miller > floors.cooper)
+    |> filter(floors => !adjacent(floors.smith, floors.fletcher))
+    |> filter(floors => !adjacent(floors.fletcher, floors.cooper))
+    |> each(floors => (
+        write_line("Baker lives on floor {floors.baker}")
+        write_line("Cooper lives on floor {floors.cooper}")
+        write_line("Fletcher lives on floor {floors.fletcher}")
+        write_line("Miller lives on floor {floors.miller}")
+        write_line("Smith lives on floor {floors.smith}")
+    ));
+```
+
+output:
+
+```
+Baker lives on floor 3
+Cooper lives on floor 2
+Fletcher lives on floor 4
+Miller lives on floor 5
+Smith lives on floor 1
+```
+
+
+---
+
+<a id="rosetta/forward-difference"></a>
+
+
+# Forward difference
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Forward_difference
+
+```ghul
+use IO.Std.write_line
+use Collections
+use Ghul.Pipes
+
+differences(xs: List[int]) -> List[int] =>
+    zip(xs[1..<0], xs[0..<1])
+    |> map(((next, current)) => next - current)
+    |> collect_list()
+
+forward(order: int, xs: List[int]) -> List[int] =>
+    if order == 0 then xs
+    else forward(order - 1, differences(xs))
+    fi
+
+let xs: List[int] = [90, 47, 58, 29, 22, 32, 55, 5, 55, 73]
+
+for order in 0..xs.count do
+    write_line("order {order}: {forward(order, xs) |> join(", ")}")
+od
+```
+
+output:
+
+```
+order 0: 90, 47, 58, 29, 22, 32, 55, 5, 55, 73
+order 1: -43, 11, -29, -7, 10, 23, -50, 50, 18
+order 2: 54, -40, 22, 17, 13, -73, 100, -32
+order 3: -94, 62, -5, -4, -86, 173, -132
+order 4: 156, -67, 1, -82, 259, -305
+order 5: -223, 68, -83, 341, -564
+order 6: 291, -151, 424, -905
+order 7: -442, 575, -1329
+order 8: 1017, -1904
+order 9: -2921
+```
+
+
+---
+
+<a id="rosetta/huffman-coding"></a>
+
+
+# Huffman coding
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Huffman_coding
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Collections.List
+use Collections.MAP
+use Ghul.Pipes
+
+union Huffman(weight: int) is
+    LEAF(symbol: char, ..)
+    NODE(left: Huffman, right: Huffman, ..)
+si
+
+use Huffman.LEAF
+use Huffman.NODE
+
+take_lightest(pending: LIST[Huffman]) -> Huffman is
+    let at mut = 0
+
+    for i in 1..pending.count do
+        if pending[i].weight < pending[at].weight then
+            at = i
+        fi
+    od
+
+    let lightest = pending[at]
+
+    pending.remove_at(at)
+
+    return lightest
+si
+
+build_tree(leaves: List[Huffman]) -> Huffman is
+    let pending = LIST[Huffman](leaves)
+
+    while pending.count > 1 do
+        let first = take_lightest(pending)
+        let second = take_lightest(pending)
+
+        pending.add(NODE(first, second, first.weight + second.weight))
+    od
+
+    return pending[0]
+si
+
+codes(node: Huffman, prefix: string)
+    -> Pipe[(symbol: char, weight: int, code: string)]
+is
+    if let leaf: LEAF = ► node then
+        let code = if prefix.length == 0 then "0" else prefix fi
+
+        yield (symbol = leaf.symbol, weight = leaf.weight, code = code)
+    elif let branch: NODE = ► node then
+        yield in codes(branch.left, "{prefix}0")
+        yield in codes(branch.right, "{prefix}1")
+    fi
+si
+
+let text = "this is an example for huffman encoding"
+
+let weights = MAP[char, int]()
+
+for character in text do
+    let seen mut = 0
+
+    weights.try_get_value(character, seen ref)
+
+    weights[character] = seen + 1
+od
+
+let leaves = LIST[Huffman]()
+
+for symbol in weights.keys |> sort() do
+    leaves.add(LEAF(symbol, weights[symbol]))
+od
+
+let table =
+    codes(build_tree(leaves), "")
+    |> sort((left, right) =>
+        if left.weight != right.weight then
+            right.weight - left.weight
+        else
+            cast int(left.symbol) - cast int(right.symbol)
+        fi)
+    |> collect_list()
+
+write_line("symbol  weight  code")
+
+for entry in table do
+    let symbol = "'{entry.symbol}'"
+
+    write_line("{symbol,-6}  {entry.weight,6}  {entry.code}")
+od
+```
+
+output:
+
+```
+symbol  weight  code
+' '          6  101
+'n'          4  000
+'a'          3  1001
+'e'          3  1100
+'f'          3  1101
+'i'          3  1110
+'h'          2  11111
+'m'          2  0010
+'o'          2  0011
+'s'          2  0100
+'c'          1  01010
+'d'          1  01011
+'g'          1  01100
+'l'          1  01101
+'p'          1  01110
+'r'          1  01111
+'t'          1  10000
+'u'          1  10001
+'x'          1  11110
+```
+
+
+---
+
+<a id="rosetta/josephus-problem"></a>
+
+
+# Josephus problem
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Josephus_problem
+
+## Who survives
+
+```ghul
+use IO.Std.write_line
+
+survivor(n: int, k: int) -> int =>
+    if n == 1 then 0 else (survivor(n - 1, k) + k) % n fi
+
+write_line(
+    "41 prisoners, every 3rd killed: prisoner {survivor(41, 3)} survives")
+
+write_line(
+    "5 prisoners, every 2nd killed:  prisoner {survivor(5, 2)} survives");
+```
+
+output:
+
+```
+41 prisoners, every 3rd killed: prisoner 30 survives
+5 prisoners, every 2nd killed:  prisoner 2 survives
+```
+
+## The killing sequence
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+killings(n: int, k: int) -> Pipe[int] is
+    let standing = (0..n) |> collect_list()
+    let at mut = 0
+
+    while standing.count > 1 do
+        at = (at + k - 1) % standing.count
+
+        yield standing[at]
+
+        standing.remove_at(at)
+    od
+si
+
+show(n: int, k: int) is
+    let killed = killings(n, k) |> collect_list()
+
+    write_line("n = {n}, k = {k}: killed {killed |> join(", ")}")
+si
+
+show(5, 2)
+show(7, 3);
+```
+
+output:
+
+```
+n = 5, k = 2: killed 1, 3, 0, 4
+n = 7, k = 3: killed 2, 5, 1, 6, 4, 0
+```
+
+
+---
+
+<a id="rosetta/non-continuous-subsequences"></a>
+
+
+# Non-continuous subsequences
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Non-continuous_subsequences
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Ghul.Pipes
+
+let elements = [1, 2, 3, 4]
+
+selected(mask: int) -> LIST[int] =>
+    (0..elements.count)
+        |> filter(index => (mask & (1 << index)) != 0)
+        |> map(index => elements[index])
+        |> collect_list()
+
+continuous(chosen: LIST[int]) -> bool =>
+    chosen[chosen.count - 1] - chosen[0] + 1 == chosen.count
+
+(1..(1 << elements.count))
+    |> map(selected)
+    |> filter(chosen => chosen.count > 1 /\ !continuous(chosen))
+    |> map(chosen => chosen |> join(", "))
+    |> each(line => write_line(line));
+```
+
+output:
+
+```
+1, 3
+1, 4
+2, 4
+1, 2, 4
+1, 3, 4
+```
+
+
+---
+
+<a id="rosetta/power-set"></a>
+
+
+# Power set
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Power_set
+
+```ghul
+use IO.Std.write_line
+use Collections.Iterable
+use Collections.List
+use Collections.LIST
+use Ghul.Pipes
+
+power_set[T](values: List[T]) -> LIST[LIST[T]] is
+    if values.count == 0 then
+        let empty: LIST[LIST[T]] = _()
+
+        empty.add(LIST[T]())
+
+        return empty
+    fi
+
+    let first = values[0]
+    let result: LIST[LIST[T]] = _()
+
+    for subset in power_set(values |> skip(1) |> collect()) do
+        let with_first: LIST[T] = _()
+
+        with_first.add(first)
+        with_first.add_range(subset)
+
+        result.add(subset)
+        result.add(with_first)
+    od
+
+    return result
+si
+
+braced[T](values: Iterable[T]) -> string => "{{{values |> join(", ")}}}"
+
+show[T](sets: LIST[LIST[T]]) -> string =>
+    braced(sets |> map(subset => braced(subset)))
+
+write_line(show(power_set(LIST[int]())))
+write_line(show(power_set([1, 2, 3] |> collect())))
+write_line(show(power_set(["a", "b"] |> collect())));
+```
+
+output:
+
+```
+{{}}
+{{}, {1}, {2}, {1, 2}, {3}, {1, 3}, {2, 3}, {1, 2, 3}}
+{{}, {a}, {b}, {a, b}}
+```
+
+
+---
+
+<a id="rosetta/smith-waterman-algorithm"></a>
+
+
+# Smith–Waterman algorithm
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Smith–Waterman_algorithm
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Ghul.Pipes
+
+score(first: char, second: char) -> int =>
+    if first == second then 2 else -1 fi
+
+gap() -> int => -2
+
+highest(values: int[]) -> int =>
+    values
+    |> reduce(0, (best, value) => if value > best then value else best fi)
+
+matrix(first: string, second: string) -> LIST[LIST[int]] is
+    let scores = LIST[LIST[int]]()
+
+    for i in 0::first.length do
+        let row = LIST[int]()
+
+        for j in 0::second.length do
+            row.add(0)
+        od
+
+        scores.add(row)
+    od
+
+    for i in 1::first.length do
+        for j in 1::second.length do
+            scores[i][j] =
+                highest([
+                    0,
+                    scores[i - 1][j - 1] +
+                        score(first[i - 1], second[j - 1]),
+                    scores[i - 1][j] + gap(),
+                    scores[i][j - 1] + gap()
+                ])
+        od
+    od
+
+    return scores
+si
+
+best_cell(scores: LIST[LIST[int]]) -> (row: int, column: int) is
+    let row mut = 0
+    let column mut = 0
+
+    for i in 0..scores.count do
+        for j in 0..scores[i].count do
+            if scores[i][j] > scores[row][column] then
+                row = i
+                column = j
+            fi
+        od
+    od
+
+    return (row = row, column = column)
+si
+
+trace(
+    first: string,
+    second: string,
+    scores: LIST[LIST[int]]
+) -> (a_aligned: string, b_aligned: string, path: string) is
+    let (row, column) = best_cell(scores)
+
+    let i mut = row
+    let j mut = column
+
+    let top = LIST[char]()
+    let bottom = LIST[char]()
+    let cells = LIST[string]()
+
+    while i > 0 /\ j > 0 /\ scores[i][j] > 0 do
+        cells.add("({i},{j})")
+
+        let diagonal =
+            scores[i - 1][j - 1] + score(first[i - 1], second[j - 1])
+
+        if scores[i][j] == diagonal then
+            top.add(first[i - 1])
+            bottom.add(second[j - 1])
+
+            i = i - 1
+            j = j - 1
+        elif scores[i][j] == scores[i - 1][j] + gap() then
+            top.add(first[i - 1])
+            bottom.add('-')
+
+            i = i - 1
+        else
+            top.add('-')
+            bottom.add(second[j - 1])
+
+            j = j - 1
+        fi
+    od
+
+    top.reverse()
+    bottom.reverse()
+    cells.reverse()
+
+    return (
+        a_aligned = string(top.to_array()),
+        b_aligned = string(bottom.to_array()),
+        path = cells |> join(" ")
+    )
+si
+
+show(first: string, second: string) is
+    let scores = matrix(first, second)
+    let (row, column) = best_cell(scores)
+    let (a_aligned, b_aligned, path) = trace(first, second, scores)
+
+    write_line("sequences: {first} and {second}")
+    write_line("highest score: {scores[row][column]}")
+    write_line("aligned: {a_aligned}")
+    write_line("         {b_aligned}")
+    write_line("path: {path}")
+    write_line("")
+    let heading =
+        second |> map(character => "{character}".pad_left(3)) |> join("")
+
+    write_line("       {heading}")
+
+    for i in 0::first.length do
+        let label = if i == 0 then " " else "{first[i - 1]}" fi
+
+        let row =
+            scores[i] |> map(value => "{value}".pad_left(3)) |> join("")
+
+        write_line("  {label} {row}")
+    od
+si
+
+show("ACACACTA", "AGCACACA");
+```
+
+output:
+
+```
+sequences: ACACACTA and AGCACACA
+highest score: 10
+aligned: ACACA
+         ACACA
+path: (1,4) (2,5) (3,6) (4,7) (5,8)
+
+         A  G  C  A  C  A  C  A
+      0  0  0  0  0  0  0  0  0
+  A   0  2  0  0  2  0  2  0  2
+  C   0  0  1  2  0  4  2  4  2
+  A   0  2  0  0  4  2  6  4  6
+  C   0  0  1  2  2  6  4  8  6
+  A   0  2  0  0  4  4  8  6 10
+  C   0  0  1  2  2  6  6 10  8
+  T   0  0  0  0  1  4  5  8  9
+  A   0  2  0  0  2  2  6  6 10
+```
+
+
+---
+
+<a id="rosetta/sorting-algorithms-quicksort"></a>
+
+
+# Sorting algorithms/Quicksort
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Sorting_algorithms/Quicksort
+
+```ghul
+use IO.Std.write_line
+use Collections.List
+use Ghul.Pipes
+
+quicksort[T: Ghul.Comparable[T]](values: List[T]) -> List[T] =>
+    if values.count <= 1 then
+        values
+    else
+        let pivot = values[0]
+        let rest = values[1..<0]
+
+        let below = rest |> filter(value => value < pivot) |> collect()
+        let above = rest |> filter(value => value >= pivot) |> collect()
+
+        quicksort(below)
+            |> cat([pivot])
+            |> cat(quicksort(above))
+            |> collect()
+    fi
+
+write_line("{$quicksort([6, 2, 9, 2, 5, 1, 8, 3] |> collect())}")
+write_line("{$quicksort(["pear", "apple", "fig", "date"] |> collect())}");
+```
+
+output:
+
+```
+[1, 2, 2, 3, 5, 6, 8, 9]
+[apple, date, fig, pear]
+```
+
+
+---
+
+<a id="rosetta/topswops"></a>
+
+
+# Topswops
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Topswops
+
+```ghul
+use IO.Std.write_line
+use Collections
+
+swaps(deck: int[]) -> int => (
+    let cards = LIST()
+
+    for card in deck do
+        cards.add(card)
+    od
+
+    let count mut = 0
+
+    while cards[0] != 1 do
+        let top_card = cards[0]
+        let last = top_card - 1
+
+        for i in 0::(top_card - 1) / 2 do
+            let held = cards[i]
+
+            cards[i] = cards[last - i]
+            cards[last - i] = held
+        od
+
+        count = count + 1
+    od
+
+    count
+)
+
+topswops(n: int) -> int => (
+    let deck = LIST()
+
+    for card in 1::n do
+        deck.add(card)
+    od
+
+    let best mut = 0
+
+    let search = (position: int) -> void rec is
+        if position == n then
+            let rounds = swaps(deck.to_array())
+
+            if rounds > best then
+                best = rounds
+            fi
+        else
+            for i in position::(n - 1) do
+                let held = deck[position]
+
+                deck[position] = deck[i]
+                deck[i] = held
+
+                rec(position + 1)
+
+                let put_back = deck[position]
+
+                deck[position] = deck[i]
+                deck[i] = put_back
+            od
+        fi
+    si
+
+    search(0)
+
+    best
+)
+
+for n in 1::10 do
+    write_line("{n}: {topswops(n)}")
+od
+```
+
+output:
+
+```
+1: 0
+2: 1
+3: 2
+4: 4
+5: 7
+6: 10
+7: 16
+8: 22
+9: 30
+10: 38
+```
+
+
+---
+
+<a id="rosetta/water-collected-between-towers"></a>
+
+
+# Water collected between towers
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Water_collected_between_towers
+
+```ghul
+use IO.Std.write_line
+use Collections.Iterable
+use Ghul.Pipes
+use System.Math
+
+running_maxima(heights: Iterable[int]) -> Pipe[int] is
+    let highest mut = 0
+
+    for height in heights do
+        highest = Math.max(highest, height)
+
+        yield highest
+    od
+si
+
+water(heights: int[]) -> int => (
+    let left = running_maxima(heights) |> collect_list()
+    let right =
+        running_maxima(heights |> reverse()) |> collect_list()
+    let last = heights.count - 1
+
+    (0..heights.count)
+    |> map(i => Math.min(left[i], right[last - i]) - heights[i])
+    |> reduce(0, (total, depth) => total + depth)
+)
+
+let series: int[][] =
+    [[1, 5, 3, 7, 2],
+     [5, 3, 7, 2, 6, 4, 5, 9, 1, 2],
+     [2, 6, 3, 5, 2, 8, 1, 4, 2, 2, 5, 3, 5, 7, 4, 1],
+     [5, 5, 5, 5],
+     [5, 6, 7, 8],
+     [8, 7, 7, 6],
+     [6, 7, 10, 7, 6]]
+
+series |> each((towers: int[]) =>
+    write_line("{towers |> join(", ")} -> {water(towers)}"));
+```
+
+output:
+
+```
+1, 5, 3, 7, 2 -> 2
+5, 3, 7, 2, 6, 4, 5, 9, 1, 2 -> 14
+2, 6, 3, 5, 2, 8, 1, 4, 2, 2, 5, 3, 5, 7, 4, 1 -> 35
+5, 5, 5, 5 -> 0
+5, 6, 7, 8 -> 0
+8, 7, 7, 6 -> 0
+6, 7, 10, 7, 6 -> 0
+```

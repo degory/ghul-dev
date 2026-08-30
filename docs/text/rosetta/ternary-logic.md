@@ -1,0 +1,116 @@
+
+# Ternary logic
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Ternary_logic
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+union Trit is
+    TRUE
+    MAYBE
+    FALSE
+si
+
+use Trit.TRUE
+use Trit.MAYBE
+use Trit.FALSE
+
+rank(trit: Trit) -> int =>
+    case ► trit
+    when _: FALSE then 0
+    when _: MAYBE then 1
+    when _: TRUE then 2
+    esac
+
+of_rank(rank_value: int) -> Trit =>
+    case rank_value
+    when 0 then FALSE
+    when 1 then MAYBE
+    else TRUE
+    esac
+
+!(trit: Trit) -> Trit => of_rank(2 - rank(trit))
+
+/\(left: Trit, right: Trit) -> Trit =>
+    if rank(left) < rank(right) then left else right fi
+
+\/(left: Trit, right: Trit) -> Trit =>
+    if rank(left) > rank(right) then left else right fi
+
+implies(left: Trit, right: Trit) -> Trit => !left \/ right
+
+equivalent(left: Trit, right: Trit) -> Trit =>
+    implies(left, right) /\ implies(right, left)
+
+show(trit: Trit) -> string =>
+    case ► trit
+    when _: TRUE then "true"
+    when _: MAYBE then "maybe"
+    when _: FALSE then "false"
+    esac
+
+trits: Trit[] => [TRUE, MAYBE, FALSE]
+
+table(name: string, operator: (Trit, Trit) -> Trit) is
+    write_line("")
+    let heading = trits |> map(trit => "{show(trit),6}") |> join("")
+
+    write_line("{name,-8}|{heading}")
+    write_line("--------+------------------")
+
+    for left in trits do
+        let row =
+            trits
+            |> map(right => "{show(operator(left, right)),6}")
+            |> join("")
+
+        write_line("{show(left),-8}|{row}")
+    od
+si
+
+write_line("not")
+
+for left in trits do
+    write_line("{show(left),-8}|{show(!left),6}")
+od
+
+table("and", (left, right) => left /\ right)
+table("or", (left, right) => left \/ right)
+table("implies", implies)
+table("equiv", equivalent);
+```
+
+output:
+
+```
+not
+true    | false
+maybe   | maybe
+false   |  true
+
+and     |  true maybe false
+--------+------------------
+true    |  true maybe false
+maybe   | maybe maybe false
+false   | false false false
+
+or      |  true maybe false
+--------+------------------
+true    |  true  true  true
+maybe   |  true maybe maybe
+false   |  true maybe false
+
+implies |  true maybe false
+--------+------------------
+true    |  true maybe false
+maybe   |  true maybe maybe
+false   |  true  true  true
+
+equiv   |  true maybe false
+--------+------------------
+true    |  true maybe false
+maybe   | maybe maybe maybe
+false   | false maybe  true
+```

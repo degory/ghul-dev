@@ -1,0 +1,30 @@
+
+# 100 doors
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/100_doors
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+let doors = (1::100) |> map(_ => false) |> collect_list()
+
+for pass in 1::100 do
+    let door mut = pass
+
+    while door <= 100 do
+        doors[door - 1] = !doors[door - 1]
+        door = door + pass
+    od
+od
+
+let open_doors = (1::100) |> filter(door => doors[door - 1])
+
+write_line("open doors: {$open_doors}");
+```
+
+output:
+
+```
+open doors: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+```

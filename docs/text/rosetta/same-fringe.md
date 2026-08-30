@@ -1,0 +1,89 @@
+
+# Same fringe
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Same_fringe
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+union Tree is
+    LEAF(value: int)
+    NODE(left: Tree, right: Tree)
+si
+
+use Tree.LEAF
+use Tree.NODE
+
+fringe(tree: Tree) -> Pipe[int] is
+    if isa LEAF( ► tree) then
+        yield tree.value
+    elif isa NODE( ► tree) then
+        yield in fringe(tree.left)
+        yield in fringe(tree.right)
+    fi
+si
+
+compare(first: Tree, second: Tree) -> (same: bool, leaves: int) is
+    let left = fringe(first).iterator
+    let right = fringe(second).iterator
+
+    let leaves mut = 0
+
+    do
+        let more_left = left.move_next()
+        let more_right = right.move_next()
+
+        if more_left != more_right then
+            return (false, leaves)
+        fi
+
+        if !more_left then
+            return (true, leaves)
+        fi
+
+        leaves = leaves + 1
+
+        if left.current != right.current then
+            return (false, leaves)
+        fi
+    od
+si
+
+show(tree: Tree) -> string =>
+    case ► tree
+    when (value): LEAF then "{value}"
+    when (left, right): NODE then "({show(left)} {show(right)})"
+    esac
+
+let leaning_left = NODE(NODE(LEAF(1), LEAF(2)), LEAF(3))
+let leaning_right = NODE(LEAF(1), NODE(LEAF(2), LEAF(3)))
+let differs_last = NODE(LEAF(1), NODE(LEAF(2), LEAF(4)))
+let differs_first = NODE(NODE(LEAF(9), LEAF(2)), LEAF(3))
+let shorter = NODE(LEAF(1), LEAF(2))
+
+for (first, second) in [
+    (leaning_left, leaning_right),
+    (leaning_left, differs_last),
+    (leaning_left, differs_first),
+    (leaning_left, shorter)
+] do
+    let (same, leaves) = compare(first, second)
+
+    let verdict = if same then "same fringe" else "different" fi
+    let counted = if leaves == 1 then "leaf" else "leaves" fi
+
+    write_line(
+        "{show(first)} and {show(second)}: {verdict}, "
+        "{leaves} {counted} compared")
+od
+```
+
+output:
+
+```
+((1 2) 3) and (1 (2 3)): same fringe, 3 leaves compared
+((1 2) 3) and (1 (2 4)): different, 3 leaves compared
+((1 2) 3) and ((9 2) 3): different, 1 leaf compared
+((1 2) 3) and (1 2): different, 2 leaves compared
+```

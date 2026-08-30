@@ -143,7 +143,7 @@ anything with an `.iterator` - into a `Pipe[T]`. This is what the `|`
 operator calls to wrap its left operand.
 
 ```ghul
-pipe[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ pipe[T](source: Iterable[T]) -> Pipe[T] pure;
 ```
 
 ## stages
@@ -153,7 +153,7 @@ A stage returns a new pipe, so stages chain onto one another.
 ### filter
 
 ```ghul
-filter[T](
+◆ filter[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> Pipe[T] pure;
@@ -162,13 +162,13 @@ filter[T](
 or, as a method:
 
 ```ghul
-filter(predicate: (T) -> bool pure) -> Pipe[T] pure;
+◆ filter(predicate: (T) -> bool pure) -> Pipe[T] pure;
 ```
 
 ### map
 
 ```ghul
-map[T,U](
+◆ map[T,U](
     source: Iterable[T],
     mapper: (T) -> U pure
 ) -> Pipe[U] pure;
@@ -177,7 +177,7 @@ map[T,U](
 or, as a method:
 
 ```ghul
-map[U](mapper: (T) -> U pure) -> Pipe[U] pure;
+◆ map[U](mapper: (T) -> U pure) -> Pipe[U] pure;
 ```
 
 ### flat_map
@@ -185,7 +185,7 @@ map[U](mapper: (T) -> U pure) -> Pipe[U] pure;
 Maps each element to an iterable and runs the results together into one sequence.
 
 ```ghul
-flat_map[T,U](
+◆ flat_map[T,U](
     source: Iterable[T],
     mapper: (T) -> Iterable[U] pure
 ) -> Pipe[U] pure;
@@ -194,37 +194,37 @@ flat_map[T,U](
 or, as a method:
 
 ```ghul
-flat_map[U](mapper: (T) -> Iterable[U] pure) -> Pipe[U] pure;
+◆ flat_map[U](mapper: (T) -> Iterable[U] pure) -> Pipe[U] pure;
 ```
 
 ### skip
 
 ```ghul
-skip[T](source: Iterable[T], count: int) -> Pipe[T] pure;
+◆ skip[T](source: Iterable[T], count: int) -> Pipe[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-skip(count: int) -> Pipe[T] pure;
+◆ skip(count: int) -> Pipe[T] pure;
 ```
 
 ### take
 
 ```ghul
-take[T](source: Iterable[T], count: int) -> Pipe[T] pure;
+◆ take[T](source: Iterable[T], count: int) -> Pipe[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-take(count: int) -> Pipe[T] pure;
+◆ take(count: int) -> Pipe[T] pure;
 ```
 
 ### skip_while
 
 ```ghul
-skip_while[T](
+◆ skip_while[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> Pipe[T] pure;
@@ -233,13 +233,13 @@ skip_while[T](
 or, as a method:
 
 ```ghul
-skip_while(predicate: (T) -> bool pure) -> Pipe[T] pure;
+◆ skip_while(predicate: (T) -> bool pure) -> Pipe[T] pure;
 ```
 
 ### take_while
 
 ```ghul
-take_while[T](
+◆ take_while[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> Pipe[T] pure;
@@ -248,7 +248,7 @@ take_while[T](
 or, as a method:
 
 ```ghul
-take_while(predicate: (T) -> bool pure) -> Pipe[T] pure;
+◆ take_while(predicate: (T) -> bool pure) -> Pipe[T] pure;
 ```
 
 The four set operations that follow all discard duplicates. This is what they do to the same pair of sources:
@@ -280,13 +280,13 @@ except:         1, 2
 Removes duplicates, keeping the first occurrence of each element. `distinct`, `union_with`, `intersect_with` and `except` all do this, so each produces a sequence with no repeats, in the order first seen. Elements are compared with `=~` and `get_hash_code`, so a type used with these needs [both](https://ghul.dev/dotnet-integration.html#equality).
 
 ```ghul
-distinct[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ distinct[T](source: Iterable[T]) -> Pipe[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-distinct() -> Pipe[T] pure;
+◆ distinct() -> Pipe[T] pure;
 ```
 
 ### union_with
@@ -294,7 +294,7 @@ distinct() -> Pipe[T] pure;
 Every element of both sources with duplicates removed, taking the left source's elements first.
 
 ```ghul
-union_with[T](
+◆ union_with[T](
     source: Iterable[T],
     right: Iterable[T]
 ) -> Pipe[T] pure;
@@ -303,7 +303,7 @@ union_with[T](
 or, as a method:
 
 ```ghul
-union_with(right: Iterable[T]) -> Pipe[T] pure;
+◆ union_with(right: Iterable[T]) -> Pipe[T] pure;
 ```
 
 ### intersect_with
@@ -311,7 +311,7 @@ union_with(right: Iterable[T]) -> Pipe[T] pure;
 Elements the left and right sources have in common, in the order the left source has them.
 
 ```ghul
-intersect_with[T](
+◆ intersect_with[T](
     source: Iterable[T],
     right: Iterable[T]
 ) -> Pipe[T] pure;
@@ -320,7 +320,7 @@ intersect_with[T](
 or, as a method:
 
 ```ghul
-intersect_with(right: Iterable[T]) -> Pipe[T] pure;
+◆ intersect_with(right: Iterable[T]) -> Pipe[T] pure;
 ```
 
 ### except
@@ -328,7 +328,7 @@ intersect_with(right: Iterable[T]) -> Pipe[T] pure;
 Elements of the left source that the right source doesn't have.
 
 ```ghul
-except[T](
+◆ except[T](
     source: Iterable[T],
     right: Iterable[T]
 ) -> Pipe[T] pure;
@@ -337,7 +337,7 @@ except[T](
 or, as a method:
 
 ```ghul
-except(right: Iterable[T]) -> Pipe[T] pure;
+◆ except(right: Iterable[T]) -> Pipe[T] pure;
 ```
 
 ### peek
@@ -345,13 +345,13 @@ except(right: Iterable[T]) -> Pipe[T] pure;
 Calls `action` on each element and passes it through unchanged.
 
 ```ghul
-peek[T](source: Iterable[T], action: T -> void) -> Pipe[T] pure;
+◆ peek[T](source: Iterable[T], action: T -> void) -> Pipe[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-peek(action: T -> void) -> Pipe[T] pure;
+◆ peek(action: T -> void) -> Pipe[T] pure;
 ```
 
 `chunk` and `windows` both produce groups of elements, and differ in how the groups are cut:
@@ -393,13 +393,13 @@ window: 5, 6, 7
 The first `size` elements, then the next `size`, and so on, each element appearing in one group only. The last group is short when the source doesn't divide evenly. Compare `windows`, below.
 
 ```ghul
-chunk[T](source: Iterable[T], size: int) -> Pipe[LIST[T]] pure;
+◆ chunk[T](source: Iterable[T], size: int) -> Pipe[LIST[T]] pure;
 ```
 
 or, as a method:
 
 ```ghul
-chunk(size: int) -> Pipe[LIST[T]] pure;
+◆ chunk(size: int) -> Pipe[LIST[T]] pure;
 ```
 
 ### windows
@@ -407,7 +407,7 @@ chunk(size: int) -> Pipe[LIST[T]] pure;
 Every run of `size` neighbouring elements: the first `size`, then the same run moved along by one, and so on. Each window therefore shares all but one of its elements with the window before it. A window is always `size` long, so a source with fewer than `size` elements produces none.
 
 ```ghul
-windows[T](
+◆ windows[T](
     source: Iterable[T],
     size: int
 ) -> Pipe[LIST[T]] pure;
@@ -416,7 +416,7 @@ windows[T](
 or, as a method:
 
 ```ghul
-windows(size: int) -> Pipe[LIST[T]] pure;
+◆ windows(size: int) -> Pipe[LIST[T]] pure;
 ```
 
 ### cat
@@ -424,13 +424,13 @@ windows(size: int) -> Pipe[LIST[T]] pure;
 Concatenation: every element of the left source, then every element of the right.
 
 ```ghul
-cat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T] pure;
+◆ cat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-cat(right: Iterable[T]) -> Pipe[T] pure;
+◆ cat(right: Iterable[T]) -> Pipe[T] pure;
 ```
 
 ### index
@@ -438,9 +438,9 @@ cat(right: Iterable[T]) -> Pipe[T] pure;
 Pairs each element with its index. `INDEXED_VALUE[T]` has `index` and `value`, and destructures positionally, so `for (i, x) in xs | .index() do` reads the pair apart. The second form starts the index at a given number rather than at 0.
 
 ```ghul
-index[T](source: Iterable[T]) -> Pipe[INDEXED_VALUE[T]] pure;
+◆ index[T](source: Iterable[T]) -> Pipe[INDEXED_VALUE[T]] pure;
 
-index[T](
+◆ index[T](
     source: Iterable[T],
     index: int
 ) -> Pipe[INDEXED_VALUE[T]] pure;
@@ -449,9 +449,9 @@ index[T](
 or, as a method:
 
 ```ghul
-index() -> Pipe[INDEXED_VALUE[T]] pure;
+◆ index() -> Pipe[INDEXED_VALUE[T]] pure;
 
-index(index: int) -> Pipe[INDEXED_VALUE[T]] pure;
+◆ index(index: int) -> Pipe[INDEXED_VALUE[T]] pure;
 ```
 
 ### zip
@@ -459,12 +459,12 @@ index(index: int) -> Pipe[INDEXED_VALUE[T]] pure;
 Pairs elements of the source with elements of `other`, stopping when either side runs out. The second form combines each pair with a mapper instead of yielding a tuple.
 
 ```ghul
-zip[T,U](
+◆ zip[T,U](
     source: Iterable[T],
     other: Iterable[U]
 ) -> Pipe[(T,U)] pure;
 
-zip[T,U,TOut](
+◆ zip[T,U,TOut](
     source: Iterable[T],
     other: Iterable[U],
     mapper: (T,U) -> TOut pure
@@ -474,9 +474,9 @@ zip[T,U,TOut](
 or, as a method:
 
 ```ghul
-zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure;
+◆ zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure;
 
-zip[U,TOut](
+◆ zip[U,TOut](
     other: Iterable[U],
     mapper: (T,U) -> TOut pure
 ) -> Pipe[TOut] pure;
@@ -493,13 +493,13 @@ moment they are called, rather than passing elements along one at a time.
 Yields the source's elements last to first.
 
 ```ghul
-reverse[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ reverse[T](source: Iterable[T]) -> Pipe[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-reverse() -> Pipe[T] pure;
+◆ reverse() -> Pipe[T] pure;
 ```
 
 ### sort
@@ -507,14 +507,14 @@ reverse() -> Pipe[T] pure;
 Yields the source's elements in order. The first form uses the element type's own ordering: sorting without a comparer needs an element type that defines `<>`, or is comparable on the .NET side. The other two forms take an `IComparer[T]` or a comparison function returning negative, zero or positive.
 
 ```ghul
-sort[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ sort[T](source: Iterable[T]) -> Pipe[T] pure;
 
-sort[T](
+◆ sort[T](
     source: Iterable[T],
     comparer: Collections.IComparer[T]
 ) -> Pipe[T] pure;
 
-sort[T](
+◆ sort[T](
     source: Iterable[T],
     compare: (T, T) -> int pure
 ) -> Pipe[T] pure;
@@ -523,29 +523,29 @@ sort[T](
 or, as a method:
 
 ```ghul
-sort() -> Pipe[T] pure;
+◆ sort() -> Pipe[T] pure;
 
-sort(comparer: Collections.IComparer[T]) -> Pipe[T] pure;
+◆ sort(comparer: Collections.IComparer[T]) -> Pipe[T] pure;
 
-sort(compare: (T, T) -> int pure) -> Pipe[T] pure;
+◆ sort(compare: (T, T) -> int pure) -> Pipe[T] pure;
 ```
 
 ### sort_descending
 
 ```ghul
-sort_descending[T](source: Iterable[T]) -> Pipe[T] pure;
+◆ sort_descending[T](source: Iterable[T]) -> Pipe[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-sort_descending() -> Pipe[T] pure;
+◆ sort_descending() -> Pipe[T] pure;
 ```
 
 ### sort_by
 
 ```ghul
-sort_by[T,K: Ghul.Comparable[K]](
+◆ sort_by[T,K: Ghul.Comparable[K]](
     source: Iterable[T],
     key_selector: (T) -> K pure
 ) -> Pipe[T] pure;
@@ -554,7 +554,7 @@ sort_by[T,K: Ghul.Comparable[K]](
 or, as a method:
 
 ```ghul
-sort_by[K: Ghul.Comparable[K]](
+◆ sort_by[K: Ghul.Comparable[K]](
     key_selector: (T) -> K pure
 ) -> Pipe[T] pure;
 ```
@@ -562,7 +562,7 @@ sort_by[K: Ghul.Comparable[K]](
 ### sort_by_descending
 
 ```ghul
-sort_by_descending[T,K: Ghul.Comparable[K]](
+◆ sort_by_descending[T,K: Ghul.Comparable[K]](
     source: Iterable[T],
     key_selector: (T) -> K pure
 ) -> Pipe[T] pure;
@@ -571,7 +571,7 @@ sort_by_descending[T,K: Ghul.Comparable[K]](
 or, as a method:
 
 ```ghul
-sort_by_descending[K: Ghul.Comparable[K]](
+◆ sort_by_descending[K: Ghul.Comparable[K]](
     key_selector: (T) -> K pure
 ) -> Pipe[T] pure;
 ```
@@ -635,7 +635,7 @@ first_map: none
 The first element matching the predicate, absent if none does. `first` is the same question with no predicate.
 
 ```ghul
-find[T](
+◆ find[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> Ghul.MAYBE[T] pure;
@@ -644,7 +644,7 @@ find[T](
 or, as a method:
 
 ```ghul
-find(predicate: (T) -> bool pure) -> Ghul.MAYBE[T] pure;
+◆ find(predicate: (T) -> bool pure) -> Ghul.MAYBE[T] pure;
 ```
 
 ### find_map
@@ -652,7 +652,7 @@ find(predicate: (T) -> bool pure) -> Ghul.MAYBE[T] pure;
 Calls `mapper` on each element in turn and returns the first present result. `first_map` differs: it calls the mapper on the *first* element only, and gives up if that one declines.
 
 ```ghul
-find_map[T,U](
+◆ find_map[T,U](
     source: Iterable[T],
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> Ghul.MAYBE[U] pure;
@@ -661,7 +661,7 @@ find_map[T,U](
 or, as a method:
 
 ```ghul
-find_map[U](
+◆ find_map[U](
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> Ghul.MAYBE[U] pure;
 ```
@@ -671,7 +671,7 @@ find_map[U](
 As `find`, throwing instead of returning absent when nothing matches.
 
 ```ghul
-find_or_throw[T](
+◆ find_or_throw[T](
     source: Iterable[T],
     predicate: T -> bool pure
 ) -> T pure;
@@ -680,7 +680,7 @@ find_or_throw[T](
 or, as a method:
 
 ```ghul
-find_or_throw(predicate: T -> bool pure) -> T pure;
+◆ find_or_throw(predicate: T -> bool pure) -> T pure;
 ```
 
 ### find_map_or_throw
@@ -688,7 +688,7 @@ find_or_throw(predicate: T -> bool pure) -> T pure;
 As `find_map`, throwing instead of returning absent when nothing maps.
 
 ```ghul
-find_map_or_throw[T,U](
+◆ find_map_or_throw[T,U](
     source: Iterable[T],
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> U pure;
@@ -697,7 +697,7 @@ find_map_or_throw[T,U](
 or, as a method:
 
 ```ghul
-find_map_or_throw[U](
+◆ find_map_or_throw[U](
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> U pure;
 ```
@@ -707,13 +707,13 @@ find_map_or_throw[U](
 The leading element, absent when the source is empty.
 
 ```ghul
-first[T](source: Iterable[T]) -> Ghul.MAYBE[T] pure;
+◆ first[T](source: Iterable[T]) -> Ghul.MAYBE[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-first() -> Ghul.MAYBE[T] pure;
+◆ first() -> Ghul.MAYBE[T] pure;
 ```
 
 ### first_map
@@ -721,7 +721,7 @@ first() -> Ghul.MAYBE[T] pure;
 Calls `mapper` on the leading element only. Compare `find_map`, above, which keeps going.
 
 ```ghul
-first_map[T,U](
+◆ first_map[T,U](
     source: Iterable[T],
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> Ghul.MAYBE[U] pure;
@@ -730,7 +730,7 @@ first_map[T,U](
 or, as a method:
 
 ```ghul
-first_map[U](
+◆ first_map[U](
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> Ghul.MAYBE[U] pure;
 ```
@@ -740,13 +740,13 @@ first_map[U](
 As `first`, throwing instead of returning absent when the source is empty.
 
 ```ghul
-first_or_throw[T](source: Iterable[T]) -> T pure;
+◆ first_or_throw[T](source: Iterable[T]) -> T pure;
 ```
 
 or, as a method:
 
 ```ghul
-first_or_throw() -> T pure;
+◆ first_or_throw() -> T pure;
 ```
 
 ### first_map_or_throw
@@ -754,7 +754,7 @@ first_or_throw() -> T pure;
 As `first_map`, throwing instead of returning absent.
 
 ```ghul
-first_map_or_throw[T,U](
+◆ first_map_or_throw[T,U](
     source: Iterable[T],
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> U pure;
@@ -763,7 +763,7 @@ first_map_or_throw[T,U](
 or, as a method:
 
 ```ghul
-first_map_or_throw[U](
+◆ first_map_or_throw[U](
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> U pure;
 ```
@@ -773,19 +773,19 @@ first_map_or_throw[U](
 The single element the source holds, throwing when it holds none or more than one.
 
 ```ghul
-only[T](source: Iterable[T]) -> T pure;
+◆ only[T](source: Iterable[T]) -> T pure;
 ```
 
 or, as a method:
 
 ```ghul
-only() -> T pure;
+◆ only() -> T pure;
 ```
 
 ### any
 
 ```ghul
-any[T](
+◆ any[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> bool pure;
@@ -794,13 +794,13 @@ any[T](
 or, as a method:
 
 ```ghul
-any(predicate: (T) -> bool pure) -> bool pure;
+◆ any(predicate: (T) -> bool pure) -> bool pure;
 ```
 
 ### all
 
 ```ghul
-all[T](
+◆ all[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> bool pure;
@@ -809,19 +809,19 @@ all[T](
 or, as a method:
 
 ```ghul
-all(predicate: (T) -> bool pure) -> bool pure;
+◆ all(predicate: (T) -> bool pure) -> bool pure;
 ```
 
 ### count
 
 ```ghul
-count[T](source: Iterable[T]) -> int pure;
+◆ count[T](source: Iterable[T]) -> int pure;
 ```
 
 or, as a method:
 
 ```ghul
-count() -> int pure;
+◆ count() -> int pure;
 ```
 
 ### min
@@ -829,7 +829,7 @@ count() -> int pure;
 The smallest element, absent when the source is empty. `min` and `max` have no method form.
 
 ```ghul
-min[T: Ghul.Comparable[T]](
+◆ min[T: Ghul.Comparable[T]](
     values: Iterable[T]
 ) -> Ghul.MAYBE[T] pure;
 ```
@@ -837,7 +837,7 @@ min[T: Ghul.Comparable[T]](
 ### max
 
 ```ghul
-max[T: Ghul.Comparable[T]](
+◆ max[T: Ghul.Comparable[T]](
     values: Iterable[T]
 ) -> Ghul.MAYBE[T] pure;
 ```
@@ -845,7 +845,7 @@ max[T: Ghul.Comparable[T]](
 ### min_by
 
 ```ghul
-min_by[T,K: Ghul.Comparable[K]](
+◆ min_by[T,K: Ghul.Comparable[K]](
     source: Iterable[T],
     key_selector: (T) -> K pure
 ) -> Ghul.MAYBE[T] pure;
@@ -854,7 +854,7 @@ min_by[T,K: Ghul.Comparable[K]](
 or, as a method:
 
 ```ghul
-min_by[K: Ghul.Comparable[K]](
+◆ min_by[K: Ghul.Comparable[K]](
     key_selector: (T) -> K pure
 ) -> Ghul.MAYBE[T] pure;
 ```
@@ -862,7 +862,7 @@ min_by[K: Ghul.Comparable[K]](
 ### max_by
 
 ```ghul
-max_by[T,K: Ghul.Comparable[K]](
+◆ max_by[T,K: Ghul.Comparable[K]](
     source: Iterable[T],
     key_selector: (T) -> K pure
 ) -> Ghul.MAYBE[T] pure;
@@ -871,7 +871,7 @@ max_by[T,K: Ghul.Comparable[K]](
 or, as a method:
 
 ```ghul
-max_by[K: Ghul.Comparable[K]](
+◆ max_by[K: Ghul.Comparable[K]](
     key_selector: (T) -> K pure
 ) -> Ghul.MAYBE[T] pure;
 ```
@@ -916,55 +916,55 @@ group_by:     large 5, 9, 6
 Collects into the read-only `Collections.List[T]`. `collect_list` gives back the mutable `LIST[T]` instead, and the others collect into an array, a set, or a map.
 
 ```ghul
-collect[T](source: Iterable[T]) -> Collections.List[T] pure;
+◆ collect[T](source: Iterable[T]) -> Collections.List[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-collect() -> Collections.List[T] pure;
+◆ collect() -> Collections.List[T] pure;
 ```
 
 ### collect_array
 
 ```ghul
-collect_array[T](source: Iterable[T]) -> T[] pure;
+◆ collect_array[T](source: Iterable[T]) -> T[] pure;
 ```
 
 or, as a method:
 
 ```ghul
-collect_array() -> T[] pure;
+◆ collect_array() -> T[] pure;
 ```
 
 ### collect_list
 
 ```ghul
-collect_list[T](source: Iterable[T]) -> LIST[T] pure;
+◆ collect_list[T](source: Iterable[T]) -> LIST[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-collect_list() -> LIST[T] pure;
+◆ collect_list() -> LIST[T] pure;
 ```
 
 ### collect_set
 
 ```ghul
-collect_set[T](source: Iterable[T]) -> SET[T] pure;
+◆ collect_set[T](source: Iterable[T]) -> SET[T] pure;
 ```
 
 or, as a method:
 
 ```ghul
-collect_set() -> SET[T] pure;
+◆ collect_set() -> SET[T] pure;
 ```
 
 ### collect_map
 
 ```ghul
-collect_map[T,K,V](
+◆ collect_map[T,K,V](
     source: Iterable[T],
     key_selector: (T) -> K pure,
     value_selector: (T) -> V pure
@@ -974,7 +974,7 @@ collect_map[T,K,V](
 or, as a method:
 
 ```ghul
-collect_map[K,V](
+◆ collect_map[K,V](
     key_selector: (T) -> K pure,
     value_selector: (T) -> V pure
 ) -> MAP[K,V] pure;
@@ -985,7 +985,7 @@ collect_map[K,V](
 Splits the source in two on a predicate. The elements matching the predicate come first, then the elements not matching.
 
 ```ghul
-partition[T](
+◆ partition[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> (LIST[T], LIST[T]) pure;
@@ -994,7 +994,7 @@ partition[T](
 or, as a method:
 
 ```ghul
-partition(
+◆ partition(
     predicate: (T) -> bool pure
 ) -> (LIST[T], LIST[T]) pure;
 ```
@@ -1004,7 +1004,7 @@ partition(
 Collects the elements into a map, keyed by what `key_selector` returns for each.
 
 ```ghul
-group_by[T,K](
+◆ group_by[T,K](
     source: Iterable[T],
     key_selector: (T) -> K pure
 ) -> MAP[K, LIST[T]] pure;
@@ -1013,7 +1013,7 @@ group_by[T,K](
 or, as a method:
 
 ```ghul
-group_by[K](
+◆ group_by[K](
     key_selector: (T) -> K pure
 ) -> MAP[K, LIST[T]] pure;
 ```
@@ -1023,13 +1023,13 @@ group_by[K](
 Folds the source into a single value, starting at `seed` and calling `accumulator` with the running value and each element in turn. The second form passes the final running value through a mapper before returning it.
 
 ```ghul
-reduce[T,TRunning](
+◆ reduce[T,TRunning](
     source: Iterable[T],
     seed: TRunning,
     accumulator: (TRunning,T) -> TRunning pure
 ) -> TRunning pure;
 
-reduce[T,TRunning,TOut](
+◆ reduce[T,TRunning,TOut](
     source: Iterable[T],
     seed: TRunning,
     accumulator: (TRunning,T) -> TRunning pure,
@@ -1040,12 +1040,12 @@ reduce[T,TRunning,TOut](
 or, as a method:
 
 ```ghul
-reduce[TRunning](
+◆ reduce[TRunning](
     seed: TRunning,
     accumulator: (TRunning,T) -> TRunning pure
 ) -> TRunning pure;
 
-reduce[TRunning,TOut](
+◆ reduce[TRunning,TOut](
     seed: TRunning,
     accumulator: (TRunning,T) -> TRunning pure,
     mapper: (TRunning) -> TOut pure
@@ -1057,13 +1057,13 @@ reduce[TRunning,TOut](
 Calls `action` on every element. It returns nothing and, alone among these, is not `pure` - it exists for its side effects.
 
 ```ghul
-each[T](source: Iterable[T], action: T -> void) -> void;
+◆ each[T](source: Iterable[T], action: T -> void) -> void;
 ```
 
 or, as a method:
 
 ```ghul
-each(action: T -> void) -> void;
+◆ each(action: T -> void) -> void;
 ```
 
 ### append_to
@@ -1071,13 +1071,13 @@ each(action: T -> void) -> void;
 Appends each element to a `StringBuilder`, separated by `separator`, or by `", "` when that is left off. `join` is the same thing answering a fresh string.
 
 ```ghul
-append_to[T](
+◆ append_to[T](
     source: Iterable[T],
     into: System.Text.StringBuilder,
     separator: string
 ) -> System.Text.StringBuilder;
 
-append_to[T](
+◆ append_to[T](
     source: Iterable[T],
     into: System.Text.StringBuilder
 ) -> System.Text.StringBuilder;
@@ -1086,12 +1086,12 @@ append_to[T](
 or, as a method:
 
 ```ghul
-append_to(
+◆ append_to(
     into: System.Text.StringBuilder,
     separator: string
 ) -> System.Text.StringBuilder;
 
-append_to(
+◆ append_to(
     into: System.Text.StringBuilder
 ) -> System.Text.StringBuilder;
 ```
@@ -1101,15 +1101,15 @@ append_to(
 Renders the elements into one string, separated by `separator`, or by `", "` when left off.
 
 ```ghul
-join[T](source: Iterable[T], separator: string) -> string pure;
+◆ join[T](source: Iterable[T], separator: string) -> string pure;
 
-join[T](source: Iterable[T]) -> string pure;
+◆ join[T](source: Iterable[T]) -> string pure;
 ```
 
 or, as a method:
 
 ```ghul
-join(separator: string) -> string pure;
+◆ join(separator: string) -> string pure;
 
-join() -> string pure;
+◆ join() -> string pure;
 ```

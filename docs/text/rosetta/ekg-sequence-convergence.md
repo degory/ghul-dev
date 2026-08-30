@@ -1,0 +1,68 @@
+
+# EKG sequence convergence
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/EKG_sequence_convergence
+
+```ghul
+use IO.Std.write_line
+use Collections.LIST
+use Collections.SET
+use Ghul.Pipes
+
+shares_factor(left_value: int, right_value: int) -> bool => (
+    let left mut = left_value
+    let right mut = right_value
+
+    while right > 0 do
+        let remainder = left % right
+        left = right
+        right = remainder
+    od
+
+    left > 1
+)
+
+ekg(start: int, count: int) -> LIST[int] is
+    let terms = LIST[int]([1, start])
+    let used = SET[int]([1, start])
+
+    while terms.count < count do
+        let candidate mut = 2
+
+        while used.contains(candidate) \/
+                !shares_factor(candidate, terms[terms.count - 1]) do
+            candidate = candidate + 1
+        od
+
+        terms.add(candidate)
+        used.add(candidate)
+    od
+
+    terms
+si
+
+let two = ekg(2, 80)
+let five = ekg(5, 80)
+
+write_line("EKG(2): {two |> take(10) |> join(" ")}")
+write_line("EKG(5): {five |> take(10) |> join(" ")}")
+
+let last_difference mut = 0
+
+for index in 0::(two.count - 1) do
+    if two[index] != five[index] then
+        last_difference = index + 1
+    fi
+od
+
+write_line(
+    "EKG(2) and EKG(5) converge at term {last_difference + 1}");
+```
+
+output:
+
+```
+EKG(2): 1 2 4 6 3 9 12 8 10 5
+EKG(5): 1 5 10 2 4 6 3 9 12 8
+EKG(2) and EKG(5) converge at term 45
+```

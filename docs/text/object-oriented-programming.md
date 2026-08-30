@@ -23,23 +23,23 @@ A class extends at most one superclass, named after a colon in the header, and i
 ```ghul
 use IO.Std.write_line;
 
-class Animal is
+class ◆▼ Animal is
     _name: string;
     init(name: string) is _name = name; si
 
     name: string => _name;
-    speak() -> string;                     // body-less: Animal is implicitly abstract
+    ◆▼ speak() -> string;                     // body-less: Animal is implicitly abstract
     describe() -> string => "{_name} says {speak()}";
 si
 
 class DOG: Animal is
     init(name: string) is super.init(name); si
-    speak() -> string => "woof";
+    ▲ speak() -> string => "woof";
 si
 
 class CAT: Animal is
     init(name: string) is super.init(name); si
-    speak() -> string => "meow";
+    ▲ speak() -> string => "meow";
 si
 
 let animals: Animal[] = [DOG("Rex"), CAT("Tom")];
@@ -126,8 +126,8 @@ string_calculator.clear_memory();
 
 write_line("memory is cleared");
 
-trait Operation[T] is
-    execute(left: T, right: T) -> T;
+trait ▼ Operation[T] is
+    ◆▼ execute(left: T, right: T) -> T;
 si
 
 class CALCULATOR[T] is
@@ -188,19 +188,19 @@ class CALCULATOR[T] is
 si
 
 class INTEGER_ADDITION(): Operation[int] is
-    execute(left: int, right: int) -> int => left + right;
+    ▲ execute(left: int, right: int) -> int => left + right;
 si
 
 class INTEGER_SUBTRACTION(): Operation[int] is
-    execute(left: int, right: int) -> int => left - right;
+    ▲ execute(left: int, right: int) -> int => left - right;
 si
 
 class INTEGER_MULTIPLICATION(): Operation[int] is
-    execute(left: int, right: int) -> int => left * right;
+    ▲ execute(left: int, right: int) -> int => left * right;
 si
 
 class INTEGER_DIVISION(): Operation[int] is
-    execute(left: int, right: int) -> int =>
+    ▲ execute(left: int, right: int) -> int =>
         if right == 0 then
             throw System.InvalidOperationException(
                 "division by zero"
@@ -211,12 +211,12 @@ class INTEGER_DIVISION(): Operation[int] is
 si
 
 class STRING_CONCATENATION(): Operation[string] is
-    execute(left: string, right: string) -> string =>
+    ▲ execute(left: string, right: string) -> string =>
         "{left}{right}";
 si
 
 class STRING_SUBTRACTION(): Operation[string] is
-    execute(left: string, right: string) -> string =>
+    ▲ execute(left: string, right: string) -> string =>
         left.replace(right, "");
 si
 ```

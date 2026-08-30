@@ -1,0 +1,47 @@
+
+# Damm algorithm
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Damm_algorithm
+
+```ghul
+use IO.Std.write_line
+
+let table = [
+    "0317598642",
+    "7092154863",
+    "4206871359",
+    "1750983426",
+    "6123045978",
+    "3674209581",
+    "5869720134",
+    "8945362017",
+    "9438617205",
+    "2581436790"
+]
+
+digit_value(digit: char) -> int => cast int(digit) - cast int('0')
+
+valid(number: string) -> bool => (
+    let interim mut = 0
+
+    for digit in number do
+        let row = table[interim]
+        interim = digit_value(row[digit_value(digit)])
+    od
+
+    interim == 0
+)
+
+for sample in ["5724", "5727", "5857"] do
+    let verdict = if valid(sample) then "valid" else "invalid" fi
+    write_line("{sample} checksum {verdict}")
+od
+```
+
+output:
+
+```
+5724 checksum valid
+5727 checksum invalid
+5857 checksum invalid
+```

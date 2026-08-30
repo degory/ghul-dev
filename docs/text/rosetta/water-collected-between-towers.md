@@ -1,0 +1,56 @@
+
+# Water collected between towers
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Water_collected_between_towers
+
+```ghul
+use IO.Std.write_line
+use Collections.Iterable
+use Ghul.Pipes
+use System.Math
+
+running_maxima(heights: Iterable[int]) -> Pipe[int] is
+    let highest mut = 0
+
+    for height in heights do
+        highest = Math.max(highest, height)
+
+        yield highest
+    od
+si
+
+water(heights: int[]) -> int => (
+    let left = running_maxima(heights) |> collect_list()
+    let right =
+        running_maxima(heights |> reverse()) |> collect_list()
+    let last = heights.count - 1
+
+    (0..heights.count)
+    |> map(i => Math.min(left[i], right[last - i]) - heights[i])
+    |> reduce(0, (total, depth) => total + depth)
+)
+
+let series: int[][] =
+    [[1, 5, 3, 7, 2],
+     [5, 3, 7, 2, 6, 4, 5, 9, 1, 2],
+     [2, 6, 3, 5, 2, 8, 1, 4, 2, 2, 5, 3, 5, 7, 4, 1],
+     [5, 5, 5, 5],
+     [5, 6, 7, 8],
+     [8, 7, 7, 6],
+     [6, 7, 10, 7, 6]]
+
+series |> each((towers: int[]) =>
+    write_line("{towers |> join(", ")} -> {water(towers)}"));
+```
+
+output:
+
+```
+1, 5, 3, 7, 2 -> 2
+5, 3, 7, 2, 6, 4, 5, 9, 1, 2 -> 14
+2, 6, 3, 5, 2, 8, 1, 4, 2, 2, 5, 3, 5, 7, 4, 1 -> 35
+5, 5, 5, 5 -> 0
+5, 6, 7, 8 -> 0
+8, 7, 7, 6 -> 0
+6, 7, 10, 7, 6 -> 0
+```

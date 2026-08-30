@@ -1,0 +1,26 @@
+
+# Pangram checker
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Pangram_checker
+
+```ghul
+use IO.Std.write_line
+use Ghul.Pipes
+
+is_pangram(sentence: string) -> bool =>
+    sentence
+        |> map(char.to_lower)
+        |> filter(char.is_letter)
+        |> distinct()
+        |> count() == 26
+
+write_line("{is_pangram("The quick brown fox jumps over the lazy dog")}")
+write_line("{is_pangram("Hello, World!")}");
+```
+
+output:
+
+```
+True
+False
+```

@@ -81,8 +81,8 @@ A type bound `[T: SomeType]` requires the type argument to derive from `SomeType
 
 ```ghul
 …
-trait Greetable is
-    name: string;
+trait ▼ Greetable is
+    ◆▼ name: string;
 si
 
 // T must derive from Greetable, so .name is available on T
@@ -90,7 +90,7 @@ greet[T: Greetable](x: T) is
     write_line("hello, {x.name}");
 si
 
-class CAT(name: string): Greetable;
+class CAT( ▲ name: string): Greetable;
 …
 greet(CAT("whiskers"));
 ```
@@ -106,13 +106,13 @@ A value whose static type is a bounded type parameter also narrows and destructu
 ```ghul
 use IO.Std.write_line;
 
-class Animal abstract is
-    name() -> string;
+class ▼ Animal abstract is
+    ◆▼ name() -> string;
 si
 
 class CAT: Animal is
     init() is si
-    name() -> string => "cat";
+    ▲ name() -> string => "cat";
     purr() -> string => "purr";
 si
 
@@ -238,8 +238,8 @@ Type variance is declared on a *trait*'s type parameters (the CLR permits varian
 ```ghul
 …
 // T: out marks Box[T] as covariant in T - a Box[CAT] is also a Box[Animal]
-trait Box[T: out] is
-    contents() -> T;
+trait ▼ Box[T: out] is
+    ◆▼ contents() -> T;
 si
 …
 let cats: Box[CAT] = CAT_BOX();

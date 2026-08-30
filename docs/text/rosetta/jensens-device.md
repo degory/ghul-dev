@@ -1,0 +1,32 @@
+
+# Jensen's Device
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Jensen's_Device
+
+```ghul
+use IO.Std.write_line
+
+let i mut = 0
+
+let sum = (low: int, high: int, term: () -> double) -> double => (
+    let total mut = 0.0D
+
+    i = low
+
+    while i <= high do
+        total = total + term()
+
+        i = i + 1
+    od
+
+    total
+)
+
+write_line("{sum(1, 100, () => 1.0D / cast double(i))}");
+```
+
+output:
+
+```
+5.187377517639621
+```

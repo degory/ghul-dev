@@ -1,0 +1,36 @@
+
+# Sorting algorithms/Quicksort
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Sorting_algorithms/Quicksort
+
+```ghul
+use IO.Std.write_line
+use Collections.List
+use Ghul.Pipes
+
+quicksort[T: Ghul.Comparable[T]](values: List[T]) -> List[T] =>
+    if values.count <= 1 then
+        values
+    else
+        let pivot = values[0]
+        let rest = values[1..<0]
+
+        let below = rest |> filter(value => value < pivot) |> collect()
+        let above = rest |> filter(value => value >= pivot) |> collect()
+
+        quicksort(below)
+            |> cat([pivot])
+            |> cat(quicksort(above))
+            |> collect()
+    fi
+
+write_line("{$quicksort([6, 2, 9, 2, 5, 1, 8, 3] |> collect())}")
+write_line("{$quicksort(["pear", "apple", "fig", "date"] |> collect())}");
+```
+
+output:
+
+```
+[1, 2, 2, 3, 5, 6, 8, 9]
+[apple, date, fig, pear]
+```

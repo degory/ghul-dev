@@ -1,0 +1,14 @@
+
+# Quine
+
+The same solution is posted on Rosetta Code: https://rosettacode.org/wiki/Quine
+
+```ghul
+use IO.Std.write_line; let quote = string(cast char(34), 1); let marker = string(cast char(77), 1); let source = "use IO.Std.write_line; let quote = string(cast char(34), 1); let marker = string(cast char(77), 1); let source = M; write_line(source.replace(marker, string.concat([quote, source, quote])))"; write_line(source.replace(marker, string.concat([quote, source, quote])))
+```
+
+output:
+
+```
+use IO.Std.write_line; let quote = string(cast char(34), 1); let marker = string(cast char(77), 1); let source = "use IO.Std.write_line; let quote = string(cast char(34), 1); let marker = string(cast char(77), 1); let source = M; write_line(source.replace(marker, string.concat([quote, source, quote])))"; write_line(source.replace(marker, string.concat([quote, source, quote])))
+```
