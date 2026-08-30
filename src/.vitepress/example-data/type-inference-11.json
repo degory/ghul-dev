@@ -1,5 +1,6 @@
 {
   "name": "type-inference-11",
+  "snippet": false,
   "code": "let int_string = [(123, \"hello\"), (456, \"goodbye\")];\n\nlet int_object = [(123, 456), (798, \"wibble\")];",
   "fullSource": "let int_string = [(123, \"hello\"), (456, \"goodbye\")];\n\nlet int_object = [(123, 456), (798, \"wibble\")];\n",
   "hiddenBefore": false,
@@ -8,12 +9,12 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "text": "int_string: (int, string)[]", "signature": "int_string: (int, string)[]", "kindLabel": "local value" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "int_object: (int, object)[]", "signature": "int_object: (int, object)[]", "kindLabel": "local value" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "text": "int_string: (int, string)[]", "signature": "int_string: (int, string)[]", "kindLabel": "top-level variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "int_object: (int, object)[]", "signature": "int_object: (int, object)[]", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "tokenType": "property" }
   ]
 }

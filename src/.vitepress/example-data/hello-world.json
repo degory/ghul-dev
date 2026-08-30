@@ -1,5 +1,6 @@
 {
   "name": "hello-world",
+  "snippet": false,
   "code": "IO.Std.write_line(\"hello, world\");",
   "fullSource": "IO.Std.write_line(\"hello, world\");\n",
   "hiddenBefore": false,

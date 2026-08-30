@@ -1,10 +1,14 @@
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
+import { relative } from 'node:path'
 import { defineConfig } from 'vitepress'
 import { createHighlighter } from 'shiki'
 import { FALLBACK_VERSIONS, fetchLatestStable } from './nuget-versions'
 import { SECTIONS } from './pages'
 import { renderText } from './render-text'
+
+// src/, the directory the pages live in: this file sits in src/.vitepress/.
+const SRC_DIR = fileURLToPath(new URL('..', import.meta.url))
 
 const ghulInlineHighlighter = await createHighlighter({
   themes: ['light-plus', 'dark-plus'],
@@ -120,8 +124,15 @@ function ghulExamplePagePlugin() {
       }
       if (names.length === 0) return null
 
+      // The import is relative to the page, and a page is not always at the root of src: the
+      // Rosetta Code section is a directory of them. SRC_DIR is this file's own parent's parent,
+      // so the depth is however many directories separate the page from it.
+      const depth = relative(SRC_DIR, id.split('?')[0]).split('/').length - 1
+
+      const up = depth === 0 ? './' : '../'.repeat(depth)
+
       const imports = names
-        .map((name, i) => `import __ghulExample${i} from './.vitepress/example-data/${name}.json'`)
+        .map((name, i) => `import __ghulExample${i} from '${up}.vitepress/example-data/${name}.json'`)
         .join('\n')
       const entries = names
         .map((name, i) => `  ${JSON.stringify(name)}: __ghulExample${i},`)
@@ -272,6 +283,10 @@ export default defineConfig({
   },
 
   themeConfig: {
+    // The Rosetta Code section grows without limit and its pages are not read in order, so the
+    // site needs a way to find one by name.
+    search: { provider: 'local' },
+
     outline: { level: [2, 3], label: 'on this page' },
 
     socialLinks: [

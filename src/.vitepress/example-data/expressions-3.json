@@ -1,5 +1,6 @@
 {
   "name": "expressions-3",
+  "snippet": false,
   "code": "let s = 123.456; // single\nlet t = 123.456E5; // single\n\nlet d = 123.456D; // double\nlet e = 123_456_789_000.0D // double",
   "fullSource": "let s = 123.456; // single\nlet t = 123.456E5; // single\n\nlet d = 123.456D; // double\nlet e = 123_456_789_000.0D // double\n",
   "hiddenBefore": false,
@@ -8,16 +9,16 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "s: single", "signature": "s: single", "kindLabel": "local value" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "t: single", "signature": "t: single", "kindLabel": "local value" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "text": "d: double", "signature": "d: double", "kindLabel": "local value" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 5, "text": "e: double", "signature": "e: double", "kindLabel": "local value" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "s: single", "signature": "s: single", "kindLabel": "top-level variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "t: single", "signature": "t: single", "kindLabel": "top-level variable" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "text": "d: double", "signature": "d: double", "kindLabel": "top-level variable" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 5, "text": "e: double", "signature": "e: double", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "tokenType": "property" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 5, "tokenType": "property" }
   ]
 }

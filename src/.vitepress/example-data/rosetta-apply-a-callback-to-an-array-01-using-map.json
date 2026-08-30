@@ -1,0 +1,34 @@
+{
+  "name": "rosetta-apply-a-callback-to-an-array-01-using-map",
+  "snippet": false,
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nwrite_line(\"{$([1, 2, 3, 4, 5] |> map(value => value * value))}\");",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nwrite_line(\"{$([1, 2, 3, 4, 5] |> map(value => value * value))}\");\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "[1, 4, 9, 16, 25]\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 14, "text": "namespace Ghul.Pipes", "signature": "namespace Ghul.Pipes", "kindLabel": "" },
+    { "startLine": 4, "startColumn": 39, "endLine": 4, "endColumn": 43, "text": "value: int", "signature": "value: int", "kindLabel": "local argument" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 4, "startColumn": 35, "endLine": 4, "endColumn": 37, "text": "Ghul.Pipes.map[int,int](\n    source: Collections.Iterable[int],\n    mapper: int -> int pure\n) -> Pipe[int]", "signature": "Ghul.Pipes.map[int,int](\n    source: Collections.Iterable[int],\n    mapper: int -> int pure\n) -> Pipe[int]", "kindLabel": "pure global function" },
+    { "startLine": 4, "startColumn": 48, "endLine": 4, "endColumn": 52, "text": "value: int", "signature": "value: int", "kindLabel": "local argument" },
+    { "startLine": 4, "startColumn": 56, "endLine": 4, "endColumn": 60, "text": "value: int", "signature": "value: int", "kindLabel": "local argument" },
+    { "startLine": 4, "startColumn": 54, "endLine": 4, "endColumn": 54, "text": "Ghul.*(a: int, b: int) -> int", "signature": "Ghul.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "text": "Ghul.$[int](values: Collections.Iterable[int]) -> string", "signature": "Ghul.$[int](values: Collections.Iterable[int]) -> string", "kindLabel": "global function" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 14, "tokenType": "namespace" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 35, "endLine": 4, "endColumn": 37, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 39, "endLine": 4, "endColumn": 43, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 48, "endLine": 4, "endColumn": 52, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 54, "endLine": 4, "endColumn": 54, "tokenType": "operator" },
+    { "startLine": 4, "startColumn": 56, "endLine": 4, "endColumn": 60, "tokenType": "variable", "modifiers": "readonly" }
+  ]
+}

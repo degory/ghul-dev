@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-append_to-method",
+  "snippet": false,
   "code": "append_to(\n    into: System.Text.StringBuilder,\n    separator: string\n) -> System.Text.StringBuilder;\n\nappend_to(\n    into: System.Text.StringBuilder\n) -> System.Text.StringBuilder;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    append_to(\n        into: System.Text.StringBuilder,\n        separator: string\n    ) -> System.Text.StringBuilder;\n\n    append_to(\n        into: System.Text.StringBuilder\n    ) -> System.Text.StringBuilder;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -8,28 +9,31 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 9, "text": "Pipe[T].append_to(\n    into: System.Text.StringBuilder,\n    separator: string\n) -> System.Text.StringBuilder", "signature": "Pipe[T].append_to(\n    into: System.Text.StringBuilder,\n    separator: string\n) -> System.Text.StringBuilder", "kindLabel": "abstract method" },
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 9, "text": "Pipe[T].append_to(\n    into: System.Text.StringBuilder,\n    separator: string\n) -> System.Text.StringBuilder", "signature": "Pipe[T].append_to(\n    into: System.Text.StringBuilder,\n    separator: string\n) -> System.Text.StringBuilder", "kindLabel": "pure abstract method" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "into: System.Text.StringBuilder", "signature": "into: System.Text.StringBuilder", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 35, "text": "class System.Text.StringBuilder", "signature": "class System.Text.StringBuilder", "kindLabel": "class" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 13, "text": "separator: string", "signature": "separator: string", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 21, "text": "class string", "signature": "class string", "kindLabel": "class" },
-    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 9, "text": "Pipe[T].append_to(\n    into: System.Text.StringBuilder\n) -> System.Text.StringBuilder", "signature": "Pipe[T].append_to(\n    into: System.Text.StringBuilder\n) -> System.Text.StringBuilder", "kindLabel": "abstract method" },
+    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 9, "text": "Pipe[T].append_to(\n    into: System.Text.StringBuilder\n) -> System.Text.StringBuilder", "signature": "Pipe[T].append_to(\n    into: System.Text.StringBuilder\n) -> System.Text.StringBuilder", "kindLabel": "pure abstract method" },
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 8, "text": "into: System.Text.StringBuilder", "signature": "into: System.Text.StringBuilder", "kindLabel": "local argument" },
     { "startLine": 7, "startColumn": 23, "endLine": 7, "endColumn": 35, "text": "class System.Text.StringBuilder", "signature": "class System.Text.StringBuilder", "kindLabel": "class" },
     { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 30, "text": "class System.Text.StringBuilder", "signature": "class System.Text.StringBuilder", "kindLabel": "class" },
     { "startLine": 8, "startColumn": 18, "endLine": 8, "endColumn": 30, "text": "class System.Text.StringBuilder", "signature": "class System.Text.StringBuilder", "kindLabel": "class" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "append_to\n\n- ◆ abstract", "code": "definition-virtuality" },
+    { "line": 6, "column": 1, "label": "◆", "detail": "append_to\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 9, "tokenType": "method" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 35, "tokenType": "class" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 21, "tokenType": "class" },
+    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 30, "tokenType": "class" },
     { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 9, "tokenType": "method" },
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 7, "startColumn": 23, "endLine": 7, "endColumn": 35, "tokenType": "class" },
-    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 30, "tokenType": "class" },
     { "startLine": 8, "startColumn": 18, "endLine": 8, "endColumn": 30, "tokenType": "class" }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-collect-function",
+  "snippet": false,
   "code": "collect[T](source: Iterable[T]) -> Collections.List[T] pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\ncollect[T](source: Iterable[T]) -> Collections.List[T] pure;\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -16,14 +17,16 @@
     { "startLine": 1, "startColumn": 53, "endLine": 1, "endColumn": 53, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 48, "endLine": 1, "endColumn": 51, "text": "trait Collections.List[T]", "signature": "trait Collections.List[T]", "kindLabel": "trait" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "collect\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 7, "tokenType": "function" },
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 29, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 27, "tokenType": "interface" },
-    { "startLine": 1, "startColumn": 53, "endLine": 1, "endColumn": 53, "tokenType": "typeParameter" },
-    { "startLine": 1, "startColumn": 48, "endLine": 1, "endColumn": 51, "tokenType": "interface" }
+    { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 29, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 48, "endLine": 1, "endColumn": 51, "tokenType": "interface" },
+    { "startLine": 1, "startColumn": 53, "endLine": 1, "endColumn": 53, "tokenType": "typeParameter" }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "control-flow-19",
+  "snippet": false,
   "code": "let counter mut = 0;\nwhile counter < 5 do\n    write_line(counter);\n    counter = counter + 1;\nod",
   "fullSource": "use IO.Std.write_line;\n\nlet counter mut = 0;\nwhile counter < 5 do\n    write_line(counter);\n    counter = counter + 1;\nod\n",
   "hiddenBefore": true,
@@ -8,24 +9,24 @@
   "output": "0\n1\n2\n3\n4\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "counter: int", "signature": "counter: int", "kindLabel": "local variable" },
-    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 13, "text": "counter: int", "signature": "counter: int", "kindLabel": "local variable" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "counter: int", "signature": "counter: int", "kindLabel": "top-level variable" },
+    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 13, "text": "counter: int", "signature": "counter: int", "kindLabel": "top-level variable" },
     { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 15, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "IO.Std.write_line(value: int) -> void", "signature": "IO.Std.write_line(value: int) -> void", "kindLabel": "pure class method" },
-    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "text": "counter: int", "signature": "counter: int", "kindLabel": "local variable" },
-    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 21, "text": "counter: int", "signature": "counter: int", "kindLabel": "local variable" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "text": "counter: int", "signature": "counter: int", "kindLabel": "top-level variable" },
+    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 21, "text": "counter: int", "signature": "counter: int", "kindLabel": "top-level variable" },
     { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 23, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "text": "counter: int", "signature": "counter: int", "kindLabel": "local variable" }
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "text": "counter: int", "signature": "counter: int", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "variable" },
-    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 13, "tokenType": "variable" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 13, "tokenType": "property" },
     { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 15, "tokenType": "operator" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "tokenType": "variable" },
-    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 21, "tokenType": "variable" },
-    { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 23, "tokenType": "operator" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "tokenType": "variable" }
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 22, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 21, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 23, "tokenType": "operator" }
   ]
 }

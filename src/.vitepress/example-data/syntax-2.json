@@ -1,5 +1,6 @@
 {
   "name": "syntax-2",
+  "snippet": false,
   "code": "use IO.Std.write_line;\n\ngreet(name: string) is\n    write_line(\"hello, {name}\");\nsi\n\ngreet(\"world\");",
   "fullSource": "use IO.Std.write_line;\n\ngreet(name: string) is\n    write_line(\"hello, {name}\");\nsi\n\ngreet(\"world\");\n",
   "hiddenBefore": false,
@@ -12,9 +13,9 @@
     { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 5, "text": "greet(name: string) -> void", "signature": "greet(name: string) -> void", "kindLabel": "pure global function" },
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 10, "text": "name: string", "signature": "name: string", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 18, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 5, "text": "greet(name: string) -> void", "signature": "greet(name: string) -> void", "kindLabel": "pure global function" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 4, "startColumn": 25, "endLine": 4, "endColumn": 28, "text": "name: string", "signature": "name: string", "kindLabel": "local argument" },
-    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 5, "text": "greet(name: string) -> void", "signature": "greet(name: string) -> void", "kindLabel": "pure global function" }
+    { "startLine": 4, "startColumn": 25, "endLine": 4, "endColumn": 28, "text": "name: string", "signature": "name: string", "kindLabel": "local argument" }
   ],
   "inlayHints": [],
   "semanticTokens": [

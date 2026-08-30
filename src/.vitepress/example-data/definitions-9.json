@@ -1,5 +1,6 @@
 {
   "name": "definitions-9",
+  "snippet": false,
   "code": "let a_thing = THING();",
   "fullSource": "class THING();\n\nlet a_thing = THING();\n",
   "hiddenBefore": true,
@@ -8,12 +9,12 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "a_thing: THING", "signature": "a_thing: THING", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "a_thing: THING", "signature": "a_thing: THING", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 19, "text": "THING.init()", "signature": "THING.init()", "kindLabel": "constructor" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "tokenType": "property" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 19, "tokenType": "method" }
   ]
 }

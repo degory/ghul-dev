@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-only-method",
+  "snippet": false,
   "code": "only() -> T pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    only() -> T pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -11,7 +12,9 @@
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 4, "text": "Pipe[T].only() -> T", "signature": "Pipe[T].only() -> T", "kindLabel": "pure abstract method" },
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 11, "text": "T", "signature": "T", "kindLabel": "type variable" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "only\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 4, "tokenType": "method" },
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 11, "tokenType": "typeParameter" }

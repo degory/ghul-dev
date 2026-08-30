@@ -1,5 +1,6 @@
 {
   "name": "expressions-1",
+  "snippet": false,
   "code": "let i = 12_345_678; // int\nlet hex = 0x1234_ABCD; // int\nlet long = 1_000_000_000_000_000L; // long\n\nlet hex_unsigned_long = 0x1234_5678__9ABC_DEF0_UL; // ulong\n\nlet b = 99b; // byte",
   "fullSource": "let i = 12_345_678; // int\nlet hex = 0x1234_ABCD; // int\nlet long = 1_000_000_000_000_000L; // long\n\nlet hex_unsigned_long = 0x1234_5678__9ABC_DEF0_UL; // ulong\n\nlet b = 99b; // byte\n",
   "hiddenBefore": false,
@@ -8,18 +9,18 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: int", "signature": "i: int", "kindLabel": "local value" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "text": "hex: int", "signature": "hex: int", "kindLabel": "local value" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "long: long", "signature": "long: long", "kindLabel": "local value" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 21, "text": "hex_unsigned_long: ulong", "signature": "hex_unsigned_long: ulong", "kindLabel": "local value" },
-    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 5, "text": "b: byte", "signature": "b: byte", "kindLabel": "local value" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "i: int", "signature": "i: int", "kindLabel": "top-level variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "text": "hex: int", "signature": "hex: int", "kindLabel": "top-level variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "long: Ghul.long", "signature": "long: Ghul.long", "kindLabel": "top-level variable" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 21, "text": "hex_unsigned_long: ulong", "signature": "hex_unsigned_long: ulong", "kindLabel": "top-level variable" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 5, "text": "b: byte", "signature": "b: byte", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 21, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "tokenType": "property" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 21, "tokenType": "property" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 5, "tokenType": "property" }
   ]
 }

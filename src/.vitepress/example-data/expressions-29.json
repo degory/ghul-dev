@@ -1,5 +1,6 @@
 {
   "name": "expressions-29",
+  "snippet": false,
   "code": "let n = 2;\n\nlet size =\n    case n\n    when 0 then \"none\"\n    when 1, 2, 3 then \"small\"\n    else \"large\"\n    esac;\n\nwrite_line(\"size = {size}\");",
   "fullSource": "use IO.Std.write_line;\n\nlet n = 2;\n\nlet size =\n    case n\n    when 0 then \"none\"\n    when 1, 2, 3 then \"small\"\n    else \"large\"\n    esac;\n\nwrite_line(\"size = {size}\");\n",
   "hiddenBefore": true,
@@ -8,18 +9,22 @@
   "output": "size = small\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "n: int", "signature": "n: int", "kindLabel": "local value" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "size: string", "signature": "size: string", "kindLabel": "local value" },
-    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 10, "text": "n: int", "signature": "n: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "n: int", "signature": "n: int", "kindLabel": "top-level variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "size: string", "signature": "size: string", "kindLabel": "top-level variable" },
+    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 10, "text": "n: int", "signature": "n: int", "kindLabel": "top-level variable" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 22, "text": "int.=~(obj: int) -> bool", "signature": "int.=~(obj: int) -> bool", "kindLabel": "method" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 29, "text": "int.=~(obj: int) -> bool", "signature": "int.=~(obj: int) -> bool", "kindLabel": "method" },
     { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 10, "startColumn": 21, "endLine": 10, "endColumn": 24, "text": "size: string", "signature": "size: string", "kindLabel": "local value" }
+    { "startLine": 10, "startColumn": 21, "endLine": 10, "endColumn": 24, "text": "size: string", "signature": "size: string", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 10, "tokenType": "property" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 22, "tokenType": "method" },
+    { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 29, "tokenType": "method" },
     { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 10, "startColumn": 21, "endLine": 10, "endColumn": 24, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 10, "startColumn": 21, "endLine": 10, "endColumn": 24, "tokenType": "property" }
   ]
 }

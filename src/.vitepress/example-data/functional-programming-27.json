@@ -9,6 +9,11 @@
   "output": "apply(square, 5): 25\napply(anonymous, 5): 6\n",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 8, "startColumn": 41, "endLine": 8, "endColumn": 41, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
+    { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 8, "startColumn": 35, "endLine": 8, "endColumn": 39, "text": "apply(f: int -> int pure, x: int) -> int", "signature": "apply(f: int -> int pure, x: int) -> int", "kindLabel": "pure global function" },
+    { "startLine": 8, "startColumn": 46, "endLine": 8, "endColumn": 46, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
+    { "startLine": 8, "startColumn": 48, "endLine": 8, "endColumn": 48, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
     { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 6, "text": "square(x: int) -> int", "signature": "square(x: int) -> int", "kindLabel": "pure global function" },
     { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 8, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 13, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
@@ -25,11 +30,6 @@
     { "startLine": 5, "startColumn": 40, "endLine": 5, "endColumn": 42, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 5, "startColumn": 47, "endLine": 5, "endColumn": 47, "text": "f: int -> int pure", "signature": "f: int -> int pure", "kindLabel": "local argument" },
     { "startLine": 5, "startColumn": 49, "endLine": 5, "endColumn": 49, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
-    { "startLine": 8, "startColumn": 41, "endLine": 8, "endColumn": 41, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
-    { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 8, "startColumn": 35, "endLine": 8, "endColumn": 39, "text": "apply(f: int -> int pure, x: int) -> int", "signature": "apply(f: int -> int pure, x: int) -> int", "kindLabel": "pure global function" },
-    { "startLine": 8, "startColumn": 46, "endLine": 8, "endColumn": 46, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
-    { "startLine": 8, "startColumn": 48, "endLine": 8, "endColumn": 48, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
     { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 7, "startColumn": 32, "endLine": 7, "endColumn": 36, "text": "apply(f: int -> int pure, x: int) -> int", "signature": "apply(f: int -> int pure, x: int) -> int", "kindLabel": "pure global function" },
     { "startLine": 7, "startColumn": 38, "endLine": 7, "endColumn": 43, "text": "square(x: int) -> int", "signature": "square(x: int) -> int", "kindLabel": "pure global function" }

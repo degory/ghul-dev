@@ -1,5 +1,6 @@
 {
   "name": "expressions-27",
+  "snippet": false,
   "code": "let area = let r = 5 in r * r;\n\nwrite_line(\"area = {area}\");",
   "fullSource": "use IO.Std.write_line;\n\nlet area = let r = 5 in r * r;\n\nwrite_line(\"area = {area}\");\n",
   "hiddenBefore": true,
@@ -9,21 +10,21 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "text": "r: int", "signature": "r: int", "kindLabel": "local value" },
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "area: int", "signature": "area: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "area: int", "signature": "area: int", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "text": "r: int", "signature": "r: int", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 29, "text": "r: int", "signature": "r: int", "kindLabel": "local value" },
     { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "text": "Ghul.*(a: int, b: int) -> int", "signature": "Ghul.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" },
     { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 24, "text": "area: int", "signature": "area: int", "kindLabel": "local value" }
+    { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 24, "text": "area: int", "signature": "area: int", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "property" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 29, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "operator" },
+    { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 29, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 24, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 24, "tokenType": "property" }
   ]
 }

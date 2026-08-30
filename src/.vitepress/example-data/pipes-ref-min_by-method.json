@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-min_by-method",
+  "snippet": false,
   "code": "min_by[K: Ghul.Comparable[K]](\n    key_selector: (T) -> K pure\n) -> Ghul.MAYBE[T] pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    min_by[K: Ghul.Comparable[K]](\n        key_selector: (T) -> K pure\n    ) -> Ghul.MAYBE[T] pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -18,16 +19,18 @@
     { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 17, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 15, "text": "struct MAYBE[T]", "signature": "struct MAYBE[T]", "kindLabel": "struct" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "min_by\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 6, "tokenType": "method" },
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 8, "tokenType": "typeParameter" },
-    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 25, "tokenType": "interface" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "typeParameter" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 26, "tokenType": "typeParameter" },
     { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 20, "tokenType": "typeParameter" },
-    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 17, "tokenType": "typeParameter" },
-    { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 15, "tokenType": "struct" }
+    { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 26, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 15, "tokenType": "struct" },
+    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 17, "tokenType": "typeParameter" }
   ]
 }

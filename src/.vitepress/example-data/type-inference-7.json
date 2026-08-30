@@ -1,5 +1,6 @@
 {
   "name": "type-inference-7",
+  "snippet": false,
   "code": "let a_string = \"12345\";\nlet an_int = 12345;\nlet an_int_array = [1, 2, 3, 4, 5];",
   "fullSource": "let a_string = \"12345\";\nlet an_int = 12345;\nlet an_int_array = [1, 2, 3, 4, 5];\n",
   "hiddenBefore": false,
@@ -8,14 +9,14 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 12, "text": "a_string: string", "signature": "a_string: string", "kindLabel": "local value" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "an_int: int", "signature": "an_int: int", "kindLabel": "local value" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "text": "an_int_array: int[]", "signature": "an_int_array: int[]", "kindLabel": "local value" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 12, "text": "a_string: string", "signature": "a_string: string", "kindLabel": "top-level variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "an_int: int", "signature": "an_int: int", "kindLabel": "top-level variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "text": "an_int_array: int[]", "signature": "an_int_array: int[]", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 12, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "tokenType": "property" }
   ]
 }

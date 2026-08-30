@@ -1,5 +1,6 @@
 {
   "name": "type-inference-15",
+  "snippet": false,
   "code": "let returns_int = (i: int) => i * 2;\nlet returns_string = (s: string) => \"{s}{s}\";",
   "fullSource": "let returns_int = (i: int) => i * 2;\nlet returns_string = (s: string) => \"{s}{s}\";\n",
   "hiddenBefore": false,
@@ -9,25 +10,25 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "text": "i: int", "signature": "i: int", "kindLabel": "local argument" },
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "text": "returns_int: int -> int", "signature": "returns_int: int -> int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "text": "returns_int: int -> int pure", "signature": "returns_int: int -> int pure", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 25, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 31, "text": "i: int", "signature": "i: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 33, "text": "Ghul.*(a: int, b: int) -> int", "signature": "Ghul.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" },
     { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 23, "text": "s: string", "signature": "s: string", "kindLabel": "local argument" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 18, "text": "returns_string: string -> string", "signature": "returns_string: string -> string", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 18, "text": "returns_string: string -> string pure", "signature": "returns_string: string -> string pure", "kindLabel": "top-level variable" },
     { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 31, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 2, "startColumn": 39, "endLine": 2, "endColumn": 39, "text": "s: string", "signature": "s: string", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 42, "endLine": 2, "endColumn": 42, "text": "s: string", "signature": "s: string", "kindLabel": "local argument" }
   ],
   "inlayHints": [],
   "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "tokenType": "property" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 25, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 31, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 33, "tokenType": "operator" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 18, "tokenType": "property" },
     { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 31, "tokenType": "class" },
     { "startLine": 2, "startColumn": 39, "endLine": 2, "endColumn": 39, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 42, "endLine": 2, "endColumn": 42, "tokenType": "variable", "modifiers": "readonly" }

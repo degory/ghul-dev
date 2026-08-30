@@ -1,5 +1,6 @@
 {
   "name": "language-basics-16",
+  "snippet": false,
   "code": "if name? then\n    write_line(\"name is {name}\"); // name is non-optional here\nfi",
   "fullSource": "use IO.Std.write_line;\n\nlookup() -> string? => \"Alice\";\n\nlet name = lookup();\nif name? then\n    write_line(\"name is {name}\"); // name is non-optional here\nfi\n",
   "hiddenBefore": true,
@@ -8,16 +9,16 @@
   "output": "name is Alice\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 7, "text": "name: string?", "signature": "name: string?", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 7, "text": "name: string?", "signature": "name: string?", "kindLabel": "top-level variable" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 29, "text": "name: string?\n    ► string", "signature": "name: string?\n    ► string", "kindLabel": "local value" }
+    { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 29, "text": "name: string?\n    ► string", "signature": "name: string?\n    ► string", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [
     { "line": 1, "column": 4, "label": "►", "detail": "► string", "code": "narrowing-presence" }
   ],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 7, "tokenType": "property" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 29, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 29, "tokenType": "property" }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-find_or_throw-method",
+  "snippet": false,
   "code": "find_or_throw(predicate: T -> bool pure) -> T pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    find_or_throw(predicate: T -> bool pure) -> T pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -14,12 +15,14 @@
     { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 26, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 45, "endLine": 1, "endColumn": 45, "text": "T", "signature": "T", "kindLabel": "type variable" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "find_or_throw\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 13, "tokenType": "method" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 34, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 26, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 34, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 45, "endLine": 1, "endColumn": 45, "tokenType": "typeParameter" }
   ]
 }

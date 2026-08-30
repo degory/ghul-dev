@@ -1,5 +1,6 @@
 {
   "name": "expressions-22",
+  "snippet": false,
   "code": "let point = POINT(10, 20);",
   "fullSource": "class POINT(x: int, y: int);\n\nlet point = POINT(10, 20);\n",
   "hiddenBefore": true,
@@ -8,12 +9,12 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "point: POINT", "signature": "point: POINT", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "point: POINT", "signature": "point: POINT", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 17, "text": "POINT.init(x: int, y: int)", "signature": "POINT.init(x: int, y: int)", "kindLabel": "constructor" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "tokenType": "property" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 17, "tokenType": "method" }
   ]
 }

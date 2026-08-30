@@ -1,0 +1,659 @@
+[
+  {
+    "title": "starting out",
+    "blurb": "Short programs, and the shapes every language has to have.",
+    "tasks": [
+      {
+        "slug": "100-doors",
+        "title": "100 doors",
+        "url": "https://rosettacode.org/wiki/100_doors",
+        "parts": []
+      },
+      {
+        "slug": "arithmetic-mean",
+        "title": "Averages/Arithmetic mean",
+        "url": "https://rosettacode.org/wiki/Averages/Arithmetic_mean",
+        "parts": []
+      },
+      {
+        "slug": "binary-digits",
+        "title": "Binary digits",
+        "url": "https://rosettacode.org/wiki/Binary_digits",
+        "parts": []
+      },
+      {
+        "slug": "factorial",
+        "title": "Factorial",
+        "url": "https://rosettacode.org/wiki/Factorial",
+        "parts": []
+      },
+      {
+        "slug": "fizzbuzz",
+        "title": "FizzBuzz",
+        "url": "https://rosettacode.org/wiki/FizzBuzz",
+        "parts": []
+      },
+      {
+        "slug": "hello-world-text",
+        "title": "Hello world/Text",
+        "url": "https://rosettacode.org/wiki/Hello_world/Text",
+        "parts": []
+      },
+      {
+        "slug": "quine",
+        "title": "Quine",
+        "url": "https://rosettacode.org/wiki/Quine",
+        "parts": []
+      },
+      {
+        "slug": "reverse-a-string",
+        "title": "Reverse a string",
+        "url": "https://rosettacode.org/wiki/Reverse_a_string",
+        "parts": []
+      },
+      {
+        "slug": "towers-of-hanoi",
+        "title": "Towers of Hanoi",
+        "url": "https://rosettacode.org/wiki/Towers_of_Hanoi",
+        "parts": []
+      }
+    ]
+  },
+  {
+    "title": "functions and closures",
+    "blurb": "Functions as values: passed, returned, captured, and calling themselves.",
+    "tasks": [
+      {
+        "slug": "accumulator-factory",
+        "title": "Accumulator factory",
+        "url": "https://rosettacode.org/wiki/Accumulator_factory",
+        "parts": []
+      },
+      {
+        "slug": "anonymous-recursion",
+        "title": "Anonymous recursion",
+        "url": "https://rosettacode.org/wiki/Anonymous_recursion",
+        "parts": []
+      },
+      {
+        "slug": "apply-a-callback-to-an-array",
+        "title": "Apply a callback to an array",
+        "url": "https://rosettacode.org/wiki/Apply_a_callback_to_an_array",
+        "parts": [
+          "Using map",
+          "Writing apply"
+        ]
+      },
+      {
+        "slug": "catamorphism",
+        "title": "Catamorphism",
+        "url": "https://rosettacode.org/wiki/Catamorphism",
+        "parts": [
+          "Using reduce",
+          "Writing fold"
+        ]
+      },
+      {
+        "slug": "church-numerals",
+        "title": "Church numerals",
+        "url": "https://rosettacode.org/wiki/Church_numerals",
+        "parts": []
+      },
+      {
+        "slug": "closures-value-capture",
+        "title": "Closures/Value capture",
+        "url": "https://rosettacode.org/wiki/Closures/Value_capture",
+        "parts": []
+      },
+      {
+        "slug": "cumulative-standard-deviation",
+        "title": "Cumulative standard deviation",
+        "url": "https://rosettacode.org/wiki/Cumulative_standard_deviation",
+        "parts": []
+      },
+      {
+        "slug": "first-class-functions",
+        "title": "First-class functions",
+        "url": "https://rosettacode.org/wiki/First-class_functions",
+        "parts": []
+      },
+      {
+        "slug": "jensens-device",
+        "title": "Jensen's Device",
+        "url": "https://rosettacode.org/wiki/Jensen's_Device",
+        "parts": []
+      },
+      {
+        "slug": "man-or-boy-test",
+        "title": "Man or boy test",
+        "url": "https://rosettacode.org/wiki/Man_or_boy_test",
+        "parts": []
+      },
+      {
+        "slug": "mutual-recursion",
+        "title": "Mutual recursion",
+        "url": "https://rosettacode.org/wiki/Mutual_recursion",
+        "parts": []
+      },
+      {
+        "slug": "nested-function",
+        "title": "Nested function",
+        "url": "https://rosettacode.org/wiki/Nested_function",
+        "parts": []
+      },
+      {
+        "slug": "variadic-function",
+        "title": "Variadic function",
+        "url": "https://rosettacode.org/wiki/Variadic_function",
+        "parts": []
+      },
+      {
+        "slug": "y-combinator",
+        "title": "Y combinator",
+        "url": "https://rosettacode.org/wiki/Y_combinator",
+        "parts": [
+          "The y combinator",
+          "Using rec"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "types and pattern matching",
+    "blurb": "Unions, traits, generics and operators: modelling data and taking it apart again.",
+    "tasks": [
+      {
+        "slug": "abstract-type",
+        "title": "Abstract type",
+        "url": "https://rosettacode.org/wiki/Abstract_type",
+        "parts": []
+      },
+      {
+        "slug": "algebraic-data-types",
+        "title": "Algebraic data types",
+        "url": "https://rosettacode.org/wiki/Algebraic_data_types",
+        "parts": []
+      },
+      {
+        "slug": "arithmetic-evaluation",
+        "title": "Arithmetic evaluation",
+        "url": "https://rosettacode.org/wiki/Arithmetic_evaluation",
+        "parts": []
+      },
+      {
+        "slug": "flatten-a-list",
+        "title": "Flatten a list",
+        "url": "https://rosettacode.org/wiki/Flatten_a_list",
+        "parts": []
+      },
+      {
+        "slug": "generic-swap",
+        "title": "Generic swap",
+        "url": "https://rosettacode.org/wiki/Generic_swap",
+        "parts": []
+      },
+      {
+        "slug": "multiple-distinct-objects",
+        "title": "Multiple distinct objects",
+        "url": "https://rosettacode.org/wiki/Multiple_distinct_objects",
+        "parts": []
+      },
+      {
+        "slug": "null-object",
+        "title": "Null object",
+        "url": "https://rosettacode.org/wiki/Null_object",
+        "parts": []
+      },
+      {
+        "slug": "quaternion",
+        "title": "Quaternion",
+        "url": "https://rosettacode.org/wiki/Quaternion",
+        "parts": []
+      },
+      {
+        "slug": "queue-definition",
+        "title": "Queue/Definition",
+        "url": "https://rosettacode.org/wiki/Queue/Definition",
+        "parts": []
+      },
+      {
+        "slug": "s-expressions",
+        "title": "S-expressions",
+        "url": "https://rosettacode.org/wiki/S-expressions",
+        "parts": []
+      },
+      {
+        "slug": "ternary-logic",
+        "title": "Ternary logic",
+        "url": "https://rosettacode.org/wiki/Ternary_logic",
+        "parts": []
+      }
+    ]
+  },
+  {
+    "title": "generators and laziness",
+    "blurb": "Sequences produced a value at a time, and consumers that stop when they have enough.",
+    "tasks": [
+      {
+        "slug": "amb",
+        "title": "Amb",
+        "url": "https://rosettacode.org/wiki/Amb",
+        "parts": []
+      },
+      {
+        "slug": "balanced-brackets",
+        "title": "Balanced brackets",
+        "url": "https://rosettacode.org/wiki/Balanced_brackets",
+        "parts": []
+      },
+      {
+        "slug": "calkin-wilf-sequence",
+        "title": "Calkin-Wilf sequence",
+        "url": "https://rosettacode.org/wiki/Calkin-Wilf_sequence",
+        "parts": []
+      },
+      {
+        "slug": "ekg-sequence-convergence",
+        "title": "EKG sequence convergence",
+        "url": "https://rosettacode.org/wiki/EKG_sequence_convergence",
+        "parts": []
+      },
+      {
+        "slug": "fibonacci-sequence",
+        "title": "Fibonacci sequence",
+        "url": "https://rosettacode.org/wiki/Fibonacci_sequence",
+        "parts": [
+          "Functional",
+          "Imperative"
+        ]
+      },
+      {
+        "slug": "fusc-sequence",
+        "title": "Fusc sequence",
+        "url": "https://rosettacode.org/wiki/Fusc_sequence",
+        "parts": []
+      },
+      {
+        "slug": "hailstone-sequence",
+        "title": "Hailstone sequence",
+        "url": "https://rosettacode.org/wiki/Hailstone_sequence",
+        "parts": []
+      },
+      {
+        "slug": "intersecting-number-wheels",
+        "title": "Intersecting number wheels",
+        "url": "https://rosettacode.org/wiki/Intersecting_number_wheels",
+        "parts": []
+      },
+      {
+        "slug": "kolakoski-sequence",
+        "title": "Kolakoski sequence",
+        "url": "https://rosettacode.org/wiki/Kolakoski_sequence",
+        "parts": []
+      },
+      {
+        "slug": "look-and-say-sequence",
+        "title": "Look-and-say sequence",
+        "url": "https://rosettacode.org/wiki/Look-and-say_sequence",
+        "parts": []
+      },
+      {
+        "slug": "ordered-partitions",
+        "title": "Ordered partitions",
+        "url": "https://rosettacode.org/wiki/Ordered_partitions",
+        "parts": []
+      },
+      {
+        "slug": "same-fringe",
+        "title": "Same fringe",
+        "url": "https://rosettacode.org/wiki/Same_fringe",
+        "parts": []
+      },
+      {
+        "slug": "stern-brocot-sequence",
+        "title": "Stern-Brocot sequence",
+        "url": "https://rosettacode.org/wiki/Stern-Brocot_sequence",
+        "parts": []
+      },
+      {
+        "slug": "tree-traversal",
+        "title": "Tree traversal",
+        "url": "https://rosettacode.org/wiki/Tree_traversal",
+        "parts": []
+      },
+      {
+        "slug": "van-der-corput-sequence",
+        "title": "Van der Corput sequence",
+        "url": "https://rosettacode.org/wiki/Van_der_Corput_sequence",
+        "parts": []
+      },
+      {
+        "slug": "van-eck-sequence",
+        "title": "Van Eck sequence",
+        "url": "https://rosettacode.org/wiki/Van_Eck_sequence",
+        "parts": []
+      }
+    ]
+  },
+  {
+    "title": "numbers",
+    "blurb": "Arithmetic, primes, and sequences with something to prove.",
+    "tasks": [
+      {
+        "slug": "achilles-numbers",
+        "title": "Achilles numbers",
+        "url": "https://rosettacode.org/wiki/Achilles_numbers",
+        "parts": []
+      },
+      {
+        "slug": "ackermann-function",
+        "title": "Ackermann function",
+        "url": "https://rosettacode.org/wiki/Ackermann_function",
+        "parts": []
+      },
+      {
+        "slug": "additive-primes",
+        "title": "Additive primes",
+        "url": "https://rosettacode.org/wiki/Additive_primes",
+        "parts": []
+      },
+      {
+        "slug": "almost-prime",
+        "title": "Almost prime",
+        "url": "https://rosettacode.org/wiki/Almost_prime",
+        "parts": []
+      },
+      {
+        "slug": "amicable-pairs",
+        "title": "Amicable pairs",
+        "url": "https://rosettacode.org/wiki/Amicable_pairs",
+        "parts": []
+      },
+      {
+        "slug": "anti-primes",
+        "title": "Anti-primes",
+        "url": "https://rosettacode.org/wiki/Anti-primes",
+        "parts": []
+      },
+      {
+        "slug": "descending-primes",
+        "title": "Descending primes",
+        "url": "https://rosettacode.org/wiki/Descending_primes",
+        "parts": []
+      },
+      {
+        "slug": "gapful-numbers",
+        "title": "Gapful numbers",
+        "url": "https://rosettacode.org/wiki/Gapful_numbers",
+        "parts": []
+      },
+      {
+        "slug": "gray-code",
+        "title": "Gray code",
+        "url": "https://rosettacode.org/wiki/Gray_code",
+        "parts": []
+      },
+      {
+        "slug": "greatest-common-divisor",
+        "title": "Greatest common divisor",
+        "url": "https://rosettacode.org/wiki/Greatest_common_divisor",
+        "parts": []
+      },
+      {
+        "slug": "haversine-formula",
+        "title": "Haversine formula",
+        "url": "https://rosettacode.org/wiki/Haversine_formula",
+        "parts": []
+      },
+      {
+        "slug": "iterated-digits-squaring",
+        "title": "Iterated digits squaring",
+        "url": "https://rosettacode.org/wiki/Iterated_digits_squaring",
+        "parts": []
+      },
+      {
+        "slug": "juggler-sequence",
+        "title": "Juggler sequence",
+        "url": "https://rosettacode.org/wiki/Juggler_sequence",
+        "parts": []
+      },
+      {
+        "slug": "kaprekar-numbers",
+        "title": "Kaprekar numbers",
+        "url": "https://rosettacode.org/wiki/Kaprekar_numbers",
+        "parts": []
+      },
+      {
+        "slug": "ludic-numbers",
+        "title": "Ludic numbers",
+        "url": "https://rosettacode.org/wiki/Ludic_numbers",
+        "parts": []
+      },
+      {
+        "slug": "map-range",
+        "title": "Map range",
+        "url": "https://rosettacode.org/wiki/Map_range",
+        "parts": []
+      },
+      {
+        "slug": "negative-base-numbers",
+        "title": "Negative base numbers",
+        "url": "https://rosettacode.org/wiki/Negative_base_numbers",
+        "parts": []
+      },
+      {
+        "slug": "numbers-with-equal-rises-and-falls",
+        "title": "Numbers with equal rises and falls",
+        "url": "https://rosettacode.org/wiki/Numbers_with_equal_rises_and_falls",
+        "parts": []
+      },
+      {
+        "slug": "ormiston-pairs",
+        "title": "Ormiston pairs",
+        "url": "https://rosettacode.org/wiki/Ormiston_pairs",
+        "parts": []
+      },
+      {
+        "slug": "pernicious-numbers",
+        "title": "Pernicious numbers",
+        "url": "https://rosettacode.org/wiki/Pernicious_numbers",
+        "parts": []
+      },
+      {
+        "slug": "population-count",
+        "title": "Population count",
+        "url": "https://rosettacode.org/wiki/Population_count",
+        "parts": []
+      },
+      {
+        "slug": "radical-of-an-integer",
+        "title": "Radical of an integer",
+        "url": "https://rosettacode.org/wiki/Radical_of_an_integer",
+        "parts": []
+      },
+      {
+        "slug": "roman-numerals-encode",
+        "title": "Roman numerals/Encode",
+        "url": "https://rosettacode.org/wiki/Roman_numerals/Encode",
+        "parts": []
+      },
+      {
+        "slug": "semiprime",
+        "title": "Semiprime",
+        "url": "https://rosettacode.org/wiki/Semiprime",
+        "parts": []
+      },
+      {
+        "slug": "sieve-of-eratosthenes",
+        "title": "Sieve of Eratosthenes",
+        "url": "https://rosettacode.org/wiki/Sieve_of_Eratosthenes",
+        "parts": []
+      },
+      {
+        "slug": "sphenic-numbers",
+        "title": "Sphenic numbers",
+        "url": "https://rosettacode.org/wiki/Sphenic_numbers",
+        "parts": []
+      },
+      {
+        "slug": "taxicab-numbers",
+        "title": "Taxicab numbers",
+        "url": "https://rosettacode.org/wiki/Taxicab_numbers",
+        "parts": []
+      },
+      {
+        "slug": "truncatable-primes",
+        "title": "Truncatable primes",
+        "url": "https://rosettacode.org/wiki/Truncatable_primes",
+        "parts": []
+      },
+      {
+        "slug": "undulating-numbers",
+        "title": "Undulating numbers",
+        "url": "https://rosettacode.org/wiki/Undulating_numbers",
+        "parts": []
+      },
+      {
+        "slug": "zeckendorf-number-representation",
+        "title": "Zeckendorf number representation",
+        "url": "https://rosettacode.org/wiki/Zeckendorf_number_representation",
+        "parts": []
+      }
+    ]
+  },
+  {
+    "title": "text",
+    "blurb": "Reading, rewriting and comparing strings.",
+    "tasks": [
+      {
+        "slug": "abc-problem",
+        "title": "ABC problem",
+        "url": "https://rosettacode.org/wiki/ABC_problem",
+        "parts": []
+      },
+      {
+        "slug": "align-columns",
+        "title": "Align columns",
+        "url": "https://rosettacode.org/wiki/Align_columns",
+        "parts": []
+      },
+      {
+        "slug": "camel-case-and-snake-case",
+        "title": "Camel case and snake case",
+        "url": "https://rosettacode.org/wiki/Camel_case_and_snake_case",
+        "parts": []
+      },
+      {
+        "slug": "entropy",
+        "title": "Entropy",
+        "url": "https://rosettacode.org/wiki/Entropy",
+        "parts": []
+      },
+      {
+        "slug": "jaro-similarity",
+        "title": "Jaro similarity",
+        "url": "https://rosettacode.org/wiki/Jaro_similarity",
+        "parts": []
+      },
+      {
+        "slug": "levenshtein-distance",
+        "title": "Levenshtein distance",
+        "url": "https://rosettacode.org/wiki/Levenshtein_distance",
+        "parts": []
+      },
+      {
+        "slug": "palindrome-detection",
+        "title": "Palindrome detection",
+        "url": "https://rosettacode.org/wiki/Palindrome_detection",
+        "parts": []
+      },
+      {
+        "slug": "pangram-checker",
+        "title": "Pangram checker",
+        "url": "https://rosettacode.org/wiki/Pangram_checker",
+        "parts": []
+      },
+      {
+        "slug": "run-length-encoding",
+        "title": "Run-length encoding",
+        "url": "https://rosettacode.org/wiki/Run-length_encoding",
+        "parts": []
+      }
+    ]
+  },
+  {
+    "title": "collections and algorithms",
+    "blurb": "Sorting, searching, and working over whole collections.",
+    "tasks": [
+      {
+        "slug": "damm-algorithm",
+        "title": "Damm algorithm",
+        "url": "https://rosettacode.org/wiki/Damm_algorithm",
+        "parts": []
+      },
+      {
+        "slug": "dinesmans-multiple-dwelling-problem",
+        "title": "Dinesman's multiple-dwelling problem",
+        "url": "https://rosettacode.org/wiki/Dinesman's_multiple-dwelling_problem",
+        "parts": []
+      },
+      {
+        "slug": "forward-difference",
+        "title": "Forward difference",
+        "url": "https://rosettacode.org/wiki/Forward_difference",
+        "parts": []
+      },
+      {
+        "slug": "huffman-coding",
+        "title": "Huffman coding",
+        "url": "https://rosettacode.org/wiki/Huffman_coding",
+        "parts": []
+      },
+      {
+        "slug": "josephus-problem",
+        "title": "Josephus problem",
+        "url": "https://rosettacode.org/wiki/Josephus_problem",
+        "parts": [
+          "Who survives",
+          "The killing sequence"
+        ]
+      },
+      {
+        "slug": "non-continuous-subsequences",
+        "title": "Non-continuous subsequences",
+        "url": "https://rosettacode.org/wiki/Non-continuous_subsequences",
+        "parts": []
+      },
+      {
+        "slug": "power-set",
+        "title": "Power set",
+        "url": "https://rosettacode.org/wiki/Power_set",
+        "parts": []
+      },
+      {
+        "slug": "smith-waterman-algorithm",
+        "title": "Smith–Waterman algorithm",
+        "url": "https://rosettacode.org/wiki/Smith–Waterman_algorithm",
+        "parts": []
+      },
+      {
+        "slug": "sorting-algorithms-quicksort",
+        "title": "Sorting algorithms/Quicksort",
+        "url": "https://rosettacode.org/wiki/Sorting_algorithms/Quicksort",
+        "parts": []
+      },
+      {
+        "slug": "topswops",
+        "title": "Topswops",
+        "url": "https://rosettacode.org/wiki/Topswops",
+        "parts": []
+      },
+      {
+        "slug": "water-collected-between-towers",
+        "title": "Water collected between towers",
+        "url": "https://rosettacode.org/wiki/Water_collected_between_towers",
+        "parts": []
+      }
+    ]
+  }
+]

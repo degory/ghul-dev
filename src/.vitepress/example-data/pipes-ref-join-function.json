@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-join-function",
+  "snippet": false,
   "code": "join[T](source: Iterable[T], separator: string) -> string pure;\n\njoin[T](source: Iterable[T]) -> string pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\njoin[T](source: Iterable[T], separator: string) -> string pure;\n\njoin[T](source: Iterable[T]) -> string pure;\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -23,21 +24,24 @@
     { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 24, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
     { "startLine": 3, "startColumn": 33, "endLine": 3, "endColumn": 38, "text": "class string", "signature": "class string", "kindLabel": "class" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "join\n\n- ◆ abstract", "code": "definition-virtuality" },
+    { "line": 3, "column": 1, "label": "◆", "detail": "join\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 4, "tokenType": "function" },
     { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 30, "endLine": 1, "endColumn": 38, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 26, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 24, "tokenType": "interface" },
+    { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 26, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 30, "endLine": 1, "endColumn": 38, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 41, "endLine": 1, "endColumn": 46, "tokenType": "class" },
     { "startLine": 1, "startColumn": 52, "endLine": 1, "endColumn": 57, "tokenType": "class" },
     { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 4, "tokenType": "function" },
     { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "tokenType": "typeParameter" },
     { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 26, "endLine": 3, "endColumn": 26, "tokenType": "typeParameter" },
     { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 24, "tokenType": "interface" },
+    { "startLine": 3, "startColumn": 26, "endLine": 3, "endColumn": 26, "tokenType": "typeParameter" },
     { "startLine": 3, "startColumn": 33, "endLine": 3, "endColumn": 38, "tokenType": "class" }
   ]
 }

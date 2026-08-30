@@ -1,5 +1,6 @@
 {
   "name": "language-basics-17",
+  "snippet": false,
   "code": "let here: int? = 42;   // present\nlet gone: int? = null; // absent",
   "fullSource": "let here: int? = 42;   // present\nlet gone: int? = null; // absent\n",
   "hiddenBefore": false,
@@ -8,18 +9,18 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "here: int?", "signature": "here: int?", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "here: int?", "signature": "here: int?", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 13, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "gone: int?", "signature": "gone: int?", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "gone: int?", "signature": "gone: int?", "kindLabel": "top-level variable" },
     { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 13, "text": "struct int", "signature": "struct int", "kindLabel": "struct" }
   ],
   "inlayHints": [
     { "line": 1, "column": 5, "label": "►", "detail": "► int?", "code": "narrowing-assign" }
   ],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "property" },
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 13, "tokenType": "struct" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "tokenType": "property" },
     { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 13, "tokenType": "struct" }
   ]
 }

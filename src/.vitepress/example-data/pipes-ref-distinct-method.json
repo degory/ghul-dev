@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-distinct-method",
+  "snippet": false,
   "code": "distinct() -> Pipe[T] pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    distinct() -> Pipe[T] pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -12,10 +13,12 @@
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 18, "text": "trait Pipe[T]", "signature": "trait Pipe[T]", "kindLabel": "trait" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "distinct\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 8, "tokenType": "method" },
-    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "tokenType": "typeParameter" },
-    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 18, "tokenType": "interface" }
+    { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 18, "tokenType": "interface" },
+    { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "tokenType": "typeParameter" }
   ]
 }

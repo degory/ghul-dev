@@ -1,5 +1,6 @@
 {
   "name": "expressions-2",
+  "snippet": false,
   "code": "let c = 'c';\nlet u_macron = 'ū'",
   "fullSource": "let c = 'c';\nlet u_macron = 'ū'\n",
   "hiddenBefore": false,
@@ -8,12 +9,12 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "c: char", "signature": "c: char", "kindLabel": "local value" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "u_macron: char", "signature": "u_macron: char", "kindLabel": "local value" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "c: char", "signature": "c: char", "kindLabel": "top-level variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "u_macron: char", "signature": "u_macron: char", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "tokenType": "property" }
   ]
 }

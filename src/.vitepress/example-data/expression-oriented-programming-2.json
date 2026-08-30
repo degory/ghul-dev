@@ -1,5 +1,6 @@
 {
   "name": "expression-oriented-programming-2",
+  "snippet": false,
   "code": "day_kind(day: int) -> string =>\n    // days run Monday (0) to Sunday (6)\n    case day\n    when 5, 6 then \"weekend\"\n    else \"weekday\"\n    esac;\n\nwrite_line(day_kind(5));\nwrite_line(day_kind(3));\nwrite_line(day_kind(6));",
   "fullSource": "use IO.Std.write_line;\n\nday_kind(day: int) -> string =>\n    // days run Monday (0) to Sunday (6)\n    case day\n    when 5, 6 then \"weekend\"\n    else \"weekday\"\n    esac;\n\nwrite_line(day_kind(5));\nwrite_line(day_kind(3));\nwrite_line(day_kind(6));\n",
   "hiddenBefore": true,
@@ -12,13 +13,14 @@
     { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 12, "text": "day: int", "signature": "day: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 17, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 28, "text": "class string", "signature": "class string", "kindLabel": "class" },
-    { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 12, "text": "day: int", "signature": "day: int", "kindLabel": "local argument" },
     { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 8, "startColumn": 12, "endLine": 8, "endColumn": 19, "text": "day_kind(day: int) -> string", "signature": "day_kind(day: int) -> string", "kindLabel": "pure global function" },
     { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 9, "startColumn": 12, "endLine": 9, "endColumn": 19, "text": "day_kind(day: int) -> string", "signature": "day_kind(day: int) -> string", "kindLabel": "pure global function" },
     { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 10, "startColumn": 12, "endLine": 10, "endColumn": 19, "text": "day_kind(day: int) -> string", "signature": "day_kind(day: int) -> string", "kindLabel": "pure global function" }
+    { "startLine": 10, "startColumn": 12, "endLine": 10, "endColumn": 19, "text": "day_kind(day: int) -> string", "signature": "day_kind(day: int) -> string", "kindLabel": "pure global function" },
+    { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 12, "text": "day: int", "signature": "day: int", "kindLabel": "local argument" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 28, "text": "int.=~(obj: int) -> bool", "signature": "int.=~(obj: int) -> bool", "kindLabel": "method" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -27,6 +29,7 @@
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 17, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 28, "tokenType": "class" },
     { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 28, "tokenType": "method" },
     { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
     { "startLine": 8, "startColumn": 12, "endLine": 8, "endColumn": 19, "tokenType": "function" },
     { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "tokenType": "method", "modifiers": "static" },

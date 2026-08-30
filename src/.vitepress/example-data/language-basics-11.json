@@ -1,5 +1,6 @@
 {
   "name": "language-basics-11",
+  "snippet": false,
   "code": "let point: (int, int) = (10, 20);\nlet person: (string, int) = (\"Alice\", 30);",
   "fullSource": "let point: (int, int) = (10, 20);\nlet person: (string, int) = (\"Alice\", 30);\n",
   "hiddenBefore": false,
@@ -8,19 +9,19 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "point: (int, int)", "signature": "point: (int, int)", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "point: (int, int)", "signature": "point: (int, int)", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 20, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "person: (string, int)", "signature": "person: (string, int)", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "person: (string, int)", "signature": "person: (string, int)", "kindLabel": "top-level variable" },
     { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 19, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 24, "text": "struct int", "signature": "struct int", "kindLabel": "struct" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "tokenType": "property" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 20, "tokenType": "struct" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "property" },
     { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 19, "tokenType": "class" },
     { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 24, "tokenType": "struct" }
   ]

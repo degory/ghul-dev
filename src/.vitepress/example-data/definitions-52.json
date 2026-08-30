@@ -25,11 +25,11 @@
     { "startLine": 15, "startColumn": 5, "endLine": 15, "endColumn": 9, "text": "USER.label() -> string", "signature": "USER.label() -> string", "kindLabel": "pure method" },
     { "startLine": 15, "startColumn": 16, "endLine": 15, "endColumn": 21, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 15, "startColumn": 29, "endLine": 15, "endColumn": 32, "text": "name: string", "signature": "name: string", "kindLabel": "pure instance property" },
-    { "startLine": 12, "startColumn": 21, "endLine": 12, "endColumn": 24, "text": "name: string", "signature": "name: string", "kindLabel": "local argument" },
-    { "startLine": 12, "startColumn": 14, "endLine": 12, "endColumn": 17, "text": "USER.name: string", "signature": "USER.name: string", "kindLabel": "pure instance property" },
     { "startLine": 18, "startColumn": 1, "endLine": 18, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 18, "startColumn": 12, "endLine": 18, "endColumn": 15, "text": "USER.init(name: string)", "signature": "USER.init(name: string)", "kindLabel": "constructor" },
-    { "startLine": 18, "startColumn": 24, "endLine": 18, "endColumn": 28, "text": "USER.label() -> string", "signature": "USER.label() -> string", "kindLabel": "pure method" }
+    { "startLine": 18, "startColumn": 24, "endLine": 18, "endColumn": 28, "text": "USER.label() -> string", "signature": "USER.label() -> string", "kindLabel": "pure method" },
+    { "startLine": 12, "startColumn": 21, "endLine": 12, "endColumn": 24, "text": "name: string", "signature": "name: string", "kindLabel": "local argument" },
+    { "startLine": 12, "startColumn": 14, "endLine": 12, "endColumn": 17, "text": "USER.name: string", "signature": "USER.name: string", "kindLabel": "pure instance property" }
   ],
   "inlayHints": [
     { "line": 5, "column": 5, "label": "◆▼", "detail": "label\n\n- ◆ abstract\n- ▼ overridden by `USER.label() -> string`", "code": "definition-virtuality" },

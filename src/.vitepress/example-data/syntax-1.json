@@ -1,5 +1,6 @@
 {
   "name": "syntax-1",
+  "snippet": false,
   "code": "if x > y then\n    write_line(\"x > y\")\nelse\n    write_line(\"x <= y\")\nfi",
   "fullSource": "use IO.Std.write_line;\n\nlet x = 3;\nlet y = 7;\n\nif x > y then\n    write_line(\"x > y\")\nelse\n    write_line(\"x <= y\")\nfi\n",
   "hiddenBefore": true,
@@ -8,17 +9,17 @@
   "output": "x <= y\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 4, "text": "x: int", "signature": "x: int", "kindLabel": "local value" },
-    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 8, "text": "y: int", "signature": "y: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 4, "text": "x: int", "signature": "x: int", "kindLabel": "top-level variable" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 8, "text": "y: int", "signature": "y: int", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 4, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 4, "endLine": 1, "endColumn": 4, "tokenType": "property" },
     { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "tokenType": "operator" },
+    { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 8, "tokenType": "property" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "tokenType": "method", "modifiers": "static" }
   ]

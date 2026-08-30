@@ -1,5 +1,6 @@
 {
   "name": "top-level-statements-1",
+  "snippet": false,
   "code": "use IO.Std.write_line;\n\n// in a file with no namespace, statements at the top level run in\n// order as the program's entry point\nwrite_line(\"first\");\nwrite_line(\"second\");\n\n// definitions in the same file are still visible, wherever they sit\ngreet(name: string) is\n    write_line(\"hello, {name}\");\nsi\n\ngreet(\"ghūl\");",
   "fullSource": "use IO.Std.write_line;\n\n// in a file with no namespace, statements at the top level run in\n// order as the program's entry point\nwrite_line(\"first\");\nwrite_line(\"second\");\n\n// definitions in the same file are still visible, wherever they sit\ngreet(name: string) is\n    write_line(\"hello, {name}\");\nsi\n\ngreet(\"ghūl\");\n",
   "hiddenBefore": false,
@@ -12,22 +13,22 @@
     { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 5, "text": "greet(name: string) -> void", "signature": "greet(name: string) -> void", "kindLabel": "pure global function" },
     { "startLine": 9, "startColumn": 7, "endLine": 9, "endColumn": 10, "text": "name: string", "signature": "name: string", "kindLabel": "local argument" },
     { "startLine": 9, "startColumn": 13, "endLine": 9, "endColumn": 18, "text": "class string", "signature": "class string", "kindLabel": "class" },
-    { "startLine": 10, "startColumn": 5, "endLine": 10, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 10, "startColumn": 25, "endLine": 10, "endColumn": 28, "text": "name: string", "signature": "name: string", "kindLabel": "local argument" },
     { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 13, "startColumn": 1, "endLine": 13, "endColumn": 5, "text": "greet(name: string) -> void", "signature": "greet(name: string) -> void", "kindLabel": "pure global function" }
+    { "startLine": 13, "startColumn": 1, "endLine": 13, "endColumn": 5, "text": "greet(name: string) -> void", "signature": "greet(name: string) -> void", "kindLabel": "pure global function" },
+    { "startLine": 10, "startColumn": 5, "endLine": 10, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 10, "startColumn": 25, "endLine": 10, "endColumn": 28, "text": "name: string", "signature": "name: string", "kindLabel": "local argument" }
   ],
   "inlayHints": [],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "tokenType": "function" },
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
     { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 5, "tokenType": "function" },
     { "startLine": 9, "startColumn": 7, "endLine": 9, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 9, "startColumn": 13, "endLine": 9, "endColumn": 18, "tokenType": "class" },
     { "startLine": 10, "startColumn": 5, "endLine": 10, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
     { "startLine": 10, "startColumn": 25, "endLine": 10, "endColumn": 28, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
     { "startLine": 13, "startColumn": 1, "endLine": 13, "endColumn": 5, "tokenType": "function" }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-except-method",
+  "snippet": false,
   "code": "except(right: Iterable[T]) -> Pipe[T] pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    except(right: Iterable[T]) -> Pipe[T] pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -15,13 +16,15 @@
     { "startLine": 1, "startColumn": 36, "endLine": 1, "endColumn": 36, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 34, "text": "trait Pipe[T]", "signature": "trait Pipe[T]", "kindLabel": "trait" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "except\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 6, "tokenType": "method" },
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 24, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 22, "tokenType": "interface" },
-    { "startLine": 1, "startColumn": 36, "endLine": 1, "endColumn": 36, "tokenType": "typeParameter" },
-    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 34, "tokenType": "interface" }
+    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 24, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 34, "tokenType": "interface" },
+    { "startLine": 1, "startColumn": 36, "endLine": 1, "endColumn": 36, "tokenType": "typeParameter" }
   ]
 }

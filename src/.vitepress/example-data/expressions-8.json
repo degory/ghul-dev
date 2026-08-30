@@ -1,5 +1,6 @@
 {
   "name": "expressions-8",
+  "snippet": false,
   "code": "let simple_add = (x: int, y: int) -> int => x + y;",
   "fullSource": "let simple_add = (x: int, y: int) -> int => x + y;\n",
   "hiddenBefore": false,
@@ -10,7 +11,7 @@
   "hovers": [
     { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 19, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "text": "y: int", "signature": "y: int", "kindLabel": "local argument" },
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "text": "simple_add: (int, int) -> int", "signature": "simple_add: (int, int) -> int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "text": "simple_add: (int, int) -> int pure", "signature": "simple_add: (int, int) -> int pure", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 38, "endLine": 1, "endColumn": 40, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 24, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 30, "endLine": 1, "endColumn": 32, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
@@ -20,14 +21,14 @@
   ],
   "inlayHints": [],
   "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "tokenType": "property" },
     { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 19, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 38, "endLine": 1, "endColumn": 40, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 24, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 30, "endLine": 1, "endColumn": 32, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 38, "endLine": 1, "endColumn": 40, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 45, "endLine": 1, "endColumn": 45, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 49, "endLine": 1, "endColumn": 49, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 47, "endLine": 1, "endColumn": 47, "tokenType": "operator" }
+    { "startLine": 1, "startColumn": 47, "endLine": 1, "endColumn": 47, "tokenType": "operator" },
+    { "startLine": 1, "startColumn": 49, "endLine": 1, "endColumn": 49, "tokenType": "variable", "modifiers": "readonly" }
   ]
 }

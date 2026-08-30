@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-first_or_throw-method",
+  "snippet": false,
   "code": "first_or_throw() -> T pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    first_or_throw() -> T pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -11,7 +12,9 @@
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 14, "text": "Pipe[T].first_or_throw() -> T", "signature": "Pipe[T].first_or_throw() -> T", "kindLabel": "pure abstract method" },
     { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 21, "text": "T", "signature": "T", "kindLabel": "type variable" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "first_or_throw\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 14, "tokenType": "method" },
     { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 21, "tokenType": "typeParameter" }

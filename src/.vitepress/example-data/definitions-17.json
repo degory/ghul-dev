@@ -1,5 +1,6 @@
 {
   "name": "definitions-17",
+  "snippet": false,
   "code": "let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));\nlet leaf = Tree.LEAF(123);\n\nif isa Tree.NODE(tree) then\n    write_line(\"have tree node\");\nelif isa Tree.LEAF(tree) then\n    write_line(\"have tree leaf\");\nfi",
   "fullSource": "use IO.Std.write_line;\n\nunion Tree is\n    NODE(left: Tree, right: Tree);\n    LEAF(value: int);\nsi\n\nlet tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));\nlet leaf = Tree.LEAF(123);\n\nif isa Tree.NODE(tree) then\n    write_line(\"have tree node\");\nelif isa Tree.LEAF(tree) then\n    write_line(\"have tree leaf\");\nfi\n",
   "hiddenBefore": true,
@@ -8,7 +9,7 @@
   "output": "have tree node\n",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "tree: Tree", "signature": "tree: Tree", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "tree: Tree", "signature": "tree: Tree", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 14, "text": "union Tree", "signature": "union Tree", "kindLabel": "union" },
     { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 21, "text": "union Tree", "signature": "union Tree", "kindLabel": "union" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 26, "text": "Tree.NODE.init(left: Tree, right: Tree)", "signature": "Tree.NODE.init(left: Tree, right: Tree)", "kindLabel": "constructor" },
@@ -16,15 +17,15 @@
     { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 36, "text": "Tree.LEAF.init(value: int)", "signature": "Tree.LEAF.init(value: int)", "kindLabel": "constructor" },
     { "startLine": 1, "startColumn": 44, "endLine": 1, "endColumn": 47, "text": "union Tree", "signature": "union Tree", "kindLabel": "union" },
     { "startLine": 1, "startColumn": 49, "endLine": 1, "endColumn": 52, "text": "Tree.LEAF.init(value: int)", "signature": "Tree.LEAF.init(value: int)", "kindLabel": "constructor" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "leaf: Tree.LEAF", "signature": "leaf: Tree.LEAF", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "leaf: Tree.LEAF", "signature": "leaf: Tree.LEAF", "kindLabel": "top-level variable" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 15, "text": "union Tree", "signature": "union Tree", "kindLabel": "union" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 20, "text": "Tree.LEAF.init(value: int)", "signature": "Tree.LEAF.init(value: int)", "kindLabel": "constructor" },
     { "startLine": 4, "startColumn": 13, "endLine": 4, "endColumn": 16, "text": "Tree.NODE(left: Tree, right: Tree)", "signature": "Tree.NODE(left: Tree, right: Tree)", "kindLabel": "variant" },
     { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 11, "text": "union Tree", "signature": "union Tree", "kindLabel": "union" },
-    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 21, "text": "tree: Tree", "signature": "tree: Tree", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 21, "text": "tree: Tree", "signature": "tree: Tree", "kindLabel": "top-level variable" },
     { "startLine": 6, "startColumn": 15, "endLine": 6, "endColumn": 18, "text": "Tree.LEAF(value: int)", "signature": "Tree.LEAF(value: int)", "kindLabel": "variant" },
     { "startLine": 6, "startColumn": 10, "endLine": 6, "endColumn": 13, "text": "union Tree", "signature": "union Tree", "kindLabel": "union" },
-    { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 23, "text": "tree: Tree\n    ► Tree.LEAF", "signature": "tree: Tree\n    ► Tree.LEAF", "kindLabel": "local value" },
+    { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 23, "text": "tree: Tree\n    ► Tree.LEAF", "signature": "tree: Tree\n    ► Tree.LEAF", "kindLabel": "top-level variable" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" }
   ],
@@ -33,7 +34,7 @@
     { "line": 6, "column": 20, "label": "►", "detail": "► Tree.LEAF", "code": "narrowing-isa" }
   ],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "property" },
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 14, "tokenType": "class" },
     { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 21, "tokenType": "class" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 26, "tokenType": "method" },
@@ -41,16 +42,16 @@
     { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 36, "tokenType": "method" },
     { "startLine": 1, "startColumn": 44, "endLine": 1, "endColumn": 47, "tokenType": "class" },
     { "startLine": 1, "startColumn": 49, "endLine": 1, "endColumn": 52, "tokenType": "method" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "tokenType": "property" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 15, "tokenType": "class" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 20, "tokenType": "method" },
-    { "startLine": 4, "startColumn": 13, "endLine": 4, "endColumn": 16, "tokenType": "class" },
     { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 11, "tokenType": "class" },
-    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 21, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 6, "startColumn": 15, "endLine": 6, "endColumn": 18, "tokenType": "class" },
-    { "startLine": 6, "startColumn": 10, "endLine": 6, "endColumn": 13, "tokenType": "class" },
-    { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 13, "endLine": 4, "endColumn": 16, "tokenType": "class" },
+    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 21, "tokenType": "property" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 6, "startColumn": 10, "endLine": 6, "endColumn": 13, "tokenType": "class" },
+    { "startLine": 6, "startColumn": 15, "endLine": 6, "endColumn": 18, "tokenType": "class" },
+    { "startLine": 6, "startColumn": 20, "endLine": 6, "endColumn": 23, "tokenType": "property" },
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 14, "tokenType": "method", "modifiers": "static" }
   ]
 }

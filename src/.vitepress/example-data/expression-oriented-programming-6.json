@@ -1,5 +1,6 @@
 {
   "name": "expression-oriented-programming-6",
+  "snippet": false,
   "code": "hypotenuse_squared(a: int, b: int) -> int =>\n    let a2 = a * a, b2 = b * b in a2 + b2;\n\nwrite_line(\"h2 = {hypotenuse_squared(3, 4)}\");",
   "fullSource": "use IO.Std.write_line;\n\nhypotenuse_squared(a: int, b: int) -> int =>\n    let a2 = a * a, b2 = b * b in a2 + b2;\n\nwrite_line(\"h2 = {hypotenuse_squared(3, 4)}\");\n",
   "hiddenBefore": true,
@@ -32,21 +33,21 @@
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 18, "tokenType": "function" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 28, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 25, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 28, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 33, "tokenType": "struct" },
     { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 41, "tokenType": "struct" },
     { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 16, "tokenType": "operator" },
+    { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 21, "endLine": 2, "endColumn": 22, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 26, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 30, "endLine": 2, "endColumn": 30, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 28, "endLine": 2, "endColumn": 28, "tokenType": "operator" },
+    { "startLine": 2, "startColumn": 30, "endLine": 2, "endColumn": 30, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 35, "endLine": 2, "endColumn": 36, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 40, "endLine": 2, "endColumn": 41, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 38, "endLine": 2, "endColumn": 38, "tokenType": "operator" },
+    { "startLine": 2, "startColumn": 40, "endLine": 2, "endColumn": 41, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
     { "startLine": 4, "startColumn": 19, "endLine": 4, "endColumn": 36, "tokenType": "function" }
   ]

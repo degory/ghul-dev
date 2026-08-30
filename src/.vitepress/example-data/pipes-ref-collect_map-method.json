@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-collect_map-method",
+  "snippet": false,
   "code": "collect_map[K,V](\n    key_selector: (T) -> K pure,\n    value_selector: (T) -> V pure\n) -> MAP[K,V] pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    collect_map[K,V](\n        key_selector: (T) -> K pure,\n        value_selector: (T) -> V pure\n    ) -> MAP[K,V] pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -21,19 +22,21 @@
     { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 12, "text": "V", "signature": "V", "kindLabel": "type variable" },
     { "startLine": 4, "startColumn": 6, "endLine": 4, "endColumn": 8, "text": "class MAP[TKey,TValue]", "signature": "class MAP[TKey,TValue]", "kindLabel": "class" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "collect_map\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 11, "tokenType": "method" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 15, "endLine": 1, "endColumn": 15, "tokenType": "typeParameter" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 26, "tokenType": "typeParameter" },
     { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 20, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 26, "tokenType": "typeParameter" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 3, "startColumn": 28, "endLine": 3, "endColumn": 28, "tokenType": "typeParameter" },
     { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 22, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 28, "endLine": 3, "endColumn": 28, "tokenType": "typeParameter" },
+    { "startLine": 4, "startColumn": 6, "endLine": 4, "endColumn": 8, "tokenType": "class" },
     { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 10, "tokenType": "typeParameter" },
-    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 12, "tokenType": "typeParameter" },
-    { "startLine": 4, "startColumn": 6, "endLine": 4, "endColumn": 8, "tokenType": "class" }
+    { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 12, "tokenType": "typeParameter" }
   ]
 }

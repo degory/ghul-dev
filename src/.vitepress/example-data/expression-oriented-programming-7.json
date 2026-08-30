@@ -21,11 +21,11 @@
     { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 15, "text": "trimmed: int", "signature": "trimmed: int", "kindLabel": "local value" },
     { "startLine": 4, "startColumn": 19, "endLine": 4, "endColumn": 24, "text": "height: int", "signature": "height: int", "kindLabel": "local argument" },
     { "startLine": 4, "startColumn": 26, "endLine": 4, "endColumn": 26, "text": "Ghul.-(a: int, b: int) -> int", "signature": "Ghul.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },
+    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 9, "startColumn": 14, "endLine": 9, "endColumn": 17, "text": "area(width: int, height: int) -> int", "signature": "area(width: int, height: int) -> int", "kindLabel": "pure global function" },
     { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 11, "text": "doubled: int", "signature": "doubled: int", "kindLabel": "local value" },
     { "startLine": 6, "startColumn": 15, "endLine": 6, "endColumn": 21, "text": "trimmed: int", "signature": "trimmed: int", "kindLabel": "local value" },
-    { "startLine": 6, "startColumn": 13, "endLine": 6, "endColumn": 13, "text": "Ghul.*(a: int, b: int) -> int", "signature": "Ghul.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" },
-    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 9, "startColumn": 14, "endLine": 9, "endColumn": 17, "text": "area(width: int, height: int) -> int", "signature": "area(width: int, height: int) -> int", "kindLabel": "pure global function" }
+    { "startLine": 6, "startColumn": 13, "endLine": 6, "endColumn": 13, "text": "Ghul.*(a: int, b: int) -> int", "signature": "Ghul.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" }
   ],
   "inlayHints": [],
   "semanticTokens": [

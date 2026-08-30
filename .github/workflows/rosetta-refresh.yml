@@ -1,0 +1,63 @@
+name: Rosetta refresh
+
+# The solutions are written in ghul-rosetta-code and copied here, never edited
+# here. That repository moves on its own, so a check on every pull request
+# would fail this repository's builds for changes made elsewhere. Instead this
+# runs on a schedule, re-pulls, and raises a pull request when the copy has
+# fallen behind. Placing a new task in a group is a decision for this site, so
+# the pull fails naming any that is unplaced and the pull request is left to a
+# person to complete.
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    name: Re-pull the solutions
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:10.0
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - uses: actions/checkout@v7
+      with:
+        repository: degory/ghul-rosetta-code
+        path: .rosetta-source
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v7
+      with:
+        node-version: 'lts/*'
+
+    - run: npm ci
+
+    - name: Pull the solutions
+      run: npm run pull-rosetta -- .rosetta-source
+
+    - name: Rebuild the example data
+      run: |
+        dotnet tool restore
+        dotnet run --project example-tool -- examples src/.vitepress/example-data
+
+    - name: Raise a pull request if anything changed
+      uses: peter-evans/create-pull-request@v7
+      with:
+        branch: rosetta-refresh
+        title: Refresh the Rosetta Code solutions
+        commit-message: Refresh the Rosetta Code solutions
+        body: |
+          Re-pulled from ghul-rosetta-code. Everything here is generated - to
+          change a solution, change it in that repository and let this run again.
+        add-paths: |
+          examples
+          src/rosetta
+          src/.vitepress/rosetta-tasks.json
+          src/.vitepress/example-data

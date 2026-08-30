@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-first-function",
+  "snippet": false,
   "code": "first[T](source: Iterable[T]) -> Ghul.MAYBE[T] pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\nfirst[T](source: Iterable[T]) -> Ghul.MAYBE[T] pure;\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -16,14 +17,16 @@
     { "startLine": 1, "startColumn": 45, "endLine": 1, "endColumn": 45, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 43, "text": "struct MAYBE[T]", "signature": "struct MAYBE[T]", "kindLabel": "struct" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "first\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 5, "tokenType": "function" },
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 7, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 25, "tokenType": "interface" },
-    { "startLine": 1, "startColumn": 45, "endLine": 1, "endColumn": 45, "tokenType": "typeParameter" },
-    { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 43, "tokenType": "struct" }
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "typeParameter" },
+    { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 43, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 45, "endLine": 1, "endColumn": 45, "tokenType": "typeParameter" }
   ]
 }

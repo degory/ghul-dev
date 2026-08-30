@@ -1,5 +1,6 @@
 {
   "name": "dotnet-integration-1",
+  "snippet": false,
   "code": "entry(args: string[]) is\n    let builder = WebApplication.create_builder(args);\n\n    let app = builder.build();\n\n    // '|>' threads app in as map_get's first argument:\n    app |> map_get(\"/hello\", () => Results.ok(\"hello, world\"));\n\n    app.run(null);\nsi",
   "fullSource": "use Microsoft.AspNetCore.Builder;\nuse Microsoft.AspNetCore.Http;\n\n// map_get is an extension method, so use it and call it with '|>':\nuse Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.map_get;\n\nentry(args: string[]) is\n    let builder = WebApplication.create_builder(args);\n\n    let app = builder.build();\n\n    // '|>' threads app in as map_get's first argument:\n    app |> map_get(\"/hello\", () => Results.ok(\"hello, world\"));\n\n    app.run(null);\nsi\n",
   "hiddenBefore": true,
@@ -37,8 +38,8 @@
     { "startLine": 4, "startColumn": 9, "endLine": 4, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 21, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 4, "startColumn": 23, "endLine": 4, "endColumn": 27, "tokenType": "method" },
-    { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 18, "tokenType": "method", "modifiers": "static" },
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 18, "tokenType": "method", "modifiers": "static" },
     { "startLine": 7, "startColumn": 36, "endLine": 7, "endColumn": 42, "tokenType": "class" },
     { "startLine": 7, "startColumn": 44, "endLine": 7, "endColumn": 45, "tokenType": "method", "modifiers": "static" },
     { "startLine": 9, "startColumn": 5, "endLine": 9, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },

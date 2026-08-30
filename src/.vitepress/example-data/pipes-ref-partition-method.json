@@ -1,5 +1,6 @@
 {
   "name": "pipes-ref-partition-method",
+  "snippet": false,
   "code": "partition(\n    predicate: (T) -> bool pure\n) -> (LIST[T], LIST[T]) pure;",
   "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    partition(\n        predicate: (T) -> bool pure\n    ) -> (LIST[T], LIST[T]) pure;\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
@@ -17,15 +18,17 @@
     { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 21, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 19, "text": "class LIST[T]", "signature": "class LIST[T]", "kindLabel": "class" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 1, "column": 1, "label": "◆", "detail": "partition\n\n- ◆ abstract", "code": "definition-virtuality" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 9, "tokenType": "method" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 26, "tokenType": "struct" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "tokenType": "typeParameter" },
-    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 12, "tokenType": "typeParameter" },
+    { "startLine": 2, "startColumn": 23, "endLine": 2, "endColumn": 26, "tokenType": "struct" },
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 10, "tokenType": "class" },
-    { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 21, "tokenType": "typeParameter" },
-    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 19, "tokenType": "class" }
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 12, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 19, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 21, "tokenType": "typeParameter" }
   ]
 }

@@ -14,6 +14,7 @@
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "text": "b: int", "signature": "b: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 14, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 22, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 7, "text": "bitwise(a: int, b: int) -> void", "signature": "bitwise(a: int, b: int) -> void", "kindLabel": "pure global function" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 18, "text": "a: int", "signature": "a: int", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 22, "text": "b: int", "signature": "b: int", "kindLabel": "local argument" },
@@ -28,8 +29,7 @@
     { "startLine": 5, "startColumn": 20, "endLine": 5, "endColumn": 21, "text": "Ghul.<<(a: int, b: int) -> int", "signature": "Ghul.<<(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.shl" },
     { "startLine": 5, "startColumn": 31, "endLine": 5, "endColumn": 32, "text": "Ghul.>>(a: int, b: int) -> int", "signature": "Ghul.>>(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.shr" },
     { "startLine": 5, "startColumn": 38, "endLine": 5, "endColumn": 38, "text": "Ghul.-(a: int) -> int", "signature": "Ghul.-(a: int) -> int", "kindLabel": "innate function arithmetic.neg" },
-    { "startLine": 5, "startColumn": 42, "endLine": 5, "endColumn": 44, "text": "Ghul.>>>(a: int, b: int) -> int", "signature": "Ghul.>>>(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.ushr" },
-    { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 7, "text": "bitwise(a: int, b: int) -> void", "signature": "bitwise(a: int, b: int) -> void", "kindLabel": "pure global function" }
+    { "startLine": 5, "startColumn": 42, "endLine": 5, "endColumn": 44, "text": "Ghul.>>>(a: int, b: int) -> int", "signature": "Ghul.>>>(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.ushr" }
   ],
   "inlayHints": [],
   "semanticTokens": [

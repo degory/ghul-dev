@@ -1,5 +1,6 @@
 {
   "name": "type-inference-16",
+  "snippet": false,
   "code": "[1, 2, 2, 4, 5] |> filter(i => i > 3);",
   "fullSource": "use Ghul.Pipes;\n\n[1, 2, 2, 4, 5] |> filter(i => i > 3);",
   "hiddenBefore": true,
@@ -15,8 +16,8 @@
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 25, "tokenType": "function" },
+    { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 32, "endLine": 1, "endColumn": 32, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 34, "endLine": 1, "endColumn": 34, "tokenType": "operator" }
   ]

@@ -1,5 +1,6 @@
 {
   "name": "definitions-43",
+  "snippet": false,
   "code": "union Shape is\n    CIRCLE(radius: int);\n    SQUARE(side: int);\nsi\n\npartial Shape is\n    describe() -> string =>\n        case self\n        when c: CIRCLE then \"circle r={c.radius}\"\n        when s: SQUARE then \"square s={s.side}\"\n        esac;\nsi\n\nlet s: Shape = Shape.SQUARE(4);\nwrite_line(s.describe());",
   "fullSource": "use IO.Std.write_line;\n\nunion Shape is\n    CIRCLE(radius: int);\n    SQUARE(side: int);\nsi\n\npartial Shape is\n    describe() -> string =>\n        case self\n        when c: CIRCLE then \"circle r={c.radius}\"\n        when s: SQUARE then \"square s={s.side}\"\n        esac;\nsi\n\nlet s: Shape = Shape.SQUARE(4);\nwrite_line(s.describe());\n",
   "hiddenBefore": true,
@@ -12,14 +13,20 @@
     { "startLine": 1, "startColumn": 1, "endLine": 4, "endColumn": 2, "text": "Ghul./\\(a: bool, b: bool) -> bool", "signature": "Ghul./\\(a: bool, b: bool) -> bool", "kindLabel": "innate function bool.and_then" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "Shape.CIRCLE(radius: int)", "signature": "Shape.CIRCLE(radius: int)", "kindLabel": "variant" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 17, "text": "Shape.CIRCLE.radius: int", "signature": "Shape.CIRCLE.radius: int", "kindLabel": "variant field" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 24, "text": "object.equals(objA: object?, objB: object?) -> bool", "signature": "object.equals(objA: object?, objB: object?) -> bool", "kindLabel": "class method" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 24, "text": "Ghul./\\(a: bool, b: bool) -> bool", "signature": "Ghul./\\(a: bool, b: bool) -> bool", "kindLabel": "innate function bool.and_then" },
     { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 22, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 22, "text": "int.=~(obj: int) -> bool", "signature": "int.=~(obj: int) -> bool", "kindLabel": "method" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 10, "text": "Shape.SQUARE(side: int)", "signature": "Shape.SQUARE(side: int)", "kindLabel": "variant" },
     { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 15, "text": "Shape.SQUARE.side: int", "signature": "Shape.SQUARE.side: int", "kindLabel": "variant field" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 22, "text": "object.equals(objA: object?, objB: object?) -> bool", "signature": "object.equals(objA: object?, objB: object?) -> bool", "kindLabel": "class method" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 22, "text": "Ghul./\\(a: bool, b: bool) -> bool", "signature": "Ghul./\\(a: bool, b: bool) -> bool", "kindLabel": "innate function bool.and_then" },
     { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 20, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 20, "text": "int.=~(obj: int) -> bool", "signature": "int.=~(obj: int) -> bool", "kindLabel": "method" },
+    { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 5, "text": "s: Shape", "signature": "s: Shape", "kindLabel": "top-level variable" },
+    { "startLine": 14, "startColumn": 8, "endLine": 14, "endColumn": 12, "text": "union Shape", "signature": "union Shape", "kindLabel": "union" },
+    { "startLine": 14, "startColumn": 16, "endLine": 14, "endColumn": 20, "text": "union Shape", "signature": "union Shape", "kindLabel": "union" },
+    { "startLine": 14, "startColumn": 22, "endLine": 14, "endColumn": 27, "text": "Shape.SQUARE.init(side: int)", "signature": "Shape.SQUARE.init(side: int)", "kindLabel": "constructor" },
     { "startLine": 6, "startColumn": 9, "endLine": 6, "endColumn": 13, "text": "union Shape", "signature": "union Shape", "kindLabel": "union" },
-    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 12, "text": "Shape.describe() -> string", "signature": "Shape.describe() -> string", "kindLabel": "method" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 12, "text": "Shape.describe() -> string", "signature": "Shape.describe() -> string", "kindLabel": "pure method" },
     { "startLine": 7, "startColumn": 19, "endLine": 7, "endColumn": 24, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 9, "startColumn": 14, "endLine": 9, "endColumn": 14, "text": "c: Shape.CIRCLE", "signature": "c: Shape.CIRCLE", "kindLabel": "local value" },
     { "startLine": 9, "startColumn": 17, "endLine": 9, "endColumn": 22, "text": "CIRCLE(radius: int)", "signature": "CIRCLE(radius: int)", "kindLabel": "variant" },
@@ -29,15 +36,13 @@
     { "startLine": 10, "startColumn": 17, "endLine": 10, "endColumn": 22, "text": "SQUARE(side: int)", "signature": "SQUARE(side: int)", "kindLabel": "variant" },
     { "startLine": 10, "startColumn": 40, "endLine": 10, "endColumn": 40, "text": "s: SQUARE", "signature": "s: SQUARE", "kindLabel": "local value" },
     { "startLine": 10, "startColumn": 42, "endLine": 10, "endColumn": 45, "text": "SQUARE.side: int", "signature": "SQUARE.side: int", "kindLabel": "variant field" },
-    { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 5, "text": "s: Shape", "signature": "s: Shape", "kindLabel": "local value" },
-    { "startLine": 14, "startColumn": 8, "endLine": 14, "endColumn": 12, "text": "union Shape", "signature": "union Shape", "kindLabel": "union" },
-    { "startLine": 14, "startColumn": 16, "endLine": 14, "endColumn": 20, "text": "union Shape", "signature": "union Shape", "kindLabel": "union" },
-    { "startLine": 14, "startColumn": 22, "endLine": 14, "endColumn": 27, "text": "Shape.SQUARE.init(side: int)", "signature": "Shape.SQUARE.init(side: int)", "kindLabel": "constructor" },
     { "startLine": 15, "startColumn": 1, "endLine": 15, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 15, "startColumn": 12, "endLine": 15, "endColumn": 12, "text": "s: Shape", "signature": "s: Shape", "kindLabel": "local value" },
-    { "startLine": 15, "startColumn": 14, "endLine": 15, "endColumn": 21, "text": "Shape.describe() -> string", "signature": "Shape.describe() -> string", "kindLabel": "method" }
+    { "startLine": 15, "startColumn": 12, "endLine": 15, "endColumn": 12, "text": "s: Shape", "signature": "s: Shape", "kindLabel": "top-level variable" },
+    { "startLine": 15, "startColumn": 14, "endLine": 15, "endColumn": 21, "text": "Shape.describe() -> string", "signature": "Shape.describe() -> string", "kindLabel": "pure method" }
   ],
-  "inlayHints": [],
+  "inlayHints": [
+    { "line": 8, "column": 14, "label": "►", "detail": "► SQUARE", "code": "narrowing-if-let" }
+  ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "tokenType": "class" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "class" },
@@ -57,12 +62,12 @@
     { "startLine": 10, "startColumn": 17, "endLine": 10, "endColumn": 22, "tokenType": "class" },
     { "startLine": 10, "startColumn": 40, "endLine": 10, "endColumn": 40, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 10, "startColumn": 42, "endLine": 10, "endColumn": 45, "tokenType": "property" },
-    { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 14, "startColumn": 5, "endLine": 14, "endColumn": 5, "tokenType": "property" },
     { "startLine": 14, "startColumn": 8, "endLine": 14, "endColumn": 12, "tokenType": "class" },
     { "startLine": 14, "startColumn": 16, "endLine": 14, "endColumn": 20, "tokenType": "class" },
     { "startLine": 14, "startColumn": 22, "endLine": 14, "endColumn": 27, "tokenType": "method" },
     { "startLine": 15, "startColumn": 1, "endLine": 15, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
-    { "startLine": 15, "startColumn": 12, "endLine": 15, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 15, "startColumn": 12, "endLine": 15, "endColumn": 12, "tokenType": "property" },
     { "startLine": 15, "startColumn": 14, "endLine": 15, "endColumn": 21, "tokenType": "method" }
   ]
 }

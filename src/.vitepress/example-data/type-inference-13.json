@@ -1,5 +1,6 @@
 {
   "name": "type-inference-13",
+  "snippet": false,
   "code": "class THING[T](value: T);\nlet int_thing = THING(1234);\nlet string_thing = THING(\"hello\");",
   "fullSource": "class THING[T](value: T);\n\nlet int_thing = THING(1234);\nlet string_thing = THING(\"hello\");\n",
   "hiddenBefore": false,
@@ -12,10 +13,11 @@
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 20, "text": "THING[T].value: T", "signature": "THING[T].value: T", "kindLabel": "pure instance property" },
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 23, "text": "THING[T].init(value: T)", "signature": "THING[T].init(value: T)", "kindLabel": "constructor" },
+    { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 23, "text": "$$value: T", "signature": "$$value: T", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "text": "T", "signature": "T", "kindLabel": "type variable" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "text": "int_thing: THING[int]", "signature": "int_thing: THING[int]", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "text": "int_thing: THING[int]", "signature": "int_thing: THING[int]", "kindLabel": "top-level variable" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 21, "text": "THING[int].init(value: int)", "signature": "THING[int].init(value: int)", "kindLabel": "constructor" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "text": "string_thing: THING[string]", "signature": "string_thing: THING[string]", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "text": "string_thing: THING[string]", "signature": "string_thing: THING[string]", "kindLabel": "top-level variable" },
     { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 24, "text": "THING[string].init(value: string)", "signature": "THING[string].init(value: string)", "kindLabel": "constructor" }
   ],
   "inlayHints": [],
@@ -24,9 +26,9 @@
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "tokenType": "typeParameter" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 20, "tokenType": "property" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "tokenType": "typeParameter" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "tokenType": "property" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 21, "tokenType": "method" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "tokenType": "property" },
     { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 24, "tokenType": "method" }
   ]
 }

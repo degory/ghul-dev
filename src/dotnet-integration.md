@@ -10,10 +10,10 @@ The ghūl compiler is driven by MSBuild and uses the .NET SDK targets for most o
 When consuming C# code the ghūl compiler transforms symbol names to better match ghūl conventions:
 
 - Class, struct and trait (=interface) names are left unchanged
-- Any generic type argument count suffix is left as-is (for example ``KeyValuePair`2``)
+- .NET's generic arity suffix is removed, so `KeyValuePair<K, V>` is `Collections.KeyValuePair[K, V]`
 - Enum names and enum member names are transformed to `MACRO_CASE`
 - Method, property and field names are transformed to `snake_case`
-- Names that conflict with ghūl keywords are prefixed with `` ` ``
+- A name that collides with a ghūl keyword is left unchanged too. The backtick is how you write such a name where the keyword reading would otherwise win, as in ``` `class ```; it is not part of the name, and after a `.` none is needed
 
 ## namespace and type name re-mapping
 Some commonly used namespace and type names are re-mapped in line with ghūl conventions

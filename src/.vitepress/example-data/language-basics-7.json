@@ -1,5 +1,6 @@
 {
   "name": "language-basics-7",
+  "snippet": false,
   "code": "let my_int: int = 42;\nlet my_float: double = 3.14d;\nlet my_decimal: decimal = 19.99m;\nlet my_bool: bool = true;\nlet my_char: char = 'A';",
   "fullSource": "let my_int: int = 42;\nlet my_float: double = 3.14d;\nlet my_decimal: decimal = 19.99m;\nlet my_bool: bool = true;\nlet my_char: char = 'A';\n",
   "hiddenBefore": false,
@@ -8,28 +9,28 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "my_int: int", "signature": "my_int: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "my_int: int", "signature": "my_int: int", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "my_float: double", "signature": "my_float: double", "kindLabel": "local value" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "my_float: double", "signature": "my_float: double", "kindLabel": "top-level variable" },
     { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 20, "text": "struct double", "signature": "struct double", "kindLabel": "struct" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "my_decimal: decimal", "signature": "my_decimal: decimal", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "text": "my_decimal: decimal", "signature": "my_decimal: decimal", "kindLabel": "top-level variable" },
     { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 23, "text": "struct decimal", "signature": "struct decimal", "kindLabel": "struct" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "text": "my_bool: bool", "signature": "my_bool: bool", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "text": "my_bool: bool", "signature": "my_bool: bool", "kindLabel": "top-level variable" },
     { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 17, "text": "struct bool", "signature": "struct bool", "kindLabel": "struct" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 11, "text": "my_char: char", "signature": "my_char: char", "kindLabel": "local value" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 11, "text": "my_char: char", "signature": "my_char: char", "kindLabel": "top-level variable" },
     { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 17, "text": "struct char", "signature": "struct char", "kindLabel": "struct" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "tokenType": "property" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "tokenType": "struct" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "tokenType": "property" },
     { "startLine": 2, "startColumn": 15, "endLine": 2, "endColumn": 20, "tokenType": "struct" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 14, "tokenType": "property" },
     { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 23, "tokenType": "struct" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "tokenType": "property" },
     { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 17, "tokenType": "struct" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 11, "tokenType": "property" },
     { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 17, "tokenType": "struct" }
   ]
 }

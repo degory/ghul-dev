@@ -1,5 +1,6 @@
 {
   "name": "expressions-18",
+  "snippet": false,
   "code": "let max = if a > b then a else b fi;",
   "fullSource": "let a = 10;\nlet b = 5;\nlet max = if a > b then a else b fi;\n",
   "hiddenBefore": true,
@@ -8,20 +9,20 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 7, "text": "max: int", "signature": "max: int", "kindLabel": "local value" },
-    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "a: int", "signature": "a: int", "kindLabel": "local value" },
-    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 18, "text": "b: int", "signature": "b: int", "kindLabel": "local value" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 7, "text": "max: int", "signature": "max: int", "kindLabel": "top-level variable" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "a: int", "signature": "a: int", "kindLabel": "top-level variable" },
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 18, "text": "b: int", "signature": "b: int", "kindLabel": "top-level variable" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
-    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "text": "a: int", "signature": "a: int", "kindLabel": "local value" },
-    { "startLine": 1, "startColumn": 32, "endLine": 1, "endColumn": 32, "text": "b: int", "signature": "b: int", "kindLabel": "local value" }
+    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "text": "a: int", "signature": "a: int", "kindLabel": "top-level variable" },
+    { "startLine": 1, "startColumn": 32, "endLine": 1, "endColumn": 32, "text": "b: int", "signature": "b: int", "kindLabel": "top-level variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 7, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 18, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 7, "tokenType": "property" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "tokenType": "property" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 16, "tokenType": "operator" },
-    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 1, "startColumn": 32, "endLine": 1, "endColumn": 32, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 18, "tokenType": "property" },
+    { "startLine": 1, "startColumn": 25, "endLine": 1, "endColumn": 25, "tokenType": "property" },
+    { "startLine": 1, "startColumn": 32, "endLine": 1, "endColumn": 32, "tokenType": "property" }
   ]
 }

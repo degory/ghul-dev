@@ -3,6 +3,8 @@ import DefaultTheme from 'vitepress/theme'
 import { nextTick, onMounted, watch } from 'vue'
 import GhulExample from './components/GhulExample.vue'
 import GhulExampleSwitcher from './components/GhulExampleSwitcher.vue'
+import RosettaTask from './components/RosettaTask.vue'
+import RosettaIndex from './components/RosettaIndex.vue'
 import { refreshPackageVersions } from './package-versions'
 import './style.css'
 
@@ -29,5 +31,7 @@ export default {
   enhanceApp({ app }) {
     app.component('GhulExample', GhulExample)
     app.component('GhulExampleSwitcher', GhulExampleSwitcher)
+    app.component('RosettaTask', RosettaTask)
+    app.component('RosettaIndex', RosettaIndex)
   },
 }

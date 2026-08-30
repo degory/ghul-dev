@@ -1,5 +1,6 @@
 {
   "name": "definitions-8a",
+  "snippet": false,
   "code": "class POINT(x: int, y: int) is\nsi",
   "fullSource": "class POINT(x: int, y: int) is\nsi\n\n",
   "hiddenBefore": false,
@@ -12,6 +13,8 @@
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "text": "POINT.x: int", "signature": "POINT.x: int", "kindLabel": "pure instance property" },
     { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 21, "text": "POINT.y: int", "signature": "POINT.y: int", "kindLabel": "pure instance property" },
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 26, "text": "POINT.init(x: int, y: int)", "signature": "POINT.init(x: int, y: int)", "kindLabel": "constructor" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 18, "text": "$$value: int", "signature": "$$value: int", "kindLabel": "local argument" },
+    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 26, "text": "$$value: int", "signature": "$$value: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 18, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 26, "text": "struct int", "signature": "struct int", "kindLabel": "struct" }
   ],
@@ -19,8 +22,8 @@
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "tokenType": "class" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "tokenType": "property" },
-    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 21, "tokenType": "property" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 18, "tokenType": "struct" },
+    { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 21, "tokenType": "property" },
     { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 26, "tokenType": "struct" }
   ]
 }
