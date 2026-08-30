@@ -1,8 +1,8 @@
 {
   "name": "rosetta-pangram-checker",
   "snippet": false,
-  "code": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nis_pangram(sentence: string) -> bool =>\n    sentence\n        |> map(char.to_lower)\n        |> filter(char.is_letter)\n        |> distinct()\n        |> count() == 26;\n\nwrite_line(\"{is_pangram(\"The quick brown fox jumps over the lazy dog\")}\");\nwrite_line(\"{is_pangram(\"Hello, World!\")}\");",
-  "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nis_pangram(sentence: string) -> bool =>\n    sentence\n        |> map(char.to_lower)\n        |> filter(char.is_letter)\n        |> distinct()\n        |> count() == 26;\n\nwrite_line(\"{is_pangram(\"The quick brown fox jumps over the lazy dog\")}\");\nwrite_line(\"{is_pangram(\"Hello, World!\")}\");\n",
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nis_pangram(sentence: string) -> bool =>\n    sentence\n        |> map(char.to_lower)\n        |> filter(char.is_letter)\n        |> distinct()\n        |> count() == 26\n\nwrite_line(\"{is_pangram(\"The quick brown fox jumps over the lazy dog\")}\")\nwrite_line(\"{is_pangram(\"Hello, World!\")}\");",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nis_pangram(sentence: string) -> bool =>\n    sentence\n        |> map(char.to_lower)\n        |> filter(char.is_letter)\n        |> distinct()\n        |> count() == 26\n\nwrite_line(\"{is_pangram(\"The quick brown fox jumps over the lazy dog\")}\")\nwrite_line(\"{is_pangram(\"Hello, World!\")}\");\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

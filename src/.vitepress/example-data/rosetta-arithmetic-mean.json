@@ -1,8 +1,8 @@
 {
   "name": "rosetta-arithmetic-mean",
   "snippet": false,
-  "code": "use IO.Std.write_line;\nuse Collections;\nuse Ghul.Pipes;\n\nmean(values: List[double]) -> double =>\n    values |> reduce(0.0D, (total, value) => total + value)\n    / cast(values.count);\n\nwrite_line(\"mean: {mean([1.0D, 2.0D, 3.0D, 4.0D, 5.0D]):F1}\");",
-  "fullSource": "use IO.Std.write_line;\nuse Collections;\nuse Ghul.Pipes;\n\nmean(values: List[double]) -> double =>\n    values |> reduce(0.0D, (total, value) => total + value)\n    / cast(values.count);\n\nwrite_line(\"mean: {mean([1.0D, 2.0D, 3.0D, 4.0D, 5.0D]):F1}\");\n",
+  "code": "use IO.Std.write_line\nuse Collections\nuse Ghul.Pipes\n\nmean(values: List[double]) -> double =>\n    values |> reduce(0.0D, (total, value) => total + value) /\n    cast(values.count)\n\nwrite_line(\"mean: {mean([1.0D, 2.0D, 3.0D, 4.0D, 5.0D]):F1}\");",
+  "fullSource": "use IO.Std.write_line\nuse Collections\nuse Ghul.Pipes\n\nmean(values: List[double]) -> double =>\n    values |> reduce(0.0D, (total, value) => total + value) /\n    cast(values.count)\n\nwrite_line(\"mean: {mean([1.0D, 2.0D, 3.0D, 4.0D, 5.0D]):F1}\");\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
@@ -24,12 +24,12 @@
     { "startLine": 6, "startColumn": 46, "endLine": 6, "endColumn": 50, "text": "total: double", "signature": "total: double", "kindLabel": "local argument" },
     { "startLine": 6, "startColumn": 54, "endLine": 6, "endColumn": 58, "text": "value: double", "signature": "value: double", "kindLabel": "local argument" },
     { "startLine": 6, "startColumn": 52, "endLine": 6, "endColumn": 52, "text": "Ghul.+(a: double, b: double) -> double", "signature": "Ghul.+(a: double, b: double) -> double", "kindLabel": "innate function arithmetic.add" },
+    { "startLine": 6, "startColumn": 61, "endLine": 6, "endColumn": 61, "text": "Ghul./(a: double, b: double) -> double", "signature": "Ghul./(a: double, b: double) -> double", "kindLabel": "innate function arithmetic.div" },
     { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 9, "startColumn": 20, "endLine": 9, "endColumn": 23, "text": "mean(values: List[double]) -> double", "signature": "mean(values: List[double]) -> double", "kindLabel": "pure global function" },
-    { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 17, "text": "values: List[double]", "signature": "values: List[double]", "kindLabel": "local argument" },
-    { "startLine": 7, "startColumn": 19, "endLine": 7, "endColumn": 23, "text": "List[double].count: int", "signature": "List[double].count: int", "kindLabel": "pure instance property" },
-    { "startLine": 7, "startColumn": 7, "endLine": 7, "endColumn": 10, "text": "struct double", "signature": "struct double", "kindLabel": "struct" },
-    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 5, "text": "Ghul./(a: double, b: double) -> double", "signature": "Ghul./(a: double, b: double) -> double", "kindLabel": "innate function arithmetic.div" }
+    { "startLine": 7, "startColumn": 10, "endLine": 7, "endColumn": 15, "text": "values: List[double]", "signature": "values: List[double]", "kindLabel": "local argument" },
+    { "startLine": 7, "startColumn": 17, "endLine": 7, "endColumn": 21, "text": "List[double].count: int", "signature": "List[double].count: int", "kindLabel": "pure instance property" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 8, "text": "struct double", "signature": "struct double", "kindLabel": "struct" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -48,10 +48,10 @@
     { "startLine": 6, "startColumn": 46, "endLine": 6, "endColumn": 50, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 6, "startColumn": 52, "endLine": 6, "endColumn": 52, "tokenType": "operator" },
     { "startLine": 6, "startColumn": 54, "endLine": 6, "endColumn": 58, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 5, "tokenType": "operator" },
-    { "startLine": 7, "startColumn": 7, "endLine": 7, "endColumn": 10, "tokenType": "struct" },
-    { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 7, "startColumn": 19, "endLine": 7, "endColumn": 23, "tokenType": "property" },
+    { "startLine": 6, "startColumn": 61, "endLine": 6, "endColumn": 61, "tokenType": "operator" },
+    { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 8, "tokenType": "struct" },
+    { "startLine": 7, "startColumn": 10, "endLine": 7, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 7, "startColumn": 17, "endLine": 7, "endColumn": 21, "tokenType": "property" },
     { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
     { "startLine": 9, "startColumn": 20, "endLine": 9, "endColumn": 23, "tokenType": "function" }
   ]

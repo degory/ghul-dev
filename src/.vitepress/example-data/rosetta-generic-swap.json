@@ -1,8 +1,8 @@
 {
   "name": "rosetta-generic-swap",
   "snippet": false,
-  "code": "use IO.Std.write_line;\n\nswap[T](left: T ref, right: T ref) is\n    (left!, right!) = (right!, left!);\nsi\n\nlet a mut = 1;\nlet b mut = 2;\n\nswap(a ref, b ref);\n\nwrite_line(\"ints:    {a} {b}\");\n\nlet s mut = \"first\";\nlet t mut = \"second\";\n\nswap(s ref, t ref);\n\nwrite_line(\"strings: {s} {t}\");\n\nlet p mut = (1, \"one\");\nlet q mut = (2, \"two\");\n\nswap(p ref, q ref);\n\nwrite_line(\"tuples:  {p} {q}\");",
-  "fullSource": "use IO.Std.write_line;\n\nswap[T](left: T ref, right: T ref) is\n    (left!, right!) = (right!, left!);\nsi\n\nlet a mut = 1;\nlet b mut = 2;\n\nswap(a ref, b ref);\n\nwrite_line(\"ints:    {a} {b}\");\n\nlet s mut = \"first\";\nlet t mut = \"second\";\n\nswap(s ref, t ref);\n\nwrite_line(\"strings: {s} {t}\");\n\nlet p mut = (1, \"one\");\nlet q mut = (2, \"two\");\n\nswap(p ref, q ref);\n\nwrite_line(\"tuples:  {p} {q}\");\n",
+  "code": "use IO.Std.write_line\n\nswap[T](left: T ref, right: T ref) is\n    (left!, right!) = (right!, left!)\nsi\n\nlet a mut = 1\nlet b mut = 2\n\nswap(a ref, b ref)\n\nwrite_line(\"ints:    {a} {b}\")\n\nlet s mut = \"first\"\nlet t mut = \"second\"\n\nswap(s ref, t ref)\n\nwrite_line(\"strings: {s} {t}\")\n\nlet p mut = (1, \"one\")\nlet q mut = (2, \"two\")\n\nswap(p ref, q ref)\n\nwrite_line(\"tuples:  {p} {q}\");",
+  "fullSource": "use IO.Std.write_line\n\nswap[T](left: T ref, right: T ref) is\n    (left!, right!) = (right!, left!)\nsi\n\nlet a mut = 1\nlet b mut = 2\n\nswap(a ref, b ref)\n\nwrite_line(\"ints:    {a} {b}\")\n\nlet s mut = \"first\"\nlet t mut = \"second\"\n\nswap(s ref, t ref)\n\nwrite_line(\"strings: {s} {t}\")\n\nlet p mut = (1, \"one\")\nlet q mut = (2, \"two\")\n\nswap(p ref, q ref)\n\nwrite_line(\"tuples:  {p} {q}\");\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

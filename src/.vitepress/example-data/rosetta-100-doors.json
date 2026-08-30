@@ -1,8 +1,8 @@
 {
   "name": "rosetta-100-doors",
   "snippet": false,
-  "code": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nlet doors = (1::100) |> map(_ => false) |> collect_list();\n\nfor pass in 1::100 do\n    let door mut = pass;\n\n    while door <= 100 do\n        doors[door - 1] = !doors[door - 1];\n        door = door + pass;\n    od\nod\n\nlet open_doors = (1::100) |> filter(door => doors[door - 1]);\n\nwrite_line(\"open doors: {$open_doors}\");",
-  "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nlet doors = (1::100) |> map(_ => false) |> collect_list();\n\nfor pass in 1::100 do\n    let door mut = pass;\n\n    while door <= 100 do\n        doors[door - 1] = !doors[door - 1];\n        door = door + pass;\n    od\nod\n\nlet open_doors = (1::100) |> filter(door => doors[door - 1]);\n\nwrite_line(\"open doors: {$open_doors}\");\n",
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nlet doors = (1::100) |> map(_ => false) |> collect_list()\n\nfor pass in 1::100 do\n    let door mut = pass\n\n    while door <= 100 do\n        doors[door - 1] = !doors[door - 1]\n        door = door + pass\n    od\nod\n\nlet open_doors = (1::100) |> filter(door => doors[door - 1])\n\nwrite_line(\"open doors: {$open_doors}\");",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nlet doors = (1::100) |> map(_ => false) |> collect_list()\n\nfor pass in 1::100 do\n    let door mut = pass\n\n    while door <= 100 do\n        doors[door - 1] = !doors[door - 1]\n        door = door + pass\n    od\nod\n\nlet open_doors = (1::100) |> filter(door => doors[door - 1])\n\nwrite_line(\"open doors: {$open_doors}\");\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

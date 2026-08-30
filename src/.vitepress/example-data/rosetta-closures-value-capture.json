@@ -1,8 +1,8 @@
 {
   "name": "rosetta-closures-value-capture",
   "snippet": false,
-  "code": "use IO.Std.write_line;\nuse Collections.LIST;\n\nlet squares = LIST[() -> int]();\n\nfor i in 0..10 do\n    squares.add(() => i * i);\nod\n\nwrite_line(\"{squares[3]()}\");",
-  "fullSource": "use IO.Std.write_line;\nuse Collections.LIST;\n\nlet squares = LIST[() -> int]();\n\nfor i in 0..10 do\n    squares.add(() => i * i);\nod\n\nwrite_line(\"{squares[3]()}\");\n",
+  "code": "use IO.Std.write_line\nuse Collections.LIST\n\nlet squares = LIST[() -> int]()\n\nfor i in 0..10 do\n    squares.add(() => i * i)\nod\n\nwrite_line(\"{squares[3]()}\");",
+  "fullSource": "use IO.Std.write_line\nuse Collections.LIST\n\nlet squares = LIST[() -> int]()\n\nfor i in 0..10 do\n    squares.add(() => i * i)\nod\n\nwrite_line(\"{squares[3]()}\");\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

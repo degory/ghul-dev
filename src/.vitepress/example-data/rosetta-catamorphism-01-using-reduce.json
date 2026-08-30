@@ -1,8 +1,8 @@
 {
   "name": "rosetta-catamorphism-01-using-reduce",
   "snippet": false,
-  "code": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nlet numbers = [1, 2, 3, 4, 5];\n\nlet largest =\n    (left: int, right: int) => if left > right then left else right fi;\n\nlet sum = numbers |> reduce(0, (total, value) => total + value);\nlet product = numbers |> reduce(1, (total, value) => total * value);\n\nwrite_line(\"sum:     {sum}\");\nwrite_line(\"product: {product}\");\nwrite_line(\"largest: {numbers |> reduce(numbers[0], largest)}\");",
-  "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nlet numbers = [1, 2, 3, 4, 5];\n\nlet largest =\n    (left: int, right: int) => if left > right then left else right fi;\n\nlet sum = numbers |> reduce(0, (total, value) => total + value);\nlet product = numbers |> reduce(1, (total, value) => total * value);\n\nwrite_line(\"sum:     {sum}\");\nwrite_line(\"product: {product}\");\nwrite_line(\"largest: {numbers |> reduce(numbers[0], largest)}\");\n",
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nlet numbers = [1, 2, 3, 4, 5]\n\nlet largest =\n    (left: int, right: int) => if left > right then left else right fi\n\nlet sum = numbers |> reduce(0, (total, value) => total + value)\nlet product = numbers |> reduce(1, (total, value) => total * value)\n\nwrite_line(\"sum:     {sum}\")\nwrite_line(\"product: {product}\")\nwrite_line(\"largest: {numbers |> reduce(numbers[0], largest)}\");",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nlet numbers = [1, 2, 3, 4, 5]\n\nlet largest =\n    (left: int, right: int) => if left > right then left else right fi\n\nlet sum = numbers |> reduce(0, (total, value) => total + value)\nlet product = numbers |> reduce(1, (total, value) => total * value)\n\nwrite_line(\"sum:     {sum}\")\nwrite_line(\"product: {product}\")\nwrite_line(\"largest: {numbers |> reduce(numbers[0], largest)}\");\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

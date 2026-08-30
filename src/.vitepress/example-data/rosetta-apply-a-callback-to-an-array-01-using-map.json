@@ -1,8 +1,8 @@
 {
   "name": "rosetta-apply-a-callback-to-an-array-01-using-map",
   "snippet": false,
-  "code": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nwrite_line(\"{$([1, 2, 3, 4, 5] |> map(value => value * value))}\");",
-  "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nwrite_line(\"{$([1, 2, 3, 4, 5] |> map(value => value * value))}\");\n",
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nwrite_line(\"{$([1, 2, 3, 4, 5] |> map(value => value * value))}\");",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nwrite_line(\"{$([1, 2, 3, 4, 5] |> map(value => value * value))}\");\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

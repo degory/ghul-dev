@@ -1,8 +1,8 @@
 {
   "name": "rosetta-fizzbuzz",
   "snippet": false,
-  "code": "use IO.Std.write_line;\n\nfor i in 1::100 do\n    write_line(\n        if i % 15 == 0 then\n            \"FizzBuzz\"\n        elif i % 3 == 0 then\n            \"Fizz\"\n        elif i % 5 == 0 then\n            \"Buzz\"\n        else\n            \"{i}\"\n        fi\n    );\nod",
-  "fullSource": "use IO.Std.write_line;\n\nfor i in 1::100 do\n    write_line(\n        if i % 15 == 0 then\n            \"FizzBuzz\"\n        elif i % 3 == 0 then\n            \"Fizz\"\n        elif i % 5 == 0 then\n            \"Buzz\"\n        else\n            \"{i}\"\n        fi\n    );\nod\n",
+  "code": "use IO.Std.write_line\n\nfor i in 1::100 do\n    write_line(\n        if i % 15 == 0 then\n            \"FizzBuzz\"\n        elif i % 3 == 0 then\n            \"Fizz\"\n        elif i % 5 == 0 then\n            \"Buzz\"\n        else\n            \"{i}\"\n        fi\n    )\nod",
+  "fullSource": "use IO.Std.write_line\n\nfor i in 1::100 do\n    write_line(\n        if i % 15 == 0 then\n            \"FizzBuzz\"\n        elif i % 3 == 0 then\n            \"Fizz\"\n        elif i % 5 == 0 then\n            \"Buzz\"\n        else\n            \"{i}\"\n        fi\n    )\nod\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

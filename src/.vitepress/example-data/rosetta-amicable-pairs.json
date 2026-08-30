@@ -1,8 +1,8 @@
 {
   "name": "rosetta-amicable-pairs",
   "snippet": false,
-  "code": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nlet limit = 20000;\n\nsum_of_proper_divisors(n: int) -> int =>\n    (1::(n / 2))\n        |> filter(divisor => n % divisor == 0)\n        |> reduce(0, (total, divisor) => total + divisor);\n\n(1::limit)\n    |> map(n => (n, partner = sum_of_proper_divisors(n)))\n    |> filter(((n, partner)) =>\n        partner > n /\\ sum_of_proper_divisors(partner) == n)\n    |> each(((n, partner)) => write_line(\"{n} and {partner}\"));",
-  "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nlet limit = 20000;\n\nsum_of_proper_divisors(n: int) -> int =>\n    (1::(n / 2))\n        |> filter(divisor => n % divisor == 0)\n        |> reduce(0, (total, divisor) => total + divisor);\n\n(1::limit)\n    |> map(n => (n, partner = sum_of_proper_divisors(n)))\n    |> filter(((n, partner)) =>\n        partner > n /\\ sum_of_proper_divisors(partner) == n)\n    |> each(((n, partner)) => write_line(\"{n} and {partner}\"));\n",
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nlet limit = 20000\n\nsum_of_proper_divisors(n: int) -> int =>\n    (1::(n / 2))\n        |> filter(divisor => n % divisor == 0)\n        |> reduce(0, (total, divisor) => total + divisor)\n\n(1::limit)\n    |> map(n => (n, partner = sum_of_proper_divisors(n)))\n    |> filter(((n, partner)) =>\n        partner > n /\\ sum_of_proper_divisors(partner) == n)\n    |> each(((n, partner)) => write_line(\"{n} and {partner}\"));",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nlet limit = 20000\n\nsum_of_proper_divisors(n: int) -> int =>\n    (1::(n / 2))\n        |> filter(divisor => n % divisor == 0)\n        |> reduce(0, (total, divisor) => total + divisor)\n\n(1::limit)\n    |> map(n => (n, partner = sum_of_proper_divisors(n)))\n    |> filter(((n, partner)) =>\n        partner > n /\\ sum_of_proper_divisors(partner) == n)\n    |> each(((n, partner)) => write_line(\"{n} and {partner}\"));\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

@@ -1,8 +1,8 @@
 {
   "name": "rosetta-binary-digits",
   "snippet": false,
-  "code": "use IO.Std.write_line;\n\nbinary(value: int) -> string =>\n    if value < 2 then \"{value}\" else \"{binary(value / 2)}{value % 2}\" fi;\n\nfor value in [5, 50, 9000] do\n    write_line(binary(value));\nod",
-  "fullSource": "use IO.Std.write_line;\n\nbinary(value: int) -> string =>\n    if value < 2 then \"{value}\" else \"{binary(value / 2)}{value % 2}\" fi;\n\nfor value in [5, 50, 9000] do\n    write_line(binary(value));\nod\n",
+  "code": "use IO.Std.write_line\n\nbinary(value: int) -> string =>\n    if value < 2 then \"{value}\" else \"{binary(value / 2)}{value % 2}\" fi\n\nfor value in [5, 50, 9000] do\n    write_line(binary(value))\nod",
+  "fullSource": "use IO.Std.write_line\n\nbinary(value: int) -> string =>\n    if value < 2 then \"{value}\" else \"{binary(value / 2)}{value % 2}\" fi\n\nfor value in [5, 50, 9000] do\n    write_line(binary(value))\nod\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

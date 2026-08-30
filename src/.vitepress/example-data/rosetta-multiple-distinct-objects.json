@@ -1,8 +1,8 @@
 {
   "name": "rosetta-multiple-distinct-objects",
   "snippet": false,
-  "code": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nclass BOX(value: int public);\n\nlet n = 5;\n\nlet distinct = (0..n) |> map(_ => BOX(0)) |> collect_list();\n\ndistinct[0].value = 42;\n\nwrite_line(\n    \"distinct: {distinct |> map(box => \"{box.value}\") |> join(\" \")}\");\n\nlet shared = BOX(0);\nlet same = (0..n) |> map(_ => shared) |> collect_list();\n\nsame[0].value = 42;\n\nwrite_line(\n    \"shared:   {same |> map(box => \"{box.value}\") |> join(\" \")}\");",
-  "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nclass BOX(value: int public);\n\nlet n = 5;\n\nlet distinct = (0..n) |> map(_ => BOX(0)) |> collect_list();\n\ndistinct[0].value = 42;\n\nwrite_line(\n    \"distinct: {distinct |> map(box => \"{box.value}\") |> join(\" \")}\");\n\nlet shared = BOX(0);\nlet same = (0..n) |> map(_ => shared) |> collect_list();\n\nsame[0].value = 42;\n\nwrite_line(\n    \"shared:   {same |> map(box => \"{box.value}\") |> join(\" \")}\");\n",
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nclass BOX(value: int public)\n\nlet n = 5\n\nlet distinct = (0..n) |> map(_ => BOX(0)) |> collect_list()\n\ndistinct[0].value = 42\n\nwrite_line(\n    \"distinct: {distinct |> map(box => \"{box.value}\") |> join(\" \")}\")\n\nlet shared = BOX(0)\nlet same = (0..n) |> map(_ => shared) |> collect_list()\n\nsame[0].value = 42\n\nwrite_line(\n    \"shared:   {same |> map(box => \"{box.value}\") |> join(\" \")}\");",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nclass BOX(value: int public)\n\nlet n = 5\n\nlet distinct = (0..n) |> map(_ => BOX(0)) |> collect_list()\n\ndistinct[0].value = 42\n\nwrite_line(\n    \"distinct: {distinct |> map(box => \"{box.value}\") |> join(\" \")}\")\n\nlet shared = BOX(0)\nlet same = (0..n) |> map(_ => shared) |> collect_list()\n\nsame[0].value = 42\n\nwrite_line(\n    \"shared:   {same |> map(box => \"{box.value}\") |> join(\" \")}\");\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

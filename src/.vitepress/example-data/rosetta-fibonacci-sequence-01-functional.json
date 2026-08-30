@@ -1,8 +1,8 @@
 {
   "name": "rosetta-fibonacci-sequence-01-functional",
   "snippet": false,
-  "code": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nlet fibonacci_sequence = stream(\n    (0, 1),\n    ((previous, current)) =>\n        previous || (current, previous + current)\n);\n\nlet fib = n => fibonacci_sequence |> skip(n) |> first();\n\nfibonacci_sequence\n    |> take(10)\n    |> index()\n    |> each(((position, value)) =>\n        write_line(\"fib({position}) = {value}\"));\n\nwrite_line(\"fib(30) = {fib(30)}\");",
-  "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nlet fibonacci_sequence = stream(\n    (0, 1),\n    ((previous, current)) =>\n        previous || (current, previous + current)\n);\n\nlet fib = n => fibonacci_sequence |> skip(n) |> first();\n\nfibonacci_sequence\n    |> take(10)\n    |> index()\n    |> each(((position, value)) =>\n        write_line(\"fib({position}) = {value}\"));\n\nwrite_line(\"fib(30) = {fib(30)}\");\n",
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nlet fibonacci_sequence = stream(\n    (0, 1),\n    ((previous, current)) =>\n        previous || (current, previous + current)\n)\n\nlet fib = n => fibonacci_sequence |> skip(n) |> first()\n\nfibonacci_sequence\n    |> take(10)\n    |> index()\n    |> each(((position, value)) =>\n        write_line(\"fib({position}) = {value}\"))\n\nwrite_line(\"fib(30) = {fib(30)}\");",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nlet fibonacci_sequence = stream(\n    (0, 1),\n    ((previous, current)) =>\n        previous || (current, previous + current)\n)\n\nlet fib = n => fibonacci_sequence |> skip(n) |> first()\n\nfibonacci_sequence\n    |> take(10)\n    |> index()\n    |> each(((position, value)) =>\n        write_line(\"fib({position}) = {value}\"))\n\nwrite_line(\"fib(30) = {fib(30)}\");\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

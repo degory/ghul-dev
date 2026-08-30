@@ -1,8 +1,8 @@
 {
   "name": "rosetta-fibonacci-sequence-02-imperative",
   "snippet": false,
-  "code": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nfibonacci() -> Pipe[int] is\n    let previous mut = 0;\n    let current mut = 1;\n    do\n        yield previous;\n\n        (previous, current) = (current, previous + current);\n    od\nsi\n\nlet fib = n => fibonacci() |> skip(n) |> first();\n\nfor (position, value) in fibonacci() |> take(10) |> index() do\n    write_line(\"fib({position}) = {value}\");\nod\n\nwrite_line(\"fib(30) = {fib(30)}\");",
-  "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nfibonacci() -> Pipe[int] is\n    let previous mut = 0;\n    let current mut = 1;\n    do\n        yield previous;\n\n        (previous, current) = (current, previous + current);\n    od\nsi\n\nlet fib = n => fibonacci() |> skip(n) |> first();\n\nfor (position, value) in fibonacci() |> take(10) |> index() do\n    write_line(\"fib({position}) = {value}\");\nod\n\nwrite_line(\"fib(30) = {fib(30)}\");\n",
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nfibonacci() -> Pipe[int] is\n    let previous mut = 0\n    let current mut = 1\n    do\n        yield previous\n\n        (previous, current) = (current, previous + current)\n    od\nsi\n\nlet fib = n => fibonacci() |> skip(n) |> first()\n\nfor (position, value) in fibonacci() |> take(10) |> index() do\n    write_line(\"fib({position}) = {value}\")\nod\n\nwrite_line(\"fib(30) = {fib(30)}\");",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nfibonacci() -> Pipe[int] is\n    let previous mut = 0\n    let current mut = 1\n    do\n        yield previous\n\n        (previous, current) = (current, previous + current)\n    od\nsi\n\nlet fib = n => fibonacci() |> skip(n) |> first()\n\nfor (position, value) in fibonacci() |> take(10) |> index() do\n    write_line(\"fib({position}) = {value}\")\nod\n\nwrite_line(\"fib(30) = {fib(30)}\");\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

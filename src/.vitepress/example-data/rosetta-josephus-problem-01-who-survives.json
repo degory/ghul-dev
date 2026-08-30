@@ -1,8 +1,8 @@
 {
   "name": "rosetta-josephus-problem-01-who-survives",
   "snippet": false,
-  "code": "use IO.Std.write_line;\n\nsurvivor(n: int, k: int) -> int =>\n    if n == 1 then 0 else (survivor(n - 1, k) + k) % n fi;\n\nwrite_line(\n    \"41 prisoners, every 3rd killed: prisoner {survivor(41, 3)} survives\");\n\nwrite_line(\n    \"5 prisoners, every 2nd killed:  prisoner {survivor(5, 2)} survives\");",
-  "fullSource": "use IO.Std.write_line;\n\nsurvivor(n: int, k: int) -> int =>\n    if n == 1 then 0 else (survivor(n - 1, k) + k) % n fi;\n\nwrite_line(\n    \"41 prisoners, every 3rd killed: prisoner {survivor(41, 3)} survives\");\n\nwrite_line(\n    \"5 prisoners, every 2nd killed:  prisoner {survivor(5, 2)} survives\");\n",
+  "code": "use IO.Std.write_line\n\nsurvivor(n: int, k: int) -> int =>\n    if n == 1 then 0 else (survivor(n - 1, k) + k) % n fi\n\nwrite_line(\n    \"41 prisoners, every 3rd killed: prisoner {survivor(41, 3)} survives\")\n\nwrite_line(\n    \"5 prisoners, every 2nd killed:  prisoner {survivor(5, 2)} survives\");",
+  "fullSource": "use IO.Std.write_line\n\nsurvivor(n: int, k: int) -> int =>\n    if n == 1 then 0 else (survivor(n - 1, k) + k) % n fi\n\nwrite_line(\n    \"41 prisoners, every 3rd killed: prisoner {survivor(41, 3)} survives\")\n\nwrite_line(\n    \"5 prisoners, every 2nd killed:  prisoner {survivor(5, 2)} survives\");\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

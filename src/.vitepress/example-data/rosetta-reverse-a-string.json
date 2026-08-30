@@ -1,8 +1,8 @@
 {
   "name": "rosetta-reverse-a-string",
   "snippet": false,
-  "code": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nreverse(text: string) -> string =>\n    text |> reduce(\"\", (reversed, character) => \"{character}{reversed}\");\n\nwrite_line(reverse(\"asdf\"));\nwrite_line(reverse(\"Hello, World!\"));",
-  "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nreverse(text: string) -> string =>\n    text |> reduce(\"\", (reversed, character) => \"{character}{reversed}\");\n\nwrite_line(reverse(\"asdf\"));\nwrite_line(reverse(\"Hello, World!\"));\n",
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nreverse(text: string) -> string =>\n    text |> reduce(\"\", (reversed, character) => \"{character}{reversed}\")\n\nwrite_line(reverse(\"asdf\"))\nwrite_line(reverse(\"Hello, World!\"));",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nreverse(text: string) -> string =>\n    text |> reduce(\"\", (reversed, character) => \"{character}{reversed}\")\n\nwrite_line(reverse(\"asdf\"))\nwrite_line(reverse(\"Hello, World!\"));\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

@@ -1,8 +1,8 @@
 {
   "name": "rosetta-ackermann-function",
   "snippet": false,
-  "code": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nackermann(m: int, n: int) -> int =>\n    if m == 0 then\n        n + 1\n    elif n == 0 then\n        ackermann(m - 1, 1)\n    else\n        ackermann(m - 1, ackermann(m, n - 1))\n    fi;\n\nfor m in 0::3 do\n    let row = (0::5) |> map(n => \"{ackermann(m, n)}\") |> join(\" \");\n\n    write_line(\"A({m}, n) = {row}\");\nod",
-  "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nackermann(m: int, n: int) -> int =>\n    if m == 0 then\n        n + 1\n    elif n == 0 then\n        ackermann(m - 1, 1)\n    else\n        ackermann(m - 1, ackermann(m, n - 1))\n    fi;\n\nfor m in 0::3 do\n    let row = (0::5) |> map(n => \"{ackermann(m, n)}\") |> join(\" \");\n\n    write_line(\"A({m}, n) = {row}\");\nod\n",
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nackermann(m: int, n: int) -> int =>\n    if m == 0 then\n        n + 1\n    elif n == 0 then\n        ackermann(m - 1, 1)\n    else\n        ackermann(m - 1, ackermann(m, n - 1))\n    fi\n\nfor m in 0::3 do\n    let row = (0::5) |> map(n => \"{ackermann(m, n)}\") |> join(\" \")\n\n    write_line(\"A({m}, n) = {row}\")\nod",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nackermann(m: int, n: int) -> int =>\n    if m == 0 then\n        n + 1\n    elif n == 0 then\n        ackermann(m - 1, 1)\n    else\n        ackermann(m - 1, ackermann(m, n - 1))\n    fi\n\nfor m in 0::3 do\n    let row = (0::5) |> map(n => \"{ackermann(m, n)}\") |> join(\" \")\n\n    write_line(\"A({m}, n) = {row}\")\nod\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

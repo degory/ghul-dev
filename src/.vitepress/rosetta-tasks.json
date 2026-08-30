@@ -40,6 +40,12 @@
         "parts": []
       },
       {
+        "slug": "quine",
+        "title": "Quine",
+        "url": "https://rosettacode.org/wiki/Quine",
+        "parts": []
+      },
+      {
         "slug": "reverse-a-string",
         "title": "Reverse a string",
         "url": "https://rosettacode.org/wiki/Reverse_a_string",
@@ -145,7 +151,10 @@
         "slug": "y-combinator",
         "title": "Y combinator",
         "url": "https://rosettacode.org/wiki/Y_combinator",
-        "parts": []
+        "parts": [
+          "The y combinator",
+          "Using rec"
+        ]
       }
     ]
   },
@@ -232,6 +241,24 @@
         "parts": []
       },
       {
+        "slug": "balanced-brackets",
+        "title": "Balanced brackets",
+        "url": "https://rosettacode.org/wiki/Balanced_brackets",
+        "parts": []
+      },
+      {
+        "slug": "calkin-wilf-sequence",
+        "title": "Calkin-Wilf sequence",
+        "url": "https://rosettacode.org/wiki/Calkin-Wilf_sequence",
+        "parts": []
+      },
+      {
+        "slug": "ekg-sequence-convergence",
+        "title": "EKG sequence convergence",
+        "url": "https://rosettacode.org/wiki/EKG_sequence_convergence",
+        "parts": []
+      },
+      {
         "slug": "fibonacci-sequence",
         "title": "Fibonacci sequence",
         "url": "https://rosettacode.org/wiki/Fibonacci_sequence",
@@ -241,9 +268,21 @@
         ]
       },
       {
+        "slug": "fusc-sequence",
+        "title": "Fusc sequence",
+        "url": "https://rosettacode.org/wiki/Fusc_sequence",
+        "parts": []
+      },
+      {
         "slug": "hailstone-sequence",
         "title": "Hailstone sequence",
         "url": "https://rosettacode.org/wiki/Hailstone_sequence",
+        "parts": []
+      },
+      {
+        "slug": "hamming-numbers",
+        "title": "Hamming numbers",
+        "url": "https://rosettacode.org/wiki/Hamming_numbers",
         "parts": []
       },
       {
@@ -274,6 +313,12 @@
         "slug": "same-fringe",
         "title": "Same fringe",
         "url": "https://rosettacode.org/wiki/Same_fringe",
+        "parts": []
+      },
+      {
+        "slug": "stern-brocot-sequence",
+        "title": "Stern-Brocot sequence",
+        "url": "https://rosettacode.org/wiki/Stern-Brocot_sequence",
         "parts": []
       },
       {
@@ -337,9 +382,21 @@
         "parts": []
       },
       {
+        "slug": "benfords-law",
+        "title": "Benford's law",
+        "url": "https://rosettacode.org/wiki/Benford's_law",
+        "parts": []
+      },
+      {
         "slug": "descending-primes",
         "title": "Descending primes",
         "url": "https://rosettacode.org/wiki/Descending_primes",
+        "parts": []
+      },
+      {
+        "slug": "gapful-numbers",
+        "title": "Gapful numbers",
+        "url": "https://rosettacode.org/wiki/Gapful_numbers",
         "parts": []
       },
       {
@@ -361,6 +418,30 @@
         "parts": []
       },
       {
+        "slug": "iterated-digits-squaring",
+        "title": "Iterated digits squaring",
+        "url": "https://rosettacode.org/wiki/Iterated_digits_squaring",
+        "parts": []
+      },
+      {
+        "slug": "juggler-sequence",
+        "title": "Juggler sequence",
+        "url": "https://rosettacode.org/wiki/Juggler_sequence",
+        "parts": []
+      },
+      {
+        "slug": "kaprekar-numbers",
+        "title": "Kaprekar numbers",
+        "url": "https://rosettacode.org/wiki/Kaprekar_numbers",
+        "parts": []
+      },
+      {
+        "slug": "ludic-numbers",
+        "title": "Ludic numbers",
+        "url": "https://rosettacode.org/wiki/Ludic_numbers",
+        "parts": []
+      },
+      {
         "slug": "map-range",
         "title": "Map range",
         "url": "https://rosettacode.org/wiki/Map_range",
@@ -379,9 +460,27 @@
         "parts": []
       },
       {
+        "slug": "ormiston-pairs",
+        "title": "Ormiston pairs",
+        "url": "https://rosettacode.org/wiki/Ormiston_pairs",
+        "parts": []
+      },
+      {
+        "slug": "pernicious-numbers",
+        "title": "Pernicious numbers",
+        "url": "https://rosettacode.org/wiki/Pernicious_numbers",
+        "parts": []
+      },
+      {
         "slug": "population-count",
         "title": "Population count",
         "url": "https://rosettacode.org/wiki/Population_count",
+        "parts": []
+      },
+      {
+        "slug": "radical-of-an-integer",
+        "title": "Radical of an integer",
+        "url": "https://rosettacode.org/wiki/Radical_of_an_integer",
         "parts": []
       },
       {
@@ -412,6 +511,18 @@
         "slug": "taxicab-numbers",
         "title": "Taxicab numbers",
         "url": "https://rosettacode.org/wiki/Taxicab_numbers",
+        "parts": []
+      },
+      {
+        "slug": "truncatable-primes",
+        "title": "Truncatable primes",
+        "url": "https://rosettacode.org/wiki/Truncatable_primes",
+        "parts": []
+      },
+      {
+        "slug": "undulating-numbers",
+        "title": "Undulating numbers",
+        "url": "https://rosettacode.org/wiki/Undulating_numbers",
         "parts": []
       },
       {
@@ -487,6 +598,12 @@
     "blurb": "Sorting, searching, and working over whole collections.",
     "tasks": [
       {
+        "slug": "damm-algorithm",
+        "title": "Damm algorithm",
+        "url": "https://rosettacode.org/wiki/Damm_algorithm",
+        "parts": []
+      },
+      {
         "slug": "dinesmans-multiple-dwelling-problem",
         "title": "Dinesman's multiple-dwelling problem",
         "url": "https://rosettacode.org/wiki/Dinesman's_multiple-dwelling_problem",
@@ -512,6 +629,12 @@
           "Who survives",
           "The killing sequence"
         ]
+      },
+      {
+        "slug": "non-continuous-subsequences",
+        "title": "Non-continuous subsequences",
+        "url": "https://rosettacode.org/wiki/Non-continuous_subsequences",
+        "parts": []
       },
       {
         "slug": "power-set",

@@ -1,8 +1,8 @@
 {
   "name": "rosetta-anti-primes",
   "snippet": false,
-  "code": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\ndivisor_count(n: int) -> int =>\n    (1::n) |> filter(divisor => n % divisor == 0) |> count();\n\nanti_primes() -> Pipe[int] is\n    let most mut = 0;\n    let n mut = 1;\n\n    do\n        let divisors = divisor_count(n);\n\n        if divisors > most then\n            most = divisors;\n\n            yield n;\n        fi\n\n        n = n + 1;\n    od\nsi\n\nwrite_line(anti_primes() |> take(20) |> join(\" \"));",
-  "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\ndivisor_count(n: int) -> int =>\n    (1::n) |> filter(divisor => n % divisor == 0) |> count();\n\nanti_primes() -> Pipe[int] is\n    let most mut = 0;\n    let n mut = 1;\n\n    do\n        let divisors = divisor_count(n);\n\n        if divisors > most then\n            most = divisors;\n\n            yield n;\n        fi\n\n        n = n + 1;\n    od\nsi\n\nwrite_line(anti_primes() |> take(20) |> join(\" \"));\n",
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\ndivisor_count(n: int) -> int =>\n    (1::n) |> filter(divisor => n % divisor == 0) |> count()\n\nanti_primes() -> Pipe[int] is\n    let most mut = 0\n    let n mut = 1\n\n    do\n        let divisors = divisor_count(n)\n\n        if divisors > most then\n            most = divisors\n\n            yield n\n        fi\n\n        n = n + 1\n    od\nsi\n\nwrite_line(anti_primes() |> take(20) |> join(\" \"));",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\ndivisor_count(n: int) -> int =>\n    (1::n) |> filter(divisor => n % divisor == 0) |> count()\n\nanti_primes() -> Pipe[int] is\n    let most mut = 0\n    let n mut = 1\n\n    do\n        let divisors = divisor_count(n)\n\n        if divisors > most then\n            most = divisors\n\n            yield n\n        fi\n\n        n = n + 1\n    od\nsi\n\nwrite_line(anti_primes() |> take(20) |> join(\" \"));\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
