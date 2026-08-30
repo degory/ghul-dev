@@ -1,12 +1,12 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 // pure: square assigns no field, property, or array element
-square(x: int) -> int pure => x * x;
+square(x: int) -> int pure => x * x
 
 // a pure function type: this slot accepts only pure functions
-apply(f: (int) -> int pure, x: int) -> int => f(x);
+apply(f: (int) -> int pure, x: int) -> int => f(x)
 
-write_line("apply(square, 5): {apply(square, 5)}");
-write_line("apply(anonymous, 5): {apply(x => x + 1, 5)}");
+write_line("apply(square, 5): {apply(square, 5)}")
+write_line("apply(anonymous, 5): {apply(x => x + 1, 5)}")
 // <<<

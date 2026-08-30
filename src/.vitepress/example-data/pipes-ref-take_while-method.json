@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-take_while-method",
   "snippet": false,
-  "code": "take_while(predicate: (T) -> bool pure) -> Pipe[T] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    take_while(predicate: (T) -> bool pure) -> Pipe[T] pure;\nsi\n\nentry() is si\n",
+  "code": "take_while(predicate: (T) -> bool pure) -> Pipe[T] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\n\ntrait Pipe[T] is\n    take_while(predicate: (T) -> bool pure) -> Pipe[T] pure\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

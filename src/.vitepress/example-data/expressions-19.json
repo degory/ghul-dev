@@ -1,8 +1,8 @@
 {
   "name": "expressions-19",
   "snippet": false,
-  "code": "let result = sum(10, 5);",
-  "fullSource": "sum(x: int, y: int) -> int => x + y;\n\nlet result = sum(10, 5);\n",
+  "code": "let result = sum(10, 5)",
+  "fullSource": "sum(x: int, y: int) -> int => x + y\n\nlet result = sum(10, 5)\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

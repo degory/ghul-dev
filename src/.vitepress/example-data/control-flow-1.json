@@ -1,8 +1,8 @@
 {
   "name": "control-flow-1",
   "snippet": false,
-  "code": "assert true else \"all bets are off\"; // does not throw\n\nlet list = [1, 2, 3, 4, 5];\n\nassert 3 < list.count\n    else System.ArgumentOutOfRangeException(\"list\");\n\nwrite_line(\"ok: {list.count} elements\");",
-  "fullSource": "use IO.Std.write_line;\n\nassert true else \"all bets are off\"; // does not throw\n\nlet list = [1, 2, 3, 4, 5];\n\nassert 3 < list.count\n    else System.ArgumentOutOfRangeException(\"list\");\n\nwrite_line(\"ok: {list.count} elements\");\n",
+  "code": "assert true else \"all bets are off\" // does not throw\n\nlet list = [1, 2, 3, 4, 5]\n\nassert 3 < list.count\n    else System.ArgumentOutOfRangeException(\"list\")\n\nwrite_line(\"ok: {list.count} elements\")",
+  "fullSource": "use IO.Std.write_line\n\nassert true else \"all bets are off\" // does not throw\n\nlet list = [1, 2, 3, 4, 5]\n\nassert 3 < list.count\n    else System.ArgumentOutOfRangeException(\"list\")\n\nwrite_line(\"ok: {list.count} elements\")\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

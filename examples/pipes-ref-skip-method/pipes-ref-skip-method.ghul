@@ -1,12 +1,12 @@
-use Collections.Iterable;
-use Collections.LIST;
-use Collections.MAP;
-use Collections.SET;
-use Ghul.Pipes.INDEXED_VALUE;
+use Collections.Iterable
+use Collections.LIST
+use Collections.MAP
+use Collections.SET
+use Ghul.Pipes.INDEXED_VALUE
 
 trait Pipe[T] is
 // >>>
-    skip(count: int) -> Pipe[T] pure;
+    skip(count: int) -> Pipe[T] pure
 // <<<
 si
 

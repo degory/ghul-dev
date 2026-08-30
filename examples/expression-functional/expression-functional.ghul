@@ -1,15 +1,15 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // an expression is one of three variants
 union Expr is
-    NUM(value: int);
-    ADD(left: Expr, right: Expr);
-    MUL(left: Expr, right: Expr);
+    NUM(value: int)
+    ADD(left: Expr, right: Expr)
+    MUL(left: Expr, right: Expr)
 si
 
-use Expr.NUM;
-use Expr.ADD;
-use Expr.MUL;
+use Expr.NUM
+use Expr.ADD
+use Expr.MUL
 
 // evaluate an expression, recursing into the children
 eval(e: Expr) -> int =>
@@ -17,7 +17,7 @@ eval(e: Expr) -> int =>
     when n: NUM then n.value
     when a: ADD then eval(a.left) + eval(a.right)
     when m: MUL then eval(m.left) * eval(m.right)
-    esac;
+    esac
 
 // render an expression, recursing into the children
 render(e: Expr) -> string =>
@@ -25,9 +25,9 @@ render(e: Expr) -> string =>
     when n: NUM then "{n.value}"
     when a: ADD then "({render(a.left)} + {render(a.right)})"
     when m: MUL then "({render(m.left)} * {render(m.right)})"
-    esac;
+    esac
 
 // (2 * (3 + 4)) = 14
-let expression = MUL(NUM(2), ADD(NUM(3), NUM(4)));
+let expression = MUL(NUM(2), ADD(NUM(3), NUM(4)))
 
-write_line("{render(expression)} = {eval(expression)}");
+write_line("{render(expression)} = {eval(expression)}")

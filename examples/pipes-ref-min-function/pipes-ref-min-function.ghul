@@ -1,14 +1,14 @@
-use Collections.Iterable;
-use Collections.LIST;
-use Collections.MAP;
-use Collections.SET;
-use Ghul.Pipes.INDEXED_VALUE;
-use Ghul.Pipes.Pipe;
+use Collections.Iterable
+use Collections.LIST
+use Collections.MAP
+use Collections.SET
+use Ghul.Pipes.INDEXED_VALUE
+use Ghul.Pipes.Pipe
 
 // >>>
 min[T: Ghul.Comparable[T]](
     values: Iterable[T]
-) -> Ghul.MAYBE[T] pure;
+) -> Ghul.MAYBE[T] pure
 // <<<
 
 entry() is si

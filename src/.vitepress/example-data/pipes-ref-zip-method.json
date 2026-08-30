@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-zip-method",
   "snippet": false,
-  "code": "zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure;\n\nzip[U,TOut](\n    other: Iterable[U],\n    mapper: (T,U) -> TOut pure\n) -> Pipe[TOut] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure;\n\n    zip[U,TOut](\n        other: Iterable[U],\n        mapper: (T,U) -> TOut pure\n    ) -> Pipe[TOut] pure;\nsi\n\nentry() is si\n",
+  "code": "zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure\n\nzip[U,TOut](\n    other: Iterable[U],\n    mapper: (T,U) -> TOut pure\n) -> Pipe[TOut] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\n\ntrait Pipe[T] is\n    zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure\n\n    zip[U,TOut](\n        other: Iterable[U],\n        mapper: (T,U) -> TOut pure\n    ) -> Pipe[TOut] pure\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

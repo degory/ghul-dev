@@ -1,9 +1,9 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 union Result[T, E] is
-    OK(value: T) default;
-    ERROR(error: E);
+    OK(value: T) default
+    ERROR(error: E)
 si
 
 divide(a: int, b: int) -> Result[int, string] =>
@@ -11,16 +11,16 @@ divide(a: int, b: int) -> Result[int, string] =>
         Result.ERROR("division by zero")
     else
         Result.OK(a / b)
-    fi;
+    fi
 
-let good = divide(10, 2);
-let bad = divide(10, 0);
+let good = divide(10, 2)
+let bad = divide(10, 0)
 
 if good? then
-    write_line("10 / 2 = {good!}");
+    write_line("10 / 2 = {good!}")
 fi
 
 if !bad? then
-    write_line("10 / 0 failed");
+    write_line("10 / 0 failed")
 fi
 // <<<

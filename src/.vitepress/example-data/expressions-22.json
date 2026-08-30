@@ -1,8 +1,8 @@
 {
   "name": "expressions-22",
   "snippet": false,
-  "code": "let point = POINT(10, 20);",
-  "fullSource": "class POINT(x: int, y: int);\n\nlet point = POINT(10, 20);\n",
+  "code": "let point = POINT(10, 20)",
+  "fullSource": "class POINT(x: int, y: int)\n\nlet point = POINT(10, 20)\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

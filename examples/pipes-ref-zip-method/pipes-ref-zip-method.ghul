@@ -1,17 +1,17 @@
-use Collections.Iterable;
-use Collections.LIST;
-use Collections.MAP;
-use Collections.SET;
-use Ghul.Pipes.INDEXED_VALUE;
+use Collections.Iterable
+use Collections.LIST
+use Collections.MAP
+use Collections.SET
+use Ghul.Pipes.INDEXED_VALUE
 
 trait Pipe[T] is
 // >>>
-    zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure;
+    zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure
 
     zip[U,TOut](
         other: Iterable[U],
         mapper: (T,U) -> TOut pure
-    ) -> Pipe[TOut] pure;
+    ) -> Pipe[TOut] pure
 // <<<
 si
 

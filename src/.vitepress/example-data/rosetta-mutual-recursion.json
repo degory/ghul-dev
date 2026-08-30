@@ -1,8 +1,8 @@
 {
   "name": "rosetta-mutual-recursion",
   "snippet": false,
-  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nfemale(n: int) -> int => if n == 0 then 1 else n - male(female(n - 1)) fi\n\nmale(n: int) -> int => if n == 0 then 0 else n - female(male(n - 1)) fi\n\nshow(name: string, function: (int) -> int pure) =>\n    write_line(\"{name} {(0..20) |> map(function) |> join(\" \")}\")\n\nshow(\"F:\", female)\nshow(\"M:\", male);",
-  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nfemale(n: int) -> int => if n == 0 then 1 else n - male(female(n - 1)) fi\n\nmale(n: int) -> int => if n == 0 then 0 else n - female(male(n - 1)) fi\n\nshow(name: string, function: (int) -> int pure) =>\n    write_line(\"{name} {(0..20) |> map(function) |> join(\" \")}\")\n\nshow(\"F:\", female)\nshow(\"M:\", male);\n",
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nfemale(n: int) -> int => if n == 0 then 1 else n - male(female(n - 1)) fi\n\nmale(n: int) -> int => if n == 0 then 0 else n - female(male(n - 1)) fi\n\nshow(name: string, function: (int) -> int pure) =>\n    write_line(\"{name} {(0..20) |> map(function) |> join(\" \")}\")\n\nshow(\"F:\", female)\nshow(\"M:\", male)",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nfemale(n: int) -> int => if n == 0 then 1 else n - male(female(n - 1)) fi\n\nmale(n: int) -> int => if n == 0 then 0 else n - female(male(n - 1)) fi\n\nshow(name: string, function: (int) -> int pure) =>\n    write_line(\"{name} {(0..20) |> map(function) |> join(\" \")}\")\n\nshow(\"F:\", female)\nshow(\"M:\", male)\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-find_map_or_throw-method",
   "snippet": false,
-  "code": "find_map_or_throw[U](\n    mapper: (T) -> Ghul.MAYBE[U] pure\n) -> U pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    find_map_or_throw[U](\n        mapper: (T) -> Ghul.MAYBE[U] pure\n    ) -> U pure;\nsi\n\nentry() is si\n",
+  "code": "find_map_or_throw[U](\n    mapper: (T) -> Ghul.MAYBE[U] pure\n) -> U pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\n\ntrait Pipe[T] is\n    find_map_or_throw[U](\n        mapper: (T) -> Ghul.MAYBE[U] pure\n    ) -> U pure\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

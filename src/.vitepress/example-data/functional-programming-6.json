@@ -1,8 +1,8 @@
 {
   "name": "functional-programming-6",
   "snippet": false,
-  "code": "let numbers = [1, 2, 3, 4, 5];\n\nlet element = numbers[3]; // elements can be read\n\nnumbers[3] = 6;",
-  "fullSource": "// expect: error\nlet numbers = [1, 2, 3, 4, 5];\n\nlet element = numbers[3]; // elements can be read\n\nnumbers[3] = 6;\n",
+  "code": "let numbers = [1, 2, 3, 4, 5]\n\nlet element = numbers[3] // elements can be read\n\nnumbers[3] = 6",
+  "fullSource": "// expect: error\nlet numbers = [1, 2, 3, 4, 5]\n\nlet element = numbers[3] // elements can be read\n\nnumbers[3] = 6\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

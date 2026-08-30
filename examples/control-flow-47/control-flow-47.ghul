@@ -1,18 +1,18 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 side_effect(label: string) -> Tasks.TASK is
-    write_line("side effect: {label}");
+    write_line("side effect: {label}")
 
-    return Tasks.TASK.completed_task;
+    return Tasks.TASK.completed_task
 si
 
 // >>>
 run_side_effects() -> Tasks.TASK is
-    await side_effect("first");
-    await side_effect("second");
+    await side_effect("first")
+    await side_effect("second")
 
-    return;
+    return
 si
 
-run_side_effects().wait();
+run_side_effects().wait()
 // <<<

@@ -1,8 +1,8 @@
 {
   "name": "control-flow-21",
   "snippet": false,
-  "code": "let counter mut = 0;\nwhile counter < 5 do\n    counter = counter + 1;\n    if counter == 3 then\n        continue;\n    fi\n    write_line(counter);\nod",
-  "fullSource": "use IO.Std.write_line;\n\nlet counter mut = 0;\nwhile counter < 5 do\n    counter = counter + 1;\n    if counter == 3 then\n        continue;\n    fi\n    write_line(counter);\nod\n",
+  "code": "let counter mut = 0\nwhile counter < 5 do\n    counter = counter + 1\n    if counter == 3 then\n        continue\n    fi\n    write_line(counter)\nod",
+  "fullSource": "use IO.Std.write_line\n\nlet counter mut = 0\nwhile counter < 5 do\n    counter = counter + 1\n    if counter == 3 then\n        continue\n    fi\n    write_line(counter)\nod\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

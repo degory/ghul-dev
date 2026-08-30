@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-index-method",
   "snippet": false,
-  "code": "index() -> Pipe[INDEXED_VALUE[T]] pure;\n\nindex(index: int) -> Pipe[INDEXED_VALUE[T]] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    index() -> Pipe[INDEXED_VALUE[T]] pure;\n\n    index(index: int) -> Pipe[INDEXED_VALUE[T]] pure;\nsi\n\nentry() is si\n",
+  "code": "index() -> Pipe[INDEXED_VALUE[T]] pure\n\nindex(index: int) -> Pipe[INDEXED_VALUE[T]] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\n\ntrait Pipe[T] is\n    index() -> Pipe[INDEXED_VALUE[T]] pure\n\n    index(index: int) -> Pipe[INDEXED_VALUE[T]] pure\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

@@ -1,14 +1,14 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
-lookup() -> string? => "found";
+lookup() -> string? => "found"
 
-let maybe = lookup();
+let maybe = lookup()
 // >>>
 if maybe? then
-    let narrowed: string = maybe; // narrowed to string here
-    write_line(narrowed);
+    let narrowed: string = maybe // narrowed to string here
+    write_line(narrowed)
 fi
 
-let forced: string = maybe!;            // asserts present, throws if absent
-let safe: string = maybe ?? "fallback"; // falls back when absent
+let forced: string = maybe!            // asserts present, throws if absent
+let safe: string = maybe ?? "fallback" // falls back when absent
 // <<<

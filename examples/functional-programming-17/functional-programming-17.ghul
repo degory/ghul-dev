@@ -1,48 +1,48 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 union Option[T] is
-    SOME(value: T);
-    NONE;
+    SOME(value: T)
+    NONE
 si
 
 union List[T] is
-    NIL;
-    CONS(head: T, tail: List[T]);
+    NIL
+    CONS(head: T, tail: List[T])
 si
 
 union Tree[T] is
-    LEAF(value: T);
-    NODE(left: Tree[T], right: Tree[T]);
+    LEAF(value: T)
+    NODE(left: Tree[T], right: Tree[T])
 si
 
-use Option.SOME;
-use Option.NONE;
-use List.NIL;
-use List.CONS;
-use Tree.LEAF;
-use Tree.NODE;
+use Option.SOME
+use Option.NONE
+use List.NIL
+use List.CONS
+use Tree.LEAF
+use Tree.NODE
 
-test_option();
-test_list();
-test_tree();
+test_option()
+test_list()
+test_tree()
 
 test_option() is
-    let some_int = SOME(42);
-    let none_int = NONE();
+    let some_int = SOME(42)
+    let none_int = NONE()
 
     let stringify_option = o rec =>
         if isa SOME(o) then
             "{o.value}"
         else
             "none"
-        fi;
+        fi
 
-    write_line(stringify_option(some_int));
-    write_line(stringify_option(none_int));
+    write_line(stringify_option(some_int))
+    write_line(stringify_option(none_int))
 si
 
 test_list() is
-    let list = CONS(1, CONS(2, CONS(3, NIL())));
+    let list = CONS(1, CONS(2, CONS(3, NIL())))
 
     let stringify_list = l rec =>
         if isa CONS(l) then
@@ -50,9 +50,9 @@ test_list() is
             "{head}, {rec(tail)}"
         else
             "nil"
-        fi;
+        fi
 
-    write_line(stringify_list(list));
+    write_line(stringify_list(list))
 si
 
 test_tree() is
@@ -65,7 +65,7 @@ test_tree() is
             LEAF(3),
             LEAF(4)
         )
-    );
+    )
 
     let stringify_tree = t rec =>
         if isa NODE(t) then
@@ -73,7 +73,7 @@ test_tree() is
             "({rec(left)}, {rec(right)})"
         else
             "{t.value}"
-        fi;
+        fi
 
-    write_line(stringify_tree(tree));
+    write_line(stringify_tree(tree))
 si

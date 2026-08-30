@@ -1,13 +1,13 @@
 namespace Analysis.Protocol is
-    use System.Exception;
-    use System.Diagnostics.Process;
-    use System.Diagnostics.ProcessStartInfo;
-    use System.Text.StringBuilder;
-    use System.Text.UTF8Encoding;
-    use System.Text.Json.JsonSerializer;
-    use System.Text.Json.JsonSerializerOptions;
+    use System.Exception
+    use System.Diagnostics.Process
+    use System.Diagnostics.ProcessStartInfo
+    use System.Text.StringBuilder
+    use System.Text.UTF8Encoding
+    use System.Text.Json.JsonSerializer
+    use System.Text.Json.JsonSerializerOptions
 
-    use Collections.LIST;
+    use Collections.LIST
 
     // Drives a `dotnet ghul-compiler --analyse` subprocess over the JSON
     // analysis protocol: one JSON object per line, newline-terminated; requests
@@ -18,40 +18,40 @@ namespace Analysis.Protocol is
     // or a run of `-a "..."` flags from a project's `.assemblies.json` for a
     // project-backed example.
     class ANALYSER_PROCESS: Disposable is
-        _process: Process;
-        _stderr_capture: StringBuilder;
-        _options: JsonSerializerOptions;
+        _process: Process
+        _stderr_capture: StringBuilder
+        _options: JsonSerializerOptions
 
         init(working_directory: string, reference_arguments: string) is
-            _options = JsonSerializerOptions();
+            _options = JsonSerializerOptions()
             // Variant constructor args emit as public CLR fields, not
             // properties — System.Text.Json's default is to skip fields.
-            _options.include_fields = true;
+            _options.include_fields = true
 
-            let start_info = ProcessStartInfo();
+            let start_info = ProcessStartInfo()
 
-            start_info.file_name = "dotnet";
-            start_info.arguments = "ghul-compiler --analyse --v3 --test-run {reference_arguments}";
-            start_info.working_directory = working_directory;
+            start_info.file_name = "dotnet"
+            start_info.arguments = "ghul-compiler --analyse --v3 --test-run {reference_arguments}"
+            start_info.working_directory = working_directory
 
-            start_info.use_shell_execute = false;
-            start_info.redirect_standard_input = true;
-            start_info.redirect_standard_output = true;
-            start_info.redirect_standard_error = true;
+            start_info.use_shell_execute = false
+            start_info.redirect_standard_input = true
+            start_info.redirect_standard_output = true
+            start_info.redirect_standard_error = true
 
-            start_info.standard_input_encoding = UTF8Encoding();
-            start_info.standard_output_encoding = UTF8Encoding();
-            start_info.standard_error_encoding = UTF8Encoding();
+            start_info.standard_input_encoding = UTF8Encoding()
+            start_info.standard_output_encoding = UTF8Encoding()
+            start_info.standard_error_encoding = UTF8Encoding()
 
-            let started = Process.start(start_info);
+            let started = Process.start(start_info)
 
             if !started? then
-                throw Exception("failed to start ghul-compiler analyser process");
+                throw Exception("failed to start ghul-compiler analyser process")
             fi
 
-            _process = started;
+            _process = started
 
-            _stderr_capture = StringBuilder();
+            _stderr_capture = StringBuilder()
 
             // Drain stderr in the background so a chatty analyser can't fill
             // its stderr pipe and block.
@@ -59,26 +59,26 @@ namespace Analysis.Protocol is
                 () is
                     try
                         do
-                            let line = _process.standard_error.read_line();
+                            let line = _process.standard_error.read_line()
                             if !line? then
-                                break;
+                                break
                             fi
-                            _stderr_capture.append(line);
-                            _stderr_capture.append('\n');
+                            _stderr_capture.append(line)
+                            _stderr_capture.append('\n')
                         od
                     catch ex: Exception
                     yrt
                 si
-            );
+            )
 
             try
-                let first = read_response();
+                let first = read_response()
                 if !isa Response.LISTEN(first) then
-                    throw Exception("expected listen as first response, got a different variant\nstderr so far:\n{_stderr_capture}");
+                    throw Exception("expected listen as first response, got a different variant\nstderr so far:\n{_stderr_capture}")
                 fi
             catch ex: Exception
-                dispose();
-                throw ex;
+                dispose()
+                throw ex
             yrt
         si
 
@@ -87,92 +87,92 @@ namespace Analysis.Protocol is
         // position isn't cached; that path writes a diagnostics response
         // before the handler's own response.
         read_query_response() -> Response is
-            let response mut = read_response();
+            let response mut = read_response()
 
             if isa Response.DIAGNOSTICS(response) then
-                response = read_response();
+                response = read_response()
             fi
 
-            return response;
+            return response
         si
 
         // Read one JSON line from stdout (a JSON message never contains a raw
         // newline) and deserialize into a Response.
         read_response() -> Response is
-            let buffer = StringBuilder();
+            let buffer = StringBuilder()
 
             do
-                let c = _process.standard_output.read();
+                let c = _process.standard_output.read()
 
                 if c < 0 then
                     throw Exception(
                         "analyser stdout closed before a response line\n"
                         "buffer so far:\n{buffer}\n"
                         "stderr so far:\n{_stderr_capture}"
-                    );
+                    )
                 fi
 
                 if c == 10 then
-                    break;
+                    break
                 fi
 
                 if c != 13 then
-                    buffer.append(cast char(c));
+                    buffer.append(cast char(c))
                 fi
             od
 
-            let response = JsonSerializer.deserialize[Response](buffer.to_string(), _options);
+            let response = JsonSerializer.deserialize[Response](buffer.to_string(), _options)
 
             if !response? then
-                throw Exception("analyser response did not deserialize\nbuffer:\n{buffer}");
+                throw Exception("analyser response did not deserialize\nbuffer:\n{buffer}")
             fi
 
-            return response;
+            return response
         si
 
         write_request(request: Request) is
-            _process.standard_input.write(JsonSerializer.serialize[Request](request, _options));
-            _process.standard_input.write("\n");
-            _process.standard_input.flush();
+            _process.standard_input.write(JsonSerializer.serialize[Request](request, _options))
+            _process.standard_input.write("\n")
+            _process.standard_input.flush()
         si
 
         send_edit(path: string, source: string) is
-            let files = LIST[EDIT_FILE]();
-            files.add(EDIT_FILE(path, source));
-            write_request(Request.EDIT(files));
+            let files = LIST[EDIT_FILE]()
+            files.add(EDIT_FILE(path, source))
+            write_request(Request.EDIT(files))
         si
 
         // Fire-and-forget: no response frame. Declares `path` open so the
         // analyser records editor-only inlay hints for it during the EDIT.
         send_set_open_files(path: string) is
-            let paths = LIST[string]();
-            paths.add(path);
-            write_request(Request.SET_OPEN_FILES(paths));
+            let paths = LIST[string]()
+            paths.add(path)
+            write_request(Request.SET_OPEN_FILES(paths))
         si
 
         send_hover_map(path: string) is
-            write_request(Request.HOVER_MAP(path));
+            write_request(Request.HOVER_MAP(path))
         si
 
         send_semantic_tokens(path: string) is
-            write_request(Request.SEMANTIC_TOKENS(path));
+            write_request(Request.SEMANTIC_TOKENS(path))
         si
 
         send_inlay_hints(path: string) is
-            write_request(Request.INLAY_HINTS(path));
+            write_request(Request.INLAY_HINTS(path))
         si
 
-        stderr_capture: string => _stderr_capture.to_string();
+        stderr_capture: string => _stderr_capture.to_string()
 
         dispose() is
             try
-                _process.standard_input.close();
+                _process.standard_input.close()
             catch ex: Exception
             yrt
 
             if !_process.wait_for_exit(2000) then
                 try
-                    _process.kill();
+                    _process.kill()
                 catch ex: Exception
                 yrt
             fi

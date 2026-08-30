@@ -1,8 +1,8 @@
 {
   "name": "rosetta-greatest-common-divisor",
   "snippet": false,
-  "code": "use IO.Std.write_line\n\ngcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi\n\nwrite_line(\"gcd(48, 18) = {gcd(48, 18)}\")\nwrite_line(\"gcd(1071, 462) = {gcd(1071, 462)}\")\nwrite_line(\"gcd(0, 13) = {gcd(0, 13)}\")\nwrite_line(\"gcd(13, 0) = {gcd(13, 0)}\");",
-  "fullSource": "use IO.Std.write_line\n\ngcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi\n\nwrite_line(\"gcd(48, 18) = {gcd(48, 18)}\")\nwrite_line(\"gcd(1071, 462) = {gcd(1071, 462)}\")\nwrite_line(\"gcd(0, 13) = {gcd(0, 13)}\")\nwrite_line(\"gcd(13, 0) = {gcd(13, 0)}\");\n",
+  "code": "use IO.Std.write_line\n\ngcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi\n\nwrite_line(\"gcd(48, 18) = {gcd(48, 18)}\")\nwrite_line(\"gcd(1071, 462) = {gcd(1071, 462)}\")\nwrite_line(\"gcd(0, 13) = {gcd(0, 13)}\")\nwrite_line(\"gcd(13, 0) = {gcd(13, 0)}\")",
+  "fullSource": "use IO.Std.write_line\n\ngcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi\n\nwrite_line(\"gcd(48, 18) = {gcd(48, 18)}\")\nwrite_line(\"gcd(1071, 462) = {gcd(1071, 462)}\")\nwrite_line(\"gcd(0, 13) = {gcd(0, 13)}\")\nwrite_line(\"gcd(13, 0) = {gcd(13, 0)}\")\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

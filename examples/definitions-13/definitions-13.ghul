@@ -1,6 +1,6 @@
 // >>>
 trait Printable is
-    print();
+    print()
 si
 // <<<
 

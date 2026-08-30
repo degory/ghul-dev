@@ -1,10 +1,10 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
-lookup() -> string? => "Alice";
+lookup() -> string? => "Alice"
 
-let name = lookup();
+let name = lookup()
 // >>>
 if name? then
-    write_line("name is {name}"); // name is non-optional here
+    write_line("name is {name}") // name is non-optional here
 fi
 // <<<

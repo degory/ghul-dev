@@ -1,12 +1,12 @@
-use Collections.Iterable;
-use Collections.LIST;
-use Collections.MAP;
-use Collections.SET;
-use Ghul.Pipes.INDEXED_VALUE;
-use Ghul.Pipes.Pipe;
+use Collections.Iterable
+use Collections.LIST
+use Collections.MAP
+use Collections.SET
+use Ghul.Pipes.INDEXED_VALUE
+use Ghul.Pipes.Pipe
 
 // >>>
-collect_set[T](source: Iterable[T]) -> SET[T] pure;
+collect_set[T](source: Iterable[T]) -> SET[T] pure
 // <<<
 
 entry() is si

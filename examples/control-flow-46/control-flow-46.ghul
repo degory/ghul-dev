@@ -1,17 +1,17 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
-double_async(x: int) -> Tasks.TASK[int] => x * 2;
+double_async(x: int) -> Tasks.TASK[int] => x * 2
 
-add_async(x: int, y: int) -> Tasks.TASK[int] => x + y;
+add_async(x: int, y: int) -> Tasks.TASK[int] => x + y
 
 // >>>
 compute() -> Tasks.TASK[int] is
-    let a = await double_async(10);   // a = 20
-    let b = await double_async(a);    // b = 40
-    let c = await add_async(a, b);    // c = 60
+    let a = await double_async(10)   // a = 20
+    let b = await double_async(a)    // b = 40
+    let c = await add_async(a, b)    // c = 60
 
-    return c;
+    return c
 si
 
-write_line("{compute().result}");
+write_line("{compute().result}")
 // <<<

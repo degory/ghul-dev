@@ -1,10 +1,10 @@
 // >>>
 union Option[T] is
-    SOME(value: T);
-    NONE;
+    SOME(value: T)
+    NONE
 si
 // <<<
 
 // >>>
-let some_int = Option.SOME(1234);
+let some_int = Option.SOME(1234)
 // <<<

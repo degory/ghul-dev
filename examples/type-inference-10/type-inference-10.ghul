@@ -1,11 +1,11 @@
 // >>>
-class BASE();
+class BASE()
 
-class DERIVED(): BASE;
+class DERIVED(): BASE
 // <<<
 
 // >>>
-let array_of_base = [BASE(), DERIVED()];
-let array_of_object = [BASE(), DERIVED(), object()];
-let array_of_int = [1, 2, 3, 4, 5];
+let array_of_base = [BASE(), DERIVED()]
+let array_of_object = [BASE(), DERIVED(), object()]
+let array_of_int = [1, 2, 3, 4, 5]
 // <<<

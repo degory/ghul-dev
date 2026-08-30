@@ -1,27 +1,27 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 // T: out marks Box[T] as covariant in T - a Box[CAT] is also a Box[Animal]
 trait Box[T: out] is
-    contents() -> T;
+    contents() -> T
 si
 // <<<
 
 trait Animal is
-    speak() -> string;
+    speak() -> string
 si
 
 class CAT(): Animal is
-    speak() -> string => "meow";
+    speak() -> string => "meow"
 si
 
 class CAT_BOX(): Box[CAT] is
-    contents() -> CAT => CAT();
+    contents() -> CAT => CAT()
 si
 
 // >>>
-let cats: Box[CAT] = CAT_BOX();
-let animals: Box[Animal] = cats;   // covariance
+let cats: Box[CAT] = CAT_BOX()
+let animals: Box[Animal] = cats   // covariance
 
-write_line(animals.contents().speak());
+write_line(animals.contents().speak())
 // <<<

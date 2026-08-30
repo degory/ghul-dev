@@ -1,8 +1,8 @@
 {
   "name": "rosetta-jensens-device",
   "snippet": false,
-  "code": "use IO.Std.write_line\n\nlet i mut = 0\n\nlet sum = (low: int, high: int, term: () -> double) -> double => (\n    let total mut = 0.0D\n\n    i = low\n\n    while i <= high do\n        total = total + term()\n\n        i = i + 1\n    od\n\n    total\n)\n\nwrite_line(\"{sum(1, 100, () => 1.0D / cast double(i))}\");",
-  "fullSource": "use IO.Std.write_line\n\nlet i mut = 0\n\nlet sum = (low: int, high: int, term: () -> double) -> double => (\n    let total mut = 0.0D\n\n    i = low\n\n    while i <= high do\n        total = total + term()\n\n        i = i + 1\n    od\n\n    total\n)\n\nwrite_line(\"{sum(1, 100, () => 1.0D / cast double(i))}\");\n",
+  "code": "use IO.Std.write_line\n\nlet i mut = 0\n\nlet sum = (low: int, high: int, term: () -> double) -> double => (\n    let total mut = 0.0D\n\n    i = low\n\n    while i <= high do\n        total = total + term()\n\n        i = i + 1\n    od\n\n    total\n)\n\nwrite_line(\"{sum(1, 100, () => 1.0D / cast double(i))}\")",
+  "fullSource": "use IO.Std.write_line\n\nlet i mut = 0\n\nlet sum = (low: int, high: int, term: () -> double) -> double => (\n    let total mut = 0.0D\n\n    i = low\n\n    while i <= high do\n        total = total + term()\n\n        i = i + 1\n    od\n\n    total\n)\n\nwrite_line(\"{sum(1, 100, () => 1.0D / cast double(i))}\")\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

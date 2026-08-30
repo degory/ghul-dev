@@ -1,10 +1,10 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 trait Logged is
     log(message: string) is
         // the default body writes the message with a [log] prefix
-        write_line("[log] {message}");
+        write_line("[log] {message}")
     si
 si
 
@@ -15,10 +15,10 @@ si
 class LOUD(): Logged is
     // override the default, while still calling through to it with super
     log(message: string) is
-        super.log(message.to_upper());
+        super.log(message.to_upper())
     si
 si
 
-PLAIN().log("hello");
-LOUD().log("hello");
+PLAIN().log("hello")
+LOUD().log("hello")
 // <<<

@@ -1,17 +1,17 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 union Tree is
-    NODE(left: Tree, right: Tree);
-    LEAF(value: int);
+    NODE(left: Tree, right: Tree)
+    LEAF(value: int)
 si
 
 // >>>
-let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456));
-let leaf = Tree.LEAF(123);
+let tree: Tree = Tree.NODE(Tree.LEAF(123), Tree.LEAF(456))
+let leaf = Tree.LEAF(123)
 
 if isa Tree.NODE(tree) then
-    write_line("have tree node");
+    write_line("have tree node")
 elif isa Tree.LEAF(tree) then
-    write_line("have tree leaf");
+    write_line("have tree leaf")
 fi
 // <<<

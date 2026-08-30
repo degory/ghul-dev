@@ -1,8 +1,8 @@
 // expect: error
-lookup() -> string? => null;
+lookup() -> string? => null
 
-let maybe = lookup();
+let maybe = lookup()
 // >>>
 // rejected: a string? is not assignable to a string
-let title: string = maybe;
+let title: string = maybe
 // <<<

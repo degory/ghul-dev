@@ -1,13 +1,13 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 trait Printable is
-    print();
+    print()
 si
 
 // >>>
 class BOOK(title: string, author: string): Printable is
     print() is
-        write_line("Title: {title}, Author: {author}");
+        write_line("Title: {title}, Author: {author}")
     si
 si
 // <<<

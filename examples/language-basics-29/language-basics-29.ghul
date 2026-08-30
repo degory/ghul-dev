@@ -1,14 +1,14 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 class PERSON is
-    name: string;
+    name: string
     init(name: string) is self.name = name; si
 si
 
-find() -> PERSON? => null;
+find() -> PERSON? => null
 
 // >>>
-let p = find();
-let name = p?.name; // string? - absent when p is absent
-write_line("name: {name ?? "unknown"}");
+let p = find()
+let name = p?.name // string? - absent when p is absent
+write_line("name: {name ?? "unknown"}")
 // <<<

@@ -1,17 +1,17 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
-class ANIMAL(name: string);
+class ANIMAL(name: string)
 
 // >>>
 class DOG(name: string, breed: string): ANIMAL is
     // forward name to the superclass; the local DOG keeps breed as a field
-    super(name);
+    super(name)
 
     init(.., trick: string) is
         // .. expands to (name, breed); the primary init has already run
-        write_line("{name} the {breed} can {trick}");
+        write_line("{name} the {breed} can {trick}")
     si
 si
 
-DOG("rex", "labrador", "sit");
+DOG("rex", "labrador", "sit")
 // <<<

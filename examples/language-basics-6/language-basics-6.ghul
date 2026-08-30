@@ -1,4 +1,4 @@
 // >>>
-let x: int = 42;
-let y = "Hello";
+let x: int = 42
+let y = "Hello"
 // <<<

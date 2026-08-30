@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-partition-method",
   "snippet": false,
-  "code": "partition(\n    predicate: (T) -> bool pure\n) -> (LIST[T], LIST[T]) pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    partition(\n        predicate: (T) -> bool pure\n    ) -> (LIST[T], LIST[T]) pure;\nsi\n\nentry() is si\n",
+  "code": "partition(\n    predicate: (T) -> bool pure\n) -> (LIST[T], LIST[T]) pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\n\ntrait Pipe[T] is\n    partition(\n        predicate: (T) -> bool pure\n    ) -> (LIST[T], LIST[T]) pure\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

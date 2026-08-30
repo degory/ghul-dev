@@ -1,9 +1,9 @@
 read_file(path: string) -> string is
-    let reader = StreamReader(path);
+    let reader = StreamReader(path)
 
     try
-        return reader.read_to_end();
+        return reader.read_to_end()
     finally
-        reader.close(); // runs before the function returns
+        reader.close() // runs before the function returns
     yrt
 si

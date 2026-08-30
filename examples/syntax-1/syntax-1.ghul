@@ -1,7 +1,7 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
-let x = 3;
-let y = 7;
+let x = 3
+let y = 7
 
 // >>>
 if x > y then

@@ -1,18 +1,18 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 // >>>
 class VECTOR is
-    x: int;
-    y: int;
+    x: int
+    y: int
 
     init(x: int, y: int) is
-        self.x = x;
-        self.y = y;
+        self.x = x
+        self.y = y
     si
 
     // a binary operator as an instance method takes one parameter, the right operand:
-    +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y);
+    +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y)
 si
 
-let sum = VECTOR(1, 2) + VECTOR(3, 4);
-write_line("({sum.x}, {sum.y})");
+let sum = VECTOR(1, 2) + VECTOR(3, 4)
+write_line("({sum.x}, {sum.y})")
 // <<<

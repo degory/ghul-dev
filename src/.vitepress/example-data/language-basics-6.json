@@ -1,8 +1,8 @@
 {
   "name": "language-basics-6",
   "snippet": false,
-  "code": "let x: int = 42;\nlet y = \"Hello\";",
-  "fullSource": "let x: int = 42;\nlet y = \"Hello\";\n",
+  "code": "let x: int = 42\nlet y = \"Hello\"",
+  "fullSource": "let x: int = 42\nlet y = \"Hello\"\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

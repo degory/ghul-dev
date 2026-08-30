@@ -1,22 +1,22 @@
-use IO.Std.write_line;
-use Collections.LIST;
+use IO.Std.write_line
+use Collections.LIST
 
 // >>>
 // Define a list to hold the closures:
-let closure_list = LIST();
+let closure_list = LIST()
 
 // Iterate over an integer range:
 for i in 1::10 do
     // Create a closure capturing i's current value
-    let closure = () => i;
+    let closure = () => i
 
     // Add the closure to the list:
-    closure_list.add(closure);
+    closure_list.add(closure)
 od
 
 // Each closure captured the value of i at the
 // time of its creation:
 for closure in closure_list do
-    write_line("Closure captured value: {closure()}");
+    write_line("Closure captured value: {closure()}")
 od
 // <<<

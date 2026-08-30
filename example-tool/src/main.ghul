@@ -1,13 +1,13 @@
 namespace ExampleTool is
-    use IO.Std;
-    use IO.File;
-    use IO.Path;
-    use IO.Directory;
+    use IO.Std
+    use IO.File
+    use IO.Path
+    use IO.Directory
 
-    use Collections.LIST;
+    use Collections.LIST
 
-    use Analysis.Protocol.ANALYSER_PROCESS;
-    use Analysis.Protocol.Response;
+    use Analysis.Protocol.ANALYSER_PROCESS
+    use Analysis.Protocol.Response
 
     // Generates a rendered-example artifact (<name>.json) for every example
     // directory under the given root. An example directory holds a single
@@ -20,48 +20,63 @@ namespace ExampleTool is
     // and write <output-dir>/<name>.json.
     entry(arguments: string[]) is
         if arguments.count < 2 then
-            Std.error.write_line("usage: example-tool <examples-root-dir> <output-dir>");
-            return;
+            Std.error.write_line("usage: example-tool <examples-root-dir> <output-dir>")
+            return
         fi
 
-        let examples_root = arguments[0];
-        let output_dir = arguments[1];
+        let examples_root = arguments[0]
+        let output_dir = arguments[1]
 
         // Newer compilers require an explicit SDK reference-assembly directory
         // (no implicit search). Discover it once and pass it through to every
         // compiler and analyser invocation.
-        let sdk_ref_path = discover_sdk_reference_path();
+        let sdk_ref_path = discover_sdk_reference_path()
 
-        Directory.create_directory(output_dir);
+        Directory.create_directory(output_dir)
 
-        let failed mut = false;
+        let failed mut = false
+
+        let generated mut = 0
 
         for example_dir in Directory.get_directories(examples_root) do
-            let name = Path.get_file_name(example_dir);
+            let name = Path.get_file_name(example_dir)
 
-            if File.exists(Path.combine(example_dir, "{name}.ghul")) then
-                if !generate(example_dir, output_dir, sdk_ref_path) then
-                    failed = true;
-                fi
+            // A directory carrying no source of its own produces no
+            // artifact, and the page referring to it then fails the site
+            // build with nothing to say about which example was missing.
+            // Report it here, where the name is known.
+            if !File.exists(Path.combine(example_dir, "{name}.ghul")) then
+                Std.error.write_line("FAILED example '{name}': no {name}.ghul in {example_dir}")
+                failed = true
+            elif generate(example_dir, output_dir, sdk_ref_path) then
+                generated = generated + 1
+            else
+                failed = true
             fi
         od
 
         // Snippets — illustrative ghūl that can't reasonably compile — live
         // in a sibling `snippets/` directory and are rendered code-only.
-        let snippets_root = Path.combine(Path.get_directory_name(examples_root)!, "snippets");
+        let snippets_root = Path.combine(Path.get_directory_name(examples_root)!, "snippets")
 
         if Directory.exists(snippets_root) then
             for snippet_dir in Directory.get_directories(snippets_root) do
-                let name = Path.get_file_name(snippet_dir);
+                let name = Path.get_file_name(snippet_dir)
 
                 if File.exists(Path.combine(snippet_dir, "{name}.ghul")) then
-                    generate_snippet(snippet_dir, output_dir);
+                    generate_snippet(snippet_dir, output_dir)
+                    generated = generated + 1
+                else
+                    Std.error.write_line("FAILED snippet '{name}': no {name}.ghul in {snippet_dir}")
+                    failed = true
                 fi
             od
         fi
 
+        Std.out.write_line("{generated} artifact(s) written to {output_dir}")
+
         if failed then
-            System.Environment.exit(1);
+            System.Environment.exit(1)
         fi
     si
 
@@ -69,10 +84,10 @@ namespace ExampleTool is
     // skeleton with placeholders). It is rendered with the same markup as a
     // real example — just no hover, no diagnostics, no output panel.
     generate_snippet(snippet_dir: string, output_dir: string) is
-        let name = Path.get_file_name(snippet_dir)!;
-        let source = File.read_all_text(Path.combine(snippet_dir, "{name}.ghul"));
+        let name = Path.get_file_name(snippet_dir)!
+        let source = File.read_all_text(Path.combine(snippet_dir, "{name}.ghul"))
 
-        let region = extract_visible(source);
+        let region = extract_visible(source)
 
         let json = build_artifact_json(
             name, region.code, strip_markers(source),
@@ -80,10 +95,10 @@ namespace ExampleTool is
             Collections.LIST[HOVER](), "", Collections.LIST[DIAGNOSTIC](),
             Collections.LIST[SEMANTIC_TOKEN](), Collections.LIST[INLAY_HINT](),
             true
-        );
-        File.write_all_text(Path.combine(output_dir, "{name}.json"), json);
+        )
+        File.write_all_text(Path.combine(output_dir, "{name}.json"), json)
 
-        Std.out.write_line("snippet {name}");
+        Std.out.write_line("snippet {name}")
     si
 
     // An example declares its intended compile outcome with a scaffold
@@ -92,19 +107,19 @@ namespace ExampleTool is
     // that silently starts failing, or a deliberate-error demo that starts
     // compiling, is caught.
     _parse_expect(source: string) -> string is
-        let marker = "// expect:";
+        let marker = "// expect:"
 
         for line in source.split(['\n']) do
-            let trimmed = line.trim();
+            let trimmed = line.trim()
             if trimmed.starts_with(marker) then
-                let value = trimmed.substring(marker.length).trim();
+                let value = trimmed.substring(marker.length).trim()
                 if value =~ "ok" \/ value =~ "warning" \/ value =~ "error" then
-                    return value;
+                    return value
                 fi
             fi
         od
 
-        return "ok";
+        return "ok"
     si
 
     // Parse compiler diagnostics from a build's combined output. The compiler
@@ -112,33 +127,33 @@ namespace ExampleTool is
     //   <source-file>: <sl>,<sc>..<el>,<ec>: <error|warn>: <message>
     // Lines that are not in that shape (banners, ICE traces) are skipped.
     _parse_diagnostics(text: string, source_file: string) -> LIST[DIAGNOSTIC] is
-        let result = LIST[DIAGNOSTIC]();
-        let prefix = "{source_file}: ";
+        let result = LIST[DIAGNOSTIC]()
+        let prefix = "{source_file}: "
 
         for raw in text.split(['\n']) do
-            let line = raw.trim_end(['\r']);
+            let line = raw.trim_end(['\r'])
 
             if !line.starts_with(prefix) then
-                continue;
+                continue
             fi
 
-            let rest = line.substring(prefix.length);
+            let rest = line.substring(prefix.length)
 
-            let location_end = rest.index_of(": ");
+            let location_end = rest.index_of(": ")
             if location_end < 0 then
-                continue;
+                continue
             fi
 
-            let location = rest.substring(0, location_end);
-            let after = rest.substring(location_end + 2);
+            let location = rest.substring(0, location_end)
+            let after = rest.substring(location_end + 2)
 
-            let severity_end = after.index_of(": ");
+            let severity_end = after.index_of(": ")
             if severity_end < 0 then
-                continue;
+                continue
             fi
 
-            let severity_word = after.substring(0, severity_end);
-            let message = after.substring(severity_end + 2);
+            let severity_word = after.substring(0, severity_end)
+            let message = after.substring(severity_end + 2)
 
             let severity =
                 if severity_word =~ "warn" then
@@ -147,35 +162,35 @@ namespace ExampleTool is
                     "error"
                 else
                     ""
-                fi;
+                fi
 
             if severity.length == 0 then
-                continue;
+                continue
             fi
 
-            let parsed = _parse_location(location, severity, message);
+            let parsed = _parse_location(location, severity, message)
             if parsed? then
-                result.add(parsed);
+                result.add(parsed)
             fi
         od
 
-        return result;
+        return result
     si
 
     // Parse a `<sl>,<sc>..<el>,<ec>` location into a DIAGNOSTIC.
     _parse_location(location: string, severity: string, message: string) -> DIAGNOSTIC? is
-        let separator = location.index_of("..");
+        let separator = location.index_of("..")
         if separator < 0 then
-            return null;
+            return null
         fi
 
-        let start = location.substring(0, separator);
-        let end = location.substring(separator + 2);
+        let start = location.substring(0, separator)
+        let end = location.substring(separator + 2)
 
-        let start_comma = start.index_of(",");
-        let end_comma = end.index_of(",");
+        let start_comma = start.index_of(",")
+        let end_comma = end.index_of(",")
         if start_comma < 0 \/ end_comma < 0 then
-            return null;
+            return null
         fi
 
         try
@@ -186,53 +201,53 @@ namespace ExampleTool is
                 System.Convert.to_int32(end.substring(end_comma + 1)),
                 severity,
                 message
-            );
+            )
         catch ex: System.FormatException
-            return null;
+            return null
         yrt
     si
 
     generate(example_dir: string, output_dir: string, sdk_ref_path: string) -> bool is
-        let name = Path.get_file_name(example_dir)!;
-        let source_file = "{name}.ghul";
-        let source = File.read_all_text(Path.combine(example_dir, source_file));
+        let name = Path.get_file_name(example_dir)!
+        let source_file = "{name}.ghul"
+        let source = File.read_all_text(Path.combine(example_dir, source_file))
 
-        let expected = _parse_expect(source);
+        let expected = _parse_expect(source)
 
         // The compiler — building and analysing — resolves the runtime from
         // ghul-runtime.dll in its working directory, and the compiled binary
         // loads it from there too.
-        let project = _find_ghulproj(example_dir);
+        let project = _find_ghulproj(example_dir)
 
-        let raw_diagnostics: LIST[DIAGNOSTIC] mut;
-        let compiled: bool mut;
-        let reference_arguments: string mut;
-        let error_output: string mut;
-        let output: string mut;
+        let raw_diagnostics: LIST[DIAGNOSTIC] mut
+        let compiled: bool mut
+        let reference_arguments: string mut
+        let error_output: string mut
+        let output: string mut
 
         if project? then
             // Project-backed example: MSBuild restores its packages and
             // compiles it against the real assemblies, then
             // GenerateAssembliesJson writes .assemblies.json with the full
             // reference set for the analyser to resolve hover against.
-            let build = run_process("dotnet", "build -nologo -verbosity:quiet", example_dir);
-            run_process("dotnet", "build -nologo -verbosity:quiet -t:GenerateAssembliesJson", example_dir);
+            let build = run_process("dotnet", "build -nologo -verbosity:quiet", example_dir)
+            run_process("dotnet", "build -nologo -verbosity:quiet -t:GenerateAssembliesJson", example_dir)
 
-            let full_output = "{build.standard_error}\n{build.standard_output}";
+            let full_output = "{build.standard_error}\n{build.standard_output}"
 
             // MSBuild passes the source with its full path, so diagnostics are
             // prefixed with that rather than the bare file name.
-            let source_path = Path.get_full_path(Path.combine(example_dir, source_file));
+            let source_path = Path.get_full_path(Path.combine(example_dir, source_file))
 
-            raw_diagnostics = _parse_diagnostics(full_output, source_path);
-            compiled = build.exit_code == 0;
-            reference_arguments = _assembly_reference_arguments(example_dir);
-            error_output = full_output;
+            raw_diagnostics = _parse_diagnostics(full_output, source_path)
+            compiled = build.exit_code == 0
+            reference_arguments = _assembly_reference_arguments(example_dir)
+            error_output = full_output
             // The example demonstrates wiring against a framework it can't
             // start here, so there is no run output to capture.
-            output = "";
+            output = ""
         else
-            _provision_runtime(example_dir);
+            _provision_runtime(example_dir)
 
             // With no `-a` at all, `--sdk-ref-path` alone makes the
             // compiler default to its own canned reference set - the base
@@ -243,13 +258,13 @@ namespace ExampleTool is
             // for our own runtime keeps this in step, but it also opts out
             // of that canned default entirely, so the base class library
             // DLLs have to be spelled out here too.
-            let reference_flags = _sdk_and_runtime_reference_flags(sdk_ref_path);
+            let reference_flags = _sdk_and_runtime_reference_flags(sdk_ref_path)
 
             let compile mut = run_process(
                 "dotnet",
                 "ghul-compiler --v3 --test-run --dotnet --sdk-ref-path \"{sdk_ref_path}\" {reference_flags} {source_file} -o binary.exe",
                 example_dir
-            );
+            )
 
             // An example that is only declarations has nothing to run, which
             // the compiler reports as a missing entry point. The declarations
@@ -257,27 +272,27 @@ namespace ExampleTool is
             let library =
                 !File.exists(Path.combine(example_dir, "binary.exe")) /\
                 "{compile.standard_error}\n{compile.standard_output}"
-                    .contains("no entry point declared");
+                    .contains("no entry point declared")
 
             if library then
                 compile = run_process(
                     "dotnet",
                     "ghul-compiler --v3 --test-run --dotnet --library --sdk-ref-path \"{sdk_ref_path}\" {reference_flags} {source_file} -o binary.dll",
                     example_dir
-                );
+                )
             fi
 
             raw_diagnostics = _parse_diagnostics(
                 "{compile.standard_error}\n{compile.standard_output}", source_file
-            );
+            )
             compiled =
                 if library then
                     File.exists(Path.combine(example_dir, "binary.dll"))
                 else
                     File.exists(Path.combine(example_dir, "binary.exe"))
-                fi;
-            reference_arguments = "--sdk-ref-path \"{sdk_ref_path}\" {reference_flags}";
-            error_output = compile.standard_error;
+                fi
+            reference_arguments = "--sdk-ref-path \"{sdk_ref_path}\" {reference_flags}"
+            error_output = compile.standard_error
 
             // No binary for a deliberate-error example — only diagnostics. The
             // analyser still resolves what it can, so hover survives the failure.
@@ -286,16 +301,16 @@ namespace ExampleTool is
                     run_process("dotnet", "binary.exe", example_dir).standard_output
                 else
                     ""
-                fi;
+                fi
         fi
 
-        let has_error mut = !compiled;
-        let has_warning mut = false;
+        let has_error mut = !compiled
+        let has_warning mut = false
         for diagnostic in raw_diagnostics do
             if diagnostic.severity =~ "error" then
-                has_error = true;
+                has_error = true
             elif diagnostic.severity =~ "warning" then
-                has_warning = true;
+                has_warning = true
             fi
         od
 
@@ -306,21 +321,21 @@ namespace ExampleTool is
                 "warning"
             else
                 "ok"
-            fi;
+            fi
 
         if !(actual =~ expected) then
-            Std.error.write_line("FAILED example '{name}': expected {expected}, got {actual}");
-            Std.error.write_line(error_output);
-            return false;
+            Std.error.write_line("FAILED example '{name}': expected {expected}, got {actual}")
+            Std.error.write_line(error_output)
+            return false
         fi
 
-        let collected = _collect_hovers_and_tokens(example_dir, source_file, source, reference_arguments);
+        let collected = _collect_hovers_and_tokens(example_dir, source_file, source, reference_arguments)
 
-        let diagnostics = LIST[DIAGNOSTIC]();
+        let diagnostics = LIST[DIAGNOSTIC]()
         for diagnostic in raw_diagnostics do
-            let translated = collected.region.translate_diagnostic(diagnostic);
+            let translated = collected.region.translate_diagnostic(diagnostic)
             if translated? then
-                diagnostics.add(translated);
+                diagnostics.add(translated)
             fi
         od
 
@@ -330,16 +345,16 @@ namespace ExampleTool is
             collected.region.hidden_gaps_after_line,
             collected.hovers, output, diagnostics, collected.semantic_tokens,
             collected.inlay_hints, false
-        );
-        File.write_all_text(Path.combine(output_dir, "{name}.json"), json);
+        )
+        File.write_all_text(Path.combine(output_dir, "{name}.json"), json)
 
         Std.out.write_line(
             "generated {name} [{actual}]: {collected.hovers.count} hover(s), "
             "{collected.semantic_tokens.count} token(s), {diagnostics.count} diagnostic(s), "
             "{collected.inlay_hints.count} inlay(s)"
-        );
+        )
 
-        return true;
+        return true
     si
 
     // Drive the analyser over the example for hover_map, semantic_tokens and
@@ -356,63 +371,63 @@ namespace ExampleTool is
         semantic_tokens: LIST[SEMANTIC_TOKEN],
         inlay_hints: LIST[INLAY_HINT]
     ) is
-        let use analyser = ANALYSER_PROCESS(example_dir, reference_arguments);
+        let use analyser = ANALYSER_PROCESS(example_dir, reference_arguments)
 
-        analyser.send_set_open_files(source_file);
+        analyser.send_set_open_files(source_file)
 
-        analyser.send_edit(source_file, source);
-        analyser.read_response();   // diagnostics
+        analyser.send_edit(source_file, source)
+        analyser.read_response()   // diagnostics
 
-        analyser.send_hover_map(source_file);
-        let hover_response = analyser.read_query_response();
+        analyser.send_hover_map(source_file)
+        let hover_response = analyser.read_query_response()
 
-        analyser.send_semantic_tokens(source_file);
-        let token_response = analyser.read_query_response();
+        analyser.send_semantic_tokens(source_file)
+        let token_response = analyser.read_query_response()
 
-        analyser.send_inlay_hints(source_file);
-        let inlay_response = analyser.read_query_response();
+        analyser.send_inlay_hints(source_file)
+        let inlay_response = analyser.read_query_response()
 
-        let region = extract_visible(source);
+        let region = extract_visible(source)
 
-        let hovers = LIST[HOVER]();
+        let hovers = LIST[HOVER]()
         if let hover_map: Response.HOVER_MAP = hover_response then
             for entry in hover_map.entries do
                 let raw = HOVER(
                     entry.start_line, entry.start_column,
                     entry.end_line, entry.end_column,
                     entry.description, entry.kind_label
-                );
-                let translated = region.translate(raw);
+                )
+                let translated = region.translate(raw)
                 if translated? then
-                    hovers.add(translated);
+                    hovers.add(translated)
                 fi
             od
         fi
 
-        let semantic_tokens = LIST[SEMANTIC_TOKEN]();
+        let semantic_tokens = LIST[SEMANTIC_TOKEN]()
         if let tokens_resp: Response.SEMANTIC_TOKENS = token_response then
             for token in tokens_resp.tokens do
                 let raw = SEMANTIC_TOKEN(
                     token.start_line, token.start_column,
                     token.end_line, token.end_column,
                     token.token_type, token.modifiers
-                );
-                let translated = region.translate_semantic_token(raw);
+                )
+                let translated = region.translate_semantic_token(raw)
                 if translated? then
-                    semantic_tokens.add(translated);
+                    semantic_tokens.add(translated)
                 fi
             od
         fi
 
-        let inlay_hints = LIST[INLAY_HINT]();
+        let inlay_hints = LIST[INLAY_HINT]()
         if let inlays_resp: Response.INLAY_HINTS = inlay_response then
             for hint in inlays_resp.hints do
                 let raw = INLAY_HINT(
                     hint.line, hint.column, hint.label, hint.detail, hint.code
-                );
-                let translated = region.translate_inlay(raw);
+                )
+                let translated = region.translate_inlay(raw)
                 if translated? then
-                    inlay_hints.add(translated);
+                    inlay_hints.add(translated)
                 fi
             od
         fi
@@ -422,18 +437,18 @@ namespace ExampleTool is
             hovers = hovers,
             semantic_tokens = semantic_tokens,
             inlay_hints = inlay_hints
-        );
+        )
     si
 
     // Copy the tool's own ghul-runtime.dll (from its ghul.runtime package
     // reference) into the example directory, overwriting any stale copy.
     _provision_runtime(example_dir: string) is
-        let tool_dir = Path.get_directory_name(System.Reflection.Assembly.get_executing_assembly().location)!;
-        let source = Path.combine(tool_dir, "ghul-runtime.dll");
-        let target = Path.combine(example_dir, "ghul-runtime.dll");
+        let tool_dir = Path.get_directory_name(System.Reflection.Assembly.get_executing_assembly().location)!
+        let source = Path.combine(tool_dir, "ghul-runtime.dll")
+        let target = Path.combine(example_dir, "ghul-runtime.dll")
 
         if File.exists(source) then
-            File.copy(source, target, true);
+            File.copy(source, target, true)
         fi
     si
 
@@ -445,17 +460,17 @@ namespace ExampleTool is
     // own runtime has to spell these out too, or it fails to load a core
     // assembly at all.
     _sdk_and_runtime_reference_flags(sdk_ref_path: string) -> string is
-        let names = ["System.Console", "System.Runtime", "System.IO.FileSystem", "System.Collections", "System.Threading"];
+        let names = ["System.Console", "System.Runtime", "System.IO.FileSystem", "System.Collections", "System.Threading"]
 
-        let flags = System.Text.StringBuilder();
+        let flags = System.Text.StringBuilder()
 
         for name in names do
-            flags.append("-a \"{Path.combine(sdk_ref_path, "{name}.dll")}\" ");
+            flags.append("-a \"{Path.combine(sdk_ref_path, "{name}.dll")}\" ")
         od
 
-        flags.append("-a \"ghul-runtime.dll\"");
+        flags.append("-a \"ghul-runtime.dll\"")
 
-        return flags.to_string();
+        return flags.to_string()
     si
 
     // The .ghulproj in an example directory, or null for a bare-source
@@ -465,11 +480,11 @@ namespace ExampleTool is
     _find_ghulproj(example_dir: string) -> string? is
         for file in Directory.get_files(example_dir) do
             if file.ends_with(".ghulproj") then
-                return file;
+                return file
             fi
         od
 
-        return null;
+        return null
     si
 
     // Build the analyser reference-flag fragment from a project's
@@ -477,34 +492,34 @@ namespace ExampleTool is
     // one `-a "path"` per resolved reference assembly, so the analyser sees
     // the same reference set the build did.
     _assembly_reference_arguments(example_dir: string) -> string is
-        let json = File.read_all_text(Path.combine(example_dir, ".assemblies.json"));
+        let json = File.read_all_text(Path.combine(example_dir, ".assemblies.json"))
 
         // { "assemblies": [ "/path/one.dll", "/path/two.dll" ] } — a flat
         // string array. Assembly paths hold no quote or comma, so splitting
         // the bracketed body on commas and trimming the quotes is enough.
-        let open_bracket = json.index_of('[');
-        let close_bracket = json.last_index_of(']');
+        let open_bracket = json.index_of('[')
+        let close_bracket = json.last_index_of(']')
 
         if open_bracket < 0 \/ close_bracket <= open_bracket then
-            return "";
+            return ""
         fi
 
-        let body = json.substring(open_bracket + 1, close_bracket - open_bracket - 1);
+        let body = json.substring(open_bracket + 1, close_bracket - open_bracket - 1)
 
-        let arguments = System.Text.StringBuilder();
+        let arguments = System.Text.StringBuilder()
 
         for raw in body.split([',']) do
-            let path = raw.trim().trim(['"']);
+            let path = raw.trim().trim(['"'])
 
             if path.length > 0 then
                 if arguments.length > 0 then
-                    arguments.append(' ');
+                    arguments.append(' ')
                 fi
 
-                arguments.append("-a \"{path}\"");
+                arguments.append("-a \"{path}\"")
             fi
         od
 
-        return arguments.to_string();
+        return arguments.to_string()
     si
 si

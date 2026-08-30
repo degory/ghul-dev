@@ -1,5 +1,5 @@
-class THING();
+class THING()
 
 // >>>
-let a_thing = THING();
+let a_thing = THING()
 // <<<

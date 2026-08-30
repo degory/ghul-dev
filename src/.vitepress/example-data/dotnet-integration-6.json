@@ -1,8 +1,8 @@
 {
   "name": "dotnet-integration-6",
   "snippet": false,
-  "code": "class SCOPE(name: string): Ghul.Disposable is\n    dispose() is\n        write_line(\"closing {name}\");\n    si\nsi\n\nlet use s = SCOPE(\"file\");\n\nwrite_line(\"inside the scope\");",
-  "fullSource": "use IO.Std.write_line;\n\nclass SCOPE(name: string): Ghul.Disposable is\n    dispose() is\n        write_line(\"closing {name}\");\n    si\nsi\n\nlet use s = SCOPE(\"file\");\n\nwrite_line(\"inside the scope\");\n",
+  "code": "class SCOPE(name: string): Ghul.Disposable is\n    dispose() is\n        write_line(\"closing {name}\")\n    si\nsi\n\nlet use s = SCOPE(\"file\")\n\nwrite_line(\"inside the scope\")",
+  "fullSource": "use IO.Std.write_line\n\nclass SCOPE(name: string): Ghul.Disposable is\n    dispose() is\n        write_line(\"closing {name}\")\n    si\nsi\n\nlet use s = SCOPE(\"file\")\n\nwrite_line(\"inside the scope\")\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

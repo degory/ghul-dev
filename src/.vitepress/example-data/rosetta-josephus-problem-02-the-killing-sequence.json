@@ -1,8 +1,8 @@
 {
   "name": "rosetta-josephus-problem-02-the-killing-sequence",
   "snippet": false,
-  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nkillings(n: int, k: int) -> Pipe[int] is\n    let standing = (0..n) |> collect_list()\n    let at mut = 0\n\n    while standing.count > 1 do\n        at = (at + k - 1) % standing.count\n\n        yield standing[at]\n\n        standing.remove_at(at)\n    od\nsi\n\nshow(n: int, k: int) is\n    let killed = killings(n, k) |> collect_list()\n\n    write_line(\"n = {n}, k = {k}: killed {killed |> join(\", \")}\")\nsi\n\nshow(5, 2)\nshow(7, 3);",
-  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nkillings(n: int, k: int) -> Pipe[int] is\n    let standing = (0..n) |> collect_list()\n    let at mut = 0\n\n    while standing.count > 1 do\n        at = (at + k - 1) % standing.count\n\n        yield standing[at]\n\n        standing.remove_at(at)\n    od\nsi\n\nshow(n: int, k: int) is\n    let killed = killings(n, k) |> collect_list()\n\n    write_line(\"n = {n}, k = {k}: killed {killed |> join(\", \")}\")\nsi\n\nshow(5, 2)\nshow(7, 3);\n",
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nkillings(n: int, k: int) -> Pipe[int] is\n    let standing = (0..n) |> collect_list()\n    let at mut = 0\n\n    while standing.count > 1 do\n        at = (at + k - 1) % standing.count\n\n        yield standing[at]\n\n        standing.remove_at(at)\n    od\nsi\n\nshow(n: int, k: int) is\n    let killed = killings(n, k) |> collect_list()\n\n    write_line(\"n = {n}, k = {k}: killed {killed |> join(\", \")}\")\nsi\n\nshow(5, 2)\nshow(7, 3)",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nkillings(n: int, k: int) -> Pipe[int] is\n    let standing = (0..n) |> collect_list()\n    let at mut = 0\n\n    while standing.count > 1 do\n        at = (at + k - 1) % standing.count\n\n        yield standing[at]\n\n        standing.remove_at(at)\n    od\nsi\n\nshow(n: int, k: int) is\n    let killed = killings(n, k) |> collect_list()\n\n    write_line(\"n = {n}, k = {k}: killed {killed |> join(\", \")}\")\nsi\n\nshow(5, 2)\nshow(7, 3)\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

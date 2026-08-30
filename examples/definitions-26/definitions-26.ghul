@@ -1,7 +1,7 @@
 // >>>
 namespace Outer.Inner is
     do_something() is
-        IO.Std.write_line("did something");
+        IO.Std.write_line("did something")
     si
 si
 // <<<
@@ -9,7 +9,7 @@ si
 namespace Demo is
     entry() is
 // >>>
-        Outer.Inner.do_something();
+        Outer.Inner.do_something()
 // <<<
     si
 si

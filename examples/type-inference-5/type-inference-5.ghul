@@ -1,4 +1,4 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 class Animal abstract is
     init() is si
@@ -6,21 +6,21 @@ si
 
 class CAT: Animal is
     init() is super.init(); si
-    purr() -> string => "purr";
+    purr() -> string => "purr"
 si
 
 class CARRIER(occupant: Animal) is
-    handled: int;
+    handled: int
 
     handle() is
-        handled = handled + 1;
+        handled = handled + 1
     si
 si
 
 // >>>
 describe(carrier: CARRIER) is
     if isa CAT(carrier.occupant) then
-        carrier.handle();
+        carrier.handle()
         // handle() writes only 'handled', so the compiler can
         // see it leaves the narrow on occupant alone
         write_line(carrier.occupant.purr())

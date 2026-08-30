@@ -2,13 +2,13 @@
 // >>>
 namespace Example is
     entry() is
-        IO.Std.write_line("hello from a namespace");
+        IO.Std.write_line("hello from a namespace")
     si
 si
 // <<<
 
 // >>>
 greet() is
-    IO.Std.write_line("not in a namespace");
+    IO.Std.write_line("not in a namespace")
 si
 // <<<

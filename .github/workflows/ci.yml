@@ -79,6 +79,17 @@ jobs:
     - name: Compile and run every example
       run: dotnet ghul-test --runtime-dll '${{ steps.toolchain.outputs.runtime }}' example-tests
 
+    # The examples are what the site teaches, so they are written in the
+    # terminator-free style the compiler infers. A `;` a line break would
+    # infer anyway is the compiler's own redundant-semicolon warning, but
+    # nothing compiles an example through a project file to enable it.
+    - name: Check no example writes a terminator the compiler infers
+      run: |
+        if grep -rn ';$' examples snippets --include='*.ghul' ; then
+            echo "the lines above end with a statement terminator the compiler infers" >&2
+            exit 1
+        fi
+
   code_review:
     name: Code review
     if: ${{ github.event_name == 'pull_request' && github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository }}

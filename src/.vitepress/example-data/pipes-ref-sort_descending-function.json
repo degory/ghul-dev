@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-sort_descending-function",
   "snippet": false,
-  "code": "sort_descending[T](source: Iterable[T]) -> Pipe[T] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\nsort_descending[T](source: Iterable[T]) -> Pipe[T] pure;\n\nentry() is si\n",
+  "code": "sort_descending[T](source: Iterable[T]) -> Pipe[T] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\nsort_descending[T](source: Iterable[T]) -> Pipe[T] pure\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

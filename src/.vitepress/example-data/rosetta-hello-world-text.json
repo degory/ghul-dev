@@ -1,8 +1,8 @@
 {
   "name": "rosetta-hello-world-text",
   "snippet": false,
-  "code": "IO.Std.write_line(\"Hello world!\");",
-  "fullSource": "IO.Std.write_line(\"Hello world!\");\n",
+  "code": "IO.Std.write_line(\"Hello world!\")",
+  "fullSource": "IO.Std.write_line(\"Hello world!\")\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

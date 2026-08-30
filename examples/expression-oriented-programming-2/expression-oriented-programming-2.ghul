@@ -1,4 +1,4 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 day_kind(day: int) -> string =>
@@ -6,9 +6,9 @@ day_kind(day: int) -> string =>
     case day
     when 5, 6 then "weekend"
     else "weekday"
-    esac;
+    esac
 
-write_line(day_kind(5));
-write_line(day_kind(3));
-write_line(day_kind(6));
+write_line(day_kind(5))
+write_line(day_kind(3))
+write_line(day_kind(6))
 // <<<

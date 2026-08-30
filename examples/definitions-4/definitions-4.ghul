@@ -2,5 +2,5 @@
 let
     an_inferred_int = 123,
     an_explicit_int: int = 456,
-    a_string = "hello";
+    a_string = "hello"
 // <<<

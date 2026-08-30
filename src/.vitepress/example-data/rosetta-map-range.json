@@ -1,8 +1,8 @@
 {
   "name": "rosetta-map-range",
   "snippet": false,
-  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nmap_range(\n    (a1, a2): (double, double),\n    (b1, b2): (double, double),\n    s: double\n) -> double =>\n    b1 + (s - a1) * (b2 - b1) / (a2 - a1)\n\n(0::10)\n    |> map(s =>\n        (s, mapped = map_range((0.0D, 10.0D), (-1.0D, 0.0D), cast(s))))\n    |> each(((s, mapped)) => write_line(\"{s} maps to {mapped:F1}\"));",
-  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nmap_range(\n    (a1, a2): (double, double),\n    (b1, b2): (double, double),\n    s: double\n) -> double =>\n    b1 + (s - a1) * (b2 - b1) / (a2 - a1)\n\n(0::10)\n    |> map(s =>\n        (s, mapped = map_range((0.0D, 10.0D), (-1.0D, 0.0D), cast(s))))\n    |> each(((s, mapped)) => write_line(\"{s} maps to {mapped:F1}\"));\n",
+  "code": "use IO.Std.write_line\nuse Ghul.Pipes\n\nmap_range(\n    (a1, a2): (double, double),\n    (b1, b2): (double, double),\n    s: double\n) -> double =>\n    b1 + (s - a1) * (b2 - b1) / (a2 - a1)\n\n(0::10)\n    |> map(s =>\n        (s, mapped = map_range((0.0D, 10.0D), (-1.0D, 0.0D), cast(s))))\n    |> each(((s, mapped)) => write_line(\"{s} maps to {mapped:F1}\"))",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nmap_range(\n    (a1, a2): (double, double),\n    (b1, b2): (double, double),\n    s: double\n) -> double =>\n    b1 + (s - a1) * (b2 - b1) / (a2 - a1)\n\n(0::10)\n    |> map(s =>\n        (s, mapped = map_range((0.0D, 10.0D), (-1.0D, 0.0D), cast(s))))\n    |> each(((s, mapped)) => write_line(\"{s} maps to {mapped:F1}\"))\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

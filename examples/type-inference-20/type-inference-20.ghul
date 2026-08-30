@@ -1,6 +1,6 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
-let length_of = x => x.length;
-write_line("{length_of("hello")}");
+let length_of = x => x.length
+write_line("{length_of("hello")}")
 // <<<

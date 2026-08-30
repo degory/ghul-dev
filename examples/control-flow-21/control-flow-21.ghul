@@ -1,12 +1,12 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
-let counter mut = 0;
+let counter mut = 0
 while counter < 5 do
-    counter = counter + 1;
+    counter = counter + 1
     if counter == 3 then
-        continue;
+        continue
     fi
-    write_line(counter);
+    write_line(counter)
 od
 // <<<

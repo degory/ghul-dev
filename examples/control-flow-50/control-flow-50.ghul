@@ -1,20 +1,20 @@
-use IO.Std.write_line;
-use Ghul.Pipes;
+use IO.Std.write_line
+use Ghul.Pipes
 
 fibs() -> Ghul.Pipes.Pipe[int] is
-    let a mut = 0;
-    let b mut = 1;
+    let a mut = 0
+    let b mut = 1
     do
-        yield a;
-        let next = a + b;
-        a = b;
-        b = next;
+        yield a
+        let next = a + b
+        a = b
+        b = next
     od
 si
 
 // >>>
 // fibs() is an infinite generator; take(8) bounds it
 for f in fibs() |> take(8) do
-    write_line(f);
+    write_line(f)
 od
 // <<<

@@ -1,8 +1,8 @@
 {
   "name": "expressions-4",
   "snippet": false,
-  "code": "let hello_world = \"Hello World!\";\nlet unicode = \"ghūl programming language\"",
-  "fullSource": "let hello_world = \"Hello World!\";\nlet unicode = \"ghūl programming language\"\n",
+  "code": "let hello_world = \"Hello World!\"\nlet unicode = \"ghūl programming language\"",
+  "fullSource": "let hello_world = \"Hello World!\"\nlet unicode = \"ghūl programming language\"\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

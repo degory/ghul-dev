@@ -1,8 +1,8 @@
 {
   "name": "rosetta-apply-a-callback-to-an-array-02-writing-apply",
   "snippet": false,
-  "code": "use IO.Std.write_line\nuse Collections.List\nuse Collections.LIST\n\napply[T, U](values: T[], callback: T -> U pure) -> List[U] is\n    let applied = LIST[U]()\n\n    for value in values do\n        applied.add(callback(value))\n    od\n\n    return applied\nsi\n\nshout(word: string) -> string => \"{word.to_upper()}!\"\n\nwrite_line(\"{$([1, 2, 3, 4, 5] |> apply(value => value * value))}\")\nwrite_line(\"{$([\"frog\", \"newt\", \"toad\"] |> apply(shout))}\");",
-  "fullSource": "use IO.Std.write_line\nuse Collections.List\nuse Collections.LIST\n\napply[T, U](values: T[], callback: T -> U pure) -> List[U] is\n    let applied = LIST[U]()\n\n    for value in values do\n        applied.add(callback(value))\n    od\n\n    return applied\nsi\n\nshout(word: string) -> string => \"{word.to_upper()}!\"\n\nwrite_line(\"{$([1, 2, 3, 4, 5] |> apply(value => value * value))}\")\nwrite_line(\"{$([\"frog\", \"newt\", \"toad\"] |> apply(shout))}\");\n",
+  "code": "use IO.Std.write_line\nuse Collections.List\nuse Collections.LIST\n\napply[T, U](values: T[], callback: T -> U pure) -> List[U] is\n    let applied = LIST[U]()\n\n    for value in values do\n        applied.add(callback(value))\n    od\n\n    return applied\nsi\n\nshout(word: string) -> string => \"{word.to_upper()}!\"\n\nwrite_line(\"{$([1, 2, 3, 4, 5] |> apply(value => value * value))}\")\nwrite_line(\"{$([\"frog\", \"newt\", \"toad\"] |> apply(shout))}\")",
+  "fullSource": "use IO.Std.write_line\nuse Collections.List\nuse Collections.LIST\n\napply[T, U](values: T[], callback: T -> U pure) -> List[U] is\n    let applied = LIST[U]()\n\n    for value in values do\n        applied.add(callback(value))\n    od\n\n    return applied\nsi\n\nshout(word: string) -> string => \"{word.to_upper()}!\"\n\nwrite_line(\"{$([1, 2, 3, 4, 5] |> apply(value => value * value))}\")\nwrite_line(\"{$([\"frog\", \"newt\", \"toad\"] |> apply(shout))}\")\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

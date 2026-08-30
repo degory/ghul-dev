@@ -1,20 +1,20 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 class Animal abstract is
-    name() -> string;
+    name() -> string
 si
 
 class CAT: Animal is
     init() is si
-    name() -> string => "cat";
-    purr() -> string => "purr";
+    name() -> string => "cat"
+    purr() -> string => "purr"
 si
 
-any_animal() -> Animal => CAT();
+any_animal() -> Animal => CAT()
 
-let pet mut = any_animal();
+let pet mut = any_animal()
 // >>>
-pet = CAT();
+pet = CAT()
 // assigning a CAT narrows pet to CAT, so purr() is in reach
-write_line(pet.purr());
+write_line(pet.purr())
 // <<<

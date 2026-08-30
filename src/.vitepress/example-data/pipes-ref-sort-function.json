@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-sort-function",
   "snippet": false,
-  "code": "sort[T](source: Iterable[T]) -> Pipe[T] pure;\n\nsort[T](\n    source: Iterable[T],\n    comparer: Collections.IComparer[T]\n) -> Pipe[T] pure;\n\nsort[T](\n    source: Iterable[T],\n    compare: (T, T) -> int pure\n) -> Pipe[T] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\nsort[T](source: Iterable[T]) -> Pipe[T] pure;\n\nsort[T](\n    source: Iterable[T],\n    comparer: Collections.IComparer[T]\n) -> Pipe[T] pure;\n\nsort[T](\n    source: Iterable[T],\n    compare: (T, T) -> int pure\n) -> Pipe[T] pure;\n\nentry() is si\n",
+  "code": "sort[T](source: Iterable[T]) -> Pipe[T] pure\n\nsort[T](\n    source: Iterable[T],\n    comparer: Collections.IComparer[T]\n) -> Pipe[T] pure\n\nsort[T](\n    source: Iterable[T],\n    compare: (T, T) -> int pure\n) -> Pipe[T] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\nsort[T](source: Iterable[T]) -> Pipe[T] pure\n\nsort[T](\n    source: Iterable[T],\n    comparer: Collections.IComparer[T]\n) -> Pipe[T] pure\n\nsort[T](\n    source: Iterable[T],\n    compare: (T, T) -> int pure\n) -> Pipe[T] pure\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

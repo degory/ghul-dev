@@ -1,8 +1,8 @@
 {
   "name": "functional-programming-8",
   "snippet": false,
-  "code": "struct THING(name: string);\nlet thing = THING(\"a thing\");\n\nthing.name = \"change it\";",
-  "fullSource": "// expect: error\nstruct THING(name: string);\n\nlet thing = THING(\"a thing\");\n\nthing.name = \"change it\";\n",
+  "code": "struct THING(name: string)\nlet thing = THING(\"a thing\")\n\nthing.name = \"change it\"",
+  "fullSource": "// expect: error\nstruct THING(name: string)\n\nlet thing = THING(\"a thing\")\n\nthing.name = \"change it\"\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [1],

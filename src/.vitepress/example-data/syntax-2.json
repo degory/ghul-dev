@@ -1,8 +1,8 @@
 {
   "name": "syntax-2",
   "snippet": false,
-  "code": "use IO.Std.write_line;\n\ngreet(name: string) is\n    write_line(\"hello, {name}\");\nsi\n\ngreet(\"world\");",
-  "fullSource": "use IO.Std.write_line;\n\ngreet(name: string) is\n    write_line(\"hello, {name}\");\nsi\n\ngreet(\"world\");\n",
+  "code": "use IO.Std.write_line\n\ngreet(name: string) is\n    write_line(\"hello, {name}\")\nsi\n\ngreet(\"world\")",
+  "fullSource": "use IO.Std.write_line\n\ngreet(name: string) is\n    write_line(\"hello, {name}\")\nsi\n\ngreet(\"world\")\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

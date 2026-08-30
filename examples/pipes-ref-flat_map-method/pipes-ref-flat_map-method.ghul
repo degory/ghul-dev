@@ -1,12 +1,12 @@
-use Collections.Iterable;
-use Collections.LIST;
-use Collections.MAP;
-use Collections.SET;
-use Ghul.Pipes.INDEXED_VALUE;
+use Collections.Iterable
+use Collections.LIST
+use Collections.MAP
+use Collections.SET
+use Ghul.Pipes.INDEXED_VALUE
 
 trait Pipe[T] is
 // >>>
-    flat_map[U](mapper: (T) -> Iterable[U] pure) -> Pipe[U] pure;
+    flat_map[U](mapper: (T) -> Iterable[U] pure) -> Pipe[U] pure
 // <<<
 si
 

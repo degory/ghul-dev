@@ -1,8 +1,8 @@
 {
   "name": "language-basics-4",
   "snippet": false,
-  "code": "square(x: int) -> int => x * x;",
-  "fullSource": "square(x: int) -> int => x * x;\n\n",
+  "code": "square(x: int) -> int => x * x",
+  "fullSource": "square(x: int) -> int => x * x\n\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

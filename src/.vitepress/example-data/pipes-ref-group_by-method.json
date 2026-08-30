@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-group_by-method",
   "snippet": false,
-  "code": "group_by[K](\n    key_selector: (T) -> K pure\n) -> MAP[K, LIST[T]] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    group_by[K](\n        key_selector: (T) -> K pure\n    ) -> MAP[K, LIST[T]] pure;\nsi\n\nentry() is si\n",
+  "code": "group_by[K](\n    key_selector: (T) -> K pure\n) -> MAP[K, LIST[T]] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\n\ntrait Pipe[T] is\n    group_by[K](\n        key_selector: (T) -> K pure\n    ) -> MAP[K, LIST[T]] pure\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

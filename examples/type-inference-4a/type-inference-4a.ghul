@@ -1,6 +1,6 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
-class ORDER(customer: string?);
+class ORDER(customer: string?)
 
 // >>>
 describe(order: ORDER) is
@@ -9,9 +9,9 @@ describe(order: ORDER) is
         // within this branch order.customer is the
         // non-optional string, so .length is
         // reachable directly
-        write_line("customer name has {order.customer.length} chars");
+        write_line("customer name has {order.customer.length} chars")
     fi
 si
 
-describe(ORDER("alice"));
+describe(ORDER("alice"))
 // <<<

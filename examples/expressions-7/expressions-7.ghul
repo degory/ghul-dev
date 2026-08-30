@@ -1,6 +1,6 @@
 // >>>
-let things = ("thing", 12.34);
+let things = ("thing", 12.34)
 
-let name = things.`0;
-let weight = things.`1;
+let name = things.`0
+let weight = things.`1
 // <<<

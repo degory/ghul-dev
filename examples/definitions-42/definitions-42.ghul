@@ -1,17 +1,17 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 trait Named is
-    name: string;
-    label() -> string => "[{name}]";
+    name: string
+    label() -> string => "[{name}]"
 si
 
 union Token(name: string): Named is
-    KEYWORD(..);
-    IDENTIFIER(text: string, ..);
+    KEYWORD(..)
+    IDENTIFIER(text: string, ..)
 si
 
 // >>>
-let t = Token.IDENTIFIER("count", "identifier");
-write_line(t.name);    // identifier - shared primary-header field
-write_line(t.label()); // [identifier] - inherited trait default
+let t = Token.IDENTIFIER("count", "identifier")
+write_line(t.name)    // identifier - shared primary-header field
+write_line(t.label()) // [identifier] - inherited trait default
 // <<<

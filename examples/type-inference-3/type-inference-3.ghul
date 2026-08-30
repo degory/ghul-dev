@@ -1,9 +1,9 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 class Animal abstract is si
 
 class CAT(): Animal is
-    purr() -> string => "purr";
+    purr() -> string => "purr"
 si
 
 // >>>
@@ -11,9 +11,9 @@ greet(a: Animal) is
     if isa CAT(a) then
         // a is a parameter of greet, narrowed to CAT
         // in this branch
-        write_line(a.purr());
+        write_line(a.purr())
     fi
 si
 
-greet(CAT());
+greet(CAT())
 // <<<

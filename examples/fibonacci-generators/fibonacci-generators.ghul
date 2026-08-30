@@ -1,50 +1,50 @@
-use IO.Std.write_line;
-use Ghul.Pipes;
+use IO.Std.write_line
+use Ghul.Pipes
 
 // a generator: a function returning Pipe[T] that yields.
 // each yield produces the next value and pauses until the
 // caller asks for another, so this sequence is infinite
 // but only ever computed as far as it is consumed
 fibonacci() -> Pipe[int] is
-    let prev mut = 0;
-    let current mut = 1;
+    let prev mut = 0
+    let current mut = 1
     do
-        yield prev;
+        yield prev
         // the right hand side is evaluated before either
         // variable is assigned, so no temporary is needed
-        (prev, current) = (current, prev + current);
+        (prev, current) = (current, prev + current)
     od
 si
 
 factorial() -> Pipe[int] is
-    let n mut = 0;
-    let current mut = 1;
+    let n mut = 0
+    let current mut = 1
     do
-        yield current;
-        (n, current) = (n + 1, current * (n + 1));
+        yield current
+        (n, current) = (n + 1, current * (n + 1))
     od
 si
 
 // a generator is a Pipe, so the pipe operations compose
 // onto it directly
-write_line("first 10 fibonacci numbers: {fibonacci() |> take(10)}");
-write_line("first 10 factorial numbers: {factorial() |> take(10)}");
+write_line("first 10 fibonacci numbers: {fibonacci() |> take(10)}")
+write_line("first 10 factorial numbers: {factorial() |> take(10)}")
 
 let first_10_even =
     fibonacci()
         |> filter(x => x % 2 == 0)
-        |> take(10);
+        |> take(10)
 
-write_line("first 10 even fibonacci numbers: {first_10_even}");
+write_line("first 10 even fibonacci numbers: {first_10_even}")
 
 // take(10) bounds the infinite generators so the loop ends
 let indexed =
     fibonacci()
         |> zip(factorial())
         |> take(10)
-        |> index();
+        |> index()
 
 for (i, (fib, fact)) in indexed do
-    write_line("fibonacci {i} is {fib}");
-    write_line("factorial {i} is {fact}");
+    write_line("fibonacci {i} is {fib}")
+    write_line("factorial {i} is {fact}")
 od

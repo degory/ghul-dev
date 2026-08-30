@@ -1,14 +1,14 @@
-use Collections.Iterable;
-use Collections.LIST;
-use Collections.MAP;
-use Collections.SET;
-use Ghul.Pipes.INDEXED_VALUE;
+use Collections.Iterable
+use Collections.LIST
+use Collections.MAP
+use Collections.SET
+use Ghul.Pipes.INDEXED_VALUE
 
 trait Pipe[T] is
 // >>>
     group_by[K](
         key_selector: (T) -> K pure
-    ) -> MAP[K, LIST[T]] pure;
+    ) -> MAP[K, LIST[T]] pure
 // <<<
 si
 

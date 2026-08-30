@@ -1,19 +1,19 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 find_first[T](xs: T[], predicate: T -> bool) -> T? is
     for x in xs do
         if predicate(x) then
-            return x;
+            return x
         fi
     od
 
-    return null;
+    return null
 si
 
-let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0);    // T = int, a value type
-let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2); // T = string, a reference type
+let first_even = find_first([1, 3, 4, 7, 8], n => n % 2 == 0)    // T = int, a value type
+let first_long = find_first(["a", "bb", "ccc"], s => s.length > 2) // T = string, a reference type
 
-write_line("first even: {first_even ?? -1}");
-write_line("first long: {first_long ?? "none"}");
+write_line("first even: {first_even ?? -1}")
+write_line("first long: {first_long ?? "none"}")
 // <<<

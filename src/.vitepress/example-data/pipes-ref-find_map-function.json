@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-find_map-function",
   "snippet": false,
-  "code": "find_map[T,U](\n    source: Iterable[T],\n    mapper: (T) -> Ghul.MAYBE[U] pure\n) -> Ghul.MAYBE[U] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\nfind_map[T,U](\n    source: Iterable[T],\n    mapper: (T) -> Ghul.MAYBE[U] pure\n) -> Ghul.MAYBE[U] pure;\n\nentry() is si\n",
+  "code": "find_map[T,U](\n    source: Iterable[T],\n    mapper: (T) -> Ghul.MAYBE[U] pure\n) -> Ghul.MAYBE[U] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\nfind_map[T,U](\n    source: Iterable[T],\n    mapper: (T) -> Ghul.MAYBE[U] pure\n) -> Ghul.MAYBE[U] pure\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

@@ -1,8 +1,8 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 greet(name: string) -> void is
-    write_line("Hello, {name}!");
+    write_line("Hello, {name}!")
 si
 // <<<
 

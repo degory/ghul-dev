@@ -1,22 +1,22 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 class SLOT[T] is
-    _stored: T?;
+    _stored: T?
 
     init() is si
 
     put(value: T) is _stored = value; si
 
     take() -> T? is
-        let result = _stored;
-        _stored = null;
-        return result;
+        let result = _stored
+        _stored = null
+        return result
     si
 si
 
-let s = SLOT[int]();
-s.put(42);
-write_line("{s.take() ?? -1}");
-write_line("{s.take() ?? -1}");
+let s = SLOT[int]()
+s.put(42)
+write_line("{s.take() ?? -1}")
+write_line("{s.take() ?? -1}")
 // <<<

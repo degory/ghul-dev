@@ -1,8 +1,8 @@
 {
   "name": "definitions-22",
   "snippet": false,
-  "code": "class SCALER is\n    _scale: double;\n\n    scale(value: double) -> double => value * _scale;\nsi",
-  "fullSource": "class SCALER is\n    _scale: double;\n\n    scale(value: double) -> double => value * _scale;\nsi\n\n",
+  "code": "class SCALER is\n    _scale: double\n\n    scale(value: double) -> double => value * _scale\nsi",
+  "fullSource": "class SCALER is\n    _scale: double\n\n    scale(value: double) -> double => value * _scale\nsi\n\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

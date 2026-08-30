@@ -1,24 +1,24 @@
 class BOX[T] is
-    _value: T;
+    _value: T
 
     init() is
-        _value = _;
+        _value = _
     si
 
     set(value: T) is
-        _value = value;
+        _value = value
     si
 
-    get() -> T => _value;
+    get() -> T => _value
 si
 
 // >>>
 // m is BOX[?] here; the type argument is not
 // yet known
-let m = BOX();
+let m = BOX()
 
 // the set call takes an int, so m is BOX[int]
-m.set(42);
+m.set(42)
 
-let x = m.get();
+let x = m.get()
 // <<<

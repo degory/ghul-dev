@@ -1,8 +1,8 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 hypotenuse_squared(a: int, b: int) -> int =>
-    let a2 = a * a, b2 = b * b in a2 + b2;
+    let a2 = a * a, b2 = b * b in a2 + b2
 
-write_line("h2 = {hypotenuse_squared(3, 4)}");
+write_line("h2 = {hypotenuse_squared(3, 4)}")
 // <<<

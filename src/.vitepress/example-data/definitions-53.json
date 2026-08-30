@@ -1,8 +1,8 @@
 {
   "name": "definitions-53",
   "snippet": false,
-  "code": "class RECTANGLE(width: int, height: int) is\n    // a method body ends the same way a function body does\n    area() -> int is\n        width * height\n    si\n\n    // a terminated last statement is discarded, so this one returns explicitly\n    describe() -> string is\n        let label = \"{width}x{height}\";\n\n        return \"{label} = {area()}\";\n    si\nsi",
-  "fullSource": "use IO.Std.write_line;\n\nclass RECTANGLE(width: int, height: int) is\n    // a method body ends the same way a function body does\n    area() -> int is\n        width * height\n    si\n\n    // a terminated last statement is discarded, so this one returns explicitly\n    describe() -> string is\n        let label = \"{width}x{height}\";\n\n        return \"{label} = {area()}\";\n    si\nsi\n\nwrite_line(RECTANGLE(3, 4).describe())\n",
+  "code": "class RECTANGLE(width: int, height: int) is\n    // a method body ends the same way a function body does\n    area() -> int is\n        width * height\n    si\n\n    // a terminated last statement is discarded, so this one returns explicitly\n    describe() -> string is\n        let label = \"{width}x{height}\"\n\n        return \"{label} = {area()}\"\n    si\nsi",
+  "fullSource": "use IO.Std.write_line\n\nclass RECTANGLE(width: int, height: int) is\n    // a method body ends the same way a function body does\n    area() -> int is\n        width * height\n    si\n\n    // a terminated last statement is discarded, so this one returns explicitly\n    describe() -> string is\n        let label = \"{width}x{height}\"\n\n        return \"{label} = {area()}\"\n    si\nsi\n\nwrite_line(RECTANGLE(3, 4).describe())\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

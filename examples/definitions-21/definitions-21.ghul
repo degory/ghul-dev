@@ -1,16 +1,16 @@
 // >>>
 class COUNTER is
-    count: int;
+    count: int
 si
 
 class SIZED is
-    _size: int;
+    _size: int
 
     size: int => _size,
         = new_size is
-            assert new_size > 0;
+            assert new_size > 0
 
-            _size = new_size;
+            _size = new_size
         si
 si
 // <<<

@@ -1,8 +1,8 @@
 // >>>
 class SCALER is
-    _scale: double;
+    _scale: double
 
-    scale(value: double) -> double => value * _scale;
+    scale(value: double) -> double => value * _scale
 si
 // <<<
 

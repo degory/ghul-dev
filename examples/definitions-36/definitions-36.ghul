@@ -1,26 +1,26 @@
 // expect: error
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 struct VALUE is
-    public_property: int;
+    public_property: int
 
-    _private_property: string;
+    _private_property: string
 
     init(value: int) is
-        public_property = value;
-        _private_property = "value is {value}";
+        public_property = value
+        _private_property = "value is {value}"
     si
 si
 // <<<
 
 // >>>
-let v = VALUE(1234);
+let v = VALUE(1234)
 
 // OK: public_property is publicly readable
-write_line(v.public_property);
+write_line(v.public_property)
 
-write_line(v._private_property);
+write_line(v._private_property)
 
-v.public_property = 5678;
+v.public_property = 5678
 // <<<

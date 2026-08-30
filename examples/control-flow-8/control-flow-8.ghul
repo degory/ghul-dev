@@ -1,30 +1,30 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 union Maybe[T] is
-    YES(value: T);
-    NO;
+    YES(value: T)
+    NO
 si
 // <<<
 
 class Animal abstract is si
 
 class CAT(name: string): Animal is
-    purr() -> string => "{name} purrs";
+    purr() -> string => "{name} purrs"
 si
 
 // >>>
-let m: Maybe[int] = Maybe.YES(42);
+let m: Maybe[int] = Maybe.YES(42)
 
 if isa Maybe.YES(m) then
     // m is narrowed to Maybe.YES inside the branch,
     // so m.value is in scope
-    write_line("got value {m.value}");
+    write_line("got value {m.value}")
 fi
 
-let a: Animal = CAT("whiskers");
+let a: Animal = CAT("whiskers")
 if isa CAT(a) then
     // a is narrowed to CAT inside the branch
-    write_line(a.purr());
+    write_line(a.purr())
 fi
 // <<<

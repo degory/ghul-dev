@@ -3,7 +3,7 @@ namespace Example is
     // this definition of Test is visible unqualified
     // throughout the Example namespace:
     trait Test is
-        run();
+        run()
     si
 si
 // <<<

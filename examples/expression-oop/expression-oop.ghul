@@ -1,42 +1,42 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // a trait for rendering an expression as a string
 trait Renderable is
-    render() -> string;
+    render() -> string
 si
 
 // an abstract expression: body-less eval and render
 // make the class abstract, so only the subclasses below
 // can be constructed
 class Expr: Renderable is
-    eval() -> int;
-    render() -> string;
+    eval() -> int
+    render() -> string
 si
 
 class NUM(value: int): Expr is
-    eval() -> int => value;
-    render() -> string => "{value}";
+    eval() -> int => value
+    render() -> string => "{value}"
 si
 
 class ADD(left: Expr, right: Expr): Expr is
-    eval() -> int => left.eval() + right.eval();
-    render() -> string => "({left.render()} + {right.render()})";
+    eval() -> int => left.eval() + right.eval()
+    render() -> string => "({left.render()} + {right.render()})"
 si
 
 class MUL(left: Expr, right: Expr): Expr is
-    eval() -> int => left.eval() * right.eval();
-    render() -> string => "({left.render()} * {right.render()})";
+    eval() -> int => left.eval() * right.eval()
+    render() -> string => "({left.render()} * {right.render()})"
 si
 
 // (2 * (3 + 4)) = 14
-let expression = MUL(NUM(2), ADD(NUM(3), NUM(4)));
+let expression = MUL(NUM(2), ADD(NUM(3), NUM(4)))
 
-write_line("{expression.render()} = {expression.eval()}");
+write_line("{expression.render()} = {expression.eval()}")
 
 // any of the classes above satisfies Renderable, so a
 // value held at the trait renders whatever it really is
-let renderables: Renderable[] = [NUM(7), expression];
+let renderables: Renderable[] = [NUM(7), expression]
 
 for r in renderables do
-    write_line(r.render());
+    write_line(r.render())
 od

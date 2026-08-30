@@ -1,20 +1,20 @@
-use IO.Std.write_line;
-use Ghul.Pipes;
+use IO.Std.write_line
+use Ghul.Pipes
 
 // >>>
-let numbers = [1, 2, 3, 4, 5, 6];
+let numbers = [1, 2, 3, 4, 5, 6]
 
 // nothing has asked this pipe for elements yet, so peek's
 // action has not run
 let stages = numbers
     |> peek(x => write_line("  pulled {x}"))
     |> filter(x => x % 2 == 0)
-    |> map(x => x * 10);
+    |> map(x => x * 10)
 
-write_line("pipe built - nothing has run yet");
+write_line("pipe built - nothing has run yet")
 
 // collect_list is a terminal, so it asks for the elements
-let result = stages |> collect_list();
+let result = stages |> collect_list()
 
-write_line("result: {result |> join(", ")}");
+write_line("result: {result |> join(", ")}")
 // <<<

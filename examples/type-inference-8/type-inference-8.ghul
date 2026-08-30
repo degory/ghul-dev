@@ -1,6 +1,6 @@
 // >>>
-let person = ("alice", 30);
-let (name, age) = person;
+let person = ("alice", 30)
+let (name, age) = person
 
-let ((first, second), third) = (("a", "b"), "c");
+let ((first, second), third) = (("a", "b"), "c")
 // <<<

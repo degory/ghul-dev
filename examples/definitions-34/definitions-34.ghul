@@ -2,15 +2,15 @@
 class PUBLIC is
 si
 
-public_function() -> int => 0;
+public_function() -> int => 0
 
-public_property: int;
+public_property: int
 
 class _PRIVATE is
 si
 
-_private_function() -> int => 0;
+_private_function() -> int => 0
 
-_private_property: int;
+_private_property: int
 // <<<
 

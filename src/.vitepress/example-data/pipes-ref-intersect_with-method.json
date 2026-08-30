@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-intersect_with-method",
   "snippet": false,
-  "code": "intersect_with(right: Iterable[T]) -> Pipe[T] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    intersect_with(right: Iterable[T]) -> Pipe[T] pure;\nsi\n\nentry() is si\n",
+  "code": "intersect_with(right: Iterable[T]) -> Pipe[T] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\n\ntrait Pipe[T] is\n    intersect_with(right: Iterable[T]) -> Pipe[T] pure\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],
