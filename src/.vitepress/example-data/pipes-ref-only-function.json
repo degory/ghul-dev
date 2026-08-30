@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-only-function",
   "snippet": false,
-  "code": "only[T](source: Iterable[T]) -> T pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\nonly[T](source: Iterable[T]) -> T pure;\n\nentry() is si\n",
+  "code": "only[T](source: Iterable[T]) -> T pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\nonly[T](source: Iterable[T]) -> T pure\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

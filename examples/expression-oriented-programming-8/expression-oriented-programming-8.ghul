@@ -1,4 +1,4 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 // an if in tail position is the return value, so no branch needs its own return

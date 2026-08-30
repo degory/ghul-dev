@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-windows-function",
   "snippet": false,
-  "code": "windows[T](\n    source: Iterable[T],\n    size: int\n) -> Pipe[LIST[T]] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\nwindows[T](\n    source: Iterable[T],\n    size: int\n) -> Pipe[LIST[T]] pure;\n\nentry() is si\n",
+  "code": "windows[T](\n    source: Iterable[T],\n    size: int\n) -> Pipe[LIST[T]] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\nwindows[T](\n    source: Iterable[T],\n    size: int\n) -> Pipe[LIST[T]] pure\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

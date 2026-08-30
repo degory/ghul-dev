@@ -1,4 +1,4 @@
 // >>>
-let name: string? = "Alice"; // present
+let name: string? = "Alice" // present
 let nickname: string? = null; // absent
 // <<<

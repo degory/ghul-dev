@@ -1,6 +1,6 @@
 // >>>
-let a = _[int];   // 0
-let b: string? = _;   // null
+let a = _[int]   // 0
+let b: string? = _   // null
 // <<<
 
 // >>>

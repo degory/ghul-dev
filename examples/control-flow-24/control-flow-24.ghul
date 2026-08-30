@@ -1,8 +1,8 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 for i in 0..5 do
     // i will take values 0, 1, 2, 3, 4 in sequence
-    write_line(i);
+    write_line(i)
 od
 // <<<

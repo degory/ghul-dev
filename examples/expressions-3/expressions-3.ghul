@@ -1,7 +1,7 @@
 // >>>
-let s = 123.456; // single
-let t = 123.456E5; // single
+let s = 123.456 // single
+let t = 123.456E5 // single
 
-let d = 123.456D; // double
+let d = 123.456D // double
 let e = 123_456_789_000.0D // double
 // <<<

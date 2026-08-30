@@ -1,16 +1,16 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 class Animal abstract is si
 
 class CAT(name: string): Animal is
-    purr() -> string => "{name} purrs";
+    purr() -> string => "{name} purrs"
 si
 
-let a: Animal = CAT("whiskers");
+let a: Animal = CAT("whiskers")
 // >>>
-let c = cast CAT?(a);
+let c = cast CAT?(a)
 
 if c? then
-    write_line(c.purr());
+    write_line(c.purr())
 fi
 // <<<

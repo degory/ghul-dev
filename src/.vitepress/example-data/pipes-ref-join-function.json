@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-join-function",
   "snippet": false,
-  "code": "join[T](source: Iterable[T], separator: string) -> string pure;\n\njoin[T](source: Iterable[T]) -> string pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\njoin[T](source: Iterable[T], separator: string) -> string pure;\n\njoin[T](source: Iterable[T]) -> string pure;\n\nentry() is si\n",
+  "code": "join[T](source: Iterable[T], separator: string) -> string pure\n\njoin[T](source: Iterable[T]) -> string pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\njoin[T](source: Iterable[T], separator: string) -> string pure\n\njoin[T](source: Iterable[T]) -> string pure\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

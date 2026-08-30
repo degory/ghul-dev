@@ -1,7 +1,7 @@
 // >>>
 union Option[T] is
-    SOME(value: T);
-    NONE;
+    SOME(value: T)
+    NONE
 si
 // <<<
 

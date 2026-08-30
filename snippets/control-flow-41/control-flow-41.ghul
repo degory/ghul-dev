@@ -1,16 +1,16 @@
-let reader mut: StreamReader;
+let reader mut: StreamReader
 
 try
-    reader = StreamReader("file.txt");
+    reader = StreamReader("file.txt")
 
-    let content = reader.read_to_end();
-    write_line(content);
+    let content = reader.read_to_end()
+    write_line(content)
 
-    write_line("File processing completed.");
+    write_line("File processing completed.")
 
 finally
     if reader? then
-        reader.close();
+        reader.close()
     fi
 
     // Any exceptions will be thrown to the calling code

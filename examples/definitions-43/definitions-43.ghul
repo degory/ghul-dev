@@ -1,9 +1,9 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 union Shape is
-    CIRCLE(radius: int);
-    SQUARE(side: int);
+    CIRCLE(radius: int)
+    SQUARE(side: int)
 si
 
 partial Shape is
@@ -11,9 +11,9 @@ partial Shape is
         case self
         when c: CIRCLE then "circle r={c.radius}"
         when s: SQUARE then "square s={s.side}"
-        esac;
+        esac
 si
 
-let s: Shape = Shape.SQUARE(4);
+let s: Shape = Shape.SQUARE(4)
 write_line(s.describe());
 // <<<

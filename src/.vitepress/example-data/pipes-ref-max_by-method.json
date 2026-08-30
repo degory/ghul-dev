@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-max_by-method",
   "snippet": false,
-  "code": "max_by[K: Ghul.Comparable[K]](\n    key_selector: (T) -> K pure\n) -> Ghul.MAYBE[T] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    max_by[K: Ghul.Comparable[K]](\n        key_selector: (T) -> K pure\n    ) -> Ghul.MAYBE[T] pure;\nsi\n\nentry() is si\n",
+  "code": "max_by[K: Ghul.Comparable[K]](\n    key_selector: (T) -> K pure\n) -> Ghul.MAYBE[T] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\n\ntrait Pipe[T] is\n    max_by[K: Ghul.Comparable[K]](\n        key_selector: (T) -> K pure\n    ) -> Ghul.MAYBE[T] pure\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

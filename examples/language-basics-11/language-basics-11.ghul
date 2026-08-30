@@ -1,4 +1,4 @@
 // >>>
-let point: (int, int) = (10, 20);
+let point: (int, int) = (10, 20)
 let person: (string, int) = ("Alice", 30);
 // <<<

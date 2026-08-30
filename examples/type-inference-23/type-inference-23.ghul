@@ -1,4 +1,4 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 class Animal abstract is
     init() is si
@@ -6,12 +6,12 @@ si
 
 class CAT: Animal is
     init() is super.init(); si
-    purr() -> string => "purr";
+    purr() -> string => "purr"
 si
 
 class CARRIER(occupant: Animal) is
     swap(a: Animal) is
-        occupant = a;
+        occupant = a
     si
 si
 
@@ -19,10 +19,10 @@ si
 describe(carrier: CARRIER, other: Animal) is
     // a local holds one value, which no other function can
     // reach - its narrowing survives any call
-    let cat = carrier.occupant;
+    let cat = carrier.occupant
 
     if isa CAT(cat) then
-        carrier.swap(other);
+        carrier.swap(other)
         write_line(cat.purr())
     fi
 si

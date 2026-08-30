@@ -1,23 +1,23 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 union Result[T, E] is
-    OK(value: T);
-    ERR(error: E);
+    OK(value: T)
+    ERR(error: E)
 si
 // <<<
 
 some_call() -> Result[int, string] is
-    return Result.OK[int, string](42);
+    return Result.OK[int, string](42)
 si
 
 // >>>
-let r: Result[int, string] = some_call();
+let r: Result[int, string] = some_call()
 
 if isa Result.OK(r) then
-    write_line("ok: {r.value}");
+    write_line("ok: {r.value}")
 else
     // r is narrowed to Result.ERR here
-    write_line("err: {r.error}");
+    write_line("err: {r.error}")
 fi
 // <<<

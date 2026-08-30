@@ -1,8 +1,8 @@
 {
   "name": "control-flow-5",
   "snippet": false,
-  "code": "if list.count > 0 then\n    write_line(\"list is not empty\");\nelse\n    write_line(\"list is empty\");\nfi",
-  "fullSource": "use IO.Std.write_line;\n\nlet list = [1, 2, 3, 4];\nif list.count > 0 then\n    write_line(\"list is not empty\");\nelse\n    write_line(\"list is empty\");\nfi\n",
+  "code": "if list.count > 0 then\n    write_line(\"list is not empty\")\nelse\n    write_line(\"list is empty\")\nfi",
+  "fullSource": "use IO.Std.write_line\n\nlet list = [1, 2, 3, 4]\nif list.count > 0 then\n    write_line(\"list is not empty\")\nelse\n    write_line(\"list is empty\")\nfi\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

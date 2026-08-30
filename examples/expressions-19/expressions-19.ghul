@@ -1,4 +1,4 @@
-sum(x: int, y: int) -> int => x + y;
+sum(x: int, y: int) -> int => x + y
 
 // >>>
 let result = sum(10, 5);

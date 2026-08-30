@@ -1,11 +1,11 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 let area = (
-    let width = 4;
-    let height = 5;
+    let width = 4
+    let height = 5
     width * height
-);
+)
 
 write_line("area = {area}");
 // <<<

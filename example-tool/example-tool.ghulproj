@@ -7,4 +7,9 @@
   <ItemGroup>
     <GhulSources Include="src/**/*.ghul" />
   </ItemGroup>
+
+  <ItemGroup>
+    <GhulOptions Include="--warn redundant-semicolon" />
+    <GhulOptions Include="--warn-as-error redundant-semicolon" Condition="'$(CI)' != ''" />
+  </ItemGroup>
 </Project>

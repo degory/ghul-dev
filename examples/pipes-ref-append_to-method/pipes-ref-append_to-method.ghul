@@ -1,19 +1,19 @@
-use Collections.Iterable;
-use Collections.LIST;
-use Collections.MAP;
-use Collections.SET;
-use Ghul.Pipes.INDEXED_VALUE;
+use Collections.Iterable
+use Collections.LIST
+use Collections.MAP
+use Collections.SET
+use Ghul.Pipes.INDEXED_VALUE
 
 trait Pipe[T] is
 // >>>
     append_to(
         into: System.Text.StringBuilder,
         separator: string
-    ) -> System.Text.StringBuilder;
+    ) -> System.Text.StringBuilder
 
     append_to(
         into: System.Text.StringBuilder
-    ) -> System.Text.StringBuilder;
+    ) -> System.Text.StringBuilder
 // <<<
 si
 

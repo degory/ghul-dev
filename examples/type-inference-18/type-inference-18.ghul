@@ -1,6 +1,6 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
-let f = x => x + 1;
+let f = x => x + 1
 write_line("{f(42)}");
 // <<<

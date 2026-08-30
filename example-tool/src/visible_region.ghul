@@ -1,37 +1,37 @@
 namespace ExampleTool is
-    use Collections.LIST;
-    use Collections.MAP;
-    use System.Text.StringBuilder;
+    use Collections.LIST
+    use Collections.MAP
+    use System.Text.StringBuilder
 
     // A `// >>>` line opens a visible region; `// <<<` closes it. The marker
     // lines and everything outside a region are scaffold — compiled and run,
     // but not displayed.
-    MARKER_OPEN: string static => "// >>>";
-    MARKER_CLOSE: string static => "// <<<";
+    MARKER_OPEN: string static => "// >>>"
+    MARKER_CLOSE: string static => "// <<<"
 
     // A hover span. Coordinates are 1-based line/column — both as the
     // analyser reports them (whole-file) and, after `VISIBLE_REGION.translate`,
     // relative to the displayed slice.
     class HOVER is
-        start_line: int public;
-        start_column: int public;
-        end_line: int public;
-        end_column: int public;
+        start_line: int public
+        start_column: int public
+        end_line: int public
+        end_column: int public
         // The formatted declaration head, no trailing `// kind` classifier;
         // it can span several lines for a wide signature. The analyser wraps
         // the argument list with its own layout engine.
-        signature: string public;
+        signature: string public
         // The kind classifier (`instance method`, `class`, `variant`, …), or
         // null when the symbol has none.
-        kind_label: string? public;
+        kind_label: string? public
 
         init(start_line: int, start_column: int, end_line: int, end_column: int, signature: string, kind_label: string?) is
-            self.start_line = start_line;
-            self.start_column = start_column;
-            self.end_line = end_line;
-            self.end_column = end_column;
-            self.signature = signature;
-            self.kind_label = kind_label;
+            self.start_line = start_line
+            self.start_column = start_column
+            self.end_line = end_line
+            self.end_column = end_column
+            self.signature = signature
+            self.kind_label = kind_label
         si
     si
 
@@ -42,20 +42,20 @@ namespace ExampleTool is
     // `parameter`). `modifiers` is the analyser's raw comma-separated
     // string (possibly empty) — `static`, `readonly`.
     class SEMANTIC_TOKEN is
-        start_line: int public;
-        start_column: int public;
-        end_line: int public;
-        end_column: int public;
-        token_type: string public;
-        modifiers: string public;
+        start_line: int public
+        start_column: int public
+        end_line: int public
+        end_column: int public
+        token_type: string public
+        modifiers: string public
 
         init(start_line: int, start_column: int, end_line: int, end_column: int, token_type: string, modifiers: string) is
-            self.start_line = start_line;
-            self.start_column = start_column;
-            self.end_line = end_line;
-            self.end_column = end_column;
-            self.token_type = token_type;
-            self.modifiers = modifiers;
+            self.start_line = start_line
+            self.start_column = start_column
+            self.end_line = end_line
+            self.end_column = end_column
+            self.token_type = token_type
+            self.modifiers = modifiers
         si
     si
 
@@ -65,18 +65,18 @@ namespace ExampleTool is
     // `label` is the terse ghost text (a direction sigil), `detail` the
     // explanation shown on hover, `code` a suppressable slug.
     class INLAY_HINT is
-        line: int public;
-        column: int public;
-        label: string public;
-        detail: string public;
-        code: string public;
+        line: int public
+        column: int public
+        label: string public
+        detail: string public
+        code: string public
 
         init(line: int, column: int, label: string, detail: string, code: string) is
-            self.line = line;
-            self.column = column;
-            self.label = label;
-            self.detail = detail;
-            self.code = code;
+            self.line = line
+            self.column = column
+            self.label = label
+            self.detail = detail
+            self.code = code
         si
     si
 
@@ -85,31 +85,31 @@ namespace ExampleTool is
     // `VISIBLE_REGION.translate_diagnostic`, relative to the displayed slice.
     // `severity` is "error" or "warning".
     class DIAGNOSTIC is
-        start_line: int public;
-        start_column: int public;
-        end_line: int public;
-        end_column: int public;
-        severity: string public;
-        message: string public;
+        start_line: int public
+        start_column: int public
+        end_line: int public
+        end_column: int public
+        severity: string public
+        message: string public
 
         init(start_line: int, start_column: int, end_line: int, end_column: int, severity: string, message: string) is
-            self.start_line = start_line;
-            self.start_column = start_column;
-            self.end_line = end_line;
-            self.end_column = end_column;
-            self.severity = severity;
-            self.message = message;
+            self.start_line = start_line
+            self.start_column = start_column
+            self.end_line = end_line
+            self.end_column = end_column
+            self.severity = severity
+            self.message = message
         si
     si
 
     // Where one original source line lands in the displayed slice.
     class DISPLAY_LINE is
-        line: int public;     // 1-based line in the displayed code
-        dedent: int public;   // leading-whitespace columns stripped from it
+        line: int public     // 1-based line in the displayed code
+        dedent: int public   // leading-whitespace columns stripped from it
 
         init(line: int, dedent: int) is
-            self.line = line;
-            self.dedent = dedent;
+            self.line = line
+            self.dedent = dedent
         si
     si
 
@@ -122,11 +122,11 @@ namespace ExampleTool is
     // two visible regions. The Vue component renders a faint ellipsis at
     // each marked position.
     class VISIBLE_REGION is
-        code: string public;
-        hidden_before: bool public;
-        hidden_after: bool public;
-        hidden_gaps_after_line: LIST[int] public;
-        _lines: MAP[int, DISPLAY_LINE];
+        code: string public
+        hidden_before: bool public
+        hidden_after: bool public
+        hidden_gaps_after_line: LIST[int] public
+        _lines: MAP[int, DISPLAY_LINE]
 
         init(
             code: string,
@@ -135,11 +135,11 @@ namespace ExampleTool is
             hidden_gaps_after_line: LIST[int],
             lines: MAP[int, DISPLAY_LINE]
         ) is
-            self.code = code;
-            self.hidden_before = hidden_before;
-            self.hidden_after = hidden_after;
-            self.hidden_gaps_after_line = hidden_gaps_after_line;
-            _lines = lines;
+            self.code = code
+            self.hidden_before = hidden_before
+            self.hidden_after = hidden_after
+            self.hidden_gaps_after_line = hidden_gaps_after_line
+            _lines = lines
         si
 
         // Translate one hover onto the displayed text. Null when the hover
@@ -150,20 +150,20 @@ namespace ExampleTool is
                 !_lines.contains_key(hover.start_line) \/
                 !_lines.contains_key(hover.end_line)
             then
-                return null;
+                return null
             fi
 
-            let start = _lines[hover.start_line];
-            let end = _lines[hover.end_line];
+            let start = _lines[hover.start_line]
+            let end = _lines[hover.end_line]
 
-            let start_column = hover.start_column - start.dedent;
-            let end_column = hover.end_column - end.dedent;
+            let start_column = hover.start_column - start.dedent
+            let end_column = hover.end_column - end.dedent
 
             if start_column < 1 \/ end_column < 1 then
-                return null;
+                return null
             fi
 
-            return HOVER(start.line, start_column, end.line, end_column, hover.signature, hover.kind_label);
+            return HOVER(start.line, start_column, end.line, end_column, hover.signature, hover.kind_label)
         si
 
         // Translate one diagnostic onto the displayed text. Null when it does
@@ -175,22 +175,22 @@ namespace ExampleTool is
                 !_lines.contains_key(diagnostic.start_line) \/
                 !_lines.contains_key(diagnostic.end_line)
             then
-                return null;
+                return null
             fi
 
-            let start = _lines[diagnostic.start_line];
-            let end = _lines[diagnostic.end_line];
+            let start = _lines[diagnostic.start_line]
+            let end = _lines[diagnostic.end_line]
 
-            let raw_start = diagnostic.start_column - start.dedent;
-            let raw_end = diagnostic.end_column - end.dedent;
+            let raw_start = diagnostic.start_column - start.dedent
+            let raw_end = diagnostic.end_column - end.dedent
 
-            let start_column = if raw_start < 1 then 1 else raw_start fi;
-            let end_column = if raw_end < 1 then 1 else raw_end fi;
+            let start_column = if raw_start < 1 then 1 else raw_start fi
+            let end_column = if raw_end < 1 then 1 else raw_end fi
 
             return DIAGNOSTIC(
                 start.line, start_column, end.line, end_column,
                 diagnostic.severity, diagnostic.message
-            );
+            )
         si
 
         // Translate one semantic token onto the displayed text. Null
@@ -202,23 +202,23 @@ namespace ExampleTool is
                 !_lines.contains_key(token.start_line) \/
                 !_lines.contains_key(token.end_line)
             then
-                return null;
+                return null
             fi
 
-            let start = _lines[token.start_line];
-            let end = _lines[token.end_line];
+            let start = _lines[token.start_line]
+            let end = _lines[token.end_line]
 
-            let start_column = token.start_column - start.dedent;
-            let end_column = token.end_column - end.dedent;
+            let start_column = token.start_column - start.dedent
+            let end_column = token.end_column - end.dedent
 
             if start_column < 1 \/ end_column < 1 then
-                return null;
+                return null
             fi
 
             return SEMANTIC_TOKEN(
                 start.line, start_column, end.line, end_column,
                 token.token_type, token.modifiers
-            );
+            )
         si
 
         // Translate one inlay hint onto the displayed text. Null when the hint
@@ -226,30 +226,30 @@ namespace ExampleTool is
         // column before the start of the line.
         translate_inlay(hint: INLAY_HINT) -> INLAY_HINT? is
             if !_lines.contains_key(hint.line) then
-                return null;
+                return null
             fi
 
-            let at = _lines[hint.line];
-            let column = hint.column - at.dedent;
+            let at = _lines[hint.line]
+            let column = hint.column - at.dedent
 
             if column < 1 then
-                return null;
+                return null
             fi
 
-            return INLAY_HINT(at.line, column, hint.label, hint.detail, hint.code);
+            return INLAY_HINT(at.line, column, hint.label, hint.detail, hint.code)
         si
     si
 
     _leading_whitespace(line: string) -> int is
-        let n mut = 0;
+        let n mut = 0
         for c in line do
             if c == ' ' \/ c == '\t' then
-                n = n + 1;
+                n = n + 1
             else
-                break;
+                break
             fi
         od
-        return n;
+        return n
     si
 
     // Strip the `// >>>` / `// <<<` region-marker lines from a source
@@ -258,37 +258,37 @@ namespace ExampleTool is
     // copy button, so the user gets a runnable file rather than just the
     // displayed slice.
     strip_markers(source: string) -> string is
-        let trailing_newline = source.length > 0 /\ source.ends_with('\n');
+        let trailing_newline = source.length > 0 /\ source.ends_with('\n')
 
         let body =
             if trailing_newline then
                 source.substring(0, source.length - 1)
             else
                 source
-            fi;
+            fi
 
-        let raw = LIST[string](body.split(['\n']));
-        let b = StringBuilder();
-        let first mut = true;
+        let raw = LIST[string](body.split(['\n']))
+        let b = StringBuilder()
+        let first mut = true
 
         for line in raw do
-            let trimmed = line.trim();
+            let trimmed = line.trim()
             if trimmed =~ MARKER_OPEN \/ trimmed =~ MARKER_CLOSE then
-                continue;
+                continue
             fi
 
             if !first then
-                b.append('\n');
+                b.append('\n')
             fi
-            first = false;
-            b.append(line);
+            first = false
+            b.append(line)
         od
 
         if trailing_newline then
-            b.append('\n');
+            b.append('\n')
         fi
 
-        return b.to_string();
+        return b.to_string()
     si
 
     // Slice the visible region(s) out of an example source and de-indent
@@ -301,114 +301,114 @@ namespace ExampleTool is
                 source.substring(0, source.length - 1)
             else
                 source
-            fi;
+            fi
 
-        let raw = LIST[string](body.split(['\n']));
+        let raw = LIST[string](body.split(['\n']))
 
-        let has_markers mut = false;
+        let has_markers mut = false
         for line in raw do
             if line.trim() =~ MARKER_OPEN then
-                has_markers = true;
+                has_markers = true
             fi
         od
 
         // Group visible lines into regions, carrying original 1-based numbers.
-        let regions = LIST[LIST[int]]();
+        let regions = LIST[LIST[int]]()
 
         if has_markers then
-            let current: LIST[int]? mut = null;
-            let i mut = 0;
+            let current: LIST[int]? mut = null
+            let i mut = 0
             while i < raw.count do
-                let trimmed = raw[i].trim();
+                let trimmed = raw[i].trim()
 
                 if trimmed =~ MARKER_OPEN then
-                    let fresh = LIST[int]();
-                    regions.add(fresh);
-                    current = fresh;
+                    let fresh = LIST[int]()
+                    regions.add(fresh)
+                    current = fresh
                 elif trimmed =~ MARKER_CLOSE then
-                    current = null;
+                    current = null
                 elif current? then
-                    current.add(i + 1);
+                    current.add(i + 1)
                 fi
 
-                i = i + 1;
+                i = i + 1
             od
         else
-            let all = LIST[int]();
-            let i mut = 0;
+            let all = LIST[int]()
+            let i mut = 0
             while i < raw.count do
-                all.add(i + 1);
-                i = i + 1;
+                all.add(i + 1)
+                i = i + 1
             od
-            regions.add(all);
+            regions.add(all)
         fi
 
-        let code = StringBuilder();
-        let lines = MAP[int, DISPLAY_LINE]();
-        let display mut = 0;
-        let first mut = true;
-        let hidden_gaps_after_line = LIST[int]();
-        let region_index mut = 0;
+        let code = StringBuilder()
+        let lines = MAP[int, DISPLAY_LINE]()
+        let display mut = 0
+        let first mut = true
+        let hidden_gaps_after_line = LIST[int]()
+        let region_index mut = 0
 
         for region in regions do
             // Common leading whitespace across this region's non-blank lines.
-            let dedent mut = 1_000_000_000;
+            let dedent mut = 1_000_000_000
             for original in region do
-                let text = raw[original - 1];
-                let ws = _leading_whitespace(text);
+                let text = raw[original - 1]
+                let ws = _leading_whitespace(text)
                 if ws < text.length /\ ws < dedent then
-                    dedent = ws;
+                    dedent = ws
                 fi
             od
             if dedent == 1_000_000_000 then
-                dedent = 0;
+                dedent = 0
             fi
 
             for original in region do
-                let text = raw[original - 1];
-                display = display + 1;
+                let text = raw[original - 1]
+                display = display + 1
 
                 if !first then
-                    code.append('\n');
+                    code.append('\n')
                 fi
-                first = false;
+                first = false
 
                 if text.length > dedent then
-                    code.append(text.substring(dedent));
+                    code.append(text.substring(dedent))
                 fi
 
-                lines[original] = DISPLAY_LINE(display, dedent);
+                lines[original] = DISPLAY_LINE(display, dedent)
             od
 
             if region_index < regions.count - 1 /\ region.count > 0 then
-                hidden_gaps_after_line.add(display);
+                hidden_gaps_after_line.add(display)
             fi
-            region_index = region_index + 1;
+            region_index = region_index + 1
         od
 
-        let hidden_before mut = false;
-        let hidden_after mut = false;
+        let hidden_before mut = false
+        let hidden_after mut = false
         if has_markers /\ regions.count > 0 /\ regions[0].count > 0 then
-            let first_visible = regions[0][0];
-            let last_region = regions[regions.count - 1];
-            let last_visible = last_region[last_region.count - 1];
+            let first_visible = regions[0][0]
+            let last_region = regions[regions.count - 1]
+            let last_visible = last_region[last_region.count - 1]
 
-            let i mut = 0;
+            let i mut = 0
             while i < first_visible - 1 do
-                let trimmed = raw[i].trim();
+                let trimmed = raw[i].trim()
                 if trimmed.length > 0 /\ !(trimmed =~ MARKER_OPEN) /\ !(trimmed =~ MARKER_CLOSE) then
-                    hidden_before = true;
+                    hidden_before = true
                 fi
-                i = i + 1;
+                i = i + 1
             od
 
-            let j mut = last_visible;
+            let j mut = last_visible
             while j < raw.count do
-                let trimmed = raw[j].trim();
+                let trimmed = raw[j].trim()
                 if trimmed.length > 0 /\ !(trimmed =~ MARKER_OPEN) /\ !(trimmed =~ MARKER_CLOSE) then
-                    hidden_after = true;
+                    hidden_after = true
                 fi
-                j = j + 1;
+                j = j + 1
             od
         fi
 
@@ -416,6 +416,6 @@ namespace ExampleTool is
             code.to_string(),
             hidden_before, hidden_after, hidden_gaps_after_line,
             lines
-        );
+        )
     si
 si

@@ -1,8 +1,8 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
-let rows = [("apples", 3), ("pears", 1), ("plums", 0)];
-let wanted = "pears";
+let rows = [("apples", 3), ("pears", 1), ("plums", 0)]
+let wanted = "pears"
 
 for row in rows do
     // ~wanted matches where the first element equals the

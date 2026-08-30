@@ -1,4 +1,4 @@
-use Example; // imports Example.TEST and Example.Test
+use Example // imports Example.TEST and Example.Test
 
 ...
 

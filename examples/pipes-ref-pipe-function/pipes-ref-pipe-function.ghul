@@ -1,8 +1,8 @@
-use Collections.Iterable;
-use Ghul.Pipes.Pipe;
+use Collections.Iterable
+use Ghul.Pipes.Pipe
 
 // >>>
-pipe[T](source: Iterable[T]) -> Pipe[T] pure;
+pipe[T](source: Iterable[T]) -> Pipe[T] pure
 // <<<
 
 entry() is si

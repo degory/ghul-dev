@@ -211,8 +211,8 @@ plain `Pipe[T]`.
 
 ```ghul
 union STREAM[T, S] is
-    DONE;
-    YIELD(value: T, state: S);
+    DONE
+    YIELD(value: T, state: S)
 si
 
 stream[T, S](

@@ -1,6 +1,6 @@
 // >>>
-let path_with_id = (path = "/tmp/my-file.txt", id = 1234);
+let path_with_id = (path = "/tmp/my-file.txt", id = 1234)
 
-let path = path_with_id.path;
+let path = path_with_id.path
 let id = path_with_id.id;
 // <<<

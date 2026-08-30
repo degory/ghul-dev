@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-sort-method",
   "snippet": false,
-  "code": "sort() -> Pipe[T] pure;\n\nsort(comparer: Collections.IComparer[T]) -> Pipe[T] pure;\n\nsort(compare: (T, T) -> int pure) -> Pipe[T] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    sort() -> Pipe[T] pure;\n\n    sort(comparer: Collections.IComparer[T]) -> Pipe[T] pure;\n\n    sort(compare: (T, T) -> int pure) -> Pipe[T] pure;\nsi\n\nentry() is si\n",
+  "code": "sort() -> Pipe[T] pure\n\nsort(comparer: Collections.IComparer[T]) -> Pipe[T] pure\n\nsort(compare: (T, T) -> int pure) -> Pipe[T] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\n\ntrait Pipe[T] is\n    sort() -> Pipe[T] pure\n\n    sort(comparer: Collections.IComparer[T]) -> Pipe[T] pure\n\n    sort(compare: (T, T) -> int pure) -> Pipe[T] pure\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

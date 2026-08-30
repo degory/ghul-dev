@@ -1,5 +1,5 @@
-use IO.Std.write_line;
-use Ghul.Pipes;
+use IO.Std.write_line
+use Ghul.Pipes
 
 // lazily generates an infinite sequence of
 // fibonacci numbers. the state is a (prev, current)
@@ -8,7 +8,7 @@ let fibonacci_sequence = stream(
     (0, 1),
     ((prev, current)) =>
         prev || (current, prev + current)
-);
+)
 
 // lazily generates an infinite sequence of
 // factorials. the state is an (n, factorial of n) tuple:
@@ -16,25 +16,25 @@ let factorial_sequence = stream(
     (0, 1),
     ((n, current)) =>
         current || (n + 1, current * (n + 1))
-);
+)
 
-let first_10_fib = fibonacci_sequence |> take(10);
-let first_10_fact = factorial_sequence |> take(10);
+let first_10_fib = fibonacci_sequence |> take(10)
+let first_10_fact = factorial_sequence |> take(10)
 
 let first_10_even =
     fibonacci_sequence
         |> filter(x => x % 2 == 0)
-        |> take(10);
+        |> take(10)
 
 write_line(
     "first 10 fibonacci numbers: {first_10_fib}"
-);
+)
 write_line(
     "first 10 factorial numbers: {first_10_fact}"
-);
+)
 write_line(
     "first 10 even fibonacci numbers: {first_10_even}"
-);
+)
 
 // the whole thing stays one expression: pair the two
 // sequences up, number them, and consume the result

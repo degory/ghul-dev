@@ -1,7 +1,7 @@
 if isa Tree.NODE(tree) then
     write_line(
         "left {tree.left}, right {tree.right}"
-    );
+    )
 elif isa Tree.LEAF(tree) then
-    write_line("leaf value {tree.value}");
+    write_line("leaf value {tree.value}")
 fi

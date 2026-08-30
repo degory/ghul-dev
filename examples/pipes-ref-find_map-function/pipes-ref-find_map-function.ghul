@@ -1,15 +1,15 @@
-use Collections.Iterable;
-use Collections.LIST;
-use Collections.MAP;
-use Collections.SET;
-use Ghul.Pipes.INDEXED_VALUE;
-use Ghul.Pipes.Pipe;
+use Collections.Iterable
+use Collections.LIST
+use Collections.MAP
+use Collections.SET
+use Ghul.Pipes.INDEXED_VALUE
+use Ghul.Pipes.Pipe
 
 // >>>
 find_map[T,U](
     source: Iterable[T],
     mapper: (T) -> Ghul.MAYBE[U] pure
-) -> Ghul.MAYBE[U] pure;
+) -> Ghul.MAYBE[U] pure
 // <<<
 
 entry() is si

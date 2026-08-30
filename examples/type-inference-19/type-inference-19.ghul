@@ -1,7 +1,7 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 let factorial = n rec =>
-    if n == 0 then 1 else n * rec(n - 1) fi;
+    if n == 0 then 1 else n * rec(n - 1) fi
 write_line("{factorial(5)}");
 // <<<

@@ -70,8 +70,8 @@ A kind constraint requires the type argument to be a particular kind of type. Fo
 
 ```ghul
 class CELL[T: struct] is
-    value: T;
-    init(value: T) is self.value = value; si
+    value: T
+    init(value: T) is self.value = value si
 si
 ```
 

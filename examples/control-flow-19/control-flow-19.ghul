@@ -1,9 +1,9 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
-let counter mut = 0;
+let counter mut = 0
 while counter < 5 do
-    write_line(counter);
-    counter = counter + 1;
+    write_line(counter)
+    counter = counter + 1
 od
 // <<<

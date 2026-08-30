@@ -1,16 +1,16 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
-let my_variable = 42;
+let my_variable = 42
 
 print_something(thing: string) is
-    write_line("The thing is: {thing}");
+    write_line("The thing is: {thing}")
 si
 
-print_something("a hello");
+print_something("a hello")
 
 class PERSON is
-    name: string;
-    age: int;
+    name: string
+    age: int
 si
 // <<<

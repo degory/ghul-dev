@@ -1,5 +1,5 @@
 namespace Analysis.Protocol is
-    use Collections.LIST;
+    use Collections.LIST
 
     // Client-side response DTOs for the JSON analysis protocol. Only the
     // shapes example-tool consumes are mirrored here — listen, diagnostics,
@@ -7,13 +7,13 @@ namespace Analysis.Protocol is
     // variant.
 
     class WIRE_DIAGNOSTIC is
-        path: string public;
-        start_line: int public;
-        start_column: int public;
-        end_line: int public;
-        end_column: int public;
-        severity: int public;
-        message: string public;
+        path: string public
+        start_line: int public
+        start_column: int public
+        end_line: int public
+        end_column: int public
+        severity: int public
+        message: string public
 
         init() is si
 
@@ -22,58 +22,58 @@ namespace Analysis.Protocol is
             start_line: int, start_column: int, end_line: int, end_column: int,
             severity: int, message: string
         ) is
-            self.path = path;
-            self.start_line = start_line;
-            self.start_column = start_column;
-            self.end_line = end_line;
-            self.end_column = end_column;
-            self.severity = severity;
-            self.message = message;
+            self.path = path
+            self.start_line = start_line
+            self.start_column = start_column
+            self.end_line = end_line
+            self.end_column = end_column
+            self.severity = severity
+            self.message = message
         si
     si
 
     class WIRE_HOVER_ENTRY is
-        start_line: int public;
-        start_column: int public;
-        end_line: int public;
-        end_column: int public;
+        start_line: int public
+        start_column: int public
+        end_line: int public
+        end_column: int public
         // The formatted declaration head, no trailing `// kind` classifier;
         // wrapped onto multiple lines for a wide signature. The classifier
         // travels separately in `kind_label`.
-        description: string public;
+        description: string public
         // The kind classifier (`instance method`, `class`, `variant`, …), or
         // null when the symbol has none (namespaces, labels).
-        kind_label: string? public;
+        kind_label: string? public
 
         init() is si
 
         init(start_line: int, start_column: int, end_line: int, end_column: int, description: string, kind_label: string?) is
-            self.start_line = start_line;
-            self.start_column = start_column;
-            self.end_line = end_line;
-            self.end_column = end_column;
-            self.description = description;
-            self.kind_label = kind_label;
+            self.start_line = start_line
+            self.start_column = start_column
+            self.end_line = end_line
+            self.end_column = end_column
+            self.description = description
+            self.kind_label = kind_label
         si
     si
 
     class WIRE_SEMANTIC_TOKEN is
-        start_line: int public;
-        start_column: int public;
-        end_line: int public;
-        end_column: int public;
-        token_type: string public;
-        modifiers: string public;
+        start_line: int public
+        start_column: int public
+        end_line: int public
+        end_column: int public
+        token_type: string public
+        modifiers: string public
 
         init() is si
 
         init(start_line: int, start_column: int, end_line: int, end_column: int, token_type: string, modifiers: string) is
-            self.start_line = start_line;
-            self.start_column = start_column;
-            self.end_line = end_line;
-            self.end_column = end_column;
-            self.token_type = token_type;
-            self.modifiers = modifiers;
+            self.start_line = start_line
+            self.start_column = start_column
+            self.end_line = end_line
+            self.end_column = end_column
+            self.token_type = token_type
+            self.modifiers = modifiers
         si
     si
 
@@ -81,20 +81,20 @@ namespace Analysis.Protocol is
     // sigil), `detail` the explanation shown on hover, `code` a suppressable
     // slug (`narrowing-null-compare`, `narrowing-killed`, …).
     class WIRE_INLAY_HINT is
-        line: int public;
-        column: int public;
-        label: string public;
-        detail: string public;
-        code: string public;
+        line: int public
+        column: int public
+        label: string public
+        detail: string public
+        code: string public
 
         init() is si
 
         init(line: int, column: int, label: string, detail: string, code: string) is
-            self.line = line;
-            self.column = column;
-            self.label = label;
-            self.detail = detail;
-            self.code = code;
+            self.line = line
+            self.column = column
+            self.label = label
+            self.detail = detail
+            self.code = code
         si
     si
 
@@ -105,7 +105,7 @@ namespace Analysis.Protocol is
     @System.Text.Json.Serialization.JsonDerivedType(typeof Response.SEMANTIC_TOKENS, "semantic_tokens")
     @System.Text.Json.Serialization.JsonDerivedType(typeof Response.INLAY_HINTS, "inlay_hints")
     union Response is
-        LISTEN(capabilities: LIST[string]);
+        LISTEN(capabilities: LIST[string])
 
         DIAGNOSTICS(
             diagnostics: LIST[WIRE_DIAGNOSTIC],
@@ -113,10 +113,10 @@ namespace Analysis.Protocol is
             phase: string,
             elapsed_ms: double,
             compile_needed: bool
-        );
+        )
 
-        HOVER_MAP(entries: LIST[WIRE_HOVER_ENTRY]);
-        SEMANTIC_TOKENS(tokens: LIST[WIRE_SEMANTIC_TOKEN]);
-        INLAY_HINTS(hints: LIST[WIRE_INLAY_HINT]);
+        HOVER_MAP(entries: LIST[WIRE_HOVER_ENTRY])
+        SEMANTIC_TOKENS(tokens: LIST[WIRE_SEMANTIC_TOKEN])
+        INLAY_HINTS(hints: LIST[WIRE_INLAY_HINT])
     si
 si

@@ -1,6 +1,6 @@
 namespace Example is
     trait Test is
-        run();
+        run()
     si
 
 // >>>

@@ -1,8 +1,8 @@
 {
   "name": "expressions-3",
   "snippet": false,
-  "code": "let s = 123.456; // single\nlet t = 123.456E5; // single\n\nlet d = 123.456D; // double\nlet e = 123_456_789_000.0D // double",
-  "fullSource": "let s = 123.456; // single\nlet t = 123.456E5; // single\n\nlet d = 123.456D; // double\nlet e = 123_456_789_000.0D // double\n",
+  "code": "let s = 123.456 // single\nlet t = 123.456E5 // single\n\nlet d = 123.456D // double\nlet e = 123_456_789_000.0D // double",
+  "fullSource": "let s = 123.456 // single\nlet t = 123.456E5 // single\n\nlet d = 123.456D // double\nlet e = 123_456_789_000.0D // double\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

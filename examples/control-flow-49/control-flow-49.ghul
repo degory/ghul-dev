@@ -1,15 +1,15 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 squares(limit: int) -> Ghul.Pipes.Pipe[int] is
-    let i mut = 1;
+    let i mut = 1
     while i <= limit do
-        yield i * i;
-        i = i + 1;
+        yield i * i
+        i = i + 1
     od
 si
 
 for s in squares(4) do
-    write_line(s);
+    write_line(s)
 od
 // <<<

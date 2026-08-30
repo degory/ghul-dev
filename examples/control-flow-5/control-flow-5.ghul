@@ -1,10 +1,10 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
-let list = [1, 2, 3, 4];
+let list = [1, 2, 3, 4]
 // >>>
 if list.count > 0 then
-    write_line("list is not empty");
+    write_line("list is not empty")
 else
-    write_line("list is empty");
+    write_line("list is empty")
 fi
 // <<<

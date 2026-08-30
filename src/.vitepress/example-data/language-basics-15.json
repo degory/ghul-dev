@@ -1,8 +1,8 @@
 {
   "name": "language-basics-15",
   "snippet": false,
-  "code": "let name: string? = \"Alice\"; // present\nlet nickname: string? = null; // absent",
-  "fullSource": "let name: string? = \"Alice\"; // present\nlet nickname: string? = null; // absent\n",
+  "code": "let name: string? = \"Alice\" // present\nlet nickname: string? = null; // absent",
+  "fullSource": "let name: string? = \"Alice\" // present\nlet nickname: string? = null; // absent\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

@@ -1,4 +1,4 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 class RECTANGLE(width: int, height: int) is
@@ -9,9 +9,9 @@ class RECTANGLE(width: int, height: int) is
 
     // a terminated last statement is discarded, so this one returns explicitly
     describe() -> string is
-        let label = "{width}x{height}";
+        let label = "{width}x{height}"
 
-        return "{label} = {area()}";
+        return "{label} = {area()}"
     si
 si
 // <<<

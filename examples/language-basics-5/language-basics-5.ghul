@@ -1,20 +1,20 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 process(item: int) is
 si
 
-let x = 1;
-let my_list = [1, 2, 3];
+let x = 1
+let my_list = [1, 2, 3]
 // >>>
 if x > 0 then
-    write_line("Positive");
+    write_line("Positive")
 elif x < 0 then
-    write_line("Negative");
+    write_line("Negative")
 else
-    write_line("Zero");
+    write_line("Zero")
 fi
 
 for item in my_list do
-    process(item);
+    process(item)
 od
 // <<<

@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-collect_array-function",
   "snippet": false,
-  "code": "collect_array[T](source: Iterable[T]) -> T[] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\ncollect_array[T](source: Iterable[T]) -> T[] pure;\n\nentry() is si\n",
+  "code": "collect_array[T](source: Iterable[T]) -> T[] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\ncollect_array[T](source: Iterable[T]) -> T[] pure\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

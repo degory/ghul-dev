@@ -1,8 +1,8 @@
 {
   "name": "expressions-5",
   "snippet": false,
-  "code": "let animals = [\"frog\", \"bat\", \"elephant\"]; // string[]\nlet things = [\"frog\", 1234, 12.5]; // object[]\nlet lists = [[1, 2], [3, 4], [5, 6], [7, 7]]; // int[][]",
-  "fullSource": "let animals = [\"frog\", \"bat\", \"elephant\"]; // string[]\nlet things = [\"frog\", 1234, 12.5]; // object[]\nlet lists = [[1, 2], [3, 4], [5, 6], [7, 7]]; // int[][]\n",
+  "code": "let animals = [\"frog\", \"bat\", \"elephant\"] // string[]\nlet things = [\"frog\", 1234, 12.5] // object[]\nlet lists = [[1, 2], [3, 4], [5, 6], [7, 7]]; // int[][]",
+  "fullSource": "let animals = [\"frog\", \"bat\", \"elephant\"] // string[]\nlet things = [\"frog\", 1234, 12.5] // object[]\nlet lists = [[1, 2], [3, 4], [5, 6], [7, 7]]; // int[][]\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

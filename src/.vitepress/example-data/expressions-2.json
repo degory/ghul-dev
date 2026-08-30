@@ -1,8 +1,8 @@
 {
   "name": "expressions-2",
   "snippet": false,
-  "code": "let c = 'c';\nlet u_macron = 'ū'",
-  "fullSource": "let c = 'c';\nlet u_macron = 'ū'\n",
+  "code": "let c = 'c'\nlet u_macron = 'ū'",
+  "fullSource": "let c = 'c'\nlet u_macron = 'ū'\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

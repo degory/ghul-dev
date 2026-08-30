@@ -1,18 +1,18 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 class CAT is
-    name: string;
-    is_friendly: bool;
+    name: string
+    is_friendly: bool
     init(name: string, is_friendly: bool) is
-        self.name = name;
-        self.is_friendly = is_friendly;
+        self.name = name
+        self.is_friendly = is_friendly
     si
 si
 
-find() -> CAT? => CAT("Tom", true);
+find() -> CAT? => CAT("Tom", true)
 
 // >>>
 if let c: CAT = find() /\ c.is_friendly then
-    write_line("friendly cat: {c.name}");
+    write_line("friendly cat: {c.name}")
 fi
 // <<<

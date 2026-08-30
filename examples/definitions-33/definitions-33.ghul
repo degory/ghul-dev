@@ -1,12 +1,12 @@
 namespace Example is
     trait Test is
-        run();
+        run()
     si
 si
 
 // >>>
 namespace UseExample is
-    use Example;
+    use Example
 
     class ANOTHER_TEST: Test is
         run() is si

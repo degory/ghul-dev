@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-map-method",
   "snippet": false,
-  "code": "map[U](mapper: (T) -> U pure) -> Pipe[U] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    map[U](mapper: (T) -> U pure) -> Pipe[U] pure;\nsi\n\nentry() is si\n",
+  "code": "map[U](mapper: (T) -> U pure) -> Pipe[U] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\n\ntrait Pipe[T] is\n    map[U](mapper: (T) -> U pure) -> Pipe[U] pure\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

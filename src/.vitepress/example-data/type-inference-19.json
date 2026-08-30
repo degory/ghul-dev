@@ -1,8 +1,8 @@
 {
   "name": "type-inference-19",
   "snippet": false,
-  "code": "let factorial = n rec =>\n    if n == 0 then 1 else n * rec(n - 1) fi;\nwrite_line(\"{factorial(5)}\");",
-  "fullSource": "use IO.Std.write_line;\n\nlet factorial = n rec =>\n    if n == 0 then 1 else n * rec(n - 1) fi;\nwrite_line(\"{factorial(5)}\");\n",
+  "code": "let factorial = n rec =>\n    if n == 0 then 1 else n * rec(n - 1) fi\nwrite_line(\"{factorial(5)}\");",
+  "fullSource": "use IO.Std.write_line\n\nlet factorial = n rec =>\n    if n == 0 then 1 else n * rec(n - 1) fi\nwrite_line(\"{factorial(5)}\");\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

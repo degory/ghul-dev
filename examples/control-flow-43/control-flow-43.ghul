@@ -1,14 +1,14 @@
 // >>>
-tries: int;
+tries: int
 // <<<
 
 // >>>
 try_something(limit: int) is
     if tries > limit then
-        return; // give up
+        return // give up
     fi
 
-    tries = tries + 1;
+    tries = tries + 1
 
     // do stuff
 si

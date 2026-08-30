@@ -1,20 +1,20 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 struct COUNTER is
-    _n: int field;
+    _n: int field
 
     init(n: int) is _n = n; si
 
     bump() is _n = _n + 1; si
 
-    value: int => _n;
+    value: int => _n
 si
 
-let original = COUNTER(0);
-let copy mut = original;
+let original = COUNTER(0)
+let copy mut = original
 
-copy.bump();
+copy.bump()
 
 write_line("original {original.value}, copy {copy.value}");
 // <<<

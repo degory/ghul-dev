@@ -1,4 +1,4 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 grade(score: int) -> string is
@@ -10,15 +10,15 @@ grade(score: int) -> string is
             when 8 then "B"
             when 7 then "C"
             else "F"
-            esac;
+            esac
 
         if band == "F" then "fail" else "pass ({band})" fi
-    );
+    )
 
-    return label;
+    return label
 si
 
-write_line(grade(95));
-write_line(grade(82));
+write_line(grade(95))
+write_line(grade(82))
 write_line(grade(60));
 // <<<

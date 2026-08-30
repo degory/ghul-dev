@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-reduce-method",
   "snippet": false,
-  "code": "reduce[TRunning](\n    seed: TRunning,\n    accumulator: (TRunning,T) -> TRunning pure\n) -> TRunning pure;\n\nreduce[TRunning,TOut](\n    seed: TRunning,\n    accumulator: (TRunning,T) -> TRunning pure,\n    mapper: (TRunning) -> TOut pure\n) -> TOut pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    reduce[TRunning](\n        seed: TRunning,\n        accumulator: (TRunning,T) -> TRunning pure\n    ) -> TRunning pure;\n\n    reduce[TRunning,TOut](\n        seed: TRunning,\n        accumulator: (TRunning,T) -> TRunning pure,\n        mapper: (TRunning) -> TOut pure\n    ) -> TOut pure;\nsi\n\nentry() is si\n",
+  "code": "reduce[TRunning](\n    seed: TRunning,\n    accumulator: (TRunning,T) -> TRunning pure\n) -> TRunning pure\n\nreduce[TRunning,TOut](\n    seed: TRunning,\n    accumulator: (TRunning,T) -> TRunning pure,\n    mapper: (TRunning) -> TOut pure\n) -> TOut pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\n\ntrait Pipe[T] is\n    reduce[TRunning](\n        seed: TRunning,\n        accumulator: (TRunning,T) -> TRunning pure\n    ) -> TRunning pure\n\n    reduce[TRunning,TOut](\n        seed: TRunning,\n        accumulator: (TRunning,T) -> TRunning pure,\n        mapper: (TRunning) -> TOut pure\n    ) -> TOut pure\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

@@ -1,17 +1,17 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 class Animal abstract is si
 
 class CAT(): Animal is
-    purr() -> string => "purr";
+    purr() -> string => "purr"
 si
 
-class CARRIER(occupant: Animal);
+class CARRIER(occupant: Animal)
 
 // >>>
 describe(carrier: CARRIER) is
     if let cat: CAT = carrier.occupant then
-        write_line(cat.purr());
+        write_line(cat.purr())
     fi
 si
 

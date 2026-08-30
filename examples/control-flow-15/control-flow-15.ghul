@@ -1,32 +1,32 @@
-use IO.Std.write_line;
-use Collections;
+use IO.Std.write_line
+use Collections
 
 class STRING_READER is
-    _lines: List[string];
-    _index: int;
+    _lines: List[string]
+    _index: int
 
     init(lines: List[string]) is
-        _lines = lines;
+        _lines = lines
     si
 
     read_line() -> string? is
         if _index < _lines.count then
-            let line = _lines[_index];
-            _index = _index + 1;
-            return line;
+            let line = _lines[_index]
+            _index = _index + 1
+            return line
         fi
 
-        return null;
+        return null
     si
 si
 
-let reader = STRING_READER(["the only line"]);
+let reader = STRING_READER(["the only line"])
 // >>>
 if let line = reader.read_line() then
     // reader.read_line() yields string?;
     // line is string here
-    write_line("read: {line}");
+    write_line("read: {line}")
 else
-    write_line("end of input");
+    write_line("end of input")
 fi
 // <<<

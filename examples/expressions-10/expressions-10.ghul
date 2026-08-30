@@ -1,8 +1,8 @@
 // >>>
-let simple_add = (x: int, y: int) => x + y;
+let simple_add = (x: int, y: int) => x + y
 
 let complex_add = (x: int, y: int) is
-    let result = x + y;
-    return result;
+    let result = x + y
+    return result
 si;
 // <<<

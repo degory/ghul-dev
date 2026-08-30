@@ -1,31 +1,31 @@
 namespace ExampleTool is
-    use System.Text.StringBuilder;
-    use Collections.Iterable;
+    use System.Text.StringBuilder
+    use Collections.Iterable
 
     _json_string(s: string) -> string is
-        let b = StringBuilder();
+        let b = StringBuilder()
 
-        b.append('"');
+        b.append('"')
 
         for c in s do
             if c == '"' then
-                b.append("\\\"");
+                b.append("\\\"")
             elif c == '\\' then
-                b.append("\\\\");
+                b.append("\\\\")
             elif c == '\n' then
-                b.append("\\n");
+                b.append("\\n")
             elif c == '\r' then
-                b.append("\\r");
+                b.append("\\r")
             elif c == '\t' then
-                b.append("\\t");
+                b.append("\\t")
             else
-                b.append(c);
+                b.append(c)
             fi
         od
 
-        b.append('"');
+        b.append('"')
 
-        return b.to_string();
+        return b.to_string()
     si
 
     // Render one example's artifact as JSON: the displayed code, the run
@@ -47,127 +47,127 @@ namespace ExampleTool is
         inlay_hints: Iterable[INLAY_HINT],
         snippet: bool
     ) -> string is
-        let b = StringBuilder();
+        let b = StringBuilder()
 
-        b.append("{{\n");
-        b.append("  \"name\": "); b.append(_json_string(name)); b.append(",\n");
-        b.append("  \"snippet\": "); b.append(if snippet then "true" else "false" fi); b.append(",\n");
-        b.append("  \"code\": "); b.append(_json_string(code)); b.append(",\n");
-        b.append("  \"fullSource\": "); b.append(_json_string(full_source)); b.append(",\n");
-        b.append("  \"hiddenBefore\": "); b.append(if hidden_before then "true" else "false" fi); b.append(",\n");
-        b.append("  \"hiddenAfter\": "); b.append(if hidden_after then "true" else "false" fi); b.append(",\n");
-        b.append("  \"hiddenGapsAfterLine\": [");
-        let first_gap mut = true;
+        b.append("{{\n")
+        b.append("  \"name\": "); b.append(_json_string(name)); b.append(",\n")
+        b.append("  \"snippet\": "); b.append(if snippet then "true" else "false" fi); b.append(",\n")
+        b.append("  \"code\": "); b.append(_json_string(code)); b.append(",\n")
+        b.append("  \"fullSource\": "); b.append(_json_string(full_source)); b.append(",\n")
+        b.append("  \"hiddenBefore\": "); b.append(if hidden_before then "true" else "false" fi); b.append(",\n")
+        b.append("  \"hiddenAfter\": "); b.append(if hidden_after then "true" else "false" fi); b.append(",\n")
+        b.append("  \"hiddenGapsAfterLine\": [")
+        let first_gap mut = true
         for gap in hidden_gaps_after_line do
             if !first_gap then
-                b.append(", ");
+                b.append(", ")
             fi
-            first_gap = false;
-            b.append("{gap}");
+            first_gap = false
+            b.append("{gap}")
         od
-        b.append("],\n");
-        b.append("  \"output\": "); b.append(_json_string(output)); b.append(",\n");
-        b.append("  \"diagnostics\": [");
+        b.append("],\n")
+        b.append("  \"output\": "); b.append(_json_string(output)); b.append(",\n")
+        b.append("  \"diagnostics\": [")
 
-        let first_diagnostic mut = true;
+        let first_diagnostic mut = true
         for d in diagnostics do
             if !first_diagnostic then
-                b.append(",");
+                b.append(",")
             fi
-            first_diagnostic = false;
+            first_diagnostic = false
 
-            b.append("\n    {{ ");
-            b.append("\"startLine\": {d.start_line}, ");
-            b.append("\"startColumn\": {d.start_column}, ");
-            b.append("\"endLine\": {d.end_line}, ");
-            b.append("\"endColumn\": {d.end_column}, ");
-            b.append("\"severity\": "); b.append(_json_string(d.severity)); b.append(", ");
-            b.append("\"message\": "); b.append(_json_string(d.message));
-            b.append(" }}");
+            b.append("\n    {{ ")
+            b.append("\"startLine\": {d.start_line}, ")
+            b.append("\"startColumn\": {d.start_column}, ")
+            b.append("\"endLine\": {d.end_line}, ")
+            b.append("\"endColumn\": {d.end_column}, ")
+            b.append("\"severity\": "); b.append(_json_string(d.severity)); b.append(", ")
+            b.append("\"message\": "); b.append(_json_string(d.message))
+            b.append(" }}")
         od
 
         if !first_diagnostic then
-            b.append("\n  ");
+            b.append("\n  ")
         fi
 
-        b.append("],\n");
-        b.append("  \"hovers\": [");
+        b.append("],\n")
+        b.append("  \"hovers\": [")
 
-        let first mut = true;
+        let first mut = true
         for h in hovers do
             if !first then
-                b.append(",");
+                b.append(",")
             fi
-            first = false;
+            first = false
 
-            b.append("\n    {{ ");
-            b.append("\"startLine\": {h.start_line}, ");
-            b.append("\"startColumn\": {h.start_column}, ");
-            b.append("\"endLine\": {h.end_line}, ");
-            b.append("\"endColumn\": {h.end_column}, ");
-            b.append("\"text\": "); b.append(_json_string(h.signature)); b.append(", ");
-            b.append("\"signature\": "); b.append(_json_string(h.signature)); b.append(", ");
-            b.append("\"kindLabel\": "); b.append(_json_string(h.kind_label ?? ""));
-            b.append(" }}");
+            b.append("\n    {{ ")
+            b.append("\"startLine\": {h.start_line}, ")
+            b.append("\"startColumn\": {h.start_column}, ")
+            b.append("\"endLine\": {h.end_line}, ")
+            b.append("\"endColumn\": {h.end_column}, ")
+            b.append("\"text\": "); b.append(_json_string(h.signature)); b.append(", ")
+            b.append("\"signature\": "); b.append(_json_string(h.signature)); b.append(", ")
+            b.append("\"kindLabel\": "); b.append(_json_string(h.kind_label ?? ""))
+            b.append(" }}")
         od
 
         if !first then
-            b.append("\n  ");
+            b.append("\n  ")
         fi
 
-        b.append("],\n");
-        b.append("  \"inlayHints\": [");
+        b.append("],\n")
+        b.append("  \"inlayHints\": [")
 
-        let first_inlay mut = true;
+        let first_inlay mut = true
         for i in inlay_hints do
             if !first_inlay then
-                b.append(",");
+                b.append(",")
             fi
-            first_inlay = false;
+            first_inlay = false
 
-            b.append("\n    {{ ");
-            b.append("\"line\": {i.line}, ");
-            b.append("\"column\": {i.column}, ");
-            b.append("\"label\": "); b.append(_json_string(i.label)); b.append(", ");
-            b.append("\"detail\": "); b.append(_json_string(i.detail)); b.append(", ");
-            b.append("\"code\": "); b.append(_json_string(i.code));
-            b.append(" }}");
+            b.append("\n    {{ ")
+            b.append("\"line\": {i.line}, ")
+            b.append("\"column\": {i.column}, ")
+            b.append("\"label\": "); b.append(_json_string(i.label)); b.append(", ")
+            b.append("\"detail\": "); b.append(_json_string(i.detail)); b.append(", ")
+            b.append("\"code\": "); b.append(_json_string(i.code))
+            b.append(" }}")
         od
 
         if !first_inlay then
-            b.append("\n  ");
+            b.append("\n  ")
         fi
 
-        b.append("],\n");
-        b.append("  \"semanticTokens\": [");
+        b.append("],\n")
+        b.append("  \"semanticTokens\": [")
 
-        let first_token mut = true;
+        let first_token mut = true
         for t in semantic_tokens do
             if !first_token then
-                b.append(",");
+                b.append(",")
             fi
-            first_token = false;
+            first_token = false
 
-            b.append("\n    {{ ");
-            b.append("\"startLine\": {t.start_line}, ");
-            b.append("\"startColumn\": {t.start_column}, ");
-            b.append("\"endLine\": {t.end_line}, ");
-            b.append("\"endColumn\": {t.end_column}, ");
-            b.append("\"tokenType\": "); b.append(_json_string(t.token_type));
+            b.append("\n    {{ ")
+            b.append("\"startLine\": {t.start_line}, ")
+            b.append("\"startColumn\": {t.start_column}, ")
+            b.append("\"endLine\": {t.end_line}, ")
+            b.append("\"endColumn\": {t.end_column}, ")
+            b.append("\"tokenType\": "); b.append(_json_string(t.token_type))
 
             if t.modifiers.length > 0 then
-                b.append(", \"modifiers\": "); b.append(_json_string(t.modifiers));
+                b.append(", \"modifiers\": "); b.append(_json_string(t.modifiers))
             fi
 
-            b.append(" }}");
+            b.append(" }}")
         od
 
         if !first_token then
-            b.append("\n  ");
+            b.append("\n  ")
         fi
 
-        b.append("]\n}}\n");
+        b.append("]\n}}\n")
 
-        return b.to_string();
+        return b.to_string()
     si
 si

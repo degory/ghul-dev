@@ -1,4 +1,4 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 print_something[T](t: T) => write_line("something is {t}");

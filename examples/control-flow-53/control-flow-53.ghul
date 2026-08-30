@@ -1,12 +1,12 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
-let status = 500;
+let status = 500
 // >>>
 let label = case status
 when 200 then "ok"
 when 500, 501, 502 then "server error"
 else "other"
-esac;
+esac
 
 write_line(label);
 // <<<

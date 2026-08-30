@@ -1,7 +1,7 @@
-struct POINT(x: double, y: double);
+struct POINT(x: double, y: double)
 
 // >>>
-let origin = POINT(0.0D, 0.0D);
+let origin = POINT(0.0D, 0.0D)
 
 // or up, or down, or even left, depending on
 // your co-ordinate system!

@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-append_to-method",
   "snippet": false,
-  "code": "append_to(\n    into: System.Text.StringBuilder,\n    separator: string\n) -> System.Text.StringBuilder;\n\nappend_to(\n    into: System.Text.StringBuilder\n) -> System.Text.StringBuilder;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    append_to(\n        into: System.Text.StringBuilder,\n        separator: string\n    ) -> System.Text.StringBuilder;\n\n    append_to(\n        into: System.Text.StringBuilder\n    ) -> System.Text.StringBuilder;\nsi\n\nentry() is si\n",
+  "code": "append_to(\n    into: System.Text.StringBuilder,\n    separator: string\n) -> System.Text.StringBuilder\n\nappend_to(\n    into: System.Text.StringBuilder\n) -> System.Text.StringBuilder",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\n\ntrait Pipe[T] is\n    append_to(\n        into: System.Text.StringBuilder,\n        separator: string\n    ) -> System.Text.StringBuilder\n\n    append_to(\n        into: System.Text.StringBuilder\n    ) -> System.Text.StringBuilder\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

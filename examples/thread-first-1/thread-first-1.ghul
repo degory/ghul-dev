@@ -1,9 +1,9 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
-class BOX(value: int);
+class BOX(value: int)
 
-twice(x: int) -> int => x * 2;
-describe(b: BOX) -> string => "box of {b.value}";
+twice(x: int) -> int => x * 2
+describe(b: BOX) -> string => "box of {b.value}"
 
 // '|>' threads its left side in as the first argument of the call on
 // its right, so a chain reads left-to-right instead of nesting

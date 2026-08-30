@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-any-method",
   "snippet": false,
-  "code": "any(predicate: (T) -> bool pure) -> bool pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\n\ntrait Pipe[T] is\n    any(predicate: (T) -> bool pure) -> bool pure;\nsi\n\nentry() is si\n",
+  "code": "any(predicate: (T) -> bool pure) -> bool pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\n\ntrait Pipe[T] is\n    any(predicate: (T) -> bool pure) -> bool pure\nsi\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

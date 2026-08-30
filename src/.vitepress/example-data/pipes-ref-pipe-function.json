@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-pipe-function",
   "snippet": false,
-  "code": "pipe[T](source: Iterable[T]) -> Pipe[T] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Ghul.Pipes.Pipe;\n\npipe[T](source: Iterable[T]) -> Pipe[T] pure;\n\nentry() is si\n",
+  "code": "pipe[T](source: Iterable[T]) -> Pipe[T] pure",
+  "fullSource": "use Collections.Iterable\nuse Ghul.Pipes.Pipe\n\npipe[T](source: Iterable[T]) -> Pipe[T] pure\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

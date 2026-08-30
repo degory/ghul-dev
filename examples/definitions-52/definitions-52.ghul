@@ -1,21 +1,21 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 // every instance member of a pure type must read and never
 // write; a bodiless member holds implementors to the same rule
 trait NAMED pure is
-    name: string;
-    label() -> string;
+    name: string
+    label() -> string
 si
 
 class USER: NAMED is
-    name: string;
+    name: string
 
     init(name: string) is
         self.name = name
     si
 
-    label() -> string => "<{name}>";
+    label() -> string => "<{name}>"
 si
 
 write_line(USER("ada").label())

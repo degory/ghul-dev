@@ -1,8 +1,8 @@
 {
   "name": "functional-programming-2",
   "snippet": false,
-  "code": "// map\nlet doubled = [1, 2, 3, 4, 5] |> map(x => x * 2);\nwrite_line(\"doubled: {doubled}\");\n\n// filter\nlet evens = [1, 2, 3, 4, 5] |> filter(x => x % 2 == 0);\nwrite_line(\"evens: {evens}\");\n\n// reduce\nlet sum = [1, 2, 3, 4, 5] |> reduce(0, (acc, x) => acc + x);\nwrite_line(\"sum: {sum}\");",
-  "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\n// map\nlet doubled = [1, 2, 3, 4, 5] |> map(x => x * 2);\nwrite_line(\"doubled: {doubled}\");\n\n// filter\nlet evens = [1, 2, 3, 4, 5] |> filter(x => x % 2 == 0);\nwrite_line(\"evens: {evens}\");\n\n// reduce\nlet sum = [1, 2, 3, 4, 5] |> reduce(0, (acc, x) => acc + x);\nwrite_line(\"sum: {sum}\");\n",
+  "code": "// map\nlet doubled = [1, 2, 3, 4, 5] |> map(x => x * 2)\nwrite_line(\"doubled: {doubled}\")\n\n// filter\nlet evens = [1, 2, 3, 4, 5] |> filter(x => x % 2 == 0)\nwrite_line(\"evens: {evens}\")\n\n// reduce\nlet sum = [1, 2, 3, 4, 5] |> reduce(0, (acc, x) => acc + x)\nwrite_line(\"sum: {sum}\");",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\n// map\nlet doubled = [1, 2, 3, 4, 5] |> map(x => x * 2)\nwrite_line(\"doubled: {doubled}\")\n\n// filter\nlet evens = [1, 2, 3, 4, 5] |> filter(x => x % 2 == 0)\nwrite_line(\"evens: {evens}\")\n\n// reduce\nlet sum = [1, 2, 3, 4, 5] |> reduce(0, (acc, x) => acc + x)\nwrite_line(\"sum: {sum}\");\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

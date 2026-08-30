@@ -1,12 +1,12 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 union Shape is
-    CIRCLE(radius: double);
-    SQUARE(side: double);
+    CIRCLE(radius: double)
+    SQUARE(side: double)
 si
 
-use Shape.CIRCLE;
-use Shape.SQUARE;
+use Shape.CIRCLE
+use Shape.SQUARE
 
 // >>>
 area(s: Shape) -> double =>
@@ -15,8 +15,8 @@ area(s: Shape) -> double =>
     case s
     when c: CIRCLE then 3.14159d * c.radius * c.radius
     when q: SQUARE then q.side * q.side
-    esac;
+    esac
 
-write_line("{area(CIRCLE(2.0d))}");
+write_line("{area(CIRCLE(2.0d))}")
 write_line("{area(SQUARE(3.0d))}");
 // <<<

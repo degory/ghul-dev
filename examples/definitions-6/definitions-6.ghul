@@ -1,8 +1,8 @@
 // >>>
-sum_two_ints(i: int, j: int) -> int => i + j;
+sum_two_ints(i: int, j: int) -> int => i + j
 
 sum_three_ints(i: int, j: int, k: int) -> int is
-    return i + j + k;
+    return i + j + k
 si
 // <<<
 

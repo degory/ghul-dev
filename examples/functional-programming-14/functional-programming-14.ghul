@@ -1,17 +1,17 @@
 // >>>
 union Shape is
-    CIRCLE(radius: double);
-    SQUARE(side: double);
+    CIRCLE(radius: double)
+    SQUARE(side: double)
 si
 
 union Option[T] is
-    SOME(value: T);
-    NONE;
+    SOME(value: T)
+    NONE
 si
 
 union Result[T, E] is
-    OK(value: T);
-    ERROR(error: E);
+    OK(value: T)
+    ERROR(error: E)
 si
 // <<<
 

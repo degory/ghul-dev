@@ -1,8 +1,8 @@
 {
   "name": "type-inference-20",
   "snippet": false,
-  "code": "let length_of = x => x.length;\nwrite_line(\"{length_of(\"hello\")}\");",
-  "fullSource": "use IO.Std.write_line;\n\nlet length_of = x => x.length;\nwrite_line(\"{length_of(\"hello\")}\");\n",
+  "code": "let length_of = x => x.length\nwrite_line(\"{length_of(\"hello\")}\");",
+  "fullSource": "use IO.Std.write_line\n\nlet length_of = x => x.length\nwrite_line(\"{length_of(\"hello\")}\");\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

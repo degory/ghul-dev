@@ -1,22 +1,22 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 class Animal abstract is si
 
 class CAT(name: string): Animal is
-    purr() -> string => "{name} purrs";
+    purr() -> string => "{name} purrs"
 si
 
 class DOG(name: string): Animal is
-    bark() -> string => "{name} barks";
+    bark() -> string => "{name} barks"
 si
 
-let a: Animal = DOG("rover");
+let a: Animal = DOG("rover")
 // >>>
 if let c: CAT = a then
-    write_line(c.purr());
+    write_line(c.purr())
 elif let d: DOG = a then
-    write_line(d.bark());
+    write_line(d.bark())
 else
-    write_line("some other animal");
+    write_line("some other animal")
 fi
 // <<<

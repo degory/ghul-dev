@@ -1,23 +1,23 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 union Color is
-    RED;
-    GREEN;
-    BLUE;
+    RED
+    GREEN
+    BLUE
 si
 
 union Result[T, E] is
-    OK(value: T) default;
-    ERROR(error: E);
+    OK(value: T) default
+    ERROR(error: E)
 si
 
-lookup() -> Result[int, string] => Result.OK(42);
+lookup() -> Result[int, string] => Result.OK(42)
 
 // >>>
-let c = Color.RED;                   // unit variant, referenced without parentheses
-write_line("red: {c =~ Color.RED}"); // true
+let c = Color.RED                   // unit variant, referenced without parentheses
+write_line("red: {c =~ Color.RED}") // true
 
-let r = lookup();
-write_line("present: {r?}");         // true - r holds the default OK variant
+let r = lookup()
+write_line("present: {r?}")         // true - r holds the default OK variant
 write_line("value: {r!}");           // 42 - unwraps the OK payload
 // <<<

@@ -1,6 +1,6 @@
 // >>>
 apply[T](f: T -> T, x: T) -> T =>
-    f(x);
+    f(x)
 
 apply_if[T](f: T -> T, x: T, predicate: T -> bool) -> T =>
     if predicate(x) then f(x) else x fi;

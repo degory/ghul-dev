@@ -1,9 +1,9 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
-lookup() -> string? => null;
+lookup() -> string? => null
 
 // >>>
-let name = lookup();
-let greeting = "hello, {name ?? "stranger"}";
+let name = lookup()
+let greeting = "hello, {name ?? "stranger"}"
 write_line(greeting);
 // <<<

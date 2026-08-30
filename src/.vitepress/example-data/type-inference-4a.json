@@ -1,8 +1,8 @@
 {
   "name": "type-inference-4a",
   "snippet": false,
-  "code": "describe(order: ORDER) is\n    if order.customer? then\n        // a presence test narrows the path itself:\n        // within this branch order.customer is the\n        // non-optional string, so .length is\n        // reachable directly\n        write_line(\"customer name has {order.customer.length} chars\");\n    fi\nsi\n\ndescribe(ORDER(\"alice\"));",
-  "fullSource": "use IO.Std.write_line;\n\nclass ORDER(customer: string?);\n\ndescribe(order: ORDER) is\n    if order.customer? then\n        // a presence test narrows the path itself:\n        // within this branch order.customer is the\n        // non-optional string, so .length is\n        // reachable directly\n        write_line(\"customer name has {order.customer.length} chars\");\n    fi\nsi\n\ndescribe(ORDER(\"alice\"));\n",
+  "code": "describe(order: ORDER) is\n    if order.customer? then\n        // a presence test narrows the path itself:\n        // within this branch order.customer is the\n        // non-optional string, so .length is\n        // reachable directly\n        write_line(\"customer name has {order.customer.length} chars\")\n    fi\nsi\n\ndescribe(ORDER(\"alice\"));",
+  "fullSource": "use IO.Std.write_line\n\nclass ORDER(customer: string?)\n\ndescribe(order: ORDER) is\n    if order.customer? then\n        // a presence test narrows the path itself:\n        // within this branch order.customer is the\n        // non-optional string, so .length is\n        // reachable directly\n        write_line(\"customer name has {order.customer.length} chars\")\n    fi\nsi\n\ndescribe(ORDER(\"alice\"));\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

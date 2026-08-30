@@ -1,8 +1,8 @@
 {
   "name": "expressions-9",
   "snippet": false,
-  "code": "let complex_add = (x: int, y: int) -> int is\n    let result = x + y;\n    return result;\nsi;",
-  "fullSource": "let complex_add = (x: int, y: int) -> int is\n    let result = x + y;\n    return result;\nsi;\n",
+  "code": "let complex_add = (x: int, y: int) -> int is\n    let result = x + y\n    return result\nsi;",
+  "fullSource": "let complex_add = (x: int, y: int) -> int is\n    let result = x + y\n    return result\nsi;\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

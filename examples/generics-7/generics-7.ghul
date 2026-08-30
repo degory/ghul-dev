@@ -1,16 +1,16 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 trait Greetable is
-    name: string;
+    name: string
 si
 
 // T must derive from Greetable, so .name is available on T
 greet[T: Greetable](x: T) is
-    write_line("hello, {x.name}");
+    write_line("hello, {x.name}")
 si
 
-class CAT(name: string): Greetable;
+class CAT(name: string): Greetable
 // <<<
 
 // >>>

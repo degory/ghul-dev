@@ -1,8 +1,8 @@
 {
   "name": "pipes-intro-thread-first",
   "snippet": false,
-  "code": "let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\n\nlet sum_of_even_squares = numbers\n    |> filter(x => x % 2 == 0)\n    |> map(x => x * x)\n    |> reduce(0, (total, x) => total + x);\n\nwrite_line(\"sum of even squares: {sum_of_even_squares}\");",
-  "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nlet numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\n\nlet sum_of_even_squares = numbers\n    |> filter(x => x % 2 == 0)\n    |> map(x => x * x)\n    |> reduce(0, (total, x) => total + x);\n\nwrite_line(\"sum of even squares: {sum_of_even_squares}\");\n",
+  "code": "let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n\nlet sum_of_even_squares = numbers\n    |> filter(x => x % 2 == 0)\n    |> map(x => x * x)\n    |> reduce(0, (total, x) => total + x)\n\nwrite_line(\"sum of even squares: {sum_of_even_squares}\");",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nlet numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n\nlet sum_of_even_squares = numbers\n    |> filter(x => x % 2 == 0)\n    |> map(x => x * x)\n    |> reduce(0, (total, x) => total + x)\n\nwrite_line(\"sum of even squares: {sum_of_even_squares}\");\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

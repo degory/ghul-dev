@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-cat-function",
   "snippet": false,
-  "code": "cat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T] pure;",
-  "fullSource": "use Collections.Iterable;\nuse Collections.LIST;\nuse Collections.MAP;\nuse Collections.SET;\nuse Ghul.Pipes.INDEXED_VALUE;\nuse Ghul.Pipes.Pipe;\n\ncat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T] pure;\n\nentry() is si\n",
+  "code": "cat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\ncat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T] pure\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],

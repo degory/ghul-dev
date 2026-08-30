@@ -1,19 +1,19 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 class Animal abstract is
-    name() -> string;
+    name() -> string
 si
 
 class CAT: Animal is
     init() is si
-    name() -> string => "cat";
-    purr() -> string => "purr";
+    name() -> string => "cat"
+    purr() -> string => "purr"
 si
 
 // T is bounded by Animal, so a T value narrows through Animal with isa
 describe[T: Animal](x: T) -> string =>
     if isa CAT(x) then x.purr()
     else x.name()
-    fi;
+    fi
 
 write_line(describe(CAT()));

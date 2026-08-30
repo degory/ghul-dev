@@ -1,15 +1,15 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 // one parameter at the tuple type, unpacked into a and b
-add_pair((a: int, b: int): (int, int)) -> int => a + b;
+add_pair((a: int, b: int): (int, int)) -> int => a + b
 
-write_line(add_pair((3, 4)));
+write_line(add_pair((3, 4)))
 
 // anonymous functions take the same form, element types
 // inferred from the sequence
-let pairs = [(1, 2), (3, 4)];
-let total = pairs | .map(((a, b)) => a + b) | .reduce(0, (acc, x) => acc + x);
+let pairs = [(1, 2), (3, 4)]
+let total = pairs | .map(((a, b)) => a + b) | .reduce(0, (acc, x) => acc + x)
 
 write_line("{total}")
 // <<<

@@ -1,8 +1,8 @@
 {
   "name": "functional-programming-9",
   "snippet": false,
-  "code": "let list = [1, 2, 3, 4, 5];\n\nlet doubled = list |> map(x => x * 2);\nwrite_line(\"doubled: {doubled}\");\n\n// the original list is unchanged:\nwrite_line(\"list: {list |> join(\", \")}\");",
-  "fullSource": "use IO.Std.write_line;\nuse Ghul.Pipes;\n\nlet list = [1, 2, 3, 4, 5];\n\nlet doubled = list |> map(x => x * 2);\nwrite_line(\"doubled: {doubled}\");\n\n// the original list is unchanged:\nwrite_line(\"list: {list |> join(\", \")}\");\n",
+  "code": "let list = [1, 2, 3, 4, 5]\n\nlet doubled = list |> map(x => x * 2)\nwrite_line(\"doubled: {doubled}\")\n\n// the original list is unchanged:\nwrite_line(\"list: {list |> join(\", \")}\");",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\nlet list = [1, 2, 3, 4, 5]\n\nlet doubled = list |> map(x => x * 2)\nwrite_line(\"doubled: {doubled}\")\n\n// the original list is unchanged:\nwrite_line(\"list: {list |> join(\", \")}\");\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
