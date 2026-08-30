@@ -16,4 +16,4 @@ totals(
 si
 // <<<
 
-totals([1, 2, 3]);
+totals([1, 2, 3])

@@ -24,5 +24,5 @@ write_line("bump = {c.bump()}")
 
 // expression-bodied anonymous function:
 let twice = (n: int) => n * 2
-write_line("twice(21) = {twice(21)}");
+write_line("twice(21) = {twice(21)}")
 // <<<

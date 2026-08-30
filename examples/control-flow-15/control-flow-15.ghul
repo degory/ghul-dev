@@ -23,7 +23,7 @@ si
 let reader = STRING_READER(["the only line"])
 // >>>
 if let line = reader.read_line() then
-    // reader.read_line() yields string?;
+    // reader.read_line() yields string?
     // line is string here
     write_line("read: {line}")
 else

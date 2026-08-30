@@ -13,5 +13,5 @@ class DOG(name: string, breed: string): ANIMAL is
     si
 si
 
-DOG("rex", "labrador", "sit");
+DOG("rex", "labrador", "sit")
 // <<<

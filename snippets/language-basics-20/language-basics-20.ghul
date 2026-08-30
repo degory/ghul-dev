@@ -10,4 +10,4 @@ let e = 1.0d + cast double(1)
 
 // OK: "hello" is a string, and string derives
 // from object
-let o: object = "hello";
+let o: object = "hello"

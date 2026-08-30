@@ -1,0 +1,14 @@
+test.ghul: 4,2..4,3: error: in type expression: expected ( or identifier but found int literal 1
+test.ghul: 4,2..4,3: error: syntax error: expected ] but found int literal 1
+test.ghul: 4,2..4,3: error: syntax error: expected = but found int literal 1
+test.ghul: 1,5..1,9: error: cannot qualify namespace or symbol alias
+test.ghul: 4,2..4,3: error: in type expression: expected ( or identifier but found int literal 1
+test.ghul: 4,3..4,4: error: in definition: expected @, [, class, enum, identifier, impl, namespace, operator, partial, struct, trait, union or use but found , 
+test.ghul: 4,6..4,7: error: in definition: expected @, [, class, enum, identifier, impl, namespace, operator, partial, struct, trait, union or use but found , 
+test.ghul: 4,9..4,10: error: in definition: expected @, [, class, enum, identifier, impl, namespace, operator, partial, struct, trait, union or use but found , 
+test.ghul: 4,12..4,13: error: in definition: expected @, [, class, enum, identifier, impl, namespace, operator, partial, struct, trait, union or use but found , 
+test.ghul: 4,15..4,16: error: in definition: expected @, [, class, enum, identifier, impl, namespace, operator, partial, struct, trait, union or use but found ] 
+test.ghul: 4,17..4,19: error: in definition: expected @, [, class, enum, identifier, impl, namespace, operator, partial, struct, trait, union or use but found |>
+test.ghul: 4,20..4,26: error: symbol not found: filter
+!!! failed !!!
+

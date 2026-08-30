@@ -22,5 +22,5 @@ write_line(v.public_property)
 
 write_line(v._private_property)
 
-v.public_property = 5678;
+v.public_property = 5678
 // <<<

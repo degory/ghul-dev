@@ -16,4 +16,4 @@ describe[T: Animal](x: T) -> string =>
     else x.name()
     fi
 
-write_line(describe(CAT()));
+write_line(describe(CAT()))

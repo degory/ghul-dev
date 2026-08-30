@@ -8,5 +8,5 @@ square(x: int) -> int pure => x * x
 apply(f: (int) -> int pure, x: int) -> int => f(x)
 
 write_line("apply(square, 5): {apply(square, 5)}")
-write_line("apply(anonymous, 5): {apply(x => x + 1, 5)}");
+write_line("apply(anonymous, 5): {apply(x => x + 1, 5)}")
 // <<<

@@ -13,5 +13,5 @@ let next = () => ( count = count + 1; count )
 
 write_line("next(): {next()}")
 write_line("next(): {next()}")
-write_line("count: {count}");
+write_line("count: {count}")
 // <<<

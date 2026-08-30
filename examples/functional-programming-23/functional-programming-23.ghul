@@ -18,5 +18,5 @@ area(s: Shape) -> double =>
     esac
 
 write_line("{area(CIRCLE(2.0d))}")
-write_line("{area(SQUARE(3.0d))}");
+write_line("{area(SQUARE(3.0d))}")
 // <<<

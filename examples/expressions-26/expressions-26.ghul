@@ -12,5 +12,5 @@ let peek = () -> int => counter
 bump(10)
 bump(5)
 
-write_line("counter = {counter}, peek() = {peek()}");
+write_line("counter = {counter}, peek() = {peek()}")
 // <<<

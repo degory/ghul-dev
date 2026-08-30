@@ -4,5 +4,5 @@ let b: string? = _   // null
 // <<<
 
 // >>>
-zero[T]() -> T => _;
+zero[T]() -> T => _
 // <<<

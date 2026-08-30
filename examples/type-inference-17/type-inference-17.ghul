@@ -20,5 +20,5 @@ let m = BOX()
 // the set call takes an int, so m is BOX[int]
 m.set(42)
 
-let x = m.get();
+let x = m.get()
 // <<<

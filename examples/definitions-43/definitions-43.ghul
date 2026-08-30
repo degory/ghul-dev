@@ -15,5 +15,5 @@ partial Shape is
 si
 
 let s: Shape = Shape.SQUARE(4)
-write_line(s.describe());
+write_line(s.describe())
 // <<<

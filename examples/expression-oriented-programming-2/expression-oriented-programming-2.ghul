@@ -10,5 +10,5 @@ day_kind(day: int) -> string =>
 
 write_line(day_kind(5))
 write_line(day_kind(3))
-write_line(day_kind(6));
+write_line(day_kind(6))
 // <<<

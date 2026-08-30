@@ -15,4 +15,4 @@ let first_number = numbers[0]
 
 IO.Std.write_line(
     "The first number is: {first_number}"
-);
+)

@@ -18,5 +18,5 @@ si
 let s = SLOT[int]()
 s.put(42)
 write_line("{s.take() ?? -1}")
-write_line("{s.take() ?? -1}");
+write_line("{s.take() ?? -1}")
 // <<<

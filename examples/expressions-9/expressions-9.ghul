@@ -2,5 +2,5 @@
 let complex_add = (x: int, y: int) -> int is
     let result = x + y
     return result
-si;
+si
 // <<<

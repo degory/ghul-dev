@@ -1,5 +1,5 @@
 let a = 10
 let b = 5
 // >>>
-let max = if a > b then a else b fi;
+let max = if a > b then a else b fi
 // <<<

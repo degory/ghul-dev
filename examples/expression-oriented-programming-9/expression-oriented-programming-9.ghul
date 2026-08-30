@@ -1,17 +1,17 @@
-use IO.Std.write_line;
+use IO.Std.write_line
 
 // >>>
 // each arm is a statement block, so it can hold locals and several
 // statements; its last statement is the arm's value
 grade(mark: int) -> string is
     if mark >= 90 then
-        let band = "top";
+        let band = "top band"
 
-        "{band} band"
+        band
     elif mark >= 50 then
-        let band = "middle";
+        let band = "middle band"
 
-        "{band} band"
+        band
     else
         "low band"
     fi
@@ -20,7 +20,7 @@ si
 // the same construct used as a statement: the arms are blocks there too
 announce(mark: int) is
     if mark >= 50 then
-        let verdict = grade(mark);
+        let verdict = grade(mark)
 
         write_line("pass: {verdict}")
     else
@@ -31,16 +31,16 @@ si
 // a loop body is a statement block whose last value goes nowhere:
 // a loop yields through break, not through its body's last statement
 total(marks: int[]) -> int is
-    let running mut = 0;
+    let running mut = 0
 
     for mark in marks do
         running = running + mark
-    od;
+    od
 
     running
 si
 
-write_line(grade(95));
-announce(60);
+write_line(grade(95))
+announce(60)
 write_line("{total([10, 20, 30])}")
 // <<<

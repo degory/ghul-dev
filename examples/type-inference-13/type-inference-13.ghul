@@ -4,5 +4,5 @@ class THING[T](value: T)
 
 // >>>
 let int_thing = THING(1234)
-let string_thing = THING("hello");
+let string_thing = THING("hello")
 // <<<

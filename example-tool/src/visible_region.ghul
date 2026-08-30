@@ -17,7 +17,7 @@ namespace ExampleTool is
         start_column: int public
         end_line: int public
         end_column: int public
-        // The formatted declaration head, no trailing `// kind` classifier;
+        // The formatted declaration head, no trailing `// kind` classifier
         // it can span several lines for a wide signature. The analyser wraps
         // the argument list with its own layout engine.
         signature: string public

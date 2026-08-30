@@ -10,4 +10,4 @@ class COUNTER is
 si
 
 let c = COUNTER(21)
-write_line(c.doubled());
+write_line(c.doubled())

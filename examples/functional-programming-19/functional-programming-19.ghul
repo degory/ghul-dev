@@ -9,5 +9,5 @@ let add_5 = curried_add(5)
 write_line("add_5(3): {add_5(3)}")
 
 let add_10 = curried_add(10)
-write_line("add_10(3): {add_10(3)}");
+write_line("add_10(3): {add_10(3)}")
 // <<<

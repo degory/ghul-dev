@@ -10,5 +10,5 @@ let size =
     else "large"
     esac
 
-write_line("size = {size}");
+write_line("size = {size}")
 // <<<

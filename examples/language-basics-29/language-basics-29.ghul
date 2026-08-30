@@ -10,5 +10,5 @@ find() -> PERSON? => null
 // >>>
 let p = find()
 let name = p?.name // string? - absent when p is absent
-write_line("name: {name ?? "unknown"}");
+write_line("name: {name ?? "unknown"}")
 // <<<

@@ -2,5 +2,5 @@ use IO.Std.write_line
 
 // >>>
 let f = x => x + 1
-write_line("{f(42)}");
+write_line("{f(42)}")
 // <<<

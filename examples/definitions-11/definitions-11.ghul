@@ -5,5 +5,5 @@ let origin = POINT(0.0D, 0.0D)
 
 // or up, or down, or even left, depending on
 // your co-ordinate system!
-let right = POINT(1.0D, 0.0D);
+let right = POINT(1.0D, 0.0D)
 // <<<

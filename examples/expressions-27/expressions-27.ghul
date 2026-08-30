@@ -3,5 +3,5 @@ use IO.Std.write_line
 // >>>
 let area = let r = 5 in r * r
 
-write_line("area = {area}");
+write_line("area = {area}")
 // <<<

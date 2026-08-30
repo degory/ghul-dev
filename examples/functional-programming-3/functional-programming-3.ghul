@@ -9,5 +9,5 @@ write_line("factorial(5): {factorial(5)}")
 // fibonacci
 let fibonacci = n rec =>
     if n <= 1 then n else rec(n - 1) + rec(n - 2) fi
-write_line("fibonacci(10): {fibonacci(10)}");
+write_line("fibonacci(10): {fibonacci(10)}")
 // <<<

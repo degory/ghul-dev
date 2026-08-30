@@ -11,6 +11,6 @@ si
 
 _private_function() -> int => 0
 
-_private_property: int;
+_private_property: int
 // <<<
 

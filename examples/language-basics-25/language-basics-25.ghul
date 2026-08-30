@@ -4,5 +4,5 @@ let gte = 4 >= 4 // true
 let lt = 3 < 1 // false
 let lte = 4 <= 4 // true
 let eq = 1 == 2 // false
-let neq = 1 != 2; // true
+let neq = 1 != 2 // true
 // <<<

@@ -19,5 +19,5 @@ write_line("red: {c =~ Color.RED}") // true
 
 let r = lookup()
 write_line("present: {r?}")         // true - r holds the default OK variant
-write_line("value: {r!}");           // 42 - unwraps the OK payload
+write_line("value: {r!}")           // 42 - unwraps the OK payload
 // <<<

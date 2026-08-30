@@ -18,5 +18,5 @@ impl Printer for List is
 si
 
 let xs: Printer = List.CONS(1, List.CONS(2, List.NIL))
-write_line(xs.print());
+write_line(xs.print())
 // <<<

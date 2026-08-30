@@ -8,5 +8,5 @@ when 500, 501, 502 then "server error"
 else "other"
 esac
 
-write_line(label);
+write_line(label)
 // <<<

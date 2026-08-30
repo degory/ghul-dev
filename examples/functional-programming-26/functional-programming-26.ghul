@@ -11,5 +11,5 @@ let times_2_then_add_1 = times_2 >> add_1
 write_line("times_2_then_add_1(5): {times_2_then_add_1(5)}")
 
 let pipeline = times_2 >> add_1 >> x => "[{x}]"
-write_line("pipeline(5): {pipeline(5)}");
+write_line("pipeline(5): {pipeline(5)}")
 // <<<

@@ -34,4 +34,4 @@ fi
 
 // ?? falls back when the value is absent
 let display = find_user(42) ?? "guest"
-write_line("signed in as {display}");
+write_line("signed in as {display}")

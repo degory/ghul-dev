@@ -2,4 +2,4 @@ use Example.TEST
 
 ...
 
-let t = TEST();
+let t = TEST()

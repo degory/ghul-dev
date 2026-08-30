@@ -14,4 +14,4 @@ let a = BOX(5)
 let b = BOX(10)
 
 assert a < b
-assert b >= a;
+assert b >= a

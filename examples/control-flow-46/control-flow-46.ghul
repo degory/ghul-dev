@@ -13,5 +13,5 @@ compute() -> Tasks.TASK[int] is
     return c
 si
 
-write_line("{compute().result}");
+write_line("{compute().result}")
 // <<<

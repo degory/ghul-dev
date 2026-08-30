@@ -10,5 +10,5 @@ let and_then =
 
 // true
 let or_else =
-    index >= list.count \/ list[index] != search_value;
+    index >= list.count \/ list[index] != search_value
 // <<<

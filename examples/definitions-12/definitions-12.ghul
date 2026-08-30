@@ -16,5 +16,5 @@ let copy mut = original
 
 copy.bump()
 
-write_line("original {original.value}, copy {copy.value}");
+write_line("original {original.value}, copy {copy.value}")
 // <<<

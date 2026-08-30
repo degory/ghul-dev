@@ -14,5 +14,5 @@ run_side_effects() -> Tasks.TASK is
     return
 si
 
-run_side_effects().wait();
+run_side_effects().wait()
 // <<<

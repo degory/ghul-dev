@@ -15,5 +15,5 @@ let base =
         DERIVED()
     else
         BASE()
-    fi;
+    fi
 // <<<

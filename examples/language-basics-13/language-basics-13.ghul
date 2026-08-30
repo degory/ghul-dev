@@ -4,5 +4,5 @@ let person = (name = "Alice", age = 30)
 let x = point.x
 let y = point.y
 let name = person.name
-let age = person.age;
+let age = person.age
 // <<<

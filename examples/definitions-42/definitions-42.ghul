@@ -13,5 +13,5 @@ si
 // >>>
 let t = Token.IDENTIFIER("count", "identifier")
 write_line(t.name)    // identifier - shared primary-header field
-write_line(t.label()); // [identifier] - inherited trait default
+write_line(t.label()) // [identifier] - inherited trait default
 // <<<

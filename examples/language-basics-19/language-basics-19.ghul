@@ -10,5 +10,5 @@ if maybe? then
 fi
 
 let forced: string = maybe!            // asserts present, throws if absent
-let safe: string = maybe ?? "fallback"; // falls back when absent
+let safe: string = maybe ?? "fallback" // falls back when absent
 // <<<

@@ -26,5 +26,5 @@ write_line(
         let doubled = midpoint * 2
         "doubled = {doubled}"
     )
-);
+)
 // <<<

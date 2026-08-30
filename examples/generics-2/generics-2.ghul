@@ -4,5 +4,5 @@ print_something[T](t: T) => write_line("something is {t}")
 
 // >>>
 print_something[int](1234)
-print_something[string]("hello");
+print_something[string]("hello")
 // <<<

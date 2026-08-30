@@ -14,5 +14,5 @@ class VECTOR is
 si
 
 let sum = VECTOR(1, 2) + VECTOR(3, 4)
-write_line("({sum.x}, {sum.y})");
+write_line("({sum.x}, {sum.y})")
 // <<<

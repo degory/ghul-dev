@@ -13,5 +13,5 @@ describe(order: ORDER) is
     fi
 si
 
-describe(ORDER("alice"));
+describe(ORDER("alice"))
 // <<<

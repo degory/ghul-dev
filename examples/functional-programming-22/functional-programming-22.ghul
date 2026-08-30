@@ -6,7 +6,7 @@ use STREAM.YIELD
 // <<<
 
 // >>>
-// counting down. State and output are both int;
+// counting down. State and output are both int
 // the sequence ends when the state reaches zero.
 let counting = (n: int) =>
     stream(
@@ -72,5 +72,5 @@ let indexed =
 for (i, (fib, fact)) in indexed do
     write_line("fibonacci {i} is {fib}")
     write_line("factorial {i} is {fact}")
-od;
+od
 // <<<

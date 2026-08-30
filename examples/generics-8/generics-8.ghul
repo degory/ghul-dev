@@ -23,5 +23,5 @@ si
 let cats: Box[CAT] = CAT_BOX()
 let animals: Box[Animal] = cats   // covariance
 
-write_line(animals.contents().speak());
+write_line(animals.contents().speak())
 // <<<

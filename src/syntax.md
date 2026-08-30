@@ -35,9 +35,13 @@ In this example `then`, `else` and `fi` all delimit blocks. The blocks they deli
 
 ## semicolons
 
-Semicolons are required: to separate statements and definitions. 
+A semicolon separates two statements or definitions written on one line. At the end of a line it is not needed: wherever the grammar could accept one, a line break stands in for it.
 
-While the compiler _could_ still unambiguously parse correct programs without requiring semicolons anywhere, having them at the end expression statements makes it clearer to the parser if the expression is incomplete or not well formed.
+That is the whole of what a `;` does. Nothing reads it for meaning - a body's tail value is judged by its type, not by whether the statement carrying it was terminated - so the style throughout this site leaves it off.
+
+A few line-start tokens keep a wrapped expression unambiguous. A line opening with `.`, `|` or `|>` carries the expression above it on, which is how member chains and pipes wrap. A line opening with `(`, `[`, an operator or `rec` starts something new, so a wrapped operator expression puts the operator at the end of the line rather than the start of the next.
+
+Two warnings police the choice, and both are off unless asked for: `--warn missing-semicolon` reports every inferred boundary, for a project that writes its terminators out, and `--warn redundant-semicolon` reports a written one a line break would infer anyway.
 
 ## definitions and statements
 

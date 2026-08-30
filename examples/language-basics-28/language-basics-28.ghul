@@ -5,5 +5,5 @@ lookup() -> string? => null
 // >>>
 let name = lookup()
 let greeting = "hello, {name ?? "stranger"}"
-write_line(greeting);
+write_line(greeting)
 // <<<

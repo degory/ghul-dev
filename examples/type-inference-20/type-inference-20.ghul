@@ -2,5 +2,5 @@ use IO.Std.write_line
 
 // >>>
 let length_of = x => x.length
-write_line("{length_of("hello")}");
+write_line("{length_of("hello")}")
 // <<<

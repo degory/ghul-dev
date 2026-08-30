@@ -42,4 +42,4 @@ write_line("3 * 4 = {ints.calculate("*", 3, 4)}")
 
 let strings = CALCULATOR([("+", STRING_APPEND())])
 
-write_line("ghūl + lang = {strings.calculate("+", "ghūl", "lang")}");
+write_line("ghūl + lang = {strings.calculate("+", "ghūl", "lang")}")

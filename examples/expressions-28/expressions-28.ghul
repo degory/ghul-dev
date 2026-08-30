@@ -7,5 +7,5 @@ let area = (
     width * height
 )
 
-write_line("area = {area}");
+write_line("area = {area}")
 // <<<

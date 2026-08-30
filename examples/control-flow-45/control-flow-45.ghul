@@ -7,5 +7,5 @@ default_return() -> int is
 si
 let i = default_return()
 assert i == 0
-write_line("default return value is {i}");
+write_line("default return value is {i}")
 // <<<

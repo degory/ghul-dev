@@ -12,5 +12,5 @@ write_line("evens: {evens}")
 
 // reduce
 let sum = [1, 2, 3, 4, 5] |> reduce(0, (acc, x) => acc + x)
-write_line("sum: {sum}");
+write_line("sum: {sum}")
 // <<<

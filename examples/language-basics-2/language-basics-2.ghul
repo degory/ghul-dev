@@ -13,5 +13,5 @@ if x > 5 then
 fi
 
 // 'if' can also be used as an expression
-let z = if x > 5 then x else y fi;
+let z = if x > 5 then x else y fi
 // <<<

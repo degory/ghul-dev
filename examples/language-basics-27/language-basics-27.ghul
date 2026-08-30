@@ -17,5 +17,5 @@ s = "{s} World!"
 
 thing.property = i + j
 
-write_line("i = {i}, s = {s}, thing.property = {thing.property}");
+write_line("i = {i}, s = {s}, thing.property = {thing.property}")
 // <<<

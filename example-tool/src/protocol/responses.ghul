@@ -37,7 +37,7 @@ namespace Analysis.Protocol is
         start_column: int public
         end_line: int public
         end_column: int public
-        // The formatted declaration head, no trailing `// kind` classifier;
+        // The formatted declaration head, no trailing `// kind` classifier
         // wrapped onto multiple lines for a wide signature. The classifier
         // travels separately in `kind_label`.
         description: string public

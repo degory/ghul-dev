@@ -9,5 +9,5 @@ let sum_of_even_squares = numbers
     |> map(x => x * x)
     |> reduce(0, (total, x) => total + x)
 
-write_line("sum of even squares: {sum_of_even_squares}");
+write_line("sum of even squares: {sum_of_even_squares}")
 // <<<

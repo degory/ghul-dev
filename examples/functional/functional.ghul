@@ -49,4 +49,4 @@ fibonacci_sequence
                 "fibonacci {i} is {fib}\n"
                 "factorial {i} is {fact}"
             )
-    );
+    )

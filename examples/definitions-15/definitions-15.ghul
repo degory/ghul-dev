@@ -20,5 +20,5 @@ class LOUD(): Logged is
 si
 
 PLAIN().log("hello")
-LOUD().log("hello");
+LOUD().log("hello")
 // <<<

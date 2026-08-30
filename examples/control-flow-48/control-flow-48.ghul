@@ -16,5 +16,5 @@ si
 
 let result = sum_of_squares([1, 2, 3, 4]).result
 
-write_line("sum_of_squares = {result}");
+write_line("sum_of_squares = {result}")
 // <<<

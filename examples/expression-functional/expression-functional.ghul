@@ -30,4 +30,4 @@ render(e: Expr) -> string =>
 // (2 * (3 + 4)) = 14
 let expression = MUL(NUM(2), ADD(NUM(3), NUM(4)))
 
-write_line("{render(expression)} = {eval(expression)}");
+write_line("{render(expression)} = {eval(expression)}")

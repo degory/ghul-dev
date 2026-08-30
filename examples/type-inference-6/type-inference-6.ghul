@@ -15,5 +15,5 @@ describe(carrier: CARRIER) is
     fi
 si
 
-describe(CARRIER(CAT()));
+describe(CARRIER(CAT()))
 // <<<

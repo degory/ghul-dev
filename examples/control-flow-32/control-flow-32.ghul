@@ -41,5 +41,5 @@ write_line(classify(0))
 write_line(classify(3))
 write_line(classify(7))
 write_line(classify(13))
-write_line(classify(-5));
+write_line(classify(-5))
 // <<<

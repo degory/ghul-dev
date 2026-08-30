@@ -20,5 +20,5 @@ write_line("with get_hash_code: {with_hash.contains(WITH_HASH(1))}")
 
 let no_hash = SET[NO_HASH]()
 no_hash.add(NO_HASH(1))
-write_line("without get_hash_code: {no_hash.contains(NO_HASH(1))}");
+write_line("without get_hash_code: {no_hash.contains(NO_HASH(1))}")
 // <<<

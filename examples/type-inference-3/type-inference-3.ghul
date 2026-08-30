@@ -15,5 +15,5 @@ greet(a: Animal) is
     fi
 si
 
-greet(CAT());
+greet(CAT())
 // <<<

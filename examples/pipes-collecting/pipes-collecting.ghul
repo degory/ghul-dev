@@ -19,5 +19,5 @@ write_line("partition:    even {even |> join(", ")}, odd {odd |> join(", ")}")
 let by_size = numbers |> group_by(x => if x < 5 then "small" else "large" fi)
 
 write_line("group_by:     small {by_size["small"] |> join(", ")}")
-write_line("group_by:     large {by_size["large"] |> join(", ")}");
+write_line("group_by:     large {by_size["large"] |> join(", ")}")
 // <<<

@@ -5,7 +5,7 @@ use Ghul.Pipes
 // >>>
 let words = ["alpha", "beta", "gamma"]
 
-// find scans for the first element matching a predicate;
+// find scans for the first element matching a predicate
 // first takes no predicate and yields the leading element
 write_line("find:      {words |> find(w => w.length == 4) ?? "none"}")
 write_line("first:     {words |> first() ?? "none"}")
@@ -29,5 +29,5 @@ write_line("first_map: {words |> first_map(shout) ?? "none"}")
 let beta_first = ["beta", "alpha", "gamma"]
 
 write_line("find_map:  {beta_first |> find_map(shout) ?? "none"}")
-write_line("first_map: {beta_first |> first_map(shout) ?? "none"}");
+write_line("first_map: {beta_first |> first_map(shout) ?? "none"}")
 // <<<
