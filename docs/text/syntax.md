@@ -50,7 +50,7 @@ In this example `then`, `else` and `fi` all delimit blocks. The blocks they deli
 
 A semicolon separates two statements or definitions written on one line. At the end of a line it is not needed: wherever the grammar could accept one, a line break stands in for it.
 
-That is the whole of what a `;` does. Nothing reads it for meaning - a body's tail value is judged by its type, not by whether the statement carrying it was terminated - so the style throughout this site leaves it off.
+That is almost the whole of what a `;` does. Nothing reads it for meaning - a body's tail value is judged by its type, not by whether the statement carrying it was terminated - so the style throughout this site leaves it off. The one exception is a `;` between two string literals: adjacent string literals join into a single literal across a line break, so where a statement ends on a string and the next begins with one, the `;` is what keeps them apart, and `redundant-semicolon` never reports it.
 
 A few line-start tokens keep a wrapped expression unambiguous. A line opening with `.`, `|` or `|>` carries the expression above it on, which is how member chains and pipes wrap. A line opening with `(`, `[`, an operator or `rec` starts something new, so a wrapped operator expression puts the operator at the end of the line rather than the start of the next.
 
