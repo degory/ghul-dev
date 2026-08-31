@@ -8581,23 +8581,31 @@ The full pass list, in the order `COMPILER` runs them:
 | Pass                                  | What it does |
 |---------------------------------------|--------------|
 | `conditional-compilation`      | Nullifies any definition or statement disabled by its `@IF.flag()` pragma. |
+| `collect-modifier-keyword-locations` | Records the source location of every contextually-lexed modifier keyword before a later rewrite consumes it, for the editor's semantic-token colouring. |
 | `rewrite-syntax-trees`         | Light syntax-tree rewrites that simplify later passes: expanding dotted namespace names into nested form, synthesising accessor methods for properties, indexers and union variants, and spilling operand-position subexpressions sitting to the left of an `await` so their values survive the suspend. |
-| `declare-symbols`              | Walks the syntax tree and registers every declaration (type, function, field, parameter, local) in the symbol table, attached to the appropriate scope. |
-| `resolve-uses`                 | Resolves the `use` declarations in each namespace block against the namespaces or members they name, so short names work in subsequent passes. |
+| `collect-suppress-pragmas`     | Registers a suppression region for each `@suppress("slug")` pragma, covering the definition or statement it wraps. |
+| `declare-symbols`              | Registers the type-level skeleton in the symbol table: namespaces, types, variants and their generic type parameters - everything a type expression can name. |
+| `resolve-uses`                 | First round of `use` resolution: binds imports of namespaces and types, so short type names work in subsequent passes. |
+| `declare-members`              | Declares every type's members - methods, fields, properties, parameters - plus global functions and variables, and classifies each function body as plain, generator or asynchronous. |
+| `resolve-member-uses`          | Second round of `use` resolution: binds imports of members - static methods, global functions, enum members - and reports any `use` still unresolved. |
+| `check-name-conventions`       | Warns where a declaration's name does not follow the naming convention for its kind. |
 | `resolve-type-expressions`     | Turns type annotations in declarations, signatures, and in expression-position uses like `cast`, `isa`, `typeof` and `_` into the semantic `Type` objects later passes use. |
 | `resolve-ancestors`            | Attaches base classes, trait parents and default ancestors to classes, traits, structs, unions and enums, and validates the inheritance constraints. |
 | `resolve-explicit-types`       | Registers each variable's, property's and parameter's declared type on its symbol, so the declared type is available to constrain inference later. |
+| `check-type-argument-bounds`   | Checks each type argument written in a type-expression position against its type parameter's declared bound. |
 | `resolve-overrides`            | Pulls inherited symbols down into each container type's scope; for every method whose signature matches an ancestor's virtual or abstract method, records the override link and checks the override is consistent. Reports duplicate top-level functions. |
+| `definition-virtuality`        | Editor-only: reports each declaration's place in the dispatch hierarchy as an inlay hint. |
+| `register-source-intrinsics`   | Registers an intrinsic handler for each built-in operator the compilation itself declares in source, so the runtime library can be built. |
 | `record-type-argument-uses`    | For every closure body, records which of the enclosing scope's generic type parameters the body references, so the closure frame can plumb them through at runtime. |
 | `mark-boxed-locals`            | Marks `let mut` locals (and parameters) that are both captured by an anonymous function and reassigned, so the IL pass wraps them in a `Ghul.BOX[T]` cell shared between the enclosing scope and every capturer. |
 | `compile-expressions`          | The largest pass. Walks every expression in every function body, working out its type, resolving operator and method overloads, running type inference, applying flow-sensitive narrowing, and producing IR values that describe what the IL should look like. |
-| `warn-implicit-mutable-let`    | Emits warnings for `let` variables that are mutated but were not declared `mut`, when the corresponding compiler flag is set. |
+| `infer-effects`                | Re-walks every body with resolved types, solves which members each function can read and write, and judges every use of a flow-narrowed value against the calls recorded across its narrowing. |
 | `generate-il`                  | Walks the syntax tree one last time and writes the assembly, encoding the IR values produced by `compile-expressions`. |
 
 Whether each pass actually runs depends on the build flags. A plain syntax
 check stops after the early passes; a full build runs all of them.
-Analysis mode runs everything up to `compile-expressions` but does
-not emit IL.
+Analysis mode runs everything except `generate-il`, so the IDE
+sees every diagnostic a batch build would report.
 
 A short overview of each:
 
@@ -8610,6 +8618,14 @@ disabled item is omitted. This pass walks the syntax tree and
 nullifies each disabled item - definitions are replaced by an empty
 definition list, statements by `null` - so subsequent passes can skip
 them.
+
+### `collect-modifier-keyword-locations`
+
+Records the source location of every contextually-lexed modifier keyword -
+currently `init` and `open`. A later rewrite consumes some of these
+tokens, so the locations are captured up front for the editor's
+semantic-token colouring, which lights them as keywords. Hard keywords
+like `abstract` need no help; only the contextually-lexed modifiers do.
 
 ### `rewrite-syntax-trees`
 
@@ -8632,33 +8648,67 @@ handle everywhere afterwards. The notable ones are:
   structural - if a later-evaluated child contains an `await`, every
   earlier child is wrapped - so no type information is needed yet.
 
+### `collect-suppress-pragmas`
+
+Finds every `@suppress("slug", …)` pragma and registers a
+suppression region for each slug, covering the definition or statement
+the pragma wraps. The diagnostics store consults the regions whenever a
+coded warning is about to be reported, so every warning honours
+`@suppress` without each pass handling it separately.
+
 ### `declare-symbols`
 
 Walks the definitions in the syntax tree and creates symbol-table entries
-for them: types for each class, trait, struct, union, variant and enum;
-functions and methods; fields, properties, parameters and local variables.
-Each declaration goes into the appropriate scope so that later passes can
-look it up.
-
-This pass also scans every function body for `yield` and `await`
-expressions and classifies the function accordingly: plain, generator
-(returns `Iterable[T]` and contains `yield`), or asynchronous (contains
-`await`). The classification is what later tells the IL pass to emit a
-generator or async state machine for the function instead of a straight
-method body.
+for the type-level skeleton: each namespace, class, trait, struct, union,
+variant and enum, and each type's generic type parameters - everything a
+type expression can name. Each declaration goes into the appropriate
+scope so that later passes can look it up. Members are deliberately left
+to `declare-members`, which runs after the first round of `use`
+resolution.
 
 ### `resolve-uses`
 
-Processes the `use` declarations that appear in each `namespace` block,
-resolving each one to the namespace, static function group or non-instance
-member it names, and attaching the result to the namespace's scope. After
-this pass, short names introduced by `use` are findable by the
+Processes the `use` declarations that appear in each `namespace` block.
+`use` resolution runs in two rounds, and this first one binds imports of
+namespaces and types - the only symbols that exist yet - attaching each
+result to the namespace's scope, so short type names are findable by the
 namespace-scope lookups that subsequent passes perform.
 
-This is the entire job of the pass. Identifier resolution inside
-expressions and function bodies - looking up a local, a parameter, a
-field, or a member access - is deferred to `compile-expressions`,
-where types are available to resolve overloads.
+Identifier resolution inside expressions and function bodies - looking up
+a local, a parameter, a field, or a member access - is deferred to
+`compile-expressions`, where types are available to resolve
+overloads.
+
+### `declare-members`
+
+Declares every type's members - methods, fields, properties and their
+parameters - along with global functions and variables. It runs after the
+first round of `use` resolution so that a `partial` or `impl` block's
+target name can be reached through a `use` import, wherever the block
+sits relative to its target.
+
+While declaring each function the pass scans its body for `yield` and
+`await` expressions and classifies the function accordingly: plain,
+generator (returns `Ghul.Pipes.Pipe[T]` and contains `yield`), or
+asynchronous (contains `await`). The classification is what later tells
+the IL pass to emit a generator or async state machine for the function
+instead of a straight method body.
+
+### `resolve-member-uses`
+
+The second round of `use` resolution: binds imports of members - static
+methods, global functions, enum members - now that `declare-members`
+has created them, and reports any `use` that still resolves to nothing.
+
+### `check-name-conventions`
+
+Reports a warning for each declaration whose name does not follow the
+naming convention for its kind: `snake_case` for variables, functions and
+properties, `PascalCase` for traits, abstract classes, unions and enums,
+`UPPER_SNAKE_CASE` for concrete classes, structs, variants and enum
+members. It runs after `declare-members` so it can read each
+class's computed abstractness - explicit or implied by a body-less
+method - rather than just the written modifier.
 
 ### `resolve-type-expressions`
 
@@ -8706,6 +8756,17 @@ the declared type. It cannot - `compile-expressions` has not yet
 typed any expression. The assignability check happens there, against the
 declared type this pass attached.
 
+### `check-type-argument-bounds`
+
+Checks each type argument written in a type-expression position - a
+field, parameter, return, local or nested annotation - against its type
+parameter's declared bound (`[T: SomeBase]`). The bound is only attached
+to the parameter symbol during `resolve-explicit-types`, after
+every type expression has resolved, which is why this check is a
+separate pass rather than part of type-expression resolution. Call and
+construction positions are checked later, in `compile-expressions`,
+where inferred type arguments become known.
+
 ### `resolve-overrides`
 
 Two jobs. First, for every container type, the pass walks its ancestors
@@ -8725,6 +8786,24 @@ narrows an ancestor's argument types just enough to miss the override.
 
 Once every source file has been visited, the pass reports any pair of
 top-level functions whose signatures cannot be told apart.
+
+### `definition-virtuality`
+
+An editor-only pass. For each declared method and property it reports,
+as an inlay hint, what the compiler now knows about the declaration's
+place in the dispatch hierarchy: whether it overrides, is overridden, or
+dispatches statically. ghūl writes none of this in source - there is no
+`virtual`, `override`, `sealed` or `final` keyword - so the hints save a
+reader reconstructing the answer from the rest of the program.
+
+### `register-source-intrinsics`
+
+The built-in operators are declared as ordinary ghūl source in the
+runtime library and marked as intrinsics; compiling any other project,
+the compiler reads them from the runtime assembly's metadata. This pass
+covers the one project that cannot do that - the runtime library itself -
+by registering an intrinsic handler for each such declaration found in
+the source being compiled.
 
 ### `record-type-argument-uses`
 
@@ -8747,7 +8826,7 @@ party reads and writes through.
 That is the whole job of the pass. Generator and async functions are
 also state-machine-compiled so their locals survive `yield` or `await`,
 but that lowering is done by `generate-il` (with help from
-information attached by `declare-symbols` and the `spill-awaits`
+information attached by `declare-members` and the `spill-awaits`
 rewrite), not here.
 
 ### `compile-expressions`
@@ -8763,7 +8842,9 @@ body and:
 - applies flow-sensitive type narrowing through `isa` checks, `if let`,
   null tests, variant tests, and divergent guards (where an early `return`
   / `throw` / `break` / `continue` leaves the code below the guard narrowed
-  to the stronger type);
+  to the stronger type), recording each call that could store to the heap
+  against the facts live across it - whether a later use of a narrowed
+  value is still safe is judged in `infer-effects` below;
 - produces *IR values* that describe, for each expression, the sequence
   of IL operations it stands for.
 
@@ -8773,14 +8854,22 @@ expression's type can be. A function's signature is always explicit, so
 inference is confined to function bodies and never changes anything
 visible from outside the function.
 
-### `warn-implicit-mutable-let`
+### `infer-effects`
 
-A `let` that is assigned to after its initializer counts as a mutable
-variable but does not say so on its declaration. When the corresponding
-warning is enabled, this pass walks the syntax tree and reports each
-local variable or parameter whose `is_reassigned` flag was set by the
-assignment handling in `compile-expressions`. Captured variables
-and explicit `let mut` declarations are skipped.
+Runs after `compile-expressions`, re-walking every function body
+with the types that pass resolved. For each function it records what the
+body reads and writes - which members, and whether it stores to the heap
+at all - and then solves those facts across the whole program's call
+graph, overrides and invoked function values included, so that for any
+call the compiler can answer which members it might write.
+
+The answers feed the *reliance judge*. Narrowing treats calls
+optimistically: a call drops no facts, but each call that could store is
+recorded against the facts live across it, and every later use that
+relies on a fact is judged here, against what the recorded calls can
+actually write. A use the solve cannot prove safe is reported at the use
+site. The same pass verifies `pure` declarations whose bodies the
+earlier walk could not settle on its own.
 
 ### `generate-il`
 
@@ -8854,12 +8943,16 @@ The hierarchy under `semantic/types/` is fairly small:
 - `GENERIC` - a generic type applied to type arguments, such as
   `List[int]`.
 - `FUNCTION` - a function type, used for first-class functions, anonymous
-  functions, and methods.
+  functions, and methods; `PURE_FUNCTION` is its store-free refinement.
 - `TUPLE` - a tuple type, with optional element names.
 - `ARRAY` - a fixed array type.
-- `OPTION`, `ONE_OF`, `NONE`, `NULL` - optional and union variations.
-- `INFERRED_VARIABLE_TYPE` and friends - placeholders used during
-  inference, replaced by concrete types as constraints accumulate.
+- `NULLABLE`, `MAYBE`, `NONE`, `NULL` - the machinery behind optional
+  types: the wrappers that carry `T?` over a value type or a type
+  parameter, and the types of the absent value.
+- `ONE_OF`, `INTERSECTION` - a value known to be one of several types, or
+  several types at once, produced by inference and flow narrowing.
+- `INFERRED_VARIABLE_TYPE` and `INFERRED_RETURN_TYPE` - placeholders used
+  during inference, replaced by concrete types as constraints accumulate.
 - `ERROR` - stands in for the type of an expression the compiler could
   not work out, so that later passes can continue without cascading every
   diagnostic.
@@ -8881,8 +8974,9 @@ the method body being built.
 
 Errors, warnings and informational messages all flow through `Logger` in
 `logging/`, which attaches a `Source.LOCATION` to each message and
-stores them in `DIAGNOSTICS_STORE`. The IDE retrieves diagnostics by
-reading the store after a compile.
+stores them in `DIAGNOSTICS_STORE`. In analysis mode, the response to
+each edit or compile request carries the store's contents back to the
+IDE.
 
 ## type inference
 
@@ -8934,24 +9028,26 @@ ghūl VS Code extension starts, it launches `ghul-compiler` with
 the `--analyse` flag, then talks to it over the process's standard
 input and output streams.
 
-Communication uses a small text protocol. The IDE sends a request as a
-keyword like `#EDIT#`, `#COMPILE#`, `#HOVER#`,
-`#DEFINITION#`, `#COMPLETE#` or `#HOVERMAP#`,
-followed by any arguments it needs on subsequent lines. The compiler
-replies with a header line, optional result lines, and ends each response
-with a form-feed character so the IDE knows the reply is complete. The
-protocol was chosen to be simple enough to implement without a JSON
-parser; the format is stable and the editor is expected to ignore lines
-it does not recognise.
+Communication is newline-delimited JSON. Each request is a single JSON
+object on one line, discriminated by a `command` field -
+`edit`, `compile`, `hover`, `definition`,
+`complete` and so on - and each response is a single object
+discriminated by a `kind` field. JSON escapes any newline inside
+a string, so reading a line is a complete framing operation on either
+end. At startup the analyser answers a `listen` request with the
+capabilities it supports, and a client sends a newer request only after
+seeing the matching capability, so either side can be upgraded first.
 
 The interesting work happens around two requests:
 
-- **`#EDIT#`** - sent on every keystroke (after a short debounce).
+- **`edit`** - sent on every keystroke (after a short debounce).
   Re-parses the file the user is editing and re-runs the early passes
   over it, keeping the rest of the project's syntax trees untouched.
   This is fast enough to keep up with typing, and it is what produces the
-  squiggles and hovers that appear as the user types.
-- **`#COMPILE#`** - sent during a longer pause in typing. Runs the
+  squiggles and hovers that appear as the user types. A client can send
+  `edit_delta` instead, carrying just the changed span of the file
+  rather than its whole text.
+- **`compile`** - sent during a longer pause in typing. Runs the
   full pass sequence over the whole project so that any consequences of
   the edit ripple through the rest of the analysis.
 
@@ -8961,19 +9057,56 @@ go-to-definition, completions and signature help all come from the state
 these passes maintain: the symbol table, the scopes, the per-node type
 annotations and the symbol-use map.
 
-Two convenience requests, `#HOVERMAP#` and
-`#SEMANTICTOKENS#`, dump every recorded hover or every recorded
-symbol use in one batch. They are mainly used by the example pipeline on
-this website, which feeds each example through the analyser and uses the
-results to drive hover popups and semantic-token colouring in the
-rendered output.
+A query that arrives while a compile is running is answered during it:
+the compile pauses at the next per-file boundary of its walk, answers
+what is queued, and resumes. An edit that arrives while a compile is
+running cuts the compile short instead - the rest of the walk would
+compute diagnostics the edit has already made stale.
+
+### incremental analysis
+
+An `edit` does not rebuild the project from scratch. The analyser
+retains the whole compiled state between requests - syntax trees, symbol
+table, scopes, types - and how much of it an edit invalidates depends on
+what the edit changed:
+
+- **An edit that preserves every declared signature** - the common case,
+  typing inside a function body - is spliced into the retained syntax
+  tree: the new bodies replace the old ones, and only those bodies are
+  re-checked. Every symbol, type and override link survives untouched,
+  which is what makes the per-keystroke path fast; on the compiler's own
+  source it is around two orders of magnitude faster than re-running the
+  early passes over the file.
+- **An edit that changes a declaration** - a signature, a type, a new or
+  removed member - invalidates more: the file's declarations are
+  re-declared and re-resolved, and the consequences for the rest of the
+  project are picked up by the next whole-project `compile`.
+
+The splice relies on a language rule doing structural work: a function's
+signature is always explicit and inference never escapes a body, so a
+body-only edit provably cannot change anything another file can see.
+Where any guard on the incremental path fails, the analyser falls back
+to the full rebuild - slower, never wrong.
+
+### batch requests and lifetime
+
+Two convenience requests, `hover_map` and
+`semantic_tokens`, dump every recorded hover or every recorded
+symbol use for a file in one batch. They are mainly used by the example
+pipeline on this website, which feeds each example through the analyser
+and uses the results to drive hover popups and semantic-token colouring
+in the rendered output.
 
 The compiler runs as a long-lived process. A `WATCHDOG` component watches
-for sustained error bursts or excessive heap growth and asks the IDE to
-recycle the process when either threshold is crossed; recycles happen
-fairly often, but the extension schedules them during idle periods so the
-user rarely notices. Even with the recycles, the long-lived shape is
-much cheaper than starting a fresh compiler for every request.
+for sustained handler failures or excessive heap growth and asks the IDE
+to recycle the process when either threshold is crossed; the extension
+schedules recycles during idle periods so the user rarely notices. The
+analyser also exits of its own accord after half an hour without a
+request: a warm analyser retains the whole symbol table, so an editor
+window left open overnight would otherwise hold hundreds of megabytes to
+answer nothing, and the cold rebuild the next request pays is the
+cheaper side of that trade. Even with the recycles, the long-lived shape
+is much cheaper than starting a fresh compiler for every request.
 
 ## bootstrap and self-hosting
 
