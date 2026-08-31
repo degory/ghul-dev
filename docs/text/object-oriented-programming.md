@@ -78,6 +78,7 @@ Discovering an object's concrete type at runtime uses `isa` or `if let`, which t
 
 ```ghul
 use IO.Std.write_line
+use Ghul.Pipes
 
 let int_calculator = CALCULATOR(
     [
@@ -143,7 +144,7 @@ class CALCULATOR[T] is
         _operations =
             Collections.MAP(
                 operations
-                    | .map(
+                    |> map(
                         on =>
                             let (name, operation) = on in
                             Collections.KeyValuePair(

@@ -1704,6 +1704,7 @@ Discovering an object's concrete type at runtime uses `isa` or `if let`, which t
 
 ```ghul
 use IO.Std.write_line
+use Ghul.Pipes
 
 let int_calculator = CALCULATOR(
     [
@@ -1769,7 +1770,7 @@ class CALCULATOR[T] is
         _operations =
             Collections.MAP(
                 operations
-                    | .map(
+                    |> map(
                         on =>
                             let (name, operation) = on in
                             Collections.KeyValuePair(
@@ -2963,14 +2964,8 @@ covers `Ghul.Pipes`, the sequence-processing library behind
 [filter, map, reduce](https://ghul.dev/functional-programming#filter-map-reduce) and the
 [thread-first operator](https://ghul.dev/expressions#thread-first-calls).
 
-Each entry is a real, compiled declaration checked against the current
-`ghul.runtime` package - hover over a name for its full signature, exactly as
-an editor would show it.
-
-A pipe combinator chain can be written with the thread-first operator `|>`
-over free functions, or fluently with `.` over `Pipe[T]` methods after
-wrapping a source with [`|`](https://ghul.dev/functional-programming) or `pipe()`. Both forms
-call the same underlying code:
+A pipe combinator chain is written with the thread-first operator `|>` over
+free functions, which pass the sequence in as the first argument:
 
 ```ghul
 …
@@ -2980,26 +2975,6 @@ let sum_of_even_squares = numbers
     |> filter(x => x % 2 == 0)
     |> map(x => x * x)
     |> reduce(0, (total, x) => total + x)
-
-write_line("sum of even squares: {sum_of_even_squares}")
-```
-
-output:
-
-```
-sum of even squares: 220
-```
-
-or, fluently:
-
-```ghul
-…
-let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-let sum_of_even_squares = numbers
-    | .filter(x => x % 2 == 0)
-    | .map(x => x * x)
-    | .reduce(0, (total, x) => total + x)
 
 write_line("sum of even squares: {sum_of_even_squares}")
 ```
@@ -3096,8 +3071,9 @@ holds nothing. Combinators that might not find anything say so in their return t
 ### pipe
 
 Turns any `Iterable[T]` - an array, a `LIST[T]`, a `MAP[T]`'s values,
-anything with an `.iterator` - into a `Pipe[T]`. This is what the `|`
-operator calls to wrap its left operand.
+anything with an `.iterator` - into a `Pipe[T]`. A chain rarely needs it: the
+free functions all take an `Iterable[T]`, so a chain can start from the source
+itself.
 
 ```ghul
 ◆ pipe[T](source: Iterable[T]) -> Pipe[T] pure
@@ -3116,12 +3092,6 @@ A stage returns a new pipe, so stages chain onto one another.
 ) -> Pipe[T] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ filter(predicate: (T) -> bool pure) -> Pipe[T] pure
-```
-
 ### map
 
 ```ghul
@@ -3129,12 +3099,6 @@ or, as a method:
     source: Iterable[T],
     mapper: (T) -> U pure
 ) -> Pipe[U] pure
-```
-
-or, as a method:
-
-```ghul
-◆ map[U](mapper: (T) -> U pure) -> Pipe[U] pure
 ```
 
 ### flat_map
@@ -3148,34 +3112,16 @@ Maps each element to an iterable and runs the results together into one sequence
 ) -> Pipe[U] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ flat_map[U](mapper: (T) -> Iterable[U] pure) -> Pipe[U] pure
-```
-
 ### skip
 
 ```ghul
 ◆ skip[T](source: Iterable[T], count: int) -> Pipe[T] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ skip(count: int) -> Pipe[T] pure
-```
-
 ### take
 
 ```ghul
 ◆ take[T](source: Iterable[T], count: int) -> Pipe[T] pure
-```
-
-or, as a method:
-
-```ghul
-◆ take(count: int) -> Pipe[T] pure
 ```
 
 ### skip_while
@@ -3187,12 +3133,6 @@ or, as a method:
 ) -> Pipe[T] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ skip_while(predicate: (T) -> bool pure) -> Pipe[T] pure
-```
-
 ### take_while
 
 ```ghul
@@ -3200,12 +3140,6 @@ or, as a method:
     source: Iterable[T],
     predicate: (T) -> bool pure
 ) -> Pipe[T] pure
-```
-
-or, as a method:
-
-```ghul
-◆ take_while(predicate: (T) -> bool pure) -> Pipe[T] pure
 ```
 
 The four set operations that follow all discard duplicates. This is what they do to the same pair of sources:
@@ -3240,12 +3174,6 @@ Removes duplicates, keeping the first occurrence of each element. `distinct`, `u
 ◆ distinct[T](source: Iterable[T]) -> Pipe[T] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ distinct() -> Pipe[T] pure
-```
-
 ### union_with
 
 Every element of both sources with duplicates removed, taking the left source's elements first.
@@ -3255,12 +3183,6 @@ Every element of both sources with duplicates removed, taking the left source's 
     source: Iterable[T],
     right: Iterable[T]
 ) -> Pipe[T] pure
-```
-
-or, as a method:
-
-```ghul
-◆ union_with(right: Iterable[T]) -> Pipe[T] pure
 ```
 
 ### intersect_with
@@ -3274,12 +3196,6 @@ Elements the left and right sources have in common, in the order the left source
 ) -> Pipe[T] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ intersect_with(right: Iterable[T]) -> Pipe[T] pure
-```
-
 ### except
 
 Elements of the left source that the right source doesn't have.
@@ -3291,24 +3207,12 @@ Elements of the left source that the right source doesn't have.
 ) -> Pipe[T] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ except(right: Iterable[T]) -> Pipe[T] pure
-```
-
 ### peek
 
 Calls `action` on each element and passes it through unchanged.
 
 ```ghul
 ◆ peek[T](source: Iterable[T], action: T -> void) -> Pipe[T] pure
-```
-
-or, as a method:
-
-```ghul
-◆ peek(action: T -> void) -> Pipe[T] pure
 ```
 
 `chunk` and `windows` both produce groups of elements, and differ in how the groups are cut:
@@ -3353,12 +3257,6 @@ The first `size` elements, then the next `size`, and so on, each element appeari
 ◆ chunk[T](source: Iterable[T], size: int) -> Pipe[LIST[T]] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ chunk(size: int) -> Pipe[LIST[T]] pure
-```
-
 ### windows
 
 Every run of `size` neighbouring elements: the first `size`, then the same run moved along by one, and so on. Each window therefore shares all but one of its elements with the window before it. A window is always `size` long, so a source with fewer than `size` elements produces none.
@@ -3370,12 +3268,6 @@ Every run of `size` neighbouring elements: the first `size`, then the same run m
 ) -> Pipe[LIST[T]] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ windows(size: int) -> Pipe[LIST[T]] pure
-```
-
 ### cat
 
 Concatenation: every element of the left source, then every element of the right.
@@ -3384,15 +3276,9 @@ Concatenation: every element of the left source, then every element of the right
 ◆ cat[T](source: Iterable[T], right: Iterable[T]) -> Pipe[T] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ cat(right: Iterable[T]) -> Pipe[T] pure
-```
-
 ### index
 
-Pairs each element with its index. `INDEXED_VALUE[T]` has `index` and `value`, and destructures positionally, so `for (i, x) in xs | .index() do` reads the pair apart. The second form starts the index at a given number rather than at 0.
+Pairs each element with its index. `INDEXED_VALUE[T]` has `index` and `value`, and destructures positionally, so `for (i, x) in xs |> index() do` reads the pair apart. The second form starts the index at a given number rather than at 0.
 
 ```ghul
 ◆ index[T](source: Iterable[T]) -> Pipe[INDEXED_VALUE[T]] pure
@@ -3401,14 +3287,6 @@ Pairs each element with its index. `INDEXED_VALUE[T]` has `index` and `value`, a
     source: Iterable[T],
     index: int
 ) -> Pipe[INDEXED_VALUE[T]] pure
-```
-
-or, as a method:
-
-```ghul
-◆ index() -> Pipe[INDEXED_VALUE[T]] pure
-
-◆ index(index: int) -> Pipe[INDEXED_VALUE[T]] pure
 ```
 
 ### zip
@@ -3428,17 +3306,6 @@ Pairs elements of the source with elements of `other`, stopping when either side
 ) -> Pipe[TOut] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ zip[U](other: Iterable[U]) -> Pipe[(T,U)] pure
-
-◆ zip[U,TOut](
-    other: Iterable[U],
-    mapper: (T,U) -> TOut pure
-) -> Pipe[TOut] pure
-```
-
 ## stages that buffer
 
 These return a pipe, like any other stage, but they cannot work out their first
@@ -3451,12 +3318,6 @@ Yields the source's elements last to first.
 
 ```ghul
 ◆ reverse[T](source: Iterable[T]) -> Pipe[T] pure
-```
-
-or, as a method:
-
-```ghul
-◆ reverse() -> Pipe[T] pure
 ```
 
 ### sort
@@ -3477,26 +3338,10 @@ Yields the source's elements in order. The first form uses the element type's ow
 ) -> Pipe[T] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ sort() -> Pipe[T] pure
-
-◆ sort(comparer: Collections.IComparer[T]) -> Pipe[T] pure
-
-◆ sort(compare: (T, T) -> int pure) -> Pipe[T] pure
-```
-
 ### sort_descending
 
 ```ghul
 ◆ sort_descending[T](source: Iterable[T]) -> Pipe[T] pure
-```
-
-or, as a method:
-
-```ghul
-◆ sort_descending() -> Pipe[T] pure
 ```
 
 ### sort_by
@@ -3508,27 +3353,11 @@ or, as a method:
 ) -> Pipe[T] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ sort_by[K: Ghul.Comparable[K]](
-    key_selector: (T) -> K pure
-) -> Pipe[T] pure
-```
-
 ### sort_by_descending
 
 ```ghul
 ◆ sort_by_descending[T,K: Ghul.Comparable[K]](
     source: Iterable[T],
-    key_selector: (T) -> K pure
-) -> Pipe[T] pure
-```
-
-or, as a method:
-
-```ghul
-◆ sort_by_descending[K: Ghul.Comparable[K]](
     key_selector: (T) -> K pure
 ) -> Pipe[T] pure
 ```
@@ -3598,12 +3427,6 @@ The first element matching the predicate, absent if none does. `first` is the sa
 ) -> Ghul.MAYBE[T] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ find(predicate: (T) -> bool pure) -> Ghul.MAYBE[T] pure
-```
-
 ### find_map
 
 Calls `mapper` on each element in turn and returns the first present result. `first_map` differs: it calls the mapper on the *first* element only, and gives up if that one declines.
@@ -3611,14 +3434,6 @@ Calls `mapper` on each element in turn and returns the first present result. `fi
 ```ghul
 ◆ find_map[T,U](
     source: Iterable[T],
-    mapper: (T) -> Ghul.MAYBE[U] pure
-) -> Ghul.MAYBE[U] pure
-```
-
-or, as a method:
-
-```ghul
-◆ find_map[U](
     mapper: (T) -> Ghul.MAYBE[U] pure
 ) -> Ghul.MAYBE[U] pure
 ```
@@ -3634,12 +3449,6 @@ As `find`, throwing instead of returning absent when nothing matches.
 ) -> T pure
 ```
 
-or, as a method:
-
-```ghul
-◆ find_or_throw(predicate: T -> bool pure) -> T pure
-```
-
 ### find_map_or_throw
 
 As `find_map`, throwing instead of returning absent when nothing maps.
@@ -3651,26 +3460,12 @@ As `find_map`, throwing instead of returning absent when nothing maps.
 ) -> U pure
 ```
 
-or, as a method:
-
-```ghul
-◆ find_map_or_throw[U](
-    mapper: (T) -> Ghul.MAYBE[U] pure
-) -> U pure
-```
-
 ### first
 
 The leading element, absent when the source is empty.
 
 ```ghul
 ◆ first[T](source: Iterable[T]) -> Ghul.MAYBE[T] pure
-```
-
-or, as a method:
-
-```ghul
-◆ first() -> Ghul.MAYBE[T] pure
 ```
 
 ### first_map
@@ -3684,26 +3479,12 @@ Calls `mapper` on the leading element only. Compare `find_map`, above, which kee
 ) -> Ghul.MAYBE[U] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ first_map[U](
-    mapper: (T) -> Ghul.MAYBE[U] pure
-) -> Ghul.MAYBE[U] pure
-```
-
 ### first_or_throw
 
 As `first`, throwing instead of returning absent when the source is empty.
 
 ```ghul
 ◆ first_or_throw[T](source: Iterable[T]) -> T pure
-```
-
-or, as a method:
-
-```ghul
-◆ first_or_throw() -> T pure
 ```
 
 ### first_map_or_throw
@@ -3717,26 +3498,12 @@ As `first_map`, throwing instead of returning absent.
 ) -> U pure
 ```
 
-or, as a method:
-
-```ghul
-◆ first_map_or_throw[U](
-    mapper: (T) -> Ghul.MAYBE[U] pure
-) -> U pure
-```
-
 ### only
 
 The single element the source holds, throwing when it holds none or more than one.
 
 ```ghul
 ◆ only[T](source: Iterable[T]) -> T pure
-```
-
-or, as a method:
-
-```ghul
-◆ only() -> T pure
 ```
 
 ### any
@@ -3748,12 +3515,6 @@ or, as a method:
 ) -> bool pure
 ```
 
-or, as a method:
-
-```ghul
-◆ any(predicate: (T) -> bool pure) -> bool pure
-```
-
 ### all
 
 ```ghul
@@ -3763,27 +3524,15 @@ or, as a method:
 ) -> bool pure
 ```
 
-or, as a method:
-
-```ghul
-◆ all(predicate: (T) -> bool pure) -> bool pure
-```
-
 ### count
 
 ```ghul
 ◆ count[T](source: Iterable[T]) -> int pure
 ```
 
-or, as a method:
-
-```ghul
-◆ count() -> int pure
-```
-
 ### min
 
-The smallest element, absent when the source is empty. `min` and `max` have no method form.
+The smallest element, absent when the source is empty.
 
 ```ghul
 ◆ min[T: Ghul.Comparable[T]](
@@ -3808,27 +3557,11 @@ The smallest element, absent when the source is empty. `min` and `max` have no m
 ) -> Ghul.MAYBE[T] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ min_by[K: Ghul.Comparable[K]](
-    key_selector: (T) -> K pure
-) -> Ghul.MAYBE[T] pure
-```
-
 ### max_by
 
 ```ghul
 ◆ max_by[T,K: Ghul.Comparable[K]](
     source: Iterable[T],
-    key_selector: (T) -> K pure
-) -> Ghul.MAYBE[T] pure
-```
-
-or, as a method:
-
-```ghul
-◆ max_by[K: Ghul.Comparable[K]](
     key_selector: (T) -> K pure
 ) -> Ghul.MAYBE[T] pure
 ```
@@ -3876,22 +3609,10 @@ Collects into the read-only `Collections.List[T]`. `collect_list` gives back the
 ◆ collect[T](source: Iterable[T]) -> Collections.List[T] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ collect() -> Collections.List[T] pure
-```
-
 ### collect_array
 
 ```ghul
 ◆ collect_array[T](source: Iterable[T]) -> T[] pure
-```
-
-or, as a method:
-
-```ghul
-◆ collect_array() -> T[] pure
 ```
 
 ### collect_list
@@ -3900,22 +3621,10 @@ or, as a method:
 ◆ collect_list[T](source: Iterable[T]) -> LIST[T] pure
 ```
 
-or, as a method:
-
-```ghul
-◆ collect_list() -> LIST[T] pure
-```
-
 ### collect_set
 
 ```ghul
 ◆ collect_set[T](source: Iterable[T]) -> SET[T] pure
-```
-
-or, as a method:
-
-```ghul
-◆ collect_set() -> SET[T] pure
 ```
 
 ### collect_map
@@ -3923,15 +3632,6 @@ or, as a method:
 ```ghul
 ◆ collect_map[T,K,V](
     source: Iterable[T],
-    key_selector: (T) -> K pure,
-    value_selector: (T) -> V pure
-) -> MAP[K,V] pure
-```
-
-or, as a method:
-
-```ghul
-◆ collect_map[K,V](
     key_selector: (T) -> K pure,
     value_selector: (T) -> V pure
 ) -> MAP[K,V] pure
@@ -3948,14 +3648,6 @@ Splits the source in two on a predicate. The elements matching the predicate com
 ) -> (LIST[T], LIST[T]) pure
 ```
 
-or, as a method:
-
-```ghul
-◆ partition(
-    predicate: (T) -> bool pure
-) -> (LIST[T], LIST[T]) pure
-```
-
 ### group_by
 
 Collects the elements into a map, keyed by what `key_selector` returns for each.
@@ -3963,14 +3655,6 @@ Collects the elements into a map, keyed by what `key_selector` returns for each.
 ```ghul
 ◆ group_by[T,K](
     source: Iterable[T],
-    key_selector: (T) -> K pure
-) -> MAP[K, LIST[T]] pure
-```
-
-or, as a method:
-
-```ghul
-◆ group_by[K](
     key_selector: (T) -> K pure
 ) -> MAP[K, LIST[T]] pure
 ```
@@ -3994,33 +3678,12 @@ Folds the source into a single value, starting at `seed` and calling `accumulato
 ) -> TOut pure
 ```
 
-or, as a method:
-
-```ghul
-◆ reduce[TRunning](
-    seed: TRunning,
-    accumulator: (TRunning,T) -> TRunning pure
-) -> TRunning pure
-
-◆ reduce[TRunning,TOut](
-    seed: TRunning,
-    accumulator: (TRunning,T) -> TRunning pure,
-    mapper: (TRunning) -> TOut pure
-) -> TOut pure
-```
-
 ### each
 
 Calls `action` on every element. It returns nothing and, alone among these, is not `pure` - it exists for its side effects.
 
 ```ghul
 ◆ each[T](source: Iterable[T], action: T -> void) -> void
-```
-
-or, as a method:
-
-```ghul
-◆ each(action: T -> void) -> void
 ```
 
 ### append_to
@@ -4040,19 +3703,6 @@ Appends each element to a `StringBuilder`, separated by `separator`, or by `", "
 ) -> System.Text.StringBuilder
 ```
 
-or, as a method:
-
-```ghul
-◆ append_to(
-    into: System.Text.StringBuilder,
-    separator: string
-) -> System.Text.StringBuilder
-
-◆ append_to(
-    into: System.Text.StringBuilder
-) -> System.Text.StringBuilder
-```
-
 ### join
 
 Renders the elements into one string, separated by `separator`, or by `", "` when left off.
@@ -4061,14 +3711,6 @@ Renders the elements into one string, separated by `separator`, or by `", "` whe
 ◆ join[T](source: Iterable[T], separator: string) -> string pure
 
 ◆ join[T](source: Iterable[T]) -> string pure
-```
-
-or, as a method:
-
-```ghul
-◆ join(separator: string) -> string pure
-
-◆ join() -> string pure
 ```
 
 
@@ -4830,7 +4472,7 @@ write_line(add_pair((3, 4)))
 // anonymous functions take the same form, element types
 // inferred from the sequence
 let pairs = [(1, 2), (3, 4)]
-let total = pairs | .map(((a, b)) => a + b) | .reduce(0, (acc, x) => acc + x)
+let total = pairs |> map(((a, b)) => a + b) |> reduce(0, (acc, x) => acc + x)
 
 write_line("{total}")
 ```
@@ -5966,7 +5608,7 @@ output:
 box of 42
 ```
 
-The right side must be call-shaped: a free function, a constructor, or a method call on a receiver. The left side always becomes the first argument; the call is otherwise resolved exactly as if it had been written without the `|>`. This is separate from the `|` [pipe](https://ghul.dev/functional-programming.html) operator, which wraps a sequence for lazy `map` and `filter`; `|>` performs an ordinary call.
+The right side must be call-shaped: a free function, a constructor, or a method call on a receiver. The left side always becomes the first argument; the call is otherwise resolved exactly as if it had been written without the `|>`. `|>` performs an ordinary call: it is how the pipe combinators are chained.
 
 ## property access
 

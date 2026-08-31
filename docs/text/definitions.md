@@ -111,7 +111,7 @@ write_line(add_pair((3, 4)))
 // anonymous functions take the same form, element types
 // inferred from the sequence
 let pairs = [(1, 2), (3, 4)]
-let total = pairs | .map(((a, b)) => a + b) | .reduce(0, (acc, x) => acc + x)
+let total = pairs |> map(((a, b)) => a + b) |> reduce(0, (acc, x) => acc + x)
 
 write_line("{total}")
 ```
