@@ -109,10 +109,10 @@ OctalDigit     ::= [0-7]
 ```
 
 A string literal may not span a newline. Two string literals separated only by
-whitespace are concatenated into a single literal; the whitespace can include
-line breaks, which is how a long string is split across lines. A `;` or a
-comment between them ends the chain, so a statement that ends on a string
-literal needs a `;` where the next statement begins with one.
+whitespace or comments are concatenated into a single literal; the whitespace
+can include line breaks, which is how a long string is split across lines. A
+`;` between them ends the chain, so a statement that ends on a string literal
+needs a `;` where the next statement begins with one.
 
 Inside a string literal, `{` begins an [interpolation](#interpolated-strings) and
 `}` ends it; a literal brace is written <code v-pre>{{</code> or <code v-pre>}}</code>.
