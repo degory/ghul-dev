@@ -170,7 +170,7 @@ ContinuationLead ::= "." | "|" | "|>"
 ```
 
 A line opening with anything else - including `"("`, `"["`, an operator, or `"rec"` -
-starts a new construct, so a wrapped operator expression carries the operator at the
+starts a new construct, so a wrapped operator expression puts the operator at the
 end of the line rather than the start of the next.
 
 ## compilation unit
