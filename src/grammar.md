@@ -182,7 +182,7 @@ BoundaryLead ::= "(" | "[" | Operator
 So a wrapped operator expression puts the operator at the end of the line rather
 than the start of the next. Postfix markers attach on the same line as what they
 mark: a line-start modifier belongs to the next definition, and a line-start
-`rec` is a recursive self-call rather than a rec-lambda marker.
+`rec` is a recursive self-call rather than a function literal's `rec` marker.
 
 ## compilation unit
 
