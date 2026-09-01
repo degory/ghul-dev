@@ -4286,13 +4286,13 @@ In this example `then`, `else` and `fi` all delimit blocks. The blocks they deli
 
 ## semicolons
 
-A semicolon separates two statements or definitions written on one line. At the end of a line it is not needed: wherever the grammar could accept one, a line break stands in for it.
+A semicolon separates two statements or definitions written on one line. At the end of a line it is not needed: wherever the grammar could accept one, a line break stands in for it. End of file ends a line too, so the last construct in a file needs no terminator either.
 
 That is almost the whole of what a `;` does. Nothing reads it for meaning - a body's tail value is judged by its type, not by whether the statement carrying it was terminated - so the style throughout this site leaves it off. The one exception is a `;` between two string literals: adjacent string literals join into a single literal across a line break, so where a statement ends on a string and the next begins with one, the `;` is what keeps them apart, and `redundant-semicolon` never reports it.
 
-A few line-start tokens keep a wrapped expression unambiguous. A line opening with `.`, `|` or `|>` carries the expression above it on, which is how member chains and pipes wrap. A line opening with `(`, `[`, an operator or `rec` starts something new, so a wrapped operator expression puts the operator at the end of the line rather than the start of the next.
+A few rules keep a wrapped expression unambiguous. A line opening with `.`, `|` or `|>` carries the expression above it on, which is how member chains and pipes wrap. A line opening with `(`, `[`, an operator or `rec` starts something new, so a wrapped operator expression puts the operator at the end of the line rather than the start of the next. A bare `return` at the end of a line is a void return when the next line opens with a closing keyword, and takes the next line's expression as its value otherwise; the two readings never compete, because a statement written after a `return` in the same block would be unreachable. In a parenthesised group, a top-level `,` commits the tuple reading and a line break commits the [block reading](https://ghul.dev/expression-oriented-programming.html#blocks), exactly as a written `;` does.
 
-Two warnings police the choice, and both are off unless asked for: `--warn missing-semicolon` reports every inferred boundary, for a project that writes its terminators out, and `--warn redundant-semicolon` reports a written one a line break would infer anyway.
+A written end-of-line `;` adds nothing, so `--warn redundant-semicolon` reports one, for a project moving its terminators out. It is off unless asked for, and like any slug it can be downgraded to a hint or suppressed rather than fixed. `--inlay terminator` shows the same information the other way round, as a `∘︎` inlay hint wherever a statement ends without a written `;`.
 
 ## definitions and statements
 
@@ -7691,9 +7691,11 @@ operator precedence table is given [at the end](#operator-precedence).
 ## lexical grammar
 
 The tokenizer turns source text into a stream of tokens. Whitespace (spaces, tabs,
-carriage returns and newlines) separates tokens but is otherwise insignificant:
-ghūl is **not** indentation-sensitive. Whitespace and comments are discarded before
-parsing.
+carriage returns and newlines) separates tokens, and how much of it there is never
+matters: ghūl is **not** indentation-sensitive. Where a token sits relative to a
+line break does matter in one respect, covered under
+[statement terminators](#statement-terminators) below. Comments are discarded
+before parsing.
 
 ### comments
 
@@ -7812,6 +7814,24 @@ unwrap/has-value, not as the operators `!.` or `?.`.
 
 A handful of operator spellings are recognised as dedicated tokens rather than
 general operators: `=`, `:`, `.`, `->`, `=>`, `?` and `@`.
+
+## statement terminators
+
+Every `";"` written in the productions below can be left off where the next token
+opens a new source line: the line break stands in for it. End of file ends a line
+too, so the last construct in a file needs no terminator. A `";"` is only required
+between two constructs written on one line.
+
+Three line-start tokens are reserved for continuing the construct above rather than
+starting a new one, so a wrapped expression is never split at the line break:
+
+```ebnf
+ContinuationLead ::= "." | "|" | "|>"
+```
+
+A line opening with anything else - including `"("`, `"["`, an operator, or `"rec"` -
+starts a new construct, so a wrapped operator expression puts the operator at the
+end of the line rather than the start of the next.
 
 ## compilation unit
 
