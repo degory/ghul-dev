@@ -31,9 +31,11 @@ operator precedence table is given [at the end](#operator-precedence).
 ## lexical grammar
 
 The tokenizer turns source text into a stream of tokens. Whitespace (spaces, tabs,
-carriage returns and newlines) separates tokens but is otherwise insignificant:
-ghūl is **not** indentation-sensitive. Whitespace and comments are discarded before
-parsing.
+carriage returns and newlines) separates tokens, and how much of it there is never
+matters: ghūl is **not** indentation-sensitive. Where a token sits relative to a
+line break does matter in one respect, covered under
+[statement terminators](#statement-terminators) below. Comments are discarded
+before parsing.
 
 ### comments
 
@@ -152,6 +154,24 @@ unwrap/has-value, not as the operators `!.` or `?.`.
 
 A handful of operator spellings are recognised as dedicated tokens rather than
 general operators: `=`, `:`, `.`, `->`, `=>`, `?` and `@`.
+
+## statement terminators
+
+Every `";"` written in the productions below can be left off where the next token
+opens a new source line: the line break stands in for it. End of file ends a line
+too, so the last construct in a file needs no terminator. A `";"` is only required
+between two constructs written on one line.
+
+Three line-start tokens are reserved for continuing the construct above rather than
+starting a new one, so a wrapped expression is never split at the line break:
+
+```ebnf
+ContinuationLead ::= "." | "|" | "|>"
+```
+
+A line opening with anything else - including `"("`, `"["`, an operator, or `"rec"` -
+starts a new construct, so a wrapped operator expression puts the operator at the
+end of the line rather than the start of the next.
 
 ## compilation unit
 
