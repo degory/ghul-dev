@@ -1,0 +1,1 @@
+import{c as a,Q as i,j as e,m as n}from"./chunks/framework.BXFC_ndL.js";const u=JSON.parse('{"title":"grammar","description":"","frontmatter":{},"headers":[],"relativePath":"grammar.md","filePath":"grammar.md"}'),t={name:"grammar.md"};function l(p,s,o,r,h,d){return i(),e("div",null,[...s[0]||(s[0]=[n("",136)])])}const k=a(t,[["render",l]]);export{u as __pageData,k as default};
