@@ -162,28 +162,27 @@ opens a new source line: the line break stands in for it. End of file ends a lin
 too, so the last construct in a file needs no terminator. A `";"` is only required
 between two constructs written on one line.
 
-A line break ends a construct that is complete and carries one that is not, so a
-trailing operator or an unclosed bracket continues onto the next line with no rule
-needed. Most line-start tokens need none either: nothing joins them to the line
-above.
+A line break ends a construct that is complete. One that is not runs on to the
+next line, so a trailing operator or an unclosed bracket needs no rule at all.
 
-Two sets are the exceptions. These continue a construct that is already complete,
-which is how member chains and pipes wrap:
+Three line-start tokens continue a construct that is already complete, which is
+how member chains and pipes wrap:
 
 ```ebnf
 ContinuationLead ::= "." | "|" | "|>"
 ```
 
-And these do not, though each of them could have - as a call, an index, an infix
-operand and a rec-lambda marker respectively:
+Three more could have continued one - as a call, an index and an infix operand -
+and deliberately do not:
 
 ```ebnf
-BoundaryLead ::= "(" | "[" | Operator | "rec"
+BoundaryLead ::= "(" | "[" | Operator
 ```
 
 So a wrapped operator expression puts the operator at the end of the line rather
-than the start of the next, and a `rec` self-call can open a line inside a
-recursive lambda.
+than the start of the next. Postfix markers attach on the same line as what they
+mark: a line-start modifier belongs to the next definition, and a line-start
+`rec` is a recursive self-call rather than a rec-lambda marker.
 
 ## compilation unit
 
