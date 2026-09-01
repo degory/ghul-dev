@@ -162,16 +162,20 @@ opens a new source line: the line break stands in for it. End of file ends a lin
 too, so the last construct in a file needs no terminator. A `";"` is only required
 between two constructs written on one line.
 
-Three line-start tokens are reserved for continuing the construct above rather than
-starting a new one, so a wrapped expression is never split at the line break:
+Three line-start tokens continue the construct above rather than starting a new
+one, so a wrapped expression is never split at the line break:
 
 ```ebnf
 ContinuationLead ::= "." | "|" | "|>"
 ```
 
-A line opening with anything else - including `"("`, `"["`, an operator, or `"rec"` -
-starts a new construct, so a wrapped operator expression puts the operator at the
-end of the line rather than the start of the next.
+Every other token starts a new construct. Four of them are worth naming because
+the grammar would otherwise join them to the construct above: a line-start `"("`
+would be a call, `"["` an index, an operator an infix operand, and `"rec"` a
+rec-lambda marker. None of those readings survives a line break, so a wrapped
+operator expression puts the operator at the end of the line rather than the
+start of the next, and a `rec` self-call can open a line inside a recursive
+lambda.
 
 ## compilation unit
 
