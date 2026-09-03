@@ -39,7 +39,7 @@ The [ghūl language extension](https://marketplace.visualstudio.com/items?itemNa
 - signature help
 - source code formatting
 
-Behind the scenes the extension runs the ghūl compiler in its analysis mode: the compiler stays resident, maintains an up-to-date analysis of your project, and updates it as you edit, reporting diagnostics back into the editor.
+Behind the scenes the extension runs the ghūl compiler in its analysis mode. When a project is opened the extension restores its NuGet packages and builds it, then starts the compiler, which reads every source file and builds its analysis of the project; even for a small project this takes a few seconds. The compiler then stays resident and updates that analysis incrementally as you edit, reporting diagnostics back into the editor, so hover and completion typically answer in a few milliseconds regardless of project size.
 
 On large projects the extension updates this analysis in two stages: a quick partial pass over the file you are editing, followed by a full pass once you pause. This is usually invisible, though it does mean a diagnostic can occasionally appear or disappear a moment after an edit.
 

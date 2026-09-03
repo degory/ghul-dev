@@ -600,6 +600,15 @@ To work locally you need the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/do
 
 [Visual Studio Code](https://code.visualstudio.com) with the [ghūl language extension](https://marketplace.visualstudio.com/items?itemName=degory.ghul) gives you errors and warnings as you type, completion, hover, go to definition, rename and formatting. Any editor that can install VS Code extensions gets the same support; other editors can drive the underlying language server directly - see [other editors](https://ghul.dev/tooling.html#other-editors) on the tooling page.
 
+When you first open a project, the extension restores its NuGet packages, builds it, and starts the compiler in analysis mode, which reads the whole project before it can answer. Even for a small project this takes a few seconds. After that the compiler updates its analysis incrementally as you edit, and hover, completion and diagnostics respond in a few milliseconds even on a large project.
+
+ghūl reads best in a font with programming ligatures, which draw operators such as `=~`, `=>` and `|>` as single glyphs. The code is perfectly readable without them, but for the best experience set the editor font to one that provides them, such as [Fira Code](https://github.com/tonsky/FiraCode), and turn ligatures on:
+
+```json
+"editor.fontFamily": "Fira Code",
+"editor.fontLigatures": true
+```
+
 ## it's all ordinary .NET
 
 A ghūl project is a normal .NET SDK project. In each repository above you'll find a `.ghulproj` - an MSBuild project file with the usual things in it - and the normal `dotnet` commands work as you'd expect:
@@ -3759,7 +3768,7 @@ The [ghūl language extension](https://marketplace.visualstudio.com/items?itemNa
 - signature help
 - source code formatting
 
-Behind the scenes the extension runs the ghūl compiler in its analysis mode: the compiler stays resident, maintains an up-to-date analysis of your project, and updates it as you edit, reporting diagnostics back into the editor.
+Behind the scenes the extension runs the ghūl compiler in its analysis mode. When a project is opened the extension restores its NuGet packages and builds it, then starts the compiler, which reads every source file and builds its analysis of the project; even for a small project this takes a few seconds. The compiler then stays resident and updates that analysis incrementally as you edit, reporting diagnostics back into the editor, so hover and completion typically answer in a few milliseconds regardless of project size.
 
 On large projects the extension updates this analysis in two stages: a quick partial pass over the file you are editing, followed by a full pass once you pause. This is usually invisible, though it does mean a diagnostic can occasionally appear or disappear a moment after an edit.
 
