@@ -72,3 +72,15 @@
 body.ghul-example-expanded-open {
   overflow: hidden;
 }
+
+/* The prose column. VitePress caps it at 688px, which was tuned for plain
+   prose; the pages mix prose with runnable examples and fenced code, where a
+   narrow measure wraps lines that would fit whole and gives rendered output -
+   often a table of numbers with nowhere sensible to wrap - the worst of it.
+   Dropping the cap lets the column fill the space the layout gives it after
+   the sidebar and outline, so every kind of content shares one width and the
+   measure scales with the window. The !important is required: VitePress scopes
+   its own rule with a data attribute, which out-specifies any plain override. */
+.VPDoc.has-aside .content-container {
+  max-width: min(100%, 108ch) !important;
+}

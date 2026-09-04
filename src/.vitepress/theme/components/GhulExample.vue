@@ -734,27 +734,6 @@ onBeforeUnmount(() => {
   overflow: hidden;
 }
 
-/* The prose column is sized for reading prose, and code wants a wider measure than that: a line
-   that would fit whole otherwise wraps or scrolls, and rendered output suffers worst because a
-   table of numbers has nowhere sensible to wrap. Where the viewport is wide enough to have room
-   either side of the column, an example takes some of it and the prose keeps its own width. The
-   amount is deliberately modest - it has to stay clear of the outline on the right. */
-@media (min-width: 1280px) {
-  .ghul-example {
-    width: calc(100% + 3rem);
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
-  }
-}
-
-@media (min-width: 1536px) {
-  .ghul-example {
-    width: calc(100% + 7rem);
-    margin-left: -3.5rem;
-    margin-right: -3.5rem;
-  }
-}
-
 .ghul-example-code {
   font-family: 'Fira Code', var(--vp-font-family-mono);
   font-feature-settings: 'calt' 1, 'liga' 1, 'ss07' 1;
