@@ -10,7 +10,7 @@
       "rollForward": false
     },
     "ghul.test": {
-      "version": "3.0.30",
+      "version": "3.0.31",
       "commands": [
         "ghul-test"
       ],
