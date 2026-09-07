@@ -1,0 +1,1 @@
+import{_ as i,o as a,c as e,ak as t}from"./chunks/framework.DviMGrXV.js";const g=JSON.parse('{"title":"tooling","description":"","frontmatter":{},"headers":[],"relativePath":"tooling.md","filePath":"tooling.md"}'),l={name:"tooling.md"};function n(h,s,p,r,o,k){return a(),e("div",null,[...s[0]||(s[0]=[t("",44)])])}const c=i(l,[["render",n]]);export{g as __pageData,c as default};
