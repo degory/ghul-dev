@@ -37,11 +37,11 @@ In this example `then`, `else` and `fi` all delimit blocks. The blocks they deli
 
 A semicolon separates two statements or definitions written on the same line. That is the only place one is needed. At the end of a line the line break ends the statement, and end of file ends the last line, so code written one statement to a line has no semicolons in it. The examples on this site are written that way.
 
-A semicolon at the end of a line is allowed and changes nothing. A function body's tail value is decided by its type, not by whether its last statement has a terminator. `--warn redundant-semicolon` reports each end-of-line semicolon, for a project taking them out, and `--inlay terminator` shows the statement boundaries the parser inferred as editor inlay hints.
+A semicolon at the end of a line is accepted, and the program is the same with or without it: a function body's tail value is decided by its type, not by whether its last statement is terminated. The compiler reports an end-of-line semicolon as a `redundant-semicolon` warning. `--inlay terminator` shows the statement boundaries the parser inferred as editor inlay hints.
 
 Adjacent string literals join into one literal, across a line break as well as within a line. Where a statement ends on a string literal and the next line begins with one, a semicolon between them keeps the two apart. `redundant-semicolon` does not report that one.
 
-A line break ends a statement only where the statement is complete. An expression left unfinished at the end of a line, such as `a +` or an open `(`, continues on the next line, and a line beginning with `.` or `|>` continues the line above, so member chains and pipes wrap in the usual way. For code formatted in the conventional way these rules give the reading you would expect. The full set is under [statement terminators](/grammar.html#statement-terminators) in the grammar, for the occasions when a wrapped expression does not parse the way it reads.
+A line break ends a statement only where the statement is complete. An expression left unfinished at the end of a line, such as `a +` or an open `(`, continues on the next line, and a line beginning with `.` or `|>` continues the line above, so member chains and pipes wrap in the usual way. Code formatted in the conventional way parses as you would expect. The full rules are under [statement terminators](/grammar.html#statement-terminators) in the grammar, for the occasions when a wrapped expression parses differently from how it reads.
 
 ## definitions and statements
 
