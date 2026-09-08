@@ -17,7 +17,7 @@
     { "startLine": 17, "startColumn": 35, "endLine": 17, "endColumn": 39, "text": "apply[int,int](\n    values: int[],\n    callback: int -> int pure\n) -> List[int]", "signature": "apply[int,int](\n    values: int[],\n    callback: int -> int pure\n) -> List[int]", "kindLabel": "global function" },
     { "startLine": 17, "startColumn": 50, "endLine": 17, "endColumn": 54, "text": "value: int", "signature": "value: int", "kindLabel": "local argument" },
     { "startLine": 17, "startColumn": 58, "endLine": 17, "endColumn": 62, "text": "value: int", "signature": "value: int", "kindLabel": "local argument" },
-    { "startLine": 17, "startColumn": 56, "endLine": 17, "endColumn": 56, "text": "Ghul.*(a: int, b: int) -> int", "signature": "Ghul.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" },
+    { "startLine": 17, "startColumn": 56, "endLine": 17, "endColumn": 56, "text": "int.*(a: int, b: int) -> int", "signature": "int.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" },
     { "startLine": 17, "startColumn": 14, "endLine": 17, "endColumn": 14, "text": "Ghul.$[int](values: Collections.Iterable[int]) -> string", "signature": "Ghul.$[int](values: Collections.Iterable[int]) -> string", "kindLabel": "global function" },
     { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 5, "text": "apply[T,U](values: T[], callback: T -> U pure) -> List[U]", "signature": "apply[T,U](values: T[], callback: T -> U pure) -> List[U]", "kindLabel": "global function" },
     { "startLine": 5, "startColumn": 7, "endLine": 5, "endColumn": 7, "text": "T", "signature": "T", "kindLabel": "type variable" },

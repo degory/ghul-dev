@@ -11,11 +11,11 @@
     { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 11, "severity": "error", "message": "indexer is read-only in int[]" }
   ],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "top-level variable" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "text": "element: int", "signature": "element: int", "kindLabel": "top-level variable" },
-    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 21, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "top-level variable" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "global variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 11, "text": "element: int", "signature": "element: int", "kindLabel": "global variable" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 21, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "global variable" },
     { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 24, "text": "Collections.List[int].get_Item(index: int) -> int", "signature": "Collections.List[int].get_Item(index: int) -> int", "kindLabel": "pure abstract method" },
-    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 7, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "top-level variable" }
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 7, "text": "numbers: int[]", "signature": "numbers: int[]", "kindLabel": "global variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [

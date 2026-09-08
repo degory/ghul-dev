@@ -46,7 +46,7 @@
     { "startLine": 18, "startColumn": 37, "endLine": 18, "endColumn": 42, "text": "values: int[]", "signature": "values: int[]", "kindLabel": "local value" },
     { "startLine": 18, "startColumn": 44, "endLine": 18, "endColumn": 44, "text": "i: int", "signature": "i: int", "kindLabel": "local value" },
     { "startLine": 18, "startColumn": 43, "endLine": 19, "endColumn": 10, "text": "Collections.List[int].get_Item(index: int) -> int", "signature": "Collections.List[int].get_Item(index: int) -> int", "kindLabel": "pure abstract method" },
-    { "startLine": 18, "startColumn": 35, "endLine": 18, "endColumn": 35, "text": "Ghul.-(a: int, b: int) -> int", "signature": "Ghul.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },
+    { "startLine": 18, "startColumn": 35, "endLine": 18, "endColumn": 35, "text": "int.-(a: int, b: int) -> int", "signature": "int.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },
     { "startLine": 18, "startColumn": 13, "endLine": 18, "endColumn": 21, "text": "remaining: int", "signature": "remaining: int", "kindLabel": "local variable" },
     { "startLine": 22, "startColumn": 12, "endLine": 22, "endColumn": 18, "text": "numeral: System.Text.StringBuilder", "signature": "numeral: System.Text.StringBuilder", "kindLabel": "local value" },
     { "startLine": 22, "startColumn": 20, "endLine": 22, "endColumn": 28, "text": "System.Text.StringBuilder.to_string() -> string", "signature": "System.Text.StringBuilder.to_string() -> string", "kindLabel": "pure method" }

@@ -9,10 +9,10 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "point: (int, int)", "signature": "point: (int, int)", "kindLabel": "top-level variable" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 9, "text": "point: (int, int)", "signature": "point: (int, int)", "kindLabel": "global variable" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 15, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 20, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "person: (string, int)", "signature": "person: (string, int)", "kindLabel": "top-level variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "person: (string, int)", "signature": "person: (string, int)", "kindLabel": "global variable" },
     { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 19, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 24, "text": "struct int", "signature": "struct int", "kindLabel": "struct" }
   ],

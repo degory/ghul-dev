@@ -22,7 +22,7 @@
     { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 46, "text": "System.InvalidOperationException.init(message: string?)", "signature": "System.InvalidOperationException.init(message: string?)", "kindLabel": "constructor" },
     { "startLine": 8, "startColumn": 12, "endLine": 8, "endColumn": 18, "text": "balance: int", "signature": "balance: int", "kindLabel": "local argument" },
     { "startLine": 8, "startColumn": 22, "endLine": 8, "endColumn": 27, "text": "amount: int", "signature": "amount: int", "kindLabel": "local argument" },
-    { "startLine": 8, "startColumn": 20, "endLine": 8, "endColumn": 20, "text": "Ghul.-(a: int, b: int) -> int", "signature": "Ghul.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" }
+    { "startLine": 8, "startColumn": 20, "endLine": 8, "endColumn": 20, "text": "int.-(a: int, b: int) -> int", "signature": "int.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" }
   ],
   "inlayHints": [],
   "semanticTokens": [

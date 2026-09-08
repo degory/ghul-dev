@@ -64,15 +64,15 @@ If the local is already narrowed, assigning a value of a different type cancels 
 
 ## how long a narrowing lasts
 
-Narrowing is optimistic: the compiler narrows whenever a test proves something, and checks afterwards whether the narrowing still holds where it is used. It has to check, because values change, and their types change with them: a value that was present can be reassigned to null.
+A narrowing is a fact about a value at a point in the program, and values change: one that was present can be reassigned to null, and one that was a `CAT` can be replaced by some other `Animal`. So a narrowing has a lifetime, and the compiler works out where it ends.
 
 A narrowing lasts at most to the end of the code block associated with the test - the then or else arm of the `if`, or the loop body. It can end earlier, because the value can change before the block ends: by an explicit reassignment, or because a call to a function or method changes it, directly or indirectly.
 
-The compiler tracks the calls that might do that, conservatively: it builds a call graph and works out which fields each call might write. When you use a narrowed value in a way that depends on the narrowing - you read a member through it, or pass it where only the non-optional or narrower type is accepted - and the compiler cannot prove the value is still what the test saw, it reports the use as potentially unsafe, naming the call it could not prove and pointing back at the test:
+The compiler tracks the calls that might do that, conservatively: it builds a call graph and works out which fields each call might write. A narrowing runs from the test to the first call the compiler cannot show left the value alone. From there the value reads at its declared type again, so a use that needed the narrowing - reading a member through it, or passing it where only the non-optional or narrower type is accepted - is an ordinary type error. The `◄` marks where the narrowing ended:
 
 <GhulExample name="type-inference-22" />
 
-When the compiler can prove that the calls in between could not have changed the value, there is nothing to report:
+When the compiler can prove that the calls in between could not have changed the value, the narrowing runs to the end of the block:
 
 <GhulExample name="type-inference-5" />
 
@@ -86,4 +86,4 @@ Narrowings of local variables are more stable than narrowings of fields and prop
 
 Whether a call can invalidate a narrowing depends on what the call can write. The compiler works this out from function bodies: a function that writes nothing that existed before the call cannot invalidate any narrowing, and most functions are proven that way with no annotation. Where the proof falls short, the postfix [`pure` modifier](/definitions.html#methods) declares it instead, trusted as declared and required of every override. Some imported .NET collection mutators, such as `LIST.add` and `STACK.push`, are known to write only their own receiver's internal state, so they invalidate only a narrowing that reads through that state.
 
-A narrowing through a property has one more dependency: the property is read once at the test and again at each use, and every read calls the getter. The narrowing is only sound if the getter's later answers agree with the answer the test saw. The compiler proves that from the getter's body where it can. Where it cannot - a getter that fills a cache on first read, for example - the test does not narrow at all, and a use that relies on the narrowing is an error naming the getter. Declaring the property [`stable`](/definitions.html#properties) restores the narrowing: it promises that two reads with nothing between them agree on whether the value is present, and on its runtime type.
+A narrowing through a property has one more dependency: the property is read once at the test and again at each use, and every read calls the getter. The narrowing is only sound if the getter's later answers agree with the answer the test saw. The compiler proves that from the getter's body where it can. Where it cannot - a getter that fills a cache on first read, for example - the test does not narrow at all, and has a hint naming the getter. Declaring the property [`stable`](/definitions.html#properties) restores the narrowing: it promises that two reads with nothing between them agree on whether the value is present, and on its runtime type.

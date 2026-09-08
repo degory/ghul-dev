@@ -11,13 +11,13 @@
   "hovers": [
     { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 19, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "text": "y: int", "signature": "y: int", "kindLabel": "local argument" },
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "text": "simple_add: (int, int) -> int pure", "signature": "simple_add: (int, int) -> int pure", "kindLabel": "top-level variable" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 14, "text": "simple_add: (int, int) -> int pure", "signature": "simple_add: (int, int) -> int pure", "kindLabel": "global variable" },
     { "startLine": 1, "startColumn": 38, "endLine": 1, "endColumn": 40, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 24, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 30, "endLine": 1, "endColumn": 32, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 45, "endLine": 1, "endColumn": 45, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 49, "endLine": 1, "endColumn": 49, "text": "y: int", "signature": "y: int", "kindLabel": "local argument" },
-    { "startLine": 1, "startColumn": 47, "endLine": 1, "endColumn": 47, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" }
+    { "startLine": 1, "startColumn": 47, "endLine": 1, "endColumn": 47, "text": "int.+(a: int, b: int) -> int", "signature": "int.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" }
   ],
   "inlayHints": [],
   "semanticTokens": [

@@ -6,6 +6,8 @@ namespace ExampleTool is
 
     use Collections.LIST
 
+    use Ghul.Pipes
+
     use Analysis.Protocol.ANALYSER_PROCESS
     use Analysis.Protocol.Response
 
@@ -452,20 +454,21 @@ namespace ExampleTool is
         fi
     si
 
-    // The base class library DLLs `--sdk-ref-path` alone would otherwise add
+    // The reference assemblies `--sdk-ref-path` alone would otherwise add
     // automatically (see `Semantic.DotNet.ASSEMBLIES.import` in the compiler),
     // plus the `ghul-runtime.dll` this tool provisioned into the example
-    // directory. Supplying any `-a` opts out of the compiler's own canned
-    // default reference set, so a bare-source example passing `-a` for its
-    // own runtime has to spell these out too, or it fails to load a core
-    // assembly at all.
+    // directory. Supplying any `-a` opts out of the compiler's own default
+    // reference set, so a bare-source example passing `-a` for its own
+    // runtime has to spell these out too, or it fails to load a core
+    // assembly at all. The whole pack goes in, as the compiler and an
+    // MSBuild build both do: the SDK decides what the framework holds, so a
+    // pack that gains an assembly a built-in type maps to needs no change
+    // here. Sorted, so the load order does not depend on the file system.
     _sdk_and_runtime_reference_flags(sdk_ref_path: string) -> string is
-        let names = ["System.Console", "System.Runtime", "System.IO.FileSystem", "System.Collections", "System.Threading"]
-
         let flags = System.Text.StringBuilder()
 
-        for name in names do
-            flags.append("-a \"{Path.combine(sdk_ref_path, "{name}.dll")}\" ")
+        for path in Directory.get_files(sdk_ref_path, "*.dll") |> sort() do
+            flags.append("-a \"{path}\" ")
         od
 
         flags.append("-a \"ghul-runtime.dll\"")

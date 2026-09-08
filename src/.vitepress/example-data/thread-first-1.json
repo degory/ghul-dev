@@ -20,7 +20,7 @@
     { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 12, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 5, "startColumn": 18, "endLine": 5, "endColumn": 20, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 5, "startColumn": 25, "endLine": 5, "endColumn": 25, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
-    { "startLine": 5, "startColumn": 27, "endLine": 5, "endColumn": 27, "text": "Ghul.*(a: int, b: int) -> int", "signature": "Ghul.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" },
+    { "startLine": 5, "startColumn": 27, "endLine": 5, "endColumn": 27, "text": "int.*(a: int, b: int) -> int", "signature": "int.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" },
     { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 8, "text": "describe(b: BOX) -> string", "signature": "describe(b: BOX) -> string", "kindLabel": "pure global function" },
     { "startLine": 6, "startColumn": 10, "endLine": 6, "endColumn": 10, "text": "b: BOX", "signature": "b: BOX", "kindLabel": "local argument" },
     { "startLine": 6, "startColumn": 13, "endLine": 6, "endColumn": 15, "text": "class BOX(value: int)", "signature": "class BOX(value: int)", "kindLabel": "class" },

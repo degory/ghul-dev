@@ -11,14 +11,14 @@
   "hovers": [
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 28, "text": "y: int", "signature": "y: int", "kindLabel": "local argument" },
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "text": "complex_add: (int, int) -> int pure", "signature": "complex_add: (int, int) -> int pure", "kindLabel": "top-level variable" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "text": "complex_add: (int, int) -> int pure", "signature": "complex_add: (int, int) -> int pure", "kindLabel": "global variable" },
     { "startLine": 1, "startColumn": 39, "endLine": 1, "endColumn": 41, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 25, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 31, "endLine": 1, "endColumn": 33, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 2, "startColumn": 9, "endLine": 2, "endColumn": 14, "text": "result: int", "signature": "result: int", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 18, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 22, "text": "y: int", "signature": "y: int", "kindLabel": "local argument" },
-    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 20, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
+    { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 20, "text": "int.+(a: int, b: int) -> int", "signature": "int.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
     { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 17, "text": "result: int", "signature": "result: int", "kindLabel": "local value" }
   ],
   "inlayHints": [],

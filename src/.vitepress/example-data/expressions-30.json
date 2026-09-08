@@ -20,7 +20,7 @@
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "total: single", "signature": "total: single", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 18, "endLine": 2, "endColumn": 22, "text": "count: int", "signature": "count: int", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 16, "text": "struct single", "signature": "struct single", "kindLabel": "struct" },
-    { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 11, "text": "Ghul./(a: single, b: single) -> single", "signature": "Ghul./(a: single, b: single) -> single", "kindLabel": "innate function arithmetic.div" }
+    { "startLine": 2, "startColumn": 11, "endLine": 2, "endColumn": 11, "text": "single./(a: single, b: single) -> single", "signature": "single./(a: single, b: single) -> single", "kindLabel": "innate function arithmetic.div" }
   ],
   "inlayHints": [],
   "semanticTokens": [

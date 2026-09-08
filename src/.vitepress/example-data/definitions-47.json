@@ -16,7 +16,7 @@
     { "startLine": 2, "startColumn": 26, "endLine": 2, "endColumn": 30, "text": "value: int", "signature": "value: int", "kindLabel": "pure instance property" },
     { "startLine": 2, "startColumn": 34, "endLine": 2, "endColumn": 38, "text": "other: BOX", "signature": "other: BOX", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 40, "endLine": 2, "endColumn": 44, "text": "value: int", "signature": "value: int", "kindLabel": "pure instance property" },
-    { "startLine": 2, "startColumn": 32, "endLine": 2, "endColumn": 32, "text": "Ghul.-(a: int, b: int) -> int", "signature": "Ghul.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" }
+    { "startLine": 2, "startColumn": 32, "endLine": 2, "endColumn": 32, "text": "int.-(a: int, b: int) -> int", "signature": "int.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" }
   ],
   "inlayHints": [],
   "semanticTokens": [

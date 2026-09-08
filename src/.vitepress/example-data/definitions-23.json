@@ -10,9 +10,9 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "text": "class COUNTER", "signature": "class COUNTER", "kindLabel": "class" },
-    { "startLine": 13, "startColumn": 5, "endLine": 13, "endColumn": 5, "text": "c: COUNTER", "signature": "c: COUNTER", "kindLabel": "top-level variable" },
+    { "startLine": 13, "startColumn": 5, "endLine": 13, "endColumn": 5, "text": "c: COUNTER", "signature": "c: COUNTER", "kindLabel": "global variable" },
     { "startLine": 13, "startColumn": 9, "endLine": 13, "endColumn": 15, "text": "COUNTER.init()", "signature": "COUNTER.init()", "kindLabel": "constructor" },
-    { "startLine": 16, "startColumn": 5, "endLine": 16, "endColumn": 5, "text": "d: COUNTER", "signature": "d: COUNTER", "kindLabel": "top-level variable" },
+    { "startLine": 16, "startColumn": 5, "endLine": 16, "endColumn": 5, "text": "d: COUNTER", "signature": "d: COUNTER", "kindLabel": "global variable" },
     { "startLine": 16, "startColumn": 9, "endLine": 16, "endColumn": 15, "text": "COUNTER.init(initial_count: int)", "signature": "COUNTER.init(initial_count: int)", "kindLabel": "constructor" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "COUNTER.count: int", "signature": "COUNTER.count: int", "kindLabel": "pure instance property" },
     { "startLine": 2, "startColumn": 5, "endLine": 4, "endColumn": 8, "text": "$$value: int", "signature": "$$value: int", "kindLabel": "local argument" },

@@ -46,7 +46,7 @@
     { "startLine": 24, "startColumn": 9, "endLine": 24, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 34, "startColumn": 19, "endLine": 34, "endColumn": 25, "text": "running: int", "signature": "running: int", "kindLabel": "local variable" },
     { "startLine": 34, "startColumn": 29, "endLine": 34, "endColumn": 32, "text": "mark: int", "signature": "mark: int", "kindLabel": "local value" },
-    { "startLine": 34, "startColumn": 27, "endLine": 34, "endColumn": 27, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
+    { "startLine": 34, "startColumn": 27, "endLine": 34, "endColumn": 27, "text": "int.+(a: int, b: int) -> int", "signature": "int.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
     { "startLine": 34, "startColumn": 9, "endLine": 34, "endColumn": 15, "text": "running: int", "signature": "running: int", "kindLabel": "local variable" },
     { "startLine": 37, "startColumn": 5, "endLine": 37, "endColumn": 11, "text": "running: int", "signature": "running: int", "kindLabel": "local variable" }
   ],

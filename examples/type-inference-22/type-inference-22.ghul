@@ -20,8 +20,8 @@ si
 describe(carrier: CARRIER, other: Animal) is
     if isa CAT(carrier.occupant) then
         carrier.swap(other)
-        // swap() can change occupant, and the use below leans on
-        // the narrow - so it is reported here, naming the call
+        // the narrowing ends at the call: swap() can change
+        // occupant, so it reads as an Animal from here on
         write_line(carrier.occupant.purr())
     fi
 si
