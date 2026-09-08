@@ -442,7 +442,7 @@ variable is immutable unless followed by `mut`.
 ## statements
 
 A statement list is a sequence of statements, separated by
-[terminators](#statement-terminators). The terminator carries no meaning of its
+[terminators](#statement-terminators). The terminator has no meaning of its
 own: a function body's tail value is judged by its type, so whether the last
 statement is terminated never changes what the body returns.
 
