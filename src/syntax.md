@@ -35,13 +35,13 @@ In this example `then`, `else` and `fi` all delimit blocks. The blocks they deli
 
 ## semicolons
 
-Most ghūl code has none. A semicolon separates two statements or definitions written on one line; at the end of a line the line break stands in for it, and end of file ends a line too, so the last construct in a file needs no terminator either. Code formatted the ordinary way - one statement to a line, a long expression wrapped in the conventional places - needs no semicolons at all, and the style throughout this site leaves them off.
+A semicolon separates two statements or definitions written on the same line. That is the only place one is needed. At the end of a line the line break ends the statement, and end of file ends the last line, so code written one statement to a line has no semicolons in it. The examples on this site are written that way.
 
-Nothing reads a terminator for meaning. A body's tail value is judged by its type, not by whether the statement that produced it was terminated, so writing an end-of-line `;` changes nothing about the program. `--warn redundant-semicolon` reports the ones that are there, for a project moving its terminators out, and `--inlay terminator` shows the same information the other way round, marking each boundary the parser inferred.
+A semicolon at the end of a line is allowed and changes nothing. A function body's tail value is decided by its type, not by whether its last statement has a terminator. `--warn redundant-semicolon` reports each end-of-line semicolon, for a project taking them out, and `--inlay terminator` shows the statement boundaries the parser inferred as editor inlay hints.
 
-One case is worth knowing about. Adjacent string literals join into a single literal, across a line break as well as within a line, so where a statement ends on a string literal and the next begins with one, a `;` between them is what keeps them apart. `redundant-semicolon` never reports that one.
+Adjacent string literals join into one literal, across a line break as well as within a line. Where a statement ends on a string literal and the next line begins with one, a semicolon between them keeps the two apart. `redundant-semicolon` does not report that one.
 
-The rules that decide where a line break ends a construct and where it does not are given under [statement terminators](/grammar.html#statement-terminators) in the grammar. They are worth reading once, and then only when a wrapped expression parses in a way you did not expect: an unfinished line always runs on to the next, a line opening with `.` or `|>` continues the line above, and a wrapped operator expression puts the operator at the end of the line rather than the start of the next.
+A line break ends a statement only where the statement is complete. An expression left unfinished at the end of a line, such as `a +` or an open `(`, continues on the next line, and a line beginning with `.` or `|>` continues the line above, so member chains and pipes wrap in the usual way. For code formatted in the conventional way these rules give the reading you would expect. The full set is under [statement terminators](/grammar.html#statement-terminators) in the grammar, for the occasions when a wrapped expression does not parse the way it reads.
 
 ## definitions and statements
 
