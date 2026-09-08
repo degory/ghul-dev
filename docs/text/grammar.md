@@ -31,9 +31,10 @@ operator precedence table is given [at the end](#operator-precedence).
 ## lexical grammar
 
 The tokenizer turns source text into a stream of tokens. Whitespace (spaces, tabs,
-carriage returns and newlines) separates tokens, and how much of it there is never
-matters: ghūl is **not** indentation-sensitive. Where a token sits relative to a
-line break does matter in one respect, covered under
+carriage returns and newlines) separates tokens, and how much of it there is
+almost never matters. Two things about it do: whether a token is the first on its
+line, which is what lets a statement terminator be left off, and how far one
+construct is indented, which matters in a single case. Both are covered under
 [statement terminators](#statement-terminators) below. Comments are discarded
 before parsing.
 
@@ -162,27 +163,67 @@ opens a new source line: the line break stands in for it. End of file ends a lin
 too, so the last construct in a file needs no terminator. A `";"` is only required
 between two constructs written on one line.
 
-A line break ends a construct that is complete. One that is not runs on to the
-next line, so a trailing operator or an unclosed bracket needs no rule at all.
-
-Three line-start tokens continue a construct that is already complete, which is
-how member chains and pipes wrap:
-
 ```ebnf
-ContinuationLead ::= "." | "|" | "|>"
+Terminator ::= ";" | Boundary
 ```
 
-Three more could have continued one - as a call, an index and an infix operand -
-and deliberately do not:
+`Boundary` is not a token. It is the position before a token that is the first on
+its source line, and before end of input.
+
+The parser accepts a `Terminator` only where the grammar could accept a `";"`, so
+the inference asks one question at one kind of position: is the current token the
+first on its line? That leaves the rest to the productions themselves. A line
+break ends a construct that is complete; one that is not runs on to the next
+line, so a trailing operator, an unclosed bracket, and an argument list still
+waiting for its `)` need no rule at all.
+
+### line-start tokens
+
+Four tokens continue a construct that is already complete, which is how member
+chains and pipes wrap:
 
 ```ebnf
-BoundaryLead ::= "(" | "[" | Operator
+ContinuationLead ::= "." | "?" | "|>" | "ref"
+```
+
+Five could have continued one - as a call, an index, an explicit generic
+application, a function literal's `rec` marker and an infix operand - and
+deliberately do not:
+
+```ebnf
+BoundaryLead ::= "(" | "[" | "`[" | "rec" | Operator
 ```
 
 So a wrapped operator expression puts the operator at the end of the line rather
-than the start of the next. Postfix markers attach on the same line as what they
-mark: a line-start modifier belongs to the next definition, and a line-start
-`rec` is a recursive self-call rather than a function literal's `rec` marker.
+than the start of the next, and a line-start `rec` is a recursive self-call
+rather than a marker for the expression above. Postfix modifiers follow the same
+rule without needing to be listed: a modifier is read only on its declaration's
+own line, so a line-start `public`, `static` or `pure` belongs to the next
+member.
+
+### constructs that end at a line break
+
+Three productions consult the boundary directly rather than through a
+`Terminator`.
+
+`Return` takes the next line's expression as its value where that line opens with
+a token that can begin an expression, and is a void return otherwise. The two
+readings never compete: a statement written after a `return` in the same block
+would be unreachable, so a closing keyword is the only thing that legitimately
+follows one.
+
+A parenthesised group is a tuple or a
+[block expression](https://ghul.dev/expression-oriented-programming.html#blocks), and a boundary
+commits the block reading exactly as a written `";"` does. A top-level `","`
+commits the tuple reading, and has always arrived first when it is going to, so
+the two never contend. A line-start operator is excluded from the block commit,
+which keeps `(a` ... `+ b)` from being misread as two statements.
+
+`Assert` is the one construct whose reading depends on how far a line is
+indented. An `else` opening the line after a bare `assert` is the assert's own
+message clause where its column is at least the assert's, and the `else` of the
+enclosing `if` or `case` arm where it is dedented past it. This is the only place
+indentation is significant; everywhere else ghūl ignores it.
 
 ## compilation unit
 
@@ -400,19 +441,13 @@ variable is immutable unless followed by `mut`.
 
 ## statements
 
-A statement list is a sequence of statements. A `;` separates statements; it is
-required after a statement whose syntax would otherwise run on into the next, and
-optional elsewhere.
-
-In a **function or method body** the `;` on the last statement is significant rather
-than optional: without one, a value-producing last statement is the body's tail and
-its value is the return value on the fall-through path; with one the value is
-discarded. At any other block close - `fi`, `esac`, `od`, the `)` of a block
-expression - the trailing `;` stays optional and does not affect the value the
-block produces.
+A statement list is a sequence of statements, separated by
+[terminators](#statement-terminators). The terminator has no meaning of its
+own: a function body's tail value is judged by its type, so whether the last
+statement is terminated never changes what the body returns.
 
 ```ebnf
-StatementList ::= ( Statement ";"? )*
+StatementList ::= ( Statement Terminator? )*
 
 Statement ::= Let
             | Return

@@ -1,0 +1,1 @@
+import{_ as a,o as i,c as e,ak as n}from"./chunks/framework.DviMGrXV.js";const k=JSON.parse('{"title":"grammar","description":"","frontmatter":{},"headers":[],"relativePath":"grammar.md","filePath":"grammar.md"}'),t={name:"grammar.md"};function l(p,s,o,r,h,d){return i(),e("div",null,[...s[0]||(s[0]=[n("",143)])])}const u=a(t,[["render",l]]);export{k as __pageData,u as default};
