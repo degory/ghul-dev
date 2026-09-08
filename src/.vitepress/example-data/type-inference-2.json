@@ -19,7 +19,7 @@
     { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 13, "text": "count: int", "signature": "count: int", "kindLabel": "pure instance property" },
     { "startLine": 12, "startColumn": 17, "endLine": 12, "endColumn": 21, "text": "count: int", "signature": "count: int", "kindLabel": "pure instance property" },
     { "startLine": 12, "startColumn": 25, "endLine": 12, "endColumn": 28, "text": "step: int", "signature": "step: int", "kindLabel": "local value" },
-    { "startLine": 12, "startColumn": 23, "endLine": 12, "endColumn": 23, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
+    { "startLine": 12, "startColumn": 23, "endLine": 12, "endColumn": 23, "text": "int.+(a: int, b: int) -> int", "signature": "int.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
     { "startLine": 12, "startColumn": 9, "endLine": 12, "endColumn": 13, "text": "count: int", "signature": "count: int", "kindLabel": "pure instance property" }
   ],
   "inlayHints": [],

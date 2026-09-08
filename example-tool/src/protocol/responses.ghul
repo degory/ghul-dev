@@ -15,7 +15,10 @@ namespace Analysis.Protocol is
         severity: int public
         message: string public
 
-        init() is si
+        init() is
+            self.path = ""
+            self.message = ""
+        si
 
         init(
             path: string,
@@ -45,7 +48,9 @@ namespace Analysis.Protocol is
         // null when the symbol has none (namespaces, labels).
         kind_label: string? public
 
-        init() is si
+        init() is
+            self.description = ""
+        si
 
         init(start_line: int, start_column: int, end_line: int, end_column: int, description: string, kind_label: string?) is
             self.start_line = start_line
@@ -65,7 +70,10 @@ namespace Analysis.Protocol is
         token_type: string public
         modifiers: string public
 
-        init() is si
+        init() is
+            self.token_type = ""
+            self.modifiers = ""
+        si
 
         init(start_line: int, start_column: int, end_line: int, end_column: int, token_type: string, modifiers: string) is
             self.start_line = start_line
@@ -87,7 +95,11 @@ namespace Analysis.Protocol is
         detail: string public
         code: string public
 
-        init() is si
+        init() is
+            self.label = ""
+            self.detail = ""
+            self.code = ""
+        si
 
         init(line: int, column: int, label: string, detail: string, code: string) is
             self.line = line

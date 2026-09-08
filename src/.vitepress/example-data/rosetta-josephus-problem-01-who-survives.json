@@ -24,12 +24,12 @@
     { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 11, "text": "Ghul.==[int](a: int, b: int) -> bool", "signature": "Ghul.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
     { "startLine": 4, "startColumn": 28, "endLine": 4, "endColumn": 35, "text": "survivor(n: int, k: int) -> int", "signature": "survivor(n: int, k: int) -> int", "kindLabel": "pure global function" },
     { "startLine": 4, "startColumn": 37, "endLine": 4, "endColumn": 37, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
-    { "startLine": 4, "startColumn": 39, "endLine": 4, "endColumn": 39, "text": "Ghul.-(a: int, b: int) -> int", "signature": "Ghul.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },
+    { "startLine": 4, "startColumn": 39, "endLine": 4, "endColumn": 39, "text": "int.-(a: int, b: int) -> int", "signature": "int.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },
     { "startLine": 4, "startColumn": 44, "endLine": 4, "endColumn": 44, "text": "k: int", "signature": "k: int", "kindLabel": "local argument" },
     { "startLine": 4, "startColumn": 49, "endLine": 4, "endColumn": 49, "text": "k: int", "signature": "k: int", "kindLabel": "local argument" },
-    { "startLine": 4, "startColumn": 47, "endLine": 4, "endColumn": 47, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
+    { "startLine": 4, "startColumn": 47, "endLine": 4, "endColumn": 47, "text": "int.+(a: int, b: int) -> int", "signature": "int.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
     { "startLine": 4, "startColumn": 54, "endLine": 4, "endColumn": 54, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
-    { "startLine": 4, "startColumn": 52, "endLine": 4, "endColumn": 52, "text": "Ghul.%(a: int, b: int) -> int", "signature": "Ghul.%(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.rem" }
+    { "startLine": 4, "startColumn": 52, "endLine": 4, "endColumn": 52, "text": "int.%(a: int, b: int) -> int", "signature": "int.%(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.rem" }
   ],
   "inlayHints": [],
   "semanticTokens": [

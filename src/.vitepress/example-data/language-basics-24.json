@@ -9,16 +9,16 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 7, "text": "add: int", "signature": "add: int", "kindLabel": "top-level variable" },
-    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "text": "sub: int", "signature": "sub: int", "kindLabel": "top-level variable" },
-    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 13, "text": "Ghul.-(a: int, b: int) -> int", "signature": "Ghul.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 7, "text": "mul: int", "signature": "mul: int", "kindLabel": "top-level variable" },
-    { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 13, "text": "Ghul.*(a: int, b: int) -> int", "signature": "Ghul.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 7, "text": "div: int", "signature": "div: int", "kindLabel": "top-level variable" },
-    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "text": "Ghul./(a: int, b: int) -> int", "signature": "Ghul./(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.div" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 7, "text": "mod: int", "signature": "mod: int", "kindLabel": "top-level variable" },
-    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 14, "text": "Ghul.%(a: int, b: int) -> int", "signature": "Ghul.%(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.rem" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 7, "text": "add: int", "signature": "add: int", "kindLabel": "global variable" },
+    { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 13, "text": "int.+(a: int, b: int) -> int", "signature": "int.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "text": "sub: int", "signature": "sub: int", "kindLabel": "global variable" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 13, "text": "int.-(a: int, b: int) -> int", "signature": "int.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 7, "text": "mul: int", "signature": "mul: int", "kindLabel": "global variable" },
+    { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 13, "text": "int.*(a: int, b: int) -> int", "signature": "int.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 7, "text": "div: int", "signature": "div: int", "kindLabel": "global variable" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "text": "int./(a: int, b: int) -> int", "signature": "int./(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.div" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 7, "text": "mod: int", "signature": "mod: int", "kindLabel": "global variable" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 14, "text": "int.%(a: int, b: int) -> int", "signature": "int.%(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.rem" }
   ],
   "inlayHints": [],
   "semanticTokens": [

@@ -9,7 +9,10 @@ namespace Analysis.Protocol is
         path: string public
         source: string public
 
-        init() is si
+        init() is
+            self.path = ""
+            self.source = ""
+        si
 
         init(path: string, source: string) is
             self.path = path

@@ -15,7 +15,7 @@
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 22, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 7, "startColumn": 12, "endLine": 7, "endColumn": 15, "text": "sign(n: int) -> string", "signature": "sign(n: int) -> string", "kindLabel": "pure global function" },
-    { "startLine": 7, "startColumn": 17, "endLine": 7, "endColumn": 17, "text": "Ghul.-(a: int) -> int", "signature": "Ghul.-(a: int) -> int", "kindLabel": "innate function arithmetic.neg" },
+    { "startLine": 7, "startColumn": 17, "endLine": 7, "endColumn": 17, "text": "int.-(a: int) -> int", "signature": "int.-(a: int) -> int", "kindLabel": "innate function arithmetic.neg" },
     { "startLine": 8, "startColumn": 1, "endLine": 8, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 8, "startColumn": 12, "endLine": 8, "endColumn": 15, "text": "sign(n: int) -> string", "signature": "sign(n: int) -> string", "kindLabel": "pure global function" },
     { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },

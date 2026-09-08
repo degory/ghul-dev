@@ -9,7 +9,7 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "primes: int[]", "signature": "primes: int[]", "kindLabel": "top-level variable" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "primes: int[]", "signature": "primes: int[]", "kindLabel": "global variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [

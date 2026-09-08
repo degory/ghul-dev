@@ -9,11 +9,11 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 19, "text": "integer_literal: int", "signature": "integer_literal: int", "kindLabel": "top-level variable" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 26, "text": "floating_point_literal: single", "signature": "floating_point_literal: single", "kindLabel": "top-level variable" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 18, "text": "string_literal: string", "signature": "string_literal: string", "kindLabel": "top-level variable" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 24, "text": "boolean_literal_true: bool", "signature": "boolean_literal_true: bool", "kindLabel": "top-level variable" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 25, "text": "boolean_literal_false: bool", "signature": "boolean_literal_false: bool", "kindLabel": "top-level variable" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 19, "text": "integer_literal: int", "signature": "integer_literal: int", "kindLabel": "global variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 26, "text": "floating_point_literal: single", "signature": "floating_point_literal: single", "kindLabel": "global variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 18, "text": "string_literal: string", "signature": "string_literal: string", "kindLabel": "global variable" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 24, "text": "boolean_literal_true: bool", "signature": "boolean_literal_true: bool", "kindLabel": "global variable" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 25, "text": "boolean_literal_false: bool", "signature": "boolean_literal_false: bool", "kindLabel": "global variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [

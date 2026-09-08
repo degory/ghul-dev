@@ -9,12 +9,12 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "text": "a: int", "signature": "a: int", "kindLabel": "top-level variable" },
-    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "text": "b: int", "signature": "b: int", "kindLabel": "top-level variable" },
-    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 18, "text": "point: (int, int)", "signature": "point: (int, int)", "kindLabel": "top-level variable" },
-    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 9, "text": "name: string", "signature": "name: string", "kindLabel": "top-level variable" },
-    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "age: int", "signature": "age: int", "kindLabel": "top-level variable" },
-    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "text": "person: (string, int)", "signature": "person: (string, int)", "kindLabel": "top-level variable" }
+    { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "text": "a: int", "signature": "a: int", "kindLabel": "global variable" },
+    { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "text": "b: int", "signature": "b: int", "kindLabel": "global variable" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 18, "text": "point: (int, int)", "signature": "point: (int, int)", "kindLabel": "global variable" },
+    { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 9, "text": "name: string", "signature": "name: string", "kindLabel": "global variable" },
+    { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "age: int", "signature": "age: int", "kindLabel": "global variable" },
+    { "startLine": 2, "startColumn": 19, "endLine": 2, "endColumn": 24, "text": "person: (string, int)", "signature": "person: (string, int)", "kindLabel": "global variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [

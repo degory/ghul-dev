@@ -9,9 +9,9 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "animals: string[]", "signature": "animals: string[]", "kindLabel": "top-level variable" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "things: object[]", "signature": "things: object[]", "kindLabel": "top-level variable" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "text": "lists: int[][]", "signature": "lists: int[][]", "kindLabel": "top-level variable" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 11, "text": "animals: string[]", "signature": "animals: string[]", "kindLabel": "global variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "things: object[]", "signature": "things: object[]", "kindLabel": "global variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "text": "lists: int[][]", "signature": "lists: int[][]", "kindLabel": "global variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [

@@ -9,10 +9,10 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "s: single", "signature": "s: single", "kindLabel": "top-level variable" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "t: single", "signature": "t: single", "kindLabel": "top-level variable" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "text": "d: double", "signature": "d: double", "kindLabel": "top-level variable" },
-    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 5, "text": "e: double", "signature": "e: double", "kindLabel": "top-level variable" }
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "s: single", "signature": "s: single", "kindLabel": "global variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "t: single", "signature": "t: single", "kindLabel": "global variable" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 5, "text": "d: double", "signature": "d: double", "kindLabel": "global variable" },
+    { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 5, "text": "e: double", "signature": "e: double", "kindLabel": "global variable" }
   ],
   "inlayHints": [],
   "semanticTokens": [

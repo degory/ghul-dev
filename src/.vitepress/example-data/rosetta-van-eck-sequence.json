@@ -39,7 +39,7 @@
     { "startLine": 16, "startColumn": 46, "endLine": 16, "endColumn": 53, "text": "previous: int", "signature": "previous: int", "kindLabel": "local value" },
     { "startLine": 17, "startColumn": 17, "endLine": 17, "endColumn": 24, "text": "position: int", "signature": "position: int", "kindLabel": "local variable" },
     { "startLine": 17, "startColumn": 28, "endLine": 17, "endColumn": 35, "text": "previous: int", "signature": "previous: int", "kindLabel": "local value" },
-    { "startLine": 17, "startColumn": 26, "endLine": 17, "endColumn": 26, "text": "Ghul.-(a: int, b: int) -> int", "signature": "Ghul.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },
+    { "startLine": 17, "startColumn": 26, "endLine": 17, "endColumn": 26, "text": "int.-(a: int, b: int) -> int", "signature": "int.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },
     { "startLine": 22, "startColumn": 27, "endLine": 22, "endColumn": 34, "text": "position: int", "signature": "position: int", "kindLabel": "local variable" },
     { "startLine": 22, "startColumn": 9, "endLine": 22, "endColumn": 17, "text": "last_seen: MAP[int,int]", "signature": "last_seen: MAP[int,int]", "kindLabel": "local value" },
     { "startLine": 22, "startColumn": 19, "endLine": 22, "endColumn": 22, "text": "term: int", "signature": "term: int", "kindLabel": "local variable" },
@@ -47,7 +47,7 @@
     { "startLine": 24, "startColumn": 16, "endLine": 24, "endColumn": 19, "text": "next: int", "signature": "next: int", "kindLabel": "local value" },
     { "startLine": 24, "startColumn": 9, "endLine": 24, "endColumn": 12, "text": "term: int", "signature": "term: int", "kindLabel": "local variable" },
     { "startLine": 25, "startColumn": 20, "endLine": 25, "endColumn": 27, "text": "position: int", "signature": "position: int", "kindLabel": "local variable" },
-    { "startLine": 25, "startColumn": 29, "endLine": 25, "endColumn": 29, "text": "Ghul.+(a: int, b: int) -> int", "signature": "Ghul.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
+    { "startLine": 25, "startColumn": 29, "endLine": 25, "endColumn": 29, "text": "int.+(a: int, b: int) -> int", "signature": "int.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" },
     { "startLine": 25, "startColumn": 9, "endLine": 25, "endColumn": 16, "text": "position: int", "signature": "position: int", "kindLabel": "local variable" }
   ],
   "inlayHints": [],

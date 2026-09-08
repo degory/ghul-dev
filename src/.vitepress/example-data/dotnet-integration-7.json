@@ -34,7 +34,7 @@
     { "startLine": 6, "startColumn": 17, "endLine": 6, "endColumn": 17, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
     { "startLine": 7, "startColumn": 19, "endLine": 7, "endColumn": 19, "text": "i: int", "signature": "i: int", "kindLabel": "local variable" },
     { "startLine": 8, "startColumn": 17, "endLine": 8, "endColumn": 17, "text": "i: int", "signature": "i: int", "kindLabel": "local variable" },
-    { "startLine": 8, "startColumn": 19, "endLine": 8, "endColumn": 19, "text": "Ghul.-(a: int, b: int) -> int", "signature": "Ghul.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },
+    { "startLine": 8, "startColumn": 19, "endLine": 8, "endColumn": 19, "text": "int.-(a: int, b: int) -> int", "signature": "int.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },
     { "startLine": 8, "startColumn": 13, "endLine": 8, "endColumn": 13, "text": "i: int", "signature": "i: int", "kindLabel": "local variable" }
   ],
   "inlayHints": [

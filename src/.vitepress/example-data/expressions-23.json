@@ -9,7 +9,7 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 17, "text": "integer_value: int", "signature": "integer_value: int", "kindLabel": "top-level variable" },
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 17, "text": "integer_value: int", "signature": "integer_value: int", "kindLabel": "global variable" },
     { "startLine": 1, "startColumn": 26, "endLine": 1, "endColumn": 28, "text": "struct int", "signature": "struct int", "kindLabel": "struct" }
   ],
   "inlayHints": [],
