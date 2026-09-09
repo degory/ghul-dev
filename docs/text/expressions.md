@@ -26,11 +26,12 @@ let u_macron = 'ū'
 
 ### floating point
 ```ghul
-let s = 123.456 // single
-let t = 123.456E5 // single
+let d = 123.456 // double
+let e = 123.456E5 // double
+let f = 123_456_789_000.0 // double
 
-let d = 123.456D // double
-let e = 123_456_789_000.0D // double
+let s = 123.456s // single
+let t = 123.456E5s // single
 ```
 
 ### string
@@ -315,7 +316,7 @@ The target type can be left out when the surrounding expression already determin
 
 ```ghul
 …
-average(count: int, total: single) -> single =>
+average(count: int, total: double) -> double =>
     total / cast(count)   // cast(v) takes its type from the formal
 
 write_line("{average(4, 10.0)}")

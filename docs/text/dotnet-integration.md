@@ -150,7 +150,7 @@ A .NET user-defined conversion operator (`op_Implicit` / `op_Explicit`) declared
 
 ```ghul
 …
-// System.Half declares an explicit conversion from single, and an implicit one back
+// System.Half declares an explicit conversion from double, and an implicit one to single
 conversions() is
     let h = cast System.Half(1.5)
     let f = cast single(h)

@@ -2801,7 +2801,7 @@ A .NET user-defined conversion operator (`op_Implicit` / `op_Explicit`) declared
 
 ```ghul
 …
-// System.Half declares an explicit conversion from single, and an implicit one back
+// System.Half declares an explicit conversion from double, and an implicit one to single
 conversions() is
     let h = cast System.Half(1.5)
     let f = cast single(h)
@@ -5371,11 +5371,12 @@ let u_macron = 'ū'
 
 ### floating point
 ```ghul
-let s = 123.456 // single
-let t = 123.456E5 // single
+let d = 123.456 // double
+let e = 123.456E5 // double
+let f = 123_456_789_000.0 // double
 
-let d = 123.456D // double
-let e = 123_456_789_000.0D // double
+let s = 123.456s // single
+let t = 123.456E5s // single
 ```
 
 ### string
@@ -5660,7 +5661,7 @@ The target type can be left out when the surrounding expression already determin
 
 ```ghul
 …
-average(count: int, total: single) -> single =>
+average(count: int, total: double) -> double =>
     total / cast(count)   // cast(v) takes its type from the formal
 
 write_line("{average(4, 10.0)}")
@@ -7766,12 +7767,13 @@ IntegerSuffix  ::= ( "s" | "S" | "u" | "U" )? [bBcCsSiIlLwW]?
 
 FloatLiteral   ::= Digit ( Digit | "_" )* "." ( Digit | "_" )* Exponent? FloatSuffix?
 Exponent       ::= ( "e" | "E" ) "-"? ( Digit | "_" )+
-FloatSuffix    ::= "s" | "S" | "d" | "D"
+FloatSuffix    ::= "s" | "S" | "d" | "D" | "m" | "M"
 ```
 
 Underscores within a number are for readability and are ignored. A float literal
-must contain a `.`; the type suffix selects `single` (`s`/`S`) or `double`
-(`d`/`D`), and an integer suffix selects the integer type and signedness.
+must contain a `.`; the type suffix selects `single` (`s`/`S`), `double`
+(`d`/`D`) or `decimal` (`m`/`M`), and a float literal without one is a `double`.
+An integer suffix selects the integer type and signedness.
 
 ### character and string literals
 
