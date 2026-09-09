@@ -26,9 +26,13 @@ still runs, `run.expected` as well.
 
 ```sh
 dotnet tool restore
-dotnet ghul-test --runtime-dll "$HOME/.nuget/packages/ghul.runtime/<version>/lib/net10.0/ghul-runtime.dll" example-tests
-dotnet ghul-test example-tests/control-flow-8      # one example
+CI=true dotnet ghul-test --runtime-dll "$HOME/.nuget/packages/ghul.runtime/<version>/lib/net10.0/ghul-runtime.dll" example-tests
+CI=true dotnet ghul-test example-tests/control-flow-8      # one example
 ```
+
+`CI=true` picks the compiler this repository pins. Without it ghul-test looks
+for a locally built compiler in a `publish/` directory, which this repository
+has no reason to have, and fails at startup before it reads its arguments.
 
 `--runtime-dll` names the runtime this repository pins, in
 `example-tool/Directory.Packages.props`. Without it ghul-test uses the copy

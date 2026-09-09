@@ -1,7 +1,7 @@
 use IO.Std.write_line
 
 // >>>
-average(count: int, total: single) -> single =>
+average(count: int, total: double) -> double =>
     total / cast(count)   // cast(v) takes its type from the formal
 
 write_line("{average(4, 10.0)}")

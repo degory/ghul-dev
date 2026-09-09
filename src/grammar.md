@@ -93,12 +93,13 @@ IntegerSuffix  ::= ( "s" | "S" | "u" | "U" )? [bBcCsSiIlLwW]?
 
 FloatLiteral   ::= Digit ( Digit | "_" )* "." ( Digit | "_" )* Exponent? FloatSuffix?
 Exponent       ::= ( "e" | "E" ) "-"? ( Digit | "_" )+
-FloatSuffix    ::= "s" | "S" | "d" | "D"
+FloatSuffix    ::= "s" | "S" | "d" | "D" | "m" | "M"
 ```
 
 Underscores within a number are for readability and are ignored. A float literal
-must contain a `.`; the type suffix selects `single` (`s`/`S`) or `double`
-(`d`/`D`), and an integer suffix selects the integer type and signedness.
+must contain a `.`; the type suffix selects `single` (`s`/`S`), `double`
+(`d`/`D`) or `decimal` (`m`/`M`), and a float literal without one is a `double`.
+An integer suffix selects the integer type and signedness.
 
 ### character and string literals
 
