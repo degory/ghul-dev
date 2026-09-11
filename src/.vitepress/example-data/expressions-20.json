@@ -9,6 +9,7 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 27, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "length: int", "signature": "length: int", "kindLabel": "global variable" },
     { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 27, "text": "string.length: int", "signature": "string.length: int", "kindLabel": "pure instance property" }
   ],

@@ -9,6 +9,10 @@
   "output": "meow\n",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 27, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 6, "startColumn": 12, "endLine": 6, "endColumn": 19, "text": "describe(a: Animal) -> string", "signature": "describe(a: Animal) -> string", "kindLabel": "pure global function" },
+    { "startLine": 6, "startColumn": 21, "endLine": 6, "endColumn": 23, "text": "CAT.init()", "signature": "CAT.init()", "kindLabel": "constructor" },
     { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 10, "text": "c: CAT", "signature": "c: CAT", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 15, "text": "class CAT", "signature": "class CAT", "kindLabel": "class" },
     { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 22, "text": "c: CAT", "signature": "c: CAT", "kindLabel": "local value" },
@@ -17,9 +21,6 @@
     { "startLine": 3, "startColumn": 13, "endLine": 3, "endColumn": 15, "text": "class DOG", "signature": "class DOG", "kindLabel": "class" },
     { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 22, "text": "d: DOG", "signature": "d: DOG", "kindLabel": "local value" },
     { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 27, "text": "DOG.bark() -> string", "signature": "DOG.bark() -> string", "kindLabel": "pure method" },
-    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 6, "startColumn": 12, "endLine": 6, "endColumn": 19, "text": "describe(a: Animal) -> string", "signature": "describe(a: Animal) -> string", "kindLabel": "pure global function" },
-    { "startLine": 6, "startColumn": 21, "endLine": 6, "endColumn": 23, "text": "CAT.init()", "signature": "CAT.init()", "kindLabel": "constructor" },
     { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 10, "text": "a: Animal", "signature": "a: Animal", "kindLabel": "local argument" }
   ],
   "inlayHints": [

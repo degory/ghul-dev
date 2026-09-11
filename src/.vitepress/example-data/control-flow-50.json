@@ -9,6 +9,7 @@
   "output": "0\n1\n1\n2\n3\n5\n8\n13\n",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 2, "startColumn": 1, "endLine": 4, "endColumn": 2, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "f: int", "signature": "f: int", "kindLabel": "local value" },
     { "startLine": 2, "startColumn": 20, "endLine": 2, "endColumn": 23, "text": "Ghul.Pipes.take[int](\n    source: Collections.Iterable[int],\n    count: int\n) -> Pipe[int]", "signature": "Ghul.Pipes.take[int](\n    source: Collections.Iterable[int],\n    count: int\n) -> Pipe[int]", "kindLabel": "pure global function" },
     { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 13, "text": "fibs() -> Pipe[int]", "signature": "fibs() -> Pipe[int]", "kindLabel": "global generator" },

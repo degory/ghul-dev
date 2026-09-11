@@ -9,6 +9,13 @@
   "output": "12.56636\n9\n",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 9, "startColumn": 1, "endLine": 10, "endColumn": 34, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 9, "startColumn": 14, "endLine": 9, "endColumn": 17, "text": "area(s: Shape) -> double", "signature": "area(s: Shape) -> double", "kindLabel": "pure global function" },
+    { "startLine": 9, "startColumn": 19, "endLine": 9, "endColumn": 24, "text": "CIRCLE.init(radius: double)", "signature": "CIRCLE.init(radius: double)", "kindLabel": "constructor" },
+    { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 10, "startColumn": 14, "endLine": 10, "endColumn": 17, "text": "area(s: Shape) -> double", "signature": "area(s: Shape) -> double", "kindLabel": "pure global function" },
+    { "startLine": 10, "startColumn": 19, "endLine": 10, "endColumn": 24, "text": "SQUARE.init(side: double)", "signature": "SQUARE.init(side: double)", "kindLabel": "constructor" },
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 4, "text": "area(s: Shape) -> double", "signature": "area(s: Shape) -> double", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "text": "s: Shape", "signature": "s: Shape", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 13, "text": "union Shape", "signature": "union Shape", "kindLabel": "union" },
@@ -28,12 +35,6 @@
     { "startLine": 6, "startColumn": 34, "endLine": 6, "endColumn": 34, "text": "q: SQUARE", "signature": "q: SQUARE", "kindLabel": "local value" },
     { "startLine": 6, "startColumn": 36, "endLine": 6, "endColumn": 39, "text": "SQUARE.side: double", "signature": "SQUARE.side: double", "kindLabel": "variant field" },
     { "startLine": 6, "startColumn": 32, "endLine": 6, "endColumn": 32, "text": "double.*(a: double, b: double) -> double", "signature": "double.*(a: double, b: double) -> double", "kindLabel": "innate function arithmetic.mul" },
-    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 9, "startColumn": 14, "endLine": 9, "endColumn": 17, "text": "area(s: Shape) -> double", "signature": "area(s: Shape) -> double", "kindLabel": "pure global function" },
-    { "startLine": 9, "startColumn": 19, "endLine": 9, "endColumn": 24, "text": "CIRCLE.init(radius: double)", "signature": "CIRCLE.init(radius: double)", "kindLabel": "constructor" },
-    { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 10, "startColumn": 14, "endLine": 10, "endColumn": 17, "text": "area(s: Shape) -> double", "signature": "area(s: Shape) -> double", "kindLabel": "pure global function" },
-    { "startLine": 10, "startColumn": 19, "endLine": 10, "endColumn": 24, "text": "SQUARE.init(side: double)", "signature": "SQUARE.init(side: double)", "kindLabel": "constructor" },
     { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 10, "text": "s: Shape", "signature": "s: Shape", "kindLabel": "local argument" }
   ],
   "inlayHints": [

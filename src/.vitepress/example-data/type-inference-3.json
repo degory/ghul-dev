@@ -9,13 +9,14 @@
   "output": "purr\n",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 12, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 5, "text": "greet(a: Animal) -> void", "signature": "greet(a: Animal) -> void", "kindLabel": "pure global function" },
+    { "startLine": 9, "startColumn": 7, "endLine": 9, "endColumn": 9, "text": "CAT.init()", "signature": "CAT.init()", "kindLabel": "constructor" },
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 5, "text": "greet(a: Animal) -> void", "signature": "greet(a: Animal) -> void", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 7, "text": "a: Animal", "signature": "a: Animal", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 15, "text": "class Animal", "signature": "class Animal", "kindLabel": "class" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 14, "text": "class CAT", "signature": "class CAT", "kindLabel": "class" },
     { "startLine": 2, "startColumn": 16, "endLine": 2, "endColumn": 16, "text": "a: Animal", "signature": "a: Animal", "kindLabel": "local argument" },
-    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 5, "text": "greet(a: Animal) -> void", "signature": "greet(a: Animal) -> void", "kindLabel": "pure global function" },
-    { "startLine": 9, "startColumn": 7, "endLine": 9, "endColumn": 9, "text": "CAT.init()", "signature": "CAT.init()", "kindLabel": "constructor" },
     { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 18, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 5, "startColumn": 20, "endLine": 5, "endColumn": 20, "text": "a: Animal\n    ► CAT", "signature": "a: Animal\n    ► CAT", "kindLabel": "local argument" },
     { "startLine": 5, "startColumn": 22, "endLine": 5, "endColumn": 25, "text": "CAT.purr() -> string", "signature": "CAT.purr() -> string", "kindLabel": "pure method" }

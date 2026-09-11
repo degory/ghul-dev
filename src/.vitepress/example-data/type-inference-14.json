@@ -14,6 +14,7 @@
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 13, "text": "class DERIVED", "signature": "class DERIVED", "kindLabel": "class" },
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 15, "text": "DERIVED.init()", "signature": "DERIVED.init()", "kindLabel": "constructor" },
     { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 21, "text": "class BASE", "signature": "class BASE", "kindLabel": "class" },
+    { "startLine": 6, "startColumn": 1, "endLine": 8, "endColumn": 43, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 6, "startColumn": 5, "endLine": 6, "endColumn": 8, "text": "base: BASE", "signature": "base: BASE", "kindLabel": "global variable" },
     { "startLine": 6, "startColumn": 12, "endLine": 6, "endColumn": 23, "text": "do_something[BASE](a: BASE, b: BASE) -> BASE", "signature": "do_something[BASE](a: BASE, b: BASE) -> BASE", "kindLabel": "pure global function" },
     { "startLine": 6, "startColumn": 25, "endLine": 6, "endColumn": 28, "text": "BASE.init()", "signature": "BASE.init()", "kindLabel": "constructor" },

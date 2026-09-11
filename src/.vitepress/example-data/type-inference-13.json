@@ -15,6 +15,7 @@
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 23, "text": "THING[T].init(value: T)", "signature": "THING[T].init(value: T)", "kindLabel": "constructor" },
     { "startLine": 1, "startColumn": 16, "endLine": 1, "endColumn": 23, "text": "$$value: T", "signature": "$$value: T", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 23, "endLine": 1, "endColumn": 23, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 2, "startColumn": 1, "endLine": 3, "endColumn": 33, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 13, "text": "int_thing: THING[int]", "signature": "int_thing: THING[int]", "kindLabel": "global variable" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 21, "text": "THING[int].init(value: int)", "signature": "THING[int].init(value: int)", "kindLabel": "constructor" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 16, "text": "string_thing: THING[string]", "signature": "string_thing: THING[string]", "kindLabel": "global variable" },

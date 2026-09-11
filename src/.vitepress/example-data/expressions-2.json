@@ -9,6 +9,7 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 2, "endColumn": 18, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "c: char", "signature": "c: char", "kindLabel": "global variable" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 12, "text": "u_macron: char", "signature": "u_macron: char", "kindLabel": "global variable" }
   ],

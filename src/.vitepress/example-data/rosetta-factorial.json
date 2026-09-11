@@ -10,6 +10,7 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
+    { "startLine": 3, "startColumn": 1, "endLine": 7, "endColumn": 2, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 17, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 13, "text": "factorial: int -> long", "signature": "factorial: int -> long", "kindLabel": "global variable" },
     { "startLine": 3, "startColumn": 29, "endLine": 3, "endColumn": 29, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },

@@ -9,6 +9,7 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 6, "endColumn": 18, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "d: double", "signature": "d: double", "kindLabel": "global variable" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 5, "text": "e: double", "signature": "e: double", "kindLabel": "global variable" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "f: double", "signature": "f: double", "kindLabel": "global variable" },

@@ -9,6 +9,7 @@
   "output": "120\n",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 3, "endColumn": 28, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 17, "endLine": 1, "endColumn": 17, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 13, "text": "factorial: int -> int", "signature": "factorial: int -> int", "kindLabel": "global variable" },
     { "startLine": 2, "startColumn": 8, "endLine": 2, "endColumn": 8, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },

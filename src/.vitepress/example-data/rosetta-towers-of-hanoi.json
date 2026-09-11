@@ -10,6 +10,8 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
+    { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 16, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 4, "text": "move(\n    disks: int,\n    source: int,\n    target: int,\n    spare: int\n) -> void", "signature": "move(\n    disks: int,\n    source: int,\n    target: int,\n    spare: int\n) -> void", "kindLabel": "pure global function" },
     { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 4, "text": "move(\n    disks: int,\n    source: int,\n    target: int,\n    spare: int\n) -> void", "signature": "move(\n    disks: int,\n    source: int,\n    target: int,\n    spare: int\n) -> void", "kindLabel": "pure global function" },
     { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 10, "text": "disks: int", "signature": "disks: int", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 23, "text": "source: int", "signature": "source: int", "kindLabel": "local argument" },
@@ -20,7 +22,6 @@
     { "startLine": 3, "startColumn": 39, "endLine": 3, "endColumn": 41, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 3, "startColumn": 51, "endLine": 3, "endColumn": 53, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 3, "startColumn": 59, "endLine": 3, "endColumn": 62, "text": "struct void", "signature": "struct void", "kindLabel": "struct" },
-    { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 4, "text": "move(\n    disks: int,\n    source: int,\n    target: int,\n    spare: int\n) -> void", "signature": "move(\n    disks: int,\n    source: int,\n    target: int,\n    spare: int\n) -> void", "kindLabel": "pure global function" },
     { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 12, "text": "disks: int", "signature": "disks: int", "kindLabel": "local argument" },
     { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
     { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 12, "text": "move(\n    disks: int,\n    source: int,\n    target: int,\n    spare: int\n) -> void", "signature": "move(\n    disks: int,\n    source: int,\n    target: int,\n    spare: int\n) -> void", "kindLabel": "pure global function" },

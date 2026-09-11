@@ -11,6 +11,9 @@
   "hovers": [
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
     { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 14, "text": "namespace Ghul.Pipes", "signature": "namespace Ghul.Pipes", "kindLabel": "" },
+    { "startLine": 23, "startColumn": 1, "endLine": 24, "endColumn": 10, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 23, "startColumn": 1, "endLine": 23, "endColumn": 4, "text": "show(n: int, k: int) -> void", "signature": "show(n: int, k: int) -> void", "kindLabel": "global function" },
+    { "startLine": 24, "startColumn": 1, "endLine": 24, "endColumn": 4, "text": "show(n: int, k: int) -> void", "signature": "show(n: int, k: int) -> void", "kindLabel": "global function" },
     { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 8, "text": "killings(n: int, k: int) -> Pipe[int]", "signature": "killings(n: int, k: int) -> Pipe[int]", "kindLabel": "global generator" },
     { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 10, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
     { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 18, "text": "k: int", "signature": "k: int", "kindLabel": "local argument" },
@@ -33,8 +36,6 @@
     { "startLine": 18, "startColumn": 18, "endLine": 18, "endColumn": 25, "text": "killings(n: int, k: int) -> Pipe[int]", "signature": "killings(n: int, k: int) -> Pipe[int]", "kindLabel": "global generator" },
     { "startLine": 18, "startColumn": 27, "endLine": 18, "endColumn": 27, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
     { "startLine": 18, "startColumn": 30, "endLine": 18, "endColumn": 30, "text": "k: int", "signature": "k: int", "kindLabel": "local argument" },
-    { "startLine": 23, "startColumn": 1, "endLine": 23, "endColumn": 4, "text": "show(n: int, k: int) -> void", "signature": "show(n: int, k: int) -> void", "kindLabel": "global function" },
-    { "startLine": 24, "startColumn": 1, "endLine": 24, "endColumn": 4, "text": "show(n: int, k: int) -> void", "signature": "show(n: int, k: int) -> void", "kindLabel": "global function" },
     { "startLine": 8, "startColumn": 11, "endLine": 8, "endColumn": 18, "text": "standing: Collections.LIST[int]", "signature": "standing: Collections.LIST[int]", "kindLabel": "local value" },
     { "startLine": 8, "startColumn": 20, "endLine": 8, "endColumn": 24, "text": "Collections.LIST[int].count: int", "signature": "Collections.LIST[int].count: int", "kindLabel": "pure instance property" },
     { "startLine": 8, "startColumn": 26, "endLine": 8, "endColumn": 26, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },

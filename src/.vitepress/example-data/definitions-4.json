@@ -9,6 +9,7 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 4, "endColumn": 22, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 19, "text": "an_inferred_int: int", "signature": "an_inferred_int: int", "kindLabel": "global variable" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 19, "text": "an_explicit_int: int", "signature": "an_explicit_int: int", "kindLabel": "global variable" },
     { "startLine": 3, "startColumn": 22, "endLine": 3, "endColumn": 24, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },

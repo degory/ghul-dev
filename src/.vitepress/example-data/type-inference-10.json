@@ -14,6 +14,7 @@
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 13, "text": "class DERIVED", "signature": "class DERIVED", "kindLabel": "class" },
     { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 15, "text": "DERIVED.init()", "signature": "DERIVED.init()", "kindLabel": "constructor" },
     { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 21, "text": "class BASE", "signature": "class BASE", "kindLabel": "class" },
+    { "startLine": 4, "startColumn": 1, "endLine": 6, "endColumn": 34, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 17, "text": "array_of_base: BASE[]", "signature": "array_of_base: BASE[]", "kindLabel": "global variable" },
     { "startLine": 4, "startColumn": 22, "endLine": 4, "endColumn": 25, "text": "BASE.init()", "signature": "BASE.init()", "kindLabel": "constructor" },
     { "startLine": 4, "startColumn": 30, "endLine": 4, "endColumn": 36, "text": "DERIVED.init()", "signature": "DERIVED.init()", "kindLabel": "constructor" },

@@ -20,6 +20,7 @@
     { "startLine": 39, "startColumn": 17, "endLine": 39, "endColumn": 23, "text": "class Polygon", "signature": "class Polygon", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
     { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 14, "text": "namespace Ghul.Pipes", "signature": "namespace Ghul.Pipes", "kindLabel": "" },
+    { "startLine": 55, "startColumn": 1, "endLine": 61, "endColumn": 56, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 55, "startColumn": 5, "endLine": 55, "endColumn": 10, "text": "shapes: Shape[]", "signature": "shapes: Shape[]", "kindLabel": "global variable" },
     { "startLine": 55, "startColumn": 13, "endLine": 55, "endColumn": 17, "text": "trait Shape", "signature": "trait Shape", "kindLabel": "trait" },
     { "startLine": 55, "startColumn": 24, "endLine": 55, "endColumn": 29, "text": "SQUARE.init(side: double)", "signature": "SQUARE.init(side: double)", "kindLabel": "constructor" },

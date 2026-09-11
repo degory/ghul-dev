@@ -9,6 +9,7 @@
   "output": "commands: help, quit\nunknown command\n",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 2, "startColumn": 1, "endLine": 3, "endColumn": 26, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 2, "startColumn": 12, "endLine": 2, "endColumn": 18, "text": "respond(line: string) -> string", "signature": "respond(line: string) -> string", "kindLabel": "pure global function" },
     { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },

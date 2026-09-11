@@ -9,6 +9,7 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 29, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "primes: int[]", "signature": "primes: int[]", "kindLabel": "global variable" }
   ],
   "inlayHints": [],
