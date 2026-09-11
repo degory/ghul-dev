@@ -324,10 +324,10 @@ si
 ```ghul
 …
 let times_2 = x => x * 2
-write_line("apply(times_2, 5): {apply(times_2, 5)}")
+write_line("invoke(times_2, 5): {invoke(times_2, 5)}")
 
 let square = x => x * x
-write_line("apply(square, 5): {apply(square, 5)}")
+write_line("invoke(square, 5): {invoke(square, 5)}")
 
 // higher order function consumes another function:
 let apply_twice = (f: int -> int, x) => f(f(x))
@@ -347,8 +347,8 @@ write_line(
 output:
 
 ```
-apply(times_2, 5): 10
-apply(square, 5): 25
+invoke(times_2, 5): 10
+invoke(square, 5): 25
 apply_twice(times_2, 5): 20
 apply_twice_times_2(5): 20
 ```
@@ -357,15 +357,13 @@ Anonymous functions take a single concrete type from context; there is no generi
 
 ## function composition
 
-There is no built-in composition operator, but
-[operators are ordinary functions](https://ghul.dev/definitions.html#operators), so a
-generic `>>` takes two lines to define:
+The runtime supplies composition in both reading orders, as `Ghul.>>` and
+`Ghul.<<` — no `use` needed, since they live in the `Ghul` namespace itself.
+`f >> g` applies `f` and then `g`, matching the thread-first operator's
+direction; `f << g` applies `g` and then `f`, the mathematical reading:
 
 ```ghul
 …
->>[A, B, C](f: A -> B, g: B -> C) -> A -> C =>
-    x => g(f(x))
-
 let times_2 = x => x * 2
 let add_1 = x => x + 1
 

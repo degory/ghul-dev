@@ -9,9 +9,6 @@ use Ghul.Pipes
 use Collections.LIST
 use System.Math
 
->>[A, B, C](f: A -> B, g: B -> C) -> A -> C =>
-    x => g(f(x))
-
 let cube = x => x * x * x
 let cube_root = x => Math.cbrt(x)
 
