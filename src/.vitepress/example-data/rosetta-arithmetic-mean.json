@@ -12,6 +12,9 @@
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 15, "text": "namespace Collections", "signature": "namespace Collections", "kindLabel": "" },
     { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 14, "text": "namespace Ghul.Pipes", "signature": "namespace Ghul.Pipes", "kindLabel": "" },
+    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 61, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 9, "startColumn": 20, "endLine": 9, "endColumn": 23, "text": "mean(values: List[double]) -> double", "signature": "mean(values: List[double]) -> double", "kindLabel": "pure global function" },
     { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 4, "text": "mean(values: List[double]) -> double", "signature": "mean(values: List[double]) -> double", "kindLabel": "pure global function" },
     { "startLine": 5, "startColumn": 6, "endLine": 5, "endColumn": 11, "text": "values: List[double]", "signature": "values: List[double]", "kindLabel": "local argument" },
     { "startLine": 5, "startColumn": 19, "endLine": 5, "endColumn": 24, "text": "struct double", "signature": "struct double", "kindLabel": "struct" },
@@ -25,8 +28,6 @@
     { "startLine": 6, "startColumn": 54, "endLine": 6, "endColumn": 58, "text": "value: double", "signature": "value: double", "kindLabel": "local argument" },
     { "startLine": 6, "startColumn": 52, "endLine": 6, "endColumn": 52, "text": "double.+(a: double, b: double) -> double", "signature": "double.+(a: double, b: double) -> double", "kindLabel": "innate function arithmetic.add" },
     { "startLine": 6, "startColumn": 61, "endLine": 6, "endColumn": 61, "text": "double./(a: double, b: double) -> double", "signature": "double./(a: double, b: double) -> double", "kindLabel": "innate function arithmetic.div" },
-    { "startLine": 9, "startColumn": 1, "endLine": 9, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 9, "startColumn": 20, "endLine": 9, "endColumn": 23, "text": "mean(values: List[double]) -> double", "signature": "mean(values: List[double]) -> double", "kindLabel": "pure global function" },
     { "startLine": 7, "startColumn": 10, "endLine": 7, "endColumn": 15, "text": "values: List[double]", "signature": "values: List[double]", "kindLabel": "local argument" },
     { "startLine": 7, "startColumn": 17, "endLine": 7, "endColumn": 21, "text": "List[double].count: int", "signature": "List[double].count: int", "kindLabel": "pure instance property" },
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 8, "text": "struct double", "signature": "struct double", "kindLabel": "struct" }

@@ -11,6 +11,7 @@
   "hovers": [
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 20, "text": "class LIST[T]", "signature": "class LIST[T]", "kindLabel": "class" },
+    { "startLine": 4, "startColumn": 1, "endLine": 10, "endColumn": 28, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 11, "text": "squares: LIST[() -> int]", "signature": "squares: LIST[() -> int]", "kindLabel": "global variable" },
     { "startLine": 4, "startColumn": 26, "endLine": 4, "endColumn": 28, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 18, "text": "LIST[() -> int].init()", "signature": "LIST[() -> int].init()", "kindLabel": "constructor" },

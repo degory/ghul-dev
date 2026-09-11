@@ -9,6 +9,7 @@
   "output": "hello, world\n",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 7, "endColumn": 2, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "name: string?", "signature": "name: string?", "kindLabel": "global variable" },
     { "startLine": 1, "startColumn": 11, "endLine": 1, "endColumn": 16, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 21, "endLine": 1, "endColumn": 26, "text": "lookup() -> string?", "signature": "lookup() -> string?", "kindLabel": "pure global function" },

@@ -20,6 +20,7 @@
     { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 13, "text": "Result.ERR[T,E].error: E", "signature": "Result.ERR[T,E].error: E", "kindLabel": "variant field" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 17, "text": "Result.ERR[T,E].init(error: E)", "signature": "Result.ERR[T,E].init(error: E)", "kindLabel": "constructor" },
     { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 16, "text": "E", "signature": "E", "kindLabel": "type variable" },
+    { "startLine": 5, "startColumn": 1, "endLine": 12, "endColumn": 2, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 5, "text": "r: Result[int,string]", "signature": "r: Result[int,string]", "kindLabel": "global variable" },
     { "startLine": 5, "startColumn": 15, "endLine": 5, "endColumn": 17, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 5, "startColumn": 20, "endLine": 5, "endColumn": 25, "text": "class string", "signature": "class string", "kindLabel": "class" },

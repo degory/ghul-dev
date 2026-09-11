@@ -9,6 +9,10 @@
   "output": "5 4\n",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 45, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 18, "text": "total[int](a: int, b: int) -> int", "signature": "total[int](a: int, b: int) -> int", "kindLabel": "global function" },
+    { "startLine": 4, "startColumn": 28, "endLine": 4, "endColumn": 32, "text": "total[double](a: double, b: double) -> double", "signature": "total[double](a: double, b: double) -> double", "kindLabel": "global function" },
     { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 5, "text": "total[T](a: T, b: T) -> T", "signature": "total[T](a: T, b: T) -> T", "kindLabel": "global function" },
     { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 7, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 22, "text": "a: T", "signature": "a: T", "kindLabel": "local argument" },
@@ -20,10 +24,7 @@
     { "startLine": 2, "startColumn": 37, "endLine": 2, "endColumn": 37, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 2, "startColumn": 42, "endLine": 2, "endColumn": 42, "text": "a: T", "signature": "a: T", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 46, "endLine": 2, "endColumn": 46, "text": "b: T", "signature": "b: T", "kindLabel": "local argument" },
-    { "startLine": 2, "startColumn": 44, "endLine": 2, "endColumn": 44, "text": "System.Numerics.IAdditionOperators[T,T,T].+(\n    left: T,\n    right: T\n) -> T", "signature": "System.Numerics.IAdditionOperators[T,T,T].+(\n    left: T,\n    right: T\n) -> T", "kindLabel": "class method" },
-    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 18, "text": "total[int](a: int, b: int) -> int", "signature": "total[int](a: int, b: int) -> int", "kindLabel": "global function" },
-    { "startLine": 4, "startColumn": 28, "endLine": 4, "endColumn": 32, "text": "total[single](a: single, b: single) -> single", "signature": "total[single](a: single, b: single) -> single", "kindLabel": "global function" }
+    { "startLine": 2, "startColumn": 44, "endLine": 2, "endColumn": 44, "text": "System.Numerics.IAdditionOperators[T,T,T].+(\n    left: T,\n    right: T\n) -> T", "signature": "System.Numerics.IAdditionOperators[T,T,T].+(\n    left: T,\n    right: T\n) -> T", "kindLabel": "class method" }
   ],
   "inlayHints": [],
   "semanticTokens": [

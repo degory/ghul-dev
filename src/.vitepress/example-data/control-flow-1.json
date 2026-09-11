@@ -9,6 +9,7 @@
   "output": "ok: 5 elements\n",
   "diagnostics": [],
   "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 8, "endColumn": 39, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "list: int[]", "signature": "list: int[]", "kindLabel": "global variable" },
     { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 15, "text": "list: int[]", "signature": "list: int[]", "kindLabel": "global variable" },
     { "startLine": 5, "startColumn": 17, "endLine": 5, "endColumn": 21, "text": "ARRAY[int].count: int", "signature": "ARRAY[int].count: int", "kindLabel": "pure instance property" },

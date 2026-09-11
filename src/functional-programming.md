@@ -156,9 +156,10 @@ Anonymous functions take a single concrete type from context; there is no generi
 
 ## function composition
 
-There is no built-in composition operator, but
-[operators are ordinary functions](/definitions.html#operators), so a
-generic `>>` takes two lines to define:
+The runtime supplies composition in both reading orders, as `Ghul.>>` and
+`Ghul.<<` — no `use` needed, since they live in the `Ghul` namespace itself.
+`f >> g` applies `f` and then `g`, matching the thread-first operator's
+direction; `f << g` applies `g` and then `f`, the mathematical reading:
 
 <GhulExample name="functional-programming-26" />
 

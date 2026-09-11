@@ -11,6 +11,7 @@
   "hovers": [
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
     { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 14, "text": "namespace Ghul.Pipes", "signature": "namespace Ghul.Pipes", "kindLabel": "" },
+    { "startLine": 30, "startColumn": 34, "endLine": 30, "endColumn": 63, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 30, "startColumn": 39, "endLine": 30, "endColumn": 42, "text": "term: string", "signature": "term: string", "kindLabel": "local argument" },
     { "startLine": 30, "startColumn": 34, "endLine": 30, "endColumn": 37, "text": "Ghul.Pipes.each[string](\n    source: Collections.Iterable[string],\n    action: string.. -> void\n) -> void", "signature": "Ghul.Pipes.each[string](\n    source: Collections.Iterable[string],\n    action: string.. -> void\n) -> void", "kindLabel": "global function" },
     { "startLine": 30, "startColumn": 22, "endLine": 30, "endColumn": 25, "text": "Ghul.Pipes.take[string](\n    source: Collections.Iterable[string],\n    count: int\n) -> Pipe[string]", "signature": "Ghul.Pipes.take[string](\n    source: Collections.Iterable[string],\n    count: int\n) -> Pipe[string]", "kindLabel": "pure global function" },

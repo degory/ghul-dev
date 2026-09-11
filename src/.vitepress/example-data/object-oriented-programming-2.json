@@ -15,12 +15,16 @@
     { "startLine": 17, "startColumn": 7, "endLine": 17, "endColumn": 9, "text": "class CAT", "signature": "class CAT", "kindLabel": "class" },
     { "startLine": 17, "startColumn": 12, "endLine": 17, "endColumn": 17, "text": "class Animal", "signature": "class Animal", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
+    { "startLine": 22, "startColumn": 1, "endLine": 26, "endColumn": 2, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 22, "startColumn": 5, "endLine": 22, "endColumn": 11, "text": "animals: Animal[]", "signature": "animals: Animal[]", "kindLabel": "global variable" },
     { "startLine": 22, "startColumn": 14, "endLine": 22, "endColumn": 19, "text": "class Animal", "signature": "class Animal", "kindLabel": "class" },
     { "startLine": 22, "startColumn": 26, "endLine": 22, "endColumn": 28, "text": "DOG.init(name: string)", "signature": "DOG.init(name: string)", "kindLabel": "constructor" },
     { "startLine": 22, "startColumn": 38, "endLine": 22, "endColumn": 40, "text": "CAT.init(name: string)", "signature": "CAT.init(name: string)", "kindLabel": "constructor" },
     { "startLine": 24, "startColumn": 5, "endLine": 24, "endColumn": 5, "text": "a: Animal", "signature": "a: Animal", "kindLabel": "local value" },
     { "startLine": 24, "startColumn": 10, "endLine": 24, "endColumn": 16, "text": "animals: Animal[]", "signature": "animals: Animal[]", "kindLabel": "global variable" },
+    { "startLine": 25, "startColumn": 5, "endLine": 25, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 25, "startColumn": 16, "endLine": 25, "endColumn": 16, "text": "a: Animal", "signature": "a: Animal", "kindLabel": "local value" },
+    { "startLine": 25, "startColumn": 18, "endLine": 25, "endColumn": 25, "text": "Animal.describe() -> string", "signature": "Animal.describe() -> string", "kindLabel": "pure method" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 9, "text": "Animal._name: string", "signature": "Animal._name: string", "kindLabel": "private field" },
     { "startLine": 4, "startColumn": 12, "endLine": 4, "endColumn": 17, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 8, "text": "Animal.init(name: string)", "signature": "Animal.init(name: string)", "kindLabel": "constructor" },
@@ -50,10 +54,7 @@
     { "startLine": 18, "startColumn": 33, "endLine": 18, "endColumn": 36, "text": "Animal.init(name: string)", "signature": "Animal.init(name: string)", "kindLabel": "constructor" },
     { "startLine": 18, "startColumn": 38, "endLine": 18, "endColumn": 41, "text": "name: string", "signature": "name: string", "kindLabel": "local argument" },
     { "startLine": 19, "startColumn": 5, "endLine": 19, "endColumn": 9, "text": "CAT.speak() -> string", "signature": "CAT.speak() -> string", "kindLabel": "pure method" },
-    { "startLine": 19, "startColumn": 16, "endLine": 19, "endColumn": 21, "text": "class string", "signature": "class string", "kindLabel": "class" },
-    { "startLine": 25, "startColumn": 5, "endLine": 25, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 25, "startColumn": 16, "endLine": 25, "endColumn": 16, "text": "a: Animal", "signature": "a: Animal", "kindLabel": "local value" },
-    { "startLine": 25, "startColumn": 18, "endLine": 25, "endColumn": 25, "text": "Animal.describe() -> string", "signature": "Animal.describe() -> string", "kindLabel": "pure method" }
+    { "startLine": 19, "startColumn": 16, "endLine": 19, "endColumn": 21, "text": "class string", "signature": "class string", "kindLabel": "class" }
   ],
   "inlayHints": [
     { "line": 8, "column": 5, "label": "◆▼", "detail": "speak\n\n- ◆ abstract\n- ▼ overridden by `DOG.speak() -> string`, `CAT.speak() -> string`", "code": "definition-virtuality" },

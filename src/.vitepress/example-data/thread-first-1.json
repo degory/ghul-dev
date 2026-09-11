@@ -15,6 +15,11 @@
     { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 20, "text": "$$value: int", "signature": "$$value: int", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 18, "endLine": 3, "endColumn": 20, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
+    { "startLine": 11, "startColumn": 41, "endLine": 11, "endColumn": 52, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 11, "startColumn": 41, "endLine": 11, "endColumn": 50, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 11, "startColumn": 27, "endLine": 11, "endColumn": 34, "text": "describe(b: BOX) -> string", "signature": "describe(b: BOX) -> string", "kindLabel": "pure global function" },
+    { "startLine": 11, "startColumn": 18, "endLine": 11, "endColumn": 20, "text": "BOX.init(value: int)", "signature": "BOX.init(value: int)", "kindLabel": "constructor" },
+    { "startLine": 11, "startColumn": 7, "endLine": 11, "endColumn": 11, "text": "twice(x: int) -> int", "signature": "twice(x: int) -> int", "kindLabel": "pure global function" },
     { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 5, "text": "twice(x: int) -> int", "signature": "twice(x: int) -> int", "kindLabel": "pure global function" },
     { "startLine": 5, "startColumn": 7, "endLine": 5, "endColumn": 7, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
     { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 12, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
@@ -26,11 +31,7 @@
     { "startLine": 6, "startColumn": 13, "endLine": 6, "endColumn": 15, "text": "class BOX(value: int)", "signature": "class BOX(value: int)", "kindLabel": "class" },
     { "startLine": 6, "startColumn": 21, "endLine": 6, "endColumn": 26, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 6, "startColumn": 40, "endLine": 6, "endColumn": 40, "text": "b: BOX", "signature": "b: BOX", "kindLabel": "local argument" },
-    { "startLine": 6, "startColumn": 42, "endLine": 6, "endColumn": 46, "text": "BOX.value: int", "signature": "BOX.value: int", "kindLabel": "pure instance property" },
-    { "startLine": 11, "startColumn": 41, "endLine": 11, "endColumn": 50, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 11, "startColumn": 27, "endLine": 11, "endColumn": 34, "text": "describe(b: BOX) -> string", "signature": "describe(b: BOX) -> string", "kindLabel": "pure global function" },
-    { "startLine": 11, "startColumn": 18, "endLine": 11, "endColumn": 20, "text": "BOX.init(value: int)", "signature": "BOX.init(value: int)", "kindLabel": "constructor" },
-    { "startLine": 11, "startColumn": 7, "endLine": 11, "endColumn": 11, "text": "twice(x: int) -> int", "signature": "twice(x: int) -> int", "kindLabel": "pure global function" }
+    { "startLine": 6, "startColumn": 42, "endLine": 6, "endColumn": 46, "text": "BOX.value: int", "signature": "BOX.value: int", "kindLabel": "pure instance property" }
   ],
   "inlayHints": [],
   "semanticTokens": [

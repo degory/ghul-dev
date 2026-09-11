@@ -10,19 +10,20 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 9, "startColumn": 7, "endLine": 9, "endColumn": 12, "text": "class PERSON", "signature": "class PERSON", "kindLabel": "class" },
+    { "startLine": 1, "startColumn": 1, "endLine": 7, "endColumn": 26, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 15, "text": "my_variable: int", "signature": "my_variable: int", "kindLabel": "global variable" },
     { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 15, "text": "print_something(thing: string) -> void", "signature": "print_something(thing: string) -> void", "kindLabel": "pure global function" },
     { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 21, "text": "thing: string", "signature": "thing: string", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 24, "endLine": 3, "endColumn": 29, "text": "class string", "signature": "class string", "kindLabel": "class" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 4, "startColumn": 32, "endLine": 4, "endColumn": 36, "text": "thing: string", "signature": "thing: string", "kindLabel": "local argument" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 15, "text": "print_something(thing: string) -> void", "signature": "print_something(thing: string) -> void", "kindLabel": "pure global function" },
     { "startLine": 10, "startColumn": 5, "endLine": 10, "endColumn": 8, "text": "PERSON.name: string", "signature": "PERSON.name: string", "kindLabel": "pure instance property" },
     { "startLine": 10, "startColumn": 5, "endLine": 11, "endColumn": 7, "text": "$$value: string", "signature": "$$value: string", "kindLabel": "local argument" },
     { "startLine": 10, "startColumn": 11, "endLine": 10, "endColumn": 16, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 11, "startColumn": 5, "endLine": 11, "endColumn": 7, "text": "PERSON.age: int", "signature": "PERSON.age: int", "kindLabel": "pure instance property" },
     { "startLine": 11, "startColumn": 5, "endLine": 12, "endColumn": 2, "text": "$$value: int", "signature": "$$value: int", "kindLabel": "local argument" },
-    { "startLine": 11, "startColumn": 10, "endLine": 11, "endColumn": 12, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
-    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 15, "text": "print_something(thing: string) -> void", "signature": "print_something(thing: string) -> void", "kindLabel": "pure global function" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 4, "startColumn": 32, "endLine": 4, "endColumn": 36, "text": "thing: string", "signature": "thing: string", "kindLabel": "local argument" }
+    { "startLine": 11, "startColumn": 10, "endLine": 11, "endColumn": 12, "text": "struct int", "signature": "struct int", "kindLabel": "struct" }
   ],
   "inlayHints": [],
   "semanticTokens": [

@@ -11,8 +11,7 @@
   "hovers": [
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
     { "startLine": 2, "startColumn": 10, "endLine": 2, "endColumn": 14, "text": "namespace Ghul.Pipes", "signature": "namespace Ghul.Pipes", "kindLabel": "" },
-    { "startLine": 12, "startColumn": 12, "endLine": 12, "endColumn": 12, "text": "s: int", "signature": "s: int", "kindLabel": "local argument" },
-    { "startLine": 12, "startColumn": 8, "endLine": 12, "endColumn": 10, "text": "Ghul.Pipes.map[int,(s: int, mapped: double)](\n    source: Collections.Iterable[int],\n    mapper: int.. -> (s: int, mapped: double) pure\n) -> Pipe[(s: int, mapped: double)]", "signature": "Ghul.Pipes.map[int,(s: int, mapped: double)](\n    source: Collections.Iterable[int],\n    mapper: int.. -> (s: int, mapped: double) pure\n) -> Pipe[(s: int, mapped: double)]", "kindLabel": "pure global function" },
+    { "startLine": 14, "startColumn": 8, "endLine": 14, "endColumn": 67, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 14, "startColumn": 14, "endLine": 14, "endColumn": 25, "text": "$arg_2: (s: int, mapped: double)", "signature": "$arg_2: (s: int, mapped: double)", "kindLabel": "local argument" },
     { "startLine": 14, "startColumn": 15, "endLine": 14, "endColumn": 15, "text": "s: int", "signature": "s: int", "kindLabel": "local value" },
     { "startLine": 14, "startColumn": 18, "endLine": 14, "endColumn": 23, "text": "mapped: double", "signature": "mapped: double", "kindLabel": "local value" },
@@ -20,6 +19,8 @@
     { "startLine": 14, "startColumn": 30, "endLine": 14, "endColumn": 39, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
     { "startLine": 14, "startColumn": 43, "endLine": 14, "endColumn": 43, "text": "s: int", "signature": "s: int", "kindLabel": "local value" },
     { "startLine": 14, "startColumn": 55, "endLine": 14, "endColumn": 60, "text": "mapped: double", "signature": "mapped: double", "kindLabel": "local value" },
+    { "startLine": 12, "startColumn": 12, "endLine": 12, "endColumn": 12, "text": "s: int", "signature": "s: int", "kindLabel": "local argument" },
+    { "startLine": 12, "startColumn": 8, "endLine": 12, "endColumn": 10, "text": "Ghul.Pipes.map[int,(s: int, mapped: double)](\n    source: Collections.Iterable[int],\n    mapper: int.. -> (s: int, mapped: double) pure\n) -> Pipe[(s: int, mapped: double)]", "signature": "Ghul.Pipes.map[int,(s: int, mapped: double)](\n    source: Collections.Iterable[int],\n    mapper: int.. -> (s: int, mapped: double) pure\n) -> Pipe[(s: int, mapped: double)]", "kindLabel": "pure global function" },
     { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 9, "text": "map_range(\n    $arg_3: (double, double),\n    $arg_4: (double, double),\n    s: double\n) -> double", "signature": "map_range(\n    $arg_3: (double, double),\n    $arg_4: (double, double),\n    s: double\n) -> double", "kindLabel": "pure global function" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 30, "text": "$arg_3: (double, double)", "signature": "$arg_3: (double, double)", "kindLabel": "local argument" },
     { "startLine": 5, "startColumn": 6, "endLine": 5, "endColumn": 7, "text": "a1: double", "signature": "a1: double", "kindLabel": "local value" },

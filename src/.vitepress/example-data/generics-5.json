@@ -16,6 +16,7 @@
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 18, "text": "Option.SOME[T].init(value: T)", "signature": "Option.SOME[T].init(value: T)", "kindLabel": "constructor" },
     { "startLine": 2, "startColumn": 17, "endLine": 2, "endColumn": 17, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 8, "text": "Option.NONE[T]", "signature": "Option.NONE[T]", "kindLabel": "variant" },
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 32, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 5, "startColumn": 5, "endLine": 5, "endColumn": 12, "text": "some_int: Option.SOME[int]", "signature": "some_int: Option.SOME[int]", "kindLabel": "global variable" },
     { "startLine": 5, "startColumn": 16, "endLine": 5, "endColumn": 21, "text": "union Option[T]", "signature": "union Option[T]", "kindLabel": "union" },
     { "startLine": 5, "startColumn": 23, "endLine": 5, "endColumn": 26, "text": "Option.SOME[int].init(value: int)", "signature": "Option.SOME[int].init(value: int)", "kindLabel": "constructor" }

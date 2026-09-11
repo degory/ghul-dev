@@ -10,6 +10,7 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
+    { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 379, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 1, "startColumn": 28, "endLine": 1, "endColumn": 32, "text": "quote: string", "signature": "quote: string", "kindLabel": "global variable" },
     { "startLine": 1, "startColumn": 66, "endLine": 1, "endColumn": 71, "text": "marker: string", "signature": "marker: string", "kindLabel": "global variable" },
     { "startLine": 1, "startColumn": 105, "endLine": 1, "endColumn": 110, "text": "source: string", "signature": "source: string", "kindLabel": "global variable" },

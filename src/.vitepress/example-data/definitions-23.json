@@ -10,6 +10,7 @@
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "text": "class COUNTER", "signature": "class COUNTER", "kindLabel": "class" },
+    { "startLine": 13, "startColumn": 1, "endLine": 16, "endColumn": 19, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 13, "startColumn": 5, "endLine": 13, "endColumn": 5, "text": "c: COUNTER", "signature": "c: COUNTER", "kindLabel": "global variable" },
     { "startLine": 13, "startColumn": 9, "endLine": 13, "endColumn": 15, "text": "COUNTER.init()", "signature": "COUNTER.init()", "kindLabel": "constructor" },
     { "startLine": 16, "startColumn": 5, "endLine": 16, "endColumn": 5, "text": "d: COUNTER", "signature": "d: COUNTER", "kindLabel": "global variable" },
