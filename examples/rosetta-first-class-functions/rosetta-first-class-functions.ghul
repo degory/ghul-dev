@@ -2,6 +2,7 @@ use IO.Std.write_line
 use Ghul.Pipes
 use Collections.LIST
 use System.Math
+use Ghul
 
 let cube = x => x * x * x
 let cube_root = x => Math.cbrt(x)

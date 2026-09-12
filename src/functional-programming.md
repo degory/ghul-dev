@@ -157,7 +157,8 @@ Anonymous functions take a single concrete type from context; there is no generi
 ## function composition
 
 The runtime supplies composition in both reading orders, as `Ghul.>>` and
-`Ghul.<<` — no `use` needed, since they live in the `Ghul` namespace itself.
+`Ghul.<<`. They are library globals rather than operators the language itself
+owns, so a file that composes functions brings them into scope with `use Ghul`.
 `f >> g` applies `f` and then `g`, matching the thread-first operator's
 direction; `f << g` applies `g` and then `f`, the mathematical reading:
 

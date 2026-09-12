@@ -208,7 +208,7 @@
     { "startLine": 108, "startColumn": 18, "endLine": 109, "endColumn": 6, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 108, "startColumn": 9, "endLine": 108, "endColumn": 14, "text": "memory: T", "signature": "memory: T", "kindLabel": "pure instance property" },
     { "startLine": 126, "startColumn": 12, "endLine": 126, "endColumn": 16, "text": "right: int", "signature": "right: int", "kindLabel": "local argument" },
-    { "startLine": 126, "startColumn": 18, "endLine": 126, "endColumn": 19, "text": "Ghul.==[int](a: int, b: int) -> bool", "signature": "Ghul.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
+    { "startLine": 126, "startColumn": 18, "endLine": 126, "endColumn": 19, "text": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "signature": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
     { "startLine": 127, "startColumn": 19, "endLine": 127, "endColumn": 24, "text": "namespace System", "signature": "namespace System", "kindLabel": "" },
     { "startLine": 127, "startColumn": 26, "endLine": 127, "endColumn": 50, "text": "System.InvalidOperationException.init(message: string?)", "signature": "System.InvalidOperationException.init(message: string?)", "kindLabel": "constructor" },
     { "startLine": 131, "startColumn": 13, "endLine": 131, "endColumn": 16, "text": "left: int", "signature": "left: int", "kindLabel": "local argument" },

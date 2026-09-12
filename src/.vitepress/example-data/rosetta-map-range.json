@@ -35,7 +35,7 @@
     { "startLine": 7, "startColumn": 5, "endLine": 7, "endColumn": 5, "text": "s: double", "signature": "s: double", "kindLabel": "local argument" },
     { "startLine": 7, "startColumn": 8, "endLine": 7, "endColumn": 13, "text": "struct double", "signature": "struct double", "kindLabel": "struct" },
     { "startLine": 8, "startColumn": 6, "endLine": 8, "endColumn": 11, "text": "struct double", "signature": "struct double", "kindLabel": "struct" },
-    { "startLine": 11, "startColumn": 3, "endLine": 11, "endColumn": 4, "text": "Ghul.::(from: int, to: int) -> INT_RANGE_INCLUSIVE", "signature": "Ghul.::(from: int, to: int) -> INT_RANGE_INCLUSIVE", "kindLabel": "innate function range.inclusive" },
+    { "startLine": 11, "startColumn": 3, "endLine": 11, "endColumn": 4, "text": "Ghul.Intrinsics.::(\n    from: int,\n    to: int\n) -> Ghul.INT_RANGE_INCLUSIVE", "signature": "Ghul.Intrinsics.::(\n    from: int,\n    to: int\n) -> Ghul.INT_RANGE_INCLUSIVE", "kindLabel": "innate function range.inclusive" },
     { "startLine": 13, "startColumn": 10, "endLine": 13, "endColumn": 10, "text": "s: int", "signature": "s: int", "kindLabel": "local argument" },
     { "startLine": 13, "startColumn": 22, "endLine": 13, "endColumn": 30, "text": "map_range(\n    $arg_3: (double, double),\n    $arg_4: (double, double),\n    s: double\n) -> double", "signature": "map_range(\n    $arg_3: (double, double),\n    $arg_4: (double, double),\n    s: double\n) -> double", "kindLabel": "pure global function" },
     { "startLine": 13, "startColumn": 48, "endLine": 13, "endColumn": 48, "text": "double.-(a: double) -> double", "signature": "double.-(a: double) -> double", "kindLabel": "innate function arithmetic.neg" },

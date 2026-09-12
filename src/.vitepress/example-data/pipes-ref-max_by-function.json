@@ -9,7 +9,7 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 6, "text": "max_by[T,K](\n    source: Iterable[T],\n    key_selector: T -> K pure\n) -> MAYBE[T]", "signature": "max_by[T,K](\n    source: Iterable[T],\n    key_selector: T -> K pure\n) -> MAYBE[T]", "kindLabel": "pure global function" },
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 6, "text": "max_by[T,K](\n    source: Iterable[T],\n    key_selector: T -> K pure\n) -> Ghul.MAYBE[T]", "signature": "max_by[T,K](\n    source: Iterable[T],\n    key_selector: T -> K pure\n) -> Ghul.MAYBE[T]", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 8, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 10, "text": "K", "signature": "K", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 29, "text": "K", "signature": "K", "kindLabel": "type variable" },
@@ -21,7 +21,7 @@
     { "startLine": 3, "startColumn": 26, "endLine": 3, "endColumn": 26, "text": "K", "signature": "K", "kindLabel": "type variable" },
     { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 20, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 4, "startColumn": 17, "endLine": 4, "endColumn": 17, "text": "T", "signature": "T", "kindLabel": "type variable" },
-    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 15, "text": "struct MAYBE[T]", "signature": "struct MAYBE[T]", "kindLabel": "struct" }
+    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 15, "text": "struct Ghul.MAYBE[T]", "signature": "struct Ghul.MAYBE[T]", "kindLabel": "struct" }
   ],
   "inlayHints": [
     { "line": 1, "column": 1, "label": "◆", "detail": "max_by\n\n- ◆ abstract", "code": "definition-virtuality" }

@@ -49,7 +49,7 @@
     { "startLine": 2, "startColumn": 37, "endLine": 2, "endColumn": 37, "text": "x: int", "signature": "x: int", "kindLabel": "pure instance property" },
     { "startLine": 2, "startColumn": 42, "endLine": 2, "endColumn": 46, "text": "other: WITH_HASH", "signature": "other: WITH_HASH", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 48, "endLine": 2, "endColumn": 48, "text": "x: int", "signature": "x: int", "kindLabel": "pure instance property" },
-    { "startLine": 2, "startColumn": 39, "endLine": 2, "endColumn": 40, "text": "Ghul.==[int](a: int, b: int) -> bool", "signature": "Ghul.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
+    { "startLine": 2, "startColumn": 39, "endLine": 2, "endColumn": 40, "text": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "signature": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 17, "text": "WITH_HASH.get_hash_code() -> int", "signature": "WITH_HASH.get_hash_code() -> int", "kindLabel": "method" },
     { "startLine": 4, "startColumn": 24, "endLine": 4, "endColumn": 26, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 4, "startColumn": 31, "endLine": 4, "endColumn": 31, "text": "x: int", "signature": "x: int", "kindLabel": "pure instance property" },
@@ -61,7 +61,7 @@
     { "startLine": 9, "startColumn": 35, "endLine": 9, "endColumn": 35, "text": "x: int", "signature": "x: int", "kindLabel": "pure instance property" },
     { "startLine": 9, "startColumn": 40, "endLine": 9, "endColumn": 44, "text": "other: NO_HASH", "signature": "other: NO_HASH", "kindLabel": "local argument" },
     { "startLine": 9, "startColumn": 46, "endLine": 9, "endColumn": 46, "text": "x: int", "signature": "x: int", "kindLabel": "pure instance property" },
-    { "startLine": 9, "startColumn": 37, "endLine": 9, "endColumn": 38, "text": "Ghul.==[int](a: int, b: int) -> bool", "signature": "Ghul.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" }
+    { "startLine": 9, "startColumn": 37, "endLine": 9, "endColumn": 38, "text": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "signature": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" }
   ],
   "inlayHints": [
     { "line": 4, "column": 5, "label": "▲", "detail": "get_hash_code\n\n- ▲ overrides `object.get_hash_code() -> int`", "code": "definition-virtuality" }

@@ -146,7 +146,7 @@
     { "startLine": 44, "startColumn": 21, "endLine": 44, "endColumn": 24, "text": "tree: Tree[T]", "signature": "tree: Tree[T]", "kindLabel": "local argument" },
     { "startLine": 46, "startColumn": 11, "endLine": 46, "endColumn": 17, "text": "pending: Queue[Tree[T]]", "signature": "pending: Queue[Tree[T]]", "kindLabel": "local value" },
     { "startLine": 46, "startColumn": 19, "endLine": 46, "endColumn": 23, "text": "Queue[Tree[T]].count: int", "signature": "Queue[Tree[T]].count: int", "kindLabel": "instance property" },
-    { "startLine": 46, "startColumn": 25, "endLine": 46, "endColumn": 25, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
+    { "startLine": 46, "startColumn": 25, "endLine": 46, "endColumn": 25, "text": "Ghul.Intrinsics.<>(a: int, b: int) -> int", "signature": "Ghul.Intrinsics.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
     { "startLine": 50, "startColumn": 19, "endLine": 50, "endColumn": 23, "text": "value: T", "signature": "value: T", "kindLabel": "local value" },
     { "startLine": 52, "startColumn": 13, "endLine": 52, "endColumn": 19, "text": "pending: Queue[Tree[T]]", "signature": "pending: Queue[Tree[T]]", "kindLabel": "local value" },
     { "startLine": 52, "startColumn": 21, "endLine": 52, "endColumn": 27, "text": "Queue[Tree[T]].enqueue(item: Tree[T]) -> void", "signature": "Queue[Tree[T]].enqueue(item: Tree[T]) -> void", "kindLabel": "method" },

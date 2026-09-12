@@ -123,7 +123,7 @@
     { "startLine": 55, "startColumn": 9, "endLine": 55, "endColumn": 17, "text": "generated: LIST[string]", "signature": "generated: LIST[string]", "kindLabel": "local value" },
     { "startLine": 55, "startColumn": 21, "endLine": 55, "endColumn": 24, "text": "LIST[string].init()", "signature": "LIST[string].init()", "kindLabel": "constructor" },
     { "startLine": 57, "startColumn": 9, "endLine": 57, "endColumn": 9, "text": "$discard_0: int", "signature": "$discard_0: int", "kindLabel": "local value" },
-    { "startLine": 57, "startColumn": 15, "endLine": 57, "endColumn": 16, "text": "Ghul.::(from: int, to: int) -> INT_RANGE_INCLUSIVE", "signature": "Ghul.::(from: int, to: int) -> INT_RANGE_INCLUSIVE", "kindLabel": "innate function range.inclusive" },
+    { "startLine": 57, "startColumn": 15, "endLine": 57, "endColumn": 16, "text": "Ghul.Intrinsics.::(\n    from: int,\n    to: int\n) -> Ghul.INT_RANGE_INCLUSIVE", "signature": "Ghul.Intrinsics.::(\n    from: int,\n    to: int\n) -> Ghul.INT_RANGE_INCLUSIVE", "kindLabel": "innate function range.inclusive" },
     { "startLine": 18, "startColumn": 19, "endLine": 18, "endColumn": 21, "text": "MAP[char,Value[]].init()", "signature": "MAP[char,Value[]].init()", "kindLabel": "constructor" },
     { "startLine": 18, "startColumn": 9, "endLine": 18, "endColumn": 15, "text": "_values: MAP[char,Value[]]", "signature": "_values: MAP[char,Value[]]", "kindLabel": "private field" },
     { "startLine": 19, "startColumn": 21, "endLine": 19, "endColumn": 23, "text": "MAP[char,int].init()", "signature": "MAP[char,int].init()", "kindLabel": "constructor" },

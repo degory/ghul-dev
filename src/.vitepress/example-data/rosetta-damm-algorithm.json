@@ -38,7 +38,7 @@
     { "startLine": 23, "startColumn": 34, "endLine": 23, "endColumn": 53, "text": "string.get_Item(index: int) -> char", "signature": "string.get_Item(index: int) -> char", "kindLabel": "pure method" },
     { "startLine": 23, "startColumn": 9, "endLine": 23, "endColumn": 15, "text": "interim: int", "signature": "interim: int", "kindLabel": "local variable" },
     { "startLine": 26, "startColumn": 5, "endLine": 26, "endColumn": 11, "text": "interim: int", "signature": "interim: int", "kindLabel": "local variable" },
-    { "startLine": 26, "startColumn": 13, "endLine": 26, "endColumn": 14, "text": "Ghul.==[int](a: int, b: int) -> bool", "signature": "Ghul.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
+    { "startLine": 26, "startColumn": 13, "endLine": 26, "endColumn": 14, "text": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "signature": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
     { "startLine": 29, "startColumn": 5, "endLine": 29, "endColumn": 10, "text": "sample: string", "signature": "sample: string", "kindLabel": "local value" },
     { "startLine": 30, "startColumn": 9, "endLine": 30, "endColumn": 15, "text": "verdict: string", "signature": "verdict: string", "kindLabel": "local value" },
     { "startLine": 30, "startColumn": 22, "endLine": 30, "endColumn": 26, "text": "valid(number: string) -> bool", "signature": "valid(number: string) -> bool", "kindLabel": "global function" },

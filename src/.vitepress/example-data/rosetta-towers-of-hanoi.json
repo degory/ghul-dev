@@ -23,7 +23,7 @@
     { "startLine": 3, "startColumn": 51, "endLine": 3, "endColumn": 53, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 3, "startColumn": 59, "endLine": 3, "endColumn": 62, "text": "struct void", "signature": "struct void", "kindLabel": "struct" },
     { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 12, "text": "disks: int", "signature": "disks: int", "kindLabel": "local argument" },
-    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "text": "Ghul.Intrinsics.<>(a: int, b: int) -> int", "signature": "Ghul.Intrinsics.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
     { "startLine": 5, "startColumn": 9, "endLine": 5, "endColumn": 12, "text": "move(\n    disks: int,\n    source: int,\n    target: int,\n    spare: int\n) -> void", "signature": "move(\n    disks: int,\n    source: int,\n    target: int,\n    spare: int\n) -> void", "kindLabel": "pure global function" },
     { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 18, "text": "disks: int", "signature": "disks: int", "kindLabel": "local argument" },
     { "startLine": 5, "startColumn": 20, "endLine": 5, "endColumn": 20, "text": "int.-(a: int, b: int) -> int", "signature": "int.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },
