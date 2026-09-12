@@ -82,7 +82,7 @@
     { "startLine": 11, "startColumn": 19, "endLine": 11, "endColumn": 22, "text": "LIST[T].init()", "signature": "LIST[T].init()", "kindLabel": "constructor" },
     { "startLine": 8, "startColumn": 8, "endLine": 8, "endColumn": 13, "text": "values: List[T]", "signature": "values: List[T]", "kindLabel": "local argument" },
     { "startLine": 8, "startColumn": 15, "endLine": 8, "endColumn": 19, "text": "List[T].count: int", "signature": "List[T].count: int", "kindLabel": "pure instance property" },
-    { "startLine": 8, "startColumn": 21, "endLine": 8, "endColumn": 22, "text": "Ghul.==[int](a: int, b: int) -> bool", "signature": "Ghul.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
+    { "startLine": 8, "startColumn": 21, "endLine": 8, "endColumn": 22, "text": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "signature": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
     { "startLine": 13, "startColumn": 16, "endLine": 13, "endColumn": 20, "text": "empty: LIST[LIST[T]]", "signature": "empty: LIST[LIST[T]]", "kindLabel": "local value" },
     { "startLine": 22, "startColumn": 9, "endLine": 22, "endColumn": 18, "text": "with_first: LIST[T]", "signature": "with_first: LIST[T]", "kindLabel": "local value" },
     { "startLine": 22, "startColumn": 20, "endLine": 22, "endColumn": 22, "text": "LIST[T].add(item: T) -> void", "signature": "LIST[T].add(item: T) -> void", "kindLabel": "method" },

@@ -143,7 +143,7 @@
     { "startLine": 17, "startColumn": 25, "endLine": 17, "endColumn": 25, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 17, "startColumn": 53, "endLine": 17, "endColumn": 53, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 17, "startColumn": 8, "endLine": 17, "endColumn": 8, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
-    { "startLine": 17, "startColumn": 10, "endLine": 17, "endColumn": 11, "text": "Ghul.==[int](a: int, b: int) -> bool", "signature": "Ghul.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
+    { "startLine": 17, "startColumn": 10, "endLine": 17, "endColumn": 11, "text": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "signature": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
     { "startLine": 17, "startColumn": 20, "endLine": 17, "endColumn": 23, "text": "zero[T](f: T -> T) -> T -> T", "signature": "zero[T](f: T -> T) -> T -> T", "kindLabel": "pure global function" },
     { "startLine": 17, "startColumn": 33, "endLine": 17, "endColumn": 41, "text": "successor[T](n: T -> T -> T -> T) -> T -> T -> T -> T", "signature": "successor[T](n: T -> T -> T -> T) -> T -> T -> T -> T", "kindLabel": "pure global function" },
     { "startLine": 17, "startColumn": 43, "endLine": 17, "endColumn": 51, "text": "to_church[T](n: int) -> T -> T -> T -> T", "signature": "to_church[T](n: int) -> T -> T -> T -> T", "kindLabel": "pure global function" },

@@ -6,6 +6,7 @@ namespace Analysis.Protocol is
     use System.Text.UTF8Encoding
     use System.Text.Json.JsonSerializer
     use System.Text.Json.JsonSerializerOptions
+    use Ghul
 
     use Collections.LIST
 

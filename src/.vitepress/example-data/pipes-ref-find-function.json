@@ -9,7 +9,7 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 4, "text": "find[T](\n    source: Iterable[T],\n    predicate: T -> bool pure\n) -> MAYBE[T]", "signature": "find[T](\n    source: Iterable[T],\n    predicate: T -> bool pure\n) -> MAYBE[T]", "kindLabel": "pure global function" },
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 4, "text": "find[T](\n    source: Iterable[T],\n    predicate: T -> bool pure\n) -> Ghul.MAYBE[T]", "signature": "find[T](\n    source: Iterable[T],\n    predicate: T -> bool pure\n) -> Ghul.MAYBE[T]", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 6, "endLine": 1, "endColumn": 6, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "source: Iterable[T]", "signature": "source: Iterable[T]", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 22, "text": "T", "signature": "T", "kindLabel": "type variable" },
@@ -18,7 +18,7 @@
     { "startLine": 3, "startColumn": 23, "endLine": 3, "endColumn": 26, "text": "struct bool", "signature": "struct bool", "kindLabel": "struct" },
     { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 17, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 4, "startColumn": 17, "endLine": 4, "endColumn": 17, "text": "T", "signature": "T", "kindLabel": "type variable" },
-    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 15, "text": "struct MAYBE[T]", "signature": "struct MAYBE[T]", "kindLabel": "struct" }
+    { "startLine": 4, "startColumn": 11, "endLine": 4, "endColumn": 15, "text": "struct Ghul.MAYBE[T]", "signature": "struct Ghul.MAYBE[T]", "kindLabel": "struct" }
   ],
   "inlayHints": [
     { "line": 1, "column": 1, "label": "◆", "detail": "find\n\n- ◆ abstract", "code": "definition-virtuality" }

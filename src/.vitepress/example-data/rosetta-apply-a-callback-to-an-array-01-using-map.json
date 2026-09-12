@@ -18,7 +18,7 @@
     { "startLine": 4, "startColumn": 48, "endLine": 4, "endColumn": 52, "text": "value: int", "signature": "value: int", "kindLabel": "local argument" },
     { "startLine": 4, "startColumn": 56, "endLine": 4, "endColumn": 60, "text": "value: int", "signature": "value: int", "kindLabel": "local argument" },
     { "startLine": 4, "startColumn": 54, "endLine": 4, "endColumn": 54, "text": "int.*(a: int, b: int) -> int", "signature": "int.*(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.mul" },
-    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "text": "Ghul.$[int](values: Collections.Iterable[int]) -> string", "signature": "Ghul.$[int](values: Collections.Iterable[int]) -> string", "kindLabel": "global function" }
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "text": "Ghul.Intrinsics.$[int](\n    values: Collections.Iterable[int]\n) -> string", "signature": "Ghul.Intrinsics.$[int](\n    values: Collections.Iterable[int]\n) -> string", "kindLabel": "global function" }
   ],
   "inlayHints": [],
   "semanticTokens": [

@@ -9,15 +9,15 @@
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 18, "text": "first_map_or_throw[T,U](\n    source: Iterable[T],\n    mapper: T -> MAYBE[U] pure\n) -> U", "signature": "first_map_or_throw[T,U](\n    source: Iterable[T],\n    mapper: T -> MAYBE[U] pure\n) -> U", "kindLabel": "pure global function" },
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 18, "text": "first_map_or_throw[T,U](\n    source: Iterable[T],\n    mapper: T -> Ghul.MAYBE[U] pure\n) -> U", "signature": "first_map_or_throw[T,U](\n    source: Iterable[T],\n    mapper: T -> Ghul.MAYBE[U] pure\n) -> U", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 20, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 22, "endLine": 1, "endColumn": 22, "text": "U", "signature": "U", "kindLabel": "type variable" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "source: Iterable[T]", "signature": "source: Iterable[T]", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 22, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 20, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 10, "text": "mapper: T -> MAYBE[U] pure", "signature": "mapper: T -> MAYBE[U] pure", "kindLabel": "local argument" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 10, "text": "mapper: T -> Ghul.MAYBE[U] pure", "signature": "mapper: T -> Ghul.MAYBE[U] pure", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 31, "endLine": 3, "endColumn": 31, "text": "U", "signature": "U", "kindLabel": "type variable" },
-    { "startLine": 3, "startColumn": 25, "endLine": 3, "endColumn": 29, "text": "struct MAYBE[T]", "signature": "struct MAYBE[T]", "kindLabel": "struct" },
+    { "startLine": 3, "startColumn": 25, "endLine": 3, "endColumn": 29, "text": "struct Ghul.MAYBE[T]", "signature": "struct Ghul.MAYBE[T]", "kindLabel": "struct" },
     { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 4, "startColumn": 6, "endLine": 4, "endColumn": 6, "text": "U", "signature": "U", "kindLabel": "type variable" }
   ],

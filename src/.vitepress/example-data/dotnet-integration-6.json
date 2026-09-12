@@ -13,7 +13,7 @@
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 16, "text": "SCOPE.name: string", "signature": "SCOPE.name: string", "kindLabel": "pure instance property" },
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 24, "text": "SCOPE.init(name: string)", "signature": "SCOPE.init(name: string)", "kindLabel": "constructor" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 24, "text": "$$value: string", "signature": "$$value: string", "kindLabel": "local argument" },
-    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 42, "text": "trait Disposable", "signature": "trait Disposable", "kindLabel": "trait" },
+    { "startLine": 1, "startColumn": 33, "endLine": 1, "endColumn": 42, "text": "trait Ghul.Disposable", "signature": "trait Ghul.Disposable", "kindLabel": "trait" },
     { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 24, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 7, "startColumn": 1, "endLine": 9, "endColumn": 30, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 7, "startColumn": 9, "endLine": 7, "endColumn": 9, "text": "s: SCOPE", "signature": "s: SCOPE", "kindLabel": "global variable" },
@@ -24,7 +24,7 @@
     { "startLine": 3, "startColumn": 30, "endLine": 3, "endColumn": 33, "text": "name: string", "signature": "name: string", "kindLabel": "pure instance property" }
   ],
   "inlayHints": [
-    { "line": 2, "column": 5, "label": "▲", "detail": "dispose\n\n- ▲ overrides `Disposable.dispose() -> void`", "code": "definition-virtuality" }
+    { "line": 2, "column": 5, "label": "▲", "detail": "dispose\n\n- ▲ overrides `Ghul.Disposable.dispose() -> void`", "code": "definition-virtuality" }
   ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "tokenType": "class" },

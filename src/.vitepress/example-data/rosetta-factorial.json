@@ -14,7 +14,7 @@
     { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 17, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 13, "text": "factorial: int -> long", "signature": "factorial: int -> long", "kindLabel": "global variable" },
     { "startLine": 3, "startColumn": 29, "endLine": 3, "endColumn": 29, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
-    { "startLine": 3, "startColumn": 31, "endLine": 3, "endColumn": 32, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
+    { "startLine": 3, "startColumn": 31, "endLine": 3, "endColumn": 32, "text": "Ghul.Intrinsics.<>(a: int, b: int) -> int", "signature": "Ghul.Intrinsics.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
     { "startLine": 3, "startColumn": 54, "endLine": 3, "endColumn": 54, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
     { "startLine": 3, "startColumn": 49, "endLine": 3, "endColumn": 52, "text": "struct long", "signature": "struct long", "kindLabel": "struct" },
     { "startLine": 3, "startColumn": 63, "endLine": 3, "endColumn": 63, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },

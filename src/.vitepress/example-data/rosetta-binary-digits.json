@@ -20,7 +20,7 @@
     { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 17, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 3, "startColumn": 23, "endLine": 3, "endColumn": 28, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 12, "text": "value: int", "signature": "value: int", "kindLabel": "local argument" },
-    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "text": "Ghul.Intrinsics.<>(a: int, b: int) -> int", "signature": "Ghul.Intrinsics.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
     { "startLine": 4, "startColumn": 25, "endLine": 4, "endColumn": 29, "text": "value: int", "signature": "value: int", "kindLabel": "local argument" },
     { "startLine": 4, "startColumn": 40, "endLine": 4, "endColumn": 45, "text": "binary(value: int) -> string", "signature": "binary(value: int) -> string", "kindLabel": "pure global function" },
     { "startLine": 4, "startColumn": 47, "endLine": 4, "endColumn": 51, "text": "value: int", "signature": "value: int", "kindLabel": "local argument" },

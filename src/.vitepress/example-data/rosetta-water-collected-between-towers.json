@@ -81,7 +81,7 @@
     { "startLine": 19, "startColumn": 24, "endLine": 19, "endColumn": 30, "text": "heights: int[]", "signature": "heights: int[]", "kindLabel": "captured value" },
     { "startLine": 22, "startColumn": 9, "endLine": 22, "endColumn": 15, "text": "heights: int[]", "signature": "heights: int[]", "kindLabel": "captured value" },
     { "startLine": 22, "startColumn": 17, "endLine": 22, "endColumn": 21, "text": "ARRAY[int].count: int", "signature": "ARRAY[int].count: int", "kindLabel": "pure instance property" },
-    { "startLine": 22, "startColumn": 8, "endLine": 22, "endColumn": 8, "text": "Ghul...(from: int, to: int) -> INT_RANGE", "signature": "Ghul...(from: int, to: int) -> INT_RANGE", "kindLabel": "innate function range.exclusive" }
+    { "startLine": 22, "startColumn": 8, "endLine": 22, "endColumn": 8, "text": "Ghul.Intrinsics...(from: int, to: int) -> Ghul.INT_RANGE", "signature": "Ghul.Intrinsics...(from: int, to: int) -> Ghul.INT_RANGE", "kindLabel": "innate function range.exclusive" }
   ],
   "inlayHints": [],
   "semanticTokens": [

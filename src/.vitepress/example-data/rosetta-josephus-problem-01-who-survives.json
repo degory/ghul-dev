@@ -22,7 +22,7 @@
     { "startLine": 3, "startColumn": 21, "endLine": 3, "endColumn": 23, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 3, "startColumn": 29, "endLine": 3, "endColumn": 31, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 4, "startColumn": 8, "endLine": 4, "endColumn": 8, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
-    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 11, "text": "Ghul.==[int](a: int, b: int) -> bool", "signature": "Ghul.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
+    { "startLine": 4, "startColumn": 10, "endLine": 4, "endColumn": 11, "text": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "signature": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
     { "startLine": 4, "startColumn": 28, "endLine": 4, "endColumn": 35, "text": "survivor(n: int, k: int) -> int", "signature": "survivor(n: int, k: int) -> int", "kindLabel": "pure global function" },
     { "startLine": 4, "startColumn": 37, "endLine": 4, "endColumn": 37, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
     { "startLine": 4, "startColumn": 39, "endLine": 4, "endColumn": 39, "text": "int.-(a: int, b: int) -> int", "signature": "int.-(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.sub" },

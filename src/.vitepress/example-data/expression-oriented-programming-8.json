@@ -24,9 +24,9 @@
     { "startLine": 13, "startColumn": 14, "endLine": 13, "endColumn": 16, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 13, "startColumn": 22, "endLine": 13, "endColumn": 27, "text": "class string", "signature": "class string", "kindLabel": "class" },
     { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 8, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
-    { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 10, "text": "Ghul.<>(a: int, b: int) -> int", "signature": "Ghul.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
+    { "startLine": 3, "startColumn": 10, "endLine": 3, "endColumn": 10, "text": "Ghul.Intrinsics.<>(a: int, b: int) -> int", "signature": "Ghul.Intrinsics.<>(a: int, b: int) -> int", "kindLabel": "innate function compare.order" },
     { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 10, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },
-    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 13, "text": "Ghul.==[int](a: int, b: int) -> bool", "signature": "Ghul.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
+    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 13, "text": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "signature": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
     { "startLine": 14, "startColumn": 10, "endLine": 14, "endColumn": 10, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" }
   ],
   "inlayHints": [],

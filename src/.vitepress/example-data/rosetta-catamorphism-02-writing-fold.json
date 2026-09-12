@@ -91,7 +91,7 @@
     { "startLine": 18, "startColumn": 9, "endLine": 18, "endColumn": 9, "text": "i: int", "signature": "i: int", "kindLabel": "local value" },
     { "startLine": 18, "startColumn": 17, "endLine": 18, "endColumn": 22, "text": "values: List[T]", "signature": "values: List[T]", "kindLabel": "local argument" },
     { "startLine": 18, "startColumn": 24, "endLine": 18, "endColumn": 28, "text": "List[T].count: int", "signature": "List[T].count: int", "kindLabel": "pure instance property" },
-    { "startLine": 18, "startColumn": 16, "endLine": 18, "endColumn": 16, "text": "Ghul...(from: int, to: int) -> INT_RANGE", "signature": "Ghul...(from: int, to: int) -> INT_RANGE", "kindLabel": "innate function range.exclusive" },
+    { "startLine": 18, "startColumn": 16, "endLine": 18, "endColumn": 16, "text": "Ghul.Intrinsics...(from: int, to: int) -> Ghul.INT_RANGE", "signature": "Ghul.Intrinsics...(from: int, to: int) -> Ghul.INT_RANGE", "kindLabel": "innate function range.exclusive" },
     { "startLine": 9, "startColumn": 19, "endLine": 9, "endColumn": 25, "text": "combine: (A, T) -> A", "signature": "combine: (A, T) -> A", "kindLabel": "local argument" },
     { "startLine": 9, "startColumn": 27, "endLine": 9, "endColumn": 33, "text": "running: A", "signature": "running: A", "kindLabel": "local variable" },
     { "startLine": 9, "startColumn": 36, "endLine": 9, "endColumn": 40, "text": "value: T", "signature": "value: T", "kindLabel": "local value" },

@@ -48,7 +48,7 @@
     { "startLine": 8, "startColumn": 40, "endLine": 8, "endColumn": 43, "text": "text: string", "signature": "text: string", "kindLabel": "local argument" },
     { "startLine": 8, "startColumn": 48, "endLine": 8, "endColumn": 54, "text": "reverse(text: string) -> string", "signature": "reverse(text: string) -> string", "kindLabel": "pure global function" },
     { "startLine": 8, "startColumn": 56, "endLine": 8, "endColumn": 59, "text": "text: string", "signature": "text: string", "kindLabel": "local argument" },
-    { "startLine": 8, "startColumn": 45, "endLine": 8, "endColumn": 46, "text": "Ghul.=~(a: string?, b: string?) -> bool", "signature": "Ghul.=~(a: string?, b: string?) -> bool", "kindLabel": "innate function string.equals" },
+    { "startLine": 8, "startColumn": 45, "endLine": 8, "endColumn": 46, "text": "Ghul.Intrinsics.=~(a: string?, b: string?) -> bool", "signature": "Ghul.Intrinsics.=~(a: string?, b: string?) -> bool", "kindLabel": "innate function string.equals" },
     { "startLine": 10, "startColumn": 1, "endLine": 10, "endColumn": 21, "text": "is_inexact_palindrome(text: string) -> bool", "signature": "is_inexact_palindrome(text: string) -> bool", "kindLabel": "pure global function" },
     { "startLine": 10, "startColumn": 23, "endLine": 10, "endColumn": 26, "text": "text: string", "signature": "text: string", "kindLabel": "local argument" },
     { "startLine": 10, "startColumn": 29, "endLine": 10, "endColumn": 34, "text": "class string", "signature": "class string", "kindLabel": "class" },
