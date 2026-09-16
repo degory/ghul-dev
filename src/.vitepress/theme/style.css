@@ -1,11 +1,11 @@
 /* Fira Code (variable) for the runnable example component — ligatures,
    including ss07's `=~` / `!~`, are enabled where it is applied.
 
-   Served from this site rather than from a CDN. The site sends
-   Cross-Origin-Embedder-Policy: require-corp, so every cross-origin
-   subresource has to opt in to being loaded here, and a font that stops
-   loading takes the ligatures out of every code sample on the site. Serving
-   it ourselves also means a CDN outage cannot change how the samples look. */
+   Served from this site rather than from a CDN, so an outage elsewhere cannot
+   change how every code sample on the site looks. A CDN would still load: the
+   site sends Cross-Origin-Embedder-Policy: require-corp, and a font is fetched
+   in CORS mode, which satisfies it where a plain subresource would need a
+   Cross-Origin-Resource-Policy header of its own. */
 @font-face {
   font-family: 'Fira Code';
   font-style: normal;
