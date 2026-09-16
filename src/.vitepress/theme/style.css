@@ -1,11 +1,18 @@
 /* Fira Code (variable) for the runnable example component — ligatures,
-   including ss07's `=~` / `!~`, are enabled where it is applied. */
+   including ss07's `=~` / `!~`, are enabled where it is applied.
+
+   Served from this site rather than from a CDN, so an outage elsewhere cannot
+   change how every code sample on the site looks. A CDN would still load: the
+   site sends Cross-Origin-Embedder-Policy: require-corp, and a font is fetched
+   in CORS mode, which satisfies it where a plain subresource would need a
+   Cross-Origin-Resource-Policy header of its own. */
 @font-face {
   font-family: 'Fira Code';
   font-style: normal;
   font-display: swap;
   font-weight: 300 700;
-  src: url('https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/woff2/FiraCode-VF.woff2') format('woff2');
+  src: url('/FiraCode-VF.woff2') format('woff2'),
+       url('/FiraCode-VF.woff') format('woff');
 }
 
 /* ghūl brand green, carried over from the previous VuePress palette. */
