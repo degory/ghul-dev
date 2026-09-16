@@ -7,7 +7,11 @@ on:
   workflow_dispatch:
 
 env:
-  HOST: ghul.dev
+  # Two different things, and conflating them is how the host key check fails:
+  # SSH_HOST is the machine being deployed to, whose key deploy/known_hosts
+  # carries, and SITE is the name it serves once it has been.
+  SSH_HOST: playground.ghul.dev
+  SITE: ghul.dev
   DEPLOY_USER: deploy
 
 # One deploy at a time. A push that lands while one is running waits its turn
@@ -64,7 +68,7 @@ jobs:
           rsync -az --delete \
             -e "ssh -i ~/.ssh/deploy_key" \
             ./src/.vitepress/dist/ \
-            "$DEPLOY_USER@$HOST:/var/www/ghul-dev/"
+            "$DEPLOY_USER@$SSH_HOST:/var/www/ghul-dev/"
 
       # The isolation header is checked rather than assumed. Without it the
       # site still looks entirely correct, and the only thing that breaks is
@@ -72,9 +76,9 @@ jobs:
       # cross-origin isolated before it can start.
       - name: Check the site came back
         run: |
-          code=$(curl -s -o /dev/null -w '%{http_code}' "https://$HOST/")
+          code=$(curl -s -o /dev/null -w '%{http_code}' "https://$SITE/")
           echo "site -> $code"
           test "$code" = 200
 
-          curl -sI "https://$HOST/" | grep -qi '^cross-origin-embedder-policy: require-corp'
-          curl -sI "https://$HOST/" | grep -qi '^cross-origin-opener-policy: same-origin'
+          curl -sI "https://$SITE/" | grep -qi '^cross-origin-embedder-policy: require-corp'
+          curl -sI "https://$SITE/" | grep -qi '^cross-origin-opener-policy: same-origin'
