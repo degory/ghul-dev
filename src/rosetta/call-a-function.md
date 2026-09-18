@@ -6,4 +6,10 @@ title: "Call a function"
 
 <RosettaTask url="https://rosettacode.org/wiki/Call_a_function" tags="basics,closures,pipes" :playground="true" />
 
-<GhulExample name="rosetta-call-a-function" />
+<GhulExample name="rosetta-call-a-function" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="call-a-function" />
+</ClientOnly>

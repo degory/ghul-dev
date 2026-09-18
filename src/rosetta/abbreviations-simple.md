@@ -6,4 +6,10 @@ title: "Abbreviations, simple"
 
 <RosettaTask url="https://rosettacode.org/wiki/Abbreviations,_simple" tags="text-processing,pipes,optionals" :playground="true" />
 
-<GhulExample name="rosetta-abbreviations-simple" />
+<GhulExample name="rosetta-abbreviations-simple" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="abbreviations-simple" />
+</ClientOnly>

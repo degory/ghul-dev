@@ -6,4 +6,10 @@ title: "Continued fraction"
 
 <RosettaTask url="https://rosettacode.org/wiki/Continued_fraction" tags="maths,number-theory" :playground="true" />
 
-<GhulExample name="rosetta-continued-fraction" />
+<GhulExample name="rosetta-continued-fraction" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="continued-fraction" />
+</ClientOnly>

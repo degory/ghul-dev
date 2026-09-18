@@ -6,4 +6,10 @@ title: "Fibonacci word"
 
 <RosettaTask url="https://rosettacode.org/wiki/Fibonacci_word" tags="number-theory,generators,dotnet-interop" :playground="false" />
 
-<GhulExample name="rosetta-fibonacci-word" />
+<GhulExample name="rosetta-fibonacci-word" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="fibonacci-word" />
+</ClientOnly>

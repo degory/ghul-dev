@@ -6,4 +6,10 @@ title: "Forward difference"
 
 <RosettaTask url="https://rosettacode.org/wiki/Forward_difference" tags="maths,recursion" :playground="true" />
 
-<GhulExample name="rosetta-forward-difference" />
+<GhulExample name="rosetta-forward-difference" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="forward-difference" />
+</ClientOnly>

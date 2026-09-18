@@ -8,8 +8,14 @@ title: "Monads/Maybe monad"
 
 ## Using optional types
 
-<GhulExample name="rosetta-maybe-monad-01-using-optional-types" />
+<GhulExample name="rosetta-maybe-monad-01-using-optional-types" run-to-see />
 
 ## Defining a maybe union
 
-<GhulExample name="rosetta-maybe-monad-02-defining-a-maybe-union" />
+<GhulExample name="rosetta-maybe-monad-02-defining-a-maybe-union" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="maybe-monad" />
+</ClientOnly>

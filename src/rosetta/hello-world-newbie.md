@@ -8,12 +8,18 @@ title: "Hello world/Newbie"
 
 ## In the browser
 
-<GhulExample name="rosetta-hello-world-newbie-01-in-the-browser" />
+<GhulExample name="rosetta-hello-world-newbie-01-in-the-browser" run-to-see />
 
 ## In a codespace or from the template
 
-<GhulExample name="rosetta-hello-world-newbie-02-in-a-codespace-or-from-the-template" />
+<GhulExample name="rosetta-hello-world-newbie-02-in-a-codespace-or-from-the-template" run-to-see />
 
 ## On your own machine
 
-<GhulExample name="rosetta-hello-world-newbie-03-on-your-own-machine" />
+<GhulExample name="rosetta-hello-world-newbie-03-on-your-own-machine" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="hello-world-newbie" />
+</ClientOnly>

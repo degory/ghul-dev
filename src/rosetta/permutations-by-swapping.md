@@ -6,4 +6,10 @@ title: "Permutations by swapping"
 
 <RosettaTask url="https://rosettacode.org/wiki/Permutations_by_swapping" tags="algorithms,generators" :playground="true" />
 
-<GhulExample name="rosetta-permutations-by-swapping" />
+<GhulExample name="rosetta-permutations-by-swapping" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="permutations-by-swapping" />
+</ClientOnly>

@@ -6,4 +6,10 @@ title: "N-queens problem"
 
 <RosettaTask url="https://rosettacode.org/wiki/N-queens_problem" tags="puzzles,pattern-matching,pipes,generators,recursion" :playground="true" />
 
-<GhulExample name="rosetta-n-queens-problem" />
+<GhulExample name="rosetta-n-queens-problem" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="n-queens-problem" />
+</ClientOnly>

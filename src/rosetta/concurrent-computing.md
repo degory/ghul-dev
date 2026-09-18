@@ -6,4 +6,10 @@ title: "Concurrent computing"
 
 <RosettaTask url="https://rosettacode.org/wiki/Concurrent_computing" tags="concurrency,async" :playground="true" />
 
-<GhulExample name="rosetta-concurrent-computing" />
+<GhulExample name="rosetta-concurrent-computing" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="concurrent-computing" />
+</ClientOnly>

@@ -110,7 +110,7 @@ for (const task of index.tasks) {
       body.push(`## ${part.heading}`, '')
     }
 
-    body.push(`<GhulExample name="${name}" />`, '')
+    body.push(`<GhulExample name="${name}" run-to-see />`, '')
   }
 
   writeFileSync(
@@ -125,12 +125,20 @@ for (const task of index.tasks) {
       `<RosettaTask url="${task.url.replace(/"/g, '%22')}" tags="${task.tags.join(',')}" :playground="${task.playground}" />`,
       '',
       ...body,
+    '## more tasks',
+    '',
+    // Client-side only: prerendered, the list of every task would be repeated in every page.
+    '<ClientOnly>',
+    `<RosettaExplorer current="${task.slug}" />`,
+    '</ClientOnly>',
+    '',
     ].join('\n')
   )
 
   manifest.push({
     slug: task.slug,
     title: task.title,
+    url: task.url,
     tags: task.tags,
     interest: task.interest,
     playground: task.playground,

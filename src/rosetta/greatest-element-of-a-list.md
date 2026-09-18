@@ -6,4 +6,10 @@ title: "Greatest element of a list"
 
 <RosettaTask url="https://rosettacode.org/wiki/Greatest_element_of_a_list" tags="algorithms,generics" :playground="true" />
 
-<GhulExample name="rosetta-greatest-element-of-a-list" />
+<GhulExample name="rosetta-greatest-element-of-a-list" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="greatest-element-of-a-list" />
+</ClientOnly>

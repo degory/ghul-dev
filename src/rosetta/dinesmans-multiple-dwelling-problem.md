@@ -6,4 +6,10 @@ title: "Dinesman's multiple-dwelling problem"
 
 <RosettaTask url="https://rosettacode.org/wiki/Dinesman's_multiple-dwelling_problem" tags="puzzles,pipes,generators" :playground="true" />
 
-<GhulExample name="rosetta-dinesmans-multiple-dwelling-problem" />
+<GhulExample name="rosetta-dinesmans-multiple-dwelling-problem" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="dinesmans-multiple-dwelling-problem" />
+</ClientOnly>

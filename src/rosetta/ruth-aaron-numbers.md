@@ -6,4 +6,10 @@ title: "Ruth-Aaron numbers"
 
 <RosettaTask url="https://rosettacode.org/wiki/Ruth-Aaron_numbers" tags="number-theory,generators" :playground="false" />
 
-<GhulExample name="rosetta-ruth-aaron-numbers" />
+<GhulExample name="rosetta-ruth-aaron-numbers" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="ruth-aaron-numbers" />
+</ClientOnly>

@@ -6,4 +6,10 @@ title: "Detect division by zero"
 
 <RosettaTask url="https://rosettacode.org/wiki/Detect_division_by_zero" tags="maths" :playground="true" />
 
-<GhulExample name="rosetta-detect-division-by-zero" />
+<GhulExample name="rosetta-detect-division-by-zero" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="detect-division-by-zero" />
+</ClientOnly>

@@ -4,7 +4,7 @@
   "fullSource": "use IO\n\nlet contents = File.read_all_text(\"input.txt\")\n\nFile.write_all_text(\"output.txt\", contents)\n\nStd.write(File.read_all_text(\"output.txt\"))",
   "output": "the first line\nthe second line\n",
   "images": [],
-  "playground": false,
+  "playground": true,
   "playgroundPath": "file-input-output",
   "hovers": [],
   "diagnostics": []

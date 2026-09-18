@@ -6,4 +6,10 @@ title: "Literals/Integer"
 
 <RosettaTask url="https://rosettacode.org/wiki/Literals/Integer" tags="basics" :playground="true" />
 
-<GhulExample name="rosetta-literals-integer" />
+<GhulExample name="rosetta-literals-integer" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="literals-integer" />
+</ClientOnly>

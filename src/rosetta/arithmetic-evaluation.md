@@ -6,4 +6,10 @@ title: "Arithmetic evaluation"
 
 <RosettaTask url="https://rosettacode.org/wiki/Arithmetic_evaluation" tags="parsing,recursion,unions,pattern-matching" :playground="true" />
 
-<GhulExample name="rosetta-arithmetic-evaluation" />
+<GhulExample name="rosetta-arithmetic-evaluation" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="arithmetic-evaluation" />
+</ClientOnly>

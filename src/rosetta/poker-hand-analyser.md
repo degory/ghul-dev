@@ -6,4 +6,10 @@ title: "Poker hand analyser"
 
 <RosettaTask url="https://rosettacode.org/wiki/Poker_hand_analyser" tags="algorithms,pipes" :playground="true" />
 
-<GhulExample name="rosetta-poker-hand-analyser" />
+<GhulExample name="rosetta-poker-hand-analyser" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="poker-hand-analyser" />
+</ClientOnly>

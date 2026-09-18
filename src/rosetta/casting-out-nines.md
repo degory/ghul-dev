@@ -6,4 +6,10 @@ title: "Casting out nines"
 
 <RosettaTask url="https://rosettacode.org/wiki/Casting_out_nines" tags="number-theory,pipes" :playground="true" />
 
-<GhulExample name="rosetta-casting-out-nines" />
+<GhulExample name="rosetta-casting-out-nines" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="casting-out-nines" />
+</ClientOnly>

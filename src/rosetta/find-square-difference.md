@@ -6,4 +6,10 @@ title: "Find square difference"
 
 <RosettaTask url="https://rosettacode.org/wiki/Find_square_difference" tags="maths,optionals" :playground="true" />
 
-<GhulExample name="rosetta-find-square-difference" />
+<GhulExample name="rosetta-find-square-difference" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="find-square-difference" />
+</ClientOnly>

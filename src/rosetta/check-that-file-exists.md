@@ -6,4 +6,10 @@ title: "Check that file exists"
 
 <RosettaTask url="https://rosettacode.org/wiki/Check_that_file_exists" tags="dotnet-interop,basics" :playground="false" />
 
-<GhulExample name="rosetta-check-that-file-exists" />
+<GhulExample name="rosetta-check-that-file-exists" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="check-that-file-exists" />
+</ClientOnly>

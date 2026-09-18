@@ -8,8 +8,14 @@ title: "Sieve of Eratosthenes"
 
 ## Marking multiples
 
-<GhulExample name="rosetta-sieve-of-eratosthenes-01-marking-multiples" />
+<GhulExample name="rosetta-sieve-of-eratosthenes-01-marking-multiples" run-to-see />
 
 ## Chained filters
 
-<GhulExample name="rosetta-sieve-of-eratosthenes-02-chained-filters" />
+<GhulExample name="rosetta-sieve-of-eratosthenes-02-chained-filters" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="sieve-of-eratosthenes" />
+</ClientOnly>

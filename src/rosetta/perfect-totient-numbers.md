@@ -6,4 +6,10 @@ title: "Perfect totient numbers"
 
 <RosettaTask url="https://rosettacode.org/wiki/Perfect_totient_numbers" tags="number-theory,generators" :playground="true" />
 
-<GhulExample name="rosetta-perfect-totient-numbers" />
+<GhulExample name="rosetta-perfect-totient-numbers" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="perfect-totient-numbers" />
+</ClientOnly>

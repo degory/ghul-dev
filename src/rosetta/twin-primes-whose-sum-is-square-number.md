@@ -6,4 +6,10 @@ title: "Twin primes whose sum is square number"
 
 <RosettaTask url="https://rosettacode.org/wiki/Twin_primes_whose_sum_is_square_number" tags="primes,number-theory" :playground="true" />
 
-<GhulExample name="rosetta-twin-primes-whose-sum-is-square-number" />
+<GhulExample name="rosetta-twin-primes-whose-sum-is-square-number" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="twin-primes-whose-sum-is-square-number" />
+</ClientOnly>

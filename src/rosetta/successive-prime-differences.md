@@ -6,4 +6,10 @@ title: "Successive prime differences"
 
 <RosettaTask url="https://rosettacode.org/wiki/Successive_prime_differences" tags="primes,generators" :playground="true" />
 
-<GhulExample name="rosetta-successive-prime-differences" />
+<GhulExample name="rosetta-successive-prime-differences" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="successive-prime-differences" />
+</ClientOnly>

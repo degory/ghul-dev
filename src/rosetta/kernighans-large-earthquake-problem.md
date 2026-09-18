@@ -6,4 +6,10 @@ title: "Kernighans large earthquake problem"
 
 <RosettaTask url="https://rosettacode.org/wiki/Kernighans_large_earthquake_problem" tags="text-processing,pipes" :playground="true" />
 
-<GhulExample name="rosetta-kernighans-large-earthquake-problem" />
+<GhulExample name="rosetta-kernighans-large-earthquake-problem" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="kernighans-large-earthquake-problem" />
+</ClientOnly>

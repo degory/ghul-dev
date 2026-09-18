@@ -6,4 +6,10 @@ title: "Summarize and say sequence"
 
 <RosettaTask url="https://rosettacode.org/wiki/Summarize_and_say_sequence" tags="number-theory,pipes" :playground="true" />
 
-<GhulExample name="rosetta-summarize-and-say-sequence" />
+<GhulExample name="rosetta-summarize-and-say-sequence" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="summarize-and-say-sequence" />
+</ClientOnly>

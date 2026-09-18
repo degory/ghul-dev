@@ -6,4 +6,10 @@ title: "Box the compass"
 
 <RosettaTask url="https://rosettacode.org/wiki/Box_the_compass" tags="maths,pattern-matching,pipes" :playground="true" />
 
-<GhulExample name="rosetta-box-the-compass" />
+<GhulExample name="rosetta-box-the-compass" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="box-the-compass" />
+</ClientOnly>

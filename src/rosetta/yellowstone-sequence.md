@@ -6,4 +6,10 @@ title: "Yellowstone sequence"
 
 <RosettaTask url="https://rosettacode.org/wiki/Yellowstone_sequence" tags="number-theory" :playground="true" />
 
-<GhulExample name="rosetta-yellowstone-sequence" />
+<GhulExample name="rosetta-yellowstone-sequence" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="yellowstone-sequence" />
+</ClientOnly>

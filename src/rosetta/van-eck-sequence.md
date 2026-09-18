@@ -6,4 +6,10 @@ title: "Van Eck sequence"
 
 <RosettaTask url="https://rosettacode.org/wiki/Van_Eck_sequence" tags="number-theory,generators" :playground="true" />
 
-<GhulExample name="rosetta-van-eck-sequence" />
+<GhulExample name="rosetta-van-eck-sequence" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="van-eck-sequence" />
+</ClientOnly>

@@ -8,8 +8,14 @@ title: "Decorate-sort-undecorate idiom"
 
 ## With named lists
 
-<GhulExample name="rosetta-decorate-sort-undecorate-idiom-01-with-named-lists" />
+<GhulExample name="rosetta-decorate-sort-undecorate-idiom-01-with-named-lists" run-to-see />
 
 ## Schwartzian transform
 
-<GhulExample name="rosetta-decorate-sort-undecorate-idiom-02-schwartzian-transform" />
+<GhulExample name="rosetta-decorate-sort-undecorate-idiom-02-schwartzian-transform" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="decorate-sort-undecorate-idiom" />
+</ClientOnly>

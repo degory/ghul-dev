@@ -6,4 +6,10 @@ title: "French Republican calendar"
 
 <RosettaTask url="https://rosettacode.org/wiki/French_Republican_calendar" tags="date-time,dotnet-interop" :playground="true" />
 
-<GhulExample name="rosetta-french-republican-calendar" />
+<GhulExample name="rosetta-french-republican-calendar" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="french-republican-calendar" />
+</ClientOnly>

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, shallowRef, watch, onMounted } from 'vue'
+import { useRouter } from 'vitepress'
 import corpus from '../../rosetta-tasks.json'
 import GhulExample from './GhulExample.vue'
 
@@ -10,6 +11,15 @@ import GhulExample from './GhulExample.vue'
 
 // Each part's data is its own chunk, fetched when the part is shown, so the page does not carry
 // every solution's source.
+// On a task's own page the task is already there above, so the explorer only browses: the same
+// search, tags and list, with every choice leading to another task's page. `current` names the
+// page's task, so another never lands on it and the list can mark it.
+const props = defineProps({
+  current: { type: String, default: null },
+})
+
+const router = useRouter()
+
 const artifacts = import.meta.glob('../../example-data/rosetta-*.json', { import: 'default' })
 
 const load = name => artifacts[`../../example-data/${name}.json`]()
@@ -84,17 +94,26 @@ async function feature(task) {
 }
 
 function another() {
+  if (props.current) {
+    const next = draw(matching.value, props.current)
+
+    if (next) router.go(`/rosetta/${next.slug}`)
+
+    return
+  }
+
   feature(draw(matching.value, featured.value?.slug))
 }
 
 // A random pick differs between the prerender and the reader's browser, so it is made only once
 // the page is live.
-onMounted(another)
+onMounted(() => { if (!props.current) another() })
 
 // Narrowing the filter to something the featured task is not part of picks a new one; widening
 // it leaves the reader looking at what they were looking at.
 watch(matching, tasks => {
-  if (featured.value && !tasks.includes(featured.value)) another()
+  // By name: what is featured is held reactively, so it is never the same object as its entry here.
+  if (featured.value && !tasks.some(task => task.slug === featured.value.slug)) another()
 })
 </script>
 
@@ -113,6 +132,8 @@ watch(matching, tasks => {
         <input v-model="runnableOnly" type="checkbox" />
         runs in the browser
       </label>
+
+      <button v-if="current" type="button" class="rosetta-another" @click="another">another</button>
     </div>
 
     <div class="rosetta-tags" role="group" aria-label="filter by tag">
@@ -130,9 +151,9 @@ watch(matching, tasks => {
 
     <section v-if="featured" class="rosetta-featured">
       <header>
-        <h2 :id="featured.slug">
-          <a :href="`/rosetta/${featured.slug}`">{{ featured.title }}</a>
-        </h2>
+        <h2 :id="featured.slug">{{ featured.title }}</h2>
+
+        <a class="rosetta-wiki" :href="featured.url" target="_blank" rel="noreferrer">on Rosetta Code</a>
 
         <button type="button" class="rosetta-another" @click="another">another</button>
       </header>
@@ -151,7 +172,7 @@ watch(matching, tasks => {
       <template v-for="part in featuredParts" :key="part.name">
         <h3 v-if="part.heading">{{ part.heading }}</h3>
 
-        <GhulExample :name="part.name" :data="part.data" />
+        <GhulExample :name="part.name" :data="part.data" run-to-see />
       </template>
     </section>
 
@@ -161,7 +182,7 @@ watch(matching, tasks => {
 
     <ul class="rosetta-list">
       <li v-for="task in matching" :key="task.slug">
-        <a :href="`/rosetta/${task.slug}`">{{ task.title }}</a>
+        <a :href="`/rosetta/${task.slug}`" :class="{ 'is-current': task.slug === current }">{{ task.title }}</a>
         <span v-if="task.images" class="rosetta-mark" title="draws a picture">image</span>
         <span v-if="task.input" class="rosetta-mark" title="reads what you type">input</span>
         <span v-if="task.parts.length > 1" class="rosetta-mark">{{ task.parts.length }} ways</span>
@@ -235,6 +256,8 @@ watch(matching, tasks => {
 
 .rosetta-featured {
   margin-top: 2rem;
+  /* Clear of the site's fixed header when a task picked from the list is scrolled to. */
+  scroll-margin-top: calc(var(--vp-nav-height) + 1rem);
 }
 
 .rosetta-featured header {
@@ -245,9 +268,16 @@ watch(matching, tasks => {
 }
 
 .rosetta-featured h2 {
+  flex: 1;
   margin: 0;
   padding: 0;
   border: none;
+}
+
+.rosetta-wiki {
+  font-size: 0.85rem;
+  font-weight: 400;
+  white-space: nowrap;
 }
 
 .rosetta-another {
@@ -283,6 +313,21 @@ watch(matching, tasks => {
   margin: 0;
   padding: 0.15rem 0;
   break-inside: avoid;
+}
+
+/* A long list of bold links is a wall; these read as a list of names. */
+.rosetta-list a {
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.rosetta-list a.is-current {
+  color: var(--vp-c-text-1);
+  font-weight: 600;
+}
+
+.rosetta-list a:hover {
+  text-decoration: underline;
 }
 
 .rosetta-mark {

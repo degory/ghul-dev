@@ -6,4 +6,10 @@ title: "Sorting algorithms/Bogosort"
 
 <RosettaTask url="https://rosettacode.org/wiki/Sorting_algorithms/Bogosort" tags="sorting" :playground="true" />
 
-<GhulExample name="rosetta-sorting-algorithms-bogosort" />
+<GhulExample name="rosetta-sorting-algorithms-bogosort" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="sorting-algorithms-bogosort" />
+</ClientOnly>

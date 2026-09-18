@@ -6,4 +6,10 @@ title: "Formal power series"
 
 <RosettaTask url="https://rosettacode.org/wiki/Formal_power_series" tags="maths,operators,classes" :playground="true" />
 
-<GhulExample name="rosetta-formal-power-series" />
+<GhulExample name="rosetta-formal-power-series" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="formal-power-series" />
+</ClientOnly>

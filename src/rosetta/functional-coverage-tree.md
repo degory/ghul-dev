@@ -6,4 +6,10 @@ title: "Functional coverage tree"
 
 <RosettaTask url="https://rosettacode.org/wiki/Functional_coverage_tree" tags="data-structures,classes,optionals" :playground="true" />
 
-<GhulExample name="rosetta-functional-coverage-tree" />
+<GhulExample name="rosetta-functional-coverage-tree" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="functional-coverage-tree" />
+</ClientOnly>

@@ -6,4 +6,10 @@ title: "Zumkeller numbers"
 
 <RosettaTask url="https://rosettacode.org/wiki/Zumkeller_numbers" tags="number-theory,pipes" :playground="false" />
 
-<GhulExample name="rosetta-zumkeller-numbers" />
+<GhulExample name="rosetta-zumkeller-numbers" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="zumkeller-numbers" />
+</ClientOnly>
