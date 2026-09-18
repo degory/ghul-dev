@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-inverted-index",
+  "code": "use default\n\nlet documents = [\n    \"it is what it is\",\n    \"what is done is done\",\n    \"what is done is what is done\"\n]\n\nlet index = MAP[string, SET[int]]()\nlet number mut = 0\n\nfor document in documents do\n    for word in document.split([' ']) do\n        if !index.contains_key(word) then\n            index[word] = SET[int]()\n        fi\n\n        index[word].add(number)\n    od\n\n    number = number + 1\nod\n\nfor term in [\"what\", \"is\", \"done\", \"absent\"] do\n    let hits = if index.contains_key(term)\n        then index[term] |> sort() |> map(n => \"{n}\") |> join(\", \")\n        else \"\"\n        fi\n\n    write_line(\"{term}: {hits}\")\nod",
+  "fullSource": "use default\n\nlet documents = [\n    \"it is what it is\",\n    \"what is done is done\",\n    \"what is done is what is done\"\n]\n\nlet index = MAP[string, SET[int]]()\nlet number mut = 0\n\nfor document in documents do\n    for word in document.split([' ']) do\n        if !index.contains_key(word) then\n            index[word] = SET[int]()\n        fi\n\n        index[word].add(number)\n    od\n\n    number = number + 1\nod\n\nfor term in [\"what\", \"is\", \"done\", \"absent\"] do\n    let hits = if index.contains_key(term)\n        then index[term] |> sort() |> map(n => \"{n}\") |> join(\", \")\n        else \"\"\n        fi\n\n    write_line(\"{term}: {hits}\")\nod",
+  "output": "what: 0, 1, 2\nis: 0, 1, 2\ndone: 1, 2\nabsent: \n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "inverted-index",
+  "hovers": [],
+  "diagnostics": []
+}

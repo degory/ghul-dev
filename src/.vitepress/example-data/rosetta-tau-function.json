@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-tau-function",
+  "code": "use default\n\ntau(value: int) -> int is\n    let divisors mut = 0\n    let candidate mut = 1\n\n    while candidate * candidate <= value do\n        if value % candidate == 0 then\n            divisors = divisors + 2\n\n            if candidate * candidate == value then\n                divisors = divisors - 1\n            fi\n        fi\n\n        candidate = candidate + 1\n    od\n\n    divisors\nsi\n\nwrite_line(\"the number of divisors of 1 to 100:\")\n\nfor row in 0..10 do\n    let cells = (row * 10 + 1::row * 10 + 10) |> map(n => \"{tau(n),4}\")\n\n    write_line(cells |> join(\"\"))\nod",
+  "fullSource": "use default\n\ntau(value: int) -> int is\n    let divisors mut = 0\n    let candidate mut = 1\n\n    while candidate * candidate <= value do\n        if value % candidate == 0 then\n            divisors = divisors + 2\n\n            if candidate * candidate == value then\n                divisors = divisors - 1\n            fi\n        fi\n\n        candidate = candidate + 1\n    od\n\n    divisors\nsi\n\nwrite_line(\"the number of divisors of 1 to 100:\")\n\nfor row in 0..10 do\n    let cells = (row * 10 + 1::row * 10 + 10) |> map(n => \"{tau(n),4}\")\n\n    write_line(cells |> join(\"\"))\nod",
+  "output": "the number of divisors of 1 to 100:\n   1   2   2   3   2   4   2   4   3   4\n   2   6   2   4   4   5   2   6   2   6\n   4   4   2   8   3   4   4   6   2   8\n   2   6   4   4   4   9   2   4   4   8\n   2   8   2   6   6   4   2  10   3   6\n   4   6   2   8   4   8   4   4   2  12\n   2   4   6   7   4   8   2   6   4   8\n   2  12   2   4   6   6   4   8   2  10\n   5   4   2  12   4   4   4   8   2  12\n   4   6   4   4   4  12   2   6   6   9\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "tau-function",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-long-multiplication",
+  "code": "use default\n\ndigits_of(s: string) -> LIST[int] is\n    let value = c => cast int(c) - cast int('0')\n\n    s |> reverse() |> map(value) |> collect_list()\nsi\n\nmultiply(a: string, b: string) -> string is\n    let da = digits_of(a)\n    let db = digits_of(b)\n    let result = (0::(da.count + db.count)) |> map(_ => 0) |> collect_list()\n\n    for i in 0..da.count do\n        for j in 0..db.count do\n            result[i + j] = result[i + j] + da[i] * db[j]\n        od\n    od\n\n    let carry mut = 0\n\n    for k in 0..result.count do\n        let total = result[k] + carry\n\n        result[k] = total % 10\n        carry = total / 10\n    od\n\n    let raw = result |> reverse() |> map(d => \"{d}\") |> join(\"\")\n    let trimmed = raw.trim_start(['0'])\n\n    if trimmed.length == 0 then \"0\" else trimmed fi\nsi\n\nlet a = \"18446744073709551616\"\nlet b = \"18446744073709551616\"\n\nwrite_line(\"{a} * {b}\")\nwrite_line(\"= {multiply(a, b)}\")",
+  "fullSource": "use default\n\ndigits_of(s: string) -> LIST[int] is\n    let value = c => cast int(c) - cast int('0')\n\n    s |> reverse() |> map(value) |> collect_list()\nsi\n\nmultiply(a: string, b: string) -> string is\n    let da = digits_of(a)\n    let db = digits_of(b)\n    let result = (0::(da.count + db.count)) |> map(_ => 0) |> collect_list()\n\n    for i in 0..da.count do\n        for j in 0..db.count do\n            result[i + j] = result[i + j] + da[i] * db[j]\n        od\n    od\n\n    let carry mut = 0\n\n    for k in 0..result.count do\n        let total = result[k] + carry\n\n        result[k] = total % 10\n        carry = total / 10\n    od\n\n    let raw = result |> reverse() |> map(d => \"{d}\") |> join(\"\")\n    let trimmed = raw.trim_start(['0'])\n\n    if trimmed.length == 0 then \"0\" else trimmed fi\nsi\n\nlet a = \"18446744073709551616\"\nlet b = \"18446744073709551616\"\n\nwrite_line(\"{a} * {b}\")\nwrite_line(\"= {multiply(a, b)}\")",
+  "output": "18446744073709551616 * 18446744073709551616\n= 340282366920938463463374607431768211456\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "long-multiplication",
+  "hovers": [],
+  "diagnostics": []
+}

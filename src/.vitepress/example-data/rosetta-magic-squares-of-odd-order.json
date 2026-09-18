@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-magic-squares-of-odd-order",
+  "code": "use default\n\nmagic_square(n: int) -> LIST[int] is\n    let cells =\n        stream(0, v => v || v + 1) |> take(n * n) |> map(_ => 0) |> collect_list()\n\n    let row mut = 0\n    let column mut = n / 2\n\n    for value in 1::(n * n) do\n        cells[row * n + column] = value\n\n        let next_row mut = (row + n - 1) % n\n        let next_column mut = (column + 1) % n\n\n        if cells[next_row * n + next_column] == 0 then\n            row = next_row\n            column = next_column\n        else\n            row = (row + 1) % n\n        fi\n    od\n\n    cells\nsi\n\nlet n = 5\nlet square = magic_square(n)\nlet magic_number = n * (n * n + 1) / 2\n\nwrite_line(\"5 by 5 magic square, magic number {magic_number}:\")\nsquare |> chunk(n)\n    |> each(row => write_line(row |> map((value: int) => \"{value,3}\") |> join(\"\")))",
+  "fullSource": "use default\n\nmagic_square(n: int) -> LIST[int] is\n    let cells =\n        stream(0, v => v || v + 1) |> take(n * n) |> map(_ => 0) |> collect_list()\n\n    let row mut = 0\n    let column mut = n / 2\n\n    for value in 1::(n * n) do\n        cells[row * n + column] = value\n\n        let next_row mut = (row + n - 1) % n\n        let next_column mut = (column + 1) % n\n\n        if cells[next_row * n + next_column] == 0 then\n            row = next_row\n            column = next_column\n        else\n            row = (row + 1) % n\n        fi\n    od\n\n    cells\nsi\n\nlet n = 5\nlet square = magic_square(n)\nlet magic_number = n * (n * n + 1) / 2\n\nwrite_line(\"5 by 5 magic square, magic number {magic_number}:\")\nsquare |> chunk(n)\n    |> each(row => write_line(row |> map((value: int) => \"{value,3}\") |> join(\"\")))",
+  "output": "5 by 5 magic square, magic number 65:\n 17 24  1  8 15\n 23  5  7 14 16\n  4  6 13 20 22\n 10 12 19 21  3\n 11 18 25  2  9\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "magic-squares-of-odd-order",
+  "hovers": [],
+  "diagnostics": []
+}

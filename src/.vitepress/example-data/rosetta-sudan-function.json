@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sudan-function",
+  "code": "use IO.Std.write_line\n\nsudan(order: int, left: bigint, right: bigint) -> bigint =>\n    if order == 0 then left + right\n    elif right.is_zero then left\n    else (\n        let step = sudan(order, left, right - 1n)\n\n        sudan(order - 1, step, step + right)\n    )\n    fi\n\nshow(order: int, left: int, right: int) is\n    let value = sudan(order, cast(left), cast(right))\n\n    write_line(\"F({order}, {left}, {right}) = {value}\")\nsi\n\nfor right in 0::3 do\n    show(0, 3, right)\nod\n\nfor right in 0::3 do\n    show(1, 3, right)\nod\n\nfor right in 0::2 do\n    show(2, 1, right)\nod\n\nshow(3, 1, 1)",
+  "fullSource": "use IO.Std.write_line\n\nsudan(order: int, left: bigint, right: bigint) -> bigint =>\n    if order == 0 then left + right\n    elif right.is_zero then left\n    else (\n        let step = sudan(order, left, right - 1n)\n\n        sudan(order - 1, step, step + right)\n    )\n    fi\n\nshow(order: int, left: int, right: int) is\n    let value = sudan(order, cast(left), cast(right))\n\n    write_line(\"F({order}, {left}, {right}) = {value}\")\nsi\n\nfor right in 0::3 do\n    show(0, 3, right)\nod\n\nfor right in 0::3 do\n    show(1, 3, right)\nod\n\nfor right in 0::2 do\n    show(2, 1, right)\nod\n\nshow(3, 1, 1)",
+  "output": "F(0, 3, 0) = 3\nF(0, 3, 1) = 4\nF(0, 3, 2) = 5\nF(0, 3, 3) = 6\nF(1, 3, 0) = 3\nF(1, 3, 1) = 7\nF(1, 3, 2) = 16\nF(1, 3, 3) = 35\nF(2, 1, 0) = 1\nF(2, 1, 1) = 8\nF(2, 1, 2) = 10228\nF(3, 1, 1) = 10228\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sudan-function",
+  "hovers": [],
+  "diagnostics": []
+}

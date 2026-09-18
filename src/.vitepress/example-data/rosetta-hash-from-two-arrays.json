@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-hash-from-two-arrays",
+  "code": "use default\n\nlet keys = [\"hydrogen\", \"helium\", \"lithium\", \"beryllium\"]\nlet values = [1, 2, 3, 4]\n\nlet elements =\n    keys\n        |> zip(values)\n        |> collect_map(pair => pair.`0, pair => pair.`1)\n\nfor key in keys do\n    write_line(\"{key,-10} {elements[key]}\")\nod",
+  "fullSource": "use default\n\nlet keys = [\"hydrogen\", \"helium\", \"lithium\", \"beryllium\"]\nlet values = [1, 2, 3, 4]\n\nlet elements =\n    keys\n        |> zip(values)\n        |> collect_map(pair => pair.`0, pair => pair.`1)\n\nfor key in keys do\n    write_line(\"{key,-10} {elements[key]}\")\nod",
+  "output": "hydrogen   1\nhelium     2\nlithium    3\nberyllium  4\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "hash-from-two-arrays",
+  "hovers": [],
+  "diagnostics": []
+}

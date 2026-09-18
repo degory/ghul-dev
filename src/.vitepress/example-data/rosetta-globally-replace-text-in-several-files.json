@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-globally-replace-text-in-several-files",
+  "code": "use IO.Std.write_line\nuse IO.File\n\nreplace_in_file(source: string, destination: string) is\n    let replaced =\n        File.read_all_text(source)\n            .replace(\"Goodbye London!\", \"Hello New York!\")\n\n    File.write_all_text(destination, replaced)\n\n    write_line(\"{destination}:\")\n    write_line(File.read_all_text(destination))\nsi\n\nreplace_in_file(\"one.txt\", \"one.out.txt\")\nreplace_in_file(\"two.txt\", \"two.out.txt\")",
+  "fullSource": "use IO.Std.write_line\nuse IO.File\n\nreplace_in_file(source: string, destination: string) is\n    let replaced =\n        File.read_all_text(source)\n            .replace(\"Goodbye London!\", \"Hello New York!\")\n\n    File.write_all_text(destination, replaced)\n\n    write_line(\"{destination}:\")\n    write_line(File.read_all_text(destination))\nsi\n\nreplace_in_file(\"one.txt\", \"one.out.txt\")\nreplace_in_file(\"two.txt\", \"two.out.txt\")",
+  "output": "one.out.txt:\nI once lived in London.\nHello New York! I'm moving on.\n\ntwo.out.txt:\nHello New York! Hello New York!\nSee you around.\n\n",
+  "images": [],
+  "playground": false,
+  "playgroundPath": "globally-replace-text-in-several-files",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-copy-a-string",
+  "code": "use default\n\nlet original = \"hello\"\n\nlet reference = original\n\nlet copy = string(original |> collect_array())\n\nwrite_line(\"reference is another name for the same string\")\nwrite_line(\"original == reference: {original == reference}\")\n\nwrite_line(\"copy holds the same characters in a new string\")\nwrite_line(\"original == copy: {original == copy}\")\nwrite_line(\"original =~ copy: {original =~ copy}\")",
+  "fullSource": "use default\n\nlet original = \"hello\"\n\nlet reference = original\n\nlet copy = string(original |> collect_array())\n\nwrite_line(\"reference is another name for the same string\")\nwrite_line(\"original == reference: {original == reference}\")\n\nwrite_line(\"copy holds the same characters in a new string\")\nwrite_line(\"original == copy: {original == copy}\")\nwrite_line(\"original =~ copy: {original =~ copy}\")",
+  "output": "reference is another name for the same string\noriginal == reference: True\ncopy holds the same characters in a new string\noriginal == copy: False\noriginal =~ copy: True\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "copy-a-string",
+  "hovers": [],
+  "diagnostics": []
+}

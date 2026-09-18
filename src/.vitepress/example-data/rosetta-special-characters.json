@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-special-characters",
+  "code": "use IO.Std.write_line\n\nescape(written: string, produced: char) =>\n    write_line(\"{written,-10} U+{cast int(produced):X4}\")\n\nwrite_line(\"escape     character\")\n\nescape(\"\\\\t\", '\\t')\nescape(\"\\\\n\", '\\n')\nescape(\"\\\\r\", '\\r')\nescape(\"\\\\\\\\\", '\\\\')\nescape(\"\\\\\\\"\", '\\\"')\nescape(\"\\\\u20AC\", '€')\n\nwrite_line(\"\")\nwrite_line(\"a brace in an interpolated string is doubled: {{ }}\")\n\nlet `class = \"a keyword is an identifier behind a backtick\"\nwrite_line(`class)\n\nwrite_line(\"a backtick ends the digits of a literal: {0x20AC`c}\")",
+  "fullSource": "use IO.Std.write_line\n\nescape(written: string, produced: char) =>\n    write_line(\"{written,-10} U+{cast int(produced):X4}\")\n\nwrite_line(\"escape     character\")\n\nescape(\"\\\\t\", '\\t')\nescape(\"\\\\n\", '\\n')\nescape(\"\\\\r\", '\\r')\nescape(\"\\\\\\\\\", '\\\\')\nescape(\"\\\\\\\"\", '\\\"')\nescape(\"\\\\u20AC\", '€')\n\nwrite_line(\"\")\nwrite_line(\"a brace in an interpolated string is doubled: {{ }}\")\n\nlet `class = \"a keyword is an identifier behind a backtick\"\nwrite_line(`class)\n\nwrite_line(\"a backtick ends the digits of a literal: {0x20AC`c}\")",
+  "output": "escape     character\n\\t         U+0009\n\\n         U+000A\n\\r         U+000D\n\\\\         U+005C\n\\\"         U+0022\n\\u20AC     U+20AC\n\na brace in an interpolated string is doubled: { }\na keyword is an identifier behind a backtick\na backtick ends the digits of a literal: €\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "special-characters",
+  "hovers": [],
+  "diagnostics": []
+}

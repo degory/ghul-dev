@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-averages-median",
+  "code": "use default\n\nmedian(values: Collections.Iterable[double]) -> double is\n    let ordered = values |> sort() |> collect()\n\n    assert ordered.count > 0 else \"the median of no values is not defined\"\n\n    let middle = ordered.count / 2\n\n    return\n        if ordered.count % 2 == 1 then\n            ordered[middle]\n        else\n            (ordered[middle - 1] + ordered[middle]) / 2.0\n        fi\nsi\n\nwrite_line(\"{median([4.1, 5.6, 7.2, 1.7, 9.3, 4.4, 3.2])}\")\nwrite_line(\"{median([4.1, 7.2, 1.7, 9.3, 4.4, 3.2])}\")",
+  "fullSource": "use default\n\nmedian(values: Collections.Iterable[double]) -> double is\n    let ordered = values |> sort() |> collect()\n\n    assert ordered.count > 0 else \"the median of no values is not defined\"\n\n    let middle = ordered.count / 2\n\n    return\n        if ordered.count % 2 == 1 then\n            ordered[middle]\n        else\n            (ordered[middle - 1] + ordered[middle]) / 2.0\n        fi\nsi\n\nwrite_line(\"{median([4.1, 5.6, 7.2, 1.7, 9.3, 4.4, 3.2])}\")\nwrite_line(\"{median([4.1, 7.2, 1.7, 9.3, 4.4, 3.2])}\")",
+  "output": "4.4\n4.25\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "averages-median",
+  "hovers": [],
+  "diagnostics": []
+}

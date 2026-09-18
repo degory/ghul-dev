@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-mandelbrot-set",
+  "code": "use System.Math\nuse Raster.IMAGE\n\nlet width = 600\nlet height = 450\nlet limit = 300\n\nescape(cx: double, cy: double) -> int =>\n    (let x mut = 0.0D\n     let y mut = 0.0D\n     let steps mut = 0\n\n     while steps < limit /\\ x * x + y * y <= 4.0D do\n         let next = x * x - y * y + cx\n\n         y = 2.0D * x * y + cy\n         x = next\n         steps = steps + 1\n     od\n\n     steps)\n\nband(level: double, phase: double) -> ubyte =>\n    cast ubyte(\n        127.5D * (1.0D - Math.cos(6.0D * Math.pi * level + phase))\n    )\n\nlet image = IMAGE(width, height)\n\nfor row in 0..height do\n    for column in 0..width do\n        let cx =\n            -2.2D + 3.0D * cast double(column) / cast double(width)\n        let cy =\n            -1.2D + 2.4D * cast double(row) / cast double(height)\n\n        let steps = escape(cx, cy)\n\n        if steps < limit then\n            let level =\n                Math.log(cast double(steps) + 1.0D) /\n                Math.log(cast double(limit) + 1.0D)\n\n            image.set_pixel(\n                column, row,\n                band(level, 0.0D),\n                band(level, 2.1D),\n                band(level, 4.2D)\n            )\n        else\n            image.set_pixel(column, row, 0ub, 0ub, 0ub)\n        fi\n    od\nod\n\nimage.write(\"mandelbrot.png\")\n\nimage.show(\"mandelbrot.png\")",
+  "fullSource": "use System.Math\nuse Raster.IMAGE\n\nlet width = 600\nlet height = 450\nlet limit = 300\n\nescape(cx: double, cy: double) -> int =>\n    (let x mut = 0.0D\n     let y mut = 0.0D\n     let steps mut = 0\n\n     while steps < limit /\\ x * x + y * y <= 4.0D do\n         let next = x * x - y * y + cx\n\n         y = 2.0D * x * y + cy\n         x = next\n         steps = steps + 1\n     od\n\n     steps)\n\nband(level: double, phase: double) -> ubyte =>\n    cast ubyte(\n        127.5D * (1.0D - Math.cos(6.0D * Math.pi * level + phase))\n    )\n\nlet image = IMAGE(width, height)\n\nfor row in 0..height do\n    for column in 0..width do\n        let cx =\n            -2.2D + 3.0D * cast double(column) / cast double(width)\n        let cy =\n            -1.2D + 2.4D * cast double(row) / cast double(height)\n\n        let steps = escape(cx, cy)\n\n        if steps < limit then\n            let level =\n                Math.log(cast double(steps) + 1.0D) /\n                Math.log(cast double(limit) + 1.0D)\n\n            image.set_pixel(\n                column, row,\n                band(level, 0.0D),\n                band(level, 2.1D),\n                band(level, 4.2D)\n            )\n        else\n            image.set_pixel(column, row, 0ub, 0ub, 0ub)\n        fi\n    od\nod\n\nimage.write(\"mandelbrot.png\")\n\nimage.show(\"mandelbrot.png\")",
+  "output": "<<image mandelbrot.png>>\n",
+  "images": [
+    {
+      "name": "mandelbrot.png",
+      "url": "/rosetta/mandelbrot-set/mandelbrot.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "mandelbrot-set",
+  "hovers": [],
+  "diagnostics": []
+}

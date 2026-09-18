@@ -1,0 +1,20 @@
+{
+  "name": "rosetta-bitmap-histogram",
+  "code": "use default\nuse Raster.IMAGE\nuse System.Math\n\nlet width = 320\nlet height = 240\n\nlet source = IMAGE(width, height)\n\nfor y in 0..height do\n    for x in 0..width do\n        let radius =\n            Math.sqrt(\n                cast double((x - 160) * (x - 160) + (y - 120) * (y - 120)))\n\n        let shade = cast ubyte(120.0 + 110.0 * Math.sin(radius / 12.0))\n\n        source.set_pixel(x, y, shade, 255ub - shade, 90ub)\n    od\nod\n\nsource.write(\"source.png\")\n\nluminance(x: int, y: int) -> int is\n    let pixel = source.pixel(x, y)\n\n    return\n        cast int(\n            0.2126 * cast double(pixel.red) +\n            0.7152 * cast double(pixel.green) +\n            0.0722 * cast double(pixel.blue))\nsi\n\nlet histogram = (0..256) |> map(_ => 0) |> collect_list()\n\nfor y in 0..height do\n    for x in 0..width do\n        let level = luminance(x, y)\n\n        histogram[level] = histogram[level] + 1\n    od\nod\n\nmedian() -> int is\n    let half = width * height / 2\n\n    let seen mut = 0\n\n    for level in 0..256 do\n        seen = seen + histogram[level]\n\n        if seen >= half then\n            return level\n        fi\n    od\n\n    return 255\nsi\n\nlet threshold = median()\n\nwrite_line(\"median luminance: {threshold}\")\n\nlet art = IMAGE(width, height)\n\nfor y in 0..height do\n    for x in 0..width do\n        let shade = if luminance(x, y) < threshold then 0ub else 255ub fi\n\n        art.set_pixel(x, y, shade, shade, shade)\n    od\nod\n\nart.write(\"art.png\")\n\nsource.show(\"source.png\")\nart.show(\"art.png\")",
+  "fullSource": "use default\nuse Raster.IMAGE\nuse System.Math\n\nlet width = 320\nlet height = 240\n\nlet source = IMAGE(width, height)\n\nfor y in 0..height do\n    for x in 0..width do\n        let radius =\n            Math.sqrt(\n                cast double((x - 160) * (x - 160) + (y - 120) * (y - 120)))\n\n        let shade = cast ubyte(120.0 + 110.0 * Math.sin(radius / 12.0))\n\n        source.set_pixel(x, y, shade, 255ub - shade, 90ub)\n    od\nod\n\nsource.write(\"source.png\")\n\nluminance(x: int, y: int) -> int is\n    let pixel = source.pixel(x, y)\n\n    return\n        cast int(\n            0.2126 * cast double(pixel.red) +\n            0.7152 * cast double(pixel.green) +\n            0.0722 * cast double(pixel.blue))\nsi\n\nlet histogram = (0..256) |> map(_ => 0) |> collect_list()\n\nfor y in 0..height do\n    for x in 0..width do\n        let level = luminance(x, y)\n\n        histogram[level] = histogram[level] + 1\n    od\nod\n\nmedian() -> int is\n    let half = width * height / 2\n\n    let seen mut = 0\n\n    for level in 0..256 do\n        seen = seen + histogram[level]\n\n        if seen >= half then\n            return level\n        fi\n    od\n\n    return 255\nsi\n\nlet threshold = median()\n\nwrite_line(\"median luminance: {threshold}\")\n\nlet art = IMAGE(width, height)\n\nfor y in 0..height do\n    for x in 0..width do\n        let shade = if luminance(x, y) < threshold then 0ub else 255ub fi\n\n        art.set_pixel(x, y, shade, shade, shade)\n    od\nod\n\nart.write(\"art.png\")\n\nsource.show(\"source.png\")\nart.show(\"art.png\")",
+  "output": "median luminance: 127\n<<image source.png>>\n<<image art.png>>\n",
+  "images": [
+    {
+      "name": "art.png",
+      "url": "/rosetta/bitmap-histogram/art.png"
+    },
+    {
+      "name": "source.png",
+      "url": "/rosetta/bitmap-histogram/source.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "bitmap-histogram",
+  "hovers": [],
+  "diagnostics": []
+}

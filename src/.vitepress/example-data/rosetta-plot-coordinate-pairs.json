@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-plot-coordinate-pairs",
+  "code": "use default\nuse Raster.IMAGE\n\nuse POINT = (x: double, y: double)\n\nlet xs = [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]\n\nlet ys = [\n    2.7, 2.8, 31.4, 38.1, 58.0,\n    76.2, 100.5, 130.0, 149.3, 180.0\n]\n\nlet points =\n    xs\n    |> zip(ys)\n    |> map(pair => (x = pair.`0, y = pair.`1))\n    |> collect_list()\n\nmarker(at: POINT) -> List[POINT] =>\n    [(x = at.x - 0.14, y = at.y),\n     (x = at.x, y = at.y + 2.8),\n     (x = at.x + 0.14, y = at.y),\n     (x = at.x, y = at.y - 2.8)]\n    |> collect_list()\n\nlet image = IMAGE(480, 360)\n\n\nimage.view(-1.0, -20.0, 10.0, 200.0)\n\nimage.colour(160ub, 160ub, 160ub)\nimage.stroke(1.0)\n\nfor tick in 0..10 do\n    image.line(cast double(tick), -20.0, cast double(tick), 200.0)\nod\n\nfor tick in 0..5 do\n    let y = cast double(tick) * 40.0\n    image.line(-1.0, y, 10.0, y)\nod\n\nimage.colour(20ub, 60ub, 180ub)\nimage.stroke(2.0)\nimage.line(points)\n\nimage.colour(200ub, 40ub, 40ub)\n\nfor point in points do\n    image.fill(marker(point))\nod\n\nimage.write(\"plot.png\")\n\nimage.show(\"plot.png\")",
+  "fullSource": "use default\nuse Raster.IMAGE\n\nuse POINT = (x: double, y: double)\n\nlet xs = [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]\n\nlet ys = [\n    2.7, 2.8, 31.4, 38.1, 58.0,\n    76.2, 100.5, 130.0, 149.3, 180.0\n]\n\nlet points =\n    xs\n    |> zip(ys)\n    |> map(pair => (x = pair.`0, y = pair.`1))\n    |> collect_list()\n\nmarker(at: POINT) -> List[POINT] =>\n    [(x = at.x - 0.14, y = at.y),\n     (x = at.x, y = at.y + 2.8),\n     (x = at.x + 0.14, y = at.y),\n     (x = at.x, y = at.y - 2.8)]\n    |> collect_list()\n\nlet image = IMAGE(480, 360)\n\n\nimage.view(-1.0, -20.0, 10.0, 200.0)\n\nimage.colour(160ub, 160ub, 160ub)\nimage.stroke(1.0)\n\nfor tick in 0..10 do\n    image.line(cast double(tick), -20.0, cast double(tick), 200.0)\nod\n\nfor tick in 0..5 do\n    let y = cast double(tick) * 40.0\n    image.line(-1.0, y, 10.0, y)\nod\n\nimage.colour(20ub, 60ub, 180ub)\nimage.stroke(2.0)\nimage.line(points)\n\nimage.colour(200ub, 40ub, 40ub)\n\nfor point in points do\n    image.fill(marker(point))\nod\n\nimage.write(\"plot.png\")\n\nimage.show(\"plot.png\")",
+  "output": "<<image plot.png>>\n",
+  "images": [
+    {
+      "name": "plot.png",
+      "url": "/rosetta/plot-coordinate-pairs/plot.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "plot-coordinate-pairs",
+  "hovers": [],
+  "diagnostics": []
+}

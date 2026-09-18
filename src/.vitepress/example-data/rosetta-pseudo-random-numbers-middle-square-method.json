@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-pseudo-random-numbers-middle-square-method",
+  "code": "use default\n\nmiddle_square(seed: int) -> Pipe[int] is\n    let current mut = seed\n\n    while true do\n        let squared = \"{cast long(current) * cast long(current),012}\"\n\n        current = int.parse(squared.substring(3, 6))\n\n        yield current\n    od\nsi\n\nfor value in middle_square(675248) |> take(5) do\n    write_line(\"{value}\")\nod",
+  "fullSource": "use default\n\nmiddle_square(seed: int) -> Pipe[int] is\n    let current mut = seed\n\n    while true do\n        let squared = \"{cast long(current) * cast long(current),012}\"\n\n        current = int.parse(squared.substring(3, 6))\n\n        yield current\n    od\nsi\n\nfor value in middle_square(675248) |> take(5) do\n    write_line(\"{value}\")\nod",
+  "output": "959861\n333139\n981593\n524817\n432883\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "pseudo-random-numbers-middle-square-method",
+  "hovers": [],
+  "diagnostics": []
+}

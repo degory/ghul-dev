@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-boolean-values",
+  "code": "use IO.Std.write_line\n\nlet yes = true\nlet no = false\n\nwrite_line(\"the literals are true and false\")\nwrite_line(\"printing them gives {yes} and {no}\")\n\nif yes then\n    write_line(\"a condition takes a bool and nothing else\")\nfi\n\nlet unknown: bool? = null\n\nif unknown ?? false then\n    write_line(\"an absent bool counted as true\")\nelse\n    write_line(\"an optional bool needs a fallback to be a condition\")\nfi",
+  "fullSource": "use IO.Std.write_line\n\nlet yes = true\nlet no = false\n\nwrite_line(\"the literals are true and false\")\nwrite_line(\"printing them gives {yes} and {no}\")\n\nif yes then\n    write_line(\"a condition takes a bool and nothing else\")\nfi\n\nlet unknown: bool? = null\n\nif unknown ?? false then\n    write_line(\"an absent bool counted as true\")\nelse\n    write_line(\"an optional bool needs a fallback to be a condition\")\nfi",
+  "output": "the literals are true and false\nprinting them gives True and False\na condition takes a bool and nothing else\nan optional bool needs a fallback to be a condition\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "boolean-values",
+  "hovers": [],
+  "diagnostics": []
+}

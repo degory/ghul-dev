@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-include-a-file",
+  "code": "use IO.Std.write_line\nuse Greeting.greet\n\n// ghul has no include directive. A project names its sources - the project\n// file here globs **/*.ghul - and every file's definitions are reached by\n// namespace, so this file uses a function defined in greeting.ghul without\n// naming that file anywhere.\n\nwrite_line(greet(\"world\"))",
+  "fullSource": "use IO.Std.write_line\nuse Greeting.greet\n\n// ghul has no include directive. A project names its sources - the project\n// file here globs **/*.ghul - and every file's definitions are reached by\n// namespace, so this file uses a function defined in greeting.ghul without\n// naming that file anywhere.\n\nwrite_line(greet(\"world\"))",
+  "output": "hello, world\n",
+  "images": [],
+  "playground": false,
+  "playgroundPath": "include-a-file",
+  "hovers": [],
+  "diagnostics": []
+}

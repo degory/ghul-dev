@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-empty-program",
+  "code": "entry() is si",
+  "fullSource": "entry() is si",
+  "output": "",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "empty-program",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-list-comprehensions-01-using-pipes",
+  "code": "use default\n\ntriples(n: int) -> Pipe[(int, int, int)] =>\n    (1::n) |> flat_map(a =>\n        (a::n) |> flat_map(b =>\n            (b::n)\n                |> filter(c => a * a + b * b == c * c)\n                |> map(c => (a, b, c))))\n\nwrite_line(triples(20) |> join(\", \"))",
+  "fullSource": "use default\n\ntriples(n: int) -> Pipe[(int, int, int)] =>\n    (1::n) |> flat_map(a =>\n        (a::n) |> flat_map(b =>\n            (b::n)\n                |> filter(c => a * a + b * b == c * c)\n                |> map(c => (a, b, c))))\n\nwrite_line(triples(20) |> join(\", \"))",
+  "output": "(3, 4, 5), (5, 12, 13), (6, 8, 10), (8, 15, 17), (9, 12, 15), (12, 16, 20)\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "list-comprehensions/01-using-pipes",
+  "hovers": [],
+  "diagnostics": []
+}

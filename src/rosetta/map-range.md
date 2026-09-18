@@ -4,6 +4,6 @@ title: "Map range"
 
 # Map range
 
-<RosettaTask url="https://rosettacode.org/wiki/Map_range" />
+<RosettaTask url="https://rosettacode.org/wiki/Map_range" tags="maths,pattern-matching,pipes" :playground="true" />
 
 <GhulExample name="rosetta-map-range" />

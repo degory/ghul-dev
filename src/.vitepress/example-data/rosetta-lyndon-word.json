@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-lyndon-word",
+  "code": "use default\n\nlyndon_words(alphabet: string, n: int) -> Pipe[string] is\n    let last = alphabet.length - 1\n    let word = LIST([-1])\n\n    while word.count > 0 do\n        word[word.count - 1] = word[word.count - 1] + 1\n\n        yield word |> map(i => alphabet[i]) |> join(\"\")\n\n        let period = word.count\n\n        while word.count < n do\n            word.add(word[word.count - period])\n        od\n\n        while word.count > 0 /\\ word[word.count - 1] == last do\n            word.remove_at(word.count - 1)\n        od\n    od\nsi\n\nwrite_line(lyndon_words(\"01\", 5) |> join(\", \"))\nwrite_line(lyndon_words(\"012\", 3) |> join(\", \"))",
+  "fullSource": "use default\n\nlyndon_words(alphabet: string, n: int) -> Pipe[string] is\n    let last = alphabet.length - 1\n    let word = LIST([-1])\n\n    while word.count > 0 do\n        word[word.count - 1] = word[word.count - 1] + 1\n\n        yield word |> map(i => alphabet[i]) |> join(\"\")\n\n        let period = word.count\n\n        while word.count < n do\n            word.add(word[word.count - period])\n        od\n\n        while word.count > 0 /\\ word[word.count - 1] == last do\n            word.remove_at(word.count - 1)\n        od\n    od\nsi\n\nwrite_line(lyndon_words(\"01\", 5) |> join(\", \"))\nwrite_line(lyndon_words(\"012\", 3) |> join(\", \"))",
+  "output": "0, 00001, 0001, 00011, 001, 00101, 0011, 00111, 01, 01011, 011, 0111, 01111, 1\n0, 001, 002, 01, 011, 012, 02, 021, 022, 1, 112, 12, 122, 2\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "lyndon-word",
+  "hovers": [],
+  "diagnostics": []
+}

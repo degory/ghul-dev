@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sierpinski-carpet",
+  "code": "use default\n\nlet order = 3\n\nfilled(x: int, y: int) -> bool =>\n    (let across mut = x\n     let down mut = y\n\n     let solid mut = true\n\n     while across > 0 \\/ down > 0 do\n         if across % 3 == 1 /\\ down % 3 == 1 then\n             solid = false\n         fi\n\n         across = across / 3\n         down = down / 3\n     od\n\n     solid)\n\nlet size = (0..order) |> reduce(1, (total, _) => total * 3)\n\nfor down in 0..size do\n    write_line(\n        (0..size)\n            |> map(across => if filled(across, down) then \"#\" else \" \" fi)\n            |> join(\"\")\n    )\nod",
+  "fullSource": "use default\n\nlet order = 3\n\nfilled(x: int, y: int) -> bool =>\n    (let across mut = x\n     let down mut = y\n\n     let solid mut = true\n\n     while across > 0 \\/ down > 0 do\n         if across % 3 == 1 /\\ down % 3 == 1 then\n             solid = false\n         fi\n\n         across = across / 3\n         down = down / 3\n     od\n\n     solid)\n\nlet size = (0..order) |> reduce(1, (total, _) => total * 3)\n\nfor down in 0..size do\n    write_line(\n        (0..size)\n            |> map(across => if filled(across, down) then \"#\" else \" \" fi)\n            |> join(\"\")\n    )\nod",
+  "output": "###########################\n# ## ## ## ## ## ## ## ## #\n###########################\n###   ######   ######   ###\n# #   # ## #   # ## #   # #\n###   ######   ######   ###\n###########################\n# ## ## ## ## ## ## ## ## #\n###########################\n#########         #########\n# ## ## #         # ## ## #\n#########         #########\n###   ###         ###   ###\n# #   # #         # #   # #\n###   ###         ###   ###\n#########         #########\n# ## ## #         # ## ## #\n#########         #########\n###########################\n# ## ## ## ## ## ## ## ## #\n###########################\n###   ######   ######   ###\n# #   # ## #   # ## #   # #\n###   ######   ######   ###\n###########################\n# ## ## ## ## ## ## ## ## #\n###########################\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sierpinski-carpet",
+  "hovers": [],
+  "diagnostics": []
+}

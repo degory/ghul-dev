@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-nested-function-02-a-function-literal-inside-a-named-function",
+  "code": "use default\n\nmake_list(separator: string) -> string is\n    let counter mut = 0\n\n    let make_item = (item: string) => (\n        counter = counter + 1\n        \"{counter}{separator}{item}\"\n    )\n\n    let items = LIST()\n\n    for item in [\"first\", \"second\", \"third\"] do\n        items.add(make_item(item))\n    od\n\n    return items |> join(\"\\n\")\nsi\n\nwrite_line(make_list(\". \"))",
+  "fullSource": "use default\n\nmake_list(separator: string) -> string is\n    let counter mut = 0\n\n    let make_item = (item: string) => (\n        counter = counter + 1\n        \"{counter}{separator}{item}\"\n    )\n\n    let items = LIST()\n\n    for item in [\"first\", \"second\", \"third\"] do\n        items.add(make_item(item))\n    od\n\n    return items |> join(\"\\n\")\nsi\n\nwrite_line(make_list(\". \"))",
+  "output": "1. first\n2. second\n3. third\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "nested-function/02-a-function-literal-inside-a-named-function",
+  "hovers": [],
+  "diagnostics": []
+}

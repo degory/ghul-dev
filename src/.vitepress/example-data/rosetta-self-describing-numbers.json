@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-self-describing-numbers",
+  "code": "use default\n\ndigit_of(letter: char) -> int => cast int(letter) - cast int('0')\n\nself_describing(value: int) -> bool is\n    let digits = \"{value}\"\n\n    return\n        digits\n        |> index()\n        |> all(digit =>\n            digit_of(digit.value) ==\n                (digits\n                 |> filter(other => digit_of(other) == digit.index)\n                 |> count()))\nsi\n\nfor value in [1210, 2020, 21200, 3211000, 42101000, 1211, 2021] do\n    write_line(\"{value} {self_describing(value)}\")\nod\n\nwrite_line(\"\")\nwrite_line(\"self-describing numbers below 100000:\")\n\nwrite_line(\n    (1..100000)\n    |> filter(self_describing)\n    |> map(value => \"{value}\")\n    |> join(\" \")\n)",
+  "fullSource": "use default\n\ndigit_of(letter: char) -> int => cast int(letter) - cast int('0')\n\nself_describing(value: int) -> bool is\n    let digits = \"{value}\"\n\n    return\n        digits\n        |> index()\n        |> all(digit =>\n            digit_of(digit.value) ==\n                (digits\n                 |> filter(other => digit_of(other) == digit.index)\n                 |> count()))\nsi\n\nfor value in [1210, 2020, 21200, 3211000, 42101000, 1211, 2021] do\n    write_line(\"{value} {self_describing(value)}\")\nod\n\nwrite_line(\"\")\nwrite_line(\"self-describing numbers below 100000:\")\n\nwrite_line(\n    (1..100000)\n    |> filter(self_describing)\n    |> map(value => \"{value}\")\n    |> join(\" \")\n)",
+  "output": "1210 True\n2020 True\n21200 True\n3211000 True\n42101000 True\n1211 False\n2021 False\n\nself-describing numbers below 100000:\n1210 2020 21200\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "self-describing-numbers",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-dynamic-variable-names",
+  "code": "use default\nuse IO.Std.read_line\n\nlet variables = MAP[string, int]()\n\nlet name = read_line()!\nlet value = int.parse(read_line()!)\n\nvariables[name] = value\n\nwrite_line(\"{name} = {variables[name]}\")",
+  "fullSource": "use default\nuse IO.Std.read_line\n\nlet variables = MAP[string, int]()\n\nlet name = read_line()!\nlet value = int.parse(read_line()!)\n\nvariables[name] = value\n\nwrite_line(\"{name} = {variables[name]}\")",
+  "output": "count = 42\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "dynamic-variable-names",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-input-loop",
+  "code": "use IO.Std.write_line\nuse IO.Std.read_line\n\nlet lines mut = 0\n\nwhile let line = read_line() do\n    lines = lines + 1\n\n    write_line(\"{lines}: {line}\")\nod\n\nwrite_line(\"the stream ran out after {lines} lines\")",
+  "fullSource": "use IO.Std.write_line\nuse IO.Std.read_line\n\nlet lines mut = 0\n\nwhile let line = read_line() do\n    lines = lines + 1\n\n    write_line(\"{lines}: {line}\")\nod\n\nwrite_line(\"the stream ran out after {lines} lines\")",
+  "output": "1: the first line\n2: the second line\n3: the third line\nthe stream ran out after 3 lines\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "input-loop",
+  "hovers": [],
+  "diagnostics": []
+}

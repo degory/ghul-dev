@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-iterators",
+  "code": "use default\n\nsquares(count: int) -> Pipe[int] is\n    for value in 1::count do\n        yield value * value\n    od\nsi\n\nshow(caption: string, values: Iterable[int]) is\n    let shown = values |> map(value => \"{value}\") |> join(\" \")\n\n    write_line(\"{caption}: {shown}\")\nsi\n\nshow(\"array\", [3, 1, 2])\nshow(\"list\", LIST([3, 1, 2]))\nshow(\"set\", SET([3, 1, 2]))\nshow(\"range\", 1::4)\nshow(\"generator\", squares(4))",
+  "fullSource": "use default\n\nsquares(count: int) -> Pipe[int] is\n    for value in 1::count do\n        yield value * value\n    od\nsi\n\nshow(caption: string, values: Iterable[int]) is\n    let shown = values |> map(value => \"{value}\") |> join(\" \")\n\n    write_line(\"{caption}: {shown}\")\nsi\n\nshow(\"array\", [3, 1, 2])\nshow(\"list\", LIST([3, 1, 2]))\nshow(\"set\", SET([3, 1, 2]))\nshow(\"range\", 1::4)\nshow(\"generator\", squares(4))",
+  "output": "array: 3 1 2\nlist: 3 1 2\nset: 3 1 2\nrange: 1 2 3 4\ngenerator: 1 4 9 16\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "iterators",
+  "hovers": [],
+  "diagnostics": []
+}

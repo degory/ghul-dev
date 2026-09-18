@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-accumulator-factory-01-generic-over-any-number",
+  "code": "use IO.Std.write_line\nuse System.Numerics.INumber\nuse System.Numerics.IAdditionOperators.`+\n\naccumulator[T: INumber[T]](initial: T) -> T -> T is\n    let sum mut = initial\n\n    return value => (\n        sum = sum + value\n        sum\n    )\nsi\n\nlet x = accumulator(1)\n\nx(5)\n\naccumulator(3)\n\nwrite_line(x(2))\n\nlet y = accumulator(1.0D)\n\ny(5.0D)\n\naccumulator(3.0D)\n\nwrite_line(y(2.3D))\n\nlet z = accumulator(System.Int128.one)\n\nz(System.Int128.parse(\"123456789012345678901234567890\"))\n\nwrite_line(z(System.Int128.one))",
+  "fullSource": "use IO.Std.write_line\nuse System.Numerics.INumber\nuse System.Numerics.IAdditionOperators.`+\n\naccumulator[T: INumber[T]](initial: T) -> T -> T is\n    let sum mut = initial\n\n    return value => (\n        sum = sum + value\n        sum\n    )\nsi\n\nlet x = accumulator(1)\n\nx(5)\n\naccumulator(3)\n\nwrite_line(x(2))\n\nlet y = accumulator(1.0D)\n\ny(5.0D)\n\naccumulator(3.0D)\n\nwrite_line(y(2.3D))\n\nlet z = accumulator(System.Int128.one)\n\nz(System.Int128.parse(\"123456789012345678901234567890\"))\n\nwrite_line(z(System.Int128.one))",
+  "output": "8\n8.3\n123456789012345678901234567892\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "accumulator-factory/01-generic-over-any-number",
+  "hovers": [],
+  "diagnostics": []
+}

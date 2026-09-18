@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-quickselect-algorithm",
+  "code": "use default\n\nquickselect(values: List[int], k: int) -> int is\n    let pivot = values[values.count / 2]\n\n    let lowers = values |> filter(v => v < pivot) |> collect()\n    let pivots = values |> filter(v => v == pivot) |> collect()\n\n    if k < lowers.count then\n        quickselect(lowers, k)\n    elif k < lowers.count + pivots.count then\n        pivot\n    else\n        quickselect(\n            values |> filter(v => v > pivot) |> collect(),\n            k - lowers.count - pivots.count)\n    fi\nsi\n\nlet values = [9, 8, 7, 6, 5, 0, 1, 2, 3, 4]\n\nfor k in 0..values.count do\n    write_line(\n        \"largest {k + 1}: {quickselect(values, values.count - 1 - k)}\")\nod",
+  "fullSource": "use default\n\nquickselect(values: List[int], k: int) -> int is\n    let pivot = values[values.count / 2]\n\n    let lowers = values |> filter(v => v < pivot) |> collect()\n    let pivots = values |> filter(v => v == pivot) |> collect()\n\n    if k < lowers.count then\n        quickselect(lowers, k)\n    elif k < lowers.count + pivots.count then\n        pivot\n    else\n        quickselect(\n            values |> filter(v => v > pivot) |> collect(),\n            k - lowers.count - pivots.count)\n    fi\nsi\n\nlet values = [9, 8, 7, 6, 5, 0, 1, 2, 3, 4]\n\nfor k in 0..values.count do\n    write_line(\n        \"largest {k + 1}: {quickselect(values, values.count - 1 - k)}\")\nod",
+  "output": "largest 1: 9\nlargest 2: 8\nlargest 3: 7\nlargest 4: 6\nlargest 5: 5\nlargest 6: 4\nlargest 7: 3\nlargest 8: 2\nlargest 9: 1\nlargest 10: 0\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "quickselect-algorithm",
+  "hovers": [],
+  "diagnostics": []
+}

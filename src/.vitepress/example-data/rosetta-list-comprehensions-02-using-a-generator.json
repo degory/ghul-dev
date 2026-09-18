@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-list-comprehensions-02-using-a-generator",
+  "code": "use default\n\ntriples(n: int) -> Pipe[(int, int, int)] is\n    for a in 1::n do\n        for b in a::n do\n            for c in b::n do\n                if a * a + b * b == c * c then\n                    yield (a, b, c)\n                fi\n            od\n        od\n    od\nsi\n\nwrite_line(triples(20) |> join(\", \"))",
+  "fullSource": "use default\n\ntriples(n: int) -> Pipe[(int, int, int)] is\n    for a in 1::n do\n        for b in a::n do\n            for c in b::n do\n                if a * a + b * b == c * c then\n                    yield (a, b, c)\n                fi\n            od\n        od\n    od\nsi\n\nwrite_line(triples(20) |> join(\", \"))",
+  "output": "(3, 4, 5), (5, 12, 13), (6, 8, 10), (8, 15, 17), (9, 12, 15), (12, 16, 20)\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "list-comprehensions/02-using-a-generator",
+  "hovers": [],
+  "diagnostics": []
+}

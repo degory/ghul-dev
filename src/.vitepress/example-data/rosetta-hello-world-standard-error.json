@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-hello-world-standard-error",
+  "code": "IO.Std.error.write_line(\"Goodbye, World!\")",
+  "fullSource": "IO.Std.error.write_line(\"Goodbye, World!\")",
+  "output": "",
+  "images": [],
+  "playground": false,
+  "playgroundPath": "hello-world-standard-error",
+  "hovers": [],
+  "diagnostics": []
+}

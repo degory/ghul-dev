@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sum-and-product-of-an-array",
+  "code": "use default\n\nlet numbers = [1, 2, 3, 4, 5]\n\nwrite_line(\"sum:     {numbers |> reduce(0, (a, b) => a + b)}\")\nwrite_line(\"product: {numbers |> reduce(1, (a, b) => a * b)}\")",
+  "fullSource": "use default\n\nlet numbers = [1, 2, 3, 4, 5]\n\nwrite_line(\"sum:     {numbers |> reduce(0, (a, b) => a + b)}\")\nwrite_line(\"product: {numbers |> reduce(1, (a, b) => a * b)}\")",
+  "output": "sum:     15\nproduct: 120\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sum-and-product-of-an-array",
+  "hovers": [],
+  "diagnostics": []
+}

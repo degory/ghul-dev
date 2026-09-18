@@ -4,6 +4,6 @@ title: "Run-length encoding"
 
 # Run-length encoding
 
-<RosettaTask url="https://rosettacode.org/wiki/Run-length_encoding" />
+<RosettaTask url="https://rosettacode.org/wiki/Run-length_encoding" tags="text-processing,strings" :playground="true" />
 
 <GhulExample name="rosetta-run-length-encoding" />

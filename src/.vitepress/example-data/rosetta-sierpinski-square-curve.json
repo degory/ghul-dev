@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-sierpinski-square-curve",
+  "code": "use Raster\n\nlet order = 4\nlet step = 8.0D\n\nlet image = IMAGE(540, 540)\nlet pen = TURTLE(image)\n\ncorner(depth: int) is\n    if depth == 0 then\n        return\n    fi\n\n    corner(depth - 1)\n\n    pen.forward(step)\n    pen.turn(-90.0D)\n    pen.forward(step)\n    pen.turn(90.0D)\n    pen.forward(step)\n    pen.turn(-90.0D)\n\n    corner(depth - 1)\n\n    pen.forward(step)\n    pen.turn(90.0D)\n    pen.forward(step)\n    pen.turn(90.0D)\n\n    corner(depth - 1)\n\n    pen.forward(step)\n    pen.turn(-90.0D)\n    pen.forward(step)\n    pen.turn(90.0D)\n    pen.forward(step)\n    pen.turn(-90.0D)\n\n    corner(depth - 1)\nsi\n\nimage.view(0.0D, 0.0D, 540.0D, 540.0D)\nimage.colour(0ub, 0ub, 160ub)\nimage.stroke(1.2D)\n\npen.move_to(266.0D, 26.0D)\n\npen.forward(step)\npen.turn(90.0D)\n\ncorner(order)\n\npen.forward(step)\npen.turn(90.0D)\npen.forward(step)\npen.turn(90.0D)\n\ncorner(order)\n\npen.forward(step)\n\nimage.write(\"square-curve.png\")\n\nimage.show(\"square-curve.png\")",
+  "fullSource": "use Raster\n\nlet order = 4\nlet step = 8.0D\n\nlet image = IMAGE(540, 540)\nlet pen = TURTLE(image)\n\ncorner(depth: int) is\n    if depth == 0 then\n        return\n    fi\n\n    corner(depth - 1)\n\n    pen.forward(step)\n    pen.turn(-90.0D)\n    pen.forward(step)\n    pen.turn(90.0D)\n    pen.forward(step)\n    pen.turn(-90.0D)\n\n    corner(depth - 1)\n\n    pen.forward(step)\n    pen.turn(90.0D)\n    pen.forward(step)\n    pen.turn(90.0D)\n\n    corner(depth - 1)\n\n    pen.forward(step)\n    pen.turn(-90.0D)\n    pen.forward(step)\n    pen.turn(90.0D)\n    pen.forward(step)\n    pen.turn(-90.0D)\n\n    corner(depth - 1)\nsi\n\nimage.view(0.0D, 0.0D, 540.0D, 540.0D)\nimage.colour(0ub, 0ub, 160ub)\nimage.stroke(1.2D)\n\npen.move_to(266.0D, 26.0D)\n\npen.forward(step)\npen.turn(90.0D)\n\ncorner(order)\n\npen.forward(step)\npen.turn(90.0D)\npen.forward(step)\npen.turn(90.0D)\n\ncorner(order)\n\npen.forward(step)\n\nimage.write(\"square-curve.png\")\n\nimage.show(\"square-curve.png\")",
+  "output": "<<image square-curve.png>>\n",
+  "images": [
+    {
+      "name": "square-curve.png",
+      "url": "/rosetta/sierpinski-square-curve/square-curve.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "sierpinski-square-curve",
+  "hovers": [],
+  "diagnostics": []
+}

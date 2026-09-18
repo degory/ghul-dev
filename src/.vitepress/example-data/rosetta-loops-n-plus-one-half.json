@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-loops-n-plus-one-half",
+  "code": "use IO.Std\n\nfor value in 1::10 do\n    Std.write(\"{value}\")\n\n    if value == 10 then\n        Std.write_line(\"\")\n    else\n        Std.write(\", \")\n    fi\nod",
+  "fullSource": "use IO.Std\n\nfor value in 1::10 do\n    Std.write(\"{value}\")\n\n    if value == 10 then\n        Std.write_line(\"\")\n    else\n        Std.write(\", \")\n    fi\nod",
+  "output": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "loops-n-plus-one-half",
+  "hovers": [],
+  "diagnostics": []
+}

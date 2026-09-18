@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-hamming-numbers",
+  "code": "use default\n\nlet two = 2n\nlet three = 3n\nlet five = 5n\n\nlet hamming = LIST([1n])\nlet next_two mut = 0\nlet next_three mut = 0\nlet next_five mut = 0\n\nwhile hamming.count < 1000000 do\n    let by_two = two * hamming[next_two]\n    let by_three = three * hamming[next_three]\n    let by_five = five * hamming[next_five]\n\n    let best = if bigint.compare(by_two, by_three) < 0\n               then by_two else by_three fi\n    let next = if bigint.compare(by_five, best) < 0\n               then by_five else best fi\n\n    hamming.add(next)\n\n    if by_two =~ next then next_two = next_two + 1; fi\n    if by_three =~ next then next_three = next_three + 1; fi\n    if by_five =~ next then next_five = next_five + 1; fi\nod\n\nwrite_line(hamming |> take(20) |> join(\" \"))\nwrite_line(\"1691st: {hamming[1690]}\")\nwrite_line(\"1000000th: {hamming[999999]}\")",
+  "fullSource": "use default\n\nlet two = 2n\nlet three = 3n\nlet five = 5n\n\nlet hamming = LIST([1n])\nlet next_two mut = 0\nlet next_three mut = 0\nlet next_five mut = 0\n\nwhile hamming.count < 1000000 do\n    let by_two = two * hamming[next_two]\n    let by_three = three * hamming[next_three]\n    let by_five = five * hamming[next_five]\n\n    let best = if bigint.compare(by_two, by_three) < 0\n               then by_two else by_three fi\n    let next = if bigint.compare(by_five, best) < 0\n               then by_five else best fi\n\n    hamming.add(next)\n\n    if by_two =~ next then next_two = next_two + 1; fi\n    if by_three =~ next then next_three = next_three + 1; fi\n    if by_five =~ next then next_five = next_five + 1; fi\nod\n\nwrite_line(hamming |> take(20) |> join(\" \"))\nwrite_line(\"1691st: {hamming[1690]}\")\nwrite_line(\"1000000th: {hamming[999999]}\")",
+  "output": "1 2 3 4 5 6 8 9 10 12 15 16 18 20 24 25 27 30 32 36\n1691st: 2125764000\n1000000th: 519312780448388736089589843750000000000000000000000000000000000000000000000000000000\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "hamming-numbers",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-loops-break",
+  "code": "use IO.Std.write_line\n\nlet source = System.Random(20260909)\n\ndo\n    let first = source.next(20)\n\n    write_line(\"{first}\")\n\n    if first == 10 then\n        break\n    fi\n\n    write_line(\"{source.next(20)}\")\nod",
+  "fullSource": "use IO.Std.write_line\n\nlet source = System.Random(20260909)\n\ndo\n    let first = source.next(20)\n\n    write_line(\"{first}\")\n\n    if first == 10 then\n        break\n    fi\n\n    write_line(\"{source.next(20)}\")\nod",
+  "output": "9\n14\n16\n7\n13\n9\n17\n9\n15\n14\n9\n15\n19\n2\n5\n1\n14\n18\n6\n4\n14\n7\n2\n2\n10\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "loops-break",
+  "hovers": [],
+  "diagnostics": []
+}

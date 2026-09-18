@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sort-disjoint-sublist",
+  "code": "use default\n\nsort_disjoint_sublist(values: LIST[int], indices: SET[int]) is\n    let positions = indices |> sort() |> collect_list()\n    let picked = positions |> map(i => values[i]) |> sort()\n        |> collect_list()\n\n    for i in 0..positions.count do\n        values[positions[i]] = picked[i]\n    od\nsi\n\nlet values = LIST([7, 6, 5, 4, 3, 2, 1, 0])\nlet indices = SET([6, 1, 7])\n\nsort_disjoint_sublist(values, indices)\n\nwrite_line(values |> join(\", \"))",
+  "fullSource": "use default\n\nsort_disjoint_sublist(values: LIST[int], indices: SET[int]) is\n    let positions = indices |> sort() |> collect_list()\n    let picked = positions |> map(i => values[i]) |> sort()\n        |> collect_list()\n\n    for i in 0..positions.count do\n        values[positions[i]] = picked[i]\n    od\nsi\n\nlet values = LIST([7, 6, 5, 4, 3, 2, 1, 0])\nlet indices = SET([6, 1, 7])\n\nsort_disjoint_sublist(values, indices)\n\nwrite_line(values |> join(\", \"))",
+  "output": "7, 0, 5, 4, 3, 2, 1, 6\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sort-disjoint-sublist",
+  "hovers": [],
+  "diagnostics": []
+}

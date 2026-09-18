@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-literals-string",
+  "code": "use IO.Std.write_line\n\nlet name = \"world\"\n\n// Every string literal in ghul interpolates, so there is no separate quote\n// that expands variables and none that suppresses it. There are no verbatim\n// strings and no here-documents; adjacent literals chain instead, which is\n// how a long one is written across several lines.\n\nwrite_line(\"a plain string literal\")\nwrite_line(\"interpolated: hello, {name}\")\nwrite_line(\"escaped: a tab[\\t], a quote[\\\"], a backslash[\\\\]\")\nwrite_line(\"braces are doubled: {{ and }}\")\nwrite_line(\"unicode by code point: \\u20AC and \\uD83D\\uDE00\")\nwrite_line(\n    \"adjacent literals chain, \"\n    \"so this is one string \"\n    \"written over three lines\")\n\nlet letter = 'g'\n\nwrite_line(\"a character literal: {letter}\")",
+  "fullSource": "use IO.Std.write_line\n\nlet name = \"world\"\n\n// Every string literal in ghul interpolates, so there is no separate quote\n// that expands variables and none that suppresses it. There are no verbatim\n// strings and no here-documents; adjacent literals chain instead, which is\n// how a long one is written across several lines.\n\nwrite_line(\"a plain string literal\")\nwrite_line(\"interpolated: hello, {name}\")\nwrite_line(\"escaped: a tab[\\t], a quote[\\\"], a backslash[\\\\]\")\nwrite_line(\"braces are doubled: {{ and }}\")\nwrite_line(\"unicode by code point: \\u20AC and \\uD83D\\uDE00\")\nwrite_line(\n    \"adjacent literals chain, \"\n    \"so this is one string \"\n    \"written over three lines\")\n\nlet letter = 'g'\n\nwrite_line(\"a character literal: {letter}\")",
+  "output": "a plain string literal\ninterpolated: hello, world\nescaped: a tab[\t], a quote[\"], a backslash[\\]\nbraces are doubled: { and }\nunicode by code point: € and 😀\nadjacent literals chain, so this is one string written over three lines\na character literal: g\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "literals-string",
+  "hovers": [],
+  "diagnostics": []
+}

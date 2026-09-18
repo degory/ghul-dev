@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sattolo-cycle",
+  "code": "use default\nuse System.Random\n\nsattolo_cycle(items: LIST[int], random: Random) is\n    let i mut = items.count - 1\n\n    while i >= 1 do\n        let j = random.next(0, i)\n        let value = items[i]\n\n        items[i] = items[j]\n        items[j] = value\n\n        i = i - 1\n    od\nsi\n\nlet random = Random(42)\nlet original = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]\nlet shuffled = LIST[int](original)\n\nsattolo_cycle(shuffled, random)\n\nwrite_line(shuffled |> map(v => \"{v}\") |> join(\" \"))\n\nwrite_line(\"{original\n    |> zip(shuffled)\n    |> all((before, after) => before != after)}\")",
+  "fullSource": "use default\nuse System.Random\n\nsattolo_cycle(items: LIST[int], random: Random) is\n    let i mut = items.count - 1\n\n    while i >= 1 do\n        let j = random.next(0, i)\n        let value = items[i]\n\n        items[i] = items[j]\n        items[j] = value\n\n        i = i - 1\n    od\nsi\n\nlet random = Random(42)\nlet original = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]\nlet shuffled = LIST[int](original)\n\nsattolo_cycle(shuffled, random)\n\nwrite_line(shuffled |> map(v => \"{v}\") |> join(\" \"))\n\nwrite_line(\"{original\n    |> zip(shuffled)\n    |> all((before, after) => before != after)}\")",
+  "output": "100 60 50 30 90 80 40 10 20 70\nTrue\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sattolo-cycle",
+  "hovers": [],
+  "diagnostics": []
+}

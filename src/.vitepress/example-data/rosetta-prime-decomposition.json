@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-prime-decomposition",
+  "code": "use default\n\ndecompose(n: bigint) -> List[bigint] is\n    let factors = LIST()\n\n    let two = 2n\n    let rest mut = n\n\n    while rest % two =~ 0n do\n        factors.add(two)\n        rest = rest / two\n    od\n\n    let divisor mut = 3n\n\n    while divisor * divisor <= rest do\n        if rest % divisor =~ 0n then\n            factors.add(divisor)\n            rest = rest / divisor\n        else\n            divisor = divisor + two\n        fi\n    od\n\n    if rest > 1n then\n        factors.add(rest)\n    fi\n\n    return factors\nsi\n\nshow(n: bigint) is\n    let rendered = LIST()\n\n    for factor in decompose(n) do\n        rendered.add(\"{factor}\")\n    od\n\n    write_line(\"{n} = {rendered |> join(\" x \")}\")\nsi\n\nfor n in [12L, 2L, 9L, 1024L, 1048576L, 4294967297L, 1234567890L] do\n    show(cast(n))\nod\n\nshow(12345678901234567890n)",
+  "fullSource": "use default\n\ndecompose(n: bigint) -> List[bigint] is\n    let factors = LIST()\n\n    let two = 2n\n    let rest mut = n\n\n    while rest % two =~ 0n do\n        factors.add(two)\n        rest = rest / two\n    od\n\n    let divisor mut = 3n\n\n    while divisor * divisor <= rest do\n        if rest % divisor =~ 0n then\n            factors.add(divisor)\n            rest = rest / divisor\n        else\n            divisor = divisor + two\n        fi\n    od\n\n    if rest > 1n then\n        factors.add(rest)\n    fi\n\n    return factors\nsi\n\nshow(n: bigint) is\n    let rendered = LIST()\n\n    for factor in decompose(n) do\n        rendered.add(\"{factor}\")\n    od\n\n    write_line(\"{n} = {rendered |> join(\" x \")}\")\nsi\n\nfor n in [12L, 2L, 9L, 1024L, 1048576L, 4294967297L, 1234567890L] do\n    show(cast(n))\nod\n\nshow(12345678901234567890n)",
+  "output": "12 = 2 x 2 x 3\n2 = 2\n9 = 3 x 3\n1024 = 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2\n1048576 = 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2\n4294967297 = 641 x 6700417\n1234567890 = 2 x 3 x 3 x 5 x 3607 x 3803\n12345678901234567890 = 2 x 3 x 3 x 5 x 101 x 3541 x 3607 x 3803 x 27961\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "prime-decomposition",
+  "hovers": [],
+  "diagnostics": []
+}

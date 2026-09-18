@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-partial-function-application",
+  "code": "use default\n\nfs(f: (int) -> int, s: Iterable[int]) -> Pipe[int] =>\n    s |> map(f)\n\nf1(n: int) -> int => n * 2\nf2(n: int) -> int => n * n\n\nlet fsf1 = s => fs(f1, s)\nlet fsf2 = s => fs(f2, s)\n\nfor s in [0::3, [2, 4, 6, 8]] do\n    write_line(\"fsf1: {fsf1(s) |> join(\", \")}\")\n    write_line(\"fsf2: {fsf2(s) |> join(\", \")}\")\nod",
+  "fullSource": "use default\n\nfs(f: (int) -> int, s: Iterable[int]) -> Pipe[int] =>\n    s |> map(f)\n\nf1(n: int) -> int => n * 2\nf2(n: int) -> int => n * n\n\nlet fsf1 = s => fs(f1, s)\nlet fsf2 = s => fs(f2, s)\n\nfor s in [0::3, [2, 4, 6, 8]] do\n    write_line(\"fsf1: {fsf1(s) |> join(\", \")}\")\n    write_line(\"fsf2: {fsf2(s) |> join(\", \")}\")\nod",
+  "output": "fsf1: 0, 2, 4, 6\nfsf2: 0, 1, 4, 9\nfsf1: 4, 8, 12, 16\nfsf2: 4, 16, 36, 64\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "partial-function-application",
+  "hovers": [],
+  "diagnostics": []
+}

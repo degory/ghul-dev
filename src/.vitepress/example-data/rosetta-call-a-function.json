@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-call-a-function",
+  "code": "use default\n\ngreeting() -> string => \"no arguments\"\n\nadd(left: int, right: int) -> int => left + right\n\nannounce(what: string) is\n    write_line(\"statement context: {what}\")\nsi\n\nwrite_line(greeting())\nwrite_line(\"fixed arguments: {add(2, 3)}\")\n\nannounce(\"the return value is discarded\")\n\nlet operation = add\n\nwrite_line(\"first class: {operation(4, 5)}\")\nwrite_line(\"threaded first argument: {6 |> add(7)}\")\n\nlet add_ten = (value: int) => add(10, value)\n\nwrite_line(\"partial application: {add_ten(1)}\")\n\nlet parsed mut = 0\n\nif int.try_parse(\"42\", parsed ref) then\n    write_line(\"written through a ref argument: {parsed}\")\nfi\n\nwrite_line(\"there are no optional, named or variadic arguments\")",
+  "fullSource": "use default\n\ngreeting() -> string => \"no arguments\"\n\nadd(left: int, right: int) -> int => left + right\n\nannounce(what: string) is\n    write_line(\"statement context: {what}\")\nsi\n\nwrite_line(greeting())\nwrite_line(\"fixed arguments: {add(2, 3)}\")\n\nannounce(\"the return value is discarded\")\n\nlet operation = add\n\nwrite_line(\"first class: {operation(4, 5)}\")\nwrite_line(\"threaded first argument: {6 |> add(7)}\")\n\nlet add_ten = (value: int) => add(10, value)\n\nwrite_line(\"partial application: {add_ten(1)}\")\n\nlet parsed mut = 0\n\nif int.try_parse(\"42\", parsed ref) then\n    write_line(\"written through a ref argument: {parsed}\")\nfi\n\nwrite_line(\"there are no optional, named or variadic arguments\")",
+  "output": "no arguments\nfixed arguments: 5\nstatement context: the return value is discarded\nfirst class: 9\nthreaded first argument: 13\npartial application: 11\nwritten through a ref argument: 42\nthere are no optional, named or variadic arguments\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "call-a-function",
+  "hovers": [],
+  "diagnostics": []
+}

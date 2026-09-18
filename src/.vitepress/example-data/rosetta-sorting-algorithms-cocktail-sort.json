@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sorting-algorithms-cocktail-sort",
+  "code": "use default\n\ncocktail_sort[T: Ghul.Comparable[T]](values: LIST[T]) is\n    let swapped mut = true\n\n    while swapped do\n        swapped = false\n\n        for i in 0..values.count - 1 do\n            if values[i] > values[i + 1] then\n                (values[i], values[i + 1]) = (values[i + 1], values[i])\n\n                swapped = true\n            fi\n        od\n\n        if !swapped then\n            break\n        fi\n\n        swapped = false\n\n        let i mut = values.count - 2\n\n        while i >= 0 do\n            if values[i] > values[i + 1] then\n                (values[i], values[i + 1]) = (values[i + 1], values[i])\n\n                swapped = true\n            fi\n\n            i = i - 1\n        od\n    od\nsi\n\nlet numbers = LIST([5, 3, 8, 1, 9, 2, 7])\n\ncocktail_sort(numbers)\n\nwrite_line(numbers |> join(\", \"))\n\nlet words = LIST([\"pear\", \"apple\", \"quince\", \"banana\"])\n\ncocktail_sort(words)\n\nwrite_line(words |> join(\", \"))",
+  "fullSource": "use default\n\ncocktail_sort[T: Ghul.Comparable[T]](values: LIST[T]) is\n    let swapped mut = true\n\n    while swapped do\n        swapped = false\n\n        for i in 0..values.count - 1 do\n            if values[i] > values[i + 1] then\n                (values[i], values[i + 1]) = (values[i + 1], values[i])\n\n                swapped = true\n            fi\n        od\n\n        if !swapped then\n            break\n        fi\n\n        swapped = false\n\n        let i mut = values.count - 2\n\n        while i >= 0 do\n            if values[i] > values[i + 1] then\n                (values[i], values[i + 1]) = (values[i + 1], values[i])\n\n                swapped = true\n            fi\n\n            i = i - 1\n        od\n    od\nsi\n\nlet numbers = LIST([5, 3, 8, 1, 9, 2, 7])\n\ncocktail_sort(numbers)\n\nwrite_line(numbers |> join(\", \"))\n\nlet words = LIST([\"pear\", \"apple\", \"quince\", \"banana\"])\n\ncocktail_sort(words)\n\nwrite_line(words |> join(\", \"))",
+  "output": "1, 2, 3, 5, 7, 8, 9\napple, banana, pear, quince\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sorting-algorithms-cocktail-sort",
+  "hovers": [],
+  "diagnostics": []
+}

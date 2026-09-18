@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sorting-algorithms-selection-sort",
+  "code": "use default\n\nselection_sort[T: Ghul.Comparable[T]](values: LIST[T]) is\n    for i in 0..values.count - 1 do\n        let smallest mut = i\n\n        for j in i + 1..values.count do\n            if values[j] < values[smallest] then\n                smallest = j\n            fi\n        od\n\n        (values[i], values[smallest]) = (values[smallest], values[i])\n    od\nsi\n\nlet numbers = LIST([5, 3, 8, 1, 9, 2, 7])\n\nselection_sort(numbers)\n\nwrite_line(numbers |> join(\", \"))\n\nlet words = LIST([\"pear\", \"apple\", \"quince\", \"banana\"])\n\nselection_sort(words)\n\nwrite_line(words |> join(\", \"))",
+  "fullSource": "use default\n\nselection_sort[T: Ghul.Comparable[T]](values: LIST[T]) is\n    for i in 0..values.count - 1 do\n        let smallest mut = i\n\n        for j in i + 1..values.count do\n            if values[j] < values[smallest] then\n                smallest = j\n            fi\n        od\n\n        (values[i], values[smallest]) = (values[smallest], values[i])\n    od\nsi\n\nlet numbers = LIST([5, 3, 8, 1, 9, 2, 7])\n\nselection_sort(numbers)\n\nwrite_line(numbers |> join(\", \"))\n\nlet words = LIST([\"pear\", \"apple\", \"quince\", \"banana\"])\n\nselection_sort(words)\n\nwrite_line(words |> join(\", \"))",
+  "output": "1, 2, 3, 5, 7, 8, 9\napple, banana, pear, quince\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sorting-algorithms-selection-sort",
+  "hovers": [],
+  "diagnostics": []
+}

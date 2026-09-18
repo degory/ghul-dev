@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-json",
+  "code": "use IO.Std.write_line\nuse System.Text.Json.Nodes\n\nlet text =\n    \"{{\\\"name\\\": \\\"Ada\\\", \\\"age\\\": 36, \"\n    \"\\\"languages\\\": [\\\"Ada\\\", \\\"ghūl\\\"]}}\"\n\nlet parsed =\n    JsonNode.parse(text, null, _[System.Text.Json.JsonDocumentOptions])!\n        .as_object()\nlet languages = parsed[\"languages\"]!.as_array()\n\nwrite_line(\"name = {parsed[\"name\"]!.get_value[string]()}\")\nwrite_line(\"age = {parsed[\"age\"]!.get_value[int]()}\")\nwrite_line(\"first language = {languages[0]!.get_value[string]()}\")\n\nlet created = JsonObject(null)\n\ncreated[\"title\"] = JsonValue.create(\"Rosetta Code\", null)\ncreated[\"year\"] = JsonValue.create(2007, null)\n\nlet tags = JsonArray(null)\n\ntags.add(JsonValue.create(\"wiki\", null))\ntags.add(JsonValue.create(\"programming\", null))\n\ncreated[\"tags\"] = tags\n\nwrite_line(created.to_json_string(null))",
+  "fullSource": "use IO.Std.write_line\nuse System.Text.Json.Nodes\n\nlet text =\n    \"{{\\\"name\\\": \\\"Ada\\\", \\\"age\\\": 36, \"\n    \"\\\"languages\\\": [\\\"Ada\\\", \\\"ghūl\\\"]}}\"\n\nlet parsed =\n    JsonNode.parse(text, null, _[System.Text.Json.JsonDocumentOptions])!\n        .as_object()\nlet languages = parsed[\"languages\"]!.as_array()\n\nwrite_line(\"name = {parsed[\"name\"]!.get_value[string]()}\")\nwrite_line(\"age = {parsed[\"age\"]!.get_value[int]()}\")\nwrite_line(\"first language = {languages[0]!.get_value[string]()}\")\n\nlet created = JsonObject(null)\n\ncreated[\"title\"] = JsonValue.create(\"Rosetta Code\", null)\ncreated[\"year\"] = JsonValue.create(2007, null)\n\nlet tags = JsonArray(null)\n\ntags.add(JsonValue.create(\"wiki\", null))\ntags.add(JsonValue.create(\"programming\", null))\n\ncreated[\"tags\"] = tags\n\nwrite_line(created.to_json_string(null))",
+  "output": "name = Ada\nage = 36\nfirst language = Ada\n{\"title\":\"Rosetta Code\",\"year\":2007,\"tags\":[\"wiki\",\"programming\"]}\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "json",
+  "hovers": [],
+  "diagnostics": []
+}

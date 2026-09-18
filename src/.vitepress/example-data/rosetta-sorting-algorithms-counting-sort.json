@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sorting-algorithms-counting-sort",
+  "code": "use default\n\ncounting_sort(values: List[int], low: int, high: int) -> List[int] is\n    let counts = LIST()\n\n    for _ in low..high + 1 do\n        counts.add(0)\n    od\n\n    for value in values do\n        counts[value - low] = counts[value - low] + 1\n    od\n\n    let result = LIST()\n\n    for offset in 0..counts.count do\n        for _ in 0..counts[offset] do\n            result.add(offset + low)\n        od\n    od\n\n    result\nsi\n\nlet numbers = [5, 3, 8, 1, 9, 2, 7, 1, 9]\n\nwrite_line(counting_sort(numbers, 1, 9) |> join(\", \"))",
+  "fullSource": "use default\n\ncounting_sort(values: List[int], low: int, high: int) -> List[int] is\n    let counts = LIST()\n\n    for _ in low..high + 1 do\n        counts.add(0)\n    od\n\n    for value in values do\n        counts[value - low] = counts[value - low] + 1\n    od\n\n    let result = LIST()\n\n    for offset in 0..counts.count do\n        for _ in 0..counts[offset] do\n            result.add(offset + low)\n        od\n    od\n\n    result\nsi\n\nlet numbers = [5, 3, 8, 1, 9, 2, 7, 1, 9]\n\nwrite_line(counting_sort(numbers, 1, 9) |> join(\", \"))",
+  "output": "1, 1, 2, 3, 5, 7, 8, 9, 9\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sorting-algorithms-counting-sort",
+  "hovers": [],
+  "diagnostics": []
+}

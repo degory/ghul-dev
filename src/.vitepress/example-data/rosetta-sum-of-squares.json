@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sum-of-squares",
+  "code": "use default\n\nsum_of_squares(values: Collections.Iterable[double]) -> double =>\n    values\n        |> map(v => v * v)\n        |> reduce(0.0, (running, square) => running + square)\n\nwrite_line(\"{sum_of_squares([3.0, 1.0, 4.0, 1.0, 5.0, 9.0])}\")\nwrite_line(\"{sum_of_squares([])}\")",
+  "fullSource": "use default\n\nsum_of_squares(values: Collections.Iterable[double]) -> double =>\n    values\n        |> map(v => v * v)\n        |> reduce(0.0, (running, square) => running + square)\n\nwrite_line(\"{sum_of_squares([3.0, 1.0, 4.0, 1.0, 5.0, 9.0])}\")\nwrite_line(\"{sum_of_squares([])}\")",
+  "output": "133\n0\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sum-of-squares",
+  "hovers": [],
+  "diagnostics": []
+}

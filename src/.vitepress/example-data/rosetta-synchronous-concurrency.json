@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-synchronous-concurrency",
+  "code": "use IO.Std.write_line\nuse Ghul.Coroutines\n\nunion Request is\n    PRINT(line: string)\n    COUNT\nsi\n\nuse Request.COUNT\nuse Request.PRINT\n\nlet path = \"input.txt\"\n\nIO.File.write_all_lines(path, [\"Enjoy\", \"Rosetta\", \"Code\"])\n\nlet requests = CHANNEL[Request]()\nlet replies = CHANNEL[int]()\n\nprinter() -> COROUTINE is\n    let printed mut = 0\n\n    do\n        let request = await requests.receive()\n\n        if isa PRINT(request) then\n            write_line(request.line)\n            printed = printed + 1\n        else\n            replies.send(printed)\n            break\n        fi\n    od\nsi\n\nreader() -> COROUTINE is\n    for line in IO.File.read_lines(path) do\n        requests.send(PRINT(line))\n        await pause()\n    od\n\n    requests.send(COUNT)\n\n    let printed = await replies.receive()\n\n    write_line(\"{printed} lines printed\")\nsi\n\nprinter()\nreader()\n\nrun()\n\nIO.File.delete(path)",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Coroutines\n\nunion Request is\n    PRINT(line: string)\n    COUNT\nsi\n\nuse Request.COUNT\nuse Request.PRINT\n\nlet path = \"input.txt\"\n\nIO.File.write_all_lines(path, [\"Enjoy\", \"Rosetta\", \"Code\"])\n\nlet requests = CHANNEL[Request]()\nlet replies = CHANNEL[int]()\n\nprinter() -> COROUTINE is\n    let printed mut = 0\n\n    do\n        let request = await requests.receive()\n\n        if isa PRINT(request) then\n            write_line(request.line)\n            printed = printed + 1\n        else\n            replies.send(printed)\n            break\n        fi\n    od\nsi\n\nreader() -> COROUTINE is\n    for line in IO.File.read_lines(path) do\n        requests.send(PRINT(line))\n        await pause()\n    od\n\n    requests.send(COUNT)\n\n    let printed = await replies.receive()\n\n    write_line(\"{printed} lines printed\")\nsi\n\nprinter()\nreader()\n\nrun()\n\nIO.File.delete(path)",
+  "output": "Enjoy\nRosetta\nCode\n3 lines printed\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "synchronous-concurrency",
+  "hovers": [],
+  "diagnostics": []
+}

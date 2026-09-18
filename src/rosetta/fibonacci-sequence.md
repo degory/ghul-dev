@@ -4,7 +4,7 @@ title: "Fibonacci sequence"
 
 # Fibonacci sequence
 
-<RosettaTask url="https://rosettacode.org/wiki/Fibonacci_sequence" />
+<RosettaTask url="https://rosettacode.org/wiki/Fibonacci_sequence" tags="number-theory,generators,pipes" :playground="true" />
 
 ## Functional
 
@@ -13,4 +13,3 @@ title: "Fibonacci sequence"
 ## Imperative
 
 <GhulExample name="rosetta-fibonacci-sequence-02-imperative" />
-

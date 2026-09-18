@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-file-extension-is-in-extensions-list",
+  "code": "use default\n\nhas_extension(name: string, extensions: string[]) -> bool =>\n    extensions |> any(ext =>\n        name.to_lower().ends_with(\".{ext.to_lower()}\"))\n\nlet extensions =\n    [\"zip\", \"rar\", \"7z\", \"gz\", \"archive\", \"A##\", \"tar.bz2\"]\n\nlet names = [\n    \"MyData.a##\", \"MyData.tar.Gz\", \"MyData.gzip\",\n    \"MyData.7z.backup\", \"MyData...\", \"MyData\",\n    \"MyData_v1.0.tar.bz2\", \"MyData_v1.0.bz2\"\n]\n\nfor name in names do\n    write_line(\"{name}: {has_extension(name, extensions)}\")\nod",
+  "fullSource": "use default\n\nhas_extension(name: string, extensions: string[]) -> bool =>\n    extensions |> any(ext =>\n        name.to_lower().ends_with(\".{ext.to_lower()}\"))\n\nlet extensions =\n    [\"zip\", \"rar\", \"7z\", \"gz\", \"archive\", \"A##\", \"tar.bz2\"]\n\nlet names = [\n    \"MyData.a##\", \"MyData.tar.Gz\", \"MyData.gzip\",\n    \"MyData.7z.backup\", \"MyData...\", \"MyData\",\n    \"MyData_v1.0.tar.bz2\", \"MyData_v1.0.bz2\"\n]\n\nfor name in names do\n    write_line(\"{name}: {has_extension(name, extensions)}\")\nod",
+  "output": "MyData.a##: True\nMyData.tar.Gz: True\nMyData.gzip: False\nMyData.7z.backup: False\nMyData...: False\nMyData: False\nMyData_v1.0.tar.bz2: True\nMyData_v1.0.bz2: False\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "file-extension-is-in-extensions-list",
+  "hovers": [],
+  "diagnostics": []
+}

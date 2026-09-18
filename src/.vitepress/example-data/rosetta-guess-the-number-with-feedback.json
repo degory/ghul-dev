@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-guess-the-number-with-feedback",
+  "code": "use IO.Std.read_line\nuse IO.Std.write\nuse IO.Std.write_line\n\n// Seeded, so the transcript below reproduces.\nlet random = System.Random(11)\n\nlet low = 1\nlet high = 100\n\nlet target = random.next(low, high + 1)\n\nwrite_line(\"I am thinking of a number between {low} and {high}.\")\n\ndo\n    write(\"Your guess: \")\n\n    let line = read_line()\n\n    if !line? then\n        write_line()\n        write_line(\"No more guesses.\")\n\n        break\n    fi\n\n    let guess mut = 0\n\n    if !int.try_parse(line, guess ref) \\/ guess < low \\/ guess > high then\n        write_line(\"That is not a number between {low} and {high}.\")\n\n        continue\n    fi\n\n    if guess < target then\n        write_line(\"Too low.\")\n    elif guess > target then\n        write_line(\"Too high.\")\n    else\n        write_line(\"Well guessed!\")\n\n        break\n    fi\nod",
+  "fullSource": "use IO.Std.read_line\nuse IO.Std.write\nuse IO.Std.write_line\n\n// Seeded, so the transcript below reproduces.\nlet random = System.Random(11)\n\nlet low = 1\nlet high = 100\n\nlet target = random.next(low, high + 1)\n\nwrite_line(\"I am thinking of a number between {low} and {high}.\")\n\ndo\n    write(\"Your guess: \")\n\n    let line = read_line()\n\n    if !line? then\n        write_line()\n        write_line(\"No more guesses.\")\n\n        break\n    fi\n\n    let guess mut = 0\n\n    if !int.try_parse(line, guess ref) \\/ guess < low \\/ guess > high then\n        write_line(\"That is not a number between {low} and {high}.\")\n\n        continue\n    fi\n\n    if guess < target then\n        write_line(\"Too low.\")\n    elif guess > target then\n        write_line(\"Too high.\")\n    else\n        write_line(\"Well guessed!\")\n\n        break\n    fi\nod",
+  "output": "I am thinking of a number between 1 and 100.\nYour guess: one hundred\nThat is not a number between 1 and 100.\nYour guess: 150\nThat is not a number between 1 and 100.\nYour guess: 50\nToo high.\nYour guess: 25\nToo low.\nYour guess: 37\nToo low.\nYour guess: 43\nToo low.\nYour guess: 46\nToo low.\nYour guess: 47\nToo low.\nYour guess: 48\nWell guessed!\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "guess-the-number-with-feedback",
+  "hovers": [],
+  "diagnostics": []
+}

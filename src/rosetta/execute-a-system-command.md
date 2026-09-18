@@ -1,0 +1,9 @@
+---
+title: "Execute a system command"
+---
+
+# Execute a system command
+
+<RosettaTask url="https://rosettacode.org/wiki/Execute_a_system_command" tags="dotnet-interop" :playground="false" />
+
+<GhulExample name="rosetta-execute-a-system-command" />

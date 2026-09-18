@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-special-variables",
+  "code": "use IO.Std.write_line\n\nclass ANIMAL is\n    init() is si\n\n    speak() -> string => \"an animal\"\nsi\n\nclass DOG: ANIMAL is\n    _barks: int\n\n    init() is\n        super.init()\n        _barks = 0\n    si\n\n    bark() -> DOG is\n        _barks = _barks + 1\n        return self\n    si\n\n    speak() -> string => \"{super.speak()} that barked {_barks} times\"\nsi\n\nlet factorial = n rec => if n == 0 then 1 else n * rec(n - 1) fi\n\nlet missing: string? = null\n\nlet (_, second) = (1, \"two\")\n\nwrite_line(\"self      {DOG().bark().bark().speak()}\")\nwrite_line(\"super     {DOG().speak()}\")\nwrite_line(\"null      an absent value tests as {missing?}\")\nwrite_line(\"true      {1 == 1} and false {1 == 2}\")\nwrite_line(\"_         discards a value: {second}\")\nwrite_line(\"_[T]      the default value of an int: {_[int]}\")\nwrite_line(\"rec       a function literal calls itself: {factorial(5)}\")",
+  "fullSource": "use IO.Std.write_line\n\nclass ANIMAL is\n    init() is si\n\n    speak() -> string => \"an animal\"\nsi\n\nclass DOG: ANIMAL is\n    _barks: int\n\n    init() is\n        super.init()\n        _barks = 0\n    si\n\n    bark() -> DOG is\n        _barks = _barks + 1\n        return self\n    si\n\n    speak() -> string => \"{super.speak()} that barked {_barks} times\"\nsi\n\nlet factorial = n rec => if n == 0 then 1 else n * rec(n - 1) fi\n\nlet missing: string? = null\n\nlet (_, second) = (1, \"two\")\n\nwrite_line(\"self      {DOG().bark().bark().speak()}\")\nwrite_line(\"super     {DOG().speak()}\")\nwrite_line(\"null      an absent value tests as {missing?}\")\nwrite_line(\"true      {1 == 1} and false {1 == 2}\")\nwrite_line(\"_         discards a value: {second}\")\nwrite_line(\"_[T]      the default value of an int: {_[int]}\")\nwrite_line(\"rec       a function literal calls itself: {factorial(5)}\")",
+  "output": "self      an animal that barked 2 times\nsuper     an animal that barked 0 times\nnull      an absent value tests as False\ntrue      True and false False\n_         discards a value: two\n_[T]      the default value of an int: 0\nrec       a function literal calls itself: 120\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "special-variables",
+  "hovers": [],
+  "diagnostics": []
+}

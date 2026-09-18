@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-integer-comparison",
+  "code": "use IO.Std.write\nuse IO.Std.write_line\nuse IO.Std.read_line\nuse System.StringSplitOptions\n\nwrite(\"a b: \")\n\nif let entered = read_line() then\n    let fields =\n        entered.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES)\n\n    let first = int.parse(fields[0])\n    let second = int.parse(fields[1])\n\n    if first < second then\n        write_line(\"{first} is less than {second}\")\n    fi\n\n    if first == second then\n        write_line(\"{first} is equal to {second}\")\n    fi\n\n    if first > second then\n        write_line(\"{first} is greater than {second}\")\n    fi\nfi",
+  "fullSource": "use IO.Std.write\nuse IO.Std.write_line\nuse IO.Std.read_line\nuse System.StringSplitOptions\n\nwrite(\"a b: \")\n\nif let entered = read_line() then\n    let fields =\n        entered.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES)\n\n    let first = int.parse(fields[0])\n    let second = int.parse(fields[1])\n\n    if first < second then\n        write_line(\"{first} is less than {second}\")\n    fi\n\n    if first == second then\n        write_line(\"{first} is equal to {second}\")\n    fi\n\n    if first > second then\n        write_line(\"{first} is greater than {second}\")\n    fi\nfi",
+  "output": "a b: 3 7\n3 is less than 7\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "integer-comparison",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-nth-root",
+  "code": "use IO.Std.write_line\n\nnth_root(a: double, n: int) -> double is\n    let order = cast double(n)\n\n    let estimate mut = a / order\n\n    do\n        let power = System.Math.pow(estimate, order - 1.0)\n\n        let next = ((order - 1.0) * estimate + a / power) / order\n\n        if System.Math.abs(next - estimate) < 1.0e-12 then\n            return next\n        fi\n\n        estimate = next\n    od\nsi\n\nfor (a, n) in [(2.0, 2), (27.0, 3), (5.0, 5)] do\n    write_line(\"root {n} of {a} is {nth_root(a, n):0.000000}\")\nod",
+  "fullSource": "use IO.Std.write_line\n\nnth_root(a: double, n: int) -> double is\n    let order = cast double(n)\n\n    let estimate mut = a / order\n\n    do\n        let power = System.Math.pow(estimate, order - 1.0)\n\n        let next = ((order - 1.0) * estimate + a / power) / order\n\n        if System.Math.abs(next - estimate) < 1.0e-12 then\n            return next\n        fi\n\n        estimate = next\n    od\nsi\n\nfor (a, n) in [(2.0, 2), (27.0, 3), (5.0, 5)] do\n    write_line(\"root {n} of {a} is {nth_root(a, n):0.000000}\")\nod",
+  "output": "root 2 of 2 is 1.414214\nroot 3 of 27 is 3.000000\nroot 5 of 5 is 1.379730\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "nth-root",
+  "hovers": [],
+  "diagnostics": []
+}

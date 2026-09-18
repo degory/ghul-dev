@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-program-termination",
+  "code": "use IO.Std.write_line\nuse System.Environment\n\nwrite_line(\"about to stop\")\n\nif Environment.processor_count > 0 then\n    Environment.exit(0)\nfi\n\nwrite_line(\"this line is never reached\")",
+  "fullSource": "use IO.Std.write_line\nuse System.Environment\n\nwrite_line(\"about to stop\")\n\nif Environment.processor_count > 0 then\n    Environment.exit(0)\nfi\n\nwrite_line(\"this line is never reached\")",
+  "output": "about to stop\n",
+  "images": [],
+  "playground": false,
+  "playgroundPath": "program-termination",
+  "hovers": [],
+  "diagnostics": []
+}

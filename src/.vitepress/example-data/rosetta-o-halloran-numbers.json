@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-o-halloran-numbers",
+  "code": "use default\n\ncuboid_areas() -> SET[int] is\n    let areas = SET()\n\n    for length in 1::12 do\n        for width in length::16 do\n            for height in width::166 do\n                let area = 2 * (length * width +\n                    height * (length + width))\n\n                if area >= 1000 then break fi\n                areas.add(area)\n            od\n        od\n    od\n\n    areas\nsi\n\nlet areas = cuboid_areas()\n\nlet o_halloran = (7::999)\n    |> filter(n => n % 2 == 0 /\\ areas.contains(n) == false)\n    |> collect()\n\nwrite_line(\"even values below 1000 that are no cuboid's surface area:\")\nwrite_line(o_halloran |> join(\" \"))\nwrite_line(\"count: {o_halloran.count}\")",
+  "fullSource": "use default\n\ncuboid_areas() -> SET[int] is\n    let areas = SET()\n\n    for length in 1::12 do\n        for width in length::16 do\n            for height in width::166 do\n                let area = 2 * (length * width +\n                    height * (length + width))\n\n                if area >= 1000 then break fi\n                areas.add(area)\n            od\n        od\n    od\n\n    areas\nsi\n\nlet areas = cuboid_areas()\n\nlet o_halloran = (7::999)\n    |> filter(n => n % 2 == 0 /\\ areas.contains(n) == false)\n    |> collect()\n\nwrite_line(\"even values below 1000 that are no cuboid's surface area:\")\nwrite_line(o_halloran |> join(\" \"))\nwrite_line(\"count: {o_halloran.count}\")",
+  "output": "even values below 1000 that are no cuboid's surface area:\n8 12 20 36 44 60 84 116 140 156 204 260 380 420 660 924\ncount: 16\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "o-halloran-numbers",
+  "hovers": [],
+  "diagnostics": []
+}

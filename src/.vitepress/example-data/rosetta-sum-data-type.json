@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sum-data-type",
+  "code": "use IO.Std.write_line\n\nunion Shape is\n    CIRCLE(radius: double)\n    RECTANGLE(width: double, height: double)\n    TRIANGLE(base: double, height: double)\nsi\n\narea(shape: Shape) -> double =>\n    case shape\n    when c: Shape.CIRCLE then c.radius * c.radius * 3.14159\n    when r: Shape.RECTANGLE then r.width * r.height\n    when t: Shape.TRIANGLE then t.base * t.height / 2.0\n    esac\n\ndescribe(shape: Shape) -> string =>\n    case shape\n    when c: Shape.CIRCLE then \"circle of radius {c.radius}\"\n    when r: Shape.RECTANGLE then \"{r.width} by {r.height} rectangle\"\n    when t: Shape.TRIANGLE then \"triangle {t.base} by {t.height}\"\n    esac\n\nlet shapes: Shape[] =\n    [Shape.CIRCLE(2.0), Shape.RECTANGLE(3.0, 4.0), Shape.TRIANGLE(5.0, 6.0)]\n\nfor shape in shapes do\n    write_line(\"{describe(shape)}: area {area(shape)}\")\nod",
+  "fullSource": "use IO.Std.write_line\n\nunion Shape is\n    CIRCLE(radius: double)\n    RECTANGLE(width: double, height: double)\n    TRIANGLE(base: double, height: double)\nsi\n\narea(shape: Shape) -> double =>\n    case shape\n    when c: Shape.CIRCLE then c.radius * c.radius * 3.14159\n    when r: Shape.RECTANGLE then r.width * r.height\n    when t: Shape.TRIANGLE then t.base * t.height / 2.0\n    esac\n\ndescribe(shape: Shape) -> string =>\n    case shape\n    when c: Shape.CIRCLE then \"circle of radius {c.radius}\"\n    when r: Shape.RECTANGLE then \"{r.width} by {r.height} rectangle\"\n    when t: Shape.TRIANGLE then \"triangle {t.base} by {t.height}\"\n    esac\n\nlet shapes: Shape[] =\n    [Shape.CIRCLE(2.0), Shape.RECTANGLE(3.0, 4.0), Shape.TRIANGLE(5.0, 6.0)]\n\nfor shape in shapes do\n    write_line(\"{describe(shape)}: area {area(shape)}\")\nod",
+  "output": "circle of radius 2: area 12.56636\n3 by 4 rectangle: area 12\ntriangle 5 by 6: area 15\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sum-data-type",
+  "hovers": [],
+  "diagnostics": []
+}

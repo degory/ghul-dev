@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-odd-and-square-numbers",
+  "code": "use default\n\nlet squares = stream(1, n => n * n || n + 1)\n\nwrite_line(\n    squares\n        |> skip_while(square => square < 100)\n        |> take_while(square => square < 1000)\n        |> filter(square => square % 2 == 1)\n        |> join(\", \"))",
+  "fullSource": "use default\n\nlet squares = stream(1, n => n * n || n + 1)\n\nwrite_line(\n    squares\n        |> skip_while(square => square < 100)\n        |> take_while(square => square < 1000)\n        |> filter(square => square % 2 == 1)\n        |> join(\", \"))",
+  "output": "121, 169, 225, 289, 361, 441, 529, 625, 729, 841, 961\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "odd-and-square-numbers",
+  "hovers": [],
+  "diagnostics": []
+}

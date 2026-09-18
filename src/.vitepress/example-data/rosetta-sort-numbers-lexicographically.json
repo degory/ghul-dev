@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sort-numbers-lexicographically",
+  "code": "use default\n\nlet n = 13\n\nlet sorted = (1::n)\n    |> map(i => \"{i}\")\n    |> sort((a, b) => a <> b)\n    |> map(int.parse)\n    |> collect_list()\n\nwrite_line(sorted |> join(\", \"))",
+  "fullSource": "use default\n\nlet n = 13\n\nlet sorted = (1::n)\n    |> map(i => \"{i}\")\n    |> sort((a, b) => a <> b)\n    |> map(int.parse)\n    |> collect_list()\n\nwrite_line(sorted |> join(\", \"))",
+  "output": "1, 10, 11, 12, 13, 2, 3, 4, 5, 6, 7, 8, 9\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sort-numbers-lexicographically",
+  "hovers": [],
+  "diagnostics": []
+}

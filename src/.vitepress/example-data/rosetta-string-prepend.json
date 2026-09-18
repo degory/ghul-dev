@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-string-prepend",
+  "code": "use IO.Std.write_line\nuse System.Text.StringBuilder\n\nlet text mut = \"world\"\n\ntext = \"hello, {text}\"\n\nwrite_line(text)\n\nlet built = StringBuilder(\"world\")\n\nbuilt.insert(0, \"hello, \")\n\nwrite_line(\"{built}\")",
+  "fullSource": "use IO.Std.write_line\nuse System.Text.StringBuilder\n\nlet text mut = \"world\"\n\ntext = \"hello, {text}\"\n\nwrite_line(text)\n\nlet built = StringBuilder(\"world\")\n\nbuilt.insert(0, \"hello, \")\n\nwrite_line(\"{built}\")",
+  "output": "hello, world\nhello, world\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "string-prepend",
+  "hovers": [],
+  "diagnostics": []
+}

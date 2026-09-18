@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-start-from-a-main-routine",
+  "code": "use IO.Std.write_line\n\nentry() is\n    write_line(\"a function named entry starts the program by default\")\nsi\n\n@entry()\nrun() is\n    write_line(\"the @entry pragma names this one instead\")\nsi",
+  "fullSource": "use IO.Std.write_line\n\nentry() is\n    write_line(\"a function named entry starts the program by default\")\nsi\n\n@entry()\nrun() is\n    write_line(\"the @entry pragma names this one instead\")\nsi",
+  "output": "the @entry pragma names this one instead\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "start-from-a-main-routine",
+  "hovers": [],
+  "diagnostics": []
+}

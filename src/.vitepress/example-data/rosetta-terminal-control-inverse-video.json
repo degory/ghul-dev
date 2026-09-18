@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-terminal-control-inverse-video",
+  "code": "use IO.Std.write_line\n\nlet inverse = \"\\u001B[7m\"\nlet normal = \"\\u001B[0m\"\n\nwrite_line(\"{inverse}inverse{normal} normal\")",
+  "fullSource": "use IO.Std.write_line\n\nlet inverse = \"\\u001B[7m\"\nlet normal = \"\\u001B[0m\"\n\nwrite_line(\"{inverse}inverse{normal} normal\")",
+  "output": "\u001b[7minverse\u001b[0m normal\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "terminal-control-inverse-video",
+  "hovers": [],
+  "diagnostics": []
+}

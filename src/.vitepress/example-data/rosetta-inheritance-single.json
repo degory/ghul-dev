@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-inheritance-single",
+  "code": "use IO.Std.write_line\n\nclass Animal abstract is\n    init() is si\nsi\n\nclass Dog: Animal abstract is\n    init() is super.init() si\nsi\n\nclass CAT: Animal is\n    init() is super.init() si\nsi\n\nclass LAB: Dog is\n    init() is super.init() si\nsi\n\nclass COLLIE: Dog is\n    init() is super.init() si\nsi\n\nwrite_line(\"Animal <- Dog <- Lab: {isa Animal(LAB())}, {isa Dog(LAB())}\")\nwrite_line(\n    \"Animal <- Dog <- Collie: {isa Animal(COLLIE())}, \"\n    \"{isa Dog(COLLIE())}\")\nwrite_line(\"Animal <- Cat: {isa Animal(CAT())}\")\nwrite_line(\"Cat is not a Dog: {!isa Dog(CAT())}\")",
+  "fullSource": "use IO.Std.write_line\n\nclass Animal abstract is\n    init() is si\nsi\n\nclass Dog: Animal abstract is\n    init() is super.init() si\nsi\n\nclass CAT: Animal is\n    init() is super.init() si\nsi\n\nclass LAB: Dog is\n    init() is super.init() si\nsi\n\nclass COLLIE: Dog is\n    init() is super.init() si\nsi\n\nwrite_line(\"Animal <- Dog <- Lab: {isa Animal(LAB())}, {isa Dog(LAB())}\")\nwrite_line(\n    \"Animal <- Dog <- Collie: {isa Animal(COLLIE())}, \"\n    \"{isa Dog(COLLIE())}\")\nwrite_line(\"Animal <- Cat: {isa Animal(CAT())}\")\nwrite_line(\"Cat is not a Dog: {!isa Dog(CAT())}\")",
+  "output": "Animal <- Dog <- Lab: True, True\nAnimal <- Dog <- Collie: True, True\nAnimal <- Cat: True\nCat is not a Dog: True\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "inheritance-single",
+  "hovers": [],
+  "diagnostics": []
+}

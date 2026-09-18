@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-pick-random-element",
+  "code": "use IO.Std.write_line\n\n// Seeded, so the run is reproducible - the point is the choosing, not the\n// particular elements it lands on.\nlet random = System.Random(42)\n\nlet colours =\n    [\"red\", \"orange\", \"yellow\", \"green\", \"blue\", \"indigo\", \"violet\"]\n\nfor _ in 1::5 do\n    write_line(colours[random.next(colours.count)])\nod",
+  "fullSource": "use IO.Std.write_line\n\n// Seeded, so the run is reproducible - the point is the choosing, not the\n// particular elements it lands on.\nlet random = System.Random(42)\n\nlet colours =\n    [\"red\", \"orange\", \"yellow\", \"green\", \"blue\", \"indigo\", \"violet\"]\n\nfor _ in 1::5 do\n    write_line(colours[random.next(colours.count)])\nod",
+  "output": "blue\nred\nred\ngreen\norange\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "pick-random-element",
+  "hovers": [],
+  "diagnostics": []
+}

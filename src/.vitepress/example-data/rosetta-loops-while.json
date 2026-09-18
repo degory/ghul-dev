@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-loops-while",
+  "code": "use IO.Std.write_line\n\nlet value mut = 1024\n\nwhile value > 0 do\n    write_line(\"{value}\")\n\n    value = value / 2\nod",
+  "fullSource": "use IO.Std.write_line\n\nlet value mut = 1024\n\nwhile value > 0 do\n    write_line(\"{value}\")\n\n    value = value / 2\nod",
+  "output": "1024\n512\n256\n128\n64\n32\n16\n8\n4\n2\n1\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "loops-while",
+  "hovers": [],
+  "diagnostics": []
+}

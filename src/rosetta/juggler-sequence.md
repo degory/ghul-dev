@@ -4,6 +4,6 @@ title: "Juggler sequence"
 
 # Juggler sequence
 
-<RosettaTask url="https://rosettacode.org/wiki/Juggler_sequence" />
+<RosettaTask url="https://rosettacode.org/wiki/Juggler_sequence" tags="number-theory,maths" :playground="true" />
 
 <GhulExample name="rosetta-juggler-sequence" />

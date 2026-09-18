@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-vector-products",
+  "code": "use IO.Std.write_line\n\nuse VECTOR = (x: int, y: int, z: int)\n\n*(a: VECTOR, b: VECTOR) -> int =>\n    a.x * b.x + a.y * b.y + a.z * b.z\n\n><(a: VECTOR, b: VECTOR) -> VECTOR =>\n    (x = a.y * b.z - a.z * b.y,\n     y = a.z * b.x - a.x * b.z,\n     z = a.x * b.y - a.y * b.x)\n\nlet a = (x = 3, y = 4, z = 5)\nlet b = (x = 4, y = 3, z = 5)\nlet c = (x = -5, y = -12, z = -13)\n\nwrite_line(\"a . b = {a * b}\")\nwrite_line(\"a x b = {a >< b}\")\nwrite_line(\"a . (b x c) = {a * (b >< c)}\")\nwrite_line(\"a x (b x c) = {a >< (b >< c)}\")",
+  "fullSource": "use IO.Std.write_line\n\nuse VECTOR = (x: int, y: int, z: int)\n\n*(a: VECTOR, b: VECTOR) -> int =>\n    a.x * b.x + a.y * b.y + a.z * b.z\n\n><(a: VECTOR, b: VECTOR) -> VECTOR =>\n    (x = a.y * b.z - a.z * b.y,\n     y = a.z * b.x - a.x * b.z,\n     z = a.x * b.y - a.y * b.x)\n\nlet a = (x = 3, y = 4, z = 5)\nlet b = (x = 4, y = 3, z = 5)\nlet c = (x = -5, y = -12, z = -13)\n\nwrite_line(\"a . b = {a * b}\")\nwrite_line(\"a x b = {a >< b}\")\nwrite_line(\"a . (b x c) = {a * (b >< c)}\")\nwrite_line(\"a x (b x c) = {a >< (b >< c)}\")",
+  "output": "a . b = 49\na x b = (5, 5, -7)\na . (b x c) = 6\na x (b x c) = (-267, 204, -3)\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "vector-products",
+  "hovers": [],
+  "diagnostics": []
+}

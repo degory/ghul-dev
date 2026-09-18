@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-thue-morse",
+  "code": "use default\n\ncomplement(text: string) -> string =>\n    text\n        |> map((digit: char) => if digit == '0' then \"1\" else \"0\" fi)\n        |> join(\"\")\n\nstream(\"0\", step => step || \"{step}{complement(step)}\")\n    |> take(7)\n    |> each(step => write_line(step))",
+  "fullSource": "use default\n\ncomplement(text: string) -> string =>\n    text\n        |> map((digit: char) => if digit == '0' then \"1\" else \"0\" fi)\n        |> join(\"\")\n\nstream(\"0\", step => step || \"{step}{complement(step)}\")\n    |> take(7)\n    |> each(step => write_line(step))",
+  "output": "0\n01\n0110\n01101001\n0110100110010110\n01101001100101101001011001101001\n0110100110010110100101100110100110010110011010010110100110010110\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "thue-morse",
+  "hovers": [],
+  "diagnostics": []
+}

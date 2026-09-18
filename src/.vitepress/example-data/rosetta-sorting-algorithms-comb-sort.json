@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sorting-algorithms-comb-sort",
+  "code": "use default\n\ncomb_sort[T: Ghul.Comparable[T]](values: LIST[T]) is\n    let gap mut = values.count\n    let sorted mut = false\n\n    while !sorted do\n        gap = cast int(cast double(gap) / 1.3)\n\n        if gap <= 1 then\n            gap = 1\n            sorted = true\n        fi\n\n        for i in 0..values.count - gap do\n            if values[i] > values[i + gap] then\n                (values[i], values[i + gap]) = (values[i + gap], values[i])\n\n                sorted = false\n            fi\n        od\n    od\nsi\n\nlet numbers = LIST([5, 3, 8, 1, 9, 2, 7])\n\ncomb_sort(numbers)\n\nwrite_line(numbers |> join(\", \"))\n\nlet words = LIST([\"pear\", \"apple\", \"quince\", \"banana\"])\n\ncomb_sort(words)\n\nwrite_line(words |> join(\", \"))",
+  "fullSource": "use default\n\ncomb_sort[T: Ghul.Comparable[T]](values: LIST[T]) is\n    let gap mut = values.count\n    let sorted mut = false\n\n    while !sorted do\n        gap = cast int(cast double(gap) / 1.3)\n\n        if gap <= 1 then\n            gap = 1\n            sorted = true\n        fi\n\n        for i in 0..values.count - gap do\n            if values[i] > values[i + gap] then\n                (values[i], values[i + gap]) = (values[i + gap], values[i])\n\n                sorted = false\n            fi\n        od\n    od\nsi\n\nlet numbers = LIST([5, 3, 8, 1, 9, 2, 7])\n\ncomb_sort(numbers)\n\nwrite_line(numbers |> join(\", \"))\n\nlet words = LIST([\"pear\", \"apple\", \"quince\", \"banana\"])\n\ncomb_sort(words)\n\nwrite_line(words |> join(\", \"))",
+  "output": "1, 2, 3, 5, 7, 8, 9\napple, banana, pear, quince\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sorting-algorithms-comb-sort",
+  "hovers": [],
+  "diagnostics": []
+}

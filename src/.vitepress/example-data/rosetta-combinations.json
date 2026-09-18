@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-combinations",
+  "code": "use default\n\nchoose(m: int, n: int, from: int, chosen: LIST[int]) -> Pipe[LIST[int]] is\n    if chosen.count == m then\n        yield chosen\n\n        return\n    fi\n\n    for candidate in from..n do\n        let extended = LIST(chosen)\n\n        extended.add(candidate)\n\n        yield in choose(m, n, candidate + 1, extended)\n    od\nsi\n\ncombinations(m: int, n: int) -> Pipe[LIST[int]] =>\n    choose(m, n, 0, LIST())\n\nfor combination in combinations(3, 5) do\n    write_line(combination |> join(\" \"))\nod",
+  "fullSource": "use default\n\nchoose(m: int, n: int, from: int, chosen: LIST[int]) -> Pipe[LIST[int]] is\n    if chosen.count == m then\n        yield chosen\n\n        return\n    fi\n\n    for candidate in from..n do\n        let extended = LIST(chosen)\n\n        extended.add(candidate)\n\n        yield in choose(m, n, candidate + 1, extended)\n    od\nsi\n\ncombinations(m: int, n: int) -> Pipe[LIST[int]] =>\n    choose(m, n, 0, LIST())\n\nfor combination in combinations(3, 5) do\n    write_line(combination |> join(\" \"))\nod",
+  "output": "0 1 2\n0 1 3\n0 1 4\n0 2 3\n0 2 4\n0 3 4\n1 2 3\n1 2 4\n1 3 4\n2 3 4\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "combinations",
+  "hovers": [],
+  "diagnostics": []
+}

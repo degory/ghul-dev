@@ -4,6 +4,6 @@ title: "Pangram checker"
 
 # Pangram checker
 
-<RosettaTask url="https://rosettacode.org/wiki/Pangram_checker" />
+<RosettaTask url="https://rosettacode.org/wiki/Pangram_checker" tags="strings,pipes" :playground="true" />
 
 <GhulExample name="rosetta-pangram-checker" />

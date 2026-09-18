@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-loops-for",
+  "code": "use IO.Std.write_line\n\nfor row in 1::5 do\n    let line = string('*', row)\n\n    write_line(line)\nod",
+  "fullSource": "use IO.Std.write_line\n\nfor row in 1::5 do\n    let line = string('*', row)\n\n    write_line(line)\nod",
+  "output": "*\n**\n***\n****\n*****\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "loops-for",
+  "hovers": [],
+  "diagnostics": []
+}

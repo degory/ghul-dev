@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-a-b",
+  "code": "use IO.Std.write\nuse IO.Std.write_line\nuse IO.Std.read_line\nuse System.StringSplitOptions\n\nwrite(\"a b: \")\n\nwhile let entered = read_line() do\n    let fields =\n        entered.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES)\n\n    write_line(\"{int.parse(fields[0]) + int.parse(fields[1])}\")\n\n    write(\"a b: \")\nod\n\nwrite_line()",
+  "fullSource": "use IO.Std.write\nuse IO.Std.write_line\nuse IO.Std.read_line\nuse System.StringSplitOptions\n\nwrite(\"a b: \")\n\nwhile let entered = read_line() do\n    let fields =\n        entered.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES)\n\n    write_line(\"{int.parse(fields[0]) + int.parse(fields[1])}\")\n\n    write(\"a b: \")\nod\n\nwrite_line()",
+  "output": "a b: 2 2\n4\na b: 3 2\n5\na b: \n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "a-b",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-bernoullis-triangle",
+  "code": "use default\n\nbernoulli(rows: int) -> Pipe[LIST[int]] is\n    let row mut = LIST()\n    row.add(1)\n\n    for number in 0..rows do\n        yield row\n\n        let following = LIST()\n        following.add(1)\n\n        for column in 1::row.count - 1 do\n            following.add(row[column - 1] + row[column])\n        od\n\n        following.add(row[row.count - 1] * 2)\n\n        row = following\n    od\nsi\n\nfor row in bernoulli(15) do\n    write_line(row |> map(value => \"{value,7}\") |> join(\"\"))\nod",
+  "fullSource": "use default\n\nbernoulli(rows: int) -> Pipe[LIST[int]] is\n    let row mut = LIST()\n    row.add(1)\n\n    for number in 0..rows do\n        yield row\n\n        let following = LIST()\n        following.add(1)\n\n        for column in 1::row.count - 1 do\n            following.add(row[column - 1] + row[column])\n        od\n\n        following.add(row[row.count - 1] * 2)\n\n        row = following\n    od\nsi\n\nfor row in bernoulli(15) do\n    write_line(row |> map(value => \"{value,7}\") |> join(\"\"))\nod",
+  "output": "      1\n      1      2\n      1      3      4\n      1      4      7      8\n      1      5     11     15     16\n      1      6     16     26     31     32\n      1      7     22     42     57     63     64\n      1      8     29     64     99    120    127    128\n      1      9     37     93    163    219    247    255    256\n      1     10     46    130    256    382    466    502    511    512\n      1     11     56    176    386    638    848    968   1013   1023   1024\n      1     12     67    232    562   1024   1486   1816   1981   2036   2047   2048\n      1     13     79    299    794   1586   2510   3302   3797   4017   4083   4095   4096\n      1     14     92    378   1093   2380   4096   5812   7099   7814   8100   8178   8191   8192\n      1     15    106    470   1471   3473   6476   9908  12911  14913  15914  16278  16369  16383  16384\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "bernoullis-triangle",
+  "hovers": [],
+  "diagnostics": []
+}

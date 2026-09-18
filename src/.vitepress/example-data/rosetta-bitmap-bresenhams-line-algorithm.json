@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-bitmap-bresenhams-line-algorithm",
+  "code": "use System.Math\nuse Raster.IMAGE\n\nlet image = IMAGE(400, 400)\n\nline(from_x: int, from_y: int, to_x: int, to_y: int) is\n    let across = Math.abs(to_x - from_x)\n    let up = Math.abs(to_y - from_y)\n\n    let step_x = if from_x < to_x then 1 else -1 fi\n    let step_y = if from_y < to_y then 1 else -1 fi\n\n    let x mut = from_x\n    let y mut = from_y\n    let error mut = across - up\n\n    do\n        image.set_pixel(x, y, 0ub, 0ub, 160ub)\n\n        if x == to_x /\\ y == to_y then\n            break\n        fi\n\n        let doubled = error * 2\n\n        if doubled > -up then\n            error = error - up\n            x = x + step_x\n        fi\n\n        if doubled < across then\n            error = error + across\n            y = y + step_y\n        fi\n    od\nsi\n\nfor spoke in 0..24 do\n    let angle = 2.0D * Math.pi * cast double(spoke) / 24.0D\n\n    line(\n        200, 200,\n        200 + cast int(180.0D * Math.cos(angle)),\n        200 + cast int(180.0D * Math.sin(angle))\n    )\nod\n\nimage.write(\"bresenham.png\")\n\nimage.show(\"bresenham.png\")",
+  "fullSource": "use System.Math\nuse Raster.IMAGE\n\nlet image = IMAGE(400, 400)\n\nline(from_x: int, from_y: int, to_x: int, to_y: int) is\n    let across = Math.abs(to_x - from_x)\n    let up = Math.abs(to_y - from_y)\n\n    let step_x = if from_x < to_x then 1 else -1 fi\n    let step_y = if from_y < to_y then 1 else -1 fi\n\n    let x mut = from_x\n    let y mut = from_y\n    let error mut = across - up\n\n    do\n        image.set_pixel(x, y, 0ub, 0ub, 160ub)\n\n        if x == to_x /\\ y == to_y then\n            break\n        fi\n\n        let doubled = error * 2\n\n        if doubled > -up then\n            error = error - up\n            x = x + step_x\n        fi\n\n        if doubled < across then\n            error = error + across\n            y = y + step_y\n        fi\n    od\nsi\n\nfor spoke in 0..24 do\n    let angle = 2.0D * Math.pi * cast double(spoke) / 24.0D\n\n    line(\n        200, 200,\n        200 + cast int(180.0D * Math.cos(angle)),\n        200 + cast int(180.0D * Math.sin(angle))\n    )\nod\n\nimage.write(\"bresenham.png\")\n\nimage.show(\"bresenham.png\")",
+  "output": "<<image bresenham.png>>\n",
+  "images": [
+    {
+      "name": "bresenham.png",
+      "url": "/rosetta/bitmap-bresenhams-line-algorithm/bresenham.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "bitmap-bresenhams-line-algorithm",
+  "hovers": [],
+  "diagnostics": []
+}

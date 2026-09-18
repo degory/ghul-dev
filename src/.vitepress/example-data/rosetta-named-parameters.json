@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-named-parameters",
+  "code": "use default\n\nsqlen(x: int, y: int, z: int) -> int =>\n    x * x + y * y + z * z\n\nwrite_line(sqlen(x = 3, y = 4, z = 0))\nwrite_line(sqlen(z = 0, x = 3, y = 4))\nwrite_line(sqlen(y = 4, z = 0, x = 3))",
+  "fullSource": "use default\n\nsqlen(x: int, y: int, z: int) -> int =>\n    x * x + y * y + z * z\n\nwrite_line(sqlen(x = 3, y = 4, z = 0))\nwrite_line(sqlen(z = 0, x = 3, y = 4))\nwrite_line(sqlen(y = 4, z = 0, x = 3))",
+  "output": "25\n25\n25\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "named-parameters",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-horners-rule-for-polynomial-evaluation",
+  "code": "use default\n\nhorner(coefficients: int[], x: int) -> int =>\n    coefficients\n        |> reverse()\n        |> reduce(0, (accumulator, coefficient) =>\n            accumulator * x + coefficient)\n\nlet coefficients = [-19, 7, -4, 6]\n\nwrite_line(\"value at x = 3: {horner(coefficients, 3)}\")",
+  "fullSource": "use default\n\nhorner(coefficients: int[], x: int) -> int =>\n    coefficients\n        |> reverse()\n        |> reduce(0, (accumulator, coefficient) =>\n            accumulator * x + coefficient)\n\nlet coefficients = [-19, 7, -4, 6]\n\nwrite_line(\"value at x = 3: {horner(coefficients, 3)}\")",
+  "output": "value at x = 3: 128\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "horners-rule-for-polynomial-evaluation",
+  "hovers": [],
+  "diagnostics": []
+}
