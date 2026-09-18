@@ -693,6 +693,11 @@ onBeforeUnmount(() => {
             title="the editor still compiles and runs; only live diagnostics and hover are unavailable"
           >no analyser available</span>
           <span
+            v-else-if="frameReady && analyser === 'refused'"
+            class="ghul-example-analyser-note"
+            title="too many editors are open from this network address; the editor still compiles and runs, and live diagnostics return once another editor is closed"
+          >analyser busy - close another editor</span>
+          <span
             v-else-if="frameReady && analyser === 'connecting'"
             class="ghul-example-analyser-note"
           >connecting ...</span>
