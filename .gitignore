@@ -7,8 +7,5 @@ examples/*/bin/
 examples/*/obj/
 **/.assemblies.json
 
-# a working checkout of ghul-rosetta-code, made by the refresh workflow
-.rosetta-source/
-
 # test-run artifacts left beside an example test
 example-tests/**/compiler.trim

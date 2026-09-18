@@ -73,12 +73,11 @@ The three `dotnet-integration-*` examples build against ASP.NET through a
 `.ghulproj` and are never run, so they are left out. `snippets/` is illustrative
 and is not compiled at all.
 
-The `rosetta-*` examples are copied in from
-[ghul-rosetta-code](https://github.com/degory/ghul-rosetta-code), where each one's output is
-already pinned by a test. Snapshotting them again here would mean this repository holding an
-output it does not own, and a solution improved upstream would then arrive as a failing test
-rather than as a better example. They are still compiled and run on every pull, by
-`example-tool`, which is what produces the output the pages display.
+The Rosetta Code solutions are not here at all. They are written, compiled and run in
+[ghul-rosetta-code](https://github.com/degory/ghul-rosetta-code), where each one's output is pinned
+by a test, and the site reads them from there when a reader opens the section. Testing them again
+here would mean this repository holding an output it does not own, and a solution improved upstream
+would then arrive as a failing test rather than as a better example.
 
 `functional-programming-26` uses the function composition operators `ghul.runtime` supplies
 in the `Ghul` namespace. A projectless compile here resolves the `ghul-runtime.dll` bundled

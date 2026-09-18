@@ -7,13 +7,13 @@ ghūl (pronounced 'ghoul') is a statically typed programming language for .NET 1
 Every example on this site is a whole program. Press **edit & run**, change it, and run it in your browser.
 
 <GhulExampleSwitcher
-  names="rosetta-fractal-tree,optionals-narrowing,expression-functional,fibonacci-generators,word-frequency"
-  labels="drawing: a fractal tree,optionals: `T?` + narrowing,expression trees: union + pattern matching,fibonacci: generators + pipes,word frequency: maps + pipes"
+  names="optionals-narrowing,expression-functional,fibonacci-generators,word-frequency"
+  labels="optionals: `T?` + narrowing,expression trees: union + pattern matching,fibonacci: generators + pipes,word frequency: maps + pipes"
 />
 
 ## where to go next
 
-- [Rosetta Code](/rosetta/) - 703 tasks solved in ghūl, searchable, and nearly all runnable here. The page opens on one picked at random.
+- [Rosetta Code](/rosetta/) - several hundred tasks solved in ghūl, from one-liners to graphics and games, searchable and nearly all runnable here. The page opens on one picked at random.
 - [the tour](/expression-oriented-programming) - the language a topic at a time, every example editable.
 - [getting started](/getting-started) - ghūl on your own machine. A ghūl repository pins the compiler as a local .NET tool, so the compiler arrives with the code.
 
