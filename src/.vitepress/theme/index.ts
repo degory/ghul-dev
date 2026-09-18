@@ -3,8 +3,8 @@ import DefaultTheme from 'vitepress/theme'
 import { nextTick, onMounted, watch } from 'vue'
 import GhulExample from './components/GhulExample.vue'
 import GhulExampleSwitcher from './components/GhulExampleSwitcher.vue'
-import RosettaTask from './components/RosettaTask.vue'
 import RosettaExplorer from './components/RosettaExplorer.vue'
+import { installRosettaRouting } from './rosetta-route'
 import { refreshPackageVersions } from './package-versions'
 import './style.css'
 
@@ -28,10 +28,14 @@ export default {
         window.goatcounter?.count?.()
       }))
   },
-  enhanceApp({ app }) {
+  enhanceApp({ app, router }) {
+    // The Rosetta Code section answers every address under it from one page, so those addresses
+    // are handled here rather than by loading a page that does not exist. It has to be installed
+    // before the first route is loaded, which is why it is here rather than in setup().
+    installRosettaRouting(router)
+
     app.component('GhulExample', GhulExample)
     app.component('GhulExampleSwitcher', GhulExampleSwitcher)
-    app.component('RosettaTask', RosettaTask)
     app.component('RosettaExplorer', RosettaExplorer)
   },
 }

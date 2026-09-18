@@ -158,29 +158,16 @@ export function renderText(srcDir: string, outDir: string) {
   const textDir = join(outDir, 'text')
   mkdirSync(textDir, { recursive: true })
 
-  // Read rather than imported: this module is loaded through the VitePress config, and the
-  // manifest is generated, so reading it keeps the two independent.
-  const ROSETTA: {
-    tasks: { slug: string, title: string, tags: string[] }[]
-  } = JSON.parse(readFileSync(join(srcDir, '.vitepress', 'rosetta-tasks.json'), 'utf-8'))
-
-  // The Rosetta pages carry two components of their own. `RosettaTask` is a link to the wiki
-  // entry, which is worth keeping in the text rendering; `RosettaExplorer` is the contents, which
-  // has to be written out here because it is data rather than markup.
-  const contentsList = ROSETTA.tasks
-    .map(task => `- [${task.title}](${SITE}/rosetta/${task.slug}) - ${task.tags.join(', ')}`)
-    .join('\n')
-
+  // The Rosetta Code section is one page, and its contents is fetched from ghul-rosetta-code when
+  // a reader opens it rather than being in this repository, so there is nothing to render here
+  // beyond a line saying where the tasks are. The solutions themselves are on the wiki and in
+  // that repository; they were never this site's to publish as text.
   const expandRosetta = (body: string) =>
-    body
-      .replace(
-        /<RosettaTask\s+url="([^"]*)"[^>]*\/>/g,
-        (_match, url) => `The same solution is posted on Rosetta Code: ${url}`
-      )
-      // On a task's page the explorer browses the rest; one line here, not the whole list again.
-      .replace(/<RosettaExplorer\s+current="[^"]*"\s*\/>/g, `All tasks: ${SITE}/rosetta/`)
-      .replace(/<\/?ClientOnly>\n?/g, '')
-      .replace(/<RosettaExplorer\s*\/>/g, contentsList)
+    body.replace(
+      /<RosettaExplorer\s*\/>/g,
+      `The tasks, searchable: ${SITE}/rosetta/ - one page, which reads them from`
+        + ' https://github.com/degory/ghul-rosetta-code',
+    )
 
   const rendered = PAGES.map(page => {
     const slug = pageSlug(page.link)
@@ -188,28 +175,13 @@ export function renderText(srcDir: string, outDir: string) {
     return { ...page, slug, body: expandRosetta(renderPage(source, dataDir)) }
   })
 
-  // Every task has a page but only the section's contents is in the sidebar, so these are
-  // rendered from the manifest rather than from PAGES. Without this the text rendering would
-  // quietly omit the whole section.
-  const rosetta = ROSETTA.tasks.map(task => {
-    const slug = `rosetta/${task.slug}`
-    const source = readFileSync(join(srcDir, `${slug}.md`), 'utf-8')
-
-    return {
-      text: task.title,
-      link: `/${slug}`,
-      slug,
-      body: expandRosetta(renderPage(source, dataDir)),
-    }
-  })
-
   mkdirSync(join(textDir, 'rosetta'), { recursive: true })
 
-  for (const page of [...rendered, ...rosetta]) {
+  for (const page of rendered) {
     writeFileSync(join(textDir, `${page.slug}.md`), page.body)
   }
 
-  const contents = [...rendered, ...rosetta]
+  const contents = rendered
     .map(page => `- [${page.text}](#${page.slug}) - ${SITE}${page.link}`)
     .join('\n')
 
@@ -231,10 +203,10 @@ export function renderText(srcDir: string, outDir: string) {
     contents,
   ].join('\n')
 
-  const all = [preamble, ...[...rendered, ...rosetta].map(page =>
+  const all = [preamble, ...rendered.map(page =>
     `<a id="${page.slug}"></a>\n\n${page.body}`)].join('\n\n---\n\n')
 
   writeFileSync(join(textDir, 'all.md'), all)
 
-  return rendered.length + rosetta.length
+  return rendered.length
 }

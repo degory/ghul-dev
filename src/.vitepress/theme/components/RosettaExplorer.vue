@@ -1,43 +1,46 @@
 <script setup>
 import { ref, computed, shallowRef, watch, onMounted } from 'vue'
-import { useRouter } from 'vitepress'
-import corpus from '../../rosetta-tasks.json'
 import GhulExample from './GhulExample.vue'
+import { tokenise } from '../rosetta-highlight'
+import { shownSlug, shownFilter, showAt, replaceAt } from '../rosetta-route'
+import {
+  loadCorpus, taskBySlug, matching, tagCounts, draw, addressOf, filterFromSearch,
+} from '../rosetta-corpus'
 
-// The way into the Rosetta Code section: one task shown whole and ready to run, picked at random
-// and weighted towards the ones worth a stranger's time, with the whole corpus searchable and
-// filterable beneath it. The corpus is several hundred tasks and grows, so nothing here is a
-// hand-made list - the tags and the interest score come from ghul-rosetta-code with the tasks.
+// The whole Rosetta Code section: one task shown whole and ready to run, with the corpus
+// searchable and filterable beneath it. The task is whichever /rosetta/<slug> the reader arrived
+// at, or one picked at random and weighted towards the ones worth a stranger's time.
+//
+// Nothing here is copied into the site. The corpus is read from ghul-rosetta-code when the page
+// opens and each solution's source when its task is shown, so a task solved there this morning is
+// here this morning, and the site stops growing a page per task. What that costs is a section that
+// needs GitHub to be reachable, which is what the failure state below is for.
 
-// Each part's data is its own chunk, fetched when the part is shown, so the page does not carry
-// every solution's source.
-// On a task's own page the task is already there above, so the explorer only browses: the same
-// search, tags and list, with every choice leading to another task's page. `current` names the
-// page's task, so another never lands on it and the list can mark it.
-const props = defineProps({
-  current: { type: String, default: null },
-})
-
-const router = useRouter()
-
-const artifacts = import.meta.glob('../../example-data/rosetta-*.json', { import: 'default' })
-
-const load = name => artifacts[`../../example-data/${name}.json`]()
+const corpus = shallowRef(null)
+const failure = ref(null)
 
 const query = ref('')
 const chosen = ref(new Set())
 const runnableOnly = ref(true)
 
-// Only the tags in use, most used first: a chip that matches nothing is noise.
-const tagCounts = computed(() => {
-  const counts = new Map()
+// A task shown by address rather than picked: the reader followed a link, or chose one from the
+// list. Held apart from `picked` so that going back to the section restores the random pick.
+const picked = shallowRef(null)
 
-  for (const task of corpus.tasks) {
-    for (const tag of task.tags) counts.set(tag, (counts.get(tag) ?? 0) + 1)
-  }
+const shown = computed(() => {
+  if (!corpus.value) return null
 
-  return [...counts.entries()].sort((a, b) => b[1] - a[1])
+  return shownSlug.value ? taskBySlug(corpus.value, shownSlug.value) : picked.value
 })
+
+const missing = computed(() =>
+  corpus.value !== null && shownSlug.value !== null && shown.value === null)
+
+const tags = computed(() => corpus.value ? tagCounts(corpus.value) : [])
+
+const matches = computed(() => corpus.value
+  ? matching(corpus.value, { query: query.value, tags: [...chosen.value], runnableOnly: runnableOnly.value })
+  : [])
 
 function toggleTag(tag) {
   const next = new Set(chosen.value)
@@ -47,151 +50,261 @@ function toggleTag(tag) {
   chosen.value = next
 }
 
-const matching = computed(() => {
-  const wanted = query.value.trim().toLowerCase().split(/\s+/).filter(w => w !== '')
+// --- the shown task's source -------------------------------------------------------------------
 
-  return corpus.tasks.filter(task => {
-    if (runnableOnly.value && !task.playground) return false
+// Each part's source and its syntax colour, in the shape <GhulExample> takes: the same fields the
+// build writes into an example artifact, minus the hovers and diagnostics only a compile produces
+// and the recorded output `run-to-see` would hide anyway.
+const parts = shallowRef([])
+const partsFailure = ref(null)
 
-    for (const tag of chosen.value) {
-      if (!task.tags.includes(tag)) return false
-    }
+async function text(url) {
+  const response = await fetch(url, { signal: AbortSignal.timeout(15000) })
 
-    const text = `${task.title} ${task.tags.join(' ')}`.toLowerCase()
+  if (!response.ok) throw new Error(`${response.status} ${response.statusText}`)
 
-    return wanted.every(word => text.includes(word))
-  })
-})
+  return response.text()
+}
 
-// Interest squared: a 5 is drawn twenty-five times as often as a 1, without a 1 being impossible.
-function draw(tasks, except) {
-  const pool = tasks.length > 1 ? tasks.filter(task => task.slug !== except) : tasks
+async function part(entry) {
+  const code = (await text(entry.source)).replace(/\n+$/, '')
 
-  if (pool.length === 0) return null
-
-  const total = pool.reduce((sum, task) => sum + task.interest ** 2, 0)
-
-  let at = Math.random() * total
-
-  for (const task of pool) {
-    at -= task.interest ** 2
-
-    if (at <= 0) return task
+  return {
+    ...entry,
+    data: {
+      name: entry.name,
+      code,
+      fullSource: code,
+      tokens: await tokenise(code),
+      output: '',
+      images: [],
+      hovers: [],
+      diagnostics: [],
+      playground: entry.playground,
+      playgroundPath: entry.id,
+    },
+    // Only where it will not run: one line saying what it needs that a browser cannot give it.
+    reason: entry.playground ? null : await text(entry.unsupported).then(
+      line => line.trim(), () => null),
   }
-
-  return pool[pool.length - 1]
 }
 
-const featured = ref(null)
-const featuredParts = shallowRef([])
+// The task whose parts `parts` holds, so a fetch that finishes after the reader has moved on is
+// dropped rather than shown under the wrong heading.
+let loading = null
 
-async function feature(task) {
-  featured.value = task
+watch(shown, async task => {
+  loading = task?.slug ?? null
+  parts.value = []
+  partsFailure.value = null
 
-  featuredParts.value = task
-    ? await Promise.all(task.parts.map(async part => ({ ...part, data: await load(part.name) })))
-    : []
+  if (!task) return
+
+  try {
+    const loaded = await Promise.all(task.parts.map(part))
+
+    if (loading === task.slug) parts.value = loaded
+  } catch (error) {
+    if (loading === task.slug) partsFailure.value = error.message
+  }
+}, { immediate: true })
+
+// Each task used to be a page, and a page was counted. They are shown in place now, so the count
+// is made here or the section reads as one visit however many tasks somebody works through.
+watch([() => shownSlug.value, shown], ([slug, task], previous) => {
+  if (!slug) return
+
+  document.title = `${task?.title ?? 'Rosetta Code'} | ghūl programming language`
+
+  if (slug !== previous?.[0]) window.goatcounter?.count?.()
+}, { immediate: true })
+
+// --- choosing ----------------------------------------------------------------------------------
+
+// `keep` is false for the draw the page makes on its own: the reader did not ask to be here, so
+// it is not a place for the back button to return to.
+function another(keep = true) {
+  const next = draw(matches.value, shown.value?.slug)
+
+  if (!next) return
+
+  picked.value = next
+
+  // The address names the task, whether it was chosen or drawn: what is on the page is what a
+  // reader can link to.
+  showAt(addressOf({ slug: next.slug }), keep)
 }
 
-function another() {
-  if (props.current) {
-    const next = draw(matching.value, props.current)
+function show(task) {
+  showAt(addressOf({ slug: task.slug }))
+}
 
-    if (next) router.go(`/rosetta/${next.slug}`)
+onMounted(async () => {
+  // The address of a task reached from outside was handed to the router as the section's, so that
+  // it had a page to load. Put it back, now that there is an explorer to show the task.
+  if (shownSlug.value) replaceAt(addressOf({ slug: shownSlug.value }))
+
+  const filter = filterFromSearch(shownFilter.value || location.search)
+
+  query.value = filter.query
+  chosen.value = new Set(filter.tags)
+
+  try {
+    corpus.value = await loadCorpus()
+  } catch (error) {
+    failure.value = error.message
 
     return
   }
 
-  feature(draw(matching.value, featured.value?.slug))
-}
+  // A random pick differs between the prerender and the reader's browser, so it is made only once
+  // the page is live - and only where the address does not already name a task.
+  if (!shownSlug.value) another(false)
+})
 
-// A random pick differs between the prerender and the reader's browser, so it is made only once
-// the page is live.
-onMounted(() => { if (!props.current) another() })
+// Narrowing the filter to something the shown task is not part of picks a new one; widening it
+// leaves the reader looking at what they were looking at. A task reached by its own address stays
+// put: they asked for that one.
+watch(matches, tasks => {
+  if (shownSlug.value) return
+  if (picked.value && !tasks.some(task => task.slug === picked.value.slug)) another(false)
+})
 
-// Narrowing the filter to something the featured task is not part of picks a new one; widening
-// it leaves the reader looking at what they were looking at.
-watch(matching, tasks => {
-  // By name: what is featured is held reactively, so it is never the same object as its entry here.
-  if (featured.value && !tasks.some(task => task.slug === featured.value.slug)) another()
+// The filter is part of the address while the section itself is shown, so a search or a set of
+// tags is a link. Replaced rather than pushed: typing a word is not a place to go back to.
+watch([query, chosen], () => {
+  if (shownSlug.value) return
+
+  replaceAt(addressOf({ query: query.value, tags: [...chosen.value] }))
+})
+
+// Following a link back to the section restores the filter that link carried.
+watch(shownFilter, search => {
+  if (shownSlug.value) return
+
+  const filter = filterFromSearch(search)
+
+  if (filter.query !== query.value) query.value = filter.query
+
+  if (filter.tags.join(',') !== [...chosen.value].sort().join(',')) {
+    chosen.value = new Set(filter.tags)
+  }
 })
 </script>
 
 <template>
   <div class="rosetta-explorer">
-    <div class="rosetta-controls">
-      <input
-        v-model="query"
-        class="rosetta-filter"
-        type="search"
-        placeholder="search by name or tag"
-        aria-label="search tasks by name or tag"
-      />
+    <p v-if="failure" class="rosetta-failure">
+      The solutions are read from
+      <a href="https://github.com/degory/ghul-rosetta-code" target="_blank" rel="noreferrer">
+        ghul-rosetta-code</a>
+      when this page opens, and that did not answer ({{ failure }}). Reloading is worth a try.
+    </p>
 
-      <label class="rosetta-runnable">
-        <input v-model="runnableOnly" type="checkbox" />
-        runs in the browser
-      </label>
+    <p v-else-if="!corpus" class="rosetta-loading">reading the solutions ...</p>
 
-      <button v-if="current" type="button" class="rosetta-another" @click="another">another</button>
-    </div>
+    <template v-else>
+      <p v-if="missing" class="rosetta-failure">
+        There is no task called <code>{{ shownSlug }}</code>. Here is everything there is.
+      </p>
 
-    <div class="rosetta-tags" role="group" aria-label="filter by tag">
-      <button
-        v-for="[tag, count] in tagCounts"
-        :key="tag"
-        type="button"
-        class="rosetta-tag"
-        :class="{ 'is-chosen': chosen.has(tag) }"
-        :aria-pressed="chosen.has(tag)"
-        :title="corpus.tags[tag]"
-        @click="toggleTag(tag)"
-      >{{ tag }} <span>{{ count }}</span></button>
-    </div>
+      <section v-if="shown" class="rosetta-featured">
+        <header>
+          <h2 :id="shown.slug">{{ shown.title }}</h2>
 
-    <section v-if="featured" class="rosetta-featured">
-      <header>
-        <h2 :id="featured.slug">{{ featured.title }}</h2>
+          <a class="rosetta-wiki" :href="shown.url" target="_blank" rel="noreferrer">on Rosetta Code</a>
 
-        <a class="rosetta-wiki" :href="featured.url" target="_blank" rel="noreferrer">on Rosetta Code</a>
+          <button type="button" class="rosetta-another" @click="another">another</button>
+        </header>
 
-        <button type="button" class="rosetta-another" @click="another">another</button>
-      </header>
+        <p class="rosetta-featured-tags">
+          <button
+            v-for="tag in shown.tags"
+            :key="tag"
+            type="button"
+            class="rosetta-tag"
+            :class="{ 'is-chosen': chosen.has(tag) }"
+            :title="corpus.tags[tag]"
+            @click="toggleTag(tag)"
+          >{{ tag }}</button>
+        </p>
 
-      <p class="rosetta-featured-tags">
+        <p v-if="partsFailure" class="rosetta-failure">
+          The solution itself did not load ({{ partsFailure }}).
+        </p>
+
+        <p v-else-if="parts.length === 0" class="rosetta-loading">reading the solution ...</p>
+
+        <template v-for="entry in parts" :key="entry.name">
+          <h3 v-if="entry.heading">{{ entry.heading }}</h3>
+
+          <p v-if="entry.reason" class="rosetta-unsupported">{{ entry.reason }}</p>
+
+          <GhulExample :name="entry.name" :data="entry.data" run-to-see />
+        </template>
+      </section>
+
+      <div class="rosetta-controls">
+        <input
+          v-model="query"
+          class="rosetta-filter"
+          type="search"
+          placeholder="search by name or tag"
+          aria-label="search tasks by name or tag"
+        />
+
+        <label class="rosetta-runnable">
+          <input v-model="runnableOnly" type="checkbox" />
+          runs in the browser
+        </label>
+      </div>
+
+      <div class="rosetta-tags" role="group" aria-label="filter by tag">
         <button
-          v-for="tag in featured.tags"
+          v-for="[tag, count] in tags"
           :key="tag"
           type="button"
           class="rosetta-tag"
           :class="{ 'is-chosen': chosen.has(tag) }"
+          :aria-pressed="chosen.has(tag)"
+          :title="corpus.tags[tag]"
           @click="toggleTag(tag)"
-        >{{ tag }}</button>
+        >{{ tag }} <span>{{ count }}</span></button>
+      </div>
+
+      <p class="rosetta-count">
+        {{ matches.length }} {{ matches.length === 1 ? 'task' : 'tasks' }}
       </p>
 
-      <template v-for="part in featuredParts" :key="part.name">
-        <h3 v-if="part.heading">{{ part.heading }}</h3>
-
-        <GhulExample :name="part.name" :data="part.data" run-to-see />
-      </template>
-    </section>
-
-    <p class="rosetta-count">
-      {{ matching.length }} {{ matching.length === 1 ? 'task' : 'tasks' }}
-    </p>
-
-    <ul class="rosetta-list">
-      <li v-for="task in matching" :key="task.slug">
-        <a :href="`/rosetta/${task.slug}`" :class="{ 'is-current': task.slug === current }">{{ task.title }}</a>
-        <span v-if="task.images" class="rosetta-mark" title="draws a picture">image</span>
-        <span v-if="task.input" class="rosetta-mark" title="reads what you type">input</span>
-        <span v-if="task.parts.length > 1" class="rosetta-mark">{{ task.parts.length }} ways</span>
-      </li>
-    </ul>
+      <ul class="rosetta-list">
+        <li v-for="task in matches" :key="task.slug">
+          <a
+            :href="`/rosetta/${task.slug}`"
+            :class="{ 'is-current': task.slug === shown?.slug }"
+            @click.prevent="show(task)"
+          >{{ task.title }}</a>
+          <span v-if="task.images" class="rosetta-mark" title="draws a picture">image</span>
+          <span v-if="task.input" class="rosetta-mark" title="reads what you type">input</span>
+          <span v-if="task.parts.length > 1" class="rosetta-mark">{{ task.parts.length }} ways</span>
+        </li>
+      </ul>
+    </template>
   </div>
 </template>
-
 <style scoped>
+.rosetta-loading,
+.rosetta-failure {
+  margin: 1.5rem 0;
+  color: var(--vp-c-text-2);
+}
+
+/* Why a solution is here to read rather than run, in the words written beside it. */
+.rosetta-unsupported {
+  margin: 0.5rem 0;
+  color: var(--vp-c-text-2);
+  font-size: 0.9rem;
+}
+
 .rosetta-controls {
   display: flex;
   flex-wrap: wrap;
@@ -255,7 +368,7 @@ watch(matching, tasks => {
 }
 
 .rosetta-featured {
-  margin-top: 2rem;
+  margin-top: 1rem;
   /* Clear of the site's fixed header when a task picked from the list is scrolled to. */
   scroll-margin-top: calc(var(--vp-nav-height) + 1rem);
 }
