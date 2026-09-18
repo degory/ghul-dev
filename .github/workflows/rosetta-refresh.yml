@@ -42,11 +42,6 @@ jobs:
     - name: Pull the solutions
       run: npm run pull-rosetta -- .rosetta-source
 
-    - name: Rebuild the example data
-      run: |
-        dotnet tool restore
-        dotnet run --project example-tool -- examples src/.vitepress/example-data
-
     - name: Raise a pull request if anything changed
       uses: peter-evans/create-pull-request@v8
       with:
@@ -59,5 +54,6 @@ jobs:
         add-paths: |
           examples
           src/rosetta
+          src/public/rosetta
           src/.vitepress/rosetta-tasks.json
           src/.vitepress/example-data

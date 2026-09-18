@@ -384,7 +384,7 @@ const edited = ref(retainedEdit(props.name) !== null)
 // placeholders (`if condition then`, `catch e: SomeExceptionType`) rather
 // than a program, so opening one in the editor would only produce a wall of
 // errors about the placeholders.
-if (!props.signature && !isSnippet.value) {
+if (!props.signature && !isSnippet.value && example.value?.playground !== false) {
   playgroundAvailable().then(available => { canEdit.value = available })
 }
 
@@ -394,6 +394,10 @@ const embedUrl = `${PLAYGROUND_ORIGIN}/embed.html`
 // the reader's own edit produced.
 const shownDiagnostics = computed(() => editing.value ? liveDiagnostics.value : diagnostics.value)
 const shownOutput = computed(() => editing.value ? liveOutput.value : example.value?.output)
+
+// The pictures follow the same rule: what the example is recorded as drawing,
+// until the reader runs their own version.
+const shownImages = computed(() => editing.value ? liveImages.value : example.value?.images ?? [])
 
 const runLabel = computed(() => {
   if (!editing.value) return null
@@ -486,6 +490,7 @@ function startEditing() {
   // Start from the recorded output, so the panel is not empty before the
   // reader has run anything.
   liveOutput.value = example.value?.output ?? ''
+  liveImages.value = example.value?.images ?? []
   liveDiagnostics.value = diagnostics.value
 
   window.addEventListener('message', onFrameMessage)
@@ -654,7 +659,7 @@ onBeforeUnmount(() => {
         </div>
       </template>
     </div>
-    <div v-if="example.output || diagnostics.length || editing" class="ghul-example-output">
+    <div v-if="example.output || example.images?.length || diagnostics.length || editing" class="ghul-example-output">
       <button
         type="button"
         class="ghul-example-output-toggle"
@@ -732,8 +737,8 @@ onBeforeUnmount(() => {
           <button type="submit">send</button>
           <button type="button" title="no more input" @click="endInput">end</button>
         </form>
-        <div v-if="editing && liveImages.length" class="ghul-example-images">
-          <figure v-for="image in liveImages" :key="image.name">
+        <div v-if="shownImages.length" class="ghul-example-images">
+          <figure v-for="image in shownImages" :key="image.name">
             <img :src="image.url" :alt="image.name" />
             <figcaption>{{ image.name }}</figcaption>
           </figure>

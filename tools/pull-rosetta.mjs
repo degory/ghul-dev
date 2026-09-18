@@ -3,193 +3,162 @@
 //
 //   node tools/pull-rosetta.mjs <ghul-rosetta-code-checkout>
 //
-// Writes, per published task:
+// Everything is derived from that repository's index.json: which tasks there are, their parts,
+// their tags, which can run in the playground, and where each part's source, recorded output and
+// expected images live. Nothing about the corpus is decided here, so a solution added there
+// appears here at the next pull with nobody placing it.
 //
-//   examples/rosetta-<slug>[-<part>]/….ghul   the source, which example-tool compiles and runs
-//   src/rosetta/<slug>.md                     the page
+// Writes, per task:
 //
-// plus src/rosetta/index.md and src/.vitepress/rosetta-tasks.json, the manifest the index page
+//   src/.vitepress/example-data/rosetta-<id>.json   one per part: the source and its output
+//   src/rosetta/<slug>.md                           the page
+//   src/public/rosetta/<id>/<name>.png              what a drawing program is expected to draw
+//
+// plus src/rosetta/index.md and src/.vitepress/rosetta-tasks.json, the manifest the explorer
 // renders from.
 //
-// The dependency points this way round on purpose. Knowing how this site renders an example is
-// this site's business, so ghul-rosetta-code holds solutions, tests and a ledger and knows
-// nothing about VitePress. Which tasks to carry and how to group them are decisions made here.
-//
-// Everything under src/rosetta and examples/rosetta-* is generated: edit a solution in
-// ghul-rosetta-code and pull again. What this script must never do is write a program's output -
-// example-tool produces that by running the code, so a page cannot show output the code does not
-// produce.
+// The example data is written directly rather than by example-tool, because compiling and running
+// every solution is ghul-rosetta-code's test suite's job and it has already done it: the output
+// here is that suite's pinned output, so a page still cannot show output the code does not
+// produce. What these examples go without is hover data, which only a compile gives; the editor
+// supplies it once the reader opens one.
 
-import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'node:fs'
-import { join, dirname } from 'node:path'
+import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync, copyFileSync } from 'node:fs'
+import { join, dirname, basename } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 
 const source = process.argv[2]
 
-if (!source || !existsSync(join(source, 'TASKS.json'))) {
+if (!source || !existsSync(join(source, 'index.json'))) {
   console.error('usage: node tools/pull-rosetta.mjs <ghul-rosetta-code-checkout>')
   process.exit(1)
 }
 
-const { ROSETTA_GROUPS, NOT_CARRIED } = await import('../src/.vitepress/rosetta-groups.ts')
+const index = JSON.parse(readFileSync(join(source, 'index.json'), 'utf8'))
 
-// NN-name orders a task's parts and names its section, the same convention the wiki markup uses.
-const heading = part => {
-  const name = part.replace(/^\d+-/, '').replace(/-/g, ' ')
-
-  return name.charAt(0).toUpperCase() + name.slice(1)
-}
-
-const parts = slug => {
-  const dir = join(source, 'tasks', slug)
-
-  return readdirSync(dir, { withFileTypes: true })
-    .filter(e => e.isDirectory() && /^\d\d-/.test(e.name))
-    .map(e => e.name)
-    .sort()
-}
-
-const ledger = JSON.parse(readFileSync(join(source, 'TASKS.json'), 'utf8'))
-
-const published = ledger.tasks
-  .filter(t => t.state === 'published' && t.slug && !(t.slug in NOT_CARRIED))
-  .map(t => ({ ...t, ...JSON.parse(readFileSync(join(source, 'tasks', t.slug, 'task.json'), 'utf8')) }))
-
-// A task nobody has placed would otherwise be carried but unreachable, so this is an error rather
-// than a warning: the grouping is what the section is navigated by.
-const placed = new Set(ROSETTA_GROUPS.flatMap(g => g.slugs))
-const unplaced = published.filter(t => !placed.has(t.slug))
-
-if (unplaced.length > 0) {
-  console.error('these published tasks are not in any group in src/.vitepress/rosetta-groups.ts:')
-  unplaced.forEach(t => console.error(`  ${t.slug}  (${t.task})`))
+if (index.version !== 1) {
+  console.error(`index.json is version ${index.version}; this script reads version 1`)
   process.exit(1)
 }
 
-const known = new Set(published.map(t => t.slug))
-const missing = [...placed].filter(s => !known.has(s))
+const DATA = join(ROOT, 'src/.vitepress/example-data')
+const PAGES = join(ROOT, 'src/rosetta')
+const IMAGES = join(ROOT, 'src/public/rosetta')
 
-if (missing.length > 0) {
-  console.error('these slugs are grouped but not published in ghul-rosetta-code:')
-  missing.forEach(s => console.error(`  ${s}`))
-  process.exit(1)
-}
+// Generated output is replaced wholesale, so a task that goes away there leaves nothing behind
+// here.
+rmSync(PAGES, { recursive: true, force: true })
+rmSync(IMAGES, { recursive: true, force: true })
+mkdirSync(PAGES, { recursive: true })
 
-// Generated output is replaced wholesale, so a task that goes away here does not leave a page
-// behind.
-rmSync(join(ROOT, 'src/rosetta'), { recursive: true, force: true })
-mkdirSync(join(ROOT, 'src/rosetta'), { recursive: true })
+readdirSync(DATA, { withFileTypes: true })
+  .filter(e => e.isFile() && e.name.startsWith('rosetta-') && e.name.endsWith('.json'))
+  .forEach(e => rmSync(join(DATA, e.name), { force: true }))
 
+// Earlier pulls carried each solution as an example for example-tool to compile.
 readdirSync(join(ROOT, 'examples'), { withFileTypes: true })
   .filter(e => e.isDirectory() && e.name.startsWith('rosetta-'))
   .forEach(e => rmSync(join(ROOT, 'examples', e.name), { recursive: true, force: true }))
 
-// example-tool only writes, so the data for an example that has gone - a task withdrawn, or one
-// split into parts under new names - would otherwise sit in the site's data directory for ever.
-readdirSync(join(ROOT, 'src/.vitepress/example-data'), { withFileTypes: true })
-  .filter(e => e.isFile() && e.name.startsWith('rosetta-') && e.name.endsWith('.json'))
-  .forEach(e => rmSync(join(ROOT, 'src/.vitepress/example-data', e.name), { force: true }))
+const read = path => readFileSync(join(source, path), 'utf8')
 
-// example-tool treats any diagnostic as a failure unless the example says to expect one, so a
-// solution the compiler warns about carries the marker. Which ones those are is recorded in the
-// source repository, by its test's captured warnings - a fact about the solution rather than
-// about this site. The marker sits above `// >>>`, the tool's hidden-scaffold mark, so a reader
-// never sees it.
-const warns = slug => {
-  const captured = join(source, 'integration-tests', slug, 'warn.expected')
-
-  return existsSync(captured) && readFileSync(captured, 'utf8').trim() !== ''
-}
-
-const example = (name, from, warning) => {
-  const body = readFileSync(from, 'utf8')
-
-  mkdirSync(join(ROOT, 'examples', name), { recursive: true })
-  writeFileSync(
-    join(ROOT, 'examples', name, `${name}.ghul`),
-    warning ? `// expect: warning\n// >>>\n${body}` : body
-  )
-
-  return name
-}
+// A part's id is a slug, or a slug and a part: the path the playground loads it by.
+const exampleName = id => `rosetta-${id.replace(/\//g, '-')}`
 
 const manifest = []
 
-for (const task of published) {
-  const { slug } = task
-  const found = parts(slug)
+let examples = 0
 
+for (const task of index.tasks) {
   const body = []
 
-  if (found.length === 0) {
-    const name = example(`rosetta-${slug}`, join(source, 'tasks', slug, `${slug}.ghul`), warns(slug))
+  for (const part of task.parts) {
+    const name = exampleName(part.id)
+    const code = read(part.source).replace(/\n+$/, '')
 
-    body.push(`<GhulExample name="${name}" />`)
-  } else {
-    for (const part of found) {
-      const name = example(
-        `rosetta-${slug}-${part}`,
-        join(source, 'tasks', slug, part, `${part}.ghul`),
-        warns(`${slug}-${part}`)
-      )
+    const images = part.images.map(path => {
+      // <name>.png.expected in the source repository is a PNG.
+      const file = basename(path).replace(/\.expected$/, '')
 
-      body.push(`## ${heading(part)}`, '', `<GhulExample name="${name}" />`, '')
+      mkdirSync(join(IMAGES, part.id), { recursive: true })
+      copyFileSync(join(source, path), join(IMAGES, part.id, file))
+
+      return { name: file, url: `/rosetta/${part.id}/${file}` }
+    })
+
+    writeFileSync(
+      join(DATA, `${name}.json`),
+      JSON.stringify({
+        name,
+        code,
+        fullSource: code,
+        output: part.output && existsSync(join(source, part.output)) ? read(part.output) : '',
+        images,
+        // Opens in the editor only where the playground can run it.
+        playground: part.playground,
+        playgroundPath: part.id,
+        hovers: [],
+        diagnostics: [],
+      }, null, 2) + '\n'
+    )
+
+    examples++
+
+    if (part.heading) {
+      body.push(`## ${part.heading}`, '')
     }
+
+    body.push(`<GhulExample name="${name}" />`, '')
   }
 
   writeFileSync(
-    join(ROOT, 'src/rosetta', `${slug}.md`),
+    join(PAGES, `${task.slug}.md`),
     [
       '---',
-      `title: ${JSON.stringify(task.task)}`,
+      `title: ${JSON.stringify(task.title)}`,
       '---',
       '',
-      `# ${task.task}`,
+      `# ${task.title}`,
       '',
-      `<RosettaTask url=${JSON.stringify(task.url)} />`,
+      `<RosettaTask url="${task.url.replace(/"/g, '%22')}" tags="${task.tags.join(',')}" :playground="${task.playground}" />`,
       '',
       ...body,
-    ].join('\n') + '\n'
+    ].join('\n')
   )
 
-  manifest.push({ slug, title: task.task, url: task.url, parts: found.map(heading) })
+  manifest.push({
+    slug: task.slug,
+    title: task.title,
+    tags: task.tags,
+    interest: task.interest,
+    playground: task.playground,
+    input: task.input,
+    images: task.images.length > 0,
+    lines: task.lines,
+    parts: task.parts.map(part => ({ name: exampleName(part.id), heading: part.heading })),
+  })
 }
-
-const group = ROSETTA_GROUPS.map(g => ({
-  title: g.title,
-  blurb: g.blurb,
-  tasks: g.slugs
-    .map(s => manifest.find(t => t.slug === s))
-    .sort((a, b) => a.title.localeCompare(b.title)),
-}))
 
 writeFileSync(
   join(ROOT, 'src/.vitepress/rosetta-tasks.json'),
-  JSON.stringify(group, null, 2) + '\n'
+  JSON.stringify({ tags: index.tags, tasks: manifest }) + '\n'
 )
 
 writeFileSync(
-  join(ROOT, 'src/rosetta/index.md'),
+  join(PAGES, 'index.md'),
   `---
 title: Rosetta Code
 ---
 
 # Rosetta Code
 
-ghūl solutions to [Rosetta Code](https://rosettacode.org) tasks. Each can be edited and run here:
-click the pencil, change it, and run it in your browser.
+ghūl solutions to ${manifest.length} [Rosetta Code](https://rosettacode.org) tasks. Every one that
+says so can be changed and run here, in your browser.
 
-<RosettaIndex />
+<RosettaExplorer />
 `
 )
 
-const skipped = Object.keys(NOT_CARRIED).length
-
-console.log(`${manifest.length} tasks, ${manifest.reduce((n, t) => n + Math.max(1, t.parts.length), 0)} examples`)
-
-if (skipped > 0) {
-  console.log(`${skipped} not carried: ${Object.keys(NOT_CARRIED).join(', ')}`)
-}
-console.log('next: dotnet run --project example-tool -- examples src/.vitepress/example-data')
+console.log(`${manifest.length} tasks, ${examples} examples`)

@@ -160,32 +160,24 @@ export function renderText(srcDir: string, outDir: string) {
 
   // Read rather than imported: this module is loaded through the VitePress config, and the
   // manifest is generated, so reading it keeps the two independent.
-  const ROSETTA_TASKS: {
-    title: string
-    blurb: string
-    tasks: { slug: string, title: string, url: string, parts: string[] }[]
-  }[] = JSON.parse(readFileSync(join(srcDir, '.vitepress', 'rosetta-tasks.json'), 'utf-8'))
+  const ROSETTA: {
+    tasks: { slug: string, title: string, tags: string[] }[]
+  } = JSON.parse(readFileSync(join(srcDir, '.vitepress', 'rosetta-tasks.json'), 'utf-8'))
 
   // The Rosetta pages carry two components of their own. `RosettaTask` is a link to the wiki
-  // entry, which is worth keeping in the text rendering; `RosettaIndex` is the contents, which
+  // entry, which is worth keeping in the text rendering; `RosettaExplorer` is the contents, which
   // has to be written out here because it is data rather than markup.
-  const contentsList = ROSETTA_TASKS
-    .map(group => [
-      `### ${group.title}`,
-      '',
-      group.blurb,
-      '',
-      ...group.tasks.map(task => `- [${task.title}](${SITE}/rosetta/${task.slug})`),
-    ].join('\n'))
-    .join('\n\n')
+  const contentsList = ROSETTA.tasks
+    .map(task => `- [${task.title}](${SITE}/rosetta/${task.slug}) - ${task.tags.join(', ')}`)
+    .join('\n')
 
   const expandRosetta = (body: string) =>
     body
       .replace(
-        /<RosettaTask\s+url="([^"]*)"\s*\/>/g,
+        /<RosettaTask\s+url="([^"]*)"[^>]*\/>/g,
         (_match, url) => `The same solution is posted on Rosetta Code: ${url}`
       )
-      .replace(/<RosettaIndex\s*\/>/g, contentsList)
+      .replace(/<RosettaExplorer\s*\/>/g, contentsList)
 
   const rendered = PAGES.map(page => {
     const slug = pageSlug(page.link)
@@ -196,7 +188,7 @@ export function renderText(srcDir: string, outDir: string) {
   // Every task has a page but only the section's contents is in the sidebar, so these are
   // rendered from the manifest rather than from PAGES. Without this the text rendering would
   // quietly omit the whole section.
-  const rosetta = ROSETTA_TASKS.flatMap(group => group.tasks).map(task => {
+  const rosetta = ROSETTA.tasks.map(task => {
     const slug = `rosetta/${task.slug}`
     const source = readFileSync(join(srcDir, `${slug}.md`), 'utf-8')
 
