@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-monte-carlo-methods",
+  "code": "use default\nuse Raster.IMAGE\nuse System.Math\n\nlet random = System.Random(314)\n\ndarts() -> Pipe[(x: double, y: double)] is\n    while true do\n        yield (x = random.next_double(), y = random.next_double())\n    od\nsi\n\ninside(p: (x: double, y: double)) -> bool => p.x * p.x + p.y * p.y <= 1.0D\n\nestimate(throws: int) -> double =>\n    let hits = darts() |> take(throws) |> filter(inside) |> count() in\n    4.0D * cast double(hits) / cast double(throws)\n\nfor power in 2::7 do\n    let throws = cast int(Math.pow(10.0D, cast double(power)))\n    let pi = estimate(throws)\n\n    let error = Math.abs(pi - Math.pi)\n\n    write_line(\"{throws,10} throws: pi is about {pi:F6}, off by {error:F6}\")\nod\n\nlet image = IMAGE(300, 300)\n\nimage.view(0.0D, 0.0D, 1.0D, 1.0D)\nimage.clear(252ub, 250ub, 245ub)\n\nfor p in darts() |> take(4000) do\n    if inside(p) then\n        image.colour(40ub, 90ub, 180ub)\n    else\n        image.colour(210ub, 70ub, 50ub)\n    fi\n\n    image.dot(p.x, p.y, 1.5D)\nod\n\nimage.write(\"darts.png\")\n\nimage.show(\"darts.png\")",
+  "fullSource": "use default\nuse Raster.IMAGE\nuse System.Math\n\nlet random = System.Random(314)\n\ndarts() -> Pipe[(x: double, y: double)] is\n    while true do\n        yield (x = random.next_double(), y = random.next_double())\n    od\nsi\n\ninside(p: (x: double, y: double)) -> bool => p.x * p.x + p.y * p.y <= 1.0D\n\nestimate(throws: int) -> double =>\n    let hits = darts() |> take(throws) |> filter(inside) |> count() in\n    4.0D * cast double(hits) / cast double(throws)\n\nfor power in 2::7 do\n    let throws = cast int(Math.pow(10.0D, cast double(power)))\n    let pi = estimate(throws)\n\n    let error = Math.abs(pi - Math.pi)\n\n    write_line(\"{throws,10} throws: pi is about {pi:F6}, off by {error:F6}\")\nod\n\nlet image = IMAGE(300, 300)\n\nimage.view(0.0D, 0.0D, 1.0D, 1.0D)\nimage.clear(252ub, 250ub, 245ub)\n\nfor p in darts() |> take(4000) do\n    if inside(p) then\n        image.colour(40ub, 90ub, 180ub)\n    else\n        image.colour(210ub, 70ub, 50ub)\n    fi\n\n    image.dot(p.x, p.y, 1.5D)\nod\n\nimage.write(\"darts.png\")\n\nimage.show(\"darts.png\")",
+  "output": "       100 throws: pi is about 2.840000, off by 0.301593\n      1000 throws: pi is about 3.196000, off by 0.054407\n     10000 throws: pi is about 3.133600, off by 0.007993\n    100000 throws: pi is about 3.139080, off by 0.002513\n   1000000 throws: pi is about 3.142068, off by 0.000475\n  10000000 throws: pi is about 3.141167, off by 0.000425\n<<image darts.png>>\n",
+  "images": [
+    {
+      "name": "darts.png",
+      "url": "/rosetta/monte-carlo-methods/darts.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "monte-carlo-methods",
+  "hovers": [],
+  "diagnostics": []
+}

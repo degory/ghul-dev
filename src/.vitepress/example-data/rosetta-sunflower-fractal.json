@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-sunflower-fractal",
+  "code": "use default\nuse Raster.IMAGE\nuse System.Math\n\nlet seeds = 3000\nlet phi = (Math.sqrt(5.0D) + 1.0D) / 2.0D\n\nlet image = IMAGE(400, 400)\n\nimage.view(-200.0D, -200.0D, 200.0D, 200.0D)\nimage.clear(255ub, 255ub, 255ub)\nimage.colour(0ub, 0ub, 255ub)\nimage.stroke(1.0D)\n\nfor i in 0::seeds do\n    let n = cast double(i)\n    let r = Math.pow(n, phi) / cast double(seeds)\n    let angle = 2.0D * Math.pi * phi * n\n\n    image.circle(\n        r * Math.sin(angle), r * Math.cos(angle),\n        5.0D * n / cast double(seeds))\nod\n\nwrite_line(\"{seeds} seeds, each turned the golden angle from the last\")\n\nimage.write(\"sunflower.png\")\n\nimage.show(\"sunflower.png\")",
+  "fullSource": "use default\nuse Raster.IMAGE\nuse System.Math\n\nlet seeds = 3000\nlet phi = (Math.sqrt(5.0D) + 1.0D) / 2.0D\n\nlet image = IMAGE(400, 400)\n\nimage.view(-200.0D, -200.0D, 200.0D, 200.0D)\nimage.clear(255ub, 255ub, 255ub)\nimage.colour(0ub, 0ub, 255ub)\nimage.stroke(1.0D)\n\nfor i in 0::seeds do\n    let n = cast double(i)\n    let r = Math.pow(n, phi) / cast double(seeds)\n    let angle = 2.0D * Math.pi * phi * n\n\n    image.circle(\n        r * Math.sin(angle), r * Math.cos(angle),\n        5.0D * n / cast double(seeds))\nod\n\nwrite_line(\"{seeds} seeds, each turned the golden angle from the last\")\n\nimage.write(\"sunflower.png\")\n\nimage.show(\"sunflower.png\")",
+  "output": "3000 seeds, each turned the golden angle from the last\n<<image sunflower.png>>\n",
+  "images": [
+    {
+      "name": "sunflower.png",
+      "url": "/rosetta/sunflower-fractal/sunflower.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "sunflower-fractal",
+  "hovers": [],
+  "diagnostics": []
+}

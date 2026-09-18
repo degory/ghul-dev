@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-fivenum-01-the-summary",
+  "code": "use default\n\nfivenum(xs_raw: double[]) -> double[] is\n    let xs = xs_raw |> sort() |> collect_array()\n    let n = xs.count\n    let n4 = System.Math.floor((cast double(n) + 3.0) / 2.0) / 2.0\n    let d = [\n        1.0, n4, (cast double(n) + 1.0) / 2.0,\n        cast double(n) + 1.0 - n4, cast double(n)\n    ]\n    midpoint(di: double) -> double is\n        let lo = xs[cast int(System.Math.floor(di)) - 1]\n        let hi = xs[cast int(System.Math.ceiling(di)) - 1]\n\n        0.5 * (lo + hi)\n    si\n\n    d |> map(midpoint) |> collect_array()\nsi\n\nlet datasets = [\n    [15.0, 6.0, 42.0, 41.0, 7.0, 36.0, 49.0, 40.0, 39.0, 47.0, 43.0],\n    [36.0, 40.0, 7.0, 39.0, 41.0, 15.0]\n]\n\nfor xs in datasets do\n    let data_text = xs |> map(x => \"{x}\") |> join(\", \")\n    let result_text = fivenum(xs) |> map(x => \"{x}\") |> join(\", \")\n\n    write_line(\"data: {data_text}\")\n    write_line(\"fivenum: {result_text}\")\nod",
+  "fullSource": "use default\n\nfivenum(xs_raw: double[]) -> double[] is\n    let xs = xs_raw |> sort() |> collect_array()\n    let n = xs.count\n    let n4 = System.Math.floor((cast double(n) + 3.0) / 2.0) / 2.0\n    let d = [\n        1.0, n4, (cast double(n) + 1.0) / 2.0,\n        cast double(n) + 1.0 - n4, cast double(n)\n    ]\n    midpoint(di: double) -> double is\n        let lo = xs[cast int(System.Math.floor(di)) - 1]\n        let hi = xs[cast int(System.Math.ceiling(di)) - 1]\n\n        0.5 * (lo + hi)\n    si\n\n    d |> map(midpoint) |> collect_array()\nsi\n\nlet datasets = [\n    [15.0, 6.0, 42.0, 41.0, 7.0, 36.0, 49.0, 40.0, 39.0, 47.0, 43.0],\n    [36.0, 40.0, 7.0, 39.0, 41.0, 15.0]\n]\n\nfor xs in datasets do\n    let data_text = xs |> map(x => \"{x}\") |> join(\", \")\n    let result_text = fivenum(xs) |> map(x => \"{x}\") |> join(\", \")\n\n    write_line(\"data: {data_text}\")\n    write_line(\"fivenum: {result_text}\")\nod",
+  "output": "data: 15, 6, 42, 41, 7, 36, 49, 40, 39, 47, 43\nfivenum: 6, 25.5, 40, 42.5, 49\ndata: 36, 40, 7, 39, 41, 15\nfivenum: 7, 15, 37.5, 40, 41\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "fivenum/01-the-summary",
+  "hovers": [],
+  "diagnostics": []
+}

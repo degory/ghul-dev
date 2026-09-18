@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-draw-a-pixel",
+  "code": "use default\nuse Raster.IMAGE\n\nlet image = IMAGE(320, 240)\n\nimage.set_pixel(100, 100, 255ub, 0ub, 0ub)\n\nlet p = image.pixel(100, 100)\n\nwrite_line(\"pixel (100, 100) is ({p.red}, {p.green}, {p.blue})\")\n\nimage.write(\"pixel.png\")\n\nimage.show(\"pixel.png\")",
+  "fullSource": "use default\nuse Raster.IMAGE\n\nlet image = IMAGE(320, 240)\n\nimage.set_pixel(100, 100, 255ub, 0ub, 0ub)\n\nlet p = image.pixel(100, 100)\n\nwrite_line(\"pixel (100, 100) is ({p.red}, {p.green}, {p.blue})\")\n\nimage.write(\"pixel.png\")\n\nimage.show(\"pixel.png\")",
+  "output": "pixel (100, 100) is (255, 0, 0)\n<<image pixel.png>>\n",
+  "images": [
+    {
+      "name": "pixel.png",
+      "url": "/rosetta/draw-a-pixel/pixel.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "draw-a-pixel",
+  "hovers": [],
+  "diagnostics": []
+}

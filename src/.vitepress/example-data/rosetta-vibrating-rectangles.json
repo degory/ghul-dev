@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-vibrating-rectangles",
+  "code": "use default\nuse Raster.ANIMATION\nuse Raster.IMAGE\nuse System.Math\n\nlet width = 240\nlet height = 180\nlet rectangles = 21\nlet spacing = 4.0D\nlet frames = 42\n\nchannel(hue: double, offset: double) -> ubyte =>\n    let wave = 0.5D + 0.5D * Math.cos(2.0D * Math.pi * (hue - offset)) in\n    cast ubyte(Math.round(40.0D + 215.0D * wave))\n\ndraw(image: IMAGE, frame: int) is\n    image.clear(10ub, 10ub, 15ub)\n    image.stroke(2.0D)\n\n    for ring in 0..rectangles do\n        let inset = spacing * cast double(ring) + 2.0D\n        let hue = cast double(frame - 2 * ring) / cast double(frames)\n\n        image.colour(\n            channel(hue, 0.0D),\n            channel(hue, 1.0D / 3.0D),\n            channel(hue, 2.0D / 3.0D))\n\n        let left = inset\n        let top = inset\n        let right = cast double(width) - inset\n        let bottom = cast double(height) - inset\n\n        image.line([\n            (x = left, y = top), (x = right, y = top),\n            (x = right, y = bottom), (x = left, y = bottom),\n            (x = left, y = top)])\n    od\nsi\n\nlet image = IMAGE(width, height)\nlet animation = ANIMATION(width, height)\n\nfor frame in 0..frames do\n    draw(image, frame)\n    animation.add(image, 50)\nod\n\nwrite_line(\"{rectangles} rectangles around one centre, the colour fading\")\nwrite_line(\"in from the outermost to the innermost\")\n\nanimation.write(\"rectangles.png\")\n\nanimation.show(\"rectangles.png\")",
+  "fullSource": "use default\nuse Raster.ANIMATION\nuse Raster.IMAGE\nuse System.Math\n\nlet width = 240\nlet height = 180\nlet rectangles = 21\nlet spacing = 4.0D\nlet frames = 42\n\nchannel(hue: double, offset: double) -> ubyte =>\n    let wave = 0.5D + 0.5D * Math.cos(2.0D * Math.pi * (hue - offset)) in\n    cast ubyte(Math.round(40.0D + 215.0D * wave))\n\ndraw(image: IMAGE, frame: int) is\n    image.clear(10ub, 10ub, 15ub)\n    image.stroke(2.0D)\n\n    for ring in 0..rectangles do\n        let inset = spacing * cast double(ring) + 2.0D\n        let hue = cast double(frame - 2 * ring) / cast double(frames)\n\n        image.colour(\n            channel(hue, 0.0D),\n            channel(hue, 1.0D / 3.0D),\n            channel(hue, 2.0D / 3.0D))\n\n        let left = inset\n        let top = inset\n        let right = cast double(width) - inset\n        let bottom = cast double(height) - inset\n\n        image.line([\n            (x = left, y = top), (x = right, y = top),\n            (x = right, y = bottom), (x = left, y = bottom),\n            (x = left, y = top)])\n    od\nsi\n\nlet image = IMAGE(width, height)\nlet animation = ANIMATION(width, height)\n\nfor frame in 0..frames do\n    draw(image, frame)\n    animation.add(image, 50)\nod\n\nwrite_line(\"{rectangles} rectangles around one centre, the colour fading\")\nwrite_line(\"in from the outermost to the innermost\")\n\nanimation.write(\"rectangles.png\")\n\nanimation.show(\"rectangles.png\")",
+  "output": "21 rectangles around one centre, the colour fading\nin from the outermost to the innermost\n<<image rectangles.png>>\n",
+  "images": [
+    {
+      "name": "rectangles.png",
+      "url": "/rosetta/vibrating-rectangles/rectangles.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "vibrating-rectangles",
+  "hovers": [],
+  "diagnostics": []
+}

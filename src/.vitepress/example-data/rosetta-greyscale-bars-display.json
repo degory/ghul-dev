@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-greyscale-bars-display",
+  "code": "use default\nuse Raster.IMAGE\n\nlet width = 512\nlet height = 256\nlet band = height / 4\n\nlet image = IMAGE(width, height)\n\nfor quarter in 0..4 do\n    let bars = 8 << quarter\n    let bar_width = width / bars\n    let top = cast double(quarter * band)\n\n    for bar in 0..bars do\n        let step = if quarter % 2 == 0 then bar else bars - 1 - bar fi\n        let grey = cast ubyte(255 * step / (bars - 1))\n        let left = cast double(bar * bar_width)\n        let right = left + cast double(bar_width)\n\n        image.colour(grey, grey, grey)\n        image.fill_rectangle(\n            left, top, right, top + cast double(band))\n    od\n\n    write_line(\"row {quarter + 1}: {bars} bars of {bar_width} pixels\")\nod\n\nimage.write(\"bars.png\")\n\nimage.show(\"bars.png\")",
+  "fullSource": "use default\nuse Raster.IMAGE\n\nlet width = 512\nlet height = 256\nlet band = height / 4\n\nlet image = IMAGE(width, height)\n\nfor quarter in 0..4 do\n    let bars = 8 << quarter\n    let bar_width = width / bars\n    let top = cast double(quarter * band)\n\n    for bar in 0..bars do\n        let step = if quarter % 2 == 0 then bar else bars - 1 - bar fi\n        let grey = cast ubyte(255 * step / (bars - 1))\n        let left = cast double(bar * bar_width)\n        let right = left + cast double(bar_width)\n\n        image.colour(grey, grey, grey)\n        image.fill_rectangle(\n            left, top, right, top + cast double(band))\n    od\n\n    write_line(\"row {quarter + 1}: {bars} bars of {bar_width} pixels\")\nod\n\nimage.write(\"bars.png\")\n\nimage.show(\"bars.png\")",
+  "output": "row 1: 8 bars of 64 pixels\nrow 2: 16 bars of 32 pixels\nrow 3: 32 bars of 16 pixels\nrow 4: 64 bars of 8 pixels\n<<image bars.png>>\n",
+  "images": [
+    {
+      "name": "bars.png",
+      "url": "/rosetta/greyscale-bars-display/bars.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "greyscale-bars-display",
+  "hovers": [],
+  "diagnostics": []
+}

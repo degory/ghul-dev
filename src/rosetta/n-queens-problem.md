@@ -4,9 +4,15 @@ title: "N-queens problem"
 
 # N-queens problem
 
-<RosettaTask url="https://rosettacode.org/wiki/N-queens_problem" tags="puzzles,pattern-matching,pipes,generators,recursion" :playground="true" />
+<RosettaTask url="https://rosettacode.org/wiki/N-queens_problem" tags="puzzles,graphics,generators,pipes,recursion" :playground="true" />
 
-<GhulExample name="rosetta-n-queens-problem" run-to-see />
+## Counting and one board
+
+<GhulExample name="rosetta-n-queens-problem-01-counting-and-one-board" run-to-see />
+
+## All ninety two drawn
+
+<GhulExample name="rosetta-n-queens-problem-02-all-ninety-two-drawn" run-to-see />
 
 ## more tasks
 
