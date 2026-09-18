@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-superellipse",
+  "code": "use default\nuse Raster.AXES\nuse Raster.IMAGE\n\nuse Math = System.Math\n\nlet n = 2.5D\nlet a = 200.0D\nlet b = 200.0D\n\nshaped(turn: double, half_axis: double) -> double =>\n    (let value = Math.pow(Math.abs(turn), 2.0D / n) * half_axis\n\n     if turn < 0.0D then -value else value fi)\n\noutline(steps: int) -> Pipe[(x: double, y: double)] =>\n    (0::steps)\n        |> map(step =>\n            (let angle = 2.0D * Math.pi * cast double(step) /\n                    cast double(steps)\n\n             (x = shaped(Math.cos(angle), a),\n              y = shaped(Math.sin(angle), b))))\n\nlet image = IMAGE(560, 560)\n\nimage.view(-230.0D, -230.0D, 230.0D, 230.0D, 56.0D)\n\nimage.colour(120ub, 120ub, 120ub)\nimage.stroke(1.0D)\n\nAXES(image).draw()\n\nimage.colour(180ub, 30ub, 60ub)\nimage.stroke(2.0D)\n\nimage.line(outline(720) |> collect_list())\n\nimage.write(\"superellipse.png\")\n\nimage.show(\"superellipse.png\")",
+  "fullSource": "use default\nuse Raster.AXES\nuse Raster.IMAGE\n\nuse Math = System.Math\n\nlet n = 2.5D\nlet a = 200.0D\nlet b = 200.0D\n\nshaped(turn: double, half_axis: double) -> double =>\n    (let value = Math.pow(Math.abs(turn), 2.0D / n) * half_axis\n\n     if turn < 0.0D then -value else value fi)\n\noutline(steps: int) -> Pipe[(x: double, y: double)] =>\n    (0::steps)\n        |> map(step =>\n            (let angle = 2.0D * Math.pi * cast double(step) /\n                    cast double(steps)\n\n             (x = shaped(Math.cos(angle), a),\n              y = shaped(Math.sin(angle), b))))\n\nlet image = IMAGE(560, 560)\n\nimage.view(-230.0D, -230.0D, 230.0D, 230.0D, 56.0D)\n\nimage.colour(120ub, 120ub, 120ub)\nimage.stroke(1.0D)\n\nAXES(image).draw()\n\nimage.colour(180ub, 30ub, 60ub)\nimage.stroke(2.0D)\n\nimage.line(outline(720) |> collect_list())\n\nimage.write(\"superellipse.png\")\n\nimage.show(\"superellipse.png\")",
+  "output": "<<image superellipse.png>>\n",
+  "images": [
+    {
+      "name": "superellipse.png",
+      "url": "/rosetta/superellipse/superellipse.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "superellipse",
+  "hovers": [],
+  "diagnostics": []
+}

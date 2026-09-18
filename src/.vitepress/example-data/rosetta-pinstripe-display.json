@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-pinstripe-display",
+  "code": "use Raster.IMAGE\n\nlet width = 640\nlet height = 400\n\nlet image = IMAGE(width, height)\n\nfor y in 0..height do\n    let band = y * 4 / height + 1\n\n    for x in 0..width do\n        let shade = if x / band % 2 == 0 then 255ub else 0ub fi\n\n        image.set_pixel(x, y, shade, shade, shade)\n    od\nod\n\nimage.write(\"pinstripe.png\")\n\nimage.show(\"pinstripe.png\")",
+  "fullSource": "use Raster.IMAGE\n\nlet width = 640\nlet height = 400\n\nlet image = IMAGE(width, height)\n\nfor y in 0..height do\n    let band = y * 4 / height + 1\n\n    for x in 0..width do\n        let shade = if x / band % 2 == 0 then 255ub else 0ub fi\n\n        image.set_pixel(x, y, shade, shade, shade)\n    od\nod\n\nimage.write(\"pinstripe.png\")\n\nimage.show(\"pinstripe.png\")",
+  "output": "<<image pinstripe.png>>\n",
+  "images": [
+    {
+      "name": "pinstripe.png",
+      "url": "/rosetta/pinstripe-display/pinstripe.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "pinstripe-display",
+  "hovers": [],
+  "diagnostics": []
+}

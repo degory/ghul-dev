@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-the-name-game",
+  "code": "use default\nuse IO.Std.read_line\n\nverse(name: string) -> string is\n    let lower = name.to_lower()\n    let first = lower[0]\n    let tail =\n        if \"aeiou\".contains(first) then lower else lower.substring(1) fi\n\n    let rhyme = (letter: char) =>\n        if first == letter then tail else \"{letter}{tail}\" fi\n\n    \"{name}, {name}, bo-{rhyme('b')}\\n\"\n    \"Banana-fana fo-{rhyme('f')}\\n\"\n    \"Fee-fi-mo-{rhyme('m')}\\n\"\n    \"{name}!\\n\"\nsi\n\nwhile let name = read_line() do\n    write_line(verse(name.trim()))\nod",
+  "fullSource": "use default\nuse IO.Std.read_line\n\nverse(name: string) -> string is\n    let lower = name.to_lower()\n    let first = lower[0]\n    let tail =\n        if \"aeiou\".contains(first) then lower else lower.substring(1) fi\n\n    let rhyme = (letter: char) =>\n        if first == letter then tail else \"{letter}{tail}\" fi\n\n    \"{name}, {name}, bo-{rhyme('b')}\\n\"\n    \"Banana-fana fo-{rhyme('f')}\\n\"\n    \"Fee-fi-mo-{rhyme('m')}\\n\"\n    \"{name}!\\n\"\nsi\n\nwhile let name = read_line() do\n    write_line(verse(name.trim()))\nod",
+  "output": "Gary, Gary, bo-bary\nBanana-fana fo-fary\nFee-fi-mo-mary\nGary!\n\nEarl, Earl, bo-bearl\nBanana-fana fo-fearl\nFee-fi-mo-mearl\nEarl!\n\nBilly, Billy, bo-illy\nBanana-fana fo-filly\nFee-fi-mo-milly\nBilly!\n\nFelix, Felix, bo-belix\nBanana-fana fo-elix\nFee-fi-mo-melix\nFelix!\n\nMary, Mary, bo-bary\nBanana-fana fo-fary\nFee-fi-mo-ary\nMary!\n\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "the-name-game",
+  "hovers": [],
+  "diagnostics": []
+}

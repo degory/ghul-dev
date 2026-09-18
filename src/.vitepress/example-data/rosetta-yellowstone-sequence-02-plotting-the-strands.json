@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-yellowstone-sequence-02-plotting-the-strands",
+  "code": "use default\nuse Raster.AXES\nuse Raster.IMAGE\n\ngcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi\n\nyellowstone(count: int) -> LIST[int] is\n    let terms = LIST([1, 2, 3])\n    let used = SET([1, 2, 3])\n\n    while terms.count < count do\n        let previous = terms[terms.count - 1]\n        let before_previous = terms[terms.count - 2]\n        let candidate mut = 1\n\n        while used.contains(candidate) \\/\n                gcd(candidate, previous) != 1 \\/\n                gcd(candidate, before_previous) == 1 do\n            candidate = candidate + 1\n        od\n\n        terms.add(candidate)\n        used.add(candidate)\n    od\n\n    terms\nsi\n\nlet terms = yellowstone(500)\n\nlet highest = terms\n    |> reduce(0, (so_far, term) =>\n        if term > so_far then term else so_far fi)\n\nlet points = terms\n    |> index()\n    |> map(term =>\n        (x = cast double(term.index + 1), y = cast double(term.value)))\n    |> collect_list()\n\nlet image = IMAGE(760, 470)\n\nimage.colour(90ub, 95ub, 110ub)\nimage.stroke(1.0)\n\nlet axes = AXES(image)\n\naxes.x_title = \"n\"\naxes.y_title = \"a(n)\"\n\naxes.fit(0.0, 0.0, cast double(terms.count), cast double(highest) + 20.0)\naxes.draw()\n\nimage.colour(170ub, 180ub, 205ub)\nimage.line(points)\n\nimage.colour(30ub, 70ub, 140ub)\n\nfor point in points do\n    image.dot(point.x, point.y, 1.7)\nod\n\nimage.write(\"yellowstone.png\")\n\nimage.show(\"yellowstone.png\")",
+  "fullSource": "use default\nuse Raster.AXES\nuse Raster.IMAGE\n\ngcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi\n\nyellowstone(count: int) -> LIST[int] is\n    let terms = LIST([1, 2, 3])\n    let used = SET([1, 2, 3])\n\n    while terms.count < count do\n        let previous = terms[terms.count - 1]\n        let before_previous = terms[terms.count - 2]\n        let candidate mut = 1\n\n        while used.contains(candidate) \\/\n                gcd(candidate, previous) != 1 \\/\n                gcd(candidate, before_previous) == 1 do\n            candidate = candidate + 1\n        od\n\n        terms.add(candidate)\n        used.add(candidate)\n    od\n\n    terms\nsi\n\nlet terms = yellowstone(500)\n\nlet highest = terms\n    |> reduce(0, (so_far, term) =>\n        if term > so_far then term else so_far fi)\n\nlet points = terms\n    |> index()\n    |> map(term =>\n        (x = cast double(term.index + 1), y = cast double(term.value)))\n    |> collect_list()\n\nlet image = IMAGE(760, 470)\n\nimage.colour(90ub, 95ub, 110ub)\nimage.stroke(1.0)\n\nlet axes = AXES(image)\n\naxes.x_title = \"n\"\naxes.y_title = \"a(n)\"\n\naxes.fit(0.0, 0.0, cast double(terms.count), cast double(highest) + 20.0)\naxes.draw()\n\nimage.colour(170ub, 180ub, 205ub)\nimage.line(points)\n\nimage.colour(30ub, 70ub, 140ub)\n\nfor point in points do\n    image.dot(point.x, point.y, 1.7)\nod\n\nimage.write(\"yellowstone.png\")\n\nimage.show(\"yellowstone.png\")",
+  "output": "<<image yellowstone.png>>\n",
+  "images": [
+    {
+      "name": "yellowstone.png",
+      "url": "/rosetta/yellowstone-sequence/02-plotting-the-strands/yellowstone.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "yellowstone-sequence/02-plotting-the-strands",
+  "hovers": [],
+  "diagnostics": []
+}

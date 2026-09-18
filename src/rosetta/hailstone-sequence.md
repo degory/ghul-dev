@@ -4,9 +4,15 @@ title: "Hailstone sequence"
 
 # Hailstone sequence
 
-<RosettaTask url="https://rosettacode.org/wiki/Hailstone_sequence" tags="number-theory,generators" :playground="true" />
+<RosettaTask url="https://rosettacode.org/wiki/Hailstone_sequence" tags="number-theory,graphics,generators" :playground="true" />
 
-<GhulExample name="rosetta-hailstone-sequence" run-to-see />
+## The sequence
+
+<GhulExample name="rosetta-hailstone-sequence-01-the-sequence" run-to-see />
+
+## Lengths plotted
+
+<GhulExample name="rosetta-hailstone-sequence-02-lengths-plotted" run-to-see />
 
 ## more tasks
 

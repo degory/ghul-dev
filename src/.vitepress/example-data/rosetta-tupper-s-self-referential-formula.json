@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-tupper-s-self-referential-formula",
+  "code": "use default\nuse Raster.IMAGE\n\nlet k =\n    bigint.parse(\n        \"960939379918958884971672962127852754715004339660\"\n        \"129306651505519271702802395266424689642842174350\"\n        \"718121267153782770623355993237280874144307891325\"\n        \"963941337723487857735749823926629715517173716995\"\n        \"165232890538221612403238855866184013235585136048\"\n        \"828693337902491454229288667081096184496091705183\"\n        \"454067827731551705405381627380967602565625016981\"\n        \"482083418783163849115590225610003652351370343874\"\n        \"461848378737238198224849863465033159410054974700\"\n        \"593138339226497249461751545728366702369745461014\"\n        \"655997933798537483143786841806593422227898388722\"\n        \"980000748404719\"\n    )\n\nlet cell = 6\n\nlit(x: int, y: int) -> bool =>\n    ((k + cast bigint(y)) / 17n >> (17 * x + y % 17)) % 2n =~ 1n\n\nlet image = IMAGE(106 * cell, 17 * cell)\n\nmark(x: int, y: int) is\n    let left = (105 - x) * cell\n    let top = y * cell\n\n    for down in 0..cell do\n        for across in 0..cell do\n            image.set_pixel(\n                left + across, top + down, 0ub, 0ub, 0ub\n            )\n        od\n    od\nsi\n\nfor y in 0..17 do\n    for x in 0..106 do\n        if lit(x, y) then\n            mark(x, y)\n        fi\n    od\nod\n\nimage.write(\"tupper.png\")\n\nimage.show(\"tupper.png\")",
+  "fullSource": "use default\nuse Raster.IMAGE\n\nlet k =\n    bigint.parse(\n        \"960939379918958884971672962127852754715004339660\"\n        \"129306651505519271702802395266424689642842174350\"\n        \"718121267153782770623355993237280874144307891325\"\n        \"963941337723487857735749823926629715517173716995\"\n        \"165232890538221612403238855866184013235585136048\"\n        \"828693337902491454229288667081096184496091705183\"\n        \"454067827731551705405381627380967602565625016981\"\n        \"482083418783163849115590225610003652351370343874\"\n        \"461848378737238198224849863465033159410054974700\"\n        \"593138339226497249461751545728366702369745461014\"\n        \"655997933798537483143786841806593422227898388722\"\n        \"980000748404719\"\n    )\n\nlet cell = 6\n\nlit(x: int, y: int) -> bool =>\n    ((k + cast bigint(y)) / 17n >> (17 * x + y % 17)) % 2n =~ 1n\n\nlet image = IMAGE(106 * cell, 17 * cell)\n\nmark(x: int, y: int) is\n    let left = (105 - x) * cell\n    let top = y * cell\n\n    for down in 0..cell do\n        for across in 0..cell do\n            image.set_pixel(\n                left + across, top + down, 0ub, 0ub, 0ub\n            )\n        od\n    od\nsi\n\nfor y in 0..17 do\n    for x in 0..106 do\n        if lit(x, y) then\n            mark(x, y)\n        fi\n    od\nod\n\nimage.write(\"tupper.png\")\n\nimage.show(\"tupper.png\")",
+  "output": "<<image tupper.png>>\n",
+  "images": [
+    {
+      "name": "tupper.png",
+      "url": "/rosetta/tupper-s-self-referential-formula/tupper.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "tupper-s-self-referential-formula",
+  "hovers": [],
+  "diagnostics": []
+}

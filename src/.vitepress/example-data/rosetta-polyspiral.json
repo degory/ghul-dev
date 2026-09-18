@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-polyspiral",
+  "code": "use default\nuse Raster.ANIMATION\nuse Raster.IMAGE\nuse System.Math\n\nlet size = 150\nlet frames = 72\nlet segments = 100\n\ndraw(image: IMAGE, increment: double) is\n    image.clear(15ub, 15ub, 25ub)\n    image.stroke(1.0D)\n\n    let x mut = 0.0D\n    let y mut = 0.0D\n    let length mut = 5.0D\n    let angle mut = increment\n\n    for segment in 0..segments do\n        let radians = angle * Math.pi / 180.0D\n        let next_x = x + length * Math.cos(radians)\n        let next_y = y + length * Math.sin(radians)\n        let fade = cast double(segment) / cast double(segments)\n\n        image.colour(\n            cast ubyte(255.0D * (1.0D - fade)),\n            cast ubyte(120.0D + 100.0D * fade),\n            255ub)\n        image.line(x, y, next_x, next_y)\n\n        x = next_x\n        y = next_y\n        length = length + 3.0D\n        angle = angle + increment\n    od\nsi\n\nlet image = IMAGE(size, size)\n\nimage.view(-250.0D, -250.0D, 250.0D, 250.0D)\n\nlet animation = ANIMATION(size, size)\n\nfor frame in 0..frames do\n    draw(image, 90.0D + 360.0D * cast double(frame) / cast double(frames))\n    animation.add(image, 100)\nod\n\nwrite_line(\"{frames} spirals, the turn between segments going full circle\")\n\nanimation.write(\"polyspiral.png\")\n\nanimation.show(\"polyspiral.png\")",
+  "fullSource": "use default\nuse Raster.ANIMATION\nuse Raster.IMAGE\nuse System.Math\n\nlet size = 150\nlet frames = 72\nlet segments = 100\n\ndraw(image: IMAGE, increment: double) is\n    image.clear(15ub, 15ub, 25ub)\n    image.stroke(1.0D)\n\n    let x mut = 0.0D\n    let y mut = 0.0D\n    let length mut = 5.0D\n    let angle mut = increment\n\n    for segment in 0..segments do\n        let radians = angle * Math.pi / 180.0D\n        let next_x = x + length * Math.cos(radians)\n        let next_y = y + length * Math.sin(radians)\n        let fade = cast double(segment) / cast double(segments)\n\n        image.colour(\n            cast ubyte(255.0D * (1.0D - fade)),\n            cast ubyte(120.0D + 100.0D * fade),\n            255ub)\n        image.line(x, y, next_x, next_y)\n\n        x = next_x\n        y = next_y\n        length = length + 3.0D\n        angle = angle + increment\n    od\nsi\n\nlet image = IMAGE(size, size)\n\nimage.view(-250.0D, -250.0D, 250.0D, 250.0D)\n\nlet animation = ANIMATION(size, size)\n\nfor frame in 0..frames do\n    draw(image, 90.0D + 360.0D * cast double(frame) / cast double(frames))\n    animation.add(image, 100)\nod\n\nwrite_line(\"{frames} spirals, the turn between segments going full circle\")\n\nanimation.write(\"polyspiral.png\")\n\nanimation.show(\"polyspiral.png\")",
+  "output": "72 spirals, the turn between segments going full circle\n<<image polyspiral.png>>\n",
+  "images": [
+    {
+      "name": "polyspiral.png",
+      "url": "/rosetta/polyspiral/polyspiral.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "polyspiral",
+  "hovers": [],
+  "diagnostics": []
+}
