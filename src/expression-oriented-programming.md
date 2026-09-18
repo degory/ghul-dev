@@ -10,6 +10,8 @@ An `if` yields the value of the chosen branch. Each branch is itself an expressi
 
 <GhulExample name="expression-oriented-programming-1" />
 
+An `if` with no `else` yields an optional, absent when no branch runs. See [conditional](/expressions#conditional).
+
 ## case as an expression
 
 A `case` yields the value of the matched arm. As an expression it needs an `else` arm, so every value is covered:
@@ -48,7 +50,7 @@ The value an arm produces is its last statement's, on the same rule as a parenth
 
 Where the value then goes is what the two uses differ on. An `if` used as an expression takes the value of the arm it chose; the same `if` used as a statement discards it. A loop body is the case where it always goes nowhere, since a loop yields through `break` rather than through its body's last statement.
 
-A terminating `;` on the last statement changes nothing here, or anywhere else: it separates two statements written on one line, and that is all it does.
+A `;` after the last statement has no effect on the value: it separates two statements written on one line, and that is all it does.
 
 ## block bodies return their tail
 

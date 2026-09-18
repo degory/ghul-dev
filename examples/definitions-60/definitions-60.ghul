@@ -1,0 +1,13 @@
+use IO.Std.write_line
+
+struct N(v: int) is
+    to_string() -> string => "{v}"
+si
+
+// >>>
+⊕(a: N, b: N) -> N => N(a.v + b.v)
+⊗(a: N, b: N) -> N => N(a.v * b.v)
+
+// ⊗ binds tighter than ⊕, as * binds tighter than +
+write_line("{N(1) ⊕ N(2) ⊗ N(3)}")
+// <<<

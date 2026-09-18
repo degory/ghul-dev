@@ -7,7 +7,7 @@ class RECTANGLE(width: int, height: int) is
         width * height
     si
 
-    // a terminated last statement is discarded, so this one returns explicitly
+    // return works in a body as well as a tail does
     describe() -> string is
         let label = "{width}x{height}"
 

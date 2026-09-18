@@ -1,0 +1,11 @@
+// expect: error
+use IO.Std.write_line
+
+let a = (1, "one")
+let b = (1, "one")
+
+// >>>
+write_line("{a =~ b}")    // true: compares element by element
+
+write_line("{a == b}")    // rejected: == is not defined on tuples
+// <<<

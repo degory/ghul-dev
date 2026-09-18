@@ -1,0 +1,16 @@
+use IO.Std.write_line
+
+// >>>
+@System.Flags()
+enum Access is
+    READ = 1,
+    WRITE = 2,
+    EXECUTE = 4
+si
+
+let granted = Access.READ | Access.WRITE
+
+write_line("{granted}")
+write_line("{granted & Access.WRITE == Access.WRITE}")
+write_line("{granted & Access.EXECUTE == Access.EXECUTE}")
+// <<<

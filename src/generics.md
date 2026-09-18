@@ -33,6 +33,26 @@ Generic argument types can be inferred from context for generic constructor invo
 
 <GhulExample name="generics-6" />
 
+A generic type used as a type needs its type arguments. Naming it without
+them is an error:
+
+<GhulExample name="generics-14" />
+
+## open generics
+
+An open generic is a generic type before any type argument is supplied.
+Only reflection can hold one, so it can only be named as the operand of a
+`typeof`. `BOX[_]` names the open generic, with one `_` for each type
+argument the type takes, and it is the type `get_generic_type_definition()`
+returns for any `BOX[T]`:
+
+<GhulExample name="generics-13" />
+
+A name can be declared at more than one generic arity, `BOX` and `BOX[T]`,
+in which case a bare `BOX` in a `typeof` names the one that takes no type
+arguments. `BOX[_]` names the generic one whatever other declarations
+there are.
+
 ## type-parameter constraints
 
 A type parameter can have one or more constraints, listed inside its declaration. Constraints both narrow the operations the generic body can perform on values of that type and restrict the actual types that callers can supply. The compiler enforces all constraints, both for ghūl types that declare them and for types imported from .NET assemblies.

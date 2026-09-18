@@ -1,0 +1,30 @@
+{
+  "name": "language-basics-33",
+  "snippet": false,
+  "code": "let wide = 0x20AC       // int: the C is a hex digit\nlet euro = 0x20AC`c     // char: the backtick separates the suffix\nlet byte_max = 0xFF`ub  // ubyte\n\nwrite_line(\"{wide} {euro} {byte_max}\")",
+  "fullSource": "use IO.Std.write_line\n\nlet wide = 0x20AC       // int: the C is a hex digit\nlet euro = 0x20AC`c     // char: the backtick separates the suffix\nlet byte_max = 0xFF`ub  // ubyte\n\nwrite_line(\"{wide} {euro} {byte_max}\")\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "8364 € 255\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "wide: int", "signature": "wide: int", "kindLabel": "global variable" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "euro: char", "signature": "euro: char", "kindLabel": "global variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 12, "text": "byte_max: ubyte", "signature": "byte_max: ubyte", "kindLabel": "global variable" },
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 17, "text": "wide: int", "signature": "wide: int", "kindLabel": "global variable" },
+    { "startLine": 5, "startColumn": 21, "endLine": 5, "endColumn": 24, "text": "euro: char", "signature": "euro: char", "kindLabel": "global variable" },
+    { "startLine": 5, "startColumn": 28, "endLine": 5, "endColumn": 35, "text": "byte_max: ubyte", "signature": "byte_max: ubyte", "kindLabel": "global variable" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 12, "tokenType": "property" },
+    { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 17, "tokenType": "property" },
+    { "startLine": 5, "startColumn": 21, "endLine": 5, "endColumn": 24, "tokenType": "property" },
+    { "startLine": 5, "startColumn": 28, "endLine": 5, "endColumn": 35, "tokenType": "property" }
+  ]
+}

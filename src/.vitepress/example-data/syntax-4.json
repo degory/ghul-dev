@@ -1,0 +1,22 @@
+{
+  "name": "syntax-4",
+  "snippet": false,
+  "code": "#!/usr/bin/env ghul\n\nIO.Std.write_line(\"hello from a script\")",
+  "fullSource": "#!/usr/bin/env ghul\n\nIO.Std.write_line(\"hello from a script\")\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "hello from a script\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 2, "text": "namespace IO", "signature": "namespace IO", "kindLabel": "" },
+    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 6, "text": "class IO.Std", "signature": "class IO.Std", "kindLabel": "class" },
+    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 17, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 2, "tokenType": "namespace" },
+    { "startLine": 3, "startColumn": 4, "endLine": 3, "endColumn": 6, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 17, "tokenType": "method", "modifiers": "static" }
+  ]
+}

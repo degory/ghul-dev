@@ -1,0 +1,30 @@
+{
+  "name": "syntax-6",
+  "snippet": false,
+  "code": "use Suit.*\nuse LIMITS.*\n\nwrite_line(\"{HEARTS} and {SPADES} run from {lowest} to {highest}\")",
+  "fullSource": "use IO.Std.write_line\n\nenum Suit is\n    HEARTS,\n    DIAMONDS,\n    CLUBS,\n    SPADES\nsi\n\nclass LIMITS is\n    lowest: int static => 1\n    highest: int static => 13\nsi\n\nuse Suit.*\nuse LIMITS.*\n\nwrite_line(\"{HEARTS} and {SPADES} run from {lowest} to {highest}\")\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "HEARTS and SPADES run from 1 to 13\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "enum Suit", "signature": "enum Suit", "kindLabel": "enum" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "class LIMITS", "signature": "class LIMITS", "kindLabel": "class" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 19, "text": "HEARTS = 0", "signature": "HEARTS = 0", "kindLabel": "enum member" },
+    { "startLine": 4, "startColumn": 27, "endLine": 4, "endColumn": 32, "text": "SPADES = 3", "signature": "SPADES = 3", "kindLabel": "enum member" },
+    { "startLine": 4, "startColumn": 45, "endLine": 4, "endColumn": 50, "text": "lowest: int", "signature": "lowest: int", "kindLabel": "pure class property" },
+    { "startLine": 4, "startColumn": 57, "endLine": 4, "endColumn": 63, "text": "highest: int", "signature": "highest: int", "kindLabel": "pure class property" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "enum" },
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "class" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 19, "tokenType": "enumMember" },
+    { "startLine": 4, "startColumn": 27, "endLine": 4, "endColumn": 32, "tokenType": "enumMember" },
+    { "startLine": 4, "startColumn": 45, "endLine": 4, "endColumn": 50, "tokenType": "property", "modifiers": "static" },
+    { "startLine": 4, "startColumn": 57, "endLine": 4, "endColumn": 63, "tokenType": "property", "modifiers": "static" }
+  ]
+}

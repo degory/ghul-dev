@@ -1,0 +1,8 @@
+// >>>
+entry(args: string[], env: Ghul.Environment) -> int is
+    IO.Std.write_line("{args.count} argument(s)")
+    IO.Std.write_line(env["GHUL_EXAMPLE_GREETING"] ?? "no greeting set")
+
+    return 0
+si
+// <<<

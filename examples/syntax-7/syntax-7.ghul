@@ -1,0 +1,14 @@
+use IO.Std.write_line
+
+// >>>
+use IndexedName = (index: int, name: string)
+use Pair[A, B] = (first: A, second: B)
+
+swap[A, B](p: Pair[A, B]) -> Pair[B, A] => (first = p.second, second = p.first)
+
+let item: IndexedName = (index = 2, name = "two")
+let swapped = swap((first = 1, second = "one"))
+
+write_line("{item.index} {item.name}")
+write_line("{swapped.first} {swapped.second}")
+// <<<

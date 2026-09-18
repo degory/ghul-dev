@@ -1,0 +1,19 @@
+use IO.Std.write_line
+
+parse_port(s: string) -> int? is
+    let port: int mut
+
+    return if int.try_parse(s, port ref) then port else null fi
+si
+
+in_range(n: int) -> int? => if n > 0 /\ n < 65536 then n else null fi
+
+label(n: int) -> string => "port {n}"
+
+// >>>
+for text in ["8080", "99999", "http"] do
+    // each '~>' stage runs only when the value before it is present
+    let shown = text |> parse_port() ~> in_range() ~> label() ?? "no port"
+    write_line("{text}: {shown}")
+od
+// <<<

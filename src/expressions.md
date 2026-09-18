@@ -92,6 +92,12 @@ Conditional expressions allow you to evaluate different expressions based on a c
 
 <GhulExample name="expressions-18" />
 
+Without an `else`, an `if` expression yields an optional: the branch's value when a branch runs, and the absent value when none does:
+
+<GhulExample name="expressions-31" />
+
+Where the context needs the non-optional type, the `else` is still required.
+
 ## case expression
 
 A `case` expression yields the value of the matched arm. It needs an `else` arm so that every value is covered; the arm values and the `else` agree on a type:
@@ -167,6 +173,8 @@ A parenthesised block is a sequence of statements in `(` and `)` that produces a
 <GhulExample name="expressions-28" />
 
 A `return E` inside a block yields from the block, not from the enclosing function.
+
+`val` ... `lav` is the historical spelling of the same construct, and is headed for removal. Write the parenthesised form.
 
 These are the main types of expressions in ghūl. They can be combined and nested to form more complex expressions and statements:
 

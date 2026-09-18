@@ -23,6 +23,103 @@ dotnet test    # run a test project
 
 A ghūl project can reference NuGet packages, produce libraries or executables, and be packed and published exactly like a C# project.
 
+## running a script
+
+The [`ghul.cli`{:text}](https://www.nuget.org/packages/ghul.cli) tool runs a
+single `.ghul`{:text} file with no project file. It installs its own copy of
+the compiler the first time it needs one, and caches each compiled script, so
+a script that has not changed starts without compiling again:
+
+```sh
+dotnet tool install -g ghul.cli
+ghul greet.ghul world
+```
+
+Everything after the script's name is passed to it as its command-line
+arguments. On Linux a script can start with a `#!`{:text} line naming `ghul`
+and then run like any other executable:
+
+```ghul
+#!/usr/bin/env ghul
+
+IO.Std.write_line("hello, {if args.count > 0 then args[0] else "world" fi}")
+```
+
+```sh
+chmod +x greet.ghul
+./greet.ghul world
+```
+
+`ghul compile <script>`{:sh} compiles a script without running it and prints
+the path of the result, and `ghul -`{:sh} reads the script from standard
+input.
+
+## the REPL
+
+`ghul repl`{:sh} starts an interactive session. Each line you type is
+compiled and run as soon as it is complete, and what it defines stays
+available to every later line. A line that leaves something open, such as a
+block with no closing keyword, waits for more with a `|`{:text} prompt, and
+a blank line submits whatever has been typed. A submission that ends on a
+value shows the value:
+
+```plaintext
+> let names mut = LIST[string]()
+> names.add("first")
+> for name in ["second", "third"] do
+|     names.add(name)
+| od
+> names
+[first, second, third]
+```
+
+The compiler's default imports (`use default`) are in force in every
+submission, and a `use` you type stays in force for the rest of the session.
+`ghul repl --no-default-use`{:sh} leaves the default imports out. Defining a
+name again replaces it for later submissions and can read the value it
+replaces, so `let x = x + 1` works.
+
+At a terminal the line can be edited as it is typed: the arrow keys move
+along it and bring back earlier lines, and Tab completes the name being
+typed from everything the session has defined. `:complete TEXT`{:text} lists
+what could follow some text, `:hover TEXT`{:text} shows what the end of it
+names, `:reset`{:text} starts a fresh session and `:quit`{:text} leaves.
+
+Messages call the third submission `cell-3`{:text}. In code it is `cell3`,
+which is how a later submission reaches something the third one defined, as
+in `cell3.x`. Each submission is compiled as a small library of its own, so a
+name that begins with `_` stays private to the submission that defines it.
+
+The session keeps one compiler running for as long as it lasts, which is what
+makes each submission answer in tens of milliseconds.
+`ghul repl --no-server`{:sh} starts the compiler for each submission instead,
+which takes about a second each.
+
+## notebooks
+
+The [`ghul.jupyter`{:text}](https://www.nuget.org/packages/ghul.jupyter) tool
+is a [Jupyter](https://jupyter.org) kernel for ghūl: each notebook cell is a
+submission to the same kind of session the REPL runs. Install it and register
+it with Jupyter:
+
+```sh
+dotnet tool install -g ghul.jupyter
+ghul-jupyter install
+```
+
+To use it in VS Code, install the Jupyter extension, then reload the window
+(**Developer: Reload Window**), since the Jupyter extension only looks for
+kernels when it starts. Open or create a `.ipynb`{:text} file, choose
+**Jupyter Kernel...** from the kernel picker, and pick **ghūl**. The ghūl
+extension highlights the cells. A cell keeps the language it was created
+with, so cells made before the ghūl kernel was chosen stay in their earlier
+language until you change it from the language indicator at the cell's
+bottom right.
+
+The kernel compiles cells with the compiler `ghul.cli`{:text} installs, or
+the `ghul-compiler`{:text} on the path. Installing `ghul.cli`{:text} and
+running any script once is the simplest way to have one.
+
 ## diagnostics
 
 Every warning has a slug, shown in its message. A slug can be silenced with `@suppress("<slug>")` on a declaration, a whole file, or the project, or re-levelled on the compiler command line: `--warn-as-hint <slug,…>` downgrades matching warnings to editor-only hints that never appear in a batch build, and `--warn-as-info <slug,…>` downgrades them to informational diagnostics that still show in a build. Suppression wins over a demotion.

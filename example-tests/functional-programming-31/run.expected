@@ -1,0 +1,3 @@
+add_3(4): 7
+apply(add, 1, 2): 3
+81 81 9, computed 2 times

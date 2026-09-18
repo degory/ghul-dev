@@ -57,6 +57,50 @@ The definitions in a file can be global functions, properties, classes, structs,
 
 A file that declares any `namespace` must place all of its definitions inside namespaces. A file with no namespace at all has its definitions placed in a private namespace of their own, which is convenient for small programs and tests. Namespaces, `use` and symbol visibility are covered in full under [definitions](/definitions.html#namespaces).
 
+### a `#!` first line
+
+A file can begin with a `#!` line naming an interpreter, as a shell script does. The compiler recognises it only as the very first line, and skips it:
+
+<GhulExample name="syntax-4" />
+
+With [ghul-cli](/tooling.html) installed, such a file can be marked executable and run directly.
+
+### file-level pragmas
+
+An ordinary pragma applies to the one definition written after it. A pragma written with two `@` signs applies to the whole file instead, and must come before anything else in it, after a `#!` line if there is one:
+
+<GhulExample name="syntax-3" />
+
+`@@suppress` is the way to suppress a warning reported at a top-level statement, which has no enclosing definition for an ordinary pragma to wrap. `@@precedence` sets an operator's precedence for the rest of the file.
+
+## imports
+
+A file sees the built-in types, such as `int` and `string`, and the operators on them without any `use`: they are declared in the namespace `Ghul.Intrinsics`, which every file imports implicitly. Everything else the runtime library provides is imported like any other library, with `use Ghul` for the function combinators and `use Ghul.Pipes` for the pipe functions. The rest of `use` is covered under [definitions](/definitions.html#importing-symbols-with-use).
+
+### `use default`
+
+`use default` imports the names most programs want before they want anything else: `IO.Std.write_line`, the pipe functions in `Ghul.Pipes`, and the collections in `Collections`:
+
+<GhulExample name="syntax-5" />
+
+Like any `use`, it applies only to the file or namespace block it is written in. A project can replace the set with its own list, with the `--default-use` compiler flag or the `<GhulDefaultUses>`{:text} MSBuild property.
+
+### wildcard imports
+
+`use X.*` imports every usable member of `X` at once. On an enum it imports the members; on a class, struct or union it imports the static members, and a union's variants:
+
+<GhulExample name="syntax-6" />
+
+Each name is imported exactly as if it had been named in a `use` of its own, so a clash with a name already in scope is the usual duplicate-use error.
+
+### type aliases
+
+A `use` whose right-hand side is a type gives that type a second name. An alias can take type parameters:
+
+<GhulExample name="syntax-7" />
+
+An alias is another spelling of the type it names rather than a new type, so a value of either is accepted wherever the other is expected.
+
 ## top-level statements
 
 A file with no `namespace` can also have statements at its top level. They run in source order as the program's entry point, so a short program needs no `entry` function:

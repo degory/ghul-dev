@@ -1,0 +1,32 @@
+{
+  "name": "language-basics-36",
+  "snippet": false,
+  "code": "let low_bits = 0x0F\n\nwrite_line(\"{\\low_bits}\")       // every bit flipped: -16\nwrite_line(\"{\\low_bits & 0xFF}\")  // 240",
+  "fullSource": "use IO.Std.write_line\n\nlet low_bits = 0x0F\n\nwrite_line(\"{\\low_bits}\")       // every bit flipped: -16\nwrite_line(\"{\\low_bits & 0xFF}\")  // 240\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "-16\n240\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 12, "text": "low_bits: int", "signature": "low_bits: int", "kindLabel": "global variable" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 22, "text": "low_bits: int", "signature": "low_bits: int", "kindLabel": "global variable" },
+    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "text": "int.\\(a: int) -> int", "signature": "int.\\(a: int) -> int", "kindLabel": "innate function arithmetic.not" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 22, "text": "low_bits: int", "signature": "low_bits: int", "kindLabel": "global variable" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "text": "int.\\(a: int) -> int", "signature": "int.\\(a: int) -> int", "kindLabel": "innate function arithmetic.not" },
+    { "startLine": 4, "startColumn": 24, "endLine": 4, "endColumn": 24, "text": "int.&(a: int, b: int) -> int", "signature": "int.&(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.and" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 12, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "tokenType": "operator" },
+    { "startLine": 3, "startColumn": 15, "endLine": 3, "endColumn": 22, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 4, "startColumn": 14, "endLine": 4, "endColumn": 14, "tokenType": "operator" },
+    { "startLine": 4, "startColumn": 15, "endLine": 4, "endColumn": 22, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 24, "endLine": 4, "endColumn": 24, "tokenType": "operator" }
+  ]
+}

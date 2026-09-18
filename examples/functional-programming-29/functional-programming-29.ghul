@@ -1,0 +1,16 @@
+use IO.Std.write_line
+use Ghul.Pipes
+
+// >>>
+// from counts upwards without end; take bounds it
+let squares = from(1) |> map(n => n * n) |> take(5)
+write_line("squares: {squares}")
+
+// from with a step, and repeat with a count
+write_line("evens: {from(0, 2) |> take(4)}")
+write_line("dashes: {repeat("-", 5) |> join("")}")
+
+// a list of a given size, filled with one value
+let seen = repeat(false, 3) |> collect_list()
+write_line("seen: {seen.count} values, first {seen[0]}")
+// <<<

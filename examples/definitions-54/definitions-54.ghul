@@ -1,0 +1,18 @@
+use IO.Std.write_line
+
+// >>>
+total_score(scores: int[]) -> int is
+    // a named function among the statements of a body:
+    bonus(score: int) -> int => if score > 90 then 5 else 0 fi
+
+    let total mut = 0
+
+    for score in scores do
+        total = total + score + bonus(score)
+    od
+
+    total
+si
+// <<<
+
+write_line("{total_score([95, 80, 91])}")
