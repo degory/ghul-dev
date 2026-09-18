@@ -164,6 +164,36 @@ direction; `f << g` applies `g` and then `f`, the mathematical reading:
 
 <GhulExample name="functional-programming-26" />
 
+## function combinators
+
+The runtime also supplies the common function combinators in namespace
+`Ghul`, next to `>>` and `<<`. `curry` turns a two-argument function into
+one that takes its arguments one at a time, and `uncurry` turns it back.
+`apply` calls a function with the rest of its own arguments. `memoize`
+returns a function that computes its result once for each distinct set of
+arguments and answers repeated calls from a cache, and `retry` returns one
+that calls the function again, up to a given number of attempts, when it
+throws:
+
+<GhulExample name="functional-programming-31" />
+
+## argument packs
+
+A type parameter written with a trailing `..`, as in `[T..]`, is an
+argument pack: it stands for however many arguments a call supplies,
+collected into a tuple. A formal typed `T.. -> U` takes a function of that
+many parameters, and a formal typed `T..` takes the call's remaining
+arguments. Together they let one function accept a function of any arity
+and the arguments to call it with:
+
+<GhulExample name="functional-programming-32" />
+
+A pack holds at most seven arguments, the size of the largest tuple.
+Declare the spread formal `v: T..` last, since it takes every argument
+after it. A caller that already holds the tuple can pass it in place of
+the separate arguments. The runtime's `apply`, `memoize` and `retry` are
+written this way, and so are the pipe stages that take a function.
+
 ## currying
 
 A curried function takes its arguments one at a time: each call takes one
@@ -203,6 +233,19 @@ present, and `if let` tests and unwraps in one step:
 
 Optional types have [their own page](/optional-types.html).
 
+## the propagating thread-first operator
+
+`~>` is the thread-first operator `|>` for a value that might be absent. If
+the value on its left is present, it is passed to the call on its right,
+unwrapped. If it is absent, the call is skipped, its arguments are not
+evaluated, and the result is absent. The result is always optional, so a
+chain of `~>` stages usually ends with `??`:
+
+<GhulExample name="functional-programming-28" />
+
+`|>` and `~>` mix freely in one chain: a `|>` stage runs whatever it is
+given, and a `~>` stage runs only when there is something to run on.
+
 ## lazy sequences
 
 Lazy infinite and finite sequences are expressed with the
@@ -237,6 +280,19 @@ and the anonymous function's yield expression.
 The factory returns `Pipe[T]`, so combinators like `take`, `filter`,
 `map`, `zip`, and `index` chain straight onto it. The state type does not
 appear in that result, so consumers never see how a stream is stepped.
+
+Two simpler seeds start a pipe with no source to draw from. `from(start)`
+counts upwards from `start` without end, and `from(start, step)` counts
+in steps of `step`. `repeat(value)` yields the same value without end, and
+`repeat(value, count)` yields it `count` times. An unbounded seed needs a
+stage that stops pulling, such as `take`:
+
+<GhulExample name="functional-programming-29" />
+
+A pipe normally recomputes its elements each time it is read. `memo` reads
+its source once, keeps what it read, and replays it on every later read:
+
+<GhulExample name="functional-programming-30" />
 
 [Generators](/async-and-generators.html) are the other way to a lazy
 sequence: a function containing `yield` produces its elements on demand,

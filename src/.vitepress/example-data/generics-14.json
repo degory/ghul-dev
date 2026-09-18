@@ -1,0 +1,24 @@
+{
+  "name": "generics-14",
+  "snippet": false,
+  "code": "// a generic type named without its type arguments is an error\nlet boxes = Collections.LIST[BOX]()",
+  "fullSource": "// expect: error\nclass BOX[T](value: T)\n\n// a generic type named without its type arguments is an error\nlet boxes = Collections.LIST[BOX]()\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [
+    { "startLine": 2, "startColumn": 30, "endLine": 2, "endColumn": 33, "severity": "error", "message": "type BOX requires 1 type argument" }
+  ],
+  "hovers": [
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "text": "boxes: Collections.LIST[!!!]", "signature": "boxes: Collections.LIST[!!!]", "kindLabel": "global variable" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 23, "text": "namespace Collections", "signature": "namespace Collections", "kindLabel": "" },
+    { "startLine": 2, "startColumn": 25, "endLine": 2, "endColumn": 28, "text": "Collections.LIST[!!!].init()", "signature": "Collections.LIST[!!!].init()", "kindLabel": "constructor" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 9, "tokenType": "property" },
+    { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 23, "tokenType": "namespace" },
+    { "startLine": 2, "startColumn": 25, "endLine": 2, "endColumn": 28, "tokenType": "method" }
+  ]
+}

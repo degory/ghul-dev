@@ -1,0 +1,16 @@
+// >>>
+@@suppress("definite-return")
+
+use IO.Std.write_line
+
+// would otherwise warn that it can fall off the end without a value
+first_even(xs: int[]) -> int is
+    for x in xs do
+        if x % 2 == 0 then
+            return x
+        fi
+    od
+si
+
+write_line("{first_even([3, 5, 8, 9])}")
+// <<<

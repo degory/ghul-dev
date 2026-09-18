@@ -1,0 +1,7 @@
+use IO.Std.write_line
+
+// >>>
+write_line("€")          // the euro sign
+write_line("😀")    // one character above U+FFFF, as a surrogate pair
+write_line("Acat")       // exactly four digits, so this is Acat
+// <<<

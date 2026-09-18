@@ -38,11 +38,27 @@ In ghūl functions consist of a name and a parenthesized formal arguments list, 
 
 `=>` introduces a single-expression body, while the `is` and `si` keywords are used to delimit block bodies.
 
-To return a value from a block body, you can write it as the last statement with no terminating `;`, instead of writing `return`. Any statement that produces a value works: an expression, an `if`, a `case`, a parenthesised block. With the `;`, the value is discarded, like the value of any other expression statement. See [block bodies return their tail](/expression-oriented-programming.html#block-bodies-return-their-tail) for the rule in full.
+To return a value from a block body, you can end the body on it instead of writing `return`. Any statement that produces a value works: an expression, an `if`, a `case`, a parenthesised block. Whether the last statement ends in `;` makes no difference to what it returns. See [block bodies return their tail](/expression-oriented-programming.html#block-bodies-return-their-tail) for the rule in full.
 
 <GhulExample name="definitions-53" />
 
-Functions can only be defined at global scope. Functions can be generic, which will be covered later. Function names should be in `snake_case`.
+A function can also be written among the statements of a body, with a name. It is a local variable holding a function literal, so its argument and return types can be inferred as a literal's are, and it can call itself by its own name:
+
+<GhulExample name="definitions-54" />
+
+Functions can be generic, which will be covered later. Function names should be in `snake_case`.
+
+### the entry point
+
+A program starts at a function named `entry`, or at the statements written at the top level of a file with no namespace. `entry` can take the command-line arguments as a `string[]`, the process environment as a `Ghul.Environment`, both, or neither, and returns either nothing or an `int` exit status:
+
+<GhulExample name="definitions-55" />
+
+Top-level statements see the same two values as `args` and `env`.
+
+A function that the program would start at but that has any other shape is reported, naming what rules it out:
+
+<GhulExample name="definitions-56" />
 
 ## arguments
 
@@ -75,6 +91,12 @@ Two postfix modifiers control the class hierarchy. Without `open`, a class can b
 
 Because the compiler knows every subclass of a closed class, an `isa` test can narrow in the else branch too: ruling out the tested subclass leaves the others, and when an `abstract` root has exactly two subclasses, ruling out one leaves the other. See [type narrowing](/type-narrowing.html).
 
+A class has no `=~` unless it defines one. `@equality()` before a class asks the compiler to write `=~` and a matching `get_hash_code`, comparing the members that hold the class's state, so .NET collections find an equal value as well as the same object:
+
+<GhulExample name="definitions-57" />
+
+Two values are equal only when they are the same class. A subclass of a class that asks for equality has to ask for its own, or define `=~` and `get_hash_code` itself. `@equality()` cannot be used on an `open` class, or on one that already defines any of `=~`, `<>`, `get_hash_code` or `equals`.
+
 Classes can only be defined at global scope. Classes can be generic, which will be covered later. Concrete class names should be in `MACRO_CASE`. Abstract class names should be in `PascalCase`.
 
 ### structs
@@ -88,7 +110,11 @@ Structs are constructed the same way as classes, with a constructor expression:
 A struct defines a new value type. Assigning a struct copies all of its fields, so the copy and the original are independent afterwards:
 <GhulExample name="definitions-12" />
 
-`==` is not defined for structs. To give a struct an equality operator, define `=~`, described under [defining operators](#operators) and, for the .NET side, under [making your own types work with .NET](/dotnet-integration.html#equality).
+`==` is not defined for structs: it would compare the bytes of the value rather than its members. `=~` compares structs instead. A struct whose members are all public and that declares no equality of its own is given `=~` and a matching `get_hash_code`, comparing its members one by one:
+
+<GhulExample name="definitions-58" />
+
+A struct with a non-public member, or one that declares any of `=~`, `<>`, `get_hash_code` or `equals`, gets none of this, and defines its own equality as described under [defining operators](#operators) and, for the .NET side, under [making your own types work with .NET](/dotnet-integration.html#equality).
 
 Structs can only be defined at global scope. Structs can be generic, which will be covered later. Struct names should be in `MACRO_CASE`.
 
@@ -145,7 +171,13 @@ An enum consists of a name and then an enum body, which contains one or more ele
 
 Enums can only be defined at global scope. An enum type name should be in `PascalCase`, and its members in `MACRO_CASE`.
 
-Enum values compare for equality and order: `=~` and `==` compare by the underlying integer, and `<`, `<=`, `>` and `>=` order by it. `=~` on an optional enum is not supported; narrow the value first. An individual member can be imported by name - `use Some.Namespace.Suit.HEARTS;` - as well as reached through the type.
+Enum values compare for equality and order: `=~` and `==` compare by the underlying integer, and `<`, `<=`, `>` and `>=` order by it. `=~` works over an optional enum as it does over any other optional. An individual member can be imported by name - `use Some.Namespace.Suit.HEARTS` - as well as reached through the type.
+
+An enum marked `@System.Flags()` also gets the bitwise operators `&`, `|`, `^` and the unary `\`, each taking and returning the enum's own type, and its values print as the names they combine:
+
+<GhulExample name="definitions-59" />
+
+An enum without the attribute has none of the four, since its members are not meant to combine.
 
 ### partial and impl blocks
 
@@ -207,7 +239,11 @@ An operator is a function or method whose name is an operator symbol rather than
 
 Written as a global function or a `static` member instead, an operator takes both operands as parameters: `+(a: VECTOR, b: VECTOR) -> VECTOR`. A prefix operator is always a one-parameter function, defined globally or in the operand's type.
 
-Every operator has a precedence taken from its first character, so an operator starting with `*` binds tighter than one starting with `+`, with no declaration needed. The `@precedence` pragma places an operator in a specific band when the default doesn't suit it.
+Every operator has a precedence taken from its first character, so an operator starting with `*` binds tighter than one starting with `+`, with no declaration needed. Unicode symbols count as operator characters and take the precedence of the ASCII operator they resemble, so `⊗` binds like `*` and `⊕` like `+`:
+
+<GhulExample name="definitions-60" />
+
+The `@precedence` pragma places an operator in a specific band when the default doesn't suit it: before a definition it covers that definition, and written as `@@precedence` at the start of a file it covers the rest of the file.
 
 The comparison operators come from two backing operators. Define `<>`, a three-way ordering that returns a negative, zero, or positive `int`, and `<`, `<=`, `>`, and `>=` follow from it; define `=~`, an equality returning `bool`, and `!~` follows as its negation:
 
@@ -302,6 +338,8 @@ Symbols can be brought into the current namespace instance's scope using the use
 
 `use` applied to a namespace imports all symbols from that namespace:
 <GhulExample name="definitions-32" />
+
+The other forms of `use` - `use default`, wildcard imports and type aliases - are covered under [imports](/syntax.html#imports).
 
 Note that `use` only applies within the current `namespace` definition. It does not import a symbol into all instances of the current namespace:
 

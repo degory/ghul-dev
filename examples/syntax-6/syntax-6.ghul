@@ -1,0 +1,20 @@
+use IO.Std.write_line
+
+enum Suit is
+    HEARTS,
+    DIAMONDS,
+    CLUBS,
+    SPADES
+si
+
+class LIMITS is
+    lowest: int static => 1
+    highest: int static => 13
+si
+
+// >>>
+use Suit.*
+use LIMITS.*
+
+write_line("{HEARTS} and {SPADES} run from {lowest} to {highest}")
+// <<<

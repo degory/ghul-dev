@@ -6,6 +6,35 @@ ghūl is hosted on and targets .NET 10 and can consume most types in .NET assemb
 
 The ghūl compiler is driven by MSBuild and uses the .NET SDK targets for most of the build process. Provided you reference the ghūl runtime library package, things should work as you'd expect for any other .NET SDK project. You can add package references, build assemblies and pack NuGet packages etc. all using the normal `dotnet`{:text} command line tools.
 
+### embedded resources
+
+An `EmbeddedResource` item builds a file into the assembly, as it does in a
+C# project:
+
+```xml
+<PropertyGroup>
+    <RootNamespace>Greeter</RootNamespace>
+</PropertyGroup>
+
+<ItemGroup>
+    <EmbeddedResource Include="data/greeting.txt" />
+</ItemGroup>
+```
+
+The resource is named the way C# names it: the project's `RootNamespace`,
+then the file's folder path with each separator turned into a dot, then the
+file name. A `LogicalName` on the item replaces that name. The program reads
+the resource back through reflection:
+
+```ghul
+let assembly = System.Reflection.Assembly.get_executing_assembly()
+
+let use stream = assembly.get_manifest_resource_stream("Greeter.data.greeting.txt")!
+let use reader = IO.StreamReader(stream)
+
+write_line(reader.read_to_end())
+```
+
 ## name mangling
 When consuming C# code the ghūl compiler transforms symbol names to better match ghūl conventions:
 
@@ -47,26 +76,29 @@ Some commonly used namespace and type names are re-mapped in line with ghūl con
 
 ### primitive types
 
+The primitive types are declared in `Ghul.Intrinsics`, which every file sees without a `use`:
+
 | Original Type     | Mapped Type          |
 |-------------------|----------------------|
-| `System.Void`     | `Ghul.void`          |
-| `System.Boolean`  | `Ghul.bool`          |
-| `System.Char`     | `Ghul.char`          |
-| `System.Byte`     | `Ghul.ubyte`         |
-| `System.SByte`    | `Ghul.byte`          |
-| `System.UInt16`   | `Ghul.ushort`        |
-| `System.Int16`    | `Ghul.short`         |
-| `System.UInt32`   | `Ghul.uint`          |
-| `System.Int32`    | `Ghul.int`           |
-| `System.UInt64`   | `Ghul.ulong`         |
-| `System.Int64`    | `Ghul.long`          |
-| `System.UIntPtr`  | `Ghul.uword`         |
-| `System.IntPtr`   | `Ghul.word`          |
-| `System.Single`   | `Ghul.single`        |
-| `System.Double`   | `Ghul.double`        |
-| `System.Decimal`  | `Ghul.decimal`       |
-| `System.Object`   | `Ghul.object`        |
-| `System.String`   | `Ghul.string`        |
+| `System.Void`     | `void`               |
+| `System.Boolean`  | `bool`               |
+| `System.Char`     | `char`               |
+| `System.Byte`     | `ubyte`              |
+| `System.SByte`    | `byte`               |
+| `System.UInt16`   | `ushort`             |
+| `System.Int16`    | `short`              |
+| `System.UInt32`   | `uint`               |
+| `System.Int32`    | `int`                |
+| `System.UInt64`   | `ulong`              |
+| `System.Int64`    | `long`               |
+| `System.UIntPtr`  | `uword`              |
+| `System.IntPtr`   | `word`               |
+| `System.Single`   | `single`             |
+| `System.Double`   | `double`             |
+| `System.Decimal`  | `decimal`            |
+| `System.Object`   | `object`             |
+| `System.String`   | `string`             |
+| `System.Numerics.BigInteger` | `bigint` |
 
 ## making your own types work with .NET
 
@@ -80,7 +112,7 @@ The mappings above are about reaching into .NET. This section is the other direc
 
 `System.HashCode.combine` is the usual way to build the hash from the same members `=~` reads.
 
-The hash is not generated for you, because an operator is free to ignore members it does not care about, and a member-wise hash would then disagree with it. A type that defines neither is consistent as it stands, comparing and hashing by identity, so a type that defines only `=~` is reported as `equality-without-hash` and left alone rather than half-converted.
+The hash is not generated for an `=~` you write yourself, because an operator is free to ignore members it does not care about, and a member-wise hash would then disagree with it. Where the compiler writes the operator as well, for a class marked [`@equality()`](/definitions.html) or for a struct whose members are all public, it writes the matching hash with it. A type that defines neither is consistent as it stands, comparing and hashing by identity, so a type that defines only `=~` is reported as `equality-without-hash` and left alone rather than half-converted.
 
 A value type hides this for a while: .NET's default equality for a struct is member-wise, so a struct that skips `get_hash_code` often behaves correctly by coincidence and then diverges the moment its `=~` stops agreeing with a member-wise comparison. The warning fires either way, and is worth heeding either way.
 

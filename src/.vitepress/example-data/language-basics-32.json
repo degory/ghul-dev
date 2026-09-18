@@ -1,0 +1,22 @@
+{
+  "name": "language-basics-32",
+  "snippet": false,
+  "code": "write_line(\"€\")          // the euro sign\nwrite_line(\"😀\")    // one character above U+FFFF, as a surrogate pair\nwrite_line(\"Acat\")       // exactly four digits, so this is Acat",
+  "fullSource": "use IO.Std.write_line\n\nwrite_line(\"€\")          // the euro sign\nwrite_line(\"😀\")    // one character above U+FFFF, as a surrogate pair\nwrite_line(\"Acat\")       // exactly four digits, so this is Acat\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "€\n😀\nAcat\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "tokenType": "method", "modifiers": "static" }
+  ]
+}

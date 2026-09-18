@@ -1,0 +1,32 @@
+{
+  "name": "language-basics-35",
+  "snippet": false,
+  "code": "write_line(\"{a =~ b}\")    // true: compares element by element\n\nwrite_line(\"{a == b}\")    // rejected: == is not defined on tuples",
+  "fullSource": "// expect: error\nuse IO.Std.write_line\n\nlet a = (1, \"one\")\nlet b = (1, \"one\")\n\nwrite_line(\"{a =~ b}\")    // true: compares element by element\n\nwrite_line(\"{a == b}\")    // rejected: == is not defined on tuples\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [
+    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 20, "severity": "error", "message": "== cannot be applied to values of type (int, string) [help: use =~ to compare by value]" }
+  ],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "text": "a: (int, string)", "signature": "a: (int, string)", "kindLabel": "global variable" },
+    { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 19, "text": "b: (int, string)", "signature": "b: (int, string)", "kindLabel": "global variable" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "text": "a: (int, string)", "signature": "a: (int, string)", "kindLabel": "global variable" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 19, "text": "b: (int, string)", "signature": "b: (int, string)", "kindLabel": "global variable" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 17, "text": "Ghul.Intrinsics.==[(int, string)](\n    a: (int, string),\n    b: (int, string)\n) -> bool", "signature": "Ghul.Intrinsics.==[(int, string)](\n    a: (int, string),\n    b: (int, string)\n) -> bool", "kindLabel": "innate function compare.value" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 1, "startColumn": 14, "endLine": 1, "endColumn": 14, "tokenType": "property" },
+    { "startLine": 1, "startColumn": 19, "endLine": 1, "endColumn": 19, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 14, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 16, "endLine": 3, "endColumn": 17, "tokenType": "operator" },
+    { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 19, "tokenType": "property" }
+  ]
+}

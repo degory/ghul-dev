@@ -1,0 +1,14 @@
+use IO.Std.write_line
+
+class BOX[T](value: T)
+
+// >>>
+let closed = typeof BOX[int]
+
+// BOX[_] names the open generic, before any type argument is supplied
+let open = typeof BOX[_]
+
+write_line("closed: {closed.name}, generic: {closed.is_generic_type}")
+write_line("open: {open.name}, definition: {open.is_generic_type_definition}")
+write_line("same definition: {closed.get_generic_type_definition() == open}")
+// <<<

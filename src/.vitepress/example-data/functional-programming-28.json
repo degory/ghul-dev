@@ -1,0 +1,34 @@
+{
+  "name": "functional-programming-28",
+  "snippet": false,
+  "code": "for text in [\"8080\", \"99999\", \"http\"] do\n    // each '~>' stage runs only when the value before it is present\n    let shown = text |> parse_port() ~> in_range() ~> label() ?? \"no port\"\n    write_line(\"{text}: {shown}\")\nod",
+  "fullSource": "use IO.Std.write_line\n\nparse_port(s: string) -> int? is\n    let port: int mut\n\n    return if int.try_parse(s, port ref) then port else null fi\nsi\n\nin_range(n: int) -> int? => if n > 0 /\\ n < 65536 then n else null fi\n\nlabel(n: int) -> string => \"port {n}\"\n\nfor text in [\"8080\", \"99999\", \"http\"] do\n    // each '~>' stage runs only when the value before it is present\n    let shown = text |> parse_port() ~> in_range() ~> label() ?? \"no port\"\n    write_line(\"{text}: {shown}\")\nod\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "8080: port 8080\n99999: no port\nhttp: no port\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "text: string", "signature": "text: string", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 13, "text": "shown: string", "signature": "shown: string", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 55, "endLine": 3, "endColumn": 59, "text": "label(n: int) -> string", "signature": "label(n: int) -> string", "kindLabel": "pure global function" },
+    { "startLine": 3, "startColumn": 41, "endLine": 3, "endColumn": 48, "text": "in_range(n: int) -> int?", "signature": "in_range(n: int) -> int?", "kindLabel": "pure global function" },
+    { "startLine": 3, "startColumn": 25, "endLine": 3, "endColumn": 34, "text": "parse_port(s: string) -> int?", "signature": "parse_port(s: string) -> int?", "kindLabel": "global function" },
+    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 20, "text": "text: string", "signature": "text: string", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 21, "text": "text: string", "signature": "text: string", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 26, "endLine": 4, "endColumn": 30, "text": "shown: string", "signature": "shown: string", "kindLabel": "local value" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 9, "endLine": 3, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 20, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 25, "endLine": 3, "endColumn": 34, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 41, "endLine": 3, "endColumn": 48, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 55, "endLine": 3, "endColumn": 59, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 14, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 4, "startColumn": 18, "endLine": 4, "endColumn": 21, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 4, "startColumn": 26, "endLine": 4, "endColumn": 30, "tokenType": "variable", "modifiers": "readonly" }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "definitions-56",
+  "snippet": false,
+  "code": "// an entry point cannot take an int\nentry(count: int) is\n    IO.Std.write_line(\"{count}\")\nsi",
+  "fullSource": "// expect: error\n// an entry point cannot take an int\nentry(count: int) is\n    IO.Std.write_line(\"{count}\")\nsi\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "",
+  "diagnostics": [
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 6, "severity": "error", "message": "cannot start at entry: the parameter type is neither string[] nor Ghul.Environment" }
+  ],
+  "hovers": [
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 5, "text": "entry(count: int) -> void", "signature": "entry(count: int) -> void", "kindLabel": "pure global function" },
+    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 11, "text": "count: int", "signature": "count: int", "kindLabel": "local argument" },
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 16, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 6, "text": "namespace IO", "signature": "namespace IO", "kindLabel": "" },
+    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 10, "text": "class IO.Std", "signature": "class IO.Std", "kindLabel": "class" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 21, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 3, "startColumn": 25, "endLine": 3, "endColumn": 29, "text": "count: int", "signature": "count: int", "kindLabel": "local argument" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 2, "startColumn": 1, "endLine": 2, "endColumn": 5, "tokenType": "function" },
+    { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 11, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 2, "startColumn": 14, "endLine": 2, "endColumn": 16, "tokenType": "struct" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 6, "tokenType": "namespace" },
+    { "startLine": 3, "startColumn": 8, "endLine": 3, "endColumn": 10, "tokenType": "class" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 21, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 3, "startColumn": 25, "endLine": 3, "endColumn": 29, "tokenType": "variable", "modifiers": "readonly" }
+  ]
+}

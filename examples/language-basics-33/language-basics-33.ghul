@@ -1,0 +1,9 @@
+use IO.Std.write_line
+
+// >>>
+let wide = 0x20AC       // int: the C is a hex digit
+let euro = 0x20AC`c     // char: the backtick separates the suffix
+let byte_max = 0xFF`ub  // ubyte
+
+write_line("{wide} {euro} {byte_max}")
+// <<<

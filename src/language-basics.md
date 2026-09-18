@@ -46,6 +46,7 @@ ghūl's built-in data types are primitive types, arrays, tuples, and optionals.
 ghūl provides the following primitive data types:
 
 * integer types: `byte`, `ubyte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `word`, `uword`
+* arbitrary-precision integer type: `bigint`
 * floating-point types: `single`, `double`
 * fixed-point type: `decimal`
 * boolean type: `bool`
@@ -54,6 +55,12 @@ ghūl provides the following primitive data types:
 
 <GhulExample name="language-basics-7" />
 These types are used to represent basic values in ghūl programs.
+
+`bigint` is an integer with no fixed width, so it never overflows. It is .NET's `System.Numerics.BigInteger` under a built-in name. A literal with an `n` suffix is a `bigint`, and a value of another integer type converts to one with `bigint(...)`:
+
+<GhulExample name="language-basics-31" />
+
+As with the other numeric types, the operands of an arithmetic operator must have the same type: `total * 2` is rejected where `total` is a `bigint`, and `total * 2n` is the way to write it.
 
 ### arrays
 
@@ -67,10 +74,20 @@ Arrays can be constructed with an [array literal](/expressions.html#array)
 Array elements can be read with indexer syntax
 <GhulExample name="language-basics-10" />
 
+Indexing with a range takes a slice rather than a single element. `..` excludes its end and `::` includes it, as they do everywhere else. `..<` counts its end back from the end of the source, and `..<<` counts both ends back, so `..<0` runs to the end:
+
+<GhulExample name="language-basics-34" />
+
+A slice is a view onto the source, not a copy. Arrays, strings and lists can all be sliced; slicing a string gives back a string.
+
 ### tuples
 Tuples in ghūl are lightweight, immutable data structures that can hold a fixed number of elements of different types. Tuple types use parentheses `(` `)`, with elements separated by commas. Tuple literals are similarly constructed with `(` `)` and comma delimited elements. Tuples compare by structural equality: two tuples are equal when their corresponding elements are.
 
 <GhulExample name="language-basics-11" />
+
+Compare tuples with `=~`. The `==` operator is rejected on a tuple, as it is on any struct, because it would compare the value's bytes rather than its elements:
+
+<GhulExample name="language-basics-35" />
 
 Tuple elements can be accessed using the dot `.` notation followed by the element name:
 
@@ -137,6 +154,16 @@ Literal expressions represent fixed values of a specific type.
 
 <GhulExample name="language-basics-23" />
 
+An integer literal can be written in hexadecimal with a `0x` prefix, and can end with a suffix that picks its type: `123L` is a `long`, `0ub` is a `ubyte`, `65c` is a `char`. The digits are read first and as far as they go, so in a hex literal `b` and `c` are digits rather than suffixes. A backtick separates a suffix that would otherwise be read as a digit:
+
+<GhulExample name="language-basics-33" />
+
+In a string or character literal, `\u` followed by exactly four hex digits writes a character by its code. A character above `U+FFFF` is written as its two surrogate halves:
+
+<GhulExample name="language-basics-32" />
+
+A run of octal digits after a `\` is the older way to write a character code. It still works, but the compiler reports a `deprecated-octal-escape` warning. Write `\u` instead.
+
 ## operators and expressions
 ### arithmetic operators
 <GhulExample name="language-basics-24" />
@@ -152,7 +179,9 @@ The integer types have the usual bitwise operators - `&`, `|`, `^` - and the shi
 
 <GhulExample name="language-basics-30" />
 
-There is no bitwise complement operator.
+The unary `\` operator is the bitwise complement, which flips every bit of its operand:
+
+<GhulExample name="language-basics-36" />
 
 ## assignment
 

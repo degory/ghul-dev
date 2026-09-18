@@ -1,0 +1,9 @@
+use IO.Std.write_line
+
+// >>>
+struct MONEY(amount: int, currency: string)
+
+let price = MONEY(10, "EUR")
+
+write_line("{price =~ MONEY(10, "EUR")} {price =~ MONEY(10, "GBP")}")
+// <<<

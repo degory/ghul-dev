@@ -1,0 +1,36 @@
+{
+  "name": "language-basics-31",
+  "snippet": false,
+  "code": "let factorial mut = 1n\n\nfor i in 1::30 do\n    factorial = factorial * bigint(i)\nod\n\nwrite_line(\"{factorial}\")",
+  "fullSource": "use IO.Std.write_line\n\nlet factorial mut = 1n\n\nfor i in 1::30 do\n    factorial = factorial * bigint(i)\nod\n\nwrite_line(\"{factorial}\")\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "265252859812191058636308480000000\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 13, "text": "factorial: bigint", "signature": "factorial: bigint", "kindLabel": "global variable" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "text": "i: int", "signature": "i: int", "kindLabel": "local value" },
+    { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 12, "text": "Ghul.Intrinsics.::(\n    from: int,\n    to: int\n) -> Ghul.INT_RANGE_INCLUSIVE", "signature": "Ghul.Intrinsics.::(\n    from: int,\n    to: int\n) -> Ghul.INT_RANGE_INCLUSIVE", "kindLabel": "innate function range.inclusive" },
+    { "startLine": 4, "startColumn": 17, "endLine": 4, "endColumn": 25, "text": "factorial: bigint", "signature": "factorial: bigint", "kindLabel": "global variable" },
+    { "startLine": 4, "startColumn": 29, "endLine": 4, "endColumn": 34, "text": "bigint.init(value: int)", "signature": "bigint.init(value: int)", "kindLabel": "constructor" },
+    { "startLine": 4, "startColumn": 36, "endLine": 4, "endColumn": 36, "text": "i: int", "signature": "i: int", "kindLabel": "local value" },
+    { "startLine": 4, "startColumn": 27, "endLine": 4, "endColumn": 27, "text": "bigint.*(left: bigint, right: bigint) -> bigint", "signature": "bigint.*(left: bigint, right: bigint) -> bigint", "kindLabel": "class method" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 13, "text": "factorial: bigint", "signature": "factorial: bigint", "kindLabel": "global variable" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 7, "startColumn": 14, "endLine": 7, "endColumn": 22, "text": "factorial: bigint", "signature": "factorial: bigint", "kindLabel": "global variable" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 13, "tokenType": "property" },
+    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 5, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 12, "tokenType": "operator" },
+    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 13, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 17, "endLine": 4, "endColumn": 25, "tokenType": "property" },
+    { "startLine": 4, "startColumn": 27, "endLine": 4, "endColumn": 27, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 4, "startColumn": 29, "endLine": 4, "endColumn": 34, "tokenType": "method" },
+    { "startLine": 4, "startColumn": 36, "endLine": 4, "endColumn": 36, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 7, "startColumn": 14, "endLine": 7, "endColumn": 22, "tokenType": "property" }
+  ]
+}

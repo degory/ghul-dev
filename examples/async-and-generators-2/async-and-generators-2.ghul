@@ -1,0 +1,17 @@
+use IO.Std.write_line
+
+// >>>
+// ValueTask[T] and Task.yield() follow the awaiter pattern, so both can
+// be awaited like a Task
+half(n: int) -> Tasks.ValueTask[int] => Tasks.ValueTask[int](n / 2)
+
+compute() -> Tasks.TASK[int] is
+    await Tasks.TASK.yield()
+
+    let a = await half(84)
+
+    return a
+si
+
+write_line("{compute().result}")
+// <<<

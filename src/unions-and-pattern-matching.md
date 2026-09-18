@@ -28,6 +28,12 @@ A `case` expression matches one scrutinee against several `when` arms, which rea
 
 Equality labels compare by value, the way `=~` compares: over a string scrutinee or any type defining the operator, matching is by content, and `when null` matches absence.
 
+A unit variant has a single shared value, so naming it as a label covers that variant exactly as a type test would. Arms that name every unit variant cover the union with no `else`:
+
+<GhulExample name="unions-and-pattern-matching-1" />
+
+A label takes its type from the scrutinee, so a generic union's unit variant needs no type arguments there: `when Option.NONE then` over an `Option[int]`.
+
 So `case` is the exhaustive counterpart to `if let` rather than a different matching mechanism. See [the case statement](/control-flow.html#case-statement) for the full picture.
 
 ## option-shaped unions

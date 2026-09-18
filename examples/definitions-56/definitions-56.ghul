@@ -1,0 +1,7 @@
+// expect: error
+// >>>
+// an entry point cannot take an int
+entry(count: int) is
+    IO.Std.write_line("{count}")
+si
+// <<<

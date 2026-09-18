@@ -1,0 +1,42 @@
+{
+  "name": "syntax-3",
+  "snippet": false,
+  "code": "@@suppress(\"definite-return\")\n\nuse IO.Std.write_line\n\n// would otherwise warn that it can fall off the end without a value\nfirst_even(xs: int[]) -> int is\n    for x in xs do\n        if x % 2 == 0 then\n            return x\n        fi\n    od\nsi\n\nwrite_line(\"{first_even([3, 5, 8, 9])}\")",
+  "fullSource": "@@suppress(\"definite-return\")\n\nuse IO.Std.write_line\n\n// would otherwise warn that it can fall off the end without a value\nfirst_even(xs: int[]) -> int is\n    for x in xs do\n        if x % 2 == 0 then\n            return x\n        fi\n    od\nsi\n\nwrite_line(\"{first_even([3, 5, 8, 9])}\")\n",
+  "hiddenBefore": false,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "8\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
+    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 10, "text": "first_even(xs: int[]) -> int", "signature": "first_even(xs: int[]) -> int", "kindLabel": "global function" },
+    { "startLine": 6, "startColumn": 12, "endLine": 6, "endColumn": 13, "text": "xs: int[]", "signature": "xs: int[]", "kindLabel": "local argument" },
+    { "startLine": 6, "startColumn": 16, "endLine": 6, "endColumn": 18, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 6, "startColumn": 26, "endLine": 6, "endColumn": 28, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 7, "startColumn": 9, "endLine": 7, "endColumn": 9, "text": "x: int", "signature": "x: int", "kindLabel": "local value" },
+    { "startLine": 7, "startColumn": 14, "endLine": 7, "endColumn": 15, "text": "xs: int[]", "signature": "xs: int[]", "kindLabel": "local argument" },
+    { "startLine": 14, "startColumn": 1, "endLine": 14, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
+    { "startLine": 14, "startColumn": 14, "endLine": 14, "endColumn": 23, "text": "first_even(xs: int[]) -> int", "signature": "first_even(xs: int[]) -> int", "kindLabel": "global function" },
+    { "startLine": 8, "startColumn": 12, "endLine": 8, "endColumn": 12, "text": "x: int", "signature": "x: int", "kindLabel": "local value" },
+    { "startLine": 8, "startColumn": 14, "endLine": 8, "endColumn": 14, "text": "int.%(a: int, b: int) -> int", "signature": "int.%(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.rem" },
+    { "startLine": 8, "startColumn": 18, "endLine": 8, "endColumn": 19, "text": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "signature": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
+    { "startLine": 9, "startColumn": 20, "endLine": 9, "endColumn": 20, "text": "x: int", "signature": "x: int", "kindLabel": "local value" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 21, "tokenType": "function" },
+    { "startLine": 6, "startColumn": 1, "endLine": 6, "endColumn": 10, "tokenType": "function" },
+    { "startLine": 6, "startColumn": 12, "endLine": 6, "endColumn": 13, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 6, "startColumn": 16, "endLine": 6, "endColumn": 18, "tokenType": "struct" },
+    { "startLine": 6, "startColumn": 26, "endLine": 6, "endColumn": 28, "tokenType": "struct" },
+    { "startLine": 7, "startColumn": 9, "endLine": 7, "endColumn": 9, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 7, "startColumn": 14, "endLine": 7, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 12, "endLine": 8, "endColumn": 12, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 8, "startColumn": 14, "endLine": 8, "endColumn": 14, "tokenType": "operator" },
+    { "startLine": 8, "startColumn": 18, "endLine": 8, "endColumn": 19, "tokenType": "operator" },
+    { "startLine": 9, "startColumn": 20, "endLine": 9, "endColumn": 20, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 14, "startColumn": 1, "endLine": 14, "endColumn": 10, "tokenType": "method", "modifiers": "static" },
+    { "startLine": 14, "startColumn": 14, "endLine": 14, "endColumn": 23, "tokenType": "function" }
+  ]
+}

@@ -1,0 +1,19 @@
+use IO.Std.write_line
+
+// >>>
+union Light is
+    RED
+    AMBER
+    GREEN
+si
+
+next(light: Light) -> Light =>
+    // naming each unit variant by value covers the union, so no else is needed
+    case light
+    when Light.RED then Light.GREEN
+    when Light.GREEN then Light.AMBER
+    when Light.AMBER then Light.RED
+    esac
+// <<<
+
+write_line("{next(Light.RED) =~ Light.GREEN}")

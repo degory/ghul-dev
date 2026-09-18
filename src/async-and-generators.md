@@ -24,7 +24,39 @@ Inside such a function, `await e` evaluates to the result of the task `e` once i
 
 <GhulExample name="control-flow-48" />
 
+`await` is not limited to tasks. Anything that follows .NET's awaiter
+pattern can be awaited: a type with a parameterless `get_awaiter()` whose
+result has a `bool` property `is_completed`, a parameterless
+`get_result()`, and implements
+`System.Runtime.CompilerServices.INotifyCompletion`. `Tasks.ValueTask[T]`
+and `Tasks.TASK.yield()` both qualify, and the `await` takes the type
+`get_result` returns:
+
+<GhulExample name="async-and-generators-2" />
+
+An `await` over a value that does not follow the pattern is reported,
+naming the first member it lacks.
+
 A `try` / `catch` / `finally` around awaiting code works as expected, including a `return` from inside the `try`. What is not yet supported is an `await` inside a `catch` or `finally` handler itself. A faulted task can also be handled at the call site: reading `.result` on a returned task throws the fault as a `System.AggregateException`.
+
+## coroutines
+
+What an asynchronous function returns is not fixed to `Tasks.TASK` either.
+Any type carrying .NET's `AsyncMethodBuilderAttribute` can be the return
+type: the attribute names a builder type, and the compiler drives that
+builder instead of the one for tasks. The runtime's `Ghul.Coroutines`
+namespace uses this for cooperative coroutines. A function returning
+`COROUTINE` or `COROUTINE[T]` is a coroutine: calling it runs its body
+until the first `await`, `pause()` gives up its turn, and `run()` resumes
+waiting coroutines one at a time until none remain. Everything runs on one
+thread:
+
+<GhulExample name="async-and-generators-3" />
+
+`sleep(milliseconds)` gives up the turn until a deadline has passed, and
+`CHANNEL[T]`, `MUTEX` and `SEMAPHORE` pass values between coroutines and
+guard what they share. A coroutine can also await a task, and `run()`
+resumes it on its own thread when the task completes.
 
 ## generators
 
@@ -35,6 +67,12 @@ A function is a generator when its declared return type is `Pipe[T]` (`Ghul.Pipe
 A generator *is* a [pipe](/runtime-library.html#stages), so it can be looped over directly and composed with `map` / `filter` / `take` and the other pipe operators:
 
 <GhulExample name="control-flow-50" />
+
+`yield in E` yields every element of `E` in turn, where `E` is anything a
+`for` loop can iterate. The elements are pulled one at a time as the
+consumer asks for them, so a recursive generator reads naturally:
+
+<GhulExample name="async-and-generators-1" />
 
 `return;` ends the sequence early; falling off the end of the body has the same effect.
 

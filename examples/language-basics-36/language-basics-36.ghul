@@ -1,0 +1,8 @@
+use IO.Std.write_line
+
+// >>>
+let low_bits = 0x0F
+
+write_line("{\low_bits}")       // every bit flipped: -16
+write_line("{\low_bits & 0xFF}")  // 240
+// <<<

@@ -1,0 +1,9 @@
+use IO.Std.write_line
+
+let n = 7
+// >>>
+// no else, so the if yields a string?
+let parity = if n % 2 == 0 then "even" fi
+
+write_line(parity ?? "odd")
+// <<<

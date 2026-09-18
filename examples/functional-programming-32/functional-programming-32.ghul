@@ -1,0 +1,13 @@
+use IO.Std.write_line
+
+// >>>
+// T.. stands for however many arguments the call supplies
+twice[T.., U](f: T.. -> U, v: T..) -> (U, U) => (f(v), f(v))
+
+greet(name: string) -> string => "hello {name}"
+join_words(a: string, b: string) -> string => "{a} {b}"
+
+write_line("{twice(greet, "world")}")
+write_line("{twice(join_words, "good", "morning")}")
+write_line("{twice((a, b, c) => a + b + c, 1, 2, 3)}")
+// <<<
