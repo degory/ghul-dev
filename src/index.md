@@ -7,8 +7,8 @@ ghūl (pronounced 'ghoul') is a statically typed programming language for .NET 1
 Every example on this site is a whole program. Press **edit & run**, change it, and run it in your browser.
 
 <GhulExampleSwitcher
-  names="optionals-narrowing,expression-functional,fibonacci-generators,word-frequency"
-  labels="optionals: `T?` + narrowing,expression trees: union + pattern matching,fibonacci: generators + pipes,word frequency: maps + pipes"
+  names="fractal-tree,optionals-narrowing,expression-functional,fibonacci-generators,word-frequency"
+  labels="drawing: a fractal tree,optionals: `T?` + narrowing,expression trees: union + pattern matching,fibonacci: generators + pipes,word frequency: maps + pipes"
 />
 
 ## where to go next
