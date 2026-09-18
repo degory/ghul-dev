@@ -1,8 +1,8 @@
 {
   "name": "unions-and-pattern-matching-1",
   "snippet": false,
-  "code": "union Light is\n    RED;\n    AMBER;\n    GREEN;\nsi\n\nnext(light: Light) -> Light =>\n    // naming each unit variant by value covers the union, so no else is needed\n    case light\n    when Light.RED then Light.GREEN\n    when Light.GREEN then Light.AMBER\n    when Light.AMBER then Light.RED\n    esac",
-  "fullSource": "use IO.Std.write_line\n\nunion Light is\n    RED;\n    AMBER;\n    GREEN;\nsi\n\nnext(light: Light) -> Light =>\n    // naming each unit variant by value covers the union, so no else is needed\n    case light\n    when Light.RED then Light.GREEN\n    when Light.GREEN then Light.AMBER\n    when Light.AMBER then Light.RED\n    esac\n\nwrite_line(\"{next(Light.RED) =~ Light.GREEN}\")\n",
+  "code": "union Light is\n    RED\n    AMBER\n    GREEN\nsi\n\nnext(light: Light) -> Light =>\n    // naming each unit variant by value covers the union, so no else is needed\n    case light\n    when Light.RED then Light.GREEN\n    when Light.GREEN then Light.AMBER\n    when Light.AMBER then Light.RED\n    esac",
+  "fullSource": "use IO.Std.write_line\n\nunion Light is\n    RED\n    AMBER\n    GREEN\nsi\n\nnext(light: Light) -> Light =>\n    // naming each unit variant by value covers the union, so no else is needed\n    case light\n    when Light.RED then Light.GREEN\n    when Light.GREEN then Light.AMBER\n    when Light.AMBER then Light.RED\n    esac\n\nwrite_line(\"{next(Light.RED) =~ Light.GREEN}\")\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],
@@ -11,11 +11,8 @@
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "text": "union Light", "signature": "union Light", "kindLabel": "union" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 7, "text": "Light.RED", "signature": "Light.RED", "kindLabel": "variant" },
-    { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 8, "text": "Light.RED.init()", "signature": "Light.RED.init()", "kindLabel": "constructor" },
     { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 9, "text": "Light.AMBER", "signature": "Light.AMBER", "kindLabel": "variant" },
-    { "startLine": 3, "startColumn": 5, "endLine": 3, "endColumn": 10, "text": "Light.AMBER.init()", "signature": "Light.AMBER.init()", "kindLabel": "constructor" },
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 9, "text": "Light.GREEN", "signature": "Light.GREEN", "kindLabel": "variant" },
-    { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 10, "text": "Light.GREEN.init()", "signature": "Light.GREEN.init()", "kindLabel": "constructor" },
     { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 4, "text": "next(light: Light) -> Light", "signature": "next(light: Light) -> Light", "kindLabel": "pure global function" },
     { "startLine": 7, "startColumn": 6, "endLine": 7, "endColumn": 10, "text": "light: Light", "signature": "light: Light", "kindLabel": "local argument" },
     { "startLine": 7, "startColumn": 13, "endLine": 7, "endColumn": 17, "text": "union Light", "signature": "union Light", "kindLabel": "union" },

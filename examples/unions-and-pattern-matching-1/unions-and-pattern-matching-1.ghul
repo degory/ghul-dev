@@ -2,9 +2,9 @@ use IO.Std.write_line
 
 // >>>
 union Light is
-    RED;
-    AMBER;
-    GREEN;
+    RED
+    AMBER
+    GREEN
 si
 
 next(light: Light) -> Light =>

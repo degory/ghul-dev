@@ -1,6 +1,6 @@
 use IO.Std.write_line
 
-class BOX[T](value: T);
+class BOX[T](value: T)
 
 // >>>
 let closed = typeof BOX[int]

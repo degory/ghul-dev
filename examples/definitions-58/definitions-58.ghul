@@ -1,7 +1,7 @@
 use IO.Std.write_line
 
 // >>>
-struct MONEY(amount: int, currency: string);
+struct MONEY(amount: int, currency: string)
 
 let price = MONEY(10, "EUR")
 
