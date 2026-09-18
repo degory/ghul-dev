@@ -545,31 +545,21 @@ onBeforeUnmount(() => {
   <div v-if="example" class="ghul-example" :class="{ 'is-filling': filling }">
     <span v-if="!canEdit" class="ghul-example-lang">ghul</span>
 
-    <div class="ghul-example-tools">
+    <div class="ghul-example-tools" :class="{ 'is-editing': editing }">
     <button
-      v-if="canEdit && !editing"
+      v-if="!signature"
       type="button"
-      class="ghul-example-tool ghul-example-edit"
-      :class="{ 'has-edit': edited }"
-      :title="edited ? 'resume editing this example' : 'edit and run this example'"
-      @click="startEditing"
+      class="ghul-example-tool ghul-example-copy"
+      :class="{ copied }"
+      :title="copied ? 'copied' : 'copy code'"
+      @click="copy"
     >
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 20h9" />
-        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+      <svg v-if="!copied" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="9" width="13" height="13" rx="2" />
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
       </svg>
-      <span>{{ edited ? 'resume' : 'edit & run' }}</span>
-    </button>
-    <button
-      v-if="editing"
-      type="button"
-      class="ghul-example-tool ghul-example-edit is-active"
-      title="stop editing and show the original"
-      @click="stopEditing"
-    >
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18" />
-        <line x1="6" y1="6" x2="18" y2="18" />
+      <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12" />
       </svg>
     </button>
     <button
@@ -595,19 +585,29 @@ onBeforeUnmount(() => {
       </svg>
     </button>
     <button
-      v-if="!signature"
+      v-if="canEdit && !editing"
       type="button"
-      class="ghul-example-tool ghul-example-copy"
-      :class="{ copied }"
-      :title="copied ? 'copied' : 'copy code'"
-      @click="copy"
+      class="ghul-example-tool ghul-example-edit"
+      :class="{ 'has-edit': edited }"
+      :title="edited ? 'resume editing this example' : 'edit and run this example'"
+      @click="startEditing"
     >
-      <svg v-if="!copied" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="9" y="9" width="13" height="13" rx="2" />
-        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h9" />
+        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
       </svg>
-      <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="20 6 9 17 4 12" />
+      <span>{{ edited ? 'resume' : 'edit & run' }}</span>
+    </button>
+    <button
+      v-if="editing"
+      type="button"
+      class="ghul-example-tool ghul-example-edit is-active"
+      title="stop editing and show the original"
+      @click="stopEditing"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
       </svg>
     </button>
     </div>
@@ -695,8 +695,8 @@ onBeforeUnmount(() => {
           <span
             v-else-if="frameReady && analyser === 'refused'"
             class="ghul-example-analyser-note"
-            title="too many editors are open from this network address; the editor still compiles and runs, and live diagnostics return once another editor is closed"
-          >analyser busy - close another editor</span>
+            title="the analyser allows a few editors at a time from one network address, and that many are already open. This one still compiles and runs; errors as you type and hovers come back by themselves once another editor is closed"
+          >analyser limit reached</span>
           <span
             v-else-if="frameReady && analyser === 'connecting'"
             class="ghul-example-analyser-note"
@@ -917,6 +917,11 @@ onBeforeUnmount(() => {
   transition: opacity 0.2s;
 }
 
+/* Rightmost is whatever is always shown - the way in to editing, or the way
+   out of it - so nothing visible is ever left standing off from the corner by
+   the width of buttons that are waiting for a pointer. Copying is the one tool
+   that waits, and it appears to the left. While editing every tool is shown:
+   the reader is working in the example, so there is nothing to keep quiet. */
 /* One row rather than per-button offsets, so buttons appearing and
    disappearing cannot collide or leave gaps. */
 .ghul-example-tools {
@@ -947,7 +952,8 @@ onBeforeUnmount(() => {
   opacity: 0;
 }
 
-.ghul-example:hover .ghul-example-tool {
+.ghul-example:hover .ghul-example-tool,
+.ghul-example-tools.is-editing .ghul-example-tool {
   opacity: 1;
 }
 
