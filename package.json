@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "dev": "vitepress dev src",
-    "build": "vitepress build src",
+    "build": "NODE_OPTIONS=--max-old-space-size=8192 vitepress build src",
     "preview": "vitepress preview src",
     "pull-rosetta": "node tools/pull-rosetta.mjs"
   },
