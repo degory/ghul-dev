@@ -8,8 +8,14 @@ title: "Same fringe"
 
 ## Generators
 
-<GhulExample name="rosetta-same-fringe-01-generators" />
+<GhulExample name="rosetta-same-fringe-01-generators" run-to-see />
 
 ## Coroutines
 
-<GhulExample name="rosetta-same-fringe-02-coroutines" />
+<GhulExample name="rosetta-same-fringe-02-coroutines" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="same-fringe" />
+</ClientOnly>

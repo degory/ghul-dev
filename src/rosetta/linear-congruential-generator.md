@@ -6,4 +6,10 @@ title: "Linear congruential generator"
 
 <RosettaTask url="https://rosettacode.org/wiki/Linear_congruential_generator" tags="number-theory,generators,pipes" :playground="true" />
 
-<GhulExample name="rosetta-linear-congruential-generator" />
+<GhulExample name="rosetta-linear-congruential-generator" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="linear-congruential-generator" />
+</ClientOnly>

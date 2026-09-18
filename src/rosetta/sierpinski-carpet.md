@@ -6,4 +6,10 @@ title: "Sierpinski carpet"
 
 <RosettaTask url="https://rosettacode.org/wiki/Sierpinski_carpet" tags="graphics,fractal" :playground="true" />
 
-<GhulExample name="rosetta-sierpinski-carpet" />
+<GhulExample name="rosetta-sierpinski-carpet" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="sierpinski-carpet" />
+</ClientOnly>

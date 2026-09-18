@@ -177,6 +177,9 @@ export function renderText(srcDir: string, outDir: string) {
         /<RosettaTask\s+url="([^"]*)"[^>]*\/>/g,
         (_match, url) => `The same solution is posted on Rosetta Code: ${url}`
       )
+      // On a task's page the explorer browses the rest; one line here, not the whole list again.
+      .replace(/<RosettaExplorer\s+current="[^"]*"\s*\/>/g, `All tasks: ${SITE}/rosetta/`)
+      .replace(/<\/?ClientOnly>\n?/g, '')
       .replace(/<RosettaExplorer\s*\/>/g, contentsList)
 
   const rendered = PAGES.map(page => {

@@ -6,4 +6,10 @@ title: "Binary digits"
 
 <RosettaTask url="https://rosettacode.org/wiki/Binary_digits" tags="number-theory,recursion" :playground="true" />
 
-<GhulExample name="rosetta-binary-digits" />
+<GhulExample name="rosetta-binary-digits" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="binary-digits" />
+</ClientOnly>

@@ -6,4 +6,10 @@ title: "Events"
 
 <RosettaTask url="https://rosettacode.org/wiki/Events" tags="concurrency,async,classes" :playground="true" />
 
-<GhulExample name="rosetta-events" />
+<GhulExample name="rosetta-events" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="events" />
+</ClientOnly>

@@ -6,4 +6,10 @@ title: "Idoneal numbers"
 
 <RosettaTask url="https://rosettacode.org/wiki/Idoneal_numbers" tags="number-theory,pipes" :playground="true" />
 
-<GhulExample name="rosetta-idoneal-numbers" />
+<GhulExample name="rosetta-idoneal-numbers" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="idoneal-numbers" />
+</ClientOnly>

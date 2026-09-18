@@ -6,4 +6,10 @@ title: "Day of the week"
 
 <RosettaTask url="https://rosettacode.org/wiki/Day_of_the_week" tags="date-time,pipes,generators" :playground="true" />
 
-<GhulExample name="rosetta-day-of-the-week" />
+<GhulExample name="rosetta-day-of-the-week" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="day-of-the-week" />
+</ClientOnly>

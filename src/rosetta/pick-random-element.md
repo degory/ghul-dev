@@ -6,4 +6,10 @@ title: "Pick random element"
 
 <RosettaTask url="https://rosettacode.org/wiki/Pick_random_element" tags="basics" :playground="true" />
 
-<GhulExample name="rosetta-pick-random-element" />
+<GhulExample name="rosetta-pick-random-element" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="pick-random-element" />
+</ClientOnly>

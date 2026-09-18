@@ -4,7 +4,7 @@
   "fullSource": "use default\n\nlet wheel = \"ndeokgelw\"\nlet centre = 'k'\n\navailable(letters: string) -> MAP[char, int] is\n    let counts = MAP[char, int]()\n\n    for letter in letters do\n        if !counts.contains_key(letter) then\n            counts[letter] = 0\n        fi\n\n        counts[letter] = counts[letter] + 1\n    od\n\n    return counts\nsi\n\nspellable(word: string) -> bool is\n    let left = available(wheel)\n\n    for letter in word do\n        if !left.contains_key(letter) \\/ left[letter] == 0 then\n            return false\n        fi\n\n        left[letter] = left[letter] - 1\n    od\n\n    return true\nsi\n\nlet found =\n    IO.File.read_all_lines(\"unixdict.txt\")\n    |> filter(word =>\n        word.length >= 3 /\\ word.contains(centre) /\\ spellable(word))\n    |> collect_list()\n\nwrite_line(found |> join(\"\\n\"))\nwrite_line(\"\")\nwrite_line(\"{found.count} words\")",
   "output": "eke\nelk\nkeel\nkeen\nkeg\nken\nkeno\nknee\nkneel\nknew\nknow\nknowledge\nkong\nleek\nweek\nwok\nwoke\n\n17 words\n",
   "images": [],
-  "playground": false,
+  "playground": true,
   "playgroundPath": "word-wheel",
   "hovers": [],
   "diagnostics": []

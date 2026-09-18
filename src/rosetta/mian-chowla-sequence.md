@@ -6,4 +6,10 @@ title: "Mian-Chowla sequence"
 
 <RosettaTask url="https://rosettacode.org/wiki/Mian-Chowla_sequence" tags="number-theory,pipes,generators" :playground="true" />
 
-<GhulExample name="rosetta-mian-chowla-sequence" />
+<GhulExample name="rosetta-mian-chowla-sequence" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="mian-chowla-sequence" />
+</ClientOnly>

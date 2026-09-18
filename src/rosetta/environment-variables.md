@@ -6,4 +6,10 @@ title: "Environment variables"
 
 <RosettaTask url="https://rosettacode.org/wiki/Environment_variables" tags="dotnet-interop" :playground="true" />
 
-<GhulExample name="rosetta-environment-variables" />
+<GhulExample name="rosetta-environment-variables" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="environment-variables" />
+</ClientOnly>

@@ -6,4 +6,10 @@ title: "Deceptive numbers"
 
 <RosettaTask url="https://rosettacode.org/wiki/Deceptive_numbers" tags="number-theory,primes,pipes" :playground="true" />
 
-<GhulExample name="rosetta-deceptive-numbers" />
+<GhulExample name="rosetta-deceptive-numbers" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="deceptive-numbers" />
+</ClientOnly>

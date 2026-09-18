@@ -6,4 +6,10 @@ title: "Arithmetic-geometric mean"
 
 <RosettaTask url="https://rosettacode.org/wiki/Arithmetic-geometric_mean" tags="maths" :playground="true" />
 
-<GhulExample name="rosetta-arithmetic-geometric-mean" />
+<GhulExample name="rosetta-arithmetic-geometric-mean" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="arithmetic-geometric-mean" />
+</ClientOnly>

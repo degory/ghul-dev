@@ -6,4 +6,10 @@ title: "Narcissistic decimal number"
 
 <RosettaTask url="https://rosettacode.org/wiki/Narcissistic_decimal_number" tags="number-theory,generators,recursion" :playground="true" />
 
-<GhulExample name="rosetta-narcissistic-decimal-number" />
+<GhulExample name="rosetta-narcissistic-decimal-number" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="narcissistic-decimal-number" />
+</ClientOnly>

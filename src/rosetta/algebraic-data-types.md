@@ -6,4 +6,10 @@ title: "Algebraic data types"
 
 <RosettaTask url="https://rosettacode.org/wiki/Algebraic_data_types" tags="data-structures,unions,pattern-matching" :playground="true" />
 
-<GhulExample name="rosetta-algebraic-data-types" />
+<GhulExample name="rosetta-algebraic-data-types" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="algebraic-data-types" />
+</ClientOnly>

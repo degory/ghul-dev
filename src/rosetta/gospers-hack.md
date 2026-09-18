@@ -6,4 +6,10 @@ title: "Gosper's hack"
 
 <RosettaTask url="https://rosettacode.org/wiki/Gosper's_hack" tags="algorithms" :playground="true" />
 
-<GhulExample name="rosetta-gospers-hack" />
+<GhulExample name="rosetta-gospers-hack" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="gospers-hack" />
+</ClientOnly>

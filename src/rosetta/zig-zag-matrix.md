@@ -6,4 +6,10 @@ title: "Zig-zag matrix"
 
 <RosettaTask url="https://rosettacode.org/wiki/Zig-zag_matrix" tags="maths,pipes" :playground="true" />
 
-<GhulExample name="rosetta-zig-zag-matrix" />
+<GhulExample name="rosetta-zig-zag-matrix" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="zig-zag-matrix" />
+</ClientOnly>

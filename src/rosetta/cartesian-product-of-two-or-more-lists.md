@@ -6,4 +6,10 @@ title: "Cartesian product of two or more lists"
 
 <RosettaTask url="https://rosettacode.org/wiki/Cartesian_product_of_two_or_more_lists" tags="data-structures,generators" :playground="true" />
 
-<GhulExample name="rosetta-cartesian-product-of-two-or-more-lists" />
+<GhulExample name="rosetta-cartesian-product-of-two-or-more-lists" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="cartesian-product-of-two-or-more-lists" />
+</ClientOnly>

@@ -4,7 +4,7 @@
   "fullSource": "IO.Std.error.write_line(\"Goodbye, World!\")",
   "output": "",
   "images": [],
-  "playground": false,
+  "playground": true,
   "playgroundPath": "hello-world-standard-error",
   "hovers": [],
   "diagnostics": []

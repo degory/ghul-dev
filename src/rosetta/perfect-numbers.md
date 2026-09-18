@@ -6,4 +6,10 @@ title: "Perfect numbers"
 
 <RosettaTask url="https://rosettacode.org/wiki/Perfect_numbers" tags="number-theory" :playground="true" />
 
-<GhulExample name="rosetta-perfect-numbers" />
+<GhulExample name="rosetta-perfect-numbers" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="perfect-numbers" />
+</ClientOnly>

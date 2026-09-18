@@ -6,4 +6,10 @@ title: "Ludic numbers"
 
 <RosettaTask url="https://rosettacode.org/wiki/Ludic_numbers" tags="number-theory,primes" :playground="true" />
 
-<GhulExample name="rosetta-ludic-numbers" />
+<GhulExample name="rosetta-ludic-numbers" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="ludic-numbers" />
+</ClientOnly>

@@ -28,6 +28,10 @@ const props = defineProps({
   name: { type: String, required: true },
   data: { type: Object, default: null },
   signature: { type: Boolean, default: false },
+  // Show nothing the example is recorded as producing: its output and pictures
+  // appear only once the reader runs it. For a page of programs to try, where
+  // output that is there before anything has run reads as a run that happened.
+  runToSee: { type: Boolean, default: false },
 })
 
 const example = computed(() => props.data)
@@ -309,7 +313,7 @@ function isShortOutput(output) {
 }
 
 const outputExpanded = ref(
-  diagnostics.value.length > 0 || isShortOutput(example.value?.output)
+  diagnostics.value.length > 0 || isShortOutput(props.runToSee ? '' : example.value?.output)
 )
 
 function toggleOutput() {
@@ -393,11 +397,14 @@ const embedUrl = `${PLAYGROUND_ORIGIN}/embed.html`
 // What the panel shows: the recorded output of the verified example, or what
 // the reader's own edit produced.
 const shownDiagnostics = computed(() => editing.value ? liveDiagnostics.value : diagnostics.value)
-const shownOutput = computed(() => editing.value ? liveOutput.value : example.value?.output)
+const recordedOutput = computed(() => props.runToSee ? '' : example.value?.output ?? '')
+const recordedImages = computed(() => props.runToSee ? [] : example.value?.images ?? [])
+
+const shownOutput = computed(() => editing.value ? liveOutput.value : recordedOutput.value)
 
 // The pictures follow the same rule: what the example is recorded as drawing,
 // until the reader runs their own version.
-const shownImages = computed(() => editing.value ? liveImages.value : example.value?.images ?? [])
+const shownImages = computed(() => editing.value ? liveImages.value : recordedImages.value)
 
 const runLabel = computed(() => {
   if (!editing.value) return null
@@ -489,8 +496,8 @@ function startEditing() {
 
   // Start from the recorded output, so the panel is not empty before the
   // reader has run anything.
-  liveOutput.value = example.value?.output ?? ''
-  liveImages.value = example.value?.images ?? []
+  liveOutput.value = recordedOutput.value
+  liveImages.value = recordedImages.value
   liveDiagnostics.value = diagnostics.value
 
   window.addEventListener('message', onFrameMessage)
@@ -661,7 +668,7 @@ onBeforeUnmount(() => {
         </div>
       </template>
     </div>
-    <div v-if="example.output || example.images?.length || diagnostics.length || editing" class="ghul-example-output">
+    <div v-if="recordedOutput || recordedImages.length || diagnostics.length || editing" class="ghul-example-output">
       <button
         type="button"
         class="ghul-example-output-toggle"

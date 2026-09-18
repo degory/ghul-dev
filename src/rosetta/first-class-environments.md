@@ -6,4 +6,10 @@ title: "First class environments"
 
 <RosettaTask url="https://rosettacode.org/wiki/First_class_environments" tags="classes,simulation" :playground="true" />
 
-<GhulExample name="rosetta-first-class-environments" />
+<GhulExample name="rosetta-first-class-environments" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="first-class-environments" />
+</ClientOnly>

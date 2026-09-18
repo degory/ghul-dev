@@ -6,4 +6,10 @@ title: "Count in factors"
 
 <RosettaTask url="https://rosettacode.org/wiki/Count_in_factors" tags="number-theory,pipes,generators" :playground="true" />
 
-<GhulExample name="rosetta-count-in-factors" />
+<GhulExample name="rosetta-count-in-factors" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="count-in-factors" />
+</ClientOnly>

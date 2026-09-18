@@ -8,8 +8,14 @@ title: "Fibonacci sequence"
 
 ## Functional
 
-<GhulExample name="rosetta-fibonacci-sequence-01-functional" />
+<GhulExample name="rosetta-fibonacci-sequence-01-functional" run-to-see />
 
 ## Imperative
 
-<GhulExample name="rosetta-fibonacci-sequence-02-imperative" />
+<GhulExample name="rosetta-fibonacci-sequence-02-imperative" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="fibonacci-sequence" />
+</ClientOnly>

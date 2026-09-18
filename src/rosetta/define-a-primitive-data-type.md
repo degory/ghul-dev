@@ -6,4 +6,10 @@ title: "Define a primitive data type"
 
 <RosettaTask url="https://rosettacode.org/wiki/Define_a_primitive_data_type" tags="classes,operators" :playground="true" />
 
-<GhulExample name="rosetta-define-a-primitive-data-type" />
+<GhulExample name="rosetta-define-a-primitive-data-type" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="define-a-primitive-data-type" />
+</ClientOnly>

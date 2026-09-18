@@ -6,4 +6,10 @@ title: "Jaro-Winkler distance"
 
 <RosettaTask url="https://rosettacode.org/wiki/Jaro-Winkler_distance" tags="strings,algorithms" :playground="true" />
 
-<GhulExample name="rosetta-jaro-winkler-distance" />
+<GhulExample name="rosetta-jaro-winkler-distance" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="jaro-winkler-distance" />
+</ClientOnly>

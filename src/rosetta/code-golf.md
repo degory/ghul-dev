@@ -8,8 +8,14 @@ title: "Code Golf"
 
 ## Shortest
 
-<GhulExample name="rosetta-code-golf-01-shortest" />
+<GhulExample name="rosetta-code-golf-01-shortest" run-to-see />
 
 ## No literals
 
-<GhulExample name="rosetta-code-golf-02-no-literals" />
+<GhulExample name="rosetta-code-golf-02-no-literals" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="code-golf" />
+</ClientOnly>

@@ -6,4 +6,10 @@ title: "Goldbach's comet"
 
 <RosettaTask url="https://rosettacode.org/wiki/Goldbach's_comet" tags="number-theory,primes" :playground="true" />
 
-<GhulExample name="rosetta-goldbachs-comet" />
+<GhulExample name="rosetta-goldbachs-comet" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="goldbachs-comet" />
+</ClientOnly>

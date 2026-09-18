@@ -6,4 +6,10 @@ title: "Sorting algorithms/Counting sort"
 
 <RosettaTask url="https://rosettacode.org/wiki/Sorting_algorithms/Counting_sort" tags="sorting" :playground="true" />
 
-<GhulExample name="rosetta-sorting-algorithms-counting-sort" />
+<GhulExample name="rosetta-sorting-algorithms-counting-sort" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="sorting-algorithms-counting-sort" />
+</ClientOnly>

@@ -6,4 +6,10 @@ title: "Benford's law"
 
 <RosettaTask url="https://rosettacode.org/wiki/Benford's_law" tags="number-theory,maths,pipes" :playground="true" />
 
-<GhulExample name="rosetta-benfords-law" />
+<GhulExample name="rosetta-benfords-law" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="benfords-law" />
+</ClientOnly>

@@ -6,4 +6,10 @@ title: "Equilibrium index"
 
 <RosettaTask url="https://rosettacode.org/wiki/Equilibrium_index" tags="algorithms" :playground="true" />
 
-<GhulExample name="rosetta-equilibrium-index" />
+<GhulExample name="rosetta-equilibrium-index" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="equilibrium-index" />
+</ClientOnly>

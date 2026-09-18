@@ -6,4 +6,10 @@ title: "Cuban primes"
 
 <RosettaTask url="https://rosettacode.org/wiki/Cuban_primes" tags="primes,pipes,generators,algorithms" :playground="false" />
 
-<GhulExample name="rosetta-cuban-primes" />
+<GhulExample name="rosetta-cuban-primes" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="cuban-primes" />
+</ClientOnly>

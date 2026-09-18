@@ -6,4 +6,10 @@ title: "Word wrap"
 
 <RosettaTask url="https://rosettacode.org/wiki/Word_wrap" tags="text-processing,generators" :playground="true" />
 
-<GhulExample name="rosetta-word-wrap" />
+<GhulExample name="rosetta-word-wrap" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="word-wrap" />
+</ClientOnly>

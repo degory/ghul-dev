@@ -6,4 +6,10 @@ title: "Self-describing numbers"
 
 <RosettaTask url="https://rosettacode.org/wiki/Self-describing_numbers" tags="number-theory,pipes" :playground="true" />
 
-<GhulExample name="rosetta-self-describing-numbers" />
+<GhulExample name="rosetta-self-describing-numbers" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="self-describing-numbers" />
+</ClientOnly>

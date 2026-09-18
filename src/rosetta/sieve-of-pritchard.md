@@ -6,4 +6,10 @@ title: "Sieve of Pritchard"
 
 <RosettaTask url="https://rosettacode.org/wiki/Sieve_of_Pritchard" tags="primes" :playground="true" />
 
-<GhulExample name="rosetta-sieve-of-pritchard" />
+<GhulExample name="rosetta-sieve-of-pritchard" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="sieve-of-pritchard" />
+</ClientOnly>

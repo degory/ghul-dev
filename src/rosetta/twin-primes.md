@@ -6,4 +6,10 @@ title: "Twin primes"
 
 <RosettaTask url="https://rosettacode.org/wiki/Twin_primes" tags="primes,generators,pipes" :playground="true" />
 
-<GhulExample name="rosetta-twin-primes" />
+<GhulExample name="rosetta-twin-primes" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="twin-primes" />
+</ClientOnly>

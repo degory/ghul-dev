@@ -8,8 +8,14 @@ title: "Accumulator factory"
 
 ## Generic over any number
 
-<GhulExample name="rosetta-accumulator-factory-01-generic-over-any-number" />
+<GhulExample name="rosetta-accumulator-factory-01-generic-over-any-number" run-to-see />
 
 ## Widening from integer to float
 
-<GhulExample name="rosetta-accumulator-factory-02-widening-from-integer-to-float" />
+<GhulExample name="rosetta-accumulator-factory-02-widening-from-integer-to-float" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="accumulator-factory" />
+</ClientOnly>

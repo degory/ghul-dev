@@ -6,4 +6,10 @@ title: "Fractal tree"
 
 <RosettaTask url="https://rosettacode.org/wiki/Fractal_tree" tags="graphics,fractal,recursion" :playground="true" />
 
-<GhulExample name="rosetta-fractal-tree" />
+<GhulExample name="rosetta-fractal-tree" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="fractal-tree" />
+</ClientOnly>

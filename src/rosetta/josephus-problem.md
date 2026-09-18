@@ -8,8 +8,14 @@ title: "Josephus problem"
 
 ## Who survives
 
-<GhulExample name="rosetta-josephus-problem-01-who-survives" />
+<GhulExample name="rosetta-josephus-problem-01-who-survives" run-to-see />
 
 ## The killing sequence
 
-<GhulExample name="rosetta-josephus-problem-02-the-killing-sequence" />
+<GhulExample name="rosetta-josephus-problem-02-the-killing-sequence" run-to-see />
+
+## more tasks
+
+<ClientOnly>
+<RosettaExplorer current="josephus-problem" />
+</ClientOnly>
