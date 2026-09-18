@@ -341,6 +341,25 @@ const runState = ref(null)
 const liveOutput = ref('')
 const liveDiagnostics = ref([])
 
+// What a running program drew, as { name, url } with a data URL each, and
+// whether it is waiting for a line. The frame owns only the editor, so both
+// are rendered here, in the same panel as the text the program writes.
+const liveImages = ref([])
+const inputWanted = ref(false)
+const inputLine = ref('')
+
+function sendInput() {
+  post('input', { line: inputLine.value })
+  inputLine.value = ''
+  inputWanted.value = false
+}
+
+// No line at all: the program sees the end of its input.
+function endInput() {
+  post('input', {})
+  inputWanted.value = false
+}
+
 // filling the window rather than the article column. The site's content is a
 // narrow centre strip with sidebars either side, which is far less room than a
 // reader editing code actually has. Distinct from `filling`, which gives an
@@ -425,6 +444,12 @@ function onFrameMessage(event) {
   if (message.type === 'height') { frameHeight.value = message.height; return }
   if (message.type === 'analyser') { analyser.value = message.state; return }
   if (message.type === 'output') { liveOutput.value = message.text ?? ''; return }
+  if (message.type === 'images') { liveImages.value = message.images ?? []; return }
+  if (message.type === 'input-wanted') {
+    inputWanted.value = true
+    outputExpanded.value = true
+    return
+  }
   if (message.type === 'diagnostics') {
     // The compiler says `warn`; the artifact and the icon component both say
     // `warning`. Normalise here rather than teaching the icon a second spelling.
@@ -437,6 +462,7 @@ function onFrameMessage(event) {
 
   if (message.type === 'status') {
     runState.value = message.state
+    if (message.state !== 'running') inputWanted.value = false
     if (message.state === 'done' || message.state === 'failed' || message.state === 'error') {
       // Leave the last state visible only while it is interesting.
       setTimeout(() => { if (runState.value === message.state) runState.value = null }, 1500)
@@ -477,6 +503,8 @@ function stopEditing() {
   frameReady.value = false
   frameHeight.value = 0
   runState.value = null
+  liveImages.value = []
+  inputWanted.value = false
 
   window.removeEventListener('message', onFrameMessage)
   stopWatchingTheme?.()
@@ -688,6 +716,28 @@ onBeforeUnmount(() => {
           <span class="ghul-example-diag-text">{{ d.message }}</span>
         </div>
         <pre v-if="shownOutput">{{ shownOutput }}</pre>
+        <form
+          v-if="editing && inputWanted"
+          class="ghul-example-input"
+          @submit.prevent="sendInput"
+        >
+          <input
+            v-model="inputLine"
+            type="text"
+            aria-label="a line of input for the program"
+            placeholder="the program is waiting for a line"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button type="submit">send</button>
+          <button type="button" title="no more input" @click="endInput">end</button>
+        </form>
+        <div v-if="editing && liveImages.length" class="ghul-example-images">
+          <figure v-for="image in liveImages" :key="image.name">
+            <img :src="image.url" :alt="image.name" />
+            <figcaption>{{ image.name }}</figcaption>
+          </figure>
+        </div>
       </div>
     </div>
   </div>
@@ -1074,6 +1124,68 @@ onBeforeUnmount(() => {
   font-feature-settings: 'calt' 1, 'liga' 1, 'ss07' 1;
   font-size: 0.875em;
   white-space: pre-wrap;
+}
+
+/* The line a running program is waiting for. */
+.ghul-example-input {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.2rem 1.25rem 0.9rem;
+}
+
+.ghul-example-input input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 4px;
+  background: var(--vp-c-bg);
+  font-family: 'Fira Code', var(--vp-font-family-mono);
+  font-size: 0.875em;
+}
+
+.ghul-example-input input:focus {
+  border-color: var(--vp-c-brand-1);
+  outline: none;
+}
+
+.ghul-example-input button {
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+.ghul-example-input button:hover {
+  border-color: var(--vp-c-brand-1);
+}
+
+/* What the program drew. Pixel art stays sharp: most of these are small
+   rasters scaled up, where smoothing turns a fractal into a smear. */
+.ghul-example-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.4rem 1.25rem 0.9rem;
+}
+
+.ghul-example-images figure {
+  margin: 0;
+  max-width: 100%;
+}
+
+.ghul-example-images img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  border: 1px solid var(--vp-c-divider);
+}
+
+.ghul-example-images figcaption {
+  margin-top: 0.25rem;
+  color: var(--vp-c-text-2);
+  font-size: 0.8em;
 }
 
 /* One diagnostic line in the panel: a severity icon and the message. */
