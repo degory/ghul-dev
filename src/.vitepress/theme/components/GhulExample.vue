@@ -625,6 +625,7 @@ onBeforeUnmount(() => {
         :style="filling ? {} : { height: Math.max(frameHeight, 120) + 'px' }"
         title="ghūl playground"
         sandbox="allow-scripts allow-same-origin allow-forms"
+        allow="cross-origin-isolated"
       ></iframe>
     </div>
 
