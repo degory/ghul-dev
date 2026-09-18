@@ -1,0 +1,28 @@
+use IO.Std.write_line
+use Collections.MAP
+use Ghul.Pipes
+
+let text =
+    "the quick brown fox jumps over the lazy dog. "
+    "the dog sleeps; the fox does not. "
+    "a quick fox is a happy fox"
+
+// split on anything that is not a letter, and drop the empty
+// strings that two separators in a row leave behind
+let words =
+    text.split([' ', '.', ';'])
+        |> filter(word => word.length > 0)
+
+// count each word
+let counts = MAP[string, int]()
+
+for word in words do
+    counts[word] = (if counts.contains_key(word) then counts[word] else 0 fi) + 1
+od
+
+// the five most frequent, most frequent first. a map iterates
+// as key and value pairs, which destructure in the lambda
+counts
+    |> sort(((_, a), (_, b)) => b - a)
+    |> take(5)
+    |> each(((word, count)) => write_line("{count} {word}"))

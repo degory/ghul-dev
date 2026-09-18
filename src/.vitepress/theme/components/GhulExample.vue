@@ -543,7 +543,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div v-if="example" class="ghul-example" :class="{ 'is-filling': filling }">
-    <span class="ghul-example-lang">ghul</span>
+    <span v-if="!canEdit" class="ghul-example-lang">ghul</span>
 
     <div class="ghul-example-tools">
     <button
@@ -558,6 +558,7 @@ onBeforeUnmount(() => {
         <path d="M12 20h9" />
         <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
       </svg>
+      <span>{{ edited ? 'resume' : 'edit & run' }}</span>
     </button>
     <button
       v-if="editing"
@@ -1029,8 +1030,24 @@ onBeforeUnmount(() => {
   background: var(--vp-c-brand-1);
 }
 
+/* The way in to editing is shown all the time and says what it does: the other
+   tools can wait for a pointer, but a reader who never hovers, or cannot, would
+   otherwise never learn that the example runs. */
 .ghul-example-edit {
   position: relative;
+}
+
+.ghul-example-edit:not(.is-active) {
+  gap: 0.35rem;
+  width: auto;
+  padding: 0 0.55rem;
+  opacity: 1;
+  font-size: 0.75rem;
+}
+
+.ghul-example-edit:not(.is-active):hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
 }
 
 .ghul-example-frame {

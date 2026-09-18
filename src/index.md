@@ -1,49 +1,32 @@
-
 #  ghūl programming language
 
 <img class="ghul-logo" src="/ghul-logo-draft.png" alt="ghūl programming language logo" />
 
-ghūl (pronounced 'ghoul') is a statically typed, general-purpose programming language that compiles to .NET 10. It produces ordinary .NET assemblies and NuGet packages, and ghūl code can call any .NET library. The [ghūl compiler](https://github.com/degory/ghul) is written in ghūl - about 120,000 lines of it - and compiles itself.
+ghūl (pronounced 'ghoul') is a statically typed programming language for .NET 10. The [compiler](https://github.com/degory/ghul) is about 120,000 lines of ghūl, and compiles itself.
 
-The language is under active development: whatever the compiler accepts is currently the definitive language reference.
-
-## examples
-
-::: tip editable examples
-Every example on this site is a complete program you can change and run in place: click the pencil, edit, and run. Output and any compiler errors appear in the panel beneath.
-
-Edits live only in the page - to keep something, paste it into the [ghūl scratchpad](https://github.com/degory/ghul-scratchpad)'s `main.ghul`{:text}: a one-file project that opens in a GitHub Codespace with the compiler ready, or that you can clone on your own machine.
-:::
+Every example on this site is a whole program. Press **edit & run**, change it, and run it in your browser.
 
 <GhulExampleSwitcher
-  names="functional,expression-oop,expression-functional,fibonacci-generators,generic-calculator,optionals-narrowing"
-  labels="fibonacci: streams + `|>`,expression trees: classes + traits,expression trees: union + pattern matching,fibonacci: generators + pipes,calculator: generics,optionals: `T?` + narrowing"
+  names="rosetta-fractal-tree,optionals-narrowing,expression-functional,fibonacci-generators,word-frequency"
+  labels="drawing: a fractal tree,optionals: `T?` + narrowing,expression trees: union + pattern matching,fibonacci: generators + pipes,word frequency: maps + pipes"
 />
 
-So is this one:
+## where to go next
 
-<GhulExample name="hello-world" />
+- [Rosetta Code](/rosetta/) - 703 tasks solved in ghūl, searchable, and nearly all runnable here. The page opens on one picked at random.
+- [the tour](/expression-oriented-programming) - the language a topic at a time, every example editable.
+- [getting started](/getting-started) - ghūl on your own machine. A ghūl repository pins the compiler as a local .NET tool, so the compiler arrives with the code.
 
-A file with no namespace runs its top-level statements as the program's entry point, so a program needs no other ceremony until it grows enough to want some.
+## what is distinctive
 
-To write ghūl on your own machine, see [getting started](/getting-started): a ghūl repository pins the compiler as a local .NET tool, so the compiler arrives with the code. The [tour](/expression-oriented-programming) walks through the language a topic at a time.
+- **[type narrowing](/type-narrowing)** - a value's type follows control flow. A null test, an `isa`, a union variant test or an `if let` narrows whatever was tested - a local, a field, or a whole member-access path - and the narrowing survives the calls the compiler can show leave it alone.
 
-## features
+- **[everything is an expression](/expression-oriented-programming)** - `if`, `case`, loops and blocks all yield values. A `for` loop that finds something evaluates to what it found.
 
-- **statically typed** - every expression has a compile-time type, and a type mismatch is a compile error.
+- **[unions and pattern matching](/unions-and-pattern-matching)** - refutable patterns match by type and by value, and a `case` over a closed domain - a union, an enum, `bool`, a closed class hierarchy, a tuple of those - is checked for coverage.
 
-- **type inference** - inside function bodies, types are almost always inferred. A written type is a choice - widening a variable, testing a value - not a requirement; signatures are always explicit.
+- **keywords, not braces** - blocks open with a keyword and close with its mirror: `is` ... `si`, `if` ... `fi`, `do` ... `od`. No semicolons at the end of a line.
 
-- **type narrowing** - a value's type follows control flow. `isa` checks, null checks, union variant tests, and `if let` narrow whatever was tested - a local, a field, or a whole member-access path - within the code the check covers.
+The rest is what you would expect of a .NET language: classes, structs, traits and generics, first-class functions and closures, generators, `async`/`await`, and every NuGet package. ghūl produces ordinary assemblies and packages, and other .NET languages can call them.
 
-- **pattern matching** - refutable patterns match by type and by value, with exhaustiveness checking. `case` arms over closed domains - a union, an enum, `bool`, a closed class hierarchy - are checked for coverage; open domains need `else`.
-
-- **expression-oriented** - `if`, `case`, loops, and blocks are expressions: each yields a value, so a computation can be written as one expression rather than a sequence of assignments.
-
-- **functional and object-oriented** - first-class functions with closures and non-mutating pipe operations sit alongside classes, structs, traits, and inheritance. Neither style is second-class.
-
-- **lazy sequences and asynchrony** - generator functions `yield` sequences on demand, and asynchronous functions `await` .NET tasks in the conventional way.
-
-- **.NET integration** - ghūl produces and consumes NuGet packages and inter-operates with other .NET languages, so the whole .NET ecosystem is available from day one.
-
-Alongside the expected staples: generics with declaration-site variance, optional types, properties and indexers, `try`/`catch`/`finally` over .NET exceptions - all covered in the [tour](/expression-oriented-programming) and the reference pages.
+The language is under active development: whatever the compiler accepts is the definitive reference.
