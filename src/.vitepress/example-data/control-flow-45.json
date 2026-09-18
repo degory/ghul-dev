@@ -8,7 +8,7 @@
   "hiddenGapsAfterLine": [],
   "output": "default return value is 0\n",
   "diagnostics": [
-    { "startLine": 1, "startColumn": 1, "endLine": 3, "endColumn": 3, "severity": "warning", "message": "[definite-return] function may not return a value on all paths" }
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 24, "severity": "warning", "message": "[definite-return] function may not return a value on all paths" }
   ],
   "hovers": [
     { "startLine": 4, "startColumn": 1, "endLine": 6, "endColumn": 41, "text": "class string", "signature": "class string", "kindLabel": "class" },
