@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-loops-for-with-a-specified-step",
+  "code": "use default\n\nfor value in (0::4) |> map(index => index * 5) do\n    write_line(\"{value}\")\nod",
+  "fullSource": "use default\n\nfor value in (0::4) |> map(index => index * 5) do\n    write_line(\"{value}\")\nod",
+  "output": "0\n5\n10\n15\n20\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "loops-for-with-a-specified-step",
+  "hovers": [],
+  "diagnostics": []
+}

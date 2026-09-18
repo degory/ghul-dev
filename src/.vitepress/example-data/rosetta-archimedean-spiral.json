@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-archimedean-spiral",
+  "code": "use Ghul.Pipes\nuse Raster.IMAGE\nuse System.Math\n\nlet turns = 5.0D\nlet steps = 2000\n\nlet last = turns * 2.0D * Math.pi\n\nat(angle: double) -> (x: double, y: double) =>\n    (x = angle * Math.cos(angle), y = angle * Math.sin(angle))\n\nlet image = IMAGE(400, 400)\n\nimage.view(-last, -last, last, last)\n\nimage.colour(0ub, 0ub, 160ub)\nimage.stroke(1.5D)\n\nimage.line(\n    (0..steps + 1)\n        |> map(step => at(last * cast double(step) / cast double(steps)))\n        |> collect_list()\n)\n\nimage.write(\"spiral.png\")\n\nimage.show(\"spiral.png\")",
+  "fullSource": "use Ghul.Pipes\nuse Raster.IMAGE\nuse System.Math\n\nlet turns = 5.0D\nlet steps = 2000\n\nlet last = turns * 2.0D * Math.pi\n\nat(angle: double) -> (x: double, y: double) =>\n    (x = angle * Math.cos(angle), y = angle * Math.sin(angle))\n\nlet image = IMAGE(400, 400)\n\nimage.view(-last, -last, last, last)\n\nimage.colour(0ub, 0ub, 160ub)\nimage.stroke(1.5D)\n\nimage.line(\n    (0..steps + 1)\n        |> map(step => at(last * cast double(step) / cast double(steps)))\n        |> collect_list()\n)\n\nimage.write(\"spiral.png\")\n\nimage.show(\"spiral.png\")",
+  "output": "<<image spiral.png>>\n",
+  "images": [
+    {
+      "name": "spiral.png",
+      "url": "/rosetta/archimedean-spiral/spiral.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "archimedean-spiral",
+  "hovers": [],
+  "diagnostics": []
+}

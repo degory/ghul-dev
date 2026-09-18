@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-equilibrium-index",
+  "code": "use default\n\nequilibrium_indices(values: int[]) -> Pipe[int] is\n    let total = values |> reduce(0, (sum, value) => sum + value)\n    let below mut = 0\n\n    for index in 0..values.count do\n        if below * 2 + values[index] == total then\n            yield index\n        fi\n\n        below = below + values[index]\n    od\nsi\n\nlet sequence = [-7, 1, 5, 2, -4, 3, 0]\n\nlet indices = equilibrium_indices(sequence)\n    |> map(index => \"{index}\")\n    |> join(\" \")\n\nwrite_line(\"equilibrium indices: {indices}\")",
+  "fullSource": "use default\n\nequilibrium_indices(values: int[]) -> Pipe[int] is\n    let total = values |> reduce(0, (sum, value) => sum + value)\n    let below mut = 0\n\n    for index in 0..values.count do\n        if below * 2 + values[index] == total then\n            yield index\n        fi\n\n        below = below + values[index]\n    od\nsi\n\nlet sequence = [-7, 1, 5, 2, -4, 3, 0]\n\nlet indices = equilibrium_indices(sequence)\n    |> map(index => \"{index}\")\n    |> join(\" \")\n\nwrite_line(\"equilibrium indices: {indices}\")",
+  "output": "equilibrium indices: 3 6\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "equilibrium-index",
+  "hovers": [],
+  "diagnostics": []
+}

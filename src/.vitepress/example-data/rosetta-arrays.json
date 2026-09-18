@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-arrays",
+  "code": "use default\n\nlet fixed = [\"apple\", \"orange\", \"pear\"]\n\nwrite_line(\"{$fixed} has {fixed.count}, and fixed[1] is {fixed[1]}\")\nwrite_line(\"an array indexer only reads, so a list carries the writes\")\n\nlet growing = LIST(fixed)\n\ngrowing.add(\"lemon\")\n\ngrowing[0] = \"quince\"\n\nwrite_line(\"{$growing} has {growing.count}, and growing[0] is {growing[0]}\")",
+  "fullSource": "use default\n\nlet fixed = [\"apple\", \"orange\", \"pear\"]\n\nwrite_line(\"{$fixed} has {fixed.count}, and fixed[1] is {fixed[1]}\")\nwrite_line(\"an array indexer only reads, so a list carries the writes\")\n\nlet growing = LIST(fixed)\n\ngrowing.add(\"lemon\")\n\ngrowing[0] = \"quince\"\n\nwrite_line(\"{$growing} has {growing.count}, and growing[0] is {growing[0]}\")",
+  "output": "[apple, orange, pear] has 3, and fixed[1] is orange\nan array indexer only reads, so a list carries the writes\n[quince, orange, pear, lemon] has 4, and growing[0] is quince\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "arrays",
+  "hovers": [],
+  "diagnostics": []
+}

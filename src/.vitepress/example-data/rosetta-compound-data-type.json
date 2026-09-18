@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-compound-data-type",
+  "code": "use IO.Std.write_line\n\n// A struct is a value type, so a copy is a separate point.\nstruct POINT(x: int, y: int)\n\nlet origin = POINT(0, 0)\nlet corner = POINT(3, 4)\n\nwrite_line(\"origin ({origin.x}, {origin.y})\")\nwrite_line(\"corner ({corner.x}, {corner.y})\")\nlet same = if origin =~ corner then \"equal\" else \"different\" fi\n\nwrite_line(\"the two points are {same}\")",
+  "fullSource": "use IO.Std.write_line\n\n// A struct is a value type, so a copy is a separate point.\nstruct POINT(x: int, y: int)\n\nlet origin = POINT(0, 0)\nlet corner = POINT(3, 4)\n\nwrite_line(\"origin ({origin.x}, {origin.y})\")\nwrite_line(\"corner ({corner.x}, {corner.y})\")\nlet same = if origin =~ corner then \"equal\" else \"different\" fi\n\nwrite_line(\"the two points are {same}\")",
+  "output": "origin (0, 0)\ncorner (3, 4)\nthe two points are different\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "compound-data-type",
+  "hovers": [],
+  "diagnostics": []
+}

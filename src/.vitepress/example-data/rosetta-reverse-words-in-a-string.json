@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-reverse-words-in-a-string",
+  "code": "use default\n\nlet text =\n    \"---------- Ice and Fire ------------\\n\"\n    \"\\n\"\n    \"fire, in end will world the say Some\\n\"\n    \"ice. in say Some\\n\"\n    \"desire of tasted I've what From\\n\"\n    \"fire. favor who those with hold I\\n\"\n    \"\\n\"\n    \"... elided paragraph last ...\\n\"\n    \"\\n\"\n    \"Frost Robert -----------------------\"\n\nlet separators = [' ']\n\nfor line in text.split(['\\n']) do\n    write_line(line.split(separators) |> reverse() |> join(\" \"))\nod",
+  "fullSource": "use default\n\nlet text =\n    \"---------- Ice and Fire ------------\\n\"\n    \"\\n\"\n    \"fire, in end will world the say Some\\n\"\n    \"ice. in say Some\\n\"\n    \"desire of tasted I've what From\\n\"\n    \"fire. favor who those with hold I\\n\"\n    \"\\n\"\n    \"... elided paragraph last ...\\n\"\n    \"\\n\"\n    \"Frost Robert -----------------------\"\n\nlet separators = [' ']\n\nfor line in text.split(['\\n']) do\n    write_line(line.split(separators) |> reverse() |> join(\" \"))\nod",
+  "output": "------------ Fire and Ice ----------\n\nSome say the world will end in fire,\nSome say in ice.\nFrom what I've tasted of desire\nI hold with those who favor fire.\n\n... last paragraph elided ...\n\n----------------------- Robert Frost\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "reverse-words-in-a-string",
+  "hovers": [],
+  "diagnostics": []
+}

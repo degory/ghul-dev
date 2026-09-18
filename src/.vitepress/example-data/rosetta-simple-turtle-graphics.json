@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-simple-turtle-graphics",
+  "code": "use default\nuse Raster\n\nlet image = IMAGE(640, 360)\n\nlet pen = TURTLE(image)\n\nhouse(size: double) is\n    let x = pen.x\n    let y = pen.y\n    let heading = pen.heading\n\n    for _ in 0..4 do\n        pen.forward(size)\n        pen.turn(90.0)\n    od\n\n    pen.pen_up()\n    pen.turn(90.0)\n    pen.forward(size)\n    pen.turn(-90.0)\n    pen.pen_down()\n\n    pen.turn(60.0)\n    pen.forward(size)\n    pen.turn(-120.0)\n    pen.forward(size)\n\n    pen.move_to(x, y)\n    pen.face(heading)\nsi\n\nbar_chart(values: List[double], size: double) is\n    let x = pen.x\n    let y = pen.y\n    let heading = pen.heading\n\n    let tallest =\n        values |> reduce(0.0, (most, value) =>\n            if value > most then value else most fi)\n\n    let width = size / cast double(values.count)\n\n    for value in values do\n        let height = size * value / tallest\n\n        pen.turn(90.0)\n        pen.forward(height)\n        pen.turn(-90.0)\n        pen.forward(width)\n        pen.turn(-90.0)\n        pen.forward(height)\n        pen.turn(90.0)\n    od\n\n    pen.move_to(x, y)\n    pen.face(heading)\nsi\n\nimage.view(0.0, 0.0, 640.0, 360.0)\n\nimage.colour(140ub, 60ub, 40ub)\nimage.stroke(3.0)\n\npen.move_to(70.0, 30.0)\npen.face(0.0)\n\nhouse(160.0)\n\nimage.colour(40ub, 90ub, 160ub)\n\npen.move_to(370.0, 30.0)\npen.face(0.0)\n\nbar_chart([3.0, 7.0, 1.0, 5.0, 9.0, 4.0] |> collect_list(), 220.0)\n\nimage.write(\"turtle.png\")\n\nimage.show(\"turtle.png\")",
+  "fullSource": "use default\nuse Raster\n\nlet image = IMAGE(640, 360)\n\nlet pen = TURTLE(image)\n\nhouse(size: double) is\n    let x = pen.x\n    let y = pen.y\n    let heading = pen.heading\n\n    for _ in 0..4 do\n        pen.forward(size)\n        pen.turn(90.0)\n    od\n\n    pen.pen_up()\n    pen.turn(90.0)\n    pen.forward(size)\n    pen.turn(-90.0)\n    pen.pen_down()\n\n    pen.turn(60.0)\n    pen.forward(size)\n    pen.turn(-120.0)\n    pen.forward(size)\n\n    pen.move_to(x, y)\n    pen.face(heading)\nsi\n\nbar_chart(values: List[double], size: double) is\n    let x = pen.x\n    let y = pen.y\n    let heading = pen.heading\n\n    let tallest =\n        values |> reduce(0.0, (most, value) =>\n            if value > most then value else most fi)\n\n    let width = size / cast double(values.count)\n\n    for value in values do\n        let height = size * value / tallest\n\n        pen.turn(90.0)\n        pen.forward(height)\n        pen.turn(-90.0)\n        pen.forward(width)\n        pen.turn(-90.0)\n        pen.forward(height)\n        pen.turn(90.0)\n    od\n\n    pen.move_to(x, y)\n    pen.face(heading)\nsi\n\nimage.view(0.0, 0.0, 640.0, 360.0)\n\nimage.colour(140ub, 60ub, 40ub)\nimage.stroke(3.0)\n\npen.move_to(70.0, 30.0)\npen.face(0.0)\n\nhouse(160.0)\n\nimage.colour(40ub, 90ub, 160ub)\n\npen.move_to(370.0, 30.0)\npen.face(0.0)\n\nbar_chart([3.0, 7.0, 1.0, 5.0, 9.0, 4.0] |> collect_list(), 220.0)\n\nimage.write(\"turtle.png\")\n\nimage.show(\"turtle.png\")",
+  "output": "<<image turtle.png>>\n",
+  "images": [
+    {
+      "name": "turtle.png",
+      "url": "/rosetta/simple-turtle-graphics/turtle.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "simple-turtle-graphics",
+  "hovers": [],
+  "diagnostics": []
+}

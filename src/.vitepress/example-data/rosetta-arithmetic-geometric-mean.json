@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-arithmetic-geometric-mean",
+  "code": "use IO.Std.write_line\nuse System.Math\n\nagm(a0: double, g0: double) -> double is\n    let a mut = a0\n    let g mut = g0\n\n    while Math.abs(a - g) > 1.0e-15 * Math.abs(a) do\n        let next_a = (a + g) / 2.0\n\n        g = Math.sqrt(a * g)\n        a = next_a\n    od\n\n    a\nsi\n\nwrite_line(\"{agm(1.0, 1.0 / Math.sqrt(2.0))}\")",
+  "fullSource": "use IO.Std.write_line\nuse System.Math\n\nagm(a0: double, g0: double) -> double is\n    let a mut = a0\n    let g mut = g0\n\n    while Math.abs(a - g) > 1.0e-15 * Math.abs(a) do\n        let next_a = (a + g) / 2.0\n\n        g = Math.sqrt(a * g)\n        a = next_a\n    od\n\n    a\nsi\n\nwrite_line(\"{agm(1.0, 1.0 / Math.sqrt(2.0))}\")",
+  "output": "0.8472130847939792\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "arithmetic-geometric-mean",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-writer-monad",
+  "code": "use IO.Std.write\nuse IO.Std.write_line\nuse System.Math.sqrt\n\nuse Writer[T] = (value: T, log: string)\n\nunit[T](value: T, note: string) -> Writer[T] =>\n    (value = value, log = \"  {note,-17}: {value}\\n\")\n\n>>=[T, U](writer: Writer[T], f: (T) -> Writer[U]) -> Writer[U] =>\n    (let next = f(writer.value)\n     (value = next.value, log = \"{writer.log}{next.log}\"))\n\nroot(value: int) -> Writer[double] =>\n    unit(sqrt(cast(value)), \"Took square root\")\n\nadd_one(value: double) -> Writer[double] =>\n    unit(value + 1.0D, \"Added one\")\n\nhalf(value: double) -> Writer[double] =>\n    unit(value / 2.0D, \"Divided by two\")\n\nlet golden = unit(5, \"Initial value\") >>= root >>= add_one >>= half\n\nwrite_line(\"The golden ratio is {golden.value}\")\nwrite_line()\nwrite_line(\"This was derived as follows:\")\nwrite(golden.log)",
+  "fullSource": "use IO.Std.write\nuse IO.Std.write_line\nuse System.Math.sqrt\n\nuse Writer[T] = (value: T, log: string)\n\nunit[T](value: T, note: string) -> Writer[T] =>\n    (value = value, log = \"  {note,-17}: {value}\\n\")\n\n>>=[T, U](writer: Writer[T], f: (T) -> Writer[U]) -> Writer[U] =>\n    (let next = f(writer.value)\n     (value = next.value, log = \"{writer.log}{next.log}\"))\n\nroot(value: int) -> Writer[double] =>\n    unit(sqrt(cast(value)), \"Took square root\")\n\nadd_one(value: double) -> Writer[double] =>\n    unit(value + 1.0D, \"Added one\")\n\nhalf(value: double) -> Writer[double] =>\n    unit(value / 2.0D, \"Divided by two\")\n\nlet golden = unit(5, \"Initial value\") >>= root >>= add_one >>= half\n\nwrite_line(\"The golden ratio is {golden.value}\")\nwrite_line()\nwrite_line(\"This was derived as follows:\")\nwrite(golden.log)",
+  "output": "The golden ratio is 1.618033988749895\n\nThis was derived as follows:\n  Initial value    : 5\n  Took square root : 2.23606797749979\n  Added one        : 3.23606797749979\n  Divided by two   : 1.618033988749895\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "writer-monad",
+  "hovers": [],
+  "diagnostics": []
+}

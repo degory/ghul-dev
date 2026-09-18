@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sort-stability",
+  "code": "use default\n\nlet countries = [\n    (country = \"UK\", city = \"London\"),\n    (country = \"US\", city = \"New York\"),\n    (country = \"US\", city = \"Birmingham\"),\n    (country = \"UK\", city = \"Birmingham\")\n]\n\nlet by_city = countries\n    |> sort((a, b) => a.city <> b.city)\n    |> collect_list()\n\nfor row in by_city do\n    write_line(\"{row.country} {row.city}\")\nod",
+  "fullSource": "use default\n\nlet countries = [\n    (country = \"UK\", city = \"London\"),\n    (country = \"US\", city = \"New York\"),\n    (country = \"US\", city = \"Birmingham\"),\n    (country = \"UK\", city = \"Birmingham\")\n]\n\nlet by_city = countries\n    |> sort((a, b) => a.city <> b.city)\n    |> collect_list()\n\nfor row in by_city do\n    write_line(\"{row.country} {row.city}\")\nod",
+  "output": "US Birmingham\nUK Birmingham\nUK London\nUS New York\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sort-stability",
+  "hovers": [],
+  "diagnostics": []
+}

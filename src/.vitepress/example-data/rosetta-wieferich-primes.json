@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-wieferich-primes",
+  "code": "use default\n\nis_prime(value: int) -> bool =>\n    value > 1 /\\ ((2..value)\n        |> take_while(divisor => divisor * divisor <= value)\n        |> all(divisor => value % divisor != 0))\n\nis_wieferich(prime: int) -> bool =>\n    let square = bigint(prime) * bigint(prime) in\n    bigint.mod_pow(2n, bigint(prime - 1), square) =~ 1n\n\nwrite_line(\"Wieferich primes less than 5000:\")\n\nwrite_line((2..5000)\n    |> filter(is_prime)\n    |> filter(is_wieferich)\n    |> join(\" \"))",
+  "fullSource": "use default\n\nis_prime(value: int) -> bool =>\n    value > 1 /\\ ((2..value)\n        |> take_while(divisor => divisor * divisor <= value)\n        |> all(divisor => value % divisor != 0))\n\nis_wieferich(prime: int) -> bool =>\n    let square = bigint(prime) * bigint(prime) in\n    bigint.mod_pow(2n, bigint(prime - 1), square) =~ 1n\n\nwrite_line(\"Wieferich primes less than 5000:\")\n\nwrite_line((2..5000)\n    |> filter(is_prime)\n    |> filter(is_wieferich)\n    |> join(\" \"))",
+  "output": "Wieferich primes less than 5000:\n1093 3511\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "wieferich-primes",
+  "hovers": [],
+  "diagnostics": []
+}

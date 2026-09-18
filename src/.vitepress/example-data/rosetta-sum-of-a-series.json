@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sum-of-a-series",
+  "code": "use default\n\ns(n: int) -> double =>\n    (1::n)\n        |> map(k => 1.0 / cast double(k * k))\n        |> reduce(0.0, (running, term) => running + term)\n\nwrite_line(\"S(1000) = {s(1000)}\")",
+  "fullSource": "use default\n\ns(n: int) -> double =>\n    (1::n)\n        |> map(k => 1.0 / cast double(k * k))\n        |> reduce(0.0, (running, term) => running + term)\n\nwrite_line(\"S(1000) = {s(1000)}\")",
+  "output": "S(1000) = 1.6439345666815615\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sum-of-a-series",
+  "hovers": [],
+  "diagnostics": []
+}

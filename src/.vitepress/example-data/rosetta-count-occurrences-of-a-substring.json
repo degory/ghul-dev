@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-count-occurrences-of-a-substring",
+  "code": "use IO.Std.write_line\n\noccurrences(haystack: string, needle: string) -> int is\n    let found mut = 0\n    let at mut = haystack.index_of(needle)\n\n    while at >= 0 do\n        found = found + 1\n        at = haystack.index_of(needle, at + needle.length)\n    od\n\n    found\nsi\n\nwrite_line(\"{occurrences(\"the three truths\", \"th\")}\")\nwrite_line(\"{occurrences(\"ababababab\", \"abab\")}\")",
+  "fullSource": "use IO.Std.write_line\n\noccurrences(haystack: string, needle: string) -> int is\n    let found mut = 0\n    let at mut = haystack.index_of(needle)\n\n    while at >= 0 do\n        found = found + 1\n        at = haystack.index_of(needle, at + needle.length)\n    od\n\n    found\nsi\n\nwrite_line(\"{occurrences(\"the three truths\", \"th\")}\")\nwrite_line(\"{occurrences(\"ababababab\", \"abab\")}\")",
+  "output": "3\n2\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "count-occurrences-of-a-substring",
+  "hovers": [],
+  "diagnostics": []
+}

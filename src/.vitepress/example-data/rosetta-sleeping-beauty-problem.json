@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sleeping-beauty-problem",
+  "code": "use IO.Std.write_line\n\nlet coin = System.Random(20260909)\n\nlet runs = 1000000\n\nlet wakings mut = 0\nlet heads mut = 0\n\nfor _ in 0..runs do\n    if coin.next(2) == 0 then\n        wakings = wakings + 1\n        heads = heads + 1\n    else\n        wakings = wakings + 2\n    fi\nod\n\nwrite_line(\"{runs} runs of the experiment\")\nwrite_line(\"{wakings} wakings\")\nwrite_line(\"{heads} of them after heads\")\nwrite_line(\"credence: {cast double(heads) / cast double(wakings):F4}\")",
+  "fullSource": "use IO.Std.write_line\n\nlet coin = System.Random(20260909)\n\nlet runs = 1000000\n\nlet wakings mut = 0\nlet heads mut = 0\n\nfor _ in 0..runs do\n    if coin.next(2) == 0 then\n        wakings = wakings + 1\n        heads = heads + 1\n    else\n        wakings = wakings + 2\n    fi\nod\n\nwrite_line(\"{runs} runs of the experiment\")\nwrite_line(\"{wakings} wakings\")\nwrite_line(\"{heads} of them after heads\")\nwrite_line(\"credence: {cast double(heads) / cast double(wakings):F4}\")",
+  "output": "1000000 runs of the experiment\n1499903 wakings\n500097 of them after heads\ncredence: 0.3334\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sleeping-beauty-problem",
+  "hovers": [],
+  "diagnostics": []
+}

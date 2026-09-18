@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-letter-frequency",
+  "code": "use default\n\nlet text =\n    \"Now is the time for all good men to come to the aid of their country\"\n\nlet counts =\n    text\n        |> filter(c => char.is_letter(c))\n        |> group_by(c => char.to_lower_invariant(c))\n\nfor letter in counts.keys |> sort_by(k => k) do\n    write_line(\"{letter}: {counts[letter].count}\")\nod",
+  "fullSource": "use default\n\nlet text =\n    \"Now is the time for all good men to come to the aid of their country\"\n\nlet counts =\n    text\n        |> filter(c => char.is_letter(c))\n        |> group_by(c => char.to_lower_invariant(c))\n\nfor letter in counts.keys |> sort_by(k => k) do\n    write_line(\"{letter}: {counts[letter].count}\")\nod",
+  "output": "a: 2\nc: 2\nd: 2\ne: 6\nf: 2\ng: 1\nh: 3\ni: 4\nl: 2\nm: 3\nn: 3\no: 9\nr: 3\ns: 1\nt: 7\nu: 1\nw: 1\ny: 1\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "letter-frequency",
+  "hovers": [],
+  "diagnostics": []
+}

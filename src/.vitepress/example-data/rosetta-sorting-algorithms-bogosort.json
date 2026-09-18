@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sorting-algorithms-bogosort",
+  "code": "use default\n\nlet random = System.Random(42)\n\nin_order(values: LIST[int]) -> bool =>\n    (0..values.count - 1)\n        |> all(i => values[i] <= values[i + 1])\n\nshuffle(values: LIST[int]) is\n    let i mut = values.count - 1\n\n    while i > 0 do\n        let j = random.next(i + 1)\n\n        (values[i], values[j]) = (values[j], values[i])\n\n        i = i - 1\n    od\nsi\n\nbogosort(values: LIST[int]) is\n    while !in_order(values) do\n        shuffle(values)\n    od\nsi\n\nlet numbers = LIST([5, 3, 8, 1, 9])\n\nbogosort(numbers)\n\nwrite_line(numbers |> join(\", \"))",
+  "fullSource": "use default\n\nlet random = System.Random(42)\n\nin_order(values: LIST[int]) -> bool =>\n    (0..values.count - 1)\n        |> all(i => values[i] <= values[i + 1])\n\nshuffle(values: LIST[int]) is\n    let i mut = values.count - 1\n\n    while i > 0 do\n        let j = random.next(i + 1)\n\n        (values[i], values[j]) = (values[j], values[i])\n\n        i = i - 1\n    od\nsi\n\nbogosort(values: LIST[int]) is\n    while !in_order(values) do\n        shuffle(values)\n    od\nsi\n\nlet numbers = LIST([5, 3, 8, 1, 9])\n\nbogosort(numbers)\n\nwrite_line(numbers |> join(\", \"))",
+  "output": "1, 3, 5, 8, 9\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sorting-algorithms-bogosort",
+  "hovers": [],
+  "diagnostics": []
+}

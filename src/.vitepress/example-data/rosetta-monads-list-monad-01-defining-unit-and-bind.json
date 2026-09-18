@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-monads-list-monad-01-defining-unit-and-bind",
+  "code": "use default\nuse System.Convert.to_string\n\nunit[T](value: T) -> Iterable[T] => [value]\n\n>>=[T, U](values: Iterable[T], f: (T) -> Iterable[U])\n    -> Iterable[U]\n=>\n    values |> flat_map(f)\n\ndivisors(n: int) -> Iterable[int] =>\n    (1::n) |> filter(d => n % d == 0)\n\nspellings(n: int) -> Iterable[string] =>\n    [\"{n}\", \"0b{to_string(n, 2)}\"]\n\nwrite_line((unit(6) >>= divisors) |> join(\", \"))\nwrite_line((unit(6) >>= divisors >>= spellings) |> join(\", \"))",
+  "fullSource": "use default\nuse System.Convert.to_string\n\nunit[T](value: T) -> Iterable[T] => [value]\n\n>>=[T, U](values: Iterable[T], f: (T) -> Iterable[U])\n    -> Iterable[U]\n=>\n    values |> flat_map(f)\n\ndivisors(n: int) -> Iterable[int] =>\n    (1::n) |> filter(d => n % d == 0)\n\nspellings(n: int) -> Iterable[string] =>\n    [\"{n}\", \"0b{to_string(n, 2)}\"]\n\nwrite_line((unit(6) >>= divisors) |> join(\", \"))\nwrite_line((unit(6) >>= divisors >>= spellings) |> join(\", \"))",
+  "output": "1, 2, 3, 6\n1, 0b1, 2, 0b10, 3, 0b11, 6, 0b110\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "monads-list-monad/01-defining-unit-and-bind",
+  "hovers": [],
+  "diagnostics": []
+}

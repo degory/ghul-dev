@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-empty-string",
+  "code": "use IO.Std.write_line\n\nlet empty = \"\"\n\nlet filled = \"text\"\n\nwrite_line(\"empty is empty: {empty.length == 0}\")\nwrite_line(\"filled is empty: {filled.length == 0}\")\nwrite_line(\"filled is not empty: {filled.length > 0}\")\nwrite_line(\"null or empty: {string.is_null_or_empty(empty)}\")",
+  "fullSource": "use IO.Std.write_line\n\nlet empty = \"\"\n\nlet filled = \"text\"\n\nwrite_line(\"empty is empty: {empty.length == 0}\")\nwrite_line(\"filled is empty: {filled.length == 0}\")\nwrite_line(\"filled is not empty: {filled.length > 0}\")\nwrite_line(\"null or empty: {string.is_null_or_empty(empty)}\")",
+  "output": "empty is empty: True\nfilled is empty: False\nfilled is not empty: True\nnull or empty: True\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "empty-string",
+  "hovers": [],
+  "diagnostics": []
+}

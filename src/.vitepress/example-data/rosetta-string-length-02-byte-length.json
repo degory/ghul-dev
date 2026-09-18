@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-string-length-02-byte-length",
+  "code": "use IO.Std.write_line\nuse System.Text.Encoding\n\nlet subjects = [\"møøse\", \"𝔘𝔫𝔦𝔠𝔬𝔡𝔢\", \"J̲o̲s̲é̲\"]\n\nfor subject in subjects do\n    write_line(\n        \"{subject}: {Encoding.utf8.get_byte_count(subject)} bytes in UTF-8, \"\n        \"{Encoding.unicode.get_byte_count(subject)} in UTF-16\")\nod",
+  "fullSource": "use IO.Std.write_line\nuse System.Text.Encoding\n\nlet subjects = [\"møøse\", \"𝔘𝔫𝔦𝔠𝔬𝔡𝔢\", \"J̲o̲s̲é̲\"]\n\nfor subject in subjects do\n    write_line(\n        \"{subject}: {Encoding.utf8.get_byte_count(subject)} bytes in UTF-8, \"\n        \"{Encoding.unicode.get_byte_count(subject)} in UTF-16\")\nod",
+  "output": "møøse: 7 bytes in UTF-8, 10 in UTF-16\n𝔘𝔫𝔦𝔠𝔬𝔡𝔢: 28 bytes in UTF-8, 28 in UTF-16\nJ̲o̲s̲é̲: 14 bytes in UTF-8, 18 in UTF-16\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "string-length/02-byte-length",
+  "hovers": [],
+  "diagnostics": []
+}

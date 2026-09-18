@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-symmetric-difference",
+  "code": "use default\n\nonly_in(left: SET[string], right: SET[string]) -> Pipe[string] =>\n    left |> filter(name => !right.contains(name))\n\nshow(label: string, names: Pipe[string]) is\n    let listed = names |> join(\", \")\n\n    write_line(\"{label}: {listed}\")\nsi\n\nlet a = SET([\"John\", \"Serena\", \"Bob\", \"Mary\", \"Serena\"])\nlet b = SET([\"Jim\", \"Mary\", \"John\", \"Jim\", \"Bob\"])\n\nshow(\"only in A\", only_in(a, b))\nshow(\"only in B\", only_in(b, a))\nshow(\"symmetric difference\", only_in(a, b) |> cat(only_in(b, a)))",
+  "fullSource": "use default\n\nonly_in(left: SET[string], right: SET[string]) -> Pipe[string] =>\n    left |> filter(name => !right.contains(name))\n\nshow(label: string, names: Pipe[string]) is\n    let listed = names |> join(\", \")\n\n    write_line(\"{label}: {listed}\")\nsi\n\nlet a = SET([\"John\", \"Serena\", \"Bob\", \"Mary\", \"Serena\"])\nlet b = SET([\"Jim\", \"Mary\", \"John\", \"Jim\", \"Bob\"])\n\nshow(\"only in A\", only_in(a, b))\nshow(\"only in B\", only_in(b, a))\nshow(\"symmetric difference\", only_in(a, b) |> cat(only_in(b, a)))",
+  "output": "only in A: Serena\nonly in B: Jim\nsymmetric difference: Serena, Jim\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "symmetric-difference",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-moser-s-circle-problem",
+  "code": "use default\n\npolynomial(n: int) -> int =>\n    (n * n * n * n - 6 * n * n * n + 23 * n * n - 18 * n + 24) / 24\n\nchoose(n: int, k: int) -> int =>\n    if k > n then\n        0\n    else\n        (1..k + 1)\n        |> reduce(1, (total, step) => total * (n - k + step) / step)\n    fi\n\nbinomials(n: int) -> int => choose(n, 4) + choose(n, 2) + 1\n\nwrite_line(\"{\"n\",3}{\"polynomial\",14}{\"binomials\",14}\")\n\nfor n in 1..21 do\n    write_line(\"{n,3}{polynomial(n),14}{binomials(n),14}\")\nod",
+  "fullSource": "use default\n\npolynomial(n: int) -> int =>\n    (n * n * n * n - 6 * n * n * n + 23 * n * n - 18 * n + 24) / 24\n\nchoose(n: int, k: int) -> int =>\n    if k > n then\n        0\n    else\n        (1..k + 1)\n        |> reduce(1, (total, step) => total * (n - k + step) / step)\n    fi\n\nbinomials(n: int) -> int => choose(n, 4) + choose(n, 2) + 1\n\nwrite_line(\"{\"n\",3}{\"polynomial\",14}{\"binomials\",14}\")\n\nfor n in 1..21 do\n    write_line(\"{n,3}{polynomial(n),14}{binomials(n),14}\")\nod",
+  "output": "  n    polynomial     binomials\n  1             1             1\n  2             2             2\n  3             4             4\n  4             8             8\n  5            16            16\n  6            31            31\n  7            57            57\n  8            99            99\n  9           163           163\n 10           256           256\n 11           386           386\n 12           562           562\n 13           794           794\n 14          1093          1093\n 15          1471          1471\n 16          1941          1941\n 17          2517          2517\n 18          3214          3214\n 19          4048          4048\n 20          5036          5036\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "moser-s-circle-problem",
+  "hovers": [],
+  "diagnostics": []
+}

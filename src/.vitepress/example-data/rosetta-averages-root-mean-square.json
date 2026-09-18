@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-averages-root-mean-square",
+  "code": "use default\nuse System.Math\n\nroot_mean_square(values: Collections.List[double]) -> double is\n    let squares =\n        values\n            |> map(v => v * v)\n            |> reduce(0.0, (running, square) => running + square)\n\n    return Math.sqrt(squares / cast(values.count))\nsi\n\nlet one_to_ten = (1::10) |> map(n => cast double(n)) |> collect()\n\nwrite_line(\"{root_mean_square(one_to_ten)}\")",
+  "fullSource": "use default\nuse System.Math\n\nroot_mean_square(values: Collections.List[double]) -> double is\n    let squares =\n        values\n            |> map(v => v * v)\n            |> reduce(0.0, (running, square) => running + square)\n\n    return Math.sqrt(squares / cast(values.count))\nsi\n\nlet one_to_ten = (1::10) |> map(n => cast double(n)) |> collect()\n\nwrite_line(\"{root_mean_square(one_to_ten)}\")",
+  "output": "6.2048368229954285\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "averages-root-mean-square",
+  "hovers": [],
+  "diagnostics": []
+}

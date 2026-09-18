@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-caesar-cipher",
+  "code": "use IO.Std.write_line\n\nrotate(text: string, key: int) -> string is\n    let shifted = System.Text.StringBuilder()\n\n    for letter in text do\n        let first =\n            if letter >= 'a' /\\ letter <= 'z' then cast int('a')\n            elif letter >= 'A' /\\ letter <= 'Z' then cast int('A')\n            else -1\n            fi\n\n        if first < 0 then\n            shifted.append(letter)\n        else\n            let rotated = (cast int(letter) - first + key) % 26\n\n            shifted.append(cast char(first + rotated))\n        fi\n    od\n\n    shifted.to_string()\nsi\n\nencode(text: string, key: int) -> string => rotate(text, key)\ndecode(text: string, key: int) -> string => rotate(text, 26 - key)\n\nlet message = \"The Quick Brown Fox Jumps Over The Lazy Dog!\"\nlet encoded = encode(message, 3)\n\nwrite_line(\"plain:   {message}\")\nwrite_line(\"encoded: {encoded}\")\nwrite_line(\"decoded: {decode(encoded, 3)}\")",
+  "fullSource": "use IO.Std.write_line\n\nrotate(text: string, key: int) -> string is\n    let shifted = System.Text.StringBuilder()\n\n    for letter in text do\n        let first =\n            if letter >= 'a' /\\ letter <= 'z' then cast int('a')\n            elif letter >= 'A' /\\ letter <= 'Z' then cast int('A')\n            else -1\n            fi\n\n        if first < 0 then\n            shifted.append(letter)\n        else\n            let rotated = (cast int(letter) - first + key) % 26\n\n            shifted.append(cast char(first + rotated))\n        fi\n    od\n\n    shifted.to_string()\nsi\n\nencode(text: string, key: int) -> string => rotate(text, key)\ndecode(text: string, key: int) -> string => rotate(text, 26 - key)\n\nlet message = \"The Quick Brown Fox Jumps Over The Lazy Dog!\"\nlet encoded = encode(message, 3)\n\nwrite_line(\"plain:   {message}\")\nwrite_line(\"encoded: {encoded}\")\nwrite_line(\"decoded: {decode(encoded, 3)}\")",
+  "output": "plain:   The Quick Brown Fox Jumps Over The Lazy Dog!\nencoded: Wkh Txlfn Eurzq Ira Mxpsv Ryhu Wkh Odcb Grj!\ndecoded: The Quick Brown Fox Jumps Over The Lazy Dog!\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "caesar-cipher",
+  "hovers": [],
+  "diagnostics": []
+}

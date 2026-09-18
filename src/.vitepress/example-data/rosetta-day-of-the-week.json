@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-day-of-the-week",
+  "code": "use default\nuse System\n\nchristmas_days() -> Pipe[DateTime] is\n    for year in 2008::2121 do\n        yield DateTime(year, 12, 25)\n    od\nsi\n\nlet sundays = christmas_days()\n    |> filter(christmas => christmas.day_of_week == DayOfWeek.SUNDAY)\n\nwrite_line(\"Christmas falls on a Sunday in:\")\nsundays |> each(christmas => write_line(\"{christmas:yyyy}\"))",
+  "fullSource": "use default\nuse System\n\nchristmas_days() -> Pipe[DateTime] is\n    for year in 2008::2121 do\n        yield DateTime(year, 12, 25)\n    od\nsi\n\nlet sundays = christmas_days()\n    |> filter(christmas => christmas.day_of_week == DayOfWeek.SUNDAY)\n\nwrite_line(\"Christmas falls on a Sunday in:\")\nsundays |> each(christmas => write_line(\"{christmas:yyyy}\"))",
+  "output": "Christmas falls on a Sunday in:\n2011\n2016\n2022\n2033\n2039\n2044\n2050\n2061\n2067\n2072\n2078\n2089\n2095\n2101\n2107\n2112\n2118\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "day-of-the-week",
+  "hovers": [],
+  "diagnostics": []
+}

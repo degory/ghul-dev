@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-here-document",
+  "code": "use default\n\nlet doc =\n    \"Rosetta Code\\n\"\n    \"    is a programming chrestomathy site.\\n\"\n    \"\\n\"\n    \"It preserves:\\n\"\n    \"  - indentation\\n\"\n    \"  - line breaks\\n\"\n    \"  - other whitespace\\n\"\n    \"within a block built from adjacent string literals.\"\n\nwrite_line(doc)",
+  "fullSource": "use default\n\nlet doc =\n    \"Rosetta Code\\n\"\n    \"    is a programming chrestomathy site.\\n\"\n    \"\\n\"\n    \"It preserves:\\n\"\n    \"  - indentation\\n\"\n    \"  - line breaks\\n\"\n    \"  - other whitespace\\n\"\n    \"within a block built from adjacent string literals.\"\n\nwrite_line(doc)",
+  "output": "Rosetta Code\n    is a programming chrestomathy site.\n\nIt preserves:\n  - indentation\n  - line breaks\n  - other whitespace\nwithin a block built from adjacent string literals.\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "here-document",
+  "hovers": [],
+  "diagnostics": []
+}

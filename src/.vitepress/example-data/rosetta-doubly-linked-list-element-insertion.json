@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-doubly-linked-list-element-insertion",
+  "code": "use IO.Std.write_line\n\nclass NODE[T](value: T) is\n    next: NODE[T]?\n    previous: NODE[T]?\n\n    insert_after(value: T) -> NODE[T] is\n        let inserted = NODE[T](value)\n\n        inserted.previous = self\n        inserted.next = next\n\n        if let following = next then\n            following.previous = inserted\n        fi\n\n        next = inserted\n\n        inserted\n    si\nsi\n\nrender[T](first: NODE[T]) -> string is\n    let text mut = \"{first.value}\"\n    let cursor mut = first.next\n\n    while let node = cursor do\n        text = \"{text} -> {node.value}\"\n        cursor = node.next\n    od\n\n    text\nsi\n\nlet a = NODE(\"A\")\nlet b = a.insert_after(\"B\")\n\nwrite_line(render(a))\n\na.insert_after(\"C\")\n\nwrite_line(render(a))\nwrite_line(\"B.previous = {b.previous?.value}\")",
+  "fullSource": "use IO.Std.write_line\n\nclass NODE[T](value: T) is\n    next: NODE[T]?\n    previous: NODE[T]?\n\n    insert_after(value: T) -> NODE[T] is\n        let inserted = NODE[T](value)\n\n        inserted.previous = self\n        inserted.next = next\n\n        if let following = next then\n            following.previous = inserted\n        fi\n\n        next = inserted\n\n        inserted\n    si\nsi\n\nrender[T](first: NODE[T]) -> string is\n    let text mut = \"{first.value}\"\n    let cursor mut = first.next\n\n    while let node = cursor do\n        text = \"{text} -> {node.value}\"\n        cursor = node.next\n    od\n\n    text\nsi\n\nlet a = NODE(\"A\")\nlet b = a.insert_after(\"B\")\n\nwrite_line(render(a))\n\na.insert_after(\"C\")\n\nwrite_line(render(a))\nwrite_line(\"B.previous = {b.previous?.value}\")",
+  "output": "A -> B\nA -> C -> B\nB.previous = C\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "doubly-linked-list-element-insertion",
+  "hovers": [],
+  "diagnostics": []
+}

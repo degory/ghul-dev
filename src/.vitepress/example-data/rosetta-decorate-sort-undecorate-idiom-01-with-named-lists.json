@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-decorate-sort-undecorate-idiom-01-with-named-lists",
+  "code": "use default\n\ndecorate_sort_undecorate[T, K: Ghul.Comparable[K]]\n    (items: Iterable[T], key: (T) -> K) -> Pipe[T]\nis\n    let decorated =\n        items |> map(item => (item, key = key(item))) |> collect_list()\n\n    let sorted = decorated |> sort_by(pair => pair.key) |> collect_list()\n\n    sorted |> map(pair => pair.item)\nsi\n\nlet words =\n    [\"Rosetta\", \"Code\", \"is\", \"a\", \"programming\", \"chrestomathy\", \"site\"]\n\nwrite_line(words |> decorate_sort_undecorate(w => w.length) |> join(\", \"))\nwrite_line(words |> decorate_sort_undecorate(w => w[0]) |> join(\", \"))",
+  "fullSource": "use default\n\ndecorate_sort_undecorate[T, K: Ghul.Comparable[K]]\n    (items: Iterable[T], key: (T) -> K) -> Pipe[T]\nis\n    let decorated =\n        items |> map(item => (item, key = key(item))) |> collect_list()\n\n    let sorted = decorated |> sort_by(pair => pair.key) |> collect_list()\n\n    sorted |> map(pair => pair.item)\nsi\n\nlet words =\n    [\"Rosetta\", \"Code\", \"is\", \"a\", \"programming\", \"chrestomathy\", \"site\"]\n\nwrite_line(words |> decorate_sort_undecorate(w => w.length) |> join(\", \"))\nwrite_line(words |> decorate_sort_undecorate(w => w[0]) |> join(\", \"))",
+  "output": "a, is, Code, site, Rosetta, programming, chrestomathy\nCode, Rosetta, a, chrestomathy, is, programming, site\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "decorate-sort-undecorate-idiom/01-with-named-lists",
+  "hovers": [],
+  "diagnostics": []
+}

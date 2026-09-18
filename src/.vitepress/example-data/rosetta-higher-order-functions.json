@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-higher-order-functions",
+  "code": "use IO.Std.write_line\n\napply[T,U](f: (T) -> U, argument: T) -> U =>\n    f(argument)\n\nshout(text: string) -> string => \"{text.to_upper_invariant()}!\"\n\nwrite_line(apply(shout, \"hello\"))\nwrite_line(apply(text => \"<{text}>\", \"hello\"))",
+  "fullSource": "use IO.Std.write_line\n\napply[T,U](f: (T) -> U, argument: T) -> U =>\n    f(argument)\n\nshout(text: string) -> string => \"{text.to_upper_invariant()}!\"\n\nwrite_line(apply(shout, \"hello\"))\nwrite_line(apply(text => \"<{text}>\", \"hello\"))",
+  "output": "HELLO!\n<hello>\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "higher-order-functions",
+  "hovers": [],
+  "diagnostics": []
+}

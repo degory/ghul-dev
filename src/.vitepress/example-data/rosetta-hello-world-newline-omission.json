@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-hello-world-newline-omission",
+  "code": "use IO.Std.write\n\nwrite(\"Goodbye, World!\")",
+  "fullSource": "use IO.Std.write\n\nwrite(\"Goodbye, World!\")",
+  "output": "Goodbye, World!",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "hello-world-newline-omission",
+  "hovers": [],
+  "diagnostics": []
+}

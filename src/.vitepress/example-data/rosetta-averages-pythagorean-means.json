@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-averages-pythagorean-means",
+  "code": "use default\nuse System.Math\n\narithmetic(values: double[]) -> double is\n    let total = values |> reduce(0.0, (running, v) => running + v)\n\n    return total / cast(values.count)\nsi\n\ngeometric(values: double[]) -> double is\n    let product = values |> reduce(1.0, (running, v) => running * v)\n\n    return Math.pow(product, 1.0 / cast(values.count))\nsi\n\nharmonic(values: double[]) -> double is\n    let reciprocals =\n        values |> reduce(0.0, (running, v) => running + 1.0 / v)\n\n    return cast(values.count) / reciprocals\nsi\n\nlet one_to_ten = (1::10) |> map(n => cast double(n)) |> collect_array()\n\nlet a = arithmetic(one_to_ten)\nlet g = geometric(one_to_ten)\nlet h = harmonic(one_to_ten)\n\nwrite_line(\"arithmetic {a}\")\nwrite_line(\"geometric  {g}\")\nwrite_line(\"harmonic   {h}\")\nwrite_line(\"A >= G >= H holds: {a >= g /\\ g >= h}\")",
+  "fullSource": "use default\nuse System.Math\n\narithmetic(values: double[]) -> double is\n    let total = values |> reduce(0.0, (running, v) => running + v)\n\n    return total / cast(values.count)\nsi\n\ngeometric(values: double[]) -> double is\n    let product = values |> reduce(1.0, (running, v) => running * v)\n\n    return Math.pow(product, 1.0 / cast(values.count))\nsi\n\nharmonic(values: double[]) -> double is\n    let reciprocals =\n        values |> reduce(0.0, (running, v) => running + 1.0 / v)\n\n    return cast(values.count) / reciprocals\nsi\n\nlet one_to_ten = (1::10) |> map(n => cast double(n)) |> collect_array()\n\nlet a = arithmetic(one_to_ten)\nlet g = geometric(one_to_ten)\nlet h = harmonic(one_to_ten)\n\nwrite_line(\"arithmetic {a}\")\nwrite_line(\"geometric  {g}\")\nwrite_line(\"harmonic   {h}\")\nwrite_line(\"A >= G >= H holds: {a >= g /\\ g >= h}\")",
+  "output": "arithmetic 5.5\ngeometric  4.528728688116765\nharmonic   3.414171521474055\nA >= G >= H holds: True\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "averages-pythagorean-means",
+  "hovers": [],
+  "diagnostics": []
+}

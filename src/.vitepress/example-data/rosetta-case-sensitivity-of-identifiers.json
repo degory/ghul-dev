@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-case-sensitivity-of-identifiers",
+  "code": "// ghul is case sensitive, so these are three separate variables. It also\n// has a naming convention the compiler checks - a variable is snake_case -\n// and two of the three names here deliberately break it.\n@@suppress(\"non-snake-case-name\")\n\nuse IO.Std.write_line\n\nlet dog = \"Benjamin\"\nlet Dog = \"Samba\"\nlet DOG = \"Bernie\"\n\nwrite_line(\"The three dogs are named {dog}, {Dog} and {DOG}.\")",
+  "fullSource": "// ghul is case sensitive, so these are three separate variables. It also\n// has a naming convention the compiler checks - a variable is snake_case -\n// and two of the three names here deliberately break it.\n@@suppress(\"non-snake-case-name\")\n\nuse IO.Std.write_line\n\nlet dog = \"Benjamin\"\nlet Dog = \"Samba\"\nlet DOG = \"Bernie\"\n\nwrite_line(\"The three dogs are named {dog}, {Dog} and {DOG}.\")",
+  "output": "The three dogs are named Benjamin, Samba and Bernie.\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "case-sensitivity-of-identifiers",
+  "hovers": [],
+  "diagnostics": []
+}

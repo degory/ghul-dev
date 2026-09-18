@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-literals-integer",
+  "code": "use IO.Std.write_line\n\nwrite_line(\"decimal: {727}\")\nwrite_line(\"hexadecimal: {0x2D7}\")\nwrite_line(\"grouped: {1_000_000}\")\nwrite_line(\"long: {727L}\")\nwrite_line(\"byte: {27b}\")\nwrite_line(\"unsigned byte: {200ub}\")\nwrite_line(\"big integer: {727n}\")\nwrite_line(\"character code: {0x20AC`c}\")",
+  "fullSource": "use IO.Std.write_line\n\nwrite_line(\"decimal: {727}\")\nwrite_line(\"hexadecimal: {0x2D7}\")\nwrite_line(\"grouped: {1_000_000}\")\nwrite_line(\"long: {727L}\")\nwrite_line(\"byte: {27b}\")\nwrite_line(\"unsigned byte: {200ub}\")\nwrite_line(\"big integer: {727n}\")\nwrite_line(\"character code: {0x20AC`c}\")",
+  "output": "decimal: 727\nhexadecimal: 727\ngrouped: 1000000\nlong: 727\nbyte: 27\nunsigned byte: 200\nbig integer: 727\ncharacter code: €\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "literals-integer",
+  "hovers": [],
+  "diagnostics": []
+}

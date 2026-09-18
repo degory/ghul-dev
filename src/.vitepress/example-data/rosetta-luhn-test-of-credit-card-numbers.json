@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-luhn-test-of-credit-card-numbers",
+  "code": "use default\n\nluhn(number: string) -> bool is\n    let total =\n        number\n            |> reverse()\n            |> index()\n            |> map(entry =>\n                (\n                    let digit = cast int(entry.value) - cast int('0')\n\n                    if entry.index % 2 == 0 then\n                        digit\n                    else\n                        let doubled = digit * 2\n\n                        if doubled > 9 then doubled - 9 else doubled fi\n                    fi\n                ))\n            |> reduce(0, (running, digit) => running + digit)\n\n    return total % 10 == 0\nsi\n\nlet numbers = [\n    \"49927398716\",\n    \"49927398717\",\n    \"1234567812345678\",\n    \"1234567812345670\"\n]\n\nfor number in numbers do\n    let verdict = if luhn(number) then \"valid\" else \"invalid\" fi\n\n    write_line(\"{number,-18} {verdict}\")\nod",
+  "fullSource": "use default\n\nluhn(number: string) -> bool is\n    let total =\n        number\n            |> reverse()\n            |> index()\n            |> map(entry =>\n                (\n                    let digit = cast int(entry.value) - cast int('0')\n\n                    if entry.index % 2 == 0 then\n                        digit\n                    else\n                        let doubled = digit * 2\n\n                        if doubled > 9 then doubled - 9 else doubled fi\n                    fi\n                ))\n            |> reduce(0, (running, digit) => running + digit)\n\n    return total % 10 == 0\nsi\n\nlet numbers = [\n    \"49927398716\",\n    \"49927398717\",\n    \"1234567812345678\",\n    \"1234567812345670\"\n]\n\nfor number in numbers do\n    let verdict = if luhn(number) then \"valid\" else \"invalid\" fi\n\n    write_line(\"{number,-18} {verdict}\")\nod",
+  "output": "49927398716        valid\n49927398717        invalid\n1234567812345678   invalid\n1234567812345670   valid\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "luhn-test-of-credit-card-numbers",
+  "hovers": [],
+  "diagnostics": []
+}

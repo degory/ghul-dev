@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-read-a-file-line-by-line",
+  "code": "use IO.Std.write_line\nuse IO\n\nlet reader = StreamReader(\"input.txt\")\n\nlet numbered mut = 0\n\nwhile let line = reader.read_line() do\n    numbered = numbered + 1\n\n    write_line(\"{numbered}: {line}\")\nod\n\nreader.dispose()",
+  "fullSource": "use IO.Std.write_line\nuse IO\n\nlet reader = StreamReader(\"input.txt\")\n\nlet numbered mut = 0\n\nwhile let line = reader.read_line() do\n    numbered = numbered + 1\n\n    write_line(\"{numbered}: {line}\")\nod\n\nreader.dispose()",
+  "output": "1: alpha\n2: beta\n3: gamma\n",
+  "images": [],
+  "playground": false,
+  "playgroundPath": "read-a-file-line-by-line",
+  "hovers": [],
+  "diagnostics": []
+}

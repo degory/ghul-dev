@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-generate-lower-case-ascii-alphabet",
+  "code": "use default\n\nlet letters = ('a'::'z') |> collect()\n\nlet last = letters.count - 1\n\nwrite_line(letters |> join(\"\"))\nwrite_line(\"{letters.count} letters, {letters[0]} to {letters[last]}\")",
+  "fullSource": "use default\n\nlet letters = ('a'::'z') |> collect()\n\nlet last = letters.count - 1\n\nwrite_line(letters |> join(\"\"))\nwrite_line(\"{letters.count} letters, {letters[0]} to {letters[last]}\")",
+  "output": "abcdefghijklmnopqrstuvwxyz\n26 letters, a to z\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "generate-lower-case-ascii-alphabet",
+  "hovers": [],
+  "diagnostics": []
+}

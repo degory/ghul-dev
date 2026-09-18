@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-least-common-multiple",
+  "code": "use IO.Std.write_line\nuse System.Math\n\ngcd(a: int, b: int) -> int =>\n    if b == 0 then a else gcd(b, a % b) fi\n\nlcm(a: int, b: int) -> int =>\n    if a == 0 \\/ b == 0 then\n        0\n    else\n        Math.abs(a / gcd(a, b) * b)\n    fi\n\nfor (a, b) in [(12, 18), (-6, 14), (35, 0)] do\n    write_line(\"lcm({a}, {b}) = {lcm(a, b)}\")\nod",
+  "fullSource": "use IO.Std.write_line\nuse System.Math\n\ngcd(a: int, b: int) -> int =>\n    if b == 0 then a else gcd(b, a % b) fi\n\nlcm(a: int, b: int) -> int =>\n    if a == 0 \\/ b == 0 then\n        0\n    else\n        Math.abs(a / gcd(a, b) * b)\n    fi\n\nfor (a, b) in [(12, 18), (-6, 14), (35, 0)] do\n    write_line(\"lcm({a}, {b}) = {lcm(a, b)}\")\nod",
+  "output": "lcm(12, 18) = 36\nlcm(-6, 14) = 42\nlcm(35, 0) = 0\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "least-common-multiple",
+  "hovers": [],
+  "diagnostics": []
+}

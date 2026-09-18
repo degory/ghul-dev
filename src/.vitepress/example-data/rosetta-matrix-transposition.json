@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-matrix-transposition",
+  "code": "use default\n\ntranspose(matrix: List[List[int]]) -> List[List[int]] is\n    let columns = LIST()\n\n    for column in 0..matrix[0].count do\n        let row = LIST()\n\n        for source in matrix do\n            row.add(source[column])\n        od\n\n        columns.add(row)\n    od\n\n    columns\nsi\n\nshow(caption: string, matrix: List[List[int]]) is\n    write_line(caption)\n\n    for row in matrix do\n        write_line(\"  {row |> join(\" \")}\")\n    od\nsi\n\nlet matrix = [\n    [1, 2, 3, 4],\n    [5, 6, 7, 8],\n    [9, 10, 11, 12]\n]\n\nshow(\"original\", matrix)\nshow(\"transposed\", transpose(matrix))",
+  "fullSource": "use default\n\ntranspose(matrix: List[List[int]]) -> List[List[int]] is\n    let columns = LIST()\n\n    for column in 0..matrix[0].count do\n        let row = LIST()\n\n        for source in matrix do\n            row.add(source[column])\n        od\n\n        columns.add(row)\n    od\n\n    columns\nsi\n\nshow(caption: string, matrix: List[List[int]]) is\n    write_line(caption)\n\n    for row in matrix do\n        write_line(\"  {row |> join(\" \")}\")\n    od\nsi\n\nlet matrix = [\n    [1, 2, 3, 4],\n    [5, 6, 7, 8],\n    [9, 10, 11, 12]\n]\n\nshow(\"original\", matrix)\nshow(\"transposed\", transpose(matrix))",
+  "output": "original\n  1 2 3 4\n  5 6 7 8\n  9 10 11 12\ntransposed\n  1 5 9\n  2 6 10\n  3 7 11\n  4 8 12\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "matrix-transposition",
+  "hovers": [],
+  "diagnostics": []
+}

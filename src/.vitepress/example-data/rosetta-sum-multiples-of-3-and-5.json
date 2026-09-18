@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sum-multiples-of-3-and-5",
+  "code": "use default\n\nsum_of_multiples(below: long) -> long =>\n    (1L..below)\n        |> filter(n => n % 3L == 0L \\/ n % 5L == 0L)\n        |> reduce(0L, (running, n) => running + n)\n\nfor below in [10L, 1000L, 1000000L] do\n    write_line(\"below {below,8}: {sum_of_multiples(below)}\")\nod",
+  "fullSource": "use default\n\nsum_of_multiples(below: long) -> long =>\n    (1L..below)\n        |> filter(n => n % 3L == 0L \\/ n % 5L == 0L)\n        |> reduce(0L, (running, n) => running + n)\n\nfor below in [10L, 1000L, 1000000L] do\n    write_line(\"below {below,8}: {sum_of_multiples(below)}\")\nod",
+  "output": "below       10: 23\nbelow     1000: 233168\nbelow  1000000: 233333166668\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sum-multiples-of-3-and-5",
+  "hovers": [],
+  "diagnostics": []
+}

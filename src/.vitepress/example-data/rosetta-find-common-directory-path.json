@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-find-common-directory-path",
+  "code": "use default\n\ncommon_directory_path(paths: string[]) -> string is\n    let segments = paths |> map(p => p.split(['/'])) |> collect_array()\n    let common = LIST[string]()\n\n    for i in 0..segments[0].count do\n        let candidate = segments[0][i]\n\n        if segments |> all(s => i < s.count /\\ s[i] =~ candidate) then\n            common.add(candidate)\n        else\n            break\n        fi\n    od\n\n    common |> join(\"/\")\nsi\n\nlet paths = [\n    \"/home/user1/tmp/coverage/test\",\n    \"/home/user1/tmp/covert/operator\",\n    \"/home/user1/tmp/coven/members\"\n]\n\nwrite_line(common_directory_path(paths))",
+  "fullSource": "use default\n\ncommon_directory_path(paths: string[]) -> string is\n    let segments = paths |> map(p => p.split(['/'])) |> collect_array()\n    let common = LIST[string]()\n\n    for i in 0..segments[0].count do\n        let candidate = segments[0][i]\n\n        if segments |> all(s => i < s.count /\\ s[i] =~ candidate) then\n            common.add(candidate)\n        else\n            break\n        fi\n    od\n\n    common |> join(\"/\")\nsi\n\nlet paths = [\n    \"/home/user1/tmp/coverage/test\",\n    \"/home/user1/tmp/covert/operator\",\n    \"/home/user1/tmp/coven/members\"\n]\n\nwrite_line(common_directory_path(paths))",
+  "output": "/home/user1/tmp\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "find-common-directory-path",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-peano-curve",
+  "code": "use Raster\n\nlet order = 3\nlet step = 18.0D\n\nlet image = IMAGE(540, 540)\nlet pen = TURTLE(image)\n\npeano(depth: int, angle: double) is\n    if depth == 0 then\n        return\n    fi\n\n    peano(depth - 1, angle)\n    pen.forward(step)\n    peano(depth - 1, -angle)\n    pen.forward(step)\n    peano(depth - 1, angle)\n\n    pen.turn(angle)\n    pen.forward(step)\n    pen.turn(angle)\n\n    peano(depth - 1, -angle)\n    pen.forward(step)\n    peano(depth - 1, angle)\n    pen.forward(step)\n    peano(depth - 1, -angle)\n\n    pen.turn(-angle)\n    pen.forward(step)\n    pen.turn(-angle)\n\n    peano(depth - 1, angle)\n    pen.forward(step)\n    peano(depth - 1, -angle)\n    pen.forward(step)\n    peano(depth - 1, angle)\nsi\n\nimage.view(0.0D, 0.0D, 540.0D, 540.0D)\nimage.colour(0ub, 0ub, 160ub)\nimage.stroke(1.2D)\n\npen.move_to(24.0D, 24.0D)\n\npeano(order, 90.0D)\n\nimage.write(\"peano.png\")\n\nimage.show(\"peano.png\")",
+  "fullSource": "use Raster\n\nlet order = 3\nlet step = 18.0D\n\nlet image = IMAGE(540, 540)\nlet pen = TURTLE(image)\n\npeano(depth: int, angle: double) is\n    if depth == 0 then\n        return\n    fi\n\n    peano(depth - 1, angle)\n    pen.forward(step)\n    peano(depth - 1, -angle)\n    pen.forward(step)\n    peano(depth - 1, angle)\n\n    pen.turn(angle)\n    pen.forward(step)\n    pen.turn(angle)\n\n    peano(depth - 1, -angle)\n    pen.forward(step)\n    peano(depth - 1, angle)\n    pen.forward(step)\n    peano(depth - 1, -angle)\n\n    pen.turn(-angle)\n    pen.forward(step)\n    pen.turn(-angle)\n\n    peano(depth - 1, angle)\n    pen.forward(step)\n    peano(depth - 1, -angle)\n    pen.forward(step)\n    peano(depth - 1, angle)\nsi\n\nimage.view(0.0D, 0.0D, 540.0D, 540.0D)\nimage.colour(0ub, 0ub, 160ub)\nimage.stroke(1.2D)\n\npen.move_to(24.0D, 24.0D)\n\npeano(order, 90.0D)\n\nimage.write(\"peano.png\")\n\nimage.show(\"peano.png\")",
+  "output": "<<image peano.png>>\n",
+  "images": [
+    {
+      "name": "peano.png",
+      "url": "/rosetta/peano-curve/peano.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "peano-curve",
+  "hovers": [],
+  "diagnostics": []
+}

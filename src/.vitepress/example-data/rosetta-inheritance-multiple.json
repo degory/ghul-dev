@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-inheritance-multiple",
+  "code": "use IO.Std.write_line\n\ntrait Camera is\n    take_photo() => write_line(\"flash!\")\nsi\n\ntrait MobilePhone is\n    make_call() => write_line(\"ring ring\")\nsi\n\nclass CAMERA_PHONE: Camera, MobilePhone is\n    init() is si\nsi\n\nlet phone = CAMERA_PHONE()\n\nwrite_line(\"is a Camera: {isa Camera(phone)}\")\nwrite_line(\"is a MobilePhone: {isa MobilePhone(phone)}\")\n\nphone.take_photo()\nphone.make_call()",
+  "fullSource": "use IO.Std.write_line\n\ntrait Camera is\n    take_photo() => write_line(\"flash!\")\nsi\n\ntrait MobilePhone is\n    make_call() => write_line(\"ring ring\")\nsi\n\nclass CAMERA_PHONE: Camera, MobilePhone is\n    init() is si\nsi\n\nlet phone = CAMERA_PHONE()\n\nwrite_line(\"is a Camera: {isa Camera(phone)}\")\nwrite_line(\"is a MobilePhone: {isa MobilePhone(phone)}\")\n\nphone.take_photo()\nphone.make_call()",
+  "output": "is a Camera: True\nis a MobilePhone: True\nflash!\nring ring\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "inheritance-multiple",
+  "hovers": [],
+  "diagnostics": []
+}

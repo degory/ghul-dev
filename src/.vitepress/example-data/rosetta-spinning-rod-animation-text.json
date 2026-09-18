@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-spinning-rod-animation-text",
+  "code": "let frames = [\"|\", \"/\", \"-\", \"\\\\\"]\n\nfor turn in 0..8 do\n    IO.Std.write(\"\\r{frames[turn % frames.count]}\")\n\n    System.Threading.Thread.sleep(250)\nod\n\nIO.Std.write_line(\"\\r\")",
+  "fullSource": "let frames = [\"|\", \"/\", \"-\", \"\\\\\"]\n\nfor turn in 0..8 do\n    IO.Std.write(\"\\r{frames[turn % frames.count]}\")\n\n    System.Threading.Thread.sleep(250)\nod\n\nIO.Std.write_line(\"\\r\")",
+  "output": "\r|\r/\r-\r\\\r|\r/\r-\r\\\r\n",
+  "images": [],
+  "playground": false,
+  "playgroundPath": "spinning-rod-animation-text",
+  "hovers": [],
+  "diagnostics": []
+}

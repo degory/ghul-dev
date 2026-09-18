@@ -4,7 +4,7 @@ title: "Y combinator"
 
 # Y combinator
 
-<RosettaTask url="https://rosettacode.org/wiki/Y_combinator" />
+<RosettaTask url="https://rosettacode.org/wiki/Y_combinator" tags="algorithms,closures,generics,recursion" :playground="true" />
 
 ## The y combinator
 
@@ -13,4 +13,3 @@ title: "Y combinator"
 ## Using rec
 
 <GhulExample name="rosetta-y-combinator-02-using-rec" />
-

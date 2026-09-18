@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-crc-32",
+  "code": "use default\n\nlet table = (0..256)\n    |> map(n => (0..8) |> reduce(cast uint(n), (c, _) =>\n        if (c & 1u) != 0u then 0xEDB88320u ^ (c >> 1) else c >> 1 fi))\n    |> collect_list()\n\ncrc32(data: ubyte[]) -> uint is\n    let step = (crc: uint, b: ubyte) =>\n        table[cast int((crc ^ cast uint(b)) & 0xFFu)] ^ (crc >> 8)\n\n    (data |> reduce(0xFFFFFFFFu, step)) ^ 0xFFFFFFFFu\nsi\n\nlet text = \"The quick brown fox jumps over the lazy dog\"\nlet bytes = System.Text.Encoding.ascii.get_bytes(text)\n\nwrite_line(\"{text}\")\nwrite_line(\"{crc32(bytes),0:X8}\")",
+  "fullSource": "use default\n\nlet table = (0..256)\n    |> map(n => (0..8) |> reduce(cast uint(n), (c, _) =>\n        if (c & 1u) != 0u then 0xEDB88320u ^ (c >> 1) else c >> 1 fi))\n    |> collect_list()\n\ncrc32(data: ubyte[]) -> uint is\n    let step = (crc: uint, b: ubyte) =>\n        table[cast int((crc ^ cast uint(b)) & 0xFFu)] ^ (crc >> 8)\n\n    (data |> reduce(0xFFFFFFFFu, step)) ^ 0xFFFFFFFFu\nsi\n\nlet text = \"The quick brown fox jumps over the lazy dog\"\nlet bytes = System.Text.Encoding.ascii.get_bytes(text)\n\nwrite_line(\"{text}\")\nwrite_line(\"{crc32(bytes),0:X8}\")",
+  "output": "The quick brown fox jumps over the lazy dog\n414FA339\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "crc-32",
+  "hovers": [],
+  "diagnostics": []
+}

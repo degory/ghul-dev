@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-zero-to-the-zero-power",
+  "code": "use IO.Std.write_line\n\nwrite_line(\"there is no exponentiation operator, so the library answers\")\nwrite_line(\"as doubles: {System.Math.pow(0.0, 0.0)}\")\nwrite_line(\"as big integers: {bigint.pow(0n, 0)}\")",
+  "fullSource": "use IO.Std.write_line\n\nwrite_line(\"there is no exponentiation operator, so the library answers\")\nwrite_line(\"as doubles: {System.Math.pow(0.0, 0.0)}\")\nwrite_line(\"as big integers: {bigint.pow(0n, 0)}\")",
+  "output": "there is no exponentiation operator, so the library answers\nas doubles: 1\nas big integers: 1\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "zero-to-the-zero-power",
+  "hovers": [],
+  "diagnostics": []
+}

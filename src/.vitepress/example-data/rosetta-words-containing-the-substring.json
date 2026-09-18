@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-words-containing-the-substring",
+  "code": "use default\n\nwrite_line(\n    IO.File.read_all_lines(\"unixdict.txt\")\n    |> filter(word => word.length > 11 /\\ word.contains(\"the\"))\n    |> join(\"\\n\")\n)",
+  "fullSource": "use default\n\nwrite_line(\n    IO.File.read_all_lines(\"unixdict.txt\")\n    |> filter(word => word.length > 11 /\\ word.contains(\"the\"))\n    |> join(\"\\n\")\n)",
+  "output": "authenticate\nchemotherapy\nchrysanthemum\nclothesbrush\nclotheshorse\neratosthenes\nfeatherbedding\nfeatherbrain\nfeatherweight\ngaithersburg\nhydrothermal\nlighthearted\nmathematician\nneurasthenic\nnevertheless\nnortheastern\nnorthernmost\notherworldly\nparasympathetic\nphysiotherapist\nphysiotherapy\npsychotherapeutic\npsychotherapist\npsychotherapy\nradiotherapy\nsoutheastern\nsouthernmost\ntheoretician\nweatherbeaten\nweatherproof\nweatherstrip\nweatherstripping\n",
+  "images": [],
+  "playground": false,
+  "playgroundPath": "words-containing-the-substring",
+  "hovers": [],
+  "diagnostics": []
+}

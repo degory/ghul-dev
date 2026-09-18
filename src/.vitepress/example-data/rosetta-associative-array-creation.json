@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-associative-array-creation",
+  "code": "use default\n\nlet ages = MAP()\n\nages.add(\"alice\", 30)\nages[\"bob\"] = 27\n\nwrite_line(\"alice is {ages[\"alice\"]}\")\nwrite_line(\"bob is {ages[\"bob\"]}\")\n\nlet carol = if ages.contains_key(\"carol\") then \"known\" else \"not known\" fi\n\nwrite_line(\"carol is {carol}\")",
+  "fullSource": "use default\n\nlet ages = MAP()\n\nages.add(\"alice\", 30)\nages[\"bob\"] = 27\n\nwrite_line(\"alice is {ages[\"alice\"]}\")\nwrite_line(\"bob is {ages[\"bob\"]}\")\n\nlet carol = if ages.contains_key(\"carol\") then \"known\" else \"not known\" fi\n\nwrite_line(\"carol is {carol}\")",
+  "output": "alice is 30\nbob is 27\ncarol is not known\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "associative-array-creation",
+  "hovers": [],
+  "diagnostics": []
+}

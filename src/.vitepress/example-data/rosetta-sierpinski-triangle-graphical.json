@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-sierpinski-triangle-graphical",
+  "code": "use default\nuse Raster.IMAGE\n\nuse POINT = (x: double, y: double)\n\nmidpoint(a: POINT, b: POINT) -> POINT =>\n    (x = (a.x + b.x) / 2.0, y = (a.y + b.y) / 2.0)\n\ntriangle(a: POINT, b: POINT, c: POINT) -> List[POINT] =>\n    [a, b, c]\n\nlet image = IMAGE(512, 456)\n\nimage.view(0.0, 0.0, 1.0, 0.89)\nimage.colour(30ub, 90ub, 160ub)\n\ndraw(a: POINT, b: POINT, c: POINT, order: int) is\n    if order == 0 then\n        image.fill(triangle(a, b, c))\n        return\n    fi\n\n    draw(a, midpoint(a, b), midpoint(a, c), order - 1)\n    draw(midpoint(a, b), b, midpoint(b, c), order - 1)\n    draw(midpoint(a, c), midpoint(b, c), c, order - 1)\nsi\n\ndraw(\n    (x = 0.5, y = 0.87),\n    (x = 0.0, y = 0.01),\n    (x = 1.0, y = 0.01),\n    6\n)\n\nimage.write(\"sierpinski.png\")\n\nimage.show(\"sierpinski.png\")",
+  "fullSource": "use default\nuse Raster.IMAGE\n\nuse POINT = (x: double, y: double)\n\nmidpoint(a: POINT, b: POINT) -> POINT =>\n    (x = (a.x + b.x) / 2.0, y = (a.y + b.y) / 2.0)\n\ntriangle(a: POINT, b: POINT, c: POINT) -> List[POINT] =>\n    [a, b, c]\n\nlet image = IMAGE(512, 456)\n\nimage.view(0.0, 0.0, 1.0, 0.89)\nimage.colour(30ub, 90ub, 160ub)\n\ndraw(a: POINT, b: POINT, c: POINT, order: int) is\n    if order == 0 then\n        image.fill(triangle(a, b, c))\n        return\n    fi\n\n    draw(a, midpoint(a, b), midpoint(a, c), order - 1)\n    draw(midpoint(a, b), b, midpoint(b, c), order - 1)\n    draw(midpoint(a, c), midpoint(b, c), c, order - 1)\nsi\n\ndraw(\n    (x = 0.5, y = 0.87),\n    (x = 0.0, y = 0.01),\n    (x = 1.0, y = 0.01),\n    6\n)\n\nimage.write(\"sierpinski.png\")\n\nimage.show(\"sierpinski.png\")",
+  "output": "<<image sierpinski.png>>\n",
+  "images": [
+    {
+      "name": "sierpinski.png",
+      "url": "/rosetta/sierpinski-triangle-graphical/sierpinski.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "sierpinski-triangle-graphical",
+  "hovers": [],
+  "diagnostics": []
+}

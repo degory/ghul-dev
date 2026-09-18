@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-find-square-difference",
+  "code": "use IO.Std.write_line\n\nlet found: int? =\n    for n in 1::100000 do\n        if n * n - (n - 1) * (n - 1) > 1000 then break n fi\n    od\n\nif let n = found then\n    let square = n * n\n    let previous = (n - 1) * (n - 1)\n\n    write_line(\"{n}: {square} - {previous} = {square - previous}\")\nfi",
+  "fullSource": "use IO.Std.write_line\n\nlet found: int? =\n    for n in 1::100000 do\n        if n * n - (n - 1) * (n - 1) > 1000 then break n fi\n    od\n\nif let n = found then\n    let square = n * n\n    let previous = (n - 1) * (n - 1)\n\n    write_line(\"{n}: {square} - {previous} = {square - previous}\")\nfi",
+  "output": "501: 251001 - 250000 = 1001\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "find-square-difference",
+  "hovers": [],
+  "diagnostics": []
+}

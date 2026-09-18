@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-string-matching",
+  "code": "use default\n\nlet text = \"the rain in spain stays mainly in the plain\"\n\nlet wanted = \"ain\"\n\nwrite_line(\"starts with the: {text.starts_with(\"the\")}\")\nwrite_line(\"contains {wanted}: {text.contains(wanted)}\")\nwrite_line(\"ends with plain: {text.ends_with(\"plain\")}\")\nwrite_line(\"first at: {text.index_of(wanted)}\")\n\nlet places =\n    (0..text.length - wanted.length + 1)\n        |> filter(at => text[at..at + wanted.length] =~ wanted)\n        |> map(at => \"{at}\")\n        |> join(\", \")\n\nwrite_line(\"all at: {places}\")",
+  "fullSource": "use default\n\nlet text = \"the rain in spain stays mainly in the plain\"\n\nlet wanted = \"ain\"\n\nwrite_line(\"starts with the: {text.starts_with(\"the\")}\")\nwrite_line(\"contains {wanted}: {text.contains(wanted)}\")\nwrite_line(\"ends with plain: {text.ends_with(\"plain\")}\")\nwrite_line(\"first at: {text.index_of(wanted)}\")\n\nlet places =\n    (0..text.length - wanted.length + 1)\n        |> filter(at => text[at..at + wanted.length] =~ wanted)\n        |> map(at => \"{at}\")\n        |> join(\", \")\n\nwrite_line(\"all at: {places}\")",
+  "output": "starts with the: True\ncontains ain: True\nends with plain: True\nfirst at: 5\nall at: 5, 14, 25, 40\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "string-matching",
+  "hovers": [],
+  "diagnostics": []
+}

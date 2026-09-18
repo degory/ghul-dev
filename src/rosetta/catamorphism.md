@@ -4,7 +4,7 @@ title: "Catamorphism"
 
 # Catamorphism
 
-<RosettaTask url="https://rosettacode.org/wiki/Catamorphism" />
+<RosettaTask url="https://rosettacode.org/wiki/Catamorphism" tags="pipes,generics,closures" :playground="true" />
 
 ## Using reduce
 
@@ -13,4 +13,3 @@ title: "Catamorphism"
 ## Writing fold
 
 <GhulExample name="rosetta-catamorphism-02-writing-fold" />
-

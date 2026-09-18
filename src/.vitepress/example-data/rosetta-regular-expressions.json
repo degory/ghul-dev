@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-regular-expressions",
+  "code": "use IO.Std.write_line\nuse System.Text.RegularExpressions.Regex\n\nlet text = \"The quick brown fox jumps over the lazy dog\"\n\nlet matches_digits = Regex(\"\\\\d+\").is_match(text)\nwrite_line(\"contains digits: {matches_digits}\")\n\nlet matches_word = Regex(\"\\\\bfox\\\\b\").is_match(text)\nwrite_line(\"contains the word fox: {matches_word}\")\n\nlet replaced = Regex(\"\\\\b(quick|lazy)\\\\b\").replace(text, \"slow\")\nwrite_line(\"with quick/lazy replaced: {replaced}\")",
+  "fullSource": "use IO.Std.write_line\nuse System.Text.RegularExpressions.Regex\n\nlet text = \"The quick brown fox jumps over the lazy dog\"\n\nlet matches_digits = Regex(\"\\\\d+\").is_match(text)\nwrite_line(\"contains digits: {matches_digits}\")\n\nlet matches_word = Regex(\"\\\\bfox\\\\b\").is_match(text)\nwrite_line(\"contains the word fox: {matches_word}\")\n\nlet replaced = Regex(\"\\\\b(quick|lazy)\\\\b\").replace(text, \"slow\")\nwrite_line(\"with quick/lazy replaced: {replaced}\")",
+  "output": "contains digits: False\ncontains the word fox: True\nwith quick/lazy replaced: The slow brown fox jumps over the slow dog\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "regular-expressions",
+  "hovers": [],
+  "diagnostics": []
+}

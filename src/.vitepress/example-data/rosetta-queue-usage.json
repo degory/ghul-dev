@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-queue-usage",
+  "code": "use default\n\nlet queue = Queue()\n\nreport_empty(pending: Queue[string]) is\n    let state = if pending.count == 0 then \"yes\" else \"no\" fi\n\n    write_line(\"empty: {state}\")\nsi\n\n[\"first\", \"second\", \"third\"] |> each(item => queue.enqueue(item))\n\nreport_empty(queue)\n\nwrite_line(\"front: {queue.peek()}\")\n\nwhile queue.count > 0 do\n    write_line(\"dequeued {queue.dequeue()}\")\nod\n\nreport_empty(queue)",
+  "fullSource": "use default\n\nlet queue = Queue()\n\nreport_empty(pending: Queue[string]) is\n    let state = if pending.count == 0 then \"yes\" else \"no\" fi\n\n    write_line(\"empty: {state}\")\nsi\n\n[\"first\", \"second\", \"third\"] |> each(item => queue.enqueue(item))\n\nreport_empty(queue)\n\nwrite_line(\"front: {queue.peek()}\")\n\nwhile queue.count > 0 do\n    write_line(\"dequeued {queue.dequeue()}\")\nod\n\nreport_empty(queue)",
+  "output": "empty: no\nfront: first\ndequeued first\ndequeued second\ndequeued third\nempty: yes\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "queue-usage",
+  "hovers": [],
+  "diagnostics": []
+}

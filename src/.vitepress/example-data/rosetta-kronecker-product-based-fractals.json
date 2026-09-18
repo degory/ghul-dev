@@ -1,0 +1,20 @@
+{
+  "name": "rosetta-kronecker-product-based-fractals",
+  "code": "use default\nuse Raster.IMAGE\n\nuse MATRIX = List[List[int]]\n\nkronecker(left: MATRIX, right: MATRIX) -> MATRIX =>\n    (0..left.count * right.count)\n        |> map(row =>\n            (0..left[0].count * right[0].count)\n                |> map(column =>\n                    left[row / right.count][column / right[0].count] *\n                    right[row % right.count][column % right[0].count])\n                |> collect_list())\n        |> collect_list()\n\npower(seed: MATRIX, order: int) -> MATRIX =>\n    (let result mut = seed\n\n     for _ in 1..order do\n         result = kronecker(result, seed)\n     od\n\n     result)\n\nplot(cells: MATRIX, path: string) is\n    let scale = 4\n\n    let image =\n        IMAGE(cells[0].count * scale, cells.count * scale)\n\n    for row in 0..cells.count do\n        for column in 0..cells[row].count do\n            if cells[row][column] == 0 then\n                continue\n            fi\n\n            for down in 0..scale do\n                for across in 0..scale do\n                    image.set_pixel(\n                        column * scale + across, row * scale + down,\n                        40ub, 40ub, 160ub\n                    )\n                od\n            od\n        od\n    od\n\n    image.write(path)\n\n    image.show(path)\nsi\n\nlet vicsek = [[0, 1, 0], [1, 1, 1], [0, 1, 0]]\nlet saltire = [[1, 0, 1], [0, 1, 0], [1, 0, 1]]\n\nplot(power(vicsek, 4), \"vicsek.png\")\nplot(power(saltire, 4), \"saltire.png\")",
+  "fullSource": "use default\nuse Raster.IMAGE\n\nuse MATRIX = List[List[int]]\n\nkronecker(left: MATRIX, right: MATRIX) -> MATRIX =>\n    (0..left.count * right.count)\n        |> map(row =>\n            (0..left[0].count * right[0].count)\n                |> map(column =>\n                    left[row / right.count][column / right[0].count] *\n                    right[row % right.count][column % right[0].count])\n                |> collect_list())\n        |> collect_list()\n\npower(seed: MATRIX, order: int) -> MATRIX =>\n    (let result mut = seed\n\n     for _ in 1..order do\n         result = kronecker(result, seed)\n     od\n\n     result)\n\nplot(cells: MATRIX, path: string) is\n    let scale = 4\n\n    let image =\n        IMAGE(cells[0].count * scale, cells.count * scale)\n\n    for row in 0..cells.count do\n        for column in 0..cells[row].count do\n            if cells[row][column] == 0 then\n                continue\n            fi\n\n            for down in 0..scale do\n                for across in 0..scale do\n                    image.set_pixel(\n                        column * scale + across, row * scale + down,\n                        40ub, 40ub, 160ub\n                    )\n                od\n            od\n        od\n    od\n\n    image.write(path)\n\n    image.show(path)\nsi\n\nlet vicsek = [[0, 1, 0], [1, 1, 1], [0, 1, 0]]\nlet saltire = [[1, 0, 1], [0, 1, 0], [1, 0, 1]]\n\nplot(power(vicsek, 4), \"vicsek.png\")\nplot(power(saltire, 4), \"saltire.png\")",
+  "output": "<<image vicsek.png>>\n<<image saltire.png>>\n",
+  "images": [
+    {
+      "name": "saltire.png",
+      "url": "/rosetta/kronecker-product-based-fractals/saltire.png"
+    },
+    {
+      "name": "vicsek.png",
+      "url": "/rosetta/kronecker-product-based-fractals/vicsek.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "kronecker-product-based-fractals",
+  "hovers": [],
+  "diagnostics": []
+}

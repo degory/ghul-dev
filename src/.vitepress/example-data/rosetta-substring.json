@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-substring",
+  "code": "use default\n\nlet text = \"the quick 🦊 brown fox\"\n\nlet points =\n    text.enumerate_runes() |> map(point => \"{point}\") |> collect_array()\n\nslice(from: int, length: int) -> string =>\n    points[from..from + length] |> join(\"\")\n\nstarts_at(wanted: string) -> int is\n    let target =\n        wanted.enumerate_runes()\n            |> map(point => \"{point}\")\n            |> collect_array()\n\n    for at in 0..points.count - target.count + 1 do\n        if slice(at, target.count) =~ wanted then\n            return at\n        fi\n    od\n\n    return -1\nsi\n\nwrite_line(slice(4, 5))\nwrite_line(slice(4, points.count - 4))\nwrite_line(slice(0, points.count - 1))\nwrite_line(slice(starts_at(\"b\"), 5))\nwrite_line(slice(starts_at(\"fox\"), 3))",
+  "fullSource": "use default\n\nlet text = \"the quick 🦊 brown fox\"\n\nlet points =\n    text.enumerate_runes() |> map(point => \"{point}\") |> collect_array()\n\nslice(from: int, length: int) -> string =>\n    points[from..from + length] |> join(\"\")\n\nstarts_at(wanted: string) -> int is\n    let target =\n        wanted.enumerate_runes()\n            |> map(point => \"{point}\")\n            |> collect_array()\n\n    for at in 0..points.count - target.count + 1 do\n        if slice(at, target.count) =~ wanted then\n            return at\n        fi\n    od\n\n    return -1\nsi\n\nwrite_line(slice(4, 5))\nwrite_line(slice(4, points.count - 4))\nwrite_line(slice(0, points.count - 1))\nwrite_line(slice(starts_at(\"b\"), 5))\nwrite_line(slice(starts_at(\"fox\"), 3))",
+  "output": "quick\nquick 🦊 brown fox\nthe quick 🦊 brown fo\nbrown\nfox\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "substring",
+  "hovers": [],
+  "diagnostics": []
+}

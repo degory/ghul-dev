@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-general-fizzbuzz",
+  "code": "use default\nuse IO.Std.read_line\n\nlet max_n = int.parse(read_line()!)\nlet factors = LIST[(factor: int, word: string)]()\n\nfor _ in 0..3 do\n    let parts = read_line()!.split([' '])\n\n    factors.add((factor = int.parse(parts[0]), word = parts[1]))\nod\n\nfor n in 1::max_n do\n    let label = factors\n        |> filter(f => n % f.factor == 0)\n        |> map(f => f.word)\n        |> join(\"\")\n\n    write_line(if label.length == 0 then \"{n}\" else label fi)\nod",
+  "fullSource": "use default\nuse IO.Std.read_line\n\nlet max_n = int.parse(read_line()!)\nlet factors = LIST[(factor: int, word: string)]()\n\nfor _ in 0..3 do\n    let parts = read_line()!.split([' '])\n\n    factors.add((factor = int.parse(parts[0]), word = parts[1]))\nod\n\nfor n in 1::max_n do\n    let label = factors\n        |> filter(f => n % f.factor == 0)\n        |> map(f => f.word)\n        |> join(\"\")\n\n    write_line(if label.length == 0 then \"{n}\" else label fi)\nod",
+  "output": "1\n2\nFizz\n4\nBuzz\nFizz\nBaxx\n8\nFizz\nBuzz\n11\nFizz\n13\nBaxx\nFizzBuzz\n16\n17\nFizz\n19\nBuzz\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "general-fizzbuzz",
+  "hovers": [],
+  "diagnostics": []
+}

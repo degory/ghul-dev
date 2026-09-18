@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-ethiopian-multiplication",
+  "code": "use default\n\nuse ROW = (multiplier: int, total: int)\n\nhalve(value: int) -> int => value / 2\n\ndouble(value: int) -> int => value * 2\n\nis_even(value: int) -> bool => value % 2 == 0\n\nethiopian(left: int, right: int) -> int =>\n    stream((multiplier = left, total = right), (row: ROW) =>\n            row || (multiplier = halve(row.multiplier),\n                    total = double(row.total)))\n        |> take_while(row => row.multiplier > 0)\n        |> filter(row => !is_even(row.multiplier))\n        |> reduce(0, (sum, row) => sum + row.total)\n\nwrite_line(\"17 x 34 = {ethiopian(17, 34)}\")",
+  "fullSource": "use default\n\nuse ROW = (multiplier: int, total: int)\n\nhalve(value: int) -> int => value / 2\n\ndouble(value: int) -> int => value * 2\n\nis_even(value: int) -> bool => value % 2 == 0\n\nethiopian(left: int, right: int) -> int =>\n    stream((multiplier = left, total = right), (row: ROW) =>\n            row || (multiplier = halve(row.multiplier),\n                    total = double(row.total)))\n        |> take_while(row => row.multiplier > 0)\n        |> filter(row => !is_even(row.multiplier))\n        |> reduce(0, (sum, row) => sum + row.total)\n\nwrite_line(\"17 x 34 = {ethiopian(17, 34)}\")",
+  "output": "17 x 34 = 578\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "ethiopian-multiplication",
+  "hovers": [],
+  "diagnostics": []
+}

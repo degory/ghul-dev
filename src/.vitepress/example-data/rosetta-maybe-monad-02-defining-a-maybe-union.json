@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-maybe-monad-02-defining-a-maybe-union",
+  "code": "use IO.Std.write_line\n\nunion Maybe[T] is\n    JUST(value: T)\n    NOTHING\nsi\n\nuse Maybe.JUST\nuse Maybe.NOTHING\n\nunit[T](value: T) -> Maybe[T] => JUST(value)\n\n>>=[T, U](value: Maybe[T], f: (T) -> Maybe[U]) -> Maybe[U] =>\n    if let (inner): JUST = value then f(inner) else NOTHING fi\n\nhalve(n: int) -> Maybe[int] =>\n    if n % 2 == 0 then JUST(n / 2) else NOTHING fi\n\ndescribe(n: int) -> Maybe[string] =>\n    if n > 0 then JUST(\"positive {n}\") else NOTHING fi\n\ntext(value: Maybe[string]) -> string =>\n    if let (inner): JUST = value then inner else \"nothing\" fi\n\nshow(n: int) =>\n    write_line(\"{n}: {text(unit(n) >>= halve >>= describe)}\")\n\nshow(8)\nshow(7)\nshow(-4)",
+  "fullSource": "use IO.Std.write_line\n\nunion Maybe[T] is\n    JUST(value: T)\n    NOTHING\nsi\n\nuse Maybe.JUST\nuse Maybe.NOTHING\n\nunit[T](value: T) -> Maybe[T] => JUST(value)\n\n>>=[T, U](value: Maybe[T], f: (T) -> Maybe[U]) -> Maybe[U] =>\n    if let (inner): JUST = value then f(inner) else NOTHING fi\n\nhalve(n: int) -> Maybe[int] =>\n    if n % 2 == 0 then JUST(n / 2) else NOTHING fi\n\ndescribe(n: int) -> Maybe[string] =>\n    if n > 0 then JUST(\"positive {n}\") else NOTHING fi\n\ntext(value: Maybe[string]) -> string =>\n    if let (inner): JUST = value then inner else \"nothing\" fi\n\nshow(n: int) =>\n    write_line(\"{n}: {text(unit(n) >>= halve >>= describe)}\")\n\nshow(8)\nshow(7)\nshow(-4)",
+  "output": "8: positive 4\n7: nothing\n-4: nothing\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "maybe-monad/02-defining-a-maybe-union",
+  "hovers": [],
+  "diagnostics": []
+}

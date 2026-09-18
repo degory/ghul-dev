@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-file-size",
+  "code": "use default\n\nreport(label: string, path: string) is\n    if IO.File.exists(path) then\n        write_line(\"{label}: {IO.FileInfo(path).length} bytes\")\n    else\n        write_line(\"{label}: does not exist\")\n    fi\nsi\n\nlet local_path =\n    IO.Path.combine(System.Environment.current_directory, \"input.txt\")\n\nIO.File.write_all_text(local_path, \"hello, rosetta code!\")\nreport(\"input.txt (current directory)\", local_path)\nIO.File.delete(local_path)\n\nreport(\"/input.txt (file system root)\", \"/input.txt\")",
+  "fullSource": "use default\n\nreport(label: string, path: string) is\n    if IO.File.exists(path) then\n        write_line(\"{label}: {IO.FileInfo(path).length} bytes\")\n    else\n        write_line(\"{label}: does not exist\")\n    fi\nsi\n\nlet local_path =\n    IO.Path.combine(System.Environment.current_directory, \"input.txt\")\n\nIO.File.write_all_text(local_path, \"hello, rosetta code!\")\nreport(\"input.txt (current directory)\", local_path)\nIO.File.delete(local_path)\n\nreport(\"/input.txt (file system root)\", \"/input.txt\")",
+  "output": "input.txt (current directory): 20 bytes\n/input.txt (file system root): does not exist\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "file-size",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-string-length-03-grapheme-length",
+  "code": "use IO.Std.write_line\nuse System.Globalization.StringInfo\n\nlet subjects = [\"møøse\", \"𝔘𝔫𝔦𝔠𝔬𝔡𝔢\", \"J̲o̲s̲é̲\"]\n\nfor subject in subjects do\n    let graphemes = StringInfo(subject)\n\n    write_line(\"{subject}: {graphemes.length_in_text_elements} graphemes\")\nod",
+  "fullSource": "use IO.Std.write_line\nuse System.Globalization.StringInfo\n\nlet subjects = [\"møøse\", \"𝔘𝔫𝔦𝔠𝔬𝔡𝔢\", \"J̲o̲s̲é̲\"]\n\nfor subject in subjects do\n    let graphemes = StringInfo(subject)\n\n    write_line(\"{subject}: {graphemes.length_in_text_elements} graphemes\")\nod",
+  "output": "møøse: 5 graphemes\n𝔘𝔫𝔦𝔠𝔬𝔡𝔢: 7 graphemes\nJ̲o̲s̲é̲: 4 graphemes\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "string-length/03-grapheme-length",
+  "hovers": [],
+  "diagnostics": []
+}

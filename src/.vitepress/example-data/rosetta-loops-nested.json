@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-loops-nested",
+  "code": "use IO.Std.write\nuse default\n\ngrid(size: int, random: System.Random) -> LIST[LIST[int]] is\n    let rows = LIST()\n\n    for _ in 1::size do\n        let row = LIST()\n\n        for _ in 1::size do\n            row.add(random.next(1, 21))\n        od\n\n        rows.add(row)\n    od\n\n    rows\nsi\n\nshow_until_twenty(rows: LIST[LIST[int]]) is\n    search: for row in rows do\n        for value in row do\n            write(\"{value,3}\")\n\n            if value == 20 then\n                write_line()\n                break search\n            fi\n        od\n\n        write_line()\n    od\nsi\n\nshow_until_twenty(grid(10, System.Random(20)))",
+  "fullSource": "use IO.Std.write\nuse default\n\ngrid(size: int, random: System.Random) -> LIST[LIST[int]] is\n    let rows = LIST()\n\n    for _ in 1::size do\n        let row = LIST()\n\n        for _ in 1::size do\n            row.add(random.next(1, 21))\n        od\n\n        rows.add(row)\n    od\n\n    rows\nsi\n\nshow_until_twenty(rows: LIST[LIST[int]]) is\n    search: for row in rows do\n        for value in row do\n            write(\"{value,3}\")\n\n            if value == 20 then\n                write_line()\n                break search\n            fi\n        od\n\n        write_line()\n    od\nsi\n\nshow_until_twenty(grid(10, System.Random(20)))",
+  "output": "  4 14 15 17  5  1 18 10 10 13\n  1  2  8 18 20\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "loops-nested",
+  "hovers": [],
+  "diagnostics": []
+}

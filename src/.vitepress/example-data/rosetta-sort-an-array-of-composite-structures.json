@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sort-an-array-of-composite-structures",
+  "code": "use default\n\nlet pairs = LIST([\n    (name = \"Oxygen\", value = \"O\"),\n    (name = \"Helium\", value = \"He\"),\n    (name = \"Nitrogen\", value = \"N\"),\n    (name = \"Carbon\", value = \"C\"),\n    (name = \"Hydrogen\", value = \"H\")\n])\n\npairs.sort((a, b) => a.name <> b.name)\n\nfor pair in pairs do\n    write_line(\"{pair.name}: {pair.value}\")\nod",
+  "fullSource": "use default\n\nlet pairs = LIST([\n    (name = \"Oxygen\", value = \"O\"),\n    (name = \"Helium\", value = \"He\"),\n    (name = \"Nitrogen\", value = \"N\"),\n    (name = \"Carbon\", value = \"C\"),\n    (name = \"Hydrogen\", value = \"H\")\n])\n\npairs.sort((a, b) => a.name <> b.name)\n\nfor pair in pairs do\n    write_line(\"{pair.name}: {pair.value}\")\nod",
+  "output": "Carbon: C\nHelium: He\nHydrogen: H\nNitrogen: N\nOxygen: O\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sort-an-array-of-composite-structures",
+  "hovers": [],
+  "diagnostics": []
+}

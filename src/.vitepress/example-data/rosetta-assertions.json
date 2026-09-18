@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-assertions",
+  "code": "use IO.Std.write_line\n\nlet answer = 42\n\nassert answer == 42\n\nwrite_line(\"{answer} is the answer\")\n\ntry\n    assert answer == 43 else \"the answer should be 43\"\ncatch _: Ghul.AssertFailedException\n    write_line(\"a failing assertion throws AssertFailedException\")\nyrt",
+  "fullSource": "use IO.Std.write_line\n\nlet answer = 42\n\nassert answer == 42\n\nwrite_line(\"{answer} is the answer\")\n\ntry\n    assert answer == 43 else \"the answer should be 43\"\ncatch _: Ghul.AssertFailedException\n    write_line(\"a failing assertion throws AssertFailedException\")\nyrt",
+  "output": "42 is the answer\na failing assertion throws AssertFailedException\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "assertions",
+  "hovers": [],
+  "diagnostics": []
+}

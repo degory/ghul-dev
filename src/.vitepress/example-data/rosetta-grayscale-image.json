@@ -1,0 +1,20 @@
+{
+  "name": "rosetta-grayscale-image",
+  "code": "use Ghul.Pipes\nuse Raster.IMAGE\n\nluminance(red: ubyte, green: ubyte, blue: ubyte) -> ubyte =>\n    cast ubyte(\n        0.2126D * cast double(red) +\n        0.7152D * cast double(green) +\n        0.0722D * cast double(blue) + 0.5D\n    )\n\nto_grey(colour: IMAGE) -> ubyte[] =>\n    (0..colour.width * colour.height)\n        |> map(at =>\n            (let seen =\n                 colour.pixel(at % colour.width, at / colour.width)\n\n             luminance(seen.red, seen.green, seen.blue)))\n        |> collect_array()\n\nto_colour(levels: ubyte[], width: int, height: int) -> IMAGE is\n    let image = IMAGE(width, height)\n\n    for at in 0..levels.count do\n        image.set_pixel(\n            at % width, at / width, levels[at], levels[at], levels[at]\n        )\n    od\n\n    return image\nsi\n\nlet width = 300\nlet height = 200\n\nlet colour = IMAGE(width, height)\n\nfor y in 0..height do\n    for x in 0..width do\n        colour.set_pixel(\n            x, y,\n            cast ubyte(255 * x / width),\n            cast ubyte(255 * y / height),\n            cast ubyte(255 - 255 * x / width)\n        )\n    od\nod\n\ncolour.colour(255ub, 0ub, 0ub)\ncolour.fill([(x = 30.0D, y = 30.0D),\n             (x = 110.0D, y = 30.0D),\n             (x = 70.0D, y = 110.0D)])\n\ncolour.colour(0ub, 255ub, 0ub)\ncolour.fill([(x = 120.0D, y = 30.0D),\n             (x = 200.0D, y = 30.0D),\n             (x = 160.0D, y = 110.0D)])\n\ncolour.colour(0ub, 0ub, 255ub)\ncolour.fill([(x = 210.0D, y = 30.0D),\n             (x = 290.0D, y = 30.0D),\n             (x = 250.0D, y = 110.0D)])\n\ncolour.write(\"colour.png\")\n\nlet grey = to_colour(to_grey(colour), width, height)\n\ngrey.write(\"grey.png\")\n\ncolour.show(\"colour.png\")\ngrey.show(\"grey.png\")",
+  "fullSource": "use Ghul.Pipes\nuse Raster.IMAGE\n\nluminance(red: ubyte, green: ubyte, blue: ubyte) -> ubyte =>\n    cast ubyte(\n        0.2126D * cast double(red) +\n        0.7152D * cast double(green) +\n        0.0722D * cast double(blue) + 0.5D\n    )\n\nto_grey(colour: IMAGE) -> ubyte[] =>\n    (0..colour.width * colour.height)\n        |> map(at =>\n            (let seen =\n                 colour.pixel(at % colour.width, at / colour.width)\n\n             luminance(seen.red, seen.green, seen.blue)))\n        |> collect_array()\n\nto_colour(levels: ubyte[], width: int, height: int) -> IMAGE is\n    let image = IMAGE(width, height)\n\n    for at in 0..levels.count do\n        image.set_pixel(\n            at % width, at / width, levels[at], levels[at], levels[at]\n        )\n    od\n\n    return image\nsi\n\nlet width = 300\nlet height = 200\n\nlet colour = IMAGE(width, height)\n\nfor y in 0..height do\n    for x in 0..width do\n        colour.set_pixel(\n            x, y,\n            cast ubyte(255 * x / width),\n            cast ubyte(255 * y / height),\n            cast ubyte(255 - 255 * x / width)\n        )\n    od\nod\n\ncolour.colour(255ub, 0ub, 0ub)\ncolour.fill([(x = 30.0D, y = 30.0D),\n             (x = 110.0D, y = 30.0D),\n             (x = 70.0D, y = 110.0D)])\n\ncolour.colour(0ub, 255ub, 0ub)\ncolour.fill([(x = 120.0D, y = 30.0D),\n             (x = 200.0D, y = 30.0D),\n             (x = 160.0D, y = 110.0D)])\n\ncolour.colour(0ub, 0ub, 255ub)\ncolour.fill([(x = 210.0D, y = 30.0D),\n             (x = 290.0D, y = 30.0D),\n             (x = 250.0D, y = 110.0D)])\n\ncolour.write(\"colour.png\")\n\nlet grey = to_colour(to_grey(colour), width, height)\n\ngrey.write(\"grey.png\")\n\ncolour.show(\"colour.png\")\ngrey.show(\"grey.png\")",
+  "output": "<<image colour.png>>\n<<image grey.png>>\n",
+  "images": [
+    {
+      "name": "colour.png",
+      "url": "/rosetta/grayscale-image/colour.png"
+    },
+    {
+      "name": "grey.png",
+      "url": "/rosetta/grayscale-image/grey.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "grayscale-image",
+  "hovers": [],
+  "diagnostics": []
+}

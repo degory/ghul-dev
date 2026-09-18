@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sorting-algorithms-shell-sort",
+  "code": "use default\n\nshell_sort[T: Ghul.Comparable[T]](values: LIST[T]) is\n    let gap mut = values.count / 2\n\n    while gap > 0 do\n        for i in gap..values.count do\n            let temp = values[i]\n            let j mut = i\n\n            while j >= gap /\\ values[j - gap] > temp do\n                values[j] = values[j - gap]\n                j = j - gap\n            od\n\n            values[j] = temp\n        od\n\n        gap = gap / 2\n    od\nsi\n\nlet numbers = LIST([5, 3, 8, 1, 9, 2, 7])\n\nshell_sort(numbers)\n\nwrite_line(numbers |> join(\", \"))\n\nlet words = LIST([\"pear\", \"apple\", \"quince\", \"banana\"])\n\nshell_sort(words)\n\nwrite_line(words |> join(\", \"))",
+  "fullSource": "use default\n\nshell_sort[T: Ghul.Comparable[T]](values: LIST[T]) is\n    let gap mut = values.count / 2\n\n    while gap > 0 do\n        for i in gap..values.count do\n            let temp = values[i]\n            let j mut = i\n\n            while j >= gap /\\ values[j - gap] > temp do\n                values[j] = values[j - gap]\n                j = j - gap\n            od\n\n            values[j] = temp\n        od\n\n        gap = gap / 2\n    od\nsi\n\nlet numbers = LIST([5, 3, 8, 1, 9, 2, 7])\n\nshell_sort(numbers)\n\nwrite_line(numbers |> join(\", \"))\n\nlet words = LIST([\"pear\", \"apple\", \"quince\", \"banana\"])\n\nshell_sort(words)\n\nwrite_line(words |> join(\", \"))",
+  "output": "1, 2, 3, 5, 7, 8, 9\napple, banana, pear, quince\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sorting-algorithms-shell-sort",
+  "hovers": [],
+  "diagnostics": []
+}

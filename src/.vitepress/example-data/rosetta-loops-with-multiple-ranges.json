@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-loops-with-multiple-ranges",
+  "code": "use default\n\nstepped(start: int, stop: int, step: int) -> Pipe[int] is\n    let value mut = start\n\n    while (step > 0 /\\ value <= stop) \\/ (step < 0 /\\ value >= stop) do\n        yield value\n\n        value = value + step\n    od\nsi\n\nlet x = 5\nlet y = -5\nlet z = -2\nlet one = 1\nlet three = 3\nlet seven = 7\n\nlet ranges = [\n    stepped(-three, 27, three),\n    stepped(-seven, seven, x),\n    stepped(555, 550 - y, one),\n    stepped(22, -28, -three),\n    stepped(1927, 1939, one),\n    stepped(x, y, z),\n    stepped(161051, 161051 + one, one)\n]\n\nlet sum mut = 0\n\nlet product mut = 1\n\nfor range in ranges do\n    for j in range do\n        sum = sum + System.Math.abs(j)\n\n        if System.Math.abs(product) < 134217728 /\\ j != 0 then\n            product = product * j\n        fi\n    od\nod\n\nwrite_line(\" sum= {sum:N0}\")\nwrite_line(\"prod= {product:N0}\")",
+  "fullSource": "use default\n\nstepped(start: int, stop: int, step: int) -> Pipe[int] is\n    let value mut = start\n\n    while (step > 0 /\\ value <= stop) \\/ (step < 0 /\\ value >= stop) do\n        yield value\n\n        value = value + step\n    od\nsi\n\nlet x = 5\nlet y = -5\nlet z = -2\nlet one = 1\nlet three = 3\nlet seven = 7\n\nlet ranges = [\n    stepped(-three, 27, three),\n    stepped(-seven, seven, x),\n    stepped(555, 550 - y, one),\n    stepped(22, -28, -three),\n    stepped(1927, 1939, one),\n    stepped(x, y, z),\n    stepped(161051, 161051 + one, one)\n]\n\nlet sum mut = 0\n\nlet product mut = 1\n\nfor range in ranges do\n    for j in range do\n        sum = sum + System.Math.abs(j)\n\n        if System.Math.abs(product) < 134217728 /\\ j != 0 then\n            product = product * j\n        fi\n    od\nod\n\nwrite_line(\" sum= {sum:N0}\")\nwrite_line(\"prod= {product:N0}\")",
+  "output": " sum= 348,173\nprod= -793,618,560\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "loops-with-multiple-ranges",
+  "hovers": [],
+  "diagnostics": []
+}

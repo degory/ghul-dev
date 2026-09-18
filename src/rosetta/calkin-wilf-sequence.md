@@ -4,6 +4,6 @@ title: "Calkin-Wilf sequence"
 
 # Calkin-Wilf sequence
 
-<RosettaTask url="https://rosettacode.org/wiki/Calkin-Wilf_sequence" />
+<RosettaTask url="https://rosettacode.org/wiki/Calkin-Wilf_sequence" tags="number-theory,maths" :playground="true" />
 
 <GhulExample name="rosetta-calkin-wilf-sequence" />

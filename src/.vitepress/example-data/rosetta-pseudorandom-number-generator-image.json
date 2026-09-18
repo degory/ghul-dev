@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-pseudorandom-number-generator-image",
+  "code": "use Raster.IMAGE\n\nlet size = 250\n\nnext(state: uint) -> uint => state * 1664525u + 1013904223u\n\nlet image = IMAGE(size, size)\n\nlet state mut = 20260909u\n\nfor y in 0..size do\n    for x in 0..size do\n        state = next(state)\n\n        let bit = cast ubyte((state >> 16) & 1u) * 255ub\n\n        image.set_pixel(x, y, bit, bit, bit)\n    od\nod\n\nimage.write(\"prng.png\")\n\nimage.show(\"prng.png\")",
+  "fullSource": "use Raster.IMAGE\n\nlet size = 250\n\nnext(state: uint) -> uint => state * 1664525u + 1013904223u\n\nlet image = IMAGE(size, size)\n\nlet state mut = 20260909u\n\nfor y in 0..size do\n    for x in 0..size do\n        state = next(state)\n\n        let bit = cast ubyte((state >> 16) & 1u) * 255ub\n\n        image.set_pixel(x, y, bit, bit, bit)\n    od\nod\n\nimage.write(\"prng.png\")\n\nimage.show(\"prng.png\")",
+  "output": "<<image prng.png>>\n",
+  "images": [
+    {
+      "name": "prng.png",
+      "url": "/rosetta/pseudorandom-number-generator-image/prng.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "pseudorandom-number-generator-image",
+  "hovers": [],
+  "diagnostics": []
+}

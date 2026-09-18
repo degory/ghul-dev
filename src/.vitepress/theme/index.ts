@@ -4,7 +4,7 @@ import { nextTick, onMounted, watch } from 'vue'
 import GhulExample from './components/GhulExample.vue'
 import GhulExampleSwitcher from './components/GhulExampleSwitcher.vue'
 import RosettaTask from './components/RosettaTask.vue'
-import RosettaIndex from './components/RosettaIndex.vue'
+import RosettaExplorer from './components/RosettaExplorer.vue'
 import { refreshPackageVersions } from './package-versions'
 import './style.css'
 
@@ -32,6 +32,6 @@ export default {
     app.component('GhulExample', GhulExample)
     app.component('GhulExampleSwitcher', GhulExampleSwitcher)
     app.component('RosettaTask', RosettaTask)
-    app.component('RosettaIndex', RosettaIndex)
+    app.component('RosettaExplorer', RosettaExplorer)
   },
 }

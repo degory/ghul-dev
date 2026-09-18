@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-walsh-matrix",
+  "code": "use default\n\nbits_set(value: int) -> int =>\n    if value == 0 then\n        0\n    else\n        value % 2 + bits_set(value / 2)\n    fi\n\nwalsh(order: int) -> Pipe[string] =>\n    (0..order)\n        |> map(row => (0..order)\n            |> map(column =>\n                if bits_set(row & column) % 2 == 0 then \" 1\" else \"-1\" fi)\n            |> join(\" \"))\n\nfor order in [2, 4, 8] do\n    write_line(\"W({order}):\")\n\n    walsh(order) |> each(row => write_line(row))\n\n    write_line(\"\")\nod",
+  "fullSource": "use default\n\nbits_set(value: int) -> int =>\n    if value == 0 then\n        0\n    else\n        value % 2 + bits_set(value / 2)\n    fi\n\nwalsh(order: int) -> Pipe[string] =>\n    (0..order)\n        |> map(row => (0..order)\n            |> map(column =>\n                if bits_set(row & column) % 2 == 0 then \" 1\" else \"-1\" fi)\n            |> join(\" \"))\n\nfor order in [2, 4, 8] do\n    write_line(\"W({order}):\")\n\n    walsh(order) |> each(row => write_line(row))\n\n    write_line(\"\")\nod",
+  "output": "W(2):\n 1  1\n 1 -1\n\nW(4):\n 1  1  1  1\n 1 -1  1 -1\n 1  1 -1 -1\n 1 -1 -1  1\n\nW(8):\n 1  1  1  1  1  1  1  1\n 1 -1  1 -1  1 -1  1 -1\n 1  1 -1 -1  1  1 -1 -1\n 1 -1 -1  1  1 -1 -1  1\n 1  1  1  1 -1 -1 -1 -1\n 1 -1  1 -1 -1  1 -1  1\n 1  1 -1 -1 -1 -1  1  1\n 1 -1 -1  1 -1  1  1 -1\n\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "walsh-matrix",
+  "hovers": [],
+  "diagnostics": []
+}

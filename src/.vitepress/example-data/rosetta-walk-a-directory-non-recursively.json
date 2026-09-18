@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-walk-a-directory-non-recursively",
+  "code": "use default\n\nlet root = \"walk-sample\"\n\nIO.Directory.create_directory(root)\nIO.Directory.create_directory(\"{root}/sub\")\n\nfor name in [\"a.txt\", \"b.txt\", \"c.log\"] do\n    IO.File.write_all_text(\"{root}/{name}\", \"\")\nod\n\nIO.File.write_all_text(\"{root}/sub/d.txt\", \"\")\n\nIO.Directory.get_files(root, \"*.txt\")\n    |> map(path => IO.Path.get_file_name(path)!)\n    |> sort()\n    |> each(name => write_line(name))\n\nIO.Directory.delete(root, true)",
+  "fullSource": "use default\n\nlet root = \"walk-sample\"\n\nIO.Directory.create_directory(root)\nIO.Directory.create_directory(\"{root}/sub\")\n\nfor name in [\"a.txt\", \"b.txt\", \"c.log\"] do\n    IO.File.write_all_text(\"{root}/{name}\", \"\")\nod\n\nIO.File.write_all_text(\"{root}/sub/d.txt\", \"\")\n\nIO.Directory.get_files(root, \"*.txt\")\n    |> map(path => IO.Path.get_file_name(path)!)\n    |> sort()\n    |> each(name => write_line(name))\n\nIO.Directory.delete(root, true)",
+  "output": "a.txt\nb.txt\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "walk-a-directory-non-recursively",
+  "hovers": [],
+  "diagnostics": []
+}

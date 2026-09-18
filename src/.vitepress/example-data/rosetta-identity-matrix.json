@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-identity-matrix",
+  "code": "use default\n\nidentity(size: int) -> Ghul.Pipes.Pipe[string] =>\n    (0..size)\n        |> map(row =>\n            (0..size)\n                |> map(column => if row == column then \"1\" else \"0\" fi)\n                |> join(\" \"))\n\nfor row in identity(5) do\n    write_line(row)\nod",
+  "fullSource": "use default\n\nidentity(size: int) -> Ghul.Pipes.Pipe[string] =>\n    (0..size)\n        |> map(row =>\n            (0..size)\n                |> map(column => if row == column then \"1\" else \"0\" fi)\n                |> join(\" \"))\n\nfor row in identity(5) do\n    write_line(row)\nod",
+  "output": "1 0 0 0 0\n0 1 0 0 0\n0 0 1 0 0\n0 0 0 1 0\n0 0 0 0 1\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "identity-matrix",
+  "hovers": [],
+  "diagnostics": []
+}

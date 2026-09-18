@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-factorions",
+  "code": "use default\n\nlet factorial = n rec => if n <= 1 then 1 else n * rec(n - 1) fi\n\ndigits(n: int, base_value: int) -> Pipe[int] is\n    let remaining mut = n\n\n    while remaining > 0 do\n        yield remaining % base_value\n        remaining = remaining / base_value\n    od\nsi\n\ndigit_factorial_sum(n: int, base_value: int) -> int =>\n    digits(n, base_value)\n        |> map(factorial)\n        |> reduce(0, (sum, f) => sum + f)\n\nfactorions(base_value: int) -> List[int] =>\n    stream(1, n => n || n + 1)\n        |> take(1499999)\n        |> filter(n => digit_factorial_sum(n, base_value) == n)\n        |> collect()\n\nfor base_value in [9, 10, 11, 12] do\n    let found = factorions(base_value)\n    write_line(\n        \"base {base_value}: {found |> join(\" \")} ({found.count} factorions)\")\nod",
+  "fullSource": "use default\n\nlet factorial = n rec => if n <= 1 then 1 else n * rec(n - 1) fi\n\ndigits(n: int, base_value: int) -> Pipe[int] is\n    let remaining mut = n\n\n    while remaining > 0 do\n        yield remaining % base_value\n        remaining = remaining / base_value\n    od\nsi\n\ndigit_factorial_sum(n: int, base_value: int) -> int =>\n    digits(n, base_value)\n        |> map(factorial)\n        |> reduce(0, (sum, f) => sum + f)\n\nfactorions(base_value: int) -> List[int] =>\n    stream(1, n => n || n + 1)\n        |> take(1499999)\n        |> filter(n => digit_factorial_sum(n, base_value) == n)\n        |> collect()\n\nfor base_value in [9, 10, 11, 12] do\n    let found = factorions(base_value)\n    write_line(\n        \"base {base_value}: {found |> join(\" \")} ({found.count} factorions)\")\nod",
+  "output": "base 9: 1 2 41282 (3 factorions)\nbase 10: 1 2 145 40585 (4 factorions)\nbase 11: 1 2 26 48 40472 (5 factorions)\nbase 12: 1 2 (2 factorions)\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "factorions",
+  "hovers": [],
+  "diagnostics": []
+}

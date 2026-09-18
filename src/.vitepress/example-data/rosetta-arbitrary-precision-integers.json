@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-arbitrary-precision-integers",
+  "code": "use IO.Std.write_line\nuse System.Numerics.INumber\nuse System.Numerics.IMultiplyOperators.`*\n\npower[T: INumber[T]](base: T, exponent: int) -> T =>\n    if exponent == 0 then\n        T.one\n    elif exponent % 2 == 0 then\n        let root = power(base, exponent / 2)\n\n        root * root\n    else\n        base * power(base, exponent - 1)\n    fi\n\nlet digits = power(5n, power(4, power(3, 2))).to_string()\n\nwrite_line(\"first 20 digits: {digits[0..20]}\")\nwrite_line(\"last 20 digits:  {digits[20..<<0]}\")\nwrite_line(\"decimal digits:  {digits.length}\")",
+  "fullSource": "use IO.Std.write_line\nuse System.Numerics.INumber\nuse System.Numerics.IMultiplyOperators.`*\n\npower[T: INumber[T]](base: T, exponent: int) -> T =>\n    if exponent == 0 then\n        T.one\n    elif exponent % 2 == 0 then\n        let root = power(base, exponent / 2)\n\n        root * root\n    else\n        base * power(base, exponent - 1)\n    fi\n\nlet digits = power(5n, power(4, power(3, 2))).to_string()\n\nwrite_line(\"first 20 digits: {digits[0..20]}\")\nwrite_line(\"last 20 digits:  {digits[20..<<0]}\")\nwrite_line(\"decimal digits:  {digits.length}\")",
+  "output": "first 20 digits: 62060698786608744707\nlast 20 digits:  92256259918212890625\ndecimal digits:  183231\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "arbitrary-precision-integers",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-singly-linked-list-element-insertion",
+  "code": "use IO.Std.write_line\n\nclass NODE[T](value: T) is\n    next: NODE[T]?\n\n    insert_after(value: T) -> NODE[T] is\n        let inserted = NODE[T](value)\n\n        inserted.next = next\n        next = inserted\n\n        inserted\n    si\nsi\n\nrender[T](first: NODE[T]) -> string is\n    let text mut = \"{first.value}\"\n    let cursor mut = first.next\n\n    while let node = cursor do\n        text = \"{text} -> {node.value}\"\n        cursor = node.next\n    od\n\n    text\nsi\n\nlet a = NODE(\"A\")\na.insert_after(\"B\")\n\nwrite_line(render(a))\n\na.insert_after(\"C\")\n\nwrite_line(render(a))",
+  "fullSource": "use IO.Std.write_line\n\nclass NODE[T](value: T) is\n    next: NODE[T]?\n\n    insert_after(value: T) -> NODE[T] is\n        let inserted = NODE[T](value)\n\n        inserted.next = next\n        next = inserted\n\n        inserted\n    si\nsi\n\nrender[T](first: NODE[T]) -> string is\n    let text mut = \"{first.value}\"\n    let cursor mut = first.next\n\n    while let node = cursor do\n        text = \"{text} -> {node.value}\"\n        cursor = node.next\n    od\n\n    text\nsi\n\nlet a = NODE(\"A\")\na.insert_after(\"B\")\n\nwrite_line(render(a))\n\na.insert_after(\"C\")\n\nwrite_line(render(a))",
+  "output": "A -> B\nA -> C -> B\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "singly-linked-list-element-insertion",
+  "hovers": [],
+  "diagnostics": []
+}

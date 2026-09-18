@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-sailors-coconuts-and-a-monkey-problem",
+  "code": "use default\n\nsatisfies_tale(total: int, sailors: int) -> bool is\n    let pile mut = total\n\n    for _ in 1::sailors do\n        if pile % sailors != 1 then return false fi\n        pile = pile - 1 - (pile - 1) / sailors\n    od\n\n    pile % sailors == 0\nsi\n\nhidden_piles(total: int, sailors: int) -> Pipe[int] is\n    let pile mut = total\n\n    for _ in 1::sailors do\n        yield (pile - 1) / sailors\n        pile = pile - 1 - (pile - 1) / sailors\n    od\nsi\n\nfor sailors in [5, 6] do\n    if let total = stream(sailors, c => c || c + 1)\n        |> find(c => satisfies_tale(c, sailors)) then\n        write_line(\"{sailors} sailors: smallest pile is {total} coconuts\")\n        write_line(\"  piles hidden at night: {hidden_piles(total, sailors) |> join(\", \")}\")\n    fi\nod",
+  "fullSource": "use default\n\nsatisfies_tale(total: int, sailors: int) -> bool is\n    let pile mut = total\n\n    for _ in 1::sailors do\n        if pile % sailors != 1 then return false fi\n        pile = pile - 1 - (pile - 1) / sailors\n    od\n\n    pile % sailors == 0\nsi\n\nhidden_piles(total: int, sailors: int) -> Pipe[int] is\n    let pile mut = total\n\n    for _ in 1::sailors do\n        yield (pile - 1) / sailors\n        pile = pile - 1 - (pile - 1) / sailors\n    od\nsi\n\nfor sailors in [5, 6] do\n    if let total = stream(sailors, c => c || c + 1)\n        |> find(c => satisfies_tale(c, sailors)) then\n        write_line(\"{sailors} sailors: smallest pile is {total} coconuts\")\n        write_line(\"  piles hidden at night: {hidden_piles(total, sailors) |> join(\", \")}\")\n    fi\nod",
+  "output": "5 sailors: smallest pile is 3121 coconuts\n  piles hidden at night: 624, 499, 399, 319, 255\n6 sailors: smallest pile is 233275 coconuts\n  piles hidden at night: 38879, 32399, 26999, 22499, 18749, 15624\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "sailors-coconuts-and-a-monkey-problem",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-file-modification-time",
+  "code": "use default\n\nlet path =\n    IO.Path.combine(IO.Path.get_temp_path(), \"ghul-rosetta-mtime-test.txt\")\n\nIO.File.write_all_text(path, \"hello\")\n\nlet before = IO.File.get_last_write_time_utc(path)\nlet target = System.DateTime(2000, 1, 1, 0, 0, 0, System.DateTimeKind.UTC)\n\nlet is_after_2000 = before > target\n\nwrite_line(\n    \"modification time before set is after year 2000: {is_after_2000}\"\n)\n\nIO.File.set_last_write_time_utc(path, target)\n\nlet after = IO.File.get_last_write_time_utc(path)\n\nlet matches = after =~ target\n\nwrite_line(\n    \"modification time now matches the value it was set to: {matches}\"\n)\n\nIO.File.delete(path)",
+  "fullSource": "use default\n\nlet path =\n    IO.Path.combine(IO.Path.get_temp_path(), \"ghul-rosetta-mtime-test.txt\")\n\nIO.File.write_all_text(path, \"hello\")\n\nlet before = IO.File.get_last_write_time_utc(path)\nlet target = System.DateTime(2000, 1, 1, 0, 0, 0, System.DateTimeKind.UTC)\n\nlet is_after_2000 = before > target\n\nwrite_line(\n    \"modification time before set is after year 2000: {is_after_2000}\"\n)\n\nIO.File.set_last_write_time_utc(path, target)\n\nlet after = IO.File.get_last_write_time_utc(path)\n\nlet matches = after =~ target\n\nwrite_line(\n    \"modification time now matches the value it was set to: {matches}\"\n)\n\nIO.File.delete(path)",
+  "output": "modification time before set is after year 2000: True\nmodification time now matches the value it was set to: True\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "file-modification-time",
+  "hovers": [],
+  "diagnostics": []
+}

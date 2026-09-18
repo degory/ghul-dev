@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-hello-world-newbie-01-in-the-browser",
+  "code": "IO.Std.write_line(\"Hello world!\")",
+  "fullSource": "IO.Std.write_line(\"Hello world!\")",
+  "output": "Hello world!\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "hello-world-newbie/01-in-the-browser",
+  "hovers": [],
+  "diagnostics": []
+}

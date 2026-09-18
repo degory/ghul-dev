@@ -4,7 +4,7 @@ title: Rosetta Code
 
 # Rosetta Code
 
-ghūl solutions to [Rosetta Code](https://rosettacode.org) tasks. Each can be edited and run here:
-click the pencil, change it, and run it in your browser.
+ghūl solutions to 703 [Rosetta Code](https://rosettacode.org) tasks. Every one that
+says so can be changed and run here, in your browser.
 
-<RosettaIndex />
+<RosettaExplorer />

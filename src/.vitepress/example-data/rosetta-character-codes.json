@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-character-codes",
+  "code": "use IO.Std.write_line\n\nwrite_line(\"{cast int('a')}\")\nwrite_line(\"{cast char(97)}\")\nwrite_line(\"{cast int('€')}\")\nwrite_line(\"{cast char(8364)}\")",
+  "fullSource": "use IO.Std.write_line\n\nwrite_line(\"{cast int('a')}\")\nwrite_line(\"{cast char(97)}\")\nwrite_line(\"{cast int('€')}\")\nwrite_line(\"{cast char(8364)}\")",
+  "output": "97\na\n8364\n€\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "character-codes",
+  "hovers": [],
+  "diagnostics": []
+}

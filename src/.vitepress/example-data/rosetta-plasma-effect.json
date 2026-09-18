@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-plasma-effect",
+  "code": "use System.Math\nuse Raster.IMAGE\n\nlet width = 480\nlet height = 360\n\nplasma(x: double, y: double) -> double =>\n    (Math.sin(x / 16.0) +\n     Math.sin(y / 8.0) +\n     Math.sin((x + y) / 16.0) +\n     Math.sin(Math.sqrt(x * x + y * y) / 8.0) +\n     4.0) / 8.0\n\nchannel(value: double, phase: double) -> ubyte =>\n    cast ubyte(127.5 + 127.4 * Math.sin(Math.pi * (value * 5.0 + phase)))\n\nlet image = IMAGE(width, height)\n\nfor y in 0..height do\n    for x in 0..width do\n        let value = plasma(cast double(x), cast double(y))\n\n        image.set_pixel(\n            x, y,\n            channel(value, 0.0),\n            channel(value, 2.0 / 3.0),\n            channel(value, 4.0 / 3.0)\n        )\n    od\nod\n\nimage.write(\"plasma.png\")\n\nimage.show(\"plasma.png\")",
+  "fullSource": "use System.Math\nuse Raster.IMAGE\n\nlet width = 480\nlet height = 360\n\nplasma(x: double, y: double) -> double =>\n    (Math.sin(x / 16.0) +\n     Math.sin(y / 8.0) +\n     Math.sin((x + y) / 16.0) +\n     Math.sin(Math.sqrt(x * x + y * y) / 8.0) +\n     4.0) / 8.0\n\nchannel(value: double, phase: double) -> ubyte =>\n    cast ubyte(127.5 + 127.4 * Math.sin(Math.pi * (value * 5.0 + phase)))\n\nlet image = IMAGE(width, height)\n\nfor y in 0..height do\n    for x in 0..width do\n        let value = plasma(cast double(x), cast double(y))\n\n        image.set_pixel(\n            x, y,\n            channel(value, 0.0),\n            channel(value, 2.0 / 3.0),\n            channel(value, 4.0 / 3.0)\n        )\n    od\nod\n\nimage.write(\"plasma.png\")\n\nimage.show(\"plasma.png\")",
+  "output": "<<image plasma.png>>\n",
+  "images": [
+    {
+      "name": "plasma.png",
+      "url": "/rosetta/plasma-effect/plasma.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "plasma-effect",
+  "hovers": [],
+  "diagnostics": []
+}

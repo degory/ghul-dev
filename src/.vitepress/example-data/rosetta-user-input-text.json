@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-user-input-text",
+  "code": "use IO.Std.write\nuse IO.Std.write_line\nuse IO.Std.read_line\n\nwrite(\"string: \")\n\nlet text = read_line()\n\nwrite(\"integer: \")\n\nlet number = read_line()\n\nif text? /\\ number? then\n    write_line(\n        \"read the string {text} and the integer {int.parse(number)}\"\n    )\nfi",
+  "fullSource": "use IO.Std.write\nuse IO.Std.write_line\nuse IO.Std.read_line\n\nwrite(\"string: \")\n\nlet text = read_line()\n\nwrite(\"integer: \")\n\nlet number = read_line()\n\nif text? /\\ number? then\n    write_line(\n        \"read the string {text} and the integer {int.parse(number)}\"\n    )\nfi",
+  "output": "string: hello\ninteger: 75000\nread the string hello and the integer 75000\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "user-input-text",
+  "hovers": [],
+  "diagnostics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "rosetta-temperature-conversion",
+  "code": "use IO.Std.write_line\n\nshow(kelvin: double) is\n    write_line(\"K {kelvin,8:F2}\")\n    write_line(\"C {kelvin - 273.15,8:F2}\")\n    write_line(\"F {kelvin * 1.8 - 459.67,8:F2}\")\n    write_line(\"R {kelvin * 1.8,8:F2}\")\nsi\n\nshow(21.0)",
+  "fullSource": "use IO.Std.write_line\n\nshow(kelvin: double) is\n    write_line(\"K {kelvin,8:F2}\")\n    write_line(\"C {kelvin - 273.15,8:F2}\")\n    write_line(\"F {kelvin * 1.8 - 459.67,8:F2}\")\n    write_line(\"R {kelvin * 1.8,8:F2}\")\nsi\n\nshow(21.0)",
+  "output": "K    21.00\nC  -252.15\nF  -421.87\nR    37.80\n",
+  "images": [],
+  "playground": true,
+  "playgroundPath": "temperature-conversion",
+  "hovers": [],
+  "diagnostics": []
+}

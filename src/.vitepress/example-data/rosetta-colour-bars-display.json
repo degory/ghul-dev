@@ -1,0 +1,16 @@
+{
+  "name": "rosetta-colour-bars-display",
+  "code": "use Ghul.Pipes\nuse Raster.IMAGE\n\nlet bars = [\n    (red = 0ub, green = 0ub, blue = 0ub),\n    (red = 255ub, green = 0ub, blue = 0ub),\n    (red = 0ub, green = 255ub, blue = 0ub),\n    (red = 0ub, green = 0ub, blue = 255ub),\n    (red = 255ub, green = 0ub, blue = 255ub),\n    (red = 0ub, green = 255ub, blue = 255ub),\n    (red = 255ub, green = 255ub, blue = 0ub),\n    (red = 255ub, green = 255ub, blue = 255ub)\n]\n\nlet width = 640\nlet height = 400\n\nlet image = IMAGE(width, height)\n\nfor x in 0..width do\n    let bar = bars[x * bars.count / width]\n\n    for y in 0..height do\n        image.set_pixel(x, y, bar.red, bar.green, bar.blue)\n    od\nod\n\nimage.write(\"colour-bars.png\")\n\nimage.show(\"colour-bars.png\")",
+  "fullSource": "use Ghul.Pipes\nuse Raster.IMAGE\n\nlet bars = [\n    (red = 0ub, green = 0ub, blue = 0ub),\n    (red = 255ub, green = 0ub, blue = 0ub),\n    (red = 0ub, green = 255ub, blue = 0ub),\n    (red = 0ub, green = 0ub, blue = 255ub),\n    (red = 255ub, green = 0ub, blue = 255ub),\n    (red = 0ub, green = 255ub, blue = 255ub),\n    (red = 255ub, green = 255ub, blue = 0ub),\n    (red = 255ub, green = 255ub, blue = 255ub)\n]\n\nlet width = 640\nlet height = 400\n\nlet image = IMAGE(width, height)\n\nfor x in 0..width do\n    let bar = bars[x * bars.count / width]\n\n    for y in 0..height do\n        image.set_pixel(x, y, bar.red, bar.green, bar.blue)\n    od\nod\n\nimage.write(\"colour-bars.png\")\n\nimage.show(\"colour-bars.png\")",
+  "output": "<<image colour-bars.png>>\n",
+  "images": [
+    {
+      "name": "colour-bars.png",
+      "url": "/rosetta/colour-bars-display/colour-bars.png"
+    }
+  ],
+  "playground": true,
+  "playgroundPath": "colour-bars-display",
+  "hovers": [],
+  "diagnostics": []
+}
