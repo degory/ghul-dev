@@ -8,7 +8,11 @@
 
 import { ref } from 'vue';
 
-export const PLAYGROUND_ORIGIN = 'https://playground.ghul.dev';
+// The playground is served by this site, below /playground/. The origin is still
+// named in full rather than taken from the page, so a local build of the site
+// embeds the real playground; embed.js accepts a local parent as well.
+export const PLAYGROUND_ORIGIN = 'https://ghul.dev';
+export const PLAYGROUND_BASE = `${PLAYGROUND_ORIGIN}/playground/`;
 
 // Which example is being edited, page-wide. Only one at a time: the back end
 // holds a small number of analyser sessions, so a page of forty examples that
@@ -48,7 +52,7 @@ export function playgroundAvailable() {
         if (typeof fetch !== 'function' || typeof window === 'undefined') return false;
 
         try {
-            const response = await fetch(`${PLAYGROUND_ORIGIN}/health`, {
+            const response = await fetch(`${PLAYGROUND_BASE}health`, {
                 signal: AbortSignal.timeout(PROBE_TIMEOUT_MS),
                 cache: 'no-store'
             });

@@ -2,7 +2,7 @@
 import { computed, ref, watch, onBeforeUnmount } from 'vue'
 import DiagnosticIcon from './DiagnosticIcon.vue'
 import {
-  PLAYGROUND_ORIGIN, CHANNEL, playgroundAvailable, currentTheme, watchTheme,
+  PLAYGROUND_ORIGIN, PLAYGROUND_BASE, CHANNEL, playgroundAvailable, currentTheme, watchTheme,
   editingExample, retainedEdit, retainEdit
 } from '../playground'
 
@@ -392,7 +392,7 @@ if (!props.signature && !isSnippet.value && example.value?.playground !== false)
   playgroundAvailable().then(available => { canEdit.value = available })
 }
 
-const embedUrl = `${PLAYGROUND_ORIGIN}/embed.html`
+const embedUrl = `${PLAYGROUND_BASE}embed.html`
 
 // What the panel shows: the recorded output of the verified example, or what
 // the reader's own edit produced.
