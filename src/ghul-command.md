@@ -71,7 +71,7 @@ Each script is compiled once for each combination of its text and the compiler v
 
 ## the REPL
 
-`ghul repl`{:sh} starts an interactive session. Each submission is compiled and run as soon as it is complete, and what it defines stays available to every later one. The prompt shows the number the next submission will take, and a line that doesn't end the submission is followed by a `|`{:text} prompt.
+`ghul repl`{:sh} starts an interactive session. Each submission is compiled and run as soon as it is complete, and what it defines stays available to every later one. The same sessions run in the browser, with nothing to install, in the [online REPL](https://ghul.dev/repl/). The prompt shows the number the next submission will take, and a line that doesn't end the submission is followed by a `|`{:text} prompt.
 
 A line that finishes an expression or a call ends the submission and shows its value. A line that finishes a `let`, an assignment or a definition doesn't, since those set something up for what follows: the `|`{:text} prompt stays, and the next line joins the same submission. So a definition and a first use of it can be typed as one submission, and a definition typed on its own is ended with a blank line:
 
