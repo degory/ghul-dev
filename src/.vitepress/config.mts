@@ -203,7 +203,7 @@ export default defineConfig({
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
     ['meta', { name: 'keywords', content: 'ghul, ghul programming language, ghoul, ghoul programming language, ghūl, ghūl programming language' }],
     ['link', { rel: 'icon', href: '/favicon.ico' }],
-    // self-hosted GoatCounter, served from the playground host. Both halves
+    // self-hosted GoatCounter, proxied by this site at /stats/. Both halves
     // have to be the same origin as each other: count.js reads the endpoint
     // out of the data attribute, and pointing one at a host that is not
     // serving the other silently records nothing.
@@ -211,7 +211,8 @@ export default defineConfig({
     // Every recorded path carries its host, so a row names the page it came
     // from rather than a path that either site could have produced. This site
     // and the playground report to one GoatCounter site - sites are keyed on
-    // the host serving the endpoint, and separate sites cannot be viewed
+    // the host GoatCounter is told it is serving, which the proxy keeps as the
+    // playground's, and separate sites cannot be viewed
     // together - so bare paths would put this site's home page and the
     // playground's entry page in one row.
     //
@@ -221,7 +222,7 @@ export default defineConfig({
     // Events pass their path explicitly and so keep their own naming, which is
     // what we want: they are not URLs.
     ['script', {}, 'window.goatcounter = { path: function (p) { return location.host + p } }'],
-    ['script', { 'data-goatcounter': 'https://playground.ghul.dev/stats/count', async: '', src: 'https://playground.ghul.dev/stats/count.js' }],
+    ['script', { 'data-goatcounter': 'https://ghul.dev/stats/count', async: '', src: 'https://ghul.dev/stats/count.js' }],
   ],
 
   markdown: {
