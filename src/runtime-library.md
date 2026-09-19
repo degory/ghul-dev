@@ -326,6 +326,8 @@ Collects into the read-only `Collections.List[T]`. `collect_list` gives back the
 
 ### collect_map
 
+The first form takes each element's key and value from two functions. The second collects a sequence of key and value pairs, which is how a map with fixed contents is written: `[("a", 1), ("b", 2)] |> collect_map()`.
+
 <GhulExample name="pipes-ref-collect_map-function" signature />
 
 ### partition

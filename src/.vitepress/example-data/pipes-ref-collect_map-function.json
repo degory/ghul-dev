@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-collect_map-function",
   "snippet": false,
-  "code": "collect_map[T,K,V](\n    source: Iterable[T],\n    key_selector: (T) -> K pure,\n    value_selector: (T) -> V pure\n) -> MAP[K,V] pure",
-  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\ncollect_map[T,K,V](\n    source: Iterable[T],\n    key_selector: (T) -> K pure,\n    value_selector: (T) -> V pure\n) -> MAP[K,V] pure\n\nentry() is si\n",
+  "code": "collect_map[T,K,V](\n    source: Iterable[T],\n    key_selector: (T) -> K pure,\n    value_selector: (T) -> V pure\n) -> MAP[K,V] pure\n\ncollect_map[K,V](source: Iterable[(K, V)]) -> MAP[K,V] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\ncollect_map[T,K,V](\n    source: Iterable[T],\n    key_selector: (T) -> K pure,\n    value_selector: (T) -> V pure\n) -> MAP[K,V] pure\n\ncollect_map[K,V](source: Iterable[(K, V)]) -> MAP[K,V] pure\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],
@@ -22,12 +22,23 @@
     { "startLine": 4, "startColumn": 5, "endLine": 4, "endColumn": 18, "text": "value_selector: T -> V pure", "signature": "value_selector: T -> V pure", "kindLabel": "local argument" },
     { "startLine": 4, "startColumn": 28, "endLine": 4, "endColumn": 28, "text": "V", "signature": "V", "kindLabel": "type variable" },
     { "startLine": 4, "startColumn": 22, "endLine": 4, "endColumn": 22, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 11, "text": "collect_map[K,V](source: Iterable[(K, V)]) -> MAP[K,V]", "signature": "collect_map[K,V](source: Iterable[(K, V)]) -> MAP[K,V]", "kindLabel": "pure global function" },
+    { "startLine": 7, "startColumn": 13, "endLine": 7, "endColumn": 13, "text": "K", "signature": "K", "kindLabel": "type variable" },
+    { "startLine": 7, "startColumn": 15, "endLine": 7, "endColumn": 15, "text": "V", "signature": "V", "kindLabel": "type variable" },
+    { "startLine": 7, "startColumn": 18, "endLine": 7, "endColumn": 23, "text": "source: Iterable[(K, V)]", "signature": "source: Iterable[(K, V)]", "kindLabel": "local argument" },
+    { "startLine": 7, "startColumn": 36, "endLine": 7, "endColumn": 36, "text": "K", "signature": "K", "kindLabel": "type variable" },
+    { "startLine": 7, "startColumn": 39, "endLine": 7, "endColumn": 39, "text": "V", "signature": "V", "kindLabel": "type variable" },
+    { "startLine": 7, "startColumn": 26, "endLine": 7, "endColumn": 33, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
+    { "startLine": 7, "startColumn": 51, "endLine": 7, "endColumn": 51, "text": "K", "signature": "K", "kindLabel": "type variable" },
+    { "startLine": 7, "startColumn": 53, "endLine": 7, "endColumn": 53, "text": "V", "signature": "V", "kindLabel": "type variable" },
+    { "startLine": 7, "startColumn": 47, "endLine": 7, "endColumn": 49, "text": "class MAP[TKey,TValue]", "signature": "class MAP[TKey,TValue]", "kindLabel": "class" },
     { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 10, "text": "K", "signature": "K", "kindLabel": "type variable" },
     { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 12, "text": "V", "signature": "V", "kindLabel": "type variable" },
     { "startLine": 5, "startColumn": 6, "endLine": 5, "endColumn": 8, "text": "class MAP[TKey,TValue]", "signature": "class MAP[TKey,TValue]", "kindLabel": "class" }
   ],
   "inlayHints": [
-    { "line": 1, "column": 1, "label": "◆", "detail": "collect_map\n\n- ◆ abstract", "code": "definition-virtuality" }
+    { "line": 1, "column": 1, "label": "◆", "detail": "collect_map\n\n- ◆ abstract", "code": "definition-virtuality" },
+    { "line": 7, "column": 1, "label": "◆", "detail": "collect_map\n\n- ◆ abstract", "code": "definition-virtuality" }
   ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 11, "tokenType": "function" },
@@ -45,6 +56,16 @@
     { "startLine": 4, "startColumn": 28, "endLine": 4, "endColumn": 28, "tokenType": "typeParameter" },
     { "startLine": 5, "startColumn": 6, "endLine": 5, "endColumn": 8, "tokenType": "class" },
     { "startLine": 5, "startColumn": 10, "endLine": 5, "endColumn": 10, "tokenType": "typeParameter" },
-    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 12, "tokenType": "typeParameter" }
+    { "startLine": 5, "startColumn": 12, "endLine": 5, "endColumn": 12, "tokenType": "typeParameter" },
+    { "startLine": 7, "startColumn": 1, "endLine": 7, "endColumn": 11, "tokenType": "function" },
+    { "startLine": 7, "startColumn": 13, "endLine": 7, "endColumn": 13, "tokenType": "typeParameter" },
+    { "startLine": 7, "startColumn": 15, "endLine": 7, "endColumn": 15, "tokenType": "typeParameter" },
+    { "startLine": 7, "startColumn": 18, "endLine": 7, "endColumn": 23, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 7, "startColumn": 26, "endLine": 7, "endColumn": 33, "tokenType": "interface" },
+    { "startLine": 7, "startColumn": 36, "endLine": 7, "endColumn": 36, "tokenType": "typeParameter" },
+    { "startLine": 7, "startColumn": 39, "endLine": 7, "endColumn": 39, "tokenType": "typeParameter" },
+    { "startLine": 7, "startColumn": 47, "endLine": 7, "endColumn": 49, "tokenType": "class" },
+    { "startLine": 7, "startColumn": 51, "endLine": 7, "endColumn": 51, "tokenType": "typeParameter" },
+    { "startLine": 7, "startColumn": 53, "endLine": 7, "endColumn": 53, "tokenType": "typeParameter" }
   ]
 }
