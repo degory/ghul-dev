@@ -1,8 +1,8 @@
 {
   "name": "pipes-ref-count-function",
   "snippet": false,
-  "code": "count[T](source: Iterable[T]) -> int pure",
-  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\ncount[T](source: Iterable[T]) -> int pure\n\nentry() is si\n",
+  "code": "count[T](source: Iterable[T]) -> int pure\n\ncount[T..](source: Iterable[T], predicate: T.. -> bool pure) -> int pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\ncount[T](source: Iterable[T]) -> int pure\n\ncount[T..](source: Iterable[T], predicate: T.. -> bool pure) -> int pure\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],
@@ -14,10 +14,20 @@
     { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 15, "text": "source: Iterable[T]", "signature": "source: Iterable[T]", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 25, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
-    { "startLine": 1, "startColumn": 34, "endLine": 1, "endColumn": 36, "text": "struct int", "signature": "struct int", "kindLabel": "struct" }
+    { "startLine": 1, "startColumn": 34, "endLine": 1, "endColumn": 36, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 5, "text": "count[T..](\n    source: Iterable[T],\n    predicate: T.. -> bool pure\n) -> int", "signature": "count[T..](\n    source: Iterable[T],\n    predicate: T.. -> bool pure\n) -> int", "kindLabel": "pure global function" },
+    { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 7, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 17, "text": "source: Iterable[T]", "signature": "source: Iterable[T]", "kindLabel": "local argument" },
+    { "startLine": 3, "startColumn": 33, "endLine": 3, "endColumn": 41, "text": "predicate: T -> bool pure", "signature": "predicate: T -> bool pure", "kindLabel": "local argument" },
+    { "startLine": 3, "startColumn": 29, "endLine": 3, "endColumn": 29, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 27, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
+    { "startLine": 3, "startColumn": 51, "endLine": 3, "endColumn": 54, "text": "struct bool", "signature": "struct bool", "kindLabel": "struct" },
+    { "startLine": 3, "startColumn": 44, "endLine": 3, "endColumn": 44, "text": "T", "signature": "T", "kindLabel": "type variable" },
+    { "startLine": 3, "startColumn": 65, "endLine": 3, "endColumn": 67, "text": "struct int", "signature": "struct int", "kindLabel": "struct" }
   ],
   "inlayHints": [
-    { "line": 1, "column": 1, "label": "◆", "detail": "count\n\n- ◆ abstract", "code": "definition-virtuality" }
+    { "line": 1, "column": 1, "label": "◆", "detail": "count\n\n- ◆ abstract", "code": "definition-virtuality" },
+    { "line": 3, "column": 1, "label": "◆", "detail": "count\n\n- ◆ abstract", "code": "definition-virtuality" }
   ],
   "semanticTokens": [
     { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 5, "tokenType": "function" },
@@ -25,6 +35,15 @@
     { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 15, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 18, "endLine": 1, "endColumn": 25, "tokenType": "interface" },
     { "startLine": 1, "startColumn": 27, "endLine": 1, "endColumn": 27, "tokenType": "typeParameter" },
-    { "startLine": 1, "startColumn": 34, "endLine": 1, "endColumn": 36, "tokenType": "struct" }
+    { "startLine": 1, "startColumn": 34, "endLine": 1, "endColumn": 36, "tokenType": "struct" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 5, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 7, "endLine": 3, "endColumn": 7, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 12, "endLine": 3, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 20, "endLine": 3, "endColumn": 27, "tokenType": "interface" },
+    { "startLine": 3, "startColumn": 29, "endLine": 3, "endColumn": 29, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 33, "endLine": 3, "endColumn": 41, "tokenType": "variable", "modifiers": "readonly" },
+    { "startLine": 3, "startColumn": 44, "endLine": 3, "endColumn": 44, "tokenType": "typeParameter" },
+    { "startLine": 3, "startColumn": 51, "endLine": 3, "endColumn": 54, "tokenType": "struct" },
+    { "startLine": 3, "startColumn": 65, "endLine": 3, "endColumn": 67, "tokenType": "struct" }
   ]
 }
