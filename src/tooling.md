@@ -59,9 +59,20 @@ input.
 `ghul repl`{:sh} starts an interactive session. Each line you type is
 compiled and run as soon as it is complete, and what it defines stays
 available to every later line. A line that leaves something open, such as a
-block with no closing keyword, waits for more with a `|`{:text} prompt, and
-a blank line submits whatever has been typed. A submission that ends on a
-value shows the value:
+block with no closing keyword, waits for more with a `|`{:text} prompt. A
+submission that ends on a value shows the value:
+
+```plaintext
+> let total mut = 0
+> total = total + 5
+> total
+5
+```
+
+An `if`, `case`, loop or definition written over several lines doesn't end
+the submission when it closes. The `|`{:text} prompt stays, and the next line
+joins the same submission. A one-line statement typed there ends the
+submission straight away and shows its value, as `names` does here:
 
 ```plaintext
 > let names mut = LIST[string]()
@@ -69,9 +80,28 @@ value shows the value:
 > for name in ["second", "third"] do
 |     names.add(name)
 | od
-> names
+| names
 [first, second, third]
 ```
+
+To end the submission on the construct itself, type a blank line or a line
+holding only `.`{:text}. A blank line shows no value, since a construct over
+several lines is usually there for what it does. A `.`{:text} line shows the
+value the construct ends on:
+
+```plaintext
+> if names.count > 2 then
+|     "several"
+| else
+|     "few"
+| fi
+| .
+several
+```
+
+When the session reads from a pipe or a file rather than a terminal, a
+construct over several lines ends the submission as soon as it closes, and a
+`.`{:text} line ends one too.
 
 The compiler's default imports (`use default`) are in force in every
 submission, and a `use` you type stays in force for the rest of the session.
