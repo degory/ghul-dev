@@ -190,14 +190,14 @@ few
 
 It stops at the first submission that no longer runs to the end.
 
-A C# extension method is called as the static method it is, so a package's extensions are reached through their class:
+A C# extension method is called as the static method it is, so a package's extensions are reached through their class, and `_` supplies an optional argument's default:
 
 ```plaintext
 1> :nuget Humanizer.Core 2.14.1
 restoring Humanizer.Core...
 referenced Humanizer
-1> Humanizer.StringHumanizeExtensions.humanize("some_long_identifier")
-some long identifier
+1> Humanizer.NumberToWordsExtension.to_words(1234, _)
+one thousand two hundred and thirty-four
 ```
 
 ### how a session differs from a file
