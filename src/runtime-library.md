@@ -282,6 +282,8 @@ The single element the source holds, throwing when it holds none or more than on
 
 ### count
 
+The first form counts every element. The second counts the elements the predicate accepts: `numbers |> count(n => n % 2 == 1)`.
+
 <GhulExample name="pipes-ref-count-function" signature />
 
 ### min
