@@ -115,6 +115,18 @@ typed from everything the session has defined. `:complete TEXT`{:text} lists
 what could follow some text, `:hover TEXT`{:text} shows what the end of it
 names, `:reset`{:text} starts a fresh session and `:quit`{:text} leaves.
 
+Each line starts indented four spaces further in after a line that opens a
+block, and a line starting with a closing word such as `fi`{:text} or
+`else`{:text} steps back out as the word is typed. Backspace in a line's
+indent removes a whole step.
+
+What you type is coloured as you type it, in the same colours as the
+examples on this site: the dark set on a dark background and the light set
+on a light one. The session asks the terminal for its background colour
+and uses the dark colours when it can't find out.
+`ghul repl --theme dark`{:sh}, `--theme light`{:sh} or `--theme none`{:sh}
+chooses for it, and setting `NO_COLOR`{:text} turns colour off.
+
 Messages call the third submission `cell-3`{:text}. In code it is `cell3`,
 which is how a later submission reaches something the third one defined, as
 in `cell3.x`. Each submission is compiled as a small library of its own, so a
