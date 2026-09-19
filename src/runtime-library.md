@@ -400,3 +400,13 @@ A type chooses how it is displayed by implementing `Displayable`. Its one method
 <GhulExample name="display-displayable" />
 
 A `DISPLAY_STATE` can also be created directly, with a mode and a different element limit, and read back with `to_string()` after writing into it.
+
+`display(value)` shows a value while the code goes on running, rather than only at the end. A host that shows values, such as a REPL, a notebook or the playground, installs a `DisplaySink`, and `display` sends the value to it. With no host installed, `display` writes what `inspect` gives for the value as a line of standard output. `display(value, id)` names what it shows, and `update_display(value, id)` replaces what was shown under that name, which is how a cell shows progress in place. With no host there is nothing to replace, so `update_display` writes another line. All three are in `Ghul`:
+
+<GhulExample name="display-show" />
+
+`Displayable` customises the text `$` and `inspect` produce for a value. `Renderable` offers other media for the same value, such as an image, which a host can show in place of that text. Its `representations()` method gives each as a MIME type and its content, best first:
+
+<GhulExample name="display-renderable" />
+
+The host chooses which MIME types it shows, and the text `$` writes is always the fallback. A host that shows output in a web page does not insert `text/html` or `image/svg+xml` from a value into its own document, since either can carry script.

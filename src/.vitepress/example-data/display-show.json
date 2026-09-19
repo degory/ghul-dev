@@ -1,0 +1,22 @@
+{
+  "name": "display-show",
+  "snippet": false,
+  "code": "display([1, 2, 3])\n\ndisplay(\"working\", \"status\")\nupdate_display(\"done\", \"status\")",
+  "fullSource": "use IO.Std.write_line\nuse Ghul\n\ndisplay([1, 2, 3])\n\ndisplay(\"working\", \"status\")\nupdate_display(\"done\", \"status\")\n",
+  "hiddenBefore": true,
+  "hiddenAfter": false,
+  "hiddenGapsAfterLine": [],
+  "output": "[1, 2, 3]\nworking\ndone\n",
+  "diagnostics": [],
+  "hovers": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 7, "text": "Ghul.display(value: object?) -> void", "signature": "Ghul.display(value: object?) -> void", "kindLabel": "global function" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 7, "text": "Ghul.display(value: object?, id: string) -> void", "signature": "Ghul.display(value: object?, id: string) -> void", "kindLabel": "global function" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 14, "text": "Ghul.update_display(value: object?, id: string) -> void", "signature": "Ghul.update_display(value: object?, id: string) -> void", "kindLabel": "global function" }
+  ],
+  "inlayHints": [],
+  "semanticTokens": [
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 7, "tokenType": "function" },
+    { "startLine": 3, "startColumn": 1, "endLine": 3, "endColumn": 7, "tokenType": "function" },
+    { "startLine": 4, "startColumn": 1, "endLine": 4, "endColumn": 14, "tokenType": "function" }
+  ]
+}

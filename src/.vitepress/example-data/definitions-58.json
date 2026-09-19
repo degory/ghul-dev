@@ -6,7 +6,7 @@
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
-  "output": "True False\n",
+  "output": "true false\n",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 8, "endLine": 1, "endColumn": 12, "text": "struct MONEY(amount: int, currency: string)", "signature": "struct MONEY(amount: int, currency: string)", "kindLabel": "struct" },

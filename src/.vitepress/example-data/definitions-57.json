@@ -6,7 +6,7 @@
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
-  "output": "True False\nTrue\n",
+  "output": "true false\ntrue\n",
   "diagnostics": [],
   "hovers": [
     { "startLine": 2, "startColumn": 7, "endLine": 2, "endColumn": 11, "text": "class POINT(x: int, y: int)", "signature": "class POINT(x: int, y: int)", "kindLabel": "class" },
