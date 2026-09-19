@@ -1,0 +1,16 @@
+use IO.Std.write_line
+use Ghul
+
+// >>>
+class SCORE(points: int): Displayable is
+    display(state: DISPLAY_STATE) is
+        state.append("[")
+        state.render(points)
+        state.append(if state.mode == DisplayMode.DETAILED then " points]" else "]" fi)
+    si
+si
+
+write_line($(SCORE(3)))
+write_line(inspect(SCORE(3)))
+write_line($([SCORE(1), SCORE(2)]))
+// <<<
