@@ -24,7 +24,7 @@ dotnet tool install -g ghul.cli
 
 ```plaintext
 $ ghul version
-ghul 0.27.1
+ghul 0.31.0
 ghul.compiler 60.2.0
 ```
 
@@ -138,7 +138,7 @@ The compiler's default imports (`use default`) are in force in every submission,
 
 At a terminal the whole submission is edited in place, however many lines it has. Enter on the last line ends the submission or waits for more as described above, and Enter on an earlier line starts a new line there. Up and Down move between lines, and past the first or last line bring back earlier submissions, including those of earlier sessions. Each line starts indented after a line that opens a block, and a closing word such as `fi`{:text} steps back out as it is typed.
 
-Tab completes the name being typed from everything the session has defined; where more than one name fits, it lists them. Shift-Tab shows what the name at the cursor is. Home and End, or Ctrl-A and Ctrl-E, go to either end of a line; Ctrl-Left and Ctrl-Right, or Alt-B and Alt-F, move by a word; Ctrl-U and Ctrl-K delete to either end of the line and Ctrl-W the word before the cursor; Ctrl-L clears the screen.
+Tab completes the name being typed from everything the session has defined; where more than one name fits, it writes in as much as they share and lists them. Tab again offers them as a menu: Tab and the arrow keys move through it, Enter keeps the name chosen, and Escape puts back what was typed. Shift-Tab shows what the name at the cursor is. Home and End, or Ctrl-A and Ctrl-E, go to either end of a line; Ctrl-Left and Ctrl-Right, or Alt-B and Alt-F, move by a word; Ctrl-U and Ctrl-K delete to either end of the line and Ctrl-W the word before the cursor; Ctrl-L clears the screen.
 
 Ctrl-C while a submission is running interrupts it and brings the prompt back with the session intact. At the prompt, Ctrl-C sets aside what you have typed: it stays on the screen marked `^C`{:text}, a new prompt with the same number takes its place, and Up brings it back from history. Ctrl-D in an empty submission leaves.
 
@@ -158,6 +158,8 @@ A line starting with `:`{:text} is a command:
 | `:type EXPRESSION`{:text} | shows the type of an expression without running it |
 | `:complete TEXT`{:text} | lists what could follow some text |
 | `:hover TEXT`{:text} | shows what the end of some text names |
+| `:ref FILE`{:text} | references an assembly in every later submission |
+| `:nuget PACKAGE [VERSION]`{:text} | references a NuGet package and what it depends on, the latest stable release without a version |
 | `:save FILE`{:text} | writes the submissions that ran to the end to a file |
 | `:load FILE`{:text} | submits each part of a file `:save` wrote, in order |
 | `:reset`{:text} | starts a fresh session |
@@ -187,6 +189,16 @@ few
 ```
 
 It stops at the first submission that no longer runs to the end.
+
+A C# extension method is called as the static method it is, so a package's extensions are reached through their class:
+
+```plaintext
+1> :nuget Humanizer.Core 2.14.1
+restoring Humanizer.Core...
+referenced Humanizer
+1> Humanizer.StringHumanizeExtensions.humanize("some_long_identifier")
+some long identifier
+```
 
 ### how a session differs from a file
 
