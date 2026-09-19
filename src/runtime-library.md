@@ -365,38 +365,40 @@ Appends each element to a `StringBuilder`, separated by `separator`, or by `", "
 
 ### join
 
-Renders the elements into one string, separated by `separator`, or by `", "` when left off.
+Joins the elements into one string, separated by `separator`, or by `", "` when left off.
 
 <GhulExample name="pipes-ref-join-function" signature />
 
 ### render_elements
 
-Renders the elements in brackets, as `[1, 2, 3]`, whatever `to_string` the source's own type declares. It stops at 100 elements with `...`, so an unbounded pipe renders too. This is the text a pipe gives as its own `to_string` and in string interpolation.
+Writes the elements in brackets, as `[1, 2, 3]`, whatever `to_string` the source's own type declares. It stops at 100 elements with `...`, so an unbounded pipe is written too. This is the text a pipe gives as its own `to_string` and in string interpolation.
 
 <GhulExample name="pipes-ref-render_elements-function" signature />
 
 ## displaying values
 
-The runtime renders any value as text in two ways. `$(value)` gives the text a program shows its user: string interpolation uses it for any value whose type gives no text of its own, as [string interpolation](/language-basics#string-interpolation) describes. `inspect(value)` gives the detailed form a REPL or a debugging session wants: the same structure, with each string and character quoted wherever it appears inside a value. `$` needs no `use`, and `inspect` is in `Ghul`:
+The runtime formats any value as text in two ways. `$(value)` gives the text a program shows its user: string interpolation uses it for any value whose type gives no text of its own, as [string interpolation](/language-basics#string-interpolation) describes. `inspect(value)` gives the detailed form a REPL or a debugging session wants: the same structure, with each string and character quoted wherever it appears inside a value. `$` needs no `use`, and `inspect` is in `Ghul`:
 
 <GhulExample name="display-values" />
 
 At the top, a string or character is the whole answer, so both functions write it as itself. Inside a value, `inspect` quotes it and `$` does not.
 
-The runtime renders a value by these rules, in order:
+`$` and `inspect` write a value by these rules, in order:
 
 - `null` for an absent value, and `true` or `false` for a `bool`.
-- A type that implements `Displayable` renders itself, as described below.
-- A tuple renders as its parts in parentheses, and a map entry as `(key, value)`.
-- A type that declares its own `to_string` renders as that, even when it is also a sequence. The runtime's own pipes, and generators, are the exception: their `to_string` is a rendering of their elements.
-- A sequence, such as an array, a list or a pipe, renders as its elements in brackets.
-- A class, struct or union variant with no `to_string` of its own renders as its type and members, such as `POINT(x = 3, y = 4)`.
-- A value of a type from another language with no `to_string` of its own renders as its .NET type name. The runtime does not read its properties, because a property getter can run any code: reading a task's result waits for the task.
+- A type that implements `Displayable` writes itself, as described below.
+- A tuple is written as its parts in parentheses, and a map entry as `(key, value)`.
+- A type that declares its own `to_string` is written as that, even when it is also a sequence. The runtime's own pipes, and generators, are the exception: their `to_string` writes their elements.
+- A sequence, such as an array, a list or a pipe, is written as its elements in brackets.
+- A class, struct or union variant with no `to_string` of its own is written as its type and members, such as `POINT(x = 3, y = 4)`.
+- A value of a type from another language with no `to_string` of its own is written as its .NET type name. The runtime does not read its properties, because a property getter can run any code: reading a task's result waits for the task.
 
-A sequence stops after 100 elements and ends with `, ...]`, so an unbounded pipe renders too. A pipe that the limit stops part way through is rewound, as reading it to the end would have left it. A value that contains itself renders `<cycle>` where it recurs. The same value appearing in two places is not a cycle, and renders in full both times.
+A sequence stops after 100 elements and ends with `, ...]`, so an unbounded pipe is written too. A pipe that the limit stops part way through is rewound, as reading it to the end would have left it. A value that contains itself is written as `<cycle>` where it recurs. The same value appearing in two places is not a cycle, and is written in full both times.
 
-A type chooses how it is displayed by implementing `Displayable`. Its one method writes the value through a `DISPLAY_STATE`. Render each child value with `state.render(child)` rather than `$(child)`: the state carries the element limit and the values already being rendered, and a fresh call to `$` starts without them. `state.mode` says whether the rendering is for `$`, `DisplayMode.CLEAN`, or for `inspect`, `DisplayMode.DETAILED`:
+A type chooses how it is displayed by implementing `Displayable`. Its one method writes the value through a `DISPLAY_STATE`. Write each child value with `state.render(child)` rather than `$(child)`: the state carries the element limit and the values already being written, and a fresh call to `$` starts without them. `state.mode` says whether the text is for `$`, `DisplayMode.CLEAN`, or for `inspect`, `DisplayMode.DETAILED`:
 
 <GhulExample name="display-displayable" />
 
-A `DISPLAY_STATE` can also be created directly, with a mode and a different element limit, and read back with `to_string()` after rendering into it.
+A `DISPLAY_STATE` can also be created directly, with a mode and a different element limit, and read back with `to_string()` after writing into it.
+
+`Displayable` customises the text `$` and `inspect` produce for a value. `Renderable` offers other media for the same value, such as an image, which a host like a notebook can show in place of that text. Its `representations()` method gives each as a MIME type and its content, best first. The host chooses which MIME types it shows, and the text `$` writes is always the fallback. A host that shows output in a web page does not insert `text/html` or `image/svg+xml` from a value into its own document.
