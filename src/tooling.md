@@ -125,7 +125,7 @@ examples on this site: the dark set on a dark background and the light set
 on a light one. The session asks the terminal for its background colour
 and uses the dark colours when it can't find out.
 `ghul repl --theme dark`{:sh}, `--theme light`{:sh} or `--theme none`{:sh}
-chooses for it, and setting `NO_COLOR` turns colour off.
+chooses for it, and setting `NO_COLOR`{:text} turns colour off.
 
 Messages call the third submission `cell-3`{:text}. In code it is `cell3`,
 which is how a later submission reaches something the third one defined, as
