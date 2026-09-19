@@ -2,15 +2,15 @@ use IO.Std.write_line
 use Ghul
 
 // >>>
-class BADGE(label: string): Displayable is
+class SCORE(points: int): Displayable is
     display(state: DISPLAY_STATE) is
         state.append("[")
-        state.render(label)
-        state.append(if state.mode == DisplayMode.DETAILED then " (detailed)]" else "]" fi)
+        state.render(points)
+        state.append(if state.mode == DisplayMode.DETAILED then " points]" else "]" fi)
     si
 si
 
-write_line($(BADGE("new")))
-write_line(inspect(BADGE("new")))
-write_line($([BADGE("a"), BADGE("b")]))
+write_line($(SCORE(3)))
+write_line(inspect(SCORE(3)))
+write_line($([SCORE(1), SCORE(2)]))
 // <<<
