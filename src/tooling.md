@@ -56,52 +56,55 @@ input.
 
 ## the REPL
 
-`ghul repl`{:sh} starts an interactive session. Each line you type is
-compiled and run as soon as it is complete, and what it defines stays
-available to every later line. A line that leaves something open, such as a
-block with no closing keyword, waits for more with a `|`{:text} prompt. A
-submission that ends on a value shows the value:
+`ghul repl`{:sh} starts an interactive session. Each submission is compiled
+and run as soon as it is complete, and what it defines stays available to
+every later one. The prompt shows the number the next submission will take,
+and a line that doesn't end the submission is followed by a `|`{:text}
+prompt. A submission that ends on a value shows the value:
 
 ```plaintext
-> let total mut = 0
-> total = total + 5
-> total
+1> let total mut = 0
+ | total = total + 5
+ | total
 5
 ```
 
-An `if`, `case`, loop or definition written over several lines doesn't end
-the submission when it closes. The `|`{:text} prompt stays, and the next line
-joins the same submission. A one-line statement typed there ends the
-submission straight away and shows its value, as `names` does here:
+A line that finishes a `let`, an assignment or a definition doesn't end the
+submission, since those set something up for what follows. Nor does an `if`,
+`case`, loop or `try` written over several lines when it closes, or a line
+that leaves something open, such as a block with no closing keyword. A
+one-line expression, call or other statement ends it straight away, as
+`names` does here:
 
 ```plaintext
-> let names mut = LIST[string]()
-> names.add("first")
-> for name in ["second", "third"] do
-|     names.add(name)
-| od
-| names
-[first, second, third]
+2> let names mut = LIST[string]()
+ | names.add("first")
+3> for name in ["second", "third"] do
+ |     names.add(name)
+ | od
+ | names
+["first", "second", "third"]
 ```
 
-To end the submission on the construct itself, type a blank line or a line
-holding only `.`{:text}. A blank line shows no value, since a construct over
-several lines is usually there for what it does. A `.`{:text} line shows the
-value the construct ends on:
+To end the submission where it stands, type a blank line or a line holding
+only `.`{:text}. A blank line shows no value, since a construct over several
+lines is usually there for what it does. A `.`{:text} line shows the value
+the submission ends on:
 
 ```plaintext
-> if names.count > 2 then
-|     "several"
-| else
-|     "few"
-| fi
-| .
+4> if names.count > 2 then
+ |     "several"
+ | else
+ |     "few"
+ | fi
+ | .
 several
 ```
 
-When the session reads from a pipe or a file rather than a terminal, a
-construct over several lines ends the submission as soon as it closes, and a
-`.`{:text} line ends one too.
+A line ending in a `\`{:text} on its own keeps the submission open whatever
+it holds, and the `\`{:text} is dropped. When the session reads from a pipe
+or a file rather than a terminal, a construct over several lines ends the
+submission as soon as it closes, and a `.`{:text} line ends one too.
 
 The compiler's default imports (`use default`) are in force in every
 submission, and a `use` you type stays in force for the rest of the session.
@@ -109,11 +112,25 @@ submission, and a `use` you type stays in force for the rest of the session.
 name again replaces it for later submissions and can read the value it
 replaces, so `let x = x + 1` works.
 
-At a terminal the line can be edited as it is typed: the arrow keys move
-along it and bring back earlier lines, and Tab completes the name being
-typed from everything the session has defined. `:complete TEXT`{:text} lists
-what could follow some text, `:hover TEXT`{:text} shows what the end of it
-names, `:reset`{:text} starts a fresh session and `:quit`{:text} leaves.
+At a terminal the whole submission is edited in place, however many lines it
+has. Up and Down move between its lines, and past the first or last line
+bring back earlier submissions, including those of earlier sessions. Enter
+on the last line submits or waits for more as described above, and Enter on
+an earlier line starts a new line there. Alt-Enter submits from any line and
+shows the value the submission ends on. Tab completes the name being typed
+from everything the session has defined, and a block pasted in is taken as
+it is. Ctrl-C interrupts a running submission and brings the prompt back
+with the session intact.
+
+`:cells`{:text} lists the submissions so far, each with how it ended, and
+`:cells 3`{:text} shows the whole of the third. `:rerun 3`{:text} submits the
+third again as a new submission, and `:rerun 3..`{:text} submits it and then
+every later one that ran to the end, which brings everything built on a
+redefinition up to date. `:edit 3`{:text} brings the third back to change
+and submit as a new one. `:complete TEXT`{:text} lists what could follow
+some text, `:hover TEXT`{:text} shows what the end of it names,
+`:help`{:text} lists the commands, `:reset`{:text} starts a fresh session
+and `:quit`{:text} leaves.
 
 Each line starts indented four spaces further in after a line that opens a
 block, and a line starting with a closing word such as `fi`{:text} or
@@ -127,9 +144,9 @@ and uses the dark colours when it can't find out.
 `ghul repl --theme dark`{:sh}, `--theme light`{:sh} or `--theme none`{:sh}
 chooses for it, and setting `NO_COLOR`{:text} turns colour off.
 
-Messages call the third submission `cell-3`{:text}. In code it is `cell3`,
-which is how a later submission reaches something the third one defined, as
-in `cell3.x`. Each submission is compiled as a small library of its own, so a
+Messages call the third submission `cell-3`{:text}, the number its prompt showed. In code it
+is `cell3`, which is how a later submission reaches something the third one
+defined, as in `cell3.x`. Each submission is compiled as a small library of its own, so a
 name that begins with `_` stays private to the submission that defines it.
 
 The session keeps one compiler running for as long as it lasts, which is what
