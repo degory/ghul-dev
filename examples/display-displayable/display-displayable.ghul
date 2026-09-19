@@ -1,0 +1,16 @@
+use IO.Std.write_line
+use Ghul
+
+// >>>
+class BADGE(label: string): Displayable is
+    display(state: DISPLAY_STATE) is
+        state.append("[")
+        state.render(label)
+        state.append(if state.mode == DisplayMode.DETAILED then " (detailed)]" else "]" fi)
+    si
+si
+
+write_line($(BADGE("new")))
+write_line(inspect(BADGE("new")))
+write_line($([BADGE("a"), BADGE("b")]))
+// <<<
