@@ -33,6 +33,7 @@ export const SECTIONS = [
     text: 'guides',
     items: [
       { text: 'runtime library', link: '/runtime-library' },
+      { text: 'the ghul command', link: '/ghul-command' },
       { text: 'tooling', link: '/tooling' },
     ],
   },

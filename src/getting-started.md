@@ -18,6 +18,13 @@ Both repositories are configured as [dev containers](https://containers.dev), so
 
 To work locally you need the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) and an editor, and some ghūl code to start from - clone the scratchpad or the examples repository above, or start a project of your own from the [repository template](https://github.com/degory/ghul-repository-template). The compiler is pinned in each repository as a local .NET tool, so it arrives with the code: `dotnet tool restore`{:sh} fetches it.
 
+The quickest way to run ghūl locally needs no project at all. With the .NET SDK installed, the [`ghul`{:sh} command](/ghul-command) runs a single `.ghul`{:text} file directly and starts an interactive session:
+
+```sh
+dotnet tool install -g ghul.cli
+ghul repl
+```
+
 [Visual Studio Code](https://code.visualstudio.com) with the [ghūl language extension](https://marketplace.visualstudio.com/items?itemName=degory.ghul) gives you errors and warnings as you type, completion, hover, go to definition, rename and formatting. Any editor that can install VS Code extensions gets the same support; other editors can drive the underlying language server directly - see [other editors](/tooling.html#other-editors) on the tooling page.
 
 ::: info the first few seconds

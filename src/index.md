@@ -15,6 +15,7 @@ Every example on this site is a whole program. Press **edit & run**, change it, 
 
 - [Rosetta Code](/rosetta/) - several hundred tasks solved in ghūl, from one-liners to graphics and games, searchable and nearly all runnable here. The page opens on one picked at random.
 - [the tour](/expression-oriented-programming) - the language a topic at a time, every example editable.
+- [the ghul command](/ghul-command) - run a `.ghul`{:text} file directly, or type ghūl into an interactive session or a notebook. No project needed.
 - [getting started](/getting-started) - ghūl on your own machine. A ghūl repository pins the compiler as a local .NET tool, so the compiler arrives with the code.
 
 ## what is distinctive
