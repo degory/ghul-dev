@@ -8,7 +8,10 @@ use Ghul.Pipes.Pipe
 // >>>
 count[T](source: Iterable[T]) -> int pure
 
-count[T..](source: Iterable[T], predicate: T.. -> bool pure) -> int pure
+count[T](
+    source: Iterable[T],
+    predicate: (T) -> bool pure
+) -> int pure
 // <<<
 
 entry() is si
