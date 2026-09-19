@@ -367,3 +367,9 @@ Appends each element to a `StringBuilder`, separated by `separator`, or by `", "
 Renders the elements into one string, separated by `separator`, or by `", "` when left off.
 
 <GhulExample name="pipes-ref-join-function" signature />
+
+### render_elements
+
+Renders the elements in brackets, as `[1, 2, 3]`, whatever `to_string` the source's own type declares. It stops at 100 elements with `...`, so an unbounded pipe renders too. This is the text a pipe gives as its own `to_string` and in string interpolation.
+
+<GhulExample name="pipes-ref-render_elements-function" signature />

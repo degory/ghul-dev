@@ -6,7 +6,7 @@
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [3],
-  "output": "counting down from 5: 5, 4, 3, 2, 1\nfirst 10 fibonacci numbers: 1, 2, 3, 5, 8, 13, 21, 34, 55, 89\nfirst 10 factorial numbers: 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800\nchars of hello: h, e, l, l, o\nfibonacci 0 is 1\nfactorial 0 is 2\nfibonacci 1 is 2\nfactorial 1 is 6\nfibonacci 2 is 3\nfactorial 2 is 24\nfibonacci 3 is 5\nfactorial 3 is 120\nfibonacci 4 is 8\nfactorial 4 is 720\nfibonacci 5 is 13\nfactorial 5 is 5040\nfibonacci 6 is 21\nfactorial 6 is 40320\nfibonacci 7 is 34\nfactorial 7 is 362880\nfibonacci 8 is 55\nfactorial 8 is 3628800\nfibonacci 9 is 89\nfactorial 9 is 39916800\n",
+  "output": "counting down from 5: [5, 4, 3, 2, 1]\nfirst 10 fibonacci numbers: [1, 2, 3, 5, 8, 13, 21, 34, 55, 89]\nfirst 10 factorial numbers: [2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800]\nchars of hello: [h, e, l, l, o]\nfibonacci 0 is 1\nfactorial 0 is 2\nfibonacci 1 is 2\nfactorial 1 is 6\nfibonacci 2 is 3\nfactorial 2 is 24\nfibonacci 3 is 5\nfactorial 3 is 120\nfibonacci 4 is 8\nfactorial 4 is 720\nfibonacci 5 is 13\nfactorial 5 is 5040\nfibonacci 6 is 21\nfactorial 6 is 40320\nfibonacci 7 is 34\nfactorial 7 is 362880\nfibonacci 8 is 55\nfactorial 8 is 3628800\nfibonacci 9 is 89\nfactorial 9 is 39916800\n",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 10, "endLine": 1, "endColumn": 14, "text": "namespace Ghul.Pipes", "signature": "namespace Ghul.Pipes", "kindLabel": "" },

@@ -6,7 +6,7 @@
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
-  "output": "with get_hash_code: True\nwithout get_hash_code: False\n",
+  "output": "with get_hash_code: true\nwithout get_hash_code: false\n",
   "diagnostics": [
     { "startLine": 8, "startColumn": 7, "endLine": 8, "endColumn": 14, "severity": "warning", "message": "[equality-without-hash] NO_HASH defines =~ but no get_hash_code, so .NET comparisons will not use the operator" }
   ],

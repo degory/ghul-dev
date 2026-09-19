@@ -6,7 +6,7 @@
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
-  "output": "first pass: 1, 2, 3\nsecond pass: 1, 2, 3\nelements pulled from the source: 3\n",
+  "output": "first pass: [1, 2, 3]\nsecond pass: [1, 2, 3]\nelements pulled from the source: 3\n",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "pulled: int", "signature": "pulled: int", "kindLabel": "global variable" },

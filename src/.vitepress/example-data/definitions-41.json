@@ -6,7 +6,7 @@
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
-  "output": "red: True\npresent: True\nvalue: 42\n",
+  "output": "red: true\npresent: true\nvalue: 42\n",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "c: Color.RED", "signature": "c: Color.RED", "kindLabel": "global variable" },

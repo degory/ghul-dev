@@ -1,0 +1,7 @@
+use Collections.Iterable
+
+// >>>
+render_elements[T](source: Iterable[T]) -> string pure
+// <<<
+
+entry() is si

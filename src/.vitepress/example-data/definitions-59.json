@@ -6,7 +6,7 @@
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
-  "output": "READ, WRITE\nTrue\nFalse\n",
+  "output": "READ, WRITE\ntrue\nfalse\n",
   "diagnostics": [],
   "hovers": [
     { "startLine": 2, "startColumn": 6, "endLine": 2, "endColumn": 11, "text": "enum Access", "signature": "enum Access", "kindLabel": "enum" },

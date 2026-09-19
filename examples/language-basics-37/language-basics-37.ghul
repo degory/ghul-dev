@@ -1,0 +1,14 @@
+use IO.Std.write_line
+
+// >>>
+struct POINT(x: int public, y: int public)
+
+let name = "world"
+let nickname: string? = null
+let numbers = [1, 2, 3]
+
+write_line("hello {name}")
+write_line("{true} {nickname}")
+write_line("{numbers} {(1, "one")} {POINT(3, 4)}")
+write_line("[{3.14159:F2}] [{42,6}]")
+// <<<
