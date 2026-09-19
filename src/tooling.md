@@ -71,8 +71,8 @@ submission that ends on a value shows the value:
 
 An `if`, `case`, loop or definition written over several lines doesn't end
 the submission when it closes. The `|`{:text} prompt stays, and the next line
-joins the same submission, so a statement typed after the construct runs
-with it and shows its own value:
+joins the same submission. A one-line statement typed there ends the
+submission straight away and shows its value, as `names` does here:
 
 ```plaintext
 > let names mut = LIST[string]()
@@ -84,9 +84,10 @@ with it and shows its own value:
 [first, second, third]
 ```
 
-A blank line submits what has been typed without showing a value, since a
-construct over several lines is usually there for what it does. A line
-holding only `.`{:text} submits it and shows the value it ends on:
+To end the submission on the construct itself, type a blank line or a line
+holding only `.`{:text}. A blank line shows no value, since a construct over
+several lines is usually there for what it does. A `.`{:text} line shows the
+value the construct ends on:
 
 ```plaintext
 > if names.count > 2 then
