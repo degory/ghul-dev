@@ -1,6 +1,6 @@
 # scripts, the REPL and notebooks
 
-The `ghul`{:sh} command runs a ghūl source file directly, with no project file, and starts an interactive session that compiles and runs code as you type it. The [online REPL](https://ghul.dev/repl/) runs the same kind of session in the browser, with nothing to install.
+The `ghul`{:sh} command runs a ghūl source file directly, with no project file, or starts an interactive session that compiles and runs code as you type it. The [online REPL](https://ghul.dev/repl/) runs the same kind of session in the browser, with nothing to install.
 
 A session at a terminal:
 
