@@ -6,7 +6,7 @@
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
-  "output": "closed: BOX, generic: True\nopen: BOX, definition: True\nsame definition: True\n",
+  "output": "closed: BOX, generic: true\nopen: BOX, definition: true\nsame definition: true\n",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 10, "text": "closed: System.Type", "signature": "closed: System.Type", "kindLabel": "global variable" },

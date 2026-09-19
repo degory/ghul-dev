@@ -6,7 +6,7 @@
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],
-  "output": "True\n",
+  "output": "true\n",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 11, "text": "union Light", "signature": "union Light", "kindLabel": "union" },
