@@ -140,7 +140,7 @@ At a terminal the whole submission is edited in place, however many lines it has
 
 Tab completes the name being typed from everything the session has defined; where more than one name fits, it lists them. Shift-Tab shows what the name at the cursor is. Home and End, or Ctrl-A and Ctrl-E, go to either end of a line; Ctrl-Left and Ctrl-Right, or Alt-B and Alt-F, move by a word; Ctrl-U and Ctrl-K delete to either end of the line and Ctrl-W the word before the cursor; Ctrl-L clears the screen.
 
-Ctrl-C while a submission is running interrupts it and brings the prompt back with the session intact. At the prompt it does nothing. Ctrl-D in an empty submission leaves.
+Ctrl-C while a submission is running interrupts it and brings the prompt back with the session intact. At the prompt, Ctrl-C sets aside what you have typed: it stays on the screen marked `^C`{:text}, a new prompt with the same number takes its place, and Up brings it back from history. Ctrl-D in an empty submission leaves.
 
 What you type is coloured as you type it, in the same colours as the examples on this site, and so is the line an error points at. `ghul repl --theme dark`{:sh}, `--theme light`{:sh} or `--theme none`{:sh} chooses the colours, and setting `NO_COLOR`{:text} turns them off.
 
