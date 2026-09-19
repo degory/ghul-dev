@@ -25,15 +25,15 @@ A ghūl project can reference NuGet packages, produce libraries or executables, 
 
 ## running a script
 
-The [`ghul`{:sh} command](/ghul-command) runs a single `.ghul`{:text} file with no project file, including as an executable with a `#!`{:text} line on Linux. See [running a script](/ghul-command#running-a-script).
+The `ghul`{:sh} command runs a single `.ghul`{:text} file with no project file, including as an executable with a `#!`{:text} line on Linux. See [scripts, the REPL and notebooks](/scripts-and-repl#running-a-script).
 
 ## the REPL
 
-`ghul repl`{:sh} starts an interactive session that compiles and runs each submission as you type it. See [the REPL](/ghul-command#the-repl).
+`ghul repl`{:sh} starts an interactive session that compiles and runs each submission as you type it. See [the REPL](/scripts-and-repl#the-repl).
 
 ## notebooks
 
-The [`ghul.jupyter`{:text}](https://www.nuget.org/packages/ghul.jupyter) tool is a Jupyter kernel for ghūl, which VS Code can run notebooks with. See [notebooks](/ghul-command#notebooks).
+The [`ghul.jupyter`{:text}](https://www.nuget.org/packages/ghul.jupyter) tool is a Jupyter kernel for ghūl, which VS Code can run notebooks with. See [notebooks](/scripts-and-repl#notebooks).
 
 ## diagnostics
 

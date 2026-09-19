@@ -63,7 +63,7 @@ A file can begin with a `#!` line naming an interpreter, as a shell script does.
 
 <GhulExample name="syntax-4" />
 
-With the [`ghul`{:sh} command](/ghul-command#running-a-script) installed, such a file can be marked executable and run directly.
+With the [`ghul`{:sh} command](/scripts-and-repl#running-a-script) installed, such a file can be marked executable and run directly.
 
 ### file-level pragmas
 
