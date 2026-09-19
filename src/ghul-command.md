@@ -20,12 +20,12 @@ dotnet tool install -g ghul.cli
 
 .NET installs global tools in `~/.dotnet/tools`{:text}, which has to be on your `PATH`{:text}; the first `dotnet tool install -g`{:sh} says how to add it if it isn't.
 
-`ghul`{:sh} installs its own copy of the compiler the first time it needs one. `ghul install-compiler`{:sh} installs it ahead of time, or updates it to the latest release; `ghul install-compiler 60.1.0`{:sh} installs that version instead. `ghul version`{:sh} shows both versions:
+`ghul`{:sh} installs its own copy of the compiler the first time it needs one. `ghul install-compiler`{:sh} installs it ahead of time, or updates it to the latest release; `ghul install-compiler 60.2.0`{:sh} installs that version instead. `ghul version`{:sh} shows both versions:
 
 ```plaintext
 $ ghul version
-ghul 0.26.1
-ghul.compiler 60.1.0
+ghul 0.27.1
+ghul.compiler 60.2.0
 ```
 
 `dotnet tool update -g ghul.cli`{:sh} updates `ghul`{:sh} itself.
@@ -36,8 +36,6 @@ A script is one `.ghul`{:text} file of [top-level statements](/definitions.html#
 
 ```ghul
 #!/usr/bin/env ghul
-
-use default
 
 let name = if args.count > 0 then args[0] else "world" fi
 
@@ -54,7 +52,7 @@ hello, ada
 your shell is /bin/bash
 ```
 
-A script gets no imports it does not ask for, so `use default` is what makes `write_line`, the pipes and the collections available. A file with an `entry` function instead of top-level statements runs too, and an `entry` returning an `int` sets the exit status.
+A script has the compiler's default imports, as the REPL does, so `write_line`, the pipes and the collections need no `use`. A script that declares its own `namespace` chooses its own imports instead. A file with an `entry` function instead of top-level statements runs too, and an `entry` returning an `int` sets the exit status.
 
 On Linux, a script whose first line is `#!/usr/bin/env ghul`{:text} runs like any other executable once it is marked as one:
 
