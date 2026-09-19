@@ -164,6 +164,15 @@ In a string or character literal, `\u` followed by exactly four hex digits write
 
 A run of octal digits after a `\` is the older way to write a character code. It still works, but the compiler reports a `deprecated-octal-escape` warning. Write `\u` instead.
 
+## string interpolation
+A string literal can interpolate expressions: `{` starts an expression and `}` ends it, and the value of the expression is written into the string in its place. There is no `+` operator on `string`, so interpolation is also how strings are joined.
+
+How a value is written depends on its type. A string, a number or an enum member is written as .NET writes it, and so is any value whose type declares its own `to_string`. A `bool` is written `true` or `false`. An optional value is written as the value it holds, or as `null` when it holds nothing. Any other value, such as an array, a list, a tuple, or a struct or class with no `to_string` of its own, is written by the runtime's `$` function: a sequence as its elements in brackets, a tuple as its parts, and a record as its type and members:
+
+<GhulExample name="language-basics-37" />
+
+A format or an alignment after the expression, as in `{value:F2}` or `{value,6}`, formats the value the way .NET does. To change how the values of a type are written, give the type a `to_string`.
+
 ## operators and expressions
 ### arithmetic operators
 <GhulExample name="language-basics-24" />

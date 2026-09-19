@@ -6,7 +6,7 @@
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
-  "output": "squares: 1, 4, 9, 16, 25\nevens: 0, 2, 4, 6\ndashes: -----\nseen: 3 values, first False\n",
+  "output": "squares: [1, 4, 9, 16, 25]\nevens: [0, 2, 4, 6]\ndashes: -----\nseen: 3 values, first false\n",
   "diagnostics": [],
   "hovers": [
     { "startLine": 2, "startColumn": 30, "endLine": 2, "endColumn": 30, "text": "n: int", "signature": "n: int", "kindLabel": "local argument" },

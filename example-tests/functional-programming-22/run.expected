@@ -1,7 +1,7 @@
-counting down from 5: 5, 4, 3, 2, 1
-first 10 fibonacci numbers: 1, 2, 3, 5, 8, 13, 21, 34, 55, 89
-first 10 factorial numbers: 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800
-chars of hello: h, e, l, l, o
+counting down from 5: [5, 4, 3, 2, 1]
+first 10 fibonacci numbers: [1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+first 10 factorial numbers: [2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800]
+chars of hello: [h, e, l, l, o]
 fibonacci 0 is 1
 factorial 0 is 2
 fibonacci 1 is 2

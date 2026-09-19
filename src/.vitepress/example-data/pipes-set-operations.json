@@ -6,7 +6,7 @@
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
-  "output": "distinct:       1, 2, 3, 4\nunion_with:     1, 2, 3, 4, 5\nintersect_with: 3, 4\nexcept:         1, 2\n",
+  "output": "distinct:       [1, 2, 3, 4]\nunion_with:     [1, 2, 3, 4, 5]\nintersect_with: [3, 4]\nexcept:         [1, 2]\n",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 8, "text": "left: int[]", "signature": "left: int[]", "kindLabel": "global variable" },

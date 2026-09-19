@@ -1,2 +1,2 @@
-with get_hash_code: True
-without get_hash_code: False
+with get_hash_code: true
+without get_hash_code: false

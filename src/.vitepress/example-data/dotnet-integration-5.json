@@ -6,7 +6,7 @@
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
-  "output": "sorted: 1.9, 2.1\n1.0 < 1.1: True\n",
+  "output": "sorted: 1.9, 2.1\n1.0 < 1.1: true\n",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 7, "endLine": 1, "endColumn": 13, "text": "class VERSION(major: int, minor: int)", "signature": "class VERSION(major: int, minor: int)", "kindLabel": "class" },

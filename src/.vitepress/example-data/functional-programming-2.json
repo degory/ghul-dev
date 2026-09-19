@@ -6,7 +6,7 @@
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
-  "output": "doubled: 2, 4, 6, 8, 10\nevens: 2, 4\nsum: 15\n",
+  "output": "doubled: [2, 4, 6, 8, 10]\nevens: [2, 4]\nsum: 15\n",
   "diagnostics": [],
   "hovers": [
     { "startLine": 2, "startColumn": 38, "endLine": 2, "endColumn": 38, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },

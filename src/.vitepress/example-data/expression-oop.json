@@ -97,10 +97,10 @@
     { "startLine": 41, "startColumn": 18, "endLine": 41, "endColumn": 23, "text": "Renderable.render() -> string", "signature": "Renderable.render() -> string", "kindLabel": "pure abstract method" }
   ],
   "inlayHints": [
-    { "line": 5, "column": 5, "label": "◆", "detail": "render\n\n- ◆ abstract", "code": "definition-virtuality" },
+    { "line": 5, "column": 5, "label": "◆▼", "detail": "render\n\n- ◆ abstract\n- ▼ overridden by `Expr.render() -> string`", "code": "definition-virtuality" },
     { "line": 4, "column": 7, "label": "▼", "detail": "Renderable\n\n- ▼ implemented by `Expr`", "code": "definition-virtuality" },
     { "line": 12, "column": 5, "label": "◆▼", "detail": "eval\n\n- ◆ abstract\n- ▼ overridden by `NUM.eval() -> int`, `ADD.eval() -> int`, `MUL.eval() -> int`", "code": "definition-virtuality" },
-    { "line": 13, "column": 5, "label": "◆▼", "detail": "render\n\n- ◆ abstract\n- ▼ overridden by `NUM.render() -> string`, `ADD.render() -> string`, `MUL.render() -> string`", "code": "definition-virtuality" },
+    { "line": 13, "column": 5, "label": "◆▲▼", "detail": "render\n\n- ◆ abstract\n- ▲ overrides `Renderable.render() -> string`\n- ▼ overridden by `NUM.render() -> string`, `ADD.render() -> string`, `MUL.render() -> string`", "code": "definition-virtuality" },
     { "line": 11, "column": 7, "label": "◆▼", "detail": "Expr\n\n- ◆ abstract — inferred from a body-less method, not written\n- ▼ extended by `NUM`, `ADD`, `MUL`", "code": "definition-virtuality" },
     { "line": 17, "column": 5, "label": "▲", "detail": "eval\n\n- ▲ overrides `Expr.eval() -> int`", "code": "definition-virtuality" },
     { "line": 18, "column": 5, "label": "▲", "detail": "render\n\n- ▲ overrides `Expr.render() -> string`", "code": "definition-virtuality" },

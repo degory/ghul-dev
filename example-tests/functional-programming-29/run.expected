@@ -1,4 +1,4 @@
-squares: 1, 4, 9, 16, 25
-evens: 0, 2, 4, 6
+squares: [1, 4, 9, 16, 25]
+evens: [0, 2, 4, 6]
 dashes: -----
-seen: 3 values, first False
+seen: 3 values, first false

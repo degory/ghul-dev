@@ -6,7 +6,7 @@
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
-  "output": "first 10 fibonacci numbers: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34\nfirst 10 factorial numbers: 1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880\nfirst 10 even fibonacci numbers: 0, 2, 8, 34, 144, 610, 2584, 10946, 46368, 196418\nfibonacci 0 is 0\nfactorial 0 is 1\nfibonacci 1 is 1\nfactorial 1 is 1\nfibonacci 2 is 1\nfactorial 2 is 2\nfibonacci 3 is 2\nfactorial 3 is 6\nfibonacci 4 is 3\nfactorial 4 is 24\nfibonacci 5 is 5\nfactorial 5 is 120\nfibonacci 6 is 8\nfactorial 6 is 720\nfibonacci 7 is 13\nfactorial 7 is 5040\nfibonacci 8 is 21\nfactorial 8 is 40320\nfibonacci 9 is 34\nfactorial 9 is 362880\n",
+  "output": "first 10 fibonacci numbers: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]\nfirst 10 factorial numbers: [1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880]\nfirst 10 even fibonacci numbers: [0, 2, 8, 34, 144, 610, 2584, 10946, 46368, 196418]\nfibonacci 0 is 0\nfactorial 0 is 1\nfibonacci 1 is 1\nfactorial 1 is 1\nfibonacci 2 is 1\nfactorial 2 is 2\nfibonacci 3 is 2\nfactorial 3 is 6\nfibonacci 4 is 3\nfactorial 4 is 24\nfibonacci 5 is 5\nfactorial 5 is 120\nfibonacci 6 is 8\nfactorial 6 is 720\nfibonacci 7 is 13\nfactorial 7 is 5040\nfibonacci 8 is 21\nfactorial 8 is 40320\nfibonacci 9 is 34\nfactorial 9 is 362880\n",
   "diagnostics": [],
   "hovers": [
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 21, "text": "IO.Std.write_line(...)", "signature": "IO.Std.write_line(...)", "kindLabel": "function group" },
