@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, shallowRef, watch, onMounted } from 'vue'
 import GhulExample from './GhulExample.vue'
+import { countEvent } from '../events'
 import { tokenise } from '../rosetta-highlight'
 import { shownSlug, shownFilter, showAt, replaceAt } from '../rosetta-route'
 import {
@@ -116,7 +117,13 @@ watch([() => shownSlug.value, shown], ([slug, task], previous) => {
 
   document.title = `${task?.title ?? 'Rosetta Code'} | ghūl programming language`
 
-  if (slug !== previous?.[0]) window.goatcounter?.count?.()
+  if (slug !== previous?.[0]) {
+    window.goatcounter?.count?.()
+
+    // The task as well as the pageview: every task answers from this one page,
+    // and the slug is the only thing that says which one a reader was shown.
+    if (slug) countEvent(`rosetta-open/${slug}`, 'rosetta task opened')
+  }
 }, { immediate: true })
 
 // --- choosing ----------------------------------------------------------------------------------

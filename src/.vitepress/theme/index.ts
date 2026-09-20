@@ -6,6 +6,7 @@ import GhulExampleSwitcher from './components/GhulExampleSwitcher.vue'
 import RosettaExplorer from './components/RosettaExplorer.vue'
 import { installRosettaRouting } from './rosetta-route'
 import { refreshPackageVersions } from './package-versions'
+import { countOutboundLinks } from './events'
 import './style.css'
 
 export default {
@@ -14,6 +15,11 @@ export default {
     const route = useRoute()
 
     onMounted(refreshPackageVersions)
+
+    // One listener for the whole site: an outward link in Markdown has nowhere
+    // of its own to hang a handler, and client-side navigation keeps this page
+    // alive across every route.
+    onMounted(countOutboundLinks)
     watch(() => route.path, () => nextTick(refreshPackageVersions))
 
     // In-site navigation is client-side and the counter only records a
