@@ -5,6 +5,7 @@ import {
   PLAYGROUND_ORIGIN, PLAYGROUND_BASE, CHANNEL, playgroundAvailable, currentTheme, watchTheme,
   editingExample, retainedEdit, retainEdit
 } from '../playground'
+import { countEvent } from '../events'
 
 // Renders a verified ghūl example from its generated artifact: the visible
 // (sliced, de-indented) code, syntax-coloured and with VSCE-style hover
@@ -252,11 +253,16 @@ function onInlayLeave() {
 // the page is. Silent and optional by design - `count` is absent whenever the
 // analytics script did not load, which includes every local build.
 function record(action) {
-  window.goatcounter?.count?.({
-    path: `example-${action}/${props.name}`,
-    title: `example ${action}`,
-    event: true,
-  })
+  countEvent(`example-${action}/${props.name}`, `example ${action}`)
+}
+
+// How the run ended, one event per run, named by outcome rather than by example:
+// which example was run is already the run event's business, and a path per
+// example per outcome would multiply the two for nothing.
+function recordResult(state, detail) {
+  if (state === 'done') countEvent(`example-result/${detail?.threw ? 'threw' : 'ok'}`, 'example result')
+  else if (state === 'failed') countEvent(`example-result/${detail?.timedOut ? 'timeout' : detail?.tooBig ? 'too-big' : 'compile-error'}`, 'example result')
+  else if (state === 'error') countEvent('example-result/error', 'example result')
 }
 
 const copied = ref(false)
@@ -472,6 +478,8 @@ function onFrameMessage(event) {
   }
 
   if (message.type === 'status') {
+    recordResult(message.state, message.detail)
+
     runState.value = message.state
     if (message.state !== 'running') inputWanted.value = false
     if (message.state === 'done' || message.state === 'failed' || message.state === 'error') {
