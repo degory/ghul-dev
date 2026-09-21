@@ -9,7 +9,7 @@ use Ghul.Pipes.Pipe
 find[T](
     source: Iterable[T],
     predicate: (T) -> bool pure
-) -> Ghul.MAYBE[T] pure
+) -> T? pure
 // <<<
 
 entry() is si

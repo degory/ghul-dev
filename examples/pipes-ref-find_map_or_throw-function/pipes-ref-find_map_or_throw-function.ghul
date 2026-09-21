@@ -8,7 +8,7 @@ use Ghul.Pipes.Pipe
 // >>>
 find_map_or_throw[T,U](
     source: Iterable[T],
-    mapper: (T) -> Ghul.MAYBE[U] pure
+    mapper: (T) -> U? pure
 ) -> U pure
 // <<<
 

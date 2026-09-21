@@ -6,7 +6,7 @@ use Ghul.Pipes.INDEXED_VALUE
 use Ghul.Pipes.Pipe
 
 // >>>
-first[T](source: Iterable[T]) -> Ghul.MAYBE[T] pure
+first[T](source: Iterable[T]) -> T? pure
 // <<<
 
 entry() is si

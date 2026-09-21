@@ -1,23 +1,22 @@
 {
   "name": "pipes-ref-max-function",
   "snippet": false,
-  "code": "max[T: Ghul.Comparable[T]](\n    values: Iterable[T]\n) -> Ghul.MAYBE[T] pure",
-  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\nmax[T: Ghul.Comparable[T]](\n    values: Iterable[T]\n) -> Ghul.MAYBE[T] pure\n\nentry() is si\n",
+  "code": "max[T: Ghul.Comparable[T]](\n    values: Iterable[T]\n) -> T? pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\nmax[T: Ghul.Comparable[T]](\n    values: Iterable[T]\n) -> T? pure\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 3, "text": "max[T](values: Iterable[T]) -> Ghul.MAYBE[T]", "signature": "max[T](values: Iterable[T]) -> Ghul.MAYBE[T]", "kindLabel": "pure global function" },
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 3, "text": "max[T](values: Iterable[T]) -> T?", "signature": "max[T](values: Iterable[T]) -> T?", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 5, "endLine": 1, "endColumn": 5, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 24, "endLine": 1, "endColumn": 24, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 13, "endLine": 1, "endColumn": 22, "text": "trait Ghul.Comparable[T]", "signature": "trait Ghul.Comparable[T]", "kindLabel": "trait" },
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "text": "values: Iterable[T]", "signature": "values: Iterable[T]", "kindLabel": "local argument" },
     { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 22, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 20, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
-    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 17, "text": "T", "signature": "T", "kindLabel": "type variable" },
-    { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 15, "text": "struct Ghul.MAYBE[T]", "signature": "struct Ghul.MAYBE[T]", "kindLabel": "struct" }
+    { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "text": "T", "signature": "T", "kindLabel": "type variable" }
   ],
   "inlayHints": [
     { "line": 1, "column": 1, "label": "◆", "detail": "max\n\n- ◆ abstract", "code": "definition-virtuality" }
@@ -30,7 +29,6 @@
     { "startLine": 2, "startColumn": 5, "endLine": 2, "endColumn": 10, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 2, "startColumn": 13, "endLine": 2, "endColumn": 20, "tokenType": "interface" },
     { "startLine": 2, "startColumn": 22, "endLine": 2, "endColumn": 22, "tokenType": "typeParameter" },
-    { "startLine": 3, "startColumn": 11, "endLine": 3, "endColumn": 15, "tokenType": "struct" },
-    { "startLine": 3, "startColumn": 17, "endLine": 3, "endColumn": 17, "tokenType": "typeParameter" }
+    { "startLine": 3, "startColumn": 6, "endLine": 3, "endColumn": 6, "tokenType": "typeParameter" }
   ]
 }

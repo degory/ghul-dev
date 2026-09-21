@@ -1,5 +1,4 @@
 use IO.Std.write_line
-use Ghul.MAYBE
 use Ghul.Pipes
 
 // >>>
@@ -16,8 +15,8 @@ write_line("only:      {["solo"] |> only()}")
 
 // a mapper that gives a result only for words longer than four
 // characters
-shout(w: string) -> MAYBE[string] pure =>
-    if w.length > 4 then MAYBE[string](w.to_upper()) else MAYBE[string]() fi
+shout(w: string) -> string? pure =>
+    if w.length > 4 then w.to_upper() else null fi
 
 // find_map keeps mapping until one answers; first_map maps the
 // first element and gives up when that one declines

@@ -59,9 +59,8 @@ function you pass only reads, and writes nothing to the heap. Most anonymous
 functions satisfy it without any thought; see [type narrowing](/type-narrowing.html#calls-purity-and-stable)
 for what the compiler does with the guarantee.
 
-`Ghul.MAYBE[T]` is an [optional type](/optional-types.html#unconstrained-generic-types): it holds a `T` or
-holds nothing. Combinators that might not find anything say so in their return type, and `??`,
-`!` and `if let` read the value out.
+A combinator that might not find anything returns `T?`, an [optional type](/optional-types.html#unconstrained-generic-types):
+it holds a `T` or holds nothing, and `??`, `!` and `if let` read the value out.
 
 ## making a pipe
 
@@ -215,7 +214,7 @@ or consuming the sequence as a whole.
 
 The searching combinators come in pairs. `find`-style ones take a predicate or
 a mapper and scan; `first`-style ones look only at the leading element. Each has a
-variant returning `MAYBE[T]` and one that throws instead:
+variant returning `T?` and one that throws instead:
 
 <GhulExample name="pipes-searching" />
 
@@ -286,6 +285,18 @@ The single element the source holds, throwing when it holds none or more than on
 The first form counts every element. The second counts the elements the predicate accepts: `numbers |> count(n => n % 2 == 1)`.
 
 <GhulExample name="pipes-ref-count-function" signature />
+
+### sum
+
+Every element added together. An empty source sums to zero.
+
+<GhulExample name="pipes-ref-sum-function" signature />
+
+### product
+
+Every element multiplied together. An empty source gives one.
+
+<GhulExample name="pipes-ref-product-function" signature />
 
 ### min
 
