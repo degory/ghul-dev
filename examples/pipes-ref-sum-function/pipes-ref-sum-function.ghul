@@ -4,12 +4,12 @@ use Collections.MAP
 use Collections.SET
 use Ghul.Pipes.INDEXED_VALUE
 use Ghul.Pipes.Pipe
+use System.Numerics.INumber
 
 // >>>
-first_map[T,U](
-    source: Iterable[T],
-    mapper: (T) -> U? pure
-) -> U? pure
+sum[T: INumber[T]](
+    source: Iterable[T]
+) -> T pure
 // <<<
 
 entry() is si

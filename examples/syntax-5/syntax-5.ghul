@@ -3,5 +3,5 @@ use default
 
 let totals = LIST[int]([1, 2, 3, 4, 5, 6])
 
-write_line("{totals |> filter(x => x % 2 == 0) |> reduce(0, (a, b) => a + b)}")
+write_line("{totals |> filter(x => x % 2 == 0) |> sum()}")
 // <<<

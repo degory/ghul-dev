@@ -8,7 +8,7 @@ use Ghul.Pipes.Pipe
 // >>>
 max[T: Ghul.Comparable[T]](
     values: Iterable[T]
-) -> Ghul.MAYBE[T] pure
+) -> T? pure
 // <<<
 
 entry() is si

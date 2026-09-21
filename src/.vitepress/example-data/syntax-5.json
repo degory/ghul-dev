@@ -1,8 +1,8 @@
 {
   "name": "syntax-5",
   "snippet": false,
-  "code": "use default\n\nlet totals = LIST[int]([1, 2, 3, 4, 5, 6])\n\nwrite_line(\"{totals |> filter(x => x % 2 == 0) |> reduce(0, (a, b) => a + b)}\")",
-  "fullSource": "use default\n\nlet totals = LIST[int]([1, 2, 3, 4, 5, 6])\n\nwrite_line(\"{totals |> filter(x => x % 2 == 0) |> reduce(0, (a, b) => a + b)}\")\n",
+  "code": "use default\n\nlet totals = LIST[int]([1, 2, 3, 4, 5, 6])\n\nwrite_line(\"{totals |> filter(x => x % 2 == 0) |> sum()}\")",
+  "fullSource": "use default\n\nlet totals = LIST[int]([1, 2, 3, 4, 5, 6])\n\nwrite_line(\"{totals |> filter(x => x % 2 == 0) |> sum()}\")\n",
   "hiddenBefore": false,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],
@@ -13,18 +13,13 @@
     { "startLine": 3, "startColumn": 19, "endLine": 3, "endColumn": 21, "text": "struct int", "signature": "struct int", "kindLabel": "struct" },
     { "startLine": 3, "startColumn": 14, "endLine": 3, "endColumn": 17, "text": "LIST[int].init(collection: Iterable[int])", "signature": "LIST[int].init(collection: Iterable[int])", "kindLabel": "constructor" },
     { "startLine": 5, "startColumn": 31, "endLine": 5, "endColumn": 31, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
-    { "startLine": 5, "startColumn": 62, "endLine": 5, "endColumn": 62, "text": "a: int", "signature": "a: int", "kindLabel": "local argument" },
-    { "startLine": 5, "startColumn": 65, "endLine": 5, "endColumn": 65, "text": "b: int", "signature": "b: int", "kindLabel": "local argument" },
     { "startLine": 5, "startColumn": 1, "endLine": 5, "endColumn": 10, "text": "IO.Std.write_line(value: string?) -> void", "signature": "IO.Std.write_line(value: string?) -> void", "kindLabel": "pure class method" },
-    { "startLine": 5, "startColumn": 51, "endLine": 5, "endColumn": 56, "text": "Ghul.Pipes.reduce[int,int](\n    source: Iterable[int],\n    seed: int,\n    accumulator: (int, int) -> int pure\n) -> int", "signature": "Ghul.Pipes.reduce[int,int](\n    source: Iterable[int],\n    seed: int,\n    accumulator: (int, int) -> int pure\n) -> int", "kindLabel": "pure global function" },
+    { "startLine": 5, "startColumn": 51, "endLine": 5, "endColumn": 53, "text": "Ghul.Pipes.sum[int](source: Iterable[int]) -> int", "signature": "Ghul.Pipes.sum[int](source: Iterable[int]) -> int", "kindLabel": "pure global function" },
     { "startLine": 5, "startColumn": 24, "endLine": 5, "endColumn": 29, "text": "Ghul.Pipes.filter[int](\n    source: Iterable[int],\n    predicate: int.. -> bool pure\n) -> Pipe[int]", "signature": "Ghul.Pipes.filter[int](\n    source: Iterable[int],\n    predicate: int.. -> bool pure\n) -> Pipe[int]", "kindLabel": "pure global function" },
     { "startLine": 5, "startColumn": 14, "endLine": 5, "endColumn": 19, "text": "totals: LIST[int]", "signature": "totals: LIST[int]", "kindLabel": "global variable" },
     { "startLine": 5, "startColumn": 36, "endLine": 5, "endColumn": 36, "text": "x: int", "signature": "x: int", "kindLabel": "local argument" },
     { "startLine": 5, "startColumn": 38, "endLine": 5, "endColumn": 38, "text": "int.%(a: int, b: int) -> int", "signature": "int.%(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.rem" },
-    { "startLine": 5, "startColumn": 42, "endLine": 5, "endColumn": 43, "text": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "signature": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" },
-    { "startLine": 5, "startColumn": 71, "endLine": 5, "endColumn": 71, "text": "a: int", "signature": "a: int", "kindLabel": "local argument" },
-    { "startLine": 5, "startColumn": 75, "endLine": 5, "endColumn": 75, "text": "b: int", "signature": "b: int", "kindLabel": "local argument" },
-    { "startLine": 5, "startColumn": 73, "endLine": 5, "endColumn": 73, "text": "int.+(a: int, b: int) -> int", "signature": "int.+(a: int, b: int) -> int", "kindLabel": "innate function arithmetic.add" }
+    { "startLine": 5, "startColumn": 42, "endLine": 5, "endColumn": 43, "text": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "signature": "Ghul.Intrinsics.==[int](a: int, b: int) -> bool", "kindLabel": "innate function compare.value" }
   ],
   "inlayHints": [],
   "semanticTokens": [
@@ -38,11 +33,6 @@
     { "startLine": 5, "startColumn": 36, "endLine": 5, "endColumn": 36, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 5, "startColumn": 38, "endLine": 5, "endColumn": 38, "tokenType": "operator" },
     { "startLine": 5, "startColumn": 42, "endLine": 5, "endColumn": 43, "tokenType": "operator" },
-    { "startLine": 5, "startColumn": 51, "endLine": 5, "endColumn": 56, "tokenType": "function" },
-    { "startLine": 5, "startColumn": 62, "endLine": 5, "endColumn": 62, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 5, "startColumn": 65, "endLine": 5, "endColumn": 65, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 5, "startColumn": 71, "endLine": 5, "endColumn": 71, "tokenType": "variable", "modifiers": "readonly" },
-    { "startLine": 5, "startColumn": 73, "endLine": 5, "endColumn": 73, "tokenType": "operator" },
-    { "startLine": 5, "startColumn": 75, "endLine": 5, "endColumn": 75, "tokenType": "variable", "modifiers": "readonly" }
+    { "startLine": 5, "startColumn": 51, "endLine": 5, "endColumn": 53, "tokenType": "function" }
   ]
 }
