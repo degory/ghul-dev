@@ -8,12 +8,20 @@ ghūl syntax is inspired by a number of non-brace languages, including ALGOL 68 
 
 Identifiers in ghūl follow the convention of `snake_case` for variables, functions, methods, and properties, `PascalCase` for namespaces, traits, abstract classes, unions, and enums, and `MACRO_CASE` for concrete classes, structs, variants, and enum members. ghūl keywords are lowercase.
 
+An identifier can be written in any script. A letter starts one, and a letter, a digit, a combining mark or a connecting punctuation mark continues one. The compiler reports a format character inside an identifier - a zero-width joiner, a bidirectional control - as an error, because such a character renders as nothing and a name that contains one reads as a name it is not. The compiler accepts characters from the basic multilingual plane only: a character above that plane is written as a surrogate pair, and the compiler reads a surrogate pair as two characters.
+
+A letter is never a symbol, so no character is both an identifier character and an [operator](/definitions.html#operators) character. `×` is an operator and `naïve` is a name.
+
+The compiler checks the conventions above with Unicode case. A character that has an upper-case and a lower-case form is checked for its kind whatever script it is in, so `ТИП` is a concrete class and `μέγεθος` is a property. A character with neither form says nothing about case, so a name written entirely in a script that has no case - Chinese, Japanese, Arabic, Hebrew - is correct for any kind.
+
+<GhulExample name="language-basics-identifiers" />
+
 ghūl relies on keywords for block structure where other languages use braces or indentation. Keywords are context specific and generally come in pairs where the closing keyword is the reverse or mirror image of the opening keyword. In the examples below `is` introduces a method or class body and its block is closed by the reverse keyword `si`
 
 <GhulExample name="language-basics-1" />
 
 ### expressions and statements
-Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, and most statements can be used as expressions. In a function or method body a trailing `;` on the last statement marks its value as discarded, so a body without one returns that statement's value - see [expression oriented programming](/expression-oriented-programming.html) for the forms working together.
+Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, and most statements can be used as expressions. In a function or method body the last statement is the value the body returns, whenever the type of that statement matches the declared return type. A trailing `;` does not change that: the compiler judges the last statement by its type rather than by its terminator - see [expression oriented programming](/expression-oriented-programming.html) for the forms working together.
 
 <GhulExample name="language-basics-2" />
 
