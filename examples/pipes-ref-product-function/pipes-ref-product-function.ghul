@@ -1,0 +1,15 @@
+use Collections.Iterable
+use Collections.LIST
+use Collections.MAP
+use Collections.SET
+use Ghul.Pipes.INDEXED_VALUE
+use Ghul.Pipes.Pipe
+use System.Numerics.INumber
+
+// >>>
+product[T: INumber[T]](
+    source: Iterable[T]
+) -> T pure
+// <<<
+
+entry() is si
