@@ -1,0 +1,19 @@
+use IO.Std.write_line
+
+// >>>
+class TEMPERATURA is
+    grados: double
+
+    init(grados: double) is
+        self.grados = grados
+    si
+
+    en_fahrenheit() -> double => grados * 1.8 + 32.0
+si
+
+面積(幅: double, 高さ: double) -> double => 幅 * 高さ
+
+let máxima = TEMPERATURA(21.5)
+
+write_line("{máxima.en_fahrenheit()}")
+write_line("{面積(3.0, 4.0)}")
