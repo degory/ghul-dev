@@ -8,7 +8,7 @@ import { countEvent } from '../events'
 import { tokenise } from '../rosetta-highlight'
 import { PLAYGROUND_BASE } from '../playground'
 import { shownSlug, shownFilter, showAt, replaceAt } from '../rosetta-route'
-import { corpus, query, chosen, runnableOnly, toggleTag } from '../rosetta-filter'
+import { corpus, query, chosen, toggleTag } from '../rosetta-filter'
 import { loadCorpus, taskBySlug, matching, draw, addressOf, filterFromSearch } from '../rosetta-corpus'
 
 // The whole Rosetta Code section: one task shown whole and ready to run, with the corpus
@@ -38,7 +38,7 @@ const missing = computed(() =>
   corpus.value !== null && shownSlug.value !== null && shown.value === null)
 
 const matches = computed(() => corpus.value
-  ? matching(corpus.value, { query: query.value, tags: [...chosen.value], runnableOnly: runnableOnly.value })
+  ? matching(corpus.value, { query: query.value, tags: [...chosen.value], runnableOnly: true })
   : [])
 
 // --- the shown task's source -------------------------------------------------------------------
@@ -363,10 +363,8 @@ watch(shownFilter, search => {
         <RosettaOnward
           class="rosetta-inline"
           :alike="alike"
-          :playground-href="framed ? `${PLAYGROUND_BASE}rosetta-code/${framed.id}` : null"
           @another="anotherOnward"
           @show="showOnward"
-          @playground="countEvent('rosetta-more/playground/0', 'onward to the playground')"
         />
       </section>
 
@@ -382,13 +380,9 @@ watch(shownFilter, search => {
         <RosettaOnward
           stacked
           :alike="alike"
-          :playground-href="framed ? `${PLAYGROUND_BASE}rosetta-code/${framed.id}` : null"
           @another="anotherOnward"
           @show="showOnward"
-          @playground="countEvent('rosetta-more/playground/0', 'onward to the playground')"
         />
-
-        <p class="rosetta-aside-title">Find a task</p>
 
         <RosettaControls stacked />
 

@@ -11,7 +11,6 @@ export const corpus = shallowRef(null)
 
 export const query = ref('')
 export const chosen = ref(new Set())
-export const runnableOnly = ref(true)
 
 export const tags = computed(() => corpus.value ? tagCounts(corpus.value) : [])
 

@@ -20,12 +20,4 @@ const here = computed(() => route.path.startsWith('/rosetta'))
 .rosetta-aside {
   padding-bottom: 2rem;
 }
-
-.rosetta-aside-title {
-  margin: 0 0 0.5rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  line-height: 1.5;
-  color: var(--vp-c-text-1);
-}
 </style>

@@ -1,9 +1,8 @@
 <script setup>
-// The search box, the browser-only switch and the tag chips: the whole of the filter, drawn
-// wherever there is room for it. `stacked` is the page's aside, a narrow column where the parts
+// The search box and the tag chips: the whole of the filter, drawn wherever there is room for it. `stacked` is the page's aside, a narrow column where the parts
 // go one under another.
 import { ref, computed } from 'vue'
-import { corpus, query, chosen, runnableOnly, tags, toggleTag } from '../rosetta-filter'
+import { corpus, query, chosen, tags, toggleTag } from '../rosetta-filter'
 
 const props = defineProps({ stacked: { type: Boolean, default: false } })
 
@@ -24,7 +23,11 @@ const hiddenTags = computed(() => tags.value.length - shownTags.value.length)
 
 <template>
   <div class="rosetta-filter-controls" :class="{ 'is-stacked': stacked }">
-    <div class="rosetta-controls">
+    <div class="rosetta-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" />
+        <path d="M20 20l-3.5-3.5" />
+      </svg>
       <input
         v-model="query"
         class="rosetta-filter"
@@ -32,11 +35,6 @@ const hiddenTags = computed(() => tags.value.length - shownTags.value.length)
         placeholder="search by name or tag"
         aria-label="search tasks by name or tag"
       />
-
-      <label class="rosetta-runnable">
-        <input v-model="runnableOnly" type="checkbox" />
-        runs in the browser
-      </label>
     </div>
 
     <div class="rosetta-tags" role="group" aria-label="filter by tag">
@@ -62,25 +60,29 @@ const hiddenTags = computed(() => tags.value.length - shownTags.value.length)
 </template>
 
 <style scoped>
-.rosetta-controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
+.rosetta-search {
+  position: relative;
   margin: 1.5rem 0 0.75rem;
 }
 
-.is-stacked .rosetta-controls {
-  flex-direction: column;
-  align-items: stretch;
+.is-stacked .rosetta-search {
   margin: 0 0 0.75rem;
-  gap: 0.5rem;
+}
+
+.rosetta-search svg {
+  position: absolute;
+  top: 50%;
+  left: 0.7rem;
+  width: 1rem;
+  height: 1rem;
+  transform: translateY(-50%);
+  color: var(--vp-c-text-3);
+  pointer-events: none;
 }
 
 .rosetta-filter {
-  flex: 1;
-  min-width: 12rem;
-  padding: 0.5rem 0.75rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem 0.5rem 2.2rem;
   border: 1px solid var(--vp-c-divider);
   border-radius: 6px;
   background: var(--vp-c-bg-soft);
@@ -88,22 +90,12 @@ const hiddenTags = computed(() => tags.value.length - shownTags.value.length)
 }
 
 .is-stacked .rosetta-filter {
-  min-width: 0;
-  width: 100%;
   font-size: 0.9rem;
 }
 
 .rosetta-filter:focus {
   border-color: var(--vp-c-brand-1);
   outline: none;
-}
-
-.rosetta-runnable {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--vp-c-text-2);
-  font-size: 0.9rem;
 }
 
 .rosetta-tags {
