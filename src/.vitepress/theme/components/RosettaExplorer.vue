@@ -27,8 +27,10 @@ const failure = ref(null)
 const shown = computed(() =>
   corpus.value && shownSlug.value ? taskBySlug(corpus.value, shownSlug.value) : null)
 
-// The section itself, with no task: the filter and its results across the page.
-const browsing = computed(() => shownSlug.value === null)
+// The section itself, with no task: the filter and its results across the page. Never true
+// before the corpus has loaded, so the prerender and the first client render agree - a class the
+// prerender wrote that the client did not would stay on the element unpatched.
+const browsing = computed(() => corpus.value !== null && shownSlug.value === null)
 
 const missing = computed(() =>
   corpus.value !== null && shownSlug.value !== null && shown.value === null)
