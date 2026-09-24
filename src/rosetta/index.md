@@ -8,7 +8,7 @@ ghūl solutions to [Rosetta Code](https://rosettacode.org) tasks - several hundr
 one-liners to graphics and games. Nearly every one can be changed and run here, in your browser.
 
 The solutions are written and tested in
-[ghul-rosetta-code](https://github.com/ghul-lang/ghul-rosetta-code) and read from there when this page
+[ghul-rosetta-code](https://github.com/degory/ghul-rosetta-code) and read from there when this page
 opens, so a task solved there today is here today. Search by name or tag, or take the one below:
 it is picked at random, weighted towards the ones worth a stranger's time.
 
