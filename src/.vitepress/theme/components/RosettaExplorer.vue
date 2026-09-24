@@ -90,12 +90,23 @@ async function part(entry) {
 // route too. Same origin as the site, which is what lets the page be framed at all.
 // `panel` tells the playground it is on a page that already names the task and offers the others,
 // so it leaves out the links that would say so again.
-const playgroundUrl = entry => `${PLAYGROUND_BASE}rosetta-code/${entry.id}?panel`
+// The theme goes in the address too, so the panel paints in it first time rather than switching
+// to it once its script has asked.
+const playgroundUrl = entry => `${PLAYGROUND_BASE}rosetta-code/${entry.id}?panel&theme=${
+  typeof document !== 'undefined' && document.documentElement.classList.contains('dark') ? 'dark' : 'light'}`
 
-// The one part that runs on arrival. Framing every part would start a run per part against a
-// service that admits six at once, so the first runnable part is framed and the rest are links to
-// their own pages, where each runs when it is opened.
-const framed = computed(() => parts.value.find(entry => entry.playground) ?? null)
+// The part shown, one at a time: framing every part would start a run per part against a service
+// that admits six at once. The first runnable one on arrival, and any other when chosen from the
+// strip above the panel, which replaces the panel where it stands.
+const selected = ref(null)
+
+watch(parts, list => {
+  selected.value = (list.find(entry => entry.playground) ?? list[0])?.id ?? null
+})
+
+const current = computed(() => parts.value.find(entry => entry.id === selected.value) ?? null)
+
+const framed = computed(() => current.value?.playground ? current.value : null)
 
 // As tall as the window has room for below the frame's top, so that the whole playground is on
 // the screen on arrival rather than its output pane below the fold; never shorter than an editor
@@ -391,29 +402,37 @@ function browse() {
 
         <p v-else-if="parts.length === 0" class="rosetta-loading">reading the solution ...</p>
 
-        <template v-for="entry in parts" :key="entry.name">
-          <h3 v-if="entry.heading">{{ entry.heading }}</h3>
+        <!-- A task solved more than one way: the ways, one of them shown below. -->
+        <div v-if="parts.length > 1" class="rosetta-parts" role="tablist" aria-label="ways of solving it">
+          <button
+            v-for="(entry, at) in parts"
+            :key="entry.name"
+            type="button"
+            role="tab"
+            class="rosetta-part"
+            :aria-selected="entry === current"
+            @click="selected = entry.id"
+          >{{ entry.heading ?? `part ${at + 1}` }}</button>
+        </div>
 
-          <p v-if="entry.reason" class="rosetta-unsupported">{{ entry.reason }}</p>
+        <template v-if="current">
+          <p v-if="current.reason" class="rosetta-unsupported">{{ current.reason }}</p>
 
-          <!-- The playground itself, as a panel on the page. The one that runs on arrival is
-               framed; a further way of solving the task is a link to its own page. A part that
-               cannot run in a browser is shown as it is recorded. -->
+          <!-- The playground itself, as a panel on the page; keyed on the part, so choosing
+               another loads its page in place. A part that cannot run in a browser is shown as
+               it is recorded. -->
           <iframe
-            v-if="entry === framed"
+            v-if="framed"
+            :key="framed.id"
             class="rosetta-playground"
-            :src="playgroundUrl(entry)"
+            :src="playgroundUrl(framed)"
             :title="`${shown.title} in the playground`"
             :style="{ height: frameHeight }"
             loading="eager"
             allow="clipboard-write"
           ></iframe>
 
-          <p v-else-if="entry.playground" class="rosetta-part-link">
-            <a :href="playgroundUrl(entry)">run this one in the playground</a>
-          </p>
-
-          <GhulExample v-else :name="entry.name" :data="entry.data" />
+          <GhulExample v-else :key="current.id" :name="current.name" :data="current.data" />
         </template>
 
         <!-- Under the result, where somebody who has just watched a program run is looking - on a
@@ -465,6 +484,32 @@ function browse() {
   margin: 0.5rem 0;
   color: var(--vp-c-text-2);
   font-size: 0.9rem;
+}
+
+.rosetta-parts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 0.75rem;
+}
+
+.rosetta-part {
+  padding: 0.2rem 0.75rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  color: var(--vp-c-text-2);
+  font-size: 0.875rem;
+}
+
+.rosetta-part:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-text-1);
+}
+
+.rosetta-part[aria-selected="true"] {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
 }
 
 /* The aside shows at 1280px and up (the site's own breakpoint), and carries these from there -
@@ -549,10 +594,6 @@ function browse() {
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   background: var(--vp-c-bg);
-}
-
-.rosetta-part-link {
-  margin: 0.5rem 0 1rem;
 }
 
 </style>
