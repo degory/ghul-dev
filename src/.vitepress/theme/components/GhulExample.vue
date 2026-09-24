@@ -474,11 +474,28 @@ watch(willNeverRun, settled => {
   }
 })
 
-const shownOutput = computed(() => editing.value ? liveOutput.value : recordedOutput.value)
+const producedOutput = computed(() => editing.value ? liveOutput.value : recordedOutput.value)
 
 // The pictures follow the same rule: what the example is recorded as drawing,
 // until the reader runs their own version.
 const shownImages = computed(() => editing.value ? liveImages.value : recordedImages.value)
+
+// `show` announces a picture on standard output as `<<image name>>`, which is how the page is told
+// one is there. Where the picture it names is shown below, the line is the caption said twice, so
+// it is dropped; a line naming a picture that is not shown stays, because then it is all the reader
+// has saying one was drawn.
+const shownOutput = computed(() => {
+  const shown = new Set(shownImages.value.map(image => image.name))
+
+  return producedOutput.value
+    .split('\n')
+    .filter(line => {
+      const marker = line.match(/^\s*<<image\s+(.+?)\s*>>\s*$/)
+
+      return !marker || !shown.has(marker[1])
+    })
+    .join('\n')
+})
 
 // Between arriving and the first status there is a gap - the frame has to load
 // and the editor has to come up - and on a landing page that gap is the first
