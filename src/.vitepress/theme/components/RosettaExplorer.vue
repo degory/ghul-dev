@@ -80,7 +80,7 @@ async function part(entry) {
   }
 }
 
-// The playground's own page for a part, which runs the program on arrival and carries the editor,
+// The playground's own page for a part, which runs the program on arrival and has the editor,
 // the output pane and the pictures a drawing produces. The task page frames that page rather than
 // rebuilding any of it, so there is one playground and it is the one a reader reaches by any other
 // route too. Same origin as the site, which is what lets the page be framed at all.
