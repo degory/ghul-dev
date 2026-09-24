@@ -2,7 +2,6 @@
 import { ref, computed, shallowRef, watch, onMounted } from 'vue'
 import GhulExample from './GhulExample.vue'
 import { countEvent } from '../events'
-import { PLAYGROUND_BASE } from '../playground'
 import { tokenise } from '../rosetta-highlight'
 import { shownSlug, shownFilter, showAt, replaceAt } from '../rosetta-route'
 import {
@@ -55,7 +54,8 @@ function toggleTag(tag) {
 // --- the shown task's source -------------------------------------------------------------------
 
 // Each part's source and its syntax colour, in the shape <GhulExample> takes: the same fields the
-// build writes into an example artifact, minus the hovers and diagnostics only a compile produces.
+// build writes into an example artifact, minus the hovers and diagnostics only a compile produces
+// and the recorded output `run-to-see` would hide anyway.
 const parts = shallowRef([])
 const partsFailure = ref(null)
 
@@ -77,10 +77,8 @@ async function part(entry) {
       code,
       fullSource: code,
       tokens: await tokenise(code),
-      // A part that cannot run is shown what it is recorded as producing, so
-      // fetching it is not wasted even though a run replaces it.
-      output: entry.output ? await text(entry.output).catch(() => '') : '',
-      images: entry.images ?? [],
+      output: '',
+      images: [],
       hovers: [],
       diagnostics: [],
       playground: entry.playground,
@@ -148,84 +146,7 @@ function show(task) {
   showAt(addressOf({ slug: task.slug }))
 }
 
-// Two or three tasks sharing a tag with this one, so somebody who liked what
-// they just watched has somewhere to go that is not the list of nine hundred.
-// Runnable only: an onward path to something that cannot run here would undo
-// the point of offering it.
-const alike = computed(() => {
-  const task = shown.value
-
-  if (!task || !corpus.value) return []
-
-  const tags = new Set(task.tags ?? [])
-
-  return corpus.value.tasks
-    .filter(other => other.slug !== task.slug
-      && other.playground
-      && (other.tags ?? []).some(tag => tags.has(tag)))
-    .sort((a, b) =>
-      (b.tags ?? []).filter(tag => tags.has(tag)).length - (a.tags ?? []).filter(tag => tags.has(tag)).length
-      || (b.interest ?? 0) - (a.interest ?? 0)
-      || a.title.localeCompare(b.title))
-    .slice(0, 3)
-})
-
-// The onward controls are counted apart from the header's, because where a
-// reader was when they took one is the thing worth knowing: the whole point of
-// putting them under the result is that nobody used the ones above it.
-function showOnward(task) {
-  countEvent(`rosetta-more/tag/${alike.value.findIndex(other => other.slug === task.slug)}`,
-    'onward to a like task')
-
-  show(task)
-}
-
-function anotherOnward() {
-  countEvent('rosetta-more/another/0', 'onward to another task')
-
-  another()
-}
-
-// --- the landing's first screen ------------------------------------------------------------------
-
-// The section's own introduction sits above the explorer, written in the page's markdown, and it is
-// what a reader arriving at the section reads first. A reader arriving at a task's address came for
-// the task instead: at 390px wide that introduction is 308px of the 844 there are, which puts the
-// result 267px below the fold - more than the stage can recover by shrinking. So it stands down for
-// an arrival at a task, and comes back when the reader returns to the section.
-
-// Which of the two this was. The explorer puts a randomly picked task into the address, so the
-// address stops answering that moments after the page opens; it is asked once, before it does.
-const arrivedAtTask = ref(false)
-
-const root = ref(null)
-
-function introduction() {
-  const items = []
-
-  for (let node = root.value?.parentElement?.firstElementChild; node && node !== root.value;
-       node = node.nextElementSibling) {
-    items.push(node)
-  }
-
-  return items
-}
-
-watch(shownSlug, slug => {
-  if (!arrivedAtTask.value) return
-
-  // Choosing another task from a landing keeps the landing shape; returning to the section
-  // restores what the section reads like.
-  for (const node of introduction()) node.style.display = slug ? 'none' : ''
-})
-
 onMounted(async () => {
-  arrivedAtTask.value = shownSlug.value !== null
-
-  if (arrivedAtTask.value) {
-    for (const node of introduction()) node.style.display = 'none'
-  }
-
   // The address of a task reached from outside was handed to the router as the section's, so that
   // it had a page to load. Put it back, now that there is an explorer to show the task.
   if (shownSlug.value) replaceAt(addressOf({ slug: shownSlug.value }))
@@ -279,10 +200,10 @@ watch(shownFilter, search => {
 </script>
 
 <template>
-  <div ref="root" class="rosetta-explorer">
+  <div class="rosetta-explorer">
     <p v-if="failure" class="rosetta-failure">
       The solutions are read from
-      <a href="https://github.com/ghul-lang/ghul-rosetta-code" target="_blank" rel="noreferrer">
+      <a href="https://github.com/degory/ghul-rosetta-code" target="_blank" rel="noreferrer">
         ghul-rosetta-code</a>
       when this page opens, and that did not answer ({{ failure }}). Reloading is worth a try.
     </p>
@@ -321,47 +242,13 @@ watch(shownFilter, search => {
 
         <p v-else-if="parts.length === 0" class="rosetta-loading">reading the solution ...</p>
 
-<!-- The first part runs on arrival and takes the bounded stage: somebody who
-             followed a link from the wiki came to see one program work. The rest are
-             ordinary cards, because only one card on the page can hold the editor at a
-             time and three parts would fight over it, posting three compiles to a
-             service that caps how many run at once. -->
-        <template v-for="(entry, at) in parts" :key="entry.name">
+        <template v-for="entry in parts" :key="entry.name">
           <h3 v-if="entry.heading">{{ entry.heading }}</h3>
 
           <p v-if="entry.reason" class="rosetta-unsupported">{{ entry.reason }}</p>
 
-          <GhulExample
-            :name="entry.name"
-            :data="entry.data"
-            run-to-see
-            :run-on-arrival="at === 0 && !entry.reason"
-            :stage="at === 0"
-          />
+          <GhulExample :name="entry.name" :data="entry.data" run-to-see />
         </template>
-
-        <!-- Under the result, where somebody who has just watched a program run is
-             looking, rather than in the header they scrolled past. -->
-        <nav v-if="shown" class="rosetta-onward">
-          <button type="button" class="rosetta-another" @click="anotherOnward">another</button>
-
-          <template v-if="alike.length">
-            <span class="rosetta-onward-label">more like this</span>
-
-            <a
-              v-for="task in alike"
-              :key="task.slug"
-              :href="`/rosetta/${task.slug}`"
-              @click.prevent="showOnward(task)"
-            >{{ task.title }}</a>
-          </template>
-
-          <a
-            class="rosetta-onward-playground"
-            :href="`${PLAYGROUND_BASE}rosetta-code/${shown.slug}`"
-            @click="countEvent('rosetta-more/playground/0', 'onward to the playground')"
-          >open in the playground</a>
-        </nav>
       </section>
 
       <div class="rosetta-controls">
@@ -412,28 +299,6 @@ watch(shownFilter, search => {
   </div>
 </template>
 <style scoped>
-/* The onward paths, under the result. One row that wraps rather than a grid:
-   there are never more than five things in it, and on a phone they stack
-   without a breakpoint to say so. */
-.rosetta-onward {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.5rem 0.75rem;
-  margin: 1rem 0 0;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--vp-c-divider);
-  font-size: 0.875rem;
-}
-
-.rosetta-onward-label {
-  color: var(--vp-c-text-2);
-}
-
-.rosetta-onward-playground {
-  margin-left: auto;
-}
-
 .rosetta-loading,
 .rosetta-failure {
   margin: 1.5rem 0;
