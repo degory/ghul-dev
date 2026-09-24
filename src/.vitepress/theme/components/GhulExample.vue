@@ -717,7 +717,7 @@ onBeforeUnmount(() => {
   <div
     v-if="example"
     class="ghul-example"
-    :class="{ 'is-filling': filling, 'is-staged': stage, 'is-opened-out': stage && openedOut }"
+    :class="{ 'is-filling': filling, 'is-staged': stage, 'is-opened-out': stage && openedOut && !filling }"
   >
     <span v-if="!canEdit" class="ghul-example-lang">ghul</span>
 
@@ -739,7 +739,7 @@ onBeforeUnmount(() => {
       </svg>
     </button>
     <button
-      v-if="stage"
+      v-if="stage && !filling"
       type="button"
       class="ghul-example-tool"
       :class="{ 'is-active': openedOut }"
@@ -873,6 +873,8 @@ onBeforeUnmount(() => {
         </svg>
         <span>{{ panelLabel }}</span>
 
+        <span v-if="waitingNote" class="ghul-example-waiting">{{ waitingNote }}</span>
+
         <template v-if="editing">
           <span class="ghul-example-run-state">{{ runLabel }}</span>
 
@@ -930,7 +932,6 @@ onBeforeUnmount(() => {
           <DiagnosticIcon :severity="d.severity" />
           <span class="ghul-example-diag-text">{{ d.message }}</span>
         </div>
-        <p v-if="waitingNote" class="ghul-example-waiting">{{ waitingNote }}</p>
         <pre v-if="shownOutput">{{ shownOutput }}</pre>
         <form
           v-if="editing && inputWanted"
@@ -1242,10 +1243,15 @@ onBeforeUnmount(() => {
 .ghul-example.is-staged {
   display: flex;
   flex-direction: column;
-  /* The chrome around the card, and room for the onward paths under it, so the
-     stage does not push them off the first screen on its own. */
-  max-height: calc(100vh - 12rem);
   min-height: 20rem;
+}
+
+/* The chrome around the card, and room for the onward paths under it, so the
+   stage does not push them off the first screen on its own. Filling the window
+   is the other arrangement, where there is no page around the card to leave
+   room for, so every bound the stage sets stands down for it. */
+.ghul-example.is-staged:not(.is-filling) {
+  max-height: calc(100vh - 12rem);
 }
 
 /* The source keeps a readable minimum, and scrolls within it rather than
@@ -1272,12 +1278,12 @@ onBeforeUnmount(() => {
    mid-token in a language whose examples are wide, and the reader then has two
    regions each too small for what is in it. The source gives up the space,
    since the result is what was followed here. */
-.ghul-example.is-staged:not(.is-opened-out) .ghul-example-frame-wrap,
-.ghul-example.is-staged:not(.is-opened-out) .ghul-example-code {
+.ghul-example.is-staged:not(.is-opened-out):not(.is-filling) .ghul-example-frame-wrap,
+.ghul-example.is-staged:not(.is-opened-out):not(.is-filling) .ghul-example-code {
   max-height: 45vh;
 }
 
-.ghul-example.is-staged .ghul-example-output {
+.ghul-example.is-staged:not(.is-filling) .ghul-example-output {
   max-height: 60%;
 }
 
@@ -1380,11 +1386,10 @@ onBeforeUnmount(() => {
 /* Said in the result area rather than only in the toolbar, because on arrival
    the result area is what a visitor is looking at and it would otherwise be
    empty for as long as the runtime takes. */
+/* One of the panel's states, said where the panel says the others, rather than
+   a paragraph of body text in the result area. */
 .ghul-example-waiting {
-  margin: 0;
-  padding: 0.75rem 1rem;
-  color: var(--vp-c-text-2);
-  font-style: italic;
+  color: var(--vp-c-text-3);
 }
 
 /* The rendered example stays put until the editor has loaded, so the card does
