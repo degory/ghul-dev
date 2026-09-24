@@ -4,6 +4,7 @@ import { nextTick, onMounted, watch } from 'vue'
 import GhulExample from './components/GhulExample.vue'
 import GhulExampleSwitcher from './components/GhulExampleSwitcher.vue'
 import RosettaExplorer from './components/RosettaExplorer.vue'
+import Layout from './Layout.vue'
 import { installRosettaRouting } from './rosetta-route'
 import { refreshPackageVersions } from './package-versions'
 import { countOutboundLinks } from './events'
@@ -11,6 +12,7 @@ import './style.css'
 
 export default {
   extends: DefaultTheme,
+  Layout,
   setup() {
     const route = useRoute()
 
