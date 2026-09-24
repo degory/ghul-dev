@@ -2,7 +2,7 @@
 
 ## compiler, runtime, and tools
 
-Official source repositories are [hosted on GitHub.com](https://github.com/degory)
+Official source repositories are [hosted on GitHub.com](https://github.com/ghul-lang)
 
 Official release packages are [hosted on NuGet.org](https://www.nuget.org/packages?q=degory+ghul). Copies of the release versions and beta versions are available on GitHub under Packages for each repository, and as workflow assets on successful PR builds.
 
