@@ -51,20 +51,29 @@ export function installRosettaRouting(router) {
   router.onBeforeRouteChange = href => {
     const target = read(href)
 
-    if (!taskSlugFromPath(target.pathname)) return before?.(href)
+    if (!within(target.pathname)) return before?.(href)
 
-    // Reached from elsewhere on the site: there is no explorer mounted to show the task, so let
-    // the browser fetch the page the server answers that address with.
-    if (!within(location.pathname)) {
+    // Reached from elsewhere on the site, or on the first load - the router's own first move,
+    // made before any page is loaded: there is no explorer mounted to show the section, so let
+    // the router load its page, or the browser fetch the page the server answers a task's
+    // address with.
+    if (!router.route.component || !within(location.pathname)) {
+      if (!taskSlugFromPath(target.pathname)) return before?.(href)
+
       location.assign(href)
 
       return false
     }
 
+    // Within the section, every move is the explorer changing what it shows: a task, or the
+    // section itself, whose link the router would otherwise take for the page already loaded and
+    // leave the task standing.
     history.replaceState({ scrollPosition: window.scrollY }, '')
     history.pushState({}, '', href)
 
     adopt(target)
+
+    if (!taskSlugFromPath(target.pathname)) window.scrollTo(0, 0)
 
     return false
   }
