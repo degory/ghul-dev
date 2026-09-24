@@ -11,9 +11,9 @@ import { shownSlug, shownFilter, showAt, replaceAt } from '../rosetta-route'
 import { corpus, query, chosen, toggleTag } from '../rosetta-filter'
 import { loadCorpus, taskBySlug, matching, draw, addressOf, filterFromSearch } from '../rosetta-corpus'
 
-// The whole Rosetta Code section: one task shown whole and ready to run, with the corpus
-// searchable and filterable beneath it. The task is whichever /rosetta/<slug> the reader arrived
-// at, or one picked at random and weighted towards the ones worth a stranger's time.
+// The whole Rosetta Code section. The section's own address is the corpus, searchable and
+// filterable; a task's address, /rosetta/<slug>, shows that task whole and ready to run, with the
+// filter beside it.
 //
 // Nothing here is copied into the site. The corpus is read from ghul-rosetta-code when the page
 // opens and each solution's source when its task is shown, so a task solved there this morning is
@@ -24,19 +24,11 @@ import { loadCorpus, taskBySlug, matching, draw, addressOf, filterFromSearch } f
 // controls on a wide screen.
 const failure = ref(null)
 
-// A task shown by address rather than picked: the reader followed a link, or chose one from the
-// list. Held apart from `picked` so that going back to the section restores the random pick.
-const picked = shallowRef(null)
+const shown = computed(() =>
+  corpus.value && shownSlug.value ? taskBySlug(corpus.value, shownSlug.value) : null)
 
-// The section as a page of the filter and its results, with no task shown. Read from the
-// address, so it is a link, and left by choosing a task.
-const browsing = ref(false)
-
-const shown = computed(() => {
-  if (!corpus.value || browsing.value) return null
-
-  return shownSlug.value ? taskBySlug(corpus.value, shownSlug.value) : picked.value
-})
+// The section itself, with no task: the filter and its results across the page.
+const browsing = computed(() => shownSlug.value === null)
 
 const missing = computed(() =>
   corpus.value !== null && shownSlug.value !== null && shown.value === null)
@@ -190,18 +182,12 @@ watch([() => shownSlug.value, shown], ([slug, task], previous) => {
 
 // --- choosing ----------------------------------------------------------------------------------
 
-// `keep` is false for the draw the page makes on its own: the reader did not ask to be here, so
-// it is not a place for the back button to return to.
-function another(keep = true) {
+// A task drawn at random from the ones the filter leaves, weighted towards the ones worth a
+// stranger's time. The address names it, so what is on the page is what a reader can link to.
+function another() {
   const next = draw(matches.value, shown.value?.slug)
 
-  if (!next) return
-
-  picked.value = next
-
-  // The address names the task, whether it was chosen or drawn: what is on the page is what a
-  // reader can link to.
-  showAt(addressOf({ slug: next.slug }), keep)
+  if (next) showAt(addressOf({ slug: next.slug }))
 }
 
 function show(task) {
@@ -299,27 +285,12 @@ onMounted(async () => {
 
   query.value = filter.query
   chosen.value = new Set(filter.tags)
-  browsing.value = filter.browse
 
   try {
     corpus.value = await loadCorpus()
   } catch (error) {
     failure.value = error.message
-
-    return
   }
-
-  // A random pick differs between the prerender and the reader's browser, so it is made only once
-  // the page is live - and only where the address does not already name a task.
-  if (!shownSlug.value && !browsing.value) another(false)
-})
-
-// Narrowing the filter to something the shown task is not part of picks a new one; widening it
-// leaves the reader looking at what they were looking at. A task reached by its own address stays
-// put: they asked for that one.
-watch(matches, tasks => {
-  if (shownSlug.value || browsing.value) return
-  if (picked.value && !tasks.some(task => task.slug === picked.value.slug)) another(false)
 })
 
 // The filter is part of the address while the section itself is shown, so a search or a set of
@@ -327,7 +298,7 @@ watch(matches, tasks => {
 watch([query, chosen], () => {
   if (shownSlug.value) return
 
-  replaceAt(addressOf({ query: query.value, tags: [...chosen.value], browse: browsing.value }))
+  replaceAt(addressOf({ query: query.value, tags: [...chosen.value] }))
 })
 
 // Following a link back to the section restores the filter that link carried.
@@ -341,23 +312,13 @@ watch(shownFilter, search => {
   if (filter.tags.join(',') !== [...chosen.value].sort().join(',')) {
     chosen.value = new Set(filter.tags)
   }
-
-  browsing.value = filter.browse
 })
 
-// A task chosen from the browse page is shown as a task; the section's own address, reached by
-// going back or by a link, picks one at random as it always did.
-watch(shownSlug, slug => {
-  if (slug) browsing.value = false
-})
-
-// The browse page, reached from beside a task: the filter as it stands, on a page of its own.
-const browseAddress = computed(() =>
-  addressOf({ query: query.value, tags: [...chosen.value], browse: true }))
+// The section, reached from beside a task: the filter as it stands, across the page.
+const browseAddress = computed(() => addressOf({ query: query.value, tags: [...chosen.value] }))
 
 function browse() {
   showAt(browseAddress.value)
-  browsing.value = true
 }
 </script>
 
@@ -464,7 +425,7 @@ function browse() {
         <RosettaControls stacked />
 
         <p class="rosetta-browse">
-          <a :href="browseAddress" @click.prevent="browse">search on a page of its own</a>
+          <a :href="browseAddress" @click.prevent="browse">all tasks, across the page</a>
         </p>
 
         <RosettaList stacked :matches="matches" :current="shown?.slug" @show="show" />
@@ -513,7 +474,7 @@ function browse() {
 }
 
 /* The aside shows at 1280px and up (the site's own breakpoint), and carries these from there -
-   except on the browse page, which has no task and so nothing in the aside. */
+   except on the section's own page, which has no task and so nothing in the aside. */
 @media (min-width: 1280px) {
   .rosetta-explorer:not(.is-browsing) .rosetta-inline {
     display: none;
@@ -557,7 +518,7 @@ function browse() {
 
 .rosetta-featured {
   margin-top: 1rem;
-  /* Clear of the site's fixed header when a task picked from the list is scrolled to. */
+  /* Clear of the site's fixed header when a task chosen from the list is scrolled to. */
   scroll-margin-top: calc(var(--vp-nav-height) + 1rem);
 }
 
