@@ -3,6 +3,7 @@ import { ref, computed, shallowRef, watch, onMounted } from 'vue'
 import GhulExample from './GhulExample.vue'
 import { countEvent } from '../events'
 import { tokenise } from '../rosetta-highlight'
+import { PLAYGROUND_BASE } from '../playground'
 import { shownSlug, shownFilter, showAt, replaceAt } from '../rosetta-route'
 import {
   loadCorpus, taskBySlug, matching, tagCounts, draw, addressOf, filterFromSearch,
@@ -90,6 +91,43 @@ async function part(entry) {
   }
 }
 
+// The playground's own page for a part, which runs the program on arrival and carries the editor,
+// the output pane and the pictures a drawing produces. The task page frames that page rather than
+// rebuilding any of it, so there is one playground and it is the one a reader reaches by any other
+// route too. Same origin as the site, which is what lets the page be framed at all.
+const playgroundUrl = entry => `${PLAYGROUND_BASE}rosetta-code/${entry.id}`
+
+// The one part that runs on arrival. Framing every part would start a run per part against a
+// service that admits six at once, so the first runnable part is framed and the rest are links to
+// their own pages, where each runs when it is opened.
+const framed = computed(() => parts.value.find(entry => entry.playground) ?? null)
+
+// The section's own introduction sits above the explorer, in the page's markdown, and it is what a
+// reader arriving at the section reads first. A reader arriving at a task's address came for the
+// task, and on a phone that introduction is what puts it below the fold - so it stands down for an
+// arrival at a task, and comes back on returning to the section. Decided once, on arrival: the
+// explorer writes its random pick into the address soon after, and the address alone stops saying
+// which of the two this was.
+const arrivedAtTask = ref(false)
+const root = ref(null)
+
+function introduction() {
+  const items = []
+
+  for (let node = root.value?.parentElement?.firstElementChild; node && node !== root.value;
+       node = node.nextElementSibling) {
+    items.push(node)
+  }
+
+  return items
+}
+
+watch(shownSlug, slug => {
+  if (!arrivedAtTask.value) return
+
+  for (const node of introduction()) node.style.display = slug ? 'none' : ''
+})
+
 // The task whose parts `parts` holds, so a fetch that finishes after the reader has moved on is
 // dropped rather than shown under the wrong heading.
 let loading = null
@@ -147,6 +185,12 @@ function show(task) {
 }
 
 onMounted(async () => {
+  arrivedAtTask.value = shownSlug.value !== null
+
+  if (arrivedAtTask.value) {
+    for (const node of introduction()) node.style.display = 'none'
+  }
+
   // The address of a task reached from outside was handed to the router as the section's, so that
   // it had a page to load. Put it back, now that there is an explorer to show the task.
   if (shownSlug.value) replaceAt(addressOf({ slug: shownSlug.value }))
@@ -200,7 +244,7 @@ watch(shownFilter, search => {
 </script>
 
 <template>
-  <div class="rosetta-explorer">
+  <div ref="root" class="rosetta-explorer">
     <p v-if="failure" class="rosetta-failure">
       The solutions are read from
       <a href="https://github.com/degory/ghul-rosetta-code" target="_blank" rel="noreferrer">
@@ -247,7 +291,23 @@ watch(shownFilter, search => {
 
           <p v-if="entry.reason" class="rosetta-unsupported">{{ entry.reason }}</p>
 
-          <GhulExample :name="entry.name" :data="entry.data" run-to-see />
+          <!-- The playground itself, as a panel on the page. The one that runs on arrival is
+               framed; a further way of solving the task is a link to its own page. A part that
+               cannot run in a browser is shown as it is recorded. -->
+          <iframe
+            v-if="entry === framed"
+            class="rosetta-playground"
+            :src="playgroundUrl(entry)"
+            :title="`${shown.title} in the playground`"
+            loading="eager"
+            allow="clipboard-write"
+          ></iframe>
+
+          <p v-else-if="entry.playground" class="rosetta-part-link">
+            <a :href="playgroundUrl(entry)">run this one in the playground</a>
+          </p>
+
+          <GhulExample v-else :name="entry.name" :data="entry.data" />
         </template>
       </section>
 
@@ -413,6 +473,22 @@ watch(shownFilter, search => {
 }
 
 .rosetta-featured-tags {
+  margin: 0.5rem 0 1rem;
+}
+
+/* The playground fills whatever it is given, so the frame decides the panel: tall enough to hold
+   an editor over its output pane, bounded by the viewport so the whole of it is on the first
+   screen, and never so tall that a wide window turns it into a wall. */
+.rosetta-playground {
+  display: block;
+  width: 100%;
+  height: clamp(28rem, calc(100vh - 12rem), 60rem);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg);
+}
+
+.rosetta-part-link {
   margin: 0.5rem 0 1rem;
 }
 
