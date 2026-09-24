@@ -14,7 +14,7 @@
 // Everything here is plain data and plain functions: no framework, no fetch of its own beyond the
 // two below, so the filtering and the routing can be tested directly.
 
-export const CORPUS_ROOT = 'https://raw.githubusercontent.com/degory/ghul-rosetta-code/main/'
+export const CORPUS_ROOT = 'https://raw.githubusercontent.com/ghul-lang/ghul-rosetta-code/main/'
 
 // raw.githubusercontent.com answers cross-origin requests and, unlike the GitHub API, is not held
 // to 60 requests an hour. The playground fetches the same sources from it.
@@ -63,6 +63,14 @@ function task(raw) {
       heading: part.heading,
       playground: part.playground !== false,
       source: `${CORPUS_ROOT}${part.source}`,
+      // What the solution is recorded as producing. Shown where a run cannot
+      // happen, so the result region is not empty on a page whose point is
+      // the result.
+      output: part.output ? `${CORPUS_ROOT}${part.output}` : null,
+      images: (part.images ?? []).map(image => ({
+        name: image.replace(/^.*\//, '').replace(/\.expected$/, ''),
+        url: `${CORPUS_ROOT}${image}`,
+      })),
       // Why a solution cannot run here, where it cannot: one line, written beside the solution.
       unsupported: `${CORPUS_ROOT}${part.source.replace(/\/[^/]*$/, '')}/playground-unsupported`,
     })),

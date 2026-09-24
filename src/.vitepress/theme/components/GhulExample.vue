@@ -33,6 +33,16 @@ const props = defineProps({
   // appear only once the reader runs it. For a page of programs to try, where
   // output that is there before anything has run reads as a run that happened.
   runToSee: { type: Boolean, default: false },
+  // Run as soon as the editor is ready, without the reader finding the button.
+  // For a landing page, where somebody has followed a link to see one program
+  // and the result is the point. Off everywhere else: an examples page that ran
+  // every card on arrival would post one compile per card.
+  runOnArrival: { type: Boolean, default: false },
+  // Source and result in fixed proportions that fit the viewport, rather than
+  // the source taking all the height its content needs and pushing the result
+  // off the bottom of the page. Same proportions as the fill-the-window mode,
+  // in place rather than over the page.
+  stage: { type: Boolean, default: false },
 })
 
 const example = computed(() => props.data)
@@ -318,8 +328,12 @@ function isShortOutput(output) {
   return output.replace(/\n+$/, '').split('\n').length <= 2
 }
 
+// A picture is the whole of what a drawing example produces, so a card that
+// has one opens whatever its output measures.
 const outputExpanded = ref(
-  diagnostics.value.length > 0 || isShortOutput(props.runToSee ? '' : example.value?.output)
+  diagnostics.value.length > 0 ||
+  (!props.runToSee && (example.value?.images ?? []).length > 0) ||
+  isShortOutput(props.runToSee ? '' : example.value?.output)
 )
 
 function toggleOutput() {
@@ -342,6 +356,10 @@ const panelLabel = computed(() =>
 // growing a second one that would have to be styled to match.
 
 const canEdit = ref(false)
+// Whether the question has been answered yet, which is not the same as the
+// answer: both are false until the probe comes back, and what the panel should
+// show differs between "no back end" and "not asked yet".
+const playgroundSettled = ref(false)
 const editing = ref(false)
 const frame = ref(null)
 const frameHeight = ref(0)
@@ -376,6 +394,24 @@ function endInput() {
 // example's hidden scaffolding.
 const filling = ref(false)
 
+// The bounded stage is for seeing a program and its result together. Reading
+// the source is a different errand, so it gets a control rather than a
+// compromise between the two.
+const openedOut = ref(false)
+
+function toggleOpenedOut() {
+  openedOut.value = !openedOut.value
+}
+
+// The picture takes the result region on a staged card, so hiding it is how a
+// reader gets back to the source without leaving the page. Restoring it costs
+// nothing: the image is still there, just not shown.
+const imagesHidden = ref(false)
+
+function toggleImages() {
+  imagesHidden.value = !imagesHidden.value
+}
+
 function toggleFilling() {
   filling.value = !filling.value
   document.body.classList.toggle('ghul-example-expanded-open', filling.value)
@@ -395,7 +431,16 @@ const edited = ref(retainedEdit(props.name) !== null)
 // than a program, so opening one in the editor would only produce a wall of
 // errors about the placeholders.
 if (!props.signature && !isSnippet.value && example.value?.playground !== false) {
-  playgroundAvailable().then(available => { canEdit.value = available })
+  playgroundAvailable().then(available => {
+    canEdit.value = available
+    playgroundSettled.value = true
+
+    // A landing page's whole purpose is showing what the program does, so it
+    // does not wait to be asked.
+    if (available && props.runOnArrival) startEditing()
+  })
+} else {
+  playgroundSettled.value = true
 }
 
 const embedUrl = `${PLAYGROUND_BASE}embed.html`
@@ -403,14 +448,60 @@ const embedUrl = `${PLAYGROUND_BASE}embed.html`
 // What the panel shows: the recorded output of the verified example, or what
 // the reader's own edit produced.
 const shownDiagnostics = computed(() => editing.value ? liveDiagnostics.value : diagnostics.value)
-const recordedOutput = computed(() => props.runToSee ? '' : example.value?.output ?? '')
-const recordedImages = computed(() => props.runToSee ? [] : example.value?.images ?? [])
+// `runToSee` holds back what the example is recorded as producing until the
+// reader runs it. That only makes sense while running is possible: with no back
+// end nothing ever will, and holding it back then leaves the result area empty
+// on a page whose point is the result. So once the probe has answered no, the
+// recorded output is what there is.
+const willNeverRun = computed(() => playgroundSettled.value && !canEdit.value)
 
-const shownOutput = computed(() => editing.value ? liveOutput.value : recordedOutput.value)
+const recordedOutput = computed(() =>
+  props.runToSee && !willNeverRun.value ? '' : example.value?.output ?? '')
+
+const recordedImages = computed(() =>
+  props.runToSee && !willNeverRun.value ? [] : example.value?.images ?? [])
+
+// `outputExpanded` is decided when the card is set up, and a card holding its
+// recorded output back has nothing to decide from at that moment. Once the
+// probe has answered no and the recorded output is what there is, the panel
+// takes the state it would have had were the output there from the start.
+watch(willNeverRun, settled => {
+  if (settled && props.runToSee) {
+    outputExpanded.value =
+      diagnostics.value.length > 0 ||
+      recordedImages.value.length > 0 ||
+      isShortOutput(recordedOutput.value)
+  }
+})
+
+const producedOutput = computed(() => editing.value ? liveOutput.value : recordedOutput.value)
 
 // The pictures follow the same rule: what the example is recorded as drawing,
 // until the reader runs their own version.
 const shownImages = computed(() => editing.value ? liveImages.value : recordedImages.value)
+
+// `show` announces a picture on standard output as `<<image name>>`, which is how the page is told
+// one is there. Where the picture it names is shown below, the line is the caption said twice, so
+// it is dropped; a line naming a picture that is not shown stays, because then it is all the reader
+// has saying one was drawn.
+const shownOutput = computed(() => {
+  const shown = new Set(shownImages.value.map(image => image.name))
+
+  return producedOutput.value
+    .split('\n')
+    .filter(line => {
+      const marker = line.match(/^\s*<<image\s+(.+?)\s*>>\s*$/)
+
+      return !marker || !shown.has(marker[1])
+    })
+    .join('\n')
+})
+
+// Between arriving and the first status there is a gap - the frame has to load
+// and the editor has to come up - and on a landing page that gap is the first
+// thing a visitor sees. It gets a state of its own so the result area is never
+// blank and silent.
+const awaitingArrival = ref(false)
 
 const runLabel = computed(() => {
   if (!editing.value) return null
@@ -418,8 +509,34 @@ const runLabel = computed(() => {
   return runState.value === 'compiling' ? 'compiling ...'
     : runState.value === 'starting runtime' ? 'starting the runtime ...'
       : runState.value === 'running' ? 'running ...'
-        : null
+        : awaitingArrival.value ? 'starting ...'
+          : null
 })
+
+// What the result area says while nothing has arrived yet. Only on a landing:
+// elsewhere an empty panel is correct, because nothing has been asked for.
+const waitingNote = computed(() =>
+  props.runOnArrival && awaitingArrival.value && !shownOutput.value && !shownImages.value.length
+    ? 'compiling and running this program ...'
+    : null)
+
+// How long a visitor who followed a link waited before anything appeared. The
+// same bands the playground uses, under this component's own event family so an
+// explorer run stays distinguishable from a playground run. Once per arrival:
+// every later run has the runtime in the browser's cache and would flatter it.
+function noteFirstOutput() {
+  awaitingArrival.value = false
+
+  if (!arrivalStartedAt) return
+
+  const ms = performance.now() - arrivalStartedAt
+
+  arrivalStartedAt = 0
+
+  countEvent(`example-first-output/${
+    ms < 1000 ? 'under-1s' : ms < 3000 ? '1-3s' : ms < 10000 ? '3-10s' : 'over-10s'
+  }`, 'example first output')
+}
 
 function post(type, payload = {}) {
   frame.value?.contentWindow?.postMessage(
@@ -444,7 +561,18 @@ function onFrameMessage(event) {
     return
   }
 
-  if (message.type === 'ready') { frameReady.value = true; return }
+  if (message.type === 'ready') {
+    frameReady.value = true
+
+    // The editor exists, so there is something to run. This is the only place
+    // a run starts without the reader asking, and it happens once.
+    if (props.runOnArrival && !arrivalRunStarted) {
+      arrivalRunStarted = true
+      run()
+    }
+
+    return
+  }
 
   // Escape pressed with the editor focused: the key never reaches this page,
   // so the frame forwards it.
@@ -460,8 +588,21 @@ function onFrameMessage(event) {
   }
   if (message.type === 'height') { frameHeight.value = message.height; return }
   if (message.type === 'analyser') { analyser.value = message.state; return }
-  if (message.type === 'output') { liveOutput.value = message.text ?? ''; return }
-  if (message.type === 'images') { liveImages.value = message.images ?? []; return }
+  if (message.type === 'output') {
+    liveOutput.value = message.text ?? ''
+
+    if (message.text) noteFirstOutput()
+
+    return
+  }
+
+  if (message.type === 'images') {
+    liveImages.value = message.images ?? []
+
+    if (message.images?.length) noteFirstOutput()
+
+    return
+  }
   if (message.type === 'input-wanted') {
     inputWanted.value = true
     outputExpanded.value = true
@@ -481,6 +622,12 @@ function onFrameMessage(event) {
     recordResult(message.state, message.detail)
 
     runState.value = message.state
+
+    // A run that fails or throws may produce nothing, so the waiting state ends
+    // on the status as well as on the first output.
+    if (message.state === 'done' || message.state === 'failed' || message.state === 'error') {
+      awaitingArrival.value = false
+    }
     if (message.state !== 'running') inputWanted.value = false
     if (message.state === 'done' || message.state === 'failed' || message.state === 'error') {
       // Leave the last state visible only while it is interesting.
@@ -510,6 +657,8 @@ function startEditing() {
 
   window.addEventListener('message', onFrameMessage)
   stopWatchingTheme = watchTheme(theme => post('theme', { theme }))
+
+  if (props.runOnArrival) awaitingArrival.value = true
 }
 
 function stopEditing() {
@@ -531,8 +680,16 @@ function stopEditing() {
   stopWatchingTheme = null
 }
 
+// Once per mount: a later run is the reader's, and counting it as an arrival
+// would say a visitor waited for a cold start they did not wait for.
+let arrivalRunStarted = false
+let arrivalStartedAt = 0
+
 function run() {
   record('run')
+
+  if (props.runOnArrival && !arrivalStartedAt) arrivalStartedAt = performance.now()
+
   post('run')
 }
 
@@ -557,7 +714,11 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div v-if="example" class="ghul-example" :class="{ 'is-filling': filling }">
+  <div
+    v-if="example"
+    class="ghul-example"
+    :class="{ 'is-filling': filling, 'is-staged': stage, 'is-opened-out': stage && openedOut }"
+  >
     <span v-if="!canEdit" class="ghul-example-lang">ghul</span>
 
     <div class="ghul-example-tools" :class="{ 'is-editing': editing }">
@@ -577,6 +738,15 @@ onBeforeUnmount(() => {
         <polyline points="20 6 9 17 4 12" />
       </svg>
     </button>
+    <button
+      v-if="stage"
+      type="button"
+      class="ghul-example-tool"
+      :class="{ 'is-active': openedOut }"
+      :title="openedOut ? 'fit the source to the screen' : 'open the source out to its full length'"
+      :aria-pressed="openedOut"
+      @click="toggleOpenedOut"
+    >{{ openedOut ? 'fit' : 'read it all' }}</button>
     <button
       v-if="editing"
       type="button"
@@ -676,7 +846,7 @@ onBeforeUnmount(() => {
         </div>
       </template>
     </div>
-    <div v-if="recordedOutput || recordedImages.length || diagnostics.length || editing" class="ghul-example-output">
+    <div v-if="recordedOutput || recordedImages.length || diagnostics.length || editing || runOnArrival" class="ghul-example-output">
       <button
         type="button"
         class="ghul-example-output-toggle"
@@ -733,6 +903,14 @@ onBeforeUnmount(() => {
           </span>
         </template>
       </button>
+      <button
+        v-if="stage && shownImages.length"
+        type="button"
+        class="ghul-example-tool ghul-example-hide-picture"
+        :title="imagesHidden ? 'show the picture again' : 'hide the picture and show the source'"
+        :aria-pressed="imagesHidden"
+        @click="toggleImages"
+      >{{ imagesHidden ? 'show the picture' : 'hide the picture' }}</button>
       <div v-show="outputExpanded" class="ghul-example-output-body">
         <div
           v-for="(d, k) in shownDiagnostics"
@@ -742,6 +920,7 @@ onBeforeUnmount(() => {
           <DiagnosticIcon :severity="d.severity" />
           <span class="ghul-example-diag-text">{{ d.message }}</span>
         </div>
+        <p v-if="waitingNote" class="ghul-example-waiting">{{ waitingNote }}</p>
         <pre v-if="shownOutput">{{ shownOutput }}</pre>
         <form
           v-if="editing && inputWanted"
@@ -759,7 +938,7 @@ onBeforeUnmount(() => {
           <button type="submit">send</button>
           <button type="button" title="no more input" @click="endInput">end</button>
         </form>
-        <div v-if="shownImages.length" class="ghul-example-images">
+        <div v-if="shownImages.length && !imagesHidden" class="ghul-example-images">
           <figure v-for="image in shownImages" :key="image.name">
             <img :src="image.url" :alt="image.name" />
             <figcaption>{{ image.name }}</figcaption>
@@ -1013,26 +1192,140 @@ onBeforeUnmount(() => {
 
 /* The editor takes what is left after the output pane, rather than the height
    its content happens to need. */
-.ghul-example.is-filling .ghul-example-frame-wrap {
+.ghul-example.is-filling .ghul-example-frame-wrap,
+.ghul-example.is-staged .ghul-example-frame-wrap {
   flex: 1;
   min-height: 0;
 }
 
-.ghul-example.is-filling .ghul-example-frame {
+.ghul-example.is-filling .ghul-example-frame,
+.ghul-example.is-staged .ghul-example-frame {
   height: 100%;
 }
 
-.ghul-example.is-filling .ghul-example-output {
+.ghul-example.is-filling .ghul-example-output,
+.ghul-example.is-staged .ghul-example-output {
   display: flex;
   flex-direction: column;
   max-height: 45%;
   min-height: 2.2rem;
 }
 
-.ghul-example.is-filling .ghul-example-output-body {
+.ghul-example.is-filling .ghul-example-output-body,
+.ghul-example.is-staged .ghul-example-output-body {
   flex: 1;
   min-height: 0;
   overflow: auto;
+}
+
+/* The staged card: the same proportions as filling the window, in place. It is
+   bounded by the viewport rather than lifted out of the page, because a visitor
+   who followed a link to one task should see the whole of it at once and still
+   have the page under it to scroll into.
+
+   This deliberately reverses the arrangement the frame's height message exists
+   for. Everywhere else the card grows to whatever the editor reports it needs,
+   so the editor never has its own scrollbar inside the page's; here the stage
+   is bounded and the source scrolls inside it, which is the point. The height
+   message still drives the unstaged card. */
+.ghul-example.is-staged {
+  display: flex;
+  flex-direction: column;
+  /* The chrome around the card, and room for the onward paths under it, so the
+     stage does not push them off the first screen on its own. */
+  max-height: calc(100vh - 12rem);
+  min-height: 20rem;
+}
+
+/* The source keeps a readable minimum, and scrolls within it rather than
+   growing. Without this the static rendering takes its content's full height
+   before the editor has loaded, which is the whole fault being fixed. */
+.ghul-example.is-staged .ghul-example-code {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+/* A control to read the source at its own length, when the bounded stage is
+   the wrong shape for reading rather than for looking. */
+.ghul-example.is-staged.is-opened-out {
+  max-height: none;
+}
+
+.ghul-example.is-staged.is-opened-out .ghul-example-code {
+  overflow: visible;
+}
+
+/* Beyond about this width there is room for source and result side by side,
+   which keeps both on the first screen instead of stacking to twice the
+   height. Below it they stack, and the source gives up more of the space,
+   since the result is what was followed here.
+
+   Scoped to the staged card on purpose: the examples through the rest of the
+   site have never had a breakpoint and do not gain one here. */
+@media (min-width: 1000px) {
+  .ghul-example.is-staged:not(.is-opened-out) {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .ghul-example.is-staged:not(.is-opened-out) .ghul-example-frame-wrap,
+  .ghul-example.is-staged:not(.is-opened-out) .ghul-example-code {
+    flex: 1 1 50%;
+  }
+
+  .ghul-example.is-staged:not(.is-opened-out) .ghul-example-output {
+    flex: 1 1 50%;
+    max-height: none;
+    border-left: 1px solid var(--vp-c-divider);
+  }
+}
+
+@media (max-width: 999px) {
+  /* Half the viewport, so the result is on screen without scrolling past two
+     hundred lines of source. */
+  .ghul-example.is-staged:not(.is-opened-out) .ghul-example-frame-wrap,
+  .ghul-example.is-staged:not(.is-opened-out) .ghul-example-code {
+    max-height: 45vh;
+  }
+
+  .ghul-example.is-staged .ghul-example-output {
+    max-height: 55%;
+  }
+}
+
+/* A picture is the result for the tasks that draw, so on a staged card it takes
+   the region rather than sitting under the text at thumbnail size. Scaled to
+   fit, so a large raster does not decide the stage's height. */
+.ghul-example.is-staged .ghul-example-images {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.ghul-example.is-staged .ghul-example-images figure {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.ghul-example.is-staged .ghul-example-images img {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  object-fit: contain;
+}
+
+/* Said in the result area rather than only in the toolbar, because on arrival
+   the result area is what a visitor is looking at and it would otherwise be
+   empty for as long as the runtime takes. */
+.ghul-example-waiting {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  color: var(--vp-c-text-2);
+  font-style: italic;
 }
 
 /* The rendered example stays put until the editor has loaded, so the card does
