@@ -10,15 +10,15 @@ The [online REPL](https://ghul.dev/repl/) runs ghūl a submission at a time inst
 
 ## in a Codespace
 
-The [ghūl scratchpad](https://github.com/degory/ghul-scratchpad) is a minimal one-file project: open it in a GitHub Codespace and it arrives with the .NET SDK, the compiler and the language extension ready to go. Paste any example from this site into `main.ghul`{:text} and `dotnet run`{:sh}. This needs a GitHub account and nothing else.
+The [ghūl scratchpad](https://github.com/ghul-lang/ghul-scratchpad) is a minimal one-file project: open it in a GitHub Codespace and it arrives with the .NET SDK, the compiler and the language extension ready to go. Paste any example from this site into `main.ghul`{:text} and `dotnet run`{:sh}. This needs a GitHub account and nothing else.
 
-The [examples repository](https://github.com/degory/ghul-examples) works the same way, with fuller, runnable examples organised by topic.
+The [examples repository](https://github.com/ghul-lang/ghul-examples) works the same way, with fuller, runnable examples organised by topic.
 
 Both repositories are configured as [dev containers](https://containers.dev), so the same ready-made environment also opens in VS Code with the Dev Containers extension, or in any other tool that supports them.
 
 ## on your own machine
 
-To work locally you need the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) and an editor, and some ghūl code to start from - clone the scratchpad or the examples repository above, or start a project of your own from the [repository template](https://github.com/degory/ghul-repository-template). The compiler is pinned in each repository as a local .NET tool, so it arrives with the code: `dotnet tool restore`{:sh} fetches it.
+To work locally you need the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) and an editor, and some ghūl code to start from - clone the scratchpad or the examples repository above, or start a project of your own from the [repository template](https://github.com/ghul-lang/ghul-repository-template). The compiler is pinned in each repository as a local .NET tool, so it arrives with the code: `dotnet tool restore`{:sh} fetches it.
 
 The quickest way to run ghūl locally needs no project at all. With the .NET SDK installed, the `ghul`{:sh} command runs a single `.ghul`{:text} file directly, or starts an interactive session, as [scripts, the REPL and notebooks](/scripts-and-repl) describes:
 

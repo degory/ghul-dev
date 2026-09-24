@@ -1,7 +1,7 @@
 # history
 
 ## background
-The ghūl [compiler](https://github.com/degory/ghul) is a [self-hosting compiler](https://en.wikipedia.org/wiki/Self-hosting_(compilers)): it can compile itself from its own source code. Developing the self-hosting ghūl compiler required an initial [bootstrap](https://en.wikipedia.org/wiki/Bootstrapping_(compilers)). Bootstrapping a new compiler for a new language is a classic chicken-and-egg problem: you need a compiler to compile your new compiler, but that compiler doesn’t exist yet.
+The ghūl [compiler](https://github.com/ghul-lang/ghul) is a [self-hosting compiler](https://en.wikipedia.org/wiki/Self-hosting_(compilers)): it can compile itself from its own source code. Developing the self-hosting ghūl compiler required an initial [bootstrap](https://en.wikipedia.org/wiki/Bootstrapping_(compilers)). Bootstrapping a new compiler for a new language is a classic chicken-and-egg problem: you need a compiler to compile your new compiler, but that compiler doesn’t exist yet.
 
 The solution is to write the initial compiler in an existing language. Once that compiler is sufficiently reliable, its source code must be somehow translated into the new language. This results in a compiler that can compile the new language including its own source code.
 

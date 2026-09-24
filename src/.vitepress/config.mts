@@ -297,7 +297,7 @@ export default defineConfig({
     outline: { level: [2, 3], label: 'on this page' },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/degory/ghul' },
+      { icon: 'github', link: 'https://github.com/ghul-lang/ghul' },
     ],
 
     sidebar: SECTIONS,

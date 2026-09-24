@@ -14,7 +14,7 @@ npm run build && npm run serve
 ## rosetta-corpus.test.mjs
 
 The Rosetta Code section is one page that reads the corpus from
-[ghul-rosetta-code](https://github.com/degory/ghul-rosetta-code) when a reader opens it. Which task
+[ghul-rosetta-code](https://github.com/ghul-lang/ghul-rosetta-code) when a reader opens it. Which task
 a page address names, and which tasks a search and a set of tags leave, are the two decisions that
 would otherwise only be found wrong in a browser, so they are plain functions in
 `src/.vitepress/theme/rosetta-corpus.js` and this covers them.
