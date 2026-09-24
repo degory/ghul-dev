@@ -6,7 +6,7 @@ import RosettaOnward from './RosettaOnward.vue'
 import RosettaList from './RosettaList.vue'
 import { countEvent } from '../events'
 import { tokenise } from '../rosetta-highlight'
-import { PLAYGROUND_BASE } from '../playground'
+import { PLAYGROUND_BASE, PLAYGROUND_ORIGIN } from '../playground'
 import { shownSlug, shownFilter, showAt, replaceAt } from '../rosetta-route'
 import { corpus, query, chosen, toggleTag } from '../rosetta-filter'
 import { loadCorpus, taskBySlug, matching, draw, addressOf, filterFromSearch } from '../rosetta-corpus'
@@ -28,8 +28,12 @@ const failure = ref(null)
 // list. Held apart from `picked` so that going back to the section restores the random pick.
 const picked = shallowRef(null)
 
+// The section as a page of the filter and its results, with no task shown. Read from the
+// address, so it is a link, and left by choosing a task.
+const browsing = ref(false)
+
 const shown = computed(() => {
-  if (!corpus.value) return null
+  if (!corpus.value || browsing.value) return null
 
   return shownSlug.value ? taskBySlug(corpus.value, shownSlug.value) : picked.value
 })
@@ -230,8 +234,24 @@ function anotherOnward() {
   another()
 }
 
-onMounted(() => window.addEventListener('resize', sizeFrame))
-onBeforeUnmount(() => window.removeEventListener('resize', sizeFrame))
+// Escape reaches the framed playground only once the reader has clicked into it; until then the
+// key is this page's, and the playground is told so that it can close its pictures.
+function forwardEscape(event) {
+  if (event.key !== 'Escape') return
+
+  root.value?.querySelector('.rosetta-playground')?.contentWindow
+    ?.postMessage({ ghul: 'escape' }, PLAYGROUND_ORIGIN)
+}
+
+onMounted(() => {
+  window.addEventListener('resize', sizeFrame)
+  window.addEventListener('keydown', forwardEscape)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', sizeFrame)
+  window.removeEventListener('keydown', forwardEscape)
+})
 
 onMounted(async () => {
   arrivedAtTask.value = shownSlug.value !== null
@@ -248,6 +268,7 @@ onMounted(async () => {
 
   query.value = filter.query
   chosen.value = new Set(filter.tags)
+  browsing.value = filter.browse
 
   try {
     corpus.value = await loadCorpus()
@@ -259,14 +280,14 @@ onMounted(async () => {
 
   // A random pick differs between the prerender and the reader's browser, so it is made only once
   // the page is live - and only where the address does not already name a task.
-  if (!shownSlug.value) another(false)
+  if (!shownSlug.value && !browsing.value) another(false)
 })
 
 // Narrowing the filter to something the shown task is not part of picks a new one; widening it
 // leaves the reader looking at what they were looking at. A task reached by its own address stays
 // put: they asked for that one.
 watch(matches, tasks => {
-  if (shownSlug.value) return
+  if (shownSlug.value || browsing.value) return
   if (picked.value && !tasks.some(task => task.slug === picked.value.slug)) another(false)
 })
 
@@ -275,7 +296,7 @@ watch(matches, tasks => {
 watch([query, chosen], () => {
   if (shownSlug.value) return
 
-  replaceAt(addressOf({ query: query.value, tags: [...chosen.value] }))
+  replaceAt(addressOf({ query: query.value, tags: [...chosen.value], browse: browsing.value }))
 })
 
 // Following a link back to the section restores the filter that link carried.
@@ -289,11 +310,28 @@ watch(shownFilter, search => {
   if (filter.tags.join(',') !== [...chosen.value].sort().join(',')) {
     chosen.value = new Set(filter.tags)
   }
+
+  browsing.value = filter.browse
 })
+
+// A task chosen from the browse page is shown as a task; the section's own address, reached by
+// going back or by a link, picks one at random as it always did.
+watch(shownSlug, slug => {
+  if (slug) browsing.value = false
+})
+
+// The browse page, reached from beside a task: the filter as it stands, on a page of its own.
+const browseAddress = computed(() =>
+  addressOf({ query: query.value, tags: [...chosen.value], browse: true }))
+
+function browse() {
+  showAt(browseAddress.value)
+  browsing.value = true
+}
 </script>
 
 <template>
-  <div ref="root" class="rosetta-explorer">
+  <div ref="root" class="rosetta-explorer" :class="{ 'is-browsing': browsing }">
     <p v-if="failure" class="rosetta-failure">
       The solutions are read from
       <a href="https://github.com/degory/ghul-rosetta-code" target="_blank" rel="noreferrer">
@@ -386,6 +424,10 @@ watch(shownFilter, search => {
 
         <RosettaControls stacked />
 
+        <p class="rosetta-browse">
+          <a :href="browseAddress" @click.prevent="browse">search on a page of its own</a>
+        </p>
+
         <RosettaList stacked :matches="matches" :current="shown?.slug" @show="show" />
       </Teleport>
     </template>
@@ -405,11 +447,17 @@ watch(shownFilter, search => {
   font-size: 0.9rem;
 }
 
-/* The aside shows at 1280px and up (the site's own breakpoint), and carries these from there. */
+/* The aside shows at 1280px and up (the site's own breakpoint), and carries these from there -
+   except on the browse page, which has no task and so nothing in the aside. */
 @media (min-width: 1280px) {
-  .rosetta-inline {
+  .rosetta-explorer:not(.is-browsing) .rosetta-inline {
     display: none;
   }
+}
+
+.rosetta-browse {
+  margin: 0.25rem 0 0.75rem;
+  font-size: 0.8rem;
 }
 
 .rosetta-featured-tags {
