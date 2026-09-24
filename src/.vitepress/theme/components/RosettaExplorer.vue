@@ -299,8 +299,6 @@ watch(shownFilter, search => {
           <h2 :id="shown.slug">{{ shown.title }}</h2>
 
           <a class="rosetta-wiki" :href="shown.url" target="_blank" rel="noreferrer">on Rosetta Code</a>
-
-          <button type="button" class="rosetta-another" @click="another">another</button>
         </header>
 
         <p class="rosetta-featured-tags">
@@ -343,7 +341,23 @@ watch(shownFilter, search => {
         <!-- Under the result, where somebody who has just watched a program run is
              looking, rather than in the header they scrolled past. -->
         <nav v-if="shown" class="rosetta-onward">
-          <button type="button" class="rosetta-another" @click="anotherOnward">another</button>
+          <button
+            type="button"
+            class="rosetta-another"
+            aria-label="show a randomly chosen task"
+            title="show a randomly chosen task"
+            @click="anotherOnward"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="3" />
+              <circle cx="8.5" cy="8.5" r="1.1" fill="currentColor" stroke="none" />
+              <circle cx="15.5" cy="8.5" r="1.1" fill="currentColor" stroke="none" />
+              <circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none" />
+              <circle cx="8.5" cy="15.5" r="1.1" fill="currentColor" stroke="none" />
+              <circle cx="15.5" cy="15.5" r="1.1" fill="currentColor" stroke="none" />
+            </svg>
+            <span>another</span>
+          </button>
 
           <template v-if="alike.length">
             <span class="rosetta-onward-label">more like this</span>
@@ -536,11 +550,20 @@ watch(shownFilter, search => {
 }
 
 .rosetta-another {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   padding: 0.25rem 0.9rem;
   border: 1px solid var(--vp-c-brand-1);
   border-radius: 6px;
   color: var(--vp-c-brand-1);
   font-size: 0.9rem;
+}
+
+.rosetta-another svg {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
 }
 
 .rosetta-another:hover {

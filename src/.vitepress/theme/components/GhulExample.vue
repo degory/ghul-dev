@@ -480,6 +480,14 @@ const producedOutput = computed(() => editing.value ? liveOutput.value : recorde
 // until the reader runs their own version.
 const shownImages = computed(() => editing.value ? liveImages.value : recordedImages.value)
 
+// Whether the panel's body has anything in it. An expander that opens onto an
+// empty box is indistinguishable from one that does not work.
+const hasResult = computed(() =>
+  shownDiagnostics.value.length > 0 ||
+  shownOutput.value.length > 0 ||
+  (shownImages.value.length > 0 && !imagesHidden.value) ||
+  (editing.value && inputWanted.value))
+
 // `show` announces a picture on standard output as `<<image name>>`, which is how the page is told
 // one is there. Where the picture it names is shown below, the line is the caption said twice, so
 // it is dropped; a line naming a picture that is not shown stays, because then it is all the reader
@@ -876,7 +884,10 @@ onBeforeUnmount(() => {
         <span v-if="waitingNote" class="ghul-example-waiting">{{ waitingNote }}</span>
 
         <template v-if="editing">
-          <span class="ghul-example-run-state">{{ runLabel }}</span>
+          <!-- One status on this line at a time: while the arrival run is in
+               flight its note is what the panel is saying, and the ordinary run
+               state would repeat it in fewer words. -->
+          <span v-if="!waitingNote" class="ghul-example-run-state">{{ runLabel }}</span>
 
           <!-- The analyser is what serves diagnostics and hover while typing.
                Compiling and running work without it, so its absence is worth
@@ -949,6 +960,8 @@ onBeforeUnmount(() => {
           <button type="submit">send</button>
           <button type="button" title="no more input" @click="endInput">end</button>
         </form>
+        <p v-if="!hasResult" class="ghul-example-nothing-yet">{{ waitingNote ? 'nothing yet' : 'no output' }}</p>
+
         <div v-if="shownImages.length && !imagesHidden" class="ghul-example-images">
           <figure v-for="image in shownImages" :key="image.name">
             <img :src="image.url" :alt="image.name" />
@@ -1390,6 +1403,13 @@ onBeforeUnmount(() => {
    a paragraph of body text in the result area. */
 .ghul-example-waiting {
   color: var(--vp-c-text-3);
+}
+
+.ghul-example-nothing-yet {
+  margin: 0;
+  padding: 0.6rem 1rem;
+  color: var(--vp-c-text-3);
+  font-size: 0.85em;
 }
 
 /* The rendered example stays put until the editor has loaded, so the card does
