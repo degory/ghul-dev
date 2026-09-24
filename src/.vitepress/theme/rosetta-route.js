@@ -53,10 +53,11 @@ export function installRosettaRouting(router) {
 
     if (!within(target.pathname)) return before?.(href)
 
-    // Reached from elsewhere on the site: there is no explorer mounted to show the section, so
-    // let the router load its page, or the browser fetch the page the server answers a task's
+    // Reached from elsewhere on the site, or on the first load - the router's own first move,
+    // made before any page is loaded: there is no explorer mounted to show the section, so let
+    // the router load its page, or the browser fetch the page the server answers a task's
     // address with.
-    if (!within(location.pathname)) {
+    if (!router.route.component || !within(location.pathname)) {
       if (!taskSlugFromPath(target.pathname)) return before?.(href)
 
       location.assign(href)
