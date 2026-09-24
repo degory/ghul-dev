@@ -14,7 +14,7 @@
 // Everything here is plain data and plain functions: no framework, no fetch of its own beyond the
 // two below, so the filtering and the routing can be tested directly.
 
-export const CORPUS_ROOT = 'https://raw.githubusercontent.com/degory/ghul-rosetta-code/main/'
+export const CORPUS_ROOT = 'https://raw.githubusercontent.com/ghul-lang/ghul-rosetta-code/main/'
 
 // raw.githubusercontent.com answers cross-origin requests and, unlike the GitHub API, is not held
 // to 60 requests an hour. The playground fetches the same sources from it.

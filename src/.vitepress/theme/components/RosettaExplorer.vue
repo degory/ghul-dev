@@ -1,12 +1,15 @@
 <script setup>
-import { ref, computed, shallowRef, watch, onMounted } from 'vue'
+import { ref, computed, shallowRef, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import GhulExample from './GhulExample.vue'
+import RosettaControls from './RosettaControls.vue'
+import RosettaOnward from './RosettaOnward.vue'
+import RosettaList from './RosettaList.vue'
 import { countEvent } from '../events'
 import { tokenise } from '../rosetta-highlight'
+import { PLAYGROUND_BASE } from '../playground'
 import { shownSlug, shownFilter, showAt, replaceAt } from '../rosetta-route'
-import {
-  loadCorpus, taskBySlug, matching, tagCounts, draw, addressOf, filterFromSearch,
-} from '../rosetta-corpus'
+import { corpus, query, chosen, toggleTag } from '../rosetta-filter'
+import { loadCorpus, taskBySlug, matching, draw, addressOf, filterFromSearch } from '../rosetta-corpus'
 
 // The whole Rosetta Code section: one task shown whole and ready to run, with the corpus
 // searchable and filterable beneath it. The task is whichever /rosetta/<slug> the reader arrived
@@ -17,12 +20,9 @@ import {
 // here this morning, and the site stops growing a page per task. What that costs is a section that
 // needs GitHub to be reachable, which is what the failure state below is for.
 
-const corpus = shallowRef(null)
+// The corpus and the filter live in rosetta-filter.js, because the page's aside draws the same
+// controls on a wide screen.
 const failure = ref(null)
-
-const query = ref('')
-const chosen = ref(new Set())
-const runnableOnly = ref(true)
 
 // A task shown by address rather than picked: the reader followed a link, or chose one from the
 // list. Held apart from `picked` so that going back to the section restores the random pick.
@@ -37,19 +37,9 @@ const shown = computed(() => {
 const missing = computed(() =>
   corpus.value !== null && shownSlug.value !== null && shown.value === null)
 
-const tags = computed(() => corpus.value ? tagCounts(corpus.value) : [])
-
 const matches = computed(() => corpus.value
-  ? matching(corpus.value, { query: query.value, tags: [...chosen.value], runnableOnly: runnableOnly.value })
+  ? matching(corpus.value, { query: query.value, tags: [...chosen.value], runnableOnly: true })
   : [])
-
-function toggleTag(tag) {
-  const next = new Set(chosen.value)
-
-  if (!next.delete(tag)) next.add(tag)
-
-  chosen.value = next
-}
 
 // --- the shown task's source -------------------------------------------------------------------
 
@@ -89,6 +79,63 @@ async function part(entry) {
       line => line.trim(), () => null),
   }
 }
+
+// The playground's own page for a part, which runs the program on arrival and has the editor,
+// the output pane and the pictures a drawing produces. The task page frames that page rather than
+// rebuilding any of it, so there is one playground and it is the one a reader reaches by any other
+// route too. Same origin as the site, which is what lets the page be framed at all.
+// `panel` tells the playground it is on a page that already names the task and offers the others,
+// so it leaves out the links that would say so again.
+const playgroundUrl = entry => `${PLAYGROUND_BASE}rosetta-code/${entry.id}?panel`
+
+// The one part that runs on arrival. Framing every part would start a run per part against a
+// service that admits six at once, so the first runnable part is framed and the rest are links to
+// their own pages, where each runs when it is opened.
+const framed = computed(() => parts.value.find(entry => entry.playground) ?? null)
+
+// As tall as the window has room for below the frame's top, so that the whole playground is on
+// the screen on arrival rather than its output pane below the fold; never shorter than an editor
+// is worth, never taller than a program's output needs. Measured, because what sits above the
+// frame - the site's header, the task's title, its tags - is not a fixed height.
+const frameHeight = ref('clamp(28rem, calc(100vh - 14rem), 60rem)')
+
+function sizeFrame() {
+  const frame = root.value?.querySelector('.rosetta-playground')
+
+  if (!frame) return
+
+  const top = frame.getBoundingClientRect().top + window.scrollY
+
+  frameHeight.value = `clamp(28rem, calc(100vh - ${Math.round(top) + 24}px), 60rem)`
+}
+
+watch(framed, () => nextTick(sizeFrame))
+
+// The section's own introduction sits above the explorer, in the page's markdown, and it is what a
+// reader arriving at the section reads first. A reader arriving at a task's address came for the
+// task, and on a phone that introduction is what puts it below the fold - so it stands down for an
+// arrival at a task, and comes back on returning to the section. Decided once, on arrival: the
+// explorer writes its random pick into the address soon after, and the address alone stops saying
+// which of the two this was.
+const arrivedAtTask = ref(false)
+const root = ref(null)
+
+function introduction() {
+  const items = []
+
+  for (let node = root.value?.parentElement?.firstElementChild; node && node !== root.value;
+       node = node.nextElementSibling) {
+    items.push(node)
+  }
+
+  return items
+}
+
+watch(shownSlug, slug => {
+  if (!arrivedAtTask.value) return
+
+  for (const node of introduction()) node.style.display = slug ? 'none' : ''
+})
 
 // The task whose parts `parts` holds, so a fetch that finishes after the reader has moved on is
 // dropped rather than shown under the wrong heading.
@@ -146,7 +193,53 @@ function show(task) {
   showAt(addressOf({ slug: task.slug }))
 }
 
+// Two or three tasks sharing a tag with this one, so somebody who liked what they just watched has
+// somewhere to go that is not the list of nine hundred. Runnable only: an onward path to something
+// that cannot run here would undo the point of offering it.
+const alike = computed(() => {
+  const task = shown.value
+
+  if (!task || !corpus.value) return []
+
+  const tags = new Set(task.tags ?? [])
+
+  return corpus.value.tasks
+    .filter(other => other.slug !== task.slug
+      && other.playground
+      && (other.tags ?? []).some(tag => tags.has(tag)))
+    .sort((a, b) =>
+      (b.tags ?? []).filter(tag => tags.has(tag)).length - (a.tags ?? []).filter(tag => tags.has(tag)).length
+      || (b.interest ?? 0) - (a.interest ?? 0)
+      || a.title.localeCompare(b.title))
+    .slice(0, 3)
+})
+
+// The onward controls are counted apart from the list's, because where a reader was when they took
+// one is the thing worth knowing: they sit under the result, where somebody who has just watched a
+// program run is looking.
+function showOnward(task) {
+  countEvent(`rosetta-more/tag/${alike.value.findIndex(other => other.slug === task.slug)}`,
+    'onward to a like task')
+
+  show(task)
+}
+
+function anotherOnward() {
+  countEvent('rosetta-more/another/0', 'onward to another task')
+
+  another()
+}
+
+onMounted(() => window.addEventListener('resize', sizeFrame))
+onBeforeUnmount(() => window.removeEventListener('resize', sizeFrame))
+
 onMounted(async () => {
+  arrivedAtTask.value = shownSlug.value !== null
+
+  if (arrivedAtTask.value) {
+    for (const node of introduction()) node.style.display = 'none'
+  }
+
   // The address of a task reached from outside was handed to the router as the section's, so that
   // it had a page to load. Put it back, now that there is an explorer to show the task.
   if (shownSlug.value) replaceAt(addressOf({ slug: shownSlug.value }))
@@ -200,7 +293,7 @@ watch(shownFilter, search => {
 </script>
 
 <template>
-  <div class="rosetta-explorer">
+  <div ref="root" class="rosetta-explorer">
     <p v-if="failure" class="rosetta-failure">
       The solutions are read from
       <a href="https://github.com/degory/ghul-rosetta-code" target="_blank" rel="noreferrer">
@@ -220,8 +313,6 @@ watch(shownFilter, search => {
           <h2 :id="shown.slug">{{ shown.title }}</h2>
 
           <a class="rosetta-wiki" :href="shown.url" target="_blank" rel="noreferrer">on Rosetta Code</a>
-
-          <button type="button" class="rosetta-another" @click="another">another</button>
         </header>
 
         <p class="rosetta-featured-tags">
@@ -247,54 +338,56 @@ watch(shownFilter, search => {
 
           <p v-if="entry.reason" class="rosetta-unsupported">{{ entry.reason }}</p>
 
-          <GhulExample :name="entry.name" :data="entry.data" run-to-see />
+          <!-- The playground itself, as a panel on the page. The one that runs on arrival is
+               framed; a further way of solving the task is a link to its own page. A part that
+               cannot run in a browser is shown as it is recorded. -->
+          <iframe
+            v-if="entry === framed"
+            class="rosetta-playground"
+            :src="playgroundUrl(entry)"
+            :title="`${shown.title} in the playground`"
+            :style="{ height: frameHeight }"
+            loading="eager"
+            allow="clipboard-write"
+          ></iframe>
+
+          <p v-else-if="entry.playground" class="rosetta-part-link">
+            <a :href="playgroundUrl(entry)">run this one in the playground</a>
+          </p>
+
+          <GhulExample v-else :name="entry.name" :data="entry.data" />
         </template>
+
+        <!-- Under the result, where somebody who has just watched a program run is looking - on a
+             screen without an aside. On a wide one the same paths sit beside the playground. -->
+        <RosettaOnward
+          class="rosetta-inline"
+          :alike="alike"
+          @another="anotherOnward"
+          @show="showOnward"
+        />
       </section>
 
-      <div class="rosetta-controls">
-        <input
-          v-model="query"
-          class="rosetta-filter"
-          type="search"
-          placeholder="search by name or tag"
-          aria-label="search tasks by name or tag"
+      <!-- The same controls and list the aside shows on a wide screen, for a screen without one. -->
+      <RosettaControls class="rosetta-inline" />
+
+      <RosettaList class="rosetta-inline" :matches="matches" :current="shown?.slug" @show="show" />
+
+      <!-- Beside the playground on a wide screen, where the column is the one place a reader can
+           see without scrolling past a panel as tall as the window: where to go next first, then
+           the filter, with the tasks it leaves listed under it and scrolling within the column. -->
+      <Teleport v-if="shown" defer to="#rosetta-aside">
+        <RosettaOnward
+          stacked
+          :alike="alike"
+          @another="anotherOnward"
+          @show="showOnward"
         />
 
-        <label class="rosetta-runnable">
-          <input v-model="runnableOnly" type="checkbox" />
-          runs in the browser
-        </label>
-      </div>
+        <RosettaControls stacked />
 
-      <div class="rosetta-tags" role="group" aria-label="filter by tag">
-        <button
-          v-for="[tag, count] in tags"
-          :key="tag"
-          type="button"
-          class="rosetta-tag"
-          :class="{ 'is-chosen': chosen.has(tag) }"
-          :aria-pressed="chosen.has(tag)"
-          :title="corpus.tags[tag]"
-          @click="toggleTag(tag)"
-        >{{ tag }} <span>{{ count }}</span></button>
-      </div>
-
-      <p class="rosetta-count">
-        {{ matches.length }} {{ matches.length === 1 ? 'task' : 'tasks' }}
-      </p>
-
-      <ul class="rosetta-list">
-        <li v-for="task in matches" :key="task.slug">
-          <a
-            :href="`/rosetta/${task.slug}`"
-            :class="{ 'is-current': task.slug === shown?.slug }"
-            @click.prevent="show(task)"
-          >{{ task.title }}</a>
-          <span v-if="task.images" class="rosetta-mark" title="draws a picture">image</span>
-          <span v-if="task.input" class="rosetta-mark" title="reads what you type">input</span>
-          <span v-if="task.parts.length > 1" class="rosetta-mark">{{ task.parts.length }} ways</span>
-        </li>
-      </ul>
+        <RosettaList stacked :matches="matches" :current="shown?.slug" @show="show" />
+      </Teleport>
     </template>
   </div>
 </template>
@@ -312,38 +405,13 @@ watch(shownFilter, search => {
   font-size: 0.9rem;
 }
 
-.rosetta-controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
-  margin: 1.5rem 0 0.75rem;
+/* The aside shows at 1280px and up (the site's own breakpoint), and carries these from there. */
+@media (min-width: 1280px) {
+  .rosetta-inline {
+    display: none;
+  }
 }
 
-.rosetta-filter {
-  flex: 1;
-  min-width: 12rem;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 6px;
-  background: var(--vp-c-bg-soft);
-  font-size: 1rem;
-}
-
-.rosetta-filter:focus {
-  border-color: var(--vp-c-brand-1);
-  outline: none;
-}
-
-.rosetta-runnable {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--vp-c-text-2);
-  font-size: 0.9rem;
-}
-
-.rosetta-tags,
 .rosetta-featured-tags {
   display: flex;
   flex-wrap: wrap;
@@ -400,59 +468,23 @@ watch(shownFilter, search => {
   white-space: nowrap;
 }
 
-.rosetta-another {
-  padding: 0.25rem 0.9rem;
-  border: 1px solid var(--vp-c-brand-1);
-  border-radius: 6px;
-  color: var(--vp-c-brand-1);
-  font-size: 0.9rem;
-}
-
-.rosetta-another:hover {
-  background: var(--vp-c-brand-soft);
-}
-
 .rosetta-featured-tags {
   margin: 0.5rem 0 1rem;
 }
 
-.rosetta-count {
-  margin: 2rem 0 0.5rem;
-  color: var(--vp-c-text-2);
-  font-size: 0.875rem;
+/* The playground fills whatever it is given, so the frame decides the panel: tall enough to hold
+   an editor over its output pane, bounded by the viewport so the whole of it is on the first
+   screen, and never so tall that a wide window turns it into a wall. */
+.rosetta-playground {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg);
 }
 
-.rosetta-list {
-  columns: 2 16rem;
-  column-gap: 2rem;
-  padding-left: 0;
-  list-style: none;
+.rosetta-part-link {
+  margin: 0.5rem 0 1rem;
 }
 
-.rosetta-list li {
-  margin: 0;
-  padding: 0.15rem 0;
-  break-inside: avoid;
-}
-
-/* A long list of bold links is a wall; these read as a list of names. */
-.rosetta-list a {
-  font-weight: 400;
-  text-decoration: none;
-}
-
-.rosetta-list a.is-current {
-  color: var(--vp-c-text-1);
-  font-weight: 600;
-}
-
-.rosetta-list a:hover {
-  text-decoration: underline;
-}
-
-.rosetta-mark {
-  margin-left: 0.4rem;
-  color: var(--vp-c-text-3);
-  font-size: 0.75rem;
-}
 </style>

@@ -166,7 +166,7 @@ export function renderText(srcDir: string, outDir: string) {
     body.replace(
       /<RosettaExplorer\s*\/>/g,
       `The tasks, searchable: ${SITE}/rosetta/ - one page, which reads them from`
-        + ' https://github.com/degory/ghul-rosetta-code',
+        + ' https://github.com/ghul-lang/ghul-rosetta-code',
     )
 
   const rendered = PAGES.map(page => {
