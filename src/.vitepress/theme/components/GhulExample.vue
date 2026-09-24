@@ -746,7 +746,17 @@ onBeforeUnmount(() => {
       :title="openedOut ? 'fit the source to the screen' : 'open the source out to its full length'"
       :aria-pressed="openedOut"
       @click="toggleOpenedOut"
-    >{{ openedOut ? 'fit' : 'read it all' }}</button>
+    >
+      <svg v-if="!openedOut" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="8 4 12 1 16 4" />
+        <polyline points="8 20 12 23 16 20" />
+        <line x1="12" y1="1" x2="12" y2="23" />
+      </svg>
+      <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="8 9 12 5 16 9" />
+        <polyline points="8 15 12 19 16 15" />
+      </svg>
+    </button>
     <button
       v-if="editing"
       type="button"
@@ -906,7 +916,7 @@ onBeforeUnmount(() => {
       <button
         v-if="stage && shownImages.length"
         type="button"
-        class="ghul-example-tool ghul-example-hide-picture"
+        class="ghul-example-hide-picture"
         :title="imagesHidden ? 'show the picture again' : 'hide the picture and show the source'"
         :aria-pressed="imagesHidden"
         @click="toggleImages"
@@ -1124,6 +1134,7 @@ onBeforeUnmount(() => {
   right: 8px;
   z-index: 2;
   display: flex;
+  flex-wrap: nowrap;
   gap: 4px;
 }
 
@@ -1256,54 +1267,48 @@ onBeforeUnmount(() => {
   overflow: visible;
 }
 
-/* Beyond about this width there is room for source and result side by side,
-   which keeps both on the first screen instead of stacking to twice the
-   height. Below it they stack, and the source gives up more of the space,
-   since the result is what was followed here.
-
-   Scoped to the staged card on purpose: the examples through the rest of the
-   site have never had a breakpoint and do not gain one here. */
-@media (min-width: 1000px) {
-  .ghul-example.is-staged:not(.is-opened-out) {
-    flex-direction: row;
-    align-items: stretch;
-  }
-
-  .ghul-example.is-staged:not(.is-opened-out) .ghul-example-frame-wrap,
-  .ghul-example.is-staged:not(.is-opened-out) .ghul-example-code {
-    flex: 1 1 50%;
-  }
-
-  .ghul-example.is-staged:not(.is-opened-out) .ghul-example-output {
-    flex: 1 1 50%;
-    max-height: none;
-    border-left: 1px solid var(--vp-c-divider);
-  }
+/* Source above, result below, at every width: the arrangement the playground
+   uses. Side by side was tried and taken out - half the width cuts lines
+   mid-token in a language whose examples are wide, and the reader then has two
+   regions each too small for what is in it. The source gives up the space,
+   since the result is what was followed here. */
+.ghul-example.is-staged:not(.is-opened-out) .ghul-example-frame-wrap,
+.ghul-example.is-staged:not(.is-opened-out) .ghul-example-code {
+  max-height: 45vh;
 }
 
-@media (max-width: 999px) {
-  /* Half the viewport, so the result is on screen without scrolling past two
-     hundred lines of source. */
-  .ghul-example.is-staged:not(.is-opened-out) .ghul-example-frame-wrap,
-  .ghul-example.is-staged:not(.is-opened-out) .ghul-example-code {
-    max-height: 45vh;
-  }
-
-  .ghul-example.is-staged .ghul-example-output {
-    max-height: 55%;
-  }
+.ghul-example.is-staged .ghul-example-output {
+  max-height: 60%;
 }
 
-/* A picture is the result for the tasks that draw, so on a staged card it takes
-   the region rather than sitting under the text at thumbnail size. Scaled to
-   fit, so a large raster does not decide the stage's height. */
+/* A line wider than the region scrolls, and says so: the scrollbar is what
+   tells a reader the line continues rather than ending where it is cut. */
+.ghul-example.is-staged .ghul-example-code {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+/* A picture is the result for the tasks that draw, so on a staged card the
+   first one takes the region rather than sitting under the text at thumbnail
+   size. The body has to be a column for that to mean anything: its children
+   are in normal flow otherwise, and an image told to fill simply takes its
+   natural size. */
+.ghul-example.is-staged .ghul-example-output-body {
+  display: flex;
+  flex-direction: column;
+}
+
 .ghul-example.is-staged .ghul-example-images {
   flex: 1;
-  min-height: 0;
+  min-height: 8rem;
   display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.ghul-example.is-staged .ghul-example-images figure {
+/* The first picture fills what is left; any others are a row of thumbnails
+   under it, since a task that draws several is showing a sequence. */
+.ghul-example.is-staged .ghul-example-images figure:first-child {
   flex: 1;
   min-height: 0;
   display: flex;
@@ -1311,11 +1316,65 @@ onBeforeUnmount(() => {
   margin: 0;
 }
 
-.ghul-example.is-staged .ghul-example-images img {
+.ghul-example.is-staged .ghul-example-images figure:first-child img {
   flex: 1;
   min-height: 0;
   width: 100%;
   object-fit: contain;
+}
+
+.ghul-example.is-staged .ghul-example-images figure:not(:first-child) {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.ghul-example.is-staged .ghul-example-images figure:not(:first-child) img {
+  max-height: 5rem;
+  width: auto;
+}
+
+/* The file name is how the program named the picture, which is worth having
+   and not worth a line of its own beside the picture it labels. */
+.ghul-example.is-staged .ghul-example-images figcaption {
+  font-size: 0.72em;
+  color: var(--vp-c-text-3);
+  margin-top: 0.15rem;
+}
+
+/* Hide and restore sits with the panel's own header rather than in the card's
+   icon row: it belongs to the result, it is only there while a picture is, and
+   it needs its words. Placed against the right edge of the header so it never
+   shares a line with the label and the run state. */
+.ghul-example-hide-picture {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  z-index: 2;
+  padding: 2px 8px;
+  font-size: 0.72em;
+  white-space: nowrap;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 5px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+}
+
+.ghul-example-hide-picture:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.ghul-example.is-staged .ghul-example-output {
+  position: relative;
+}
+
+/* The text a drawing task also printed is a few lines above the picture, not
+   the region: `115 segments drawn` should not push the drawing out of view. */
+.ghul-example.is-staged .ghul-example-output-body pre {
+  flex: 0 0 auto;
+  max-height: 6rem;
+  overflow: auto;
+  margin: 0;
 }
 
 /* Said in the result area rather than only in the toolbar, because on arrival
