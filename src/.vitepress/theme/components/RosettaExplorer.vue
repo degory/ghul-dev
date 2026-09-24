@@ -119,12 +119,8 @@ function sizeFrame() {
 watch(framed, () => nextTick(sizeFrame))
 
 // The section's own introduction sits above the explorer, in the page's markdown, and it is what a
-// reader arriving at the section reads first. A reader arriving at a task's address came for the
-// task, and on a phone that introduction is what puts it below the fold - so it stands down for an
-// arrival at a task, and comes back on returning to the section. Decided once, on arrival: the
-// explorer writes its random pick into the address soon after, and the address alone stops saying
-// which of the two this was.
-const arrivedAtTask = ref(false)
+// reader of the section reads first. A task's page is the task: the introduction stands down
+// whenever one is shown, and comes back on the section itself.
 const root = ref(null)
 
 function introduction() {
@@ -138,11 +134,11 @@ function introduction() {
   return items
 }
 
-watch(shownSlug, slug => {
-  if (!arrivedAtTask.value) return
+function showIntroduction(shown) {
+  for (const node of introduction()) node.style.display = shown ? '' : 'none'
+}
 
-  for (const node of introduction()) node.style.display = slug ? 'none' : ''
-})
+watch(shownSlug, slug => showIntroduction(slug === null))
 
 // The task whose parts `parts` holds, so a fetch that finishes after the reader has moved on is
 // dropped rather than shown under the wrong heading.
@@ -271,11 +267,7 @@ onBeforeUnmount(() => {
 })
 
 onMounted(async () => {
-  arrivedAtTask.value = shownSlug.value !== null
-
-  if (arrivedAtTask.value) {
-    for (const node of introduction()) node.style.display = 'none'
-  }
+  showIntroduction(shownSlug.value === null)
 
   // The address of a task reached from outside was handed to the router as the section's, so that
   // it had a page to load. Put it back, now that there is an explorer to show the task.
