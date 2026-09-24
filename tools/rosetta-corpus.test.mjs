@@ -133,7 +133,12 @@ test('a view has an address, and an address is a view', () => {
 
   assert.deepEqual(
     filterFromSearch(new URL(address, 'https://ghul.dev').search),
-    { query: 'sort', tags: ['graphics', 'primes'] })
+    { query: 'sort', tags: ['graphics', 'primes'], browse: false })
 
-  assert.deepEqual(filterFromSearch(''), { query: '', tags: [] })
+  assert.deepEqual(filterFromSearch(''), { query: '', tags: [], browse: false })
+
+  // The browse page keeps the filter and is itself part of the address.
+  assert.equal(addressOf({ browse: true }), '/rosetta/?browse')
+  assert.equal(addressOf({ query: 'sort', browse: true }), '/rosetta/?q=sort&browse')
+  assert.equal(filterFromSearch('?tags=primes&browse').browse, true)
 })

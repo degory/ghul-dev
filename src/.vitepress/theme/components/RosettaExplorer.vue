@@ -243,14 +243,34 @@ function forwardEscape(event) {
     ?.postMessage({ ghul: 'escape' }, PLAYGROUND_ORIGIN)
 }
 
+// The site's light or dark setting, which the framed playground cannot see: it is told on
+// asking, once its page has loaded, and again whenever the switch moves.
+const frameWindow = () => root.value?.querySelector('.rosetta-playground')?.contentWindow
+
+function sendTheme() {
+  frameWindow()?.postMessage(
+    { ghul: 'theme', dark: document.documentElement.classList.contains('dark') },
+    PLAYGROUND_ORIGIN)
+}
+
+function onFrameMessage(event) {
+  if (event.origin === PLAYGROUND_ORIGIN && event.data?.ghul === 'theme?') sendTheme()
+}
+
+const themeWatch = typeof MutationObserver === 'undefined' ? null : new MutationObserver(sendTheme)
+
 onMounted(() => {
   window.addEventListener('resize', sizeFrame)
   window.addEventListener('keydown', forwardEscape)
+  window.addEventListener('message', onFrameMessage)
+  themeWatch?.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', sizeFrame)
   window.removeEventListener('keydown', forwardEscape)
+  window.removeEventListener('message', onFrameMessage)
+  themeWatch?.disconnect()
 })
 
 onMounted(async () => {
