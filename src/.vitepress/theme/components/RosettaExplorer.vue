@@ -417,7 +417,7 @@ function browse() {
         <RosettaControls stacked />
 
         <p class="rosetta-browse">
-          <a :href="browseAddress" @click.prevent="browse">all tasks, across the page</a>
+          <a :href="browseAddress" @click.prevent="browse">all tasks</a>
         </p>
 
         <RosettaList stacked :matches="matches" :current="shown?.slug" @show="show" />
