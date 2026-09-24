@@ -20,4 +20,15 @@ const here = computed(() => route.path.startsWith('/rosetta'))
 .rosetta-aside {
   padding-bottom: 2rem;
 }
+
+/* Outside the document body, where the site's link colour does not reach. */
+.rosetta-aside a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+}
+
+.rosetta-aside a:hover {
+  color: var(--vp-c-brand-2);
+  text-decoration: underline;
+}
 </style>
