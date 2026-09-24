@@ -11,9 +11,9 @@ import { shownSlug, shownFilter, showAt, replaceAt } from '../rosetta-route'
 import { corpus, query, chosen, toggleTag } from '../rosetta-filter'
 import { loadCorpus, taskBySlug, matching, draw, addressOf, filterFromSearch } from '../rosetta-corpus'
 
-// The whole Rosetta Code section: one task shown whole and ready to run, with the corpus
-// searchable and filterable beneath it. The task is whichever /rosetta/<slug> the reader arrived
-// at, or one picked at random and weighted towards the ones worth a stranger's time.
+// The whole Rosetta Code section. The section's own address is the corpus, searchable and
+// filterable; a task's address, /rosetta/<slug>, shows that task whole and ready to run, with the
+// filter beside it.
 //
 // Nothing here is copied into the site. The corpus is read from ghul-rosetta-code when the page
 // opens and each solution's source when its task is shown, so a task solved there this morning is
@@ -24,19 +24,13 @@ import { loadCorpus, taskBySlug, matching, draw, addressOf, filterFromSearch } f
 // controls on a wide screen.
 const failure = ref(null)
 
-// A task shown by address rather than picked: the reader followed a link, or chose one from the
-// list. Held apart from `picked` so that going back to the section restores the random pick.
-const picked = shallowRef(null)
+const shown = computed(() =>
+  corpus.value && shownSlug.value ? taskBySlug(corpus.value, shownSlug.value) : null)
 
-// The section as a page of the filter and its results, with no task shown. Read from the
-// address, so it is a link, and left by choosing a task.
-const browsing = ref(false)
-
-const shown = computed(() => {
-  if (!corpus.value || browsing.value) return null
-
-  return shownSlug.value ? taskBySlug(corpus.value, shownSlug.value) : picked.value
-})
+// The section itself, with no task: the filter and its results across the page. Never true
+// before the corpus has loaded, so the prerender and the first client render agree - a class the
+// prerender wrote that the client did not would stay on the element unpatched.
+const browsing = computed(() => corpus.value !== null && shownSlug.value === null)
 
 const missing = computed(() =>
   corpus.value !== null && shownSlug.value !== null && shown.value === null)
@@ -90,12 +84,23 @@ async function part(entry) {
 // route too. Same origin as the site, which is what lets the page be framed at all.
 // `panel` tells the playground it is on a page that already names the task and offers the others,
 // so it leaves out the links that would say so again.
-const playgroundUrl = entry => `${PLAYGROUND_BASE}rosetta-code/${entry.id}?panel`
+// The theme goes in the address too, so the panel paints in it first time rather than switching
+// to it once its script has asked.
+const playgroundUrl = entry => `${PLAYGROUND_BASE}rosetta-code/${entry.id}?panel&theme=${
+  typeof document !== 'undefined' && document.documentElement.classList.contains('dark') ? 'dark' : 'light'}`
 
-// The one part that runs on arrival. Framing every part would start a run per part against a
-// service that admits six at once, so the first runnable part is framed and the rest are links to
-// their own pages, where each runs when it is opened.
-const framed = computed(() => parts.value.find(entry => entry.playground) ?? null)
+// The part shown, one at a time: framing every part would start a run per part against a service
+// that admits six at once. The first runnable one on arrival, and any other when chosen from the
+// strip above the panel, which replaces the panel where it stands.
+const selected = ref(null)
+
+watch(parts, list => {
+  selected.value = (list.find(entry => entry.playground) ?? list[0])?.id ?? null
+})
+
+const current = computed(() => parts.value.find(entry => entry.id === selected.value) ?? null)
+
+const framed = computed(() => current.value?.playground ? current.value : null)
 
 // As tall as the window has room for below the frame's top, so that the whole playground is on
 // the screen on arrival rather than its output pane below the fold; never shorter than an editor
@@ -116,12 +121,8 @@ function sizeFrame() {
 watch(framed, () => nextTick(sizeFrame))
 
 // The section's own introduction sits above the explorer, in the page's markdown, and it is what a
-// reader arriving at the section reads first. A reader arriving at a task's address came for the
-// task, and on a phone that introduction is what puts it below the fold - so it stands down for an
-// arrival at a task, and comes back on returning to the section. Decided once, on arrival: the
-// explorer writes its random pick into the address soon after, and the address alone stops saying
-// which of the two this was.
-const arrivedAtTask = ref(false)
+// reader of the section reads first. A task's page is the task: the introduction stands down
+// whenever one is shown, and comes back on the section itself.
 const root = ref(null)
 
 function introduction() {
@@ -135,11 +136,11 @@ function introduction() {
   return items
 }
 
-watch(shownSlug, slug => {
-  if (!arrivedAtTask.value) return
+function showIntroduction(shown) {
+  for (const node of introduction()) node.style.display = shown ? '' : 'none'
+}
 
-  for (const node of introduction()) node.style.display = slug ? 'none' : ''
-})
+watch(shownSlug, slug => showIntroduction(slug === null))
 
 // The task whose parts `parts` holds, so a fetch that finishes after the reader has moved on is
 // dropped rather than shown under the wrong heading.
@@ -179,18 +180,12 @@ watch([() => shownSlug.value, shown], ([slug, task], previous) => {
 
 // --- choosing ----------------------------------------------------------------------------------
 
-// `keep` is false for the draw the page makes on its own: the reader did not ask to be here, so
-// it is not a place for the back button to return to.
-function another(keep = true) {
+// A task drawn at random from the ones the filter leaves, weighted towards the ones worth a
+// stranger's time. The address names it, so what is on the page is what a reader can link to.
+function another() {
   const next = draw(matches.value, shown.value?.slug)
 
-  if (!next) return
-
-  picked.value = next
-
-  // The address names the task, whether it was chosen or drawn: what is on the page is what a
-  // reader can link to.
-  showAt(addressOf({ slug: next.slug }), keep)
+  if (next) showAt(addressOf({ slug: next.slug }))
 }
 
 function show(task) {
@@ -274,11 +269,7 @@ onBeforeUnmount(() => {
 })
 
 onMounted(async () => {
-  arrivedAtTask.value = shownSlug.value !== null
-
-  if (arrivedAtTask.value) {
-    for (const node of introduction()) node.style.display = 'none'
-  }
+  showIntroduction(shownSlug.value === null)
 
   // The address of a task reached from outside was handed to the router as the section's, so that
   // it had a page to load. Put it back, now that there is an explorer to show the task.
@@ -288,27 +279,12 @@ onMounted(async () => {
 
   query.value = filter.query
   chosen.value = new Set(filter.tags)
-  browsing.value = filter.browse
 
   try {
     corpus.value = await loadCorpus()
   } catch (error) {
     failure.value = error.message
-
-    return
   }
-
-  // A random pick differs between the prerender and the reader's browser, so it is made only once
-  // the page is live - and only where the address does not already name a task.
-  if (!shownSlug.value && !browsing.value) another(false)
-})
-
-// Narrowing the filter to something the shown task is not part of picks a new one; widening it
-// leaves the reader looking at what they were looking at. A task reached by its own address stays
-// put: they asked for that one.
-watch(matches, tasks => {
-  if (shownSlug.value || browsing.value) return
-  if (picked.value && !tasks.some(task => task.slug === picked.value.slug)) another(false)
 })
 
 // The filter is part of the address while the section itself is shown, so a search or a set of
@@ -316,7 +292,7 @@ watch(matches, tasks => {
 watch([query, chosen], () => {
   if (shownSlug.value) return
 
-  replaceAt(addressOf({ query: query.value, tags: [...chosen.value], browse: browsing.value }))
+  replaceAt(addressOf({ query: query.value, tags: [...chosen.value] }))
 })
 
 // Following a link back to the section restores the filter that link carried.
@@ -330,23 +306,13 @@ watch(shownFilter, search => {
   if (filter.tags.join(',') !== [...chosen.value].sort().join(',')) {
     chosen.value = new Set(filter.tags)
   }
-
-  browsing.value = filter.browse
 })
 
-// A task chosen from the browse page is shown as a task; the section's own address, reached by
-// going back or by a link, picks one at random as it always did.
-watch(shownSlug, slug => {
-  if (slug) browsing.value = false
-})
-
-// The browse page, reached from beside a task: the filter as it stands, on a page of its own.
-const browseAddress = computed(() =>
-  addressOf({ query: query.value, tags: [...chosen.value], browse: true }))
+// The section, reached from beside a task: the filter as it stands, across the page.
+const browseAddress = computed(() => addressOf({ query: query.value, tags: [...chosen.value] }))
 
 function browse() {
   showAt(browseAddress.value)
-  browsing.value = true
 }
 </script>
 
@@ -391,29 +357,37 @@ function browse() {
 
         <p v-else-if="parts.length === 0" class="rosetta-loading">reading the solution ...</p>
 
-        <template v-for="entry in parts" :key="entry.name">
-          <h3 v-if="entry.heading">{{ entry.heading }}</h3>
+        <!-- A task solved more than one way: the ways, one of them shown below. -->
+        <div v-if="parts.length > 1" class="rosetta-parts" role="tablist" aria-label="ways of solving it">
+          <button
+            v-for="(entry, at) in parts"
+            :key="entry.name"
+            type="button"
+            role="tab"
+            class="rosetta-part"
+            :aria-selected="entry === current"
+            @click="selected = entry.id"
+          >{{ entry.heading ?? `part ${at + 1}` }}</button>
+        </div>
 
-          <p v-if="entry.reason" class="rosetta-unsupported">{{ entry.reason }}</p>
+        <template v-if="current">
+          <p v-if="current.reason" class="rosetta-unsupported">{{ current.reason }}</p>
 
-          <!-- The playground itself, as a panel on the page. The one that runs on arrival is
-               framed; a further way of solving the task is a link to its own page. A part that
-               cannot run in a browser is shown as it is recorded. -->
+          <!-- The playground itself, as a panel on the page; keyed on the part, so choosing
+               another loads its page in place. A part that cannot run in a browser is shown as
+               it is recorded. -->
           <iframe
-            v-if="entry === framed"
+            v-if="framed"
+            :key="framed.id"
             class="rosetta-playground"
-            :src="playgroundUrl(entry)"
+            :src="playgroundUrl(framed)"
             :title="`${shown.title} in the playground`"
             :style="{ height: frameHeight }"
             loading="eager"
             allow="clipboard-write"
           ></iframe>
 
-          <p v-else-if="entry.playground" class="rosetta-part-link">
-            <a :href="playgroundUrl(entry)">run this one in the playground</a>
-          </p>
-
-          <GhulExample v-else :name="entry.name" :data="entry.data" />
+          <GhulExample v-else :key="current.id" :name="current.name" :data="current.data" />
         </template>
 
         <!-- Under the result, where somebody who has just watched a program run is looking - on a
@@ -445,7 +419,7 @@ function browse() {
         <RosettaControls stacked />
 
         <p class="rosetta-browse">
-          <a :href="browseAddress" @click.prevent="browse">search on a page of its own</a>
+          <a :href="browseAddress" @click.prevent="browse">all tasks</a>
         </p>
 
         <RosettaList stacked :matches="matches" :current="shown?.slug" @show="show" />
@@ -467,8 +441,34 @@ function browse() {
   font-size: 0.9rem;
 }
 
+.rosetta-parts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 0.75rem;
+}
+
+.rosetta-part {
+  padding: 0.2rem 0.75rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  color: var(--vp-c-text-2);
+  font-size: 0.875rem;
+}
+
+.rosetta-part:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-text-1);
+}
+
+.rosetta-part[aria-selected="true"] {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
 /* The aside shows at 1280px and up (the site's own breakpoint), and carries these from there -
-   except on the browse page, which has no task and so nothing in the aside. */
+   except on the section's own page, which has no task and so nothing in the aside. */
 @media (min-width: 1280px) {
   .rosetta-explorer:not(.is-browsing) .rosetta-inline {
     display: none;
@@ -512,7 +512,7 @@ function browse() {
 
 .rosetta-featured {
   margin-top: 1rem;
-  /* Clear of the site's fixed header when a task picked from the list is scrolled to. */
+  /* Clear of the site's fixed header when a task chosen from the list is scrolled to. */
   scroll-margin-top: calc(var(--vp-nav-height) + 1rem);
 }
 
@@ -549,10 +549,6 @@ function browse() {
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   background: var(--vp-c-bg);
-}
-
-.rosetta-part-link {
-  margin: 0.5rem 0 1rem;
 }
 
 </style>

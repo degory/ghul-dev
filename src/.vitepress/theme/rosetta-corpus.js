@@ -131,9 +131,7 @@ export function draw(tasks, except, random = Math.random) {
 // The address of a view: the task where one is shown, and the filter otherwise, so that a search
 // or a set of tags is a link somebody can send. Task pages left the site's own search when they
 // stopped being pages, and this is what takes their place.
-// `browse` is the section as a page of the filter and its results alone, with no task shown: the
-// whole width for the list, for a reader who came to look through it rather than to run one.
-export function addressOf({ slug = null, query = '', tags = [], browse = false } = {}) {
+export function addressOf({ slug = null, query = '', tags = [] } = {}) {
   if (slug) return `/rosetta/${slug}`
 
   const search = new URLSearchParams()
@@ -141,9 +139,9 @@ export function addressOf({ slug = null, query = '', tags = [], browse = false }
   if (query.trim() !== '') search.set('q', query.trim())
   if (tags.length > 0) search.set('tags', [...tags].sort().join(','))
 
-  const parts = [search.toString(), browse ? 'browse' : ''].filter(part => part !== '')
+  const rest = search.toString()
 
-  return parts.length === 0 ? '/rosetta/' : `/rosetta/?${parts.join('&')}`
+  return rest === '' ? '/rosetta/' : `/rosetta/?${rest}`
 }
 
 export function filterFromSearch(search) {
@@ -152,7 +150,6 @@ export function filterFromSearch(search) {
   return {
     query: parameters.get('q') ?? '',
     tags: (parameters.get('tags') ?? '').split(',').filter(tag => tag !== ''),
-    browse: parameters.has('browse'),
   }
 }
 
