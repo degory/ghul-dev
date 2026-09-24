@@ -11,33 +11,33 @@ The Visual Studio Code language extension is available on the [Visual Studio Mar
 
 ### compiler
 The ghūl compiler
-- **Repository:** [ghul](https://github.com/degory/ghul)
+- **Repository:** [ghul](https://github.com/ghul-lang/ghul)
 - **Package:** [ghul.compiler](https://www.nuget.org/packages/ghul.compiler) (Packaged as a [.NET tool](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install))
 
 ### runtime
 The ghūl runtime library.
-- **Repository:** [ghul-runtime](https://github.com/degory/ghul-runtime)
+- **Repository:** [ghul-runtime](https://github.com/ghul-lang/ghul-runtime)
 - **Package:** [ghul.runtime](https://www.nuget.org/packages/ghul.runtime)
 
 ### test
 Integration test runner for the ghūl compiler. (A build time dependency of the compiler itself. Not required for other ghūl projects)
-- **Repository:** [ghul-test](https://github.com/degory/ghul-test) 
+- **Repository:** [ghul-test](https://github.com/ghul-lang/ghul-test) 
 - **Package:** [ghul.test](https://www.nuget.org/packages/ghul.test)
 
 ### Visual Studio Code Extension
 Provides ghūl language support within VSCode.
-- **Repository:** [ghul-vsce](https://github.com/degory/ghul-vsce)
+- **Repository:** [ghul-vsce](https://github.com/ghul-lang/ghul-vsce)
 - **Package:** [degory.ghul](https://marketplace.visualstudio.com/items?itemName=degory.ghul)
 
 ### templates
 .NET New Templates
-- **Repository:** [ghul-templates](https://github.com/degory/ghul-templates)
+- **Repository:** [ghul-templates](https://github.com/ghul-lang/ghul-templates)
 - **Package** [ghul.templates](https://www.nuget.org/packages/ghul.templates) (install with `dotnet new install ghul.templates`{:sh})
 
 ## contributing
 
 ### issues
-If you encounter any problems, please feel free to open an issue on GitHub. If it's not clear which repo to open the issue in, open it in the [compiler repo](https://github.com/degory/ghul) and I can move it if needed.
+If you encounter any problems, please feel free to open an issue on GitHub. If it's not clear which repo to open the issue in, open it in the [compiler repo](https://github.com/ghul-lang/ghul) and I can move it if needed.
 
 ### PRs
 If you want to fix a bug or make an improvement, particularly if it's something small, go ahead and raise a PR. If it's something complex, please raise an issue first. Note that the CI/CD pipelines are not generally set up to handle PRs from forks, so unless you want to hack my workflow YAML, I might need to pull your feature branch and create a PR on your behalf before I can merge your changes.

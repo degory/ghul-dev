@@ -65,7 +65,7 @@ Install it from npm:
 npm install -g @ghul/language-server
 ```
 
-The command it installs is `ghul-language-server`{:text}, so point your editor's LSP client at that. The same package is attached as a `.tgz`{:text} to every [ghul-vsce release](https://github.com/degory/ghul-vsce/releases) if you would rather not install from npm.
+The command it installs is `ghul-language-server`{:text}, so point your editor's LSP client at that. The same package is attached as a `.tgz`{:text} to every [ghul-vsce release](https://github.com/ghul-lang/ghul-vsce/releases) if you would rather not install from npm.
 
 ## dev containers
 
@@ -85,11 +85,11 @@ Once installed, `dotnet new`{:sh} can scaffold a ghūl project pre-configured wi
 
 ### from the repository template
 
-If you create a new GitHub repo from the [ghūl repository template](https://github.com/degory/ghul-repository-template), the compiler comes pre-configured as a local .NET tool in your project folder - run `dotnet tool restore`{:sh} to restore it.
+If you create a new GitHub repo from the [ghūl repository template](https://github.com/ghul-lang/ghul-repository-template), the compiler comes pre-configured as a local .NET tool in your project folder - run `dotnet tool restore`{:sh} to restore it.
 
 ### from scratch
 
-The compiler expects to be driven by MSBuild using a `.ghulproj`{:text} project file. See the [ghūl test](https://github.com/degory/ghul-test) project for a real-world example.
+The compiler expects to be driven by MSBuild using a `.ghulproj`{:text} project file. See the [ghūl test](https://github.com/ghul-lang/ghul-test) project for a real-world example.
 
 `Directory.Build.props`{:text}
 ```xml

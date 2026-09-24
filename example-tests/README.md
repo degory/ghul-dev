@@ -74,7 +74,7 @@ The three `dotnet-integration-*` examples build against ASP.NET through a
 and is not compiled at all.
 
 The Rosetta Code solutions are not here at all. They are written, compiled and run in
-[ghul-rosetta-code](https://github.com/degory/ghul-rosetta-code), where each one's output is pinned
+[ghul-rosetta-code](https://github.com/ghul-lang/ghul-rosetta-code), where each one's output is pinned
 by a test, and the site reads them from there when a reader opens the section. Testing them again
 here would mean this repository holding an output it does not own, and a solution improved upstream
 would then arrive as a failing test rather than as a better example.

@@ -2,7 +2,7 @@
   "name": "ghul-dev",
   "version": "0.0.1",
   "description": "ghūl programming language",
-  "repository": "github.com/degory/ghul-dev",
+  "repository": "github.com/ghul-lang/ghul-dev",
   "license": "MIT",
   "type": "module",
   "scripts": {

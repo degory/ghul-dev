@@ -1,6 +1,6 @@
 # known issues
 
-There are numerous known issues in [the compiler](https://github.com/degory/ghul/issues), and issues in the [Visual Studio Code language extension](https://github.com/degory/ghul-vsce) are recorded there too. If you encounter a problem not already recorded in a GitHub issue, please raise a new issue. If an existing issue is blocking you, please add a comment on the issue, and I'll investigate, or feel free to raise a PR.
+There are numerous known issues in [the compiler](https://github.com/ghul-lang/ghul/issues), and issues in the [Visual Studio Code language extension](https://github.com/ghul-lang/ghul-vsce) are recorded there too. If you encounter a problem not already recorded in a GitHub issue, please raise a new issue. If an existing issue is blocking you, please add a comment on the issue, and I'll investigate, or feel free to raise a PR.
 
 Areas where you might particularly notice problems include:
 

@@ -1,7 +1,7 @@
 # history
 
 ## background
-The ghūl [compiler](https://github.com/degory/ghul) is a [self-hosting compiler](https://en.wikipedia.org/wiki/Self-hosting_(compilers)), capable of compiling itself from its own source code. 
+The ghūl [compiler](https://github.com/ghul-lang/ghul) is a [self-hosting compiler](https://en.wikipedia.org/wiki/Self-hosting_(compilers)), capable of compiling itself from its own source code. 
 
 [Bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_(compilers)) a new compiler for a new language is a classic chicken-and-egg problem: you need a compiler to compile your new compiler, but that compiler doesn’t exist yet.
 
@@ -54,7 +54,7 @@ Gradually, I integrated more semantic analysis into the ghūl compiler: represen
 
 With the compiler now capable of constructing a detailed representation of input programs, I began implementing a .NET IL generation backend. I did this in stages, adding support for expressions and local variable definitions first, then working through the other more advanced language constructs.
 
-I initially used scaffolding to test generated IL snippets, because the compiler wasn't capable of generating completely self-contained IL programs. As I implemented .NET IL for the various ghūl language features, and the compiler became increasingly more capable, I guarded against regressions by building [integration tests](https://github.com/degory/ghul/tree/main/integration-tests) as I went. The regression test runner started out as a collection of bash scripts, but as the compiler stabilized, I [rewrote it in ghūl](https://github.com/degory/ghul-test). The initial regression suite included tests asserting correct IL generation for all the different ghūl language constructs as I implemented them. As soon as the compiler could generate code for complete programs, I added further integration tests exercising generated code execution.
+I initially used scaffolding to test generated IL snippets, because the compiler wasn't capable of generating completely self-contained IL programs. As I implemented .NET IL for the various ghūl language features, and the compiler became increasingly more capable, I guarded against regressions by building [integration tests](https://github.com/ghul-lang/ghul/tree/main/integration-tests) as I went. The regression test runner started out as a collection of bash scripts, but as the compiler stabilized, I [rewrote it in ghūl](https://github.com/ghul-lang/ghul-test). The initial regression suite included tests asserting correct IL generation for all the different ghūl language constructs as I implemented them. As soon as the compiler could generate code for complete programs, I added further integration tests exercising generated code execution.
 
 I continued to maintain the transpilation to L source code backend alongside the .NET IL backend throughout this process, until the .NET IL backend was sufficiently complete and stable to self-host the compiler on .NET.
 
@@ -63,4 +63,4 @@ This phase was complicated by L's LLVM backend and by its standard library, with
 ## full self-hosting on .NET
 Finally, with the compiler reliably self-hosting on .NET, I removed the L transpilation backend and the .NET library subset, and the compiler was successfully bootstrapped onto .NET.
 
-You can see this process in the Git history in the [ghūl compiler repo](https://github.com/degory/ghul), going all the way back to the initial commit.
+You can see this process in the Git history in the [ghūl compiler repo](https://github.com/ghul-lang/ghul), going all the way back to the initial commit.

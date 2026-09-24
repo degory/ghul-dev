@@ -320,7 +320,7 @@ function browse() {
   <div ref="root" class="rosetta-explorer" :class="{ 'is-browsing': browsing }">
     <p v-if="failure" class="rosetta-failure">
       The solutions are read from
-      <a href="https://github.com/degory/ghul-rosetta-code" target="_blank" rel="noreferrer">
+      <a href="https://github.com/ghul-lang/ghul-rosetta-code" target="_blank" rel="noreferrer">
         ghul-rosetta-code</a>
       when this page opens, and that did not answer ({{ failure }}). Reloading is worth a try.
     </p>

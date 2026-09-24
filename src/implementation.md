@@ -2,7 +2,7 @@
 
 The ghūl compiler is itself written in ghūl. It is published as the
 [`ghul.compiler`{:text}](https://www.nuget.org/packages/ghul.compiler) .NET
-tool, with source in the [`degory/ghul`](https://github.com/degory/ghul)
+tool, with source in the [`degory/ghul`](https://github.com/ghul-lang/ghul)
 repository.
 
 ## overall shape
