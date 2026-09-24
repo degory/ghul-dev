@@ -191,6 +191,27 @@ function substituteVersions(html: string) {
   })
 }
 
+// What the deployed site sends on the playground, sent by the dev server too.
+// The runner inside the embed needs its document to be cross-origin isolated,
+// and a frame is only isolated when the page holding it is, so without these a
+// previewed page loads the editor and then waits for a run that never starts.
+//
+// A middleware rather than `vite.server.headers`, which VitePress does not pass
+// through to its dev server. Development only: `configureServer` is not called
+// by a build, and the deployed headers come from nginx.
+function isolationHeadersPlugin() {
+  return {
+    name: 'ghul-isolation-headers',
+    configureServer(server) {
+      server.middlewares.use((_request, response, next) => {
+        response.setHeader('Cross-Origin-Opener-Policy', 'same-origin')
+        response.setHeader('Cross-Origin-Embedder-Policy', 'require-corp')
+        next()
+      })
+    },
+  }
+}
+
 export default defineConfig({
   title: 'ghūl programming language',
   description: 'documentation for the ghūl programming language',
@@ -265,7 +286,7 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [ghulExamplePagePlugin(), ghulExampleDataPlugin()],
+    plugins: [ghulExamplePagePlugin(), ghulExampleDataPlugin(), isolationHeadersPlugin()],
   },
 
   themeConfig: {

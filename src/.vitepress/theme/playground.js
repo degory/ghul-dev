@@ -11,7 +11,15 @@ import { ref } from 'vue';
 // The playground is served by this site, below /playground/. The origin is still
 // named in full rather than taken from the page, so a local build of the site
 // embeds the real playground; embed.js accepts a local parent as well.
-export const PLAYGROUND_ORIGIN = 'https://ghul.dev';
+//
+// VITE_PLAYGROUND_ORIGIN points it somewhere else, which is how a branch of this
+// site is previewed against a branch of the playground running on the same box
+// rather than against the deployed one. It is read at build time like any other
+// Vite variable, so a production build with nothing set is unchanged, and the
+// embed src, the health probe and both ends of the message-origin check follow
+// it together because they are all derived from here.
+export const PLAYGROUND_ORIGIN =
+  import.meta.env?.VITE_PLAYGROUND_ORIGIN || 'https://ghul.dev';
 export const PLAYGROUND_BASE = `${PLAYGROUND_ORIGIN}/playground/`;
 
 // Which example is being edited, page-wide. Only one at a time: the back end
