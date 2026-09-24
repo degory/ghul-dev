@@ -328,8 +328,12 @@ function isShortOutput(output) {
   return output.replace(/\n+$/, '').split('\n').length <= 2
 }
 
+// A picture is the whole of what a drawing example produces, so a card that
+// has one opens whatever its output measures.
 const outputExpanded = ref(
-  diagnostics.value.length > 0 || isShortOutput(props.runToSee ? '' : example.value?.output)
+  diagnostics.value.length > 0 ||
+  (!props.runToSee && (example.value?.images ?? []).length > 0) ||
+  isShortOutput(props.runToSee ? '' : example.value?.output)
 )
 
 function toggleOutput() {
@@ -456,6 +460,19 @@ const recordedOutput = computed(() =>
 
 const recordedImages = computed(() =>
   props.runToSee && !willNeverRun.value ? [] : example.value?.images ?? [])
+
+// `outputExpanded` is decided when the card is set up, and a card holding its
+// recorded output back has nothing to decide from at that moment. Once the
+// probe has answered no and the recorded output is what there is, the panel
+// takes the state it would have had were the output there from the start.
+watch(willNeverRun, settled => {
+  if (settled && props.runToSee) {
+    outputExpanded.value =
+      diagnostics.value.length > 0 ||
+      recordedImages.value.length > 0 ||
+      isShortOutput(recordedOutput.value)
+  }
+})
 
 const shownOutput = computed(() => editing.value ? liveOutput.value : recordedOutput.value)
 

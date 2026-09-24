@@ -55,8 +55,7 @@ function toggleTag(tag) {
 // --- the shown task's source -------------------------------------------------------------------
 
 // Each part's source and its syntax colour, in the shape <GhulExample> takes: the same fields the
-// build writes into an example artifact, minus the hovers and diagnostics only a compile produces
-// and the recorded output `run-to-see` would hide anyway.
+// build writes into an example artifact, minus the hovers and diagnostics only a compile produces.
 const parts = shallowRef([])
 const partsFailure = ref(null)
 
@@ -78,8 +77,10 @@ async function part(entry) {
       code,
       fullSource: code,
       tokens: await tokenise(code),
-      output: '',
-      images: [],
+      // A part that cannot run is shown what it is recorded as producing, so
+      // fetching it is not wasted even though a run replaces it.
+      output: entry.output ? await text(entry.output).catch(() => '') : '',
+      images: entry.images ?? [],
       hovers: [],
       diagnostics: [],
       playground: entry.playground,
@@ -185,7 +186,46 @@ function anotherOnward() {
   another()
 }
 
+// --- the landing's first screen ------------------------------------------------------------------
+
+// The section's own introduction sits above the explorer, written in the page's markdown, and it is
+// what a reader arriving at the section reads first. A reader arriving at a task's address came for
+// the task instead: at 390px wide that introduction is 308px of the 844 there are, which puts the
+// result 267px below the fold - more than the stage can recover by shrinking. So it stands down for
+// an arrival at a task, and comes back when the reader returns to the section.
+
+// Which of the two this was. The explorer puts a randomly picked task into the address, so the
+// address stops answering that moments after the page opens; it is asked once, before it does.
+const arrivedAtTask = ref(false)
+
+const root = ref(null)
+
+function introduction() {
+  const items = []
+
+  for (let node = root.value?.parentElement?.firstElementChild; node && node !== root.value;
+       node = node.nextElementSibling) {
+    items.push(node)
+  }
+
+  return items
+}
+
+watch(shownSlug, slug => {
+  if (!arrivedAtTask.value) return
+
+  // Choosing another task from a landing keeps the landing shape; returning to the section
+  // restores what the section reads like.
+  for (const node of introduction()) node.style.display = slug ? 'none' : ''
+})
+
 onMounted(async () => {
+  arrivedAtTask.value = shownSlug.value !== null
+
+  if (arrivedAtTask.value) {
+    for (const node of introduction()) node.style.display = 'none'
+  }
+
   // The address of a task reached from outside was handed to the router as the section's, so that
   // it had a page to load. Put it back, now that there is an explorer to show the task.
   if (shownSlug.value) replaceAt(addressOf({ slug: shownSlug.value }))
@@ -239,7 +279,7 @@ watch(shownFilter, search => {
 </script>
 
 <template>
-  <div class="rosetta-explorer">
+  <div ref="root" class="rosetta-explorer">
     <p v-if="failure" class="rosetta-failure">
       The solutions are read from
       <a href="https://github.com/degory/ghul-rosetta-code" target="_blank" rel="noreferrer">

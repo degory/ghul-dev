@@ -63,6 +63,14 @@ function task(raw) {
       heading: part.heading,
       playground: part.playground !== false,
       source: `${CORPUS_ROOT}${part.source}`,
+      // What the solution is recorded as producing. Shown where a run cannot
+      // happen, so the result region is not empty on a page whose point is
+      // the result.
+      output: part.output ? `${CORPUS_ROOT}${part.output}` : null,
+      images: (part.images ?? []).map(image => ({
+        name: image.replace(/^.*\//, '').replace(/\.expected$/, ''),
+        url: `${CORPUS_ROOT}${image}`,
+      })),
       // Why a solution cannot run here, where it cannot: one line, written beside the solution.
       unsupported: `${CORPUS_ROOT}${part.source.replace(/\/[^/]*$/, '')}/playground-unsupported`,
     })),
