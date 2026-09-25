@@ -21,7 +21,7 @@ ghūl relies on keywords for block structure where other languages use braces or
 <GhulExample name="language-basics-1" />
 
 ### expressions and statements
-Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, and most statements can be used as expressions. In a function or method body the last statement is the value the body returns, whenever the type of that statement matches the declared return type. A trailing `;` does not change that: the compiler judges the last statement by its type rather than by its terminator - see [expression oriented programming](/expression-oriented-programming.html) for the forms working together.
+Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, and most statements can be used as expressions. In a function or method body the last statement is the value the body returns, whenever the type of that statement is assignable to the declared return type. A trailing `;` does not change that: the compiler judges the last statement by its type rather than by its terminator - see [expression oriented programming](/expression-oriented-programming.html) for the forms working together.
 
 <GhulExample name="language-basics-2" />
 
