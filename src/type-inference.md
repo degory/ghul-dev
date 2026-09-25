@@ -59,13 +59,13 @@ A `for` loop variable takes its type from the element type of the iterable being
 
 <GhulExample name="type-inference-9" />
 
-### list literal element types
+### array literal element types
 
-The element type of a list literal is inferred from the types of the elements: the compiler finds a type compatible with all of them.
+The element type of an array literal is inferred from the types of the elements: the compiler finds a type compatible with all of them.
 
 <GhulExample name="type-inference-10" />
 
-If a list contains tuple literals, the compiler finds a compatible common type for each tuple element across all elements of the list.
+If an array literal contains tuple literals, the compiler finds a compatible common type for each tuple element across all elements of the array.
 
 <GhulExample name="type-inference-11" />
 
