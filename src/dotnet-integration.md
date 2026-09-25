@@ -162,6 +162,8 @@ Entity Framework Core works from ghūl. A context extends `DbContext` and expose
 
 The `Products` set and the entity's `Id` and `Name` are the names EF Core's model builder and SQL generation look for. Reads and writes call the async methods directly, with `await` - `save_changes_async` here.
 
+`@IL.name("Name")` sets the name a function, method or property has in the compiled assembly, while ghūl code goes on using the name it declares. On a property it also names the accessors `get_Name` and `set_Name`, and `@IL.name.read("...")` or `@IL.name.assign("...")` names one accessor on its own.
+
 ## mocking with NSubstitute
 
 The .NET base libraries include no mocking framework; [NSubstitute](https://nsubstitute.github.io/) is the lowest-friction third-party option from ghūl, and the compiler's own test suite uses it. `Substitute.for` builds a stand-in for a trait, and the `Returns` extension stubs a call through `|>`:

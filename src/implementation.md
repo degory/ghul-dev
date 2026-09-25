@@ -104,6 +104,8 @@ The full pass list, in the order `COMPILER` runs them:
 | `check-name-conventions`{:text}       | Warns where a declaration's name does not follow the naming convention for its kind. |
 | `resolve-type-expressions`{:text}     | Turns type annotations in declarations, signatures, and in expression-position uses like `cast`, `isa`, `typeof` and `_` into the semantic `Type` objects later passes use. |
 | `resolve-ancestors`{:text}            | Attaches base classes, trait parents and default ancestors to classes, traits, structs, unions and enums, and validates the inheritance constraints. |
+| `synthesize-class-equality`{:text}   | Settles the `=~` and `get_hash_code` synthesised for an `@equality()` class once its ancestors are known: the class joins a synthesised base's operator, and keeps an equality it inherits from elsewhere instead of its own. |
+| `synthesize-iterator-reset`{:text}   | A type implementing `Collections.Iterator[T]` that declares no `reset` gets a synthesised one that throws `System.NotSupportedException`. |
 | `resolve-explicit-types`{:text}       | Registers each variable's, property's and parameter's declared type on its symbol, so the declared type is available to constrain inference later. |
 | `check-type-argument-bounds`{:text}   | Checks each type argument written in a type-expression position against its type parameter's declared bound. |
 | `resolve-overrides`{:text}            | Pulls inherited symbols down into each container type's scope; for every method whose signature matches an ancestor's virtual or abstract method, records the override link and checks the override is consistent. Reports duplicate top-level functions. |
@@ -113,6 +115,8 @@ The full pass list, in the order `COMPILER` runs them:
 | `mark-boxed-locals`{:text}            | Marks `let mut` locals (and parameters) that are both captured by an anonymous function and reassigned, so the IL pass wraps them in a `Ghul.BOX[T]` cell shared between the enclosing scope and every capturer. |
 | `compile-expressions`{:text}          | The largest pass. Walks every expression in every function body, working out its type, resolving operator and method overloads, running type inference, applying flow-sensitive narrowing, and producing IR values that describe what the IL should look like. |
 | `infer-effects`{:text}                | Re-walks every body with resolved types, solves which members each function can read and write, and judges every use of a flow-narrowed value against the calls recorded across its narrowing. |
+| `verify-compile-state`{:text}        | Checks that the state `compile-expressions`{:text} left is complete before `generate-il`{:text} reads it: every type settled, and every function literal's argument and return types known. A gap is reported as an internal error. |
+| `select-entry-point`{:text}          | Chooses the program's entry point from the candidates the project declares - an `@entry` function, the function `--entry` names, a function named `entry`, or a file's top-level statements - and reports an entry function of the wrong shape. |
 | `generate-il`{:text}                  | Walks the syntax tree one last time and writes the assembly, encoding the IR values produced by `compile-expressions`{:text}. |
 
 Whether each pass actually runs depends on the build flags. A plain syntax
