@@ -21,7 +21,7 @@ Every example on this site is a whole program. Press **edit & run**, change it, 
 
 ## what is distinctive
 
-- **[type narrowing](/type-narrowing)** - a value's type follows control flow. A null test, an `isa`, a union variant test or an `if let` narrows whatever was tested - a local, a field, or a whole member-access path - and the narrowing survives the calls the compiler can show leave it alone.
+- **[type narrowing](/type-narrowing)** - a value's type follows control flow. A null test, an `isa`, a union variant test or an `if let` narrows whatever was tested - a local, a field, or a whole member-access path - and the compiler keeps the narrowed type across any call it can show leaves the tested value unchanged.
 
 - **[everything is an expression](/expression-oriented-programming)** - `if`, `case`, loops and blocks all yield values. A `for` loop that finds something evaluates to what it found.
 
@@ -29,6 +29,6 @@ Every example on this site is a whole program. Press **edit & run**, change it, 
 
 - **keywords, not braces** - blocks open with a keyword and close with its mirror: `is` ... `si`, `if` ... `fi`, `do` ... `od`. No semicolons at the end of a line.
 
-The rest is what you would expect of a .NET language: classes, structs, traits and generics, first-class functions and closures, generators, `async`/`await`, and every NuGet package. ghūl produces ordinary assemblies and packages, and other .NET languages can call them.
+The rest is what you would expect of a .NET language: classes, structs, traits and generics, first-class functions and closures, generators, `async`/`await`, and NuGet packages. ghūl produces ordinary assemblies and packages, and other .NET languages can call them.
 
 The language is under active development: whatever the compiler accepts is the definitive reference.
