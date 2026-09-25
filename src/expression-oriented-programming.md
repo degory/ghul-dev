@@ -28,7 +28,7 @@ See [loops as expressions](/control-flow.html#loops-as-expressions) for the full
 
 ## blocks
 
-A parenthesised block `(statement; ...; value)` runs a sequence of statements and yields a value: its tail expression, with or without a `;` after it, or any `return` that targets the block. It gives an expression room for intermediate local variables, loops, and early exits:
+A parenthesised block `(statement; ...; value)` runs a sequence of statements and yields a value: its tail expression, or any `return` that targets the block. It gives an expression room for intermediate local variables, loops, and early exits:
 
 <GhulExample name="expression-oriented-programming-3" />
 
