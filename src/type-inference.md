@@ -81,7 +81,7 @@ When constructing a generic class, struct or variant, the generic type arguments
 
 <GhulExample name="type-inference-13" />
 
-Inference from the constructor arguments works when every type argument appears among those arguments and the constructor overload is unambiguous. A type argument left unpinned - by a no-argument constructor, say - can still be resolved from later use of the value (see [inference from later use sites](#inference-from-later-use-sites)).
+Inference from the constructor arguments works when every type argument appears among those arguments and the constructor overload is unambiguous. A type argument that the constructor arguments do not determine - with a no-argument constructor, say - can still be resolved from later use of the value (see [inference from later use sites](#inference-from-later-use-sites)).
 
 ### generic function and method calls
 
