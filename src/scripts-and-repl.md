@@ -223,7 +223,7 @@ ghul: area still takes the earlier Shape; redefine it to use the new one
 circle
 ```
 
-A class or trait defined in a session can be extended by a later submission, since that submission is another assembly. The compiler cannot treat a class hierarchy defined in a session as closed, so a `case` over one needs an `else`.
+A class or trait defined in a session can be extended by a later submission, since that submission is another assembly. The compiler still treats the hierarchy as closed, so a `case` that covers every subclass needs no `else`. If a later submission adds a subclass, code compiled before it raises an exception when it meets a value of the new type, rather than reading it as one it knows.
 
 A name that begins with `_` is visible to later submissions, as it is to the rest of a file:
 
