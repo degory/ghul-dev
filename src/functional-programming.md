@@ -50,16 +50,15 @@ the function itself:
 
 An anonymous function cannot refer to a variable that is not yet defined, so
 there is no direct way to write two anonymous functions that call each
-other. Write mutually recursive functions as named functions, which can
-refer to each other whatever order they are defined in:
+other. Write mutually recursive functions as global functions or methods,
+which can refer to each other whatever order they are defined in:
 
 <GhulExample name="functional-programming-5" />
 
 ## read-only by default
 
-While ghūl supports imperative code, it also aims to make pure functions and
-predictable shared data low friction: the types and traits below expose no
-way to change a value after it is constructed. The guarantee has two limits.
+The types and traits below expose no way to change a value after it is
+constructed. The guarantee has two limits.
 It is shallow: a read-only structure can still hold references to objects
 that are themselves mutable. And it binds only ghūl code: code written in
 another .NET language is not required to honour it. Within those limits,
@@ -104,7 +103,7 @@ type, unless it is declared `public`:
 
 The members a primary constructor generates are ordinary properties, so the
 same applies to them: they are set at construction and cannot be publicly
-assigned afterwards unless the parameter carries the `public` modifier.
+assigned afterwards unless the parameter has the `public` modifier.
 
 ### pipe operations build new sequences
 
@@ -115,8 +114,8 @@ produce a new sequence and leave the input as it was:
 
 ## pure functions
 
-A function or method can carry a postfix `pure` modifier, declaring that it
-assigns no field, property, or array element of any object. Most function
+A function or method can be declared with a postfix `pure` modifier, which
+says that it assigns no field, property, or array element of any object. Most function
 bodies are proven pure with no modifier needed; the declaration covers the
 rest, and every override of a pure member must itself be pure. A function
 *type* can be pure too, so a signature can require that only pure functions
@@ -125,7 +124,7 @@ are passed to it:
 <GhulExample name="functional-programming-27" />
 
 A class or struct can opt in to the same discipline for the whole type:
-declared `pure` on its header, every member must be proven or declared not
+when its header is declared `pure`, every member must be proven or declared not
 to assign any field, property, or array element after construction. The
 details, including what purity means to [type
 narrowing](/type-narrowing.html), are under
@@ -205,8 +204,7 @@ anonymous function that returns another:
 ## partial application
 
 Partial application fixes some of a function's arguments and leaves the rest
-open. No special syntax is needed: an anonymous function supplies the fixed
-arguments:
+open. Write it as an anonymous function that supplies the fixed arguments:
 
 <GhulExample name="functional-programming-20" />
 
@@ -214,8 +212,8 @@ arguments:
 
 A union holds one of several variants, and the `if let` and `case` patterns
 take one apart; they are how functional ghūl code models data. A `case` over
-a union is checked for exhaustiveness, so covering every variant needs no
-`else` arm:
+a union is checked for exhaustiveness, so covering every variant means it
+doesn't need an `else` arm:
 
 <GhulExample name="functional-programming-23" />
 
