@@ -50,8 +50,6 @@ The value an arm produces is its last statement's, on the same rule as a parenth
 
 Where the value then goes is what the two uses differ on. An `if` used as an expression takes the value of the arm it chose; the same `if` used as a statement discards it. A loop body is the case where it always goes nowhere, since a loop yields through `break` rather than through its body's last statement.
 
-A `;` after the last statement has no effect on the value: it separates two statements written on one line, and that is all it does.
-
 ## block bodies return their tail
 
 A function or method body takes its last statement's value the way an arm does. Where that value's type is assignable to the declared return type, it is the return value on the fall-through path, checked exactly as an explicit `return` would be:
