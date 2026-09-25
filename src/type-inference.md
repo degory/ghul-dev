@@ -6,11 +6,11 @@ Every example on this page can be edited and run here: click the pencil to open 
 The [ghul-examples repository](https://github.com/ghul-lang/ghul-examples/tree/main/examples/type-inference) has fuller type-inference examples to build and run locally, in a GitHub Codespace or a dev container.
 :::
 
-Inside a function body, you rarely need to write a type. Local variables, loop variables, destructured variables, anonymous function parameters and generic type arguments are all inferred - from initializers, from the context an expression sits in, and from how a value is used later in the same body. You get the checking of static types without typing most of them: in the compiler's own source, over 90% of local variables carry no type annotation, and most of the annotations that remain are deliberate - declaring a variable at a wider type than its initializer, or as reassignable before it has a value - rather than places inference needed help.
+Inside a function body, you rarely need to write a type. Local variables, loop variables, destructured variables, anonymous function parameters and generic type arguments are all inferred - from initializers, from the context an expression sits in, and from how a value is used later in the same body. You get the checking of static types without typing most of them: in the compiler's own source, over 90% of local variables have no type annotation, and most of the annotations that remain are deliberate - declaring a variable at a wider type than its initializer, or as reassignable before it has a value - rather than places inference needed help.
 
-The types that do get written are the ones worth writing. A function's parameter and return types are always explicit, and so are fields, properties and global variables: those are the contracts a reader wants written down. Keeping them explicit is also what keeps inference **function-local** - types inferred within one function are not visible outside it, and a type error always points into the body being edited rather than into another function entirely.
+A function's parameter and return types are always explicit, and so are fields, properties and global variables declared at namespace scope. Keeping them explicit is what keeps inference **function-local** - types inferred within one function are not visible outside it, and a type error always points into the body being edited rather than into another function entirely.
 
-Mechanically it is bidirectional, constraint-based inference: types flow up from expressions and down from the contexts that use them, and the compiler re-walks each function body until the unknowns settle. The [implementation page](/implementation#type-inference) describes how.
+Mechanically it is bidirectional, constraint-based inference: types flow up from expressions and down from the contexts that use them, and the compiler re-walks each function body until every inferred type is known. The [implementation page](/implementation#type-inference) describes how.
 
 Within a function, types are inferred for:
 
@@ -23,17 +23,15 @@ Within a function, types are inferred for:
 
 In each case the inferred type is concrete. The compiler does not introduce new type parameters during inference, so an anonymous function literal takes a single concrete function type from its context - it cannot itself be generic. For polymorphic behaviour, declare a generic global function or method and pass it where the function value is needed.
 
-ghūl also performs [type narrowing](/type-narrowing.html) - within parts of a function a value can be observed at a more specific type than the one it was declared with. Inference and narrowing work together: the inferred type is the ceiling, and the control flow sharpens it region by region.
+ghūl also performs [type narrowing](/type-narrowing.html) - within parts of a function a value can be observed at a more specific type than the one it was declared with. Inference and narrowing work together: the inferred type is the widest type a variable has, and narrowing gives it a more specific type wherever the control flow proves one.
 
 The examples below leave inferred types unannotated; hover over any variable to see the type the compiler worked out for it.
 
 ## what stays explicit
 
-A function's signature is written out explicitly; inference works within the body.
+Type inference is local to a function body. The signature of a global function or a method is always written out in full:
 
 <GhulExample name="type-inference-1" />
-
-Inference does not read types out of a body into the function's signature, and does not flow from one function into another: each body is checked on its own, against the explicit signatures of everything it calls.
 
 Fields and properties belong to a type rather than to a function body, so their types are written out too - for private members as well as public ones.
 
@@ -55,17 +53,17 @@ A destructuring `let` declares several variables at once from a tuple. Each vari
 
 ### for loop variables
 
-A `for` loop variable takes its type from the element type of the iterable being looped over. Destructuring composes with this: when the element type is a tuple, its element types flow into the destructured names.
+A `for` loop variable takes its type from the element type of the iterable being looped over. A loop variable can be destructured: when the element type is a tuple, each destructured name takes the type of its element.
 
 <GhulExample name="type-inference-9" />
 
-### list literal element types
+### array literal element types
 
-The element type of a list literal is inferred from the types of the elements: the compiler finds a type compatible with all of them.
+The element type of an array literal is inferred from the types of the elements: the compiler finds a type compatible with all of them.
 
 <GhulExample name="type-inference-10" />
 
-If a list contains tuple literals, the compiler finds a compatible common type for each tuple element across all elements of the list.
+If an array literal contains tuple literals, the compiler finds a compatible common type for each tuple element across all elements of the array.
 
 <GhulExample name="type-inference-11" />
 
@@ -81,7 +79,7 @@ When constructing a generic class, struct or variant, the generic type arguments
 
 <GhulExample name="type-inference-13" />
 
-Inference from the constructor arguments works when every type argument appears among those arguments and the constructor overload is unambiguous. A type argument left unpinned - by a no-argument constructor, say - can still be resolved from later use of the value (see [inference from later use sites](#inference-from-later-use-sites)).
+Inference from the constructor arguments works when every type argument appears among those arguments and the constructor overload is unambiguous. A type argument that the constructor arguments do not determine - with a no-argument constructor, say - can still be resolved from later use of the value (see [inference from later use sites](#inference-from-later-use-sites)).
 
 ### generic function and method calls
 
@@ -91,7 +89,7 @@ When calling a generic global function, a generic method, or a static method on 
 
 ### anonymous function return types
 
-The return type of an anonymous function literal is inferred from the type of its expression body, or from the types of return expressions in its block body.
+The return type of an anonymous function literal is inferred from the type of its expression body, or from the types of the return expressions and the final expression in its block body.
 
 <GhulExample name="type-inference-15" />
 
@@ -101,7 +99,7 @@ When an anonymous function literal is passed as an argument and an unambiguous o
 
 <GhulExample name="type-inference-16" />
 
-Here `self` is already known to be `Pipe[int]`, so `Pipe[int].filter(predicate: int -> bool) -> Pipe[int]` is the only overload that could match. The `predicate` argument must therefore be `int -> bool`, and the type of `i` must be `int`.
+Here the array is already known to hold `int`, so `filter` must be given a predicate of type `int -> bool`, and the type of `i` must be `int`.
 
 ## inference from later use sites
 
@@ -129,6 +127,6 @@ The call passes a `string`, and `string` has a `length` member, so `x` resolves 
 
 ### generic argument inference from sibling actuals
 
-When a generic function or method is called with two arguments that share only a common ancestor, the generic argument is inferred from their nearest shared type rather than failing the overload match.
+When a generic function or method is called with two arguments that share only a common ancestor, the type argument is inferred as their nearest shared type.
 
 <GhulExample name="type-inference-21" />
