@@ -103,7 +103,7 @@ An alias is another spelling of the type it names rather than a new type, so a v
 
 ## top-level statements
 
-A file with no `namespace` can also have statements at its top level. They run in source order as the program's entry point, so a short program needs no `entry` function:
+A file with no `namespace` can also have statements at its top level. They run in source order as the program's entry point, so a short program doesn't need an `entry` function:
 
 <GhulExample name="top-level-statements-1" />
 
