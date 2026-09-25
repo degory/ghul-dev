@@ -138,7 +138,7 @@ Records the source location of every contextually-lexed modifier keyword -
 currently `init` and `open`. A later rewrite consumes some of these
 tokens, so the locations are captured up front for the editor's
 semantic-token colouring, which lights them as keywords. Hard keywords
-like `abstract` need no help; only the contextually-lexed modifiers do.
+like `abstract` don't need any help; only the contextually-lexed modifiers do.
 
 ### `rewrite-syntax-trees`{:text}
 
@@ -261,7 +261,7 @@ By the time `compile-expressions`{:text} runs, every explicitly-typed
 symbol already knows its declared type, and that declared type becomes
 one of the constraints that bidirectional inference uses for the
 unannotated parts of the same expression. The pass also performs a few
-annotation-only checks (field and property types can't be reference
+annotation-only checks (field and property types can't be `ref`
 types; variable types can't be `void`).
 
 Note that this pass does *not* check that an initializer's type matches
@@ -390,7 +390,7 @@ The final pass writes the IR values produced by `compile-expressions`{:text}
 out as a .NET assembly, using `System.Reflection.Metadata`{:text} to encode
 the metadata tables, the method bodies and a portable PDB, and writing the
 `.dll`{:text} or `.exe`{:text} itself. Nothing outside the compiler is
-involved, so a build needs no platform-specific tool beyond the .NET
+involved, so a build doesn't need a platform-specific tool beyond the .NET
 runtime the compiler is already running on.
 
 Names, signatures and attribute blobs are all encoded from the resolved
@@ -518,8 +518,8 @@ index records an indexer. These are the `MEMBER_CONSTRAINT`,
 placeholder is resolved, the accumulated constraints filter the candidate
 types, rejecting any that don't support how the variable is used.
 
-One walk of a body cannot always see enough: a `let`-bound anonymous
-function is used after it is defined, and a constructor's type arguments
+One walk of a body cannot always see enough: an anonymous function
+assigned to a `let` variable is used after it is defined, and a constructor's type arguments
 can be fixed by a later call. So `compile-expressions`{:text} re-walks
 each function body. Constraints attached during a walk persist into the
 next and only ever narrow, so each pass either tightens the unknowns or
@@ -599,7 +599,7 @@ The splice relies on a language rule doing structural work: a function's
 signature is always explicit and inference never escapes a body, so a
 body-only edit provably cannot change anything another file can see.
 Where any guard on the incremental path fails, the analyser falls back
-to the full rebuild - slower, never wrong.
+to the full rebuild, which is slower.
 
 ### batch requests and lifetime
 
