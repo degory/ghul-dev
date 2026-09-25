@@ -33,7 +33,7 @@ A function's signature is written out explicitly; inference works within the bod
 
 <GhulExample name="type-inference-1" />
 
-Each function body is checked on its own, against the explicit signatures of everything it calls, and the types inferred in it stay in it.
+Each function body is checked on its own, against the explicit signatures of everything it calls.
 
 Fields and properties belong to a type rather than to a function body, so their types are written out too - for private members as well as public ones.
 
