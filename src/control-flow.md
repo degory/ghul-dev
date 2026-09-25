@@ -212,7 +212,7 @@ A `when` arm can take a pattern instead of an equality list, mirroring [`if let`
 
 <GhulExample name="control-flow-54" />
 
-Narrowing works like `if let`'s: an arm's type test narrows the scrutinee within its body, and so does a test made by the arm's own guard. Arm narrowing is local - what an arm proves doesn't reach a sibling arm or the code after the `case`.
+Narrowing works like `if let`'s: an arm's type test narrows the scrutinee within its body, and so does a test made by the arm's own guard. The compiler applies an arm's narrowing only within that arm: not in a sibling arm, and not in the code after the `case`.
 
 ### exhaustiveness
 
