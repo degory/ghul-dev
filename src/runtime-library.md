@@ -369,7 +369,7 @@ Calls `action` on every element. It returns nothing and, alone among these, is n
 
 ### append_to
 
-Appends each element to a `StringBuilder`, separated by `separator`, or by `", "` when that is left off. `join` is the same thing answering a fresh string.
+Appends each element to a `StringBuilder`, separated by `separator`, or by `", "` when that is left off. `join` does the same and returns a new string.
 
 <GhulExample name="pipes-ref-append_to-function" signature />
 
