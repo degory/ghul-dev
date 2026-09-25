@@ -28,7 +28,7 @@ The name `_` is a discard placeholder. It can stand in for any variable name, bu
 
 <GhulExample name="definitions-5" />
 
-`let` can be used only within function, method or property bodies, and among a file's top-level statements. Variable names should be in `snake_case`.
+`let` can be used only in a function, method or property body, or as a top-level statement in a file. Variable names should be in `snake_case`.
 
 ## functions
 
