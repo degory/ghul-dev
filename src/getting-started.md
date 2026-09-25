@@ -46,7 +46,7 @@ ghūl reads best in a font with programming ligatures, which draw operators such
 
 A ghūl project is a normal .NET SDK project. In each repository above you'll find a `.ghulproj`{:text} - an MSBuild project file with the usual things in it - and the normal `dotnet`{:text} commands work as you'd expect:
 
-```bash
+```sh
 dotnet build
 dotnet run
 dotnet test
