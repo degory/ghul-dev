@@ -17,8 +17,9 @@
 export const CORPUS_ROOT = 'https://raw.githubusercontent.com/ghul-lang/ghul-rosetta-code/main/'
 
 // raw.githubusercontent.com answers cross-origin requests and, unlike the GitHub API, is not held
-// to 60 requests an hour. The playground fetches the same sources from it.
-export const INDEX_URL = `${CORPUS_ROOT}index.json`
+// to 60 requests an hour. The playground fetches the same sources from it. The index is generated
+// from main and published on a branch of its own, holding nothing else.
+export const INDEX_URL = 'https://raw.githubusercontent.com/ghul-lang/ghul-rosetta-code/index/index.json'
 
 // The version of index.json this code reads. A later one is read anyway - the fields used here
 // have only ever been added to - but a mismatch is worth saying out loud rather than failing
