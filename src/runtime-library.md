@@ -65,7 +65,7 @@ it holds a `T` or holds nothing, and `??`, `!` and `if let` read the value out.
 
 ### pipe
 
-Turns any `Iterable[T]` - an array, a `LIST[T]`, a `MAP[T]`'s values,
+Turns any `Iterable[T]` - an array, a `LIST[T]`, a `MAP[K, V]`'s values,
 anything with an `.iterator` - into a `Pipe[T]`. A chain rarely needs it: the
 free functions all take an `Iterable[T]`, so a chain can start from the source
 itself.
