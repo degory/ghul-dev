@@ -91,7 +91,7 @@ When calling a generic global function, a generic method, or a static method on 
 
 ### anonymous function return types
 
-The return type of an anonymous function literal is inferred from the type of its expression body, or from the types of return expressions in its block body.
+The return type of an anonymous function literal is inferred from the type of its expression body, or from the types of the return expressions and the final expression in its block body.
 
 <GhulExample name="type-inference-15" />
 
