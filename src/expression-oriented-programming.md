@@ -20,7 +20,7 @@ A `case` yields the value of the matched arm. As an expression it needs an `else
 
 ## loops as expressions
 
-Every loop form yields too, at type `T?`: a `break` with a value produces it, and falling off the end - a false condition, an exhausted iterator - produces the absent value. A search over a sequence is then one expression, and a valued break can carry its result out of nested loops to the outermost one that consumes it:
+Every loop form yields too, at type `T?`: a `break` with a value produces it, and falling off the end - a false condition, an exhausted iterator - produces the absent value. A search over a sequence is then one expression, and a valued break can carry its result out of nested loops to the innermost enclosing loop that consumes it:
 
 <GhulExample name="control-flow-61" />
 
