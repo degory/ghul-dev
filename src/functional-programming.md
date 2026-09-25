@@ -50,8 +50,8 @@ the function itself:
 
 An anonymous function cannot refer to a variable that is not yet defined, so
 there is no direct way to write two anonymous functions that call each
-other. Write mutually recursive functions as named functions, which can
-refer to each other whatever order they are defined in:
+other. Write mutually recursive functions as global functions or methods,
+which can refer to each other whatever order they are defined in:
 
 <GhulExample name="functional-programming-5" />
 
