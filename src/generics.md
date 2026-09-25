@@ -63,7 +63,7 @@ A type bound `[T: SomeType]` requires the type argument to derive from `SomeType
 
 <GhulExample name="generics-7" />
 
-A value whose static type is a bounded type parameter also narrows and destructures through the bound, so `isa`, `if let`, and destructuring reach the bound's subtypes and variants directly, with no manual widen to the bound first:
+A value whose static type is a bounded type parameter also narrows and destructures through the bound, so `isa`, `if let`, and destructuring reach the bound's subtypes and variants directly, without first converting the value to the bound:
 
 <GhulExample name="generics-10" />
 
