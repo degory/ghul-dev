@@ -100,7 +100,7 @@ Where the context needs the non-optional type, the `else` is still required.
 
 ## case expression
 
-A `case` expression yields the value of the matched arm. It needs an `else` arm so that every value is covered; the arm values and the `else` agree on a type:
+A `case` expression yields the value of the matched arm. It needs an `else` arm unless its arms already cover every possible value, as arms for each variant of a union do; the arm values and the `else` agree on a type:
 
 <GhulExample name="expressions-29" />
 
@@ -142,7 +142,7 @@ A type cast converts a value from one type to another explicitly, using the `cas
 
 <GhulExample name="expressions-23" />
 
-The target type can be left out when the surrounding expression already determines it. `cast(v)` converts `v` to whatever type the position it sits in calls for - a typed `let` initializer, an assignment, a `return` or `=>` body, a call argument's formal, an operator's other operand, an index:
+The target type can be left out when the surrounding expression already determines it. `cast(v)` converts `v` to whatever type the position it sits in calls for - a typed `let` initializer, an assignment, a `return` or `=>` body, a parameter of the function or operator being called, an index:
 
 <GhulExample name="expressions-30" />
 
@@ -154,7 +154,7 @@ A cast written with an optional target yields rather than throwing: `cast T?(x)`
 
 The `_` expression evaluates to the default value of a type: `null` for reference types, the zero value for numeric and other value types.
 
-`_[T]` pins the type explicitly. A bare `_` takes its type from the surrounding context: a typed `let`, an assignment, or a return:
+`_[T]` pins the type explicitly. A bare `_` takes its type from the surrounding context: a typed `let`, an assignment, a return, or a call argument:
 
 <GhulExample name="expressions-24" />
 
