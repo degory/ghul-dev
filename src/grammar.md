@@ -652,8 +652,8 @@ Literal ::= IntegerLiteral
 ExpressionList ::= Expression ( "," Expression )*
 ```
 
-A list literal `[ a, b, ... ]` builds a `List`; it requires at least one element
-(use `LIST[T]()` for an empty list).
+An array literal `[ a, b, ... ]` builds an array. The empty literal `[]` takes
+its element type from the context.
 
 Within an `ExpressionList` that forms call arguments or a tuple, an element of the
 form `Identifier ":" TypeExpression? ( "=" Expression )?` is an inline local
