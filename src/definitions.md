@@ -50,7 +50,7 @@ Functions can be generic, which will be covered later. Function names should be 
 
 ### the entry point
 
-A program starts at a function named `entry`, or at the statements written at the top level of a file with no namespace. `entry` can take the command-line arguments as a `string[]`, the process environment as a `Ghul.Environment`, both, or neither, and returns either nothing or an `int` exit status:
+A program starts at a function named `entry`, or at the statements written at the top level of a file with no namespace. `entry` can take the command-line arguments as a `string[]`, the process environment as a `Ghul.Environment`, both, or neither, and returns either no value or an `int` exit status:
 
 <GhulExample name="definitions-55" />
 
