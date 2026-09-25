@@ -54,12 +54,12 @@ results, and so they buffer the whole source as soon as they are called.
 ## reading the signatures
 
 The `pure` on a function type - `predicate: (T) -> bool pure` - asks that the
-function you pass only reads, and writes nothing to the heap. Most anonymous
+function you pass only reads, and doesn't write to the heap. Most anonymous
 functions satisfy it without any thought; see [type narrowing](/type-narrowing.html#calls-purity-and-stable)
 for what the compiler does with the guarantee.
 
 A combinator that might not find anything returns `T?`, an [optional type](/optional-types.html#unconstrained-generic-types):
-it holds a `T` or holds nothing, and `??`, `!` and `if let` read the value out.
+it holds a `T` or doesn't hold one, and `??`, `!` and `if let` read the value out.
 
 ## making a pipe
 
@@ -231,13 +231,13 @@ Calls `mapper` on each element in turn and returns the first present result. `fi
 
 ### find_or_throw
 
-As `find`, throwing instead of returning absent when nothing matches.
+As `find`, throwing instead of returning absent when no element matches.
 
 <GhulExample name="pipes-ref-find_or_throw-function" signature />
 
 ### find_map_or_throw
 
-As `find_map`, throwing instead of returning absent when nothing maps.
+As `find_map`, throwing instead of returning absent when no element maps.
 
 <GhulExample name="pipes-ref-find_map_or_throw-function" signature />
 
@@ -363,7 +363,7 @@ Folds the source into a single value, starting at `seed` and calling `accumulato
 
 ### each
 
-Calls `action` on every element. It returns nothing and, alone among these, is not `pure` - it exists for its side effects.
+Calls `action` on every element. It doesn't return a value and, alone among these, is not `pure` - it exists for its side effects.
 
 <GhulExample name="pipes-ref-each-function" signature />
 
@@ -411,7 +411,7 @@ A type chooses how it is displayed by implementing `Displayable`. Its one method
 
 A `DISPLAY_STATE` can also be created directly, with a mode and a different element limit, and read back with `to_string()` after writing into it.
 
-`display(value)` shows a value while the code goes on running, rather than only at the end. A host that shows values, such as a REPL, a notebook or the playground, installs a `DisplaySink`, and `display` sends the value to it. With no host installed, `display` writes what `inspect` gives for the value as a line of standard output. `display(value, id)` names what it shows, and `update_display(value, id)` replaces what was shown under that name, which is how a cell shows progress in place. With no host there is nothing to replace, so `update_display` writes another line. All three are in `Ghul`:
+`display(value)` shows a value while the code goes on running, rather than only at the end. A host that shows values, such as a REPL, a notebook or the playground, installs a `DisplaySink`, and `display` sends the value to it. With no host installed, `display` writes what `inspect` gives for the value as a line of standard output. `display(value, id)` names what it shows, and `update_display(value, id)` replaces what was shown under that name, which is how a cell shows progress in place. With no host there isn't a display to replace, so `update_display` writes another line. All three are in `Ghul`:
 
 <GhulExample name="display-show" />
 

@@ -4,13 +4,13 @@ There are three ways to start writing ghūl: in the browser, in a GitHub Codespa
 
 ## in the browser
 
-The [ghūl playground](https://ghul.dev/playground/) compiles and runs ghūl in your browser, with live errors, completion and hover as you type. There is nothing to install. It is what runs the editable examples on this site, and its own menu offers complete programs to start from.
+The [ghūl playground](https://ghul.dev/playground/) compiles and runs ghūl in your browser, with live errors, completion and hover as you type. You don't need to install anything. It is what runs the editable examples on this site, and its own menu offers complete programs to start from.
 
 The [online REPL](https://ghul.dev/repl/) runs ghūl a submission at a time instead: each one runs as soon as it is complete, and what it defines stays available to the next.
 
 ## in a Codespace
 
-The [ghūl scratchpad](https://github.com/ghul-lang/ghul-scratchpad) is a minimal one-file project: open it in a GitHub Codespace and it arrives with the .NET SDK, the compiler and the language extension ready to go. Paste any example from this site into `main.ghul`{:text} and `dotnet run`{:sh}. This needs a GitHub account and nothing else.
+The [ghūl scratchpad](https://github.com/ghul-lang/ghul-scratchpad) is a minimal one-file project: open it in a GitHub Codespace and it arrives with the .NET SDK, the compiler and the language extension ready to go. Paste any example from this site into `main.ghul`{:text} and `dotnet run`{:sh}. This needs only a GitHub account.
 
 The [examples repository](https://github.com/ghul-lang/ghul-examples) works the same way, with fuller, runnable examples organised by topic.
 

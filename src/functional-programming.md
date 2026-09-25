@@ -82,14 +82,14 @@ replaced. An array literal constructs a plain array, so the same applies to it.
 ### tuples are immutable
 
 Tuple elements have no assign accessors, and tuples are value types, so a
-tuple passed to other code is a copy: nothing can change a tuple you hold.
+tuple passed to other code is a copy, and other code can't change a tuple you hold.
 
 <GhulExample name="functional-programming-7" />
 
 ### unions are read-only
 
 A union value is fixed at construction: variant fields cannot be assigned,
-and nothing can change which variant a value holds. Methods can be added to
+and the variant a value holds can't be changed. Methods can be added to
 a union with [`partial` and `impl`
 blocks](/definitions.html#partial-and-impl-blocks), but each must be pure: a
 union method that assigns a field of any object is reported.

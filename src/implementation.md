@@ -215,7 +215,7 @@ instead of a straight method body.
 
 The second round of `use` resolution: binds imports of members - static
 methods, global functions, enum members - now that `declare-members`{:text}
-has created them, and reports any `use` that still resolves to nothing.
+has created them, and reports any `use` that still doesn't resolve to anything.
 
 ### `check-name-conventions`{:text}
 
@@ -398,8 +398,8 @@ involved, so a build doesn't need a platform-specific tool beyond the .NET
 runtime the compiler is already running on.
 
 Names, signatures and attribute blobs are all encoded from the resolved
-symbols and types, so nothing about the emitted assembly depends on how
-the compiler would display those things to a reader.
+symbols and types, so the emitted assembly doesn't depend on how the
+compiler would display those things to a reader.
 
 Some metadata tables are stored as runs: a type points at the first of its
 members, and the run ends where the next type's begins. Those runs are not
@@ -410,7 +410,7 @@ rows in a second, both replaying a single recorded sequence rather than
 each working the order out for itself.
 
 Emission is deterministic: the module version id is a hash of the content
-rather than a fresh value, and nothing records the time of the build. Two
+rather than a fresh value, and the build doesn't record its time. Two
 builds of the same source produce the same bytes, which is what lets the
 bootstrap compare assemblies directly.
 
@@ -620,8 +620,8 @@ to recycle the process when either threshold is crossed; the extension
 schedules recycles during idle periods so the user rarely notices. The
 analyser also exits of its own accord after half an hour without a
 request: a warm analyser retains the whole symbol table, so an editor
-window left open overnight would otherwise hold hundreds of megabytes to
-answer nothing, and the cold rebuild the next request pays is the
+window left open overnight would otherwise hold hundreds of megabytes while
+answering no requests, and the cold rebuild the next request pays is the
 cheaper side of that trade. Even with the recycles, the long-lived shape
 is much cheaper than starting a fresh compiler for every request.
 
