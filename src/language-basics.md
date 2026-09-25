@@ -148,7 +148,7 @@ Arguments will be covered in detail with functions and methods, but the basic fo
 <GhulExample name="language-basics-22" />
 
 ### captured variables
-Variables captured by a function literal will be covered with [function literals](/expressions.html#capturing-and-closure). They are not explicitly declared but inferred from each function literal's body.
+Variables captured by a function literal will be covered with [function literals](/expressions.html#capturing-and-closure). They are not declared: a function literal captures the variables its body uses.
 
 ### scope
 
