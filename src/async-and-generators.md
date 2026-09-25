@@ -12,7 +12,7 @@ Two kinds of ghūl function suspend and resume instead of running straight throu
 
 A function is asynchronous when its declared return type is `Tasks.TASK[T]` (or `Tasks.TASK`, for one that produces no value).
 
-Inside such a function, `await e` evaluates to the result of the task `e` once it completes. `let x = await e;` assigns the result to a local and the rest of the function continues:
+Inside such a function, `await e` evaluates to the result of the task `e` once it completes. `let x = await e;` defines a local variable holding the result, and the rest of the function continues:
 
 <GhulExample name="control-flow-46" />
 
