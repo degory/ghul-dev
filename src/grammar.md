@@ -161,7 +161,7 @@ general operators: `=`, `:`, `.`, `->`, `=>`, `?` and `@`.
 
 Every `";"` written in the productions below can be left off where the next token
 opens a new source line: the line break stands in for it. End of file ends a line
-too, so the last construct in a file needs no terminator. A `";"` is only required
+too, so the last construct in a file doesn't need a terminator. A `";"` is only required
 between two constructs written on one line.
 
 ```ebnf
@@ -172,11 +172,11 @@ Terminator ::= ";" | Boundary
 its source line, and before end of input.
 
 The parser accepts a `Terminator` only where the grammar could accept a `";"`, so
-the inference asks one question at one kind of position: is the current token the
+the parser asks one question at one kind of position: is the current token the
 first on its line? That leaves the rest to the productions themselves. A line
 break ends a construct that is complete; one that is not runs on to the next
 line, so a trailing operator, an unclosed bracket, and an argument list still
-waiting for its `)` need no rule at all.
+waiting for its `)` carry the construct on to the next line.
 
 ### line-start tokens
 
@@ -216,8 +216,8 @@ follows one.
 A parenthesised group is a tuple or a
 [block expression](/expression-oriented-programming.html#blocks), and a boundary
 commits the block reading exactly as a written `";"` does. A top-level `","`
-commits the tuple reading, and has always arrived first when it is going to, so
-the two never contend. A line-start operator is excluded from the block commit,
+commits the tuple reading, and in a tuple it always comes before any line
+break that could commit a block, so the two readings never conflict. A line-start operator is excluded from the block commit,
 which keeps `(a` ... `+ b)` from being misread as two statements.
 
 `Assert` is the one construct whose reading depends on how far a line is
@@ -280,9 +280,10 @@ ClassyBody ::= "is" ClassBodyDefinition* "si"
 TypeParameters ::= "[" TypeParameter ( "," TypeParameter )* "]"
 TypeParameter  ::= Identifier ( ":" TypeParameterConstraints )? Variance?
 TypeParameterConstraints
-               ::= TypeExpression KindConstraint? "new"?    /* type bound */
-                 | KindConstraint "new"?                    /* kind only */
-                 | "new"                                    /* ctor only */
+               ::= TypeBound KindConstraint? "init"?        /* type bound */
+                 | KindConstraint "init"?                   /* kind only */
+                 | "init"                                   /* ctor only */
+TypeBound      ::= TypeExpression ( "/\" TypeExpression )*
 KindConstraint ::= "class" | "struct" | "optional"
 Variance       ::= "out" | "in"
 
@@ -298,11 +299,11 @@ SuperCallDeclaration ::= "super" "(" ExpressionList? ")" ";"
 
 `Ancestors` lists the base class and/or implemented traits.
 
-A type parameter has zero or more constraints: a *type bound* (which the actual type argument must derive from), a *kind constraint* (`class` / `struct` / `optional`), a *constructor constraint* (`new`), and on a trait a *variance* modifier (`out` for covariant, `in` for contravariant) - in that order. Only a single type bound per parameter is currently supported. Variance is only legal on a trait's type parameters.
+A type parameter has zero or more constraints: a *type bound* (which the actual type argument must derive from), a *kind constraint* (`class` / `struct` / `optional`), a *constructor constraint* (`init`), and on a trait a *variance* modifier (`out` for covariant, `in` for contravariant) - in that order. Several type bounds can be joined with `/\`. Variance is only legal on a trait's type parameters.
 
-`PrimaryParameters` declare a class or struct's primary constructor inline. Each parameter becomes a parameter of the synthesised `init` and an auto-generated field or property of the same name and declared type. A trailing modifier on a parameter overrides the default visibility - `public` for a public read-write property, `field` for a plain field, `init` to suppress field generation. A parameter named `_x` produces a private field; a body field or property declaration matching the parameter (under the same `_x`/`x` rule) overrides auto-generation.
+`PrimaryParameters` declare a class or struct's primary constructor inline. Each parameter becomes a parameter of the synthesised `init` and a synthesised field or property of the same name and declared type. A trailing modifier on a parameter overrides the default visibility - `public` for a public read-write property, `field` for a plain field, `init` to suppress field generation. A parameter named `_x` produces a private field; a body field or property declaration matching the parameter (under the same `_x`/`x` rule) replaces the synthesised member.
 
-A `SuperCallDeclaration` is a class-body shorthand for calling the superclass `init` with the given expressions. Each expression resolves with the primary parameters in scope. Primary parameters consumed by `super(...)` are excluded from auto-generation. A secondary `init(.., extras)` overload uses `..` to splice the primary parameters into its argument list; an implicit chain to the primary `init` runs before the secondary's body.
+A `SuperCallDeclaration` is a class-body shorthand for calling the superclass `init` with the given expressions. Each expression resolves with the primary parameters in scope. Primary parameters consumed by `super(...)` get no synthesised member. A secondary `init(.., extras)` overload uses `..` to splice the primary parameters into its argument list; an implicit chain to the primary `init` runs before the secondary's body.
 
 ### union
 
@@ -355,7 +356,7 @@ Body ::= "is" StatementList "si"
        | "innate" QualifiedIdentifier
 ```
 
-A function may be named by an `Operator`, which defines that operator. A function
+A function can be named by an `Operator`, which defines that operator. A function
 with no body (just `;`) is abstract. A `=>` or `innate` body is terminated by `;`;
 a block body (`is` … `si`) is not.
 
@@ -542,7 +543,7 @@ Continue ::= "continue" Identifier?
 Labelled ::= Identifier ":" Statement
 ```
 
-A `Labelled` statement may be targeted by `break` or `continue` with the matching
+A `Labelled` statement can be targeted by `break` or `continue` with the matching
 label.
 
 ### assignment and expression statements
@@ -618,7 +619,7 @@ FunctionArguments ::= "(" VariableList? ")"
                     | Identifier
 ```
 
-`rec` marks the literal as recursive, so it may refer to itself.
+`rec` marks the literal as recursive, so it can refer to itself.
 
 ### primary expressions
 
@@ -652,8 +653,8 @@ Literal ::= IntegerLiteral
 ExpressionList ::= Expression ( "," Expression )*
 ```
 
-A list literal `[ a, b, ... ]` builds a `List`; it requires at least one element
-(use `LIST[T]()` for an empty list).
+An array literal `[ a, b, ... ]` builds an array. The empty literal `[]` takes
+its element type from the context.
 
 Within an `ExpressionList` that forms call arguments or a tuple, an element of the
 form `Identifier ":" TypeExpression? ( "=" Expression )?` is an inline local
@@ -662,7 +663,7 @@ form is accepted.
 
 ## operator precedence
 
-ghūl has no fixed list of binary operators: any [operator token](#operators) may be
+ghūl has no fixed list of binary operators: any [operator token](#operators) can be
 used infix. Precedence is assigned by a table of built-in operators plus a
 first-character heuristic for everything else, so the grammar's flat
 `Expression ::= UnaryExpression ( Operator UnaryExpression )*` is disambiguated by
@@ -688,7 +689,8 @@ the following levels, **tightest first**:
 | user&#8209;1     | *(user-defined)*                            |
 | yield infix      | `\|\|`                                      |
 
-All binary operators are left-associative. Prefix unary operators, member access,
+Binary operators are left-associative, except those that start with `?`, such
+as `??`, which are right-associative. Prefix unary operators, member access,
 calls and indexing bind more tightly than any binary operator.
 
 A user-defined operator (any operator not in the table above) is assigned a
