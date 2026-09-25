@@ -22,7 +22,7 @@ The postfix `!` asserts presence and reads the value out; applied to an absent o
 
 ## the warnings
 
-Reading a member through an optional not known to be present is reported with a `null-deref` warning; `x?.y`, `x.has_value`, `x!`, and `if let` are the warning-free routes. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
+Reading a member through an optional that is not known to be present is an error; `x?.y`, `x.has_value`, `x!`, and `if let` are the ways through. Applying `!`, `?`, or `?.` to a value already known to be present warns that the operator is redundant, and `!` on a value that was never optional is an error. Each warning has a slug you can silence with `@suppress("<slug>")` per declaration, per file, or across the project.
 
 ## optional-shaped types
 
