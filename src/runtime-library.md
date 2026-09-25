@@ -37,9 +37,8 @@ stages from the source.
 <GhulExample name="pipes-lazy-chain" />
 
 Because pipes are lazy, they can consume a source with an infinite number of
-elements. The consumer can stop pulling, and discard the pipe. When the
-pipe is disposed, that disposal flows back up the pipe to the source iterator,
-which is then also disposed.
+elements. The consumer can stop pulling and discard the pipe. Calling `dispose()` on a
+pipe disposes the iterators its stages hold, back to the source iterator.
 
 One way to bound consumption is to use a stage like `take(...)`, which stops
 pulling after a given number of elements have passed through it.
@@ -66,7 +65,7 @@ it holds a `T` or holds nothing, and `??`, `!` and `if let` read the value out.
 
 ### pipe
 
-Turns any `Iterable[T]` - an array, a `LIST[T]`, a `MAP[T]`'s values,
+Turns any `Iterable[T]` - an array, a `LIST[T]`, a `MAP[K, V]`'s values,
 anything with an `.iterator` - into a `Pipe[T]`. A chain rarely needs it: the
 free functions all take an `Iterable[T]`, so a chain can start from the source
 itself.
@@ -226,7 +225,7 @@ The first element matching the predicate, absent if none does. `first` is the sa
 
 ### find_map
 
-Calls `mapper` on each element in turn and returns the first present result. `first_map` differs: it calls the mapper on the *first* element only, and gives up if that one declines.
+Calls `mapper` on each element in turn and returns the first present result. `first_map` differs: it calls the mapper on the *first* element only, and returns absent if the mapper returns absent for it.
 
 <GhulExample name="pipes-ref-find_map-function" signature />
 
@@ -268,7 +267,7 @@ As `first_map`, throwing instead of returning absent.
 
 ### only
 
-The single element the source holds, throwing when it holds none or more than one.
+The single element the source holds, throwing when it is empty or holds more than one.
 
 <GhulExample name="pipes-ref-only-function" signature />
 
@@ -370,7 +369,7 @@ Calls `action` on every element. It returns nothing and, alone among these, is n
 
 ### append_to
 
-Appends each element to a `StringBuilder`, separated by `separator`, or by `", "` when that is left off. `join` is the same thing answering a fresh string.
+Appends each element to a `StringBuilder`, separated by `separator`, or by `", "` when that is left off. `join` does the same and returns a new string.
 
 <GhulExample name="pipes-ref-append_to-function" signature />
 
@@ -388,7 +387,7 @@ Writes the elements in brackets, as `[1, 2, 3]`, whatever `to_string` the source
 
 ## displaying values
 
-The runtime formats any value as text in two ways. `$(value)` gives the text a program shows its user: string interpolation uses it for any value whose type gives no text of its own, as [string interpolation](/language-basics#string-interpolation) describes. `inspect(value)` gives the detailed form a REPL or a debugging session wants: the same structure, with each string and character quoted wherever it appears inside a value. `$` needs no `use`, and `inspect` is in `Ghul`:
+The runtime formats any value as text in two ways. `$(value)` gives the text a program shows its user: string interpolation uses it for any value whose type gives no text of its own, as [string interpolation](/language-basics#string-interpolation) describes. `inspect(value)` gives the detailed form a REPL or a debugging session wants: the same structure, with each string and character quoted wherever it appears inside a value. `$` doesn't need a `use`, and `inspect` is in `Ghul`:
 
 <GhulExample name="display-values" />
 
