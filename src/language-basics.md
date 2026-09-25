@@ -26,7 +26,7 @@ Expressions in ghūl are constructs that return a value, while statements perfor
 <GhulExample name="language-basics-2" />
 
 ### function declarations
-Functions in ghūl are declared with an optional return type, a name, a list of parameters in parentheses, and a body enclosed in `is` and `si` keywords
+Functions in ghūl are declared with a name, a list of parameters in parentheses, an optional return type after `->`, and a body enclosed in `is` and `si` keywords.
 
 <GhulExample name="language-basics-3" />
 
