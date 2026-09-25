@@ -14,7 +14,7 @@ Variables defined within a block are only accessible within that block and any n
 
 ## assert statement
 
-In ghūl the `assert` statement is used to ensure an expected condition holds and to throw an exception if it does not. An assert statement starts with `assert`, followed by an expression that must evaluate to a bool, followed by `else`, and then a value to throw. If the value to throw is a string, it will be wrapped in an `AssertionFailedException`. Otherwise it must be of a throwable type.
+In ghūl the `assert` statement is used to ensure an expected condition holds and to throw an exception if it does not. An assert statement starts with `assert`, followed by an expression that must evaluate to a bool, and optionally by `else` and a value to throw. If the value to throw is a string, it will be wrapped in a `Ghul.AssertFailedException`. Otherwise it must be of a throwable type.
 
 <GhulExample name="control-flow-1" />
 
