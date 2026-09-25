@@ -38,7 +38,7 @@ A trait member can provide a default body. An implementing type inherits the def
 
 ## narrowing
 
-Discovering an object's concrete type at runtime uses `isa` or `if let`, which test the type and narrow the value to it inside the matching branch, and a `case` over a closed hierarchy is checked for exhaustiveness. The [type narrowing](/type-narrowing.html) page covers it in full.
+`isa` and `if let` test an object's runtime type and narrow the value to it inside the matching branch, and a `case` over a closed hierarchy is checked for exhaustiveness. The [type narrowing](/type-narrowing.html) page covers it in full.
 
 ## a worked example
 
