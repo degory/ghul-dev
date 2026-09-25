@@ -28,7 +28,7 @@ The name `_` is a discard placeholder. It can stand in for any variable name, bu
 
 <GhulExample name="definitions-5" />
 
-Variables can only be defined within functions, methods or property bodies. Variable names should be in `snake_case`.
+`let` can be used only in a function, method or property body, or as a top-level statement in a file. Variable names should be in `snake_case`.
 
 ## functions
 
@@ -50,7 +50,7 @@ Functions can be generic, which will be covered later. Function names should be 
 
 ### the entry point
 
-A program starts at a function named `entry`, or at the statements written at the top level of a file with no namespace. `entry` can take the command-line arguments as a `string[]`, the process environment as a `Ghul.Environment`, both, or neither, and returns either nothing or an `int` exit status:
+A program starts at a function named `entry`, or at the statements written at the top level of a file with no namespace. `entry` can take the command-line arguments as a `string[]`, the process environment as a `Ghul.Environment`, both, or neither, and returns either no value or an `int` exit status:
 
 <GhulExample name="definitions-55" />
 
@@ -82,16 +82,16 @@ A class defines a new reference type, instances of which are assignment compatib
 Instances of classes are created via a constructor expression, which consists of a type expression followed by a parenthesis delimited list of actual constructor arguments. For a class, the type expression is the class name, qualified with any namespaces if needed:
 <GhulExample name="definitions-9" />
 
-A class can also declare its constructor parameters directly in the header. Each parameter becomes a parameter of the synthesised constructor, and an auto-generated same-named field or property holds the supplied value:
+A class can also declare its constructor parameters directly in the header. Each parameter becomes a parameter of the synthesised constructor, and a synthesised same-named field or property holds the supplied value:
 <GhulExample name="definitions-8a" />
 
-The two forms are equivalent. The primary form is the shorter shape when every field is initialized from a constructor argument; the classic form is the better fit when the body owns extra fields or properties beyond what the constructor takes. See [constructors](#constructors) for the rest of the primary-constructor surface area.
+The two forms are equivalent. The primary form is the shorter shape when every field is initialized from a constructor argument; the classic form is the better fit when the body owns extra fields or properties beyond what the constructor takes. See [constructors](#constructors) for more on primary constructors.
 
 Two postfix modifiers control the class hierarchy. Without `open`, a class can be subclassed only within the assembly that declares it; `open` allows subclassing from other assemblies. `abstract` means the class itself cannot be constructed: only its subclasses can. A class is also implicitly abstract when it declares an instance method with no body, because that method is a contract for subclasses to satisfy.
 
 Because the compiler knows every subclass of a closed class, an `isa` test can narrow in the else branch too: ruling out the tested subclass leaves the others, and when an `abstract` root has exactly two subclasses, ruling out one leaves the other. See [type narrowing](/type-narrowing.html).
 
-A class has no `=~` unless it defines one. `@equality()` before a class asks the compiler to write `=~` and a matching `get_hash_code`, comparing the members that hold the class's state, so .NET collections find an equal value as well as the same object:
+A class has no `=~` unless it defines one. `@equality()` before a class asks the compiler to synthesise `=~` and a matching `get_hash_code`, comparing the members that hold the class's state, so .NET collections find an equal value as well as the same object:
 
 <GhulExample name="definitions-57" />
 
@@ -110,11 +110,11 @@ Structs are constructed the same way as classes, with a constructor expression:
 A struct defines a new value type. Assigning a struct copies all of its fields, so the copy and the original are independent afterwards:
 <GhulExample name="definitions-12" />
 
-`==` is not defined for structs: it would compare the bytes of the value rather than its members. `=~` compares structs instead. A struct whose members are all public and that declares no equality of its own is given `=~` and a matching `get_hash_code`, comparing its members one by one:
+`==` is not defined for structs: it would compare the bytes of the value rather than its members. `=~` compares structs instead. For a struct whose members are all public and that declares no equality of its own, the compiler synthesises `=~` and a matching `get_hash_code`, comparing its members one by one:
 
 <GhulExample name="definitions-58" />
 
-A struct with a non-public member, or one that declares any of `=~`, `<>`, `get_hash_code` or `equals`, gets none of this, and defines its own equality as described under [defining operators](#operators) and, for the .NET side, under [making your own types work with .NET](/dotnet-integration.html#equality).
+The compiler doesn't synthesise these for a struct with a non-public member, or for one that declares any of `=~`, `<>`, `get_hash_code` or `equals`. Define that struct's equality as described under [defining operators](#operators) and, for the .NET side, under [making your own types work with .NET](/dotnet-integration.html#equality).
 
 Structs can only be defined at global scope. Structs can be generic, which will be covered later. Struct names should be in `MACRO_CASE`.
 
@@ -135,7 +135,7 @@ A class override can call the trait's default with `super.method()`.
 
 Traits can only be defined at global scope. Trait methods and properties can be abstract or have a default implementation. Trait names should be in `PascalCase`.
 
-Like a class, a trait is closed to other assemblies unless it has the postfix `open` modifier. A closed trait can be implemented and derived from only within the assembly that declares it; `open` opts in to cross-assembly extension. Inside the declaring assembly nothing changes.
+Like a class, a trait is closed to other assemblies unless it has the postfix `open` modifier. A closed trait can be implemented and derived from only within the assembly that declares it; `open` opts in to cross-assembly extension.
 
 ### unions
 
@@ -177,7 +177,7 @@ An enum marked `@System.Flags()` also gets the bitwise operators `&`, `|`, `^` a
 
 <GhulExample name="definitions-59" />
 
-An enum without the attribute has none of the four, since its members are not meant to combine.
+The compiler rejects these operators on an enum without the attribute, since its members are not meant to combine.
 
 ### partial and impl blocks
 
@@ -201,7 +201,7 @@ A property consists of the property name followed by the property's type and, op
 
 Public properties with no getter or setter are automatically backed by a hidden field. Private properties with no getter or setter are implemented as a plain field.
 
-A property can take a postfix `stable` modifier. It addresses a problem specific to narrowing through a property: every read of the property calls the getter, so a narrowing like `if p.value? then ... p.value ...` is only sound if the second read agrees with the first. The compiler proves that from the getter's body where it can. Where it cannot - a getter that fills a cache, for example - declaring the property `stable` states the promise instead. The promise is narrow: two reads with nothing between them agree on whether the value is present, and on its runtime type. It does not say the value never changes - other code can still write to what the getter reads, and a call between two reads is judged the same way as for any other narrowing fact:
+A property can take a postfix `stable` modifier. It addresses a problem specific to narrowing through a property: every read of the property calls the getter, so a narrowing like `if p.value? then ... p.value ...` is only sound if the second read agrees with the first. The compiler proves that from the getter's body where it can. Where it cannot - a getter that fills a cache, for example - declaring the property `stable` states the promise instead. The promise is narrow: two reads with nothing between them agree on whether the value is present, and on its runtime type. It does not say the value never changes - other code can still write to what the getter reads, and a call between two reads is judged the same way as for any other narrowing:
 
 <GhulExample name="definitions-48" />
 
@@ -215,11 +215,11 @@ Methods are syntactically the same as functions, except they are defined within 
 
 <GhulExample name="definitions-22" />
 
-A method or function can take a postfix `pure` modifier. It declares that the function does not write to the heap: it assigns no field, property, or array element of any object. The compiler proves this from the body for most functions without needing the modifier. The declaration matters to [type narrowing](/type-narrowing.html#calls-purity-and-stable): a call can invalidate a narrowing, because the callee might assign the member the narrowing depends on, but a call to a pure function cannot, so narrowings survive it. The modifier exists for bodies the compiler cannot prove; it is trusted as declared, and every override of a pure member must itself be pure:
+A method or function can take a postfix `pure` modifier. It declares that the function does not write to the heap: it assigns no field, property, or array element of any object. The compiler proves this from the body for most functions without needing the modifier. The declaration matters to [type narrowing](/type-narrowing.html#calls-purity-and-stable): a call can invalidate a narrowing, because the callee might assign the member the narrowing depends on, but a call to a pure function cannot, so the compiler keeps narrowings across it. The modifier exists for bodies the compiler cannot prove; it is trusted as declared, and every override of a pure member must itself be pure:
 
 <GhulExample name="definitions-45" />
 
-A `pure` declaration is trusted, not checked, and that is deliberate: a function can write to the heap and still reasonably declare itself `pure` when its writes are not observable to callers - filling a cache, or interning a value. The compiler does not track what a declared-pure function writes. If a write does turn out to be observable, narrowings are unsound across calls to the function: code can rely on a value being present, or having a type, that the write no longer supports, and no error or warning reports it. A property getter that fills a cache is not this case - its write is to the state its own answer comes from - so declare it `stable`, described under [properties](#properties), rather than `pure`.
+A `pure` declaration is trusted, not checked. A function whose writes are not observable to callers, such as one that fills a cache or interns a value, can be declared `pure`. The compiler does not track what a declared-pure function writes. If a write does turn out to be observable, narrowings are unsound across calls to the function: code can rely on a value being present, or having a type, that the write no longer supports, and no error or warning reports it. A property getter that fills a cache is not this case - its write is to the state its own answer comes from - so declare it `stable`, described under [properties](#properties), rather than `pure`.
 
 `pure` can also be written on a class, struct, or trait header. Every instance member of the type must then be pure: either the compiler must be able to prove from the member's own body that it assigns no field, property, or array element of any object - its own included - or the member must be declared `pure`. A member that writes and is not declared pure is reported as an error. Writes that are part of a type's normal operation are exempt: constructors assign fields, and static members can keep their own state.
 
@@ -279,7 +279,7 @@ A trailing modifier on a primary parameter overrides the default visibility:
 - `_x: int` - private field, named `_x`.
 - `x: int init` - no field is generated; `x` is in scope only inside `init`.
 
-An explicit field or property declaration whose name matches a primary parameter, either exactly or as `_x` matching parameter `x`, replaces the auto-generated member; the constructor assigns the parameter's value to it. Declaring `_x;` for a parameter `x` is also how to give the underlying storage a different name without a modifier suffix:
+An explicit field or property declaration whose name matches a primary parameter, either exactly or as `_x` matching parameter `x`, replaces the synthesised member; the constructor assigns the parameter's value to it. Declaring `_x;` for a parameter `x` is also how to give the underlying storage a different name without a modifier suffix:
 
 <GhulExample name="definitions-38" />
 
@@ -320,7 +320,7 @@ A namespace definition is an instance of that namespace. Namespace instances are
 
 ### definitions outside any namespace
 
-If a source file contains no namespaces, then all definitions in the file are placed in a compiler generated namespace that is private to that source file, and the file can have [top-level statements](/syntax.html#top-level-statements) that run as the program's entry point. This is useful for examples and tests:
+If a source file contains no namespaces, then all definitions in the file are placed in a namespace the compiler synthesises, private to that source file, and the file can have [top-level statements](/syntax.html#top-level-statements) that run as the program's entry point. This is useful for examples and tests:
 
 <GhulExample name="definitions-29" />
 For definitions to be visible from other files, they must be placed in an explicitly declared namespace.
