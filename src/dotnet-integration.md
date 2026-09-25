@@ -154,7 +154,7 @@ ASP.NET Core minimal APIs work from ghūl. Extension methods aren't exposed as m
 
 `app |> map_get(...)` calls the `MapGet` extension on `app`; the route handler is an anonymous function returning an `IResult`.
 
-Controller-style APIs rely on attributes, which apply to classes and methods: `[ApiController]`, `[Route(...)]`, `[HttpGet(...)]` and so on. ghūl doesn't yet place attributes on method parameters, so parameter-binding attributes like `[FromBody]` aren't expressible; minimal APIs bind by position and need none of them.
+Controller-style APIs rely on attributes, which apply to classes and methods: `[ApiController]`, `[Route(...)]`, `[HttpGet(...)]` and so on. A parameter-binding attribute such as `[FromBody]` is written as a pragma on the parameter, as in `@Microsoft.AspNetCore.Mvc.FromBody() body: T`.
 
 ## Entity Framework Core
 
