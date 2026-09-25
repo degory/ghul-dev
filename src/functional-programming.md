@@ -114,8 +114,8 @@ produce a new sequence and leave the input as it was:
 
 ## pure functions
 
-A function or method can carry a postfix `pure` modifier, declaring that it
-assigns no field, property, or array element of any object. Most function
+A function or method can be declared with a postfix `pure` modifier, which
+says that it assigns no field, property, or array element of any object. Most function
 bodies are proven pure with no modifier needed; the declaration covers the
 rest, and every override of a pure member must itself be pure. A function
 *type* can be pure too, so a signature can require that only pure functions
@@ -124,7 +124,7 @@ are passed to it:
 <GhulExample name="functional-programming-27" />
 
 A class or struct can opt in to the same discipline for the whole type:
-declared `pure` on its header, every member must be proven or declared not
+when its header is declared `pure`, every member must be proven or declared not
 to assign any field, property, or array element after construction. The
 details, including what purity means to [type
 narrowing](/type-narrowing.html), are under
