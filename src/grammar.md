@@ -280,9 +280,9 @@ ClassyBody ::= "is" ClassBodyDefinition* "si"
 TypeParameters ::= "[" TypeParameter ( "," TypeParameter )* "]"
 TypeParameter  ::= Identifier ( ":" TypeParameterConstraints )? Variance?
 TypeParameterConstraints
-               ::= TypeExpression KindConstraint? "new"?    /* type bound */
-                 | KindConstraint "new"?                    /* kind only */
-                 | "new"                                    /* ctor only */
+               ::= TypeExpression KindConstraint? "init"?   /* type bound */
+                 | KindConstraint "init"?                   /* kind only */
+                 | "init"                                   /* ctor only */
 KindConstraint ::= "class" | "struct" | "optional"
 Variance       ::= "out" | "in"
 
@@ -298,7 +298,7 @@ SuperCallDeclaration ::= "super" "(" ExpressionList? ")" ";"
 
 `Ancestors` lists the base class and/or implemented traits.
 
-A type parameter has zero or more constraints: a *type bound* (which the actual type argument must derive from), a *kind constraint* (`class` / `struct` / `optional`), a *constructor constraint* (`new`), and on a trait a *variance* modifier (`out` for covariant, `in` for contravariant) - in that order. Only a single type bound per parameter is currently supported. Variance is only legal on a trait's type parameters.
+A type parameter has zero or more constraints: a *type bound* (which the actual type argument must derive from), a *kind constraint* (`class` / `struct` / `optional`), a *constructor constraint* (`init`), and on a trait a *variance* modifier (`out` for covariant, `in` for contravariant) - in that order. Several type bounds can be joined with `/\`. Variance is only legal on a trait's type parameters.
 
 `PrimaryParameters` declare a class or struct's primary constructor inline. Each parameter becomes a parameter of the synthesised `init` and an auto-generated field or property of the same name and declared type. A trailing modifier on a parameter overrides the default visibility - `public` for a public read-write property, `field` for a plain field, `init` to suppress field generation. A parameter named `_x` produces a private field; a body field or property declaration matching the parameter (under the same `_x`/`x` rule) overrides auto-generation.
 
