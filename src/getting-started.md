@@ -20,7 +20,7 @@ Both repositories are configured as [dev containers](https://containers.dev), so
 
 To work locally you need the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) and an editor, and some ghūl code to start from - clone the scratchpad or the examples repository above, or start a project of your own from the [repository template](https://github.com/ghul-lang/ghul-repository-template). The compiler is pinned in each repository as a local .NET tool, so it arrives with the code: `dotnet tool restore`{:sh} fetches it.
 
-The quickest way to run ghūl locally needs no project at all. With the .NET SDK installed, the `ghul`{:sh} command runs a single `.ghul`{:text} file directly, or starts an interactive session, as [scripts, the REPL and notebooks](/scripts-and-repl) describes:
+The quickest way to run ghūl locally doesn't need a project at all. With the .NET SDK installed, the `ghul`{:sh} command runs a single `.ghul`{:text} file directly, or starts an interactive session, as [scripts, the REPL and notebooks](/scripts-and-repl) describes:
 
 ```sh
 dotnet tool install -g ghul.cli
