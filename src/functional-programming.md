@@ -57,9 +57,8 @@ which can refer to each other whatever order they are defined in:
 
 ## read-only by default
 
-While ghūl supports imperative code, it also aims to make pure functions and
-predictable shared data low friction: the types and traits below expose no
-way to change a value after it is constructed. The guarantee has two limits.
+The types and traits below expose no way to change a value after it is
+constructed. The guarantee has two limits.
 It is shallow: a read-only structure can still hold references to objects
 that are themselves mutable. And it binds only ghūl code: code written in
 another .NET language is not required to honour it. Within those limits,
