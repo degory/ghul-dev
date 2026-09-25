@@ -37,9 +37,8 @@ stages from the source.
 <GhulExample name="pipes-lazy-chain" />
 
 Because pipes are lazy, they can consume a source with an infinite number of
-elements. The consumer can stop pulling, and discard the pipe. When the
-pipe is disposed, that disposal flows back up the pipe to the source iterator,
-which is then also disposed.
+elements. The consumer can stop pulling and discard the pipe. Calling `dispose()` on a
+pipe disposes the iterators its stages hold, back to the source iterator.
 
 One way to bound consumption is to use a stage like `take(...)`, which stops
 pulling after a given number of elements have passed through it.
