@@ -129,6 +129,6 @@ The call passes a `string`, and `string` has a `length` member, so `x` resolves 
 
 ### generic argument inference from sibling actuals
 
-When a generic function or method is called with two arguments that share only a common ancestor, the generic argument is inferred from their nearest shared type rather than failing the overload match.
+When a generic function or method is called with two arguments that share only a common ancestor, the type argument is inferred as their nearest shared type.
 
 <GhulExample name="type-inference-21" />
