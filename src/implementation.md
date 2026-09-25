@@ -599,7 +599,7 @@ The splice relies on a language rule doing structural work: a function's
 signature is always explicit and inference never escapes a body, so a
 body-only edit provably cannot change anything another file can see.
 Where any guard on the incremental path fails, the analyser falls back
-to the full rebuild - slower, never wrong.
+to the full rebuild, which is slower.
 
 ### batch requests and lifetime
 
