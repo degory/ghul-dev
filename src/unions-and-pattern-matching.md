@@ -44,7 +44,7 @@ A union with a single field-carrying variant, or with one variant marked `defaul
 
 <GhulExample name="functional-programming-17" />
 
-`Option` here is a union built from scratch to show how the shape works. For a value that is present or absent, use ghūl's own optional types (`T?`), which work over reference types, value types, and unconstrained generic types alike - see [optional types](/optional-types) for the full picture, including how a user-defined union like this one fits alongside `T?`.
+`Option` here is a union built from scratch to show how the shape works. For a value that could be present or absent, use ghūl's own optional types (`T?`), which work over reference types, value types, and unconstrained generic types alike - see [optional types](/optional-types) for the full picture, including how a user-defined union like this one fits alongside `T?`.
 
 ## testing a variant with isa
 
