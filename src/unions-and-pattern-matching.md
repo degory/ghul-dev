@@ -32,7 +32,7 @@ A unit variant has a single shared value, so naming it as a label covers that va
 
 <GhulExample name="unions-and-pattern-matching-1" />
 
-A label takes its type from the scrutinee, so a generic union's unit variant needs no type arguments there: `when Option.NONE then` over an `Option[int]`.
+A label takes its type from the scrutinee, so a generic union's unit variant doesn't need type arguments there: `when Option.NONE then` over an `Option[int]`.
 
 See [the case statement](/control-flow.html#case-statement) for the full picture.
 
