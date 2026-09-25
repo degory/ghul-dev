@@ -6,7 +6,7 @@ Every example on this page can be edited and run here: click the pencil to open 
 The ghul-examples repository has fuller [async-await](https://github.com/ghul-lang/ghul-examples/tree/main/examples/async-await) and [generators](https://github.com/ghul-lang/ghul-examples/tree/main/examples/generators) examples to build and run locally, in a GitHub Codespace or a dev container.
 :::
 
-Two kinds of ghūl function suspend and resume instead of running straight through: an asynchronous function waits for tasks without blocking, and a generator produces a sequence lazily, one element per request. Both are declared by their return type alone - `Tasks.TASK[T]` for asynchronous functions, `Pipe[T]` for generators - and the body reads top to bottom either way.
+Two kinds of ghūl function suspend and resume instead of running straight through: an asynchronous function waits for tasks without blocking, and a generator produces a sequence lazily, one element per request. An asynchronous function is marked by its return type, `Tasks.TASK[T]`, and a generator by returning `Pipe[T]` and containing `yield`; the body reads top to bottom either way.
 
 ## asynchronous code
 
