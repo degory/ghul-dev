@@ -59,7 +59,7 @@ A generic function or type can use `T?` even though `T` can stand for a referenc
 
 <GhulExample name="optional-types-2" />
 
-Behind the scenes an unconstrained `T?` lowers to `Ghul.MAYBE[T]`, a struct that can hold present or absent for any `T`. Like the other two representations it is an implementation detail: there is no reason to name `MAYBE[T]` in your own code. `MAYBE[T]` exposes `has_value: bool` and `value: T` properties, so it is [optional-shaped](/optional-types#optional-shaped-types) by construction. See [generics](/generics) for how the type parameters themselves work.
+An unconstrained `T?` is stored as `Ghul.MAYBE[T]`, a struct that can hold present or absent for any `T`. Like the other two representations it is an implementation detail: there is no reason to name `MAYBE[T]` in your own code. `MAYBE[T]` exposes `has_value: bool` and `value: T` properties, so it is [optional-shaped](/optional-types#optional-shaped-types) by construction. See [generics](/generics) for how the type parameters themselves work.
 
 ### they interconvert
 
