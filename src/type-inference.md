@@ -29,11 +29,9 @@ The examples below leave inferred types unannotated; hover over any variable to 
 
 ## what stays explicit
 
-A function's signature is written out explicitly; inference works within the body.
+Type inference is local to a function body. The signature of a global function or a method is always written out in full:
 
 <GhulExample name="type-inference-1" />
-
-Each function body is checked on its own, against the explicit signatures of everything it calls.
 
 Fields and properties belong to a type rather than to a function body, so their types are written out too - for private members as well as public ones.
 
