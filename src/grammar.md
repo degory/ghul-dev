@@ -45,6 +45,8 @@ BlockComment ::= "/*" ( [^*] | "*" [^/] )* "*/"
 
 Block comments do **not** nest: the first `*/` ends the comment.
 
+A line comment that starts with exactly `///`, with nothing but whitespace before it on its line, is a [doc comment](/syntax.html#doc-comments). The parser skips it like any other comment, and the compiler attaches its text to the declaration that follows it.
+
 ### identifiers
 
 ```ebnf

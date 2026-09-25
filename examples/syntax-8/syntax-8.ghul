@@ -1,0 +1,14 @@
+// >>>
+use IO.Std.write_line
+use Ghul.Pipes
+
+/// Repeats `text`, putting `separator` between the copies.
+///
+/// - text: the string to repeat
+/// - times: how many copies to make
+/// - separator: placed between adjacent copies, not at either end
+repeat_with(text: string, times: int, separator: string) -> string =>
+    string.join(separator, repeat(text, times))
+
+write_line(repeat_with("ab", 3, "-"))
+// <<<
