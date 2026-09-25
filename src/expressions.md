@@ -142,7 +142,7 @@ A type cast converts a value from one type to another explicitly, using the `cas
 
 <GhulExample name="expressions-23" />
 
-The target type can be left out when the surrounding expression already determines it. `cast(v)` converts `v` to whatever type the position it sits in calls for - a typed `let` initializer, an assignment, a `return` or `=>` body, a call argument's formal, an operator's other operand, an index:
+The target type can be left out when the surrounding expression already determines it. `cast(v)` converts `v` to whatever type the position it sits in calls for - a typed `let` initializer, an assignment, a `return` or `=>` body, a parameter of the function or operator being called, an index:
 
 <GhulExample name="expressions-30" />
 
