@@ -37,7 +37,7 @@ The [`ghul.jupyter`{:text}](https://www.nuget.org/packages/ghul.jupyter) tool is
 
 ## diagnostics
 
-Every warning has a slug, shown in its message. A slug can be suppressed with `@suppress("<slug>")` on a declaration or a file, or with `--suppress <slug>` for a whole project, and its severity can be changed on the compiler command line: `--warn-as-hint <slug,…>` downgrades matching warnings to editor-only hints that never appear in a batch build, and `--warn-as-info <slug,…>` downgrades them to informational diagnostics that still show in a build. Suppression wins over a demotion.
+Every warning has a slug, shown in its message. A slug can be suppressed on a declaration with `@suppress("<slug>")`, for a whole source file with [`@@suppress("<slug>")`](/syntax.html) at the top of the file, or for a whole project with `--suppress <slug>`, and its severity can be changed on the compiler command line: `--warn-as-hint <slug,…>` downgrades matching warnings to editor-only hints that never appear in a batch build, and `--warn-as-info <slug,…>` downgrades them to informational diagnostics that still show in a build. Suppression wins over a demotion.
 
 ## the Visual Studio Code extension
 
