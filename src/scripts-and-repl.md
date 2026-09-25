@@ -34,7 +34,7 @@ ghul.compiler 60.2.0
 
 ## running a script
 
-A script is one `.ghul`{:text} file of [top-level statements](/definitions.html#namespaces). `args`{:text} holds its command-line arguments and `env`{:text} its environment:
+A script is one `.ghul`{:text} file of [top-level statements](/syntax.html#top-level-statements). `args`{:text} holds its command-line arguments and `env`{:text} its environment:
 
 ```ghul
 #!/usr/bin/env ghul
