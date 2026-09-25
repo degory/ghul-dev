@@ -6,50 +6,54 @@ Every example on this page can be edited and run here: click the pencil to open 
 The ghul-examples repository has fuller [unions](https://github.com/ghul-lang/ghul-examples/tree/main/examples/unions) and [pattern-matching](https://github.com/ghul-lang/ghul-examples/tree/main/examples/pattern-matching) examples to build and run locally, in a GitHub Codespace or a dev container.
 :::
 
-A union holds a value of one of several variants, each with its own set of fields: one type that represents several kinds of data. Pattern matching is how that data comes back out - test which variant a value holds, and read its fields at the narrowed type. The [definitions page](/definitions.html#unions) covers the full declaration surface: unit variants, the `default` variant, primary-constructor headers, and traits.
+A union is a type whose values each hold one of a fixed set of variants. Each variant has a name and its own fields, or no fields at all. A `Shape` below is always either a `CIRCLE` or a `SQUARE`:
 
 <GhulExample name="functional-programming-14" />
 
+A variant's own fields can be read only from a value the compiler knows holds that variant. `if let`, `case` and `isa` each test which variant a value holds and narrow it to the variant they find. A union with one field-carrying variant, or with one variant marked `default`, can also use `?` and `!`. The [definitions page](/definitions.html#unions) covers declaring unions: unit variants, the `default` variant, primary-constructor headers, and traits.
+
 ## matching with if let
 
-`if let` is how the data comes out of a union: a `let` definition in an `if` or `elif` condition tests which variant the value holds, defines a local variable for it, and narrows that variable to the variant. The branch runs only when the test matches, and the variable is in scope inside it, so there is no separate step between checking the variant and reading its fields:
+`if let c: CIRCLE = s` tests whether `s` holds a `CIRCLE`. If it does, the branch runs with a new local variable `c` holding the same value at type `CIRCLE`, so `c.radius` can be read directly. If it doesn't, `elif let` makes the next test:
 
 <GhulExample name="functional-programming-18" />
 
-A chain of `elif let` arms covers a union one variant at a time. Once there are more than a couple of variants, `case` says the same thing in one construct.
+The compiler doesn't check an `if let` chain for exhaustiveness, so `area` needs the final `return`. A `case` expression is checked.
 
 ## matching with case
 
-A `case` expression matches one scrutinee against several `when` arms, which reads better than a chain of `if let`/`elif let` once there are more than a couple of variants to cover. Over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - the compiler checks the arms for exhaustiveness, so `area` doesn't need a fallback return, and a variant the `when` arms omit is reported:
+A `case` expression tests one value, the scrutinee, against a series of `when` arms and evaluates the first arm that matches. Where the scrutinee's type is a [closed domain](/control-flow.html#exhaustiveness), such as a union, the compiler checks that the arms cover every value. The arms below cover both variants of `Shape`, so `area` doesn't need a fallback `return`, and leaving an arm out is a compile error:
 
 <GhulExample name="functional-programming-23" />
 
-`when` arms accept the same patterns as `if let`: a type test that binds and narrows (`c: CIRCLE`), destructuring with literal leaves and `~`-marked values that match rather than bind, and a trailing `/\` guard that falls through to the next arm on failure.
+A `when` arm takes the same patterns as `if let`: a type test with a new local variable (`c: CIRCLE`), or a destructure, whose literal leaves and `~`-marked leaves test values rather than define variables. An arm can end in a `/\` guard. When an arm's pattern or guard fails, the next arm is tried.
 
-Equality labels compare by value, the way `=~` compares: over a string scrutinee or any type defining the operator, matching is by content, and `when null` matches absence.
+A `when` arm can instead list values. The compiler compares the scrutinee with each value the way `=~` does, so a string matches by its characters, and `when null` matches an absent value.
 
-A unit variant has a single shared value, so naming it as a label covers that variant exactly as a type test would. Arms that name every unit variant cover the union with no `else`:
+A unit variant has a single shared instance, so a `when` arm that names one covers that variant, the same as a type test. Arms that name every unit variant of a union cover it without an `else`:
 
 <GhulExample name="unions-and-pattern-matching-1" />
 
-A label takes its type from the scrutinee, so a generic union's unit variant doesn't need type arguments there: `when Option.NONE then` over an `Option[int]`.
+A value in a `when` arm takes its type from the scrutinee, so a unit variant of a generic union doesn't need type arguments there: `when Option.NONE then` works over an `Option[int]`.
 
 See [the case statement](/control-flow.html#case-statement) for more details.
 
 ## option-shaped unions
 
-A union with a single field-carrying variant, or with one variant marked `default`, has only one thing to test, so neither construct is needed: the `?` and `!` operators test whether the value is there and unwrap it directly:
+In a union with exactly one variant that has fields of its own, or with one variant marked `default`, the postfix `?` tests whether a value holds that variant, and `!` reads the variant's value, throwing if the value holds another variant. A variant with one field reads as that field; a variant with several fields reads as the variant:
 
 <GhulExample name="functional-programming-16" />
 
-<GhulExample name="functional-programming-17" />
-
-`Option` here is a union built from scratch to show how the shape works. For a value that could be present or absent, use ghūl's own optional types (`T?`), which work over reference types, value types, and unconstrained generic types alike - see [optional types](/optional-types) for more details, including how a user-defined union like this one fits alongside `T?`.
+The `Option` union here is declared only to show the shape. For a value that could be present or absent, use ghūl's optional types, `T?`, which work over reference types, value types and unconstrained type parameters. See [optional types](/optional-types) for more details, including how a union like this one compares with `T?`.
 
 ## testing a variant with isa
 
-`if let` defines a new local variable for the value it matches. `isa Variant(value)` is the test on its own: it checks the variant and narrows in the then-branch, with no new name introduced:
+`isa Option.SOME(an_option)` tests whether `an_option` holds a `SOME`, and if it does, narrows `an_option` itself to `SOME` in the then-branch, without defining a new variable:
 
 <GhulExample name="functional-programming-15" />
 
-`isa` narrows the value in place, so it works on a member path such as `shape.outline`, or on `self`, without giving it a new name. See [type narrowing](/type-narrowing.html) for more details.
+On a union with two variants, the `else` branch is narrowed to the other variant, so each branch can read its own variant's fields:
+
+<GhulExample name="functional-programming-17" />
+
+`isa` can test a member path such as `shape.outline`, or `self`, as well as a local variable. See [type narrowing](/type-narrowing.html) for more details.
