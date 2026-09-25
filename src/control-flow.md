@@ -14,7 +14,7 @@ Variables defined within a block are only accessible within that block and any n
 
 ## assert statement
 
-In ghūl the `assert` statement is used to ensure an expected condition holds and to throw an exception if it does not. An assert statement starts with `assert`, followed by an expression that must evaluate to a bool, followed by `else`, and then a value to throw. If the value to throw is a string, it will be wrapped in an `AssertionFailedException`. Otherwise it must be of a throwable type.
+In ghūl the `assert` statement is used to ensure an expected condition holds and to throw an exception if it does not. An assert statement starts with `assert`, followed by an expression that must evaluate to a bool, and optionally by `else` and a value to throw. If the value to throw is a string, it will be wrapped in a `Ghul.AssertFailedException`. Otherwise it must be of a throwable type.
 
 <GhulExample name="control-flow-1" />
 
@@ -56,7 +56,7 @@ An `if` condition that proves something stronger about a value - an `isa` test o
 
 ### if let
 
-`cast T?(x)` views `x` as type `T`, and yields the absent value (rather than throwing) when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test. Written without the `?`, the cast is checked instead: a value that is not a `T` raises `System.InvalidCastException` there, and a `cast-may-throw` warning says so at the site. See [type cast](/expressions.html#type-cast) for the rest of the cast surface.
+`cast T?(x)` views `x` as type `T`, and yields the absent value (rather than throwing) when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test. Written without the `?`, the cast is checked instead: a value that is not a `T` raises `System.InvalidCastException` there, and a `cast-may-throw` warning says so at the site. See [type cast](/expressions.html#type-cast) for the other forms of cast.
 
 <GhulExample name="control-flow-12" />
 
@@ -212,11 +212,11 @@ A `when` arm can take a pattern instead of an equality list, mirroring [`if let`
 
 <GhulExample name="control-flow-54" />
 
-Narrowing works like `if let`'s: an arm's type test narrows the scrutinee within its body, and so does a test made by the arm's own guard. Arm narrowing is local - nothing an arm proves reaches a sibling arm or the code after the `case`.
+Narrowing works like `if let`'s: an arm's type test narrows the scrutinee within its body, and so does a test made by the arm's own guard.
 
 ### exhaustiveness
 
-A `case` over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - is checked for exhaustiveness. A missing case warns (`non-exhaustive-case`), an arm that matches nothing the earlier arms left warns (`redundant-case-arm`), and an `else` that can never run warns (`dead-case-else`). An expression-position `case` over an open domain needs an `else`, unless the expected type has a default value to fall back on.
+A `case` over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - is checked for exhaustiveness. A missing case in a `case` statement warns (`non-exhaustive-case`); in a `case` expression it is an error. An arm that doesn't match anything the earlier arms left warns (`redundant-case-arm`), and an `else` that can never run warns (`dead-case-else`). An expression-position `case` over an open domain needs an `else`, unless the expected type has a default value to fall back on.
 
 ### scope
 
