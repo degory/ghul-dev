@@ -646,7 +646,7 @@ Terminator ::= ";" | Boundary
 
 The rules that can affect code as it is written:
 
-- A line that opens with `.` or `|>` continues the expression above it, so member chains and pipes wrap.
+- A line that opens with `.`, `?.` or `|>` continues the expression above it, so member chains and pipes wrap.
 - A line that opens with `(`, `[` or an operator starts a new statement. To wrap an expression, put the operator at the end of the line.
 - Two string literals separated only by whitespace join into one, across a line break too. Where a statement ends on a string literal and the next begins with one, put a `;` between them.
 - A `return` at the end of a line takes the next line's expression as its value, unless the next line opens with a closing keyword such as `fi` or `si`.
