@@ -77,7 +77,7 @@ The *static* members of a bound are reachable through the type parameter itself,
 
 <GhulExample name="generics-12" />
 
-Without that `use` the operator is not in scope, so nothing changes for code that doesn't ask for it - and importing one does not displace the built-in operators either. Each operator imports from the interface that declares it, so the addition operator comes from `IAdditionOperators` and the unsigned right shift from `IShiftOperators`. Comparison and equality cannot be imported this way - a type says how it orders and compares by defining `<>` and `=~`.
+Without that `use` the operator is not in scope, and importing one leaves the built-in operators as they are. Each operator imports from the interface that declares it, so the addition operator comes from `IAdditionOperators` and the unsigned right shift from `IShiftOperators`. Comparison and equality cannot be imported this way - a type says how it orders and compares by defining `<>` and `=~`.
 
 ### kind constraint
 
