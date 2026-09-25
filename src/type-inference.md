@@ -101,7 +101,7 @@ When an anonymous function literal is passed as an argument and an unambiguous o
 
 <GhulExample name="type-inference-16" />
 
-Here `self` is already known to be `Pipe[int]`, so `Pipe[int].filter(predicate: int -> bool) -> Pipe[int]` is the only overload that could match. The `predicate` argument must therefore be `int -> bool`, and the type of `i` must be `int`.
+Here the array is already known to hold `int`, so `filter` must be given a predicate of type `int -> bool`, and the type of `i` must be `int`.
 
 ## inference from later use sites
 
