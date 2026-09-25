@@ -12,7 +12,7 @@ An identifier can be written in any script. A letter starts one, and a letter, a
 
 A letter is never a symbol, so no character is both an identifier character and an [operator](/definitions.html#operators) character. `×` is an operator and `naïve` is a name.
 
-The compiler checks the conventions above with Unicode case. A character that has an upper-case and a lower-case form is checked for its kind whatever script it is in, so `ТИП` is a concrete class and `μέγεθος` is a property. A character with neither form doesn't say anything about case, so a name written entirely in a script that has no case - Chinese, Japanese, Arabic, Hebrew - is correct for any kind.
+The compiler checks the conventions above with Unicode case. A character that has an upper-case and a lower-case form is checked for its kind whatever script it is in, so `ТИП` is a concrete class and `μέγεθος` is a property. The compiler doesn't check the case of a character with neither form, so a name written entirely in a script that has no case - Chinese, Japanese, Arabic, Hebrew - is correct for any kind.
 
 <GhulExample name="language-basics-identifiers" />
 
