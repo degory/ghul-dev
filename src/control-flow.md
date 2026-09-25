@@ -56,7 +56,7 @@ An `if` condition that proves something stronger about a value - an `isa` test o
 
 ### if let
 
-`cast T?(x)` views `x` as type `T`, and yields the absent value (rather than throwing) when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test. Written without the `?`, the cast is checked instead: a value that is not a `T` raises `System.InvalidCastException` there, and a `cast-may-throw` warning says so at the site. See [type cast](/expressions.html#type-cast) for the rest of the cast surface.
+`cast T?(x)` views `x` as type `T`, and yields the absent value (rather than throwing) when `x` is not a `T`. A cast followed by a presence test is therefore a safe, explicit type test. Written without the `?`, the cast is checked instead: a value that is not a `T` raises `System.InvalidCastException` there, and a `cast-may-throw` warning says so at the site. See [type cast](/expressions.html#type-cast) for the other forms of cast.
 
 <GhulExample name="control-flow-12" />
 
