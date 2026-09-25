@@ -14,7 +14,7 @@ The compiler is normally installed as a *local* .NET tool, pinned per project in
 
 Because a ghūl project is a normal .NET SDK project, the standard `dotnet`{:text} commands all work:
 
-```bash
+```sh
 dotnet build   # compile the project
 dotnet run     # build and run an executable project
 dotnet pack    # produce a NuGet package
@@ -37,11 +37,11 @@ The [`ghul.jupyter`{:text}](https://www.nuget.org/packages/ghul.jupyter) tool is
 
 ## diagnostics
 
-Every warning has a slug, shown in its message. A slug can be silenced with `@suppress("<slug>")` on a declaration, a whole file, or the project, or re-levelled on the compiler command line: `--warn-as-hint <slug,…>` downgrades matching warnings to editor-only hints that never appear in a batch build, and `--warn-as-info <slug,…>` downgrades them to informational diagnostics that still show in a build. Suppression wins over a demotion.
+Every warning has a slug, shown in its message. A slug can be suppressed on a declaration with `@suppress("<slug>")`, for a whole source file with [`@@suppress("<slug>")`](/syntax.html) at the top of the file, or for a whole project with `--suppress <slug>`, and its severity can be changed on the compiler command line: `--warn-as-hint <slug,…>` downgrades matching warnings to editor-only hints that never appear in a batch build, and `--warn-as-info <slug,…>` downgrades them to informational diagnostics that still show in a build. Suppression wins over a demotion.
 
 ## the Visual Studio Code extension
 
-The [ghūl language extension](https://marketplace.visualstudio.com/items?itemName=degory.ghul) provides rich language support while you edit:
+The [ghūl language extension](https://marketplace.visualstudio.com/items?itemName=degory.ghul) provides language support while you edit:
 
 - errors and warnings reported as you type
 - code completion
@@ -77,7 +77,7 @@ The ghūl repository template and the examples repo both ship a `.devcontainer` 
 
 The [`ghul.templates`{:text}](https://www.nuget.org/packages/ghul.templates) package adds ghūl project templates to the .NET SDK:
 
-```bash
+```sh
 dotnet new install ghul.templates
 ```
 
