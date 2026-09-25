@@ -11,6 +11,6 @@ write_line("evens: {from(0, 2) |> take(4)}")
 write_line("dashes: {repeat("-", 5) |> join("")}")
 
 // a list of a given size, filled with one value
-let seen = repeat(false, 3) |> collect_list()
+let seen = repeat(false, 3) |> collect_mutable()
 write_line("seen: {seen.count} values, first {seen[0]}")
 // <<<

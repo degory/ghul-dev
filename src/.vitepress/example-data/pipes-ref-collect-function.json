@@ -1,21 +1,20 @@
 {
   "name": "pipes-ref-collect-function",
   "snippet": false,
-  "code": "collect[T](source: Iterable[T]) -> Collections.List[T] pure",
-  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\ncollect[T](source: Iterable[T]) -> Collections.List[T] pure\n\nentry() is si\n",
+  "code": "collect[T](source: Iterable[T]) -> T[] pure",
+  "fullSource": "use Collections.Iterable\nuse Collections.LIST\nuse Collections.MAP\nuse Collections.SET\nuse Ghul.Pipes.INDEXED_VALUE\nuse Ghul.Pipes.Pipe\n\ncollect[T](source: Iterable[T]) -> T[] pure\n\nentry() is si\n",
   "hiddenBefore": true,
   "hiddenAfter": true,
   "hiddenGapsAfterLine": [],
   "output": "",
   "diagnostics": [],
   "hovers": [
-    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 7, "text": "collect[T](source: Iterable[T]) -> Collections.List[T]", "signature": "collect[T](source: Iterable[T]) -> Collections.List[T]", "kindLabel": "pure global function" },
+    { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 7, "text": "collect[T](source: Iterable[T]) -> T[]", "signature": "collect[T](source: Iterable[T]) -> T[]", "kindLabel": "pure global function" },
     { "startLine": 1, "startColumn": 9, "endLine": 1, "endColumn": 9, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 17, "text": "source: Iterable[T]", "signature": "source: Iterable[T]", "kindLabel": "local argument" },
     { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 29, "text": "T", "signature": "T", "kindLabel": "type variable" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 27, "text": "trait Iterable[T]", "signature": "trait Iterable[T]", "kindLabel": "trait" },
-    { "startLine": 1, "startColumn": 53, "endLine": 1, "endColumn": 53, "text": "T", "signature": "T", "kindLabel": "type variable" },
-    { "startLine": 1, "startColumn": 48, "endLine": 1, "endColumn": 51, "text": "trait Collections.List[T]", "signature": "trait Collections.List[T]", "kindLabel": "trait" }
+    { "startLine": 1, "startColumn": 36, "endLine": 1, "endColumn": 36, "text": "T", "signature": "T", "kindLabel": "type variable" }
   ],
   "inlayHints": [
     { "line": 1, "column": 1, "label": "◆", "detail": "collect\n\n- ◆ abstract", "code": "definition-virtuality" }
@@ -26,7 +25,6 @@
     { "startLine": 1, "startColumn": 12, "endLine": 1, "endColumn": 17, "tokenType": "variable", "modifiers": "readonly" },
     { "startLine": 1, "startColumn": 20, "endLine": 1, "endColumn": 27, "tokenType": "interface" },
     { "startLine": 1, "startColumn": 29, "endLine": 1, "endColumn": 29, "tokenType": "typeParameter" },
-    { "startLine": 1, "startColumn": 48, "endLine": 1, "endColumn": 51, "tokenType": "interface" },
-    { "startLine": 1, "startColumn": 53, "endLine": 1, "endColumn": 53, "tokenType": "typeParameter" }
+    { "startLine": 1, "startColumn": 36, "endLine": 1, "endColumn": 36, "tokenType": "typeParameter" }
   ]
 }
