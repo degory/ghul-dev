@@ -34,7 +34,7 @@ ghul.compiler 60.2.0
 
 ## running a script
 
-A script is one `.ghul`{:text} file of [top-level statements](/definitions.html#namespaces). `args`{:text} holds its command-line arguments and `env`{:text} its environment:
+A script is one `.ghul`{:text} file of [top-level statements](/syntax.html#top-level-statements). `args`{:text} holds its command-line arguments and `env`{:text} its environment:
 
 ```ghul
 #!/usr/bin/env ghul
@@ -54,7 +54,7 @@ hello, ada
 your shell is /bin/bash
 ```
 
-A script has the compiler's default imports, as the REPL does, so `write_line`, the pipes and the collections need no `use`. A script that declares its own `namespace` chooses its own imports instead. A file with an `entry` function instead of top-level statements runs too, and an `entry` returning an `int` sets the exit status.
+A script has the compiler's default imports, as the REPL does, so `write_line`, the pipes and the collections don't need a `use`. A script that declares its own `namespace` chooses its own imports instead. A file with an `entry` function instead of top-level statements runs too, and an `entry` returning an `int` sets the exit status.
 
 On Linux, a script whose first line is `#!/usr/bin/env ghul`{:text} runs like any other executable once it is marked as one:
 
@@ -223,7 +223,7 @@ ghul: area still takes the earlier Shape; redefine it to use the new one
 circle
 ```
 
-A class or trait defined in a session can be extended by a later submission, since that submission is another assembly. The compiler cannot treat a class hierarchy defined in a session as closed, so a `case` over one needs an `else`.
+A class or trait defined in a session can be extended by a later submission, since that submission is another assembly. The compiler still treats the hierarchy as closed, so a `case` that covers every subclass doesn't need an `else`. If a later submission adds a subclass, code compiled before it raises an exception when it meets a value of the new type, rather than reading it as one it knows.
 
 A name that begins with `_` is visible to later submissions, as it is to the rest of a file:
 
