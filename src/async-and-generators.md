@@ -64,7 +64,7 @@ A function is a generator when its declared return type is `Pipe[T]` (`Ghul.Pipe
 
 <GhulExample name="control-flow-49" />
 
-A generator *is* a [pipe](/runtime-library.html#stages), so it can be looped over directly and composed with `map` / `filter` / `take` and the other pipe operators:
+A generator *is* a [pipe](/runtime-library.html#stages), so it can be looped over directly and composed with `map` / `filter` / `take` and the other pipe stages:
 
 <GhulExample name="control-flow-50" />
 
