@@ -41,7 +41,7 @@ Every warning has a slug, shown in its message. A slug can be suppressed with `@
 
 ## the Visual Studio Code extension
 
-The [ghūl language extension](https://marketplace.visualstudio.com/items?itemName=degory.ghul) provides rich language support while you edit:
+The [ghūl language extension](https://marketplace.visualstudio.com/items?itemName=degory.ghul) provides language support while you edit:
 
 - errors and warnings reported as you type
 - code completion
