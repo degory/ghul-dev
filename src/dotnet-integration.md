@@ -114,7 +114,7 @@ The mappings above are about reaching into .NET. This section is the other direc
 
 The hash is not generated for an `=~` you write yourself, because an operator is free to ignore members it does not care about, and a member-wise hash would then disagree with it. Where the compiler writes the operator as well, for a class marked [`@equality()`](/definitions.html) or for a struct whose members are all public, it writes the matching hash with it. A type that defines neither is consistent as it stands, comparing and hashing by identity, so a type that defines only `=~` is reported as `equality-without-hash` and left alone rather than half-converted.
 
-A value type hides this for a while: .NET's default equality for a struct is member-wise, so a struct that skips `get_hash_code` often behaves correctly by coincidence and then diverges the moment its `=~` stops agreeing with a member-wise comparison. The warning fires either way, and is worth heeding either way.
+A value type hides this for a while: .NET's default equality for a struct is member-wise, so a struct that skips `get_hash_code` often behaves correctly by coincidence and then diverges the moment its `=~` stops agreeing with a member-wise comparison. The compiler reports the warning either way, so define `get_hash_code` either way.
 
 ### ordering
 
