@@ -106,15 +106,13 @@ The mappings above are about reaching into .NET. This section is the other direc
 
 ### equality
 
-.NET consults a type's equality when it goes looking for a value: a dictionary key, a set member, `contains` on a list. A type defines that with `=~`. Defining `=~` alone is not enough, because a hash-based collection consults the hash first and never reaches the comparison. Define `get_hash_code` alongside it, and the compiler writes the `Object.Equals` override that .NET uses:
+.NET collections compare values with `Equals` and `GetHashCode`. A `MAP` or a `SET` finds a key by its hash and then checks it with `Equals`; `contains` on a list checks each element with `Equals`. A ghūl type defines its equality with `=~` and its hash with `get_hash_code`. When a type defines both, the compiler writes an `Equals` override that calls `=~`, so .NET collections compare the type the way ghūl code does:
 
 <GhulExample name="dotnet-integration-4" />
 
-`System.HashCode.combine` is the usual way to build the hash from the same members `=~` reads.
+Build the hash from the members `=~` compares. `System.HashCode.combine` does this.
 
-The hash is not generated for an `=~` you write yourself, because an operator is free to ignore members it does not care about, and a member-wise hash would then disagree with it. Where the compiler writes the operator as well, for a class marked [`@equality()`](/definitions.html) or for a struct whose members are all public, it writes the matching hash with it. A type that defines neither is consistent as it stands, comparing and hashing by identity, so a type that defines only `=~` is reported as `equality-without-hash` and left alone rather than half-converted.
-
-A value type hides this for a while: .NET's default equality for a struct is member-wise, so a struct that skips `get_hash_code` often behaves correctly by coincidence and then diverges the moment its `=~` stops agreeing with a member-wise comparison. The compiler reports the warning either way, so define `get_hash_code` either way.
+When a type defines `=~` but not `get_hash_code`, the compiler reports an `equality-without-hash` warning and writes no `Equals` override. .NET collections then compare a class by reference and a struct member by member, whatever its `=~` says. The compiler does not write the hash itself, because `=~` can ignore some members, and a hash of all of them would then disagree with it. The exception is a class marked [`@equality()`](/definitions.html) or a struct whose members are all public: there the compiler writes both `=~` and a matching `get_hash_code`.
 
 ### ordering
 
