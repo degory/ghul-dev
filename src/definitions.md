@@ -177,7 +177,7 @@ An enum marked `@System.Flags()` also gets the bitwise operators `&`, `|`, `^` a
 
 <GhulExample name="definitions-59" />
 
-The compiler rejects the four on an enum without the attribute, since its members are not meant to combine.
+The compiler rejects these operators on an enum without the attribute, since its members are not meant to combine.
 
 ### partial and impl blocks
 
