@@ -23,6 +23,24 @@ Operators are any contiguous string of operator characters. This is only signifi
 A leading backtick escapes a keyword or operator so it can be used as an ordinary identifier: `` `while`` is the identifier `while`, and `` `+`` is the identifier `+`. The backtick is not part of the escaped name, so escaping a name that is not a keyword, like `` `count``, means the same as plain `count`. A backtick is only meaningful immediately before an identifier, operator, or opening bracket; anywhere else it is a dangling-backtick error.
 
 
+## comments
+
+`//` starts a comment that runs to the end of the line. `/*` starts a comment that runs to the next `*/`, across line breaks if there are any. Block comments don't nest.
+
+### doc comments
+
+A line comment that starts with exactly three slashes, with nothing before it on its line, is a doc comment. A block of doc comments written directly above a declaration documents that declaration:
+
+<GhulExample name="syntax-8" />
+
+The block documents a declaration when its last line is the line directly above the declaration, or directly above the declaration's first pragma. A blank line, an ordinary comment or any code between the block and the declaration stops the block documenting it.
+
+The text is Markdown. The compiler removes `///` and one following space from each line and keeps the rest as written, so a `///` line with nothing after it separates two paragraphs. Describe arguments in a bullet list with one `- name: description` line for each argument, as `repeat_with` does above.
+
+The VS Code extension shows the text in hover and completion wherever the declaration is used. The compiler stores it in the compiled assembly, so the doc comments of a library appear in the editor for code that references it.
+
+Classes, structs, traits, unions and their variants, enums and their members, functions, methods, properties and global variables can have doc comments. A comment that starts with four or more slashes is an ordinary comment.
+
 ## block structure
 
 ghūl is a [block structured programming language](https://en.wikipedia.org/wiki/Block_(programming)). Source code in ghūl is composed of blocks, typically many of them, with blocks nested inside other blocks.
