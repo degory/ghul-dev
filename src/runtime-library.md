@@ -387,7 +387,7 @@ Writes the elements in brackets, as `[1, 2, 3]`, whatever `to_string` the source
 
 ## displaying values
 
-The runtime formats any value as text in two ways. `$(value)` gives the text a program shows its user: string interpolation uses it for any value whose type gives no text of its own, as [string interpolation](/language-basics#string-interpolation) describes. `inspect(value)` gives the detailed form a REPL or a debugging session wants: the same structure, with each string and character quoted wherever it appears inside a value. `$` needs no `use`, and `inspect` is in `Ghul`:
+The runtime formats any value as text in two ways. `$(value)` gives the text a program shows its user: string interpolation uses it for any value whose type gives no text of its own, as [string interpolation](/language-basics#string-interpolation) describes. `inspect(value)` gives the detailed form a REPL or a debugging session wants: the same structure, with each string and character quoted wherever it appears inside a value. `$` doesn't need a `use`, and `inspect` is in `Ghul`:
 
 <GhulExample name="display-values" />
 
