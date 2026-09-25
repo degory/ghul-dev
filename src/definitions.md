@@ -82,7 +82,7 @@ A class defines a new reference type, instances of which are assignment compatib
 Instances of classes are created via a constructor expression, which consists of a type expression followed by a parenthesis delimited list of actual constructor arguments. For a class, the type expression is the class name, qualified with any namespaces if needed:
 <GhulExample name="definitions-9" />
 
-A class can also declare its constructor parameters directly in the header. Each parameter becomes a parameter of the synthesised constructor, and an auto-generated same-named field or property holds the supplied value:
+A class can also declare its constructor parameters directly in the header. Each parameter becomes a parameter of the synthesised constructor, and a synthesised same-named field or property holds the supplied value:
 <GhulExample name="definitions-8a" />
 
 The two forms are equivalent. The primary form is the shorter shape when every field is initialized from a constructor argument; the classic form is the better fit when the body owns extra fields or properties beyond what the constructor takes. See [constructors](#constructors) for more on primary constructors.
@@ -279,7 +279,7 @@ A trailing modifier on a primary parameter overrides the default visibility:
 - `_x: int` - private field, named `_x`.
 - `x: int init` - no field is generated; `x` is in scope only inside `init`.
 
-An explicit field or property declaration whose name matches a primary parameter, either exactly or as `_x` matching parameter `x`, replaces the auto-generated member; the constructor assigns the parameter's value to it. Declaring `_x;` for a parameter `x` is also how to give the underlying storage a different name without a modifier suffix:
+An explicit field or property declaration whose name matches a primary parameter, either exactly or as `_x` matching parameter `x`, replaces the synthesised member; the constructor assigns the parameter's value to it. Declaring `_x;` for a parameter `x` is also how to give the underlying storage a different name without a modifier suffix:
 
 <GhulExample name="definitions-38" />
 
