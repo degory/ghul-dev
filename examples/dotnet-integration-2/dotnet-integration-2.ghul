@@ -4,7 +4,6 @@ use Microsoft.EntityFrameworkCore.DbContextOptions
 
 // >>>
 // @IL.name maps these onto the PascalCase names EF Core's conventions expect.
-@IL.name("Product")
 class PRODUCT is
     @IL.name("Id")
     id: int public
