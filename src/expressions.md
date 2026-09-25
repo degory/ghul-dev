@@ -154,7 +154,7 @@ A cast written with an optional target yields rather than throwing: `cast T?(x)`
 
 The `_` expression evaluates to the default value of a type: `null` for reference types, the zero value for numeric and other value types.
 
-`_[T]` pins the type explicitly. A bare `_` takes its type from the surrounding context: a typed `let`, an assignment, or a return:
+`_[T]` pins the type explicitly. A bare `_` takes its type from the surrounding context: a typed `let`, an assignment, a return, or a call argument:
 
 <GhulExample name="expressions-24" />
 
