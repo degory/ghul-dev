@@ -6,13 +6,13 @@ Every example on this page can be edited and run here: click the pencil to open 
 The ghul-examples repository has fuller [async-await](https://github.com/ghul-lang/ghul-examples/tree/main/examples/async-await) and [generators](https://github.com/ghul-lang/ghul-examples/tree/main/examples/generators) examples to build and run locally, in a GitHub Codespace or a dev container.
 :::
 
-Two kinds of ghūl function suspend and resume instead of running straight through: an asynchronous function waits for tasks without blocking, and a generator produces a sequence lazily, one element per request. Both are declared by their return type alone - `Tasks.TASK[T]` for asynchronous functions, `Pipe[T]` for generators - and the body reads top to bottom either way.
+Two kinds of ghūl function can return control to their caller partway through and later carry on from the same point: an asynchronous function does so at an `await` whose task hasn't completed, so the thread isn't blocked while it waits, and a generator does so at each `yield`, producing its sequence one element per request. An asynchronous function is marked by its return type, `Tasks.TASK[T]`, and a generator by returning `Pipe[T]` and containing `yield`; the body reads top to bottom either way.
 
 ## asynchronous code
 
 A function is asynchronous when its declared return type is `Tasks.TASK[T]` (or `Tasks.TASK`, for one that produces no value).
 
-Inside such a function, `await e` evaluates to the result of the task `e` once it completes. `let x = await e;` assigns the result to a local and the rest of the function continues:
+Inside such a function, `await e` evaluates to the result of the task `e` once it completes. `let x = await e;` defines a local variable holding the result, and the rest of the function continues:
 
 <GhulExample name="control-flow-46" />
 
@@ -64,7 +64,7 @@ A function is a generator when its declared return type is `Pipe[T]` (`Ghul.Pipe
 
 <GhulExample name="control-flow-49" />
 
-A generator *is* a [pipe](/runtime-library.html#stages), so it can be looped over directly and composed with `map` / `filter` / `take` and the other pipe operators:
+A generator *is* a [pipe](/runtime-library.html#stages), so it can be looped over directly and composed with `map` / `filter` / `take` and the other pipe stages:
 
 <GhulExample name="control-flow-50" />
 
