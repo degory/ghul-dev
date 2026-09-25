@@ -518,8 +518,8 @@ index records an indexer. These are the `MEMBER_CONSTRAINT`,
 placeholder is resolved, the accumulated constraints filter the candidate
 types, rejecting any that don't support how the variable is used.
 
-One walk of a body cannot always see enough: a `let`-bound anonymous
-function is used after it is defined, and a constructor's type arguments
+One walk of a body cannot always see enough: an anonymous function
+assigned to a `let` variable is used after it is defined, and a constructor's type arguments
 can be fixed by a later call. So `compile-expressions`{:text} re-walks
 each function body. Constraints attached during a walk persist into the
 next and only ever narrow, so each pass either tightens the unknowns or
