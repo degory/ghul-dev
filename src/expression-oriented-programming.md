@@ -14,7 +14,7 @@ An `if` with no `else` yields an optional, absent when no branch runs. See [cond
 
 ## case as an expression
 
-A `case` yields the value of the matched arm. As an expression it needs an `else` arm unless its arms cover every value, as they can over a union, an enum or `bool`:
+A `case` yields the value of the matched arm. As an expression it needs an `else` arm unless its arms cover a [closed domain](/control-flow.html#exhaustiveness): a union's variants, an enum's members, `bool`, or a class hierarchy closed to the assembly:
 
 <GhulExample name="expression-oriented-programming-2" />
 
