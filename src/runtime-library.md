@@ -321,17 +321,13 @@ The collecting combinators differ in what they hand back:
 
 ### collect
 
-Collects into the read-only `Collections.List[T]`. `collect_list` gives back the mutable `LIST[T]` instead, and the others collect into an array, a set, or a map.
+Collects into an array, `T[]`, which is a read-only `Collections.List[T]`. `collect_mutable` gives back the mutable `LIST[T]` instead, and the others collect into a set or a map.
 
 <GhulExample name="pipes-ref-collect-function" signature />
 
-### collect_array
+### collect_mutable
 
-<GhulExample name="pipes-ref-collect_array-function" signature />
-
-### collect_list
-
-<GhulExample name="pipes-ref-collect_list-function" signature />
+<GhulExample name="pipes-ref-collect_mutable-function" signature />
 
 ### collect_set
 
