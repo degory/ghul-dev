@@ -100,7 +100,7 @@ Where the context needs the non-optional type, the `else` is still required.
 
 ## case expression
 
-A `case` expression yields the value of the matched arm. It needs an `else` arm so that every value is covered; the arm values and the `else` agree on a type:
+A `case` expression yields the value of the matched arm. It needs an `else` arm unless its arms already cover every possible value, as arms for each variant of a union do; the arm values and the `else` agree on a type:
 
 <GhulExample name="expressions-29" />
 
