@@ -66,7 +66,7 @@ If the local is already narrowed, assigning a value of a different type cancels 
 
 A narrowing is a fact about a value at a point in the program, and values change: one that was present can be reassigned to null, and one that was a `CAT` can be replaced by some other `Animal`. So a narrowing has a lifetime, and the compiler works out where it ends.
 
-A narrowing lasts at most to the end of the code block associated with the test - the then or else arm of the `if`, or the loop body. It can end earlier, because the value can change before the block ends: by an explicit reassignment, or because a call to a function or method changes it, directly or indirectly.
+A narrowing lasts at most to the end of the code the test covers - the then or else arm of the `if`, the loop body, or the rest of the block after a guard. It can end earlier, because the value can change before the block ends: by an explicit reassignment, or because a call to a function or method changes it, directly or indirectly.
 
 The compiler tracks the calls that might do that, conservatively: it builds a call graph and works out which fields each call might write. A narrowing runs from the test to the first call the compiler cannot show left the value alone. From there the value reads at its declared type again, so a use that needed the narrowing - reading a member through it, or passing it where only the non-optional or narrower type is accepted - is an ordinary type error. The `◄` marks where the narrowing ended:
 
