@@ -104,8 +104,8 @@ The full pass list, in the order `COMPILER` runs them:
 | `check-name-conventions`{:text}       | Warns where a declaration's name does not follow the naming convention for its kind. |
 | `resolve-type-expressions`{:text}     | Turns type annotations in declarations, signatures, and in expression-position uses like `cast`, `isa`, `typeof` and `_` into the semantic `Type` objects later passes use. |
 | `resolve-ancestors`{:text}            | Attaches base classes, trait parents and default ancestors to classes, traits, structs, unions and enums, and validates the inheritance constraints. |
-| `synthesize-class-equality`{:text}   | Settles the `=~` and `get_hash_code` written for an `@equality()` class once its ancestors are known: the class joins a synthesized base's operator, and keeps an equality it inherits from elsewhere instead of its own. |
-| `synthesize-iterator-reset`{:text}   | A type implementing `Collections.Iterator[T]` that declares no `reset` is given one that throws `System.NotSupportedException`. |
+| `synthesize-class-equality`{:text}   | Settles the `=~` and `get_hash_code` synthesised for an `@equality()` class once its ancestors are known: the class joins a synthesised base's operator, and keeps an equality it inherits from elsewhere instead of its own. |
+| `synthesize-iterator-reset`{:text}   | A type implementing `Collections.Iterator[T]` that declares no `reset` gets a synthesised one that throws `System.NotSupportedException`. |
 | `resolve-explicit-types`{:text}       | Registers each variable's, property's and parameter's declared type on its symbol, so the declared type is available to constrain inference later. |
 | `check-type-argument-bounds`{:text}   | Checks each type argument written in a type-expression position against its type parameter's declared bound. |
 | `resolve-overrides`{:text}            | Pulls inherited symbols down into each container type's scope; for every method whose signature matches an ancestor's virtual or abstract method, records the override link and checks the override is consistent. Reports duplicate top-level functions. |
