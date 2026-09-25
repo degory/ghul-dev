@@ -18,7 +18,7 @@ An `isa` test in an `if` condition narrows the variable to the tested type insid
 
 <GhulExample name="control-flow-8" />
 
-An [optional type](/optional-types) narrows the same way. A `?` test in the predicate narrows the optional to its non-optional form in the then-branch, so the value can be used directly:
+An [optional type](/optional-types) narrows the same way. A `?` test in the condition narrows the optional to its non-optional form in the then-branch, so the value can be used directly:
 
 <GhulExample name="control-flow-9" />
 
@@ -26,7 +26,7 @@ For a two-variant union, the `else` branch is narrowed to the complementary vari
 
 <GhulExample name="control-flow-10" />
 
-The `else` narrowing extends to a class hierarchy declared in the current assembly without `open`: the compiler knows every subclass, so ruling out the tested one narrows the `else` branch to the others, and when an `abstract` root has exactly two subclasses, ruling out one leaves the other. The [object oriented programming](/object-oriented-programming) page covers open, closed, and abstract classes.
+The `else` narrowing extends to a class hierarchy declared in the current assembly without `open`: the compiler knows every subclass, so ruling out the tested one narrows the `else` branch to the others. When an `abstract` root has exactly two subclasses, ruling out one leaves the other. The [object oriented programming](/object-oriented-programming) page covers open, closed, and abstract classes.
 
 A `while` condition narrows its body the same way an `if` condition narrows its then-branch, so `while isa CAT(a) do a.purr() od` reaches a `CAT`-only member without an inner cast.
 
