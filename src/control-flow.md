@@ -212,11 +212,11 @@ A `when` arm can take a pattern instead of an equality list, mirroring [`if let`
 
 <GhulExample name="control-flow-54" />
 
-Narrowing works like `if let`'s: an arm's type test narrows the scrutinee within its body, and so does a test made by the arm's own guard. Arm narrowing is local - nothing an arm proves reaches a sibling arm or the code after the `case`.
+Narrowing works like `if let`'s: an arm's type test narrows the scrutinee within its body, and so does a test made by the arm's own guard. Arm narrowing is local - what an arm proves doesn't reach a sibling arm or the code after the `case`.
 
 ### exhaustiveness
 
-A `case` over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - is checked for exhaustiveness. A missing case in a `case` statement warns (`non-exhaustive-case`); in a `case` expression it is an error. An arm that matches nothing the earlier arms left warns (`redundant-case-arm`), and an `else` that can never run warns (`dead-case-else`). An expression-position `case` over an open domain needs an `else`, unless the expected type has a default value to fall back on.
+A `case` over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - is checked for exhaustiveness. A missing case in a `case` statement warns (`non-exhaustive-case`); in a `case` expression it is an error. An arm that doesn't match anything the earlier arms left warns (`redundant-case-arm`), and an `else` that can never run warns (`dead-case-else`). An expression-position `case` over an open domain needs an `else`, unless the expected type has a default value to fall back on.
 
 ### scope
 
