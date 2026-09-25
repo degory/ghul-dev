@@ -55,7 +55,7 @@ A destructuring `let` declares several variables at once from a tuple. Each vari
 
 ### for loop variables
 
-A `for` loop variable takes its type from the element type of the iterable being looped over. Destructuring composes with this: when the element type is a tuple, its element types flow into the destructured names.
+A `for` loop variable takes its type from the element type of the iterable being looped over. A loop variable can be destructured: when the element type is a tuple, each destructured name takes the type of its element.
 
 <GhulExample name="type-inference-9" />
 
