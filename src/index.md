@@ -27,7 +27,7 @@ Every example on this site is a whole program. Press **edit & run**, change it, 
 
 - **[unions and pattern matching](/unions-and-pattern-matching)** - refutable patterns match by type and by value, and a `case` over a closed domain - a union, an enum, `bool`, a closed class hierarchy, a tuple of those - is checked for coverage.
 
-- **keywords, not braces** - blocks open with a keyword and close with its mirror: `is` ... `si`, `if` ... `fi`, `do` ... `od`. No semicolons at the end of a line.
+- **keywords, not braces** - blocks open with a keyword and close with its mirror: `is` ... `si`, `if` ... `fi`, `do` ... `od`. No semicolons, except to put [two statements on one line](/grammar.html#statement-terminators).
 
 The rest is what you would expect of a .NET language: classes, structs, traits and generics, first-class functions and closures, generators, `async`/`await`, and NuGet packages. ghūl produces ordinary assemblies and packages, and other .NET languages can call them.
 

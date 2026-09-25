@@ -32,11 +32,9 @@ operator precedence table is given [at the end](#operator-precedence).
 
 The tokenizer turns source text into a stream of tokens. Whitespace (spaces, tabs,
 carriage returns and newlines) separates tokens, and how much of it there is
-almost never matters. Two things about it do: whether a token is the first on its
-line, which is what lets a statement terminator be left off, and how far one
-construct is indented, which matters in a single case. Both are covered under
-[statement terminators](#statement-terminators) below. Comments are discarded
-before parsing.
+almost never matters. Where a line break does matter, [statement
+terminators](#statement-terminators) at the end of this page says how. Comments
+are discarded before parsing.
 
 ### comments
 
@@ -156,75 +154,6 @@ unwrap/has-value, not as the operators `!.` or `?.`.
 
 A handful of operator spellings are recognised as dedicated tokens rather than
 general operators: `=`, `:`, `.`, `->`, `=>`, `?` and `@`.
-
-## statement terminators
-
-Every `";"` written in the productions below can be left off where the next token
-opens a new source line: the line break stands in for it. End of file ends a line
-too, so the last construct in a file doesn't need a terminator. A `";"` is only required
-between two constructs written on one line.
-
-```ebnf
-Terminator ::= ";" | Boundary
-```
-
-`Boundary` is not a token. It is the position before a token that is the first on
-its source line, and before end of input.
-
-The parser accepts a `Terminator` only where the grammar could accept a `";"`, so
-the parser asks one question at one kind of position: is the current token the
-first on its line? That leaves the rest to the productions themselves. A line
-break ends a construct that is complete; one that is not runs on to the next
-line, so a trailing operator, an unclosed bracket, and an argument list still
-waiting for its `)` carry the construct on to the next line.
-
-### line-start tokens
-
-Four tokens continue a construct that is already complete, which is how member
-chains and pipes wrap:
-
-```ebnf
-ContinuationLead ::= "." | "?" | "|>" | "ref"
-```
-
-Five could have continued one - as a call, an index, an explicit generic
-application, a function literal's `rec` marker and an infix operand - and
-deliberately do not:
-
-```ebnf
-BoundaryLead ::= "(" | "[" | "`[" | "rec" | Operator
-```
-
-So a wrapped operator expression puts the operator at the end of the line rather
-than the start of the next, and a line-start `rec` is a recursive self-call
-rather than a marker for the expression above. Postfix modifiers follow the same
-rule without needing to be listed: a modifier is read only on its declaration's
-own line, so a line-start `public`, `static` or `pure` belongs to the next
-member.
-
-### constructs that end at a line break
-
-Three productions consult the boundary directly rather than through a
-`Terminator`.
-
-`Return` takes the next line's expression as its value where that line opens with
-a token that can begin an expression, and is a void return otherwise. The two
-readings never compete: a statement written after a `return` in the same block
-would be unreachable, so a closing keyword is the only thing that legitimately
-follows one.
-
-A parenthesised group is a tuple or a
-[block expression](/expression-oriented-programming.html#blocks), and a boundary
-commits the block reading exactly as a written `";"` does. A top-level `","`
-commits the tuple reading, and in a tuple it always comes before any line
-break that could commit a block, so the two readings never conflict. A line-start operator is excluded from the block commit,
-which keeps `(a` ... `+ b)` from being misread as two statements.
-
-`Assert` is the one construct whose reading depends on how far a line is
-indented. An `else` opening the line after a bare `assert` is the assert's own
-message clause where its column is at least the assert's, and the `else` of the
-enclosing `if` or `case` arm where it is dedented past it. This is the only place
-indentation is significant; everywhere else ghūl ignores it.
 
 ## compilation unit
 
@@ -702,3 +631,26 @@ Both arguments must be string literals (a numeric `level` is not accepted),
 and `level` names a precedence level: `user-1` … `user-8`, or one of the built-in
 level names `boolean`, `relational`, `range`, `shift`, `bitwise`, `addition` and
 `multiplication`.
+
+## statement terminators
+
+Code written in the style of the examples on this site doesn't need a semicolon anywhere, except to put two statements on one line.
+
+A `Terminator` in the productions above is a `";"` or a line break:
+
+```ebnf
+Terminator ::= ";" | Boundary
+```
+
+`Boundary` is not a token. It is the position before the first token on a line, and before the end of the file. The parser accepts one only where the grammar could accept a `";"`, so a construct left incomplete at the end of a line, such as `a +` or an argument list still waiting for its `)`, carries on to the next line.
+
+The rules that can affect code as it is written:
+
+- A line that opens with `.` or `|>` continues the expression above it, so member chains and pipes wrap.
+- A line that opens with `(`, `[` or an operator starts a new statement. To wrap an expression, put the operator at the end of the line.
+- Two string literals separated only by whitespace join into one, across a line break too. Where a statement ends on a string literal and the next begins with one, put a `;` between them.
+- A `return` at the end of a line takes the next line's expression as its value, unless the next line opens with a closing keyword such as `fi` or `si`.
+- In parentheses, a top-level `,` makes a tuple, and a `;` or a line break makes a [block expression](/expression-oriented-programming.html#blocks).
+- An `else` on the line after a bare `assert` is the assert's message when it is indented at least as far as the `assert`, and the `else` of the enclosing `if` otherwise.
+
+`--warn redundant-semicolon` reports a `;` written at the end of a line.
