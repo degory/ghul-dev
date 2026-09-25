@@ -123,7 +123,7 @@ A non-optional type never holds the absent case, so a `T?` is not assignable to 
 
 <GhulExample name="language-basics-18" />
 
-To pass a `T?` where a `T` is wanted, make the value present first: narrow it with `if x?` or `if let` (see [control flow](/control-flow.html#if-let)), assert it with `x!` (which throws when absent), or supply a fallback with `x ?? other`. Optional types work for reference and value types alike - and beyond those two, for generic code that doesn't know which one it has, and for user-defined types that never mention `T?` at all. The [optional types](/optional-types) page covers all of that, along with the `??` and `?.` operators and the warnings that keep optional handling honest.
+To pass a `T?` where a `T` is wanted, make the value present first: narrow it with `if x?` or `if let` (see [control flow](/control-flow.html#if-let)), assert it with `x!` (which throws when absent), or supply a fallback with `x ?? other`. Optional types work for reference types, value types, and type parameters that could be either, and a type with `has_value` and `value` properties is treated as optional too. The [optional types](/optional-types) page covers all of these, the `??` and `?.` operators, and the warnings the compiler reports on optional handling.
 
 ### type conversions
 
