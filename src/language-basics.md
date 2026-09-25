@@ -12,7 +12,7 @@ An identifier can be written in any script. A letter starts one, and a letter, a
 
 A letter is never a symbol, so no character is both an identifier character and an [operator](/definitions.html#operators) character. `×` is an operator and `naïve` is a name.
 
-The compiler checks the conventions above with Unicode case. A character that has an upper-case and a lower-case form is checked for its kind whatever script it is in, so `ТИП` is a concrete class and `μέγεθος` is a property. A character with neither form says nothing about case, so a name written entirely in a script that has no case - Chinese, Japanese, Arabic, Hebrew - is correct for any kind.
+The compiler checks the conventions above with Unicode case. A character that has an upper-case and a lower-case form is checked for its kind whatever script it is in, so `ТИП` is a concrete class and `μέγεθος` is a property. The compiler doesn't check the case of a character with neither form, so a name written entirely in a script that has no case - Chinese, Japanese, Arabic, Hebrew - is correct for any kind.
 
 <GhulExample name="language-basics-identifiers" />
 
@@ -21,12 +21,12 @@ ghūl relies on keywords for block structure where other languages use braces or
 <GhulExample name="language-basics-1" />
 
 ### expressions and statements
-Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, and most statements can be used as expressions. In a function or method body the last statement is the value the body returns, whenever the type of that statement matches the declared return type. A trailing `;` does not change that: the compiler judges the last statement by its type rather than by its terminator - see [expression oriented programming](/expression-oriented-programming.html) for the forms working together.
+Expressions in ghūl are constructs that return a value, while statements perform actions. All expressions can be used where statements are allowed, and most statements can be used as expressions. In a function or method body the last statement is the value the body returns, whenever the type of that statement is assignable to the declared return type. A trailing `;` does not change that: the compiler judges the last statement by its type rather than by its terminator - see [expression oriented programming](/expression-oriented-programming.html) for the forms working together.
 
 <GhulExample name="language-basics-2" />
 
 ### function declarations
-Functions in ghūl are declared with an optional return type, a name, a list of parameters in parentheses, and a body enclosed in `is` and `si` keywords
+Functions in ghūl are declared with a name, a list of parameters in parentheses, an optional return type after `->`, and a body enclosed in `is` and `si` keywords.
 
 <GhulExample name="language-basics-3" />
 
@@ -56,7 +56,7 @@ ghūl provides the following primitive data types:
 * integer types: `byte`, `ubyte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `word`, `uword`
 * arbitrary-precision integer type: `bigint`
 * floating-point types: `single`, `double`
-* fixed-point type: `decimal`
+* decimal floating-point type: `decimal`
 * boolean type: `bool`
 * character type: `char`
 * void type: `void`
@@ -123,7 +123,7 @@ A non-optional type never holds the absent case, so a `T?` is not assignable to 
 
 <GhulExample name="language-basics-18" />
 
-To pass a `T?` where a `T` is wanted, make the value present first: narrow it with `if x?` or `if let` (see [control flow](/control-flow.html#if-let)), assert it with `x!` (which throws when absent), or supply a fallback with `x ?? other`. Optional types work for reference and value types alike - and beyond those two, for generic code that doesn't know which one it has, and for user-defined types that never mention `T?` at all. The [optional types](/optional-types) page covers all of that, along with the `??` and `?.` operators and the warnings that keep optional handling honest.
+To pass a `T?` where a `T` is wanted, make the value present first: narrow it with `if x?` or `if let` (see [control flow](/control-flow.html#if-let)), assert it with `x!` (which throws when absent), or supply a fallback with `x ?? other`. Optional types work for reference types, value types, and type parameters that could be either, and a type with `has_value` and `value` properties is treated as optional too. The [optional types](/optional-types) page covers all of these, the `??` and `?.` operators, and the warnings the compiler reports on optional handling.
 
 ### type conversions
 
@@ -148,7 +148,7 @@ Arguments will be covered in detail with functions and methods, but the basic fo
 <GhulExample name="language-basics-22" />
 
 ### captured variables
-Variables captured by a function literal will be covered with [function literals](/expressions.html#capturing-and-closure). They are not explicitly declared but inferred from each function literal's body.
+Variables captured by a function literal will be covered with [function literals](/expressions.html#capturing-and-closure). They are not declared: a function literal captures the variables its body uses.
 
 ### scope
 
@@ -175,7 +175,7 @@ A run of octal digits after a `\` is the older way to write a character code. It
 ## string interpolation
 A string literal can interpolate expressions: `{` starts an expression and `}` ends it, and the value of the expression is written into the string in its place. There is no `+` operator on `string`, so interpolation is also how strings are joined.
 
-How a value is written depends on its type. A string, a number or an enum member is written as .NET writes it, and so is any value whose type declares its own `to_string`. A `bool` is written `true` or `false`. An optional value is written as the value it holds, or as `null` when it holds nothing. Any other value, such as an array, a list, a tuple, or a struct or class with no `to_string` of its own, is written by the runtime's `$` function: a sequence as its elements in brackets, a tuple as its parts, and a record as its type and members:
+How a value is written depends on its type. A string, a number or an enum member is written as .NET writes it, and so is any value whose type declares its own `to_string`. A `bool` is written `true` or `false`. An optional value is written as the value it holds, or as `null` when it doesn't hold a value. Any other value, such as an array, a list, a tuple, or a struct or class with no `to_string` of its own, is written by the runtime's `$` function: a sequence as its elements in brackets, a tuple as its parts, and a record as its type and members:
 
 <GhulExample name="language-basics-37" />
 
