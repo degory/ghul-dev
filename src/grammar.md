@@ -172,11 +172,11 @@ Terminator ::= ";" | Boundary
 its source line, and before end of input.
 
 The parser accepts a `Terminator` only where the grammar could accept a `";"`, so
-the inference asks one question at one kind of position: is the current token the
+the parser asks one question at one kind of position: is the current token the
 first on its line? That leaves the rest to the productions themselves. A line
 break ends a construct that is complete; one that is not runs on to the next
 line, so a trailing operator, an unclosed bracket, and an argument list still
-waiting for its `)` need no rule at all.
+waiting for its `)` carry the construct on to the next line.
 
 ### line-start tokens
 
