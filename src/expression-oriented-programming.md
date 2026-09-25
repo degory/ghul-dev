@@ -58,15 +58,15 @@ A function or method body takes its last statement's value the way an arm does. 
 
 <GhulExample name="expression-oriented-programming-7" />
 
-A tail of some other non-void type is an error at the tail rather than a silent discard. To evaluate a statement for its effect and throw its value away, write `let _ = doubled * trimmed`.
+A tail of some other non-void type is an error, reported at the tail. To evaluate a statement for its effect and throw its value away, write `let _ = doubled * trimmed`.
 
 Because the tail is an ordinary statement position, an `if` or a `case` sitting there is the return value too, and no branch needs its own `return`:
 
 <GhulExample name="expression-oriented-programming-8" />
 
-Only a statement that produces a value can be a tail. An expression statement, an `if`, a `case` and a parenthesised block all do. A `let`, an assignment, an `assert` and a loop do not, so a body whose last statement is one of those has no value on the fall-through path and returns [the default for its return type](/control-flow.html#default-return) instead. A loop is not an exception to [loops as expressions](#loops-as-expressions): it yields to a context that consumes a value, and a function tail is not one, so a `break` with a value there is rejected outright.
+Only a statement that produces a value can be a tail. An expression statement, an `if`, a `case` and a parenthesised block all do. A `let`, an assignment, an `assert` and a loop do not, so a body whose last statement is one of those has no value on the fall-through path and returns [the default for its return type](/control-flow.html#default-return) instead. A loop yields only to a context that consumes a value, as in [loops as expressions](#loops-as-expressions), and a function tail does not consume one, so a `break` with a value in a loop there is an error.
 
-Whole bodies can have no tail to take either. A void body discards whatever is left standing at its end, so a method ending in a bare `if` or loop is unaffected. In a generator, falling off the end means the end of the stream rather than a value, and a bare `return` ends it early. A `try` block is not an expression, so a body ending in one is not a tail either.
+Some bodies have no tail value at all. A void body discards whatever is left standing at its end, so a method ending in a bare `if` or loop is unaffected. In a generator, falling off the end means the end of the stream rather than a value, and a bare `return` ends it early. A `try` block is not an expression, so a body ending in one is not a tail either.
 
 ## expression bodies
 
