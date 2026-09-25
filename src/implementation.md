@@ -138,7 +138,7 @@ Records the source location of every contextually-lexed modifier keyword -
 currently `init` and `open`. A later rewrite consumes some of these
 tokens, so the locations are captured up front for the editor's
 semantic-token colouring, which lights them as keywords. Hard keywords
-like `abstract` need no help; only the contextually-lexed modifiers do.
+like `abstract` don't need any help; only the contextually-lexed modifiers do.
 
 ### `rewrite-syntax-trees`{:text}
 
@@ -390,7 +390,7 @@ The final pass writes the IR values produced by `compile-expressions`{:text}
 out as a .NET assembly, using `System.Reflection.Metadata`{:text} to encode
 the metadata tables, the method bodies and a portable PDB, and writing the
 `.dll`{:text} or `.exe`{:text} itself. Nothing outside the compiler is
-involved, so a build needs no platform-specific tool beyond the .NET
+involved, so a build doesn't need a platform-specific tool beyond the .NET
 runtime the compiler is already running on.
 
 Names, signatures and attribute blobs are all encoded from the resolved
