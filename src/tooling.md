@@ -14,7 +14,7 @@ The compiler is normally installed as a *local* .NET tool, pinned per project in
 
 Because a ghūl project is a normal .NET SDK project, the standard `dotnet`{:text} commands all work:
 
-```bash
+```sh
 dotnet build   # compile the project
 dotnet run     # build and run an executable project
 dotnet pack    # produce a NuGet package
@@ -77,7 +77,7 @@ The ghūl repository template and the examples repo both ship a `.devcontainer` 
 
 The [`ghul.templates`{:text}](https://www.nuget.org/packages/ghul.templates) package adds ghūl project templates to the .NET SDK:
 
-```bash
+```sh
 dotnet new install ghul.templates
 ```
 
