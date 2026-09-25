@@ -212,8 +212,8 @@ open. Write it as an anonymous function that supplies the fixed arguments:
 
 A union holds one of several variants, and the `if let` and `case` patterns
 take one apart; they are how functional ghūl code models data. A `case` over
-a union is checked for exhaustiveness, so covering every variant needs no
-`else` arm:
+a union is checked for exhaustiveness, so covering every variant means it
+doesn't need an `else` arm:
 
 <GhulExample name="functional-programming-23" />
 
