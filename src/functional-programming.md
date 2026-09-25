@@ -204,8 +204,7 @@ anonymous function that returns another:
 ## partial application
 
 Partial application fixes some of a function's arguments and leaves the rest
-open. No special syntax is needed: an anonymous function supplies the fixed
-arguments:
+open. Write it as an anonymous function that supplies the fixed arguments:
 
 <GhulExample name="functional-programming-20" />
 
