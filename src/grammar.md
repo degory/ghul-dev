@@ -280,9 +280,10 @@ ClassyBody ::= "is" ClassBodyDefinition* "si"
 TypeParameters ::= "[" TypeParameter ( "," TypeParameter )* "]"
 TypeParameter  ::= Identifier ( ":" TypeParameterConstraints )? Variance?
 TypeParameterConstraints
-               ::= TypeExpression KindConstraint? "init"?   /* type bound */
+               ::= TypeBound KindConstraint? "init"?        /* type bound */
                  | KindConstraint "init"?                   /* kind only */
                  | "init"                                   /* ctor only */
+TypeBound      ::= TypeExpression ( "/\" TypeExpression )*
 KindConstraint ::= "class" | "struct" | "optional"
 Variance       ::= "out" | "in"
 
