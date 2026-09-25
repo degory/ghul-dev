@@ -28,7 +28,7 @@ See [loops as expressions](/control-flow.html#loops-as-expressions) for the full
 
 ## blocks
 
-A parenthesised block `(statement; ...; value)` runs a sequence of statements and yields a value: its tail expression, or any `return` that targets the block. It gives an expression room for intermediate local variables, loops, and early exits:
+A parenthesised block `(statement; ...; value)` runs a sequence of statements and yields a value: its tail expression, with or without a `;` after it, or any `return` that targets the block. It gives an expression room for intermediate local variables, loops, and early exits:
 
 <GhulExample name="expression-oriented-programming-3" />
 
@@ -49,8 +49,6 @@ The value an arm produces is its last statement's, on the same rule as a parenth
 <GhulExample name="expression-oriented-programming-9" />
 
 Where the value then goes is what the two uses differ on. An `if` used as an expression takes the value of the arm it chose; the same `if` used as a statement discards it. A loop body is the case where it always goes nowhere, since a loop yields through `break` rather than through its body's last statement.
-
-A `;` after the last statement has no effect on the value: it separates two statements written on one line, and that is all it does.
 
 ## block bodies return their tail
 
