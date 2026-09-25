@@ -56,7 +56,7 @@ ghūl provides the following primitive data types:
 * integer types: `byte`, `ubyte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `word`, `uword`
 * arbitrary-precision integer type: `bigint`
 * floating-point types: `single`, `double`
-* fixed-point type: `decimal`
+* decimal floating-point type: `decimal`
 * boolean type: `bool`
 * character type: `char`
 * void type: `void`
