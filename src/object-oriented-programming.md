@@ -40,6 +40,6 @@ A trait member can provide a default body. An implementing type inherits the def
 
 `isa` and `if let` test an object's runtime type and narrow the value to it inside the matching branch, and a `case` over a closed hierarchy is checked for exhaustiveness. The [type narrowing](/type-narrowing.html) page covers it in full.
 
-## a worked example
+## a generic calculator
 
 <GhulExample name="object-oriented-programming-1" />
