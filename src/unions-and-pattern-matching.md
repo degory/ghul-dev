@@ -52,4 +52,4 @@ A union with a single field-carrying variant, or with one variant marked `defaul
 
 <GhulExample name="functional-programming-15" />
 
-Because `isa` narrows the value it tests rather than a fresh local variable, it reaches values that an `if let` name does not: a member path such as `shape.outline`, or `self`. See [type narrowing](/type-narrowing.html) for the full picture.
+`isa` narrows the value in place, so it works on a member path such as `shape.outline`, or on `self`, without giving it a new name. See [type narrowing](/type-narrowing.html) for the full picture.
