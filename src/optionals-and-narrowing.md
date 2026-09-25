@@ -34,6 +34,6 @@ Open ghūl in an editor with the [ghūl language extension](/tooling.html) and s
 
 ## the narrowing is checked
 
-A narrowed value can change before it is used: a reassignment, or a call to a function that writes the member the narrowing depends on. The compiler tracks the calls in between and reports a use it cannot prove safe, naming the call; testing the value again, or copying it into a local variable, resolves it.
+A narrowing lasts until the value might have changed: a reassignment, or a call to a function that could write the member the narrowing depends on. After that the value has its declared type again, and the editor marks the call with `◄`. To keep the narrowing, copy the value into a local variable before the call, or test it again after.
 
 [Type narrowing](/type-narrowing) covers the details: what invalidates a narrowing, what the `pure` modifier declares, and what a `stable` property promises. [Optional types](/optional-types) covers the operators, the warnings, and the three run-time representations behind `T?`.
