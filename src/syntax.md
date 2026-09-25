@@ -35,13 +35,7 @@ In this example `then`, `else` and `fi` all delimit blocks. The blocks they deli
 
 ## semicolons
 
-A semicolon separates two statements or definitions written on the same line. That is the only place one is needed. At the end of a line the line break ends the statement, and end of file ends the last line, so code written one statement to a line has no semicolons in it. The examples on this site are written that way.
-
-Leave the semicolon off at the end of a line. With `--warn redundant-semicolon` the compiler reports one there as a warning. A function body's tail value is decided by its type, whether or not its last statement ends in a semicolon. `--inlay terminator` shows the statement boundaries the parser inferred as editor inlay hints.
-
-Adjacent string literals join into one literal, across a line break as well as within a line. Where a statement ends on a string literal and the next line begins with one, a semicolon between them keeps the two apart. `redundant-semicolon` does not report that one.
-
-A line break ends a statement only where the statement is complete. An expression left unfinished at the end of a line, such as `a +` or an open `(`, continues on the next line, and a line beginning with `.` or `|>` continues the line above, so member chains and pipes wrap in the usual way. The full rules are under [statement terminators](/grammar.html#statement-terminators) in the grammar, for the occasions when a wrapped expression parses differently from how it reads.
+Code written in the style of the examples on this site doesn't need a semicolon anywhere, except to put two statements on one line. [Statement terminators](/grammar.html#statement-terminators) in the grammar lists the rules for where a line break ends a statement.
 
 ## definitions and statements
 
