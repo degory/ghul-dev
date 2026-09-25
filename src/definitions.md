@@ -91,7 +91,7 @@ Two postfix modifiers control the class hierarchy. Without `open`, a class can b
 
 Because the compiler knows every subclass of a closed class, an `isa` test can narrow in the else branch too: ruling out the tested subclass leaves the others, and when an `abstract` root has exactly two subclasses, ruling out one leaves the other. See [type narrowing](/type-narrowing.html).
 
-A class has no `=~` unless it defines one. `@equality()` before a class asks the compiler to write `=~` and a matching `get_hash_code`, comparing the members that hold the class's state, so .NET collections find an equal value as well as the same object:
+A class has no `=~` unless it defines one. `@equality()` before a class asks the compiler to synthesise `=~` and a matching `get_hash_code`, comparing the members that hold the class's state, so .NET collections find an equal value as well as the same object:
 
 <GhulExample name="definitions-57" />
 
@@ -110,11 +110,11 @@ Structs are constructed the same way as classes, with a constructor expression:
 A struct defines a new value type. Assigning a struct copies all of its fields, so the copy and the original are independent afterwards:
 <GhulExample name="definitions-12" />
 
-`==` is not defined for structs: it would compare the bytes of the value rather than its members. `=~` compares structs instead. A struct whose members are all public and that declares no equality of its own is given `=~` and a matching `get_hash_code`, comparing its members one by one:
+`==` is not defined for structs: it would compare the bytes of the value rather than its members. `=~` compares structs instead. For a struct whose members are all public and that declares no equality of its own, the compiler synthesises `=~` and a matching `get_hash_code`, comparing its members one by one:
 
 <GhulExample name="definitions-58" />
 
-The compiler doesn't write these for a struct with a non-public member, or for one that declares any of `=~`, `<>`, `get_hash_code` or `equals`. Define that struct's equality as described under [defining operators](#operators) and, for the .NET side, under [making your own types work with .NET](/dotnet-integration.html#equality).
+The compiler doesn't synthesise these for a struct with a non-public member, or for one that declares any of `=~`, `<>`, `get_hash_code` or `equals`. Define that struct's equality as described under [defining operators](#operators) and, for the .NET side, under [making your own types work with .NET](/dotnet-integration.html#equality).
 
 Structs can only be defined at global scope. Structs can be generic, which will be covered later. Struct names should be in `MACRO_CASE`.
 
