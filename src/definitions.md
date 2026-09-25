@@ -114,7 +114,7 @@ A struct defines a new value type. Assigning a struct copies all of its fields, 
 
 <GhulExample name="definitions-58" />
 
-A struct with a non-public member, or one that declares any of `=~`, `<>`, `get_hash_code` or `equals`, doesn't get any of this, and defines its own equality as described under [defining operators](#operators) and, for the .NET side, under [making your own types work with .NET](/dotnet-integration.html#equality).
+The compiler doesn't write these for a struct with a non-public member, or for one that declares any of `=~`, `<>`, `get_hash_code` or `equals`. Define that struct's equality as described under [defining operators](#operators) and, for the .NET side, under [making your own types work with .NET](/dotnet-integration.html#equality).
 
 Structs can only be defined at global scope. Structs can be generic, which will be covered later. Struct names should be in `MACRO_CASE`.
 
@@ -177,7 +177,7 @@ An enum marked `@System.Flags()` also gets the bitwise operators `&`, `|`, `^` a
 
 <GhulExample name="definitions-59" />
 
-An enum without the attribute doesn't have any of the four, since its members are not meant to combine.
+The compiler rejects the four on an enum without the attribute, since its members are not meant to combine.
 
 ### partial and impl blocks
 
