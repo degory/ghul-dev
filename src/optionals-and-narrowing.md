@@ -4,7 +4,7 @@
 Every example on this page can be edited and run here: click the pencil to open it in an editor, change it, and run it in your browser. Errors, hovers and completions come from the ghūl compiler as you type.
 :::
 
-A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and a plain `T` always holds a value. The compiler rejects a `T?` where a `T` is needed, so absence is handled where it can arise, not discovered as a crash somewhere later.
+A type followed by `?` is an *optional* type: a value of `T?` can be present or absent, and a plain `T` always holds a value. The compiler rejects a `T?` where a `T` is needed.
 
 <GhulExample name="optional-types-1" />
 
@@ -34,6 +34,6 @@ Open ghūl in an editor with the [ghūl language extension](/tooling.html) and s
 
 ## the narrowing is checked
 
-A narrowed value can change before it is used: a reassignment, or a call to a function that writes the member the narrowing depends on. The compiler tracks the calls in between and reports a use it cannot prove safe, naming the call; testing the value again, or copying it into a local variable, resolves it. So a narrowing is never a guess that the value is probably still there - it either holds, or the compiler says why not.
+A narrowed value can change before it is used: a reassignment, or a call to a function that writes the member the narrowing depends on. The compiler tracks the calls in between and reports a use it cannot prove safe, naming the call; testing the value again, or copying it into a local variable, resolves it.
 
-[Type narrowing](/type-narrowing) covers the machinery: what invalidates a narrowing, what the `pure` modifier declares, and what a `stable` property promises. [Optional types](/optional-types) covers the operators, the warnings, and the three run-time representations behind `T?`.
+[Type narrowing](/type-narrowing) covers the details: what invalidates a narrowing, what the `pure` modifier declares, and what a `stable` property promises. [Optional types](/optional-types) covers the operators, the warnings, and the three run-time representations behind `T?`.
