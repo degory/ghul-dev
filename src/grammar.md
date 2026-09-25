@@ -688,7 +688,8 @@ the following levels, **tightest first**:
 | user&#8209;1     | *(user-defined)*                            |
 | yield infix      | `\|\|`                                      |
 
-All binary operators are left-associative. Prefix unary operators, member access,
+Binary operators are left-associative, except those that start with `?`, such
+as `??`, which are right-associative. Prefix unary operators, member access,
 calls and indexing bind more tightly than any binary operator.
 
 A user-defined operator (any operator not in the table above) is assigned a
