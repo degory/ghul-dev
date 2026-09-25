@@ -103,7 +103,7 @@ type, unless it is declared `public`:
 
 The members a primary constructor generates are ordinary properties, so the
 same applies to them: they are set at construction and cannot be publicly
-assigned afterwards unless the parameter carries the `public` modifier.
+assigned afterwards unless the parameter has the `public` modifier.
 
 ### pipe operations build new sequences
 
