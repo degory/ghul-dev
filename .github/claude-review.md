@@ -20,10 +20,11 @@ as accuracy.
 
 ## What to watch for here
 
-- Prose that violates `STYLE.md`. Lead with the strongest evidence: hard-banned
-  words (`binding`, `carry`, `lambda`); conditional bans (`may` only in the
-  capability sense; `simply`/`just`/`easily`/`of course`/`obviously` only where
-  the sentence reads the same without them); em-dash use; capitalised-first-letter
+- Prose that violates `STYLE.md`. Lead with the strongest evidence: the hard
+  ban (`lambda` for a ghūl anonymous function); conditional bans (`binding` for
+  a variable, `carry` where *have* would do, `may` only in the capability
+  sense; `simply`/`just`/`easily`/`of course`/`obviously` only where the
+  sentence reads the same without them); em-dash use; capitalised-first-letter
   comments; banner headings; marketing register; page-opening clichés
   (`In this guide...`, `Let's dive into...`); summary-style page closings.
 - ghūl in `<GhulExample/>` blocks or inline backticks that is wrong, non-idiomatic,
