@@ -261,7 +261,7 @@ By the time `compile-expressions`{:text} runs, every explicitly-typed
 symbol already knows its declared type, and that declared type becomes
 one of the constraints that bidirectional inference uses for the
 unannotated parts of the same expression. The pass also performs a few
-annotation-only checks (field and property types can't be reference
+annotation-only checks (field and property types can't be `ref`
 types; variable types can't be `void`).
 
 Note that this pass does *not* check that an initializer's type matches
