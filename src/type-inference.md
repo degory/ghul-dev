@@ -6,11 +6,11 @@ Every example on this page can be edited and run here: click the pencil to open 
 The [ghul-examples repository](https://github.com/ghul-lang/ghul-examples/tree/main/examples/type-inference) has fuller type-inference examples to build and run locally, in a GitHub Codespace or a dev container.
 :::
 
-Inside a function body, you rarely need to write a type. Local variables, loop variables, destructured variables, anonymous function parameters and generic type arguments are all inferred - from initializers, from the context an expression sits in, and from how a value is used later in the same body. You get the checking of static types without typing most of them: in the compiler's own source, over 90% of local variables carry no type annotation, and most of the annotations that remain are deliberate - declaring a variable at a wider type than its initializer, or as reassignable before it has a value - rather than places inference needed help.
+Inside a function body, you rarely need to write a type. Local variables, loop variables, destructured variables, anonymous function parameters and generic type arguments are all inferred - from initializers, from the context an expression sits in, and from how a value is used later in the same body. You get the checking of static types without typing most of them: in the compiler's own source, over 90% of local variables have no type annotation, and most of the annotations that remain are deliberate - declaring a variable at a wider type than its initializer, or as reassignable before it has a value - rather than places inference needed help.
 
-The types that do get written are the ones worth writing. A function's parameter and return types are always explicit, and so are fields, properties and global variables: those are the contracts a reader wants written down. Keeping them explicit is also what keeps inference **function-local** - types inferred within one function are not visible outside it, and a type error always points into the body being edited rather than into another function entirely.
+A function's parameter and return types are always explicit, and so are fields, properties and global variables declared at namespace scope. Keeping them explicit is what keeps inference **function-local** - types inferred within one function are not visible outside it, and a type error always points into the body being edited rather than into another function entirely.
 
-Mechanically it is bidirectional, constraint-based inference: types flow up from expressions and down from the contexts that use them, and the compiler re-walks each function body until the unknowns settle. The [implementation page](/implementation#type-inference) describes how.
+Mechanically it is bidirectional, constraint-based inference: types flow up from expressions and down from the contexts that use them, and the compiler goes over each function body again until every inferred type is known. The [implementation page](/implementation#type-inference) describes how.
 
 Within a function, types are inferred for:
 
@@ -23,7 +23,7 @@ Within a function, types are inferred for:
 
 In each case the inferred type is concrete. The compiler does not introduce new type parameters during inference, so an anonymous function literal takes a single concrete function type from its context - it cannot itself be generic. For polymorphic behaviour, declare a generic global function or method and pass it where the function value is needed.
 
-ghūl also performs [type narrowing](/type-narrowing.html) - within parts of a function a value can be observed at a more specific type than the one it was declared with. Inference and narrowing work together: the inferred type is the ceiling, and the control flow sharpens it region by region.
+ghūl also performs [type narrowing](/type-narrowing.html) - within parts of a function a value can be observed at a more specific type than the one it was declared with. Inference and narrowing work together: the inferred type is the widest type a variable has, and narrowing gives it a more specific type wherever the control flow proves one.
 
 The examples below leave inferred types unannotated; hover over any variable to see the type the compiler worked out for it.
 
