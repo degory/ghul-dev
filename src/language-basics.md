@@ -12,7 +12,7 @@ An identifier can be written in any script. A letter starts one, and a letter, a
 
 A letter is never a symbol, so no character is both an identifier character and an [operator](/definitions.html#operators) character. `×` is an operator and `naïve` is a name.
 
-The compiler checks the conventions above with Unicode case. A character that has an upper-case and a lower-case form is checked for its kind whatever script it is in, so `ТИП` is a concrete class and `μέγεθος` is a property. A character with neither form says nothing about case, so a name written entirely in a script that has no case - Chinese, Japanese, Arabic, Hebrew - is correct for any kind.
+The compiler checks the conventions above with Unicode case. A character that has an upper-case and a lower-case form is checked for its kind whatever script it is in, so `ТИП` is a concrete class and `μέγεθος` is a property. A character with neither form doesn't say anything about case, so a name written entirely in a script that has no case - Chinese, Japanese, Arabic, Hebrew - is correct for any kind.
 
 <GhulExample name="language-basics-identifiers" />
 
@@ -175,7 +175,7 @@ A run of octal digits after a `\` is the older way to write a character code. It
 ## string interpolation
 A string literal can interpolate expressions: `{` starts an expression and `}` ends it, and the value of the expression is written into the string in its place. There is no `+` operator on `string`, so interpolation is also how strings are joined.
 
-How a value is written depends on its type. A string, a number or an enum member is written as .NET writes it, and so is any value whose type declares its own `to_string`. A `bool` is written `true` or `false`. An optional value is written as the value it holds, or as `null` when it holds nothing. Any other value, such as an array, a list, a tuple, or a struct or class with no `to_string` of its own, is written by the runtime's `$` function: a sequence as its elements in brackets, a tuple as its parts, and a record as its type and members:
+How a value is written depends on its type. A string, a number or an enum member is written as .NET writes it, and so is any value whose type declares its own `to_string`. A `bool` is written `true` or `false`. An optional value is written as the value it holds, or as `null` when it doesn't hold a value. Any other value, such as an array, a list, a tuple, or a struct or class with no `to_string` of its own, is written by the runtime's `$` function: a sequence as its elements in brackets, a tuple as its parts, and a record as its type and members:
 
 <GhulExample name="language-basics-37" />
 
