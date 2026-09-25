@@ -82,7 +82,7 @@ replaced. An array literal constructs a plain array, so the same applies to it.
 ### tuples are immutable
 
 Tuple elements have no assign accessors, and tuples are value types, so a
-tuple passed to other code is a copy, and other code can't change a tuple you hold.
+tuple passed to other code is a copy, so other code can't change a tuple you hold.
 
 <GhulExample name="functional-programming-7" />
 
