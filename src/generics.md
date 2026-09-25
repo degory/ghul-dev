@@ -6,7 +6,7 @@ Every example on this page can be edited and run here: click the pencil to open 
 The [ghul-examples repository](https://github.com/ghul-lang/ghul-examples/tree/main/examples/generics) has fuller generics examples to build and run locally, in a GitHub Codespace or a dev container.
 :::
 
-ghūl supports generic type arguments on
+ghūl supports type parameters on
 - classes
 - structs
 - traits
@@ -14,10 +14,10 @@ ghūl supports generic type arguments on
 - unions
 - global functions
 
-Type arguments declare a named type, which can be used anywhere within its scope in type expressions.
+A type parameter declares a named type, which can be used anywhere within its scope in type expressions.
 
-For example in the following global function, `T` is a type argument, and it can be used within the function's definition and body.
-When a particular specialization of `print_something[T](T)` is called, `T` will have whatever actual type argument was supplied
+In this global function, `T` is a type parameter, and it can be used within the function's definition and body.
+When `print_something` is called, `T` is whatever type argument was supplied:
 
 <GhulExample name="generics-1" />
 
@@ -29,7 +29,7 @@ When a particular specialization of `print_something[T](T)` is called, `T` will 
 
 <GhulExample name="generics-5" />
 
-Generic argument types can be inferred from context for generic constructor invocations as well as generic function and method calls
+Type arguments can be inferred for constructor calls as well as for function and method calls:
 
 <GhulExample name="generics-6" />
 
@@ -55,7 +55,7 @@ there are.
 
 ## type-parameter constraints
 
-A type parameter can have one or more constraints, listed inside its declaration. Constraints both narrow the operations the generic body can perform on values of that type and restrict the actual types that callers can supply. The compiler enforces all constraints, both for ghūl types that declare them and for types imported from .NET assemblies.
+A type parameter can have one or more constraints, listed inside its declaration. Constraints restrict the types that callers can supply, and let the generic body use the operations those types are guaranteed to have. The compiler enforces all constraints, both for ghūl types that declare them and for types imported from .NET assemblies.
 
 ### type bound
 
@@ -63,7 +63,7 @@ A type bound `[T: SomeType]` requires the type argument to derive from `SomeType
 
 <GhulExample name="generics-7" />
 
-A value whose static type is a bounded type parameter also narrows and destructures through the bound, so `isa`, `if let`, and destructuring reach the bound's subtypes and variants directly, with no manual widen to the bound first:
+A value whose static type is a bounded type parameter also narrows and destructures through the bound, so `isa`, `if let`, and destructuring reach the bound's subtypes and variants directly, without first converting the value to the bound:
 
 <GhulExample name="generics-10" />
 
@@ -77,7 +77,7 @@ The *static* members of a bound are reachable through the type parameter itself,
 
 <GhulExample name="generics-12" />
 
-Without that `use` the operator is not in scope, so nothing changes for code that doesn't ask for it - and importing one does not displace the built-in operators either. Each operator imports from the interface that declares it, so the addition operator comes from `IAdditionOperators` and the unsigned right shift from `IShiftOperators`. Comparison and equality cannot be imported this way - a type says how it orders and compares by defining `<>` and `=~`.
+Without that `use` the operator is not in scope, and importing one leaves the built-in operators as they are. Each operator imports from the interface that declares it, so the addition operator comes from `IAdditionOperators` and the unsigned right shift from `IShiftOperators`. Comparison and equality cannot be imported this way - a type says how it orders and compares by defining `<>` and `=~`.
 
 ### kind constraint
 
@@ -105,7 +105,7 @@ The `init` constraint requires the type argument to expose an accessible paramet
 
 ## variance
 
-Type variance is declared on a *trait*'s type parameters (the CLR permits variance only on interfaces, which is what a ghūl trait compiles to). A `class` or `struct` may not declare variant type parameters.
+Type variance is declared on a *trait*'s type parameters (the CLR permits variance only on interfaces, which is what a ghūl trait compiles to). A `class` or `struct` cannot declare variant type parameters.
 
 - `[T: out]`: covariant. `Producer[CAT]` is assignable to `Producer[ANIMAL]` when `CAT` derives from `ANIMAL`. Only legal when `T` appears in *output* positions (return types).
 - `[T: in]`: contravariant. `Consumer[ANIMAL]` is assignable to `Consumer[CAT]`. Only legal when `T` appears in *input* positions (parameter types).
