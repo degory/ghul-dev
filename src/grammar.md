@@ -216,8 +216,8 @@ follows one.
 A parenthesised group is a tuple or a
 [block expression](/expression-oriented-programming.html#blocks), and a boundary
 commits the block reading exactly as a written `";"` does. A top-level `","`
-commits the tuple reading, and has always arrived first when it is going to, so
-the two never contend. A line-start operator is excluded from the block commit,
+commits the tuple reading, and in a tuple it always comes before any line
+break that could commit a block, so the two readings never conflict. A line-start operator is excluded from the block commit,
 which keeps `(a` ... `+ b)` from being misread as two statements.
 
 `Assert` is the one construct whose reading depends on how far a line is
