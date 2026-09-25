@@ -20,7 +20,7 @@ A chain of `elif let` arms covers a union one variant at a time. Once there are 
 
 ## matching with case
 
-A `case` expression matches one scrutinee against several `when` arms, which reads better than a chain of `if let`/`elif let` once there are more than a couple of variants to cover. Over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - the compiler checks the arms for exhaustiveness, so `area` needs no fallback return, and a variant the `when` arms miss is reported:
+A `case` expression matches one scrutinee against several `when` arms, which reads better than a chain of `if let`/`elif let` once there are more than a couple of variants to cover. Over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - the compiler checks the arms for exhaustiveness, so `area` doesn't need a fallback return, and a variant the `when` arms omit is reported:
 
 <GhulExample name="functional-programming-23" />
 
