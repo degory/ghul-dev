@@ -355,7 +355,7 @@ Body ::= "is" StatementList "si"
        | "innate" QualifiedIdentifier
 ```
 
-A function may be named by an `Operator`, which defines that operator. A function
+A function can be named by an `Operator`, which defines that operator. A function
 with no body (just `;`) is abstract. A `=>` or `innate` body is terminated by `;`;
 a block body (`is` … `si`) is not.
 
@@ -542,7 +542,7 @@ Continue ::= "continue" Identifier?
 Labelled ::= Identifier ":" Statement
 ```
 
-A `Labelled` statement may be targeted by `break` or `continue` with the matching
+A `Labelled` statement can be targeted by `break` or `continue` with the matching
 label.
 
 ### assignment and expression statements
@@ -618,7 +618,7 @@ FunctionArguments ::= "(" VariableList? ")"
                     | Identifier
 ```
 
-`rec` marks the literal as recursive, so it may refer to itself.
+`rec` marks the literal as recursive, so it can refer to itself.
 
 ### primary expressions
 
@@ -662,7 +662,7 @@ form is accepted.
 
 ## operator precedence
 
-ghūl has no fixed list of binary operators: any [operator token](#operators) may be
+ghūl has no fixed list of binary operators: any [operator token](#operators) can be
 used infix. Precedence is assigned by a table of built-in operators plus a
 first-character heuristic for everything else, so the grammar's flat
 `Expression ::= UnaryExpression ( Operator UnaryExpression )*` is disambiguated by
