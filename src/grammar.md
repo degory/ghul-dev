@@ -161,7 +161,7 @@ general operators: `=`, `:`, `.`, `->`, `=>`, `?` and `@`.
 
 Every `";"` written in the productions below can be left off where the next token
 opens a new source line: the line break stands in for it. End of file ends a line
-too, so the last construct in a file needs no terminator. A `";"` is only required
+too, so the last construct in a file doesn't need a terminator. A `";"` is only required
 between two constructs written on one line.
 
 ```ebnf
