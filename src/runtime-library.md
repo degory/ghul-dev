@@ -225,7 +225,7 @@ The first element matching the predicate, absent if none does. `first` is the sa
 
 ### find_map
 
-Calls `mapper` on each element in turn and returns the first present result. `first_map` differs: it calls the mapper on the *first* element only, and gives up if that one declines.
+Calls `mapper` on each element in turn and returns the first present result. `first_map` differs: it calls the mapper on the *first* element only, and returns absent if the mapper returns absent for it.
 
 <GhulExample name="pipes-ref-find_map-function" signature />
 
@@ -267,7 +267,7 @@ As `first_map`, throwing instead of returning absent.
 
 ### only
 
-The single element the source holds, throwing when it holds none or more than one.
+The single element the source holds, throwing when it is empty or holds more than one.
 
 <GhulExample name="pipes-ref-only-function" signature />
 
