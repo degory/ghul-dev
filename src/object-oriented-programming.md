@@ -14,7 +14,7 @@ A [class](/definitions.html#classes) defines a reference type: fields and proper
 
 ## encapsulation
 
-There are no `public` or `private` keywords. A leading underscore on a name marks it non-public, and the compiler enforces it: by default `_balance` is reachable only within the class that declares it, while `balance` is public to read. A property is public to read but assignable only within its defining type, so state stays behind the methods that maintain it.
+There are no `public` or `private` keywords. A leading underscore on a name marks it non-public, and the compiler enforces it: `_balance` is reachable only within the class that declares it, while `balance` is public to read. A property is public to read but assignable only within its defining type, so state stays behind the methods that maintain it.
 
 ## inheritance
 
