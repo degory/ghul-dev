@@ -10,7 +10,7 @@ Inside a function body, you rarely need to write a type. Local variables, loop v
 
 A function's parameter and return types are always explicit, and so are fields, properties and global variables declared at namespace scope. Keeping them explicit is what keeps inference **function-local** - types inferred within one function are not visible outside it, and a type error always points into the body being edited rather than into another function entirely.
 
-Mechanically it is bidirectional, constraint-based inference: types flow up from expressions and down from the contexts that use them, and the compiler goes over each function body again until every inferred type is known. The [implementation page](/implementation#type-inference) describes how.
+Mechanically it is bidirectional, constraint-based inference: types flow up from expressions and down from the contexts that use them, and the compiler re-walks each function body until every inferred type is known. The [implementation page](/implementation#type-inference) describes how.
 
 Within a function, types are inferred for:
 
