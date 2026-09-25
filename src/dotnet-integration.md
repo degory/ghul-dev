@@ -112,7 +112,7 @@ The mappings above are about reaching into .NET. This section is the other direc
 
 Build the hash from the members `=~` compares. `System.HashCode.combine` does this.
 
-When a type defines `=~` but not `get_hash_code`, the compiler reports an `equality-without-hash` warning and writes no `Equals` override. .NET collections then compare a class by reference and a struct member by member, whatever its `=~` says. The compiler does not write the hash itself, because `=~` can ignore some members, and a hash of all of them would then disagree with it. The exception is a class marked [`@equality()`](/definitions.html) or a struct whose members are all public: there the compiler writes both `=~` and a matching `get_hash_code`.
+When a type defines `=~` but not `get_hash_code`, the compiler reports an `equality-without-hash` warning and doesn't write an `Equals` override. .NET collections then compare a class by reference and a struct member by member, whatever its `=~` says. The compiler does not write the hash itself, because `=~` can ignore some members, and a hash of all of them would then disagree with it. The exception is a class marked [`@equality()`](/definitions.html) or a struct whose members are all public: there the compiler writes both `=~` and a matching `get_hash_code`.
 
 ### ordering
 
