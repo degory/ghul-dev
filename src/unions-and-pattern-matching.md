@@ -20,7 +20,7 @@ A chain of `elif let` arms covers a union one variant at a time. Once there are 
 
 ## matching with case
 
-A `case` expression matches one scrutinee against several `when` arms, which reads better than a chain of `if let`/`elif let` once there are more than a couple of variants to cover. Over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - the compiler checks the arms for exhaustiveness, so `area` needs no fallback return for a variant the `when` arms forgot:
+A `case` expression matches one scrutinee against several `when` arms, which reads better than a chain of `if let`/`elif let` once there are more than a couple of variants to cover. Over a closed domain - a union's variants, `bool`, an enum, or a class hierarchy closed to the assembly - the compiler checks the arms for exhaustiveness, so `area` needs no fallback return, and a variant the `when` arms miss is reported:
 
 <GhulExample name="functional-programming-23" />
 
@@ -34,7 +34,7 @@ A unit variant has a single shared value, so naming it as a label covers that va
 
 A label takes its type from the scrutinee, so a generic union's unit variant needs no type arguments there: `when Option.NONE then` over an `Option[int]`.
 
-So `case` is the exhaustive counterpart to `if let` rather than a different matching mechanism. See [the case statement](/control-flow.html#case-statement) for the full picture.
+See [the case statement](/control-flow.html#case-statement) for the full picture.
 
 ## option-shaped unions
 
