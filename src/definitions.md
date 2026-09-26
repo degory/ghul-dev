@@ -42,6 +42,10 @@ To return a value from a block body, you can end the body on it instead of writi
 
 <GhulExample name="definitions-53" />
 
+A function whose result depends on the values of its arguments can have a `case` over them as its body, with one arm for each case, the way a function is defined by equations in Haskell or Elixir. Over more than one argument the value tested is a tuple of them, and the compiler checks the arms for [exhaustiveness](/control-flow.html#exhaustiveness) as it does for any `case`:
+
+<GhulExample name="definitions-61" />
+
 A function can also be written among the statements of a body, with a name. It is a local variable holding a function literal, so its argument and return types can be inferred as a literal's are, and it can call itself by its own name:
 
 <GhulExample name="definitions-54" />
