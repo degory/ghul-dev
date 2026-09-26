@@ -39,6 +39,22 @@ into the next:
 
 <GhulExample name="functional-programming-2" />
 
+## list comprehensions
+
+A list comprehension builds an array from one or more sequences. It is written in square brackets: the element first, then a `for` clause for each source, with `if` clauses to keep only some of the elements:
+
+<GhulExample name="functional-programming-33" />
+
+A `for` clause reads its source the same way a `for` loop does, so any sequence a loop can iterate over works, and the loop variable can destructure the element: `for (key, value) in counts`. Each clause can use the variables of the clauses before it, and the element can use all of them. An `if` clause narrows what it tests, so `[name.length for name in names if name?]` reads `name` as a `string` in the element.
+
+The result is an array. Its element type is the type of the element expression, or the element type of the array the context expects. Because the closing bracket ends the comprehension, it works on either side of `|>`.
+
+The loops a comprehension runs belong to the comprehension. A `break` or `continue` inside one cannot leave it, and a comprehension cannot contain a `yield`, an `await` or a `try`. A function literal inside a comprehension is a function body of its own, so these rules do not apply inside it.
+
+A comprehension builds its whole array before anything reads the result, so each source has to end. A pipe reads its source one element at a time, so an unbounded sequence, or a search that stops at the first match, is written as a pipe. The compiler reports an `unbounded-comprehension-source` warning when a comprehension's source is one of the runtime's sequences that never ends, such as `from(1)`:
+
+<GhulExample name="functional-programming-34" />
+
 ## recursion
 
 Methods, global functions and anonymous functions can all call themselves
