@@ -73,6 +73,7 @@ Some commonly used namespace and type names are re-mapped in line with ghūl con
 | `System.Collections.Generic.ISet`                    | `Collections.MutableSet`            |
 | `System.Collections.Generic.HashSet`                 | `Collections.SET`                   |
 | `System.Collections.Generic.Stack`                   | `Collections.STACK`                 |
+| `System.Collections.Generic.Queue`                   | `Collections.QUEUE`                 |
 | `System.Threading.Tasks.Task`                        | `Tasks.TASK`                        |
 | `System.Threading.Tasks.Task<T>`                     | `Tasks.TASK[T]`                     |
 
