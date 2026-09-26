@@ -1,8 +1,8 @@
 {
   "name": "functional-programming-34",
   "snippet": false,
-  "code": "// a comprehension builds its whole array before anything reads it,\n// so a sequence that never ends stays a pipe, bounded by take\nlet squares = from(1) |> map(n => n * n) |> take(5)\nwrite_line(\"squares: {squares}\")\n\n// a bounded pipe can be the source of a comprehension\nlet odd_squares = [s for s in squares if s % 2 == 1]\nwrite_line(\"odd squares: {odd_squares}\")",
-  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\n// a comprehension builds its whole array before anything reads it,\n// so a sequence that never ends stays a pipe, bounded by take\nlet squares = from(1) |> map(n => n * n) |> take(5)\nwrite_line(\"squares: {squares}\")\n\n// a bounded pipe can be the source of a comprehension\nlet odd_squares = [s for s in squares if s % 2 == 1]\nwrite_line(\"odd squares: {odd_squares}\")\n",
+  "code": "// don't write a comprehension over a sequence that never ends: it would\n// never finish. Use a pipe, and take the elements you need\nlet squares = from(1) |> map(n => n * n) |> take(5)\nwrite_line(\"squares: {squares}\")\n\n// keep the odd ones from the five squares the pipe produced\nlet odd_squares = [s for s in squares if s % 2 == 1]\nwrite_line(\"odd squares: {odd_squares}\")",
+  "fullSource": "use IO.Std.write_line\nuse Ghul.Pipes\n\n// don't write a comprehension over a sequence that never ends: it would\n// never finish. Use a pipe, and take the elements you need\nlet squares = from(1) |> map(n => n * n) |> take(5)\nwrite_line(\"squares: {squares}\")\n\n// keep the odd ones from the five squares the pipe produced\nlet odd_squares = [s for s in squares if s % 2 == 1]\nwrite_line(\"odd squares: {odd_squares}\")\n",
   "hiddenBefore": true,
   "hiddenAfter": false,
   "hiddenGapsAfterLine": [],

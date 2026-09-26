@@ -4,15 +4,15 @@ use Ghul.Pipes
 // >>>
 let words = ["apple", "fig", "banana", "kiwi"]
 
-// one source, a filter, and the element to build
+// the words longer than three letters, in upper case
 let long = [w.to_upper() for w in words if w.length > 3]
 write_line("long: {long}")
 
-// two sources: every pair of distinct numbers from 1 to 3
+// every ordered pair of different numbers from 1 to 3
 let pairs = [(a, b) for a in 1::3 for b in 1::3 if a != b]
 write_line("pairs: {pairs}")
 
-// the result is an array, so a pipe can take it from there
+// the result is an array, so you can pass it to a pipe
 let total = [w.length for w in words] |> sum()
 write_line("total length: {total}")
 // <<<

@@ -2,12 +2,12 @@ use IO.Std.write_line
 use Ghul.Pipes
 
 // >>>
-// a comprehension builds its whole array before anything reads it,
-// so a sequence that never ends stays a pipe, bounded by take
+// don't write a comprehension over a sequence that never ends: it would
+// never finish. Use a pipe, and take the elements you need
 let squares = from(1) |> map(n => n * n) |> take(5)
 write_line("squares: {squares}")
 
-// a bounded pipe can be the source of a comprehension
+// keep the odd ones from the five squares the pipe produced
 let odd_squares = [s for s in squares if s % 2 == 1]
 write_line("odd squares: {odd_squares}")
 // <<<
