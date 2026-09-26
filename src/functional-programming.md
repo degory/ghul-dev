@@ -12,7 +12,7 @@ unless declared `mut`, arrays and tuples can't be changed, and `List`, `Map`
 and `Set` are read-only views. Unions with an exhaustive `case` model data
 by cases. Pipes, generators and list comprehensions process sequences
 without changing them. The compiler proves most functions store-free, and
-checks a `pure` declaration where you write one.
+takes a `pure` declaration on trust where the proof falls short.
 
 Mutable state is there when a program needs it: a `let mut` variable, a
 `LIST`, a `public` property. A few things work differently from ML-family
@@ -100,10 +100,11 @@ it calls itself with `rec`:
 
 <GhulExample name="functional-programming-3" />
 
-A function literal can't refer to a variable that is defined after it, so
-two function literals can't call each other. Write mutually recursive
-functions as global functions or methods, which can refer to each other in
-either order:
+A function literal can't refer to a variable that is defined after it. For
+two function literals that call each other, declare one as a `let mut`
+variable and assign the literal to it afterwards. Global functions and
+methods can refer to each other in either order, so mutually recursive
+functions are simpler to write as those:
 
 <GhulExample name="functional-programming-5" />
 
@@ -128,8 +129,9 @@ error for each of these assignments:
   function that takes a `List[T]` can read the list it is given but not
   change it.
 - A union value is fixed when it is constructed: its variant and its fields
-  can't be changed. Methods added to a union with [`partial` and `impl`
-  blocks](/definitions.html#partial-and-impl-blocks) must be pure.
+  can't be changed. A method added to a union with [`partial` and `impl`
+  blocks](/definitions.html#partial-and-impl-blocks) can store to the heap,
+  but the compiler reports an `impure-union-method` warning for it.
 
 These guarantees are shallow: a read-only structure can hold references to
 objects that are themselves mutable. They also apply only to ghūl code, so
@@ -138,12 +140,14 @@ read-only.
 
 ## pure functions
 
-A postfix `pure` modifier declares that a function assigns no field,
-property or array element of any object. The compiler proves most functions
-store-free without it; write `pure` where the proof falls short, or to make
-the promise part of the function's contract. Every override of a pure member
-must be pure too. A function type can be pure, so a function can require that
-the function it is given is pure:
+A postfix `pure` modifier declares that a function stores nothing on the
+heap, and calls nothing that does. The compiler proves most functions
+store-free without it. Where the proof falls short, write `pure`: the
+compiler takes the declaration on trust. What it does check is that every
+override or implementation of a pure member is pure too.
+
+A function type can be pure, so a function can require that the function it
+is given is pure:
 
 <GhulExample name="functional-programming-27" />
 
@@ -209,11 +213,14 @@ union STREAM[T, S] is
     YIELD(value: T, state: S)
 si
 
-stream[T, S](
+stream[T, S..](
     initial: S,
-    advance: S -> STREAM[T, S]
+    advance: S.. -> STREAM[T, S]
 ) -> Pipe[T]
 ```
+
+`S..` makes `S` an [argument pack](#argument-packs), so when the state is a
+tuple, the step function can take its elements as separate parameters.
 
 `advance` takes the current state and returns either `DONE`, which ends the
 sequence, or `YIELD(value, next_state)`, which produces an element and the
