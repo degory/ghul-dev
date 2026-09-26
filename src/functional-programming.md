@@ -39,6 +39,24 @@ into the next:
 
 <GhulExample name="functional-programming-2" />
 
+## list comprehensions
+
+A list comprehension makes an array from one or more sequences. Write it in square brackets: the element first, then a `for` clause for each sequence, and optionally `if` clauses to keep only the elements you want:
+
+<GhulExample name="functional-programming-33" />
+
+Each `for` clause iterates over its sequence the way a `for` loop does, so it accepts any sequence a loop accepts, and its variable can destructure each element: `for (key, value) in counts`. A clause can use the variables of the clauses before it, and the element can use all of them. The clauses nest in the order you write them, so in the second example `b` runs through `1::3` once for each value of `a`, and the `if` removes the pairs where the two are equal.
+
+An `if` clause narrows what it tests, as an `if` statement does: in `[name.length for name in names if name?]`, `name` has type `string` in the element.
+
+The result is an array. Its element type is the type of the element expression, or the element type of the array the context expects. The closing bracket ends the comprehension, so you can use one on either side of `|>`.
+
+A comprehension's loops are its own. You can't `break` or `continue` out of one, and it can't contain a `yield`, an `await` or a `try`. A function literal inside a comprehension is a separate function body, so these restrictions don't apply inside it.
+
+Don't write a comprehension over a sequence that never ends. A comprehension makes its whole array before you can use any of it, so it would never finish. Use a pipe instead: a pipe produces its elements one at a time, and `take` stops it after the elements you need. A search that should stop at the first match is also better as a pipe, for the same reason. The compiler warns with `unbounded-comprehension-source` when a comprehension's source is one of the runtime's sequences that never ends, such as `from(1)`:
+
+<GhulExample name="functional-programming-34" />
+
 ## recursion
 
 Methods, global functions and anonymous functions can all call themselves
