@@ -69,6 +69,8 @@ Some commonly used namespace and type names are re-mapped in line with ghūl con
 | `System.Collections.Generic.IReadOnlyDictionary`     | `Collections.Map`                   |
 | `System.Collections.Generic.IDictionary`             | `Collections.MutableMap`            |
 | `System.Collections.Generic.Dictionary`              | `Collections.MAP`                   |
+| `System.Collections.Generic.IReadOnlySet`            | `Collections.Set`                   |
+| `System.Collections.Generic.ISet`                    | `Collections.MutableSet`            |
 | `System.Collections.Generic.HashSet`                 | `Collections.SET`                   |
 | `System.Collections.Generic.Stack`                   | `Collections.STACK`                 |
 | `System.Threading.Tasks.Task`                        | `Tasks.TASK`                        |
