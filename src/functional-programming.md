@@ -6,11 +6,7 @@ Every example on this page can be edited and run here: click the pencil to open 
 The [ghul-examples repository](https://github.com/ghul-lang/ghul-examples/tree/main/examples/functional) has fuller functional-programming examples to build and run locally, in a GitHub Codespace or a dev container.
 :::
 
-ghūl is not a pure functional language. It is a statically typed .NET
-language with classes, and mutable state is there when you ask for it: a
-`let mut` variable, a `LIST`, a `public` property.
-
-What a functional style needs is there as well. Functions are values, and
+ghūl supports a functional style of programming. Functions are values, and
 they capture the variables around them. Local variables are immutable
 unless declared `mut`, arrays and tuples can't be changed, and `List`, `Map`
 and `Set` are read-only views. Unions with an exhaustive `case` model data
@@ -18,10 +14,11 @@ by cases. Pipes, generators and list comprehensions process sequences
 without changing them. The compiler proves most functions store-free, and
 checks a `pure` declaration where you write one.
 
-Three things work differently from a functional language: functions are not
-curried, function literals are not generic, and a function is not defined
-clause by clause. Each has a substitute: `curry`, a generic named function,
-and a function whose body is a `case`.
+Mutable state is there when a program needs it: a `let mut` variable, a
+`LIST`, a `public` property. A few things work differently from ML-family
+languages: functions are not curried, function literals are not generic, and
+a function is not defined clause by clause. Each has a substitute: `curry`,
+a generic named function, and a function whose body is a `case`.
 
 ## functions as values
 
